@@ -50,6 +50,7 @@ import mage.client.MageFrame;
 import mage.client.components.MageTextArea;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
+import mage.client.util.FontSizeHelper;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_NO;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_ID_YES;
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
@@ -105,6 +106,23 @@ public class HelperPanel extends JPanel {
     public void init(UUID gameId) {
         this.gameId = gameId;
         session = MageFrame.getSession();
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        for (Component comp : popupMenuAskNo.getComponents()) {
+            if (comp instanceof JMenuItem) {
+                comp.setFont(FontSizeHelper.menuFont);
+            }
+        }
+        for (Component comp : popupMenuAskYes.getComponents()) {
+            if (comp instanceof JMenuItem) {
+                comp.setFont(FontSizeHelper.menuFont);
+            }
+        }
     }
 
     private void initComponents() {

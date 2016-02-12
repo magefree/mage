@@ -37,15 +37,12 @@ import java.awt.KeyboardFocusManager;
 import java.beans.PropertyVetoException;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class MagePane extends javax.swing.JInternalFrame {
-
-    private static final Logger LOGGER = Logger.getLogger(MagePane.class);
 
     /**
      * Creates new form MagePane
@@ -60,6 +57,10 @@ public abstract class MagePane extends javax.swing.JInternalFrame {
         if (ui instanceof BasicInternalFrameUI) {
             ((BasicInternalFrameUI) ui).setNorthPane(null);
         }
+    }
+
+    public void changeGUISize() {
+
     }
 
     @Override

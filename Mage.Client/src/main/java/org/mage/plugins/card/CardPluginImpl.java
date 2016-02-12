@@ -3,7 +3,6 @@ package org.mage.plugins.card;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -31,7 +30,6 @@ import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.Animation;
 import org.mage.card.arcane.CardPanel;
-import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
@@ -48,14 +46,15 @@ import org.mage.plugins.card.info.CardInfoPaneImpl;
  *
  * @author nantuko
  * @version 0.1 01.11.2010 Mage permanents. Sorting card layout.
- * @version 0.6 17.07.2011 #sortPermanents got option to display non-land permanents in one pile
+ * @version 0.6 17.07.2011 #sortPermanents got option to display non-land
+ * permanents in one pile
  * @version 0.7 29.07.2011 face down cards support
  */
 @PluginImplementation
 @Author(name = "nantuko")
 public class CardPluginImpl implements CardPlugin {
 
-    private static final Logger log = Logger.getLogger(CardPluginImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(CardPluginImpl.class);
 
     private static final int GUTTER_Y = 15;
     private static final int GUTTER_X = 5;
@@ -81,7 +80,7 @@ public class CardPluginImpl implements CardPlugin {
 
     @PluginLoaded
     public void newPlugin(CardPlugin plugin) {
-        log.info(plugin.toString() + " has been loaded.");
+        LOGGER.info(plugin.toString() + " has been loaded.");
     }
 
     @Override
@@ -398,6 +397,7 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     private class Row extends ArrayList<Stack> {
+
         private static final long serialVersionUID = 1L;
 
         public Row() {
@@ -458,6 +458,7 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     private class Stack extends ArrayList<MagePermanent> {
+
         private static final long serialVersionUID = 1L;
 
         /**
@@ -474,7 +475,7 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         private int getHeight() {
-            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY + attachmentSpacingY*maxAttachedCount;
+            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY + attachmentSpacingY * maxAttachedCount;
         }
 
         public int getMaxAttachedCount() {
@@ -489,7 +490,8 @@ public class CardPluginImpl implements CardPlugin {
     /**
      * Download various symbols (mana, tap, set).
      *
-     * @param imagesPath Path to check in and store symbols to. Can be null, in such case default path should be used.
+     * @param imagesPath Path to check in and store symbols to. Can be null, in
+     * such case default path should be used.
      */
     @Override
     public void downloadSymbols(String imagesPath) {
@@ -502,17 +504,17 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         it = new GathererSets(imagesPath);
-        for(DownloadJob job:it) {
-                g.getDownloader().add(job);
+        for (DownloadJob job : it) {
+            g.getDownloader().add(job);
         }
 
         it = new CardFrames(imagesPath);
-        for(DownloadJob job:it) {
+        for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
 
         it = new DirectLinksForDownload(imagesPath);
-        for(DownloadJob job:it) {
+        for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
 
@@ -528,11 +530,6 @@ public class CardPluginImpl implements CardPlugin {
         d.add(g);
         d.pack();
         d.setVisible(true);
-    }
-
-    @Override
-    public Image getManaSymbolImage(String symbol) {
-        return ManaSymbols.getManaSymbolImage(symbol);
     }
 
     @Override

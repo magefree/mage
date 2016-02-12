@@ -24,38 +24,37 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 
-/*
+ /*
  * BattlefieldPanel.java
  *
  * Created on 10-Jan-2010, 10:43:14 PM
  */
-
 package mage.client.game;
 
-import mage.cards.MagePermanent;
-import mage.client.cards.BigCard;
-import mage.client.cards.Permanent;
-import mage.client.plugins.impl.Plugins;
-import mage.client.util.Config;
-import mage.client.util.audio.AudioManager;
-import mage.client.util.layout.CardLayoutStrategy;
-import mage.constants.CardType;
-import mage.utils.CardUtil;
-import mage.view.CounterView;
-import mage.view.PermanentView;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import mage.cards.MagePermanent;
+import mage.client.cards.BigCard;
+import mage.client.cards.Permanent;
+import mage.client.plugins.impl.Plugins;
+import mage.client.util.Config;
+import mage.client.util.FontSizeHelper;
+import mage.client.util.audio.AudioManager;
+import mage.client.util.layout.CardLayoutStrategy;
 import mage.client.util.layout.impl.OldCardLayoutStrategy;
+import mage.constants.CardType;
+import mage.utils.CardUtil;
+import mage.view.CounterView;
+import mage.view.PermanentView;
 
 /**
  *
@@ -78,18 +77,20 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     private final CardLayoutStrategy layoutStrategy = new OldCardLayoutStrategy();
 
     //private static int iCounter = 0;
-
     private boolean addedPermanent;
     private boolean addedArtifact;
     private boolean addedCreature;
 
     private boolean removedCreature;
 
-    /** Creates new form BattlefieldPanel */
+    /**
+     * Creates new form BattlefieldPanel
+     */
     public BattlefieldPanel() {
         uiComponentsList.put("battlefieldPanel", this);
         initComponents();
         uiComponentsList.put("jPanel", jPanel);
+        setGUISize();
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -109,7 +110,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     }
 
     public void cleanUp() {
-        for (Component c: this.jPanel.getComponents()) {
+        for (Component c : this.jPanel.getComponents()) {
             if (c instanceof Permanent || c instanceof MagePermanent) {
                 this.jPanel.remove(c);
             }
@@ -119,11 +120,20 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         this.bigCard = null;
     }
 
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        jScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
+        jScrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
+    }
+
     public void update(Map<UUID, PermanentView> battlefield) {
         boolean changed = false;
 
         List<PermanentView> permanentsToAdd = new ArrayList<>();
-        for (PermanentView permanent: battlefield.values()) {
+        for (PermanentView permanent : battlefield.values()) {
             if (!permanent.isPhasedIn()) {
                 continue;
             }
@@ -131,7 +141,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             if (oldMagePermanent == null) {
                 permanentsToAdd.add(permanent);
                 changed = true;
-            } else {                
+            } else {
                 if (!changed) {
                     changed = CardUtil.isCreature(oldMagePermanent.getOriginalPermanent()) != CardUtil.isCreature(permanent);
                     if (!changed) {
@@ -158,7 +168,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                         UUID u1 = oldMagePermanent.getOriginalPermanent().getAttachedTo();
                         UUID u2 = permanent.getAttachedTo();
                         if (u1 == null && u2 != null || u2 == null && u1 != null
-                                || (u1 != null && !u1.equals(u2)) ) {
+                                || (u1 != null && !u1.equals(u2))) {
                             changed = true;
                         }
                     }
@@ -214,7 +224,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     }
 
     public void sortLayout() {
-        if (battlefield == null) {return;}
+        if (battlefield == null) {
+            return;
+        }
 
         layoutStrategy.doLayout(this, width);
 
@@ -266,26 +278,26 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     }
 
     private void removePermanent(UUID permanentId, final int count) {
-        for (Component c: this.jPanel.getComponents()) {
+        for (Component c : this.jPanel.getComponents()) {
             final Component comp = c;
             if (comp instanceof Permanent) {
-                if (((Permanent)comp).getPermanentId().equals(permanentId)) {
+                if (((Permanent) comp).getPermanentId().equals(permanentId)) {
                     comp.setVisible(false);
                     this.jPanel.remove(comp);
                 }
             } else if (comp instanceof MagePermanent) {
-                if (((MagePermanent)comp).getOriginal().getId().equals(permanentId)) {
+                if (((MagePermanent) comp).getOriginal().getId().equals(permanentId)) {
                     Thread t = new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Plugins.getInstance().onRemoveCard((MagePermanent)comp, count);
+                            Plugins.getInstance().onRemoveCard((MagePermanent) comp, count);
                             comp.setVisible(false);
                             BattlefieldPanel.this.jPanel.remove(comp);
                         }
                     });
                     t.start();
                 }
-                if (((MagePermanent)comp).getOriginal().getCardTypes().contains(CardType.CREATURE)) {
+                if (((MagePermanent) comp).getOriginal().getCardTypes().contains(CardType.CREATURE)) {
                     removedCreature = true;
                 }
             }
@@ -293,7 +305,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     }
 
     @Override
-    public boolean isOptimizedDrawingEnabled () {
+    public boolean isOptimizedDrawingEnabled() {
         return false;
     }
 
@@ -309,7 +321,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         jPanel.setOpaque(false);
         jScrollPane = new JScrollPane(jPanel);
 
-        Border empty = new EmptyBorder(0,0,0,0);
+        Border empty = new EmptyBorder(0, 0, 0, 0);
         jScrollPane.setBorder(empty);
         jScrollPane.setViewportBorder(empty);
         jScrollPane.setOpaque(false);

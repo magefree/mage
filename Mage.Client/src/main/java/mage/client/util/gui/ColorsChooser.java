@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -14,9 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
-
 import mage.client.constants.Constants;
-import mage.client.plugins.impl.Plugins;
+import org.mage.card.arcane.ManaSymbols;
 
 public class ColorsChooser extends JComboBox implements ListCellRenderer {
 
@@ -82,7 +80,7 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
         value = value.toUpperCase();
         for (int i = 0; i < value.length(); i++) {
             char symbol = value.charAt(i);
-            Image image = Plugins.getInstance().getManaSymbolImage(String.valueOf(symbol));
+            Image image = ManaSymbols.getSizedManaSymbol(String.valueOf(symbol));
             if (image != null) {
                 images.add(image);
             }
@@ -101,7 +99,7 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
             }
         } else {
             String s = value.replace("B", "{B}").replace("R", "{R}").replace("G", "{G}").replace("W", "{W}").replace("U", "{U}").replace("X", "{X}");
-            panel.add(new JLabel(s));    
+            panel.add(new JLabel(s));
         }
     }
 }

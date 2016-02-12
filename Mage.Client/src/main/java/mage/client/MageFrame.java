@@ -101,6 +101,7 @@ import mage.client.dialog.ConnectDialog;
 import mage.client.dialog.ErrorDialog;
 import mage.client.dialog.FeedbackDialog;
 import mage.client.dialog.GameEndDialog;
+import mage.client.dialog.MageDialog;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.dialog.TableWaitingDialog;
 import mage.client.dialog.UserRequestDialog;
@@ -237,7 +238,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-            FontSizeHelper.setGUISize();
+            FontSizeHelper.calculateGUISizes();
             // Change default font and row size for JTables
             Font font = FontSizeHelper.getTableFont();
             UIManager.put("Table.font", font);
@@ -1406,29 +1407,24 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void changeGUISize() {
         setGUISize();
+        for (Component component : desktopPane.getComponents()) {
+            if (component instanceof MageDialog) {
+                ((MageDialog) component).changeGUISize();
+            }
+            if (component instanceof MagePane) {
+                ((MagePane) component).changeGUISize();
+            }
+        }
+        Font font = FontSizeHelper.getChatFont();
+        for (ChatPanelBasic chatPanel : getChatPanels().values()) {
+            chatPanel.changeGUISize(font);
+        }
         this.revalidate();
         this.repaint();
     }
 
     private void setGUISize() {
         Font font = FontSizeHelper.getToolbarFont();
-        // Tables
-        if (tablesPane != null) {
-            tablesPane.changeGUISize();
-        }
-        // Deck editor
-        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
-        for (JInternalFrame window : windows) {
-            if (window instanceof DeckEditorPane) {
-                ((DeckEditorPane) window).getPanel().changeGUISize();
-            }
-        }
-        // Tournament panels
-        for (Component component : desktopPane.getComponents()) {
-            if (component instanceof TournamentPane) {
-                ((TournamentPane) component).changeGUISize();
-            }
-        }
         mageToolbar.setFont(font);
         int newHeight = font.getSize() + 6;
         Dimension mageToolbarDimension = mageToolbar.getPreferredSize();

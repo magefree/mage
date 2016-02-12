@@ -33,6 +33,8 @@
  */
 package mage.client.dialog;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
@@ -46,6 +48,7 @@ import mage.client.components.MageComponents;
 import mage.client.components.tray.MageTray;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WIDTH;
+import mage.client.util.FontSizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
@@ -90,8 +93,23 @@ public class TableWaitingDialog extends MageDialog {
         tableSeats.createDefaultColumnsFromModel();
         TableUtil.setColumnWidthAndOrder(tableSeats, DEFAULT_COLUMS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
         tableSeats.setDefaultRenderer(Icon.class, new CountryCellRenderer());
+        setGUISize();
 
         MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        Font font = FontSizeHelper.getTableFont();
+        tableSeats.getTableHeader().setFont(font);
+        tableSeats.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
+
+        jSplitPane1.setDividerSize(FontSizeHelper.dividerBarSize);
+        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
+        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
     }
 
     public void update(TableView table) {

@@ -724,9 +724,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         fontSizeLabel.setText("Size");
         fontSizeLabel.setToolTipText("<HTML>The size of the font used to display text.");
         guiSize_font.add(fontSizeLabel, java.awt.BorderLayout.CENTER);
-        fontSizeLabel.getAccessibleContext().setAccessibleName("Size");
 
-        sliderFontSize.setMajorTickSpacing(10);
+        sliderFontSize.setMajorTickSpacing(5);
         sliderFontSize.setMaximum(50);
         sliderFontSize.setMinimum(10);
         sliderFontSize.setMinorTickSpacing(1);

@@ -63,7 +63,9 @@ public class TablesPane extends MagePane {
         tablesPanel.cleanUp();
     }
 
+    @Override
     public void changeGUISize() {
+        super.changeGUISize();
         tablesPanel.changeGUISize();
     }
 

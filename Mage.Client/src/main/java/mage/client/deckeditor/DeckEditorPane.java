@@ -72,6 +72,12 @@ public class DeckEditorPane extends MagePane {
         }
     }
 
+    @Override
+    public void changeGUISize() {
+        super.changeGUISize();
+        deckEditorPanel1.changeGUISize();
+    }
+
     public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
         if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
             this.setTitle("Deck Editor - " + tableId.toString());

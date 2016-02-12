@@ -1,16 +1,16 @@
 package mage.client.game;
 
-import mage.client.cards.BigCard;
-import mage.client.dialog.PreferencesDialog;
-import mage.client.util.Config;
-import mage.constants.Zone;
-import mage.view.CardsView;
-
+import java.awt.*;
+import java.util.UUID;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.util.UUID;
+import mage.client.cards.BigCard;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.util.Config;
+import mage.client.util.FontSizeHelper;
+import mage.constants.Zone;
+import mage.view.CardsView;
 
 public class HandPanel extends JPanel {
 
@@ -25,6 +25,7 @@ public class HandPanel extends JPanel {
     public HandPanel() {
         double factor = 1;
         initComponents();
+        changeGUISize();
         sizeHand(factor, false);
     }
 
@@ -63,6 +64,15 @@ public class HandPanel extends JPanel {
 
     public void cleanUp() {
         hand.cleanUp();
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
+        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
     }
 
     public void loadCards(CardsView cards, BigCard bigCard, UUID gameId) {

@@ -443,7 +443,7 @@
                 </Component>
                 <Component class="javax.swing.JSlider" name="sliderFontSize">
                   <Properties>
-                    <Property name="majorTickSpacing" type="int" value="10"/>
+                    <Property name="majorTickSpacing" type="int" value="5"/>
                     <Property name="maximum" type="int" value="50"/>
                     <Property name="minimum" type="int" value="10"/>
                     <Property name="minorTickSpacing" type="int" value="1"/>

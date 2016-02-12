@@ -103,6 +103,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Config;
 import mage.client.util.Event;
+import mage.client.util.FontSizeHelper;
 import mage.client.util.GameManager;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
@@ -204,6 +205,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public GamePanel() {
         initComponents();
+        changeGUISize();
 
         initPopupMenuTriggerOrder();
         //this.add(popupMenuTriggerOrder);
@@ -323,6 +325,21 @@ public final class GamePanel extends javax.swing.JPanel {
         this.bigCard = null;
     }
 
+    public void changeGUISize() {
+        setGUISize();
+        handContainer.changeGUISize();
+        for (PlayAreaPanel playAreaPanel : players.values()) {
+            playAreaPanel.changeGUISize();
+        }
+        feedbackPanel.changeGUISize();
+    }
+
+    private void setGUISize() {
+        jSplitPane0.setDividerSize(FontSizeHelper.dividerBarSize);
+        jSplitPane1.setDividerSize(FontSizeHelper.dividerBarSize);
+        jSplitPane2.setDividerSize(FontSizeHelper.dividerBarSize);
+    }
+
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
@@ -374,19 +391,17 @@ public final class GamePanel extends javax.swing.JPanel {
                     p.sizePlayer(smallMode);
                 }
             }
-        } else {
-            if (smallMode) {
-                smallMode = false;
-                Dimension bbDimension = new Dimension(256, 367);
-                bigCard.setMaximumSize(bbDimension);
-                bigCard.setMinimumSize(bbDimension);
-                bigCard.setPreferredSize(bbDimension);
-                pnlShortCuts.revalidate();
-                pnlShortCuts.repaint();
-                this.handContainer.sizeHand(1, smallMode);
-                for (PlayAreaPanel p : players.values()) {
-                    p.sizePlayer(smallMode);
-                }
+        } else if (smallMode) {
+            smallMode = false;
+            Dimension bbDimension = new Dimension(256, 367);
+            bigCard.setMaximumSize(bbDimension);
+            bigCard.setMinimumSize(bbDimension);
+            bigCard.setPreferredSize(bbDimension);
+            pnlShortCuts.revalidate();
+            pnlShortCuts.repaint();
+            this.handContainer.sizeHand(1, smallMode);
+            for (PlayAreaPanel p : players.values()) {
+                p.sizePlayer(smallMode);
             }
         }
 

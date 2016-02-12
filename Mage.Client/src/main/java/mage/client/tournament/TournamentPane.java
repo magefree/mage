@@ -60,6 +60,7 @@ public class TournamentPane extends MagePane {
         removeFrame();
     }
 
+    @Override
     public void changeGUISize() {
         tournamentPanel.changeGUISize();
     }

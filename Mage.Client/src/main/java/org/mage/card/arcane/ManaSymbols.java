@@ -24,7 +24,6 @@ public class ManaSymbols {
 
     private static final Logger LOGGER = Logger.getLogger(ManaSymbols.class);
     private static final Map<String, BufferedImage> MANA_IMAGES = new HashMap<>();
-    private static final Map<String, Image> MANA_IMAGES_ORIGINAL = new HashMap<>();
     private static final Map<String, Image> SET_IMAGES = new HashMap<>();
     private static final Map<String, Dimension> SET_IMAGES_EXIST = new HashMap<>();
     private static final Pattern REPLACE_SYMBOLS_PATTERN = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
@@ -35,23 +34,36 @@ public class ManaSymbols {
             "BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU",
             "WP", "UP", "BP", "RP", "GP", "X", "C" /*, "Y", "Z", "slash"*/};
 
+        MANA_IMAGES.clear();
+        SET_IMAGES.clear();
+        SET_IMAGES_EXIST.clear();
+
         for (String symbol : symbols) {
-            File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");
-            Rectangle r = new Rectangle(11, 11);
+            String resourcePath = Constants.RESOURCE_PATH_MANA_SMALL;
+            switch (FontSizeHelper.basicSymbolSize) {
+                case "medium":
+                    resourcePath = Constants.RESOURCE_PATH_MANA_SMALL;
+                    break;
+                case "large":
+                    resourcePath = Constants.RESOURCE_PATH_MANA_LARGE;
+                    break;
+            }
+            File file = new File(getSymbolsPath() + resourcePath + "/" + symbol + ".jpg");
             try {
-                Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-                BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                MANA_IMAGES.put(symbol, resized);
+                if (FontSizeHelper.symbolPaySize != 15) {
+                    BufferedImage notResized = ImageIO.read(file);
+                    MANA_IMAGES.put(symbol, notResized);
+                } else {
+                    Rectangle r = new Rectangle(FontSizeHelper.symbolPaySize, FontSizeHelper.symbolPaySize);
+                    Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
+                    BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+                    MANA_IMAGES.put(symbol, resized);
+                }
             } catch (Exception e) {
                 LOGGER.error("Error for symbol:" + symbol);
             }
-            file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");
-            try {
-                Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-                MANA_IMAGES_ORIGINAL.put(symbol, image);
-            } catch (Exception e) {
-            }
         }
+
         List<String> setCodes = ExpansionRepository.instance.getSetCodes();
         if (setCodes == null) {
             // the cards db file is probaly not included in the client. It will be created after the first connect to a server.
@@ -158,10 +170,6 @@ public class ManaSymbols {
         return path;
     }
 
-    public static Image getManaSymbolImage(String symbol) {
-        return MANA_IMAGES_ORIGINAL.get(symbol);
-    }
-
     public static void draw(Graphics g, String manaCost, int x, int y) {
         if (manaCost.length() == 0) {
             return;
@@ -201,9 +209,9 @@ public class ManaSymbols {
     }
 
     public enum Type {
-
         CARD,
         TOOLTIP,
+        EDITOR,
         PAY
     }
 
@@ -213,28 +221,28 @@ public class ManaSymbols {
         String replaced = value;
 
         if (!MANA_IMAGES.isEmpty()) {
+            int symbolSize;
             switch (type) {
                 case TOOLTIP:
-                    replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true) + "/symbols/small/$1$2.jpg' alt='$1$2' width=11 height=11>");
-//                    replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true)
-//                            + "/symbols/" + FontSizeHelper.basicSymbolSize + "/$1$2.jpg' alt='$1$2' width="
-//                            + FontSizeHelper.symbolTooltipSize + " height=" + FontSizeHelper.symbolTooltipSize + ">");
+                    symbolSize = FontSizeHelper.symbolTooltipSize;
                     break;
                 case CARD:
-                    value = value.replace("{slash}", "<img src='file:" + getSymbolsPath() + "/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
-                    replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true)
-                            + "/symbols/" + FontSizeHelper.basicSymbolSize + "/$1$2.jpg' alt='$1$2' width="
-                            + FontSizeHelper.symbolCardSize + " height=" + FontSizeHelper.symbolCardSize + ">");
+                    symbolSize = FontSizeHelper.symbolCardSize;
                     break;
                 case PAY:
-                    value = value.replace("{slash}", "<img src='file:" + getSymbolsPath() + "/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
-                    replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true)
-                            + "/symbols/" + FontSizeHelper.basicSymbolSize + "/$1$2.jpg' alt='$1$2' "
-                            + "width=" + FontSizeHelper.symbolPaySize + " height=" + FontSizeHelper.symbolPaySize + ">");
+                    symbolSize = FontSizeHelper.symbolPaySize;
+                    break;
+                case EDITOR:
+                    symbolSize = FontSizeHelper.symbolEditorSize;
                     break;
                 default:
+                    symbolSize = 11;
                     break;
             }
+            replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true)
+                    + "/symbols/" + FontSizeHelper.basicSymbolSize + "/$1$2.jpg' alt='$1$2' width="
+                    + symbolSize + " height=" + symbolSize + ">");
+
         }
         replaced = replaced.replace("|source|", "{source}");
         replaced = replaced.replace("|this|", "{this}");
@@ -256,7 +264,7 @@ public class ManaSymbols {
         return SET_IMAGES.get(set);
     }
 
-    public static BufferedImage getManaSymbolImageSmall(String symbol) {
+    public static BufferedImage getSizedManaSymbol(String symbol) {
         return MANA_IMAGES.get(symbol);
     }
 }
