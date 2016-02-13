@@ -25,56 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.sets.onslaught;
 
-import mage.abilities.Ability;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
+import java.util.UUID;
+
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetSpell;
 
 /**
  *
  * @author Quercitron
  */
-public class ReturnToHandChosenControlledPermanentEffect extends ReturnToHandChosenPermanentEffect {
+public class IxidorsWill extends CardImpl {
 
-    public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter) {
-        super(filter);
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("Wizard", "Wizard");
+
+    public IxidorsWill(UUID ownerId) {
+        super(ownerId, 90, "Ixidor's Will", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
+        this.expansionSetCode = "ONS";
+
+        // Counter target spell unless its controller pays {2} for each Wizard on the battlefield.
+        Effect effect = new CounterUnlessPaysEffect(new PermanentsOnBattlefieldCount(FILTER, 2));
+        effect.setText("Counter target spell unless its controller pays {2} for each Wizard on the battlefield");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter, int number) {
-        super(filter, number);
-    }
-
-    public ReturnToHandChosenControlledPermanentEffect(ReturnToHandChosenControlledPermanentEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        this.targetPointer = new FixedTarget(source.getControllerId());
-        return super.apply(game, source);
-    }
-
-    @Override
-    public ReturnToHandChosenControlledPermanentEffect copy() {
-        return new ReturnToHandChosenControlledPermanentEffect(this);
+    public IxidorsWill(final IxidorsWill card) {
+        super(card);
     }
 
     @Override
-    protected String getText() {
-        StringBuilder sb = new StringBuilder("return ");
-        if (!filter.getMessage().startsWith("another")) {
-            sb.append(CardUtil.numberToText(number, "a"));
-        }
-        sb.append(" ").append(filter.getMessage());
-        if (number > 1) {
-            sb.append(" to their owner's hand");
-        } else {
-            sb.append(" to its owner's hand");
-        }
-        return sb.toString();
+    public IxidorsWill copy() {
+        return new IxidorsWill(this);
     }
-
 }
