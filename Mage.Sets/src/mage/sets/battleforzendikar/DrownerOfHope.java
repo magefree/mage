@@ -54,10 +54,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DrownerOfHope extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Eldrazi Scion");
+    private static final FilterControlledPermanent FILTER = new FilterControlledPermanent("an Eldrazi Scion");
 
     static {
-        filter.add(Predicates.and(
+        FILTER.add(Predicates.and(
                 new SubtypePredicate("Eldrazi"),
                 new SubtypePredicate("Scion")));
     }
@@ -78,7 +78,7 @@ public class DrownerOfHope extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 
         // Sacrifice an Eldrazi Scion: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new SacrificeTargetCost(new TargetControlledPermanent(FILTER)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

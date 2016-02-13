@@ -28,11 +28,11 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -45,20 +45,19 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Terror extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("nonartifact, nonblack creature");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        FILTER.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        FILTER.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public Terror(UUID ownerId) {
         super(ownerId, 182, "Terror", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "10E";
 
-
         // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(FILTER));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 

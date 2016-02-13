@@ -33,14 +33,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
@@ -48,18 +47,19 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author fireshoes
  */
 public class EldraziMimic extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another colorless creature");
-    
+
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("another colorless creature");
+
     static {
-        filter.add(new AnotherPredicate());
-        filter.add(new ColorlessPredicate());
+        FILTER.add(new AnotherPredicate());
+        FILTER.add(new ColorlessPredicate());
     }
 
     public EldraziMimic(UUID ownerId) {
@@ -69,11 +69,9 @@ public class EldraziMimic extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever another colorless creature enters the battlefield under your control, you may have the base power and toughness of Eldrazi Mimic 
+        // Whenever another colorless creature enters the battlefield under your control, you may have the base power and toughness of Eldrazi Mimic
         // become that creature's power and toughness until end of turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new EldraziMimicEffect(), filter, true, SetTargetPointer.PERMANENT,
-                "Whenever another colorless creature enters the battlefield under your control, you may have the base power and toughness of {this} become "
-                        + "that creature's power and toughness until end of turn"));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new EldraziMimicEffect(), FILTER, true, SetTargetPointer.PERMANENT, null));
     }
 
     public EldraziMimic(final EldraziMimic card) {
@@ -90,6 +88,7 @@ class EldraziMimicEffect extends OneShotEffect {
 
     public EldraziMimicEffect() {
         super(Outcome.Detriment);
+        staticText = "you may have the base power and toughness of {this} become that creature's power and toughness until end of turn";
     }
 
     public EldraziMimicEffect(final EldraziMimicEffect effect) {
@@ -105,9 +104,10 @@ class EldraziMimicEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            Permanent permanent = ((FixedTarget) getTargetPointer()).getTargetedPermanentOrLKIBattlefield(game);
             if (permanent != null) {
-                ContinuousEffect effect = new SetPowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b);
+                ContinuousEffect effect = new SetPowerToughnessTargetEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn);
+                effect.setTargetPointer(new FixedTarget(source.getSourceId()));
                 game.addEffect(effect, source);
                 return true;
             }
