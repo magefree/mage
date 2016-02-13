@@ -47,10 +47,10 @@ import mage.target.TargetPermanent;
  */
 public class DespoticScepter extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterPermanent();
+    private final static FilterPermanent FILTER = new FilterPermanent("permanent you own");
 
     static {
-        filter.add(new OwnerPredicate(TargetController.YOU));
+        FILTER.add(new OwnerPredicate(TargetController.YOU));
     }
 
     public DespoticScepter(UUID ownerId) {
@@ -59,7 +59,7 @@ public class DespoticScepter extends CardImpl {
 
         // {tap}: Destroy target permanent you own. It can't be regenerated.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(FILTER));
         this.addAbility(ability);
     }
 
