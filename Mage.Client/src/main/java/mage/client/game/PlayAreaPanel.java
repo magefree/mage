@@ -56,7 +56,7 @@ import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.constants.PlayerAction;
 import mage.view.PlayerView;
 
@@ -150,11 +150,11 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private void setGUISize() {
         for (Component comp : popupMenu.getComponents()) {
             if (comp instanceof JMenuItem) {
-                comp.setFont(FontSizeHelper.menuFont);
+                comp.setFont(GUISizeHelper.menuFont);
                 if (comp instanceof JMenu) {
-                    comp.setFont(FontSizeHelper.menuFont);
+                    comp.setFont(GUISizeHelper.menuFont);
                     for (Component subComp : ((JMenu) comp).getMenuComponents()) {
-                        subComp.setFont(FontSizeHelper.menuFont);
+                        subComp.setFont(GUISizeHelper.menuFont);
                     }
                 }
             }

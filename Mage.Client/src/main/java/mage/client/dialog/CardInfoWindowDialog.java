@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * CardInfoWindowDialog.java
  *
  * Created on Feb 1, 2010, 3:00:35 PM
@@ -57,10 +57,9 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
  */
 public class CardInfoWindowDialog extends MageDialog {
 
-    private static final Logger logger = Logger.getLogger(CardInfoWindowDialog.class);
+    private static final Logger LOGGER = Logger.getLogger(CardInfoWindowDialog.class);
 
     public static enum ShowType {
-
         REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, OTHER
     };
 
@@ -124,7 +123,7 @@ public class CardInfoWindowDialog extends MageDialog {
                 try {
                     this.setIcon(false);
                 } catch (PropertyVetoException ex) {
-                    logger.error(null, ex);
+                    LOGGER.error(null, ex);
                 }
             }
         } else {

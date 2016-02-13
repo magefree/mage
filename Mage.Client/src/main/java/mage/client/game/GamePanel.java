@@ -103,7 +103,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Config;
 import mage.client.util.Event;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.GameManager;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
@@ -205,7 +205,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public GamePanel() {
         initComponents();
-        changeGUISize();
+        setGUISize();
 
         initPopupMenuTriggerOrder();
         //this.add(popupMenuTriggerOrder);
@@ -332,12 +332,13 @@ public final class GamePanel extends javax.swing.JPanel {
             playAreaPanel.changeGUISize();
         }
         feedbackPanel.changeGUISize();
+
     }
 
     private void setGUISize() {
-        jSplitPane0.setDividerSize(FontSizeHelper.dividerBarSize);
-        jSplitPane1.setDividerSize(FontSizeHelper.dividerBarSize);
-        jSplitPane2.setDividerSize(FontSizeHelper.dividerBarSize);
+        jSplitPane0.setDividerSize(GUISizeHelper.dividerBarSize);
+        jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+        jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
     }
 
     private void saveDividerLocations() {
@@ -386,7 +387,6 @@ public final class GamePanel extends javax.swing.JPanel {
                 bigCard.setPreferredSize(bbDimension);
                 pnlShortCuts.revalidate();
                 pnlShortCuts.repaint();
-                //this.handContainer.sizeHand(0.8, smallMode);
                 for (PlayAreaPanel p : players.values()) {
                     p.sizePlayer(smallMode);
                 }
@@ -399,7 +399,6 @@ public final class GamePanel extends javax.swing.JPanel {
             bigCard.setPreferredSize(bbDimension);
             pnlShortCuts.revalidate();
             pnlShortCuts.repaint();
-            this.handContainer.sizeHand(1, smallMode);
             for (PlayAreaPanel p : players.values()) {
                 p.sizePlayer(smallMode);
             }

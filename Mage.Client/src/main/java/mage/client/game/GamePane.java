@@ -74,6 +74,8 @@ public class GamePane extends MagePane {
     public void changeGUISize() {
         super.changeGUISize();
         gamePanel.changeGUISize();
+        this.revalidate();
+        this.repaint();
     }
 
     public void removeGame() {

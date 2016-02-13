@@ -30,7 +30,7 @@ package mage.client.chat;
 import java.awt.Font;
 import static mage.client.chat.ChatPanelBasic.TIMESTAMP_COLOR;
 import mage.client.components.ColorPane;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.view.ChatMessage;
 import org.mage.card.arcane.ManaSymbols;
 
@@ -105,7 +105,7 @@ public class ChatPanelSeparated extends ChatPanelBasic {
 
     public void setSystemMessagesPane(ColorPane systemMessagesPane) {
         this.systemMessagesPane = systemMessagesPane;
-        changeGUISize(FontSizeHelper.getChatFont());
+        changeGUISize(GUISizeHelper.chatFont);
     }
 
     @Override

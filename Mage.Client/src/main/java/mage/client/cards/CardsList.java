@@ -36,7 +36,6 @@ package mage.client.cards;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -73,7 +72,7 @@ import mage.client.util.CardViewNameComparator;
 import mage.client.util.CardViewRarityComparator;
 import mage.client.util.Config;
 import mage.client.util.Event;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.client.util.gui.TableSpinnerEditor;
 import mage.constants.CardType;
@@ -148,9 +147,11 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     }
 
     private void setGUISize() {
-        Font font = FontSizeHelper.getTableFont();
-        mainTable.getTableHeader().setFont(font);
-        mainTable.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
+        mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
+        mainTable.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
+        mainTable.setFont(GUISizeHelper.tableFont);
+        mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());
+
     }
 
     private void makeTransparent() {

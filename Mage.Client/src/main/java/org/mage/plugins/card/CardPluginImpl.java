@@ -97,9 +97,9 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
-        CardPanel cardPanel = new CardPanel(permanent, gameId, loadImage, callback, false, dimension);
-        boolean implemented = permanent.getRarity() != null && !permanent.getRarity().equals(Rarity.NA);
+    public MagePermanent getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
+        CardPanel cardPanel = new CardPanel(cardView, gameId, loadImage, callback, false, dimension);
+        boolean implemented = cardView.getRarity() != null && !cardView.getRarity().equals(Rarity.NA);
         cardPanel.setShowCastingCost(implemented);
         return cardPanel;
     }

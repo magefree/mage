@@ -40,7 +40,7 @@ import java.awt.event.KeyEvent;
 import java.util.UUID;
 import javax.swing.JTextField;
 import mage.client.MageFrame;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -122,7 +122,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
     public ChatPanelBasic() {
         initComponents();
         setBackground(new Color(0, 0, 0, CHAT_ALPHA));
-        changeGUISize(FontSizeHelper.getChatFont());
+        changeGUISize(GUISizeHelper.chatFont);
         if (jScrollPaneTxt != null) {
             jScrollPaneTxt.setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
@@ -138,14 +138,14 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         txtMessage.setFont(font);
         if (jScrollPaneTxt != null) {
             jScrollPaneTxt.setFont(font);
-            jScrollPaneTxt.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
-            jScrollPaneTxt.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
+            jScrollPaneTxt.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
+            jScrollPaneTxt.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
         }
         int height = 30;
         if (font.getSize() > 20) {
             height = 30 + Math.min(font.getSize() - 10, 30);
         }
-        txtMessage.setMinimumSize(new Dimension(txtMessage.getWidth(), height));
+        txtMessage.setMinimumSize(new Dimension(20, height));
         txtMessage.setMaximumSize(new Dimension(txtMessage.getWidth(), height));
         txtMessage.setPreferredSize(new Dimension(txtMessage.getWidth(), height));
         txtMessage.setSize(new Dimension(txtMessage.getWidth(), height));

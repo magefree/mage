@@ -36,7 +36,6 @@ package mage.client.table;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -81,7 +80,7 @@ import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
 import mage.client.dialog.TableWaitingDialog;
 import mage.client.util.ButtonColumn;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.TableUtil;
@@ -286,15 +285,20 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     private void setGUISize() {
-        Font font = FontSizeHelper.getTableFont();
-        tableTables.getTableHeader().setFont(font);
-        tableTables.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
-        tableCompleted.getTableHeader().setFont(font);
-        tableCompleted.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
-        jSplitPane1.setDividerSize(FontSizeHelper.dividerBarSize);
-        jSplitPane2.setDividerSize(FontSizeHelper.dividerBarSize);
-        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
-        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
+        tableTables.getTableHeader().setFont(GUISizeHelper.tableFont);
+        tableTables.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
+        tableTables.setFont(GUISizeHelper.tableFont);
+        tableTables.setRowHeight(GUISizeHelper.getTableRowHeight());
+
+        tableCompleted.getTableHeader().setFont(GUISizeHelper.tableFont);
+        tableCompleted.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
+        tableCompleted.setFont(GUISizeHelper.tableFont);
+        tableCompleted.setRowHeight(GUISizeHelper.getTableRowHeight());
+
+        jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+        jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
+        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
+        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
     }
 
     private void saveDividerLocations() {

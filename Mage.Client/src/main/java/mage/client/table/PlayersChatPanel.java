@@ -35,7 +35,6 @@ package mage.client.table;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ import mage.client.chat.ChatPanelBasic;
 import static mage.client.chat.ChatPanelBasic.CHAT_ALPHA;
 import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_WIDTH;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
@@ -123,16 +122,17 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     }
 
     private void setGUISize() {
-        Font font = FontSizeHelper.getTableFont();
-        jTablePlayers.getTableHeader().setFont(font);
-        jTablePlayers.getTableHeader().setPreferredSize(new Dimension((int) jTablePlayers.getTableHeader().getPreferredSize().getWidth(), FontSizeHelper.tableHeaderHeight));
-        jScrollPanePlayers.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
-        jScrollPanePlayers.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
-        jScrollPaneSystem.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
-        jScrollPaneSystem.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
+        jTablePlayers.getTableHeader().setFont(GUISizeHelper.tableFont);
+        jTablePlayers.getTableHeader().setPreferredSize(new Dimension((int) jTablePlayers.getTableHeader().getPreferredSize().getWidth(), GUISizeHelper.tableHeaderHeight));
+        jTablePlayers.setFont(GUISizeHelper.tableFont);
+        jTablePlayers.setRowHeight(GUISizeHelper.getTableRowHeight());
+        jScrollPanePlayers.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
+        jScrollPanePlayers.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
+        jScrollPaneSystem.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
+        jScrollPaneSystem.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
 
-        jTabbedPaneText.setFont(FontSizeHelper.getTabFont());
-        jSplitPane1.setDividerSize(FontSizeHelper.dividerBarSize);
+        jTabbedPaneText.setFont(GUISizeHelper.getTabFont());
+        jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
     }
 
     public void setSplitDividerLocation(int location) {
@@ -291,7 +291,6 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jSpinner1 = new javax.swing.JSpinner();
         jSplitPane1 = new javax.swing.JSplitPane();
@@ -313,14 +312,15 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jTablePlayers.setToolTipText("Connected players");
         jTablePlayers.setAutoscrolls(false);
         jTablePlayers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTablePlayers.setFocusable(false);
-        jTablePlayers.setGridColor(new java.awt.Color(255, 255, 255));
         jTablePlayers.setOpaque(false);
         jTablePlayers.setRequestFocusEnabled(false);
         jTablePlayers.setRowSelectionAllowed(false);
+        jTablePlayers.setShowHorizontalLines(false);
+        jTablePlayers.setShowVerticalLines(false);
         jTablePlayers.setUpdateSelectionOnSort(false);
         jTablePlayers.setVerifyInputWhenFocusTarget(false);
         jScrollPanePlayers.setViewportView(jTablePlayers);
+        jTablePlayers.getAccessibleContext().setAccessibleDescription("");
 
         jSplitPane1.setTopComponent(jScrollPanePlayers);
 
@@ -404,7 +404,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
                 if (col != null) {
                     MageFrame.getInstance().getBalloonTip().setAttachedComponent(header);
                     JLabel content = new JLabel(tips.get(table.convertColumnIndexToModel(vColIndex)));
-                    content.setFont(FontSizeHelper.tooltipFont);
+                    content.setFont(GUISizeHelper.tooltipFont);
                     MageFrame.getInstance().getBalloonTip().setContents(content);
                     ToolTipUtils.balloonToToolTip(MageFrame.getInstance().getBalloonTip(), 600, 10000);
                 } else {

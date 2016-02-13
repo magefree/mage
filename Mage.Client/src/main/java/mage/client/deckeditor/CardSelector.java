@@ -36,7 +36,6 @@ package mage.client.deckeditor;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -65,7 +64,7 @@ import mage.client.cards.CardGrid;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
@@ -187,9 +186,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }
 
     private void setGUISize() {
-        Font font = FontSizeHelper.getTableFont();
-        mainTable.getTableHeader().setFont(font);
-        mainTable.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
+        mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
+        mainTable.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
+        mainTable.setFont(GUISizeHelper.tableFont);
+        mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());
+
     }
 
     public void switchToGrid() {

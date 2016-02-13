@@ -34,7 +34,6 @@
 package mage.client.dialog;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
@@ -48,7 +47,7 @@ import mage.client.components.MageComponents;
 import mage.client.components.tray.MageTray;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WIDTH;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
@@ -98,18 +97,20 @@ public class TableWaitingDialog extends MageDialog {
         MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
     }
 
+    @Override
     public void changeGUISize() {
         setGUISize();
     }
 
     private void setGUISize() {
-        Font font = FontSizeHelper.getTableFont();
-        tableSeats.getTableHeader().setFont(font);
-        tableSeats.getTableHeader().setPreferredSize(new Dimension(FontSizeHelper.tableHeaderHeight, FontSizeHelper.tableHeaderHeight));
+        tableSeats.getTableHeader().setFont(GUISizeHelper.tableFont);
+        tableSeats.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
+        tableSeats.setFont(GUISizeHelper.tableFont);
+        tableSeats.setRowHeight(GUISizeHelper.getTableRowHeight());
 
-        jSplitPane1.setDividerSize(FontSizeHelper.dividerBarSize);
-        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
-        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
+        jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
+        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
     }
 
     public void update(TableView table) {

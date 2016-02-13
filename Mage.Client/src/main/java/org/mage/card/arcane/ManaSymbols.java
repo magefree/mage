@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import org.apache.log4j.Logger;
@@ -40,7 +40,7 @@ public class ManaSymbols {
 
         for (String symbol : symbols) {
             String resourcePath = Constants.RESOURCE_PATH_MANA_SMALL;
-            switch (FontSizeHelper.basicSymbolSize) {
+            switch (GUISizeHelper.basicSymbolSize) {
                 case "medium":
                     resourcePath = Constants.RESOURCE_PATH_MANA_SMALL;
                     break;
@@ -50,11 +50,11 @@ public class ManaSymbols {
             }
             File file = new File(getSymbolsPath() + resourcePath + "/" + symbol + ".jpg");
             try {
-                if (FontSizeHelper.symbolPaySize != 15) {
+                if (GUISizeHelper.symbolPaySize != 15) {
                     BufferedImage notResized = ImageIO.read(file);
                     MANA_IMAGES.put(symbol, notResized);
                 } else {
-                    Rectangle r = new Rectangle(FontSizeHelper.symbolPaySize, FontSizeHelper.symbolPaySize);
+                    Rectangle r = new Rectangle(GUISizeHelper.symbolPaySize, GUISizeHelper.symbolPaySize);
                     Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                     BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
                     MANA_IMAGES.put(symbol, resized);
@@ -224,23 +224,23 @@ public class ManaSymbols {
             int symbolSize;
             switch (type) {
                 case TOOLTIP:
-                    symbolSize = FontSizeHelper.symbolTooltipSize;
+                    symbolSize = GUISizeHelper.symbolTooltipSize;
                     break;
                 case CARD:
-                    symbolSize = FontSizeHelper.symbolCardSize;
+                    symbolSize = GUISizeHelper.symbolCardSize;
                     break;
                 case PAY:
-                    symbolSize = FontSizeHelper.symbolPaySize;
+                    symbolSize = GUISizeHelper.symbolPaySize;
                     break;
                 case EDITOR:
-                    symbolSize = FontSizeHelper.symbolEditorSize;
+                    symbolSize = GUISizeHelper.symbolEditorSize;
                     break;
                 default:
                     symbolSize = 11;
                     break;
             }
             replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true)
-                    + "/symbols/" + FontSizeHelper.basicSymbolSize + "/$1$2.jpg' alt='$1$2' width="
+                    + "/symbols/" + GUISizeHelper.basicSymbolSize + "/$1$2.jpg' alt='$1$2' width="
                     + symbolSize + " height=" + symbolSize + ">");
 
         }

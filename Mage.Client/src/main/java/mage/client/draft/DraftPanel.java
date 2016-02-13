@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * DraftPanel.java
  *
  * Created on Jan 7, 2011, 2:15:48 PM
@@ -88,7 +88,7 @@ import org.apache.log4j.Logger;
  */
 public class DraftPanel extends javax.swing.JPanel {
 
-    private static final Logger logger = Logger.getLogger(DraftPanel.class);
+    private static final Logger LOGGER = Logger.getLogger(DraftPanel.class);
 
     private UUID draftId;
     private Session session;
@@ -121,7 +121,7 @@ public class DraftPanel extends javax.swing.JPanel {
     private String currentBoosterHeader;
     private String[] currentBooster;
 
-    private static final CardsView emptyView = new CardsView();
+    private static final CardsView EMPTY_VIEW = new CardsView();
 
     /**
      * Creates new form DraftPanel
@@ -145,16 +145,16 @@ public class DraftPanel extends javax.swing.JPanel {
 
         countdown = new Timer(1000,
                 new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (--timeout > 0) {
-                            setTimeout(timeout);
-                        } else {
-                            setTimeout(0);
-                            countdown.stop();
-                        }
-                    }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (--timeout > 0) {
+                    setTimeout(timeout);
+                } else {
+                    setTimeout(0);
+                    countdown.stop();
                 }
+            }
+        }
         );
     }
 
@@ -168,6 +168,15 @@ public class DraftPanel extends javax.swing.JPanel {
                 countdown.removeActionListener(al);
             }
         }
+    }
+
+    public void changeGUISize() {
+        draftPicks.changeGUISize();
+        setGUISize();
+    }
+
+    private void setGUISize() {
+
     }
 
     public synchronized void showDraft(UUID draftId) {
@@ -186,7 +195,7 @@ public class DraftPanel extends javax.swing.JPanel {
             try {
                 Files.write(pathToDraftLog(), "".getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             } catch (IOException ex) {
-                logger.error(null, ex);
+                LOGGER.error(null, ex);
             }
         } else {
             logFilename = null;
@@ -319,24 +328,24 @@ public class DraftPanel extends javax.swing.JPanel {
         this.draftBooster.clearCardEventListeners();
         this.draftBooster.addCardEventListener(
                 new Listener<Event>() {
-                    @Override
-                    public void event(Event event) {
-                        if (event.getEventName().equals("pick-a-card")) {
-                            SimpleCardView source = (SimpleCardView) event.getSource();
-                            DraftPickView view = session.sendCardPick(draftId, source.getId(), cardsHidden);
-                            if (view != null) {
-                                loadCardsToPickedCardsArea(view.getPicks());
-                                draftBooster.loadBooster(emptyView, bigCard);
-                                Plugins.getInstance().getActionCallback().hideTooltipPopup();
-                                setMessage("Waiting for other players");
-                            }
-                        }
-                        if (event.getEventName().equals("mark-a-card")) {
-                            SimpleCardView source = (SimpleCardView) event.getSource();
-                            session.sendCardMark(draftId, source.getId());
-                        }
+            @Override
+            public void event(Event event) {
+                if (event.getEventName().equals("pick-a-card")) {
+                    SimpleCardView source = (SimpleCardView) event.getSource();
+                    DraftPickView view = session.sendCardPick(draftId, source.getId(), cardsHidden);
+                    if (view != null) {
+                        loadCardsToPickedCardsArea(view.getPicks());
+                        draftBooster.loadBooster(EMPTY_VIEW, bigCard);
+                        Plugins.getInstance().getActionCallback().hideTooltipPopup();
+                        setMessage("Waiting for other players");
                     }
                 }
+                if (event.getEventName().equals("mark-a-card")) {
+                    SimpleCardView source = (SimpleCardView) event.getSource();
+                    session.sendCardMark(draftId, source.getId());
+                }
+            }
+        }
         );
         setMessage("Pick a card");
         if (!MageFrame.getInstance().isActive()) {
@@ -524,7 +533,7 @@ public class DraftPanel extends javax.swing.JPanel {
         try {
             Files.write(pathToDraftLog(), data.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException ex) {
-            logger.error(null, ex);
+            LOGGER.error(null, ex);
         }
     }
 

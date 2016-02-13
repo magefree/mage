@@ -60,7 +60,7 @@ import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 import mage.client.MageFrame;
 import mage.client.util.Config;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import static mage.constants.Constants.DEFAULT_AVATAR_ID;
@@ -82,7 +82,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static final Logger LOGGER = Logger.getLogger(PreferencesDialog.class);
 
-    public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_SHOW_TOOLTIPS_DELAY = "showTooltipsDelay";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
@@ -93,7 +92,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GAME_CONFIRM_EMPTY_MANA_POOL = "gameConfirmEmptyManaPool";
     public static final String KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER = "gameAskMoveToGraveORder";
 
-    public static final String KEY_GUI_FONT_SIZE = "guiFontSize";
+    public static final String KEY_GUI_TABLE_FONT_SIZE = "guiTableFontSize";
+    public static final String KEY_GUI_CHAT_FONT_SIZE = "guiChatFontSize";
+    public static final String KEY_GUI_CARD_HAND_SIZE = "guiCardHandSize";
 
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
     public static final String KEY_DRAFT_LOG_AUTO_SAVE = "draftLogAutoSave";
@@ -125,7 +126,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String MAIN_YOU = "mainYou";
     public static final String BEFORE_COMBAT_YOU = "beforeCombatYou";
     public static final String END_OF_COMBAT_YOU = "endOfCombatYou";
-    public static final String MAIN_2_YOU = "main2You";
+    public static final String MAIN_TWO_YOU = "main2You";
     public static final String END_OF_TURN_YOU = "endOfTurnYou";
 
     public static final String UPKEEP_OTHERS = "upkeepOthers";
@@ -133,7 +134,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String MAIN_OTHERS = "mainOthers";
     public static final String BEFORE_COMBAT_OTHERS = "beforeCombatOthers";
     public static final String END_OF_COMBAT_OTHERS = "endOfCombatOthers";
-    public static final String MAIN_2_OTHERS = "main2Others";
+    public static final String MAIN_TWO_OTHERS = "main2Others";
     public static final String END_OF_TURN_OTHERS = "endOfTurnOthers";
 
     public static final String KEY_STOP_ATTACK = "stopDeclareAttacksStep";
@@ -339,11 +340,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         tabsPanel = new javax.swing.JTabbedPane();
         tabMain = new javax.swing.JPanel();
         main_card = new javax.swing.JPanel();
-        displayBigCardsInHand = new javax.swing.JCheckBox();
         showCardName = new javax.swing.JCheckBox();
         tooltipDelayLabel = new javax.swing.JLabel();
         tooltipDelay = new javax.swing.JSlider();
@@ -360,8 +361,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbDraftLogAutoSave = new javax.swing.JCheckBox();
         tabGuiSize = new javax.swing.JPanel();
         guiSize_font = new javax.swing.JPanel();
-        fontSizeLabel = new javax.swing.JLabel();
         sliderFontSize = new javax.swing.JSlider();
+        fontSizeLabel = new javax.swing.JLabel();
+        sliderCardSizeHand = new javax.swing.JSlider();
+        labelCardSizeHand = new javax.swing.JLabel();
+        sliderChatFontSize = new javax.swing.JSlider();
+        chatFontSizeLabel = new javax.swing.JLabel();
         tabPhases = new javax.swing.JPanel();
         jLabelHeadLine = new javax.swing.JLabel();
         jLabelYourTurn = new javax.swing.JLabel();
@@ -479,16 +484,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         main_card.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card"));
 
-        displayBigCardsInHand.setText("Use big images (for high resolution screens)");
-        displayBigCardsInHand.setToolTipText("Changes the size of the cards shown in hand. Switch this option off if you have a small screen size.");
-        displayBigCardsInHand.setActionCommand("");
-        displayBigCardsInHand.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        displayBigCardsInHand.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                displayBigCardsInHandActionPerformed(evt);
-            }
-        });
-
         showCardName.setSelected(true);
         showCardName.setText("Show card name on card panel");
         showCardName.setToolTipText("Write the card's name on the card to make the card name more recognizable.");
@@ -520,8 +515,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(main_cardLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(main_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tooltipDelayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(displayBigCardsInHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tooltipDelayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                     .addComponent(tooltipDelay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(main_cardLayout.createSequentialGroup()
                         .addComponent(showCardName)
@@ -531,14 +525,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_cardLayout.setVerticalGroup(
             main_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(main_cardLayout.createSequentialGroup()
-                .addComponent(displayBigCardsInHand)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(showCardName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tooltipDelayLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tooltipDelay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(tooltipDelay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game"));
@@ -625,7 +616,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(cbAllowRequestToShowHandCards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbShowStormCounter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbAskMoveToGraveOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         main_gameLayout.setVerticalGroup(
             main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -697,7 +688,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(main_card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(main_gamelog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(tabMainLayout.createSequentialGroup()
-                        .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(main_game, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -705,25 +696,20 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(main_card, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
 
         tabsPanel.addTab("Main", tabMain);
 
-        guiSize_font.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Font"));
-        guiSize_font.setLayout(new java.awt.BorderLayout());
-
-        fontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fontSizeLabel.setText("Size");
-        fontSizeLabel.setToolTipText("<HTML>The size of the font used to display text.");
-        guiSize_font.add(fontSizeLabel, java.awt.BorderLayout.CENTER);
+        guiSize_font.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size elements"));
+        guiSize_font.setLayout(new java.awt.GridBagLayout());
 
         sliderFontSize.setMajorTickSpacing(5);
         sliderFontSize.setMaximum(50);
@@ -733,7 +719,77 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderFontSize.setPaintTicks(true);
         sliderFontSize.setSnapToTicks(true);
         sliderFontSize.setToolTipText("<HTML>Size of the font.");
-        guiSize_font.add(sliderFontSize, java.awt.BorderLayout.PAGE_START);
+        sliderFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        guiSize_font.add(sliderFontSize, gridBagConstraints);
+
+        fontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fontSizeLabel.setText("Size of table font");
+        fontSizeLabel.setToolTipText("<HTML>The size of the font used to display table text.");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSize_font.add(fontSizeLabel, gridBagConstraints);
+
+        sliderCardSizeHand.setMajorTickSpacing(5);
+        sliderCardSizeHand.setMaximum(50);
+        sliderCardSizeHand.setMinimum(10);
+        sliderCardSizeHand.setMinorTickSpacing(1);
+        sliderCardSizeHand.setPaintLabels(true);
+        sliderCardSizeHand.setPaintTicks(true);
+        sliderCardSizeHand.setSnapToTicks(true);
+        sliderCardSizeHand.setToolTipText("<HTML>Size of the font.");
+        sliderCardSizeHand.setValue(14);
+        sliderCardSizeHand.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderCardSizeHand.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        guiSize_font.add(sliderCardSizeHand, gridBagConstraints);
+
+        labelCardSizeHand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCardSizeHand.setText("Size of hand cards");
+        labelCardSizeHand.setToolTipText("<HTML>The size of the hand cards");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSize_font.add(labelCardSizeHand, gridBagConstraints);
+
+        sliderChatFontSize.setMajorTickSpacing(5);
+        sliderChatFontSize.setMaximum(50);
+        sliderChatFontSize.setMinimum(10);
+        sliderChatFontSize.setMinorTickSpacing(1);
+        sliderChatFontSize.setPaintLabels(true);
+        sliderChatFontSize.setPaintTicks(true);
+        sliderChatFontSize.setSnapToTicks(true);
+        sliderChatFontSize.setToolTipText("<HTML>Size of the font.");
+        sliderChatFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderChatFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        guiSize_font.add(sliderChatFontSize, gridBagConstraints);
+
+        chatFontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chatFontSizeLabel.setText("Size of chat font");
+        chatFontSizeLabel.setToolTipText("<HTML>The size of the font used to display the chat text");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSize_font.add(chatFontSizeLabel, gridBagConstraints);
 
         javax.swing.GroupLayout tabGuiSizeLayout = new javax.swing.GroupLayout(tabGuiSize);
         tabGuiSize.setLayout(tabGuiSizeLayout);
@@ -741,15 +797,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabGuiSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabGuiSizeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(guiSize_font, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addComponent(guiSize_font, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                .addContainerGap())
         );
         tabGuiSizeLayout.setVerticalGroup(
             tabGuiSizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabGuiSizeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(guiSize_font, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addComponent(guiSize_font, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("GUI Size", tabGuiSize);
@@ -1023,7 +1079,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                     .addComponent(cbSaveToZipFiles, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbPreferedImageLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 190, Short.MAX_VALUE))
+                        .addGap(0, 188, Short.MAX_VALUE))
                     .addGroup(panelCardImagesLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(txtImageFolderPath)
@@ -1915,7 +1971,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(connection_servers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tabConnectionLayout.setVerticalGroup(
             tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1956,7 +2012,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(405, Short.MAX_VALUE)
+                .addContainerGap(403, Short.MAX_VALUE)
                 .addComponent(saveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1981,7 +2037,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         Preferences prefs = MageFrame.getPreferences();
 
         // main
-        save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.tooltipDelay, KEY_SHOW_TOOLTIPS_DELAY, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
@@ -1995,9 +2050,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
         // GUI Size
-        if (getCachedValue(KEY_GUI_FONT_SIZE, 14) != dialog.sliderFontSize.getValue()) {
-            save(prefs, dialog.sliderFontSize, KEY_GUI_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
-            FontSizeHelper.changeGUISize();
+        boolean sizeGUIChanged = false;
+        if (getCachedValue(KEY_GUI_TABLE_FONT_SIZE, 14) != dialog.sliderFontSize.getValue()) {
+            save(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CHAT_FONT_SIZE, 14) != dialog.sliderFontSize.getValue()) {
+            save(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CARD_HAND_SIZE, 14) != dialog.sliderCardSizeHand.getValue()) {
+            save(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (sizeGUIChanged) {
+            // do as worker job
+            GUISizeHelper.changeGUISize();
         }
 
         // Phases & Priority
@@ -2006,7 +2074,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxMainYou, MAIN_YOU);
         save(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
         save(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
-        save(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
+        save(prefs, dialog.checkBoxMain2You, MAIN_TWO_YOU);
         save(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
 
         save(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
@@ -2014,7 +2082,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
         save(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
         save(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
-        save(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
+        save(prefs, dialog.checkBoxMain2Others, MAIN_TWO_OTHERS);
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
 
         save(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "false", UPDATE_CACHE_POLICY);
@@ -2263,10 +2331,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_showPlayerNamesPermanentlyActionPerformed
 
-    private void displayBigCardsInHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayBigCardsInHandActionPerformed
-
-    }//GEN-LAST:event_displayBigCardsInHandActionPerformed
-
     private void showCardNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCardNameActionPerformed
 
     }//GEN-LAST:event_showCardNameActionPerformed
@@ -2429,7 +2493,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadPhases(Preferences prefs) {
-        load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "true");
         load(prefs, dialog.tooltipDelay, KEY_SHOW_TOOLTIPS_DELAY, "300");
         load(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
@@ -2448,7 +2511,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.checkBoxMainYou, MAIN_YOU, "on", "on");
         load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU, "on", "on");
         load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU, "on", "on");
-        load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU, "on", "on");
+        load(prefs, dialog.checkBoxMain2You, MAIN_TWO_YOU, "on", "on");
         load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU, "on", "on");
 
         load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS, "on", "on");
@@ -2456,7 +2519,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS, "on", "on");
         load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS, "on", "on");
         load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS, "on", "on");
-        load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS, "on", "on");
+        load(prefs, dialog.checkBoxMain2Others, MAIN_TWO_OTHERS, "on", "on");
         load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS, "on", "on");
 
         load(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "true");
@@ -2470,7 +2533,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadGuiSize(Preferences prefs) {
-        load(prefs, dialog.sliderFontSize, KEY_GUI_FONT_SIZE, "14");
+        load(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "14");
+        load(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "14");
+        load(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "14");
     }
 
     private static void loadImagesSettings(Preferences prefs) {
@@ -2891,6 +2956,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbUseDefaultBattleImage;
     private javax.swing.JCheckBox cbUseDefaultImageFolder;
     private javax.swing.JCheckBox cbUseRandomBattleImage;
+    private javax.swing.JLabel chatFontSizeLabel;
     private javax.swing.JCheckBox checkBoxBeforeCOthers;
     private javax.swing.JCheckBox checkBoxBeforeCYou;
     private javax.swing.JCheckBox checkBoxDrawOthers;
@@ -2906,7 +2972,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxUpkeepOthers;
     private javax.swing.JCheckBox checkBoxUpkeepYou;
     private javax.swing.JPanel connection_servers;
-    private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel fontSizeLabel;
     private javax.swing.JPanel guiSize_font;
@@ -2949,6 +3014,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
+    private javax.swing.JLabel labelCardSizeHand;
     private javax.swing.JLabel labelPreferedImageLanguage;
     private javax.swing.JLabel lblProxyPassword;
     private javax.swing.JLabel lblProxyPort;
@@ -2970,6 +3036,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox showAbilityPickerForced;
     private javax.swing.JCheckBox showCardName;
     private javax.swing.JCheckBox showPlayerNamesPermanently;
+    private javax.swing.JSlider sliderCardSizeHand;
+    private javax.swing.JSlider sliderChatFontSize;
     private javax.swing.JSlider sliderFontSize;
     private javax.swing.JPanel sounds_backgroundMusic;
     private javax.swing.JPanel sounds_clips;

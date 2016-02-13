@@ -47,7 +47,7 @@ import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
-import mage.client.util.FontSizeHelper;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.layout.CardLayoutStrategy;
 import mage.client.util.layout.impl.OldCardLayoutStrategy;
@@ -125,8 +125,8 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     }
 
     private void setGUISize() {
-        jScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(FontSizeHelper.scrollBarSize, 0));
-        jScrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, FontSizeHelper.scrollBarSize));
+        jScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
+        jScrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
     }
 
     public void update(Map<UUID, PermanentView> battlefield) {
