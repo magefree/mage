@@ -53,10 +53,10 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class NissasJudgment extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public NissasJudgment(UUID ownerId) {
@@ -71,7 +71,7 @@ public class NissasJudgment extends CardImpl {
         // Choose up to one target creature an opponent controls. Each creature you control with a +1/+1 counter on it deals damage equal to its power to that creature.
         effect = new NissasJudgmentEffect();
         effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
-        getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, filter, true));
+        getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, FILTER, false));
         getSpellAbility().addEffect(effect);
     }
 
