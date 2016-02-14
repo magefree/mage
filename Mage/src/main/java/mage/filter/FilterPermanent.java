@@ -65,6 +65,11 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
     }
 
     @Override
+    public boolean checkObjectClass(Object object) {
+        return object instanceof Permanent;
+    }
+
+    @Override
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
         if (!this.match(permanent, game)) {
             return false;

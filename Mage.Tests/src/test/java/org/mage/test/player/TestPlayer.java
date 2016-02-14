@@ -392,14 +392,34 @@ public class TestPlayer implements Player {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("manaActivate:") + 13);
                     String[] groups = command.split("\\$");
-                    List<Permanent> manaPerms = computerPlayer.getAvailableManaProducers(game);
-                    for (Permanent perm : manaPerms) {
-                        for (Ability manaAbility : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
-                            if (manaAbility.toString().startsWith(groups[0])) {
-                                Ability newManaAbility = manaAbility.copy();
-                                computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
-                                actions.remove(action);
-                                return true;
+                    List<MageObject> manaObjects = computerPlayer.getAvailableManaProducers(game);
+                    for (MageObject mageObject : manaObjects) {
+                        if (mageObject instanceof Permanent) {
+                            for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                                if (manaAbility.toString().startsWith(groups[0])) {
+                                    Ability newManaAbility = manaAbility.copy();
+                                    computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
+                                    actions.remove(action);
+                                    return true;
+                                }
+                            }
+                        } else if (mageObject instanceof Card) {
+                            for (Ability manaAbility : ((Card) mageObject).getAbilities(game).getAvailableManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
+                                if (manaAbility.toString().startsWith(groups[0])) {
+                                    Ability newManaAbility = manaAbility.copy();
+                                    computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
+                                    actions.remove(action);
+                                    return true;
+                                }
+                            }
+                        } else {
+                            for (Ability manaAbility : mageObject.getAbilities().getAvailableManaAbilities(game.getState().getZone(mageObject.getId()), game)) {
+                                if (manaAbility.toString().startsWith(groups[0])) {
+                                    Ability newManaAbility = manaAbility.copy();
+                                    computerPlayer.activateAbility((ActivatedAbility) newManaAbility, game);
+                                    actions.remove(action);
+                                    return true;
+                                }
                             }
                         }
                     }

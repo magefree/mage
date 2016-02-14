@@ -2336,8 +2336,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     // returns only mana producers that don't require mana payment
-    protected List<Permanent> getAvailableManaProducers(Game game) {
-        List<Permanent> result = new ArrayList<>();
+    protected List<MageObject> getAvailableManaProducers(Game game) {
+        List<MageObject> result = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
             boolean canAdd = false;
             for (ManaAbility ability : permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
@@ -2351,6 +2351,21 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (canAdd) {
                 result.add(permanent);
+            }
+        }
+        for (Card card : getHand().getCards(game)) {
+            boolean canAdd = false;
+            for (ManaAbility ability : card.getAbilities(game).getManaAbilities(Zone.HAND)) {
+                if (!ability.getManaCosts().isEmpty()) {
+                    canAdd = false;
+                    break;
+                }
+                if (ability.canActivate(playerId, game)) {
+                    canAdd = true;
+                }
+            }
+            if (canAdd) {
+                result.add(card);
             }
         }
         return result;

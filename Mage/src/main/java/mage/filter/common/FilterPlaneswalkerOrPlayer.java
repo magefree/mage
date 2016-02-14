@@ -74,6 +74,11 @@ public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object> {
     }
 
     @Override
+    public boolean checkObjectClass(Object object) {
+        return true;
+    }
+
+    @Override
     public boolean match(Object o, Game game) {
         if (o instanceof Player) {
             return playerFilter.match((Player) o, game);

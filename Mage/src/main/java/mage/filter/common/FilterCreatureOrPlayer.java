@@ -24,19 +24,17 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.filter.common;
 
+import java.util.UUID;
+import mage.MageItem;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.MageItem;
-
-import java.util.UUID;
 
 /**
  *
@@ -64,12 +62,16 @@ public class FilterCreatureOrPlayer extends FilterImpl<MageItem> implements Filt
     }
 
     @Override
+    public boolean checkObjectClass(Object object) {
+        return true;
+    }
+
+    @Override
     public boolean match(MageItem o, Game game) {
         if (o instanceof Player) {
-            return playerFilter.match((Player)o, game);
-        }
-        else if (o instanceof Permanent) {
-            return creatureFilter.match((Permanent)o, game);
+            return playerFilter.match((Player) o, game);
+        } else if (o instanceof Permanent) {
+            return creatureFilter.match((Permanent) o, game);
         }
         return false;
     }
@@ -77,10 +79,9 @@ public class FilterCreatureOrPlayer extends FilterImpl<MageItem> implements Filt
     @Override
     public boolean match(MageItem o, UUID sourceId, UUID playerId, Game game) {
         if (o instanceof Player) {
-            return playerFilter.match((Player)o, sourceId, playerId, game);
-        }
-        else if (o instanceof Permanent) {
-            return creatureFilter.match((Permanent)o, sourceId, playerId, game);
+            return playerFilter.match((Player) o, sourceId, playerId, game);
+        } else if (o instanceof Permanent) {
+            return creatureFilter.match((Permanent) o, sourceId, playerId, game);
         }
         return false;
     }

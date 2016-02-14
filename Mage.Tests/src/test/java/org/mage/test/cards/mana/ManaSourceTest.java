@@ -25,46 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package org.mage.test.cards.mana;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.InfoEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author BetaSteward
+ * @author LevelX2
  */
-public class MyrSuperion extends CardImpl {
+public class ManaSourceTest extends CardTestPlayerBase {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public MyrSuperion(UUID ownerId) {
-        super(ownerId, 146, "Myr Superion", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "NPH";
-        this.subtype.add("Myr");
-
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(6);
-
+    /**
+     * I can use Simian Spirit Guide's mana to cast Myr Superion, but it is a
+     * creature card and not a creature when it is in hand, so it's wrong.
+     */
+    @Test
+    public void testCantCastWithCreatureCard() {
+        // Exile Simian Spirit Guide from your hand: Add {R} to your mana pool.
+        addCard(Zone.HAND, playerB, "Simian Spirit Guide", 1);
         // Spend only mana produced by creatures to cast Myr Superion.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Spend only mana produced by creatures to cast {this}")));
-        this.getSpellAbility().getManaCostsToPay().setSourceFilter(filter);
-        this.getSpellAbility().getManaCosts().setSourceFilter(filter);
+        addCard(Zone.HAND, playerB, "Myr Superion", 1); // {2}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Manakin", 1);
+
+        activateManaAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Exile");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Myr Superion");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertExileCount("Simian Spirit Guide", 1);
+
+        assertPermanentCount(playerB, "Myr Superion", 0);
+        assertHandCount(playerB, "Myr Superion", 1);
+
     }
 
-    public MyrSuperion(final MyrSuperion card) {
-        super(card);
-    }
-
-    @Override
-    public MyrSuperion copy() {
-        return new MyrSuperion(this);
-    }
 }

@@ -30,6 +30,7 @@ package mage.players;
 import java.io.Serializable;
 import java.util.UUID;
 import mage.ConditionalMana;
+import mage.MageObject;
 import mage.Mana;
 import mage.constants.Duration;
 import mage.constants.ManaType;
@@ -47,7 +48,7 @@ public class ManaPoolItem implements Serializable {
     private int black = 0;
     private int colorless = 0;
     private ConditionalMana conditionalMana;
-    private UUID sourceId;
+    private MageObject sourceObject;
     private UUID originalId; // originalId of the mana producing ability
     private boolean flag = false;
     private Duration duration;
@@ -56,24 +57,24 @@ public class ManaPoolItem implements Serializable {
     public ManaPoolItem() {
     }
 
-    public ManaPoolItem(int red, int green, int blue, int white, int black, int colorless, UUID sourceId, UUID originalId, boolean flag) {
+    public ManaPoolItem(int red, int green, int blue, int white, int black, int colorless, MageObject sourceObject, UUID originalId, boolean flag) {
         this.red = red;
         this.green = green;
         this.blue = blue;
         this.white = white;
         this.black = black;
         this.colorless = colorless;
-        this.sourceId = sourceId;
+        this.sourceObject = sourceObject;
         this.originalId = originalId;
         this.flag = flag;
         this.duration = Duration.EndOfStep;
     }
 
-    public ManaPoolItem(ConditionalMana conditionalMana, UUID sourceId, UUID originalId) {
+    public ManaPoolItem(ConditionalMana conditionalMana, MageObject sourceObject, UUID originalId) {
         this.conditionalMana = conditionalMana;
-        this.sourceId = sourceId;
+        this.sourceObject = sourceObject;
         this.originalId = originalId;
-        this.conditionalMana.setManaProducerId(sourceId);
+        this.conditionalMana.setManaProducerId(sourceObject.getId());
         this.conditionalMana.setManaProducerOriginalId(originalId);
         this.flag = conditionalMana.getFlag();
         this.duration = Duration.EndOfStep;
@@ -89,7 +90,7 @@ public class ManaPoolItem implements Serializable {
         if (item.conditionalMana != null) {
             this.conditionalMana = item.conditionalMana.copy();
         }
-        this.sourceId = item.sourceId;
+        this.sourceObject = item.sourceObject;
         this.originalId = item.originalId;
         this.flag = item.flag;
         this.duration = item.duration;
@@ -100,8 +101,12 @@ public class ManaPoolItem implements Serializable {
         return new ManaPoolItem(this);
     }
 
+    public MageObject getSourceObject() {
+        return sourceObject;
+    }
+
     public UUID getSourceId() {
-        return sourceId;
+        return sourceObject.getId();
     }
 
     public UUID getOriginalId() {

@@ -24,10 +24,11 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.filter.common;
 
+import java.util.UUID;
+import mage.MageItem;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
@@ -35,9 +36,6 @@ import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.UUID;
-import mage.MageItem;
 
 /**
  * @author nantuko
@@ -61,6 +59,11 @@ public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements Fil
         super(filter);
         this.permanentFilter = filter.permanentFilter.copy();
         this.playerFilter = filter.playerFilter.copy();
+    }
+
+    @Override
+    public boolean checkObjectClass(Object object) {
+        return true;
     }
 
     @Override
