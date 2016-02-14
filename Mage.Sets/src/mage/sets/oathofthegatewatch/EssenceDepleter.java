@@ -52,6 +52,7 @@ public class EssenceDepleter extends CardImpl {
         super(ownerId, 69, "Essence Depleter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "OGW";
         this.subtype.add("Eldrazi");
+        this.subtype.add("Drone");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

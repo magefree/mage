@@ -56,7 +56,7 @@ import mage.players.Player;
 public class RiptideChronologist extends CardImpl {
 
     public RiptideChronologist(UUID ownerId) {
-        super(ownerId, 107, "Riptide Chronologist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, 107, "Riptide Chronologist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "ONS";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
