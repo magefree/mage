@@ -222,6 +222,11 @@ class CompoundFilter<T extends MageItem> extends FilterImpl<T> implements Filter
     }
 
     @Override
+    public boolean checkObjectClass(Object object) {
+        return true; // already checked in the filter classes itself
+    }
+
+    @Override
     public boolean match(T obj, Game game) {
         return (filterA == null
                 || !filterA.match(obj, game))
