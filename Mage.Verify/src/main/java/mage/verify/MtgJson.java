@@ -1,17 +1,28 @@
 package mage.verify;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.ZipInputStream;
 
 public class MtgJson {
+    private MtgJson() {}
 
     private static class CardHolder {
         private static final Map<String, JsonCard> cards;
         static {
             try {
-                cards = JsonCard.loadAll();
+                cards = loadAllCards();
                 addAliases(cards);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -19,7 +30,48 @@ public class MtgJson {
         }
     }
 
-    public static JsonCard find(String name) {
+    private static class SetHolder {
+        private static final Map<String, JsonSet> sets;
+        static {
+            try {
+                sets = loadAllSets();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private static Map<String, JsonCard> loadAllCards() throws IOException {
+        return readFromZip("AllCards.json.zip", new TypeReference<Map<String, JsonCard>>() {});
+    }
+
+    private static Map<String, JsonSet> loadAllSets() throws IOException {
+        return readFromZip("AllSets.json.zip", new TypeReference<Map<String, JsonSet>>() {});
+    }
+
+    private static <T> T readFromZip(String filename, TypeReference<T> ref) throws IOException {
+        InputStream stream = MtgJson.class.getResourceAsStream(filename);
+        if (stream == null) {
+            File file = new File(filename);
+            if (!file.exists()) {
+                InputStream download = new URL("http://mtgjson.com/json/" + filename).openStream();
+                Files.copy(download, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Downloaded " + filename + " to " + file.getAbsolutePath());
+            } else {
+                System.out.println("Using " + filename + " from " + file.getAbsolutePath());
+            }
+            stream = new FileInputStream(file);
+        }
+        ZipInputStream zipInputStream = new ZipInputStream(stream);
+        zipInputStream.getNextEntry();
+        return new ObjectMapper().readValue(zipInputStream, ref);
+    }
+
+    public static Map<String, JsonSet> sets() {
+        return SetHolder.sets;
+    }
+
+    public static JsonCard card(String name) {
         return findReference(CardHolder.cards, name);
     }
 

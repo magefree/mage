@@ -1,26 +1,15 @@
 package mage.verify;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 class JsonCard {
-
-    static Map<String, JsonCard> loadAll() throws IOException {
-        return new ObjectMapper().readValue(
-                JsonCard.class.getResourceAsStream("AllCards.json"),
-                new TypeReference<Map<String, JsonCard>>() {});
-    }
-
     public String layout;
     public String name;
     public List<String> names; // flip cards
     public String manaCost;
     public int cmc;
     public List<String> colors;
+    public List<String> colorIdentity;
     public String type;
     public List<String> supertypes;
     public List<String> types;
@@ -33,6 +22,7 @@ class JsonCard {
     public boolean starter; // only available in boxed sets and not in boosters
     public int hand; // vanguard
     public int life; // vanguard
+    public String mciNumber;
 
     // only available in AllSets.json
     public String artist;

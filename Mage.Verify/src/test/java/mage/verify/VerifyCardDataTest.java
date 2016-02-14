@@ -23,7 +23,7 @@ public class VerifyCardDataTest {
 
     @Test
     public void verifySets() throws IOException {
-        Map<String, JsonSet> reference = JsonSet.loadAll();
+        Map<String, JsonSet> reference = MtgJson.sets();
 
         for (ExpansionSet set : Sets.getInstance().values()) {
             JsonSet ref = reference.get(set.getCode());
@@ -102,7 +102,7 @@ public class VerifyCardDataTest {
     }
 
     private void check(Card card, Set<String> tokens) {
-        JsonCard ref = MtgJson.find(card.getName());
+        JsonCard ref = MtgJson.card(card.getName());
         if (ref == null) {
             System.out.println("Missing card reference for " + card);
             return;
@@ -111,7 +111,7 @@ public class VerifyCardDataTest {
         if (tokens != null) {
             JsonCard ref2 = null;
             if (card.isFlipCard()) {
-                ref2 = MtgJson.find(card.getFlipCardName());
+                ref2 = MtgJson.card(card.getFlipCardName());
             }
             for (String token : tokens) {
                 if (!(token.equals(card.getName())
@@ -202,12 +202,18 @@ public class VerifyCardDataTest {
     }
 
     private void checkPT(Card card, JsonCard ref) {
-        String pt = card.getPower() + "/" + card.getToughness();
-        String expected = ref.power + "/" + ref.toughness;
-        if ("0/0".equals(pt) && ("null/null".equals(expected) || "*/*".equals(expected))) {
-            // ok
-        } else if (!Objects.equals(pt, expected.replace("*", "0"))) {
+        if (!eqPT(card.getPower().toString(), ref.power) || !eqPT(card.getToughness().toString(), ref.toughness)) {
+            String pt = card.getPower() + "/" + card.getToughness();
+            String expected = ref.power + "/" + ref.toughness;
             System.out.println(pt + " != " + expected + " for " + card);
+        }
+    }
+
+    private boolean eqPT(String found, String expected) {
+        if (expected == null) {
+            return "0".equals(found);
+        } else {
+            return found.equals(expected) || expected.contains("*");
         }
     }
 
