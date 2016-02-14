@@ -404,7 +404,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
                 if (col != null) {
                     MageFrame.getInstance().getBalloonTip().setAttachedComponent(header);
                     JLabel content = new JLabel(tips.get(table.convertColumnIndexToModel(vColIndex)));
-                    content.setFont(GUISizeHelper.tooltipFont);
+                    content.setFont(GUISizeHelper.balloonTooltipFont);
                     MageFrame.getInstance().getBalloonTip().setContents(content);
                     ToolTipUtils.balloonToToolTip(MageFrame.getInstance().getBalloonTip(), 600, 10000);
                 } else {

@@ -86,6 +86,7 @@ import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.TableUtil;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
+import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
@@ -94,6 +95,7 @@ import mage.remote.Session;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
 /**
@@ -119,6 +121,9 @@ public class TablesPanel extends javax.swing.JPanel {
     private List<String> messages;
     private int currentMessage;
     private MageTableRowSorter activeTablesSorter;
+
+    private final ButtonColumn actionButton1;
+    private final ButtonColumn actionButton2;
 
     JToggleButton[] filterButtons;
 
@@ -216,9 +221,10 @@ public class TablesPanel extends javax.swing.JPanel {
                         }
                         break;
                     case "Remove":
-                        if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            session.removeTable(roomId, tableId);
-                        }
+                        UserRequestMessage message = new UserRequestMessage("Removing table", "Are you sure you want to remove table?");
+                        message.setButton1("No", null);
+                        message.setButton2("Yes", PlayerAction.CLIENT_REMOVE_TABLE);
+                        MageFrame.getInstance().showUserRequestDialog(message);
                         break;
                     case "Show":
                         if (isTournament) {
@@ -269,8 +275,8 @@ public class TablesPanel extends javax.swing.JPanel {
         };
 
         // !!!! adds action buttons to the table panel (don't delete this)
-        new ButtonColumn(tableTables, openTableAction, tableTables.convertColumnIndexToView(TableTableModel.ACTION_COLUMN));
-        new ButtonColumn(tableCompleted, closedTableAction, tableCompleted.convertColumnIndexToView(MatchesTableModel.ACTION_COLUMN));
+        actionButton1 = new ButtonColumn(tableTables, openTableAction, tableTables.convertColumnIndexToView(TableTableModel.ACTION_COLUMN));
+        actionButton2 = new ButtonColumn(tableCompleted, closedTableAction, tableCompleted.convertColumnIndexToView(MatchesTableModel.ACTION_COLUMN));
         // !!!!
     }
 
@@ -281,6 +287,8 @@ public class TablesPanel extends javax.swing.JPanel {
 
     public void changeGUISize() {
         chatPanelMain.changeGUISize();
+        actionButton1.changeGUISize();
+        actionButton2.changeGUISize();
         setGUISize();
     }
 

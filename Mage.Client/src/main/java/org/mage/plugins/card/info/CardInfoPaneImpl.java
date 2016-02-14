@@ -1,10 +1,10 @@
 package org.mage.plugins.card.info;
 
-
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JEditorPane;
 import javax.swing.SwingUtilities;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.GuiDisplayUtil.TextLines;
 import mage.components.CardInfoPane;
@@ -13,20 +13,43 @@ import mage.view.CardView;
 import org.mage.card.arcane.UI;
 
 /**
- * Card info pane for displaying card rules.
- * Supports drawing mana symbols.
+ * Card info pane for displaying card rules. Supports drawing mana symbols.
  *
  * @author nantuko
  */
 public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
+    public static final int TOOLTIP_WIDTH_MIN = 160;
+
+    public static final int TOOLTIP_HEIGHT_MIN = 120;
+    public static final int TOOLTIP_HEIGHT_MAX = 300;
+
+    public static final int TOOLTIP_BORDER_WIDTH = 80;
+
     private CardView currentCard;
     private int type;
+
+    private int addWidth;
+    private int addHeight;
+    private boolean setSize = false;
 
     public CardInfoPaneImpl() {
         UI.setHTMLEditorKit(this);
         setEditable(false);
         setBackground(Color.white);
+        setGUISize();
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+        this.revalidate();
+        this.repaint();
+    }
+
+    private void setGUISize() {
+        addWidth = 20 * GUISizeHelper.cardTooltipFontSize;
+        addHeight = 12 * GUISizeHelper.cardTooltipFontSize;
+        setSize = true;
     }
 
     @Override
@@ -42,8 +65,8 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                 try {
                     if (!card.equals(currentCard)) {
                         return;
-                    }                    
-                    
+                    }
+
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -70,20 +93,29 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
             return;
         }
         boolean makeBig = (rules > 5 || ruleLength > 350);
+        if (setSize) {
+            if (makeBig) {
+                type = 0;
+            } else {
+                type = 1;
+            }
+        }
         if (makeBig && type == 0) {
             type = 1;
             container.setSize(
-                org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH,
-                org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MAX + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH
+                    addWidth + TOOLTIP_WIDTH_MIN + TOOLTIP_BORDER_WIDTH,
+                    addHeight + TOOLTIP_HEIGHT_MAX + TOOLTIP_BORDER_WIDTH
             );
-            this.setSize(org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN, org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MAX);
+            this.setSize(addWidth + TOOLTIP_WIDTH_MIN,
+                    addHeight + TOOLTIP_HEIGHT_MAX);
         } else if (!makeBig && type == 1) {
             type = 0;
             container.setSize(
-                    org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH,
-                    org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MIN + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH
+                    addWidth + TOOLTIP_WIDTH_MIN + TOOLTIP_BORDER_WIDTH,
+                    addHeight + TOOLTIP_HEIGHT_MIN + TOOLTIP_BORDER_WIDTH
             );
-            this.setSize(org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN, org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MIN);
+            this.setSize(addWidth + TOOLTIP_WIDTH_MIN,
+                    addHeight + TOOLTIP_HEIGHT_MIN);
         }
     }
 

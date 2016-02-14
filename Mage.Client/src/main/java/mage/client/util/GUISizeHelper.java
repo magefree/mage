@@ -36,20 +36,18 @@ public class GUISizeHelper {
 
     public static int flagHeight;
 
+    public static int cardTooltipFontSize = 15;
     public static Font chatFont = new java.awt.Font("Arial", 0, 12);
     public static Font tableFont = new java.awt.Font("Arial", 0, 12);
-    public static Font tooltipFont = new java.awt.Font("Arial", 0, 12);
+    public static Font balloonTooltipFont = new java.awt.Font("Arial", 0, 12);
     public static Font menuFont = new java.awt.Font("Arial", 0, 12);
+
+    public static Font gameRequestsFont = new java.awt.Font("Arial", 0, 12);
 
     public static Font gameDialogAreaFontBig = new java.awt.Font("Arial", 0, 12);
     public static Font gameDialogAreaFontSmall = new java.awt.Font("Arial", 0, 12);
 
     public static Dimension handCardDimension;
-
-    public static Font getToolbarFont() {
-        int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
-        return new java.awt.Font("Arial", 0, fontSize);
-    }
 
     public static int getTableRowHeight() {
         int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
@@ -71,47 +69,49 @@ public class GUISizeHelper {
         tableFont = new java.awt.Font("Arial", 0, tableFontSize);
         tableRowHeight = tableFontSize + 4;
         tableHeaderHeight = tableFontSize + 10;
-
-        tooltipFont = new java.awt.Font("Arial", 0, tableFontSize - 2);
-        // used for popup menus
-        menuFont = new java.awt.Font("Arial", 0, tableFontSize);
-
-        int chatFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CHAT_FONT_SIZE, 14);
-        chatFont = new java.awt.Font("Arial", 0, chatFontSize);
-
-        // Set basic symbol size
-        if (tableFontSize > 24) {
-            flagHeight = tableFontSize - 4;
-        } else {
-            flagHeight = 11;
-        }
-        if (tableFontSize < 25) {
-            basicSymbolSize = "small";
-        } else if (tableFontSize < 45) {
-            basicSymbolSize = "medium";
-        } else {
-            basicSymbolSize = "large";
-        }
+        flagHeight = tableFontSize - 2;
+        balloonTooltipFont = new Font("Arial", 0, tableFontSize);
         if (tableFontSize > 15) {
-            symbolTooltipSize = tableFontSize - 5;
             symbolEditorSize = tableFontSize - 5;
-            symbolPaySize = tableFontSize - 5;
-            symbolCardSize = 15;
             dividerBarSize = 10 + (tableFontSize / 4);
             scrollBarSize = 14 + (tableFontSize / 4);
         } else {
-            symbolTooltipSize = tableFontSize;
             symbolEditorSize = tableFontSize;
-            symbolPaySize = tableFontSize;
-            symbolCardSize = 15;
             dividerBarSize = 10;
             scrollBarSize = 14;
         }
 
+        // used for popup menus
+        int dialogFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, 14);
+        menuFont = new Font("Arial", 0, dialogFontSize);
+        gameRequestsFont = new Font("Arial", 0, dialogFontSize);
+
+        int chatFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CHAT_FONT_SIZE, 14);
+        chatFont = new java.awt.Font("Arial", 0, chatFontSize);
+
+        int symbolSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_SYMBOL_SIZE, 14);
+        // Set basic symbol size
+        if (symbolSize < 25) {
+            basicSymbolSize = "small";
+        } else if (symbolSize < 45) {
+            basicSymbolSize = "medium";
+        } else {
+            basicSymbolSize = "large";
+        }
+        if (symbolSize < 16) {
+            symbolTooltipSize = 15;
+            symbolPaySize = 15;
+            symbolCardSize = 15;
+        } else {
+            symbolTooltipSize = symbolSize;
+            symbolPaySize = symbolSize;
+            symbolCardSize = symbolSize;
+        }
+        cardTooltipFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TOOLTIP_SIZE, 14);
+
         int handCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_HAND_SIZE, 14);
         int width = CARD_IMAGE_WIDTH * handCardSize / 42;
         int height = CARD_IMAGE_HEIGHT * handCardSize / 42;
-
         handCardDimension = new Dimension(width, height);
     }
 }

@@ -185,7 +185,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
                         message = "Allow to rollback " + numberTurns + " turns?";
                 }
                 UserRequestMessage userRequestMessage = new UserRequestMessage(
-                        "Request by " + requestedUser.getName(), message, PlayerAction.REQUEST_PERMISSION_TO_ROLLBACK_TURN);
+                        "Request by " + requestedUser.getName(), message);
                 userRequestMessage.setRelatedUser(requestingUserId, requestingUser.getName());
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_ROLLBACK_TURN);
@@ -203,7 +203,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
                 UserRequestMessage userRequestMessage = new UserRequestMessage(
                         "User request",
                         "Allow user <b>" + watcher.getName() + "</b> for this match to see your hand cards?<br>"
-                        + "(You can revoke this every time using related popup menu item of your battlefield.)", PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS);
+                        + "(You can revoke this every time using related popup menu item of your battlefield.)");
                 userRequestMessage.setRelatedUser(watcherId, watcher.getName());
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_SEE_HAND_CARDS);

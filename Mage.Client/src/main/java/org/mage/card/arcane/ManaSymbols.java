@@ -32,7 +32,7 @@ public class ManaSymbols {
     public static void loadImages() {
         String[] symbols = new String[]{"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9", "B", "BG",
             "BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU",
-            "WP", "UP", "BP", "RP", "GP", "X", "C" /*, "Y", "Z", "slash"*/};
+            "WP", "UP", "BP", "RP", "GP", "X", "C"};
 
         MANA_IMAGES.clear();
         SET_IMAGES.clear();
@@ -185,7 +185,7 @@ public class ManaSymbols {
                 continue;
             }
             g.drawImage(image, x, y, null);
-            x += symbol.length() > 2 ? 10 : 12; // slash.png is only 10 pixels wide.
+            x += GUISizeHelper.symbolPaySize;
         }
     }
 
@@ -202,8 +202,8 @@ public class ManaSymbols {
         manaCost = manaCost.replace("\\", "");
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
-            String symbol = tok.nextToken().substring(0);
-            width += symbol.length() > 2 ? 10 : 12; // slash.png is only 10 pixels wide.
+            tok.nextToken();
+            width += GUISizeHelper.symbolPaySize;
         }
         return width;
     }

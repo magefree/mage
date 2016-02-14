@@ -46,7 +46,6 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
@@ -61,11 +60,13 @@ import mage.client.util.Format;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.constants.PlayerAction;
 import mage.remote.Session;
 import mage.view.RoundView;
 import mage.view.TournamentGameView;
 import mage.view.TournamentPlayerView;
 import mage.view.TournamentView;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
 /**
@@ -87,6 +88,8 @@ public class TournamentPanel extends javax.swing.JPanel {
     private UpdateTournamentTask updateTask;
     private final DateFormat df;
 
+    private final ButtonColumn actionButtonColumn1;
+
     /**
      * Creates new form TournamentPanel
      */
@@ -106,8 +109,6 @@ public class TournamentPanel extends javax.swing.JPanel {
 
         tableMatches.createDefaultColumnsFromModel();
         TableUtil.setColumnWidthAndOrder(tableMatches, DEFAULT_COLUMNS_WIDTH_MATCHES, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);
-
-        setGUISize();
 
         chatPanel1.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         chatPanel1.setChatType(ChatPanelBasic.ChatType.TOURNAMENT);
@@ -134,7 +135,8 @@ public class TournamentPanel extends javax.swing.JPanel {
         };
 
         // action button, don't delete this
-        ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
+        actionButtonColumn1 = new ButtonColumn(tableMatches, action, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
+        setGUISize();
 
     }
 
@@ -167,6 +169,8 @@ public class TournamentPanel extends javax.swing.JPanel {
         jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
         jScrollPane2.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         jScrollPane2.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
+
+        actionButtonColumn1.changeGUISize();
     }
 
     private void saveDividerLocations() {
@@ -535,10 +539,10 @@ public class TournamentPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCloseWindowActionPerformed
 
     private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the tournament?", "Confirm quit tournament", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            MageFrame.getSession().quitTournament(tournamentId);
-        }
-
+        UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the tournament?");
+        message.setButton1("No", null);
+        message.setButton2("Yes", PlayerAction.CLIENT_QUIT_TOURNAMENT);
+        MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnQuitTournamentActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed

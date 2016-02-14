@@ -1944,11 +1944,15 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void resetPlayerPassedActions() {
-        this.passedAllTurns = false;
+        this.passed = false;
         this.passedTurn = false;
         this.passedUntilEndOfTurn = false;
         this.passedUntilNextMain = false;
         this.passedUntilStackResolved = false;
+        this.dateLastAddedToStack = null;
+        this.skippedAtLeastOnce = false;
+        this.passedAllTurns = false;
+        this.justActivatedType = null;
     }
 
     @Override

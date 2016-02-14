@@ -57,7 +57,6 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
@@ -74,12 +73,14 @@ import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.BufferedImageBuilder;
+import mage.constants.PlayerAction;
 import mage.remote.Session;
 import mage.view.CardsView;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
 import mage.view.SimpleCardView;
 import mage.view.SimpleCardsView;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
 /**
@@ -910,10 +911,11 @@ public class DraftPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the tournament?", "Confirm quit tournament", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            MageFrame.getSession().quitDraft(draftId);
-            MageFrame.removeDraft(draftId);
-        }
+        UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the draft tournament?");
+        message.setButton1("No", null);
+        message.setButton2("Yes", PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
+        message.setTournamentId(draftId);
+        MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnQuitTournamentActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

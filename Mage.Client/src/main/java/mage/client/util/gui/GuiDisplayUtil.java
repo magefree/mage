@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import mage.client.MageFrame;
+import mage.client.util.GUISizeHelper;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.constants.Rarity;
@@ -157,10 +158,8 @@ public class GuiDisplayUtil {
                 if (((PermanentView) card).getCounters() != null) {
                     counters = new ArrayList<>(((PermanentView) card).getCounters());
                 }
-            } else {
-                if (card.getCounters() != null) {
-                    counters = new ArrayList<>(card.getCounters());
-                }
+            } else if (card.getCounters() != null) {
+                counters = new ArrayList<>(card.getCounters());
             }
             if (!counters.isEmpty()) {
                 StringBuilder sb = new StringBuilder();
@@ -204,15 +203,14 @@ public class GuiDisplayUtil {
             symbolCount++;
         }
 
-        int fontSize = 11;
-
         String fontFamily = "tahoma";
+        int fontSize = GUISizeHelper.cardTooltipFontSize;
+
         /*if (prefs.fontFamily == CardFontFamily.arial)
          fontFamily = "arial";
          else if (prefs.fontFamily == CardFontFamily.verdana) {
          fontFamily = "verdana";
          }*/
-
         final StringBuilder buffer = new StringBuilder(512);
         buffer.append("<html><body style='font-family:");
         buffer.append(fontFamily);
@@ -226,7 +224,7 @@ public class GuiDisplayUtil {
             buffer.append(" [").append(card.getId().toString().substring(0, 3)).append("]");
         }
         buffer.append("</b></td><td align='right' valign='top' style='width:");
-        buffer.append(symbolCount * 11 + 1);
+        buffer.append(symbolCount * GUISizeHelper.symbolTooltipSize + 1);
         buffer.append("px'>");
         if (!card.isSplitCard()) {
             buffer.append(castingCost);
@@ -307,7 +305,7 @@ public class GuiDisplayUtil {
             rule.append("<tr><td valign='top'><b>");
             rule.append(card.getLeftSplitName());
             rule.append("</b></td><td align='right' valign='top' style='width:");
-            rule.append(card.getLeftSplitCosts().getSymbols().size() * 11 + 1);
+            rule.append(card.getLeftSplitCosts().getSymbols().size() * GUISizeHelper.symbolTooltipSize + 1);
             rule.append("px'>");
             rule.append(card.getLeftSplitCosts().getText());
             rule.append("</td></tr></table>");
@@ -320,7 +318,7 @@ public class GuiDisplayUtil {
             rule.append("<tr><td valign='top'><b>");
             rule.append(card.getRightSplitName());
             rule.append("</b></td><td align='right' valign='top' style='width:");
-            rule.append(card.getRightSplitCosts().getSymbols().size() * 11 + 1);
+            rule.append(card.getRightSplitCosts().getSymbols().size() * GUISizeHelper.symbolTooltipSize + 1);
             rule.append("px'>");
             rule.append(card.getRightSplitCosts().getText());
             rule.append("</td></tr></table>");

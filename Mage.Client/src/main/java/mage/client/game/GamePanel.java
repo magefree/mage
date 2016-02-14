@@ -141,6 +141,7 @@ import mage.view.MatchView;
 import mage.view.PlayerView;
 import mage.view.RevealedView;
 import mage.view.SimpleCardsView;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -1051,10 +1052,6 @@ public final class GamePanel extends javax.swing.JPanel {
         ArrowBuilder.getBuilder().removeAllArrows(gameId);
     }
 
-    public int modalQuestion(String message, String title) {
-        return JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION);
-    }
-
     public void select(String message, GameView gameView, int messageId, Map<String, Serializable> options) {
         updateGame(gameView, options);
         boolean controllingPlayer = false;
@@ -1875,9 +1872,11 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {
-        if (modalQuestion("Are you sure you want to concede?", "Confirm concede") == JOptionPane.YES_OPTION) {
-            session.sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
-        }
+        UserRequestMessage message = new UserRequestMessage("Confirm concede", "Are you sure you want to concede?");
+        message.setButton1("No", null);
+        message.setButton2("Yes", PlayerAction.CLIENT_CONCEDE_GAME);
+        message.setGameId(gameId);
+        MageFrame.getInstance().showUserRequestDialog(message);
     }
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1941,17 +1940,22 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void btnStopWatchingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopWatchingActionPerformed
-        if (modalQuestion("Are you sure you want to stop watching?", "Stop watching") == JOptionPane.YES_OPTION) {
-            session.stopWatching(gameId);
-            this.removeGame();
-        }
+        UserRequestMessage message = new UserRequestMessage("Stop watching", "Are you sure you want to stop watching?");
+        message.setButton1("No", null);
+        message.setButton2("Yes", PlayerAction.CLIENT_STOP_WATCHING);
+        message.setGameId(gameId);
+        MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnStopWatchingActionPerformed
 
     private void btnStopReplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopReplayActionPerformed
         if (replayTask != null && !replayTask.isDone()) {
             replayTask.cancel(true);
-        } else if (modalQuestion("Are you sure you want to stop replay?", "Stop replay") == JOptionPane.YES_OPTION) {
-            session.stopReplay(gameId);
+        } else {
+            UserRequestMessage message = new UserRequestMessage("Stop replay", "Are you sure you want to stop replay?");
+            message.setButton1("No", null);
+            message.setButton2("Yes", PlayerAction.CLIENT_REPLAY_ACTION);
+            message.setGameId(gameId);
+            MageFrame.getInstance().showUserRequestDialog(message);
         }
     }//GEN-LAST:event_btnStopReplayActionPerformed
 

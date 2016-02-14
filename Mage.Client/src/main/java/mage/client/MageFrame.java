@@ -123,6 +123,7 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
+import mage.constants.PlayerAction;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
@@ -141,8 +142,8 @@ import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
-import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.DownloadPictures;
+import org.mage.plugins.card.info.CardInfoPaneImpl;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
@@ -185,6 +186,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static long startTime;
 
     private final BalloonTip balloonTip;
+
+    private List<CardInfo> missingCards;
 
     /**
      * @return the session
@@ -402,7 +405,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (cardInfoPane == null) {
             return;
         }
-        cardInfoPane.setSize(Constants.TOOLTIP_WIDTH_MIN, Constants.TOOLTIP_HEIGHT_MIN);
+//        cardInfoPane.setSize(Constants.TOOLTIP_WIDTH_MIN, Constants.TOOLTIP_HEIGHT_MIN);
         cardInfoPane.setLocation(40, 40);
         cardInfoPane.setBackground(new Color(0, 0, 0, 0));
 
@@ -411,15 +414,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         popupContainer.add(cardInfoPane);
         popupContainer.setVisible(false);
-        popupContainer.setBounds(0, 0,
-                Constants.TOOLTIP_WIDTH_MIN + Constants.TOOLTIP_BORDER_WIDTH,
-                Constants.TOOLTIP_HEIGHT_MIN + Constants.TOOLTIP_BORDER_WIDTH);
+//        popupContainer.setBounds(0, 0,
+//                Constants.TOOLTIP_WIDTH_MIN + Constants.TOOLTIP_BORDER_WIDTH,
+//                Constants.TOOLTIP_HEIGHT_MIN + Constants.TOOLTIP_BORDER_WIDTH);
 
         desktopPane.add(popupContainer, JLayeredPane.POPUP_LAYER);
 
         UI.addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
         UI.addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
-
         // preview panel normal
         JPanel cardPreviewContainer = new JPanel();
         cardPreviewContainer.setOpaque(false);
@@ -530,7 +532,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 MagePane window = (MagePane) windows[i];
                 if (window.isVisible()) {
                     menuItem = new MagePaneMenuItem(window);
-                    menuItem.setFont(GUISizeHelper.getToolbarFont());
+                    menuItem.setFont(GUISizeHelper.menuFont);
                     menuItem.setState(i == 0);
                     menuItem.addActionListener(new ActionListener() {
                         @Override
@@ -566,28 +568,29 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void checkForNewImages() {
         long beforeCall = System.currentTimeMillis();
-        List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
+        missingCards = CardRepository.instance.findCards(new CardCriteria());
         LOGGER.info("Card pool load time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
-
         beforeCall = System.currentTimeMillis();
-        if (DownloadPictures.checkForNewCards(cards)) {
+        if (DownloadPictures.checkForNewCards(missingCards)) {
             LOGGER.info("Card images checking time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
-            if (JOptionPane.showConfirmDialog(this, "New cards are available.  Do you want to download the images?", "New images available", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                DownloadPictures.startDownload(null, cards);
-            }
+            UserRequestMessage message = new UserRequestMessage("New images available", "Card images are missing (" + missingCards.size() + ").  Do you want to download the images?"
+                    + "<br><br><i>You can deactivate the image download check on apllication start in the preferences.</i>");
+            message.setButton1("No", null);
+            message.setButton2("Yes", PlayerAction.CLIENT_DOWNLOAD_CARD_IMAGES);
+            showUserRequestDialog(message);
         }
     }
 
     public void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
         List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
-
         DownloadPictures.startDownload(null, cards);
     }
 
     public void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {
-        if (JOptionPane.showConfirmDialog(this, "Do you want to download game symbols and additional image files?", "Download additional resources", JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION) {
-            Plugins.getInstance().downloadSymbols();
-        }
+        UserRequestMessage message = new UserRequestMessage("Download additional resources", "Do you want to download game symbols and additional image files?");
+        message.setButton1("No", null);
+        message.setButton2("Yes", PlayerAction.CLIENT_DOWNLOAD_SYMBOLS);
+        showUserRequestDialog(message);
     }
 
     public static void setActive(MagePane frame) {
@@ -985,15 +988,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         if (session.isConnected()) {
-            if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                session.disconnect(false);
-                tablesPane.clearChat();
-                showMessage("You have disconnected");
-            }
+            UserRequestMessage message = new UserRequestMessage("Confirm disconnect", "Are you sure you want to disconnect?");
+            message.setButton1("No", null);
+            message.setButton2("Yes", PlayerAction.CLIENT_DISCONNECT);
+            showUserRequestDialog(message);
         } else {
             connectDialog.showDialog();
+            setWindowTitle();
         }
-        setWindowTitle();
     }//GEN-LAST:event_btnConnectActionPerformed
 
     public void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
@@ -1027,18 +1029,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void exitApp() {
         if (session.isConnected()) {
-            if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
-                return;
-            }
-            session.disconnect(false);
-        } else if (JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Confirm exit", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
-            return;
+            UserRequestMessage message = new UserRequestMessage("Confirm disconnect", "You are currently connected.  Are you sure you want to disconnect?");
+            message.setButton1("No", null);
+            message.setButton2("Yes", PlayerAction.CLIENT_EXIT);
+            MageFrame.getInstance().showUserRequestDialog(message);
+        } else {
+            UserRequestMessage message = new UserRequestMessage("Confirm exit", "Are you sure you want to exit?");
+            message.setButton1("No", null);
+            message.setButton2("Yes", PlayerAction.CLIENT_EXIT);
+            MageFrame.getInstance().showUserRequestDialog(message);
         }
-        CardRepository.instance.closeDB();
-        tablesPane.cleanUp();
-        Plugins.getInstance().shutdown();
-        dispose();
-        System.exit(0);
     }
 
     public void enableButtons() {
@@ -1068,9 +1068,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (setActive) {
             setActive(tablesPane);
         } else // if other panel was already shown, mamke sure it's topmost again
-         if (topPanebefore != null) {
+        {
+            if (topPanebefore != null) {
                 setActive(topPanebefore);
             }
+        }
     }
 
     public void hideGames() {
@@ -1356,20 +1358,23 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     disableButtons();
                     hideGames();
                     hideTables();
-                    if (errorCall && JOptionPane.showConfirmDialog(MageFrame.this, "The connection to server was lost. Reconnect?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        if (performConnect()) {
-                            enableButtons();
-                        }
+                    if (errorCall) {
+                        UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect?");
+                        message.setButton1("No", null);
+                        message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
+                        showUserRequestDialog(message);
                     } else {
                         session.disconnect(false);
                     }
                 }
-            });
+            }
+            );
         }
     }
 
     @Override
-    public void showMessage(final String message) {
+    public void showMessage(final String message
+    ) {
         if (SwingUtilities.isEventDispatchThread()) {
             JOptionPane.showMessageDialog(desktopPane, message);
         } else {
@@ -1383,7 +1388,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void showError(final String message) {
+    public void showError(final String message
+    ) {
         if (SwingUtilities.isEventDispatchThread()) {
             JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -1397,8 +1403,69 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void processCallback(ClientCallback callback) {
+    public void processCallback(ClientCallback callback
+    ) {
         callbackClient.processCallback(callback);
+    }
+
+    public void sendUserReplay(PlayerAction playerAction, UserRequestMessage userRequestMessage) {
+        switch (playerAction) {
+            case CLIENT_DOWNLOAD_SYMBOLS:
+                Plugins.getInstance().downloadSymbols();
+                break;
+            case CLIENT_DOWNLOAD_CARD_IMAGES:
+                DownloadPictures.startDownload(null, missingCards);
+                break;
+            case CLIENT_DISCONNECT:
+                session.disconnect(false);
+                tablesPane.clearChat();
+                showMessage("You have disconnected");
+                setWindowTitle();
+                break;
+            case CLIENT_QUIT_TOURNAMENT:
+                MageFrame.getSession().quitTournament(userRequestMessage.getTournamentId());
+                break;
+            case CLIENT_QUIT_DRAFT_TOURNAMENT:
+                MageFrame.getSession().quitDraft(userRequestMessage.getTournamentId());
+                MageFrame.removeDraft(userRequestMessage.getTournamentId());
+                break;
+            case CLIENT_CONCEDE_GAME:
+                MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, userRequestMessage.getGameId(), null);
+                break;
+            case CLIENT_CONCEDE_MATCH:
+                MageFrame.getSession().quitMatch(userRequestMessage.getGameId());
+                break;
+            case CLIENT_STOP_WATCHING:
+                session.stopWatching(userRequestMessage.getGameId());
+                removeGame(userRequestMessage.getGameId());
+                break;
+            case CLIENT_EXIT:
+                if (session.isConnected()) {
+                    session.disconnect(false);
+                }
+                CardRepository.instance.closeDB();
+                tablesPane.cleanUp();
+                Plugins.getInstance().shutdown();
+                dispose();
+                System.exit(0);
+                break;
+            case CLIENT_REMOVE_TABLE:
+                session.removeTable(userRequestMessage.getRoomId(), userRequestMessage.getTableId());
+                break;
+            case CLIENT_RECONNECT:
+                if (performConnect()) {
+                    enableButtons();
+                }
+                break;
+            case CLIENT_REPLAY_ACTION:
+                session.stopReplay(userRequestMessage.getGameId());
+                break;
+            default:
+                if (session != null && playerAction != null) {
+                    session.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
+                }
+
+        }
     }
 
     public void changeGUISize() {
@@ -1416,12 +1483,22 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         for (ChatPanelBasic chatPanel : getChatPanels().values()) {
             chatPanel.changeGUISize(GUISizeHelper.chatFont);
         }
+        try {
+            CardInfoPaneImpl cardInfoPane = (CardInfoPaneImpl) UI.getComponent(MageComponents.CARD_INFO_PANE);
+            if (cardInfoPane != null) {
+                cardInfoPane.changeGUISize();
+            }
+
+        } catch (Exception ex) {
+
+        }
+
         this.revalidate();
         this.repaint();
     }
 
     private void setGUISize() {
-        Font font = GUISizeHelper.getToolbarFont();
+        Font font = GUISizeHelper.menuFont;
         mageToolbar.setFont(font);
         int newHeight = font.getSize() + 6;
         Dimension mageToolbarDimension = mageToolbar.getPreferredSize();
@@ -1445,7 +1522,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 component.setMaximumSize(d);
             }
         }
-        balloonTip.setFont(GUISizeHelper.tooltipFont);
+        balloonTip.setFont(GUISizeHelper.balloonTooltipFont);
     }
 }
 
