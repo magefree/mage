@@ -48,6 +48,8 @@ public class GUISizeHelper {
     public static Font gameDialogAreaFontSmall = new java.awt.Font("Arial", 0, 12);
 
     public static Dimension handCardDimension;
+    public static Dimension otherZonesCardDimension;
+    public static Dimension battlefieldCardDimension;
 
     public static int getTableRowHeight() {
         int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
@@ -110,8 +112,12 @@ public class GUISizeHelper {
         cardTooltipFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TOOLTIP_SIZE, 14);
 
         int handCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_HAND_SIZE, 14);
-        int width = CARD_IMAGE_WIDTH * handCardSize / 42;
-        int height = CARD_IMAGE_HEIGHT * handCardSize / 42;
-        handCardDimension = new Dimension(width, height);
+        handCardDimension = new Dimension(CARD_IMAGE_WIDTH * handCardSize / 42, CARD_IMAGE_HEIGHT * handCardSize / 42);
+
+        int otherZonesCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OTHER_ZONES_SIZE, 14);
+        otherZonesCardDimension = new Dimension(CARD_IMAGE_WIDTH * otherZonesCardSize / 42, CARD_IMAGE_HEIGHT * otherZonesCardSize / 42);
+
+        int battlefieldCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_SIZE, 14);
+        battlefieldCardDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldCardSize / 42, CARD_IMAGE_HEIGHT * battlefieldCardSize / 42);
     }
 }

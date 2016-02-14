@@ -332,8 +332,23 @@ public final class GamePanel extends javax.swing.JPanel {
         for (PlayAreaPanel playAreaPanel : players.values()) {
             playAreaPanel.changeGUISize();
         }
+
+        stack.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
+
         feedbackPanel.changeGUISize();
 
+        for (CardInfoWindowDialog cardInfoWindowDialog : exiles.values()) {
+            cardInfoWindowDialog.changeGUISize();
+        }
+        for (CardInfoWindowDialog cardInfoWindowDialog : revealed.values()) {
+            cardInfoWindowDialog.changeGUISize();
+        }
+        for (CardInfoWindowDialog cardInfoWindowDialog : lookedAt.values()) {
+            cardInfoWindowDialog.changeGUISize();
+        }
+        for (CardInfoWindowDialog cardInfoWindowDialog : graveyardWindows.values()) {
+            cardInfoWindowDialog.changeGUISize();
+        }
     }
 
     private void setGUISize() {
@@ -1543,7 +1558,6 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        stack.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
         stack.setBackgroundColor(new Color(0, 0, 0, 0));
 
         btnStopReplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop.png")));

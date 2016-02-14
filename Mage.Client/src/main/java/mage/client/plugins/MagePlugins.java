@@ -50,4 +50,6 @@ public interface MagePlugins {
     BufferedImage getOriginalImage(CardView card);
 
     ActionCallback getActionCallback();
+
+    void changeGUISize();
 }

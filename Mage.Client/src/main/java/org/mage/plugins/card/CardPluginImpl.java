@@ -17,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JLayeredPane;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
+import mage.client.util.GUISizeHelper;
 import mage.constants.Rarity;
 import mage.interfaces.plugin.CardPlugin;
 import mage.utils.CardUtil;
@@ -30,7 +31,6 @@ import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.Animation;
 import org.mage.card.arcane.CardPanel;
-import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
@@ -65,7 +65,9 @@ public class CardPluginImpl implements CardPlugin {
     private static final float ATTACHMENT_SPACING_Y = 0.13f;
 
     private int landStackMax = 5;
-    private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
+    // private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
+    private int cardWidthMin = 50, cardWidthMax = (int) GUISizeHelper.battlefieldCardDimension.getWidth();
+
     private boolean stackVertical = false;
 
     private int playAreaWidth, playAreaHeight;
@@ -73,6 +75,10 @@ public class CardPluginImpl implements CardPlugin {
     private int extraCardSpacingX, cardSpacingX, cardSpacingY;
     private int stackSpacingX, stackSpacingY, attachmentSpacingY;
     private List<Row> rows = new ArrayList<>();
+
+    public CardPluginImpl() {
+        setGUISize();
+    }
 
     @Init
     public void init() {
@@ -86,6 +92,16 @@ public class CardPluginImpl implements CardPlugin {
     @Override
     public String toString() {
         return "[Card plugin, version 0.7]";
+    }
+
+    @Override
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        cardWidthMin = 50;
+        cardWidthMax = (int) GUISizeHelper.battlefieldCardDimension.getWidth();
     }
 
     @Override

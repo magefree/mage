@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * Card.java
  *
  * Created on 17-Dec-2009, 9:20:50 PM
@@ -222,6 +222,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
     @Override
     public void updateImage() {
+
     }
 
     protected String getText(String cardType) {

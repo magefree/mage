@@ -53,6 +53,7 @@ import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
+import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -275,8 +276,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
         titleText = new GlowText();
         setText(gameCard);
-        int fontSize = (int) dimension.getHeight() / 11;
-        titleText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
+//        int fontSize = (int) cardHeight / 11;
+//        titleText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
         titleText.setForeground(Color.white);
         titleText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
         titleText.setWrap(true);
@@ -288,7 +289,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         } else if (CardUtil.isPlaneswalker(gameCard)) {
             ptText.setText(gameCard.getLoyalty());
         }
-        ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
+//        ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
         ptText.setForeground(Color.white);
         ptText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
         add(ptText);
@@ -587,18 +588,24 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         titleText.setVisible(showText);
         ptText.setVisible(showText);
 
-        int titleX = Math.round(cardWidth * (20f / 480));
-        int titleY = Math.round(cardHeight * (9f / 680)) + yTextOffset;
-        titleText.setBounds(cardXOffset + titleX, cardYOffset + titleY, cardWidth - titleX, cardHeight - titleY);
+        if (showText) {
+            int fontSize = (int) cardHeight / 11;
+            titleText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
 
-        Dimension ptSize = ptText.getPreferredSize();
-        ptText.setSize(ptSize.width, ptSize.height);
-        int ptX = Math.round(cardWidth * (420f / 480)) - ptSize.width / 2;
-        int ptY = Math.round(cardHeight * (675f / 680)) - ptSize.height;
+            int titleX = Math.round(cardWidth * (20f / 480));
+            int titleY = Math.round(cardHeight * (9f / 680)) + yTextOffset;
+            titleText.setBounds(cardXOffset + titleX, cardYOffset + titleY, cardWidth - titleX, cardHeight - titleY);
 
-        int offsetX = Math.round((CARD_SIZE_FULL.width - cardWidth) / 10.0f);
+            ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
+            Dimension ptSize = ptText.getPreferredSize();
+            ptText.setSize(ptSize.width, ptSize.height);
+            int ptX = Math.round(cardWidth * (420f / 480)) - ptSize.width / 2;
+            int ptY = Math.round(cardHeight * (675f / 680)) - ptSize.height;
 
-        ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
+            int offsetX = Math.round((CARD_SIZE_FULL.width - cardWidth) / 10.0f);
+
+            ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
+        }
 
         if (isAnimationPanel || cardWidth < 200) {
             imagePanel.setScalingType(ScalingType.nearestNeighbor);
@@ -724,6 +731,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     BufferedImage srcImage;
                     if (gameCard.isFaceDown()) {
                         srcImage = getFaceDownImage();
+                    } else if (cardWidth > THUMBNAIL_SIZE_FULL.width) {
+                        srcImage = ImageCache.getImage(gameCard, cardWidth, cardHeight);
                     } else {
                         srcImage = ImageCache.getThumbnail(gameCard);
                     }

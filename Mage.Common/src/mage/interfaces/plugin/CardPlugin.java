@@ -44,4 +44,6 @@ public interface CardPlugin extends Plugin {
     JComponent getCardInfoPane();
 
     BufferedImage getOriginalImage(CardView card);
+
+    void changeGUISize();
 }

@@ -1068,11 +1068,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (setActive) {
             setActive(tablesPane);
         } else // if other panel was already shown, mamke sure it's topmost again
-        {
-            if (topPanebefore != null) {
+         if (topPanebefore != null) {
                 setActive(topPanebefore);
             }
-        }
     }
 
     public void hideGames() {
@@ -1470,7 +1468,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void changeGUISize() {
         setGUISize();
-
+        Plugins.getInstance().changeGUISize();
         CountryUtil.changeGUISize();
         for (Component component : desktopPane.getComponents()) {
             if (component instanceof MageDialog) {

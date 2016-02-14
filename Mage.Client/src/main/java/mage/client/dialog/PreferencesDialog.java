@@ -98,6 +98,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GUI_SYMBOL_SIZE = "guiSymbolSize";
     public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
     public static final String KEY_GUI_DIALOG_FONT_SIZE = "guiDialogFontSize";
+    public static final String KEY_GUI_FEEDBACK_AREA_SIZE = "guiFeedbackAreaSize";
+    public static final String KEY_GUI_CARD_OTHER_ZONES_SIZE = "guiCardOtherZonesSize";
+    public static final String KEY_GUI_CARD_BATTLEFIELD_SIZE = "guiCardBattlefield";
 
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
     public static final String KEY_DRAFT_LOG_AUTO_SAVE = "draftLogAutoSave";
@@ -265,7 +268,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CONNECT_AUTO_CONNECT = "autoConnect";
     public static final String KEY_CONNECT_FLAG = "connectFlag";
 
-    private static final Map<String, String> cache = new HashMap<>();
+    private static final Map<String, String> CACHE = new HashMap<>();
 
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
 
@@ -275,7 +278,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static String PHASE_ON = "on";
     public static String PHASE_OFF = "off";
 
-    private static final Map<Integer, JPanel> panels = new HashMap<>();
+    private static final Map<Integer, JPanel> PANELS = new HashMap<>();
 
     private static final Border GREEN_BORDER = BorderFactory.createLineBorder(Color.GREEN, 3);
     private static final Border BLACK_BORDER = BorderFactory.createLineBorder(Color.BLACK, 3);
@@ -363,20 +366,26 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbGameLogAutoSave = new javax.swing.JCheckBox();
         cbDraftLogAutoSave = new javax.swing.JCheckBox();
         tabGuiSize = new javax.swing.JPanel();
-        guiSize_font = new javax.swing.JPanel();
+        guiSizeBasic = new javax.swing.JPanel();
         sliderFontSize = new javax.swing.JSlider();
         fontSizeLabel = new javax.swing.JLabel();
         sliderChatFontSize = new javax.swing.JSlider();
         chatFontSizeLabel = new javax.swing.JLabel();
         sliderDialogFont = new javax.swing.JSlider();
         labelDialogFont = new javax.swing.JLabel();
-        guiSize_font1 = new javax.swing.JPanel();
+        guiSizeGame = new javax.swing.JPanel();
         sliderCardSizeHand = new javax.swing.JSlider();
         labelCardSizeHand = new javax.swing.JLabel();
-        sliderTooltipSize = new javax.swing.JSlider();
-        labelTooltipSize = new javax.swing.JLabel();
+        sliderCardSizeOtherZones = new javax.swing.JSlider();
+        labelCardSizeOtherZones = new javax.swing.JLabel();
+        sliderCardSizeBattlefield = new javax.swing.JSlider();
+        labelCardSizeBattlefield = new javax.swing.JLabel();
         sliderSymbolSize = new javax.swing.JSlider();
         labelSymbolSize = new javax.swing.JLabel();
+        sliderGameFeedbackArea = new javax.swing.JSlider();
+        labelGameFeedback = new javax.swing.JLabel();
+        sliderTooltipSize = new javax.swing.JSlider();
+        labelTooltipSize = new javax.swing.JLabel();
         tabPhases = new javax.swing.JPanel();
         jLabelHeadLine = new javax.swing.JLabel();
         jLabelYourTurn = new javax.swing.JLabel();
@@ -718,8 +727,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Main", tabMain);
 
-        guiSize_font.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size elements"));
-        guiSize_font.setLayout(new java.awt.GridBagLayout());
+        tabGuiSize.setMaximumSize(new java.awt.Dimension(527, 423));
+        tabGuiSize.setMinimumSize(new java.awt.Dimension(527, 423));
+
+        guiSizeBasic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size basic elements"));
+        guiSizeBasic.setLayout(new java.awt.GridBagLayout());
 
         sliderFontSize.setMajorTickSpacing(5);
         sliderFontSize.setMaximum(50);
@@ -728,13 +740,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderFontSize.setPaintLabels(true);
         sliderFontSize.setPaintTicks(true);
         sliderFontSize.setSnapToTicks(true);
-        sliderFontSize.setToolTipText("<HTML>Size of the font.");
+        sliderFontSize.setToolTipText("<HTML>The size of the font used to display table text.");
         sliderFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        guiSize_font.add(sliderFontSize, gridBagConstraints);
+        guiSizeBasic.add(sliderFontSize, gridBagConstraints);
 
         fontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fontSizeLabel.setText("Size of table font");
@@ -744,7 +756,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        guiSize_font.add(fontSizeLabel, gridBagConstraints);
+        guiSizeBasic.add(fontSizeLabel, gridBagConstraints);
 
         sliderChatFontSize.setMajorTickSpacing(5);
         sliderChatFontSize.setMaximum(50);
@@ -753,24 +765,25 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderChatFontSize.setPaintLabels(true);
         sliderChatFontSize.setPaintTicks(true);
         sliderChatFontSize.setSnapToTicks(true);
-        sliderChatFontSize.setToolTipText("<HTML>Size of the chat font.");
+        sliderChatFontSize.setToolTipText("<HTML>The size of the font used to display the chat text");
         sliderChatFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderChatFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        guiSize_font.add(sliderChatFontSize, gridBagConstraints);
+        guiSizeBasic.add(sliderChatFontSize, gridBagConstraints);
 
         chatFontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         chatFontSizeLabel.setText("Size of chat font");
         chatFontSizeLabel.setToolTipText("<HTML>The size of the font used to display the chat text");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        guiSize_font.add(chatFontSizeLabel, gridBagConstraints);
+        guiSizeBasic.add(chatFontSizeLabel, gridBagConstraints);
 
         sliderDialogFont.setMajorTickSpacing(5);
         sliderDialogFont.setMaximum(50);
@@ -779,26 +792,28 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderDialogFont.setPaintLabels(true);
         sliderDialogFont.setPaintTicks(true);
         sliderDialogFont.setSnapToTicks(true);
-        sliderDialogFont.setToolTipText("<HTML>Size of the font.");
+        sliderDialogFont.setToolTipText("<HTML>The size of the font of messages and menues");
         sliderDialogFont.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderDialogFont.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        guiSize_font.add(sliderDialogFont, gridBagConstraints);
+        guiSizeBasic.add(sliderDialogFont, gridBagConstraints);
 
         labelDialogFont.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelDialogFont.setText("Size of dialog font");
-        labelDialogFont.setToolTipText("<HTML>The size of the font used to display table text.");
+        labelDialogFont.setText("Font size of messages and menues");
+        labelDialogFont.setToolTipText("<HTML>The size of the font of messages and menues");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        guiSize_font.add(labelDialogFont, gridBagConstraints);
+        guiSizeBasic.add(labelDialogFont, gridBagConstraints);
+        labelDialogFont.getAccessibleContext().setAccessibleDescription("<HTML>The size of the font used to display messages or menus.");
 
-        guiSize_font1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size game elements"));
-        guiSize_font1.setLayout(new java.awt.GridBagLayout());
+        guiSizeGame.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size game elements"));
+        guiSizeGame.setLayout(new java.awt.GridBagLayout());
 
         sliderCardSizeHand.setMajorTickSpacing(5);
         sliderCardSizeHand.setMaximum(50);
@@ -807,7 +822,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeHand.setPaintLabels(true);
         sliderCardSizeHand.setPaintTicks(true);
         sliderCardSizeHand.setSnapToTicks(true);
-        sliderCardSizeHand.setToolTipText("<HTML>Size of the font.");
+        sliderCardSizeHand.setToolTipText("<HTML>The size of the card in hand");
         sliderCardSizeHand.setValue(14);
         sliderCardSizeHand.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeHand.setMinimumSize(new java.awt.Dimension(150, 40));
@@ -816,47 +831,74 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        guiSize_font1.add(sliderCardSizeHand, gridBagConstraints);
+        guiSizeGame.add(sliderCardSizeHand, gridBagConstraints);
 
         labelCardSizeHand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelCardSizeHand.setText("Size of hand cards");
-        labelCardSizeHand.setToolTipText("<HTML>The size of the hand cards");
+        labelCardSizeHand.setToolTipText("<HTML>The size of the card in hand");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        guiSize_font1.add(labelCardSizeHand, gridBagConstraints);
+        guiSizeGame.add(labelCardSizeHand, gridBagConstraints);
 
-        sliderTooltipSize.setMajorTickSpacing(5);
-        sliderTooltipSize.setMaximum(50);
-        sliderTooltipSize.setMinimum(10);
-        sliderTooltipSize.setMinorTickSpacing(1);
-        sliderTooltipSize.setPaintLabels(true);
-        sliderTooltipSize.setPaintTicks(true);
-        sliderTooltipSize.setSnapToTicks(true);
-        sliderTooltipSize.setToolTipText("<HTML>Size of the font.");
-        sliderTooltipSize.setValue(14);
-        sliderTooltipSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        sliderTooltipSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderCardSizeOtherZones.setMajorTickSpacing(5);
+        sliderCardSizeOtherZones.setMaximum(50);
+        sliderCardSizeOtherZones.setMinimum(10);
+        sliderCardSizeOtherZones.setMinorTickSpacing(1);
+        sliderCardSizeOtherZones.setPaintLabels(true);
+        sliderCardSizeOtherZones.setPaintTicks(true);
+        sliderCardSizeOtherZones.setSnapToTicks(true);
+        sliderCardSizeOtherZones.setToolTipText("<HTML>The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
+        sliderCardSizeOtherZones.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderCardSizeOtherZones.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        guiSize_font1.add(sliderTooltipSize, gridBagConstraints);
+        guiSizeGame.add(sliderCardSizeOtherZones, gridBagConstraints);
 
-        labelTooltipSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTooltipSize.setText("Tooltip size");
-        labelTooltipSize.setToolTipText("<HTML>The size of the hand cards");
+        labelCardSizeOtherZones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCardSizeOtherZones.setText("Size of other zone cards");
+        labelCardSizeOtherZones.setToolTipText("<HTML>The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        guiSize_font1.add(labelTooltipSize, gridBagConstraints);
+        guiSizeGame.add(labelCardSizeOtherZones, gridBagConstraints);
+
+        sliderCardSizeBattlefield.setMajorTickSpacing(5);
+        sliderCardSizeBattlefield.setMaximum(50);
+        sliderCardSizeBattlefield.setMinimum(10);
+        sliderCardSizeBattlefield.setMinorTickSpacing(1);
+        sliderCardSizeBattlefield.setPaintLabels(true);
+        sliderCardSizeBattlefield.setPaintTicks(true);
+        sliderCardSizeBattlefield.setSnapToTicks(true);
+        sliderCardSizeBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        sliderCardSizeBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderCardSizeBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        guiSizeGame.add(sliderCardSizeBattlefield, gridBagConstraints);
+
+        labelCardSizeBattlefield.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCardSizeBattlefield.setText("Size of permanents");
+        labelCardSizeBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeGame.add(labelCardSizeBattlefield, gridBagConstraints);
 
         sliderSymbolSize.setMajorTickSpacing(5);
         sliderSymbolSize.setMaximum(50);
@@ -865,24 +907,82 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderSymbolSize.setPaintLabels(true);
         sliderSymbolSize.setPaintTicks(true);
         sliderSymbolSize.setSnapToTicks(true);
-        sliderSymbolSize.setToolTipText("<HTML>Size of the font.");
+        sliderSymbolSize.setToolTipText("<HTML>The size of symbols");
         sliderSymbolSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderSymbolSize.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        guiSize_font1.add(sliderSymbolSize, gridBagConstraints);
+        guiSizeGame.add(sliderSymbolSize, gridBagConstraints);
 
         labelSymbolSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelSymbolSize.setText("Symbol size");
-        labelSymbolSize.setToolTipText("<HTML>The size of the font used to display the chat text");
+        labelSymbolSize.setToolTipText("<HTML>The size of symbols");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        guiSize_font1.add(labelSymbolSize, gridBagConstraints);
+        guiSizeGame.add(labelSymbolSize, gridBagConstraints);
+
+        sliderGameFeedbackArea.setMajorTickSpacing(5);
+        sliderGameFeedbackArea.setMaximum(50);
+        sliderGameFeedbackArea.setMinimum(10);
+        sliderGameFeedbackArea.setMinorTickSpacing(1);
+        sliderGameFeedbackArea.setPaintLabels(true);
+        sliderGameFeedbackArea.setPaintTicks(true);
+        sliderGameFeedbackArea.setSnapToTicks(true);
+        sliderGameFeedbackArea.setToolTipText("<HTML>The size of the game feedback area (buttons and messages above the hand area)");
+        sliderGameFeedbackArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderGameFeedbackArea.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        guiSizeGame.add(sliderGameFeedbackArea, gridBagConstraints);
+
+        labelGameFeedback.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelGameFeedback.setText("Size game feedback area");
+        labelGameFeedback.setToolTipText("<HTML>The size of the game feedback area (buttons and messages above the hand area)");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeGame.add(labelGameFeedback, gridBagConstraints);
+        labelGameFeedback.getAccessibleContext().setAccessibleName("");
+
+        sliderTooltipSize.setMajorTickSpacing(5);
+        sliderTooltipSize.setMaximum(50);
+        sliderTooltipSize.setMinimum(10);
+        sliderTooltipSize.setMinorTickSpacing(1);
+        sliderTooltipSize.setPaintLabels(true);
+        sliderTooltipSize.setPaintTicks(true);
+        sliderTooltipSize.setSnapToTicks(true);
+        sliderTooltipSize.setToolTipText("<HTML>The size of the tooltip window for cards or permanents");
+        sliderTooltipSize.setValue(14);
+        sliderTooltipSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderTooltipSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        guiSizeGame.add(sliderTooltipSize, gridBagConstraints);
+
+        labelTooltipSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTooltipSize.setText("Tooltip size");
+        labelTooltipSize.setToolTipText("<HTML>The size of the tooltip window for cards or permanents");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeGame.add(labelTooltipSize, gridBagConstraints);
 
         org.jdesktop.layout.GroupLayout tabGuiSizeLayout = new org.jdesktop.layout.GroupLayout(tabGuiSize);
         tabGuiSize.setLayout(tabGuiSizeLayout);
@@ -891,18 +991,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(tabGuiSizeLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(guiSize_font, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                    .add(guiSize_font1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(guiSizeBasic, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                    .add(guiSizeGame, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabGuiSizeLayout.setVerticalGroup(
             tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabGuiSizeLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(guiSize_font, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(14, 14, 14)
-                .add(guiSize_font1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .add(guiSizeBasic, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 106, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(guiSizeGame, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 191, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("GUI Size", tabGuiSize);
@@ -2174,6 +2274,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
             save(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
             sizeGUIChanged = true;
         }
+        if (getCachedValue(KEY_GUI_FEEDBACK_AREA_SIZE, 14) != dialog.sliderGameFeedbackArea.getValue()) {
+            save(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CARD_OTHER_ZONES_SIZE, 14) != dialog.sliderCardSizeOtherZones.getValue()) {
+            save(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CARD_BATTLEFIELD_SIZE, 14) != dialog.sliderCardSizeBattlefield.getValue()) {
+            save(prefs, dialog.sliderCardSizeBattlefield, KEY_GUI_CARD_BATTLEFIELD_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
         if (sizeGUIChanged) {
             // do as worker job
             GUISizeHelper.changeGUISize();
@@ -2273,7 +2385,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private void useConfigurablePath() {
-        String path = cache.get(KEY_CARD_IMAGES_PATH);
+        String path = CACHE.get(KEY_CARD_IMAGES_PATH);
         dialog.txtImageFolderPath.setText(path);
         txtImageFolderPath.setEnabled(true);
         btnBrowseImageLocation.setEnabled(true);
@@ -2338,7 +2450,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private void useSelectBackgroundImage() {
-        String path = cache.get(KEY_BACKGROUND_IMAGE);
+        String path = CACHE.get(KEY_BACKGROUND_IMAGE);
         dialog.txtBackgroundImagePath.setText(path);
         txtBackgroundImagePath.setEnabled(true);
         btnBrowseBackgroundImage.setEnabled(true);
@@ -2360,7 +2472,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void useSelectedOrRandom() {
         cbUseRandomBattleImage.setEnabled(true);
-        String temp = cache.get(KEY_BATTLEFIELD_IMAGE_RANDOM);
+        String temp = CACHE.get(KEY_BATTLEFIELD_IMAGE_RANDOM);
         if (temp != null) {
             if (temp.equals("true")) {
                 useRandomBattleField();
@@ -2650,6 +2762,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.sliderSymbolSize, KEY_GUI_SYMBOL_SIZE, "14");
         load(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "14");
         load(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "14");
+        load(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "14");
+        load(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "14");
+        load(prefs, dialog.sliderCardSizeBattlefield, KEY_GUI_CARD_BATTLEFIELD_SIZE, "14");
     }
 
     private static void loadImagesSettings(Preferences prefs) {
@@ -2912,21 +3027,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static String getCachedValue(String key, String def) {
-        if (cache.containsKey(key)) {
-            return cache.get(key);
+        if (CACHE.containsKey(key)) {
+            return CACHE.get(key);
         } else {
             Preferences prefs = MageFrame.getPreferences();
             String value = prefs.get(key, def);
             if (value == null) {
                 return null;
             }
-            cache.put(key, value);
+            CACHE.put(key, value);
             return value;
         }
     }
 
     private static void updateCache(String key, String value) {
-        cache.put(key, value);
+        CACHE.put(key, value);
     }
 
     public static void saveValue(String key, String value) {
@@ -2974,17 +3089,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public void setSelectedId(int id) {
         if (id >= MIN_AVATAR_ID && id <= MAX_AVATAR_ID) {
-            for (JPanel panel : panels.values()) {
+            for (JPanel panel : PANELS.values()) {
                 panel.setBorder(BLACK_BORDER);
             }
             PreferencesDialog.selectedAvatarId = id;
-            panels.get(PreferencesDialog.selectedAvatarId).setBorder(GREEN_BORDER);
+            PANELS.get(PreferencesDialog.selectedAvatarId).setBorder(GREEN_BORDER);
         }
     }
 
     private void addAvatar(JPanel jPanel, final int id, boolean selected, boolean locked) {
         String path = "/avatars/" + String.valueOf(id) + ".jpg";
-        panels.put(id, jPanel);
+        PANELS.put(id, jPanel);
         Image image = ImageHelper.getImageFromResources(path);
 
         Rectangle r = new Rectangle(jPanel.getWidth() - 5, jPanel.getHeight() - 5);
@@ -3088,8 +3203,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel connection_servers;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel fontSizeLabel;
-    private javax.swing.JPanel guiSize_font;
-    private javax.swing.JPanel guiSize_font1;
+    private javax.swing.JPanel guiSizeBasic;
+    private javax.swing.JPanel guiSizeGame;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -3129,8 +3244,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
+    private javax.swing.JLabel labelCardSizeBattlefield;
     private javax.swing.JLabel labelCardSizeHand;
+    private javax.swing.JLabel labelCardSizeOtherZones;
     private javax.swing.JLabel labelDialogFont;
+    private javax.swing.JLabel labelGameFeedback;
     private javax.swing.JLabel labelPreferedImageLanguage;
     private javax.swing.JLabel labelSymbolSize;
     private javax.swing.JLabel labelTooltipSize;
@@ -3154,10 +3272,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox showAbilityPickerForced;
     private javax.swing.JCheckBox showCardName;
     private javax.swing.JCheckBox showPlayerNamesPermanently;
+    private javax.swing.JSlider sliderCardSizeBattlefield;
     private javax.swing.JSlider sliderCardSizeHand;
+    private javax.swing.JSlider sliderCardSizeOtherZones;
     private javax.swing.JSlider sliderChatFontSize;
     private javax.swing.JSlider sliderDialogFont;
     private javax.swing.JSlider sliderFontSize;
+    private javax.swing.JSlider sliderGameFeedbackArea;
     private javax.swing.JSlider sliderSymbolSize;
     private javax.swing.JSlider sliderTooltipSize;
     private javax.swing.JPanel sounds_backgroundMusic;

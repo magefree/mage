@@ -36,7 +36,7 @@ public class Plugins implements MagePlugins {
     public static final String PLUGINS_DIRECTORY = "plugins/";
 
     private static final MagePlugins fINSTANCE = new Plugins();
-    private static final Logger logger = Logger.getLogger(Plugins.class);
+    private static final Logger LOGGER = Logger.getLogger(Plugins.class);
     private static PluginManager pm;
 
     private ThemePlugin themePlugin = null;
@@ -51,13 +51,13 @@ public class Plugins implements MagePlugins {
 
     @Override
     public void loadPlugins() {
-        logger.info("Loading plugins...");
+        LOGGER.info("Loading plugins...");
         pm = PluginManagerFactory.createPluginManager();
         pm.addPluginsFrom(new File(PLUGINS_DIRECTORY).toURI());
         this.cardPlugin = new CardPluginImpl();
         this.counterPlugin = pm.getPlugin(CounterPlugin.class);
         this.themePlugin = new ThemePluginImpl();
-        logger.info("Done.");
+        LOGGER.info("Done.");
     }
 
     @Override
@@ -65,6 +65,18 @@ public class Plugins implements MagePlugins {
         if (pm != null) {
             pm.shutdown();
         }
+    }
+
+    @Override
+    public void changeGUISize() {
+        setGUISize();
+        if (this.cardPlugin != null) {
+            cardPlugin.changeGUISize();
+        }
+    }
+
+    private void setGUISize() {
+
     }
 
     @Override
@@ -135,7 +147,7 @@ public class Plugins implements MagePlugins {
                 try {
                     return this.counterPlugin.getGamePlayed();
                 } catch (PluginException e) {
-                    logger.fatal(e.getMessage());
+                    LOGGER.fatal(e.getMessage());
                     throw new RuntimeException(e);
                 }
             }
@@ -150,7 +162,7 @@ public class Plugins implements MagePlugins {
                 try {
                     this.counterPlugin.addGamePlayed();
                 } catch (PluginException e) {
-                    logger.fatal(e.getMessage());
+                    LOGGER.fatal(e.getMessage());
                     throw new RuntimeException(e);
                 }
             }

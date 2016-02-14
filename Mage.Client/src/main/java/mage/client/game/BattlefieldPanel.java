@@ -122,11 +122,13 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
     public void changeGUISize() {
         setGUISize();
+        sortLayout();
     }
 
     private void setGUISize() {
         jScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         jScrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
+        cardDimension = GUISizeHelper.battlefieldCardDimension;
     }
 
     public void update(Map<UUID, PermanentView> battlefield) {

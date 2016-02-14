@@ -23,12 +23,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="cards" alignment="1" pref="239" max="32767" attributes="0"/>
+          <Component id="cards" alignment="0" pref="163" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="cards" min="-2" max="-2" attributes="0"/>
+          <Component id="cards" alignment="0" pref="67" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
