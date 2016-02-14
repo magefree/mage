@@ -292,9 +292,7 @@ class ConspireEffect extends OneShotEffect {
         if (controller != null && conspiredSpell != null) {
             Card card = game.getCard(conspiredSpell.getSourceId());
             if (card != null) {
-                Spell copy = conspiredSpell.copySpell();
-                copy.setControllerId(source.getControllerId());
-                copy.setCopiedSpell(true);
+                Spell copy = conspiredSpell.copySpell(source.getControllerId());
                 game.getStack().push(copy);
                 copy.chooseNewTargets(game, source.getControllerId());
                 if (!game.isSimulation()) {

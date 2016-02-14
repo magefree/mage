@@ -94,7 +94,7 @@ class ChainOfVaporEffect extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            controller.moveCards(permanent, null, Zone.HAND, source, game);
+            controller.moveCards(permanent, Zone.HAND, source, game);
             Player player = game.getPlayer(permanent.getControllerId());
             TargetControlledPermanent target = new TargetControlledPermanent(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ")"), true);
             if (player.chooseTarget(Outcome.Sacrifice, target, source, game)) {
@@ -103,9 +103,7 @@ class ChainOfVaporEffect extends OneShotEffect {
                     if (player.chooseUse(outcome, "Copy the spell?", source, game)) {
                         Spell spell = game.getStack().getSpell(source.getSourceId());
                         if (spell != null) {
-                            Spell copy = spell.copySpell();
-                            copy.setControllerId(player.getId());
-                            copy.setCopiedSpell(true);
+                            Spell copy = spell.copySpell(player.getId());
                             game.getStack().push(copy);
                             copy.chooseNewTargets(game, player.getId());
                             String activateMessage = copy.getActivatedMessage(game);

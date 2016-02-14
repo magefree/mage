@@ -28,13 +28,12 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -63,7 +62,6 @@ public class IncreasingVengeance extends CardImpl {
     public IncreasingVengeance(UUID ownerId) {
         super(ownerId, 95, "Increasing Vengeance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
         this.expansionSetCode = "DKA";
-
 
         // Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
         this.getSpellAbility().addEffect(new IncreasingVengeanceEffect());
@@ -101,18 +99,14 @@ class IncreasingVengeanceEffect extends OneShotEffect {
         if (controller != null) {
             Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
             if (spell != null) {
-                Spell copy = spell.copySpell();
-                copy.setControllerId(source.getControllerId());
-                copy.setCopiedSpell(true);
+                Spell copy = spell.copySpell(source.getControllerId());
                 game.getStack().push(copy);
                 copy.chooseNewTargets(game, source.getControllerId());
                 game.informPlayers(new StringBuilder(controller.getLogName()).append(copy.getActivatedMessage(game)).toString());
                 Spell sourceSpell = (Spell) game.getStack().getStackObject(source.getSourceId());
                 if (sourceSpell != null) {
                     if (sourceSpell.getFromZone() == Zone.GRAVEYARD) {
-                        copy = spell.copySpell();
-                        copy.setControllerId(source.getControllerId());
-                        copy.setCopiedSpell(true);
+                        copy = spell.copySpell(source.getControllerId());
                         game.getStack().push(copy);
                         copy.chooseNewTargets(game, source.getControllerId());
                         game.informPlayers(new StringBuilder(controller.getLogName()).append(copy.getActivatedMessage(game)).toString());

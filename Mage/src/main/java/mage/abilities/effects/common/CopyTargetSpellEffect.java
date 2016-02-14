@@ -57,9 +57,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
             spell = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
         }
         if (spell != null) {
-            Spell copy = spell.copySpell();
-            copy.setControllerId(source.getControllerId());
-            copy.setCopiedSpell(true);
+            Spell copy = spell.copySpell(source.getControllerId());;
             game.getStack().push(copy);
             copy.chooseNewTargets(game, source.getControllerId());
             Player player = game.getPlayer(source.getControllerId());

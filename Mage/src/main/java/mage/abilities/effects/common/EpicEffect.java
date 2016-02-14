@@ -51,9 +51,7 @@ public class EpicEffect extends OneShotEffect {
         if (controller != null) {
             StackObject stackObject = game.getStack().getStackObject(source.getId());
             Spell spell = (Spell) stackObject;
-            spell = spell.copySpell();
-            spell.setCopiedSpell(true);
-            spell.setControllerId(source.getControllerId());
+            spell = spell.copySpell(source.getControllerId());
             // Remove Epic effect from the spell
             Effect epicEffect = null;
             for (Effect effect : spell.getSpellAbility().getEffects()) {

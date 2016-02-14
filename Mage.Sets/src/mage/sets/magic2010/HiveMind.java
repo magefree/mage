@@ -135,9 +135,7 @@ class HiveMindEffect extends OneShotEffect {
         if (spell != null && player != null) {
             for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
                 if (!playerId.equals(spell.getControllerId())) {
-                    Spell copy = spell.copySpell();
-                    copy.setControllerId(playerId);
-                    copy.setCopiedSpell(true);
+                    Spell copy = spell.copySpell(playerId);
                     game.getStack().push(copy);
                     copy.chooseNewTargets(game, playerId);
                 }

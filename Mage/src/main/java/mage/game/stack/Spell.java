@@ -139,10 +139,8 @@ public class Spell extends StackObjImpl implements Card {
             payNoMana |= spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE);
             if (ignoreAbility) {
                 ignoreAbility = false;
-            } else {
-                if (!spellAbility.activate(game, payNoMana)) {
-                    return false;
-                }
+            } else if (!spellAbility.activate(game, payNoMana)) {
+                return false;
             }
         }
         return true;
@@ -630,9 +628,21 @@ public class Spell extends StackObjImpl implements Card {
         return new Spell(this);
     }
 
-    public Spell copySpell() {
-        // replaced card.copy by copy (card content should no longer be changed)
-        return new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone);
+    public Spell copySpell(UUID newController) {
+        Spell copy = new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone);
+        boolean firstDone = false;
+        for (SpellAbility spellAbility : this.getSpellAbilities()) {
+            if (!firstDone) {
+                firstDone = true;
+                continue;
+            }
+            SpellAbility newAbility = spellAbility.copy(); // e.g. spliced spell
+            newAbility.newId();
+            copy.addSpellAbility(newAbility);
+        }
+        copy.setCopy(true);
+        copy.setControllerId(newController);
+        return copy;
     }
 
     @Override

@@ -103,13 +103,17 @@ class ZadaHedronGrinderTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell)) {
                 boolean targetsSource = false;
-                for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
-                    for (Target target : mode.getTargets()) {
-                        for (UUID targetId : target.getTargets()) {
-                            if (targetId.equals(getSourceId())) {
-                                targetsSource = true;
-                            } else {
-                                return false;
+                for (Ability ability : spell.getSpellAbilities()) {
+                    for (Mode mode : ability.getModes().getSelectedModes()) {
+                        for (Target target : mode.getTargets()) {
+                            if (!target.isNotTarget()) {
+                                for (UUID targetId : target.getTargets()) {
+                                    if (targetId.equals(getSourceId())) {
+                                        targetsSource = true;
+                                    } else {
+                                        return false;
+                                    }
+                                }
                             }
                         }
                     }
@@ -159,14 +163,17 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (spell != null && controller != null) {
+            // search the target that targets source
             Target usedTarget = null;
             setUsedTarget:
-            for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
-                for (Target target : mode.getTargets()) {
-                    if (target.getFirstTarget().equals(source.getSourceId())) {
-                        usedTarget = target.copy();
-                        usedTarget.clearChosen();
-                        break setUsedTarget;
+            for (Ability ability : spell.getSpellAbilities()) {
+                for (Mode mode : ability.getModes().getSelectedModes()) {
+                    for (Target target : mode.getTargets()) {
+                        if (!target.isNotTarget() && target.getFirstTarget().equals(source.getSourceId())) {
+                            usedTarget = target.copy();
+                            usedTarget.clearChosen();
+                            break setUsedTarget;
+                        }
                     }
                 }
             }
@@ -175,7 +182,7 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
             }
             for (Permanent creature : game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 if (!creature.getId().equals(source.getSourceId()) && usedTarget.canTarget(source.getControllerId(), creature.getId(), source, game)) {
-                    Spell copy = spell.copySpell();
+                    Spell copy = spell.copySpell(source.getControllerId());
                     setTarget:
                     for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
                         for (Target target : mode.getTargets()) {
@@ -188,8 +195,6 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
                             }
                         }
                     }
-                    copy.setControllerId(source.getControllerId());
-                    copy.setCopiedSpell(true);
                     game.getStack().push(copy);
                     String activateMessage = copy.getActivatedMessage(game);
                     if (activateMessage.startsWith(" casts ")) {

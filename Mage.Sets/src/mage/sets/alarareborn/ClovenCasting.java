@@ -64,9 +64,6 @@ public class ClovenCasting extends CardImpl {
         super(ownerId, 86, "Cloven Casting", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{R}");
         this.expansionSetCode = "ARB";
 
-
-
-
         // Whenever you cast a multicolored instant or sorcery spell, you may pay {1}. If you do, copy that spell. You may choose new targets for the copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ClovenCastingEffect(), new GenericManaCost(1)), filter, true, true));
 
@@ -97,9 +94,7 @@ class ClovenCastingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
-            Spell copy = spell.copySpell();
-            copy.setControllerId(source.getControllerId());
-            copy.setCopiedSpell(true);
+            Spell copy = spell.copySpell(source.getControllerId());
             game.getStack().push(copy);
             copy.chooseNewTargets(game, source.getControllerId());
             Player player = game.getPlayer(source.getControllerId());

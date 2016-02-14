@@ -44,11 +44,11 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class KorCastigator extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Eldrazi Scions");
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("Eldrazi Scions");
 
     static {
-        filter.add(new SubtypePredicate("Eldrazi"));
-        filter.add(new SubtypePredicate("Scion"));
+        FILTER.add(new SubtypePredicate("Eldrazi"));
+        FILTER.add(new SubtypePredicate("Scion"));
     }
 
     public KorCastigator(UUID ownerId) {
@@ -61,7 +61,7 @@ public class KorCastigator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kor Castigator can't be blocked by Eldrazi Scions.
-        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(FILTER, Duration.WhileOnBattlefield)));
     }
 
     public KorCastigator(final KorCastigator card) {

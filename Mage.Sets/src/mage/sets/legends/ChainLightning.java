@@ -52,7 +52,6 @@ public class ChainLightning extends CardImpl {
         super(ownerId, 137, "Chain Lightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "LEG";
 
-
         // Chain Lightning deals 3 damage to target creature or player. Then that player or that creature's controller may pay {R}{R}. If the player does, he or she may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainLightningEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
@@ -69,21 +68,21 @@ public class ChainLightning extends CardImpl {
 }
 
 class ChainLightningEffect extends OneShotEffect {
-    
+
     ChainLightningEffect() {
         super(Outcome.Damage);
         this.staticText = "Chain Lightning deals 3 damage to target creature or player. Then that player or that creature's controller may pay {R}{R}. If the player does, he or she may copy this spell and may choose a new target for that copy.";
     }
-    
+
     ChainLightningEffect(final ChainLightningEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ChainLightningEffect copy() {
         return new ChainLightningEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -94,8 +93,7 @@ class ChainLightningEffect extends OneShotEffect {
             if (player != null) {
                 player.damage(3, source.getSourceId(), game, false, true);
                 affectedPlayer = player;
-            }
-            else {
+            } else {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
                     permanent.damage(3, source.getSourceId(), game, false, true);
@@ -108,9 +106,7 @@ class ChainLightningEffect extends OneShotEffect {
                     if (cost.pay(source, game, source.getSourceId(), affectedPlayer.getId(), false, null)) {
                         Spell spell = game.getStack().getSpell(source.getSourceId());
                         if (spell != null) {
-                            Spell copy = spell.copySpell();
-                            copy.setControllerId(affectedPlayer.getId());
-                            copy.setCopiedSpell(true);
+                            Spell copy = spell.copySpell(affectedPlayer.getId());
                             game.getStack().push(copy);
                             copy.chooseNewTargets(game, affectedPlayer.getId());
                             game.informPlayers(affectedPlayer.getLogName() + " copies " + copy.getName() + ".");

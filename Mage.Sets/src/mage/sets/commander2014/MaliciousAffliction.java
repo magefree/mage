@@ -30,18 +30,14 @@ package mage.sets.commander2014;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
@@ -49,7 +45,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -68,7 +63,6 @@ public class MaliciousAffliction extends CardImpl {
     public MaliciousAffliction(UUID ownerId) {
         super(ownerId, 25, "Malicious Affliction", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "C14";
-
 
         // Morbid - When you cast Malicious Affliction, if a creature died this turn, you may copy Malicious Affliction and may choose a new target for the copy.
         Ability ability = new ConditionalTriggeredAbility(
@@ -112,9 +106,7 @@ class CopySourceSpellEffect extends OneShotEffect {
         if (controller != null) {
             Spell spell = game.getStack().getSpell(source.getSourceId());
             if (spell != null) {
-                Spell spellCopy = spell.copySpell();
-                spellCopy.setCopiedSpell(true);
-                spellCopy.setControllerId(source.getControllerId());
+                Spell spellCopy = spell.copySpell(source.getControllerId());;
                 game.getStack().push(spellCopy);
                 spellCopy.chooseNewTargets(game, controller.getId());
                 String activateMessage = spellCopy.getActivatedMessage(game);

@@ -116,9 +116,7 @@ class RikuOfTwoReflectionsCopyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
-            Spell copy = spell.copySpell();
-            copy.setControllerId(source.getControllerId());
-            copy.setCopiedSpell(true);
+            Spell copy = spell.copySpell(source.getControllerId());;
             game.getStack().push(copy);
             copy.chooseNewTargets(game, source.getControllerId());
             Player player = game.getPlayer(source.getControllerId());

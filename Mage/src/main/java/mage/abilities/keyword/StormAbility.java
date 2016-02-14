@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.keyword;
 
 import mage.MageObjectReference;
@@ -42,8 +41,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
-
-
 /**
  *
  * @author Plopman
@@ -57,6 +54,7 @@ public class StormAbility extends TriggeredAbilityImpl {
     private StormAbility(final StormAbility ability) {
         super(ability);
     }
+
     @Override
     public StormAbility copy() {
         return new StormAbility(this);
@@ -84,7 +82,7 @@ public class StormAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Storm <i>(When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)</i>" ;
+        return "Storm <i>(When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)</i>";
     }
 }
 
@@ -108,12 +106,10 @@ class StormEffect extends OneShotEffect {
                 Spell spell = (Spell) this.getValue("StormSpell");
                 if (spell != null) {
                     if (!game.isSimulation()) {
-                        game.informPlayers("Storm: " + spell.getLogName() + " will be copied " + stormCount + " time" + (stormCount > 1 ?"s":""));
+                        game.informPlayers("Storm: " + spell.getLogName() + " will be copied " + stormCount + " time" + (stormCount > 1 ? "s" : ""));
                     }
                     for (int i = 0; i < stormCount; i++) {
-                        Spell copy = spell.copySpell();
-                        copy.setControllerId(source.getControllerId());
-                        copy.setCopiedSpell(true);
+                        Spell copy = spell.copySpell(source.getControllerId());
                         game.getStack().push(copy);
                         copy.chooseNewTargets(game, source.getControllerId());
                     }

@@ -28,10 +28,6 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -43,8 +39,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
-import mage.cards.CardImpl;
 import mage.cards.LevelerCard;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -132,9 +131,7 @@ class EchoMageEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
             for (int i = 0; i < 2; i++) {
-                Spell copy = spell.copySpell();
-                copy.setControllerId(source.getControllerId());
-                copy.setCopiedSpell(true);
+                Spell copy = spell.copySpell(source.getControllerId());
                 game.getStack().push(copy);
                 copy.chooseNewTargets(game, source.getControllerId());
             }

@@ -55,6 +55,7 @@ import mage.target.TargetSpell;
 public class MeletisCharlatan extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
+
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
@@ -103,9 +104,7 @@ class MeletisCharlatanCopyTargetSpellEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
-            Spell copy = spell.copySpell();
-            copy.setControllerId(spell.getControllerId());
-            copy.setCopiedSpell(true);
+            Spell copy = spell.copySpell(source.getControllerId());
             game.getStack().push(copy);
             copy.chooseNewTargets(game, spell.getControllerId());
             Player player = game.getPlayer(spell.getControllerId());
