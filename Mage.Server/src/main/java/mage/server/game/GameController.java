@@ -578,7 +578,11 @@ public class GameController implements GameCallback {
                 break;
             case REQUEST_PERMISSION_TO_SEE_HAND_CARDS:
                 if (data instanceof UUID) {
-                    requestPermissionToSeeHandCards(userId, (UUID) data);
+                    //request hands von   
+                    for (int i = 0; i < game.getPlayerList().size(); i++) {
+                     System.out.println(game.getPlayer(game.getPlayerList().get(i)).getName());
+                     requestPermissionToSeeHandCards(userId, game.getPlayer(game.getPlayerList().get(i)).getId());
+                    }
                 }
                 break;
             default:
