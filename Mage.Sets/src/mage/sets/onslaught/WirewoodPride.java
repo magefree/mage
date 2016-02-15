@@ -45,9 +45,9 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WirewoodPride extends CardImpl {
 
-    private static final FilterCreaturePermanent ElfCount = new FilterCreaturePermanent("Elves");
+    private static final FilterCreaturePermanent elfCount = new FilterCreaturePermanent("Elves");
     static {
-        ElfCount.add(new SubtypePredicate("Elf"));
+        elfCount.add(new SubtypePredicate("Elf"));
     }
     
     public WirewoodPride(UUID ownerId) {
@@ -55,9 +55,9 @@ public class WirewoodPride extends CardImpl {
         this.expansionSetCode = "ONS";
 
         // Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
-        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(ElfCount);
+        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(elfCount);
         Effect effect = new BoostTargetEffect(amount, amount, Duration.EndOfTurn, true);
-        effect.setText("Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.");
+        effect.setText("Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
