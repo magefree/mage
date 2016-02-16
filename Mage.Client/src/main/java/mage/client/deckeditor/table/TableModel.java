@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.client.deckeditor.table;
 
 import java.awt.Dimension;
@@ -69,7 +68,7 @@ import org.mage.card.arcane.UI;
 
 /**
  * Table Model for card list.
- * 
+ *
  * @author nantuko
  */
 public class TableModel extends AbstractTableModel implements ICardGrid {
@@ -89,18 +88,18 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     private boolean displayNoCopies = false;
     private UpdateCountsCallback updateCountsCallback;
 
-    private final String column[] = { "Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set" };
+    private final String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set"};
 
     private SortSetting sortSetting;
     private int recentSortedColumn;
     private boolean recentAscending;
 
     private boolean numberEditable;
-            
+
     public TableModel() {
         this.numberEditable = false;
-    }    
-    
+    }
+
     public void clear() {
         this.clearCardEventListeners();
         this.clearCards();
@@ -173,9 +172,9 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                                 if (cv.getId().equals(entry.getValue().getId())) {
                                     if (count > 0) {
                                         // replace by another card with the same name+setCode
-                                        String key1 = cv.getName()+cv.getExpansionSetCode()+cv.getCardNumber();
+                                        String key1 = cv.getName() + cv.getExpansionSetCode() + cv.getCardNumber();
                                         for (CardView cardView : cards.values()) {
-                                            String key2 = cardView.getName()+cardView.getExpansionSetCode()+cardView.getCardNumber();
+                                            String key2 = cardView.getName() + cardView.getExpansionSetCode() + cardView.getCardNumber();
                                             if ((key1).equals(key2)) {
                                                 view.set(j, cardView);
                                                 break;
@@ -241,36 +240,36 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     private Object getColumn(Object obj, int column) {
         CardView c = (CardView) obj;
         switch (column) {
-        case 0:
-            if (displayNoCopies) {
-                String key = c.getName() + c.getExpansionSetCode() + c.getCardNumber();
-                Integer count = cardsNoCopies.get(key);
-                return count != null ? count : "";
-            }
-            return "";
-        case 1:
-            return c.getName();
-        case 2:
-            String manaCost = "";
-            for (String m : c.getManaCost()) {
-                manaCost += m;
-            }
-            String castingCost = UI.getDisplayManaCost(manaCost);
-            castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.PAY);            
-            return "<html>" + castingCost + "</html>";
-        case 3:
-            return CardHelper.getColor(c);
-        case 4:
-            return CardHelper.getType(c);
-        case 5:
-            return CardHelper.isCreature(c) ? c.getPower() + "/"
-                    + c.getToughness() : "-";
-        case 6:
-            return c.getRarity().toString();
-        case 7:
-            return c.getExpansionSetCode();
-        default:
-            return "error";
+            case 0:
+                if (displayNoCopies) {
+                    String key = c.getName() + c.getExpansionSetCode() + c.getCardNumber();
+                    Integer count = cardsNoCopies.get(key);
+                    return count != null ? count : "";
+                }
+                return "";
+            case 1:
+                return c.getName();
+            case 2:
+                String manaCost = "";
+                for (String m : c.getManaCost()) {
+                    manaCost += m;
+                }
+                String castingCost = UI.getDisplayManaCost(manaCost);
+                castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.TABLE);
+                return "<html>" + castingCost + "</html>";
+            case 3:
+                return CardHelper.getColor(c);
+            case 4:
+                return CardHelper.getType(c);
+            case 5:
+                return CardHelper.isCreature(c) ? c.getPower() + "/"
+                        + c.getToughness() : "-";
+            case 6:
+                return c.getRarity().toString();
+            case 7:
+                return c.getExpansionSetCode();
+            default:
+                return "error";
         }
     }
 
@@ -282,7 +281,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         cards.put(card.getId(), card);
 
         if (displayNoCopies) {
-            String key = card.getName()+card.getExpansionSetCode()+card.getCardNumber();
+            String key = card.getName() + card.getExpansionSetCode() + card.getCardNumber();
             Integer count = 1;
             if (cardsNoCopies.containsKey(key)) {
                 count = cardsNoCopies.get(key) + 1;
@@ -291,7 +290,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             }
             cardsNoCopies.put(key, count);
         } else {
-               view.add(card);
+            view.add(card);
         }
     }
 
@@ -473,6 +472,5 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         }
         return super.isCellEditable(row, col); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }

@@ -195,7 +195,7 @@ public class GuiDisplayUtil {
             manaCost += m;
         }
         String castingCost = UI.getDisplayManaCost(manaCost);
-        castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.CARD);
+        castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.TOOLTIP);
 
         int symbolCount = 0;
         int offset = 0;
@@ -344,7 +344,7 @@ public class GuiDisplayUtil {
 //                        legal = legal.replace("\r\n", "<div style='font-size:5pt'></div>");
             legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this" : card.getName());
             legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this" : card.getName());
-            buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.CARD));
+            buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.TOOLTIP));
         }
 
         buffer.append("<br></body></html>");

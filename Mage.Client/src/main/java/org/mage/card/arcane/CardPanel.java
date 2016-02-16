@@ -23,6 +23,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.UUID;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -124,6 +125,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
     public int cardXOffset, cardYOffset, cardWidth, cardHeight;
+    private int symbolWidth;
 
     private boolean isSelected;
     private boolean isPlayable;
@@ -530,13 +532,24 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
         if (showCastingCost && !isAnimationPanel && cardWidth < 200 && cardWidth > 60) {
             String manaCost = ManaSymbols.getStringManaCost(gameCard.getManaCost());
-            int width = ManaSymbols.getWidth(manaCost);
+            int width = getWidth(manaCost);
             if (hasImage) {
-                ManaSymbols.draw(g, manaCost, cardXOffset + cardWidth - width - 5, cardYOffset + 5);
+                ManaSymbols.draw(g, manaCost, cardXOffset + cardWidth - width - 5, cardYOffset + 5, symbolWidth);
             } else {
-                ManaSymbols.draw(g, manaCost, cardXOffset + 8, cardHeight - 9);
+                ManaSymbols.draw(g, manaCost, cardXOffset + 8, cardHeight - 9, symbolWidth);
             }
         }
+    }
+
+    private int getWidth(String manaCost) {
+        int width = 0;
+        manaCost = manaCost.replace("\\", "");
+        StringTokenizer tok = new StringTokenizer(manaCost, " ");
+        while (tok.hasMoreTokens()) {
+            tok.nextToken();
+            width += symbolWidth;
+        }
+        return width;
     }
 
     @Override
@@ -622,6 +635,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     @Override
     public final void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
         this.cardWidth = cardWidth;
+        this.symbolWidth = cardWidth / 7;
         this.cardHeight = cardHeight;
         if (this.isPermanent) {
             int rotCenterX = Math.round(cardWidth / 2f);

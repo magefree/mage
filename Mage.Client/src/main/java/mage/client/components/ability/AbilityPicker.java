@@ -1,5 +1,10 @@
 package mage.client.components.ability;
 
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.util.List;
+import javax.swing.*;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -11,12 +16,6 @@ import org.jdesktop.layout.LayoutStyle;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.List;
 
 /**
  * Dialog for choosing abilities.
@@ -48,8 +47,8 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     private static final String IMAGE_RIGHT_PATH = "/game/right.png";
     private static final String IMAGE_RIGHT_HOVERED_PATH = "/game/right_hovered.png";
 
-    private static Color SELECTED_COLOR = new Color(64,147,208);
-    private static Color BORDER_COLOR = new Color(0,0,0,50);
+    private static Color SELECTED_COLOR = new Color(64, 147, 208);
+    private static Color BORDER_COLOR = new Color(0, 0, 0, 50);
 
     private boolean selected = false;
 
@@ -59,7 +58,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         jScrollPane2.setOpaque(false);
         jScrollPane2.getViewport().setOpaque(false);
-        UIManager.put( "ScrollBar.width", 17);
+        UIManager.put("ScrollBar.width", 17);
         jScrollPane2.getHorizontalScrollBar().setUI(new MageScrollbarUI());
         jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
     }
@@ -67,13 +66,13 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     public AbilityPicker(List<Object> choices, String message) {
         this.choices = choices;
         setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
-        if (message!= null) {
+        if (message != null) {
             this.message = message + " (single-click)";
         }
         initComponents();
         jScrollPane2.setOpaque(false);
         jScrollPane2.getViewport().setOpaque(false);
-        UIManager.put( "ScrollBar.width", 17);
+        UIManager.put("ScrollBar.width", 17);
         jScrollPane2.getHorizontalScrollBar().setUI(new MageScrollbarUI());
         jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
     }
@@ -84,7 +83,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     }
 
     public void cleanUp() {
-        for(MouseListener ml: this.getMouseListeners()) {
+        for (MouseListener ml : this.getMouseListeners()) {
             this.removeMouseListener(ml);
         }
     }
@@ -93,7 +92,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         this.choices = new ArrayList<Object>();
         this.selected = true; // to stop previous modal
 
-        for (Map.Entry<UUID, String> choice: choices.getChoices().entrySet()) {
+        for (Map.Entry<UUID, String> choice : choices.getChoices().entrySet()) {
             this.choices.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
         }
         this.choices.add(new AbilityPickerAction(null, "Cancel"));
@@ -186,28 +185,28 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                 GroupLayout.TRAILING,
                 layout.createSequentialGroup().addContainerGap().add(
                         layout.createParallelGroup(GroupLayout.TRAILING).add(GroupLayout.LEADING, jScrollPane2, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE).add(GroupLayout.LEADING,
-                                layout.createSequentialGroup().add(jLabel1).addPreferredGap(LayoutStyle.RELATED, 175, Short.MAX_VALUE).add(1, 1, 1)).add(
-                                GroupLayout.LEADING,
-                                layout.createSequentialGroup().add(layout.createParallelGroup(GroupLayout.LEADING)
-                                        )
-                                        .addPreferredGap(LayoutStyle.RELATED)
-                                        .add(
-                                        layout.createParallelGroup(GroupLayout.TRAILING)
-                                        .add(
-                                                GroupLayout.LEADING, layout.createParallelGroup(GroupLayout.LEADING))))).add(10, 10, 10)));
+                        layout.createSequentialGroup().add(jLabel1).addPreferredGap(LayoutStyle.RELATED, 175, Short.MAX_VALUE).add(1, 1, 1)).add(
+                        GroupLayout.LEADING,
+                        layout.createSequentialGroup().add(layout.createParallelGroup(GroupLayout.LEADING)
+                        )
+                        .addPreferredGap(LayoutStyle.RELATED)
+                        .add(
+                                layout.createParallelGroup(GroupLayout.TRAILING)
+                                .add(
+                                        GroupLayout.LEADING, layout.createParallelGroup(GroupLayout.LEADING))))).add(10, 10, 10)));
 
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.LEADING).add(
                 layout.createSequentialGroup().add(
                         layout.createParallelGroup(GroupLayout.LEADING).add(
-                                layout.createSequentialGroup().add(jLabel1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-                                        .add(5, 5, 5)
-                                        .add(
-                                        layout.createParallelGroup(GroupLayout.BASELINE)
-                                        )
-                                        ).add(layout.createSequentialGroup().add(8, 8, 8)))
-                        .addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(
-                                layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.LEADING)).addPreferredGap(
-                                LayoutStyle.RELATED).add(jScrollPane2, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE).addContainerGap(23, Short.MAX_VALUE)));
+                        layout.createSequentialGroup().add(jLabel1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+                        .add(5, 5, 5)
+                        .add(
+                                layout.createParallelGroup(GroupLayout.BASELINE)
+                        )
+                ).add(layout.createSequentialGroup().add(8, 8, 8)))
+                .addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(
+                layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.LEADING)).addPreferredGap(
+                LayoutStyle.RELATED).add(jScrollPane2, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE).addContainerGap(23, Short.MAX_VALUE)));
     }
 
     @Override
@@ -217,27 +216,25 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         if (notches < 0) {
             if (index > 0) {
-                rows.setSelectedIndex(index-1);
+                rows.setSelectedIndex(index - 1);
                 rows.repaint();
             }
-        } else {
-            if (index < choices.size() - 1) {
-                rows.setSelectedIndex(index+1);
-                rows.repaint();
-            }
+        } else if (index < choices.size() - 1) {
+            rows.setSelectedIndex(index + 1);
+            rows.repaint();
         }
     }
 
     private void objectMouseClicked(MouseEvent event) {
         int index = rows.getSelectedIndex();
-        AbilityPickerAction action = (AbilityPickerAction)choices.get(index);
+        AbilityPickerAction action = (AbilityPickerAction) choices.get(index);
         action.actionPerformed(null);
     }
 
     public class ImageRenderer2 extends JEditorPane implements ListCellRenderer {
 
         public final Map<String, String> cache = new HashMap<String, String>();
-        
+
         @Override
         public Component getListCellRendererComponent(
                 javax.swing.JList list,
@@ -252,7 +249,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             UI.setHTMLEditorKit(this);
 
             setOpaque(false);
-            setBackground(new Color(0,0,0,0));
+            setBackground(new Color(0, 0, 0, 0));
 
             String text = value.toString();
 
@@ -298,16 +295,14 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             //text += "<br>";
 
             if (text.length() > 0) {
-                buffer.append(ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.PAY));
+                buffer.append(ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.DIALOG));
             }
 
             buffer.append("</b></body></html>");
             return buffer;
         }
 
-
     }
-
 
     class ImageRenderer extends DefaultListCellRenderer {
 
@@ -364,7 +359,6 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                             }
                         }
                     }*/
-
                     if (event instanceof MouseEvent) {
                         MouseEvent e = (MouseEvent) event;
                         MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);
@@ -457,14 +451,14 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         @Override
         public String toString() {
-            return (String)getValue(Action.NAME);
+            return (String) getValue(Action.NAME);
         }
 
     }
 
     private void cancel() {
         try {
-             session.sendPlayerBoolean(gameId, false);
+            session.sendPlayerBoolean(gameId, false);
         } catch (Exception e) {
             log.error("Couldn't cancel choose dialog: " + e, e);
         }

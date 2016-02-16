@@ -43,7 +43,7 @@ public class MageTextArea extends JEditorPane {
         //text = text.replaceAll("\\s*//\\s*", "<hr width='50%'>");
         text = text.replace("\r\n", "<div style='font-size:5pt'></div>");
 
-        final String basicText = ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.PAY);
+        final String basicText = ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.DIALOG);
         if (text.length() > 0) {
             buffer.append(basicText);
         }
