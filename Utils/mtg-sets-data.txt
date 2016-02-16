@@ -61,6 +61,7 @@ Duel Decks: Speed vs. Cunning|DDN|
 Duel Decks: Venser vs. Koth|DDI|
 Duel Decks: Zendikar vs. Eldrazi|DDP|
 Eldritch Moon|EMN|
+Eternal Masters|EMA|
 European Land Program|EURO|
 Eventide|EVE|
 Exodus|EXO|

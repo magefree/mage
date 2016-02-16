@@ -15,6 +15,9 @@
 |Generate|TOK:OGW|Zombie||
 
 #|Generate|TOK:DDQ|Angel||
+#|Generate|TOK:DDQ|Human||
+#|Generate|TOK:DDQ|Spirit||
+#|Generate|TOK:DDQ|Zombie||
 
 |Generate|TOK:C15|Angel||
 |Generate|TOK:C15|Bear||

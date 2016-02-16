@@ -49,6 +49,7 @@ Duel Decks: Venser vs. Koth|venservskoth|
 Duel Decks: Zendikar vs. Eldrazi|zendikarvseldrazi|
 Eighth Edition|eighthedition|
 Eldritch Moon|eldritchmoon|
+Eternal Masters|eternalmasters|
 European Land Program|europeanlandprogram|
 Eventide|eventide|
 Exodus|exodus|
