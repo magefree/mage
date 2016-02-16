@@ -18,7 +18,7 @@ public class UpdateMemUsageTask extends SwingWorker<Void, Float> {
 
     private final JLabel jLabelToDisplayInfo;
 
-    private static final Logger LOGGER = Logger.getLogger(UpdateMemUsageTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateMemUsageTask.class);
 
     public UpdateMemUsageTask(JLabel jLabelToDisplayInfo) {
         this.jLabelToDisplayInfo = jLabelToDisplayInfo;
@@ -51,7 +51,7 @@ public class UpdateMemUsageTask extends SwingWorker<Void, Float> {
         try {
             get();
         } catch (InterruptedException | ExecutionException ex) {
-            LOGGER.fatal("Update Memory Usage error", ex);
+            logger.fatal("Update Memory Usage error", ex);
         } catch (CancellationException ex) {
         }
     }

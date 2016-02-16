@@ -90,4 +90,47 @@ public class DrawTriggeredTest extends CardTestPlayerBase {
         assertHandCount(playerA, 4); // 2 * 2 from Sphinx = 4
 
     }
+
+    /**
+     * two consecrated sphinxes do not work properly, only gives one player
+     * additional draw
+     *
+     */
+    @Test
+    public void TwoConsecratedSphinxDifferentPlayers() {
+        // Flying
+        // Whenever an opponent draws a card, you may draw two cards.
+        addCard(Zone.BATTLEFIELD, playerA, "Consecrated Sphinx", 1);
+
+        // Flying
+        // Whenever an opponent draws a card, you may draw two cards.
+        addCard(Zone.BATTLEFIELD, playerB, "Consecrated Sphinx", 1);
+
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "No");
+        setChoice(playerA, "No");
+
+        setChoice(playerB, "Yes");
+        setChoice(playerB, "No");
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerB, 3); // 1 from start of turn 1 and 4 from Opponents draw of 2 cards
+        assertHandCount(playerA, 2); // 2 from Sphinx triggered by the normal draw
+
+    }
+
+    @Test
+    public void TwoConsecratedSphinxSamePlayer() {
+        // Flying
+        // Whenever an opponent draws a card, you may draw two cards.
+        addCard(Zone.BATTLEFIELD, playerA, "Consecrated Sphinx", 2);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerB, 1); // 1 from start of turn 1 and 4 from Opponents draw of 2 cards
+        assertHandCount(playerA, 4); // 2 from Sphinx triggered by the normal draw
+
+    }
 }

@@ -138,7 +138,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     private static final int ROLLBACK_TURNS_MAX = 4;
 
-    private static final Logger LOGGER = Logger.getLogger(GameImpl.class);
+    private static final Logger logger = Logger.getLogger(GameImpl.class);
 
     private static final FilterPermanent FILTER_AURA = new FilterPermanent();
     private static final FilterPermanent FILTER_EQUIPMENT = new FilterPermanent();
@@ -230,7 +230,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     public GameImpl(final GameImpl game) {
         long t1 = 0;
-        if (LOGGER.isDebugEnabled()) {
+        if (logger.isDebugEnabled()) {
             t1 = System.currentTimeMillis();
         }
         this.id = game.id;
@@ -248,7 +248,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.lkiExtended.putAll(game.lkiExtended);
         this.shortLivingLKI.putAll(game.shortLivingLKI);
         this.permanentsEntering.putAll(game.permanentsEntering);
-        if (LOGGER.isDebugEnabled()) {
+        if (logger.isDebugEnabled()) {
             copyCount++;
             copyTime += (System.currentTimeMillis() - t1);
         }
@@ -577,7 +577,7 @@ public abstract class GameImpl implements Game, Serializable {
             boolean result = checkIfGameIsOver();
             return result;
         } else {
-            LOGGER.debug("Game over for player Id: " + playerId + " gameId " + getId());
+            logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
             leave(playerId);
             return true;
         }
@@ -599,15 +599,15 @@ public abstract class GameImpl implements Game, Serializable {
         }
         if (remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1) {
             end();
-            if (remainingPlayers == 0 && LOGGER.isDebugEnabled()) {
-                LOGGER.debug("DRAW for gameId: " + getId());
+            if (remainingPlayers == 0 && logger.isDebugEnabled()) {
+                logger.debug("DRAW for gameId: " + getId());
                 for (Player player : state.getPlayers().values()) {
-                    LOGGER.debug("-- " + player.getName() + " left: " + (player.hasLeft() ? "Y" : "N") + " lost: " + (player.hasLost() ? "Y" : "N"));
+                    logger.debug("-- " + player.getName() + " left: " + (player.hasLeft() ? "Y" : "N") + " lost: " + (player.hasLost() ? "Y" : "N"));
                 }
             }
             for (Player player : state.getPlayers().values()) {
                 if (!player.hasLeft() && !player.hasLost()) {
-                    LOGGER.debug(new StringBuilder("Player ").append(player.getName()).append(" has won gameId: ").append(this.getId()));
+                    logger.debug(new StringBuilder("Player ").append(player.getName()).append(" has won gameId: ").append(this.getId()));
                     player.won(this);
                 }
             }
@@ -643,8 +643,8 @@ public abstract class GameImpl implements Game, Serializable {
     public int bookmarkState() {
         if (!simulation) {
             saveState(true);
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.trace("Bookmarking state: " + gameStates.getSize());
+            if (logger.isTraceEnabled()) {
+                logger.trace("Bookmarking state: " + gameStates.getSize());
             }
             savedStates.push(gameStates.getSize() - 1);
             return savedStates.size();
@@ -772,7 +772,7 @@ public abstract class GameImpl implements Game, Serializable {
                 sb.append("]");
                 count++;
             }
-            LOGGER.info(sb.toString());
+            logger.info(sb.toString());
         }
     }
 
@@ -926,7 +926,7 @@ public abstract class GameImpl implements Game, Serializable {
         }
         Player startingPlayer = state.getPlayer(startingPlayerId);
         if (startingPlayer == null) {
-            LOGGER.debug("Starting player not found. playerId:" + startingPlayerId);
+            logger.debug("Starting player not found. playerId:" + startingPlayerId);
             return;
         }
         StringBuilder message = new StringBuilder(choosingPlayer.getLogName()).append(" chooses that ");
@@ -1052,12 +1052,12 @@ public abstract class GameImpl implements Game, Serializable {
         UUID winnerIdFound = null;
         for (Player player : state.getPlayers().values()) {
             if (player.hasWon()) {
-                LOGGER.debug(player.getName() + " has won gameId: " + getId());
+                logger.debug(player.getName() + " has won gameId: " + getId());
                 winnerIdFound = player.getId();
                 break;
             }
             if (!player.hasLost() && !player.hasLeft()) {
-                LOGGER.debug(player.getName() + " has not lost so he won gameId: " + this.getId());
+                logger.debug(player.getName() + " has not lost so he won gameId: " + this.getId());
                 player.won(this);
                 winnerIdFound = player.getId();
                 break;
@@ -1089,7 +1089,7 @@ public abstract class GameImpl implements Game, Serializable {
                 return player.getId();
             }
         }
-        LOGGER.debug("Game was not possible to pick a choosing player.  GameId:" + getId());
+        logger.debug("Game was not possible to pick a choosing player.  GameId:" + getId());
         return null;
     }
 
@@ -1106,7 +1106,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void end() {
         if (!state.isGameOver()) {
-            LOGGER.debug("END of gameId: " + this.getId());
+            logger.debug("END of gameId: " + this.getId());
             endTime = new Date();
             state.endGame();
             for (Player player : state.getPlayers().values()) {
@@ -1175,7 +1175,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (player != null) {
             player.timerTimeout(this);
         } else {
-            LOGGER.error(new StringBuilder("timerTimeout - player not found - playerId: ").append(playerId));
+            logger.error(new StringBuilder("timerTimeout - player not found - playerId: ").append(playerId));
         }
     }
 
@@ -1185,7 +1185,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (player != null) {
             player.idleTimeout(this);
         } else {
-            LOGGER.error(new StringBuilder("idleTimeout - player not found - playerId: ").append(playerId));
+            logger.error(new StringBuilder("idleTimeout - player not found - playerId: ").append(playerId));
         }
     }
 
@@ -1193,7 +1193,7 @@ public abstract class GameImpl implements Game, Serializable {
     public synchronized void concede(UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
-            LOGGER.debug("Player " + player.getName() + " concedes game " + this.getId());
+            logger.debug("Player " + player.getName() + " concedes game " + this.getId());
             fireInformEvent(player.getLogName() + " has conceded.");
             player.concede(this);
         }
@@ -1306,10 +1306,10 @@ public abstract class GameImpl implements Game, Serializable {
                             }
                         }
                     } catch (Exception ex) {
-                        LOGGER.fatal("Game exception gameId: " + getId(), ex);
+                        logger.fatal("Game exception gameId: " + getId(), ex);
                         if ((ex instanceof NullPointerException)
                                 && errorContinueCounter == 1 && ex.getStackTrace() != null) {
-                            LOGGER.fatal(ex.getStackTrace());
+                            logger.fatal(ex.getStackTrace());
                         }
                         this.fireErrorEvent("Game exception occurred: ", ex);
                         restoreState(bookmark, "");
@@ -1329,7 +1329,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         } catch (Exception ex) {
-            LOGGER.fatal("Game exception ", ex);
+            logger.fatal("Game exception ", ex);
             this.fireErrorEvent("Game exception occurred: ", ex);
             this.end();
         } finally {
@@ -1736,7 +1736,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                     if (spellAbility.getTargets().isEmpty()) {
                         Permanent enchanted = this.getPermanent(perm.getAttachedTo());
-                        LOGGER.error("Aura without target: " + perm.getName() + " attached to " + (enchanted == null ? " null" : enchanted.getName()));
+                        logger.error("Aura without target: " + perm.getName() + " attached to " + (enchanted == null ? " null" : enchanted.getName()));
                     } else {
                         Target target = spellAbility.getTargets().get(0);
                         if (target instanceof TargetPermanent) {
@@ -2091,7 +2091,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void debugMessage(String message) {
-        LOGGER.warn(message);
+        logger.warn(message);
     }
 
     @Override
@@ -2115,7 +2115,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (simulation) {
             return;
         }
-        LOGGER.trace("fireUpdatePlayersEvent");
+        logger.trace("fireUpdatePlayersEvent");
         tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
         getState().clearLookedAt();
         getState().clearRevealed();
@@ -2126,7 +2126,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (simulation) {
             return;
         }
-        LOGGER.trace("fireGameEndIfo");
+        logger.trace("fireGameEndIfo");
         tableEventSource.fireTableEvent(EventType.END_GAME_INFO, null, this);
     }
 
@@ -2212,10 +2212,10 @@ public abstract class GameImpl implements Game, Serializable {
 
         Player player = getPlayer(playerId);
         if (player == null || player.hasLeft()) {
-            LOGGER.debug("Player already left " + (player != null ? player.getName() : playerId));
+            logger.debug("Player already left " + (player != null ? player.getName() : playerId));
             return;
         }
-        LOGGER.debug("Start leave game: " + player.getName());
+        logger.debug("Start leave game: " + player.getName());
         player.leave();
         if (checkIfGameIsOver()) {
             // no need to remove objects if only one player is left so the game is over
@@ -2530,9 +2530,9 @@ public abstract class GameImpl implements Game, Serializable {
                                     try {
                                         Integer amount = Integer.parseInt(s[1]);
                                         player.setLife(amount, this);
-                                        LOGGER.info("Setting player's life: ");
+                                        logger.info("Setting player's life: ");
                                     } catch (NumberFormatException e) {
-                                        LOGGER.fatal("error setting life", e);
+                                        logger.fatal("error setting life", e);
                                     }
                                 }
 

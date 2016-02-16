@@ -1,4 +1,4 @@
-    /*
+/*
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -132,20 +132,18 @@ public class ManaOptions extends ArrayList<Mana> {
                             }
                         }
                     }
+                } else // the ability has mana costs
+                if (netManas.size() == 1) {
+                    subtractCostAddMana(ability.getManaCosts().getMana(), netManas.get(0), ability.getCosts().isEmpty());
                 } else {
-                    // the ability has mana costs
-                    if (netManas.size() == 1) {
-                        subtractCostAddMana(ability.getManaCosts().getMana(), netManas.get(0), ability.getCosts().isEmpty());
-                    } else {
-                        List<Mana> copy = copy();
-                        this.clear();
-                        for (Mana netMana : netManas) {
-                            for (Mana mana : copy) {
-                                Mana newMana = new Mana();
-                                newMana.add(mana);
-                                newMana.add(netMana);
-                                subtractCostAddMana(ability.getManaCosts().getMana(), netMana, ability.getCosts().isEmpty());
-                            }
+                    List<Mana> copy = copy();
+                    this.clear();
+                    for (Mana netMana : netManas) {
+                        for (Mana mana : copy) {
+                            Mana newMana = new Mana();
+                            newMana.add(mana);
+                            newMana.add(netMana);
+                            subtractCostAddMana(ability.getManaCosts().getMana(), netMana, ability.getCosts().isEmpty());
                         }
                     }
                 }
@@ -248,7 +246,7 @@ public class ManaOptions extends ArrayList<Mana> {
             Mana oldMan = mana.copy();
             if (mana.includesMana(cost)) {
                 // colorless costs can be paid with different colored mana, can lead to different color combinations
-                if (cost.getGeneric() > 0 && cost.getGeneric() > mana.getGeneric()) {
+                if (cost.getGeneric() > 0 && cost.getGeneric() > (mana.getGeneric() + mana.getColorless())) {
                     Mana coloredCost = cost.copy();
                     coloredCost.setGeneric(0);
                     mana.subtract(coloredCost);

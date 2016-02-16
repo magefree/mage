@@ -81,7 +81,7 @@ import org.apache.log4j.Logger;
  */
 public class DeckEditorPanel extends javax.swing.JPanel {
 
-    private static final Logger LOGGER = Logger.getLogger(DeckEditorPanel.class);
+    private static final Logger logger = Logger.getLogger(DeckEditorPanel.class);
     private final JFileChooser fcSelectDeck;
     private final JFileChooser fcImportDeck;
     private Deck deck = new Deck();
@@ -690,7 +690,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             } catch (GameException ex) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
             } catch (Exception ex) {
-                LOGGER.fatal(ex);
+                logger.fatal(ex);
             } finally {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -722,7 +722,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 Sets.saveDeck(fileName, deck.getDeckCardLists());
             } catch (Exception ex) {
-                LOGGER.fatal(ex);
+                logger.fatal(ex);
             } finally {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -771,7 +771,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unknown deck format", "Error importing deck", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception ex) {
-                LOGGER.fatal(ex);
+                logger.fatal(ex);
             } finally {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -877,7 +877,7 @@ class ImportFilter extends FileFilter {
 
 class UpdateDeckTask extends SwingWorker<Void, Void> {
 
-    private static final Logger LOGGER = Logger.getLogger(UpdateDeckTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateDeckTask.class);
     private final Session session;
     private final UUID tableId;
     private final Deck deck;
@@ -902,7 +902,7 @@ class UpdateDeckTask extends SwingWorker<Void, Void> {
         try {
             get();
         } catch (InterruptedException | ExecutionException ex) {
-            LOGGER.fatal("Update Matches Task error", ex);
+            logger.fatal("Update Matches Task error", ex);
         } catch (CancellationException ex) {
         }
     }

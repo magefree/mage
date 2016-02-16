@@ -57,7 +57,7 @@ import mage.game.permanent.Permanent;
  */
 public class LeoninArbiter extends CardImpl {
 
-    private static final String keyString = "_ignoreEffectForTurn";
+    private static final String KEY_STRING = "_ignoreEffectForTurn";
 
     public LeoninArbiter(UUID ownerId) {
         super(ownerId, 14, "Leonin Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -69,10 +69,10 @@ public class LeoninArbiter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Players can't search libraries.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeoninArbiterCantSearchEffect(keyString)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeoninArbiterCantSearchEffect(KEY_STRING)));
 
         //  Any player may pay {2} for that player to ignore this effect until end of turn.
-        this.addAbility(new LeoninArbiterSpecialAction(keyString));
+        this.addAbility(new LeoninArbiterSpecialAction(KEY_STRING));
     }
 
     public LeoninArbiter(final LeoninArbiter card) {
@@ -132,7 +132,7 @@ class LeoninArbiterIgnoreEffect extends OneShotEffect {
         // Using a Map.Entry since there is no pair class
         long zoneChangeCount = permanent.getZoneChangeCounter(game);
         long turnNum = game.getTurnNum();
-        Long activationState =  zoneChangeCount << 32 | turnNum & 0xFFFFFFFFL;
+        Long activationState = zoneChangeCount << 32 | turnNum & 0xFFFFFFFFL;
 
         Map.Entry<Long, Set<UUID>> turnIgnoringPlayersPair = (Map.Entry<Long, Set<UUID>>) game.getState().getValue(key);
         if (turnIgnoringPlayersPair == null || !activationState.equals(turnIgnoringPlayersPair.getKey())) {
@@ -169,13 +169,13 @@ class LeoninArbiterCantSearchEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            boolean applies = true;        
+            boolean applies = true;
             String key = permanent.getId() + keyString;
             Map.Entry<Long, Set<UUID>> turnIgnoringPlayersPair = (Map.Entry<Long, Set<UUID>>) game.getState().getValue(key);
             if (turnIgnoringPlayersPair != null) {
                 long zoneChangeCount = permanent.getZoneChangeCounter(game);
                 long turnNum = game.getTurnNum();
-                Long activationState =  zoneChangeCount << 32 | turnNum & 0xFFFFFFFFL;
+                Long activationState = zoneChangeCount << 32 | turnNum & 0xFFFFFFFFL;
                 if (activationState.equals(turnIgnoringPlayersPair.getKey())) {
                     applies = !turnIgnoringPlayersPair.getValue().contains(event.getPlayerId());
                 }
