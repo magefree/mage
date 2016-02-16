@@ -71,20 +71,20 @@ public class PemminsAura extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // {U}: Untap enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new ManaCostsImpl("{U}")));
-        
+
         // {U}: Enchanted creature gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(),
-            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
-        
+                AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+
         // {U}: Enchanted creature gains shroud until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(),
-            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
-        
+                AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
+
         // {1}: Enchanted creature gets +1/-1 or -1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PemminsAuraBoostEnchantedEffect(), new ManaCostsImpl("U")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PemminsAuraBoostEnchantedEffect(), new ManaCostsImpl("{1}")));
     }
 
     public PemminsAura(final PemminsAura card) {
@@ -121,7 +121,7 @@ class PemminsAuraBoostEnchantedEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent enchantment = game.getPermanent(source.getSourceId());
         Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-        if (controller != null && creature != null) {            
+        if (controller != null && creature != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Select how to boost");
             choice.getChoices().add(CHOICE_1);
