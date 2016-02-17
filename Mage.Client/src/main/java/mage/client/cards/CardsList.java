@@ -89,6 +89,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     protected CardEventSource cardEventSource = new CardEventSource();
     private Dimension cardDimension;
+    private int rowHeight;
     private CardsView cards;
     private Map<UUID, MageCard> mageCards = new LinkedHashMap<>();
     protected BigCard bigCard;
@@ -144,6 +145,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     public void changeGUISize() {
         setGUISize();
+        redrawCards();
     }
 
     private void setGUISize() {
@@ -151,7 +153,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         mainTable.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
         mainTable.setFont(GUISizeHelper.tableFont);
         mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());
-
+        cardDimension = GUISizeHelper.editorCardDimension;
+        rowHeight = GUISizeHelper.editorCardOffsetSize;
     }
 
     private void makeTransparent() {
@@ -301,7 +304,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     @Override
     public void drawCards(SortSetting sortSetting) {
         int maxWidth = this.getParent().getWidth();
-        int numColumns = maxWidth / Config.dimensions.frameWidth;
+        int numColumns = maxWidth / cardDimension.width;
         int curColumn = 0;
         int curRow = 0;
         int maxRow = 0;
@@ -325,7 +328,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         }
 
         if (cards != null && cards.size() > 0) {
-            Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            Rectangle rectangle = new Rectangle(cardDimension.width, cardDimension.height);
             List<CardView> sortedCards = new ArrayList<>(cards.values());
             switch (sortSetting.getSortBy()) {
                 case NAME:
@@ -361,13 +364,13 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                             curRow = 0;
                         }
                     }
-                    rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
+                    rectangle.setLocation(curColumn * cardDimension.width, curRow * rowHeight);
                     setCardBounds(mageCards.get(card.getId()), rectangle);
 
                     curRow++;
                     lastCard = card;
                 } else {
-                    rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
+                    rectangle.setLocation(curColumn * cardDimension.width, curRow * rowHeight);
                     setCardBounds(mageCards.get(card.getId()), rectangle);
                     curColumn++;
                     if (curColumn == numColumns) {
@@ -381,7 +384,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         maxRow = Math.max(maxRow, curRow);
         maxColumn = Math.max(maxColumn, curColumn);
         updateCounts();
-        cardArea.setPreferredSize(new Dimension((maxColumn + 1) * Config.dimensions.frameWidth, Config.dimensions.frameHeight + maxRow * 20));
+        cardArea.setPreferredSize(new Dimension((maxColumn + 1) * cardDimension.width, cardDimension.height + maxRow * rowHeight));
         cardArea.revalidate();
         this.revalidate();
         this.repaint();
@@ -422,9 +425,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     }
 
     private MageCard addCard(CardView card, BigCard bigCard, UUID gameId) {
-        if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-        }
         MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true);
         cardArea.add(cardImg);
         cardImg.update(card);
@@ -434,7 +434,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     private void setCardBounds(MageCard card, Rectangle rectangle) {
         card.setBounds(rectangle);
-        card.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+        card.setCardBounds(rectangle.x, rectangle.y, cardDimension.width, cardDimension.height);
         cardArea.moveToFront(card);
     }
 

@@ -126,10 +126,11 @@ public class UserRequestDialog extends MageDialog {
 
         setResizable(true);
         setTitle("UserRequestMessage");
+        setModal(true);
 
         lblText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblText.setText("message to the user");
-        lblText.setMaximumSize(new java.awt.Dimension(400, 60));
+        lblText.setMaximumSize(new java.awt.Dimension(1000, 500));
         lblText.setMinimumSize(new java.awt.Dimension(400, 60));
         lblText.setPreferredSize(new java.awt.Dimension(400, 60));
 
@@ -172,7 +173,6 @@ public class UserRequestDialog extends MageDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)

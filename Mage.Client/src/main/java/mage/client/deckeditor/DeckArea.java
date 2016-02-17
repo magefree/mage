@@ -37,6 +37,7 @@ import mage.client.cards.BigCard;
 import mage.client.cards.CardsList;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.util.Event;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.view.CardsView;
 
@@ -69,6 +70,7 @@ public class DeckArea extends javax.swing.JPanel {
         setGUISize();
         deckList.changeGUISize();
         sideboardList.changeGUISize();
+        deckAreaSplitPane.setDividerSize(GUISizeHelper.dividerBarSize);
     }
 
     private void setGUISize() {

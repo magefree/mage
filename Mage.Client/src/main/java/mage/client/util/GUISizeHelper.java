@@ -54,6 +54,9 @@ public class GUISizeHelper {
     public static Dimension otherZonesCardDimension;
     public static Dimension battlefieldCardDimension;
 
+    public static Dimension editorCardDimension;
+    public static int editorCardOffsetSize;
+
     public static int getTableRowHeight() {
         int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
         return fontSize + 6;
@@ -125,5 +128,9 @@ public class GUISizeHelper {
 
         int battlefieldCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_SIZE, 14);
         battlefieldCardDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldCardSize / 42, CARD_IMAGE_HEIGHT * battlefieldCardSize / 42);
+
+        int editorCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_EDITOR_SIZE, 14);
+        editorCardDimension = new Dimension(CARD_IMAGE_WIDTH * editorCardSize / 42, CARD_IMAGE_HEIGHT * editorCardSize / 42);
+        editorCardOffsetSize = 2 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OFFSET_SIZE, 14) - 10;
     }
 }
