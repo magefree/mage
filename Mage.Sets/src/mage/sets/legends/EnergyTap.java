@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author spjspj
  */
 public class EnergyTap extends CardImpl {
 

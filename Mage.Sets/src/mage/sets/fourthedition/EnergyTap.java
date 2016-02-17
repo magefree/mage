@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author spjspj
  */
 public class EnergyTap extends mage.sets.legends.EnergyTap {
 
