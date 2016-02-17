@@ -27,8 +27,8 @@ public class ManaSymbols {
     private static boolean smallSymbolsFound = false;
     private static boolean mediumSymbolsFound = false;
 
-    private static final Map<String, Image> SET_IMAGES = new HashMap<>();
-    private static final Map<String, Dimension> SET_IMAGES_EXIST = new HashMap<>();
+    private static final Map<String, Image> setImages = new HashMap<>();
+    private static final Map<String, Dimension> setImagesExist = new HashMap<>();
     private static final Pattern REPLACE_SYMBOLS_PATTERN = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
     private static String cachedPath;
     private static final String[] symbols = new String[]{"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9", "B", "BG",
@@ -55,10 +55,10 @@ public class ManaSymbols {
                     if (h > 0) {
                         Rectangle r = new Rectangle(21, (int) (h * 21.0f / width));
                         BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                        SET_IMAGES.put(set, resized);
+                        setImages.put(set, resized);
                     }
                 } else {
-                    SET_IMAGES.put(set, image);
+                    setImages.put(set, image);
                 }
             } catch (Exception e) {
             }
@@ -111,7 +111,7 @@ public class ManaSymbols {
                 Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                 int width = image.getWidth(null);
                 int height = image.getHeight(null);
-                SET_IMAGES_EXIST.put(set, new Dimension(width, height));
+                setImagesExist.put(set, new Dimension(width, height));
             } catch (Exception e) {
             }
         }
@@ -256,19 +256,20 @@ public class ManaSymbols {
         return replaced;
     }
 
-    public static String replaceSetCodeWithHTML(String set, String rarity) {
+    public static String replaceSetCodeWithHTML(String set, String rarity, int size) {
         String _set = set;
-        if (SET_IMAGES_EXIST.containsKey(_set)) {
-            Integer width = SET_IMAGES_EXIST.get(_set).width;
-            Integer height = SET_IMAGES_EXIST.get(_set).height;
-            return "<img src='file:" + getSymbolsPath() + "/sets/small/" + _set + "-" + rarity + ".png' alt='" + rarity + " ' width=" + width + " height=" + height + ">";
+        if (setImagesExist.containsKey(_set)) {
+            int factor = size / 15 + 1;
+            Integer width = setImagesExist.get(_set).width * factor;
+            Integer height = setImagesExist.get(_set).height * factor;
+            return "<img src='file:" + getSymbolsPath() + "/sets/small/" + _set + "-" + rarity + ".png' alt='" + rarity + "' height='" + height + "' width='" + width + "' >";
         } else {
             return set;
         }
     }
 
     public static Image getSetSymbolImage(String set) {
-        return SET_IMAGES.get(set);
+        return setImages.get(set);
     }
 
     public static BufferedImage getSizedManaSymbol(String symbol) {

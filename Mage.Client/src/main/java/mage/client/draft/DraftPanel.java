@@ -69,6 +69,7 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Event;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
@@ -177,7 +178,7 @@ public class DraftPanel extends javax.swing.JPanel {
     }
 
     private void setGUISize() {
-
+        GUISizeHelper.changePopupMenuFont(popupMenuPickedArea);
     }
 
     public synchronized void showDraft(UUID draftId) {

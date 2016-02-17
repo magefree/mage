@@ -5,8 +5,12 @@
  */
 package mage.client.util;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 
@@ -40,6 +44,7 @@ public class GUISizeHelper {
     public static int flagHeight;
 
     public static int cardTooltipFontSize = 15;
+
     public static Font chatFont = new java.awt.Font("Arial", 0, 12);
     public static Font tableFont = new java.awt.Font("Arial", 0, 12);
     public static Font balloonTooltipFont = new java.awt.Font("Arial", 0, 12);
@@ -110,15 +115,15 @@ public class GUISizeHelper {
             basicSymbolSize = "large";
         }
         if (symbolSize < 16) {
-            symbolTooltipSize = 15;
             symbolPaySize = 15;
             symbolCardSize = 15;
         } else {
-            symbolTooltipSize = symbolSize;
             symbolPaySize = symbolSize;
             symbolCardSize = symbolSize;
         }
+
         cardTooltipFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TOOLTIP_SIZE, 14);
+        symbolTooltipSize = cardTooltipFontSize;
 
         int handCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_HAND_SIZE, 14);
         handCardDimension = new Dimension(CARD_IMAGE_WIDTH * handCardSize / 42, CARD_IMAGE_HEIGHT * handCardSize / 42);
@@ -132,5 +137,19 @@ public class GUISizeHelper {
         int editorCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_EDITOR_SIZE, 14);
         editorCardDimension = new Dimension(CARD_IMAGE_WIDTH * editorCardSize / 42, CARD_IMAGE_HEIGHT * editorCardSize / 42);
         editorCardOffsetSize = 2 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OFFSET_SIZE, 14) - 10;
+    }
+
+    public static void changePopupMenuFont(JPopupMenu popupMenu) {
+        for (Component comp : popupMenu.getComponents()) {
+            if (comp instanceof JMenuItem) {
+                comp.setFont(GUISizeHelper.menuFont);
+                if (comp instanceof JMenu) {
+                    comp.setFont(GUISizeHelper.menuFont);
+                    for (Component subComp : ((JMenu) comp).getMenuComponents()) {
+                        subComp.setFont(GUISizeHelper.menuFont);
+                    }
+                }
+            }
+        }
     }
 }

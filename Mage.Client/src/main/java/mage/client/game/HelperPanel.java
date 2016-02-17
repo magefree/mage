@@ -113,16 +113,8 @@ public class HelperPanel extends JPanel {
     }
 
     private void setGUISize() {
-        for (Component comp : popupMenuAskNo.getComponents()) {
-            if (comp instanceof JMenuItem) {
-                comp.setFont(GUISizeHelper.menuFont);
-            }
-        }
-        for (Component comp : popupMenuAskYes.getComponents()) {
-            if (comp instanceof JMenuItem) {
-                comp.setFont(GUISizeHelper.menuFont);
-            }
-        }
+        GUISizeHelper.changePopupMenuFont(popupMenuAskNo);
+        GUISizeHelper.changePopupMenuFont(popupMenuAskYes);
     }
 
     private void initComponents() {

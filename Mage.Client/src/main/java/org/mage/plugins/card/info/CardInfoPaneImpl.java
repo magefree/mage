@@ -47,8 +47,8 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
     }
 
     private void setGUISize() {
-        addWidth = 20 * GUISizeHelper.cardTooltipFontSize;
-        addHeight = 12 * GUISizeHelper.cardTooltipFontSize;
+        addWidth = 20 * GUISizeHelper.cardTooltipFontSize - 50;
+        addHeight = 12 * GUISizeHelper.cardTooltipFontSize - 20;
         setSize = true;
     }
 
