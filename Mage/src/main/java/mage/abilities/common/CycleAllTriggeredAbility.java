@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,7 +40,6 @@ import mage.game.stack.StackObject;
  *
  * @author LevelX2
  */
-
 public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
 
     public CycleAllTriggeredAbility(Effect effect, boolean optional) {
@@ -59,9 +57,12 @@ public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (game.getState().getStack().isEmpty()) {
+            return false;
+        }
         StackObject item = game.getState().getStack().getFirst();
         if (item instanceof StackAbility
-                && ((StackAbility)item).getStackAbility() instanceof CyclingAbility) {
+                && ((StackAbility) item).getStackAbility() instanceof CyclingAbility) {
             return true;
         }
         return false;
