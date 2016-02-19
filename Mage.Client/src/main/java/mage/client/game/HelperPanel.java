@@ -73,6 +73,7 @@ public class HelperPanel extends JPanel {
     //private javax.swing.JButton btnStopTimer;
 
     private MageTextArea textArea;
+    JPanel buttonContainer;
 
     private javax.swing.JButton linkLeft;
     private javax.swing.JButton linkRight;
@@ -113,6 +114,12 @@ public class HelperPanel extends JPanel {
     }
 
     private void setGUISize() {
+        buttonContainer.setPreferredSize(new Dimension(100, GUISizeHelper.gameDialogAreaFont.getSize() + 10));
+        btnLeft.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnRight.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnUndo.setFont(GUISizeHelper.gameDialogAreaFont);
+
         GUISizeHelper.changePopupMenuFont(popupMenuAskNo);
         GUISizeHelper.changePopupMenuFont(popupMenuAskYes);
     }
@@ -124,13 +131,13 @@ public class HelperPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setOpaque(false);
 
-        JPanel container = new JPanel();
-
-        container.setPreferredSize(new Dimension(100, 30));
-        container.setMinimumSize(new Dimension(20, 20));
-        container.setMaximumSize(new Dimension(2000, 100));
-        container.setLayout(new GridBagLayout());
-        container.setOpaque(false);
+        buttonContainer = new JPanel();
+        // buttonContainer.setBorder(new LineBorder(Color.RED, 1));
+        buttonContainer.setPreferredSize(new Dimension(100, 30));
+        buttonContainer.setMinimumSize(new Dimension(20, 20));
+        buttonContainer.setMaximumSize(new Dimension(2000, 100));
+        buttonContainer.setLayout(new GridBagLayout());
+        buttonContainer.setOpaque(false);
 
         JPanel jPanel = new JPanel();
 
@@ -142,20 +149,20 @@ public class HelperPanel extends JPanel {
         jPanel.add(textArea);
         add(jPanel);
 
-        add(container);
+        add(buttonContainer);
 
         btnSpecial = new JButton("Special");
         btnSpecial.setVisible(false);
-        container.add(btnSpecial);
+        buttonContainer.add(btnSpecial);
         btnLeft = new JButton("OK");
         btnLeft.setVisible(false);
-        container.add(btnLeft);
+        buttonContainer.add(btnLeft);
         btnRight = new JButton("Cancel");
         btnRight.setVisible(false);
-        container.add(btnRight);
+        buttonContainer.add(btnRight);
         btnUndo = new JButton("Undo");
         btnUndo.setVisible(false);
-        container.add(btnUndo);
+        buttonContainer.add(btnUndo);
 
         MouseListener checkPopupAdapter = new MouseAdapter() {
             @Override

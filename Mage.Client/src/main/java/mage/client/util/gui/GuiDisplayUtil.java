@@ -236,16 +236,16 @@ public class GuiDisplayUtil {
             buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W' ").append(imageSize);
         }
         if (card.getColor().isBlue()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_blue.png")).append("' alt='U'>").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_blue.png")).append("' alt='U' ").append(imageSize);
         }
         if (card.getColor().isBlack()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_black.png")).append("' alt='B'>").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_black.png")).append("' alt='B' ").append(imageSize);
         }
         if (card.getColor().isRed()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_red.png")).append("' alt='R'>").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_red.png")).append("' alt='R' ").append(imageSize);
         }
         if (card.getColor().isGreen()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_green.png")).append("' alt='G'>").append(imageSize);
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_green.png")).append("' alt='G' ").append(imageSize);
         }
         if (!card.getColor().isColorless()) {
             buffer.append("&nbsp;&nbsp;");
@@ -339,10 +339,6 @@ public class GuiDisplayUtil {
 
         String legal = rule.toString();
         if (legal.length() > 0) {
-// this 2 replaces were only done with the empty string, is it any longer needed? (LevelX2)
-//                        legal = legal.replaceAll("#([^#]+)#", "<i>$1</i>");
-//                        legal = legal.replaceAll("\\s*//\\s*", "<hr width='50%'>");
-//                        legal = legal.replace("\r\n", "<div style='font-size:5pt'></div>");
             legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this" : card.getName());
             legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this" : card.getName());
             buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.TOOLTIP));

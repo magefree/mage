@@ -195,6 +195,8 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private MageDialogState choiceWindowState;
 
+    private int feedbackAreaHeight;
+
     private enum PopUpMenuType {
 
         TRIGGER_ORDER
@@ -378,15 +380,18 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
 
+        feedbackAreaHeight = GUISizeHelper.gameDialogAreaFontSizeBig + GUISizeHelper.gameDialogAreaFontSizeSmall + GUISizeHelper.gameDialogAreaButtonHigh + 50;
+        helper.setPreferredSize(new Dimension(100, feedbackAreaHeight));
+
         stackObjects.setCardDimension(GUISizeHelper.handCardDimension);
         int newStackWidth = jPanel3.getWidth() * GUISizeHelper.stackWidth / 100;
         if (newStackWidth < 360) {
             newStackWidth = 360;
         }
-        Dimension newDimension = new Dimension(jPanel3.getWidth() - newStackWidth, (int) GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
+        Dimension newDimension = new Dimension(jPanel3.getWidth() - newStackWidth, GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
         handContainer.setPreferredSize(newDimension);
         handContainer.setMaximumSize(newDimension);
-        newDimension = new Dimension(newStackWidth, (int) GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
+        newDimension = new Dimension(newStackWidth, GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
         stackObjects.setPreferredSize(newDimension);
         stackObjects.setMinimumSize(newDimension);
         stackObjects.setMaximumSize(newDimension);
@@ -1115,7 +1120,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 // magenoxx: because of uncaught bug with saving state, rolling back and stack
                 // undo is allowed only for empty stack
                 controllingPlayer = !gameView.getPriorityPlayerName().equals(playerView.getName());
-                if (playerView.getStatesSavedSize() > 0 && gameView.getStack().size() == 0) {
+                if (playerView.getStatesSavedSize() > 0 && gameView.getStack().isEmpty()) {
                     feedbackPanel.allowUndo(playerView.getStatesSavedSize());
                 }
                 break;
@@ -1137,8 +1142,7 @@ public final class GamePanel extends javax.swing.JPanel {
         if (controllingPlayer) {
             priorityPlayerText = " / priority " + gameView.getPriorityPlayerName();
         }
-        String messageToDisplay = message + "<div style='font-size:11pt'>" + activePlayerText + " / " + gameView.getStep().toString() + priorityPlayerText + "</div>";
-
+        String messageToDisplay = message + FeedbackPanel.getSmallText(activePlayerText + " / " + gameView.getStep().toString() + priorityPlayerText);
         this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId);
     }
 
@@ -1335,10 +1339,10 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority.setLabelFor(txtPriority);
         lblPriority.setText("Priority Player:");
 
-        feedbackPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 50, 50), 2));
-        feedbackPanel.setMaximumSize(new java.awt.Dimension(208, 121));
-        feedbackPanel.setMinimumSize(new java.awt.Dimension(208, 121));
-
+        // feedbackPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.MAGENTA, 5));
+        // feedbackPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 50, 50), 2));
+        // feedbackPanel.setMaximumSize(new java.awt.Dimension(208, 121));
+        // feedbackPanel.setMinimumSize(new java.awt.Dimension(208, 121));
         bigCard.setBorder(new LineBorder(Color.black, 1, true));
 
         int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -1750,7 +1754,8 @@ public final class GamePanel extends javax.swing.JPanel {
         jPhases.addMouseListener(phasesMouseAdapter);
 
         pnlReplay.setOpaque(false);
-        HelperPanel helper = new HelperPanel();
+        helper = new HelperPanel();
+        // helper.setBorder(new LineBorder(Color.MAGENTA, 2));
         helper.setPreferredSize(new Dimension(100, 90));
         feedbackPanel.setHelperPanel(helper);
 
@@ -2200,6 +2205,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private mage.client.chat.ChatPanelBasic gameChatPanel;
     private mage.client.game.FeedbackPanel feedbackPanel;
+    private HelperPanel helper;
     private mage.client.chat.ChatPanelBasic userChatPanel;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

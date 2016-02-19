@@ -45,6 +45,7 @@ import mage.client.MageFrame;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import static mage.constants.Constants.Option.ORIGINAL_ID;
@@ -96,6 +97,11 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private void setGUISize() {
+        btnLeft.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnRight.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnUndo.setFont(GUISizeHelper.gameDialogAreaFont);
+
         helper.changeGUISize();
     }
 
@@ -171,8 +177,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
         }
     }
 
-    protected String getSmallText(String text) {
-        return "<div style='font-size:11pt'>" + text + "</div>";
+    protected static String getSmallText(String text) {
+        return "<div style='font-size:" + GUISizeHelper.gameDialogAreaFontSizeSmall + "pt'>" + text + "</div>";
     }
 
     private void setSpecial(String text, boolean visible) {
