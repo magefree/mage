@@ -1653,7 +1653,7 @@
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the card in hand"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the card images in hand and on the stack"/>
                     <Property name="value" type="int" value="14"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -1673,8 +1673,8 @@
                 <Component class="javax.swing.JLabel" name="labelCardSizeHand">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Cards hand"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the card in hand"/>
+                    <Property name="text" type="java.lang.String" value="Hand cards and stack objects"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of the card images in hand and on the stack"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1756,16 +1756,17 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JSlider" name="sliderSymbolSize">
+                <Component class="javax.swing.JSlider" name="sliderStackWidth">
                   <Properties>
-                    <Property name="majorTickSpacing" type="int" value="5"/>
-                    <Property name="maximum" type="int" value="50"/>
+                    <Property name="majorTickSpacing" type="int" value="20"/>
+                    <Property name="maximum" type="int" value="90"/>
                     <Property name="minimum" type="int" value="10"/>
-                    <Property name="minorTickSpacing" type="int" value="1"/>
+                    <Property name="minorTickSpacing" type="int" value="5"/>
                     <Property name="paintLabels" type="boolean" value="true"/>
                     <Property name="paintTicks" type="boolean" value="true"/>
                     <Property name="snapToTicks" type="boolean" value="true"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of symbols"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The % size of the stack object area in relation to the hand card area size."/>
+                    <Property name="value" type="int" value="30"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
@@ -1775,18 +1776,24 @@
                       <Dimension value="[150, 40]"/>
                     </Property>
                   </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="&lt;HTML&gt;The stack width in relation to the hand area width"/>
+                  </AccessibilityProperties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                       <GridBagConstraints gridX="0" gridY="2" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="2" insetsLeft="2" insetsBottom="2" insetsRight="2" anchor="11" weightX="0.0" weightY="0.0"/>
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="labelSymbolSize">
+                <Component class="javax.swing.JLabel" name="labelStackWidth">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Symbol size"/>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The size of symbols"/>
+                    <Property name="text" type="java.lang.String" value="Stack %width relatated to hand"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The % size of the stack object area in relation to the hand card area size."/>
                   </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="&lt;HTML&gt;The stack width in relation to the hand area width"/>
+                  </AccessibilityProperties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                       <GridBagConstraints gridX="0" gridY="3" gridWidth="1" gridHeight="1" fill="0" ipadX="3" ipadY="3" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="11" weightX="0.0" weightY="0.0"/>
@@ -2594,11 +2601,11 @@
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="127_sliderSymbolSize">
-                      <CodeVariable name="sliderSymbolSize" type="8194" declaredType="javax.swing.JSlider"/>
+                    <CodeExpression id="127_sliderStackWidth">
+                      <CodeVariable name="sliderStackWidth" type="8194" declaredType="javax.swing.JSlider"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
-                          <ComponentRef name="sliderSymbolSize"/>
+                          <ComponentRef name="sliderStackWidth"/>
                         </ExpressionProvider>
                       </ExpressionOrigin>
                     </CodeExpression>
@@ -2689,11 +2696,11 @@
                     <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
                   </StatementProvider>
                   <Parameters>
-                    <CodeExpression id="134_labelSymbolSize">
-                      <CodeVariable name="labelSymbolSize" type="8194" declaredType="javax.swing.JLabel"/>
+                    <CodeExpression id="134_labelStackWidth">
+                      <CodeVariable name="labelStackWidth" type="8194" declaredType="javax.swing.JLabel"/>
                       <ExpressionOrigin>
                         <ExpressionProvider type="ComponentRef">
-                          <ComponentRef name="labelSymbolSize"/>
+                          <ComponentRef name="labelStackWidth"/>
                         </ExpressionProvider>
                       </ExpressionOrigin>
                     </CodeExpression>

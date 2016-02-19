@@ -56,6 +56,8 @@ public class GUISizeHelper {
     public static Font gameDialogAreaFontSmall = new java.awt.Font("Arial", 0, 12);
 
     public static Dimension handCardDimension;
+    public static int stackWidth;
+
     public static Dimension otherZonesCardDimension;
     public static Dimension battlefieldCardDimension;
 
@@ -105,28 +107,12 @@ public class GUISizeHelper {
         chatFont = new java.awt.Font("Arial", 0, chatFontSize);
         symbolChatSize = chatFontSize;
 
-        int symbolSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_SYMBOL_SIZE, 14);
-        // Set basic symbol size
-        if (symbolSize < 25) {
-            basicSymbolSize = "small";
-        } else if (symbolSize < 45) {
-            basicSymbolSize = "medium";
-        } else {
-            basicSymbolSize = "large";
-        }
-        if (symbolSize < 16) {
-            symbolPaySize = 15;
-            symbolCardSize = 15;
-        } else {
-            symbolPaySize = symbolSize;
-            symbolCardSize = symbolSize;
-        }
-
         cardTooltipFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TOOLTIP_SIZE, 14);
         symbolTooltipSize = cardTooltipFontSize;
 
         int handCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_HAND_SIZE, 14);
         handCardDimension = new Dimension(CARD_IMAGE_WIDTH * handCardSize / 42, CARD_IMAGE_HEIGHT * handCardSize / 42);
+        stackWidth = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_STACK_WIDTH, 30);
 
         int otherZonesCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OTHER_ZONES_SIZE, 14);
         otherZonesCardDimension = new Dimension(CARD_IMAGE_WIDTH * otherZonesCardSize / 42, CARD_IMAGE_HEIGHT * otherZonesCardSize / 42);

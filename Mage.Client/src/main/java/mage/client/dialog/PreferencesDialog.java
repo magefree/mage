@@ -99,7 +99,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GUI_CARD_EDITOR_SIZE = "guiCardEditorSize";
     public static final String KEY_GUI_CARD_OFFSET_SIZE = "guiCardOffsetSize";
 
-    public static final String KEY_GUI_SYMBOL_SIZE = "guiSymbolSize";
+    public static final String KEY_GUI_STACK_WIDTH = "guiStackWidth";
     public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
     public static final String KEY_GUI_DIALOG_FONT_SIZE = "guiDialogFontSize";
     public static final String KEY_GUI_FEEDBACK_AREA_SIZE = "guiFeedbackAreaSize";
@@ -388,8 +388,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         labelCardSizeOtherZones = new javax.swing.JLabel();
         sliderCardSizeBattlefield = new javax.swing.JSlider();
         labelCardSizeBattlefield = new javax.swing.JLabel();
-        sliderSymbolSize = new javax.swing.JSlider();
-        labelSymbolSize = new javax.swing.JLabel();
+        sliderStackWidth = new javax.swing.JSlider();
+        labelStackWidth = new javax.swing.JLabel();
         sliderGameFeedbackArea = new javax.swing.JSlider();
         labelGameFeedback = new javax.swing.JLabel();
         sliderTooltipSize = new javax.swing.JSlider();
@@ -918,7 +918,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeHand.setPaintLabels(true);
         sliderCardSizeHand.setPaintTicks(true);
         sliderCardSizeHand.setSnapToTicks(true);
-        sliderCardSizeHand.setToolTipText("<HTML>The size of the card in hand");
+        sliderCardSizeHand.setToolTipText("<HTML>The size of the card images in hand and on the stack");
         sliderCardSizeHand.setValue(14);
         sliderCardSizeHand.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeHand.setMinimumSize(new java.awt.Dimension(150, 40));
@@ -931,8 +931,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeGame.add(sliderCardSizeHand, gridBagConstraints);
 
         labelCardSizeHand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCardSizeHand.setText("Cards hand");
-        labelCardSizeHand.setToolTipText("<HTML>The size of the card in hand");
+        labelCardSizeHand.setText("Hand cards and stack objects");
+        labelCardSizeHand.setToolTipText("<HTML>The size of the card images in hand and on the stack");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -999,34 +999,37 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         guiSizeGame.add(labelCardSizeBattlefield, gridBagConstraints);
 
-        sliderSymbolSize.setMajorTickSpacing(5);
-        sliderSymbolSize.setMaximum(50);
-        sliderSymbolSize.setMinimum(10);
-        sliderSymbolSize.setMinorTickSpacing(1);
-        sliderSymbolSize.setPaintLabels(true);
-        sliderSymbolSize.setPaintTicks(true);
-        sliderSymbolSize.setSnapToTicks(true);
-        sliderSymbolSize.setToolTipText("<HTML>The size of symbols");
-        sliderSymbolSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        sliderSymbolSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderStackWidth.setMajorTickSpacing(20);
+        sliderStackWidth.setMaximum(90);
+        sliderStackWidth.setMinimum(10);
+        sliderStackWidth.setMinorTickSpacing(5);
+        sliderStackWidth.setPaintLabels(true);
+        sliderStackWidth.setPaintTicks(true);
+        sliderStackWidth.setSnapToTicks(true);
+        sliderStackWidth.setToolTipText("<HTML>The % size of the stack object area in relation to the hand card area size.");
+        sliderStackWidth.setValue(30);
+        sliderStackWidth.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderStackWidth.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        guiSizeGame.add(sliderSymbolSize, gridBagConstraints);
+        guiSizeGame.add(sliderStackWidth, gridBagConstraints);
+        sliderStackWidth.getAccessibleContext().setAccessibleDescription("<HTML>The stack width in relation to the hand area width");
 
-        labelSymbolSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelSymbolSize.setText("Symbol size");
-        labelSymbolSize.setToolTipText("<HTML>The size of symbols");
+        labelStackWidth.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelStackWidth.setText("Stack %width relatated to hand");
+        labelStackWidth.setToolTipText("<HTML>The % size of the stack object area in relation to the hand card area size.");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        guiSizeGame.add(labelSymbolSize, gridBagConstraints);
+        guiSizeGame.add(labelStackWidth, gridBagConstraints);
+        labelStackWidth.getAccessibleContext().setAccessibleDescription("<HTML>The stack width in relation to the hand area width");
 
         sliderGameFeedbackArea.setMajorTickSpacing(5);
         sliderGameFeedbackArea.setMaximum(50);
@@ -2366,8 +2369,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             save(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "true", "false", UPDATE_CACHE_POLICY);
             sizeGUIChanged = true;
         }
-        if (getCachedValue(KEY_GUI_SYMBOL_SIZE, 14) != dialog.sliderSymbolSize.getValue()) {
-            save(prefs, dialog.sliderSymbolSize, KEY_GUI_SYMBOL_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        if (getCachedValue(KEY_GUI_STACK_WIDTH, 30) != dialog.sliderStackWidth.getValue()) {
+            save(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "true", "false", UPDATE_CACHE_POLICY);
             sizeGUIChanged = true;
         }
         if (getCachedValue(KEY_GUI_TOOLTIP_SIZE, 14) != dialog.sliderTooltipSize.getValue()) {
@@ -2874,7 +2877,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "14");
         load(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "14");
         load(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "14");
-        load(prefs, dialog.sliderSymbolSize, KEY_GUI_SYMBOL_SIZE, "14");
+        load(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "14");
         load(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "14");
         load(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "14");
         load(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "14");
@@ -3367,7 +3370,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelEditorCardSize;
     private javax.swing.JLabel labelGameFeedback;
     private javax.swing.JLabel labelPreferedImageLanguage;
-    private javax.swing.JLabel labelSymbolSize;
+    private javax.swing.JLabel labelStackWidth;
     private javax.swing.JLabel labelTooltipSize;
     private javax.swing.JLabel lblProxyPassword;
     private javax.swing.JLabel lblProxyPort;
@@ -3398,7 +3401,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JSlider sliderEditorCardSize;
     private javax.swing.JSlider sliderFontSize;
     private javax.swing.JSlider sliderGameFeedbackArea;
-    private javax.swing.JSlider sliderSymbolSize;
+    private javax.swing.JSlider sliderStackWidth;
     private javax.swing.JSlider sliderTooltipSize;
     private javax.swing.JPanel sounds_backgroundMusic;
     private javax.swing.JPanel sounds_clips;
