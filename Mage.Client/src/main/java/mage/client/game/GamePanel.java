@@ -380,9 +380,8 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
 
-        feedbackAreaHeight = GUISizeHelper.gameDialogAreaFontSizeBig + GUISizeHelper.gameDialogAreaFontSizeSmall + GUISizeHelper.gameDialogAreaButtonHigh + 50;
+        feedbackAreaHeight = GUISizeHelper.gameDialogAreaFontSizeBig + GUISizeHelper.gameDialogAreaFontSizeSmall + GUISizeHelper.gameDialogAreaButtonHigh + 60;
         helper.setPreferredSize(new Dimension(100, feedbackAreaHeight));
-
         stackObjects.setCardDimension(GUISizeHelper.handCardDimension);
         int newStackWidth = jPanel3.getWidth() * GUISizeHelper.stackWidth / 100;
         if (newStackWidth < 360) {

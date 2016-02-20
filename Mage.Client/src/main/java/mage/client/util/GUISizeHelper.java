@@ -57,6 +57,8 @@ public class GUISizeHelper {
     public static int gameDialogAreaFontSizeSmall = 11;
     public static int gameDialogAreaButtonHigh = 16;
     public static Font gameDialogAreaFont = new java.awt.Font("Arial", 0, 12);
+    public static int gameDialogButtonHeight;
+    public static int gameDialogButtonWidth;
 
     public static Dimension handCardDimension;
     public static int stackWidth;
@@ -111,7 +113,9 @@ public class GUISizeHelper {
         gameDialogAreaFontSizeTooltip = feedbackFontSize - 2;
         gameDialogAreaFontSizeSmall = (feedbackFontSize / 2) + 2;
         gameDialogAreaButtonHigh = feedbackFontSize;
-        gameDialogAreaFont = new Font("Arial", 0, dialogFontSize);
+        gameDialogAreaFont = new Font("Arial", 0, feedbackFontSize);
+        gameDialogButtonHeight = feedbackFontSize + 6;
+        gameDialogButtonWidth = feedbackFontSize * 2 + 40;
 
         int chatFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CHAT_FONT_SIZE, 14);
         chatFont = new java.awt.Font("Arial", 0, chatFontSize);

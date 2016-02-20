@@ -97,11 +97,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private void setGUISize() {
-        btnLeft.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnRight.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnUndo.setFont(GUISizeHelper.gameDialogAreaFont);
-
         helper.changeGUISize();
     }
 
