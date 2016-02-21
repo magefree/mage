@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * ShowCardsDialog.java
  *
  * Created on 3-Feb-2010, 8:59:11 PM
@@ -41,7 +41,6 @@ import java.util.UUID;
 import javax.swing.JLayeredPane;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
-import mage.cards.CardDimensions;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardArea;
@@ -69,6 +68,7 @@ public class ShowCardsDialog extends MageDialog {
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
+
         this.setModal(false);
 
     }
@@ -83,13 +83,23 @@ public class ShowCardsDialog extends MageDialog {
         }
     }
 
+    @Override
+    public void changeGUISize() {
+        setGUISize();
+        cardArea.changeGUISize();
+    }
+
+    private void setGUISize() {
+
+    }
+
     public void loadCards(String name, CardsView showCards, BigCard bigCard,
-            CardDimensions dimension, UUID gameId, boolean modal, Map<String, Serializable> options,
+            UUID gameId, boolean modal, Map<String, Serializable> options,
             JPopupMenu popupMenu, Listener<Event> eventListener) {
         this.title = name;
         this.setTitelBarToolTip(name);
         cardArea.clearCardEventListeners();
-        cardArea.loadCards(showCards, bigCard, dimension, gameId);
+        cardArea.loadCards(showCards, bigCard, gameId);
         if (options != null) {
             if (options.containsKey("chosen")) {
                 java.util.List<UUID> chosenCards = (java.util.List<UUID>) options.get("chosen");
@@ -145,7 +155,7 @@ public class ShowCardsDialog extends MageDialog {
         setResizable(true);
         getContentPane().setLayout(new java.awt.BorderLayout());
         getContentPane().add(cardArea, java.awt.BorderLayout.CENTER);
-
+        setGUISize();
         pack();
     }
 

@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * CombatGroup.java
  *
  * Created on Feb 10, 2010, 3:36:55 PM
@@ -37,6 +37,7 @@ package mage.client.unusedFiles;
 import java.util.UUID;
 import mage.client.cards.BigCard;
 import mage.client.util.Config;
+import mage.client.util.GUISizeHelper;
 import mage.view.CombatGroupView;
 
 /**
@@ -63,10 +64,12 @@ public class CombatGroup extends javax.swing.JPanel {
 
     public void update(CombatGroupView combatGroup) {
         this.lblDefender.setText(combatGroup.getDefenderName());
+        attackers.setCardDimension(GUISizeHelper.otherZonesCardDimension);
         this.attackers.loadCards(combatGroup.getAttackers(), bigCard, gameId, true);
-//        attackers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
+
+        blockers.setCardDimension(GUISizeHelper.otherZonesCardDimension);
         this.blockers.loadCards(combatGroup.getBlockers(), bigCard, gameId, true);
-//        blockers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
+
         this.attackers.setVisible(true);
         this.blockers.setVisible(true);
     }

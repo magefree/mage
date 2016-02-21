@@ -102,7 +102,6 @@ import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
-import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.GameManager;
@@ -196,6 +195,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private MageDialogState choiceWindowState;
 
     private int feedbackAreaHeight;
+    private boolean initComponents;
 
     private enum PopUpMenuType {
 
@@ -208,11 +208,11 @@ public final class GamePanel extends javax.swing.JPanel {
     private JPopupMenu popupMenuTriggerOrder;
 
     public GamePanel() {
+        initComponents = true;
         initComponents();
-        setGUISize();
-
         initPopupMenuTriggerOrder();
-        //this.add(popupMenuTriggerOrder);
+
+        setGUISize();
 
         pickNumber = new PickNumberDialog();
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
@@ -267,7 +267,9 @@ public final class GamePanel extends javax.swing.JPanel {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
-                                setGUISize();
+                                if (!initComponents) {
+                                    setGUISize();
+                                }
                             }
                         });
                     }
@@ -277,6 +279,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         };
         jPanel3.addComponentListener(componentAdapterPlayField);
+        initComponents = false;
     }
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
@@ -350,14 +353,14 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void changeGUISize() {
+        initComponents = true;
         setGUISize();
+        stackObjects.changeGUISize();
+        feedbackPanel.changeGUISize();
         handContainer.changeGUISize();
         for (PlayAreaPanel playAreaPanel : players.values()) {
             playAreaPanel.changeGUISize();
         }
-
-        stackObjects.changeGUISize();
-        feedbackPanel.changeGUISize();
 
         for (CardInfoWindowDialog cardInfoWindowDialog : exiles.values()) {
             cardInfoWindowDialog.changeGUISize();
@@ -371,8 +374,13 @@ public final class GamePanel extends javax.swing.JPanel {
         for (CardInfoWindowDialog cardInfoWindowDialog : graveyardWindows.values()) {
             cardInfoWindowDialog.changeGUISize();
         }
+        for (ShowCardsDialog showCardsDialog : pickTarget) {
+            showCardsDialog.changeGUISize();
+        }
+
         this.revalidate();
         this.repaint();
+        initComponents = false;
     }
 
     private void setGUISize() {
@@ -390,7 +398,7 @@ public final class GamePanel extends javax.swing.JPanel {
         Dimension newDimension = new Dimension(jPanel3.getWidth() - newStackWidth, GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
         handContainer.setPreferredSize(newDimension);
         handContainer.setMaximumSize(newDimension);
-        newDimension = new Dimension(newStackWidth, GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
+        newDimension = new Dimension(newStackWidth, STACK_MIN_CARDS_OFFSET_Y + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
         stackObjects.setPreferredSize(newDimension);
         stackObjects.setMinimumSize(newDimension);
         stackObjects.setMaximumSize(newDimension);
@@ -399,6 +407,7 @@ public final class GamePanel extends javax.swing.JPanel {
         pnlShortCuts.setMinimumSize(newDimension);
         pnlShortCuts.setMaximumSize(newDimension);
 
+        GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
     }
 
     private void saveDividerLocations() {
@@ -1179,7 +1188,7 @@ public final class GamePanel extends javax.swing.JPanel {
         if (PopUpMenuType.TRIGGER_ORDER.equals(popupMenuType)) {
             popupMenu = popupMenuTriggerOrder;
         }
-        showCards.loadCards(title, cards, bigCard, Config.dimensionsEnlarged, gameId, required, options, popupMenu, getShowCardsEventListener(showCards));
+        showCards.loadCards(title, cards, bigCard, gameId, required, options, popupMenu, getShowCardsEventListener(showCards));
         return showCards;
     }
 
@@ -1212,7 +1221,7 @@ public final class GamePanel extends javax.swing.JPanel {
     public void pickPile(String message, CardsView pile1, CardsView pile2) {
         hideAll();
         PickPileDialog pickPileDialog = new PickPileDialog();
-        pickPileDialog.loadCards(message, pile1, pile2, bigCard, Config.dimensions, gameId);
+        pickPileDialog.loadCards(message, pile1, pile2, bigCard, gameId);
         session.sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
         pickPileDialog.cleanUp();
         pickPileDialog.removeDialog();

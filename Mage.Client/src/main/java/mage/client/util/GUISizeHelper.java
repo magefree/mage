@@ -64,6 +64,8 @@ public class GUISizeHelper {
     public static int stackWidth;
 
     public static Dimension otherZonesCardDimension;
+    public static int otherZonesCardVerticalOffset;
+
     public static Dimension battlefieldCardDimension;
 
     public static Dimension editorCardDimension;
@@ -106,8 +108,8 @@ public class GUISizeHelper {
         int dialogFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, 14);
         menuFont = new Font("Arial", 0, dialogFontSize);
         gameRequestsFont = new Font("Arial", 0, dialogFontSize);
-        symbolDialogSize = dialogFontSize;
 
+        // used in the feedback area of the game panel
         int feedbackFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_FEEDBACK_AREA_SIZE, 14);
         gameDialogAreaFontSizeBig = feedbackFontSize;
         gameDialogAreaFontSizeTooltip = feedbackFontSize - 2;
@@ -116,6 +118,7 @@ public class GUISizeHelper {
         gameDialogAreaFont = new Font("Arial", 0, feedbackFontSize);
         gameDialogButtonHeight = feedbackFontSize + 6;
         gameDialogButtonWidth = feedbackFontSize * 2 + 40;
+        symbolDialogSize = feedbackFontSize;
 
         int chatFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CHAT_FONT_SIZE, 14);
         chatFont = new java.awt.Font("Arial", 0, chatFontSize);
@@ -130,6 +133,11 @@ public class GUISizeHelper {
 
         int otherZonesCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OTHER_ZONES_SIZE, 14);
         otherZonesCardDimension = new Dimension(CARD_IMAGE_WIDTH * otherZonesCardSize / 42, CARD_IMAGE_HEIGHT * otherZonesCardSize / 42);
+        if (otherZonesCardSize > 29) {
+            otherZonesCardVerticalOffset = otherZonesCardDimension.height / 8;
+        } else {
+            otherZonesCardVerticalOffset = otherZonesCardDimension.height / 10;
+        }
 
         int battlefieldCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_SIZE, 14);
         battlefieldCardDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldCardSize / 42, CARD_IMAGE_HEIGHT * battlefieldCardSize / 42);

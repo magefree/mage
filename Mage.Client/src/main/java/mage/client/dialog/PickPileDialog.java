@@ -36,7 +36,6 @@ import java.util.UUID;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import mage.cards.CardDimensions;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardArea;
@@ -110,10 +109,10 @@ public class PickPileDialog extends MageDialog {
         }
     }
 
-    public void loadCards(String name, CardsView pile1, CardsView pile2, BigCard bigCard, CardDimensions dimension, UUID gameId) {
+    public void loadCards(String name, CardsView pile1, CardsView pile2, BigCard bigCard, UUID gameId) {
         this.title = name;
-        this.pile1.loadCardsNarrow(pile1, bigCard, dimension, gameId);
-        this.pile2.loadCardsNarrow(pile2, bigCard, dimension, gameId);
+        this.pile1.loadCardsNarrow(pile1, bigCard, gameId);
+        this.pile2.loadCardsNarrow(pile2, bigCard, gameId);
 
         if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
             MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
