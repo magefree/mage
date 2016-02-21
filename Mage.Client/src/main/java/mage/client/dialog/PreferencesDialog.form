@@ -1788,7 +1788,7 @@
                 <Component class="javax.swing.JLabel" name="labelStackWidth">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Stack %width relatated to hand"/>
+                    <Property name="text" type="java.lang.String" value="Stack %width related to hand"/>
                     <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;The % size of the stack object area in relation to the hand card area size."/>
                   </Properties>
                   <AccessibilityProperties>

@@ -1020,7 +1020,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderStackWidth.getAccessibleContext().setAccessibleDescription("<HTML>The stack width in relation to the hand area width");
 
         labelStackWidth.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelStackWidth.setText("Stack %width relatated to hand");
+        labelStackWidth.setText("Stack %width related to hand");
         labelStackWidth.setToolTipText("<HTML>The % size of the stack object area in relation to the hand card area size.");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
