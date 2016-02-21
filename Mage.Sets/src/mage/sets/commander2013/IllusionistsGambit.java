@@ -200,7 +200,7 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         if (defenderId.equals(source.getControllerId())) {
             return false;
         }

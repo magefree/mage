@@ -1108,7 +1108,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 return false;
             }
             for (Ability ability : effectEntry.getValue()) {
-                if (!effectEntry.getKey().canAttack(defenderId, ability, game)) {
+                if (!effectEntry.getKey().canAttack(this, defenderId, ability, game)) {
                     return false;
                 }
             }
