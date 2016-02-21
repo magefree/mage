@@ -72,4 +72,25 @@ public class EldraziMimicTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Eldrazi Mimic ability to change it's health and power on another
+     * creatures entering the battlefield doesn't work after update.
+     */
+    @Test
+    public void testNormalCopy() {
+        addCard(Zone.HAND, playerA, "Composite Golem", 1); // 4/4
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+        // Whenever another colorless creature enters the battlefield under your control, you may have the base power and toughness of Eldrazi Mimic
+        // become that creature's power and toughness until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Eldrazi Mimic", 1); // 2/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Composite Golem");
+        setChoice(playerA, "Yes");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, "Composite Golem", 4, 4);
+        assertPowerToughness(playerA, "Eldrazi Mimic", 4, 4);
+
+    }
 }
