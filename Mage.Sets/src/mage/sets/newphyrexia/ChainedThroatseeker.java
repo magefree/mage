@@ -91,7 +91,7 @@ class ChainedThroatseekerCantAttackEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         Player targetPlayer = game.getPlayer(defenderId);
         if (targetPlayer != null) {
             if (targetPlayer.getCounters().containsKey(CounterType.POISON)) {

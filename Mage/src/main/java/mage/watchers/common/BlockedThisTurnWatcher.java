@@ -25,56 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.watchers.common;
 
-package mage.abilities.effects.common.combat;
+import java.util.HashSet;
+import java.util.Set;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
-import mage.constants.AttachmentType;
-import mage.constants.Duration;
+import mage.MageObjectReference;
+import mage.constants.WatcherScope;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-
+import mage.game.events.GameEvent;
+import mage.watchers.Watcher;
 
 /**
  *
- * @author LevelX2
+ * @author Quercitron
  */
+public class BlockedThisTurnWatcher extends Watcher {
 
-public class CantAttackControllerAttachedEffect extends RestrictionEffect {
+    private final Set<MageObjectReference> blockedThisTurnCreatures;
 
-    public CantAttackControllerAttachedEffect(AttachmentType attachmentType) {
-        super(Duration.WhileOnBattlefield);
-        if (attachmentType.equals(AttachmentType.AURA)) {
-            this.staticText = "Enchanted creature can't attack you or a planeswalker you control";
-        } else {
-            this.staticText = "Equipped creature can't attack you or a planeswalker you control";
+    public BlockedThisTurnWatcher() {
+        super("BlockedThisTurn", WatcherScope.GAME);
+        blockedThisTurnCreatures = new HashSet<>();
+    }
+
+    public BlockedThisTurnWatcher(final BlockedThisTurnWatcher watcher) {
+        super(watcher);
+        blockedThisTurnCreatures = new HashSet<>(watcher.blockedThisTurnCreatures);
+    }
+
+    @Override
+    public Watcher copy() {
+        return new BlockedThisTurnWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
+            this.blockedThisTurnCreatures.add(new MageObjectReference(event.getSourceId(), game));
         }
     }
 
-    public CantAttackControllerAttachedEffect(final CantAttackControllerAttachedEffect effect) {
-        super(effect);
+    public Set<MageObjectReference> getBlockedThisTurnCreatures() {
+        return this.blockedThisTurnCreatures;
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getAttachments().contains(source.getSourceId());
-    }
-
-    @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
-        if (defenderId.equals(source.getControllerId())) {
-            return false;
-        }
-        Permanent planeswalker = game.getPermanent(defenderId);
-        return planeswalker == null || !planeswalker.getControllerId().equals(source.getControllerId());
-    }
-
-
-    @Override
-    public CantAttackControllerAttachedEffect copy() {
-        return new CantAttackControllerAttachedEffect(this);
+    public void reset() {
+        super.reset();
+        blockedThisTurnCreatures.clear();
     }
 
 }
