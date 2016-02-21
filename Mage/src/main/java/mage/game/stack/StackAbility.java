@@ -104,7 +104,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public boolean resolve(Game game) {
-        if (ability.getTargets().stillLegal(ability, game)) {
+        if (ability.getTargets().stillLegal(ability, game) || !canFizzle()) {
             boolean result = ability.resolve(game);
             game.getStack().remove(this);
             return result;
@@ -581,4 +581,13 @@ public class StackAbility extends StackObjImpl implements Ability {
         return getAbilities().get(0).getTargetDescription(targets, game);
     }
 
+    @Override
+    public boolean canFizzle() {
+        return ability.canFizzle();
+    }
+
+    @Override
+    public void setCanFizzle(boolean canFizzle) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
 }
