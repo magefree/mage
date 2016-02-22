@@ -574,7 +574,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (DownloadPictures.checkForNewCards(missingCards)) {
             LOGGER.info("Card images checking time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
             UserRequestMessage message = new UserRequestMessage("New images available", "Card images are missing (" + missingCards.size() + ").  Do you want to download the images?"
-                    + "<br><br><i>You can deactivate the image download check on apllication start in the preferences.</i>");
+                    + "<br><br><i>You can deactivate the image download check on application start in the preferences.</i>");
             message.setButton1("No", null);
             message.setButton2("Yes", PlayerAction.CLIENT_DOWNLOAD_CARD_IMAGES);
             showUserRequestDialog(message);
