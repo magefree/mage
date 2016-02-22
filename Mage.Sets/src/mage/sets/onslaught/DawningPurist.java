@@ -113,6 +113,6 @@ class DawningPuristTriggeredAbility extends TriggeredAbilityImpl {
 
     @java.lang.Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, you may destroy target enchantment that player controls";
+        return "Whenever {this} deals combat damage to a player, you may destroy target enchantment that player controls.";
     }
 }
