@@ -30,7 +30,7 @@ package mage.client.game;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
+import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,10 +69,11 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
     private javax.swing.JButton btnUndo;
+
     //private javax.swing.JButton btnEndTurn;
     //private javax.swing.JButton btnStopTimer;
-
     private MageTextArea textArea;
+    JPanel buttonContainer;
 
     private javax.swing.JButton linkLeft;
     private javax.swing.JButton linkRight;
@@ -113,57 +114,69 @@ public class HelperPanel extends JPanel {
     }
 
     private void setGUISize() {
-        for (Component comp : popupMenuAskNo.getComponents()) {
-            if (comp instanceof JMenuItem) {
-                comp.setFont(GUISizeHelper.menuFont);
+        buttonContainer.setPreferredSize(new Dimension(getWidth(), GUISizeHelper.gameDialogButtonHeight + 20));
+        buttonContainer.setMinimumSize(new Dimension(160, GUISizeHelper.gameDialogButtonHeight + 20));
+        buttonContainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, GUISizeHelper.gameDialogButtonHeight + 20));
+
+        Dimension buttonDimension = new Dimension(GUISizeHelper.gameDialogButtonWidth, GUISizeHelper.gameDialogButtonHeight);
+        btnLeft.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnRight.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnUndo.setFont(GUISizeHelper.gameDialogAreaFont);
+
+        if (message != null) {
+            int pos = this.message.indexOf("font-size:");
+            if (pos > 0) {
+                String newMessage = this.message.substring(0, pos + 10) + GUISizeHelper.gameDialogAreaFontSizeBig + this.message.substring(pos + 12);
+                pos = this.message.indexOf("font-size:", pos + 10);
+                if (pos > 0) {
+                    newMessage = this.message.substring(0, pos + 10) + GUISizeHelper.gameDialogAreaFontSizeSmall + this.message.substring(pos + 12);
+                }
+                setBasicMessage(newMessage);
             }
         }
-        for (Component comp : popupMenuAskYes.getComponents()) {
-            if (comp instanceof JMenuItem) {
-                comp.setFont(GUISizeHelper.menuFont);
-            }
-        }
+
+        GUISizeHelper.changePopupMenuFont(popupMenuAskNo);
+        GUISizeHelper.changePopupMenuFont(popupMenuAskYes);
+        revalidate();
+        repaint();
     }
 
     private void initComponents() {
         initPopupMenuTriggerOrder();
         setBackground(new Color(0, 0, 0, 100));
-        //setLayout(new GridBagLayout());
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+//        setBorder(new LineBorder(Color.WHITE, 1));
+
         setOpaque(false);
 
-        JPanel container = new JPanel();
-
-        container.setPreferredSize(new Dimension(100, 30));
-        container.setMinimumSize(new Dimension(20, 20));
-        container.setMaximumSize(new Dimension(2000, 100));
-        container.setLayout(new GridBagLayout());
-        container.setOpaque(false);
-
-        JPanel jPanel = new JPanel();
-
         textArea = new MageTextArea();
+//        textArea.setBorder(new LineBorder(Color.GREEN, 1));
         textArea.setText("<Empty>");
+        add(textArea);
 
-        jPanel.setOpaque(false);
-        jPanel.setBackground(new Color(0, 0, 0, 80));
-        jPanel.add(textArea);
-        add(jPanel);
+        buttonContainer = new JPanel();
+//        buttonContainer.setBorder(new LineBorder(Color.RED, 1));
+        buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
+        buttonContainer.setOpaque(false);
+        add(buttonContainer);
 
-        add(container);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         btnSpecial = new JButton("Special");
         btnSpecial.setVisible(false);
-        container.add(btnSpecial);
+        buttonContainer.add(btnSpecial);
+
         btnLeft = new JButton("OK");
         btnLeft.setVisible(false);
-        container.add(btnLeft);
+        buttonContainer.add(btnLeft);
+
         btnRight = new JButton("Cancel");
         btnRight.setVisible(false);
-        container.add(btnRight);
+        buttonContainer.add(btnRight);
+
         btnUndo = new JButton("Undo");
         btnUndo.setVisible(false);
-        container.add(btnUndo);
+        buttonContainer.add(btnUndo);
 
         MouseListener checkPopupAdapter = new MouseAdapter() {
             @Override

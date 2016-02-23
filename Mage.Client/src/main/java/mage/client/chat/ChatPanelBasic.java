@@ -231,7 +231,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         if (username != null && !username.isEmpty()) {
             text.append(getColoredText(userColor, username + userSeparator));
         }
-        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY)));
+        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.CHAT)));
         this.txtConversation.append(text.toString());
     }
 

@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * PlayerPanel.java
  *
  * Created on Nov 18, 2009, 3:01:31 PM
@@ -39,7 +39,6 @@ import java.util.UUID;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.ShowCardsDialog;
-import mage.client.util.Config;
 import mage.remote.Session;
 import mage.view.PlayerView;
 
@@ -200,7 +199,7 @@ public class PlayerPanel extends javax.swing.JPanel {
         if (graveyard == null) {
             graveyard = new ShowCardsDialog();
         }
-        graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId, false, null, null, null);
+        graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, gameId, false, null, null, null);
     }//GEN-LAST:event_btnGraveActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

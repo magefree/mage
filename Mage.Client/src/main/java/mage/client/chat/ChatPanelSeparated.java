@@ -95,7 +95,7 @@ public class ChatPanelSeparated extends ChatPanelBasic {
         if (username != null && !username.isEmpty()) {
             text.append(getColoredText(userColor, username + userSeparator));
         }
-        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY)));
+        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.CHAT)));
         this.systemMessagesPane.append(text.toString());
     }
 

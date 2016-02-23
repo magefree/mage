@@ -59,7 +59,7 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
     }
 
     /**
-     * That that the creature with a +1/+1 counter returns
+     * Test that the creature with a +1/+1 counter returns
      */
     @Test
     public void testMarchesatheBlackRose() {

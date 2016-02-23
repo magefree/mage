@@ -574,7 +574,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (DownloadPictures.checkForNewCards(missingCards)) {
             LOGGER.info("Card images checking time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
             UserRequestMessage message = new UserRequestMessage("New images available", "Card images are missing (" + missingCards.size() + ").  Do you want to download the images?"
-                    + "<br><br><i>You can deactivate the image download check on apllication start in the preferences.</i>");
+                    + "<br><br><i>You can deactivate the image download check on application start in the preferences.</i>");
             message.setButton1("No", null);
             message.setButton2("Yes", PlayerAction.CLIENT_DOWNLOAD_CARD_IMAGES);
             showUserRequestDialog(message);
@@ -1135,8 +1135,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void showUserRequestDialog(final UserRequestMessage userRequestMessage) {
         final UserRequestDialog userRequestDialog = new UserRequestDialog();
         userRequestDialog.setLocation(100, 100);
-        desktopPane.add(userRequestDialog, JLayeredPane.MODAL_LAYER);
-//        ui.addComponent(MageComponents.DESKTOP_PANE, userRequestDialog);
+        desktopPane.add(userRequestDialog, JLayeredPane.POPUP_LAYER);
         if (SwingUtilities.isEventDispatchThread()) {
             userRequestDialog.showDialog(userRequestMessage);
         } else {
@@ -1371,38 +1370,21 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void showMessage(final String message
-    ) {
-        if (SwingUtilities.isEventDispatchThread()) {
-            JOptionPane.showMessageDialog(desktopPane, message);
-        } else {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    JOptionPane.showMessageDialog(desktopPane, message);
-                }
-            });
-        }
+    public void showMessage(String message) {
+        final UserRequestMessage requestMessage = new UserRequestMessage("Message", message);
+        requestMessage.setButton1("OK", null);
+        MageFrame.getInstance().showUserRequestDialog(requestMessage);
     }
 
     @Override
-    public void showError(final String message
-    ) {
-        if (SwingUtilities.isEventDispatchThread()) {
-            JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            });
-        }
+    public void showError(final String message) {
+        final UserRequestMessage requestMessage = new UserRequestMessage("Error", message);
+        requestMessage.setButton1("OK", null);
+        MageFrame.getInstance().showUserRequestDialog(requestMessage);
     }
 
     @Override
-    public void processCallback(ClientCallback callback
-    ) {
+    public void processCallback(ClientCallback callback) {
         callbackClient.processCallback(callback);
     }
 

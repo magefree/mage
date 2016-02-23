@@ -28,7 +28,6 @@
 package mage.client.game;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -148,17 +147,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
 
     private void setGUISize() {
-        for (Component comp : popupMenu.getComponents()) {
-            if (comp instanceof JMenuItem) {
-                comp.setFont(GUISizeHelper.menuFont);
-                if (comp instanceof JMenu) {
-                    comp.setFont(GUISizeHelper.menuFont);
-                    for (Component subComp : ((JMenu) comp).getMenuComponents()) {
-                        subComp.setFont(GUISizeHelper.menuFont);
-                    }
-                }
-            }
-        }
+        GUISizeHelper.changePopupMenuFont(popupMenu);
     }
 
     private void addPopupMenuPlayer(boolean allowRequestToShowHandCards) {
@@ -531,8 +520,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.playerPanel.init(gameId, player.getPlayerId(), bigCard, priorityTime);
         this.battlefieldPanel.init(gameId, bigCard);
         this.gameId = gameId;
+        this.playerId = player.getPlayerId();
         if (MageFrame.getSession().isTestMode()) {
-            this.playerId = player.getPlayerId();
             this.btnCheat.setVisible(true);
         } else {
             this.btnCheat.setVisible(false);

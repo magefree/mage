@@ -71,6 +71,7 @@ import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
 /**
@@ -80,7 +81,7 @@ import org.apache.log4j.Logger;
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
-    private static final Logger LOGGER = Logger.getLogger(PreferencesDialog.class);
+    private static final Logger logger = Logger.getLogger(PreferencesDialog.class);
 
     public static final String KEY_SHOW_TOOLTIPS_DELAY = "showTooltipsDelay";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
@@ -95,7 +96,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GUI_TABLE_FONT_SIZE = "guiTableFontSize";
     public static final String KEY_GUI_CHAT_FONT_SIZE = "guiChatFontSize";
     public static final String KEY_GUI_CARD_HAND_SIZE = "guiCardHandSize";
-    public static final String KEY_GUI_SYMBOL_SIZE = "guiSymbolSize";
+    public static final String KEY_GUI_CARD_EDITOR_SIZE = "guiCardEditorSize";
+    public static final String KEY_GUI_CARD_OFFSET_SIZE = "guiCardOffsetSize";
+
+    public static final String KEY_GUI_STACK_WIDTH = "guiStackWidth";
     public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
     public static final String KEY_GUI_DIALOG_FONT_SIZE = "guiDialogFontSize";
     public static final String KEY_GUI_FEEDBACK_AREA_SIZE = "guiFeedbackAreaSize";
@@ -373,6 +377,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         chatFontSizeLabel = new javax.swing.JLabel();
         sliderDialogFont = new javax.swing.JSlider();
         labelDialogFont = new javax.swing.JLabel();
+        sliderEditorCardSize = new javax.swing.JSlider();
+        labelEditorCardSize = new javax.swing.JLabel();
+        sliderEditorCardOffset = new javax.swing.JSlider();
+        labelEditorCardOffset = new javax.swing.JLabel();
         guiSizeGame = new javax.swing.JPanel();
         sliderCardSizeHand = new javax.swing.JSlider();
         labelCardSizeHand = new javax.swing.JLabel();
@@ -380,8 +388,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         labelCardSizeOtherZones = new javax.swing.JLabel();
         sliderCardSizeBattlefield = new javax.swing.JSlider();
         labelCardSizeBattlefield = new javax.swing.JLabel();
-        sliderSymbolSize = new javax.swing.JSlider();
-        labelSymbolSize = new javax.swing.JLabel();
+        sliderStackWidth = new javax.swing.JSlider();
+        labelStackWidth = new javax.swing.JLabel();
         sliderGameFeedbackArea = new javax.swing.JSlider();
         labelGameFeedback = new javax.swing.JLabel();
         sliderTooltipSize = new javax.swing.JSlider();
@@ -535,13 +543,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
             main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(main_cardLayout.createSequentialGroup()
                 .add(6, 6, 6)
-                .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(main_cardLayout.createSequentialGroup()
-                        .add(showCardName)
-                        .add(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, showCardName)
+                    .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         main_cardLayout.setVerticalGroup(
             main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -729,9 +735,20 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabGuiSize.setMaximumSize(new java.awt.Dimension(527, 423));
         tabGuiSize.setMinimumSize(new java.awt.Dimension(527, 423));
+        java.awt.GridBagLayout tabGuiSizeLayout = new java.awt.GridBagLayout();
+        tabGuiSizeLayout.columnWidths = new int[] {0};
+        tabGuiSizeLayout.rowHeights = new int[] {0, 20, 0};
+        tabGuiSizeLayout.columnWeights = new double[] {1.0};
+        tabGuiSizeLayout.rowWeights = new double[] {1.0, 0.0, 1.0};
+        tabGuiSize.setLayout(tabGuiSizeLayout);
 
         guiSizeBasic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size basic elements"));
-        guiSizeBasic.setLayout(new java.awt.GridBagLayout());
+        guiSizeBasic.setMinimumSize(new java.awt.Dimension(600, 180));
+        guiSizeBasic.setPreferredSize(new java.awt.Dimension(600, 180));
+        java.awt.GridBagLayout guiSizeBasicLayout = new java.awt.GridBagLayout();
+        guiSizeBasicLayout.columnWeights = new double[] {1.0, 1.0, 1.0};
+        guiSizeBasicLayout.rowWeights = new double[] {1.0, 0.2, 1.0, 0.2};
+        guiSizeBasic.setLayout(guiSizeBasicLayout);
 
         sliderFontSize.setMajorTickSpacing(5);
         sliderFontSize.setMaximum(50);
@@ -744,15 +761,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         guiSizeBasic.add(sliderFontSize, gridBagConstraints);
 
         fontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fontSizeLabel.setText("Size of table font");
+        fontSizeLabel.setText("Tables");
         fontSizeLabel.setToolTipText("<HTML>The size of the font used to display table text.");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
@@ -769,17 +790,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderChatFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderChatFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         guiSizeBasic.add(sliderChatFontSize, gridBagConstraints);
 
         chatFontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        chatFontSizeLabel.setText("Size of chat font");
+        chatFontSizeLabel.setText("Chat");
         chatFontSizeLabel.setToolTipText("<HTML>The size of the font used to display the chat text");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
@@ -796,24 +819,97 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderDialogFont.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderDialogFont.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         guiSizeBasic.add(sliderDialogFont, gridBagConstraints);
 
         labelDialogFont.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelDialogFont.setText("Font size of messages and menues");
+        labelDialogFont.setText("Messages and menues");
         labelDialogFont.setToolTipText("<HTML>The size of the font of messages and menues");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         guiSizeBasic.add(labelDialogFont, gridBagConstraints);
         labelDialogFont.getAccessibleContext().setAccessibleDescription("<HTML>The size of the font used to display messages or menus.");
 
+        sliderEditorCardSize.setMajorTickSpacing(5);
+        sliderEditorCardSize.setMaximum(50);
+        sliderEditorCardSize.setMinimum(10);
+        sliderEditorCardSize.setMinorTickSpacing(1);
+        sliderEditorCardSize.setPaintLabels(true);
+        sliderEditorCardSize.setPaintTicks(true);
+        sliderEditorCardSize.setSnapToTicks(true);
+        sliderEditorCardSize.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel");
+        sliderEditorCardSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderEditorCardSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeBasic.add(sliderEditorCardSize, gridBagConstraints);
+
+        labelEditorCardSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelEditorCardSize.setText("Cards in editor and draft panel");
+        labelEditorCardSize.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel\n");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeBasic.add(labelEditorCardSize, gridBagConstraints);
+
+        sliderEditorCardOffset.setMajorTickSpacing(5);
+        sliderEditorCardOffset.setMaximum(50);
+        sliderEditorCardOffset.setMinimum(10);
+        sliderEditorCardOffset.setMinorTickSpacing(1);
+        sliderEditorCardOffset.setPaintLabels(true);
+        sliderEditorCardOffset.setPaintTicks(true);
+        sliderEditorCardOffset.setSnapToTicks(true);
+        sliderEditorCardOffset.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel");
+        sliderEditorCardOffset.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderEditorCardOffset.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeBasic.add(sliderEditorCardOffset, gridBagConstraints);
+
+        labelEditorCardOffset.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelEditorCardOffset.setText("Card offset editor and draft");
+        labelEditorCardOffset.setToolTipText("<HTML>The vertical offset of card images in editor areas\n");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeBasic.add(labelEditorCardOffset, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        tabGuiSize.add(guiSizeBasic, gridBagConstraints);
+
         guiSizeGame.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size game elements"));
-        guiSizeGame.setLayout(new java.awt.GridBagLayout());
+        guiSizeGame.setMinimumSize(new java.awt.Dimension(600, 180));
+        guiSizeGame.setPreferredSize(new java.awt.Dimension(600, 180));
+        java.awt.GridBagLayout guiSizeGameLayout = new java.awt.GridBagLayout();
+        guiSizeGameLayout.columnWeights = new double[] {1.0, 1.0, 1.0};
+        guiSizeGameLayout.rowWeights = new double[] {1.0, 0.2, 1.0, 0.2};
+        guiSizeGame.setLayout(guiSizeGameLayout);
 
         sliderCardSizeHand.setMajorTickSpacing(5);
         sliderCardSizeHand.setMaximum(50);
@@ -822,20 +918,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeHand.setPaintLabels(true);
         sliderCardSizeHand.setPaintTicks(true);
         sliderCardSizeHand.setSnapToTicks(true);
-        sliderCardSizeHand.setToolTipText("<HTML>The size of the card in hand");
+        sliderCardSizeHand.setToolTipText("<HTML>The size of the card images in hand and on the stack");
         sliderCardSizeHand.setValue(14);
         sliderCardSizeHand.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeHand.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         guiSizeGame.add(sliderCardSizeHand, gridBagConstraints);
 
         labelCardSizeHand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCardSizeHand.setText("Size of hand cards");
-        labelCardSizeHand.setToolTipText("<HTML>The size of the card in hand");
+        labelCardSizeHand.setText("Hand cards and stack objects");
+        labelCardSizeHand.setToolTipText("<HTML>The size of the card images in hand and on the stack");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -855,17 +952,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeOtherZones.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeOtherZones.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         guiSizeGame.add(sliderCardSizeOtherZones, gridBagConstraints);
 
         labelCardSizeOtherZones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCardSizeOtherZones.setText("Size of other zone cards");
+        labelCardSizeOtherZones.setText("Cards other zones");
         labelCardSizeOtherZones.setToolTipText("<HTML>The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
@@ -883,49 +981,55 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderCardSizeBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderCardSizeBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         guiSizeGame.add(sliderCardSizeBattlefield, gridBagConstraints);
 
         labelCardSizeBattlefield.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCardSizeBattlefield.setText("Size of permanents");
+        labelCardSizeBattlefield.setText("Permanents");
         labelCardSizeBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         guiSizeGame.add(labelCardSizeBattlefield, gridBagConstraints);
 
-        sliderSymbolSize.setMajorTickSpacing(5);
-        sliderSymbolSize.setMaximum(50);
-        sliderSymbolSize.setMinimum(10);
-        sliderSymbolSize.setMinorTickSpacing(1);
-        sliderSymbolSize.setPaintLabels(true);
-        sliderSymbolSize.setPaintTicks(true);
-        sliderSymbolSize.setSnapToTicks(true);
-        sliderSymbolSize.setToolTipText("<HTML>The size of symbols");
-        sliderSymbolSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        sliderSymbolSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderStackWidth.setMajorTickSpacing(20);
+        sliderStackWidth.setMaximum(90);
+        sliderStackWidth.setMinimum(10);
+        sliderStackWidth.setMinorTickSpacing(5);
+        sliderStackWidth.setPaintLabels(true);
+        sliderStackWidth.setPaintTicks(true);
+        sliderStackWidth.setSnapToTicks(true);
+        sliderStackWidth.setToolTipText("<HTML>The % size of the stack object area in relation to the hand card area size.");
+        sliderStackWidth.setValue(30);
+        sliderStackWidth.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderStackWidth.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeGame.add(sliderStackWidth, gridBagConstraints);
+        sliderStackWidth.getAccessibleContext().setAccessibleDescription("<HTML>The stack width in relation to the hand area width");
+
+        labelStackWidth.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelStackWidth.setText("Stack %width related to hand");
+        labelStackWidth.setToolTipText("<HTML>The % size of the stack object area in relation to the hand card area size.");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
-        guiSizeGame.add(sliderSymbolSize, gridBagConstraints);
-
-        labelSymbolSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelSymbolSize.setText("Symbol size");
-        labelSymbolSize.setToolTipText("<HTML>The size of symbols");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        guiSizeGame.add(labelSymbolSize, gridBagConstraints);
+        guiSizeGame.add(labelStackWidth, gridBagConstraints);
+        labelStackWidth.getAccessibleContext().setAccessibleDescription("<HTML>The stack width in relation to the hand area width");
 
         sliderGameFeedbackArea.setMajorTickSpacing(5);
         sliderGameFeedbackArea.setMaximum(50);
@@ -938,17 +1042,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderGameFeedbackArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderGameFeedbackArea.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         guiSizeGame.add(sliderGameFeedbackArea, gridBagConstraints);
 
         labelGameFeedback.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelGameFeedback.setText("Size game feedback area");
+        labelGameFeedback.setText("Dialog area");
         labelGameFeedback.setToolTipText("<HTML>The size of the game feedback area (buttons and messages above the hand area)");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
@@ -967,43 +1073,30 @@ public class PreferencesDialog extends javax.swing.JDialog {
         sliderTooltipSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         sliderTooltipSize.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         guiSizeGame.add(sliderTooltipSize, gridBagConstraints);
 
         labelTooltipSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelTooltipSize.setText("Tooltip size");
+        labelTooltipSize.setText("Tooltip window");
         labelTooltipSize.setToolTipText("<HTML>The size of the tooltip window for cards or permanents");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         guiSizeGame.add(labelTooltipSize, gridBagConstraints);
 
-        org.jdesktop.layout.GroupLayout tabGuiSizeLayout = new org.jdesktop.layout.GroupLayout(tabGuiSize);
-        tabGuiSize.setLayout(tabGuiSizeLayout);
-        tabGuiSizeLayout.setHorizontalGroup(
-            tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabGuiSizeLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(guiSizeBasic, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                    .add(guiSizeGame, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        tabGuiSizeLayout.setVerticalGroup(
-            tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabGuiSizeLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(guiSizeBasic, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 106, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(guiSizeGame, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 191, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        tabGuiSize.add(guiSizeGame, gridBagConstraints);
 
         tabsPanel.addTab("GUI Size", tabGuiSize);
 
@@ -1215,7 +1308,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(jLabelEndOfTurn)
                     .add(checkBoxEndTurnOthers))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1994,15 +2087,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabAvatars.setLayout(tabAvatarsLayout);
         tabAvatarsLayout.setHorizontalGroup(
             tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, tabAvatarsLayout.createSequentialGroup()
-                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 527, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 0, Short.MAX_VALUE))
+            .add(tabAvatarsLayout.createSequentialGroup()
+                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 528, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 1, Short.MAX_VALUE))
         );
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, tabAvatarsLayout.createSequentialGroup()
-                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 423, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 0, Short.MAX_VALUE))
+            .add(tabAvatarsLayout.createSequentialGroup()
+                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 484, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
@@ -2191,6 +2284,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabsPanel.addTab("Connection", tabConnection);
 
         saveButton.setLabel("Save");
+        saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        saveButton.setMinimumSize(new java.awt.Dimension(100, 30));
+        saveButton.setPreferredSize(new java.awt.Dimension(100, 30));
         saveButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2199,6 +2295,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         exitButton.setLabel("Exit");
+        exitButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        exitButton.setMinimumSize(new java.awt.Dimension(100, 30));
+        exitButton.setPreferredSize(new java.awt.Dimension(100, 30));
         exitButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2216,7 +2315,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(6, 6, 6))
-            .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2224,8 +2323,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(saveButton)
-                    .add(exitButton))
+                    .add(saveButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -2262,8 +2361,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
             save(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "true", "false", UPDATE_CACHE_POLICY);
             sizeGUIChanged = true;
         }
-        if (getCachedValue(KEY_GUI_SYMBOL_SIZE, 14) != dialog.sliderSymbolSize.getValue()) {
-            save(prefs, dialog.sliderSymbolSize, KEY_GUI_SYMBOL_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        if (getCachedValue(KEY_GUI_CARD_EDITOR_SIZE, 14) != dialog.sliderEditorCardSize.getValue()) {
+            save(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CARD_OFFSET_SIZE, 14) != dialog.sliderEditorCardOffset.getValue()) {
+            save(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_STACK_WIDTH, 30) != dialog.sliderStackWidth.getValue()) {
+            save(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "true", "false", UPDATE_CACHE_POLICY);
             sizeGUIChanged = true;
         }
         if (getCachedValue(KEY_GUI_TOOLTIP_SIZE, 14) != dialog.sliderTooltipSize.getValue()) {
@@ -2359,8 +2466,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
             prefs.flush();
         } catch (BackingStoreException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error: couldn't save preferences. Please try once again.");
+            logger.error("Error: couldn't save preferences", ex);
+            UserRequestMessage message = new UserRequestMessage("Error", "Error: couldn't save preferences. Please try once again.");
+            message.setButton1("OK", null);
+            MageFrame.getInstance().showUserRequestDialog(message);
         }
 
         dialog.setVisible(false);
@@ -2623,15 +2732,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cbAutoOrderTriggerActionPerformed
 
     private void showProxySettings() {
-        if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
-            this.pnlProxy.setVisible(true);
-            this.pnlProxySettings.setVisible(true);
-        } else if (cbProxyType.getSelectedItem() == Connection.ProxyType.HTTP) {
-            this.pnlProxy.setVisible(true);
-            this.pnlProxySettings.setVisible(true);
-        } else if (cbProxyType.getSelectedItem() == Connection.ProxyType.NONE) {
-            this.pnlProxy.setVisible(false);
-            this.pnlProxySettings.setVisible(false);
+        Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
+        switch (proxyType) {
+            case SOCKS:
+                this.pnlProxy.setVisible(true);
+                this.pnlProxySettings.setVisible(true);
+                break;
+            case HTTP:
+                this.pnlProxy.setVisible(true);
+                this.pnlProxySettings.setVisible(true);
+                break;
+            case NONE:
+                this.pnlProxy.setVisible(false);
+                this.pnlProxySettings.setVisible(false);
+                break;
+            default:
+                break;
         }
         this.pack();
         this.repaint();
@@ -2657,7 +2773,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     connection.setProxyPassword(password);
                 }
             } else {
-                LOGGER.warn("host or\\and port are empty: host=" + host + ", port=" + port);
+                logger.warn("host or\\and port are empty: host=" + host + ", port=" + port);
             }
         }
     }
@@ -2759,7 +2875,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "14");
         load(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "14");
         load(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "14");
-        load(prefs, dialog.sliderSymbolSize, KEY_GUI_SYMBOL_SIZE, "14");
+        load(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "14");
+        load(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "14");
+        load(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "14");
         load(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "14");
         load(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "14");
         load(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "14");
@@ -2903,7 +3021,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 dialog.tabsPanel.setSelectedIndex(index);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error during open tab", e);
         }
     }
 
@@ -3083,7 +3201,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             addAvatar(jPanel32, 32, false, false);
 
         } catch (Exception e) {
-            LOGGER.error(e, e);
+            logger.error(e, e);
         }
     }
 
@@ -3248,9 +3366,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelCardSizeHand;
     private javax.swing.JLabel labelCardSizeOtherZones;
     private javax.swing.JLabel labelDialogFont;
+    private javax.swing.JLabel labelEditorCardOffset;
+    private javax.swing.JLabel labelEditorCardSize;
     private javax.swing.JLabel labelGameFeedback;
     private javax.swing.JLabel labelPreferedImageLanguage;
-    private javax.swing.JLabel labelSymbolSize;
+    private javax.swing.JLabel labelStackWidth;
     private javax.swing.JLabel labelTooltipSize;
     private javax.swing.JLabel lblProxyPassword;
     private javax.swing.JLabel lblProxyPort;
@@ -3277,9 +3397,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JSlider sliderCardSizeOtherZones;
     private javax.swing.JSlider sliderChatFontSize;
     private javax.swing.JSlider sliderDialogFont;
+    private javax.swing.JSlider sliderEditorCardOffset;
+    private javax.swing.JSlider sliderEditorCardSize;
     private javax.swing.JSlider sliderFontSize;
     private javax.swing.JSlider sliderGameFeedbackArea;
-    private javax.swing.JSlider sliderSymbolSize;
+    private javax.swing.JSlider sliderStackWidth;
     private javax.swing.JSlider sliderTooltipSize;
     private javax.swing.JPanel sounds_backgroundMusic;
     private javax.swing.JPanel sounds_clips;

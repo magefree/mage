@@ -83,7 +83,7 @@ import org.apache.log4j.Logger;
  */
 public class ContinuousEffects implements Serializable {
 
-    private static final Logger LOGGER = Logger.getLogger(ContinuousEffects.class);
+    private static final Logger logger = Logger.getLogger(ContinuousEffects.class);
 
     private long order = 0;
 
@@ -227,7 +227,7 @@ public class ContinuousEffects implements Serializable {
                             }
                         }
                     } else {
-                        LOGGER.error("No abilities for continuous effect: " + effect.toString());
+                        logger.error("No abilities for continuous effect: " + effect.toString());
                     }
                     break;
                 default:
@@ -1095,10 +1095,10 @@ public class ContinuousEffects implements Serializable {
 
     public void addEffect(ContinuousEffect effect, Ability source) {
         if (effect == null) {
-            LOGGER.error("Effect is null: " + source.toString());
+            logger.error("Effect is null: " + source.toString());
             return;
         } else if (source == null) {
-            LOGGER.warn("Adding effect without ability : " + effect.toString());
+            logger.warn("Adding effect without ability : " + effect.toString());
         }
         switch (effect.getEffectType()) {
             case REPLACEMENT:
@@ -1165,7 +1165,7 @@ public class ContinuousEffects implements Serializable {
                             ability.setControllerId(controllerId);
                         }
                     } else if (!ability.getZone().equals(Zone.COMMAND)) {
-                        LOGGER.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
+                        logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
                     }
                 }
             }
@@ -1236,7 +1236,7 @@ public class ContinuousEffects implements Serializable {
                     }
                 }
             } else {
-                LOGGER.error("Replacement effect without ability: " + entry.getKey().toString());
+                logger.error("Replacement effect without ability: " + entry.getKey().toString());
             }
         }
         return texts;
@@ -1274,7 +1274,7 @@ public class ContinuousEffects implements Serializable {
                         }
                     }
                 } else {
-                    LOGGER.warn("Ability without sourceId:" + ability.getRule());
+                    logger.warn("Ability without sourceId:" + ability.getRule());
                 }
             }
         }

@@ -195,7 +195,7 @@ public class GuiDisplayUtil {
             manaCost += m;
         }
         String castingCost = UI.getDisplayManaCost(manaCost);
-        castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.CARD);
+        castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.TOOLTIP);
 
         int symbolCount = 0;
         int offset = 0;
@@ -224,27 +224,28 @@ public class GuiDisplayUtil {
             buffer.append(" [").append(card.getId().toString().substring(0, 3)).append("]");
         }
         buffer.append("</b></td><td align='right' valign='top' style='width:");
-        buffer.append(symbolCount * GUISizeHelper.symbolTooltipSize + 1);
+        buffer.append(symbolCount * GUISizeHelper.cardTooltipFontSize);
         buffer.append("px'>");
         if (!card.isSplitCard()) {
             buffer.append(castingCost);
         }
         buffer.append("</td></tr></table>");
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td style='margin-left: 1px'>");
+        String imageSize = " width=" + GUISizeHelper.cardTooltipFontSize + " height=" + GUISizeHelper.cardTooltipFontSize + ">";
         if (card.getColor().isWhite()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W' ").append(imageSize);
         }
         if (card.getColor().isBlue()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_blue.png")).append("' alt='U'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_blue.png")).append("' alt='U' ").append(imageSize);
         }
         if (card.getColor().isBlack()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_black.png")).append("' alt='B'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_black.png")).append("' alt='B' ").append(imageSize);
         }
         if (card.getColor().isRed()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_red.png")).append("' alt='R'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_red.png")).append("' alt='R' ").append(imageSize);
         }
         if (card.getColor().isGreen()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_green.png")).append("' alt='G'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_green.png")).append("' alt='G' ").append(imageSize);
         }
         if (!card.getColor().isColorless()) {
             buffer.append("&nbsp;&nbsp;");
@@ -273,7 +274,7 @@ public class GuiDisplayUtil {
             rarity = card.getRarity().getCode();
         }
         if (card.getExpansionSetCode() != null) {
-            buffer.append(ManaSymbols.replaceSetCodeWithHTML(card.getExpansionSetCode().toUpperCase(), rarity));
+            buffer.append(ManaSymbols.replaceSetCodeWithHTML(card.getExpansionSetCode().toUpperCase(), rarity, GUISizeHelper.symbolTooltipSize));
         }
         buffer.append("</td></tr></table>");
 
@@ -338,13 +339,9 @@ public class GuiDisplayUtil {
 
         String legal = rule.toString();
         if (legal.length() > 0) {
-// this 2 replaces were only done with the empty string, is it any longer needed? (LevelX2)
-//                        legal = legal.replaceAll("#([^#]+)#", "<i>$1</i>");
-//                        legal = legal.replaceAll("\\s*//\\s*", "<hr width='50%'>");
-//                        legal = legal.replace("\r\n", "<div style='font-size:5pt'></div>");
             legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this" : card.getName());
             legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this" : card.getName());
-            buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.CARD));
+            buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.TOOLTIP));
         }
 
         buffer.append("<br></body></html>");

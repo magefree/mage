@@ -90,7 +90,7 @@ class GoblinGoonCantAttackEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         UUID defendingPlayerId;
         Player defender = game.getPlayer(defenderId);
         if (defender == null) {

@@ -393,6 +393,7 @@ public class TestPlayer implements Player {
                     command = command.substring(command.indexOf("manaActivate:") + 13);
                     String[] groups = command.split("\\$");
                     List<MageObject> manaObjects = computerPlayer.getAvailableManaProducers(game);
+
                     for (MageObject mageObject : manaObjects) {
                         if (mageObject instanceof Permanent) {
                             for (Ability manaAbility : ((Permanent) mageObject).getAbilities(game).getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {

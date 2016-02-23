@@ -138,6 +138,8 @@ public class DynamicManaEffect extends BasicManaEffect {
             computedMana.setRed(count);
         } else if (mana.getWhite() > 0) {
             computedMana.setWhite(count);
+        } else if (mana.getColorless() > 0) {
+            computedMana.setColorless(count);
         } else if (mana.getAny() > 0) {
             if (netMana) {
                 computedMana.setAny(count);

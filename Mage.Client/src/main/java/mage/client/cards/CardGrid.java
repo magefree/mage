@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * CardGrid.java
  *
  * Created on 30-Mar-2010, 9:25:40 PM
@@ -50,8 +50,8 @@ import java.util.UUID;
 import mage.cards.MageCard;
 import mage.client.deckeditor.SortSetting;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.Config;
 import mage.client.util.Event;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.utils.CardUtil;
 import mage.view.CardView;
@@ -126,7 +126,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, boolean drawImage) {
         if (cardDimension == null) {
-            cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            cardDimension = GUISizeHelper.editorCardDimension;
         }
         MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, drawImage);
         cards.put(card.getId(), cardImg);
@@ -139,11 +139,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     @Override
     public void drawCards(SortSetting sortSetting) {
         int maxWidth = this.getParent().getWidth();
-        int numColumns = maxWidth / Config.dimensions.frameWidth;
+        int cardVerticalOffset = GUISizeHelper.editorCardOffsetSize;
+        int numColumns = maxWidth / cardDimension.width;
         int curColumn = 0;
         int curRow = 0;
         if (cards.size() > 0) {
-            Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+            Rectangle rectangle = new Rectangle(cardDimension.width, cardDimension.height);
             List<MageCard> sortedCards = new ArrayList<>(cards.values());
             switch (sortSetting.getSortBy()) {
                 case NAME:
@@ -202,16 +203,16 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                             }
                             break;
                     }
-                    rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
+                    rectangle.setLocation(curColumn * cardDimension.width, curRow * cardVerticalOffset);
                     cardImg.setBounds(rectangle);
-                    cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+                    cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimension.width, cardDimension.height);
                     moveToFront(cardImg);
                     curRow++;
                     lastCard = cardImg;
                 } else {
-                    rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
+                    rectangle.setLocation(curColumn * cardDimension.width, curRow * cardVerticalOffset);
                     cardImg.setBounds(rectangle);
-                    cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+                    cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimension.width, cardDimension.height);
                     moveToFront(cardImg);
                     curColumn++;
                     if (curColumn == numColumns) {

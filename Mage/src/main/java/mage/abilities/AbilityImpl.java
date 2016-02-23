@@ -114,6 +114,7 @@ public abstract class AbilityImpl implements Ability {
     protected int sourceObjectZoneChangeCounter;
     protected List<Watcher> watchers = null;
     protected List<Ability> subAbilities = null;
+    protected boolean canFizzle = true;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -164,6 +165,7 @@ public abstract class AbilityImpl implements Ability {
         this.abilityWord = ability.abilityWord;
         this.sourceObject = ability.sourceObject;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
+        this.canFizzle = ability.canFizzle;
     }
 
     @Override
@@ -426,10 +428,10 @@ public abstract class AbilityImpl implements Ability {
                 if (cost instanceof TapSourceCost) {
                     Mana mana = null;
                     Effect effect = getEffects().get(0);
-                    if (effect instanceof BasicManaEffect) {
-                        mana = ((BasicManaEffect) effect).getMana(game, this);
-                    } else if (effect instanceof DynamicManaEffect) {
+                    if (effect instanceof DynamicManaEffect) {
                         mana = ((DynamicManaEffect) effect).getMana(game, this);
+                    } else if (effect instanceof BasicManaEffect) {
+                        mana = ((BasicManaEffect) effect).getMana(game, this);
                     }
                     if (mana != null && mana.getAny() == 0) { // if mana == null or Any > 0 the event has to be fired in the mana effect to know which mana was produced
                         ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId, mana);
@@ -1220,6 +1222,16 @@ public abstract class AbilityImpl implements Ability {
             this.sourceObject = sourceObject;
         }
         this.sourceObjectZoneChangeCounter = game.getState().getZoneChangeCounter(sourceId);
+    }
+
+    @Override
+    public boolean canFizzle() {
+        return canFizzle;
+    }
+
+    @Override
+    public void setCanFizzle(boolean canFizzle) {
+        this.canFizzle = canFizzle;
     }
 
 }

@@ -321,7 +321,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     public void testMageRingNetwork2() {
         // {T}: Add {C} to your mana pool.
         // {T}, {1} : Put a storage counter on Mage-Ring Network.
-        // {T}, Remove X storage counters from Mage-Ring Network: Add {X} to your mana pool.
+        // {T}, Remove any number of storage counters from Mage-Ring Network: Add {C} to your mana pool for each storage counter removed this way.
         addCard(Zone.BATTLEFIELD, playerA, "Mage-Ring Network", 1);
         addCounters(1, PhaseStep.UPKEEP, playerA, "Mage-Ring Network", CounterType.STORAGE, 4);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -332,9 +332,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
 
-        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
-        Assert.assertEquals("{C}{W}{B}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{4}{W}{B}", getManaOption(1, manaOptions));
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assert.assertEquals("{C}{C}{C}{C}{W}{B}", getManaOption(0, manaOptions));
     }
 
     @Test

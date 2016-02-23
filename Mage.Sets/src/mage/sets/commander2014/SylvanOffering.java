@@ -32,15 +32,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
-import mage.game.permanent.token.SpiritWhiteToken;
 import mage.game.permanent.token.ElfToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -57,7 +54,6 @@ public class SylvanOffering extends CardImpl {
     public SylvanOffering(UUID ownerId) {
         super(ownerId, 48, "Sylvan Offering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
         this.expansionSetCode = "C14";
-
 
         // Choose an opponent. You and that player each put an X/X green Treefolk creature token onto the battlefield.
         this.getSpellAbility().addEffect(new SylvanOfferingEffect1());
@@ -101,9 +97,10 @@ class SylvanOfferingEffect1 extends OneShotEffect {
             if (opponent != null) {
                 int xValue = source.getManaCostsToPay().getX();
                 Effect effect = new CreateTokenTargetEffect(new SylvanOfferingTreefolkToken(xValue));
+                effect.setTargetPointer(new FixedTarget(controller.getId()));
+                effect.apply(game, source);
                 effect.setTargetPointer(new FixedTarget(opponent.getId()));
                 effect.apply(game, source);
-                new CreateTokenTargetEffect(new SylvanOfferingTreefolkToken(xValue)).apply(game, source);
                 return true;
             }
         }
@@ -127,12 +124,12 @@ class SylvanOfferingTreefolkToken extends Token {
 
 class SylvanOfferingEffect2 extends OneShotEffect {
 
-   SylvanOfferingEffect2() {
+    SylvanOfferingEffect2() {
         super(Outcome.Sacrifice);
         this.staticText = "<br>Choose an opponent. You and that player each put X 1/1 green Elf Warrior creature tokens onto the battlefield";
     }
 
-   SylvanOfferingEffect2(final SylvanOfferingEffect2 effect) {
+    SylvanOfferingEffect2(final SylvanOfferingEffect2 effect) {
         super(effect);
     }
 
@@ -151,9 +148,10 @@ class SylvanOfferingEffect2 extends OneShotEffect {
             if (opponent != null) {
                 int xValue = source.getManaCostsToPay().getX();
                 Effect effect = new CreateTokenTargetEffect(new ElfToken(), xValue);
+                effect.setTargetPointer(new FixedTarget(controller.getId()));
+                effect.apply(game, source);
                 effect.setTargetPointer(new FixedTarget(opponent.getId()));
                 effect.apply(game, source);
-                new CreateTokenEffect(new ElfToken(), xValue).apply(game, source);
                 return true;
             }
         }

@@ -347,14 +347,17 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             if (black > 0) {
                 black--;
                 generic++;
+                continue;
             }
             if (colorless > 0) {
                 colorless--;
                 generic++;
+                continue;
             }
             if (any > 0) {
                 any--;
                 generic++;
+                continue;
             }
             if (oldColorless == generic) {
                 throw new ArithmeticException("Not enough mana to pay colorless");

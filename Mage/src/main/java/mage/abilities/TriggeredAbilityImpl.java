@@ -85,7 +85,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         if (isOptional()) {
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
-            if (player != null) {
+            if (player != null && object != null) {
                 if (!player.chooseUse(getEffects().get(0).getOutcome(), (object != null ? this.getRule(object.getLogName()) : this.getRule()), this, game)) {
                     return false;
                 }
@@ -129,22 +129,18 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         newRule.insert(4, "may ");
                         superRule = newRule.toString();
                     }
-                } else {
-                    if (this.getTargets().isEmpty()
-                            || ruleLow.startsWith("exile")
-                            || ruleLow.startsWith("destroy")
-                            || ruleLow.startsWith("return")
-                            || ruleLow.startsWith("tap")
-                            || ruleLow.startsWith("untap")
-                            || ruleLow.startsWith("put")
-                            || ruleLow.startsWith("remove")
-                            || ruleLow.startsWith("counter")) {
-                        sb.append("you may ");
-                    } else {
-                        if (!ruleLow.startsWith("its controller may")) {
-                            sb.append("you may have ");
-                        }
-                    }
+                } else if (this.getTargets().isEmpty()
+                        || ruleLow.startsWith("exile")
+                        || ruleLow.startsWith("destroy")
+                        || ruleLow.startsWith("return")
+                        || ruleLow.startsWith("tap")
+                        || ruleLow.startsWith("untap")
+                        || ruleLow.startsWith("put")
+                        || ruleLow.startsWith("remove")
+                        || ruleLow.startsWith("counter")) {
+                    sb.append("you may ");
+                } else if (!ruleLow.startsWith("its controller may")) {
+                    sb.append("you may have ");
                 }
 
             }
@@ -191,12 +187,10 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     if (isLeavesTheBattlefieldTrigger()) {
                         if (event.getType().equals(EventType.DESTROYED_PERMANENT)) {
                             source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
+                        } else if (((ZoneChangeEvent) event).getTarget() != null) {
+                            source = ((ZoneChangeEvent) event).getTarget();
                         } else {
-                            if (((ZoneChangeEvent) event).getTarget() != null) {
-                                source = ((ZoneChangeEvent) event).getTarget();
-                            } else {
-                                source = game.getLastKnownInformation(getSourceId(), ((ZoneChangeEvent) event).getZone());
-                            }
+                            source = game.getLastKnownInformation(getSourceId(), ((ZoneChangeEvent) event).getZone());
                         }
                     }
 

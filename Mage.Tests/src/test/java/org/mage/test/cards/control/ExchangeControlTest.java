@@ -35,7 +35,8 @@ public class ExchangeControlTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests switching control for two creature on one side (both creatures are under the same player's control)
+     * Tests switching control for two creature on one side (both creatures are
+     * under the same player's control)
      *
      * Also tests "7/1/2012: You don't have to control either target."
      */
@@ -61,8 +62,8 @@ public class ExchangeControlTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests:
-     *  7/1/2012: If one of the target creatures is an illegal target when Switcheroo resolves, the exchange won't happen.
+     * Tests: 7/1/2012: If one of the target creatures is an illegal target when
+     * Switcheroo resolves, the exchange won't happen.
      *
      * Targets opponent's creature
      */
@@ -90,10 +91,10 @@ public class ExchangeControlTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests:
-     *  7/1/2012: If one of the target creatures is an illegal target when Switcheroo resolves, the exchange won't happen.
+     * Tests: 7/1/2012: If one of the target creatures is an illegal target when
+     * Switcheroo resolves, the exchange won't happen.
      *
-     *  Targets its own creature.
+     * Targets its own creature.
      */
     @Test
     public void testOneTargetBecomesIllegal2() {
@@ -119,8 +120,8 @@ public class ExchangeControlTest extends CardTestPlayerBase {
     }
 
     /**
-     * First gain control by Act of Treason.
-     * Then exchange control with other opponent's creature.
+     * First gain control by Act of Treason. Then exchange control with other
+     * opponent's creature.
      *
      * Finally second creature should stay under ours control permanently.
      */
@@ -183,9 +184,10 @@ public class ExchangeControlTest extends CardTestPlayerBase {
     }
 
     /**
-     * An control exchanged creature gets an copy effect from
-     * an creature with an activated ability to the by exchange controlled creature.
-     * Check that the activated ability is controlled by the new controller of the copy target.
+     * An control exchanged creature gets an copy effect from an creature with
+     * an activated ability to the by exchange controlled creature. Check that
+     * the activated ability is controlled by the new controller of the copy
+     * target.
      */
     @Test
     public void testExchangeAnCopyEffect() {
@@ -208,7 +210,7 @@ public class ExchangeControlTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gilded Drake");
         addTarget(playerA, "Silvercoat Lion");
         // Let your Silvercoat Lion now be a copy of the Manta Riders
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Polymorphous Rush","Silvercoat Lion");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Polymorphous Rush", "Silvercoat Lion");
         addTarget(playerA, "Manta Riders");
 
         // now use the activated ability to make the "Silvercoat Lions" (that became Mana Riders) flying
@@ -229,10 +231,43 @@ public class ExchangeControlTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Manta Riders", 1);
         assertPermanentCount(playerA, "Manta Riders", 1);
-       
+
         Permanent controlledMantas = getPermanent("Manta Riders", playerA.getId());
         Assert.assertTrue("Manta Riders should have flying ability", controlledMantas.getAbilities().contains(FlyingAbility.getInstance()));
 
     }
 
+    /**
+     * Gilded Drake doesn't get sacrificed if the creature its ability targets
+     * is invalid when it enters the battlefield
+     */
+    @Test
+    public void testDrakeSacrificedIfNoExchangeHappens() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        // Gilded Drake {1}{U} Creature - Drake
+        // Flying
+        // When Gilded Drake enters the battlefield, exchange control of Gilded Drake and up to one target
+        // creature an opponent controls. If you don't make an exchange, sacrifice Gilded Drake. This ability
+        // can't be countered except by spells and abilities. (This effect lasts indefinitely.)
+        addCard(Zone.HAND, playerA, "Gilded Drake");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        // exchange control between Gilded Drake and Silvercoat Lion
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gilded Drake");
+        addTarget(playerA, "Silvercoat Lion");
+
+        // Destroy Silvercoat Lion before the exchange resolves so the Drake has to be sacrificed
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion", "When");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Gilded Drake", 1);
+
+    }
 }
