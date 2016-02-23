@@ -40,6 +40,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.prefs.Preferences;
 import mage.client.MageFrame;
+import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import org.jsoup.Jsoup;
@@ -56,6 +57,7 @@ public class WizardCardsImageSource implements CardImageSource {
 
     private static CardImageSource instance;
     private static Map<String, String> setsAliases;
+    private static Map<String, String> languageAliases;
     private final Map<String, Map<String, String>> sets;
 
     public static CardImageSource getInstance() {
@@ -236,42 +238,30 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("WTH", "Weatherlight");
         setsAliases.put("WWK", "Worldwake");
         setsAliases.put("ZEN", "Zendikar");
+        
+        languageAliases = new HashMap<>();
+        languageAliases.put("es", "Spanish");
+        languageAliases.put("jp", "Japanese");
+        languageAliases.put("it", "Italian");
+        languageAliases.put("fr", "French");
+        languageAliases.put("cn", "Chinese Simplified");
+        languageAliases.put("de", "German");
+
     }
 
     private Map<String, String> getSetLinks(String cardSet) {
         Map<String, String> setLinks = new HashMap<>();
         try {
             String setNames = setsAliases.get(cardSet);
-            Preferences prefs = MageFrame.getPreferences();
-            Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
+            String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
             for (String setName : setNames.split("\\^")) {
                 String URLSetName = URLEncoder.encode(setName, "UTF-8");
-                String urlDocument;
                 int page = 0;
                 int firstMultiverseIdLastPage = 0;
                 Pages:
                 while (page < 999) {
-                    Document doc;
-                    if (proxyType.equals(ProxyType.NONE)) {
-                        urlDocument = "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=" + page +"&output=spoiler&method=visual&action=advanced&set=+[%22" + URLSetName + "%22]";
-                        doc = Jsoup.connect(urlDocument).get();
-                    } else {
-                        String proxyServer = prefs.get("proxyAddress", "");
-                        int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
-                        URL url = new URL("http://gatherer.wizards.com/Pages/Search/Default.aspx?page=" + page +"&output=spoiler&method=visual&action=advanced&set=+[%22" + URLSetName + "%22]");
-                        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort)); 
-                        HttpURLConnection uc = (HttpURLConnection)url.openConnection(proxy);
-
-                        uc.connect();
-
-                        String line;
-                        StringBuffer tmp = new StringBuffer();
-                        BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-                        while ((line = in.readLine()) != null) {
-                          tmp.append(line);
-                        }
-                        doc = Jsoup.parse(String.valueOf(tmp));
-                    }
+                    String searchUrl = "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=" + page +"&output=spoiler&method=visual&action=advanced&set=+[%22" + URLSetName + "%22]";
+                    Document doc = getDocument(searchUrl);
                     
                     Elements cardsImages = doc.select("img[src^=../../Handlers/]");
                     if (cardsImages.isEmpty()) {
@@ -279,8 +269,8 @@ public class WizardCardsImageSource implements CardImageSource {
                     }
                         
                     for (int i = 0; i < cardsImages.size(); i++) {
+                        Integer multiverseId = Integer.parseInt(cardsImages.get(i).attr("src").replaceAll("[^\\d]", ""));
                         if (i == 0) {
-                            Integer multiverseId = Integer.parseInt(cardsImages.get(i).attr("src").replaceAll("[^\\d]", ""));
                             if (multiverseId == firstMultiverseIdLastPage) {
                                 break Pages;
                             }
@@ -289,23 +279,10 @@ public class WizardCardsImageSource implements CardImageSource {
                         String cardName = normalizeName(cardsImages.get(i).attr("alt"));
                         if (cardName != null && !cardName.isEmpty()) {
                             if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
-                            	Integer multiverseId = Integer.parseInt(cardsImages.get(i).attr("src").replaceAll("[^\\d]", ""));
-                            	String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
-                            	Document landDoc = Jsoup.connect(urlLandDocument).get();
-                            	Elements variations = landDoc.select("a.variationlink");
-                            	if(!variations.isEmpty()) {
-                            		int landNumber = 1;
-                            		for (Element variation : variations) {
-                            			Integer landMultiverseId = Integer.parseInt(variation.attr("onclick").replaceAll("[^\\d]", ""));
-                            			// ""
-                            			setLinks.put((cardName + landNumber).toLowerCase(), "/Handlers/Image.ashx?multiverseid=" +landMultiverseId + "&type=card");
-                            			landNumber++;
-                            		}
-                            	} else {
-                            		setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src").substring(5));
-                            	}
+                                setLinks.putAll(getLandVariations(multiverseId, cardName));
                             } else {
-                                setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src").substring(5));
+                                Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
+                                setLinks.put(cardName.toLowerCase(), generateLink(preferedMultiverseId));
                             }
                         }
                     }
@@ -316,6 +293,85 @@ public class WizardCardsImageSource implements CardImageSource {
             System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
         }
         return setLinks;
+    }
+
+    private Document getDocument(String urlString) throws NumberFormatException, IOException {
+        Preferences prefs = MageFrame.getPreferences();
+        Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
+        Document doc;
+        if (proxyType.equals(ProxyType.NONE)) {
+            doc = Jsoup.connect(urlString).get();
+        } else {
+            String proxyServer = prefs.get("proxyAddress", "");
+            int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
+            URL url = new URL(urlString);
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
+            HttpURLConnection uc = (HttpURLConnection)url.openConnection(proxy);
+            
+            uc.connect();
+            
+            String line;
+            StringBuffer tmp = new StringBuffer();
+            BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+            while ((line = in.readLine()) != null) {
+                tmp.append(line);
+            }
+            doc = Jsoup.parse(String.valueOf(tmp));
+        }
+        return doc;
+    }
+    
+    private Map<String, String> getLandVariations(Integer multiverseId, String cardName) throws IOException, NumberFormatException {
+        String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
+        Document landDoc = getDocument(urlLandDocument);
+        Elements variations = landDoc.select("a.variationlink");
+        Map<String, String> links = new HashMap<>();
+        if(!variations.isEmpty()) {
+            int landNumber = 1;
+            for (Element variation : variations) {
+                Integer landMultiverseId = Integer.parseInt(variation.attr("onclick").replaceAll("[^\\d]", ""));
+                links.put((cardName + landNumber).toLowerCase(), generateLink(landMultiverseId));
+                landNumber++;
+            }
+        } else {
+            links.put(cardName.toLowerCase(), generateLink(multiverseId));
+        }
+        
+        return links;
+    }
+
+    private static String generateLink(Integer landMultiverseId) {
+        return "/Handlers/Image.ashx?multiverseid=" +landMultiverseId + "&type=card";
+    }
+
+    private Integer getLocalizedMultiverseId(String preferedLanguage, Integer multiverseId) throws IOException {
+        if (preferedLanguage.equals("en")) {
+            return multiverseId;
+        }
+        
+        String languageName = languageAliases.get(preferedLanguage);
+        HashMap<String, Integer> localizedLanguageIds = getlocalizedMultiverseIds(multiverseId);
+        if (localizedLanguageIds.containsKey(languageName)) {
+            return localizedLanguageIds.get(languageName);
+        } else {
+            return multiverseId;
+        }
+    }
+    
+    private HashMap<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) throws IOException {
+        String cardLanguagesUrl = "http://gatherer.wizards.com/Pages/Card/Languages.aspx?multiverseid=" + englishMultiverseId;
+        Document cardLanguagesDoc = getDocument(cardLanguagesUrl);
+        Elements languageTableRows = cardLanguagesDoc.select("tr.cardItem");
+        HashMap<String, Integer> localizedIds = new HashMap<>();
+        if(!languageTableRows.isEmpty()) {
+            for (Element languageTableRow : languageTableRows) {
+                Elements languageTableColumns = languageTableRow.select("td");
+                Integer localizedId = Integer.parseInt(languageTableColumns.get(0).select("a").first().attr("href").replaceAll("[^\\d]", ""));
+                String languageName = languageTableColumns.get(1).text().trim();
+                localizedIds.put(languageName, localizedId);
+            }
+        }
+        return localizedIds;
     }
 
     private String normalizeName(String name) {
