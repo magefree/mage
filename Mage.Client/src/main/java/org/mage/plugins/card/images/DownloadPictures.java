@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.imageio.IIOImage;
@@ -572,7 +573,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 // Logger.getLogger(this.getClass()).info(url.toString());
                 URLConnection httpConn = url.openConnection(p);
                 // images download from magiccards.info may not work with default 'User-Agent: Java/1.x.x' request header
-                httpConn.setRequestProperty("User-Agent", "");
+                httpConn.setRequestProperty("User-Agent", UUID.randomUUID().toString());
                 httpConn.connect();
                 int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
                 if (responseCode == 200) {
