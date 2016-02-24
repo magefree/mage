@@ -54,9 +54,10 @@ public class JohtullWurm extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever Johtull Wurm becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
-        DynamicValue toughnessValue = new MultipliedValue(new BlockedCreatureCount(),2);
-        int value = Math.negateExact(Integer.parseInt(toughnessValue.toString()) - 1);
-
+        DynamicValue blockedCreatureCount = new BlockedCreatureCount();
+        int value = Math.negateExact(Integer.parseInt(blockedCreatureCount.toString()) - 1);
+        int powerValue = value * 2;
+        
         Effect effect = new BoostSourceEffect(powerValue, value, Duration.EndOfTurn);
         effect.setText("it gets -2/-1 until end of turn for each creature blocking it beyond the first");
         this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
