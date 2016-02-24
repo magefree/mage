@@ -29,9 +29,11 @@ package mage.sets.guildpact;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -79,7 +81,10 @@ public class BeastmastersMagemark extends CardImpl {
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.WhileOnBattlefield, filter, false));        
         this.addAbility(ability);
         // Whenever a creature you control that's enchanted becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
-        this.addAbility(new BeastmastersMagemarkAbility());
+        BlockedCreatureCount value = new BlockedCreatureCount();
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
+        effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
+        this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false,filter,false));
     }
 
     public BeastmastersMagemark(final BeastmastersMagemark card) {

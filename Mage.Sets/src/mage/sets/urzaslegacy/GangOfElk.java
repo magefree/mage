@@ -32,6 +32,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -57,7 +59,10 @@ public class GangOfElk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Gang of Elk becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
-        this.addAbility(new GangOfElkAbility());
+        DynamicValue value = new MultipliedValue(new BlockedCreatureCount(),2);
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
+        effect.setText("it gets +2/+2 until end of turn for each creature blocking it");
+        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
     }
 
     public GangOfElk(final GangOfElk card) {
@@ -67,52 +72,5 @@ public class GangOfElk extends CardImpl {
     @Override
     public GangOfElk copy() {
         return new GangOfElk(this);
-    }
-}
-
-class GangOfElkAbility extends BecomesBlockedTriggeredAbility {
-
-    public GangOfElkAbility() {
-        super(null, false);
-        GangOfElkValue value = new GangOfElkValue();
-        this.addEffect(new BoostSourceEffect(value, value, Duration.EndOfTurn));
-    }
-
-    public GangOfElkAbility(final GangOfElkAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GangOfElkAbility copy() {
-        return new GangOfElkAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.";
-    }
-}
-
-class GangOfElkValue implements DynamicValue {
-
-    @Override
-    public GangOfElkValue copy() {
-        return new GangOfElkValue();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for(CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
-                 int blockers = combatGroup.getBlockers().size();
-                 return blockers > 1 ? (blockers) * 2 : 0;
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public String getMessage() {
-        return "+2/+2 until end of turn for each creature blocking it";
     }
 }

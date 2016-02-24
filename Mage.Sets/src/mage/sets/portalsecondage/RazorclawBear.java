@@ -52,7 +52,7 @@ public class RazorclawBear extends CardImpl {
 
         // Whenever Razorclaw Bear becomes blocked, it gets +2/+2 until end of turn.
         Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("it gets +2/+2 until end of turn for each creature blocking it");
+        effect.setText("it gets +2/+2 until end of turn");
         this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
     }
 

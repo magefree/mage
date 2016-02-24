@@ -25,50 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 
 /**
  *
- * @author ilcartographer
+ * @author Markedagain
  */
-public class ElvishBerserker extends CardImpl {
+public class BlockedCreatureCount implements DynamicValue {
+    private String message;
 
-    public ElvishBerserker(UUID ownerId) {
-        super(ownerId, 237, "Elvish Berserker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "9ED";
-        this.subtype.add("Elf");
-        this.subtype.add("Berserker");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever Elvish Berserker becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
-        BlockedCreatureCount value = new BlockedCreatureCount();
-        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
-        effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+    public BlockedCreatureCount() {
+        this("each creature blocking it");
     }
 
-    public ElvishBerserker(final ElvishBerserker card) {
-        super(card);
+    public BlockedCreatureCount(String message) {
+        this.message = message;
+    }
+
+    public BlockedCreatureCount(final BlockedCreatureCount dynamicValue) {
+        super();
+        this.message = dynamicValue.message;
     }
 
     @Override
-    public ElvishBerserker copy() {
-        return new ElvishBerserker(this);
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+       for(CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
+                 int blockers = combatGroup.getBlockers().size();
+                 return blockers > 1 ? (blockers) : 0;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public BlockedCreatureCount copy() {
+        return new BlockedCreatureCount(this);
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
     }
 }
