@@ -57,7 +57,6 @@ public class TemporalIsolation extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Aura");
 
-
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Enchant creature
@@ -65,11 +64,11 @@ public class TemporalIsolation extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);          
+        this.addAbility(ability);
         // Enchanted creature has shadow.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShadowAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
         // Prevent all damage that would be dealt by enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));
     }
 
     public TemporalIsolation(final TemporalIsolation card) {
