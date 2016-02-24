@@ -30,9 +30,7 @@ package mage.sets.guildpact;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -49,8 +47,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
-import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -94,52 +90,5 @@ public class BeastmastersMagemark extends CardImpl {
     @Override
     public BeastmastersMagemark copy() {
         return new BeastmastersMagemark(this);
-    }
-}
-
-class BeastmastersMagemarkAbility extends BecomesBlockedTriggeredAbility {
-
-    public BeastmastersMagemarkAbility() {
-        super(null, false);
-        BeastmastersMagemarkValue value = new BeastmastersMagemarkValue();
-        this.addEffect(new BoostSourceEffect(value, value, Duration.EndOfTurn));
-    }
-
-    public BeastmastersMagemarkAbility(final BeastmastersMagemarkAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BeastmastersMagemarkAbility copy() {
-        return new BeastmastersMagemarkAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.";
-    }
-}
-
-class BeastmastersMagemarkValue implements DynamicValue {
-
-    @Override
-    public BeastmastersMagemarkValue copy() {
-        return new BeastmastersMagemarkValue();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for(CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
-                 int blockers = combatGroup.getBlockers().size();
-                 return blockers > 1 ? (blockers) : 0;
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public String getMessage() {
-        return "+1/+1 until end of turn for each creature blocking it";
     }
 }
