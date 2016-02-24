@@ -60,7 +60,7 @@ public class Stonecloaker extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Stonecloaker enters the battlefield, return a creature you control to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent()), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent()), false);
 
         this.addAbility(ability);
         // When Stonecloaker enters the battlefield, exile target card from a graveyard.
