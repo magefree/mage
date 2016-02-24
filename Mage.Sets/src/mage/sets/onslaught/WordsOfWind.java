@@ -92,7 +92,7 @@ class WordsOfWindEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {        
         game.informPlayers("Each player returns a permanent he or she controls to its owner's hand instead");
-        for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 TargetControlledPermanent target = new TargetControlledPermanent();

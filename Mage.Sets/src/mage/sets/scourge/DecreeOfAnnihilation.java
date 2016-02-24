@@ -108,7 +108,7 @@ class DecreeOfAnnihilationEffect extends OneShotEffect {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             permanent.moveToExile(id, "all artifacts, creatures, and land", id, game);
         }
-        for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 for (UUID cid : player.getHand().copy()) {

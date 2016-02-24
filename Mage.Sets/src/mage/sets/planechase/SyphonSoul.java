@@ -74,7 +74,7 @@ class SyphonSoulEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int damageDealt = 0;
-        for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             if (!playerId.equals(source.getControllerId())) {
                 damageDealt += game.getPlayer(playerId).damage(2, source.getSourceId(), game, false, true);
             }

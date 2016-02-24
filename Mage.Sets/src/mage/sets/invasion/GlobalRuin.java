@@ -44,7 +44,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetLandPermanent;
 
 /**
  *
@@ -90,7 +89,7 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Set<UUID> lands = new HashSet<>();
         
-        for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
                 for (String landName : new String[]{"Forest", "Island", "Mountain", "Plains", "Swamp"}) {
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent(landName + " you control");

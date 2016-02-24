@@ -90,7 +90,7 @@ class PestilenceDemonEffect extends OneShotEffect {
                 p.damage(1, source.getSourceId(), game, false, true);
             }
         }
-        for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player p = game.getPlayer(playerId);
             if (p != null) {
                 p.damage(1, source.getSourceId(), game, false, true);
