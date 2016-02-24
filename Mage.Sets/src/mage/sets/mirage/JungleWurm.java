@@ -30,6 +30,8 @@ package mage.sets.mirage;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -52,9 +54,8 @@ public class JungleWurm extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Jungle Wurm becomes blocked, it gets -1/-1 until end of turn for each creature blocking it beyond the first.
-        BlockedCreatureCount blockedCreatureCount = new BlockedCreatureCount();
-        int value = Math.negateExact(Integer.parseInt(blockedCreatureCount.toString()) - 1);
-        
+        BlockedCreatureCount blockedCreatureCount = new BlockedCreatureCount("each creature blocking it beyond the first", true);
+        DynamicValue value = new MultipliedValue(blockedCreatureCount, -1);
         Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
         effect.setText("it gets -1/-1 until end of turn for each creature blocking it beyond the first");
         this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));

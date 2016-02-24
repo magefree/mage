@@ -29,7 +29,6 @@ package mage.sets.urzaslegacy;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -40,8 +39,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.combat.CombatGroup;
 
 /**
  *
@@ -59,7 +56,7 @@ public class GangOfElk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Gang of Elk becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
-        DynamicValue value = new MultipliedValue(new BlockedCreatureCount(),2);
+        DynamicValue value = new MultipliedValue(new BlockedCreatureCount(), 2);
         Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
         effect.setText("it gets +2/+2 until end of turn for each creature blocking it");
         this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
