@@ -86,7 +86,7 @@ class CataclysmEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Card> chosen = new ArrayList<>();
 
-        for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
 
             Target target1 = new TargetControlledPermanent(1, 1, new FilterControlledArtifactPermanent(), true);

@@ -25,50 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
-import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.game.Game;
+import mage.game.combat.CombatGroup;
 
 /**
  *
- * @author fireshoes
+ * @author Markedagain
  */
-public class JohtullWurm extends CardImpl {
+public class BlockedCreatureCount implements DynamicValue {
+    private String message;
 
-    public JohtullWurm(UUID ownerId) {
-        super(ownerId, 138, "Johtull Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "ICE";
-        this.subtype.add("Wurm");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-
-        // Whenever Johtull Wurm becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
-        DynamicValue blockedCreatureCount = new BlockedCreatureCount();
-        int value = Math.negateExact(Integer.parseInt(blockedCreatureCount.toString()) - 1);
-        int powerValue = value * 2;
-        
-        Effect effect = new BoostSourceEffect(powerValue, value, Duration.EndOfTurn);
-        effect.setText("it gets -2/-1 until end of turn for each creature blocking it beyond the first");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+    public BlockedCreatureCount() {
+        this("each creature blocking it");
     }
 
-    public JohtullWurm(final JohtullWurm card) {
-        super(card);
+    public BlockedCreatureCount(String message) {
+        this.message = message;
+    }
+
+    public BlockedCreatureCount(final BlockedCreatureCount dynamicValue) {
+        super();
+        this.message = dynamicValue.message;
     }
 
     @Override
-    public JohtullWurm copy() {
-        return new JohtullWurm(this);
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+       for(CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
+                 int blockers = combatGroup.getBlockers().size();
+                 return blockers > 1 ? (blockers) : 0;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public BlockedCreatureCount copy() {
+        return new BlockedCreatureCount(this);
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
     }
 }

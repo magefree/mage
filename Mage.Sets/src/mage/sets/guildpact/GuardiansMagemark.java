@@ -25,52 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legions;
+package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.EnchantedPredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Markedagain
  */
-public class BerserkMurlodont extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Beast");
+public class GuardiansMagemark extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control that are enchanted");
     static {
-        filter.add(new SubtypePredicate("Beast"));
+        filter.add(new EnchantedPredicate());
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
     
-    public BerserkMurlodont(UUID ownerId) {
-        super(ownerId, 117, "Berserk Murlodont", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "LGN";
-        this.subtype.add("Beast");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+    public GuardiansMagemark(UUID ownerId) {
+        super(ownerId, 8, "Guardian's Magemark", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        this.expansionSetCode = "GPT";
+        this.subtype.add("Aura");
 
-        // Whenever a Beast becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
-        BlockedCreatureCount value = new BlockedCreatureCount();
-        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
-        effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
-        this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false,filter,false));
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+        // Enchant creature
+         TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // Creatures you control that are enchanted get +1/+1.
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.WhileOnBattlefield, filter, false));
+        this.addAbility(ability);
     }
 
-    public BerserkMurlodont(final BerserkMurlodont card) {
+    public GuardiansMagemark(final GuardiansMagemark card) {
         super(card);
     }
 
     @Override
-    public BerserkMurlodont copy() {
-        return new BerserkMurlodont(this);
+    public GuardiansMagemark copy() {
+        return new GuardiansMagemark(this);
     }
 }

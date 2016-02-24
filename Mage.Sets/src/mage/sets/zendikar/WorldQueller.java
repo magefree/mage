@@ -45,7 +45,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -115,12 +114,12 @@ class WorldQuellerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Card> chosen = new ArrayList<>();
-        Player you = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getControllerId());
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
-        if (you != null && sourceCreature != null) {
+        if (player != null && sourceCreature != null) {
             Choice choiceImpl = new ChoiceImpl();
             choiceImpl.setChoices(choice);
-            while (you.canRespond() && !you.choose(Outcome.Neutral, choiceImpl, game)) {}
+            while (player.canRespond() && !player.choose(Outcome.Neutral, choiceImpl, game)) {}
             CardType type = null;
             String choosenType = choiceImpl.getChoice();
 
@@ -148,26 +147,11 @@ class WorldQuellerEffect extends OneShotEffect {
                 TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
                 target.setNotTarget(true);
 
-                // you always go first
-                if (target.canChoose(you.getId(), game)) {
-                    while (you.canRespond() && !target.isChosen() && target.canChoose(you.getId(), game)) {
-                        you.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                    }
-                    Permanent permanent = game.getPermanent(target.getFirstTarget());
-                    if (permanent != null) {
-                        chosen.add(permanent);
-                    }
-                }
-
-                target.clearChosen();
-
-                // opponents follow
-                for (UUID playerId : game.getPlayerList()) {
-                    if (playerId != you.getId()) {
-                        Player player = game.getPlayer(playerId);
+                for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                        Player player2 = game.getPlayer(playerId);
                         if (target.canChoose(playerId, game)) {
-                            while (!target.isChosen() && target.canChoose(playerId, game)) {
-                                player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                            while (player2.canRespond() && !target.isChosen() && target.canChoose(playerId, game)) {
+                                player2.chooseTarget(Outcome.Sacrifice, target, source, game);
                             }
                             Permanent permanent = game.getPermanent(target.getFirstTarget());
                             if (permanent != null) {
@@ -175,7 +159,6 @@ class WorldQuellerEffect extends OneShotEffect {
                             }
                             target.clearChosen();
                         }
-                    }
                 }
 
                 // all chosen permanents are sacrificed together

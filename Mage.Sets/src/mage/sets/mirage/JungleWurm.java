@@ -29,18 +29,14 @@ package mage.sets.mirage;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.combat.CombatGroup;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -56,7 +52,12 @@ public class JungleWurm extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Jungle Wurm becomes blocked, it gets -1/-1 until end of turn for each creature blocking it beyond the first.
-        this.addAbility(new JungleWurmAbility());
+        BlockedCreatureCount blockedCreatureCount = new BlockedCreatureCount();
+        int value = Math.negateExact(Integer.parseInt(blockedCreatureCount.toString()) - 1);
+        
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
+        effect.setText("it gets -1/-1 until end of turn for each creature blocking it beyond the first");
+        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
     }
 
     public JungleWurm(final JungleWurm card) {
@@ -68,52 +69,3 @@ public class JungleWurm extends CardImpl {
         return new JungleWurm(this);
     }
 }
-
-class JungleWurmAbility extends BecomesBlockedTriggeredAbility {
-
-    public JungleWurmAbility() {
-        super(null, false);
-        JungleWurmValue value = new JungleWurmValue();
-        this.addEffect(new BoostSourceEffect(value, value, Duration.EndOfTurn));
-    }
-
-    public JungleWurmAbility(final JungleWurmAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public JungleWurmAbility copy() {
-        return new JungleWurmAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes blocked, it gets -1/-1 until end of turn for each creature blocking it beyond the first.";
-    }
-}
-
-class JungleWurmValue implements DynamicValue {
-
-    @Override
-    public JungleWurmValue copy() {
-        return new JungleWurmValue();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int count = 0;
-        for(CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
-                 int blockers = combatGroup.getBlockers().size();
-                 return blockers > 1 ? -(blockers - 1) : 0;
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public String getMessage() {
-        return "-1/-1 until end of turn for each creature blocking it beyond the first";
-    }
-}
-

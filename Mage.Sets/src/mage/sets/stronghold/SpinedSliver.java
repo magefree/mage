@@ -32,6 +32,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
@@ -54,7 +56,6 @@ public class SpinedSliver extends CardImpl {
         filter.add(new SubtypePredicate("Sliver"));
     }
 
-
     public SpinedSliver(UUID ownerId) {
         super(ownerId, 142, "Spined Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");
         this.expansionSetCode = "STH";
@@ -64,7 +65,10 @@ public class SpinedSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a Sliver becomes blocked, that Sliver gets +1/+1 until end of turn for each creature blocking it.
-        Ability ability = new BecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false);
+        BlockedCreatureCount value = new BlockedCreatureCount();
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
+        effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
+        Ability ability = new BecomesBlockedByCreatureTriggeredAbility(effect, false);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
                         Duration.WhileOnBattlefield, filter,
