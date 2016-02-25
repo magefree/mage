@@ -1091,10 +1091,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (!oneCanBeAttacked) {
                 return false;
             }
-        } else {
-            if (!canAttackCheckRestrictionEffects(defenderId, game)) {
-                return false;
-            }
+        } else if (!canAttackCheckRestrictionEffects(defenderId, game)) {
+            return false;
         }
 
         return !abilities.containsKey(DefenderAbility.getInstance().getId())
@@ -1223,6 +1221,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean removeFromCombat(Game game, boolean withInfo) {
         if (this.isAttacking() || this.blocking > 0) {
             return game.getCombat().removeFromCombat(objectId, game, withInfo);
+        } else if (getCardType().contains(CardType.PLANESWALKER)) {
+            if (game.getCombat().getDefenders().contains(getId())) {
+                game.getCombat().removePlaneswalkerFromCombat(objectId, game, withInfo);
+            }
         }
         return false;
     }

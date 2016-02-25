@@ -1110,6 +1110,17 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
+    public boolean removePlaneswalkerFromCombat(UUID planeswalkerId, Game game, boolean withInfo) {
+        boolean result = false;
+        for (CombatGroup group : groups) {
+            if (group.getDefenderId().equals(planeswalkerId)) {
+                group.removeAttackedPlaneswalker(planeswalkerId);
+                result = true;
+            }
+        }
+        return result;
+    }
+
     public boolean removeFromCombat(UUID creatureId, Game game, boolean withInfo) {
         boolean result = false;
         Permanent creature = game.getPermanent(creatureId);

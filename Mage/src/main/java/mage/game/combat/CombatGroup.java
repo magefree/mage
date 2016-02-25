@@ -503,19 +503,25 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         return defenderIsPlaneswalker;
     }
 
+    public boolean removeAttackedPlaneswalker(UUID planeswalkerId) {
+        if (defenderIsPlaneswalker && defenderId.equals(planeswalkerId)) {
+            defenderId = null;
+            return true;
+        }
+        return false;
+    }
+
     public boolean remove(UUID creatureId) {
         boolean result = false;
         if (attackers.contains(creatureId)) {
             attackers.remove(creatureId);
             result = true;
-        } else {
-            if (blockers.contains(creatureId)) {
-                blockers.remove(creatureId);
-                result = true;
-                //20100423 - 509.2a
-                if (blockerOrder.contains(creatureId)) {
-                    blockerOrder.remove(creatureId);
-                }
+        } else if (blockers.contains(creatureId)) {
+            blockers.remove(creatureId);
+            result = true;
+            //20100423 - 509.2a
+            if (blockerOrder.contains(creatureId)) {
+                blockerOrder.remove(creatureId);
             }
         }
         return result;
