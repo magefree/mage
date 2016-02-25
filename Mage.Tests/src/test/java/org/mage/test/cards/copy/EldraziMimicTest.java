@@ -45,11 +45,11 @@ public class EldraziMimicTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyIfPermanentIsGone() {
-        // Devoid
-        // When Drowner of Hope enters the battlefield, put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool."
-        // Sacrifice an Eldrazi Scion: Tap target creature.
-        addCard(Zone.HAND, playerA, "Drowner of Hope", 1); // {5}{U} 5/5
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        // Devoid (This card has no color.)
+        // Flying
+        // Whenever you cast a colorless spell, target opponent exiles the top card of his or her library.
+        addCard(Zone.HAND, playerA, "Thought Harvester", 1); // {3}{U} 2/4
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         // Whenever another colorless creature enters the battlefield under your control, you may have the base power and toughness of Eldrazi Mimic
         // become that creature's power and toughness until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Eldrazi Mimic", 1); // 2/1
@@ -58,17 +58,17 @@ public class EldraziMimicTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Terror", 1); // {1}{B}
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drowner of Hope");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Terror", "Drowner of Hope");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thought Harvester");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Terror", "Thought Harvester");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerB, "Terror", 1);
-        assertGraveyardCount(playerA, "Drowner of Hope", 1);
+        assertGraveyardCount(playerA, "Thought Harvester", 1);
 
         assertPermanentCount(playerA, "Eldrazi Mimic", 1);
-        assertPowerToughness(playerA, "Eldrazi Mimic", 5, 5);
+        assertPowerToughness(playerA, "Eldrazi Mimic", 2, 4);
 
     }
 
