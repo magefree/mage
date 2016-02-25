@@ -38,6 +38,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.prefs.Preferences;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
@@ -246,11 +249,11 @@ public class WizardCardsImageSource implements CardImageSource {
         languageAliases.put("fr", "French");
         languageAliases.put("cn", "Chinese Simplified");
         languageAliases.put("de", "German");
-
     }
 
     private Map<String, String> getSetLinks(String cardSet) {
-        Map<String, String> setLinks = new HashMap<>();
+        ConcurrentHashMap<String, String> setLinks = new ConcurrentHashMap<>();
+        ExecutorService executor = Executors.newFixedThreadPool(10);
         try {
             String setNames = setsAliases.get(cardSet);
             String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
@@ -262,12 +265,10 @@ public class WizardCardsImageSource implements CardImageSource {
                 while (page < 999) {
                     String searchUrl = "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=" + page +"&output=spoiler&method=visual&action=advanced&set=+[%22" + URLSetName + "%22]";
                     Document doc = getDocument(searchUrl);
-                    
                     Elements cardsImages = doc.select("img[src^=../../Handlers/]");
                     if (cardsImages.isEmpty()) {
                         break;
                     }
-                        
                     for (int i = 0; i < cardsImages.size(); i++) {
                         Integer multiverseId = Integer.parseInt(cardsImages.get(i).attr("src").replaceAll("[^\\d]", ""));
                         if (i == 0) {
@@ -278,12 +279,8 @@ public class WizardCardsImageSource implements CardImageSource {
                         }
                         String cardName = normalizeName(cardsImages.get(i).attr("alt"));
                         if (cardName != null && !cardName.isEmpty()) {
-                            if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
-                                setLinks.putAll(getLandVariations(multiverseId, cardName));
-                            } else {
-                                Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
-                                setLinks.put(cardName.toLowerCase(), generateLink(preferedMultiverseId));
-                            }
+                            Runnable task = new GetImageLinkTask(multiverseId, cardName, preferedLanguage, setLinks);
+                            executor.execute(task);
                         }
                     }
                     page++;
@@ -292,6 +289,16 @@ public class WizardCardsImageSource implements CardImageSource {
         } catch (IOException ex) {
             System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
         }
+        
+        executor.shutdown();
+        
+        while (!executor.isTerminated()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ie) {
+            }
+        }
+        
         return setLinks;
     }
 
@@ -440,4 +447,35 @@ public class WizardCardsImageSource implements CardImageSource {
     public Float getAverageSize() {
         return 60.0f;
     }
+    
+    private final class GetImageLinkTask implements Runnable {
+
+        private final Integer multiverseId;
+        private final String cardName;
+        private final String preferedLanguage;
+        private final ConcurrentHashMap setLinks;
+        
+        public GetImageLinkTask(Integer multiverseId, String cardName, String preferedLanguage, ConcurrentHashMap setLinks) {
+            this.multiverseId = multiverseId;
+            this.cardName = cardName;
+            this.preferedLanguage = preferedLanguage;
+            this.setLinks = setLinks;
+        }
+        
+        @Override
+        public void run() {
+            try {
+                if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+                    setLinks.putAll(getLandVariations(multiverseId, cardName));
+                } else {
+                    Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
+                    setLinks.put(cardName.toLowerCase(), generateLink(preferedMultiverseId));
+                }
+            } catch (IOException | NumberFormatException ex) {
+                System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
+            }
+        }
+        
+    }
+    
 }
