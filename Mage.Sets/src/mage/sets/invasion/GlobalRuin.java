@@ -25,86 +25,85 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.sets.invasion;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author Markedagain
  */
-public class Worldfire extends CardImpl {
+public class GlobalRuin extends CardImpl {
 
-    public Worldfire(UUID ownerId) {
-        super(ownerId, 158, "Worldfire", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{6}{R}{R}{R}");
-        this.expansionSetCode = "M13";
+    public GlobalRuin(UUID ownerId) {
+        super(ownerId, 18, "Global Ruin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}");
+        this.expansionSetCode = "INV";
 
-
-        // Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1.
-        this.getSpellAbility().addEffect(new WorldfireEffect());
+        // Each player chooses from the lands he or she controls a land of each basic land type, then sacrifices the rest.
+        this.getSpellAbility().addEffect(new GlobalRuinDestroyLandEffect());
     }
 
-    public Worldfire(final Worldfire card) {
+    public GlobalRuin(final GlobalRuin card) {
         super(card);
     }
 
     @Override
-    public Worldfire copy() {
-        return new Worldfire(this);
+    public GlobalRuin copy() {
+        return new GlobalRuin(this);
     }
 }
 
-class WorldfireEffect extends OneShotEffect {
-    
-    private static FilterPermanent filter = new FilterPermanent();
-    
-    public WorldfireEffect() {
-        super(Outcome.Detriment);
-        staticText = "Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1";
+class GlobalRuinDestroyLandEffect extends OneShotEffect {
+
+    public GlobalRuinDestroyLandEffect() {
+        super(Outcome.DestroyPermanent);
+        this.staticText = "Each player chooses from the lands he or she controls a land of each basic land type, then sacrifices the rest";
     }
 
-    public WorldfireEffect(final WorldfireEffect effect) {
+    public GlobalRuinDestroyLandEffect(final GlobalRuinDestroyLandEffect effect) {
         super(effect);
     }
 
     @Override
-    public WorldfireEffect copy() {
-        return new WorldfireEffect(this);
+    public GlobalRuinDestroyLandEffect copy() {
+        return new GlobalRuinDestroyLandEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToExile(id, "all permanents", id, game);
-        }
+        Set<UUID> lands = new HashSet<>();
+        
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (UUID cid : player.getHand().copy()) {
-                    Card c = game.getCard(cid);
-                    if (c != null) {
-                        c.moveToExile(null, null, source.getSourceId(), game);
+                for (String landName : new String[]{"Forest", "Island", "Mountain", "Plains", "Swamp"}) {
+                    FilterControlledLandPermanent filter = new FilterControlledLandPermanent(landName + " you control");
+                    filter.add(new SubtypePredicate(landName));
+                    Target target = new TargetControlledPermanent(1, 1, filter, true);
+                    if (target.canChoose(player.getId(), game)) {
+                        player.chooseTarget(outcome, target, source, game);
+                        lands.add(target.getFirstTarget());
                     }
-                }
-                for (UUID cid : player.getGraveyard().copy()) {
-                    Card c = game.getCard(cid);
-                    if (c != null) {
-                        c.moveToExile(null, null, source.getSourceId(), game);
-                    }
-                }
-                player.setLife(1, game);
+                }             
+        }
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), game)){
+            if (!lands.contains(permanent.getId())){
+                permanent.sacrifice(permanent.getId(), game);
             }
         }
         return true;

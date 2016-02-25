@@ -25,50 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.coldsnap;
+package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
-import mage.abilities.dynamicvalue.IntPlusDynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.target.TargetSpell;
+import mage.game.Game;
+import mage.game.combat.CombatGroup;
 
 /**
  *
- * @author emerald000
+ * @author Markedagain
  */
-public class RuneSnag extends CardImpl {
+public class BlockedCreatureCount implements DynamicValue {
 
-    private static final FilterCard filter = new FilterCard();
+    private String message;
+    boolean beyondTheFirst;
 
-    static {
-        filter.add(new NamePredicate("Rune Snag"));
+    public BlockedCreatureCount() {
+        this("each creature blocking it");
     }
 
-    public RuneSnag(UUID ownerId) {
-        super(ownerId, 46, "Rune Snag", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "CSP";
-
-        // Counter target spell unless its controller pays {2} plus an additional {2} for each card named Rune Snag in each graveyard.
-        Effect effect = new CounterUnlessPaysEffect(new IntPlusDynamicValue(2, new MultipliedValue(new CardsInAllGraveyardsCount(filter), 2)));
-        effect.setText("Counter target spell unless its controller pays {2} plus an additional {2} for each card named Rune Snag in each graveyard");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetSpell());
+    public BlockedCreatureCount(String message) {
+        this(message, false);
     }
 
-    public RuneSnag(final RuneSnag card) {
-        super(card);
+    public BlockedCreatureCount(String message, boolean beyondTheFist) {
+        this.message = message;
+    }
+
+    public BlockedCreatureCount(final BlockedCreatureCount dynamicValue) {
+        super();
+        this.message = dynamicValue.message;
+        this.beyondTheFirst = dynamicValue.beyondTheFirst;
     }
 
     @Override
-    public RuneSnag copy() {
-        return new RuneSnag(this);
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if (combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
+                int blockers = combatGroup.getBlockers().size();
+                if (beyondTheFirst) {
+                    blockers = blockers > 0 ? blockers - 1 : 0;
+                }
+                return blockers;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public BlockedCreatureCount copy() {
+        return new BlockedCreatureCount(this);
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
     }
 }

@@ -25,43 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author djbrez
  */
-public class RazorclawBear extends CardImpl {
+public class BlockadeRunner extends CardImpl {
 
-    public RazorclawBear(UUID ownerId) {
-        super(ownerId, 82, "Razorclaw Bear", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "PO2";
-        this.subtype.add("Bear");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+    public BlockadeRunner(UUID ownerId) {
+        super(ownerId, 60, "Blockade Runner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Merfolk");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Whenever Razorclaw Bear becomes blocked, it gets +2/+2 until end of turn.
-        Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("it gets +2/+2 until end of turn");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+        // {U}: Blockade Runner is unblockable this turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn),
+                new ManaCostsImpl("{U}")));
     }
 
-    public RazorclawBear(final RazorclawBear card) {
+    public BlockadeRunner(final BlockadeRunner card) {
         super(card);
     }
 
     @Override
-    public RazorclawBear copy() {
-        return new RazorclawBear(this);
+    public BlockadeRunner copy() {
+        return new BlockadeRunner(this);
     }
 }

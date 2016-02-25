@@ -80,7 +80,7 @@ class WhetstoneEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getPlayerList()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.moveCards(player.getLibrary().getTopCards(game, 2), Zone.LIBRARY, Zone.GRAVEYARD, source, game);

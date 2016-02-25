@@ -29,20 +29,28 @@ package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author fireshoes
+ * @author Markedagain
  */
 public class BerserkMurlodont extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Beast");
+    static {
+        filter.add(new SubtypePredicate("Beast"));
+    }
+    
     public BerserkMurlodont(UUID ownerId) {
         super(ownerId, 117, "Berserk Murlodont", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "LGN";
@@ -51,9 +59,10 @@ public class BerserkMurlodont extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a Beast becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
-        Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
+        BlockedCreatureCount value = new BlockedCreatureCount();
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
         effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
-        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(effect, false));
+        this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false,filter,false));
     }
 
     public BerserkMurlodont(final BerserkMurlodont card) {

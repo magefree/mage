@@ -29,18 +29,16 @@ package mage.sets.iceage;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.combat.CombatGroup;
 
 /**
  *
@@ -56,7 +54,10 @@ public class JohtullWurm extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever Johtull Wurm becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
-        this.addAbility(new JohtullWurmAbility());
+        DynamicValue blockedCreatureCount = new BlockedCreatureCount("each creature blocking it beyond the first", true);
+        Effect effect = new BoostSourceEffect(new MultipliedValue(blockedCreatureCount, -2), new MultipliedValue(blockedCreatureCount, -1), Duration.EndOfTurn);
+        effect.setText("it gets -2/-1 until end of turn for each creature blocking it beyond the first");
+        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
     }
 
     public JohtullWurm(final JohtullWurm card) {
@@ -68,52 +69,3 @@ public class JohtullWurm extends CardImpl {
         return new JohtullWurm(this);
     }
 }
-
-class JohtullWurmAbility extends BecomesBlockedTriggeredAbility {
-
-    public JohtullWurmAbility() {
-        super(null, false);
-        JohtullWurmValue toughnessValue = new JohtullWurmValue();
-        DynamicValue powerValue = new MultipliedValue(toughnessValue, 2);
-        this.addEffect(new BoostSourceEffect(powerValue, toughnessValue, Duration.EndOfTurn));
-    }
-
-    public JohtullWurmAbility(final JohtullWurmAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public JohtullWurmAbility copy() {
-        return new JohtullWurmAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.";
-    }
-}
-
-class JohtullWurmValue implements DynamicValue {
-
-    @Override
-    public JohtullWurmValue copy() {
-        return new JohtullWurmValue();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for(CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
-                 int blockers = combatGroup.getBlockers().size();
-                 return blockers > 1 ? -(blockers - 1) : 0;
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public String getMessage() {
-        return "-2/-1 until end of turn for each creature blocking it beyond the first";
-    }
-}
-

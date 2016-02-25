@@ -25,43 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.portalsecondage;
+package mage.sets.mirage;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.ObjectColor;
+import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author djbrez
  */
-public class RazorclawBear extends CardImpl {
+public class DreadSpecter extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
-    public RazorclawBear(UUID ownerId) {
-        super(ownerId, 82, "Razorclaw Bear", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "PO2";
-        this.subtype.add("Bear");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Whenever Razorclaw Bear becomes blocked, it gets +2/+2 until end of turn.
-        Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("it gets +2/+2 until end of turn");
-        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public RazorclawBear(final RazorclawBear card) {
+    public DreadSpecter(UUID ownerId) {
+        super(ownerId, 17, "Dread Specter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "MIR";
+        this.subtype.add("Specter");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Whenever Dread Specter blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(
+        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
+        effect.setText("destroy that creature at end of combat");
+        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, filter, false)); 
+    }
+
+    public DreadSpecter(final DreadSpecter card) {
         super(card);
     }
 
     @Override
-    public RazorclawBear copy() {
-        return new RazorclawBear(this);
+    public DreadSpecter copy() {
+        return new DreadSpecter(this);
     }
 }

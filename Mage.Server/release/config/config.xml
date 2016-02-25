@@ -107,6 +107,7 @@
     </draftCubes>
     <deckTypes>
         <deckType name="Constructed - Standard" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Standard"/>
+        <deckType name="Constructed - Eternal" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Eternal"/>
         <deckType name="Constructed - Extended" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Extended"/>
         <deckType name="Constructed - Modern" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Modern"/>
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Legacy"/>

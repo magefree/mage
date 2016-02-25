@@ -63,10 +63,12 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
+import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -99,6 +101,7 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.target.common.TargetPermanentOrPlayer;
 import mage.util.MessageToClient;
@@ -742,7 +745,23 @@ public class TestPlayer implements Player {
             if (target.getTargetController() != null && target.getAbilityController() != null) {
                 abilityControllerId = target.getAbilityController();
             }
-            if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer)) {
+            if (target instanceof TargetPlayer || target instanceof TargetCreatureOrPlayer) {
+                for (String targetDefinition : targets) {
+                    if (targetDefinition.startsWith("targetPlayer=")) {
+                        String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
+                        for (Player player : game.getPlayers().values()) {
+                            if (player.getName().equals(playerName)
+                                    && target.canTarget(computerPlayer.getId(), player.getId(), source, game)) {
+                                target.add(player.getId(), game);
+                                targets.remove(targetDefinition);
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+            }
+            if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer) || (target instanceof TargetCreatureOrPlayer)) {
                 for (String targetDefinition : targets) {
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
@@ -759,9 +778,13 @@ public class TestPlayer implements Player {
                                 targetName = targetName.substring(0, targetName.length() - 11);
                             }
                         }
-                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent) target.getFilter(), game)) {
+                        Filter filter = target.getFilter();
+                        if (filter instanceof FilterCreatureOrPlayer) {
+                            filter = ((FilterCreatureOrPlayer) filter).getCreatureFilter();
+                        }
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent) filter, game)) {
                             if (permanent.getName().equals(targetName) || (permanent.getName() + "-" + permanent.getExpansionSetCode()).equals(targetName)) {
-                                if (((TargetPermanent) target).canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
+                                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
@@ -770,6 +793,7 @@ public class TestPlayer implements Player {
                                 }
                             }
                         }
+
                     }
                     if (targetFound) {
                         targets.remove(targetDefinition);
@@ -777,22 +801,7 @@ public class TestPlayer implements Player {
                     }
                 }
             }
-            if (target instanceof TargetPlayer) {
-                for (String targetDefinition : targets) {
-                    if (targetDefinition.startsWith("targetPlayer=")) {
-                        String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
-                        for (Player player : game.getPlayers().values()) {
-                            if (player.getName().equals(playerName)
-                                    && ((TargetPlayer) target).canTarget(computerPlayer.getId(), player.getId(), source, game)) {
-                                target.add(player.getId(), game);
-                                targets.remove(targetDefinition);
-                                return true;
-                            }
-                        }
-                    }
-                }
 
-            }
             if (target instanceof TargetCardInHand) {
                 for (String targetDefinition : targets) {
                     String[] targetList = targetDefinition.split("\\^");

@@ -29,17 +29,14 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.combat.CombatGroup;
 
 /**
  *
@@ -55,7 +52,10 @@ public class SparringGolem extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Sparring Golem becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
-        this.addAbility(new SparringGolemAbility());
+        BlockedCreatureCount value = new BlockedCreatureCount();
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
+        effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
+        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
     }
 
     public SparringGolem(final SparringGolem card) {
@@ -65,52 +65,5 @@ public class SparringGolem extends CardImpl {
     @Override
     public SparringGolem copy() {
         return new SparringGolem(this);
-    }
-}
-
-class SparringGolemAbility extends BecomesBlockedTriggeredAbility {
-
-    public SparringGolemAbility() {
-        super(null, false);
-        SparringGolemValue value = new SparringGolemValue();
-        this.addEffect(new BoostSourceEffect(value, value, Duration.EndOfTurn));
-    }
-
-    public SparringGolemAbility(final SparringGolemAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SparringGolemAbility copy() {
-        return new SparringGolemAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.";
-    }
-}
-
-class SparringGolemValue implements DynamicValue {
-
-    @Override
-    public SparringGolemValue copy() {
-        return new SparringGolemValue();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for(CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
-                 int blockers = combatGroup.getBlockers().size();
-                 return blockers > 1 ? (blockers) : 0;
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public String getMessage() {
-        return "+1/+1 until end of turn for each creature blocking it";
     }
 }

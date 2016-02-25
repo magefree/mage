@@ -29,17 +29,16 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.dynamicvalue.common.BlockedCreatureCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.combat.CombatGroup;
 
 /**
  *
@@ -56,7 +55,10 @@ public class RabidElephant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Rabid Elephant becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
-        this.addAbility(new RabidElephantAbility());
+        DynamicValue value = new MultipliedValue(new BlockedCreatureCount(),2);
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
+        effect.setText("it gets +2/+2 until end of turn for each creature blocking it");
+        this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
     }
 
     public RabidElephant(final RabidElephant card) {
@@ -66,52 +68,5 @@ public class RabidElephant extends CardImpl {
     @Override
     public RabidElephant copy() {
         return new RabidElephant(this);
-    }
-}
-
-class RabidElephantAbility extends BecomesBlockedTriggeredAbility {
-
-    public RabidElephantAbility() {
-        super(null, false);
-        RabidElephantValue value = new RabidElephantValue();
-        this.addEffect(new BoostSourceEffect(value, value, Duration.EndOfTurn));
-    }
-
-    public RabidElephantAbility(final RabidElephantAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RabidElephantAbility copy() {
-        return new RabidElephantAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.";
-    }
-}
-
-class RabidElephantValue implements DynamicValue {
-
-    @Override
-    public RabidElephantValue copy() {
-        return new RabidElephantValue();
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for(CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
-                 int blockers = combatGroup.getBlockers().size();
-                 return blockers > 1 ? (blockers) * 2 : 0;
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public String getMessage() {
-        return "+2/+2 until end of turn for each creature blocking it";
     }
 }
