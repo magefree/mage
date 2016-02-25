@@ -108,14 +108,16 @@ public class Constructed extends DeckValidator {
         if (!rarities.isEmpty()) {
             for (Card card : deck.getCards()) {
                 if (!rarities.contains(card.getRarity())) {
-                    invalid.put(card.getName(), "Invalid rarity: " + card.getRarity());
-                    valid = false;
+                    if( !legalRarity(card) ){
+                        valid = false;
+                    }
                 }
             }
             for (Card card : deck.getSideboard()) {
                 if (!rarities.contains(card.getRarity())) {
-                    invalid.put(card.getName(), "Invalid rarity: " + card.getRarity());
-                    valid = false;
+                    if( !legalRarity(card) ){
+                        valid = false;
+                    }
                 }
             }
         }
@@ -123,34 +125,14 @@ public class Constructed extends DeckValidator {
         if (!setCodes.isEmpty()) {
             for (Card card : deck.getCards()) {
                 if (!setCodes.contains(card.getExpansionSetCode())) {
-                    // check if card is legal if taken from other set
-                    boolean legal = false;
-                    List<CardInfo> cardInfos = CardRepository.instance.findCards(card.getName());
-                    for (CardInfo cardInfo : cardInfos) {
-                        if (setCodes.contains(cardInfo.getSetCode())) {
-                            legal = true;
-                            break;
-                        }
-                    }
-                    if (!legal && !invalid.containsKey(card.getName())) {
-                        invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
+                    if( !legalSets(card) ){
                         valid = false;
                     }
                 }
             }
             for (Card card : deck.getSideboard()) {
                 if (!setCodes.contains(card.getExpansionSetCode())) {
-                    // check if card is legal if taken from other set
-                    boolean legal = false;
-                    List<CardInfo> cardInfos = CardRepository.instance.findCards(card.getName());
-                    for (CardInfo cardInfo : cardInfos) {
-                        if (setCodes.contains(cardInfo.getSetCode())) {
-                            legal = true;
-                            break;
-                        }
-                    }
-                    if (!legal && !invalid.containsKey(card.getName())) {
-                        invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
+                    if( !legalSets(card) ){
                         valid = false;
                     }
                 }
@@ -159,5 +141,46 @@ public class Constructed extends DeckValidator {
         logger.debug("DECK validate end: " + name + " deckname: " + deck.getName() + " invalids:" + invalid.size());
         return valid;
     }
+    
+    /**
+     * Checks if the given card is legal in any of the given rarities
+     * @param card - the card to check
+     * @return Whether the card was printed at any of the given rarities.
+     */
+    protected boolean legalRarity(Card card){
+        // check if card is legal if taken from other set
+        boolean legal = false;
+        List<CardInfo> cardInfos = CardRepository.instance.findCards(card.getName());
+        for (CardInfo cardInfo : cardInfos) {
+            if (rarities.contains(cardInfo.getRarity())) {
+                legal = true;
+                break;
+            }
+        }
+        if (!legal && !invalid.containsKey(card.getName())) {
+            invalid.put(card.getName(), "Invalid rarity: " + card.getRarity());
+        }
+        return legal;
+    }
 
+    /**
+     * Checks if the given card is legal in any of the given sets
+     * @param card - the card to check
+     * @return Whether the card was printed in any of this format's sets.
+     */
+    protected boolean legalSets(Card card) {
+        // check if card is legal if taken from other set
+        boolean legal = false;
+        List<CardInfo> cardInfos = CardRepository.instance.findCards(card.getName());
+        for (CardInfo cardInfo : cardInfos) {
+            if (setCodes.contains(cardInfo.getSetCode())) {
+                legal = true;
+                break;
+            }
+        }
+        if (!legal && !invalid.containsKey(card.getName())) {
+            invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
+        }
+        return legal;
+    }
 }
