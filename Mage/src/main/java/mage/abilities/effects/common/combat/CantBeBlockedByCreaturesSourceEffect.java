@@ -38,7 +38,6 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-
 public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
 
     private final FilterCreaturePermanent filter;
@@ -47,7 +46,7 @@ public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
         super(duration);
         this.filter = filter;
         staticText = new StringBuilder("{this} can't be blocked ")
-                .append(filter.getMessage().startsWith("except by") ? "":"by ").append(filter.getMessage()).toString();
+                .append(filter.getMessage().startsWith("except by") ? "" : "by ").append(filter.getMessage()).toString();
     }
 
     public CantBeBlockedByCreaturesSourceEffect(final CantBeBlockedByCreaturesSourceEffect effect) {
@@ -57,18 +56,12 @@ public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return permanent.getId().equals(source.getSourceId());
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (filter.match(blocker, source.getSourceId(), source.getControllerId(), game)) {
-            return false;
-        }
-        return true;
+        return !filter.match(blocker, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override

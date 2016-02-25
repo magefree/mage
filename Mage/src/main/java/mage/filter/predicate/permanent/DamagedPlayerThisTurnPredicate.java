@@ -33,14 +33,12 @@ import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
-import mage.players.Player;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 /**
  *
  * @author LevelX2
  */
-
 public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<ObjectPlayer<Controllable>> {
 
     private final TargetController controller;
@@ -56,40 +54,34 @@ public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<Obj
 
         switch (controller) {
             case YOU:
-                PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",playerId);
-                if (watcher != null ) {
+                PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", playerId);
+                if (watcher != null) {
                     return watcher.hasSourceDoneDamage(object.getId(), game);
                 }
                 break;
             case OPPONENT:
                 for (UUID opponentId : game.getOpponents(playerId)) {
-                    watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",opponentId);
-                    if (watcher != null ) {
+                    watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", opponentId);
+                    if (watcher != null) {
                         return watcher.hasSourceDoneDamage(object.getId(), game);
                     }
                 }
                 break;
             case NOT_YOU:
-                Player you = game.getPlayer(playerId);
-                if (you != null) {
-                    for (UUID notYouId : you.getInRange()) {
-                        if (!notYouId.equals(playerId)) {
-                            watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",notYouId);
-                            if (watcher != null ) {
-                                return watcher.hasSourceDoneDamage(object.getId(), game);
-                            }
+                for (UUID notYouId : game.getState().getPlayersInRange(playerId, game)) {
+                    if (!notYouId.equals(playerId)) {
+                        watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", notYouId);
+                        if (watcher != null) {
+                            return watcher.hasSourceDoneDamage(object.getId(), game);
                         }
                     }
                 }
                 break;
             case ANY:
-                you = game.getPlayer(playerId);
-                if (you != null) {
-                    for (UUID anyId : you.getInRange()) {
-                        watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",anyId);
-                        if (watcher != null ) {
-                            return watcher.hasSourceDoneDamage(object.getId(), game);
-                        }
+                for (UUID anyId : game.getState().getPlayersInRange(playerId, game)) {
+                    watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", anyId);
+                    if (watcher != null) {
+                        return watcher.hasSourceDoneDamage(object.getId(), game);
                     }
                 }
                 return true;

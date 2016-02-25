@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,6 +46,12 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class JoragaAuxiliary extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other target creatures");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public JoragaAuxiliary(UUID ownerId) {
         super(ownerId, 154, "Joraga Auxiliary", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
@@ -55,9 +62,9 @@ public class JoragaAuxiliary extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // {4}{G}{W}: Support 2.
+        // {4}{G}{W}: Support 2. (Put a +1/+1 counter on each of up to two other target creatures.)
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SupportEffect(this, 2, true), new ManaCostsImpl("{4}{G}{W}"));
-        ability.addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("target creatures"), false));
+        ability.addTarget(new TargetCreaturePermanent(0, 2, filter, false));
         this.addAbility(ability);
     }
 

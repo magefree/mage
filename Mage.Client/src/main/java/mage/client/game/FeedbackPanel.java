@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * FeedbackPanel.java
  *
  * Created on 23-Dec-2009, 9:54:01 PM
@@ -45,6 +45,7 @@ import mage.client.MageFrame;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import static mage.constants.Constants.Option.ORIGINAL_ID;
@@ -60,7 +61,7 @@ import org.apache.log4j.Logger;
  */
 public class FeedbackPanel extends javax.swing.JPanel {
 
-    private static final Logger logger = Logger.getLogger(FeedbackPanel.class);
+    private static final Logger LOGGER = Logger.getLogger(FeedbackPanel.class);
 
     public enum FeedbackMode {
 
@@ -74,7 +75,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private ChatPanelBasic connectedChatPanel;
     private int lastMessageId;
 
-    private static final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService WORKER = Executors.newSingleThreadScheduledExecutor();
 
     /**
      * Creates new form FeedbackPanel
@@ -88,12 +89,21 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.gameId = gameId;
         session = MageFrame.getSession();
         helper.init(gameId);
+        setGUISize();
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        helper.changeGUISize();
     }
 
     public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
         synchronized (this) {
             if (messageId < this.lastMessageId) {
-                logger.warn("ignoring message from later source: " + messageId + ", text=" + message);
+                LOGGER.warn("ignoring message from later source: " + messageId + ", text=" + message);
                 return;
             }
             this.lastMessageId = messageId;
@@ -162,8 +172,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
         }
     }
 
-    protected String getSmallText(String text) {
-        return "<div style='font-size:11pt'>" + text + "</div>";
+    protected static String getSmallText(String text) {
+        return "<div style='font-size:" + GUISizeHelper.gameDialogAreaFontSizeSmall + "pt'>" + text + "</div>";
     }
 
     private void setSpecial(String text, boolean visible) {
@@ -179,7 +189,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         Runnable task = new Runnable() {
             @Override
             public void run() {
-                logger.info("Ending game...");
+                LOGGER.info("Ending game...");
                 Component c = MageFrame.getGame(gameId);
                 while (c != null && !(c instanceof GamePane)) {
                     c = c.getParent();
@@ -189,7 +199,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 }
             }
         };
-        worker.schedule(task, 8, TimeUnit.SECONDS);
+        WORKER.schedule(task, 8, TimeUnit.SECONDS);
     }
 
     private void handleOptions(Map<String, Serializable> options) {

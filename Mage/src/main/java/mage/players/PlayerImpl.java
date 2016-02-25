@@ -898,7 +898,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public boolean putCardsOnTopOfLibrary(Cards cardsToLibrary, Game game, Ability source, boolean anyOrder) {
-        if (!cardsToLibrary.isEmpty()) {
+        if (cardsToLibrary != null && !cardsToLibrary.isEmpty()) {
             Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             UUID sourceId = (source == null ? null : source.getSourceId());
             if (!anyOrder) {
@@ -982,6 +982,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean cast(SpellAbility ability, Game game, boolean noMana) {
+        if (game == null || ability == null) {
+            return false;
+        }
         if (!ability.getSpellAbilityType().equals(SpellAbilityType.BASE)) {
             ability = chooseSpellAbilityForCast(ability, game, noMana);
         }
@@ -1181,18 +1184,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return false;
             }
 
-            if (ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
-                result = specialAction((SpecialAction) ability.copy(), game);
-            } else if (ability.getAbilityType().equals(AbilityType.MANA)) {
-                result = playManaAbility((ManaAbility) ability.copy(), game);
-            } else if (ability.getAbilityType().equals(AbilityType.SPELL)) {
-                if (ability instanceof FlashbackAbility) {
+            switch (ability.getAbilityType()) {
+                case SPECIAL_ACTION:
+                    result = specialAction((SpecialAction) ability.copy(), game);
+                    break;
+                case MANA:
+                    result = playManaAbility((ManaAbility) ability.copy(), game);
+                    break;
+                case SPELL:
+                    if (ability instanceof FlashbackAbility) {
+                        result = playAbility(ability.copy(), game);
+                    } else {
+                        result = cast((SpellAbility) ability, game, false);
+                    }
+                    break;
+                default:
                     result = playAbility(ability.copy(), game);
-                } else {
-                    result = cast((SpellAbility) ability, game, false);
-                }
-            } else {
-                result = playAbility(ability.copy(), game);
+                    break;
             }
         }
 
@@ -1936,11 +1944,15 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void resetPlayerPassedActions() {
-        this.passedAllTurns = false;
+        this.passed = false;
         this.passedTurn = false;
         this.passedUntilEndOfTurn = false;
         this.passedUntilNextMain = false;
         this.passedUntilStackResolved = false;
+        this.dateLastAddedToStack = null;
+        this.skippedAtLeastOnce = false;
+        this.passedAllTurns = false;
+        this.justActivatedType = null;
     }
 
     @Override
@@ -2324,8 +2336,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     // returns only mana producers that don't require mana payment
-    protected List<Permanent> getAvailableManaProducers(Game game) {
-        List<Permanent> result = new ArrayList<>();
+    protected List<MageObject> getAvailableManaProducers(Game game) {
+        List<MageObject> result = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
             boolean canAdd = false;
             for (ManaAbility ability : permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
@@ -2339,6 +2351,21 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (canAdd) {
                 result.add(permanent);
+            }
+        }
+        for (Card card : getHand().getCards(game)) {
+            boolean canAdd = false;
+            for (ManaAbility ability : card.getAbilities(game).getManaAbilities(Zone.HAND)) {
+                if (!ability.getManaCosts().isEmpty()) {
+                    canAdd = false;
+                    break;
+                }
+                if (ability.canActivate(playerId, game)) {
+                    canAdd = true;
+                }
+            }
+            if (canAdd) {
+                result.add(card);
             }
         }
         return result;
@@ -2395,7 +2422,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (canBeCastRegularly) {
                 ManaOptions abilityOptions = copy.getManaCostsToPay().getOptions();
-                if (abilityOptions.size() == 0) {
+                if (abilityOptions.isEmpty()) {
                     return true;
                 } else {
                     if (available == null) {
@@ -2634,6 +2661,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (!playableActivated.containsKey(ability.toString())) {
                         playableActivated.put(ability.toString(), ability);
                     }
+                }
+            }
+            // activated abilities from stack objects
+            for (StackObject stackObject : game.getState().getStack()) {
+                for (ActivatedAbility ability : stackObject.getAbilities().getActivatedAbilities(Zone.STACK)) {
+                    if (ability instanceof ActivatedAbility
+                            && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
+                        playableActivated.put(ability.toString(), ability);
+                    }
+
                 }
             }
             // activated abilities from objects in the command zone (emblems or commanders)

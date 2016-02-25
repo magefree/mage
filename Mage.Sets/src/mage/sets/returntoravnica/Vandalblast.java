@@ -28,20 +28,18 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetArtifactPermanent;
-
 
 /**
  *
@@ -49,23 +47,22 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class Vandalblast extends CardImpl {
 
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you don't control");
+    private static final FilterArtifactPermanent FILTER = new FilterArtifactPermanent("artifact you don't control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        FILTER.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public Vandalblast(UUID ownerId) {
         super(ownerId, 111, "Vandalblast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "RTR";
 
-
         // Destroy target artifact you don't control.
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent(FILTER));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
 
         // Overload {4}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new DestroyAllEffect(filter), new ManaCostsImpl("{4}{R}"), TimingRule.SORCERY));
+        this.addAbility(new OverloadAbility(this, new DestroyAllEffect(FILTER), new ManaCostsImpl("{4}{R}"), TimingRule.SORCERY));
 
     }
 

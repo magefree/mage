@@ -59,7 +59,7 @@ public class MurkStrider extends CardImpl {
 
         // When Murk Strider enters the battlefield, you may put a card an opponent owns from exile into that player's graveyard. If you do, return target creature to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DoIfCostPaid(new ReturnToHandTargetEffect(), new ExileOpponentsCardFromExileToGraveyardCost(true)), true);
+                new DoIfCostPaid(new ReturnToHandTargetEffect(), new ExileOpponentsCardFromExileToGraveyardCost(true)), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

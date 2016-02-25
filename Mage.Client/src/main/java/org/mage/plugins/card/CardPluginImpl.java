@@ -3,7 +3,6 @@ package org.mage.plugins.card;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -18,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JLayeredPane;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
+import mage.client.util.GUISizeHelper;
 import mage.constants.Rarity;
 import mage.interfaces.plugin.CardPlugin;
 import mage.utils.CardUtil;
@@ -31,8 +31,6 @@ import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.Animation;
 import org.mage.card.arcane.CardPanel;
-import org.mage.card.arcane.ManaSymbols;
-import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
@@ -48,14 +46,15 @@ import org.mage.plugins.card.info.CardInfoPaneImpl;
  *
  * @author nantuko
  * @version 0.1 01.11.2010 Mage permanents. Sorting card layout.
- * @version 0.6 17.07.2011 #sortPermanents got option to display non-land permanents in one pile
+ * @version 0.6 17.07.2011 #sortPermanents got option to display non-land
+ * permanents in one pile
  * @version 0.7 29.07.2011 face down cards support
  */
 @PluginImplementation
 @Author(name = "nantuko")
 public class CardPluginImpl implements CardPlugin {
 
-    private static final Logger log = Logger.getLogger(CardPluginImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(CardPluginImpl.class);
 
     private static final int GUTTER_Y = 15;
     private static final int GUTTER_X = 5;
@@ -66,7 +65,9 @@ public class CardPluginImpl implements CardPlugin {
     private static final float ATTACHMENT_SPACING_Y = 0.13f;
 
     private int landStackMax = 5;
-    private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
+    // private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
+    private int cardWidthMin = 50, cardWidthMax = (int) GUISizeHelper.battlefieldCardDimension.getWidth();
+
     private boolean stackVertical = false;
 
     private int playAreaWidth, playAreaHeight;
@@ -75,18 +76,32 @@ public class CardPluginImpl implements CardPlugin {
     private int stackSpacingX, stackSpacingY, attachmentSpacingY;
     private List<Row> rows = new ArrayList<>();
 
+    public CardPluginImpl() {
+        setGUISize();
+    }
+
     @Init
     public void init() {
     }
 
     @PluginLoaded
     public void newPlugin(CardPlugin plugin) {
-        log.info(plugin.toString() + " has been loaded.");
+        LOGGER.info(plugin.toString() + " has been loaded.");
     }
 
     @Override
     public String toString() {
         return "[Card plugin, version 0.7]";
+    }
+
+    @Override
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        cardWidthMin = 50;
+        cardWidthMax = (int) GUISizeHelper.battlefieldCardDimension.getWidth();
     }
 
     @Override
@@ -98,9 +113,9 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
-        CardPanel cardPanel = new CardPanel(permanent, gameId, loadImage, callback, false, dimension);
-        boolean implemented = permanent.getRarity() != null && !permanent.getRarity().equals(Rarity.NA);
+    public MagePermanent getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
+        CardPanel cardPanel = new CardPanel(cardView, gameId, loadImage, callback, false, dimension);
+        boolean implemented = cardView.getRarity() != null && !cardView.getRarity().equals(Rarity.NA);
         cardPanel.setShowCastingCost(implemented);
         return cardPanel;
     }
@@ -398,6 +413,7 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     private class Row extends ArrayList<Stack> {
+
         private static final long serialVersionUID = 1L;
 
         public Row() {
@@ -458,6 +474,7 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     private class Stack extends ArrayList<MagePermanent> {
+
         private static final long serialVersionUID = 1L;
 
         /**
@@ -474,7 +491,7 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         private int getHeight() {
-            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY + attachmentSpacingY*maxAttachedCount;
+            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY + attachmentSpacingY * maxAttachedCount;
         }
 
         public int getMaxAttachedCount() {
@@ -489,7 +506,8 @@ public class CardPluginImpl implements CardPlugin {
     /**
      * Download various symbols (mana, tap, set).
      *
-     * @param imagesPath Path to check in and store symbols to. Can be null, in such case default path should be used.
+     * @param imagesPath Path to check in and store symbols to. Can be null, in
+     * such case default path should be used.
      */
     @Override
     public void downloadSymbols(String imagesPath) {
@@ -502,17 +520,17 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         it = new GathererSets(imagesPath);
-        for(DownloadJob job:it) {
-                g.getDownloader().add(job);
+        for (DownloadJob job : it) {
+            g.getDownloader().add(job);
         }
 
         it = new CardFrames(imagesPath);
-        for(DownloadJob job:it) {
+        for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
 
         it = new DirectLinksForDownload(imagesPath);
-        for(DownloadJob job:it) {
+        for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
 
@@ -528,11 +546,6 @@ public class CardPluginImpl implements CardPlugin {
         d.add(g);
         d.pack();
         d.setVisible(true);
-    }
-
-    @Override
-    public Image getManaSymbolImage(String symbol) {
-        return ManaSymbols.getManaSymbolImage(symbol);
     }
 
     @Override

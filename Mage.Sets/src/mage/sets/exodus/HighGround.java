@@ -47,7 +47,7 @@ public class HighGround extends CardImpl {
         super(ownerId, 7, "High Ground", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "EXO";
 
-        // Each creature you control can block an additional creature.
+        // Each creature you control can block an additional creature each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureAllEffect(1, new FilterControlledCreaturePermanent("Each creature you control"), Duration.WhileOnBattlefield)));
     }
 

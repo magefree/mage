@@ -79,7 +79,7 @@ public class SkullRend extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                for (UUID playerId: controller.getInRange()) {
+                for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                     if (playerId != source.getControllerId()) {
                         Player opponent = game.getPlayer(playerId);
                         if (opponent != null) {

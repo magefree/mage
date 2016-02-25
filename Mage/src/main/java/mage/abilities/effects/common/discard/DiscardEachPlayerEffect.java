@@ -64,10 +64,10 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
         HashMap<UUID, Cards> cardsToDiscard = new HashMap<>();
         if (controller != null) {
             // choose cards to discard
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    switch(targetController) {
+                    switch (targetController) {
                         case NOT_YOU:
                             if (playerId.equals(source.getControllerId())) {
                                 continue;
@@ -97,7 +97,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
                 }
             }
             // discard all choosen cards
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Cards cardsPlayer = cardsToDiscard.get(playerId);
@@ -127,7 +127,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("each ");
-        switch(targetController) {
+        switch (targetController) {
             case NOT_YOU:
                 sb.append("other player");
                 break;

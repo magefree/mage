@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import java.util.ArrayList;
@@ -54,14 +53,15 @@ import mage.util.TargetAddress;
 
 /**
  * @author duncant
+ * @param <T>
  */
 public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> extends OneShotEffect {
-    
+
     protected final FilterInPlay<T> filter;
 
     public CopySpellForEachItCouldTargetEffect(FilterInPlay<T> filter) {
         super(Outcome.Copy);
-        this.staticText = "copy the spell for each other "+filter.getMessage()+" that spell could target. Each copy targets a different one";
+        this.staticText = "copy the spell for each other " + filter.getMessage() + " that spell could target. Each copy targets a different one";
         this.filter = filter;
     }
 
@@ -71,10 +71,12 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
     }
 
     protected abstract Spell getSpell(Game game, Ability source);
+
     protected abstract boolean changeTarget(Target target, Game game, Ability source);
+
     protected abstract void modifyCopy(Spell copy, Game game, Ability source);
-    
-    protected void modifyCopy(Spell copy, T newTarget, Game game, Ability source){
+
+    protected void modifyCopy(Spell copy, T newTarget, Game game, Ability source) {
         modifyCopy(copy, game, source);
     }
 
@@ -97,18 +99,17 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                     targetsToBeChanged.add(addr);
                 }
             }
-            
+
             if (targetsToBeChanged.size() < 1) {
                 return false;
             }
 
             // collect objects that can be targeted
-            Spell copy = spell.copySpell();
-            copy.setCopiedSpell(true);
+            Spell copy = spell.copySpell(source.getControllerId());
             modifyCopy(copy, game, source);
             Target sampleTarget = targetsToBeChanged.iterator().next().getTarget(copy);
             sampleTarget.setNotTarget(true);
-                
+
             Map<UUID, Map<UUID, Spell>> playerTargetCopyMap = new HashMap<>();
             for (UUID objId : sampleTarget.possibleTargets(controller.getId(), game)) {
                 MageItem obj = game.getObject(objId);
@@ -116,9 +117,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                     obj = game.getPlayer(objId);
                 }
                 if (obj != null) {
-                    copy = spell.copySpell();
-                    copy.setCopiedSpell(true);
-
+                    copy = spell.copySpell(source.getControllerId());
                     try {
                         modifyCopy(copy, (T) obj, game, source);
                         if (!filter.match((T) obj, game)) {
@@ -174,7 +173,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
 
                             // shortcut if there's only one possible target remaining
                             if (targetCopyMap.size() > 1
-                                && target.canChoose(spell.getId(), player.getId(), game)) {
+                                    && target.canChoose(spell.getId(), player.getId(), game)) {
                                 player.choose(Outcome.Neutral, target, spell.getId(), game);
                             }
                             Collection<UUID> chosenIds = target.getTargets();
@@ -205,8 +204,6 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
     }
 }
 
-
-
 class CompoundFilter<T extends MageItem> extends FilterImpl<T> implements FilterInPlay<T> {
 
     protected final FilterInPlay<T> filterA;
@@ -225,10 +222,15 @@ class CompoundFilter<T extends MageItem> extends FilterImpl<T> implements Filter
     }
 
     @Override
+    public boolean checkObjectClass(Object object) {
+        return true; // already checked in the filter classes itself
+    }
+
+    @Override
     public boolean match(T obj, Game game) {
         return (filterA == null
                 || !filterA.match(obj, game))
-            && (filterB == null
+                && (filterB == null
                 || !filterB.match(obj, game));
     }
 
@@ -236,36 +238,35 @@ class CompoundFilter<T extends MageItem> extends FilterImpl<T> implements Filter
     public boolean match(T obj, UUID sourceId, UUID playerId, Game game) {
         return (filterA == null
                 || !filterA.match(obj, sourceId, playerId, game))
-            && (filterB == null
+                && (filterB == null
                 || !filterB.match(obj, sourceId, playerId, game));
     }
 
     @Override
     public CompoundFilter copy() {
         return new CompoundFilter(filterA == null ? null : filterA.copy(),
-                                  filterB == null ? null : filterB.copy(),
-                                  message);
+                filterB == null ? null : filterB.copy(),
+                message);
     }
 }
 
-
 class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
-    
+
     protected final FilterInPlay<T> additionalFilter;
     protected final Target originalTarget;
     protected static final Integer minNumberOfTargets = null;
     protected static final Integer maxNumberOfTargets = null;
     protected static final Zone zone = null;
 
-    public TargetWithAdditionalFilter(final TargetWithAdditionalFilter target){
-        this(target.originalTarget, target.additionalFilter, false);        
+    public TargetWithAdditionalFilter(final TargetWithAdditionalFilter target) {
+        this(target.originalTarget, target.additionalFilter, false);
     }
 
-    public TargetWithAdditionalFilter(Target originalTarget, FilterInPlay<T> additionalFilter){
+    public TargetWithAdditionalFilter(Target originalTarget, FilterInPlay<T> additionalFilter) {
         this(originalTarget, additionalFilter, false);
     }
 
-    public TargetWithAdditionalFilter(Target originalTarget, FilterInPlay<T> additionalFilter, boolean notTarget){
+    public TargetWithAdditionalFilter(Target originalTarget, FilterInPlay<T> additionalFilter, boolean notTarget) {
         originalTarget = originalTarget.copy();
         originalTarget.clearChosen();
         this.originalTarget = originalTarget;
@@ -283,7 +284,7 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
     public int getMaxNumberOfTargets() {
         return originalTarget.getMaxNumberOfTargets();
     }
-    
+
     @Override
     public void setMinNumberOfTargets(int minNumberOfTargets) {
         originalTarget.setMinNumberOfTargets(minNumberOfTargets);
@@ -305,16 +306,15 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
         if (obj == null) {
             obj = game.getPlayer(id);
         }
-        
+
         try {
             return obj != null
-                && originalTarget.canTarget(id, game)
-                && additionalFilter.match((T) obj, game);
+                    && originalTarget.canTarget(id, game)
+                    && additionalFilter.match((T) obj, game);
         } catch (ClassCastException e) {
             return false;
         }
     }
-
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
@@ -322,16 +322,15 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
         if (obj == null) {
             obj = game.getPlayer(id);
         }
-        
+
         try {
             return obj != null
-                && originalTarget.canTarget(id, source, game)
-                && additionalFilter.match((T) obj, source.getSourceId(), source.getControllerId(), game);
+                    && originalTarget.canTarget(id, source, game)
+                    && additionalFilter.match((T) obj, source.getSourceId(), source.getControllerId(), game);
         } catch (ClassCastException e) {
             return false;
         }
     }
-
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
@@ -339,22 +338,20 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
         if (obj == null) {
             obj = game.getPlayer(id);
         }
-        
+
         try {
             return obj != null
-                && originalTarget.canTarget(controllerId, id, source, game)
-                && additionalFilter.match((T) obj, source.getSourceId(), controllerId, game);
+                    && originalTarget.canTarget(controllerId, id, source, game)
+                    && additionalFilter.match((T) obj, source.getSourceId(), controllerId, game);
         } catch (ClassCastException e) {
             return false;
         }
     }
 
-
     @Override
     public FilterInPlay<T> getFilter() {
         return new CompoundFilter((FilterInPlay<T>) originalTarget.getFilter(), additionalFilter, originalTarget.getFilter().getMessage());
     }
-
 
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
@@ -371,18 +368,18 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
             }
             try {
                 if (!targets.containsKey(objId)
-                    && obj != null
-                    && additionalFilter.match((T) obj, sourceId, sourceControllerId, game)) {
+                        && obj != null
+                        && additionalFilter.match((T) obj, sourceId, sourceControllerId, game)) {
                     count++;
                     if (count >= remainingTargets) {
                         return true;
                     }
                 }
-            } catch (ClassCastException e) {}
+            } catch (ClassCastException e) {
+            }
         }
         return false;
     }
-
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
@@ -399,18 +396,18 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
             }
             try {
                 if (!targets.containsKey(objId)
-                    && obj != null
-                    && additionalFilter.match((T) obj, game)) {
+                        && obj != null
+                        && additionalFilter.match((T) obj, game)) {
                     count++;
                     if (count >= remainingTargets) {
                         return true;
                     }
                 }
-            } catch (ClassCastException e) {}
+            } catch (ClassCastException e) {
+            }
         }
         return false;
     }
-
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
@@ -422,14 +419,14 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
             }
             try {
                 if (obj != null
-                    && additionalFilter.match((T) obj, sourceId, sourceControllerId, game)) {
+                        && additionalFilter.match((T) obj, sourceId, sourceControllerId, game)) {
                     ret.add(id);
                 }
-            } catch (ClassCastException e) {}
+            } catch (ClassCastException e) {
+            }
         }
         return ret;
     }
-
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
@@ -441,14 +438,14 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
             }
             try {
                 if (obj != null
-                    && additionalFilter.match((T) obj, game)) {
+                        && additionalFilter.match((T) obj, game)) {
                     ret.add(id);
                 }
-            } catch (ClassCastException e) {}
+            } catch (ClassCastException e) {
+            }
         }
         return ret;
     }
-
 
     @Override
     public TargetWithAdditionalFilter copy() {
@@ -458,7 +455,7 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
     @Override
     public String getTargetedName(Game game) {
         StringBuilder sb = new StringBuilder();
-        for (UUID targetId: getTargets()) {
+        for (UUID targetId : getTargets()) {
             MageObject object = game.getObject(targetId);
             if (object != null) {
                 sb.append(object.getLogName()).append(" ");

@@ -120,4 +120,53 @@ public class MyriadTest extends CardTestMultiPlayerBase {
         assertLife(playerD, 40);
 
     }
+
+    /**
+     * 4 player commander game, Man-o-War equipped with Blade of Selves attacks.
+     * The myriad trigger creates copies for each opponent, including the
+     * defending player, rather than the just two not being attacked.
+     */
+    @Test
+    public void BladeOfSelves() {
+        addCard(Zone.BATTLEFIELD, playerC, "Silvercoat Lion", 2);
+        addCard(Zone.BATTLEFIELD, playerC, "Pillarfield Ox", 1);
+        addCard(Zone.BATTLEFIELD, playerC, "Grizzly Bears", 1);
+
+        // Equipped creature has myriad.(Whenever this creature attacks, for each opponent other than the defending player,
+        // put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker
+        // he or she controls. Exile those tokens at the end of combat.)
+        // Equip {4}
+        addCard(Zone.BATTLEFIELD, playerD, "Blade of Selves");
+        addCard(Zone.BATTLEFIELD, playerD, "Island", 4);
+
+        // When Man-o'-War enters the battlefield, return target creature to its owner's hand.
+        addCard(Zone.HAND, playerD, "Man-o'-War"); // {2}{U}  2/2
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, "Man-o'-War");
+        addTarget(playerD, "Silvercoat Lion");
+        activateAbility(6, PhaseStep.PRECOMBAT_MAIN, playerD, "Equip", "Man-o'-War");
+
+        attack(6, playerD, "Man-o'-War", playerC);
+        addTarget(playerD, "Silvercoat Lion");
+        addTarget(playerD, "Pillarfield Ox");
+        addTarget(playerD, "Grizzly Bears");
+
+        setStopAt(6, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerD, "Man-o'-War", 1);
+        assertPermanentCount(playerC, "Silvercoat Lion", 0);
+        assertPermanentCount(playerC, "Pillarfield Ox", 0);
+        assertPermanentCount(playerC, "Grizzly Bears", 1);
+
+        assertHandCount(playerC, "Silvercoat Lion", 2);
+        assertHandCount(playerC, "Pillarfield Ox", 1);
+
+        assertLife(playerA, 38);
+        assertLife(playerB, 38);
+        assertLife(playerC, 38);
+        assertLife(playerD, 40);
+
+    }
+
 }

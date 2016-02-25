@@ -137,7 +137,7 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
         int amount = 0;
         Player controller = game.getPlayer(sourceAbility.getControllerId());
         if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
+            for (UUID playerUUID : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (controller.hasOpponent(playerUUID, game)) {
                     Player player = game.getPlayer(playerUUID);
                     if (player != null) {

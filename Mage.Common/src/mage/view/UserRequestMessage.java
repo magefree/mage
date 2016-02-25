@@ -35,32 +35,32 @@ import mage.constants.PlayerAction;
  *
  * @author LevelX2
  */
-
 public class UserRequestMessage implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-    private final String       titel;
-    private final String       message;
-    private final PlayerAction requestAction;
-    private UUID         relatedUserId;
-    private String       relatedUserName;
-    private UUID         matchId;
-    private UUID         gameId;
+    private final String titel;
+    private final String message;
+    private UUID relatedUserId;
+    private String relatedUserName;
+    private UUID matchId;
+    private UUID tournamentId;
+    private UUID gameId;
+    private UUID roomId;
+    private UUID tableId;
 
-    private String       button1Text;
+    private String button1Text;
     private PlayerAction button1Action;
 
-    private String       button2Text;
+    private String button2Text;
     private PlayerAction button2Action;
 
-    private String       button3Text;
+    private String button3Text;
     private PlayerAction button3Action;
 
-
-    public UserRequestMessage(String titel, String message, PlayerAction requestAction) {
+    public UserRequestMessage(String titel, String message) {
         this.titel = titel;
         this.message = message;
-        this.requestAction = requestAction;
         this.button1Action = null;
         this.button2Action = null;
         this.button3Action = null;
@@ -88,6 +88,7 @@ public class UserRequestMessage implements Serializable {
         this.button2Text = text;
         this.button2Action = buttonAction;
     }
+
     public void setButton3(String text, PlayerAction buttonAction) {
         this.button3Text = text;
         this.button3Action = buttonAction;
@@ -105,10 +106,6 @@ public class UserRequestMessage implements Serializable {
         return message;
     }
 
-    public PlayerAction getRequestAction() {
-        return requestAction;
-    }
-
     public UUID getRelatedUserId() {
         return relatedUserId;
     }
@@ -123,6 +120,30 @@ public class UserRequestMessage implements Serializable {
 
     public UUID getGameId() {
         return gameId;
+    }
+
+    public UUID getTournamentId() {
+        return tournamentId;
+    }
+
+    public void setTournamentId(UUID tournamentId) {
+        this.tournamentId = tournamentId;
+    }
+
+    public UUID getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(UUID roomId) {
+        this.roomId = roomId;
+    }
+
+    public UUID getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(UUID tableId) {
+        this.tableId = tableId;
     }
 
     public String getButton1Text() {

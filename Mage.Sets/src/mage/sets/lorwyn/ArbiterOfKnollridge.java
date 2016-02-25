@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.players.PlayerList;
 
 /**
  *
@@ -85,7 +86,8 @@ class ArbiterOfKnollridgeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int maxLife = 0;
-        for (UUID pid : game.getPlayerList()) {
+        PlayerList playerList = game.getState().getPlayersInRange(source.getControllerId(), game);
+        for (UUID pid : playerList) {
             Player p = game.getPlayer(pid);
             if (p != null) {
                 if (maxLife < p.getLife()) {
@@ -93,7 +95,7 @@ class ArbiterOfKnollridgeEffect extends OneShotEffect {
                 }
             }
         }
-        for (UUID pid : game.getPlayerList()) {
+        for (UUID pid : playerList) {
             Player p = game.getPlayer(pid);
             if (p != null) {
                 p.setLife(maxLife, game);

@@ -92,7 +92,8 @@ public class PlayerView implements Serializable {
         this.experience = player.getCounters().getCount(CounterType.EXPERIENCE);
         this.wins = player.getMatchPlayer().getWins();
         this.winsNeeded = player.getMatchPlayer().getWinsNeeded();
-        this.deckHashCode = player.getMatchPlayer().getDeck().getDeckHashCode();
+        // If match ended immediately before, deck can be set to null so check is necessarry here
+        this.deckHashCode = player.getMatchPlayer().getDeck() != null ? player.getMatchPlayer().getDeck().getDeckHashCode() : 0;
         this.libraryCount = player.getLibrary().size();
         this.handCount = player.getHand().size();
         this.manaPool = new ManaPoolView(player.getManaPool());

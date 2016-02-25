@@ -19,6 +19,7 @@
     userNamePattern     - pattern for user name validity check
     maxAiOpponents      - number of allowed AI opponents on the server
     saveGameActivated   - allow game save and replay options (not working correctly yet)
+
     authenticationActivated - "true" = user have to register to signon "false" = user need not to register
     * mail configs only needed if authentication is activated:
     * if mailUser = "" mailgun is used otherwise nativ mail server on the system

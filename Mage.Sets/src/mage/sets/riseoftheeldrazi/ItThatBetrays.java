@@ -28,7 +28,6 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.OpponentSacrificesNonTokenPermanentTriggeredAbility;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
@@ -40,17 +39,16 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 
-
 /**
  *
  * @author jeffwadsworth
  */
 public class ItThatBetrays extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nontoken permanent");
+    private static final FilterPermanent FILTER = new FilterPermanent("nontoken permanent");
 
     static {
-        filter.add(Predicates.not(new TokenPredicate()));
+        FILTER.add(Predicates.not(new TokenPredicate()));
     }
 
     public ItThatBetrays(UUID ownerId) {
@@ -61,6 +59,7 @@ public class ItThatBetrays extends CardImpl {
         this.power = new MageInt(11);
         this.toughness = new MageInt(11);
 
+        // Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)
         this.addAbility(new AnnihilatorAbility(2));
 
         // Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
@@ -75,5 +74,5 @@ public class ItThatBetrays extends CardImpl {
     public ItThatBetrays copy() {
         return new ItThatBetrays(this);
     }
-    
+
 }

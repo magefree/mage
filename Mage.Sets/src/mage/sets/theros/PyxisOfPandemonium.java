@@ -111,7 +111,7 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
                 game.getState().setValue(valueKey, exileIds);
             }
 
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
 
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

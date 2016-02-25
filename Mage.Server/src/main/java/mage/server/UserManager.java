@@ -54,12 +54,12 @@ public class UserManager {
 
     protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
-    private static final Logger logger = Logger.getLogger(UserManager.class);
+    private static final Logger LOGGER = Logger.getLogger(UserManager.class);
 
     private final ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, User> usersByName = new ConcurrentHashMap<>();
 
-    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
+    private static final ExecutorService CALL_EXECUTOR = ThreadExecutor.getInstance().getCallExecutor();
 
     private static final UserManager INSTANCE = new UserManager();
 
@@ -136,14 +136,14 @@ public class UserManager {
         if (userId != null) {
             final User user = users.get(userId);
             if (user != null) {
-                callExecutor.execute(
+                CALL_EXECUTOR.execute(
                         new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            logger.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId);
+                            LOGGER.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId);
                             user.remove(reason);
-                            logger.debug("USER REMOVE END - " + user.getName());
+                            LOGGER.debug("USER REMOVE END - " + user.getName());
                         } catch (Exception ex) {
                             handleException(ex);
                         } finally {
@@ -154,7 +154,7 @@ public class UserManager {
                 }
                 );
             } else {
-                logger.warn("Trying to remove userId: " + userId + " - but it does not exist.");
+                LOGGER.warn("Trying to remove userId: " + userId + " - but it does not exist.");
             }
         }
     }
@@ -188,13 +188,12 @@ public class UserManager {
 
     public void handleException(Exception ex) {
         if (ex != null) {
-            logger.fatal("User manager exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
-            if (ex.getCause() != null) {
-                logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()));
+            LOGGER.fatal("User manager exception ", ex);
+            if (ex.getStackTrace() != null) {
+                LOGGER.fatal(ex.getStackTrace());
             }
-            ex.printStackTrace();
         } else {
-            logger.fatal("User manager exception - null");
+            LOGGER.fatal("User manager exception - null");
         }
     }
 
@@ -205,13 +204,13 @@ public class UserManager {
             if (userStats == null) {
                 return "User " + userName + " not found";
             }
-            return User.userStatsToString(userStats.getProto());
+            return "History of user " + userName + ": " + User.userStatsToHistory(userStats.getProto());
         }
         return "History of user " + userName + ": " + user.getUserData().getHistory();
     }
 
     public void updateUserHistory() {
-        callExecutor.execute(new Runnable() {
+        CALL_EXECUTOR.execute(new Runnable() {
             @Override
             public void run() {
                 for (String updatedUser : UserStatsRepository.instance.updateUserStats()) {

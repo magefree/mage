@@ -70,7 +70,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     }
 
     public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-        this(new StaticValue(power), new StaticValue(toughness), duration, filter, excludeSource);
+        this(new StaticValue(power), new StaticValue(toughness), duration, filter, excludeSource, true);
     }
 
     public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {

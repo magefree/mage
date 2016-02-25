@@ -92,7 +92,7 @@ class HuntedWumpusEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID playerId: controller.getInRange()) {
+            for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!playerId.equals(controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {

@@ -37,7 +37,7 @@ public class ScouredBarrens extends mage.sets.khansoftarkir.ScouredBarrens {
 
     public ScouredBarrens(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 302;
+        this.cardNumber = 303;
         this.expansionSetCode = "C15";
     }
 

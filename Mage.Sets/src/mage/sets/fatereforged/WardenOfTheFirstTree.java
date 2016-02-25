@@ -55,12 +55,12 @@ import mage.game.permanent.token.Token;
  */
 public class WardenOfTheFirstTree extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
-    
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent FILTER2 = new FilterCreaturePermanent();
+
     static {
-        filter.add(new SubtypePredicate("Warrior"));
-        filter2.add(new SubtypePredicate("Spirit"));        
+        FILTER.add(new SubtypePredicate("Warrior"));
+        FILTER2.add(new SubtypePredicate("Spirit"));
     }
 
     public WardenOfTheFirstTree(UUID ownerId) {
@@ -80,21 +80,21 @@ public class WardenOfTheFirstTree extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
-                    new BecomesCreatureSourceEffect(new WardenOfTheFirstTree2(), "", Duration.Custom),
-                    new LockedInCondition(new SourceMatchesFilterCondition(filter)),
-                    "If {this} is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink"),
+                        new BecomesCreatureSourceEffect(new WardenOfTheFirstTree2(), "", Duration.Custom),
+                        new LockedInCondition(new SourceMatchesFilterCondition(FILTER)),
+                        "If {this} is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink"),
                 new ManaCostsImpl("{2}{W/B}{W/B}")
-                ));
+        ));
 
         // {3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalOneShotEffect(
-                    new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
-                    new SourceMatchesFilterCondition(filter2),
-                    "If {this} is a Spirit, put five +1/+1 counters on it"),
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
+                        new SourceMatchesFilterCondition(FILTER2),
+                        "If {this} is a Spirit, put five +1/+1 counters on it"),
                 new ManaCostsImpl("{3}{W/B}{W/B}{W/B}")
-                ));
+        ));
     }
 
     public WardenOfTheFirstTree(final WardenOfTheFirstTree card) {

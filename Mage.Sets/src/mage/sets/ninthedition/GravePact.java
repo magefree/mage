@@ -130,7 +130,7 @@ class GravePactEffect extends OneShotEffect {
         List<UUID> perms = new ArrayList<>();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {            
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !playerId.equals(source.getControllerId())) {
                     TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();

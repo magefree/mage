@@ -97,7 +97,7 @@ class BatwingBrumeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 final int amount = game.getBattlefield().getAllActivePermanents(new FilterAttackingCreature(), playerId, game).size();
                 if (amount > 0) {
                     Player player = game.getPlayer(playerId);

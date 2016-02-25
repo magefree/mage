@@ -56,7 +56,7 @@ import org.mage.plugins.card.images.ImageCache;
  */
 public class MageActionCallback implements ActionCallback {
 
-    private static final Logger logger = Logger.getLogger(ActionCallback.class);
+    private static final Logger LOGGER = Logger.getLogger(ActionCallback.class);
     public static final int GAP_X = 5;
     public static final double COMPARE_GAP_X = 30;
 
@@ -88,7 +88,7 @@ public class MageActionCallback implements ActionCallback {
     private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> hideTimeout;
 
-    private CardPanel prevCard;
+    private CardPanel prevCardPanel;
     private boolean startedDragging;
     private boolean isDragging;
     private Point initialCardPos;
@@ -207,7 +207,7 @@ public class MageActionCallback implements ActionCallback {
                     );
 
                 } catch (InterruptedException e) {
-                    logger.warn(e.getMessage());
+                    LOGGER.warn(e.getMessage());
                 }
             }
         });
@@ -219,11 +219,11 @@ public class MageActionCallback implements ActionCallback {
 
         // for some reason sometime mouseRelease happens before numerous Mouse_Dragged events
         // that results in not finished dragging
-        clearDragging(this.prevCard);
+        clearDragging(this.prevCardPanel);
 
         isDragging = false;
         startedDragging = false;
-        prevCard = null;
+        prevCardPanel = null;
         cardPanels.clear();
         Point mouse = new Point(e.getX(), e.getY());
         SwingUtilities.convertPointToScreen(mouse, data.component);
@@ -266,7 +266,7 @@ public class MageActionCallback implements ActionCallback {
     }
 
     private void clearDragging(CardPanel card) {
-        if (this.startedDragging && prevCard != null && card != null) {
+        if (this.startedDragging && prevCardPanel != null && card != null) {
             for (Component component : card.getCardArea().getComponents()) {
                 if (component instanceof CardPanel) {
                     if (cardPanels.contains((CardPanel) component)) {
@@ -278,7 +278,7 @@ public class MageActionCallback implements ActionCallback {
             sort(card, card.getCardArea(), true);
             cardPanels.clear();
         }
-        prevCard = null;
+        prevCardPanel = null;
     }
 
     @Override
@@ -288,8 +288,8 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseDragged(MouseEvent e, TransferData transferData) {
-        CardPanel card = ((CardPanel) transferData.component);
-        if (card.getZone() == null || !card.getZone().equalsIgnoreCase("hand")) {
+        CardPanel cardPanel = ((CardPanel) transferData.component);
+        if (cardPanel.getZone() == null || !cardPanel.getZone().equalsIgnoreCase("hand")) {
             // drag'n'drop is allowed for HAND zone only
             return;
         }
@@ -298,19 +298,19 @@ public class MageActionCallback implements ActionCallback {
             return;
         }
         isDragging = true;
-        prevCard = card;
-        Point p = card.getCardLocation();
+        prevCardPanel = cardPanel;
+        Point cardPanelLocationOld = cardPanel.getLocation();
         Point mouse = new Point(e.getX(), e.getY());
         SwingUtilities.convertPointToScreen(mouse, transferData.component);
-        int xOffset = card.getXOffset(card.getCardWidth());
+        int xOffset = cardPanel.getXOffset(cardPanel.getCardWidth());
         int newX = Math.max(initialCardPos.x + (int) (mouse.getX() - initialMousePos.x) - xOffset, 0);
-        card.setCardBounds(
+        cardPanel.setCardBounds(
                 newX,
-                p.y,
-                card.getCardWidth(),
-                card.getCardHeight());
-        card.getCardArea().setComponentZOrder(card, 0);
-        sort(card, card.getCardArea(), false);
+                cardPanelLocationOld.y + cardPanel.getCardYOffset(),
+                cardPanel.getCardWidth(),
+                cardPanel.getCardHeight());
+        cardPanel.getCardArea().setComponentZOrder(cardPanel, 0);
+        sort(cardPanel, cardPanel.getCardArea(), false);
 
         if (!this.startedDragging) {
             this.startedDragging = true;
@@ -336,10 +336,8 @@ public class MageActionCallback implements ActionCallback {
                         component.setLocation(component.getLocation().x, component.getLocation().y + GO_DOWN_ON_DRAG_Y_OFFSET);
                     }
                     cardPanels.add((CardPanel) component);
-                } else {
-                    if (!startedDragging) {
-                        component.setLocation(component.getLocation().x, component.getLocation().y - GO_UP_ON_DRAG_Y_OFFSET);
-                    }
+                } else if (!startedDragging) {
+                    component.setLocation(component.getLocation().x, component.getLocation().y - GO_UP_ON_DRAG_Y_OFFSET);
                 }
                 cards.add((CardPanel) component);
             }
@@ -430,7 +428,7 @@ public class MageActionCallback implements ActionCallback {
             Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
         } catch (Exception e2) {
-            logger.warn("Can't set tooltip to visible = false", e2);
+            LOGGER.warn("Can't set tooltip to visible = false", e2);
         }
     }
 
@@ -462,10 +460,8 @@ public class MageActionCallback implements ActionCallback {
                 if (notches > 0) {
                     hideEnlargedCard();
                 }
-            } else {
-                if (notches < 0) {
-                    hideEnlargedCard();
-                }
+            } else if (notches < 0) {
+                hideEnlargedCard();
             }
             return;
         }
@@ -515,7 +511,7 @@ public class MageActionCallback implements ActionCallback {
                 cardPreviewContainer.setVisible(false);
 
             } catch (InterruptedException e) {
-                logger.warn("Can't hide enlarged card", e);
+                LOGGER.warn("Can't hide enlarged card", e);
             }
         }
     }
@@ -587,11 +583,11 @@ public class MageActionCallback implements ActionCallback {
                         displayCardInfo(mageCard, image, bigCard);
 
                     } else {
-                        logger.warn("No Card preview Pane in Mage Frame defined. Card: " + cardView.getName());
+                        LOGGER.warn("No Card preview Pane in Mage Frame defined. Card: " + cardView.getName());
                     }
 
                 } catch (Exception e) {
-                    logger.warn("Problem dring display of enlarged card", e);
+                    LOGGER.warn("Problem dring display of enlarged card", e);
                 }
             }
         });

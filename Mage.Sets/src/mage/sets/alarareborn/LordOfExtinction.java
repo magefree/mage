@@ -75,7 +75,7 @@ class LordOfExtinctionDynamicCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
-        for (UUID playerId : game.getPlayer(sourceAbility.getControllerId()).getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 count += player.getGraveyard().size();

@@ -50,7 +50,7 @@ public class ForiysianBrigade extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Foriysian Brigade can block an additional creature.
+        // Foriysian Brigade can block an additional creature each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
     }
 

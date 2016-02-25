@@ -89,7 +89,7 @@ public class DamageEverythingEffect extends OneShotEffect {
         for (Permanent permanent: permanents) {
             permanent.damage(damage, damageSource == null ? source.getSourceId(): damageSource, game, false, true);
         }
-        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.damage(damage, damageSource == null ? source.getSourceId(): damageSource, game, false, true);

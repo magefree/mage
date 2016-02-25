@@ -54,6 +54,7 @@ public class MatchOptions implements Serializable {
     protected String password;
     protected SkillLevel skillLevel;
     protected boolean rollbackTurnsAllowed;
+    protected int quitRatio;
 
     /**
      * Time each player has during the game to play using his\her priority.
@@ -167,5 +168,13 @@ public class MatchOptions implements Serializable {
 
     public void setRollbackTurnsAllowed(boolean rollbackTurnsAllowed) {
         this.rollbackTurnsAllowed = rollbackTurnsAllowed;
-    }      
+    }
+
+    public int getQuitRatio() {
+        return quitRatio;
+    }
+
+    public void setQuitRatio(int quitRatio) {
+        this.quitRatio = quitRatio;
+    }
 }

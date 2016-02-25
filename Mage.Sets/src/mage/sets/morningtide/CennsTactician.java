@@ -76,7 +76,7 @@ public class CennsTactician extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filterSoldier));
         this.addAbility(ability);
         
-        // Each creature you control with a +1/+1 counter on it can block an additional creature.
+        // Each creature you control with a +1/+1 counter on it can block an additional creature each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureAllEffect(1, filterCounter, Duration.WhileOnBattlefield)));
     }
 

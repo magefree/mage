@@ -91,7 +91,7 @@ class UrborgSyphonMageEffect extends OneShotEffect {
         int damage = 0;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (playerId != source.getControllerId()) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {

@@ -44,7 +44,7 @@ import mage.game.stack.StackObject;
  */
 public class FilterStackObject extends FilterObject<StackObject> {
 
-    protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>();
+    protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<>();
 
     public FilterStackObject() {
         super("spell or ability");

@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,7 +57,7 @@ public class SliverHivelord extends CardImpl {
         // Sliver creatures you control have indestructible.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(IndestructibleAbility.getInstance(),
-                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
+                        Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
 
     }
 

@@ -28,12 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -46,44 +40,47 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
-
-
 /**
  *
  * @author LevelX2
  */
 public class GenjuOfTheFens extends CardImpl {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
-   
+
+    private static final FilterLandPermanent FILTER = new FilterLandPermanent("Swamp");
+
     static {
-        filter.add(new SubtypePredicate("Swamp"));
+        FILTER.add(new SubtypePredicate("Swamp"));
     }
+
     public GenjuOfTheFens(UUID ownerId) {
         super(ownerId, 66, "Genju of the Fens", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-
         // Enchant Swamp
-        TargetPermanent auraTarget = new TargetLandPermanent(filter);
+        TargetPermanent auraTarget = new TargetLandPermanent(FILTER);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // {2}: Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with "{B}: This creature gets +1/+1 until end of turn." It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with \"{B}: This creature gets +1/+1 until end of turn.\" It's still a land", Duration.EndOfTurn),new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with \"{B}: This creature gets +1/+1 until end of turn.\" It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
         this.addAbility(ability2);
 
         // When enchanted Swamp is put into a graveyard, you may return Genju of the Fens from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Swamp", true, false);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(false, true), "enchanted Swamp", true, false);
         this.addAbility(ability3);
     }
 
@@ -97,6 +94,7 @@ public class GenjuOfTheFens extends CardImpl {
     }
 
     private class SpiritToken extends Token {
+
         SpiritToken() {
             super("Spirit", "2/2 black Spirit creature with \"{B}: This creature gets +1/+1 until end of turn.\"");
             cardType.add(CardType.CREATURE);
@@ -104,7 +102,7 @@ public class GenjuOfTheFens extends CardImpl {
             subtype.add("Spirit");
             power = new MageInt(2);
             toughness = new MageInt(2);
-            addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1,Duration.EndOfTurn),new ManaCostsImpl("{B}")));
+            addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
         }
     }
 }

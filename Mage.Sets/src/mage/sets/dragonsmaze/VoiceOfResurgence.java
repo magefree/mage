@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
@@ -40,8 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -125,13 +123,6 @@ class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
 
 class VoiceOfResurgenceToken extends Token {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creatures you control");
-    private static final DynamicValue creaturesControlled = new PermanentsOnBattlefieldCount(filter);
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public VoiceOfResurgenceToken() {
         super("Elemental", "X/X green and white Elemental creature with with \"This creature's power and toughness are each equal to the number of creatures you control.");
         setOriginalExpansionSetCode("DGM");
@@ -140,9 +131,10 @@ class VoiceOfResurgenceToken extends Token {
         color.setWhite(true);
         subtype.add("Elemental");
 
-        power = new MageInt(0);        
+        power = new MageInt(0);
         toughness = new MageInt(0);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(creaturesControlled, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(
+                new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), Duration.EndOfGame)));
     }
 }

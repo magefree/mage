@@ -36,6 +36,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
+import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
 
 /**
@@ -107,7 +109,13 @@ public class DrawCardTargetEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         if (mode.getTargets().size() > 0) {
-            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+            Target target;
+            if (targetPointer instanceof SecondTargetPointer && mode.getTargets().size() > 1) {
+                target = mode.getTargets().get(1);
+            } else {
+                target = mode.getTargets().get(0);
+            }
+            sb.append("Target ").append(target.getTargetName());
         } else {
             sb.append("that player");
         }

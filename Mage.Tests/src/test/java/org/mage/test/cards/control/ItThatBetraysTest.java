@@ -87,4 +87,44 @@ public class ItThatBetraysTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Flooded Strand", 1);
     }
 
+    /**
+     * I just sacrificed a Spreading Seas to an attacking It That Betrays, and
+     * it returned the Spreading Seas under my control. It made me choose a land
+     * to enchant, and I drew a card.
+     */
+    @Test
+    public void testExileItThatBetraysEffectEnchantment() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.HAND, playerA, "Spreading Seas", 1); // {1}{U}
+
+        // Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)
+        // Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
+        addCard(Zone.BATTLEFIELD, playerB, "It That Betrays"); // 11/11
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        // Enchant land
+        // When Spreading Seas enters the battlefield, draw a card.
+        // Enchanted land is an Island.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Mountain");
+
+        attack(2, playerB, "It That Betrays");
+        setChoice(playerA, "Spreading Seas");
+        setChoice(playerA, "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 9);
+        assertLife(playerB, 20);
+
+        assertHandCount(playerA, "Spreading Seas", 0);
+
+        // Player B now controls a Silvercoat Lion and Spreading Seas
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+        assertPermanentCount(playerA, "Spreading Seas", 0);
+        assertGraveyardCount(playerA, "Spreading Seas", 0);
+        assertPermanentCount(playerB, "Spreading Seas", 1);
+    }
 }

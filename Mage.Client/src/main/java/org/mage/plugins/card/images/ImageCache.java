@@ -41,9 +41,9 @@ import org.mage.plugins.card.utils.CardImageUtils;
  */
 public class ImageCache {
 
-    private static final Logger log = Logger.getLogger(ImageCache.class);
+    private static final Logger LOGGER = Logger.getLogger(ImageCache.class);
 
-    private static final Map<String, BufferedImage> imageCache;
+    private static final Map<String, BufferedImage> IMAGE_CACHE;
 
     /**
      * Common pattern for keys. Format: "<cardname>#<setname>#<collectorID>"
@@ -51,7 +51,7 @@ public class ImageCache {
     private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)");
 
     static {
-        imageCache = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
+        IMAGE_CACHE = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
             @Override
             public BufferedImage apply(String key) {
                 try {
@@ -112,7 +112,7 @@ public class ImageCache {
                                 }
                             }
                             if (exists) {
-                                log.debug("loading thumbnail for " + key + ", path=" + thumbnailPath);
+                                LOGGER.debug("loading thumbnail for " + key + ", path=" + thumbnailPath);
                                 return loadImage(thumbnailFile);
                             } else {
                                 BufferedImage image = loadImage(file);
@@ -120,7 +120,7 @@ public class ImageCache {
                                 if (image == null) {
                                     return null;
                                 }
-                                log.debug("creating thumbnail for " + key);
+                                LOGGER.debug("creating thumbnail for " + key);
                                 return makeThumbnail(image, thumbnailPath);
                             }
                         } else {
@@ -202,7 +202,7 @@ public class ImageCache {
      */
     private static BufferedImage getImage(String key) {
         try {
-            BufferedImage image = imageCache.get(key);
+            BufferedImage image = IMAGE_CACHE.get(key);
             return image;
         } catch (NullPointerException ex) {
             // unfortunately NullOutputException, thrown when apply() returns
@@ -214,7 +214,7 @@ public class ImageCache {
             if (ex.getCause() instanceof NullPointerException) {
                 return null;
             }
-            log.error(ex, ex);
+            LOGGER.error(ex, ex);
             return null;
         }
     }
@@ -249,7 +249,7 @@ public class ImageCache {
         }
         BufferedImage image = null;
         if (!file.exists()) {
-            log.debug("File does not exist: " + file.toString());
+            LOGGER.debug("File does not exist: " + file.toString());
             return null;
         }
         try {
@@ -257,7 +257,7 @@ public class ImageCache {
                 image = ImageIO.read(inputStream);
             }
         } catch (Exception e) {
-            log.error(e, e);
+            LOGGER.error(e, e);
         }
 
         return image;
@@ -274,7 +274,7 @@ public class ImageCache {
                 ImageIO.write(image, "jpg", outputStream);
             }
         } catch (IOException e) {
-            log.error(e, e);
+            LOGGER.error(e, e);
             imageFile.delete();
         }
         return image;
@@ -345,10 +345,10 @@ public class ImageCache {
         if (Constants.THUMBNAIL_SIZE_FULL.width + 10 > width) {
             return getThumbnail(card);
         }
-        String key = getKey(card, card.getName(), "");
+        String key = getKey(card, card.getName(), Integer.toString(width));
         BufferedImage original = getImage(key);
         if (original == null) {
-            log.debug(key + " not found");
+            LOGGER.debug(key + " not found");
             return null;
         }
 
@@ -365,7 +365,7 @@ public class ImageCache {
             TFile file = new TFile(path);
             return file;
         } catch (NullPointerException ex) {
-            log.warn("Imagefile does not exist: " + path);
+            LOGGER.warn("Imagefile does not exist: " + path);
         }
         return null;
     }

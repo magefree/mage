@@ -247,9 +247,7 @@ class ReplicateCopyEffect extends OneShotEffect {
                 }
                 // create the copies
                 for (int i = 0; i < replicateCount; i++) {
-                    Spell copy = spell.copySpell();
-                    copy.setControllerId(source.getControllerId());
-                    copy.setCopiedSpell(true);
+                    Spell copy = spell.copySpell(source.getControllerId());
                     game.getStack().push(copy);
                     copy.chooseNewTargets(game, source.getControllerId());
                     if (!game.isSimulation()) {

@@ -57,7 +57,6 @@ public class EldraziObligator extends CardImpl {
         super(ownerId, 96, "Eldrazi Obligator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "OGW";
         this.subtype.add("Eldrazi");
-        this.subtype.add("Drone");
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.client.util;
 
 import com.mortennobel.imagescaling.ResampleOp;
@@ -37,6 +36,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.MemoryImageSource;
@@ -58,6 +58,7 @@ import org.mage.card.arcane.UI;
  * @author BetaSteward_at_googlemail.com
  */
 public class ImageHelper {
+
     protected static HashMap<String, BufferedImage> images = new HashMap<>();
     protected static HashMap<String, BufferedImage> backgrounds = new HashMap<>();
 
@@ -73,7 +74,8 @@ public class ImageHelper {
      *
      * @param ref - image name
      * @param height - height after scaling
-     * @return a scaled image that preserves the original aspect ratio, with a specified height
+     * @return a scaled image that preserves the original aspect ratio, with a
+     * specified height
      */
     public static BufferedImage loadImage(String ref, int height) {
         BufferedImage image = loadImage(ref);
@@ -104,7 +106,6 @@ public class ImageHelper {
         return background;
     }
 
-
     public static BufferedImage scaleImage(BufferedImage image, int width, int height) {
         BufferedImage scaledImage = image;
         int w = image.getWidth();
@@ -127,7 +128,7 @@ public class ImageHelper {
     }
 
     public static BufferedImage scaleImage(BufferedImage image, int height) {
-        double ratio = height / (double)image.getHeight();
+        double ratio = height / (double) image.getHeight();
         int width = (int) (image.getWidth() * ratio);
         return scaleImage(image, width, height);
     }
@@ -138,13 +139,12 @@ public class ImageHelper {
         PixelGrabber grabber = new PixelGrabber(image, 0, 0, dimensions.frameWidth, dimensions.frameHeight, buffer, 0, dimensions.frameWidth);
         try {
             grabber.grabPixels();
-        }
-        catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for(int y = 0; y < dimensions.frameHeight; y++) {
-            for(int x = 0; x < dimensions.frameWidth; x++) {
-                rotate[((dimensions.frameWidth - x - 1) *dimensions.frameHeight)+y] = buffer[(y*dimensions.frameWidth)+x];
+        for (int y = 0; y < dimensions.frameHeight; y++) {
+            for (int x = 0; x < dimensions.frameWidth; x++) {
+                rotate[((dimensions.frameWidth - x - 1) * dimensions.frameHeight) + y] = buffer[(y * dimensions.frameWidth) + x];
             }
         }
 
@@ -155,7 +155,7 @@ public class ImageHelper {
     public static BufferedImage rotate(BufferedImage image, double angle) {
         double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
         int w = image.getWidth(), h = image.getHeight();
-        int neww = (int)Math.floor(w*cos+h*sin), newh = (int)Math.floor(h*cos+w*sin);
+        int neww = (int) Math.floor(w * cos + h * sin), newh = (int) Math.floor(h * cos + w * sin);
 
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gs = ge.getDefaultScreenDevice();
@@ -163,8 +163,8 @@ public class ImageHelper {
 
         BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
         Graphics2D g = result.createGraphics();
-        g.translate((neww-w)/2, (newh-h)/2);
-        g.rotate(angle, w/2, h/2);
+        g.translate((neww - w) / 2, (newh - h) / 2);
+        g.rotate(angle, w / 2, h / 2);
         g.drawRenderedImage(image, null);
         g.dispose();
         return result;
@@ -184,6 +184,7 @@ public class ImageHelper {
     /**
      * Returns an image scaled to the size appropriate for the card picture
      * panel
+     *
      * @param original
      * @param width
      * @param height
@@ -196,8 +197,8 @@ public class ImageHelper {
     }
 
     /**
-     * Returns an image scaled to fit width
-     * panel
+     * Returns an image scaled to fit width panel
+     *
      * @param original
      * @param width
      * @return
@@ -213,7 +214,31 @@ public class ImageHelper {
     }
 
     /**
+     * scale image
+     *
+     * @param sbi image to scale
+     * @param imageType type of image
+     * @param dWidth width of destination image
+     * @param dHeight height of destination image
+     * @return scaled image
+     */
+    public static BufferedImage scale(BufferedImage sbi, int imageType, int dWidth, int dHeight) {
+        BufferedImage dbi = null;
+        if (sbi != null) {
+            double fWidth = dWidth / sbi.getWidth();
+            double fHeight = dHeight / sbi.getHeight();
+            dbi = new BufferedImage(dWidth, dHeight, imageType);
+            Graphics2D g = dbi.createGraphics();
+            AffineTransform at = AffineTransform.getScaleInstance(fWidth, fHeight);
+            g.drawRenderedImage(sbi, at);
+            g.dispose();
+        }
+        return dbi;
+    }
+
+    /**
      * Returns an image scaled to the needed size
+     *
      * @param original
      * @param sizeNeed
      * @return
@@ -226,6 +251,7 @@ public class ImageHelper {
 
     /**
      * Get image using relative path in resources.
+     *
      * @param path
      * @return
      */

@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.filter;
 
 import java.io.Serializable;
@@ -36,7 +35,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  * @author North
- * 
+ *
  * @param <E>
  */
 public interface Filter<E> extends Serializable {
@@ -64,9 +63,13 @@ public interface Filter<E> extends Serializable {
     }
 
     boolean match(E o, Game game);
+
     void add(Predicate predicate);
 
+    boolean checkObjectClass(Object object);
+
     String getMessage();
+
     void setMessage(String message);
 
     Filter<E> copy();

@@ -129,7 +129,7 @@ class RoilingHorrorDynamicValue implements DynamicValue {
         int opponentsMostLife = Integer.MIN_VALUE;
         Player controller = game.getPlayer(sourceAbility.getControllerId());
         if (controller != null) {
-            for (UUID playerUUID : controller.getInRange()) {
+            for (UUID playerUUID : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (controller.hasOpponent(playerUUID, game)) {
                     Player opponent = game.getPlayer(playerUUID);
                     if (opponent != null && opponent.getLife() > opponentsMostLife) {

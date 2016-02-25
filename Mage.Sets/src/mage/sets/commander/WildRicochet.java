@@ -60,7 +60,6 @@ public class WildRicochet extends CardImpl {
         super(ownerId, 139, "Wild Ricochet", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
         this.expansionSetCode = "CMD";
 
-
         // You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new WildRicochetEffect());
         this.getSpellAbility().addTarget(new TargetStackObject(filter));
@@ -96,9 +95,7 @@ class WildRicochetEffect extends OneShotEffect {
             spell.chooseNewTargets(game, you.getId());
         }
         if (spell != null) {
-            Spell copy = spell.copySpell();
-            copy.setControllerId(source.getControllerId());
-            copy.setCopiedSpell(true);
+            Spell copy = spell.copySpell(source.getControllerId());;
             game.getStack().push(copy);
             if (you != null && you.chooseUse(Outcome.Benefit, "Do you wish to choose new targets for the copied " + spell.getName() + "?", source, game)) {
                 return copy.chooseNewTargets(game, you.getId());

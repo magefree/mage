@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * TournamentPanel.java
  *
  * Created on 20-Jan-2011, 9:18:30 PM
@@ -34,6 +34,7 @@
 package mage.client.tournament;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
@@ -45,7 +46,6 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
@@ -57,13 +57,16 @@ import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_PLAYER_COLUMNS
 import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH;
 import mage.client.util.ButtonColumn;
 import mage.client.util.Format;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.constants.PlayerAction;
 import mage.remote.Session;
 import mage.view.RoundView;
 import mage.view.TournamentGameView;
 import mage.view.TournamentPlayerView;
 import mage.view.TournamentView;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
 /**
@@ -72,7 +75,10 @@ import org.apache.log4j.Logger;
  */
 public class TournamentPanel extends javax.swing.JPanel {
 
-    private static final Logger logger = Logger.getLogger(TournamentPanel.class);
+    private static final Logger LOGGER = Logger.getLogger(TournamentPanel.class);
+
+    private static final int[] DEFAULT_COLUMNS_WIDTH_PLAYERS = {30, 150, 150, 60, 400, 100};
+    private static final int[] DEFAULT_COLUMNS_WIDTH_MATCHES = {60, 140, 140, 400, 80};
 
     private UUID tournamentId;
     private boolean firstInitDone = false;
@@ -82,8 +88,7 @@ public class TournamentPanel extends javax.swing.JPanel {
     private UpdateTournamentTask updateTask;
     private final DateFormat df;
 
-    private static final int[] defaultColumnsWidthPlayers = {30, 150, 150, 60, 400};
-    private static final int[] defaultColumnsWidthMatches = {60, 140, 140, 400, 80};
+    private final ButtonColumn actionButtonColumn1;
 
     /**
      * Creates new form TournamentPanel
@@ -99,11 +104,11 @@ public class TournamentPanel extends javax.swing.JPanel {
         df = DateFormat.getDateTimeInstance();
 
         tablePlayers.createDefaultColumnsFromModel();
-        TableUtil.setColumnWidthAndOrder(tablePlayers, defaultColumnsWidthPlayers, KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH, KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER);
+        TableUtil.setColumnWidthAndOrder(tablePlayers, DEFAULT_COLUMNS_WIDTH_PLAYERS, KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH, KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER);
         tablePlayers.setDefaultRenderer(Icon.class, new CountryCellRenderer());
 
         tableMatches.createDefaultColumnsFromModel();
-        TableUtil.setColumnWidthAndOrder(tableMatches, defaultColumnsWidthMatches, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);
+        TableUtil.setColumnWidthAndOrder(tableMatches, DEFAULT_COLUMNS_WIDTH_MATCHES, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);
 
         chatPanel1.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         chatPanel1.setChatType(ChatPanelBasic.ChatType.TOURNAMENT);
@@ -123,14 +128,15 @@ public class TournamentPanel extends javax.swing.JPanel {
 //                    session.replayGame(gameId);
 //                }
                 if (state.startsWith("Dueling") && actionText.equals("Watch")) {
-                    logger.info("Watching game " + gameId);
+                    LOGGER.info("Watching game " + gameId);
                     session.watchTournamentTable(tableId);
                 }
             }
         };
 
         // action button, don't delete this
-        ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
+        actionButtonColumn1 = new ButtonColumn(tableMatches, action, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
+        setGUISize();
 
     }
 
@@ -140,6 +146,31 @@ public class TournamentPanel extends javax.swing.JPanel {
             this.chatPanel1.disconnect();
         }
 
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        tablePlayers.getTableHeader().setFont(GUISizeHelper.tableFont);
+        tablePlayers.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
+        tablePlayers.setFont(GUISizeHelper.tableFont);
+        tablePlayers.setRowHeight(GUISizeHelper.getTableRowHeight());
+
+        tableMatches.getTableHeader().setFont(GUISizeHelper.tableFont);
+        tableMatches.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
+        tableMatches.setFont(GUISizeHelper.tableFont);
+        tableMatches.setRowHeight(GUISizeHelper.getTableRowHeight());
+
+        jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+        jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
+        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
+        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
+        jScrollPane2.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
+        jScrollPane2.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
+
+        actionButtonColumn1.changeGUISize();
     }
 
     private void saveDividerLocations() {
@@ -508,10 +539,10 @@ public class TournamentPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCloseWindowActionPerformed
 
     private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the tournament?", "Confirm quit tournament", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            MageFrame.getSession().quitTournament(tournamentId);
-        }
-
+        UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the tournament?");
+        message.setButton1("No", null);
+        message.setButton2("Yes", PlayerAction.CLIENT_QUIT_TOURNAMENT);
+        MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnQuitTournamentActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -545,7 +576,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 
 class TournamentPlayersTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{"Loc", "Player Name", "State", "Points", "Results"};
+    private final String[] columnNames = new String[]{"Loc", "Player Name", "State", "Points", "Results", "History"};
     private TournamentPlayerView[] players = new TournamentPlayerView[0];
 
     public void loadData(TournamentView tournament) {
@@ -576,6 +607,8 @@ class TournamentPlayersTableModel extends AbstractTableModel {
                 return Integer.toString(players[arg0].getPoints());
             case 4:
                 return players[arg0].getResults();
+            case 5:
+                return players[arg0].getHistory();
         }
         return "";
     }

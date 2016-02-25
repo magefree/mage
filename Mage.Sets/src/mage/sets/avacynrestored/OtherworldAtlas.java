@@ -93,7 +93,7 @@ class OtherworldAtlasDrawEffect extends OneShotEffect {
         if (permanent != null) {
             int amount = permanent.getCounters().getCount(CounterType.CHARGE);
             if (amount > 0) {
-                for (UUID playerId : sourcePlayer.getInRange()) {
+                for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         player.drawCards(amount, game);

@@ -24,14 +24,13 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 
-/*
+ /*
  * GamePane.java
  *
  * Created on Dec 17, 2009, 9:34:10 AM
  */
-
 package mage.client.game;
 
 import java.util.UUID;
@@ -44,8 +43,10 @@ import mage.client.MagePane;
  * @author BetaSteward_at_googlemail.com
  */
 public class GamePane extends MagePane {
-    
-    /** Creates new form GamePane */
+
+    /**
+     * Creates new form GamePane
+     */
     public GamePane() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
@@ -66,7 +67,15 @@ public class GamePane extends MagePane {
     }
 
     public void cleanUp() {
-        gamePanel.cleanUp();       
+        gamePanel.cleanUp();
+    }
+
+    @Override
+    public void changeGUISize() {
+        super.changeGUISize();
+        gamePanel.changeGUISize();
+        this.revalidate();
+        this.repaint();
     }
 
     public void removeGame() {
@@ -97,14 +106,14 @@ public class GamePane extends MagePane {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-            .addGap(0, 600, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                .addGap(0, 600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addGap(0, 400, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                .addGap(0, 400, Short.MAX_VALUE)
         );
 
         pack();
@@ -123,7 +132,7 @@ public class GamePane extends MagePane {
     public void activated() {
         gamePanel.activated();
     }
-    
+
     private mage.client.game.GamePanel gamePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private UUID gameId;

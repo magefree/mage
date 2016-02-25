@@ -29,9 +29,6 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -39,7 +36,9 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -55,6 +54,11 @@ public class VictorysHerald extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Whenever Victory's Herald attacks, attacking creatures gain flying and lifelink until end of turn.
         Ability ability = new AttacksTriggeredAbility(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature()), false);
         ability.addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature()));
         this.addAbility(ability);

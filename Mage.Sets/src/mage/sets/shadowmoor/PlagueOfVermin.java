@@ -103,7 +103,7 @@ class PlagueOfVerminEffect extends OneShotEffect {
                 if (firstInactivePlayer == null) {
                     firstInactivePlayer = currentPlayer.getId();
                 }
-                if (currentPlayer != null && currentPlayer.canRespond() && controller.getInRange().contains(currentPlayer.getId())) {
+                if (currentPlayer != null && currentPlayer.canRespond() && game.getState().getPlayersInRange(controller.getId(), game).contains(currentPlayer.getId())) {
                     currentLifePaid = 0;
                     totalPaidLife = 0;
                     if (currentPlayer.chooseUse(Outcome.AIDontUseIt, "Pay life?", source, game)) {

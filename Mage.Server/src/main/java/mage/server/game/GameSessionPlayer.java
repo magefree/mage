@@ -185,7 +185,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
                         message = "Allow to rollback " + numberTurns + " turns?";
                 }
                 UserRequestMessage userRequestMessage = new UserRequestMessage(
-                        "Request by " + requestedUser.getName(), message, PlayerAction.REQUEST_PERMISSION_TO_ROLLBACK_TURN);
+                        "Request by " + requestedUser.getName(), message);
                 userRequestMessage.setRelatedUser(requestingUserId, requestingUser.getName());
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_ROLLBACK_TURN);
@@ -203,7 +203,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
                 UserRequestMessage userRequestMessage = new UserRequestMessage(
                         "User request",
                         "Allow user <b>" + watcher.getName() + "</b> for this match to see your hand cards?<br>"
-                        + "(You can revoke this every time using related popup menu item of your battlefield.)", PlayerAction.REQUEST_PERMISSION_TO_SEE_HAND_CARDS);
+                        + "(You can revoke this every time using related popup menu item of your battlefield.)");
                 userRequestMessage.setRelatedUser(watcherId, watcher.getName());
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_SEE_HAND_CARDS);
@@ -283,33 +283,33 @@ public class GameSessionPlayer extends GameSessionWatcher {
             if (player != null && player.isInGame()) {
                 callExecutor.execute(
                         new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    if (game.getStartTime() == null) {
-                                        // gameController is still waiting to start the game
-                                        player.leave();
-                                    } else {
-                                        // game was already started
-                                        player.quit(game);
-                                    }
+                    @Override
+                    public void run() {
+                        try {
+                            if (game.getStartTime() == null) {
+                                // gameController is still waiting to start the game
+                                player.leave();
+                            } else {
+                                // game was already started
+                                player.quit(game);
+                            }
 
-                                } catch (Exception ex) {
-                                    if (ex != null) {
-                                        // It seems this can happen if two threads try to end the game at the exact same time (one wins and one ends here)
-                                        logger.fatal("Game session game quit exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
-                                        logger.debug("- gameId:" + game.getId() + "  playerId: " + playerId);
-                                        if (ex.getCause() != null) {
-                                            logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()), ex);
-                                        } else {
-                                            logger.debug("- ex: " + ex.toString(), ex);
-                                        }
-                                    } else {
-                                        logger.fatal("Game session game quit exception - null  gameId:" + game.getId() + "  playerId: " + playerId);
-                                    }
+                        } catch (Exception ex) {
+                            if (ex != null) {
+                                // It seems this can happen if two threads try to end the game at the exact same time (one wins and one ends here)
+                                logger.fatal("Game session game quit exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
+                                logger.debug("- gameId:" + game.getId() + "  playerId: " + playerId);
+                                if (ex.getCause() != null) {
+                                    logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()), ex);
+                                } else {
+                                    logger.debug("- ex: " + ex.toString(), ex);
                                 }
+                            } else {
+                                logger.fatal("Game session game quit exception - null  gameId:" + game.getId() + "  playerId: " + playerId);
                             }
                         }
+                    }
+                }
                 );
 
             }

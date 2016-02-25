@@ -47,7 +47,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     public enum LoseType {
 
-        NONE, ALL, ALL_BUT_COLOR, ABILITIES, ABILITIES_AND_PT
+        NONE, ALL, ALL_BUT_COLOR, ABILITIES, ABILITIES_SUBTYPE_AND_PT
     };
 
     protected Token token;
@@ -111,6 +111,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                             switch (loseType) {
                                 case ALL:
                                 case ALL_BUT_COLOR:
+                                case ABILITIES_SUBTYPE_AND_PT:
                                     permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
                                     break;
                             }
@@ -143,7 +144,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                 case ALL:
                                 case ALL_BUT_COLOR:
                                 case ABILITIES:
-                                case ABILITIES_AND_PT:
+                                case ABILITIES_SUBTYPE_AND_PT:
                                     permanent.removeAllAbilities(source.getSourceId(), game);
                                     break;
                             }

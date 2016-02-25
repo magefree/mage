@@ -97,14 +97,14 @@ class DakraMysticEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID playerId: controller.getInRange()) {
+            for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.getLibrary().size() > 0) {
                     player.revealCards(player.getLogName(), new CardsImpl(player.getLibrary().getFromTop(game)), game);
                 }
             }
             if (controller.chooseUse(outcome, "Put revealed cards into graveyard?", source, game)) {
-                for(UUID playerId: controller.getInRange()) {
+                for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);                    
                     if (player != null && player.getLibrary().size() > 0) {
                         player.moveCards(player.getLibrary().getFromTop(game), Zone.LIBRARY, Zone.GRAVEYARD, source, game);

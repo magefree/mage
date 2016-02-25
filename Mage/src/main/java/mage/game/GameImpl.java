@@ -140,22 +140,22 @@ public abstract class GameImpl implements Game, Serializable {
 
     private static final Logger logger = Logger.getLogger(GameImpl.class);
 
-    private static final FilterPermanent filterAura = new FilterPermanent();
-    private static final FilterPermanent filterEquipment = new FilterPermanent();
-    private static final FilterPermanent filterFortification = new FilterPermanent();
-    private static final FilterPermanent filterLegendary = new FilterPermanent();
+    private static final FilterPermanent FILTER_AURA = new FilterPermanent();
+    private static final FilterPermanent FILTER_EQUIPMENT = new FilterPermanent();
+    private static final FilterPermanent FILTER_FORTIFICATION = new FilterPermanent();
+    private static final FilterPermanent FILTER_LEGENDARY = new FilterPermanent();
 
     static {
-        filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAura.add(new SubtypePredicate("Aura"));
+        FILTER_AURA.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        FILTER_AURA.add(new SubtypePredicate("Aura"));
 
-        filterEquipment.add(new CardTypePredicate(CardType.ARTIFACT));
-        filterEquipment.add(new SubtypePredicate("Equipment"));
+        FILTER_EQUIPMENT.add(new CardTypePredicate(CardType.ARTIFACT));
+        FILTER_EQUIPMENT.add(new SubtypePredicate("Equipment"));
 
-        filterFortification.add(new CardTypePredicate(CardType.ARTIFACT));
-        filterFortification.add(new SubtypePredicate("Fortification"));
+        FILTER_FORTIFICATION.add(new CardTypePredicate(CardType.ARTIFACT));
+        FILTER_FORTIFICATION.add(new SubtypePredicate("Fortification"));
 
-        filterLegendary.add(new SupertypePredicate("Legendary"));
+        FILTER_LEGENDARY.add(new SupertypePredicate("Legendary"));
     }
 
     private static Random rnd = new Random();
@@ -1307,6 +1307,10 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     } catch (Exception ex) {
                         logger.fatal("Game exception gameId: " + getId(), ex);
+                        if ((ex instanceof NullPointerException)
+                                && errorContinueCounter == 1 && ex.getStackTrace() != null) {
+                            logger.fatal(ex.getStackTrace());
+                        }
                         this.fireErrorEvent("Game exception occurred: ", ex);
                         restoreState(bookmark, "");
                         bookmark = 0;
@@ -1482,10 +1486,6 @@ public abstract class GameImpl implements Game, Serializable {
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
-            // Too early, because no targets set yet !!!!!!!!!!!
-            for (Effect effect : newAbility.getEffects()) {
-                effect.getTargetPointer().init(this, newAbility);
-            }
             state.addTriggeredAbility(newAbility);
         }
     }
@@ -1709,7 +1709,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.getSupertype().contains("World")) {
                 worldEnchantment.add(perm);
             }
-            if (filterAura.match(perm, this)) {
+            if (FILTER_AURA.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
                     Card card = this.getCard(perm.getId());
@@ -1744,10 +1744,8 @@ public abstract class GameImpl implements Game, Serializable {
                                     UUID wasAttachedTo = perm.getAttachedTo();
                                     perm.attachTo(null, this);
                                     fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
-                                } else {
-                                    if (movePermanentToGraveyardWithInfo(perm)) {
-                                        somethingHappened = true;
-                                    }
+                                } else if (movePermanentToGraveyardWithInfo(perm)) {
+                                    somethingHappened = true;
                                 }
                             } else {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
@@ -1758,19 +1756,15 @@ public abstract class GameImpl implements Game, Serializable {
                                             somethingHappened = true;
                                         }
                                     }
-                                } else {
-                                    if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeEnchantedBy(perm, this)) {
-                                        // handle bestow unattachment
-                                        Card card = this.getCard(perm.getId());
-                                        if (card != null && card.getCardType().contains(CardType.CREATURE)) {
-                                            UUID wasAttachedTo = perm.getAttachedTo();
-                                            perm.attachTo(null, this);
-                                            fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
-                                        } else {
-                                            if (movePermanentToGraveyardWithInfo(perm)) {
-                                                somethingHappened = true;
-                                            }
-                                        }
+                                } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeEnchantedBy(perm, this)) {
+                                    // handle bestow unattachment
+                                    Card card = this.getCard(perm.getId());
+                                    if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                                        UUID wasAttachedTo = perm.getAttachedTo();
+                                        perm.attachTo(null, this);
+                                        fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
+                                    } else if (movePermanentToGraveyardWithInfo(perm)) {
+                                        somethingHappened = true;
                                     }
                                 }
                             }
@@ -1792,10 +1786,10 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            if (this.getState().isLegendaryRuleActive() && filterLegendary.match(perm, this)) {
+            if (this.getState().isLegendaryRuleActive() && FILTER_LEGENDARY.match(perm, this)) {
                 legendary.add(perm);
             }
-            if (filterEquipment.match(perm, this)) {
+            if (FILTER_EQUIPMENT.match(perm, this)) {
                 //20091005 - 704.5p, 702.14d
                 if (perm.getAttachedTo() != null) {
                     Permanent creature = getPermanent(perm.getAttachedTo());
@@ -1810,7 +1804,7 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            if (filterFortification.match(perm, this)) {
+            if (FILTER_FORTIFICATION.match(perm, this)) {
                 if (perm.getAttachedTo() != null) {
                     Permanent land = getPermanent(perm.getAttachedTo());
                     if (land == null || !land.getAttachments().contains(perm.getId())) {
@@ -2736,9 +2730,11 @@ public abstract class GameImpl implements Game, Serializable {
     public void setDraw(UUID playerId) {
         Player player = getPlayer(playerId);
         if (player != null) {
-            for (UUID playerToSetId : player.getInRange()) {
+            for (UUID playerToSetId : getState().getPlayersInRange(playerId, this)) {
                 Player playerToDraw = getPlayer(playerToSetId);
-                playerToDraw.lostForced(this);
+                if (playerToDraw != null) {
+                    playerToDraw.lostForced(this);
+                }
             }
         }
     }

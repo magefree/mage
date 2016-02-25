@@ -43,6 +43,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -462,17 +463,15 @@ public class ContinuousEffects implements Serializable {
                     exists = permanent.getCard().getAbilities().contains(ability);
                 }
             }
-        } else {
-            if (object instanceof PermanentCard) {
-                PermanentCard permanent = (PermanentCard) object;
-                if (permanent.isFaceDown(game) && !ability.getWorksFaceDown()) {
-                    return false;
-                }
-            } else if (object instanceof Spell) {
-                Spell spell = (Spell) object;
-                if (spell.isFaceDown(game) && !ability.getWorksFaceDown()) {
-                    return false;
-                }
+        } else if (object instanceof PermanentCard) {
+            PermanentCard permanent = (PermanentCard) object;
+            if (permanent.isFaceDown(game) && !ability.getWorksFaceDown()) {
+                return false;
+            }
+        } else if (object instanceof Spell) {
+            Spell spell = (Spell) object;
+            if (spell.isFaceDown(game) && !ability.getWorksFaceDown()) {
+                return false;
             }
         }
         return exists;
@@ -539,10 +538,8 @@ public class ContinuousEffects implements Serializable {
                     if (effect.applies(objectId, ability, controllerId, game)) {
                         return true;
                     }
-                } else {
-                    if (effect.applies(objectId, affectedAbility, ability, game)) {
-                        return true;
-                    }
+                } else if (effect.applies(objectId, affectedAbility, ability, game)) {
+                    return true;
                 }
             }
         }
@@ -747,6 +744,9 @@ public class ContinuousEffects implements Serializable {
                         if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                             effect.setValue("targetAbility", targetAbility);
                             if (effect.applies(event, sourceAbility, game)) {
+                                if (targetAbility instanceof ActivatedAbility && ((ActivatedAbility) targetAbility).isCheckPlayableMode()) {
+                                    checkPlayableMode = true;
+                                }
                                 if (!checkPlayableMode) {
                                     String message = effect.getInfoMessage(sourceAbility, event, game);
                                     if (message != null && !message.isEmpty()) {
@@ -1082,11 +1082,9 @@ public class ContinuousEffects implements Serializable {
             if (abilities == null) {
                 abilities = new HashSet<>();
                 temporaryEffects.put(effect, abilities);
-            } else {
-                if (abilities.contains(source)) {
-                    // this ability (for the continuous effect) is already added
-                    return;
-                }
+            } else if (abilities.contains(source)) {
+                // this ability (for the continuous effect) is already added
+                return;
             }
             abilities.add(source);
 
@@ -1166,10 +1164,8 @@ public class ContinuousEffects implements Serializable {
                         if (ability.getSourceId().equals(sourceId)) {
                             ability.setControllerId(controllerId);
                         }
-                    } else {
-                        if (!ability.getZone().equals(Zone.COMMAND)) {
-                            logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
-                        }
+                    } else if (!ability.getZone().equals(Zone.COMMAND)) {
+                        logger.fatal("Continuous effect for ability with no sourceId Ability: " + ability);
                     }
                 }
             }

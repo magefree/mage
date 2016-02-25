@@ -119,4 +119,58 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Pillarfield Ox", 0);
         assertHandCount(playerA, 4); // 2 draw + 2 creatures returned to hand
     }
+
+    /**
+     * Not to be a bother, but I posted earlier about how Zada, Hedron Grinder
+     * 's interaction with splice is broken. I didn't get a response on whether
+     * or not the problem was being looked at. Zada SHOULD copy spliced effects
+     * (and currently doesn't) because spliced effects are put onto the spell
+     * before it is cast and therefore before Zada's ability triggers, e.g.
+     * Desperate Ritual spliced onto Into the Fray should generate 3 red mana
+     * for every creature i control.
+     *
+     * 702.46a Splice is a static ability that functions while a card is in your
+     * hand. “Splice onto [subtype] [cost]” means “You may reveal this card from
+     * your hand as you cast a [subtype] spell. If you do, copy this card’s text
+     * box onto that spell and pay [cost] as an additional cost to cast that
+     * spell.” Paying a card’s splice cost follows the rules for paying
+     * additional costs in rules 601.2b and 601.2e–g. 601.2b If the spell is
+     * modal the player announces the mode choice (see rule 700.2). If the
+     * player wishes to splice any cards onto the spell (see rule 702.46), he or
+     * she reveals those cards in his or her hand. 706.10. To copy a spell,
+     * activated ability, or triggered ability means to put a copy of it onto
+     * the stack; a copy of a spell isn’t cast and a copy of an activated
+     * ability isn’t activated. A copy of a spell or ability copies both the
+     * characteristics of the spell or ability and all decisions made for it,
+     * including modes, targets, the value of X, and additional or alternative
+     * costs. (See rule 601, “Casting Spells.”)
+     */
+    @Test
+    public void ZadaHedronGrinderAndSplicedSpell() {
+        // Draw a card.
+        // Splice onto Arcane {1}{U}
+        addCard(Zone.HAND, playerA, "Evermind", 1); // no costs
+        // Target creature attacks this turn if able.
+        // Splice onto Arcane {R}
+        addCard(Zone.HAND, playerA, "Into the Fray", 1); // Instant - Arcane - {U}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // Whenever you cast an instant or sorcery spell that targets only Zada, Hedron Grinder,
+        // copy that spell for each other creature you control that the spell could target.
+        // Each copy targets a different one of those creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Zada, Hedron Grinder", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Into the Fray", "Zada, Hedron Grinder");
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Into the Fray", 1);
+        assertHandCount(playerA, "Evermind", 1);
+        assertHandCount(playerA, 3); // Evermind + 1 card from Evermind spliced on cast Into the fray and 1 from the copied spell with splice
+    }
+
 }

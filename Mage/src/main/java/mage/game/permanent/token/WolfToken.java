@@ -31,9 +31,8 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import mage.constants.CardType;
 import mage.MageInt;
+import mage.constants.CardType;
 
 /**
  *
@@ -44,7 +43,7 @@ public class WolfToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("BNG", "C14", "CNS", "FNMP", "ISD", "LRW", "M10", "M14", "MM2", "SHM", "SOM", "ZEN"));
+        tokenImageSets.addAll(Arrays.asList("BNG", "C14", "CNS", "FNMP", "ISD", "LRW", "M10", "M14", "MM2", "SHM", "SOM", "ZEN", "SOI"));
     }
 
     public WolfToken() {

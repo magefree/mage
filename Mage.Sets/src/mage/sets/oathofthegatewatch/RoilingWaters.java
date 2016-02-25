@@ -47,10 +47,10 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class RoilingWaters extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
+    private final static FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creatures your opponents control");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        FILTER.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public RoilingWaters(UUID ownerId) {
@@ -59,7 +59,7 @@ public class RoilingWaters extends CardImpl {
 
         // Return up to two target creatures your opponents control to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, filter, false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, FILTER, false));
         // Target player draws two cards.
         Effect effect = new DrawCardTargetEffect(2);
         effect.setTargetPointer(new SecondTargetPointer());

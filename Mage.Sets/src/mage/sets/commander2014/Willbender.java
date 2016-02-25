@@ -37,7 +37,7 @@ import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterSpell;
+import mage.filter.FilterStackObject;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
 import mage.target.TargetStackObject;
 
@@ -47,10 +47,10 @@ import mage.target.TargetStackObject;
  */
 public class Willbender extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell with a single target");
+    private static final FilterStackObject FILTER = new FilterStackObject("spell or ability with a single target");
 
     static {
-        filter.add(new NumberOfTargetsPredicate(1));
+        FILTER.add(new NumberOfTargetsPredicate(1));
     }
 
     public Willbender(UUID ownerId) {
@@ -66,7 +66,7 @@ public class Willbender extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}")));
         // When Willbender is turned face up, change the target of target spell or ability with a single target.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ChooseNewTargetsTargetEffect(true, true));
-        ability.addTarget(new TargetStackObject(filter));
+        ability.addTarget(new TargetStackObject(FILTER));
         this.addAbility(ability);
 
     }

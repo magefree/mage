@@ -78,10 +78,10 @@ public class EternalDominion extends CardImpl {
 
 class EternalDominionEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("an artifact, creature, enchantment, or land card");
+    private static final FilterCard FILTER = new FilterCard("an artifact, creature, enchantment, or land card");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
+        FILTER.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.ENCHANTMENT),
                 new CardTypePredicate(CardType.LAND)));
@@ -102,7 +102,7 @@ class EternalDominionEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (opponent != null && controller != null) {
-            TargetCardInLibrary target = new TargetCardInLibrary(filter);
+            TargetCardInLibrary target = new TargetCardInLibrary(FILTER);
             controller.searchLibrary(target, game, opponent.getId());
             Card targetCard = game.getCard(target.getFirstTarget());
             if (targetCard != null) {

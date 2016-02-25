@@ -54,7 +54,7 @@ public class EternityVessel extends CardImpl {
 
         // Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total.
         this.addAbility(new EntersBattlefieldAbility(new EternityVesselEffect()));
-        
+
         // Landfall - Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new EternityVesselEffect2(), true));
     }
@@ -70,6 +70,7 @@ public class EternityVessel extends CardImpl {
 }
 
 class EternityVesselEffect extends OneShotEffect {
+
     public EternityVesselEffect() {
         super(Outcome.Benefit);
         staticText = "with X charge counters on it, where X is your life total";
@@ -81,16 +82,17 @@ class EternityVesselEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent vessel = game.getPermanent(source.getSourceId());
-        Player you = game.getPlayer(source.getControllerId());
-        if (vessel != null && you != null) {
-            int amount = you.getLife();
+        Permanent vessel = game.getPermanentEntering(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (vessel != null && controller != null) {
+            int amount = controller.getLife();
             if (amount > 0) {
                 vessel.addCounters(CounterType.CHARGE.createInstance(amount), game);
-                return true;
+
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -100,6 +102,7 @@ class EternityVesselEffect extends OneShotEffect {
 }
 
 class EternityVesselEffect2 extends OneShotEffect {
+
     public EternityVesselEffect2() {
         super(Outcome.Benefit);
         staticText = "you may have your life total become the number of charge counters on {this}";
@@ -112,9 +115,9 @@ class EternityVesselEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent vessel = game.getPermanent(source.getSourceId());
-        Player you = game.getPlayer(source.getControllerId());
-        if (vessel != null && you != null) {
-            you.setLife(vessel.getCounters().getCount(CounterType.CHARGE), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (vessel != null && controller != null) {
+            controller.setLife(vessel.getCounters().getCount(CounterType.CHARGE), game);
             return true;
         }
         return false;

@@ -106,7 +106,9 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && filter.match(card, getSourceId(), getControllerId(), game)) {
+            if (card != null
+                    && !card.isCopy()
+                    && filter.match(card, getSourceId(), getControllerId(), game)) {
                 switch (setTargetPointer) {
                     case CARD:
                         for (Effect effect : getEffects()) {

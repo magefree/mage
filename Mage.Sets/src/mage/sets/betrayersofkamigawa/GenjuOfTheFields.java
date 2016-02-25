@@ -58,20 +58,20 @@ import mage.target.common.TargetLandPermanent;
  * @author LevelX2
  */
 public class GenjuOfTheFields extends CardImpl {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
-   
+
+    private static final FilterLandPermanent FILTER = new FilterLandPermanent("Plains");
+
     static {
-        filter.add(new SubtypePredicate("Plains"));
+        FILTER.add(new SubtypePredicate("Plains"));
     }
+
     public GenjuOfTheFields(UUID ownerId) {
         super(ownerId, 5, "Genju of the Fields", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-
         // Enchant Plains
-        TargetPermanent auraTarget = new TargetLandPermanent(filter);
+        TargetPermanent auraTarget = new TargetLandPermanent(FILTER);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
@@ -80,14 +80,14 @@ public class GenjuOfTheFields extends CardImpl {
         // {2}: Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature with "Whenever this creature deals damage, its controller gains that much life." It's still a land.
         Effect effect = new BecomesCreatureAttachedEffect(new SpiritToken(),
                 "Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature", Duration.EndOfTurn);
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect,new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         effect = new GainAbilityAttachedEffect(new DealsDamageGainLifeSourceTriggeredAbility(), AttachmentType.AURA, Duration.EndOfTurn);
         effect.setText("with \"Whenever this creature deals damage, its controller gains that much life.\".  It's still a land");
         ability2.addEffect(effect);
         this.addAbility(ability2);
 
         // When enchanted Plains is put into a graveyard, you may return Genju of the Fields from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Plains", true, false);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(false, true), "enchanted Plains", true, false);
         this.addAbility(ability3);
     }
 
@@ -101,6 +101,7 @@ public class GenjuOfTheFields extends CardImpl {
     }
 
     private class SpiritToken extends Token {
+
         SpiritToken() {
             super("Spirit", "2/5 white Spirit creature");
             cardType.add(CardType.CREATURE);

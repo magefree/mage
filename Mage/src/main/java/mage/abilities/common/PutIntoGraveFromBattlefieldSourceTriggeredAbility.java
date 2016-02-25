@@ -19,6 +19,7 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
 
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, optional);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     PutIntoGraveFromBattlefieldSourceTriggeredAbility(PutIntoGraveFromBattlefieldSourceTriggeredAbility ability) {
@@ -37,14 +38,14 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        Permanent permanent = zEvent.getTarget();
-
-        if (permanent != null &&
-                zEvent.getToZone() == Zone.GRAVEYARD &&
-                zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                permanent.getId().equals(this.getSourceId())) {
-            return true;
+        if (event.getTargetId().equals(getSourceId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            Permanent permanent = zEvent.getTarget();
+            if (permanent != null
+                    && zEvent.getToZone() == Zone.GRAVEYARD
+                    && zEvent.getFromZone() == Zone.BATTLEFIELD) {
+                return true;
+            }
         }
         return false;
     }

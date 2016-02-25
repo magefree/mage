@@ -85,7 +85,7 @@ class SoullessOneDynamicCount implements DynamicValue {
         zombiesInGraveyard.add(new SubtypePredicate("Zombie"));
         
         int count = game.getBattlefield().count(zombiesBattlefield, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-        for (UUID playerId : game.getPlayer(sourceAbility.getControllerId()).getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 count += player.getGraveyard().count(zombiesInGraveyard, game);

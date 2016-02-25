@@ -33,6 +33,7 @@
  */
 package mage.client.dialog;
 
+import java.awt.Dimension;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
@@ -46,6 +47,7 @@ import mage.client.components.MageComponents;
 import mage.client.components.tray.MageTray;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WIDTH;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
@@ -60,7 +62,8 @@ import org.apache.log4j.Logger;
  */
 public class TableWaitingDialog extends MageDialog {
 
-    private static final Logger logger = Logger.getLogger(TableWaitingDialog.class);
+    private static final Logger LOGGER = Logger.getLogger(TableWaitingDialog.class);
+    private static final int[] DEFAULT_COLUMS_WIDTH = {20, 50, 100, 100, 100};
 
     private UUID tableId;
     private UUID roomId;
@@ -68,7 +71,6 @@ public class TableWaitingDialog extends MageDialog {
     private Session session;
     private final TableWaitModel tableWaitModel;
     private UpdateSeatsTask updateTask;
-    private static final int[] defaultColumnsWidth = {20, 50, 100, 100, 100};
 
     /**
      * Creates new form TableWaitingDialog
@@ -88,10 +90,27 @@ public class TableWaitingDialog extends MageDialog {
 
         chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         tableSeats.createDefaultColumnsFromModel();
-        TableUtil.setColumnWidthAndOrder(tableSeats, defaultColumnsWidth, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
+        TableUtil.setColumnWidthAndOrder(tableSeats, DEFAULT_COLUMS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
         tableSeats.setDefaultRenderer(Icon.class, new CountryCellRenderer());
+        setGUISize();
 
         MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
+    }
+
+    @Override
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        tableSeats.getTableHeader().setFont(GUISizeHelper.tableFont);
+        tableSeats.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
+        tableSeats.setFont(GUISizeHelper.tableFont);
+        tableSeats.setRowHeight(GUISizeHelper.getTableRowHeight());
+
+        jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
+        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
     }
 
     public void update(TableView table) {
@@ -280,7 +299,7 @@ public class TableWaitingDialog extends MageDialog {
             }
         } catch (Exception e) {
             //swallow exception
-            logger.error(e);
+            LOGGER.error(e);
         }
         closeDialog();
     }//GEN-LAST:event_btnCancelActionPerformed

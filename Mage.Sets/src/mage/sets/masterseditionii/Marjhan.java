@@ -74,7 +74,7 @@ public class Marjhan extends CardImpl {
     public Marjhan(UUID ownerId) {
         super(ownerId, 54, "Marjhan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.expansionSetCode = "ME2";
-        this.subtype.add("Leviathan");
+        this.subtype.add("Serpent");
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

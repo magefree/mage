@@ -93,7 +93,7 @@ class BalancingActEffect extends OneShotEffect {
         if (controller != null) {
             int minPermanent = Integer.MAX_VALUE, minCard = Integer.MAX_VALUE;
             // count minimal permanets
-            for(UUID playerId : controller.getInRange()){
+            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)){
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     int count = game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), player.getId(), source.getSourceId(), game).size();
@@ -103,7 +103,7 @@ class BalancingActEffect extends OneShotEffect {
                 }
             }
             // sacrifice permanents over the minimum
-            for(UUID playerId : controller.getInRange()){
+            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)){
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     TargetControlledPermanent target = new TargetControlledPermanent(minPermanent, minPermanent, new FilterControlledPermanent(), true);
@@ -118,7 +118,7 @@ class BalancingActEffect extends OneShotEffect {
             }
 
             // count minimal cards in hand
-            for(UUID playerId : controller.getInRange()){
+            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)){
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     int count = player.getHand().size();
@@ -129,7 +129,7 @@ class BalancingActEffect extends OneShotEffect {
             }
             
             // discard cards over the minimum
-            for(UUID playerId : controller.getInRange()){
+            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)){
                 Player player = game.getPlayer(playerId);
                 if(player != null){
                     TargetCardInHand target = new TargetCardInHand(minCard, new FilterCard());

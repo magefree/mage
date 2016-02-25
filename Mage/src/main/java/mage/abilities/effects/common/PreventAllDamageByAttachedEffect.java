@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -39,13 +38,12 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-
 public class PreventAllDamageByAttachedEffect extends PreventionEffectImpl {
 
     private final String attachedDescription;
 
     public PreventAllDamageByAttachedEffect(Duration duration, String attachedDescription, boolean onlyCombat) {
-        super(duration, Integer.MAX_VALUE, onlyCombat);
+        super(duration, Integer.MAX_VALUE, onlyCombat, false);
         this.attachedDescription = attachedDescription;
         staticText = setText();
     }

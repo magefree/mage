@@ -37,6 +37,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreatureOrPlayer;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,9 +55,20 @@ public class ArcTrail extends CardImpl {
         super(ownerId, 81, "Arc Trail", Rarity.UNCOMMON, new CardType[] { CardType.SORCERY }, "{1}{R}");
         this.expansionSetCode = "SOM";
 
-
-        Target target = new TargetCreatureOrPlayer(2);
-        this.getSpellAbility().addTarget(target);
+        // Arc Trail deals 2 damage to target creature or player and 1 damage to another target creature or player
+        FilterCreatureOrPlayer filter1 = new FilterCreatureOrPlayer("creature or player to deal 2 damage");
+        TargetCreatureOrPlayer target1 = new TargetCreatureOrPlayer(1, 1, filter1);
+        target1.setTargetTag(1);
+        this.getSpellAbility().addTarget(target1);
+        
+        FilterCreatureOrPlayer filter2 = new FilterCreatureOrPlayer("another creature or player to deal 1 damage");
+        AnotherTargetPredicate predicate = new AnotherTargetPredicate(2);
+        filter2.getCreatureFilter().add(predicate);
+        filter2.getPlayerFilter().add(predicate);
+        TargetCreatureOrPlayer target2 = new TargetCreatureOrPlayer(1, 1, filter2);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
+        
         this.getSpellAbility().addEffect(ArcTrailEffect.getInstance());
     }
 
@@ -94,8 +107,8 @@ class ArcTrailEffect extends OneShotEffect {
         boolean twoDamageDone = false;
         int damage = 2;
 
-        for ( UUID target : targetPointer.getTargets(game, source) ) {
-            Permanent permanent = game.getPermanent(target);
+        for ( Target target : source.getTargets() ) {
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
 
             if ( twoDamageDone ) {
                 damage = 1;
@@ -104,7 +117,7 @@ class ArcTrailEffect extends OneShotEffect {
             if (permanent != null) {
                 applied |= (permanent.damage( damage, source.getSourceId(), game, false, true ) > 0);
             }
-            Player player = game.getPlayer(target);
+            Player player = game.getPlayer(target.getFirstTarget());
             if (player != null) {
                 applied |= (player.damage( damage, source.getSourceId(), game, false, true ) > 0);
             }

@@ -57,10 +57,10 @@ public class VanguardsShield extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Equipment");
 
-        // Equipped creature gets +0/+3 and can block an additional creature.
+        // Equipped creature gets +0/+3 and can block an additional creature each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
 
-        // Equipped creature can block an additional creature. (static abilit of equipment, no ability that will be gained to equiped creature!)
+        // Equipped creature can block an additional creature each combat. (static abilit of equipment, no ability that will be gained to equiped creature!)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VanguardsShieldEffect()));
 
         // Equip {3}
@@ -81,7 +81,7 @@ class VanguardsShieldEffect extends ContinuousEffectImpl {
 
     public VanguardsShieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.AddAbility);
-        staticText = "Equipped creature can block an additional creature";
+        staticText = "Equipped creature can block an additional creature each combat";
     }
 
     public VanguardsShieldEffect(final VanguardsShieldEffect effect) {

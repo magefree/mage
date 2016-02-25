@@ -35,14 +35,12 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-
 public class ReturnToHandFromGraveyardAllEffect extends OneShotEffect {
 
     private final FilterCard filter;
@@ -62,10 +60,10 @@ public class ReturnToHandFromGraveyardAllEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    for (Card card :player.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game)) {
+                    for (Card card : player.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game)) {
                         card.moveToZone(Zone.HAND, playerId, game, false);
                     }
                 }

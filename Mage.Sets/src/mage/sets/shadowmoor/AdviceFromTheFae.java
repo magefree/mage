@@ -102,7 +102,7 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
             }
             controller.lookAtCards(mageObject.getIdName(), cardsFromLibrary, game);
             int max = 0;
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent();
                 filter.add(new ControllerIdPredicate(playerId));
                 if (playerId != controller.getId()) {

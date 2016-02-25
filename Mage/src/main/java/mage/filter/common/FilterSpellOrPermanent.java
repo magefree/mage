@@ -64,6 +64,11 @@ public class FilterSpellOrPermanent extends FilterImpl<Object> implements Filter
     }
 
     @Override
+    public boolean checkObjectClass(Object object) {
+        return true;
+    }
+
+    @Override
     public boolean match(Object o, Game game) {
         if (o instanceof Spell) {
             return spellFilter.match((Spell) o, game);

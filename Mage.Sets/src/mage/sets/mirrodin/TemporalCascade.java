@@ -87,7 +87,7 @@ class TemporalCascadeShuffleEffect extends OneShotEffect {
     @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId: sourcePlayer.getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 for (Card card: player.getHand().getCards(game)) {
@@ -124,7 +124,7 @@ class TemporalCascadeDrawEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
         game.getState().handleSimultaneousEvent(game); // needed here so state based triggered effects 
-        for (UUID playerId: sourcePlayer.getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.drawCards(7, game);

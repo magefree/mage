@@ -65,7 +65,7 @@ public class TwoHeadedDragon extends CardImpl {
         // Menace (This creature can't be blocked except by two or more creatures.)
         this.addAbility(new MenaceAbility());
 
-        // Two-Headed Dragon can block an additional creature.
+        // Two-Headed Dragon can block an additional creature each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
 
     }

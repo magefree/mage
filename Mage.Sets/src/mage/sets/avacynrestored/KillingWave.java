@@ -98,7 +98,7 @@ class KillingWaveEffect extends OneShotEffect {
             HashMap<UUID, Integer> lifePaidAmounts = new HashMap<UUID, Integer>();
 
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
 
@@ -117,7 +117,7 @@ class KillingWaveEffect extends OneShotEffect {
                 lifePaidAmounts.put(playerId, lifePaid);
             }
 
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 int lifePaid = lifePaidAmounts.get(playerId);
                 if (lifePaid > 0) {
                     Player player = game.getPlayer(playerId);

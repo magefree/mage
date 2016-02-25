@@ -32,31 +32,33 @@
                           <Component id="lblGameType" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="cbGameType" min="-2" pref="270" max="-2" attributes="1"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="chkRollbackTurnsAllowed" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="13" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                               <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spnFreeMulligans" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtName" max="32767" attributes="0"/>
-                                  <Component id="cbDeckType" pref="332" max="32767" attributes="1"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbTimeLimit" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblPassword" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="txtName" min="-2" pref="178" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtPassword" min="-2" pref="125" max="-2" attributes="0"/>
-                                  <Component id="cbTimeLimit" min="-2" pref="126" max="-2" attributes="1"/>
-                              </Group>
+                              <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbTimeLimit" min="-2" pref="102" max="-2" attributes="1"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtPassword" min="-2" pref="125" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="cbDeckType" min="-2" pref="332" max="-2" attributes="1"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblQuitRatio" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="spnQuitRatio" min="-2" pref="60" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -107,7 +109,7 @@
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator3" pref="586" max="32767" attributes="0"/>
+                  <Component id="jSeparator3" pref="660" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -122,13 +124,15 @@
                   <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cbDeckType" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbDeckType" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spnQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -377,6 +381,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblQuitRatio">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Allowed quit %"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spnQuitRatio">
     </Component>
   </SubComponents>
 </Form>

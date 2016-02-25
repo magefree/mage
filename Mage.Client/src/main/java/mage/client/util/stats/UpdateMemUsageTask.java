@@ -1,14 +1,14 @@
 package mage.client.util.stats;
 
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import javax.swing.*;
+import org.apache.log4j.Logger;
 
 /**
- * This updates the mem usage info in the Mage client every MEM_USAGE_UPDATE_TIME ms.
+ * This updates the mem usage info in the Mage client every
+ * MEM_USAGE_UPDATE_TIME ms.
  *
  * @author noxx
  */
@@ -16,7 +16,7 @@ public class UpdateMemUsageTask extends SwingWorker<Void, Float> {
 
     private static final int MEM_USAGE_UPDATE_TIME = 2000;
 
-    private JLabel jLabelToDisplayInfo;
+    private final JLabel jLabelToDisplayInfo;
 
     private static final Logger logger = Logger.getLogger(UpdateMemUsageTask.class);
 
@@ -28,7 +28,7 @@ public class UpdateMemUsageTask extends SwingWorker<Void, Float> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             float memUsage = MemoryUsageStatUtil.getMemoryFreeStatPercentage();
-            this.publish(memUsage >= 0 ? Float.valueOf(memUsage) : null);
+            this.publish(memUsage >= 0 ? memUsage : null);
             Thread.sleep(MEM_USAGE_UPDATE_TIME);
         }
         return null;
@@ -52,7 +52,8 @@ public class UpdateMemUsageTask extends SwingWorker<Void, Float> {
             get();
         } catch (InterruptedException | ExecutionException ex) {
             logger.fatal("Update Memory Usage error", ex);
-        } catch (CancellationException ex) {}
+        } catch (CancellationException ex) {
+        }
     }
 
 }

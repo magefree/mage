@@ -58,7 +58,10 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     @Override
     public boolean match(E e, Game game) {
-        return Predicates.and(predicates).apply(e, game);
+        if (checkObjectClass(e)) {
+            return Predicates.and(predicates).apply(e, game);
+        }
+        return false;
     }
 
     @Override

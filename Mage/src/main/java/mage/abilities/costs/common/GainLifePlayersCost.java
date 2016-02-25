@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs.common;
 
 import java.util.UUID;
@@ -57,7 +56,7 @@ public class GainLifePlayersCost extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!playerId.equals(controllerId)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null && !player.isCanGainLife()) {
@@ -67,7 +66,7 @@ public class GainLifePlayersCost extends CostImpl {
                 }
 
             }
-        }        
+        }
         return true;
     }
 
@@ -75,7 +74,7 @@ public class GainLifePlayersCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!playerId.equals(controllerId)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {

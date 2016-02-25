@@ -42,6 +42,7 @@ public class TournamentPlayerView implements Serializable, Comparable {
     private final String name;
     private final String state;
     private final String results;
+    private final String history;
     private final int points;
     private final boolean quit;
 
@@ -57,6 +58,7 @@ public class TournamentPlayerView implements Serializable, Comparable {
         this.points = tournamentPlayer.getPoints();
         this.results = tournamentPlayer.getResults();
         this.quit = !tournamentPlayer.isInTournament();
+        this.history = tournamentPlayer.getPlayer().getUserData().getHistory();
         this.flagName = tournamentPlayer.getPlayer().getUserData().getFlagName();
     }
 
@@ -88,4 +90,9 @@ public class TournamentPlayerView implements Serializable, Comparable {
     public String getFlagName() {
         return flagName;
     }
+
+    public String getHistory() {
+        return history;
+    }
+
 }

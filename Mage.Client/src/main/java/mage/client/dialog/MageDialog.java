@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * MageDialog.java
  *
  * Created on 15-Dec-2009, 10:28:27 PM
@@ -56,7 +56,7 @@ import org.apache.log4j.Logger;
  */
 public class MageDialog extends javax.swing.JInternalFrame {
 
-    private static final Logger logger = Logger.getLogger(MageDialog.class);
+    private static final Logger LOGGER = Logger.getLogger(MageDialog.class);
 
     protected boolean modal = false;
 
@@ -65,6 +65,10 @@ public class MageDialog extends javax.swing.JInternalFrame {
      */
     public MageDialog() {
         initComponents();
+    }
+
+    public void changeGUISize() {
+
     }
 
     @Override
@@ -89,22 +93,20 @@ public class MageDialog extends javax.swing.JInternalFrame {
             this.setClosable(false);
             if (value) {
                 startModal();
+            } else if (SwingUtilities.isEventDispatchThread()) {
+                stopModal();
             } else {
-                if (SwingUtilities.isEventDispatchThread()) {
-                    stopModal();
-                } else {
-                    try {
-                        SwingUtilities.invokeAndWait(new Runnable() {
-                            @Override
-                            public void run() {
-                                stopModal();
-                            }
-                        });
-                    } catch (InterruptedException ex) {
-                        logger.fatal("MageDialog error", ex);
-                    } catch (InvocationTargetException ex) {
-                        logger.fatal("MageDialog error", ex);
-                    }
+                try {
+                    SwingUtilities.invokeAndWait(new Runnable() {
+                        @Override
+                        public void run() {
+                            stopModal();
+                        }
+                    });
+                } catch (InterruptedException ex) {
+                    LOGGER.fatal("MageDialog error", ex);
+                } catch (InvocationTargetException ex) {
+                    LOGGER.fatal("MageDialog error", ex);
                 }
             }
         }
@@ -140,7 +142,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
                         } else if (source instanceof MenuComponent) {
                             ((MenuComponent) source).dispatchEvent(event);
                         } else {
-                            logger.warn("Unable to dispatch: " + event);
+                            LOGGER.warn("Unable to dispatch: " + event);
                         }
                     }
                 }

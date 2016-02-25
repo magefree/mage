@@ -26,13 +26,14 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * CardInfoWindowDialog.java
  *
  * Created on Feb 1, 2010, 3:00:35 PM
  */
 package mage.client.dialog;
 
+import java.awt.Dimension;
 import java.awt.Point;
 import java.beans.PropertyVetoException;
 import java.util.UUID;
@@ -41,7 +42,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import mage.client.cards.BigCard;
-import mage.client.util.Config;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -57,10 +58,9 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
  */
 public class CardInfoWindowDialog extends MageDialog {
 
-    private static final Logger logger = Logger.getLogger(CardInfoWindowDialog.class);
+    private static final Logger LOGGER = Logger.getLogger(CardInfoWindowDialog.class);
 
     public static enum ShowType {
-
         REVEAL, REVEAL_TOP_LIBRARY, LOOKED_AT, EXILE, GRAVEYARD, OTHER
     };
 
@@ -107,10 +107,24 @@ public class CardInfoWindowDialog extends MageDialog {
             // no icon yet
         }
         this.setTitelBarToolTip(name);
+        setGUISize();
+
     }
 
     public void cleanUp() {
         cards.cleanUp();
+    }
+
+    @Override
+    public void changeGUISize() {
+        setGUISize();
+        this.validate();
+        this.repaint();
+    }
+
+    private void setGUISize() {
+        cards.setCardDimension(GUISizeHelper.otherZonesCardDimension);
+        cards.changeGUISize();
     }
 
     public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
@@ -124,7 +138,7 @@ public class CardInfoWindowDialog extends MageDialog {
                 try {
                     this.setIcon(false);
                 } catch (PropertyVetoException ex) {
-                    logger.error(null, ex);
+                    LOGGER.error(null, ex);
                 }
             }
         } else {
@@ -198,21 +212,25 @@ public class CardInfoWindowDialog extends MageDialog {
 
         setIconifiable(true);
         setResizable(true);
+        setPreferredSize(new Dimension((int) Math.round(GUISizeHelper.otherZonesCardDimension.width * 1.3),
+            (int) Math.round(GUISizeHelper.otherZonesCardDimension.height * 1.2)));
 
-        cards.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 0, 0))
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 0, 0))
+    );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cards, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cards, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        pack();
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -27,7 +27,7 @@
  */
 package mage.filter.predicate.mageobject;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
@@ -42,7 +42,7 @@ import mage.target.Target;
  *
  * @author LevelX2
  */
-public class AnotherTargetPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+public class AnotherTargetPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageItem>> {
 
     private final int targetTag;
 
@@ -51,14 +51,14 @@ public class AnotherTargetPredicate implements ObjectSourcePlayerPredicate<Objec
     }
 
     @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {
         StackObject source = game.getStack().getStackObject(input.getSourceId());
         if (source != null) {
             for (Target target : source.getStackAbility().getTargets()) {
                 if (target.getTargetTag() > 0 // target is included in the target group to check
                         && target.getTargetTag() != targetTag // it's not the target of this predicate
-                        && target.getTargets().contains(input.getObject().getId())) { // if the uuid already is used for another target in the group it's no allowed here
-                    return false;
+                        && target.getTargets().contains(input.getObject().getId())) { // if the uuid already is used for another target in the group it's not allowed here
+                        return false;
                 }
             }
         }

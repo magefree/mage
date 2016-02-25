@@ -82,7 +82,7 @@ class RiseOfTheDarkRealmsEffect extends OneShotEffect {
         if (controller != null) {
 
             Set<Card> creatureCards = new LinkedHashSet<>();
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     for (Card card : player.getGraveyard().getCards(game)) {

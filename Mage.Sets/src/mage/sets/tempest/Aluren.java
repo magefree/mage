@@ -123,7 +123,7 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: controller.getInRange()){
+            for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)){
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     player.getAlternativeSourceCosts().add(alternativeCastingCostAbility);

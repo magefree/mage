@@ -52,7 +52,7 @@ public class TwoHeadedGiantOfForiys extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // Two-Headed Giant of Foriys can block an additional creature.
+        // Two-Headed Giant of Foriys can block an additional creature each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
     }
 

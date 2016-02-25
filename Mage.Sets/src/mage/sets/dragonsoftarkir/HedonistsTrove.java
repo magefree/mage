@@ -43,7 +43,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
@@ -63,14 +62,14 @@ public class HedonistsTrove extends CardImpl {
         // When Hedonist's Trove enters the battlefield, exile all cards from target opponent's graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new HedonistsTroveExileEffect());
         ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);        
-        
+        this.addAbility(ability);
+
         // You may play land cards exiled by Hedonist's Trove.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HedonistsTrovePlayLandEffect()));
-        
+
         // You may cast nonland cards exiled with Hedonist's Trove. You can't cast more than one spell this way each turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HedonistsTroveCastNonlandCardsEffect()));
-        
+
     }
 
     public HedonistsTrove(final HedonistsTrove card) {
@@ -138,13 +137,15 @@ class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(objectId);
-        MageObject sourceObject = source.getSourceObject(game);
-        if (card != null && card.getCardType().contains(CardType.LAND) && sourceObject != null) {
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-            if (exileId != null) {
-                ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
-                return exileZone != null && exileZone.contains(objectId);
+        if (affectedControllerId.equals(source.getControllerId())) {
+            Card card = game.getCard(objectId);
+            MageObject sourceObject = source.getSourceObject(game);
+            if (card != null && card.getCardType().contains(CardType.LAND) && sourceObject != null) {
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                if (exileId != null) {
+                    ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
+                    return exileZone != null && exileZone.contains(objectId);
+                }
             }
         }
         return false;
@@ -155,7 +156,7 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
 
     private int turnNumber;
     private UUID cardId;
-    
+
     public HedonistsTroveCastNonlandCardsEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast nonland cards exiled with {this}. You can't cast more than one spell this way each turn";
@@ -179,24 +180,26 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(objectId);
-        MageObject sourceObject = source.getSourceObject(game);
-        if (card != null && !card.getCardType().contains(CardType.LAND) && sourceObject != null) {
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-            if (exileId != null) {                
-                ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
-                if (exileZone != null && exileZone.contains(objectId)) {
-                    if (game.getTurnNum() == turnNumber) {
-                        if (!exileZone.contains(cardId)) {
-                            // last checked card this turn is no longer exiled, so you can't cast another with this effect
-                            // TODO: Handle if card was cast/removed from exile with effect from another card. 
-                            //       If so, this effect could prevent player from casting although he should be able to use it
-                            return false;
+        if (affectedControllerId.equals(source.getControllerId())) {
+            Card card = game.getCard(objectId);
+            MageObject sourceObject = source.getSourceObject(game);
+            if (card != null && !card.getCardType().contains(CardType.LAND) && sourceObject != null) {
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                if (exileId != null) {
+                    ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
+                    if (exileZone != null && exileZone.contains(objectId)) {
+                        if (game.getTurnNum() == turnNumber) {
+                            if (!exileZone.contains(cardId)) {
+                                // last checked card this turn is no longer exiled, so you can't cast another with this effect
+                                // TODO: Handle if card was cast/removed from exile with effect from another card.
+                                //       If so, this effect could prevent player from casting although he should be able to use it
+                                return false;
+                            }
                         }
-                    }                   
-                    this.turnNumber = game.getTurnNum();
-                    this.cardId = objectId;
-                    return true;
+                        this.turnNumber = game.getTurnNum();
+                        this.cardId = objectId;
+                        return true;
+                    }
                 }
             }
         }

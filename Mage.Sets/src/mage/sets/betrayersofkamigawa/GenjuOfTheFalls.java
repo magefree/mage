@@ -28,11 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -44,7 +39,11 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
@@ -56,31 +55,31 @@ import mage.target.common.TargetLandPermanent;
  * @author LevelX2
  */
 public class GenjuOfTheFalls extends CardImpl {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Island");
-   
+
+    private static final FilterLandPermanent FILTER = new FilterLandPermanent("Island");
+
     static {
-        filter.add(new SubtypePredicate("Island"));
+        FILTER.add(new SubtypePredicate("Island"));
     }
+
     public GenjuOfTheFalls(UUID ownerId) {
         super(ownerId, 35, "Genju of the Falls", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-
         // Enchant Island
-        TargetPermanent auraTarget = new TargetLandPermanent(filter);
+        TargetPermanent auraTarget = new TargetLandPermanent(FILTER);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // {2}: Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn.  It's still a land", Duration.EndOfTurn),new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn.  It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
         this.addAbility(ability2);
 
         // When enchanted Island is put into a graveyard, you may return Genju of the Falls from your graveyard to your hand.        TargetPermanent auraTarget = new TargetLandPermanent(filter);
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Island", true, false);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(false, true), "enchanted Island", true, false);
         this.addAbility(ability3);
     }
 
@@ -94,6 +93,7 @@ public class GenjuOfTheFalls extends CardImpl {
     }
 
     private class SpiritToken extends Token {
+
         SpiritToken() {
             super("Spirit", "3/2 blue Spirit creature with flying");
             cardType.add(CardType.CREATURE);

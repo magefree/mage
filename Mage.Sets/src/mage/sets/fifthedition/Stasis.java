@@ -94,6 +94,6 @@ class SkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         return event.getType() == GameEvent.EventType.UNTAP_STEP
                 && controller != null
-                && controller.getInRange().contains(event.getPlayerId());
+                && game.getState().getPlayersInRange(controller.getId(), game).contains(event.getPlayerId());
     }
 }

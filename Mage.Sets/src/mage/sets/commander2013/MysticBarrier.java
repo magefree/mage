@@ -186,7 +186,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
         if (game.getPlayers().size() > 2) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                if (controller.getInRange().contains(event.getPlayerId())) {
+                if (game.getState().getPlayersInRange(controller.getId(), game).contains(event.getPlayerId())) {
                     String allowedDirection = (String) game.getState().getValue(new StringBuilder("attack_direction_").append(source.getSourceId()).toString());
                     if (allowedDirection != null) {
                         Player defender = game.getPlayer(event.getTargetId());

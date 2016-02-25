@@ -94,7 +94,7 @@ class WeirdHarvestEffect extends OneShotEffect {
             if (xValue > 0) {
                 List<Player> usingPlayers = new ArrayList<>();
                 this.chooseAndSearchLibrary(usingPlayers, controller, xValue, source, sourceObject, game);
-                for (UUID playerId : controller.getInRange()) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     if (!playerId.equals(controller.getId())) {
                         Player player = game.getPlayer(playerId);
                         if (player != null) {

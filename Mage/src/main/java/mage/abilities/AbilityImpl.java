@@ -114,6 +114,7 @@ public abstract class AbilityImpl implements Ability {
     protected int sourceObjectZoneChangeCounter;
     protected List<Watcher> watchers = null;
     protected List<Ability> subAbilities = null;
+    protected boolean canFizzle = true;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -164,6 +165,7 @@ public abstract class AbilityImpl implements Ability {
         this.abilityWord = ability.abilityWord;
         this.sourceObject = ability.sourceObject;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
+        this.canFizzle = ability.canFizzle;
     }
 
     @Override
@@ -426,10 +428,10 @@ public abstract class AbilityImpl implements Ability {
                 if (cost instanceof TapSourceCost) {
                     Mana mana = null;
                     Effect effect = getEffects().get(0);
-                    if (effect instanceof BasicManaEffect) {
-                        mana = ((BasicManaEffect) effect).getMana(game, this);
-                    } else if (effect instanceof DynamicManaEffect) {
+                    if (effect instanceof DynamicManaEffect) {
                         mana = ((DynamicManaEffect) effect).getMana(game, this);
+                    } else if (effect instanceof BasicManaEffect) {
+                        mana = ((BasicManaEffect) effect).getMana(game, this);
                     }
                     if (mana != null && mana.getAny() == 0) { // if mana == null or Any > 0 the event has to be fired in the mana effect to know which mana was produced
                         ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId, mana);
@@ -637,10 +639,8 @@ public abstract class AbilityImpl implements Ability {
     public void setSourceId(UUID sourceId) {
         if (this.sourceId == null) {
             this.sourceId = sourceId;
-        } else {
-            if (!(this instanceof MageSingleton)) {
-                this.sourceId = sourceId;
-            }
+        } else if (!(this instanceof MageSingleton)) {
+            this.sourceId = sourceId;
         }
         if (subAbilities != null) {
             for (Ability subAbility : subAbilities) {
@@ -970,19 +970,19 @@ public abstract class AbilityImpl implements Ability {
                 object = game.getObject(getSourceId());
             }
         }
-        if (object != null && !object.getAbilities().contains(this)) {
+        if (object != null) {
             if (object instanceof Permanent) {
-                return false;
-            } else {
+                if (!((Permanent) object).getAbilities(game).contains(this)) {
+                    return false;
+                }
+                return ((Permanent) object).isPhasedIn();
+            } else if (!object.getAbilities().contains(this)) {
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
                 if (otherAbilities == null || !otherAbilities.contains(this)) {
                     return false;
                 }
             }
-        }
-        if (object instanceof Permanent) {
-            return ((Permanent) object).isPhasedIn();
         }
         return true;
     }
@@ -1060,18 +1060,16 @@ public abstract class AbilityImpl implements Ability {
                 } else {
                     sb.append(GameLog.getColoredObjectIdName(object));
                 }
-            } else {
-                if (object instanceof Spell) {
-                    Spell spell = (Spell) object;
-                    String castText = spell.getSpellCastText(game);
-                    sb.append((castText.startsWith("Cast ") ? castText.substring(5) : castText));
-                    if (spell.getFromZone() == Zone.GRAVEYARD) {
-                        sb.append(" from graveyard");
-                    }
-                    sb.append(getOptionalTextSuffix(game, spell));
-                } else {
-                    sb.append(GameLog.getColoredObjectIdName(object));
+            } else if (object instanceof Spell) {
+                Spell spell = (Spell) object;
+                String castText = spell.getSpellCastText(game);
+                sb.append((castText.startsWith("Cast ") ? castText.substring(5) : castText));
+                if (spell.getFromZone() == Zone.GRAVEYARD) {
+                    sb.append(" from graveyard");
                 }
+                sb.append(getOptionalTextSuffix(game, spell));
+            } else {
+                sb.append(GameLog.getColoredObjectIdName(object));
             }
         } else {
             sb.append("unknown");
@@ -1224,6 +1222,16 @@ public abstract class AbilityImpl implements Ability {
             this.sourceObject = sourceObject;
         }
         this.sourceObjectZoneChangeCounter = game.getState().getZoneChangeCounter(sourceId);
+    }
+
+    @Override
+    public boolean canFizzle() {
+        return canFizzle;
+    }
+
+    @Override
+    public void setCanFizzle(boolean canFizzle) {
+        this.canFizzle = canFizzle;
     }
 
 }

@@ -41,6 +41,11 @@ public class FilterObject<E extends MageObject> extends FilterImpl<E> {
         return new FilterObject<>(this);
     }
 
+    @Override
+    public boolean checkObjectClass(Object object) {
+        return object instanceof MageObject;
+    }
+
     public FilterObject(String name) {
         super(name);
     }

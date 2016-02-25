@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.keyword;
 
 import mage.MageObjectReference;
@@ -42,8 +41,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.watchers.common.GravestormWatcher;
 
-
-
 /**
  *
  * @author emerald000
@@ -57,6 +54,7 @@ public class GravestormAbility extends TriggeredAbilityImpl {
     private GravestormAbility(final GravestormAbility ability) {
         super(ability);
     }
+
     @Override
     public GravestormAbility copy() {
         return new GravestormAbility(this);
@@ -84,7 +82,7 @@ public class GravestormAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Gravestorm <i>(When you cast this spell, copy it for each permanent put into a graveyard this turn. You may choose new targets for the copies.</i>)" ;
+        return "Gravestorm <i>(When you cast this spell, copy it for each permanent put into a graveyard this turn. You may choose new targets for the copies.</i>)";
     }
 }
 
@@ -111,9 +109,7 @@ class GravestormEffect extends OneShotEffect {
                         game.informPlayers("Gravestorm: " + spell.getName() + " will be copied " + gravestormCount + " time" + (gravestormCount > 1 ? "s" : ""));
                     }
                     for (int i = 0; i < gravestormCount; i++) {
-                        Spell copy = spell.copySpell();
-                        copy.setControllerId(source.getControllerId());
-                        copy.setCopiedSpell(true);
+                        Spell copy = spell.copySpell(source.getControllerId());
                         game.getStack().push(copy);
                         copy.chooseNewTargets(game, source.getControllerId());
                     }

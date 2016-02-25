@@ -63,11 +63,21 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
         editButton = new JButton();
         editButton.setFocusPainted(false);
         editButton.addActionListener(this);
+        setGUISize();
 
         TableColumnModel columnModel = table.getColumnModel();
         columnModel.getColumn(column).setCellRenderer(this);
         columnModel.getColumn(column).setCellEditor(this);
         table.addMouseListener(this);
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        renderButton.setFont(GUISizeHelper.tableFont);
+        editButton.setFont(GUISizeHelper.tableFont);
     }
 
     @Override

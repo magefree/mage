@@ -61,14 +61,13 @@ public class ErayoSoratamiAscendant extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.flipCard = true;
-        this.flipCardName = "Erayo's Essence";        
-        
-        
+        this.flipCardName = "Erayo's Essence";
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever the fourth spell of a turn is cast, flip Erayo, Soratami Ascendant.
         this.addAbility(new ErayoSoratamiAscendantTriggeredAbility());
-        
+
     }
 
     public ErayoSoratamiAscendant(final ErayoSoratamiAscendant card) {
@@ -92,7 +91,7 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
         effect.setText("flip {this}");
         return effect;
     }
-    
+
     public ErayoSoratamiAscendantTriggeredAbility(final ErayoSoratamiAscendantTriggeredAbility ability) {
         super(ability);
     }
@@ -121,7 +120,7 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
 
 class ErayosEssence extends Token {
 
-    ErayosEssence  () {
+    ErayosEssence() {
         super("Erayo's Essence", "");
         supertype.add("Legendary");
         cardType.add(CardType.ENCHANTMENT);
@@ -129,15 +128,18 @@ class ErayosEssence extends Token {
         color.setBlue(true);
 
         // Whenever an opponent casts a spell for the first time in a turn, counter that spell.
-        this.addAbility(new ErayosEssenceTriggeredAbility());
+        Effect effect = new CounterTargetEffect();
+        effect.setText("counter that spell");
+        this.addAbility(new ErayosEssenceTriggeredAbility(effect));
     }
 }
+
 class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
-    public ErayosEssenceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CounterTargetEffect(), false);
+    public ErayosEssenceTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect, false);
     }
-    
+
     public ErayosEssenceTriggeredAbility(final ErayosEssenceTriggeredAbility ability) {
         super(ability);
     }
@@ -156,14 +158,14 @@ class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
                 return true;
-            }            
+            }
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts a spell for the first time in a turn, counter that spell.";
+        return "Whenever an opponent casts a spell for the first time each turn, " + super.getRule();
     }
 
     @Override

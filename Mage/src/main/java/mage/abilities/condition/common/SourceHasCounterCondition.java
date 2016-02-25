@@ -64,7 +64,7 @@ public class SourceHasCounterCondition implements Condition {
     @SuppressWarnings("null")
     public boolean apply(Game game, Ability source) {
         Card card = null;
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (permanent == null) {
             card = game.getCard(source.getSourceId());
             if (card == null) {

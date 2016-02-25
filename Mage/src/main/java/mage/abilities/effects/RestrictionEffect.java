@@ -65,7 +65,7 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         return true;
     }
 
@@ -77,10 +77,14 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean canBlockCheckAfter(Ability source, Game game) {
         return true;
     }
 
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return true;
+    }
+    
     /**
      * Called for all attackers after all blocking decisions are made
      *

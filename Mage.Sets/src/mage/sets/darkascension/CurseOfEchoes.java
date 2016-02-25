@@ -28,9 +28,6 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,7 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -62,7 +61,6 @@ public class CurseOfEchoes extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Aura");
         this.subtype.add("Curse");
-
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
@@ -149,13 +147,11 @@ class CurseOfEchoesEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
             String chooseMessage = "Copy target spell?  You may choose new targets for the copy.";
-            for (UUID playerId: game.getPlayerList()) {
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 if (!playerId.equals(spell.getControllerId())) {
                     Player player = game.getPlayer(playerId);
                     if (player.chooseUse(Outcome.Copy, chooseMessage, source, game)) {
-                        Spell copy = spell.copySpell();
-                        copy.setControllerId(playerId);
-                        copy.setCopiedSpell(true);
+                        Spell copy = spell.copySpell(source.getControllerId());;
                         game.getStack().push(copy);
                         copy.chooseNewTargets(game, playerId);
                     }
@@ -171,7 +167,7 @@ class CurseOfEchoesEffect extends OneShotEffect {
         return new CurseOfEchoesEffect(this);
     }
 
-   @Override
+    @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         sb.append("Copy target ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for the copy");

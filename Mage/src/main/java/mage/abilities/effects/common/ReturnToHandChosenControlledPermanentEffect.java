@@ -28,40 +28,33 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardsImpl;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
  *
- * @author Plopmans
+ * @author Quercitron
  */
-public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
-
-    private final FilterControlledPermanent filter;
-    private int number;
+public class ReturnToHandChosenControlledPermanentEffect extends ReturnToHandChosenPermanentEffect {
 
     public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter) {
-        this(filter, 1);
+        super(filter);
     }
 
     public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter, int number) {
-        super(Outcome.ReturnToHand);
-        this.filter = filter;
-        this.number = number;
-        this.staticText = getText();
+        super(filter, number);
     }
 
-    public ReturnToHandChosenControlledPermanentEffect(final ReturnToHandChosenControlledPermanentEffect effect) {
+    public ReturnToHandChosenControlledPermanentEffect(ReturnToHandChosenControlledPermanentEffect effect) {
         super(effect);
-        this.filter = effect.filter;
-        this.number = effect.number;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        this.targetPointer = new FixedTarget(source.getControllerId());
+        return super.apply(game, source);
     }
 
     @Override
@@ -70,22 +63,7 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int available = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-            if (available > 0) {
-                TargetControlledPermanent target = new TargetControlledPermanent(Math.min(number, available), number, filter, true);
-                if (controller.chooseTarget(this.outcome, target, source, game)) {
-                    controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, Zone.HAND, source, game);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    private String getText() {
+    protected String getText() {
         StringBuilder sb = new StringBuilder("return ");
         if (!filter.getMessage().startsWith("another")) {
             sb.append(CardUtil.numberToText(number, "a"));
@@ -98,4 +76,5 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
         }
         return sb.toString();
     }
+
 }

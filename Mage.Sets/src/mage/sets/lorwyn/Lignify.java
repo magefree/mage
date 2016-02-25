@@ -67,7 +67,7 @@ public class Lignify extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new BecomesCreatureAttachedEffect(new LignifyTreefolkToken(),
                         "Enchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities",
-                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_AND_PT)));
+                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE_AND_PT)));
 
     }
 

@@ -41,16 +41,17 @@ import mage.players.Player;
  * @author Jgod
  */
 public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
+
     public ExileGraveyardAllPlayersEffect() {
         super(Outcome.Detriment);
         staticText = "exile all cards from all graveyards";
     }
-    
+
     @Override
     public ExileGraveyardAllPlayersEffect copy() {
         return new ExileGraveyardAllPlayersEffect();
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -58,7 +59,7 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
             return false;
         }
 
-        for (UUID playerId : controller.getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 for (UUID cid : player.getGraveyard().copy()) {

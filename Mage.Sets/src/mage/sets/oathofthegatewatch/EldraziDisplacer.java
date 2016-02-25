@@ -50,10 +50,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EldraziDisplacer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("another target creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        FILTER.add(new AnotherPredicate());
     }
 
     public EldraziDisplacer(UUID ownerId) {
@@ -69,11 +69,12 @@ public class EldraziDisplacer extends CardImpl {
         // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
         Effect effect = new ExileTargetForSourceEffect();
         effect.setText("Exile another target creature");
+        effect.setApplyEffectsAfter(); // Needed to let temporary continuous effects end if a permanent is blinked
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{C}"));
         effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true);
         effect.setText(", then return it to the battlefield tapped under its owner's control");
         ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(FILTER));
         this.addAbility(ability);
     }
 

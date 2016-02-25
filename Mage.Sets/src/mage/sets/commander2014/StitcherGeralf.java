@@ -102,7 +102,7 @@ class StitcherGeralfEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards cards = new CardsImpl();
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     cards.addAll(player.getLibrary().getTopCards(game, 3));

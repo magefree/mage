@@ -97,7 +97,7 @@ class TarmogoyfEffect extends ContinuousEffectImpl {
             MageObject target = game.getObject(source.getSourceId());
             if (target != null) {
                 HashSet<CardType> foundCardTypes = new HashSet<>();
-                for (UUID playerId : controller.getInRange()) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         for (Card card : player.getGraveyard().getCards(game)) {

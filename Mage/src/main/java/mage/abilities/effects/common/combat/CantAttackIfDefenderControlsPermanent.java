@@ -63,7 +63,7 @@ public class CantAttackIfDefenderControlsPermanent extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
         UUID defendingPlayerId;
         Player player = game.getPlayer(defenderId);
         if (player == null) {

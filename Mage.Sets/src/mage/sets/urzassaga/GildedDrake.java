@@ -70,8 +70,10 @@ public class GildedDrake extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Gilded Drake enters the battlefield, exchange control of Gilded Drake and up to one target creature an opponent controls. If you don't make an exchange, sacrifice Gilded Drake. This ability can't be countered except by spells and abilities.
+        // When Gilded Drake enters the battlefield, exchange control of Gilded Drake and up to one target creature an opponent controls. If you don't make an exchange, sacrifice Gilded Drake.
+        // This ability can't be countered except by spells and abilities.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GildedDrakeEffect());
+        ability.setCanFizzle(false);
         ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
         this.addAbility(ability);
     }

@@ -46,10 +46,10 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class ZendikarResurgent extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a creature spell");
+    private static final FilterSpell FILTER = new FilterSpell("a creature spell");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
+        FILTER.add(new CardTypePredicate(CardType.CREATURE));
     }
 
     public ZendikarResurgent(UUID ownerId) {
@@ -65,7 +65,7 @@ public class ZendikarResurgent extends CardImpl {
                 SetTargetPointer.PERMANENT));
 
         // Whenever you cast a creature spell, draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), FILTER, false));
     }
 
     public ZendikarResurgent(final ZendikarResurgent card) {

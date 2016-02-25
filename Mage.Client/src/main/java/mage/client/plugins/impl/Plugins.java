@@ -1,7 +1,6 @@
 package mage.client.plugins.impl;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Collection;
@@ -32,13 +31,12 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.CardPluginImpl;
 import org.mage.plugins.theme.ThemePluginImpl;
 
-
 public class Plugins implements MagePlugins {
 
     public static final String PLUGINS_DIRECTORY = "plugins/";
 
-    private static final MagePlugins fINSTANCE =  new Plugins();
-    private static final Logger logger = Logger.getLogger(Plugins.class);
+    private static final MagePlugins fINSTANCE = new Plugins();
+    private static final Logger LOGGER = Logger.getLogger(Plugins.class);
     private static PluginManager pm;
 
     private ThemePlugin themePlugin = null;
@@ -53,13 +51,13 @@ public class Plugins implements MagePlugins {
 
     @Override
     public void loadPlugins() {
-        logger.info("Loading plugins...");
+        LOGGER.info("Loading plugins...");
         pm = PluginManagerFactory.createPluginManager();
         pm.addPluginsFrom(new File(PLUGINS_DIRECTORY).toURI());
         this.cardPlugin = new CardPluginImpl();
         this.counterPlugin = pm.getPlugin(CounterPlugin.class);
         this.themePlugin = new ThemePluginImpl();
-        logger.info("Done.");
+        LOGGER.info("Done.");
     }
 
     @Override
@@ -67,6 +65,18 @@ public class Plugins implements MagePlugins {
         if (pm != null) {
             pm.shutdown();
         }
+    }
+
+    @Override
+    public void changeGUISize() {
+        setGUISize();
+        if (this.cardPlugin != null) {
+            cardPlugin.changeGUISize();
+        }
+    }
+
+    private void setGUISize() {
+
     }
 
     @Override
@@ -107,8 +117,6 @@ public class Plugins implements MagePlugins {
         }
     }
 
-
-
     @Override
     public boolean isCardPluginLoaded() {
         return this.cardPlugin != null;
@@ -135,11 +143,11 @@ public class Plugins implements MagePlugins {
     @Override
     public int getGamesPlayed() {
         if (this.counterPlugin != null) {
-            synchronized(Plugins.class) {
+            synchronized (Plugins.class) {
                 try {
                     return this.counterPlugin.getGamePlayed();
                 } catch (PluginException e) {
-                    logger.fatal(e.getMessage());
+                    LOGGER.fatal(e.getMessage());
                     throw new RuntimeException(e);
                 }
             }
@@ -150,11 +158,11 @@ public class Plugins implements MagePlugins {
     @Override
     public void addGamesPlayed() {
         if (this.counterPlugin != null) {
-            synchronized(Plugins.class) {
+            synchronized (Plugins.class) {
                 try {
                     this.counterPlugin.addGamePlayed();
                 } catch (PluginException e) {
-                    logger.fatal(e.getMessage());
+                    LOGGER.fatal(e.getMessage());
                     throw new RuntimeException(e);
                 }
             }
@@ -169,14 +177,6 @@ public class Plugins implements MagePlugins {
     @Override
     public boolean isThemePluginLoaded() {
         return this.themePlugin != null;
-    }
-
-    @Override
-    public Image getManaSymbolImage(String symbol) {
-        if (this.cardPlugin != null) {
-            return this.cardPlugin.getManaSymbolImage(symbol);
-        }
-        return null;
     }
 
     @Override

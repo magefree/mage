@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.ConditionalMana;
-import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -130,8 +129,7 @@ public class ManaPool implements Serializable {
         }
         for (ManaPoolItem mana : manaItems) {
             if (filter != null) {
-                MageObject sourceObject = game.getObject(mana.getSourceId());
-                if (!filter.match(sourceObject, game)) {
+                if (!filter.match(mana.getSourceObject(), game)) {
                     continue;
                 }
             }
@@ -170,7 +168,7 @@ public class ManaPool implements Serializable {
             if (mana.isConditional()
                     && mana.getConditionalMana().get(manaType) > 0
                     && mana.getConditionalMana().apply(ability, game, mana.getSourceId(), costToPay)) {
-                if (filter == null || filter.match(game.getObject(mana.getSourceId()), game)) {
+                if (filter == null || filter.match(mana.getSourceObject(), game)) {
                     return mana.getConditionalMana().get(manaType);
                 }
             }
@@ -378,13 +376,13 @@ public class ManaPool implements Serializable {
         Mana mana = manaToAdd.copy();
         if (!game.replaceEvent(new ManaEvent(EventType.ADD_MANA, source.getId(), source.getSourceId(), playerId, mana))) {
             if (mana instanceof ConditionalMana) {
-                ManaPoolItem item = new ManaPoolItem((ConditionalMana) mana, source.getSourceId(), source.getOriginalId());
+                ManaPoolItem item = new ManaPoolItem((ConditionalMana) mana, source.getSourceObject(game), source.getOriginalId());
                 if (emptyOnTurnsEnd) {
                     item.setDuration(Duration.EndOfTurn);
                 }
                 this.manaItems.add(item);
             } else {
-                ManaPoolItem item = new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getGeneric() + mana.getColorless(), source.getSourceId(), source.getOriginalId(), mana.getFlag());
+                ManaPoolItem item = new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getGeneric() + mana.getColorless(), source.getSourceObject(game), source.getOriginalId(), mana.getFlag());
                 if (emptyOnTurnsEnd) {
                     item.setDuration(Duration.EndOfTurn);
                 }

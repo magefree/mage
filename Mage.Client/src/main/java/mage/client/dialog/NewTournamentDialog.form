@@ -72,7 +72,7 @@
                               <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="lblDraftCube" max="-2" attributes="0"/>
                                       <Component id="lblTournamentType" min="-2" max="-2" attributes="0"/>
@@ -85,16 +85,16 @@
                                       <Component id="cbDeckType" alignment="0" min="-2" pref="290" max="-2" attributes="1"/>
                                       <Component id="cbGameType" min="-2" pref="290" max="-2" attributes="1"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="cbTournamentType" min="-2" pref="290" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="spnFreeMulligans" min="-2" pref="41" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                           <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="lblQuitRatio" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="spnQuitRatio" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="cbTournamentType" min="-2" pref="290" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -113,6 +113,11 @@
                                   <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="txtPassword" min="-2" pref="56" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="spnFreeMulligans" min="-2" pref="41" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -140,14 +145,19 @@
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblTournamentType" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbTournamentType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spnFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spnNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spnQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cbTournamentType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTournamentType" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cbDraftCube" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblDraftCube" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -191,7 +201,7 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="player1Panel" pref="61" max="32767" attributes="0"/>
+              <Component id="player1Panel" min="-2" pref="62" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlPlayers" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -525,5 +535,15 @@
         <Property name="axis" type="int" value="1"/>
       </Layout>
     </Container>
+    <Component class="javax.swing.JLabel" name="lblQuitRatio">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Allow players with quit (%):"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spnQuitRatio">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

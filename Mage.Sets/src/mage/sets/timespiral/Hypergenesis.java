@@ -111,7 +111,7 @@ class HypergenesisEffect extends OneShotEffect {
             Target target = new TargetCardInHand(filter);
 
             while (controller.canRespond()) {
-                if (currentPlayer != null && currentPlayer.canRespond() && controller.getInRange().contains(currentPlayer.getId())) {
+                if (currentPlayer != null && currentPlayer.canRespond() && game.getState().getPlayersInRange(controller.getId(), game).contains(currentPlayer.getId())) {
                     if (firstInactivePlayer == null) {
                         firstInactivePlayer = currentPlayer.getId();
                     }

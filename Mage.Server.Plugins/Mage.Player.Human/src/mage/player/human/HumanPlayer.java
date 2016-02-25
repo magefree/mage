@@ -436,17 +436,16 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+        if (cards == null) {
+            return false;
+        }
         updateGameStatePriority("choose(4)", game);
         while (!abort) {
             boolean required = target.isRequired();
             // if there is no cards to select from, then add possibility to cancel choosing action
-            if (cards == null) {
+            int count = cards.count(target.getFilter(), game);
+            if (count == 0) {
                 required = false;
-            } else {
-                int count = cards.count(target.getFilter(), game);
-                if (count == 0) {
-                    required = false;
-                }
             }
             if (target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
@@ -1227,7 +1226,7 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("activateAbility", game);
         if (abilities.size() == 1 && suppressAbilityPicker(abilities.values().iterator().next())) {
             ActivatedAbility ability = abilities.values().iterator().next();
-            if (ability.getTargets().size() != 0
+            if (!ability.getTargets().isEmpty()
                     || !(ability.getCosts().size() == 1 && ability.getCosts().get(0) instanceof SacrificeSourceCost)
                     || !(ability.getCosts().size() == 2 && ability.getCosts().get(0) instanceof TapSourceCost && ability.getCosts().get(0) instanceof SacrificeSourceCost)) {
                 activateAbility(ability, game);
@@ -1236,7 +1235,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(abilities.values()));
         waitForResponse(game);
-        if (response.getUUID() != null) {
+        if (response.getUUID() != null && isInGame()) {
             if (abilities.containsKey(response.getUUID())) {
                 activateAbility(abilities.get(response.getUUID()), game);
             }

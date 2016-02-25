@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -96,6 +97,14 @@ public class FixedTarget implements TargetPointer {
 
     public int getZoneChangeCounter() {
         return zoneChangeCounter;
+    }
+
+    public Permanent getTargetedPermanentOrLKIBattlefield(Game game) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
+        if (permanent != null && permanent.getZoneChangeCounter(game) != zoneChangeCounter) {
+            permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD, zoneChangeCounter);
+        }
+        return permanent;
     }
 
 }

@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.filter.common;
 
 import java.util.UUID;
@@ -54,6 +53,11 @@ public class FilterControlledCreatureInPlay extends FilterImpl<Object> implement
         creatureFilter.add(new ControllerPredicate(TargetController.YOU));
     }
 
+    @Override
+    public boolean checkObjectClass(Object object) {
+        return object instanceof Permanent;
+    }
+
     public FilterControlledCreatureInPlay(final FilterControlledCreatureInPlay filter) {
         super(filter);
         this.creatureFilter = filter.creatureFilter.copy();
@@ -62,7 +66,7 @@ public class FilterControlledCreatureInPlay extends FilterImpl<Object> implement
     @Override
     public boolean match(Object o, Game game) {
         if (o instanceof Permanent) {
-            return creatureFilter.match((Permanent)o, game);
+            return creatureFilter.match((Permanent) o, game);
         }
         return false;
     }
@@ -70,7 +74,7 @@ public class FilterControlledCreatureInPlay extends FilterImpl<Object> implement
     @Override
     public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
         if (o instanceof Permanent) {
-            return creatureFilter.match((Permanent)o, sourceId, playerId, game);
+            return creatureFilter.match((Permanent) o, sourceId, playerId, game);
         }
         return false;
     }

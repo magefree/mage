@@ -32,9 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
@@ -45,9 +43,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -86,7 +81,7 @@ class DeathrenderEffect extends OneShotEffect {
 
     DeathrenderEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "you may put a creature card from your hand onto the battlefield and attach {this} to it.";
+        this.staticText = "you may put a creature card from your hand onto the battlefield and attach {this} to it";
     }
 
     DeathrenderEffect(final DeathrenderEffect effect) {
@@ -102,14 +97,13 @@ class DeathrenderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (controller != null) {
+        if (controller != null && sourcePermanent != null) {
             FilterCard filter = new FilterCreatureCard();
             TargetCardInHand target = new TargetCardInHand(0, 1, filter);
             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 Card creatureInHand = game.getCard(target.getFirstTarget());
                 if (creatureInHand != null) {
-                    game.getState().setValue("attachTo:" + sourcePermanent.getId(), game.getPermanent(creatureInHand.getId()));
-                    if (controller.moveCards(creatureInHand, Zone.BATTLEFIELD, source, game) && sourcePermanent != null) {
+                    if (controller.moveCards(creatureInHand, Zone.BATTLEFIELD, source, game)) {
                         game.getPermanent(creatureInHand.getId()).addAttachment(sourcePermanent.getId(), game);
                     }
                 }

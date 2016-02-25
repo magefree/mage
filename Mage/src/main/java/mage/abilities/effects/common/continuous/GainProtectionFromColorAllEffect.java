@@ -55,7 +55,7 @@ public class GainProtectionFromColorAllEffect extends GainAbilityAllEffect {
 
     public GainProtectionFromColorAllEffect(final GainProtectionFromColorAllEffect effect) {
         super(effect);
-        choice = effect.choice;
+        this.choice = effect.choice.copy();
     }
 
     @Override
@@ -65,10 +65,10 @@ public class GainProtectionFromColorAllEffect extends GainAbilityAllEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCard protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
+        FilterCard protectionFilter = (FilterCard) ((ProtectionAbility) ability).getFilter();
         protectionFilter.add(new ColorPredicate(choice.getColor()));
         protectionFilter.setMessage(choice.getChoice());
-        ((ProtectionAbility)ability).setFilter(protectionFilter);
+        ((ProtectionAbility) ability).setFilter(protectionFilter);
         return super.apply(game, source);
     }
 
@@ -77,22 +77,23 @@ public class GainProtectionFromColorAllEffect extends GainAbilityAllEffect {
         super.init(source, game);
         MageObject sourceObject = game.getObject(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if(sourceObject != null && controller != null) {
+        if (sourceObject != null && controller != null) {
             choice.clearChoice();
-            while(!choice.isChosen()) {
+            while (!choice.isChosen()) {
                 controller.choose(Outcome.Protect, choice, game);
-                if(!controller.canRespond()) {
+                if (!controller.canRespond()) {
                     return;
                 }
             }
-            if(choice.isChosen() && !game.isSimulation()) {
-                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen protection from " + choice.getChoice());                                                               }
+            if (choice.isChosen() && !game.isSimulation()) {
+                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen protection from " + choice.getChoice());
+            }
         }
     }
 
     @Override
     public String getText(Mode mode) {
-        if(staticText != null && !staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
 

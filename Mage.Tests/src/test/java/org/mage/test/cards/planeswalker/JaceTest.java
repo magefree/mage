@@ -69,4 +69,34 @@ public class JaceTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * I know it's been a bit a rules question recently but I believe flip
+     * planeswalkers shouldn't be exiled by Containment priest when flipping as
+     * happens when using xmage (at least with Jace).
+     */
+    @Test
+    public void testContainmentPriestWithFlipPlaneswalker() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.GRAVEYARD, playerA, "Mountain", 4);
+
+        // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard,
+        // exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
+        addCard(Zone.BATTLEFIELD, playerA, "Jace, Vryn's Prodigy", 1); // {2}{R} - 3/2
+        addCard(Zone.HAND, playerA, "Pillarfield Ox", 1);
+
+        // Flash
+        // If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerB, "Containment Priest", 1); // {2}{U}{U}
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card");
+        setChoice(playerA, "Pillarfield Ox");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Pillarfield Ox", 1);
+        assertExileCount("Jace, Vryn's Prodigy", 0);
+        assertPermanentCount(playerA, "Jace, Telepath Unbound", 1);
+
+    }
 }

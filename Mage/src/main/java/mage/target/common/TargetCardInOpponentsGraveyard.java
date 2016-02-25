@@ -68,7 +68,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int possibleTargets = 0;
-        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
             if (!playerId.equals(sourceControllerId)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

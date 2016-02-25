@@ -29,7 +29,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -67,10 +67,8 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null);
-            }
+            controller.moveCards(new CardsImpl(getTargetPointer().getTargets(game, source)).getCards(game),
+                    Zone.BATTLEFIELD, source, game, tapped, false, true, null);
             return true;
         }
         return false;

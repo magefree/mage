@@ -29,7 +29,6 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;

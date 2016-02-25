@@ -32,12 +32,12 @@ import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -50,7 +50,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SigilBlessing extends CardImpl {
 
-    
     public SigilBlessing(UUID ownerId) {
         super(ownerId, 195, "Sigil Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{W}");
         this.expansionSetCode = "ALA";
@@ -71,6 +70,7 @@ public class SigilBlessing extends CardImpl {
 }
 
 class SigilBlessingBoostControlledEffect extends ContinuousEffectImpl {
+
     public SigilBlessingBoostControlledEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1";
@@ -95,11 +95,11 @@ class SigilBlessingBoostControlledEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
                 int boost = 1;
-                if (getTargetPointer().getFirst(game, source).equals(permanent.getId())) {
+                if (permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
                     boost = 3;
                 }
                 permanent.addPower(boost);

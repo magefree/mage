@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -44,23 +43,22 @@ import mage.target.TargetSpell;
  */
 public class MentalMisstep extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 1");
+    private static final FilterSpell FILTER = new FilterSpell("spell with converted mana cost 1");
 
-       static {
-           filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, 1));
-       }
+    static {
+        FILTER.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, 1));
+    }
 
-        public MentalMisstep (UUID ownerId) {
+    public MentalMisstep(UUID ownerId) {
         super(ownerId, 38, "Mental Misstep", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{UP}");
         this.expansionSetCode = "NPH";
 
-        
         // Counter target spell with converted mana cost 1.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(FILTER));
     }
 
-    public MentalMisstep (final MentalMisstep card) {
+    public MentalMisstep(final MentalMisstep card) {
         super(card);
     }
 

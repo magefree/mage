@@ -12,7 +12,7 @@ public enum UserGroup {
     ADMIN(7),
     OWNER(15);
 
-    private int groupId;
+    private final int groupId;
 
     UserGroup(int groupId) {
         this.groupId = groupId;

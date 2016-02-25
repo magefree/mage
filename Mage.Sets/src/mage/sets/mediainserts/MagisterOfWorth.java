@@ -173,7 +173,7 @@ class MagisterOfWorthReturnFromGraveyardEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     player.moveCards(player.getGraveyard().getCards(new FilterCreatureCard(), game), Zone.BATTLEFIELD, source, game);

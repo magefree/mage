@@ -43,7 +43,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.MenuSelectionManager;
@@ -55,8 +54,10 @@ import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE;
+import mage.client.util.GUISizeHelper;
 import mage.constants.PlayerAction;
 import mage.view.PlayerView;
+import mage.view.UserRequestMessage;
 
 /**
  *
@@ -103,6 +104,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             addPopupMenuWatcher();
         }
         this.add(popupMenu);
+        setGUISize();
+
         init(player, bigCard, gameId, priorityTime);
         update(player);
     }
@@ -135,6 +138,16 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         }
         popupMenu.getUI().uninstallUI(this);
 
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+        battlefieldPanel.changeGUISize();
+        playerPanel.changeGUISize();
+    }
+
+    private void setGUISize() {
+        GUISizeHelper.changePopupMenuFont(popupMenu);
     }
 
     private void addPopupMenuPlayer(boolean allowRequestToShowHandCards) {
@@ -397,15 +410,19 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 switch (e.getActionCommand()) {
                     case "Game": {
-                        if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the game?", "Confirm concede game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
-                        }
+                        UserRequestMessage message = new UserRequestMessage("Confirm concede game", "Are you sure you want to concede the game?");
+                        message.setButton1("No", null);
+                        message.setButton2("Yes", PlayerAction.CLIENT_CONCEDE_GAME);
+                        message.setGameId(gameId);
+                        MageFrame.getInstance().showUserRequestDialog(message);
                         break;
                     }
                     case "Match": {
-                        if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the complete match?", "Confirm concede match", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            MageFrame.getSession().quitMatch(gameId);
-                        }
+                        UserRequestMessage message = new UserRequestMessage("Confirm concede match", "Are you sure you want to concede the complete match?");
+                        message.setButton1("No", null);
+                        message.setButton2("Yes", PlayerAction.CLIENT_CONCEDE_MATCH);
+                        message.setGameId(gameId);
+                        MageFrame.getInstance().showUserRequestDialog(message);
                         break;
                     }
                 }
@@ -459,10 +476,11 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to stop watching the game?", "Confirm stop watching game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    gamePanel.getSession().stopWatching(gameId);
-                    gamePanel.removeGame();
-                }
+                UserRequestMessage message = new UserRequestMessage("Confirm stop watching game", "Are you sure you want to stop watching the game?");
+                message.setButton1("No", null);
+                message.setButton2("Yes", PlayerAction.CLIENT_STOP_WATCHING);
+                message.setGameId(gameId);
+                MageFrame.getInstance().showUserRequestDialog(message);
             }
         });
 
@@ -502,8 +520,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.playerPanel.init(gameId, player.getPlayerId(), bigCard, priorityTime);
         this.battlefieldPanel.init(gameId, bigCard);
         this.gameId = gameId;
+        this.playerId = player.getPlayerId();
         if (MageFrame.getSession().isTestMode()) {
-            this.playerId = player.getPlayerId();
             this.btnCheat.setVisible(true);
         } else {
             this.btnCheat.setVisible(false);
@@ -530,8 +548,6 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 0)));
         playerPanel = new PlayerPanelExt();
         btnCheat = new javax.swing.JButton();
-        //jScrollPane1 = new javax.swing.JScrollPane();
-        //battlefieldPanel = new mage.client.game.BattlefieldPanel(jScrollPane1);
         battlefieldPanel = new mage.client.game.BattlefieldPanel();
 
         btnCheat.setText("Cheat");
@@ -542,10 +558,6 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        //jScrollPane1.setViewportView(battlefieldPanel);
-        //Border empty = new EmptyBorder(0,0,0,0);
-        //jScrollPane1.setBorder(empty);
-        //jScrollPane1.setViewportBorder(empty);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()

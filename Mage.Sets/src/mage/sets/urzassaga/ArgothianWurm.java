@@ -95,7 +95,7 @@ class ArgothianWurmEffect extends PutOnLibrarySourceEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             boolean costPaid = false;
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()));
                 Player player = game.getPlayer(playerId);
                 if (player != null

@@ -80,7 +80,7 @@ class AcidicSoilEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game);
-        for (UUID playerId : game.getPlayer(source.getControllerId()).getInRange()) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 int amount = 0;

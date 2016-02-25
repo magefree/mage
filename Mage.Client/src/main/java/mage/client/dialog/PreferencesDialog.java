@@ -26,7 +26,7 @@
  * or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * PreferencesDialog.java
  *
  * Created on 26.06.2011, 16:35:40
@@ -60,6 +60,7 @@ import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 import mage.client.MageFrame;
 import mage.client.util.Config;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import static mage.constants.Constants.DEFAULT_AVATAR_ID;
@@ -70,6 +71,7 @@ import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 
 /**
@@ -79,9 +81,8 @@ import org.apache.log4j.Logger;
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
-    private static final Logger log = Logger.getLogger(PreferencesDialog.class);
+    private static final Logger logger = Logger.getLogger(PreferencesDialog.class);
 
-    public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_SHOW_TOOLTIPS_DELAY = "showTooltipsDelay";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
@@ -91,6 +92,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GAME_SHOW_STORM_COUNTER = "gameShowStormCounter";
     public static final String KEY_GAME_CONFIRM_EMPTY_MANA_POOL = "gameConfirmEmptyManaPool";
     public static final String KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER = "gameAskMoveToGraveORder";
+
+    public static final String KEY_GUI_TABLE_FONT_SIZE = "guiTableFontSize";
+    public static final String KEY_GUI_CHAT_FONT_SIZE = "guiChatFontSize";
+    public static final String KEY_GUI_CARD_HAND_SIZE = "guiCardHandSize";
+    public static final String KEY_GUI_CARD_EDITOR_SIZE = "guiCardEditorSize";
+    public static final String KEY_GUI_CARD_OFFSET_SIZE = "guiCardOffsetSize";
+
+    public static final String KEY_GUI_STACK_WIDTH = "guiStackWidth";
+    public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
+    public static final String KEY_GUI_DIALOG_FONT_SIZE = "guiDialogFontSize";
+    public static final String KEY_GUI_FEEDBACK_AREA_SIZE = "guiFeedbackAreaSize";
+    public static final String KEY_GUI_CARD_OTHER_ZONES_SIZE = "guiCardOtherZonesSize";
+    public static final String KEY_GUI_CARD_BATTLEFIELD_SIZE = "guiCardBattlefield";
 
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
     public static final String KEY_DRAFT_LOG_AUTO_SAVE = "draftLogAutoSave";
@@ -122,7 +136,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String MAIN_YOU = "mainYou";
     public static final String BEFORE_COMBAT_YOU = "beforeCombatYou";
     public static final String END_OF_COMBAT_YOU = "endOfCombatYou";
-    public static final String MAIN_2_YOU = "main2You";
+    public static final String MAIN_TWO_YOU = "main2You";
     public static final String END_OF_TURN_YOU = "endOfTurnYou";
 
     public static final String UPKEEP_OTHERS = "upkeepOthers";
@@ -130,7 +144,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String MAIN_OTHERS = "mainOthers";
     public static final String BEFORE_COMBAT_OTHERS = "beforeCombatOthers";
     public static final String END_OF_COMBAT_OTHERS = "endOfCombatOthers";
-    public static final String MAIN_2_OTHERS = "main2Others";
+    public static final String MAIN_TWO_OTHERS = "main2Others";
     public static final String END_OF_TURN_OTHERS = "endOfTurnOthers";
 
     public static final String KEY_STOP_ATTACK = "stopDeclareAttacksStep";
@@ -194,6 +208,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_SKILL_LEVEL = "newTableSkillLevel";
     public static final String KEY_NEW_TABLE_NUMBER_PLAYERS = "newTableNumberPlayers";
     public static final String KEY_NEW_TABLE_PLAYER_TYPES = "newTablePlayerTypes";
+    public static final String KEY_NEW_TABLE_QUIT_RATIO = "newTableQuitRatio";
 
     // pref setting for new tournament dialog
     public static final String KEY_NEW_TOURNAMENT_NAME = "newTournamentName";
@@ -212,6 +227,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS = "newTournamentAllowSpectators";
     public static final String KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS = "newTournamentAllowRollbacks";
     public static final String KEY_NEW_TOURNAMENT_DECK_FILE = "newTournamentDeckFile";
+    public static final String KEY_NEW_TOURNAMENT_QUIT_RATIO = "newTournamentQuitRatio";
 
     // pref setting for deck generator
     public static final String KEY_NEW_DECK_GENERATOR_DECK_SIZE = "newDeckGeneratorDeckSize";
@@ -256,7 +272,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CONNECT_AUTO_CONNECT = "autoConnect";
     public static final String KEY_CONNECT_FLAG = "connectFlag";
 
-    private static final Map<String, String> cache = new HashMap<>();
+    private static final Map<String, String> CACHE = new HashMap<>();
 
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
 
@@ -266,7 +282,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static String PHASE_ON = "on";
     public static String PHASE_OFF = "off";
 
-    private static final Map<Integer, JPanel> panels = new HashMap<>();
+    private static final Map<Integer, JPanel> PANELS = new HashMap<>();
 
     private static final Border GREEN_BORDER = BorderFactory.createLineBorder(Color.GREEN, 3);
     private static final Border BLACK_BORDER = BorderFactory.createLineBorder(Color.BLACK, 3);
@@ -334,11 +350,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         tabsPanel = new javax.swing.JTabbedPane();
         tabMain = new javax.swing.JPanel();
         main_card = new javax.swing.JPanel();
-        displayBigCardsInHand = new javax.swing.JCheckBox();
         showCardName = new javax.swing.JCheckBox();
         tooltipDelayLabel = new javax.swing.JLabel();
         tooltipDelay = new javax.swing.JSlider();
@@ -353,6 +369,31 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_gamelog = new javax.swing.JPanel();
         cbGameLogAutoSave = new javax.swing.JCheckBox();
         cbDraftLogAutoSave = new javax.swing.JCheckBox();
+        tabGuiSize = new javax.swing.JPanel();
+        guiSizeBasic = new javax.swing.JPanel();
+        sliderFontSize = new javax.swing.JSlider();
+        fontSizeLabel = new javax.swing.JLabel();
+        sliderChatFontSize = new javax.swing.JSlider();
+        chatFontSizeLabel = new javax.swing.JLabel();
+        sliderDialogFont = new javax.swing.JSlider();
+        labelDialogFont = new javax.swing.JLabel();
+        sliderEditorCardSize = new javax.swing.JSlider();
+        labelEditorCardSize = new javax.swing.JLabel();
+        sliderEditorCardOffset = new javax.swing.JSlider();
+        labelEditorCardOffset = new javax.swing.JLabel();
+        guiSizeGame = new javax.swing.JPanel();
+        sliderCardSizeHand = new javax.swing.JSlider();
+        labelCardSizeHand = new javax.swing.JLabel();
+        sliderCardSizeOtherZones = new javax.swing.JSlider();
+        labelCardSizeOtherZones = new javax.swing.JLabel();
+        sliderCardSizeBattlefield = new javax.swing.JSlider();
+        labelCardSizeBattlefield = new javax.swing.JLabel();
+        sliderStackWidth = new javax.swing.JSlider();
+        labelStackWidth = new javax.swing.JLabel();
+        sliderGameFeedbackArea = new javax.swing.JSlider();
+        labelGameFeedback = new javax.swing.JLabel();
+        sliderTooltipSize = new javax.swing.JSlider();
+        labelTooltipSize = new javax.swing.JLabel();
         tabPhases = new javax.swing.JPanel();
         jLabelHeadLine = new javax.swing.JLabel();
         jLabelYourTurn = new javax.swing.JLabel();
@@ -393,7 +434,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         btnBrowseImageLocation = new javax.swing.JButton();
         cbCheckForNewImages = new javax.swing.JCheckBox();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
-        cbPreferedImageLanguage = new javax.swing.JComboBox<String>();
+        cbPreferedImageLanguage = new javax.swing.JComboBox<>();
         labelPreferedImageLanguage = new javax.swing.JLabel();
         panelBackgroundImages = new javax.swing.JPanel();
         cbUseDefaultBackground = new javax.swing.JCheckBox();
@@ -445,7 +486,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel33 = new javax.swing.JPanel();
         tabConnection = new javax.swing.JPanel();
         lblProxyType = new javax.swing.JLabel();
-        cbProxyType = new javax.swing.JComboBox<ProxyType>();
+        cbProxyType = new javax.swing.JComboBox<>();
         pnlProxySettings = new javax.swing.JPanel();
         pnlProxy = new javax.swing.JPanel();
         lblProxyServer = new javax.swing.JLabel();
@@ -468,17 +509,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Preferences");
 
-        main_card.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card"));
+        tabsPanel.setMinimumSize(new java.awt.Dimension(532, 451));
 
-        displayBigCardsInHand.setText("Use big images (for high resolution screens)");
-        displayBigCardsInHand.setToolTipText("Changes the size of the cards shown in hand. Switch this option off if you have a small screen size.");
-        displayBigCardsInHand.setActionCommand("");
-        displayBigCardsInHand.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        displayBigCardsInHand.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                displayBigCardsInHandActionPerformed(evt);
-            }
-        });
+        main_card.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card"));
 
         showCardName.setSelected(true);
         showCardName.setText("Show card name on card panel");
@@ -504,32 +537,26 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tooltipDelay.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
         tooltipDelay.setValue(300);
 
-        javax.swing.GroupLayout main_cardLayout = new javax.swing.GroupLayout(main_card);
+        org.jdesktop.layout.GroupLayout main_cardLayout = new org.jdesktop.layout.GroupLayout(main_card);
         main_card.setLayout(main_cardLayout);
         main_cardLayout.setHorizontalGroup(
-            main_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_cardLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(main_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tooltipDelayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(displayBigCardsInHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tooltipDelay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(main_cardLayout.createSequentialGroup()
-                        .addComponent(showCardName)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+            main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(main_cardLayout.createSequentialGroup()
+                .add(6, 6, 6)
+                .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, showCardName)
+                    .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         main_cardLayout.setVerticalGroup(
-            main_cardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_cardLayout.createSequentialGroup()
-                .addComponent(displayBigCardsInHand)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showCardName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tooltipDelayLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tooltipDelay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(main_cardLayout.createSequentialGroup()
+                .add(showCardName)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(tooltipDelayLabel)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game"));
@@ -602,38 +629,38 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout main_gameLayout = new javax.swing.GroupLayout(main_game);
+        org.jdesktop.layout.GroupLayout main_gameLayout = new org.jdesktop.layout.GroupLayout(main_game);
         main_game.setLayout(main_gameLayout);
         main_gameLayout.setHorizontalGroup(
-            main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_gameLayout.createSequentialGroup()
+            main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(main_gameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(showPlayerNamesPermanently, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nonLandPermanentsInOnePile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(showAbilityPickerForced)
-                    .addComponent(cbConfirmEmptyManaPool, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-                    .addComponent(cbAllowRequestToShowHandCards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbShowStormCounter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbAskMoveToGraveOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(showPlayerNamesPermanently, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(nonLandPermanentsInOnePile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(showAbilityPickerForced)
+                    .add(cbConfirmEmptyManaPool, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(cbShowStormCounter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         main_gameLayout.setVerticalGroup(
-            main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_gameLayout.createSequentialGroup()
-                .addComponent(nonLandPermanentsInOnePile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showPlayerNamesPermanently)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showAbilityPickerForced)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbAllowRequestToShowHandCards)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbShowStormCounter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbConfirmEmptyManaPool)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbAskMoveToGraveOrder)
+            main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(main_gameLayout.createSequentialGroup()
+                .add(nonLandPermanentsInOnePile)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(showPlayerNamesPermanently)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(showAbilityPickerForced)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbAllowRequestToShowHandCards)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbShowStormCounter)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbConfirmEmptyManaPool)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbAskMoveToGraveOrder)
                 .addContainerGap())
         );
 
@@ -659,54 +686,419 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout main_gamelogLayout = new javax.swing.GroupLayout(main_gamelog);
+        org.jdesktop.layout.GroupLayout main_gamelogLayout = new org.jdesktop.layout.GroupLayout(main_gamelog);
         main_gamelog.setLayout(main_gamelogLayout);
         main_gamelogLayout.setHorizontalGroup(
-            main_gamelogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_gamelogLayout.createSequentialGroup()
+            main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(main_gamelogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(main_gamelogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbDraftLogAutoSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbGameLogAutoSave, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(cbDraftLogAutoSave, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(cbGameLogAutoSave, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         main_gamelogLayout.setVerticalGroup(
-            main_gamelogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_gamelogLayout.createSequentialGroup()
-                .addComponent(cbGameLogAutoSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbDraftLogAutoSave))
+            main_gamelogLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(main_gamelogLayout.createSequentialGroup()
+                .add(cbGameLogAutoSave)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbDraftLogAutoSave))
         );
 
-        javax.swing.GroupLayout tabMainLayout = new javax.swing.GroupLayout(tabMain);
+        org.jdesktop.layout.GroupLayout tabMainLayout = new org.jdesktop.layout.GroupLayout(tabMain);
         tabMain.setLayout(tabMainLayout);
         tabMainLayout.setHorizontalGroup(
-            tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabMainLayout.createSequentialGroup()
+            tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(main_card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(main_gamelog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(tabMainLayout.createSequentialGroup()
-                        .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .add(tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, main_card, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, main_gamelog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(main_game, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabMainLayout.setVerticalGroup(
-            tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabMainLayout.createSequentialGroup()
+            tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(main_card, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .add(main_card, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(main_game, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
 
         tabsPanel.addTab("Main", tabMain);
+
+        tabGuiSize.setMaximumSize(new java.awt.Dimension(527, 423));
+        tabGuiSize.setMinimumSize(new java.awt.Dimension(527, 423));
+        java.awt.GridBagLayout tabGuiSizeLayout = new java.awt.GridBagLayout();
+        tabGuiSizeLayout.columnWidths = new int[] {0};
+        tabGuiSizeLayout.rowHeights = new int[] {0, 20, 0};
+        tabGuiSizeLayout.columnWeights = new double[] {1.0};
+        tabGuiSizeLayout.rowWeights = new double[] {1.0, 0.0, 1.0};
+        tabGuiSize.setLayout(tabGuiSizeLayout);
+
+        guiSizeBasic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size basic elements"));
+        guiSizeBasic.setMinimumSize(new java.awt.Dimension(600, 180));
+        guiSizeBasic.setPreferredSize(new java.awt.Dimension(600, 180));
+        java.awt.GridBagLayout guiSizeBasicLayout = new java.awt.GridBagLayout();
+        guiSizeBasicLayout.columnWeights = new double[] {1.0, 1.0, 1.0};
+        guiSizeBasicLayout.rowWeights = new double[] {1.0, 0.2, 1.0, 0.2};
+        guiSizeBasic.setLayout(guiSizeBasicLayout);
+
+        sliderFontSize.setMajorTickSpacing(5);
+        sliderFontSize.setMaximum(50);
+        sliderFontSize.setMinimum(10);
+        sliderFontSize.setMinorTickSpacing(1);
+        sliderFontSize.setPaintLabels(true);
+        sliderFontSize.setPaintTicks(true);
+        sliderFontSize.setSnapToTicks(true);
+        sliderFontSize.setToolTipText("<HTML>The size of the font used to display table text.");
+        sliderFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeBasic.add(sliderFontSize, gridBagConstraints);
+
+        fontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fontSizeLabel.setText("Tables");
+        fontSizeLabel.setToolTipText("<HTML>The size of the font used to display table text.");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeBasic.add(fontSizeLabel, gridBagConstraints);
+
+        sliderChatFontSize.setMajorTickSpacing(5);
+        sliderChatFontSize.setMaximum(50);
+        sliderChatFontSize.setMinimum(10);
+        sliderChatFontSize.setMinorTickSpacing(1);
+        sliderChatFontSize.setPaintLabels(true);
+        sliderChatFontSize.setPaintTicks(true);
+        sliderChatFontSize.setSnapToTicks(true);
+        sliderChatFontSize.setToolTipText("<HTML>The size of the font used to display the chat text");
+        sliderChatFontSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderChatFontSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeBasic.add(sliderChatFontSize, gridBagConstraints);
+
+        chatFontSizeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chatFontSizeLabel.setText("Chat");
+        chatFontSizeLabel.setToolTipText("<HTML>The size of the font used to display the chat text");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeBasic.add(chatFontSizeLabel, gridBagConstraints);
+
+        sliderDialogFont.setMajorTickSpacing(5);
+        sliderDialogFont.setMaximum(50);
+        sliderDialogFont.setMinimum(10);
+        sliderDialogFont.setMinorTickSpacing(1);
+        sliderDialogFont.setPaintLabels(true);
+        sliderDialogFont.setPaintTicks(true);
+        sliderDialogFont.setSnapToTicks(true);
+        sliderDialogFont.setToolTipText("<HTML>The size of the font of messages and menues");
+        sliderDialogFont.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderDialogFont.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeBasic.add(sliderDialogFont, gridBagConstraints);
+
+        labelDialogFont.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelDialogFont.setText("Messages and menues");
+        labelDialogFont.setToolTipText("<HTML>The size of the font of messages and menues");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeBasic.add(labelDialogFont, gridBagConstraints);
+        labelDialogFont.getAccessibleContext().setAccessibleDescription("<HTML>The size of the font used to display messages or menus.");
+
+        sliderEditorCardSize.setMajorTickSpacing(5);
+        sliderEditorCardSize.setMaximum(50);
+        sliderEditorCardSize.setMinimum(10);
+        sliderEditorCardSize.setMinorTickSpacing(1);
+        sliderEditorCardSize.setPaintLabels(true);
+        sliderEditorCardSize.setPaintTicks(true);
+        sliderEditorCardSize.setSnapToTicks(true);
+        sliderEditorCardSize.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel");
+        sliderEditorCardSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderEditorCardSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeBasic.add(sliderEditorCardSize, gridBagConstraints);
+
+        labelEditorCardSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelEditorCardSize.setText("Cards in editor and draft panel");
+        labelEditorCardSize.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel\n");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeBasic.add(labelEditorCardSize, gridBagConstraints);
+
+        sliderEditorCardOffset.setMajorTickSpacing(5);
+        sliderEditorCardOffset.setMaximum(50);
+        sliderEditorCardOffset.setMinimum(10);
+        sliderEditorCardOffset.setMinorTickSpacing(1);
+        sliderEditorCardOffset.setPaintLabels(true);
+        sliderEditorCardOffset.setPaintTicks(true);
+        sliderEditorCardOffset.setSnapToTicks(true);
+        sliderEditorCardOffset.setToolTipText("<HTML>The size of the card in editor and the picked zone of the draft panel");
+        sliderEditorCardOffset.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderEditorCardOffset.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeBasic.add(sliderEditorCardOffset, gridBagConstraints);
+
+        labelEditorCardOffset.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelEditorCardOffset.setText("Card offset editor and draft");
+        labelEditorCardOffset.setToolTipText("<HTML>The vertical offset of card images in editor areas\n");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeBasic.add(labelEditorCardOffset, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        tabGuiSize.add(guiSizeBasic, gridBagConstraints);
+
+        guiSizeGame.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Size game elements"));
+        guiSizeGame.setMinimumSize(new java.awt.Dimension(600, 180));
+        guiSizeGame.setPreferredSize(new java.awt.Dimension(600, 180));
+        java.awt.GridBagLayout guiSizeGameLayout = new java.awt.GridBagLayout();
+        guiSizeGameLayout.columnWeights = new double[] {1.0, 1.0, 1.0};
+        guiSizeGameLayout.rowWeights = new double[] {1.0, 0.2, 1.0, 0.2};
+        guiSizeGame.setLayout(guiSizeGameLayout);
+
+        sliderCardSizeHand.setMajorTickSpacing(5);
+        sliderCardSizeHand.setMaximum(50);
+        sliderCardSizeHand.setMinimum(10);
+        sliderCardSizeHand.setMinorTickSpacing(1);
+        sliderCardSizeHand.setPaintLabels(true);
+        sliderCardSizeHand.setPaintTicks(true);
+        sliderCardSizeHand.setSnapToTicks(true);
+        sliderCardSizeHand.setToolTipText("<HTML>The size of the card images in hand and on the stack");
+        sliderCardSizeHand.setValue(14);
+        sliderCardSizeHand.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderCardSizeHand.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeGame.add(sliderCardSizeHand, gridBagConstraints);
+
+        labelCardSizeHand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCardSizeHand.setText("Hand cards and stack objects");
+        labelCardSizeHand.setToolTipText("<HTML>The size of the card images in hand and on the stack");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeGame.add(labelCardSizeHand, gridBagConstraints);
+
+        sliderCardSizeOtherZones.setMajorTickSpacing(5);
+        sliderCardSizeOtherZones.setMaximum(50);
+        sliderCardSizeOtherZones.setMinimum(10);
+        sliderCardSizeOtherZones.setMinorTickSpacing(1);
+        sliderCardSizeOtherZones.setPaintLabels(true);
+        sliderCardSizeOtherZones.setPaintTicks(true);
+        sliderCardSizeOtherZones.setSnapToTicks(true);
+        sliderCardSizeOtherZones.setToolTipText("<HTML>The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
+        sliderCardSizeOtherZones.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderCardSizeOtherZones.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeGame.add(sliderCardSizeOtherZones, gridBagConstraints);
+
+        labelCardSizeOtherZones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCardSizeOtherZones.setText("Cards other zones");
+        labelCardSizeOtherZones.setToolTipText("<HTML>The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeGame.add(labelCardSizeOtherZones, gridBagConstraints);
+
+        sliderCardSizeBattlefield.setMajorTickSpacing(5);
+        sliderCardSizeBattlefield.setMaximum(50);
+        sliderCardSizeBattlefield.setMinimum(10);
+        sliderCardSizeBattlefield.setMinorTickSpacing(1);
+        sliderCardSizeBattlefield.setPaintLabels(true);
+        sliderCardSizeBattlefield.setPaintTicks(true);
+        sliderCardSizeBattlefield.setSnapToTicks(true);
+        sliderCardSizeBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        sliderCardSizeBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderCardSizeBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeGame.add(sliderCardSizeBattlefield, gridBagConstraints);
+
+        labelCardSizeBattlefield.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCardSizeBattlefield.setText("Permanents");
+        labelCardSizeBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeGame.add(labelCardSizeBattlefield, gridBagConstraints);
+
+        sliderStackWidth.setMajorTickSpacing(20);
+        sliderStackWidth.setMaximum(90);
+        sliderStackWidth.setMinimum(10);
+        sliderStackWidth.setMinorTickSpacing(5);
+        sliderStackWidth.setPaintLabels(true);
+        sliderStackWidth.setPaintTicks(true);
+        sliderStackWidth.setSnapToTicks(true);
+        sliderStackWidth.setToolTipText("<HTML>The % size of the stack object area in relation to the hand card area size.");
+        sliderStackWidth.setValue(30);
+        sliderStackWidth.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderStackWidth.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeGame.add(sliderStackWidth, gridBagConstraints);
+        sliderStackWidth.getAccessibleContext().setAccessibleDescription("<HTML>The stack width in relation to the hand area width");
+
+        labelStackWidth.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelStackWidth.setText("Stack %width related to hand");
+        labelStackWidth.setToolTipText("<HTML>The % size of the stack object area in relation to the hand card area size.");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeGame.add(labelStackWidth, gridBagConstraints);
+        labelStackWidth.getAccessibleContext().setAccessibleDescription("<HTML>The stack width in relation to the hand area width");
+
+        sliderGameFeedbackArea.setMajorTickSpacing(5);
+        sliderGameFeedbackArea.setMaximum(50);
+        sliderGameFeedbackArea.setMinimum(10);
+        sliderGameFeedbackArea.setMinorTickSpacing(1);
+        sliderGameFeedbackArea.setPaintLabels(true);
+        sliderGameFeedbackArea.setPaintTicks(true);
+        sliderGameFeedbackArea.setSnapToTicks(true);
+        sliderGameFeedbackArea.setToolTipText("<HTML>The size of the game feedback area (buttons and messages above the hand area)");
+        sliderGameFeedbackArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderGameFeedbackArea.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeGame.add(sliderGameFeedbackArea, gridBagConstraints);
+
+        labelGameFeedback.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelGameFeedback.setText("Dialog area");
+        labelGameFeedback.setToolTipText("<HTML>The size of the game feedback area (buttons and messages above the hand area)");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeGame.add(labelGameFeedback, gridBagConstraints);
+        labelGameFeedback.getAccessibleContext().setAccessibleName("");
+
+        sliderTooltipSize.setMajorTickSpacing(5);
+        sliderTooltipSize.setMaximum(50);
+        sliderTooltipSize.setMinimum(10);
+        sliderTooltipSize.setMinorTickSpacing(1);
+        sliderTooltipSize.setPaintLabels(true);
+        sliderTooltipSize.setPaintTicks(true);
+        sliderTooltipSize.setSnapToTicks(true);
+        sliderTooltipSize.setToolTipText("<HTML>The size of the tooltip window for cards or permanents");
+        sliderTooltipSize.setValue(14);
+        sliderTooltipSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderTooltipSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeGame.add(sliderTooltipSize, gridBagConstraints);
+
+        labelTooltipSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTooltipSize.setText("Tooltip window");
+        labelTooltipSize.setToolTipText("<HTML>The size of the tooltip window for cards or permanents");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeGame.add(labelTooltipSize, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        tabGuiSize.add(guiSizeGame, gridBagConstraints);
+
+        tabsPanel.addTab("GUI Size", tabGuiSize);
 
         jLabelHeadLine.setText("Choose phases your game will stop on if not skipped by a skip action (e.g. F6):");
 
@@ -806,117 +1198,117 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
         phases_stopSettings.add(cbAutoOrderTrigger);
 
-        javax.swing.GroupLayout tabPhasesLayout = new javax.swing.GroupLayout(tabPhases);
+        org.jdesktop.layout.GroupLayout tabPhasesLayout = new org.jdesktop.layout.GroupLayout(tabPhases);
         tabPhases.setLayout(tabPhasesLayout);
         tabPhasesLayout.setHorizontalGroup(
-            tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabPhasesLayout.createSequentialGroup()
-                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabPhasesLayout.createSequentialGroup()
-                        .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(tabPhasesLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(tabPhasesLayout.createSequentialGroup()
-                                        .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelUpkeep)
-                                            .addComponent(jLabelBeforeCombat)
-                                            .addComponent(jLabelEndofCombat)
-                                            .addComponent(jLabelMain2)
-                                            .addComponent(jLabelEndOfTurn))
-                                        .addGap(77, 77, 77)
-                                        .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(tabPhasesLayout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addComponent(jLabelYourTurn)
-                                                .addGap(32, 32, 32)
-                                                .addComponent(jLabelOpponentsTurn))
-                                            .addGroup(tabPhasesLayout.createSequentialGroup()
-                                                .addGap(13, 13, 13)
-                                                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(checkBoxDrawYou)
-                                                    .addComponent(checkBoxUpkeepYou)
-                                                    .addComponent(checkBoxMainYou)
-                                                    .addComponent(checkBoxBeforeCYou)
-                                                    .addComponent(checkBoxEndOfCYou)
-                                                    .addComponent(checkBoxMain2You)
-                                                    .addComponent(checkBoxEndTurnYou))
-                                                .addGap(78, 78, 78)
-                                                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(checkBoxUpkeepOthers)
-                                                    .addComponent(checkBoxBeforeCOthers)
-                                                    .addComponent(checkBoxMainOthers)
-                                                    .addComponent(checkBoxEndOfCOthers)
-                                                    .addComponent(checkBoxDrawOthers)
-                                                    .addComponent(checkBoxMain2Others)
-                                                    .addComponent(checkBoxEndTurnOthers)))))
-                                    .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabelMain1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabelDraw, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(tabPhasesLayout.createSequentialGroup()
+            tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabPhasesLayout.createSequentialGroup()
+                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(tabPhasesLayout.createSequentialGroup()
+                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(tabPhasesLayout.createSequentialGroup()
+                                .add(20, 20, 20)
+                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(tabPhasesLayout.createSequentialGroup()
+                                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                            .add(jLabelUpkeep)
+                                            .add(jLabelBeforeCombat)
+                                            .add(jLabelEndofCombat)
+                                            .add(jLabelMain2)
+                                            .add(jLabelEndOfTurn))
+                                        .add(77, 77, 77)
+                                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                            .add(tabPhasesLayout.createSequentialGroup()
+                                                .add(2, 2, 2)
+                                                .add(jLabelYourTurn)
+                                                .add(32, 32, 32)
+                                                .add(jLabelOpponentsTurn))
+                                            .add(tabPhasesLayout.createSequentialGroup()
+                                                .add(13, 13, 13)
+                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                                    .add(checkBoxDrawYou)
+                                                    .add(checkBoxUpkeepYou)
+                                                    .add(checkBoxMainYou)
+                                                    .add(checkBoxBeforeCYou)
+                                                    .add(checkBoxEndOfCYou)
+                                                    .add(checkBoxMain2You)
+                                                    .add(checkBoxEndTurnYou))
+                                                .add(78, 78, 78)
+                                                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                                    .add(checkBoxUpkeepOthers)
+                                                    .add(checkBoxBeforeCOthers)
+                                                    .add(checkBoxMainOthers)
+                                                    .add(checkBoxEndOfCOthers)
+                                                    .add(checkBoxDrawOthers)
+                                                    .add(checkBoxMain2Others)
+                                                    .add(checkBoxEndTurnOthers)))))
+                                    .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelMain1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelDraw, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .add(tabPhasesLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabelHeadLine)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(tabPhasesLayout.createSequentialGroup()
+                                .add(jLabelHeadLine)))
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(tabPhasesLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(phases_stopSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         tabPhasesLayout.setVerticalGroup(
-            tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabPhasesLayout.createSequentialGroup()
+            tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabPhasesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(tabPhasesLayout.createSequentialGroup()
-                        .addComponent(jLabelOpponentsTurn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(checkBoxUpkeepOthers))
-                    .addGroup(tabPhasesLayout.createSequentialGroup()
-                        .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(tabPhasesLayout.createSequentialGroup()
-                                .addComponent(jLabelHeadLine)
-                                .addGap(20, 20, 20))
-                            .addComponent(jLabelYourTurn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(checkBoxUpkeepYou)
-                            .addComponent(jLabelUpkeep))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelDraw)
-                    .addComponent(checkBoxDrawYou)
-                    .addComponent(checkBoxDrawOthers))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelMain1)
-                    .addComponent(checkBoxMainYou)
-                    .addComponent(checkBoxMainOthers))
-                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabPhasesLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelBeforeCombat, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(checkBoxBeforeCYou, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(tabPhasesLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(checkBoxBeforeCOthers)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelEndofCombat)
-                    .addComponent(checkBoxEndOfCYou)
-                    .addComponent(checkBoxEndOfCOthers))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelMain2)
-                    .addComponent(checkBoxMain2You)
-                    .addComponent(checkBoxMain2Others))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(checkBoxEndTurnYou)
-                    .addComponent(jLabelEndOfTurn)
-                    .addComponent(checkBoxEndTurnOthers))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(phases_stopSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(tabPhasesLayout.createSequentialGroup()
+                        .add(jLabelOpponentsTurn)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(checkBoxUpkeepOthers))
+                    .add(tabPhasesLayout.createSequentialGroup()
+                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(tabPhasesLayout.createSequentialGroup()
+                                .add(jLabelHeadLine)
+                                .add(20, 20, 20))
+                            .add(jLabelYourTurn))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(checkBoxUpkeepYou)
+                            .add(jLabelUpkeep))))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jLabelDraw)
+                    .add(checkBoxDrawYou)
+                    .add(checkBoxDrawOthers))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jLabelMain1)
+                    .add(checkBoxMainYou)
+                    .add(checkBoxMainOthers))
+                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(tabPhasesLayout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabelBeforeCombat)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, checkBoxBeforeCYou)))
+                    .add(tabPhasesLayout.createSequentialGroup()
+                        .add(6, 6, 6)
+                        .add(checkBoxBeforeCOthers)))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jLabelEndofCombat)
+                    .add(checkBoxEndOfCYou)
+                    .add(checkBoxEndOfCOthers))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jLabelMain2)
+                    .add(checkBoxMain2You)
+                    .add(checkBoxMain2Others))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(tabPhasesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(checkBoxEndTurnYou)
+                    .add(jLabelEndOfTurn)
+                    .add(checkBoxEndTurnOthers))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -954,55 +1346,55 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelPreferedImageLanguage.setText("Prefered image language:");
         labelPreferedImageLanguage.setFocusable(false);
 
-        javax.swing.GroupLayout panelCardImagesLayout = new javax.swing.GroupLayout(panelCardImages);
+        org.jdesktop.layout.GroupLayout panelCardImagesLayout = new org.jdesktop.layout.GroupLayout(panelCardImages);
         panelCardImages.setLayout(panelCardImagesLayout);
         panelCardImagesLayout.setHorizontalGroup(
-            panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCardImagesLayout.createSequentialGroup()
-                .addGroup(panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCardImagesLayout.createSequentialGroup()
-                        .addGroup(panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbUseDefaultImageFolder)
-                            .addComponent(cbCheckForNewImages)
-                            .addGroup(panelCardImagesLayout.createSequentialGroup()
-                                .addGroup(panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCardImagesLayout.createSequentialGroup()
+            panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelCardImagesLayout.createSequentialGroup()
+                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(panelCardImagesLayout.createSequentialGroup()
+                        .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(cbUseDefaultImageFolder)
+                            .add(cbCheckForNewImages)
+                            .add(panelCardImagesLayout.createSequentialGroup()
+                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createSequentialGroup()
                                         .addContainerGap()
-                                        .addComponent(labelPreferedImageLanguage))
-                                    .addComponent(cbSaveToZipFiles, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbPreferedImageLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 190, Short.MAX_VALUE))
-                    .addGroup(panelCardImagesLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(txtImageFolderPath)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBrowseImageLocation)))
+                                        .add(labelPreferedImageLanguage))
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, cbSaveToZipFiles))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(panelCardImagesLayout.createSequentialGroup()
+                        .add(24, 24, 24)
+                        .add(txtImageFolderPath)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(btnBrowseImageLocation)))
                 .addContainerGap())
         );
         panelCardImagesLayout.setVerticalGroup(
-            panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCardImagesLayout.createSequentialGroup()
+            panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelCardImagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbUseDefaultImageFolder)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtImageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBrowseImageLocation))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbCheckForNewImages)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbSaveToZipFiles)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelCardImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbPreferedImageLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelPreferedImageLanguage))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(cbUseDefaultImageFolder)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(txtImageFolderPath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnBrowseImageLocation))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(cbCheckForNewImages)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbSaveToZipFiles)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(labelPreferedImageLanguage))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images setting:"));
@@ -1058,76 +1450,76 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         jLabel15.setText("Battlefield:");
 
-        javax.swing.GroupLayout panelBackgroundImagesLayout = new javax.swing.GroupLayout(panelBackgroundImages);
+        org.jdesktop.layout.GroupLayout panelBackgroundImagesLayout = new org.jdesktop.layout.GroupLayout(panelBackgroundImages);
         panelBackgroundImages.setLayout(panelBackgroundImagesLayout);
         panelBackgroundImagesLayout.setHorizontalGroup(
-            panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
-                .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
-                        .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabel14))
-                            .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel15)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtBackgroundImagePath)
-                            .addComponent(txtBattlefieldImagePath))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBrowseBackgroundImage, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnBrowseBattlefieldImage, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
-                        .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbUseRandomBattleImage)
-                            .addComponent(cbUseDefaultBattleImage)
-                            .addComponent(cbUseDefaultBackground))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+            panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelBackgroundImagesLayout.createSequentialGroup()
+                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(panelBackgroundImagesLayout.createSequentialGroup()
+                        .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                .add(19, 19, 19)
+                                .add(jLabel14))
+                            .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                .add(25, 25, 25)
+                                .add(jLabel15)))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(txtBackgroundImagePath)
+                            .add(txtBattlefieldImagePath))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, btnBrowseBackgroundImage)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, btnBrowseBattlefieldImage)))
+                    .add(panelBackgroundImagesLayout.createSequentialGroup()
+                        .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(cbUseRandomBattleImage)
+                            .add(cbUseDefaultBattleImage)
+                            .add(cbUseDefaultBackground))
+                        .add(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelBackgroundImagesLayout.setVerticalGroup(
-            panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBackgroundImagesLayout.createSequentialGroup()
+            panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelBackgroundImagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbUseDefaultBackground)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBackgroundImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBrowseBackgroundImage)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbUseDefaultBattleImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbUseRandomBattleImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelBackgroundImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBattlefieldImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBrowseBattlefieldImage)
-                    .addComponent(jLabel15)))
+                .add(cbUseDefaultBackground)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(txtBackgroundImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnBrowseBackgroundImage)
+                    .add(jLabel14))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(cbUseDefaultBattleImage)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(cbUseRandomBattleImage)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(txtBattlefieldImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnBrowseBattlefieldImage)
+                    .add(jLabel15)))
         );
 
-        javax.swing.GroupLayout tabImagesLayout = new javax.swing.GroupLayout(tabImages);
+        org.jdesktop.layout.GroupLayout tabImagesLayout = new org.jdesktop.layout.GroupLayout(tabImages);
         tabImages.setLayout(tabImagesLayout);
         tabImagesLayout.setHorizontalGroup(
-            tabImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabImagesLayout.createSequentialGroup()
+            tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabImagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(tabImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelCardImages, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelBackgroundImages, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(panelCardImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabImagesLayout.setVerticalGroup(
-            tabImagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabImagesLayout.createSequentialGroup()
+            tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabImagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelCardImages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelBackgroundImages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
@@ -1198,51 +1590,51 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout sounds_backgroundMusicLayout = new javax.swing.GroupLayout(sounds_backgroundMusic);
+        org.jdesktop.layout.GroupLayout sounds_backgroundMusicLayout = new org.jdesktop.layout.GroupLayout(sounds_backgroundMusic);
         sounds_backgroundMusic.setLayout(sounds_backgroundMusicLayout);
         sounds_backgroundMusicLayout.setHorizontalGroup(
-            sounds_backgroundMusicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
+            sounds_backgroundMusicLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(sounds_backgroundMusicLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBattlefieldIBGMPath)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBattlefieldBGMBrowse))
-            .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
-                .addComponent(cbEnableBattlefieldBGM)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .add(jLabel16)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(txtBattlefieldIBGMPath)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(btnBattlefieldBGMBrowse))
+            .add(sounds_backgroundMusicLayout.createSequentialGroup()
+                .add(cbEnableBattlefieldBGM)
+                .add(0, 0, Short.MAX_VALUE))
         );
         sounds_backgroundMusicLayout.setVerticalGroup(
-            sounds_backgroundMusicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
-                .addComponent(cbEnableBattlefieldBGM)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(sounds_backgroundMusicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBattlefieldIBGMPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBattlefieldBGMBrowse)
-                    .addComponent(jLabel16)))
+            sounds_backgroundMusicLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(sounds_backgroundMusicLayout.createSequentialGroup()
+                .add(cbEnableBattlefieldBGM)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(sounds_backgroundMusicLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(txtBattlefieldIBGMPath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnBattlefieldBGMBrowse)
+                    .add(jLabel16)))
         );
 
-        javax.swing.GroupLayout tabSoundsLayout = new javax.swing.GroupLayout(tabSounds);
+        org.jdesktop.layout.GroupLayout tabSoundsLayout = new org.jdesktop.layout.GroupLayout(tabSounds);
         tabSounds.setLayout(tabSoundsLayout);
         tabSoundsLayout.setHorizontalGroup(
-            tabSoundsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabSoundsLayout.createSequentialGroup()
+            tabSoundsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabSoundsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(tabSoundsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sounds_clips, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(tabSoundsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(sounds_clips, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, sounds_backgroundMusic, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabSoundsLayout.setVerticalGroup(
-            tabSoundsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabSoundsLayout.createSequentialGroup()
+            tabSoundsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabSoundsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sounds_clips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(sounds_clips, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(sounds_backgroundMusic, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         sounds_clips.getAccessibleContext().setAccessibleDescription("");
@@ -1263,15 +1655,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel10.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel10.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        org.jdesktop.layout.GroupLayout jPanel10Layout = new org.jdesktop.layout.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel10);
@@ -1281,15 +1673,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel11.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel11.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        org.jdesktop.layout.GroupLayout jPanel11Layout = new org.jdesktop.layout.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel11);
@@ -1299,15 +1691,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel12.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel12.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        org.jdesktop.layout.GroupLayout jPanel12Layout = new org.jdesktop.layout.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel12);
@@ -1317,15 +1709,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel13.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel13.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        org.jdesktop.layout.GroupLayout jPanel13Layout = new org.jdesktop.layout.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel13Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            jPanel13Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel13);
@@ -1335,15 +1727,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel14.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel14.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        org.jdesktop.layout.GroupLayout jPanel14Layout = new org.jdesktop.layout.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel14Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel14Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel14);
@@ -1353,15 +1745,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel15.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel15.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        org.jdesktop.layout.GroupLayout jPanel15Layout = new org.jdesktop.layout.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel15Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel15Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel15);
@@ -1371,15 +1763,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel16.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel16.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        org.jdesktop.layout.GroupLayout jPanel16Layout = new org.jdesktop.layout.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel16Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel16Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel16);
@@ -1389,15 +1781,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel17.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel17.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        org.jdesktop.layout.GroupLayout jPanel17Layout = new org.jdesktop.layout.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel17Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel17Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel17);
@@ -1407,15 +1799,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel18.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel18.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        org.jdesktop.layout.GroupLayout jPanel18Layout = new org.jdesktop.layout.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel18Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel18Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel18);
@@ -1425,15 +1817,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel19.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel19.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        org.jdesktop.layout.GroupLayout jPanel19Layout = new org.jdesktop.layout.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel19Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel19Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel19);
@@ -1443,15 +1835,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel20.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel20.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        org.jdesktop.layout.GroupLayout jPanel20Layout = new org.jdesktop.layout.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel20Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel20Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel20);
@@ -1461,15 +1853,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel21.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel21.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        org.jdesktop.layout.GroupLayout jPanel21Layout = new org.jdesktop.layout.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel21Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel21Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel21);
@@ -1479,15 +1871,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel22.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel22.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        org.jdesktop.layout.GroupLayout jPanel22Layout = new org.jdesktop.layout.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel22Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel22Layout.setVerticalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel22Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel22);
@@ -1497,15 +1889,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel23.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel23.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        org.jdesktop.layout.GroupLayout jPanel23Layout = new org.jdesktop.layout.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel23Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel23Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel23);
@@ -1515,15 +1907,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel24.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel24.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
+        org.jdesktop.layout.GroupLayout jPanel24Layout = new org.jdesktop.layout.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel24Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel24Layout.setVerticalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel24Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel24);
@@ -1533,15 +1925,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel25.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel25.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+        org.jdesktop.layout.GroupLayout jPanel25Layout = new org.jdesktop.layout.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel25Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel25Layout.setVerticalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel25Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel25);
@@ -1551,15 +1943,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel26.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel26.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
+        org.jdesktop.layout.GroupLayout jPanel26Layout = new org.jdesktop.layout.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
-            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel26Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel26Layout.setVerticalGroup(
-            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel26Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel26);
@@ -1569,15 +1961,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel27.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel27.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
+        org.jdesktop.layout.GroupLayout jPanel27Layout = new org.jdesktop.layout.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
-            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel27Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel27Layout.setVerticalGroup(
-            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel27Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel27);
@@ -1587,15 +1979,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel28.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel28.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
+        org.jdesktop.layout.GroupLayout jPanel28Layout = new org.jdesktop.layout.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
         jPanel28Layout.setHorizontalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel28Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel28Layout.setVerticalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel28Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel28);
@@ -1605,15 +1997,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel29.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel29.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
+        org.jdesktop.layout.GroupLayout jPanel29Layout = new org.jdesktop.layout.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
         jPanel29Layout.setHorizontalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel29Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel29Layout.setVerticalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel29Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel29);
@@ -1623,15 +2015,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel30.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel30.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
+        org.jdesktop.layout.GroupLayout jPanel30Layout = new org.jdesktop.layout.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel30Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel30Layout.setVerticalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel30Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel30);
@@ -1641,15 +2033,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel31.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel31.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
+        org.jdesktop.layout.GroupLayout jPanel31Layout = new org.jdesktop.layout.GroupLayout(jPanel31);
         jPanel31.setLayout(jPanel31Layout);
         jPanel31Layout.setHorizontalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel31Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel31Layout.setVerticalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel31Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel31);
@@ -1659,15 +2051,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel32.setMinimumSize(new java.awt.Dimension(102, 102));
         jPanel32.setPreferredSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
+        org.jdesktop.layout.GroupLayout jPanel32Layout = new org.jdesktop.layout.GroupLayout(jPanel32);
         jPanel32.setLayout(jPanel32Layout);
         jPanel32Layout.setHorizontalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel32Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel32Layout.setVerticalGroup(
-            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel32Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel32);
@@ -1676,32 +2068,34 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel33.setMaximumSize(new java.awt.Dimension(102, 102));
         jPanel33.setMinimumSize(new java.awt.Dimension(102, 102));
 
-        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
+        org.jdesktop.layout.GroupLayout jPanel33Layout = new org.jdesktop.layout.GroupLayout(jPanel33);
         jPanel33.setLayout(jPanel33Layout);
         jPanel33Layout.setHorizontalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel33Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
         jPanel33Layout.setVerticalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            jPanel33Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
         );
 
         avatarPanel.add(jPanel33);
 
         avatarPane.setViewportView(avatarPanel);
 
-        javax.swing.GroupLayout tabAvatarsLayout = new javax.swing.GroupLayout(tabAvatars);
+        org.jdesktop.layout.GroupLayout tabAvatarsLayout = new org.jdesktop.layout.GroupLayout(tabAvatars);
         tabAvatars.setLayout(tabAvatarsLayout);
         tabAvatarsLayout.setHorizontalGroup(
-            tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabAvatarsLayout.createSequentialGroup()
-                .addComponent(avatarPane, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabAvatarsLayout.createSequentialGroup()
+                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 528, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 1, Short.MAX_VALUE))
         );
         tabAvatarsLayout.setVerticalGroup(
-            tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(avatarPane, javax.swing.GroupLayout.PREFERRED_SIZE, 438, Short.MAX_VALUE)
+            tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabAvatarsLayout.createSequentialGroup()
+                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 484, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
@@ -1746,72 +2140,72 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jLabel11.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         jLabel11.setText("Note: password won't be encrypted!");
 
-        javax.swing.GroupLayout pnlProxyLayout = new javax.swing.GroupLayout(pnlProxy);
+        org.jdesktop.layout.GroupLayout pnlProxyLayout = new org.jdesktop.layout.GroupLayout(pnlProxy);
         pnlProxy.setLayout(pnlProxyLayout);
         pnlProxyLayout.setHorizontalGroup(
-            pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProxyLayout.createSequentialGroup()
+            pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pnlProxyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlProxyLayout.createSequentialGroup()
-                        .addComponent(rememberPswd)
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel11)
-                        .addGap(34, 34, 34))
-                    .addGroup(pnlProxyLayout.createSequentialGroup()
-                        .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblProxyPort)
-                            .addComponent(lblProxyPassword)
-                            .addComponent(lblProxyServer)
-                            .addComponent(lblProxyUserName))
-                        .addGap(19, 19, 19)
-                        .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtProxyServer))
+                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(pnlProxyLayout.createSequentialGroup()
+                        .add(rememberPswd)
+                        .add(47, 47, 47)
+                        .add(jLabel11)
+                        .add(34, 34, 34))
+                    .add(pnlProxyLayout.createSequentialGroup()
+                        .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(lblProxyPort)
+                            .add(lblProxyPassword)
+                            .add(lblProxyServer)
+                            .add(lblProxyUserName))
+                        .add(19, 19, 19)
+                        .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(txtProxyPort, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 58, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                .add(org.jdesktop.layout.GroupLayout.LEADING, txtPasswordField)
+                                .add(org.jdesktop.layout.GroupLayout.LEADING, txtProxyUserName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 148, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(txtProxyServer))
                         .addContainerGap())))
         );
         pnlProxyLayout.setVerticalGroup(
-            pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProxyLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProxyServer))
-                .addGap(8, 8, 8)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProxyPort)
-                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtProxyUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProxyUserName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProxyPassword))
-                .addGap(18, 18, 18)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rememberPswd)
-                    .addComponent(jLabel11))
-                .addContainerGap(25, Short.MAX_VALUE))
+            pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pnlProxyLayout.createSequentialGroup()
+                .add(6, 6, 6)
+                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(txtProxyServer, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(lblProxyServer))
+                .add(8, 8, 8)
+                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(lblProxyPort)
+                    .add(txtProxyPort, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(txtProxyUserName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(lblProxyUserName))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(txtPasswordField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(lblProxyPassword))
+                .add(18, 18, 18)
+                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(rememberPswd)
+                    .add(jLabel11))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout pnlProxySettingsLayout = new javax.swing.GroupLayout(pnlProxySettings);
+        org.jdesktop.layout.GroupLayout pnlProxySettingsLayout = new org.jdesktop.layout.GroupLayout(pnlProxySettings);
         pnlProxySettings.setLayout(pnlProxySettingsLayout);
         pnlProxySettingsLayout.setHorizontalGroup(
-            pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProxySettingsLayout.createSequentialGroup()
+            pnlProxySettingsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pnlProxySettingsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(pnlProxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlProxySettingsLayout.setVerticalGroup(
-            pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProxySettingsLayout.createSequentialGroup()
-                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            pnlProxySettingsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pnlProxySettingsLayout.createSequentialGroup()
+                .add(pnlProxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1830,59 +2224,59 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jLabel17.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         jLabel17.setText("e.g.: http://XMage.de/files/server-list.txt");
 
-        javax.swing.GroupLayout connection_serversLayout = new javax.swing.GroupLayout(connection_servers);
+        org.jdesktop.layout.GroupLayout connection_serversLayout = new org.jdesktop.layout.GroupLayout(connection_servers);
         connection_servers.setLayout(connection_serversLayout);
         connection_serversLayout.setHorizontalGroup(
-            connection_serversLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(connection_serversLayout.createSequentialGroup()
-                .addGroup(connection_serversLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(connection_serversLayout.createSequentialGroup()
+            connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(connection_serversLayout.createSequentialGroup()
+                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(connection_serversLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblURLServerList, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtURLServerList, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(connection_serversLayout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(jLabel17)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(lblURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(txtURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 370, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(connection_serversLayout.createSequentialGroup()
+                        .add(141, 141, 141)
+                        .add(jLabel17)))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         connection_serversLayout.setVerticalGroup(
-            connection_serversLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(connection_serversLayout.createSequentialGroup()
-                .addGroup(connection_serversLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblURLServerList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtURLServerList, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel17))
+            connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(connection_serversLayout.createSequentialGroup()
+                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(lblURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel17))
         );
 
-        javax.swing.GroupLayout tabConnectionLayout = new javax.swing.GroupLayout(tabConnection);
+        org.jdesktop.layout.GroupLayout tabConnectionLayout = new org.jdesktop.layout.GroupLayout(tabConnection);
         tabConnection.setLayout(tabConnectionLayout);
         tabConnectionLayout.setHorizontalGroup(
-            tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabConnectionLayout.createSequentialGroup()
+            tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabConnectionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pnlProxySettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tabConnectionLayout.createSequentialGroup()
-                        .addComponent(lblProxyType)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(connection_servers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(pnlProxySettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, tabConnectionLayout.createSequentialGroup()
+                        .add(lblProxyType)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(connection_servers, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tabConnectionLayout.setVerticalGroup(
-            tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabConnectionLayout.createSequentialGroup()
+            tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(tabConnectionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(connection_servers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tabConnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblProxyType)
-                    .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .add(connection_servers, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(lblProxyType)
+                    .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(18, 18, 18)
+                .add(pnlProxySettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
@@ -1890,6 +2284,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabsPanel.addTab("Connection", tabConnection);
 
         saveButton.setLabel("Save");
+        saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        saveButton.setMinimumSize(new java.awt.Dimension(100, 30));
+        saveButton.setPreferredSize(new java.awt.Dimension(100, 30));
         saveButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1898,6 +2295,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         exitButton.setLabel("Exit");
+        exitButton.setMaximumSize(new java.awt.Dimension(100, 30));
+        exitButton.setMinimumSize(new java.awt.Dimension(100, 30));
+        exitButton.setPreferredSize(new java.awt.Dimension(100, 30));
         exitButton.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1905,26 +2305,26 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(405, Short.MAX_VALUE)
-                .addComponent(saveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(saveButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(6, 6, 6))
+            .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabsPanel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(exitButton)
-                    .addComponent(saveButton))
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(layout.createSequentialGroup()
+                .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(saveButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1935,7 +2335,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         Preferences prefs = MageFrame.getPreferences();
 
         // main
-        save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.tooltipDelay, KEY_SHOW_TOOLTIPS_DELAY, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
@@ -1948,13 +2347,64 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
+        // GUI Size
+        boolean sizeGUIChanged = false;
+        if (getCachedValue(KEY_GUI_TABLE_FONT_SIZE, 14) != dialog.sliderFontSize.getValue()) {
+            save(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CHAT_FONT_SIZE, 14) != dialog.sliderChatFontSize.getValue()) {
+            save(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CARD_HAND_SIZE, 14) != dialog.sliderCardSizeHand.getValue()) {
+            save(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CARD_EDITOR_SIZE, 14) != dialog.sliderEditorCardSize.getValue()) {
+            save(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CARD_OFFSET_SIZE, 14) != dialog.sliderEditorCardOffset.getValue()) {
+            save(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_STACK_WIDTH, 30) != dialog.sliderStackWidth.getValue()) {
+            save(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_TOOLTIP_SIZE, 14) != dialog.sliderTooltipSize.getValue()) {
+            save(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_DIALOG_FONT_SIZE, 14) != dialog.sliderDialogFont.getValue()) {
+            save(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_FEEDBACK_AREA_SIZE, 14) != dialog.sliderGameFeedbackArea.getValue()) {
+            save(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CARD_OTHER_ZONES_SIZE, 14) != dialog.sliderCardSizeOtherZones.getValue()) {
+            save(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CARD_BATTLEFIELD_SIZE, 14) != dialog.sliderCardSizeBattlefield.getValue()) {
+            save(prefs, dialog.sliderCardSizeBattlefield, KEY_GUI_CARD_BATTLEFIELD_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (sizeGUIChanged) {
+            // do as worker job
+            GUISizeHelper.changeGUISize();
+        }
+
         // Phases & Priority
         save(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
         save(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
         save(prefs, dialog.checkBoxMainYou, MAIN_YOU);
         save(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
         save(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
-        save(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
+        save(prefs, dialog.checkBoxMain2You, MAIN_TWO_YOU);
         save(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
 
         save(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
@@ -1962,7 +2412,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
         save(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
         save(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
-        save(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
+        save(prefs, dialog.checkBoxMain2Others, MAIN_TWO_OTHERS);
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
 
         save(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "false", UPDATE_CACHE_POLICY);
@@ -2016,8 +2466,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
             prefs.flush();
         } catch (BackingStoreException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error: couldn't save preferences. Please try once again.");
+            logger.error("Error: couldn't save preferences", ex);
+            UserRequestMessage message = new UserRequestMessage("Error", "Error: couldn't save preferences. Please try once again.");
+            message.setButton1("OK", null);
+            MageFrame.getInstance().showUserRequestDialog(message);
         }
 
         dialog.setVisible(false);
@@ -2042,7 +2494,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private void useConfigurablePath() {
-        String path = cache.get(KEY_CARD_IMAGES_PATH);
+        String path = CACHE.get(KEY_CARD_IMAGES_PATH);
         dialog.txtImageFolderPath.setText(path);
         txtImageFolderPath.setEnabled(true);
         btnBrowseImageLocation.setEnabled(true);
@@ -2107,7 +2559,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private void useSelectBackgroundImage() {
-        String path = cache.get(KEY_BACKGROUND_IMAGE);
+        String path = CACHE.get(KEY_BACKGROUND_IMAGE);
         dialog.txtBackgroundImagePath.setText(path);
         txtBackgroundImagePath.setEnabled(true);
         btnBrowseBackgroundImage.setEnabled(true);
@@ -2129,7 +2581,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void useSelectedOrRandom() {
         cbUseRandomBattleImage.setEnabled(true);
-        String temp = cache.get(KEY_BATTLEFIELD_IMAGE_RANDOM);
+        String temp = CACHE.get(KEY_BATTLEFIELD_IMAGE_RANDOM);
         if (temp != null) {
             if (temp.equals("true")) {
                 useRandomBattleField();
@@ -2211,10 +2663,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_showPlayerNamesPermanentlyActionPerformed
 
-    private void displayBigCardsInHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayBigCardsInHandActionPerformed
-
-    }//GEN-LAST:event_displayBigCardsInHandActionPerformed
-
     private void showCardNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCardNameActionPerformed
 
     }//GEN-LAST:event_showCardNameActionPerformed
@@ -2284,15 +2732,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cbAutoOrderTriggerActionPerformed
 
     private void showProxySettings() {
-        if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
-            this.pnlProxy.setVisible(true);
-            this.pnlProxySettings.setVisible(true);
-        } else if (cbProxyType.getSelectedItem() == Connection.ProxyType.HTTP) {
-            this.pnlProxy.setVisible(true);
-            this.pnlProxySettings.setVisible(true);
-        } else if (cbProxyType.getSelectedItem() == Connection.ProxyType.NONE) {
-            this.pnlProxy.setVisible(false);
-            this.pnlProxySettings.setVisible(false);
+        Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
+        switch (proxyType) {
+            case SOCKS:
+                this.pnlProxy.setVisible(true);
+                this.pnlProxySettings.setVisible(true);
+                break;
+            case HTTP:
+                this.pnlProxy.setVisible(true);
+                this.pnlProxySettings.setVisible(true);
+                break;
+            case NONE:
+                this.pnlProxy.setVisible(false);
+                this.pnlProxySettings.setVisible(false);
+                break;
+            default:
+                break;
         }
         this.pack();
         this.repaint();
@@ -2318,10 +2773,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     connection.setProxyPassword(password);
                 }
             } else {
-                log.warn("host or\\and port are empty: host=" + host + ", port=" + port);
+                logger.warn("host or\\and port are empty: host=" + host + ", port=" + port);
             }
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -2345,6 +2801,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
                     // Main & Phases
                     loadPhases(prefs);
+
+                    // Gui Size
+                    loadGuiSize(prefs);
 
                     // Images
                     loadImagesSettings(prefs);
@@ -2373,7 +2832,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadPhases(Preferences prefs) {
-        load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "true");
         load(prefs, dialog.tooltipDelay, KEY_SHOW_TOOLTIPS_DELAY, "300");
         load(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
@@ -2392,7 +2850,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.checkBoxMainYou, MAIN_YOU, "on", "on");
         load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU, "on", "on");
         load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU, "on", "on");
-        load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU, "on", "on");
+        load(prefs, dialog.checkBoxMain2You, MAIN_TWO_YOU, "on", "on");
         load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU, "on", "on");
 
         load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS, "on", "on");
@@ -2400,7 +2858,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS, "on", "on");
         load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS, "on", "on");
         load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS, "on", "on");
-        load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS, "on", "on");
+        load(prefs, dialog.checkBoxMain2Others, MAIN_TWO_OTHERS, "on", "on");
         load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS, "on", "on");
 
         load(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "true");
@@ -2411,6 +2869,20 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbPassPriorityActivation, KEY_PASS_PRIORITY_ACTIVATION, "true", "false");
         load(prefs, dialog.cbAutoOrderTrigger, KEY_AUTO_ORDER_TRIGGER, "true", "true");
 
+    }
+
+    private static void loadGuiSize(Preferences prefs) {
+        load(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "14");
+        load(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "14");
+        load(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "14");
+        load(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "14");
+        load(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "14");
+        load(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "14");
+        load(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "14");
+        load(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "14");
+        load(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "14");
+        load(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "14");
+        load(prefs, dialog.sliderCardSizeBattlefield, KEY_GUI_CARD_BATTLEFIELD_SIZE, "14");
     }
 
     private static void loadImagesSettings(Preferences prefs) {
@@ -2549,7 +3021,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 dialog.tabsPanel.setSelectedIndex(index);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error during open tab", e);
         }
     }
 
@@ -2673,21 +3145,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static String getCachedValue(String key, String def) {
-        if (cache.containsKey(key)) {
-            return cache.get(key);
+        if (CACHE.containsKey(key)) {
+            return CACHE.get(key);
         } else {
             Preferences prefs = MageFrame.getPreferences();
             String value = prefs.get(key, def);
             if (value == null) {
                 return null;
             }
-            cache.put(key, value);
+            CACHE.put(key, value);
             return value;
         }
     }
 
     private static void updateCache(String key, String value) {
-        cache.put(key, value);
+        CACHE.put(key, value);
     }
 
     public static void saveValue(String key, String value) {
@@ -2729,23 +3201,23 @@ public class PreferencesDialog extends javax.swing.JDialog {
             addAvatar(jPanel32, 32, false, false);
 
         } catch (Exception e) {
-            log.error(e, e);
+            logger.error(e, e);
         }
     }
 
     public void setSelectedId(int id) {
         if (id >= MIN_AVATAR_ID && id <= MAX_AVATAR_ID) {
-            for (JPanel panel : panels.values()) {
+            for (JPanel panel : PANELS.values()) {
                 panel.setBorder(BLACK_BORDER);
             }
             PreferencesDialog.selectedAvatarId = id;
-            panels.get(PreferencesDialog.selectedAvatarId).setBorder(GREEN_BORDER);
+            PANELS.get(PreferencesDialog.selectedAvatarId).setBorder(GREEN_BORDER);
         }
     }
 
     private void addAvatar(JPanel jPanel, final int id, boolean selected, boolean locked) {
         String path = "/avatars/" + String.valueOf(id) + ".jpg";
-        panels.put(id, jPanel);
+        PANELS.put(id, jPanel);
         Image image = ImageHelper.getImageFromResources(path);
 
         Rectangle r = new Rectangle(jPanel.getWidth() - 5, jPanel.getHeight() - 5);
@@ -2831,6 +3303,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbUseDefaultBattleImage;
     private javax.swing.JCheckBox cbUseDefaultImageFolder;
     private javax.swing.JCheckBox cbUseRandomBattleImage;
+    private javax.swing.JLabel chatFontSizeLabel;
     private javax.swing.JCheckBox checkBoxBeforeCOthers;
     private javax.swing.JCheckBox checkBoxBeforeCYou;
     private javax.swing.JCheckBox checkBoxDrawOthers;
@@ -2846,8 +3319,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxUpkeepOthers;
     private javax.swing.JCheckBox checkBoxUpkeepYou;
     private javax.swing.JPanel connection_servers;
-    private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
+    private javax.swing.JLabel fontSizeLabel;
+    private javax.swing.JPanel guiSizeBasic;
+    private javax.swing.JPanel guiSizeGame;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -2887,7 +3362,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
+    private javax.swing.JLabel labelCardSizeBattlefield;
+    private javax.swing.JLabel labelCardSizeHand;
+    private javax.swing.JLabel labelCardSizeOtherZones;
+    private javax.swing.JLabel labelDialogFont;
+    private javax.swing.JLabel labelEditorCardOffset;
+    private javax.swing.JLabel labelEditorCardSize;
+    private javax.swing.JLabel labelGameFeedback;
     private javax.swing.JLabel labelPreferedImageLanguage;
+    private javax.swing.JLabel labelStackWidth;
+    private javax.swing.JLabel labelTooltipSize;
     private javax.swing.JLabel lblProxyPassword;
     private javax.swing.JLabel lblProxyPort;
     private javax.swing.JLabel lblProxyServer;
@@ -2908,10 +3392,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox showAbilityPickerForced;
     private javax.swing.JCheckBox showCardName;
     private javax.swing.JCheckBox showPlayerNamesPermanently;
+    private javax.swing.JSlider sliderCardSizeBattlefield;
+    private javax.swing.JSlider sliderCardSizeHand;
+    private javax.swing.JSlider sliderCardSizeOtherZones;
+    private javax.swing.JSlider sliderChatFontSize;
+    private javax.swing.JSlider sliderDialogFont;
+    private javax.swing.JSlider sliderEditorCardOffset;
+    private javax.swing.JSlider sliderEditorCardSize;
+    private javax.swing.JSlider sliderFontSize;
+    private javax.swing.JSlider sliderGameFeedbackArea;
+    private javax.swing.JSlider sliderStackWidth;
+    private javax.swing.JSlider sliderTooltipSize;
     private javax.swing.JPanel sounds_backgroundMusic;
     private javax.swing.JPanel sounds_clips;
     private javax.swing.JPanel tabAvatars;
     private javax.swing.JPanel tabConnection;
+    private javax.swing.JPanel tabGuiSize;
     private javax.swing.JPanel tabImages;
     private javax.swing.JPanel tabMain;
     private javax.swing.JPanel tabPhases;

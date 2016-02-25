@@ -1,4 +1,8 @@
-|Generate}TOK:OGW|Angel||
+#|Generate|TOK:SOI|Clue||
+#|Generate|TOK:SOI|Devil||
+#|Generate|TOK:SOI|Wolf||
+
+|Generate|TOK:OGW|Angel||
 |Generate|TOK:OGW|Elemental|1|
 |Generate|TOK:OGW|Elemental|2|
 |Generate}TOK:OGW|Eldrazi Scion|1|
@@ -11,6 +15,9 @@
 |Generate|TOK:OGW|Zombie||
 
 #|Generate|TOK:DDQ|Angel||
+#|Generate|TOK:DDQ|Human||
+#|Generate|TOK:DDQ|Spirit||
+#|Generate|TOK:DDQ|Zombie||
 
 |Generate|TOK:C15|Angel||
 |Generate|TOK:C15|Bear||

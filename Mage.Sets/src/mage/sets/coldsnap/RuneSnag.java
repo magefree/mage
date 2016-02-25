@@ -45,8 +45,9 @@ import mage.target.TargetSpell;
  * @author emerald000
  */
 public class RuneSnag extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard();
+
     static {
         filter.add(new NamePredicate("Rune Snag"));
     }
@@ -54,7 +55,6 @@ public class RuneSnag extends CardImpl {
     public RuneSnag(UUID ownerId) {
         super(ownerId, 46, "Rune Snag", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CSP";
-
 
         // Counter target spell unless its controller pays {2} plus an additional {2} for each card named Rune Snag in each graveyard.
         Effect effect = new CounterUnlessPaysEffect(new IntPlusDynamicValue(2, new MultipliedValue(new CardsInAllGraveyardsCount(filter), 2)));

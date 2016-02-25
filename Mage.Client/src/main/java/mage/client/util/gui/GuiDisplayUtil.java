@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import mage.client.MageFrame;
+import mage.client.util.GUISizeHelper;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.constants.Rarity;
@@ -157,10 +158,8 @@ public class GuiDisplayUtil {
                 if (((PermanentView) card).getCounters() != null) {
                     counters = new ArrayList<>(((PermanentView) card).getCounters());
                 }
-            } else {
-                if (card.getCounters() != null) {
-                    counters = new ArrayList<>(card.getCounters());
-                }
+            } else if (card.getCounters() != null) {
+                counters = new ArrayList<>(card.getCounters());
             }
             if (!counters.isEmpty()) {
                 StringBuilder sb = new StringBuilder();
@@ -196,7 +195,7 @@ public class GuiDisplayUtil {
             manaCost += m;
         }
         String castingCost = UI.getDisplayManaCost(manaCost);
-        castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.CARD);
+        castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.TOOLTIP);
 
         int symbolCount = 0;
         int offset = 0;
@@ -204,15 +203,14 @@ public class GuiDisplayUtil {
             symbolCount++;
         }
 
-        int fontSize = 11;
-
         String fontFamily = "tahoma";
+        int fontSize = GUISizeHelper.cardTooltipFontSize;
+
         /*if (prefs.fontFamily == CardFontFamily.arial)
          fontFamily = "arial";
          else if (prefs.fontFamily == CardFontFamily.verdana) {
          fontFamily = "verdana";
          }*/
-
         final StringBuilder buffer = new StringBuilder(512);
         buffer.append("<html><body style='font-family:");
         buffer.append(fontFamily);
@@ -226,27 +224,28 @@ public class GuiDisplayUtil {
             buffer.append(" [").append(card.getId().toString().substring(0, 3)).append("]");
         }
         buffer.append("</b></td><td align='right' valign='top' style='width:");
-        buffer.append(symbolCount * 11 + 1);
+        buffer.append(symbolCount * GUISizeHelper.cardTooltipFontSize);
         buffer.append("px'>");
         if (!card.isSplitCard()) {
             buffer.append(castingCost);
         }
         buffer.append("</td></tr></table>");
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td style='margin-left: 1px'>");
+        String imageSize = " width=" + GUISizeHelper.cardTooltipFontSize + " height=" + GUISizeHelper.cardTooltipFontSize + ">";
         if (card.getColor().isWhite()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W' ").append(imageSize);
         }
         if (card.getColor().isBlue()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_blue.png")).append("' alt='U'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_blue.png")).append("' alt='U' ").append(imageSize);
         }
         if (card.getColor().isBlack()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_black.png")).append("' alt='B'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_black.png")).append("' alt='B' ").append(imageSize);
         }
         if (card.getColor().isRed()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_red.png")).append("' alt='R'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_red.png")).append("' alt='R' ").append(imageSize);
         }
         if (card.getColor().isGreen()) {
-            buffer.append("<img src='").append(getResourcePath("card/color_ind_green.png")).append("' alt='G'>");
+            buffer.append("<img src='").append(getResourcePath("card/color_ind_green.png")).append("' alt='G' ").append(imageSize);
         }
         if (!card.getColor().isColorless()) {
             buffer.append("&nbsp;&nbsp;");
@@ -275,7 +274,7 @@ public class GuiDisplayUtil {
             rarity = card.getRarity().getCode();
         }
         if (card.getExpansionSetCode() != null) {
-            buffer.append(ManaSymbols.replaceSetCodeWithHTML(card.getExpansionSetCode().toUpperCase(), rarity));
+            buffer.append(ManaSymbols.replaceSetCodeWithHTML(card.getExpansionSetCode().toUpperCase(), rarity, GUISizeHelper.symbolTooltipSize));
         }
         buffer.append("</td></tr></table>");
 
@@ -307,7 +306,7 @@ public class GuiDisplayUtil {
             rule.append("<tr><td valign='top'><b>");
             rule.append(card.getLeftSplitName());
             rule.append("</b></td><td align='right' valign='top' style='width:");
-            rule.append(card.getLeftSplitCosts().getSymbols().size() * 11 + 1);
+            rule.append(card.getLeftSplitCosts().getSymbols().size() * GUISizeHelper.symbolTooltipSize + 1);
             rule.append("px'>");
             rule.append(card.getLeftSplitCosts().getText());
             rule.append("</td></tr></table>");
@@ -320,7 +319,7 @@ public class GuiDisplayUtil {
             rule.append("<tr><td valign='top'><b>");
             rule.append(card.getRightSplitName());
             rule.append("</b></td><td align='right' valign='top' style='width:");
-            rule.append(card.getRightSplitCosts().getSymbols().size() * 11 + 1);
+            rule.append(card.getRightSplitCosts().getSymbols().size() * GUISizeHelper.symbolTooltipSize + 1);
             rule.append("px'>");
             rule.append(card.getRightSplitCosts().getText());
             rule.append("</td></tr></table>");
@@ -340,13 +339,9 @@ public class GuiDisplayUtil {
 
         String legal = rule.toString();
         if (legal.length() > 0) {
-// this 2 replaces were only done with the empty string, is it any longer needed? (LevelX2)
-//                        legal = legal.replaceAll("#([^#]+)#", "<i>$1</i>");
-//                        legal = legal.replaceAll("\\s*//\\s*", "<hr width='50%'>");
-//                        legal = legal.replace("\r\n", "<div style='font-size:5pt'></div>");
             legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this" : card.getName());
             legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this" : card.getName());
-            buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.CARD));
+            buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.TOOLTIP));
         }
 
         buffer.append("<br></body></html>");

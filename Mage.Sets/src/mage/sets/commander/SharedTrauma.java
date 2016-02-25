@@ -89,7 +89,7 @@ class SharedTraumaEffect extends OneShotEffect {
         if (controller != null) {
             int xSum = 0;
             xSum += playerPaysXGenericMana(controller, source, game);
-            for(UUID playerId : controller.getInRange()) {
+            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (playerId != controller.getId()) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
@@ -99,7 +99,7 @@ class SharedTraumaEffect extends OneShotEffect {
                 }
             }
             if (xSum > 0) {
-                for(UUID playerId : controller.getInRange()) {
+                for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(xSum);
                     effect.setTargetPointer(new FixedTarget(playerId));
                     effect.apply(game, source);

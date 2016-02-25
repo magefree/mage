@@ -50,7 +50,7 @@ public class EchoCirclet extends CardImpl {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
 
-        // Equipped creature can block an additional creature. (static abilit of equipment, no ability that will be gained to equiped creature!)
+        // Equipped creature can block an additional creature each combat. (static abilit of equipment, no ability that will be gained to equiped creature!)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EchoCircletEffect()));
 
         // Equip {1}
@@ -71,7 +71,7 @@ class EchoCircletEffect extends ContinuousEffectImpl {
 
     public EchoCircletEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Equipped creature can block an additional creature";
+        staticText = "Equipped creature can block an additional creature each combat";
     }
 
     public EchoCircletEffect(final EchoCircletEffect effect) {

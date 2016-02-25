@@ -90,7 +90,7 @@ class PoxEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             // Each player loses a third of his or her life,
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int lifeToLose = (int) Math.ceil(player.getLife() / 3.0);
@@ -98,7 +98,7 @@ class PoxEffect extends OneShotEffect {
                 }
             }
             // then discards a third of the cards in his or her hand,
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int cardsToDiscard = (int) Math.ceil(player.getHand().size() / 3.0);
@@ -108,7 +108,7 @@ class PoxEffect extends OneShotEffect {
                 }
             }
             // then sacrifices a third of the creatures he or she controls,
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
@@ -126,7 +126,7 @@ class PoxEffect extends OneShotEffect {
                 }
             }
             // then sacrifices a third of the lands he or she controls.
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent();

@@ -120,4 +120,26 @@ public class WardenOfTheFirstTreeTest extends CardTestPlayerBase {
      * power/toughness instead of 1/1. I have had it enter with both 2/2 and
      * 4/4, neither of which are actual values the card can hold.
      */
+    @Test
+    public void testTwoWarden() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        // {1}{W/B}: Warden of the First Tree becomes a Human Warrior with base power and toughness 3/3.
+        // {2}{W/B}{W/B}: If Warden of the First Tree is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink.
+        // {3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.
+        addCard(Zone.HAND, playerA, "Warden of the First Tree", 2); // {G}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warden of the First Tree");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{W/B}:");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{W/B}{W/B}:");
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Warden of the First Tree");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, "Warden of the First Tree", 1, 1, Filter.ComparisonScope.Any);
+        assertPowerToughness(playerA, "Warden of the First Tree", 3, 3, Filter.ComparisonScope.Any);
+    }
+
 }

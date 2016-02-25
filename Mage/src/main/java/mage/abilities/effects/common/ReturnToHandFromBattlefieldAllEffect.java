@@ -27,10 +27,11 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.HashSet;
+import java.util.Set;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -61,11 +62,11 @@ public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cardsToHand = new CardsImpl();
+            Set<Card> permanentsToHand = new HashSet<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                cardsToHand.add(permanent);
+                permanentsToHand.add(permanent);
             }
-            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+            controller.moveCards(permanentsToHand, Zone.HAND, source, game);
             return true;
         }
         return false;

@@ -27,8 +27,10 @@
  */
 package mage.client.chat;
 
+import java.awt.Font;
 import static mage.client.chat.ChatPanelBasic.TIMESTAMP_COLOR;
 import mage.client.components.ColorPane;
+import mage.client.util.GUISizeHelper;
 import mage.view.ChatMessage;
 import org.mage.card.arcane.ManaSymbols;
 
@@ -93,7 +95,7 @@ public class ChatPanelSeparated extends ChatPanelBasic {
         if (username != null && !username.isEmpty()) {
             text.append(getColoredText(userColor, username + userSeparator));
         }
-        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY)));
+        text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.CHAT)));
         this.systemMessagesPane.append(text.toString());
     }
 
@@ -103,6 +105,16 @@ public class ChatPanelSeparated extends ChatPanelBasic {
 
     public void setSystemMessagesPane(ColorPane systemMessagesPane) {
         this.systemMessagesPane = systemMessagesPane;
+        changeGUISize(GUISizeHelper.chatFont);
+    }
+
+    @Override
+    public void changeGUISize(Font font) {
+        if (systemMessagesPane != null) {
+            systemMessagesPane.setFont(font);
+        }
+
+        super.changeGUISize(font);
     }
 
 }

@@ -43,6 +43,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -112,7 +113,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
             if (watcher != null) {
                 int xValue = watcher.getManaSpentToCastLastTime(sourceCard.getZoneChangeCounter(game) - 1);
                 if (xValue > 0) {
-                    for (UUID playerId : controller.getInRange()) {
+                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                         Player player = game.getPlayer(playerId);
                         if (player != null) {
                             int cardsToExile = Math.min(player.getLibrary().size(), xValue);
@@ -152,13 +153,16 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.chooseUse(outcome, "Cast an instant or sorcery from exile?", source, game)) {
-                TargetCardInExile target = new TargetCardInExile(new FilterInstantOrSorceryCard(), CardUtil.getCardExileZoneId(game, source));
-                if (controller.choose(Outcome.PlayForFree, game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)), target, game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        game.getExile().removeCard(card, game);
-                        return controller.cast(card.getSpellAbility(), game, true);
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+            if (exileZone != null && exileZone.count(new FilterInstantOrSorceryCard(), game) > 0) {
+                if (controller.chooseUse(outcome, "Cast an instant or sorcery card from exile?", source, game)) {
+                    TargetCardInExile target = new TargetCardInExile(new FilterInstantOrSorceryCard(), CardUtil.getCardExileZoneId(game, source));
+                    if (controller.choose(Outcome.PlayForFree, exileZone, target, game)) {
+                        Card card = game.getCard(target.getFirstTarget());
+                        if (card != null) {
+                            game.getExile().removeCard(card, game);
+                            return controller.cast(card.getSpellAbility(), game, true);
+                        }
                     }
                 }
             }

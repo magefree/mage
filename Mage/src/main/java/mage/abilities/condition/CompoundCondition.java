@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.condition;
 
 import java.util.ArrayList;
@@ -34,14 +33,15 @@ import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
- * Combines conditions to one compound conditon, all single conditons
- * must be true to return true for the compound condtion.
+ * Combines conditions to one compound conditon, all single conditons must be
+ * true to return true for the compound condtion.
  *
  * @author LevelX2
  */
 public class CompoundCondition implements Condition {
 
-    private final ArrayList<Condition> conditions = new ArrayList();
+    private final ArrayList<Condition> conditions = new ArrayList<>();
+
     private final String text;
 
     public CompoundCondition(Condition... conditions) {
@@ -55,7 +55,7 @@ public class CompoundCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Condition condition: conditions) {
+        for (Condition condition : conditions) {
             if (!condition.apply(game, source)) {
                 return false;
             }

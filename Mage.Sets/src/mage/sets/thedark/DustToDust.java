@@ -32,6 +32,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -44,10 +45,9 @@ public class DustToDust extends CardImpl {
         super(ownerId, 78, "Dust to Dust", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
         this.expansionSetCode = "DRK";
 
-
         // Exile two target artifacts.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent(2));
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent(2, 2, new FilterArtifactPermanent("artifacts"), false));
     }
 
     public DustToDust(final DustToDust card) {

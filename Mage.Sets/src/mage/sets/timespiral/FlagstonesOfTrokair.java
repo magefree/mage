@@ -44,10 +44,10 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FlagstonesOfTrokair extends CardImpl {
 
-    private static final FilterLandCard filter = new FilterLandCard("Plains card");
+    private static final FilterLandCard FILTER = new FilterLandCard("Plains card");
 
     static {
-        filter.add(new SubtypePredicate("Plains"));
+        FILTER.add(new SubtypePredicate("Plains"));
     }
 
     public FlagstonesOfTrokair(UUID ownerId) {
@@ -57,9 +57,9 @@ public class FlagstonesOfTrokair extends CardImpl {
 
         // {tap}: Add {W} to your mana pool.
         this.addAbility(new WhiteManaAbility());
-        
+
         // When Flagstones of Trokair is put into a graveyard from the battlefield, you may search your library for a Plains card and put it onto the battlefield tapped. If you do, shuffle your library.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, true), true));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(FILTER), true, true), true));
     }
 
     public FlagstonesOfTrokair(final FlagstonesOfTrokair card) {

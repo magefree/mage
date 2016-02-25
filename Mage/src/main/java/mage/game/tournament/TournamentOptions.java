@@ -46,6 +46,7 @@ public class TournamentOptions implements Serializable {
     protected boolean watchingAllowed = true;
     protected int numberRounds;
     protected String password;
+    protected int quitRatio;
 
     public TournamentOptions(String name) {
         this.name = name;
@@ -103,4 +104,11 @@ public class TournamentOptions implements Serializable {
         this.password = password;
     }
 
+    public int getQuitRatio() {
+        return quitRatio;
+    }
+
+    public void setQuitRatio(int quitRatio) {
+        this.quitRatio = quitRatio;
+    }
 }

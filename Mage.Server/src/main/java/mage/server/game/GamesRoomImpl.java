@@ -63,9 +63,9 @@ import org.apache.log4j.Logger;
  */
 public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
-    private static final Logger logger = Logger.getLogger(GamesRoomImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(GamesRoomImpl.class);
 
-    private static final ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService UPDATE_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
     private static List<TableView> tableView = new ArrayList<>();
     private static List<MatchView> matchView = new ArrayList<>();
     private static List<RoomUsersView> roomUsersView = new ArrayList<>();
@@ -73,13 +73,13 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
     public GamesRoomImpl() {
-        updateExecutor.scheduleAtFixedRate(new Runnable() {
+        UPDATE_EXECUTOR.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 try {
                     update();
                 } catch (Exception ex) {
-                    logger.fatal("Games room update exception! " + ex.toString(), ex);
+                    LOGGER.fatal("Games room update exception! " + ex.toString(), ex);
                 }
 
             }
@@ -114,13 +114,18 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         List<UsersView> users = new ArrayList<>();
         for (User user : UserManager.getInstance().getUsers()) {
             try {
-                users.add(new UsersView(user.getUserData().getFlagName(), user.getName(), user.getHistory(), user.getGameInfo(), user.getPingInfo()));
+                users.add(new UsersView(user.getUserData().getFlagName(), user.getName(),
+                        user.getMatchHistory(), user.getMatchQuitRatio(), user.getTourneyHistory(),
+                        user.getTourneyQuitRatio(), user.getGameInfo(), user.getPingInfo()));
             } catch (Exception ex) {
-                logger.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
+                LOGGER.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
                 users.add(new UsersView(
                         (user.getUserData() != null && user.getUserData().getFlagName() != null) ? user.getUserData().getFlagName() : "world",
                         user.getName() != null ? user.getName() : "<no name>",
-                        user.getHistory() != null ? user.getHistory() : "<no history>",
+                        user.getMatchHistory() != null ? user.getMatchHistory() : "<no match history>",
+                        user.getMatchQuitRatio(),
+                        user.getTourneyHistory() != null ? user.getTourneyHistory() : "<no tourney history>",
+                        user.getTourneyQuitRatio(),
                         "[exception]",
                         user.getPingInfo() != null ? user.getPingInfo() : "<no ping>"));
             }
@@ -192,8 +197,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         if (table != null) {
             table.cleanUp();
             tables.remove(tableId);
-            if (logger.isDebugEnabled()) {
-                logger.debug("Table removed: " + tableId);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Table removed: " + tableId);
             }
         }
     }

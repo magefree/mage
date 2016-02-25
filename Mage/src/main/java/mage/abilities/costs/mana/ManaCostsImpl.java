@@ -127,7 +127,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (this.size() == 0 || noMana) {
+        if (this.isEmpty() || noMana) {
             setPaid();
             return true;
         }
@@ -330,35 +330,28 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                     if (symbol.length() == 1 || isNumeric(symbol)) {
                         if (Character.isDigit(symbol.charAt(0))) {
                             this.add(new GenericManaCost(Integer.valueOf(symbol)));
-                        } else {
-                            if (symbol.equals("S")) {
-                                this.add(new SnowManaCost());
-                            } else if (symbol.equals("C")) {
-                                this.add(new ColorlessManaCost(1));
-                            } else if (!symbol.equals("X")) {
-                                this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
-                            } else {
-                                // check X wasn't added before
-                                if (modifierForX == 0) {
-                                    // count X occurence
-                                    for (String s : symbols) {
-                                        if (s.equals("X")) {
-                                            modifierForX++;
-                                        }
-                                    }
-                                    this.add(new VariableManaCost(modifierForX));
+                        } else if (symbol.equals("S")) {
+                            this.add(new SnowManaCost());
+                        } else if (symbol.equals("C")) {
+                            this.add(new ColorlessManaCost(1));
+                        } else if (!symbol.equals("X")) {
+                            this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
+                        } else // check X wasn't added before
+                        if (modifierForX == 0) {
+                            // count X occurence
+                            for (String s : symbols) {
+                                if (s.equals("X")) {
+                                    modifierForX++;
                                 }
                             }
-                            //TODO: handle multiple {X} and/or {Y} symbols
-                        }
+                            this.add(new VariableManaCost(modifierForX));
+                        } //TODO: handle multiple {X} and/or {Y} symbols
+                    } else if (Character.isDigit(symbol.charAt(0))) {
+                        this.add((T) new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
+                    } else if (symbol.contains("P")) {
+                        this.add((T) new PhyrexianManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
                     } else {
-                        if (Character.isDigit(symbol.charAt(0))) {
-                            this.add((T) new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
-                        } else if (symbol.contains("P")) {
-                            this.add((T) new PhyrexianManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
-                        } else {
-                            this.add((T) new HybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(0)), ColoredManaSymbol.lookup(symbol.charAt(2))));
-                        }
+                        this.add((T) new HybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(0)), ColoredManaSymbol.lookup(symbol.charAt(2))));
                     }
                 }
             }

@@ -131,10 +131,10 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
     }
 
     protected boolean conditionState(Ability source, Game game) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLife() >= 30) {
-            for (UUID opponentId : player.getInRange()) {
-                if (player.hasOpponent(opponentId, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && controller.getLife() >= 30) {
+            for (UUID opponentId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                if (controller.hasOpponent(opponentId, game)) {
                     Player opponent = game.getPlayer(opponentId);
                     if (opponent != null && opponent.getLife() < 11) {
                         return true;

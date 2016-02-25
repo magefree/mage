@@ -96,7 +96,7 @@ class HoodedHorrorCantBeBlockedEffect extends RestrictionEffect {
         if (controller != null) {
             int maxCreatures = 0;
             UUID playerIdWithMax = null;
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 int creatures = game.getBattlefield().countAll(filter, playerId, game);
                 if (creatures > maxCreatures || (creatures == maxCreatures && playerId.equals(blocker.getControllerId())) ) {
                     maxCreatures = creatures;

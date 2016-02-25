@@ -98,9 +98,9 @@ class KaervekTheMercilessEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject spellCast = game.getObject(targetPointer.getFirst(game, source));
+        MageObject spellCast = game.getObject(getTargetPointer().getFirst(game, source));
         if (spellCast instanceof Spell) {
-            int cost = ((Spell)spellCast).getConvertedManaCost();
+            int cost = ((Spell) spellCast).getConvertedManaCost();
             Player target = game.getPlayer(source.getFirstTarget());
             if (target != null) {
                 target.damage(cost, source.getSourceId(), game, false, true);
@@ -108,7 +108,7 @@ class KaervekTheMercilessEffect extends OneShotEffect {
             }
             Permanent targetCreature = game.getPermanent(source.getFirstTarget());
             if (targetCreature != null) {
-                targetCreature.damage(cost, source.getSourceId(), game, true, false);
+                targetCreature.damage(cost, source.getSourceId(), game, false, true);
                 return true;
             }
         }

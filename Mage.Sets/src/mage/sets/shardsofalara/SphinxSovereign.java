@@ -95,7 +95,7 @@ class SphinxSovereignEffect extends OneShotEffect {
             if (!permanent.isTapped()) {
                 controller.gainLife(3, game);
             } else {
-                for (UUID opponentId : controller.getInRange()) {
+                for (UUID opponentId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     if (controller.hasOpponent(opponentId, game)) {
                     Player opponent = game.getPlayer(opponentId);
                         if (opponent != null) {

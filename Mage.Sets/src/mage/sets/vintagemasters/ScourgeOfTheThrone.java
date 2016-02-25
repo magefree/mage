@@ -107,7 +107,7 @@ class ScourgeOfTheThroneAttacksTriggeredAbility extends TriggeredAbilityImpl {
             Player controller = game.getPlayer(getControllerId());
             if (attackedPlayer != null && controller != null) {
                 int mostLife = Integer.MIN_VALUE;
-                for (UUID playerId : controller.getInRange()) {
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         if (player.getLife() > mostLife) {

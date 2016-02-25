@@ -45,8 +45,8 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
 public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
+
     protected Effects executingEffects = new Effects();
     private final Cost cost;
     private String chooseUseText;
@@ -81,7 +81,7 @@ public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
             String message;
             if (chooseUseText == null) {
                 String effectText = executingEffects.getText(source.getModes().getMode());
-                message = "Pay " + cost.getText() + " to prevent (" + effectText.substring(0, effectText.length() -1) + ")?";
+                message = "Pay " + cost.getText() + " to prevent (" + effectText.substring(0, effectText.length() - 1) + ")?";
             } else {
                 message = chooseUseText;
             }
@@ -89,13 +89,14 @@ public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
             boolean result = true;
             boolean doEffect = true;
             // check if any player is willing to pay
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(Outcome.Detriment, message, source, game)) {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
-                        if (!game.isSimulation())
+                        if (!game.isSimulation()) {
                             game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
+                        }
                         doEffect = false;
                         break;
                     }
@@ -103,12 +104,11 @@ public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
             }
             // do the effects if nobody paid
             if (doEffect) {
-                for(Effect effect: executingEffects) {
+                for (Effect effect : executingEffects) {
                     effect.setTargetPointer(this.targetPointer);
                     if (effect instanceof OneShotEffect) {
                         result &= effect.apply(game, source);
-                    }
-                    else {
+                    } else {
                         game.addEffect((ContinuousEffect) effect, source);
                     }
                 }
@@ -128,7 +128,7 @@ public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
             return staticText;
         }
         String effectsText = executingEffects.getText(mode);
-        return  effectsText.substring(0, effectsText.length() -1) + " unless any player pays " + cost.getText();
+        return effectsText.substring(0, effectsText.length() - 1) + " unless any player pays " + cost.getText();
     }
 
     @Override

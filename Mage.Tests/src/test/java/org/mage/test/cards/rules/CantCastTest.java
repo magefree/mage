@@ -40,11 +40,11 @@ public class CantCastTest extends CardTestPlayerBase {
 
     /**
      * I control Void Winnower. But my opponent can cast Jayemdae Tome (that's
-     * converted mana cost is even) He can cast other even spell.
-     *
+     * converted mana cost is even) He can cast other even spell. Test casting
+     * cost 4
      */
     @Test
-    public void testVoidWinnower() {
+    public void testVoidWinnower1() {
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
         // Your opponents can't block with creatures with even converted mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
@@ -53,7 +53,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Jayemdae Tome", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jayemdae Tome");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jayemdae Tome"); // {4}
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -64,6 +64,9 @@ public class CantCastTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Test with X=3
+     */
     @Test
     public void testVoidWinnower2() {
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
@@ -87,6 +90,9 @@ public class CantCastTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Test with X=4
+     */
     @Test
     public void testVoidWinnower3() {
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
@@ -136,4 +142,56 @@ public class CantCastTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Pine Walker", 1);
 
     }
+
+    /**
+     * Test with casting cost = {0}
+     */
+    @Test
+    public void testVoidWinnowerZero() {
+        // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
+        // Your opponents can't block with creatures with even converted mana costs.
+        addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
+
+        // Metalcraft - {T}: Add one mana of any color to your mana pool. Activate this ability only if you control three or more artifacts.
+        addCard(Zone.HAND, playerA, "Mox Opal", 1); // {0}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Opal");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Mox Opal", 1);
+
+        assertLife(playerB, 20);
+
+    }
+
+    /**
+     * Test that panic can only be cast during the correct pahse/steü
+     */
+    @Test
+    public void testPanic() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+
+        // Cast Panic only during combat before blockers are declared.
+        // Target creature can't block this turn.
+        // Draw a card at the beginning of the next turn's upkeep.
+        addCard(Zone.HAND, playerA, "Panic", 4); // Instant - {R}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Panic", "Silvercoat Lion");
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Panic", "Silvercoat Lion");
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, "Panic", "Silvercoat Lion");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Panic", "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerA, "Panic", 3);
+        assertHandCount(playerA, 4);
+        assertGraveyardCount(playerA, "Panic", 1);
+
+    }
+
 }

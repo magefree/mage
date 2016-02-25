@@ -23,6 +23,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.UUID;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -53,6 +54,7 @@ import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
+import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -67,7 +69,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private static final long serialVersionUID = -3272134219262184410L;
 
-    private static final Logger logger = Logger.getLogger(CardPanel.class);
+    private static final Logger LOGGER = Logger.getLogger(CardPanel.class);
 
     private static final int WIDTH_LIMIT = 90; // card width limit to create smaller counter
     public static final double TAPPED_ANGLE = Math.PI / 2;
@@ -123,6 +125,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
     public int cardXOffset, cardYOffset, cardWidth, cardHeight;
+    private int symbolWidth;
 
     private boolean isSelected;
     private boolean isPlayable;
@@ -161,12 +164,13 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         this.gameCard = newGameCard;
         this.callback = callback;
         this.gameId = gameId;
-        this.setCardBounds(0, 0, dimension.width, dimension.height);
-        this.isPermanent = this.gameCard instanceof PermanentView;
 
+        this.isPermanent = this.gameCard instanceof PermanentView;
         if (isPermanent) {
             this.hasSickness = ((PermanentView) this.gameCard).hasSummoningSickness();
         }
+
+        this.setCardBounds(0, 0, dimension.width, dimension.height);
 
         //for container debug (don't remove)
         //setBorder(BorderFactory.createLineBorder(Color.green));
@@ -271,9 +275,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         addComponentListener(this);
 
         displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_CARD_NAMES, "true").equals("true");
+
         titleText = new GlowText();
         setText(gameCard);
-        titleText.setFont(getFont().deriveFont(Font.BOLD, 13f));
+//        int fontSize = (int) cardHeight / 11;
+//        titleText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
         titleText.setForeground(Color.white);
         titleText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
         titleText.setWrap(true);
@@ -285,7 +291,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         } else if (CardUtil.isPlaneswalker(gameCard)) {
             ptText.setText(gameCard.getLoyalty());
         }
-        ptText.setFont(getFont().deriveFont(Font.BOLD, 13f));
+//        ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
         ptText.setForeground(Color.white);
         ptText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
         add(ptText);
@@ -330,9 +336,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     }
                     setText(gameCard);
                 } catch (Exception e) {
-                    logger.fatal("Problem during image animation", e);
+                    LOGGER.fatal("Problem during image animation", e);
                 } catch (Error err) {
-                    logger.error("Problem during image animation", err);
+                    LOGGER.error("Problem during image animation", err);
                 }
             }
         });
@@ -526,13 +532,24 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
         if (showCastingCost && !isAnimationPanel && cardWidth < 200 && cardWidth > 60) {
             String manaCost = ManaSymbols.getStringManaCost(gameCard.getManaCost());
-            int width = ManaSymbols.getWidth(manaCost);
+            int width = getWidth(manaCost);
             if (hasImage) {
-                ManaSymbols.draw(g, manaCost, cardXOffset + cardWidth - width - 5, cardYOffset + 5);
+                ManaSymbols.draw(g, manaCost, cardXOffset + cardWidth - width - 5, cardYOffset + 5, symbolWidth);
             } else {
-                ManaSymbols.draw(g, manaCost, cardXOffset + 8, cardHeight - 9);
+                ManaSymbols.draw(g, manaCost, cardXOffset + 8, cardHeight - 9, symbolWidth);
             }
         }
+    }
+
+    private int getWidth(String manaCost) {
+        int width = 0;
+        manaCost = manaCost.replace("\\", "");
+        StringTokenizer tok = new StringTokenizer(manaCost, " ");
+        while (tok.hasMoreTokens()) {
+            tok.nextToken();
+            width += symbolWidth;
+        }
+        return width;
     }
 
     @Override
@@ -584,18 +601,24 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         titleText.setVisible(showText);
         ptText.setVisible(showText);
 
-        int titleX = Math.round(cardWidth * (20f / 480));
-        int titleY = Math.round(cardHeight * (9f / 680)) + yTextOffset;
-        titleText.setBounds(cardXOffset + titleX, cardYOffset + titleY, cardWidth - titleX, cardHeight - titleY);
+        if (showText) {
+            int fontSize = (int) cardHeight / 11;
+            titleText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
 
-        Dimension ptSize = ptText.getPreferredSize();
-        ptText.setSize(ptSize.width, ptSize.height);
-        int ptX = Math.round(cardWidth * (420f / 480)) - ptSize.width / 2;
-        int ptY = Math.round(cardHeight * (675f / 680)) - ptSize.height;
+            int titleX = Math.round(cardWidth * (20f / 480));
+            int titleY = Math.round(cardHeight * (9f / 680)) + yTextOffset;
+            titleText.setBounds(cardXOffset + titleX, cardYOffset + titleY, cardWidth - titleX, cardHeight - titleY);
 
-        int offsetX = Math.round((CARD_SIZE_FULL.width - cardWidth) / 10.0f);
+            ptText.setFont(getFont().deriveFont(Font.BOLD, fontSize));
+            Dimension ptSize = ptText.getPreferredSize();
+            ptText.setSize(ptSize.width, ptSize.height);
+            int ptX = Math.round(cardWidth * (420f / 480)) - ptSize.width / 2;
+            int ptY = Math.round(cardHeight * (675f / 680)) - ptSize.height;
 
-        ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
+            int offsetX = Math.round((CARD_SIZE_FULL.width - cardWidth) / 10.0f);
+
+            ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
+        }
 
         if (isAnimationPanel || cardWidth < 200) {
             imagePanel.setScalingType(ScalingType.nearestNeighbor);
@@ -612,33 +635,51 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     @Override
     public final void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
         this.cardWidth = cardWidth;
+        this.symbolWidth = cardWidth / 7;
         this.cardHeight = cardHeight;
-        int rotCenterX = Math.round(cardWidth / 2f);
-        int rotCenterY = cardHeight - rotCenterX;
-        int rotCenterToTopCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_TOP_CORNER);
-        int rotCenterToBottomCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
-        int xOffset = getXOffset(cardWidth);
-        int yOffset = getYOffset(cardWidth, cardHeight);
-        cardXOffset = -xOffset;
-        cardYOffset = -yOffset;
-        int width = -xOffset + rotCenterX + rotCenterToTopCorner;
-        int height = -yOffset + rotCenterY + rotCenterToBottomCorner;
-        setBounds(x + xOffset, y + yOffset, width, height);
+        if (this.isPermanent) {
+            int rotCenterX = Math.round(cardWidth / 2f);
+            int rotCenterY = cardHeight - rotCenterX;
+            int rotCenterToTopCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_TOP_CORNER);
+            int rotCenterToBottomCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
+            int xOffset = getXOffset(cardWidth);
+            int yOffset = getYOffset(cardWidth, cardHeight);
+            cardXOffset = -xOffset;
+            cardYOffset = -yOffset;
+            int width = -xOffset + rotCenterX + rotCenterToTopCorner;
+            int height = -yOffset + rotCenterY + rotCenterToBottomCorner;
+            setBounds(x + xOffset, y + yOffset, width, height);
+        } else {
+            cardXOffset = 5;
+            cardYOffset = 5;
+            int width = cardXOffset * 2 + cardWidth;
+            int height = cardYOffset * 2 + cardHeight;
+            setBounds(x - cardXOffset, y - cardYOffset, width, height);
+        }
     }
 
     public int getXOffset(int cardWidth) {
-        int rotCenterX = Math.round(cardWidth / 2f);
-        int rotCenterToBottomCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
-        int xOffset = rotCenterX - rotCenterToBottomCorner;
-        return xOffset;
+        if (this.isPermanent) {
+            int rotCenterX = Math.round(cardWidth / 2f);
+            int rotCenterToBottomCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_BOTTOM_CORNER);
+            int xOffset = rotCenterX - rotCenterToBottomCorner;
+            return xOffset;
+        } else {
+            return cardXOffset;
+        }
     }
 
     public int getYOffset(int cardWidth, int cardHeight) {
-        int rotCenterX = Math.round(cardWidth / 2f);
-        int rotCenterY = cardHeight - rotCenterX;
-        int rotCenterToTopCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_TOP_CORNER);
-        int yOffset = rotCenterY - rotCenterToTopCorner;
-        return yOffset;
+        if (this.isPermanent) {
+            int rotCenterX = Math.round(cardWidth / 2f);
+            int rotCenterY = cardHeight - rotCenterX;
+            int rotCenterToTopCorner = Math.round(cardWidth * CardPanel.ROT_CENTER_TO_TOP_CORNER);
+            int yOffset = rotCenterY - rotCenterToTopCorner;
+            return yOffset;
+        } else {
+            return cardYOffset;
+        }
+
     }
 
     public int getCardX() {
@@ -704,6 +745,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     BufferedImage srcImage;
                     if (gameCard.isFaceDown()) {
                         srcImage = getFaceDownImage();
+                    } else if (cardWidth > THUMBNAIL_SIZE_FULL.width) {
+                        srcImage = ImageCache.getImage(gameCard, cardWidth, cardHeight);
                     } else {
                         srcImage = ImageCache.getThumbnail(gameCard);
                     }
@@ -728,12 +771,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             } else {
                 return ImageCache.getManifestImage();
             }
+        } else if (this.gameCard instanceof StackAbilityView) {
+            return ImageCache.getMorphImage();
         } else {
-            if (this.gameCard instanceof StackAbilityView) {
-                return ImageCache.getMorphImage();
-            } else {
-                return ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
-            }
+            return ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
         }
     }
 
@@ -1145,7 +1186,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 dayNightButton.setIcon(new ImageIcon(night));
             }
             if (this.gameCard.getSecondCardFace() == null) {
-                logger.error("no second side for card to transform!");
+                LOGGER.error("no second side for card to transform!");
                 return;
             }
             if (!isPermanent) { // use only for custom transformation (when pressing day-night button)
