@@ -142,6 +142,11 @@ public class Constructed extends DeckValidator {
         return valid;
     }
     
+    /**
+     * Checks if the given card is legal in any of the given rarities
+     * @param card - the card to check
+     * @return Whether the card was printed at any of the given rarities.
+     */
     protected boolean legalRarity(Card card){
         // check if card is legal if taken from other set
         boolean legal = false;
@@ -158,6 +163,11 @@ public class Constructed extends DeckValidator {
         return legal;
     }
 
+    /**
+     * Checks if the given card is legal in any of the given sets
+     * @param card - the card to check
+     * @return Whether the card was printed in any of this format's sets.
+     */
     protected boolean legalSets(Card card) {
         // check if card is legal if taken from other set
         boolean legal = false;
