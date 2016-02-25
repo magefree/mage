@@ -42,11 +42,13 @@ import mage.game.events.ManaEvent;
  *
  * @author LevelX
  */
-
 //20130711
 /*
  * 903.9. If mana would be added to a player's mana pool of a color that isn't in the color identity
  * of that player's commander, that amount of colorless mana is added to that player's mana pool instead.
+ *
+ * Commander rule #4 was removed Jan. 18, 2016 
+ *
  */
 public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
 
