@@ -83,21 +83,12 @@ class RevivingVaporsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject ==  null) {
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
         Cards cards = new CardsImpl();
-        int count = Math.min(controller.getLibrary().size(), 3);
-        for (int i = 0; i < count; i++) {
-            Card card = controller.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            } else {
-                return false;
-            }
-        }
-
+        cards.addAll(controller.getLibrary().getTopCards(game, 3));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getName(), cards, game);
             Card card = null;
@@ -112,9 +103,9 @@ class RevivingVaporsEffect extends OneShotEffect {
             }
             if (card != null) {
                 cards.remove(card);
-                controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);                
+                controller.moveCards(card, Zone.HAND, source, game);
             }
-            controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
         }
         return true;
     }
