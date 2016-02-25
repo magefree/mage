@@ -25,47 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package org.mage.test.multiplayer;
+package org.mage.test.commander.FFA3;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestMultiPlayerBase;
+import org.mage.test.serverside.base.CardTestCommander3PlayersFFA;
 
 /**
  *
  * @author LevelX2
  */
-public class PrimordialTest extends CardTestMultiPlayerBase {
-
-    /**
-     * Tests Primordial cards with multiplayer effects
-     *
-     */
-    @Test
-    public void SepulchralPrimordialTest() {
-        // When Sepulchral Primordial enters the battlefield, for each opponent, you may put up to one
-        // target creature card from that player's graveyard onto the battlefield under your control.
-        addCard(Zone.HAND, playerA, "Sepulchral Primordial");
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
-
-        // Player order: A -> D -> C -> B
-        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
-        addCard(Zone.GRAVEYARD, playerC, "Walking Corpse");
-        addCard(Zone.GRAVEYARD, playerD, "Pillarfield Ox");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sepulchral Primordial");
-
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
-        assertPermanentCount(playerA, "Sepulchral Primordial", 1);
-        assertPermanentCount(playerA, "Silvercoat Lion", 1);
-        assertPermanentCount(playerA, "Walking Corpse", 0);
-        assertPermanentCount(playerA, "Pillarfield Ox", 1);
-        assertGraveyardCount(playerC, "Walking Corpse", 1);
-        assertGraveyardCount(playerD, "Pillarfield Ox", 0);
-    }
+public class PrimordialTest extends CardTestCommander3PlayersFFA {
 
     /**
      * Diluvian Primordial ETB trigger never happened in a 3 player FFA
@@ -80,26 +51,22 @@ public class PrimordialTest extends CardTestMultiPlayerBase {
 
         addCard(Zone.GRAVEYARD, playerB, "Lightning Bolt");
         addCard(Zone.GRAVEYARD, playerC, "Lightning Bolt");
-        addCard(Zone.GRAVEYARD, playerD, "Lightning Bolt");
 
-        // Player order: A -> D -> C -> B
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Diluvian Primordial");
         addTarget(playerA, "Lightning Bolt");
         addTarget(playerA, "Lightning Bolt");
 
         addTarget(playerA, playerB);
-        addTarget(playerA, playerD);
+        addTarget(playerA, playerC);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Diluvian Primordial", 1);
-        assertGraveyardCount(playerC, "Lightning Bolt", 1);
         assertExileCount("Lightning Bolt", 2);
-        assertLife(playerA, 20);
-        assertLife(playerB, 17);
-        assertLife(playerC, 20);
-        assertLife(playerD, 17);
+        assertLife(playerA, 40);
+        assertLife(playerB, 37);
+        assertLife(playerC, 37);
     }
 
 }
