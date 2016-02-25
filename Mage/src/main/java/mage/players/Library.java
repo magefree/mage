@@ -180,7 +180,7 @@ public class Library implements Serializable {
     }
 
     public List<UUID> getCardList() {
-        return new ArrayList(library);
+        return new ArrayList<>(library);
     }
 
     public List<Card> getCards(Game game) {
