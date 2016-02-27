@@ -27,7 +27,6 @@ public class CountryUtil {
     public static ImageIcon getCountryFlagIcon(String countryCode) {
         ImageIcon flagIcon = FLAG_ICON_CACHE.get(countryCode);
         if (flagIcon == null) {
-            // URL url = CountryUtil.class.getResource("/flags/" + countryCode + (countryCode.endsWith(".png") ? "" : ".png"));
             Image flagImage = ImageHelper.getImageFromResources("/flags/" + countryCode + (countryCode.endsWith(".png") ? "" : ".png"));
             if (flagImage != null) {
                 if (GUISizeHelper.flagHeight > 11) {
@@ -43,6 +42,22 @@ public class CountryUtil {
                 FLAG_ICON_CACHE.put(countryCode, flagIcon);
             } else {
                 FLAG_ICON_CACHE.put(countryCode, flagIcon);
+            }
+        }
+        return flagIcon;
+    }
+
+    public static ImageIcon getCountryFlagIconSize(String countryCode, int height) {
+        ImageIcon flagIcon = null;
+        Image flagImage = ImageHelper.getImageFromResources("/flags/" + countryCode + (countryCode.endsWith(".png") ? "" : ".png"));
+        if (flagImage != null) {
+
+            if (height > 11) {
+                int width = Math.round(height * flagImage.getWidth(null) / flagImage.getHeight(null));
+                BufferedImage resized = ImageHelper.scale((BufferedImage) flagImage, BufferedImage.TYPE_4BYTE_ABGR, width, height);
+                flagIcon = new ImageIcon(resized);
+            } else {
+                flagIcon = new ImageIcon(flagImage);
             }
         }
         return flagIcon;
