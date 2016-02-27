@@ -169,8 +169,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 if (deck != null) {
                     this.cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), this.bigCard);
                 }
-                // TODO: take from preferences
-                this.cardSelector.switchToGrid();
 
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
