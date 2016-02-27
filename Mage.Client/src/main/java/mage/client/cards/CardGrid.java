@@ -78,6 +78,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 
     public CardGrid() {
         initComponents();
+        setGUISize();
         setOpaque(false);
     }
 
@@ -88,6 +89,14 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         this.clearCardEventListeners();
         this.clearCards();
         this.bigCard = null;
+    }
+
+    public void changeGUISize() {
+        setGUISize();
+    }
+
+    private void setGUISize() {
+        cardDimension = GUISizeHelper.editorCardDimension;
     }
 
     @Override
@@ -125,9 +134,6 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, boolean drawImage) {
-        if (cardDimension == null) {
-            cardDimension = GUISizeHelper.editorCardDimension;
-        }
         MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, drawImage);
         cards.put(card.getId(), cardImg);
         cardImg.addMouseListener(this);
