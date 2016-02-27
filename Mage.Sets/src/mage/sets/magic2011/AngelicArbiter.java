@@ -141,7 +141,7 @@ class AngelicArbiterCantAttackTargetEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (game.getActivePlayerId().equals(permanent.getControllerId()) && game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
-            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
             if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(permanent.getControllerId()) > 0) {
                 return true;
             }

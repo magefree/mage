@@ -27,28 +27,19 @@
  */
 package mage.sets.zendikar;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.target.TargetSpell;
-import mage.watchers.Watcher;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
@@ -63,14 +54,12 @@ public class MindbreakTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-
         // If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(
-                new MindbreakTrapAlternativeCost());
-        this.getSpellAbility().addWatcher(new MindbreakTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), MindbreakTrapCondition.getInstance()));
+
         // Exile any number of target spells.
         this.getSpellAbility().addTarget(new TargetSpell(0, Integer.MAX_VALUE, filter));
-        this.getSpellAbility().addEffect(new MindbreakEffect());
+        this.getSpellAbility().addEffect(new ExileTargetEffect("Exile any number of target spells"));
     }
 
     public MindbreakTrap(final MindbreakTrap card) {
@@ -83,116 +72,30 @@ public class MindbreakTrap extends CardImpl {
     }
 }
 
-class MindbreakTrapWatcher extends Watcher {
+class MindbreakTrapCondition implements Condition {
 
-    private Map<UUID, Integer> counts = new HashMap<>();
+    private static final MindbreakTrapCondition fInstance = new MindbreakTrapCondition();
 
-    public MindbreakTrapWatcher() {
-        super("opponent cast three or more spells", WatcherScope.PLAYER);
-    }
-
-    public MindbreakTrapWatcher(final MindbreakTrapWatcher watcher) {
-        super(watcher);
-        for (Entry<UUID, Integer> entry: watcher.counts.entrySet()) {
-            counts.put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    @Override
-    public MindbreakTrapWatcher copy() {
-        return new MindbreakTrapWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (condition == true) { // no need to check - condition has already occured
-            return;
-        }
-        if (event.getType() == EventType.SPELL_CAST
-                && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            int count = 1;
-            if (counts.containsKey(event.getPlayerId())) {
-                count += counts.get(event.getPlayerId());
-                if (count >= 3) {
-                    condition = true;
-                }
-            }
-            counts.put(event.getPlayerId(), count);
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        counts.clear();
-    }
-
-}
-
-class MindbreakTrapAlternativeCost extends AlternativeCostImpl {
-
-    public MindbreakTrapAlternativeCost() {
-        super("you may pay {0} rather than pay {this}'s mana cost");
-        this.add(new GenericManaCost(0));
-    }
-
-    public MindbreakTrapAlternativeCost(final MindbreakTrapAlternativeCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public MindbreakTrapAlternativeCost copy() {
-        return new MindbreakTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("opponent cast three or more spells", source.getControllerId());
-        if (watcher != null && watcher.conditionMet()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getText() {
-        return "If an opponent cast three or more spells this turn, you may pay {0} rather than pay {this}'s mana cost";
-    }
-}
-
-class MindbreakEffect extends OneShotEffect{
-
-    MindbreakEffect(MindbreakEffect effect) {
-        super(effect);
-    }
-
-    MindbreakEffect() {
-        super(Outcome.Exile);
-        staticText = "Exile any number of target spells";
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int affectedTargets = 0;
-            if (targetPointer.getTargets(game, source).size() > 0) {
-                for (UUID spellId : targetPointer.getTargets(game, source)) {
-                    Spell spell = game.getStack().getSpell(spellId);
-                    if (spell != null) {
-                        controller.moveCardToExileWithInfo(spell, null, "", source.getSourceId(), game, Zone.STACK, true);
-                        affectedTargets++;
-                    }
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
+        if (watcher != null) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+                if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(opponentId) > 2) {
+                    return true;
                 }
             }
-            return affectedTargets > 0;
         }
         return false;
     }
 
     @Override
-    public MindbreakEffect copy() {
-        return new MindbreakEffect(this);
+    public String toString() {
+        return "If an opponent cast three or more spells this turn";
     }
 
 }

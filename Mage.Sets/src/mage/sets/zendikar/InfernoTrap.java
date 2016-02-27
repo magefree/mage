@@ -28,15 +28,14 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,11 +53,10 @@ public class InfernoTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-
         // If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new InfernoTrapAlternativeCost());
         this.getSpellAbility().addWatcher(new ControllerDamagedByCreatureWatcher());
-        
+
         // Inferno Trap deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

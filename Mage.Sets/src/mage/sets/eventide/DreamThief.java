@@ -29,7 +29,6 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -39,14 +38,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.watchers.Watcher;
+import mage.watchers.common.SpellsCastWatcher;
 
 /**
  *
@@ -69,7 +63,8 @@ public class DreamThief extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Dream Thief enters the battlefield, draw a card if you've cast another blue spell this turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new CastBlueSpellThisTurnCondition(), rule)), new DreamThiefWatcher(this.getId()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new CastBlueSpellThisTurnCondition(), rule)),
+                new SpellsCastWatcher());
 
     }
 
@@ -87,55 +82,14 @@ class CastBlueSpellThisTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DreamThiefWatcher watcher = (DreamThiefWatcher) game.getState().getWatchers().get("DreamThiefWatcher", source.getControllerId());
+        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
         if (watcher != null) {
-            return watcher.conditionMet();
-        }
-        return false;
-    }
-}
-
-class DreamThiefWatcher extends Watcher {
-
-    private static final FilterSpell filter = new FilterSpell();
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-    }
-
-    private UUID cardId;
-
-    public DreamThiefWatcher(UUID cardId) {
-        super("DreamThiefWatcher", WatcherScope.PLAYER);
-        this.cardId = cardId;
-    }
-
-    public DreamThiefWatcher(final DreamThiefWatcher watcher) {
-        super(watcher);
-        this.cardId = watcher.cardId;
-    }
-
-    @Override
-    public DreamThiefWatcher copy() {
-        return new DreamThiefWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (condition == true) { //no need to check - condition has already occured
-            return;
-        }
-        if (event.getType() == EventType.SPELL_CAST
-                && controllerId.equals(event.getPlayerId())) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (!spell.getSourceId().equals(cardId) && filter.match(spell, game)) {
-                condition = true;
+            for (Spell spell : watcher.getSpellsCastThisTurn(source.getControllerId())) {
+                if (!spell.getSourceId().equals(source.getSourceId()) && spell.getColor(game).isBlue()) {
+                    return true;
+                }
             }
         }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
+        return false;
     }
 }

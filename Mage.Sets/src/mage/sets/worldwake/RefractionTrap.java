@@ -27,13 +27,12 @@
  */
 package mage.sets.worldwake;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -42,7 +41,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -51,7 +49,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.Watcher;
+import mage.watchers.common.SpellsCastWatcher;
 
 /**
  *
@@ -65,13 +63,11 @@ public class RefractionTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay Refraction Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new RefractionTrapAlternativeCost());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}"), RefractionTrapCondition.getInstance()), new SpellsCastWatcher());
 
         // Prevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, Refraction Trap deals that much damage to target creature or player.
         this.getSpellAbility().addEffect(new RefractionTrapPreventDamageEffect(Duration.EndOfTurn, 3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-
-        this.getSpellAbility().addWatcher(new RefractionTrapWatcher());
     }
 
     public RefractionTrap(final RefractionTrap card) {
@@ -84,89 +80,43 @@ public class RefractionTrap extends CardImpl {
     }
 }
 
-class RefractionTrapWatcher extends Watcher {
+class RefractionTrapCondition implements Condition {
 
-    Set<UUID> playersMetCondition = new HashSet<>();
+    private static final RefractionTrapCondition fInstance = new RefractionTrapCondition();
 
-    public RefractionTrapWatcher() {
-        super("RefractionTrapWatcher", WatcherScope.GAME);
-    }
-
-    public RefractionTrapWatcher(final RefractionTrapWatcher watcher) {
-        super(watcher);
-        this.playersMetCondition.addAll(watcher.playersMetCondition);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public RefractionTrapWatcher copy() {
-        return new RefractionTrapWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell.getColor(game).isRed()) {
-                if (spell.getCardType().contains(CardType.INSTANT)
-                        || spell.getCardType().contains(CardType.SORCERY)) {
-                    playersMetCondition.add(event.getPlayerId());
-                }
-            }
-        }
-    }
-
-    public boolean conditionMetForAnOpponent(UUID controllerId, Game game) {
-        Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            for (UUID playerId : playersMetCondition) {
-                if (controller.hasOpponent(playerId, game)) {
-                    return true;
+    public boolean apply(Game game, Ability source) {
+        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
+        if (watcher != null) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+                List<Spell> spells = watcher.getSpellsCastThisTurn(opponentId);
+                if (spells != null) {
+                    for (Spell spell : spells) {
+                        if ((spell.getCardType().contains(CardType.SORCERY) || spell.getCardType().contains(CardType.INSTANT))
+                                && spell.getColor(game).isRed()) {
+                            return true;
+                        }
+                    }
                 }
             }
         }
         return false;
-
     }
 
     @Override
-    public void reset() {
-        playersMetCondition.clear();
-        super.reset();
-    }
-}
-
-class RefractionTrapAlternativeCost extends AlternativeCostImpl {
-
-    public RefractionTrapAlternativeCost() {
-        super("You may pay {W} rather than pay Refraction Trap's mana cost");
-        this.add(new ManaCostsImpl<ManaCost>("{W}"));
-    }
-
-    public RefractionTrapAlternativeCost(final RefractionTrapAlternativeCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public RefractionTrapAlternativeCost copy() {
-        return new RefractionTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        RefractionTrapWatcher watcher = (RefractionTrapWatcher) game.getState().getWatchers().get("RefractionTrapWatcher");
-        return watcher != null && watcher.conditionMetForAnOpponent(source.getControllerId(), game);
-    }
-
-    @Override
-    public String getText() {
-        return "If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay {this} mana cost";
+    public String toString() {
+        return "If an opponent cast a red instant or sorcery spell this turn";
     }
 }
 
 class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
 
     private final TargetSource target;
-    private int amount;
+    private final int amount;
 
     public RefractionTrapPreventDamageEffect(Duration duration, int amount) {
         super(duration, amount, false, false);

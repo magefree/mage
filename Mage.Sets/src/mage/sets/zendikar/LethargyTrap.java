@@ -28,16 +28,15 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.Cost;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
@@ -47,25 +46,24 @@ import mage.game.Game;
  * @author jeffwadsworth
  */
 public class LethargyTrap extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
 
     static {
         filter.add(new AttackingPredicate());
     }
-    
+
     public LethargyTrap(UUID ownerId) {
         super(ownerId, 51, "Lethargy Trap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-
         // If three or more creatures are attacking, you may pay {U} rather than pay Lethargy Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new LethargyTrapAlternativeCost());
-        
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), LethargyTrapCondition.getInstance()));
+
         // Attacking creatures get -3/-0 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-3, 0, Duration.EndOfTurn, filter, false));
-        
+
     }
 
     public LethargyTrap(final LethargyTrap card) {
@@ -78,32 +76,21 @@ public class LethargyTrap extends CardImpl {
     }
 }
 
-class LethargyTrapAlternativeCost extends AlternativeCostImpl<Cost> {
+class LethargyTrapCondition implements Condition {
 
-    public LethargyTrapAlternativeCost() {
-        super("you may pay {U} rather than pay Lethargy Trap's mana cost");
-        this.add(new ManaCostsImpl("{U}"));
-    }
+    private static final LethargyTrapCondition fInstance = new LethargyTrapCondition();
 
-    public LethargyTrapAlternativeCost(final LethargyTrapAlternativeCost cost) {
-        super(cost);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public LethargyTrapAlternativeCost copy() {
-        return new LethargyTrapAlternativeCost(this);
+    public boolean apply(Game game, Ability source) {
+        return game.getCombat().getAttackers().size() > 2;
     }
 
     @Override
-    public boolean isAvailable(Game game, Ability source) {
-        if (game.getCombat().getAttackers().size() >= 3) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getText() {
-        return "If three or more creatures are attacking, you may pay {U} rather than pay Lethargy Trap's mana cost";
+    public String toString() {
+        return "If three or more creatures are attacking";
     }
 }

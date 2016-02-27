@@ -27,26 +27,23 @@
  */
 package mage.sets.zendikar;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.Cost;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
-import mage.watchers.Watcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 /**
  *
@@ -60,8 +57,7 @@ public class LavaballTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new LavaballTrapAlternativeCost());
-        this.getSpellAbility().addWatcher(new LavaballTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{3}{R}{R}"), LavaballTrapCondition.getInstance()), new PermanentsEnteredBattlefieldWatcher());
 
         // Destroy two target lands. Lavaball Trap deals 4 damage to each creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -80,87 +76,38 @@ public class LavaballTrap extends CardImpl {
     }
 }
 
-class LavaballTrapWatcher extends Watcher {
+class LavaballTrapCondition implements Condition {
 
-    private Map<UUID, Integer> amountOfLandsPlayedThisTurn = new HashMap<>();
+    private static final LavaballTrapCondition fInstance = new LavaballTrapCondition();
 
-    public LavaballTrapWatcher() {
-        super("LavaballTrapWatcher", WatcherScope.GAME);
-    }
-
-    public LavaballTrapWatcher(final LavaballTrapWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.amountOfLandsPlayedThisTurn.entrySet()) {
-            amountOfLandsPlayedThisTurn.put(entry.getKey(), entry.getValue());
-        }
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public LavaballTrapWatcher copy() {
-        return new LavaballTrapWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent perm = game.getPermanent(event.getTargetId());
-            if (perm.getCardType().contains(CardType.LAND)) {
-                Integer amount = amountOfLandsPlayedThisTurn.get(perm.getControllerId());
-                if (amount == null) {
-                    amount = 1;
-                } else {
-                    ++amount;
+    public boolean apply(Game game, Ability source) {
+        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getName());
+        if (watcher != null) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+                List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
+                if (permanents != null) {
+                    int count = 0;
+                    for (Permanent permanent : permanents) {
+                        if (permanent.getCardType().contains(CardType.LAND)) {
+                            count++;
+                            if (count == 2) {
+                                return true;
+                            }
+                        }
+                    }
                 }
-                amountOfLandsPlayedThisTurn.put(perm.getControllerId(), amount);
             }
-        }
-    }
-
-    public int maxLandsAnOpponentPlayedThisTurn(UUID playerId, Game game) {
-        int maxLands = 0;
-        for (UUID opponentId : game.getOpponents(playerId)) {
-            Integer amount = amountOfLandsPlayedThisTurn.get(opponentId);
-            if (amount != null && amount > maxLands) {
-                maxLands = amount;
-            }
-        }
-        return maxLands;
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        amountOfLandsPlayedThisTurn.clear();
-    }
-}
-
-class LavaballTrapAlternativeCost extends AlternativeCostImpl<Cost> {
-
-    public LavaballTrapAlternativeCost() {
-        super("you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost");
-        this.add(new ManaCostsImpl("{3}{R}{R}"));
-    }
-
-    public LavaballTrapAlternativeCost(final LavaballTrapAlternativeCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public LavaballTrapAlternativeCost copy() {
-        return new LavaballTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        LavaballTrapWatcher watcher = (LavaballTrapWatcher) game.getState().getWatchers().get("LavaballTrapWatcher");
-        if (watcher != null && watcher.maxLandsAnOpponentPlayedThisTurn(source.getControllerId(), game) > 1) {
-            return true;
         }
         return false;
     }
 
     @Override
-    public String getText() {
-        return "If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost";
+    public String toString() {
+        return "If an opponent had two or more lands enter the battlefield under his or her control this turn";
     }
 }
