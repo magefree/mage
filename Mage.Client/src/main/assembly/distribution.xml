@@ -4,6 +4,7 @@
           xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.1
                       http://maven.apache.org/xsd/assembly-1.1.1.xsd">
     <includeBaseDirectory>false</includeBaseDirectory>
+    <id>mage-client</id>
     <formats>
         <format>zip</format>
     </formats>
