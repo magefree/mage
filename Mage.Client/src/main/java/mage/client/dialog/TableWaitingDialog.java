@@ -104,7 +104,6 @@ public class TableWaitingDialog extends MageDialog {
 
     private void setGUISize() {
         tableSeats.getTableHeader().setFont(GUISizeHelper.tableFont);
-        tableSeats.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
         tableSeats.setFont(GUISizeHelper.tableFont);
         tableSeats.setRowHeight(GUISizeHelper.getTableRowHeight());
 
