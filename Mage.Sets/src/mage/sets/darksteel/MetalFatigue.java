@@ -28,29 +28,25 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TapAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
  * @author djbrez
  */
 public class MetalFatigue extends CardImpl {
+    
 
     public MetalFatigue(UUID ownerId) {
         super(ownerId, 8, "Metal Fatigue", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "DST";
 
         // Tap all artifacts.
-        this.getSpellAbility().addEffect(new TapAllArtifactsEffect());
+        this.getSpellAbility().addEffect(new TapAllEffect(new FilterArtifactPermanent("artifacts")));
     }
 
     public MetalFatigue(final MetalFatigue card) {
@@ -61,34 +57,4 @@ public class MetalFatigue extends CardImpl {
     public MetalFatigue copy() {
         return new MetalFatigue(this);
     }
-}
-
-class TapAllArtifactsEffect extends OneShotEffect {
-    
-    public TapAllArtifactsEffect() {
-        super(Outcome.Tap);
-        staticText = "Tap all artifacts";
-    }
-
-    public TapAllArtifactsEffect(final TapAllArtifactsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Permanent artifact: game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), game)) {
-                artifact.tap(game);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public TapAllArtifactsEffect copy() {
-        return new TapAllArtifactsEffect(this);
-    }
-
 }
