@@ -54,6 +54,14 @@ import mage.util.TournamentUtil;
  */
 public class DeckGenerator {
 
+    public static class DeckGeneratorException extends RuntimeException {
+
+        public DeckGeneratorException(String message) {
+            super(message);
+        }
+
+    }
+
     private static final int MAX_TRIES = 8196;
     private static DeckGeneratorDialog genDialog;
     private static DeckGeneratorPool genPool;
@@ -82,6 +90,9 @@ public class DeckGenerator {
         String format = genDialog.getSelectedFormat();
 
         List<String> setsToUse = ConstructedFormats.getSetsByFormat(format);
+        if (setsToUse == null) {
+            throw new DeckGeneratorException("Deck sets aren't initialized; please connect to a server to update the database.");
+        }
         if (setsToUse.isEmpty()) {
             // Default to using all sets
             setsToUse = ExpansionRepository.instance.getSetCodes();

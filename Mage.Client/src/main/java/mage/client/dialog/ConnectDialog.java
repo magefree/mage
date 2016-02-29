@@ -66,6 +66,7 @@ import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_FLAG;
 import mage.client.preference.MagePreferences;
 import mage.client.util.Config;
 import mage.client.util.gui.countryBox.CountryItemEditor;
+import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
 import org.apache.log4j.Logger;
 
@@ -442,6 +443,7 @@ public class ConnectDialog extends MageDialog {
     private void connected() {
         this.saveSettings();
         this.hideDialog();
+        ConstructedFormats.ensureLists();
     }
 
     private void keyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyTyped
