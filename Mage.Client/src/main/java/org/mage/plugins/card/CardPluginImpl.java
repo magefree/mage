@@ -31,6 +31,7 @@ import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.Animation;
 import org.mage.card.arcane.CardPanel;
+import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
@@ -540,6 +541,7 @@ public class CardPluginImpl implements CardPlugin {
             @Override
             public void windowClosing(WindowEvent e) {
                 g.getDownloader().dispose();
+                ManaSymbols.loadImages();
             }
         });
         d.setLayout(new BorderLayout());
