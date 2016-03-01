@@ -6,7 +6,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.watchers.Watcher;
+import mage.watchers.common.CastFromHandWatcher;
 
 /**
  * Warning: CastFromHandWatcher must be installed to card for proper working.
@@ -31,9 +31,8 @@ public class CastFromHandCondition implements Condition {
                     return false;
                 }
             }
-            // Probably watcher is no longer needed
-            Watcher watcher = game.getState().getWatchers().get("CastFromHand", source.getSourceId());
-            if (watcher != null && watcher.conditionMet()) {
+            CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getName(), source.getSourceId());
+            if (watcher != null && watcher.spellWasCastFromHand(source.getSourceId())  {
                 return true;
             }
         }
