@@ -31,7 +31,7 @@ public class CastFromHandCondition implements Condition {
                     return false;
                 }
             }
-            CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getName(), source.getSourceId());
+            CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getName());
             if (watcher != null && watcher.spellWasCastFromHand(source.getSourceId())) {
                 return true;
             }
