@@ -37,11 +37,11 @@ public class CastFromHandWatcher extends Watcher {
             step = null;
         }
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone().equals(Zone.HAND)) {
-            step = game.getTurn().getStep();
-            Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (this.getSourceId().equals(spell.getSourceId())) {
-                condition = true;
+            if (step == null) {
+                step = game.getTurn().getStep();
             }
+            Spell spell = (Spell) game.getObject(event.getTargetId());
+            spellsCastFromHand.add(spell.getSourceId());
         }
     }
 
