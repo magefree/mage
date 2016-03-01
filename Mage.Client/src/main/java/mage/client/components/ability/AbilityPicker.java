@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 import org.jdesktop.swingx.JXPanel;
+import org.jsoup.Jsoup;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
@@ -434,6 +435,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             if (choice == null || choice.isEmpty()) {
                 return choice;
             }
+            choice = Jsoup.parse(choice).text(); // decode HTML entities and strip tags
             return choice.substring(0, 1).toUpperCase() + choice.substring(1);
         }
 

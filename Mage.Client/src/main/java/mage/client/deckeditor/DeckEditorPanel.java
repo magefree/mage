@@ -60,9 +60,9 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
-import static mage.client.constants.Constants.DeckEditorMode.FREE_BUILDING;
-import static mage.client.constants.Constants.DeckEditorMode.LIMITED_BUILDING;
-import static mage.client.constants.Constants.DeckEditorMode.SIDEBOARDING;
+import mage.client.deck.generator.DeckGenerator;
+import mage.client.deck.generator.DeckGenerator.DeckGeneratorException;
+
 import mage.client.dialog.AddLandDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
@@ -173,6 +173,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.cardSelector.switchToGrid();
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
+                this.btnGenDeck.setVisible(false);
                 if (!MageFrame.getSession().isTestMode()) {
                     this.btnLoad.setVisible(false);
                 }
@@ -195,6 +196,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 //this.cardTableSelector.loadCards(this.bigCard);
                 this.btnExit.setVisible(true);
                 this.btnImport.setVisible(true);
+                this.btnGenDeck.setVisible(true);
                 if (!MageFrame.getSession().isTestMode()) {
                     this.btnLoad.setVisible(true);
                 }
@@ -504,6 +506,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnImport = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
         btnAddLand = new javax.swing.JButton();
+        btnGenDeck = new javax.swing.JButton();
         txtTimeRemaining = new javax.swing.JTextField();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -591,6 +594,15 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 btnAddLandActionPerformed(evt);
             }
         });
+        
+        btnGenDeck.setText("Generate");
+        btnGenDeck.setName("btnGenDeck");
+        btnGenDeck.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenDeckActionPerformed(evt);
+            }
+        });
 
         txtTimeRemaining.setEditable(false);
         txtTimeRemaining.setForeground(java.awt.Color.red);
@@ -626,6 +638,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                         .addContainerGap()
                                         .addComponent(btnImport)
                                         .addContainerGap()
+                                        .addComponent(btnGenDeck)
+                                        .addContainerGap()
                                         .addComponent(btnAddLand)
                                         .addContainerGap()
                                         .addComponent(btnSubmit))
@@ -650,6 +664,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnImport)
+                                .addComponent(btnGenDeck)
                                 .addComponent(btnAddLand)
                                 .addComponent(btnSubmit))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -801,6 +816,21 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         refreshDeck();
     }//GEN-LAST:event_btnAddLandActionPerformed
 
+    private void btnGenDeckActionPerformed(ActionEvent evt) {
+        try {
+            setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            String path = DeckGenerator.generateDeck();
+            deck = Deck.load(DeckImporterUtil.importDeck(path), true, true);
+        } catch (GameException ex) {
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading generated deck", JOptionPane.ERROR_MESSAGE);
+        }catch (DeckGeneratorException ex) {
+            JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Generator error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+        refreshDeck();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnExit;
@@ -816,6 +846,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtDeckName;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnAddLand;
+    private javax.swing.JButton btnGenDeck;
     private JComponent cardInfoPane;
     private javax.swing.JTextField txtTimeRemaining;
     // End of variables declaration//GEN-END:variables
