@@ -95,4 +95,40 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         assertLife(playerB, 17);
     }
 
+    /**
+     * Scion of Vitu-Ghazi if it is NOT cast from the hand, it will still allow
+     * the Populate effect. It should only allow these when it is cast from
+     * hand.
+     *
+     */
+    @Test
+    public void testScionOfVituGhaziConditionNotTrue() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        // When Scion of Vitu-Ghazi enters the battlefield, if you cast it from your hand, put a 1/1 white Bird creature token with flying onto the battlefield, then populate.
+        addCard(Zone.HAND, playerA, "Scion of Vitu-Ghazi", 1); // 4/4 - {3}{W}{W}
+        // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
+        addCard(Zone.HAND, playerA, "Reanimate", 1); // {B}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
+        addCard(Zone.HAND, playerB, "Terror", 1); // {1}{B}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scion of Vitu-Ghazi");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Terror", "Scion of Vitu-Ghazi");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Reanimate", "Scion of Vitu-Ghazi");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Terror", 1);
+
+        assertGraveyardCount(playerA, "Reanimate", 1);
+        assertPermanentCount(playerA, "Scion of Vitu-Ghazi", 1);
+        assertPermanentCount(playerA, "Bird", 2); // only 2 from cast from hand creation and populate. Populate may not trigger from reanimate
+
+        assertLife(playerA, 15);
+        assertLife(playerB, 20);
+    }
+
 }
