@@ -130,5 +130,77 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         assertLife(playerA, 15);
         assertLife(playerB, 20);
     }
+    
+    /**
+     * Dread Cacodemon's abilities should only trigger when cast from hand.
+     * 
+     * Testing when cast from hand abilities take effect.
+     * Cast from hand destroys opponents creatures and taps all other creatures owner controls.
+     */
+    @Test
+    public void testDreadCacodemonConditionTrue() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        
+        // When Dread Cacodemon enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.
+        addCard(Zone.HAND, playerA, "Dread Cacodemon", 1); // 8/8 - {7}{B}{B}{B}
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        
+        // Protection from white, first strike
+        addCard(Zone.BATTLEFIELD, playerA, "Black Knight", 2); // {B}{B}
+        // Deathtouch
+        addCard(Zone.BATTLEFIELD, playerB, "Typhoid Rats", 2); // {B}
+                
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dread Cacodemon");
+        setStopAt(1, PhaseStep.END_TURN);
+        
+        execute();
+
+        assertPermanentCount(playerB, "Typhoid Rats", 0);
+
+        assertPermanentCount(playerA, "Dread Cacodemon", 1);
+        assertPermanentCount(playerA, "Black Knight", 2); 
+        assertTappedCount("Black Knight", true, 2);
+        assertTapped("Dread Cacodemon", false);
+    }
+    
+     /**
+     * Dread Cacodemon's abilities should only trigger when cast from hand.
+     * 
+     * Testing when card is not cast from hand, abilities do not take effect.
+     * All opponents creatures remain alive and owner's creatures are not tapped.
+     */
+    @Test
+    public void testDreadCacodemonConditionFalse() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        
+        // When Dread Cacodemon enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.
+        addCard(Zone.GRAVEYARD, playerA, "Dread Cacodemon", 1); // 8/8 - {7}{B}{B}{B}
+        // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
+        addCard(Zone.HAND, playerA, "Reanimate", 1); // {B}
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        
+        // Protection from white, first strike
+        addCard(Zone.BATTLEFIELD, playerA, "Black Knight", 2); // {B}{B}
+        // Deathtouch
+        addCard(Zone.BATTLEFIELD, playerB, "Typhoid Rats", 2); // {B}
+                
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Dread Cacodemon");
+        setStopAt(1, PhaseStep.END_TURN);
+        
+        execute();
+
+        assertPermanentCount(playerB, "Typhoid Rats", 2);
+
+        assertGraveyardCount(playerA, "Reanimate", 1);
+        assertPermanentCount(playerA, "Dread Cacodemon", 1);
+        assertPermanentCount(playerA, "Black Knight", 2); 
+        assertTappedCount("Black Knight", false, 2);
+        assertTapped("Dread Cacodemon", false);
+
+        assertLife(playerA, 10); // loses 10 life from reanimating Dread Cacodemon at 10 CMC
+        assertLife(playerB, 20);
+    }
 
 }
