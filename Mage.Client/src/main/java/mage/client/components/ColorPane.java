@@ -22,6 +22,7 @@ import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.components.CardInfoPane;
+import mage.utils.ThreadUtils;
 import mage.view.CardView;
 
 /**
@@ -42,37 +43,53 @@ public class ColorPane extends JEditorPane {
 
             @Override
             public void hyperlinkUpdate(final HyperlinkEvent e) {
-                tooltipDelay = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300);
-                if (tooltipDelay == 0) {
-                    return;
-                }
-                String name = e.getDescription().substring(1);
-                CardInfo card = CardRepository.instance.findCard(name);
-                try {
-                    final Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
-                    if (e.getEventType() == EventType.EXITED) {
-                        setPopupVisibility(container, false);
-                    } else {
-                        CardInfoPane cardInfoPane = (CardInfoPane) MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
-                        cardInfoPane.setCard(new CardView(card.getMockCard()), container);
-                        Point location = new Point(getLocationOnScreen().x - container.getWidth(), (int) MageFrame.getDesktop()
-                                .getMousePosition().getY());
-                        Component parentComponent = MageFrame.getInstance();
-                        location = GuiDisplayUtil.keepComponentInsideParent(location, parentComponent.getLocationOnScreen(), container,
-                                parentComponent);
-                        container.setLocation(location);
-                        setPopupVisibility(container, true);
+                ThreadUtils.threadPool2.submit(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        tooltipDelay = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_DELAY, 300);
+                        if (tooltipDelay == 0) {
+                            return;
+                        }
+                        String name = e.getDescription().substring(1);
+                        CardInfo card = CardRepository.instance.findCard(name);
+                        try {
+                            final Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
+                            if (e.getEventType() == EventType.EXITED) {
+                                setPopupVisibility(null, container, false);
+                            } else {
+                                CardInfoPane cardInfoPane = (CardInfoPane) MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
+                                cardInfoPane.setCard(new CardView(card.getMockCard()), container);
+                                Point mousePosition = MageFrame.getDesktop().getMousePosition();
+                                int popupY = 0;
+                                if (mousePosition == null) { // switched to another window
+                                    popupY = getLocationOnScreen().y;
+                                } else {
+                                    popupY = mousePosition.y;
+                                }
+                                Point location = new Point(getLocationOnScreen().x - container.getWidth(), popupY);
+                                Component parentComponent = MageFrame.getInstance();
+                                location = GuiDisplayUtil.keepComponentInsideParent(location, parentComponent.getLocationOnScreen(),
+                                        container, parentComponent);
+                                setPopupVisibility(location, container, true);
+                            }
+                        } catch (InterruptedException e1) {
+                            e1.printStackTrace();
+                        }
+
                     }
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
+                });
             }
 
-            private void setPopupVisibility(final Component container, final boolean show) throws InterruptedException {
+            private void setPopupVisibility(final Point location, final Component container, final boolean show)
+                    throws InterruptedException {
                 final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+                        if (location != null) {
+                            container.setLocation(location);
+                        }
                         container.setVisible(show);
                         c.repaint();
                     }

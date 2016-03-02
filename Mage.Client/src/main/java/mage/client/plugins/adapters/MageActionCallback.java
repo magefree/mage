@@ -189,26 +189,30 @@ public class MageActionCallback implements ActionCallback {
                     Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
                     location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popup2, parentComponent);
                     location.translate(-parentPoint.x, -parentPoint.y);
-                    popupContainer.setLocation(location);
 
                     ThreadUtils.sleep(200);
 
-                    final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
-                                return;
-                            }
-                            popupContainer.setVisible(true);
-                            c.repaint();
-                        }
-                    }
-                    );
+                    showPopup(popupContainer, location);
 
                 } catch (InterruptedException e) {
                     LOGGER.warn(e.getMessage());
                 }
+            }
+
+            public void showPopup(final Component popupContainer, final Point location) throws InterruptedException {
+                final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+                            return;
+                        }
+                        popupContainer.setLocation(location);
+                        popupContainer.setVisible(true);
+                        c.repaint();
+                    }
+                }
+                );
             }
         });
     }
