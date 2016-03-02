@@ -53,7 +53,7 @@ public class DeckGeneratorDialog {
     private JComboBox<String> cbSets;
     private JComboBox<String> cbDeckSize;
     private JButton btnGenerate, btnCancel;
-    private JCheckBox cArtifacts, cSingleton, cNonBasicLands;
+    private JCheckBox cArtifacts, cSingleton, cNonBasicLands, cColorless;
     private SimpleDateFormat dateFormat;
 
     public DeckGeneratorDialog()
@@ -138,8 +138,15 @@ public class DeckGeneratorDialog {
         cNonBasicLands.setSelected(Boolean.valueOf(nonBasicEnabled));
         jCheckBoxes.add(cNonBasicLands);
 
-        jCheckBoxes.setPreferredSize(new Dimension(300, 25));
-        jCheckBoxes.setMaximumSize(new Dimension(300, 25));
+        // Non-basic lands
+        cColorless = new JCheckBox("Colorless mana", false);
+        cColorless.setToolTipText("Allow cards with colorless mana cost.");
+        String colorlessEnabled = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_COLORLESS, "false");
+        cColorless.setSelected(Boolean.valueOf(colorlessEnabled));
+        jCheckBoxes.add(cColorless);
+
+        jCheckBoxes.setPreferredSize(new Dimension(450, 25));
+        jCheckBoxes.setMaximumSize(new Dimension(450, 25));
         p0.add(jCheckBoxes);
 
         btnGenerate = new JButton("Ok");
@@ -202,6 +209,12 @@ public class DeckGeneratorDialog {
     public boolean isSingleton() {
         boolean selected = cSingleton.isSelected();
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_SINGLETON, Boolean.toString(selected));
+        return selected;
+    }
+
+    public boolean isColorless() {
+        boolean selected = cColorless.isSelected();
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_COLORLESS, Boolean.toString(selected));
         return selected;
     }
 
