@@ -155,7 +155,7 @@ public class DeckGenerator {
      * @return the final deck to use.
      */
     private static Deck generateDeck(int deckSize, List<ColoredManaSymbol> allowedColors, List<String> setsToUse) {
-        genPool = new DeckGeneratorPool(deckSize, allowedColors, genDialog.isSingleton());
+        genPool = new DeckGeneratorPool(deckSize, allowedColors, genDialog.isSingleton(), genDialog.isColorless());
 
         final String[] sets = setsToUse.toArray(new String[setsToUse.size()]);
 
