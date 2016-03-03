@@ -276,9 +276,9 @@ public class ManaSymbols {
             symbolFilesFound = mediumSymbolsFound;
         }
         if (symbolFilesFound) {
-            replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll(
-                    "<img src='file:" + getSymbolsPath(true) + "/symbols/" + resourcePath + "/$1$2.gif' alt='$1$2' width=" + symbolSize
-                            + " height=" + symbolSize + ">");
+            replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true)
+                    + "/symbols/" + resourcePath + "/$1$2.gif' alt='$1$2' width="
+                    + symbolSize + " height=" + symbolSize + ">");
         }
         replaced = replaced.replace("|source|", "{source}");
         replaced = replaced.replace("|this|", "{this}");
