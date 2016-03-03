@@ -160,73 +160,81 @@ public class BloodMoonTest extends CardTestPlayerBase {
         // Check that the Steam Vents produces only {R}
         Assert.assertTrue("The mana the land can produce should be [{U}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{U}]"));
     }
-    
+
     /**
-     * Possible bug reported: Blood Moon effects no longer appearing with Pithing Needle naming Blood Moon.
-     * 
+     * Possible bug reported: Blood Moon effects no longer appearing with
+     * Pithing Needle naming Blood Moon.
+     *
      * Testing Blood Moon on battlefield before Pithing Needle naming it.
      * Non-basics should still only produce {R}
      */
     @Test
     public void testBloodMoonBeforePithingNeedle() {
-        
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Blood Moon   2R
         // Enchantment
         // Nonbasic lands are Mountains
-        addCard(Zone.BATTLEFIELD, playerA, "Blood Moon", 1);
+        addCard(Zone.HAND, playerA, "Blood Moon", 1);
 
         // Artifact (1)
         // As Pithing Needle enters the battlefield, name a card.
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
         addCard(Zone.HAND, playerB, "Pithing Needle"); // {1}
+        addCard(Zone.HAND, playerB, "Ghost Quarter", 1);
+        // {T}: Add {C} to your mana pool.
+        // {T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search his or her library for a basic land card, put it onto the battlefield, then shuffle his or her library.
         addCard(Zone.BATTLEFIELD, playerB, "Ghost Quarter", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Pithing Needle");
-        setChoice(playerB, "Blood Moon");
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
-                      
-        assertPermanentCount(playerA, "Blood Moon", 1);
-        assertPermanentCount(playerB, "Pithing Needle", 1);    
-        assertPermanentCount(playerB, "Ghost Quarter", 1); 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Moon");
 
-        Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Pithing Needle");
+        setChoice(playerB, "Blood Moon");
+        playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Ghost Quarter");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Blood Moon", 1);
+        assertPermanentCount(playerB, "Pithing Needle", 1);
+        assertPermanentCount(playerB, "Ghost Quarter", 2);
+
+        Assert.assertTrue("The mana Ghost Quarter can produce should be [{R}] but it's " + playerB.getManaAvailable(currentGame).toString(), playerB.getManaAvailable(currentGame).toString().equals("[{R}]"));
     }
-    
+
     /**
-     * Possible bug reported: Blood Moon effects no longer appearing with Pithing Needle naming Blood Moon.
-     * 
-     * Testing Pithing Needle on the battlefield naming Blood Moon, then playing Blood Moon after.
-     * Non-basics should still only produce {R}
+     * Possible bug reported: Blood Moon effects no longer appearing with
+     * Pithing Needle naming Blood Moon.
+     *
+     * Testing Pithing Needle on the battlefield naming Blood Moon, then playing
+     * Blood Moon after. Non-basics should still only produce {R}
      */
     @Test
     public void testBloodMoonAfterPithingNeedle() {
-        
+
         // Artifact (1)
         // As Pithing Needle enters the battlefield, name a card.
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
-        addCard(Zone.HAND, playerA, "Pithing Needle"); // {1}            
+        addCard(Zone.HAND, playerA, "Pithing Needle"); // {1}
         addCard(Zone.BATTLEFIELD, playerA, "Ghost Quarter", 1);
-                
+
         // Blood Moon   2R
         // Enchantment
         // Nonbasic lands are Mountains
-        addCard(Zone.HAND, playerB, "Blood Moon", 1);        
+        addCard(Zone.HAND, playerB, "Blood Moon", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pithing Needle");
-        setChoice(playerA, "Blood Moon");        
-        
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Blood Moon");    
-        
+        setChoice(playerA, "Blood Moon");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Blood Moon");
+
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
-        
-        execute();        
-                
+
+        execute();
+
         assertPermanentCount(playerB, "Blood Moon", 1);
-        assertPermanentCount(playerA, "Pithing Needle", 1);          
-        assertPermanentCount(playerA, "Ghost Quarter", 1); 
+        assertPermanentCount(playerA, "Pithing Needle", 1);
+        assertPermanentCount(playerA, "Ghost Quarter", 1);
 
         Assert.assertTrue("The mana the land can produce should be [{R}] but it's " + playerA.getManaAvailable(currentGame).toString(), playerA.getManaAvailable(currentGame).toString().equals("[{R}]"));
     }
