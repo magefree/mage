@@ -120,14 +120,14 @@ public class ManaSymbols {
     private static boolean loadSymbolsImages(int size) {
         boolean fileErrors = false;
         HashMap<String, BufferedImage> sizedSymbols = new HashMap<>();
+        String resourcePath = Constants.RESOURCE_PATH_MANA_SMALL;
+        if (size > 25) {
+            resourcePath = Constants.RESOURCE_PATH_MANA_LARGE;
+        } else if (size > 15) {
+            resourcePath = Constants.RESOURCE_PATH_MANA_MEDIUM;
+        }
         for (String symbol : symbols) {
-            String resourcePath = Constants.RESOURCE_PATH_MANA_SMALL;
-            if (size > 25) {
-                resourcePath = Constants.RESOURCE_PATH_MANA_LARGE;
-            } else if (size > 15) {
-                resourcePath = Constants.RESOURCE_PATH_MANA_MEDIUM;
-            }
-            File file = new File(getSymbolsPath() + resourcePath + "/" + symbol + ".jpg");
+            File file = new File(getSymbolsPath() + resourcePath + "/" + symbol + ".gif");
             try {
 
                 if (size == 15 || size == 25) {
