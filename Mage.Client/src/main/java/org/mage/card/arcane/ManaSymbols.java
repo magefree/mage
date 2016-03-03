@@ -6,6 +6,16 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.PathMatcher;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +46,7 @@ public class ManaSymbols {
         "WP", "UP", "BP", "RP", "GP", "X", "C"};
 
     public static void loadImages() {
+        renameSymbols(getSymbolsPath() + File.separator + "symbols");
         smallSymbolsFound = loadSymbolsImages(15);
         mediumSymbolsFound = loadSymbolsImages(25);
 
@@ -148,6 +159,24 @@ public class ManaSymbols {
         return !fileErrors;
     }
 
+    private static void renameSymbols(String path) {
+        final PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:**/*.jpg");
+        try {
+            Files.walkFileTree(Paths.get(path), new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    if (matcher.matches(file)) {
+                        Path gifPath = file.resolveSibling(file.getFileName().toString().replaceAll("\\.jpg$", ".gif"));
+                        Files.move(file, gifPath, StandardCopyOption.REPLACE_EXISTING);
+                    }
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e) {
+            LOGGER.error("Couldn't rename mana symbols!");
+        }
+    }
+
     private static String getSymbolsPath() {
         return getSymbolsPath(false);
     }
@@ -247,9 +276,9 @@ public class ManaSymbols {
             symbolFilesFound = mediumSymbolsFound;
         }
         if (symbolFilesFound) {
-            replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll("<img src='file:" + getSymbolsPath(true)
-                    + "/symbols/" + resourcePath + "/$1$2.jpg' alt='$1$2' width="
-                    + symbolSize + " height=" + symbolSize + ">");
+            replaced = REPLACE_SYMBOLS_PATTERN.matcher(value).replaceAll(
+                    "<img src='file:" + getSymbolsPath(true) + "/symbols/" + resourcePath + "/$1$2.gif' alt='$1$2' width=" + symbolSize
+                            + " height=" + symbolSize + ">");
         }
         replaced = replaced.replace("|source|", "{source}");
         replaced = replaced.replace("|this|", "{this}");

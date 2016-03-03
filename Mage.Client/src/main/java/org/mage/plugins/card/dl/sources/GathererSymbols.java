@@ -71,7 +71,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                     return computeNext();
                 }
                 String symbol = sym.replaceAll("/", "");
-                File dst = new File(dir, symbol + ".jpg");
+                File dst = new File(dir, symbol + ".gif");
 
                 switch (symbol) {
                     case "T":
