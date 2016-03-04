@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.CastFromHandCondition;
+import mage.abilities.condition.common.CastFromHandSourceCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -67,7 +67,7 @@ public class Epochrasite extends CardImpl {
         // Epochrasite enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(
                     new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
-                    new InvertCondition(new CastFromHandCondition()),
+                    new InvertCondition(new CastFromHandSourceCondition()),
                     "{this} enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand",""), 
                 new CastFromHandWatcher());
 

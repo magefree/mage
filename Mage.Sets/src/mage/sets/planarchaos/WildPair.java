@@ -31,15 +31,15 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
@@ -47,25 +47,27 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.IntComparePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.watchers.common.CastFromHandWatcher;
 
 /**
  *
  * @author fenhl
  */
 public class WildPair extends CardImpl {
-    
+
     public WildPair(UUID ownerID) {
         super(ownerID, 30, "Wild Pair", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
         this.expansionSetCode = "PLC";
 
         // Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library.
         this.addAbility(new ConditionalTriggeredAbility(
-                new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new WildPairEffect(), new FilterCreaturePermanent("a creature"), true),
-                new CastFromHandCondition(),
+                new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new WildPairEffect(), new FilterCreaturePermanent("a creature"), true, SetTargetPointer.PERMANENT, ""),
+                new CastFromHandTargetCondition(),
                 "Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library."
-        ));
+        ), new CastFromHandWatcher());
     }
 
     public WildPair(final WildPair card) {
@@ -110,7 +112,7 @@ class WildPairEffect extends OneShotEffect {
                     }
                 }
                 controller.shuffleLibrary(game);
-                return true;                
+                return true;
             }
         }
         return false;
@@ -136,4 +138,38 @@ class TotalPowerAndToughnessPredicate extends IntComparePredicate<MageObject> {
     public String toString() {
         return "TotalPowerAndToughness" + super.toString();
     }
+}
+
+class CastFromHandTargetCondition implements Condition {
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        UUID targetId = source.getEffects().get(0).getTargetPointer().getFirst(game, source);
+        Permanent permanent = game.getPermanentEntering(targetId);
+        int zccDiff = 0;
+        if (permanent == null) {
+            permanent = game.getPermanentOrLKIBattlefield(targetId); // can be alredy again removed from battlefield so also check LKI
+            zccDiff = -1;
+        }
+        if (permanent != null) {
+            // check that the spell is still in the LKI
+            Spell spell = game.getStack().getSpell(targetId);
+            if (spell == null || spell.getZoneChangeCounter(game) != permanent.getZoneChangeCounter(game) + zccDiff) {
+                if (game.getLastKnownInformation(targetId, Zone.STACK, permanent.getZoneChangeCounter(game) + zccDiff) == null) {
+                    return false;
+                }
+            }
+            CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getName());
+            if (watcher != null && watcher.spellWasCastFromHand(targetId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "you cast it from your hand";
+    }
+
 }

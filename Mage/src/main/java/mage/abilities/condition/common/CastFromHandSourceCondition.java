@@ -13,7 +13,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author Loki
  */
-public class CastFromHandCondition implements Condition {
+public class CastFromHandSourceCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
