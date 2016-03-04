@@ -35,6 +35,7 @@ public class ColorPane extends JEditorPane {
     HTMLEditorKit kit = new HTMLEditorKit();
     HTMLDocument doc = new HTMLDocument();
     private int tooltipDelay;
+    private int tooltipCounter;
 
     public ColorPane() {
         this.setEditorKit(kit);
@@ -90,7 +91,8 @@ public class ColorPane extends JEditorPane {
                         if (location != null) {
                             container.setLocation(location);
                         }
-                        container.setVisible(show);
+                        tooltipCounter += show ? 1 : -1;
+                        container.setVisible(tooltipCounter > 0);
                         c.repaint();
                     }
                 });
