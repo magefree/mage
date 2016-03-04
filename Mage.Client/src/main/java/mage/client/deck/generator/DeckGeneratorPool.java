@@ -51,6 +51,7 @@ public class DeckGeneratorPool
     private static final int NONCREATURE_COUNT_60 = 13;
 
     private final List<ColoredManaSymbol> allowedColors;
+    private boolean colorlessAllowed;
     private final List<DeckGeneratorCMC> poolCMCs;
     private final int creatureCount;
     private final int nonCreatureCount;
@@ -68,11 +69,12 @@ public class DeckGeneratorPool
     private List<Card> reserveSpells = new ArrayList<>();
     private Deck deck;
 
-    public DeckGeneratorPool(final int deckSize, final List<ColoredManaSymbol> allowedColors, boolean isSingleton)
+    public DeckGeneratorPool(final int deckSize, final List<ColoredManaSymbol> allowedColors, boolean isSingleton, boolean colorlessAllowed)
     {
         this.deckSize = deckSize;
         this.allowedColors = allowedColors;
         this.isSingleton = isSingleton;
+        this.colorlessAllowed = colorlessAllowed;
 
         this.deck = new Deck();
 
@@ -206,6 +208,9 @@ public class DeckGeneratorPool
                 if (!found) {
                     return false;
                 }
+            }
+            if (symbol.equals("C") && !colorlessAllowed) {
+                return false;
             }
         }
         return true;

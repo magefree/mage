@@ -47,8 +47,8 @@ public class EDTExceptionHandler implements Thread.UncaughtExceptionHandler {
 
     public void handle(Throwable throwable) {
         try {
-            logger.fatal(null, throwable);
-            JOptionPane.showMessageDialog(MageFrame.getDesktop(), throwable, "MAGE Client UI error", JOptionPane.ERROR_MESSAGE);
+            logger.fatal("MAGE Client UI error", throwable);
+            // JOptionPane.showMessageDialog(MageFrame.getDesktop(), throwable, "MAGE Client UI error", JOptionPane.ERROR_MESSAGE);
         } catch (Throwable t) {}
     }
 

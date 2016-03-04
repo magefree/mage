@@ -52,7 +52,9 @@ public class RateCard {
      */
     public static int rateCard(Card card, List<ColoredManaSymbol> allowedColors) {
         if (allowedColors == null && rated.containsKey(card.getName())) {
-            return rated.get(card.getName());
+            int rate = rated.get(card.getName());
+//            log.info(card.getName() + " rate: " + rate);
+            return rate;
         }
         int type;
         if (card.getCardType().contains(CardType.PLANESWALKER)) {
@@ -136,7 +138,7 @@ public class RateCard {
      */
     private synchronized static void readRatings() {
         if (ratings == null) {
-            ratings = new HashMap<String, Integer>();
+            ratings = new HashMap<>();
             readFromFile("/m13.csv");
         }
     }

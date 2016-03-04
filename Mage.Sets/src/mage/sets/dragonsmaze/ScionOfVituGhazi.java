@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandCondition;
+import mage.abilities.condition.common.CastFromHandSourceCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PopulateEffect;
@@ -57,7 +57,7 @@ public class ScionOfVituGhazi extends CardImpl {
 
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken()), false);
         ability.addEffect(new PopulateEffect("then"));
-        this.addAbility(new ConditionalTriggeredAbility(ability, new CastFromHandCondition(),
+        this.addAbility(new ConditionalTriggeredAbility(ability, new CastFromHandSourceCondition(),
                 "When {this} enters the battlefield, if you cast it from your hand, put a 1/1 white Bird creature token with flying onto the battlefield, then populate."),
                 new CastFromHandWatcher());
     }

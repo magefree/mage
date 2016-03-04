@@ -30,7 +30,7 @@ package mage.sets.commander2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandCondition;
+import mage.abilities.condition.common.CastFromHandSourceCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -62,7 +62,7 @@ public class AngelOfTheDireHour extends CardImpl {
         // When Angel of the Dire Hour enters the battlefield, if you cast it from your hand, exile all attacking creatures.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ExileAllEffect(new FilterAttackingCreature("attacking creatures")), false),
-                new CastFromHandCondition(),
+                new CastFromHandSourceCondition(),
                 "When {this} enters the battlefield, if you cast it from your hand, exile all attacking creatures."),
                 new CastFromHandWatcher());
     }

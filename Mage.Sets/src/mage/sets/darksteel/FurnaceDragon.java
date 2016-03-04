@@ -30,7 +30,7 @@ package mage.sets.darksteel;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandCondition;
+import mage.abilities.condition.common.CastFromHandSourceCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
@@ -70,7 +70,7 @@ public class FurnaceDragon extends CardImpl {
         // When Furnace Dragon enters the battlefield, if you cast it from your hand, exile all artifacts.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ExileAllEffect(filter), false),
-                new CastFromHandCondition(),
+                new CastFromHandSourceCondition(),
                 "When {this} enters the battlefield, if you cast it from your hand, exile all artifacts."),
                 new CastFromHandWatcher());
     }

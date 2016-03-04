@@ -1192,7 +1192,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public synchronized void concede(UUID playerId) {
         Player player = state.getPlayer(playerId);
-        if (player != null) {
+        if (player != null && !player.hasLost()) {
             logger.debug("Player " + player.getName() + " concedes game " + this.getId());
             fireInformEvent(player.getLogName() + " has conceded.");
             player.concede(this);

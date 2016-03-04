@@ -73,10 +73,9 @@ public class CrovaxTheCursed extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CrovaxTheCursedEffect(), TargetController.YOU, false);
         this.addAbility(ability);
 
-
         // {B}: Crovax gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));
-        
+
     }
 
     public CrovaxTheCursed(final CrovaxTheCursed card) {
@@ -118,11 +117,9 @@ class CrovaxTheCursedEffect extends OneShotEffect {
                         game.informPlayers(controller.getLogName() + " puts a +1/+1 counter on " + sourceObject.getName());
                     }
                 }
-            } else {
-                if (sourceObject != null && sourceObject.getCounters().containsKey(CounterType.P1P1)) {
-                    sourceObject.getCounters().removeCounter(CounterType.P1P1, 1);
-                    game.informPlayers(controller.getLogName() + " removes a +1/+1 counter from " + sourceObject.getName());
-                }
+            } else if (sourceObject != null && sourceObject.getCounters().containsKey(CounterType.P1P1)) {
+                sourceObject.removeCounters(CounterType.P1P1.getName(), 1, game);
+                game.informPlayers(controller.getLogName() + " removes a +1/+1 counter from " + sourceObject.getName());
             }
             return true;
         }
