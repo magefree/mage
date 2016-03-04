@@ -173,14 +173,14 @@ public class DisruptingShoalTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Air Elemental");
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disrupting Shoal", "Air Elemental", "Air Elemental");
-        playerB.addChoice("Yes"); // use alternate costs = 3 CMC = Away
+        playerB.addChoice("Yes"); // use alternate costs = 2 or 3 CMC = Far // Away, not the combined cost!
         
         setStopAt(1, PhaseStep.CLEANUP);
         execute();        
         
         assertExileCount(playerB, 1); // Far // Away should be exiled as part of Disrupting alternative cost      
         assertGraveyardCount(playerB,"Disrupting Shoal", 1);    
-        assertPermanentCount(playerA, "Air Elemental", 0); // should have been countered by Shoal
-        assertGraveyardCount(playerA, "Air Elemental", 1);         
+        assertPermanentCount(playerA, "Air Elemental", 1); // should NOT have been countered by Shoal
+        assertGraveyardCount(playerA, "Air Elemental", 0);         
     } 
 }
