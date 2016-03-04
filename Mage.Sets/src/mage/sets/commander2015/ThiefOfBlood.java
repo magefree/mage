@@ -57,10 +57,10 @@ public class ThiefOfBlood extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.subtype.add("Vampire");
-        
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // As Thief of Blood enters the battlefield, remove all counters from all permanents. Thief of Blood enters the battlefield with a +1/+1 counter on it for each counter removed this way.
         this.addAbility(new EntersBattlefieldAbility(new ThiefOfBloodEffect(), null, "As {this} enters the battlefield, remove all counters from all permanents. {this} enters the battlefield with a +1/+1 counter on it for each counter removed this way", null));
     }
@@ -76,33 +76,34 @@ public class ThiefOfBlood extends CardImpl {
 }
 
 class ThiefOfBloodEffect extends OneShotEffect {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("permanent with a counter");
+
     static {
         filter.add(new CounterPredicate(null));
     }
-    
+
     ThiefOfBloodEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "remove all counters from all permanents. {this} enters the battlefield with a +1/+1 counter on it for each counter removed this way";
     }
-    
+
     ThiefOfBloodEffect(final ThiefOfBloodEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ThiefOfBloodEffect copy() {
         return new ThiefOfBloodEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         int countersRemoved = 0;
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             Counters counters = permanent.getCounters().copy();
             for (Counter counter : counters.values()) {
-                permanent.getCounters().removeCounter(counter.getName(), counter.getCount());
+                permanent.removeCounters(counter.getName(), counter.getCount(), game);
                 countersRemoved += counter.getCount();
             }
         }

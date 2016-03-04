@@ -27,20 +27,20 @@
  */
 package mage.sets.zendikar;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastToken2;
-import mage.watchers.Watcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 /**
  *
@@ -54,8 +54,7 @@ public class BalothCageTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new BalothCageTrapAlternativeCost());
-        this.getSpellAbility().addWatcher(new BalothCageTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{G}"), BalothCageTrapCondition.getInstance()), new PermanentsEnteredBattlefieldWatcher());
 
         // Put a 4/4 green Beast creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
@@ -71,68 +70,34 @@ public class BalothCageTrap extends CardImpl {
     }
 }
 
-class BalothCageTrapWatcher extends Watcher {
+class BalothCageTrapCondition implements Condition {
 
-    public BalothCageTrapWatcher() {
-        super("BalothCageTrapWatcher", WatcherScope.GAME);
-    }
+    private static final BalothCageTrapCondition fInstance = new BalothCageTrapCondition();
 
-    public BalothCageTrapWatcher(final BalothCageTrapWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public BalothCageTrapWatcher copy() {
-        return new BalothCageTrapWatcher(this);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public void watch(GameEvent event, Game game) {
-        if (condition == true) { // no need to check - condition has already occured
-            return;
-        }
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent perm = game.getPermanent(event.getTargetId());
-            if (perm.getCardType().contains(CardType.ARTIFACT) && !perm.getControllerId().equals(controllerId)) {
-                condition = true;
+    public boolean apply(Game game, Ability source) {
+        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getName());
+        if (watcher != null) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+                List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
+                if (permanents != null) {
+                    for (Permanent permanent : permanents) {
+                        if (permanent.getCardType().contains(CardType.ARTIFACT)) {
+                            return true;
+                        }
+                    }
+                }
             }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        condition = false;
-    }
-}
-
-class BalothCageTrapAlternativeCost extends AlternativeCostImpl {
-
-    public BalothCageTrapAlternativeCost() {
-        super("you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost");
-        this.add(new ManaCostsImpl("{1}{G}"));
-    }
-
-    public BalothCageTrapAlternativeCost(final BalothCageTrapAlternativeCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public BalothCageTrapAlternativeCost copy() {
-        return new BalothCageTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        BalothCageTrapWatcher watcher = (BalothCageTrapWatcher) game.getState().getWatchers().get("BalothCageTrapWatcher");
-        if (watcher != null && watcher.conditionMet()) {
-            return true;
         }
         return false;
     }
 
     @Override
-    public String getText() {
-        return "If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost";
+    public String toString() {
+        return "If an opponent had an artifact enter the battlefield under his or her control this turn";
     }
 }

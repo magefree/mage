@@ -682,6 +682,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             gamePane.watchGame(gameId);
             setActive(gamePane);
         } catch (PropertyVetoException ex) {
+            LOGGER.debug("Problem starting watching game " + gameId, ex);
         }
     }
 
@@ -1068,9 +1069,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (setActive) {
             setActive(tablesPane);
         } else // if other panel was already shown, mamke sure it's topmost again
-         if (topPanebefore != null) {
+        {
+            if (topPanebefore != null) {
                 setActive(topPanebefore);
             }
+        }
     }
 
     public void hideGames() {
@@ -1417,6 +1420,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 break;
             case CLIENT_STOP_WATCHING:
                 session.stopWatching(userRequestMessage.getGameId());
+                GamePanel gamePanel = getGame(userRequestMessage.getGameId());
+                if (gamePanel != null) {
+                    gamePanel.removeGame();
+                }
                 removeGame(userRequestMessage.getGameId());
                 break;
             case CLIENT_EXIT:

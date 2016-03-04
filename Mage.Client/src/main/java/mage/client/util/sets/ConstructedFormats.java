@@ -50,6 +50,12 @@ public class ConstructedFormats {
 
     }
 
+    public static void ensureLists() {
+        if (getSetsByFormat(ConstructedFormats.STANDARD) == null) {
+            buildLists();
+        }
+    }
+    
     private static void buildLists() {
         GregorianCalendar cutoff;
         // month is zero based so January = 0
@@ -60,6 +66,7 @@ public class ConstructedFormats {
             cutoff = new GregorianCalendar(calendar.get(Calendar.YEAR) - 2, Calendar.SEPTEMBER, 1);
         }
         final Map<String, ExpansionInfo> expansionInfo = new HashMap<>();
+        formats.clear(); // prevent NPE on sorting if this is not the first try
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
         	expansionInfo.put(set.getName(), set);
         	formats.add(set.getName());
@@ -207,10 +214,11 @@ public class ConstructedFormats {
 			}
         	
 		});
-
-        formats.add(0, MODERN);
-        formats.add(0, EXTENDED);
-        formats.add(0, STANDARD);
+        if (!formats.isEmpty()) {
+            formats.add(0, MODERN);
+            formats.add(0, EXTENDED);
+            formats.add(0, STANDARD);
+        }
         formats.add(0, ALL);
     }
     

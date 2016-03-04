@@ -154,12 +154,10 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     private void setGUISize() {
         tablePlayers.getTableHeader().setFont(GUISizeHelper.tableFont);
-        tablePlayers.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
         tablePlayers.setFont(GUISizeHelper.tableFont);
         tablePlayers.setRowHeight(GUISizeHelper.getTableRowHeight());
 
         tableMatches.getTableHeader().setFont(GUISizeHelper.tableFont);
-        tableMatches.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
         tableMatches.setFont(GUISizeHelper.tableFont);
         tableMatches.setRowHeight(GUISizeHelper.getTableRowHeight());
 

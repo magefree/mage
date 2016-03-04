@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -43,14 +42,13 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author LevelX2
  */
-
 public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifyingEffectImpl {
 
     private final TargetController targetController;
-    
+
     public CantCastMoreThanOneSpellEffect(TargetController targetController) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        this.targetController = targetController;        
+        this.targetController = targetController;
     }
 
     public CantCastMoreThanOneSpellEffect(final CantCastMoreThanOneSpellEffect effect) {
@@ -95,22 +93,22 @@ public class CantCastMoreThanOneSpellEffect extends ContinuousRuleModifyingEffec
                 Permanent attachment = game.getPermanent(source.getSourceId());
                 if (attachment == null || !attachment.getAttachedTo().equals(event.getPlayerId())) {
                     return false;
-                }                    
+                }
         }
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-        if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId())> 0) {
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
+        if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) > 0) {
             return true;
         }
         return false;
     }
-    
+
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        switch(targetController) {
+        switch (targetController) {
             case YOU:
                 sb.append("You");
                 break;

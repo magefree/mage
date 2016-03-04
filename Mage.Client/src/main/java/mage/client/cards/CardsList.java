@@ -149,7 +149,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     private void setGUISize() {
         mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
-        mainTable.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
         mainTable.setFont(GUISizeHelper.tableFont);
         mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());
         cardDimension = GUISizeHelper.editorCardDimension;

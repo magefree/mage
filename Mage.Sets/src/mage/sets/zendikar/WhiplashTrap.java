@@ -27,23 +27,20 @@
  */
 package mage.sets.zendikar;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.WatcherScope;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.Watcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 /**
  *
@@ -56,15 +53,13 @@ public class WhiplashTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-
         // If an opponent had two or more creatures enter the battlefield under his or her control this turn, you may pay {U} rather than pay Whiplash Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new WhiplashAlternativeCost());
-        this.getSpellAbility().addWatcher(new WhiplashTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), WhiplashTrapCondition.getInstance()), new PermanentsEnteredBattlefieldWatcher());
 
         // Return two target creatures to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
-        
+
     }
 
     public WhiplashTrap(final WhiplashTrap card) {
@@ -77,87 +72,38 @@ public class WhiplashTrap extends CardImpl {
     }
 }
 
-class WhiplashTrapWatcher extends Watcher {
+class WhiplashTrapCondition implements Condition {
 
-    private Map<UUID, Integer> amountOfCreaturesPlayedThisTurn = new HashMap<>();
+    private static final WhiplashTrapCondition fInstance = new WhiplashTrapCondition();
 
-    public WhiplashTrapWatcher() {
-        super("WhiplashTrapWatcher", WatcherScope.GAME);
-    }
-
-    public WhiplashTrapWatcher(final WhiplashTrapWatcher watcher) {
-        super(watcher);
-        for (Map.Entry<UUID, Integer> entry : watcher.amountOfCreaturesPlayedThisTurn.entrySet()) {
-            amountOfCreaturesPlayedThisTurn.put(entry.getKey(), entry.getValue());
-        }
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public WhiplashTrapWatcher copy() {
-        return new WhiplashTrapWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent perm = game.getPermanent(event.getTargetId());
-            if (perm.getCardType().contains(CardType.CREATURE)) {
-                Integer amount = amountOfCreaturesPlayedThisTurn.get(perm.getControllerId());
-                if (amount == null) {
-                    amount = 1;
-                } else {
-                    ++amount;
+    public boolean apply(Game game, Ability source) {
+        PermanentsEnteredBattlefieldWatcher watcher = (PermanentsEnteredBattlefieldWatcher) game.getState().getWatchers().get(PermanentsEnteredBattlefieldWatcher.class.getName());
+        if (watcher != null) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+                List<Permanent> permanents = watcher.getThisTurnEnteringPermanents(opponentId);
+                if (permanents != null) {
+                    int count = 0;
+                    for (Permanent permanent : permanents) {
+                        if (permanent.getCardType().contains(CardType.CREATURE)) {
+                            count++;
+                            if (count == 2) {
+                                return true;
+                            }
+                        }
+                    }
                 }
-                amountOfCreaturesPlayedThisTurn.put(perm.getControllerId(), amount);
             }
-        }
-    }
-    
-    public int maxCreaturesAnOpponentPlayedThisTurn(UUID playerId, Game game) {
-        int maxCreatures = 0;
-        for (UUID opponentId : game.getOpponents(playerId)) {
-            Integer amount = amountOfCreaturesPlayedThisTurn.get(opponentId);
-            if (amount != null && amount > maxCreatures) {
-                maxCreatures = amount;
-            }
-        }
-        return maxCreatures;
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        amountOfCreaturesPlayedThisTurn.clear();
-    }
-}
-
-class WhiplashAlternativeCost extends AlternativeCostImpl {
-
-    public WhiplashAlternativeCost() {
-        super("you may pay {U} rather than pay Whiplash Trap's mana cost");
-        this.add(new ManaCostsImpl("{U}"));
-    }
-
-    public WhiplashAlternativeCost(final WhiplashAlternativeCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public WhiplashAlternativeCost copy() {
-        return new WhiplashAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        WhiplashTrapWatcher watcher = (WhiplashTrapWatcher) game.getState().getWatchers().get("WhiplashTrapWatcher");
-        if (watcher != null && watcher.maxCreaturesAnOpponentPlayedThisTurn(source.getControllerId(), game) >= 2) {
-            return true;
         }
         return false;
     }
 
     @Override
-    public String getText() {
-        return "If an opponent had two or more creatures enter the battlefield under his or her control this turn, you may pay {U} rather than pay {this}'s mana cost";
+    public String toString() {
+        return "If an opponent had two or more creatures enter the battlefield under his or her control this turn";
     }
 }

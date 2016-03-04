@@ -30,10 +30,9 @@ package mage.sets.divinevsdemonic;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.condition.common.CastFromHandSourceCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -50,9 +49,9 @@ import mage.watchers.common.CastFromHandWatcher;
  * @author daagar
  */
 public class ReiverDemon extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creatures");
-    
+
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
@@ -67,12 +66,13 @@ public class ReiverDemon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Reiver Demon enters the battlefield, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new DestroyAllEffect(filter), new CastFromHandCondition(),
-                "if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated"));
-        this.addAbility(ability, new CastFromHandWatcher());
+        this.addAbility(new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter, true), false),
+                new CastFromHandSourceCondition(),
+                "When {this} enters the battlefield, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated."),
+                new CastFromHandWatcher());
     }
 
     public ReiverDemon(final ReiverDemon card) {

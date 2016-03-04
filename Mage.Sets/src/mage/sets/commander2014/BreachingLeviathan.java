@@ -32,8 +32,8 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.condition.common.CastFromHandSourceCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -64,10 +64,11 @@ public class BreachingLeviathan extends CardImpl {
         this.toughness = new MageInt(9);
 
         // When Breaching Leviathan enters the battlefield, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new BreachingLeviathanEffect(), new CastFromHandCondition(),
-                "if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps"));
-        this.addAbility(ability, new CastFromHandWatcher());
+        this.addAbility(new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new BreachingLeviathanEffect(), false),
+                new CastFromHandSourceCondition(),
+                "When {this} enters the battlefield, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps."),
+                new CastFromHandWatcher());
     }
 
     public BreachingLeviathan(final BreachingLeviathan card) {
@@ -104,7 +105,7 @@ class BreachingLeviathanEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             creature.tap(game);
             ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
             effect.setTargetPointer(new FixedTarget(creature.getId()));

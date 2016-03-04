@@ -35,7 +35,6 @@ package mage.client.deckeditor;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -183,11 +182,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     public void changeGUISize() {
         setGUISize();
+        cardGrid.changeGUISize();
     }
 
     private void setGUISize() {
         mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
-        mainTable.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
         mainTable.setFont(GUISizeHelper.tableFont);
         mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());
 

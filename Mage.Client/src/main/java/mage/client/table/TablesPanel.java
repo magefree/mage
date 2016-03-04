@@ -294,12 +294,10 @@ public class TablesPanel extends javax.swing.JPanel {
 
     private void setGUISize() {
         tableTables.getTableHeader().setFont(GUISizeHelper.tableFont);
-        tableTables.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
         tableTables.setFont(GUISizeHelper.tableFont);
         tableTables.setRowHeight(GUISizeHelper.getTableRowHeight());
 
         tableCompleted.getTableHeader().setFont(GUISizeHelper.tableFont);
-        tableCompleted.getTableHeader().setPreferredSize(new Dimension(GUISizeHelper.tableHeaderHeight, GUISizeHelper.tableHeaderHeight));
         tableCompleted.setFont(GUISizeHelper.tableFont);
         tableCompleted.setRowHeight(GUISizeHelper.getTableRowHeight());
 

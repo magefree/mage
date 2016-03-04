@@ -226,7 +226,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     }
 
     public void sortLayout() {
-        if (battlefield == null) {
+        if (battlefield == null || this.getWidth() < 1) { // Can't do layout when panel is not sized yet
             return;
         }
 

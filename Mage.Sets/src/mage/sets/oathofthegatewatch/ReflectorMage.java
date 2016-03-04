@@ -47,6 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -110,7 +111,9 @@ class ReflectorMageEffect extends OneShotEffect {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null) {
                 controller.moveCards(targetCreature, Zone.HAND, source, game);
-                game.addEffect(new ExclusionRitualReplacementEffect(targetCreature.getName(), targetCreature.getOwnerId()), source);
+                if (!targetCreature.getName().isEmpty()) { // if the creature had no name, no restrict effect will be created
+                    game.addEffect(new ExclusionRitualReplacementEffect(targetCreature.getName(), targetCreature.getOwnerId()), source);
+                }
             }
             return true;
         }
@@ -138,13 +141,17 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
+        return event.getType() == GameEvent.EventType.CAST_SPELL_LATE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
         if (card != null) {
+            Spell spell = game.getState().getStack().getSpell(event.getSourceId());
+            if (spell != null && spell.isFaceDown(game)) {
+                return false; // Face Down cast spell (Morph creature) has no name
+            }
             return card.getName().equals(creatureName);
         }
         return false;

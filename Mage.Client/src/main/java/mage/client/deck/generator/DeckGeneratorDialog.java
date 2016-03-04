@@ -48,13 +48,13 @@ import java.util.Date;
  */
 public class DeckGeneratorDialog {
 
-    private static JDialog dlg;
-    private static String selectedColors;
-    private static JComboBox cbSets;
-    private static JComboBox cbDeckSize;
-    private static JButton btnGenerate, btnCancel;
-    private static JCheckBox cArtifacts, cSingleton, cNonBasicLands;
-    private static SimpleDateFormat dateFormat;
+    private JDialog dlg;
+    private String selectedColors;
+    private JComboBox<String> cbSets;
+    private JComboBox<String> cbDeckSize;
+    private JButton btnGenerate, btnCancel;
+    private JCheckBox cArtifacts, cSingleton, cNonBasicLands, cColorless;
+    private SimpleDateFormat dateFormat;
 
     public DeckGeneratorDialog()
     {
@@ -83,7 +83,7 @@ public class DeckGeneratorDialog {
         p0.add(Box.createVerticalStrut(5));
         JPanel jPanel = new JPanel();
         JLabel text3 = new JLabel("Choose sets:");
-        cbSets = new JComboBox(ConstructedFormats.getTypes());
+        cbSets = new JComboBox<String>(ConstructedFormats.getTypes());
         cbSets.setSelectedIndex(0);
         cbSets.setPreferredSize(new Dimension(300, 25));
         cbSets.setMaximumSize(new Dimension(300, 25));
@@ -100,7 +100,7 @@ public class DeckGeneratorDialog {
         p0.add(Box.createVerticalStrut(5));
         JPanel jPanel2 = new JPanel();
         JLabel textDeckSize = new JLabel("Deck size:");
-        cbDeckSize = new JComboBox(new String[]{"40","60"});
+        cbDeckSize = new JComboBox<String>(new String[] { "40", "60" });
         cbDeckSize.setSelectedIndex(0);
         cbDeckSize.setPreferredSize(new Dimension(300, 25));
         cbDeckSize.setMaximumSize(new Dimension(300, 25));
@@ -138,8 +138,15 @@ public class DeckGeneratorDialog {
         cNonBasicLands.setSelected(Boolean.valueOf(nonBasicEnabled));
         jCheckBoxes.add(cNonBasicLands);
 
-        jCheckBoxes.setPreferredSize(new Dimension(300, 25));
-        jCheckBoxes.setMaximumSize(new Dimension(300, 25));
+        // Non-basic lands
+        cColorless = new JCheckBox("Colorless mana", false);
+        cColorless.setToolTipText("Allow cards with colorless mana cost.");
+        String colorlessEnabled = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_COLORLESS, "false");
+        cColorless.setSelected(Boolean.valueOf(colorlessEnabled));
+        jCheckBoxes.add(cColorless);
+
+        jCheckBoxes.setPreferredSize(new Dimension(450, 25));
+        jCheckBoxes.setMaximumSize(new Dimension(450, 25));
         p0.add(jCheckBoxes);
 
         btnGenerate = new JButton("Ok");
@@ -168,7 +175,7 @@ public class DeckGeneratorDialog {
         dlg.dispose();
     }
 
-    public static void cleanUp() {
+    public void cleanUp() {
         for (ActionListener al: btnGenerate.getActionListeners()) {
             btnGenerate.removeActionListener(al);
         }
@@ -187,7 +194,7 @@ public class DeckGeneratorDialog {
             tmp.createNewFile();
             deck.setName(deckName);
             Sets.saveDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
-            DeckGeneratorDialog.cleanUp();
+            cleanUp();
             return tmp.getAbsolutePath();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Couldn't generate deck. Try again.");
@@ -202,6 +209,12 @@ public class DeckGeneratorDialog {
     public boolean isSingleton() {
         boolean selected = cSingleton.isSelected();
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_SINGLETON, Boolean.toString(selected));
+        return selected;
+    }
+
+    public boolean isColorless() {
+        boolean selected = cColorless.isSelected();
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_COLORLESS, Boolean.toString(selected));
         return selected;
     }
 

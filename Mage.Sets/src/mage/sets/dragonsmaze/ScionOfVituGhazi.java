@@ -25,15 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.condition.common.CastFromHandSourceCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
@@ -46,11 +45,9 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author LevelX2
  */
-
-
 public class ScionOfVituGhazi extends CardImpl {
 
-    public ScionOfVituGhazi (UUID ownerId) {
+    public ScionOfVituGhazi(UUID ownerId) {
         super(ownerId, 7, "Scion of Vitu-Ghazi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Elemental");
@@ -58,15 +55,14 @@ public class ScionOfVituGhazi extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Scion of Vitu-Ghazi enters the battlefield, if you cast it from your hand, put a 1/1 white Bird creature token with flying onto the battlefield, then populate.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new CreateTokenEffect(new BirdToken()), new CastFromHandCondition(),
-                "if you cast it from your hand, put a 1/1 white Bird creature token with flying onto the battlefield,"));
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken()), false);
         ability.addEffect(new PopulateEffect("then"));
-        this.addAbility(ability, new CastFromHandWatcher());
+        this.addAbility(new ConditionalTriggeredAbility(ability, new CastFromHandSourceCondition(),
+                "When {this} enters the battlefield, if you cast it from your hand, put a 1/1 white Bird creature token with flying onto the battlefield, then populate."),
+                new CastFromHandWatcher());
     }
 
-    public ScionOfVituGhazi (final ScionOfVituGhazi card) {
+    public ScionOfVituGhazi(final ScionOfVituGhazi card) {
         super(card);
     }
 

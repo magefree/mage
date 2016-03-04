@@ -29,10 +29,9 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.condition.common.CastFromHandSourceCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -41,9 +40,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.watchers.Watcher;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -51,7 +47,7 @@ import mage.watchers.common.CastFromHandWatcher;
  * @author fireshoes
  */
 public class FurnaceDragon extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("artifacts");
 
     static {
@@ -67,12 +63,16 @@ public class FurnaceDragon extends CardImpl {
 
         // Affinity for artifacts
         this.addAbility(new AffinityForArtifactsAbility());
-        
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Furnace Dragon enters the battlefield, if you cast it from your hand, exile all artifacts.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new ExileAllEffect(filter), new FurnaceDragonCondition()), false), new CastFromHandWatcher());
+        this.addAbility(new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new ExileAllEffect(filter), false),
+                new CastFromHandSourceCondition(),
+                "When {this} enters the battlefield, if you cast it from your hand, exile all artifacts."),
+                new CastFromHandWatcher());
     }
 
     public FurnaceDragon(final FurnaceDragon card) {
@@ -82,26 +82,5 @@ public class FurnaceDragon extends CardImpl {
     @Override
     public FurnaceDragon copy() {
         return new FurnaceDragon(this);
-    }
-}
-
-class FurnaceDragonCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean applies = false;
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Watcher watcher = game.getState().getWatchers().get("CastFromHand", source.getSourceId());
-            if (watcher != null && watcher.conditionMet()) {
-                applies = true;
-            }
-        }
-        return applies;
-    }
-    
-    @Override
-    public String toString() {
-        return "you cast it from your hand";
     }
 }

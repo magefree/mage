@@ -30,16 +30,13 @@ package mage.sets.sorinvstibalt;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.condition.common.CastFromHandSourceCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.effects.common.ExileAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterAttackingCreature;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -56,10 +53,11 @@ public class CoalStoker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Coal Stoker enters the battlefield, if you cast it from your hand, add {R}{R}{R} to your mana pool.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new BasicManaEffect(new Mana(3, 0, 0, 0, 0, 0, 0, 0)), new CastFromHandCondition(),
-                " if you cast it from your hand, add {R}{R}{R} to your mana pool."));
-        this.addAbility(ability, new CastFromHandWatcher());
+        this.addAbility(new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new BasicManaEffect(new Mana(3, 0, 0, 0, 0, 0, 0, 0)), false),
+                new CastFromHandSourceCondition(),
+                "When {this} enters the battlefield, if you cast it from your hand, add {R}{R}{R} to your mana pool."),
+                new CastFromHandWatcher());
     }
 
     public CoalStoker(final CoalStoker card) {

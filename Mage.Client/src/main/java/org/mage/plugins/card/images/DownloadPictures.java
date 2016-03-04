@@ -312,14 +312,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         url.setFlippedSide(true);
                         allCardsUrls.add(url);
                     }
-                } else {
-                    if (card.getCardNumber() < 1) {
-                        System.err.println("There was a critical error!");
-                        logger.error("Card has no collector ID and won't be sent to client: " + card);
-                    } else if (card.getSetCode().isEmpty()) {
-                        System.err.println("There was a critical error!");
-                        logger.error("Card has no set name and won't be sent to client:" + card);
-                    }
+                } else if (card.getCardNumber() < 1) {
+                    System.err.println("There was a critical error!");
+                    logger.error("Card has no collector ID and won't be sent to client: " + card);
+                } else if (card.getSetCode().isEmpty()) {
+                    System.err.println("There was a critical error!");
+                    logger.error("Card has no set name and won't be sent to client:" + card);
                 }
             }
             allCardsUrls.addAll(getTokenCardUrls());

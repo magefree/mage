@@ -29,7 +29,8 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
@@ -50,7 +51,7 @@ public class ArrowVolleyTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If four or more creatures are attacking, you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new ArrowVolleyTrapAlternativeCost());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{1}{W}"), ArrowVolleyTrapCondition.getInstance()));
 
         // Arrow Volley Trap deals 5 damage divided as you choose among any number of target attacking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
@@ -68,29 +69,21 @@ public class ArrowVolleyTrap extends CardImpl {
     }
 }
 
-class ArrowVolleyTrapAlternativeCost extends AlternativeCostImpl {
+class ArrowVolleyTrapCondition implements Condition {
 
-    public ArrowVolleyTrapAlternativeCost() {
-        super("you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost");
-        this.add(new ManaCostsImpl("{1}{W}"));
-    }
+    private static final ArrowVolleyTrapCondition fInstance = new ArrowVolleyTrapCondition();
 
-    public ArrowVolleyTrapAlternativeCost(final ArrowVolleyTrapAlternativeCost cost) {
-        super(cost);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public ArrowVolleyTrapAlternativeCost copy() {
-        return new ArrowVolleyTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
+    public boolean apply(Game game, Ability source) {
         return game.getCombat().getAttackers().size() > 3;
     }
 
     @Override
-    public String getText() {
-        return "If four or more creatures are attacking, you may pay {1}{W} rather than pay {this}'s mana cost";
+    public String toString() {
+        return "If four or more creatures are attacking";
     }
 }

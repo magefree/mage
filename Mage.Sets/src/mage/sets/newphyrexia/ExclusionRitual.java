@@ -28,8 +28,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,6 +35,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -50,6 +49,7 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class ExclusionRitual extends CardImpl {
+
     private static final FilterPermanent filter = new FilterPermanent("nonland permanent");
 
     static {
@@ -59,7 +59,6 @@ public class ExclusionRitual extends CardImpl {
     public ExclusionRitual(UUID ownerId) {
         super(ownerId, 10, "Exclusion Ritual", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");
         this.expansionSetCode = "NPH";
-
 
         // Imprint - When Exclusion Ritual enters the battlefield, exile target nonland permanent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExclusionRitualImprintEffect(), false);
@@ -80,6 +79,7 @@ public class ExclusionRitual extends CardImpl {
 }
 
 class ExclusionRitualImprintEffect extends OneShotEffect {
+
     ExclusionRitualImprintEffect() {
         super(Outcome.Exile);
         staticText = "exile target nonland permanent";
@@ -108,6 +108,7 @@ class ExclusionRitualImprintEffect extends OneShotEffect {
 }
 
 class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl {
+
     ExclusionRitualReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can't cast spells with the same name as the exiled card";
@@ -116,12 +117,12 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
     ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
+        return event.getType() == GameEvent.EventType.CAST_SPELL_LATE;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());

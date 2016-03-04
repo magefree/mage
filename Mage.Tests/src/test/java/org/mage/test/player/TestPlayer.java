@@ -300,7 +300,7 @@ public class TestPlayer implements Player {
             if (selectedMode == null) {
                 throw new UnsupportedOperationException("Mode not available for " + ability.toString());
             }
-            if (selectedMode.getTargets().size() == 0) {
+            if (selectedMode.getTargets().isEmpty()) {
                 throw new AssertionError("Ability has no targets. " + ability.toString());
             }
             if (index >= selectedMode.getTargets().size()) {
@@ -319,27 +319,29 @@ public class TestPlayer implements Player {
                 }
             } else {
                 for (UUID id : currentTarget.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
-                    MageObject object = game.getObject(id);
-                    if (object != null
-                            && ((!targetName.isEmpty() && object.getName().startsWith(targetName)) || (targetName.isEmpty() && object.getName().isEmpty()))) {
-                        if (currentTarget.getNumberOfTargets() == 1) {
-                            currentTarget.clearChosen();
+                    if (!currentTarget.getTargets().contains(id)) {
+                        MageObject object = game.getObject(id);
+                        if (object != null
+                                && ((!targetName.isEmpty() && object.getName().startsWith(targetName)) || (targetName.isEmpty() && object.getName().isEmpty()))) {
+                            if (currentTarget.getNumberOfTargets() == 1) {
+                                currentTarget.clearChosen();
+                            }
+                            if (currentTarget instanceof TargetCreaturePermanentAmount) {
+                                // supports only to set the complete amount to one target
+                                TargetCreaturePermanentAmount targetAmount = (TargetCreaturePermanentAmount) currentTarget;
+                                targetAmount.setAmount(ability, game);
+                                int amount = targetAmount.getAmountRemaining();
+                                targetAmount.addTarget(id, amount, ability, game);
+                                targetsSet++;
+                            } else {
+                                currentTarget.addTarget(id, ability, game);
+                                targetsSet++;
+                            }
+                            if (currentTarget.getTargets().size() == currentTarget.getMaxNumberOfTargets()) {
+                                index++;
+                            }
+                            break;
                         }
-                        if (currentTarget instanceof TargetCreaturePermanentAmount) {
-                            // supports only to set the complete amount to one target
-                            TargetCreaturePermanentAmount targetAmount = (TargetCreaturePermanentAmount) currentTarget;
-                            targetAmount.setAmount(ability, game);
-                            int amount = targetAmount.getAmountRemaining();
-                            targetAmount.addTarget(id, amount, ability, game);
-                            targetsSet++;
-                        } else {
-                            currentTarget.addTarget(id, ability, game);
-                            targetsSet++;
-                        }
-                        if (currentTarget.getTargets().size() == currentTarget.getMaxNumberOfTargets()) {
-                            index++;
-                        }
-                        break;
                     }
                 }
             }

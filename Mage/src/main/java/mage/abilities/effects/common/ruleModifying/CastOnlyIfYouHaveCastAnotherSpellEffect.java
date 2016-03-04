@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.ruleModifying;
 
 import mage.abilities.Ability;
@@ -40,15 +39,15 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author LoneFox
  */
-
 public class CastOnlyIfYouHaveCastAnotherSpellEffect extends ContinuousRuleModifyingEffectImpl {
+
     public CastOnlyIfYouHaveCastAnotherSpellEffect() {
-       super(Duration.EndOfGame, Outcome.Detriment);
-       staticText = "Cast {this} only if you've cast another spell this turn";
+        super(Duration.EndOfGame, Outcome.Detriment);
+        staticText = "Cast {this} only if you've cast another spell this turn";
     }
 
     public CastOnlyIfYouHaveCastAnotherSpellEffect(final CastOnlyIfYouHaveCastAnotherSpellEffect effect) {
-       super(effect);
+        super(effect);
     }
 
     @Override
@@ -58,22 +57,22 @@ public class CastOnlyIfYouHaveCastAnotherSpellEffect extends ContinuousRuleModif
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-       if (event.getSourceId().equals(source.getSourceId())) {
-           CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-           if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) == 0) {
-               return true;
-           }
-       }
-       return false;
+        if (event.getSourceId().equals(source.getSourceId())) {
+            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
+            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-       return true;
+        return true;
     }
 
     @Override
     public CastOnlyIfYouHaveCastAnotherSpellEffect copy() {
-       return new CastOnlyIfYouHaveCastAnotherSpellEffect(this);
+        return new CastOnlyIfYouHaveCastAnotherSpellEffect(this);
     }
 }

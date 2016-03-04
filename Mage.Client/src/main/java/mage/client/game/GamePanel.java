@@ -608,9 +608,9 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         PlayerView player = game.getPlayers().get(playerSeat);
-        PlayAreaPanel sessionPlayer = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
-                new PlayAreaPanelOptions(game.isPlayer(), true, game.isRollbackTurnsAllowed()));
-        players.put(player.getPlayerId(), sessionPlayer);
+        PlayAreaPanel playAreaPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
+                new PlayAreaPanelOptions(game.isPlayer(), game.isPlayer(), game.isRollbackTurnsAllowed()));
+        players.put(player.getPlayerId(), playAreaPanel);
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 0.5;
@@ -620,8 +620,8 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         c.gridx = col;
         c.gridy = row;
-        this.pnlBattlefield.add(sessionPlayer, c);
-        sessionPlayer.setVisible(true);
+        this.pnlBattlefield.add(playAreaPanel, c);
+        playAreaPanel.setVisible(true);
         if (oddNumber) {
             col++;
         }

@@ -34,7 +34,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.continuous.CommanderManaReplacementEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
@@ -49,7 +48,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
-import mage.util.CardUtil;
 import mage.watchers.common.CommanderInfoWatcher;
 
 /**
@@ -88,7 +86,8 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                     commander.moveToZone(Zone.COMMAND, null, this, true);
                     ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
                     ability.addEffect(new CommanderCostModification(commander.getId()));
-                    ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
+                    // Commander rule #4 was removed Jan. 18, 2016
+                    // ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
                     getState().setValue(commander.getId() + "_castCount", 0);
                     CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), false);
                     getState().getWatchers().add(watcher);

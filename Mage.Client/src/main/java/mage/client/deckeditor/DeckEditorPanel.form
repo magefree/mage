@@ -83,6 +83,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnImport" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnGenDeck" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnAddLand" min="-2" max="-2" attributes="0"/>   
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnSubmit" min="-2" max="-2" attributes="0"/>                                                    
@@ -110,6 +112,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnImport" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGenDeck" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnAddLand" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnSubmit" alignment="3" min="-2" max="-2" attributes="0"/>                      
                   </Group>

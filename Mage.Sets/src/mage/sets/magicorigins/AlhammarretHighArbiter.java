@@ -173,7 +173,7 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CAST_SPELL;
+        return event.getType() == EventType.CAST_SPELL_LATE;
     }
 
     @Override

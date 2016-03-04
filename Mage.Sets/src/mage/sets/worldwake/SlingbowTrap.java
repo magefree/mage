@@ -27,17 +27,16 @@
  */
 package mage.sets.worldwake;
 
-import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.Cost;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
@@ -61,9 +60,8 @@ public class SlingbowTrap extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Trap");
 
-
         // If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new SlingbowTrapAlternativeCost());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{G}"), SlingbowTrapCondition.getInstance()));
 
         // Destroy target attacking creature with flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -80,37 +78,29 @@ public class SlingbowTrap extends CardImpl {
     }
 }
 
-class SlingbowTrapAlternativeCost extends AlternativeCostImpl<Cost> {
+class SlingbowTrapCondition implements Condition {
 
-    public SlingbowTrapAlternativeCost() {
-        super("you may pay {G} rather than pay {this}'s mana cost");
-        this.add(new ManaCostsImpl("{G}"));
-    }
+    private static final SlingbowTrapCondition fInstance = new SlingbowTrapCondition();
 
-    public SlingbowTrapAlternativeCost(final SlingbowTrapAlternativeCost cost) {
-        super(cost);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public SlingbowTrapAlternativeCost copy() {
-        return new SlingbowTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        List<UUID> attackers = game.getCombat().getAttackers();
-        for (UUID creatureId : attackers) {
-            Permanent creature = game.getPermanent(creatureId);
-            if (creature.getColor(game).isBlack()
-                    && creature.getAbilities().contains(FlyingAbility.getInstance())) {
-                return true;
+    public boolean apply(Game game, Ability source) {
+        for (UUID attackingCreatureId : game.getCombat().getAttackers()) {
+            Permanent attackingCreature = game.getPermanent(attackingCreatureId);
+            if (attackingCreature != null) {
+                if (attackingCreature.getColor(game).isBlack() && attackingCreature.hasAbility(FlyingAbility.getInstance().getId(), game)) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
     @Override
-    public String getText() {
-        return "If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost";
+    public String toString() {
+        return "If a black creature with flying is attacking";
     }
 }

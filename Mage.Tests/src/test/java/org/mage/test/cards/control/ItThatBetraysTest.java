@@ -127,4 +127,41 @@ public class ItThatBetraysTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Spreading Seas", 0);
         assertPermanentCount(playerB, "Spreading Seas", 1);
     }
+
+    /**
+     * It That Betrays had a strange bug. Attacked opponent's planeswalker with
+     * him (I think it was Venser, the Sojourner), then opponent sacrificed said
+     * planeswalker to ITB (It That Betrays) annihilator ability, ITB ability
+     * triggered and Venser came over to my control, but ITB was still attacking
+     * my own planeswalker and killed it. Shouldn't happen because that's an
+     * entirely new planeswalker, not the one I was attacking. That one died,
+     * therefore the attack was invalid.
+     */
+    @Test
+    public void testExileAttackedPlaneswalker() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
+        // -1: Creatures can't be blocked this turn.
+        // -8: You get an emblem with "Whenever you cast a spell, exile target permanent."
+        addCard(Zone.BATTLEFIELD, playerA, "Venser, the Sojourner", 1);
+
+        // Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)
+        // Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
+        addCard(Zone.BATTLEFIELD, playerB, "It That Betrays"); // 11/11
+
+        attack(2, playerB, "It That Betrays", "Venser, the Sojourner");
+        setChoice(playerA, "Venser, the Sojourner");
+        setChoice(playerA, "Mountain");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        // Player B now controls a Silvercoat Lion and Spreading Seas
+        assertPermanentCount(playerB, "Venser, the Sojourner", 1);
+        assertPermanentCount(playerB, "Mountain", 1);
+    }
 }

@@ -59,33 +59,28 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
         }
         currentCard = card;
 
-        ThreadUtils.threadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                try {
+        try {
+            if (!card.equals(currentCard)) {
+                return;
+            }
+
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
                     if (!card.equals(currentCard)) {
                         return;
                     }
-
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!card.equals(currentCard)) {
-                                return;
-                            }
-                            TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
-                            StringBuilder buffer = GuiDisplayUtil.getRulefromCardView(card, textLines);
-                            resizeTooltipIfNeeded(container, textLines.basicTextLength, textLines.lines.size());
-                            setText(buffer.toString());
-                            setCaretPosition(0);
-                        }
-                    });
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
+                    StringBuilder buffer = GuiDisplayUtil.getRulefromCardView(card, textLines);
+                    resizeTooltipIfNeeded(container, textLines.basicTextLength, textLines.lines.size());
+                    setText(buffer.toString());
+                    setCaretPosition(0);
                 }
-            }
-        });
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void resizeTooltipIfNeeded(Component container, int ruleLength, int rules) {

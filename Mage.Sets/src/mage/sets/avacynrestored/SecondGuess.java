@@ -77,7 +77,7 @@ class SecondSpellPredicate implements Predicate<Spell> {
 
     @Override
     public boolean apply(Spell input, Game game) {
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
 
         if (watcher.getSpellOrder(new MageObjectReference(input.getId(), game), game) == 2) {
             return true;

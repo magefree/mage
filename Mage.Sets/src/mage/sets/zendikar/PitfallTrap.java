@@ -29,7 +29,8 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -60,7 +61,7 @@ public class PitfallTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If exactly one creature is attacking, you may pay {W} rather than pay Pitfall Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new PitfallTrapAlternativeCost());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{W}"), PitfallTrapCondition.getInstance()));
 
         // Destroy target attacking creature without flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -77,32 +78,21 @@ public class PitfallTrap extends CardImpl {
     }
 }
 
-class PitfallTrapAlternativeCost extends AlternativeCostImpl {
+class PitfallTrapCondition implements Condition {
 
-    public PitfallTrapAlternativeCost() {
-        super("you may pay {W} rather than pay Pitfall Trap's mana cost");
-        this.add(new ManaCostsImpl("{W}"));
-    }
+    private static final PitfallTrapCondition fInstance = new PitfallTrapCondition();
 
-    public PitfallTrapAlternativeCost(final PitfallTrapAlternativeCost cost) {
-        super(cost);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public PitfallTrapAlternativeCost copy() {
-        return new PitfallTrapAlternativeCost(this);
+    public boolean apply(Game game, Ability source) {
+        return game.getCombat().getAttackers().size() == 1;
     }
 
     @Override
-    public boolean isAvailable(Game game, Ability source) {
-        if (game.getCombat().getAttackers().size() == 1) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getText() {
-        return "If exactly one creature is attacking, you may pay {W} rather than pay Pitfall Trap's mana cost";
+    public String toString() {
+        return "If exactly one creature is attacking";
     }
 }

@@ -28,9 +28,6 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,7 +38,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -83,6 +82,7 @@ public class LudevicsTestSubject extends CardImpl {
 }
 
 class LudevicsTestSubjectEffect extends OneShotEffect {
+
     LudevicsTestSubjectEffect() {
         super(Outcome.Benefit);
         staticText = "Then if there are five or more hatchling counters on it, remove all of them and transform it";
@@ -97,7 +97,7 @@ class LudevicsTestSubjectEffect extends OneShotEffect {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
             if (p.getCounters().getCount(CounterType.HATCHLING) >= 5) {
-                p.getCounters().removeCounter(CounterType.HATCHLING, p.getCounters().getCount(CounterType.HATCHLING));
+                p.removeCounters(CounterType.HATCHLING.getName(), p.getCounters().getCount(CounterType.HATCHLING), game);
                 TransformSourceEffect effect = new TransformSourceEffect(true);
                 return effect.apply(game, source);
             }

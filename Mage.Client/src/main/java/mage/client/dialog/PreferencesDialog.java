@@ -235,6 +235,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_DECK_GENERATOR_SINGLETON = "newDeckGeneratorSingleton";
     public static final String KEY_NEW_DECK_GENERATOR_ARTIFACTS = "newDeckGeneratorArtifacts";
     public static final String KEY_NEW_DECK_GENERATOR_NON_BASIC_LANDS = "newDeckGeneratorNonBasicLands";
+    public static final String KEY_NEW_DECK_GENERATOR_COLORLESS = "newDeckGeneratorColorless";
 
     // used to save and restore the settings for the cardArea (draft, sideboarding, deck builder)
     public static final String KEY_DRAFT_VIEW = "draftView";

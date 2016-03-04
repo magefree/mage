@@ -27,26 +27,22 @@
  */
 package mage.sets.worldwake;
 
+import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
-import mage.watchers.Watcher;
+import mage.watchers.common.SpellsCastWatcher;
 
 /**
  *
@@ -65,15 +61,14 @@ public class RicochetTrap extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Trap");
 
-
         // If an opponent cast a blue spell this turn, you may pay {R} rather than pay Ricochet Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new RicochetTrapAlternativeCost());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RicochetTrapCondition.getInstance()));
 
         // Change the target of target spell with a single target.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
 
-        this.getSpellAbility().addWatcher(new RicochetTrapWatcher());
+        this.getSpellAbility().addWatcher(new SpellsCastWatcher());
     }
 
     public RicochetTrap(final RicochetTrap card) {
@@ -86,70 +81,34 @@ public class RicochetTrap extends CardImpl {
     }
 }
 
-class RicochetTrapWatcher extends Watcher {
+class RicochetTrapCondition implements Condition {
 
-    public RicochetTrapWatcher() {
-        super("RicochetTrapWatcher", WatcherScope.GAME);
-    }
+    private static final RicochetTrapCondition fInstance = new RicochetTrapCondition();
 
-    public RicochetTrapWatcher(final RicochetTrapWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public RicochetTrapWatcher copy() {
-        return new RicochetTrapWatcher(this);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
-        {
-            return;
-        }
-        if (event.getType() == EventType.SPELL_CAST
-                && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell.getColor(game).isBlue()) {
-                condition = true;
+    public boolean apply(Game game, Ability source) {
+        SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
+        if (watcher != null) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+                List<Spell> spells = watcher.getSpellsCastThisTurn(opponentId);
+                if (spells != null) {
+                    for (Spell spell : spells) {
+                        if (spell.getColor(game).isBlue()) {
+                            return true;
+                        }
+                    }
+                }
             }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        condition = false;
-    }
-}
-
-class RicochetTrapAlternativeCost extends AlternativeCostImpl<Cost> {
-
-    public RicochetTrapAlternativeCost() {
-        super("You may pay {R} rather than pay Ricochet Trap's mana cost");
-        this.add(new ColoredManaCost(ColoredManaSymbol.R));
-    }
-
-    public RicochetTrapAlternativeCost(final RicochetTrapAlternativeCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public RicochetTrapAlternativeCost copy() {
-        return new RicochetTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        RicochetTrapWatcher watcher = (RicochetTrapWatcher) game.getState().getWatchers().get("RicochetTrapWatcher");
-        if (watcher != null && watcher.conditionMet()) {
-            return true;
         }
         return false;
     }
 
     @Override
-    public String getText() {
-        return "If an opponent cast a blue spell this turn, you may pay {R} rather than pay {this} mana cost";
+    public String toString() {
+        return "If an opponent cast a blue spell this turn";
     }
 }

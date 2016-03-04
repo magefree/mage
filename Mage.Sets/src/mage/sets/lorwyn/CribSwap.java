@@ -39,7 +39,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.SpiritWhiteToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,7 +53,6 @@ public class CribSwap extends CardImpl {
         super(ownerId, 11, "Crib Swap", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Shapeshifter");
-
 
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());
@@ -112,7 +110,6 @@ class CribSwapShapeshifterWhiteToken extends Token {
         this.setOriginalExpansionSetCode("LRW");
         cardType.add(CardType.CREATURE);
         subtype.add("Shapeshifter");
-        color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(ChangelingAbility.getInstance());

@@ -47,6 +47,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     protected String deckNameA;
     protected String deckNameB;
+    protected String deckNameC;
+    protected String deckNameD;
 
     protected enum ExpectedType {
 
@@ -1116,6 +1118,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void setDecknamePlayerB(String deckname) {
         deckNameB = deckname;
+    }
+
+    public void setDecknamePlayerC(String deckname) {
+        deckNameC = deckname;
+    }
+
+    public void setDecknamePlayerD(String deckname) {
+        deckNameD = deckname;
     }
 
     protected void skipInitShuffling() {

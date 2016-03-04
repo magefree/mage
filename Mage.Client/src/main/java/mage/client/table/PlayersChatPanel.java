@@ -123,7 +123,6 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
     private void setGUISize() {
         jTablePlayers.getTableHeader().setFont(GUISizeHelper.tableFont);
-        jTablePlayers.getTableHeader().setPreferredSize(new Dimension((int) jTablePlayers.getTableHeader().getPreferredSize().getWidth(), GUISizeHelper.tableHeaderHeight));
         jTablePlayers.setFont(GUISizeHelper.tableFont);
         jTablePlayers.setRowHeight(GUISizeHelper.getTableRowHeight());
         jScrollPanePlayers.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));

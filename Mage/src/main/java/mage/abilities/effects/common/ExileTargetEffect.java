@@ -38,6 +38,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.targetpointer.FirstTargetPointer;
@@ -132,6 +134,11 @@ public class ExileTargetEffect extends OneShotEffect {
                             Zone currentZone = game.getState().getZone(card.getId());
                             if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(currentZone))) {
                                 toExile.add(card);
+                            }
+                        } else {
+                            StackObject stackObject = game.getStack().getStackObject(targetId);
+                            if (stackObject instanceof Spell && ((Spell) stackObject).getCard() != null) {
+                                toExile.add(((Spell) stackObject).getCard());
                             }
                         }
                     }

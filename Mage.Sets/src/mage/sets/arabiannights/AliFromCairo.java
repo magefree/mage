@@ -97,11 +97,7 @@ class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
                     && (controller.getLife() > 0) &&(controller.getLife() - event.getAmount()) < 1
                     && event.getPlayerId().equals(controller.getId())
                     ) {
-                return true;
-                //unsure how to make this comply with
-                // 10/1/2008: The ability doesn't change how much damage is dealt;
-                // it just changes how much life that damage makes you lose.
-                // An effect such as Spirit Link will see the full amount of damage being dealt.
+                return true;                
             }
         }
         return false;
@@ -110,10 +106,17 @@ class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
+        
+        // 10/1/2008: The ability doesn't change how much damage is dealt;
+        // it just changes how much life that damage makes you lose.
+        // An effect such as Spirit Link will see the full amount of damage being dealt.      
+        game.fireEvent(event);                 
+        
         if (controller != null) {
-            event.setAmount(controller.getLife() - 1);
+            controller.setLife(1, game);
         }
-        return false;
+        
+        return true;
     }
 
 }

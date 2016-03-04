@@ -287,7 +287,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             avatar.setText(this.player.getName());
             if (!player.getUserData().getFlagName().equals(flagName)) {
                 flagName = player.getUserData().getFlagName();
-                this.avatar.setTopTextImage(CountryUtil.getCountryFlagIcon(flagName).getImage());
+                this.avatar.setTopTextImage(CountryUtil.getCountryFlagIconSize(flagName, 11).getImage());
             }
             // TODO: Add the wins to the tooltiptext of the avatar
             String countryname = CountryUtil.getCountryName(flagName);

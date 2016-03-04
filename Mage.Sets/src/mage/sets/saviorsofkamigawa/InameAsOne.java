@@ -33,8 +33,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromHandCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.condition.common.CastFromHandSourceCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -75,13 +75,14 @@ public class InameAsOne extends CardImpl {
         this.toughness = new MageInt(8);
 
         // When Iname as One enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle your library.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter), false),
-                        new CastFromHandCondition()));
-        this.addAbility(ability, new CastFromHandWatcher());
+        this.addAbility(new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter)), true),
+                new CastFromHandSourceCondition(),
+                "When {this} enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle your library."),
+                new CastFromHandWatcher());
 
         // When Iname as One dies, you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield.
-        ability = new DiesTriggeredAbility(new InameAsOneEffect(), false);
+        Ability ability = new DiesTriggeredAbility(new InameAsOneEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
