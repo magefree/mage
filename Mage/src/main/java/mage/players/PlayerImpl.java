@@ -2580,9 +2580,17 @@ public abstract class PlayerImpl implements Player, Serializable {
                                         playable.add(ability);
                                     }
                                 }
-                            } else if (card.getCardType().contains(CardType.LAND) && ability instanceof AlternativeSourceCosts) {
-                                if (canLandPlayAlternateSourceCostsAbility(card, availableMana, ability, game)) { // e.g. Land with Morph
-                                    playable.add(ability);
+                            } else if (ability instanceof AlternativeSourceCosts) {
+                                if (card.getCardType().contains(CardType.LAND)) {
+                                    if (canLandPlayAlternateSourceCostsAbility(card, availableMana, ability, game)) { // e.g. Land with Morph
+                                        playable.add(ability);
+                                    }
+                                } else if (card.getCardType().contains(CardType.CREATURE)) { // e.g. makes a card available for play by Morph if the card may not be cast normally
+                                    if (!playable.contains(card.getSpellAbility())) {
+                                        if (((AlternativeSourceCosts) ability).isAvailable(card.getSpellAbility(), game)) {
+                                            playable.add(card.getSpellAbility());
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -2701,7 +2709,8 @@ public abstract class PlayerImpl implements Player, Serializable {
      *
      */
     @Override
-    public Set<UUID> getPlayableInHand(Game game) {
+    public Set<UUID> getPlayableInHand(Game game
+    ) {
         Set<UUID> playable = new HashSet<>();
         if (!shouldSkipGettingPlayable(game)) {
             ManaOptions available = getManaAvailable(game);
