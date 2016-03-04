@@ -35,6 +35,7 @@ public class ColorPane extends JEditorPane {
     HTMLEditorKit kit = new HTMLEditorKit();
     HTMLDocument doc = new HTMLDocument();
     private int tooltipDelay;
+    private int tooltipCounter;
 
     public ColorPane() {
         this.setEditorKit(kit);
@@ -90,7 +91,8 @@ public class ColorPane extends JEditorPane {
                         if (location != null) {
                             container.setLocation(location);
                         }
-                        container.setVisible(show);
+                        tooltipCounter += show ? 1 : -1;
+                        container.setVisible(tooltipCounter > 0);
                         c.repaint();
                     }
                 });
@@ -119,7 +121,7 @@ public class ColorPane extends JEditorPane {
 
     public void append(String text) {
         try {
-            text = text.replaceAll("(<font color=[^>]*>([^<]*)) (\\[[0-9a-fA-F]*\\])</font>", "<a href='#$2'>$1</a> $3");
+            text = text.replaceAll("(<font color=[^>]*>([^<]*)) (\\[[0-9a-fA-F]*\\])</font>", "<a href=\"#$2\">$1</a> $3");
             setEditable(true);
             kit.insertHTML(doc, doc.getLength(), text, 0, 0, null);
             setEditable(false);
