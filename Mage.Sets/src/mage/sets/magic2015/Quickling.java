@@ -109,7 +109,7 @@ class QuicklingEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     targetChosen = true;
-                    controller.moveCards(permanent, null, Zone.HAND, source, game);
+                    permanent.moveToZone(Zone.HAND, this.getId(), game, false);
                 }
             }
 

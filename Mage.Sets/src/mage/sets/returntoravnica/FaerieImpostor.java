@@ -101,15 +101,13 @@ class FaerieImpostorEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             boolean targetChosen = false;
-            TargetPermanent target = new TargetPermanent(1, 1, filter, false);
-
-            if (target.canChoose(controller.getId(), game)) {
-                controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game);
+            TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+            if (target.canChoose(controller.getId(), game) && controller.chooseUse(outcome, "Return another creature you control to its owner's hand?", source, game)) {
+                controller.chooseTarget(Outcome.ReturnToHand, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
-
                 if (permanent != null) {
                     targetChosen = true;
-                    controller.moveCards(permanent, null, Zone.HAND, source, game);
+                    permanent.moveToZone(Zone.HAND, this.getId(), game, false);
                 }
             }
 
