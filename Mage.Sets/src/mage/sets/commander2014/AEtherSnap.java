@@ -53,7 +53,6 @@ public class AEtherSnap extends CardImpl {
         super(ownerId, 133, "AEther Snap", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "C14";
 
-
         // Remove all counters from all permanents and exile all tokens.
         this.getSpellAbility().addEffect(new AEtherSnapEffect());
     }
@@ -88,13 +87,13 @@ class AEtherSnapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent permanent :game.getBattlefield().getActivePermanents(new FilterPermanent(), controller.getId(), source.getSourceId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterPermanent(), controller.getId(), source.getSourceId(), game)) {
                 if (permanent instanceof PermanentToken) {
                     controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
-                } else if (!permanent.getCounters().isEmpty()){
+                } else if (!permanent.getCounters().isEmpty()) {
                     Counters counters = permanent.getCounters().copy();
-                    for (Counter counter: counters.values()) {
-                        permanent.getCounters().removeCounter(counter.getName(), counter.getCount());
+                    for (Counter counter : counters.values()) {
+                        permanent.removeCounters(counter, game);
                     }
                 }
             }

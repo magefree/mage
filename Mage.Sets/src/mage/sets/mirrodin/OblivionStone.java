@@ -28,9 +28,6 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -39,7 +36,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -78,6 +77,7 @@ public class OblivionStone extends CardImpl {
 }
 
 class OblivionStoneEffect extends OneShotEffect {
+
     OblivionStoneEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy each nonland permanent without a fate counter on it, then remove all fate counters from all permanents";
@@ -96,7 +96,7 @@ class OblivionStoneEffect extends OneShotEffect {
         }
         for (Permanent p : game.getBattlefield().getAllActivePermanents()) {
             if (p.getCounters().containsKey(CounterType.FATE)) {
-                p.getCounters().removeCounter(CounterType.FATE, p.getCounters().getCount(CounterType.FATE));
+                p.removeCounters(CounterType.FATE.getName(), p.getCounters().getCount(CounterType.FATE), game);
             }
         }
         return true;
