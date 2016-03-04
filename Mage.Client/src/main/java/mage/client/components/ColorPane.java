@@ -58,7 +58,8 @@ public class ColorPane extends JEditorPane {
                             final Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
                             if (e.getEventType() == EventType.EXITED) {
                                 setPopupVisibility(null, container, false);
-                            } else {
+                            }
+                            if (e.getEventType() == EventType.ENTERED) {
                                 CardInfoPane cardInfoPane = (CardInfoPane) MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
                                 cardInfoPane.setCard(new CardView(card.getMockCard()), container);
                                 Point mousePosition = MageFrame.getDesktop().getMousePosition();
