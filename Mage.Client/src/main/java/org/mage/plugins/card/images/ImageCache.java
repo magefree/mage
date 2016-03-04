@@ -113,15 +113,15 @@ public class ImageCache {
                             }
                             if (exists) {
                                 LOGGER.debug("loading thumbnail for " + key + ", path=" + thumbnailPath);
-                                return loadImage(thumbnailFile);
-                            } else {
-                                BufferedImage image = loadImage(file);
-                                image = getWizardsCard(image);
-                                if (image == null) {
-                                    return null;
+                                BufferedImage thumbnailImage = loadImage(thumbnailFile);
+                                if (thumbnailImage == null) { // thumbnail exists but broken for some reason
+                                    LOGGER.warn("failed loading thumbnail for " + key + ", path=" + thumbnailPath
+                                            + ", thumbnail file is probably broken, attempting to recreate it...");
+                                    thumbnailImage = makeThumbnailByFile(key, file, thumbnailPath);
                                 }
-                                LOGGER.debug("creating thumbnail for " + key);
-                                return makeThumbnail(image, thumbnailPath);
+                                return thumbnailImage;
+                            } else {
+                                return makeThumbnailByFile(key, file, thumbnailPath);
                             }
                         } else {
                             return getWizardsCard(loadImage(file));
@@ -137,6 +137,16 @@ public class ImageCache {
                         throw new ComputationException(ex);
                     }
                 }
+            }
+
+            public BufferedImage makeThumbnailByFile(String key, TFile file, String thumbnailPath) {
+                BufferedImage image = loadImage(file);
+                image = getWizardsCard(image);
+                if (image == null) {
+                    return null;
+                }
+                LOGGER.debug("creating thumbnail for " + key);
+                return makeThumbnail(image, thumbnailPath);
             }
         });
     }
@@ -271,7 +281,8 @@ public class ImageCache {
         }
         try {
             try (TFileOutputStream outputStream = new TFileOutputStream(imageFile)) {
-                ImageIO.write(image, "jpg", outputStream);
+                String format = image.getColorModel().getNumComponents() > 3 ? "png" : "jpg";
+                ImageIO.write(image, format, outputStream);
             }
         } catch (IOException e) {
             LOGGER.error(e, e);
