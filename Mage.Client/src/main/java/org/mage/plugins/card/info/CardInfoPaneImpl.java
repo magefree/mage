@@ -8,7 +8,6 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.GuiDisplayUtil.TextLines;
 import mage.components.CardInfoPane;
-import mage.utils.ThreadUtils;
 import mage.view.CardView;
 import org.mage.card.arcane.UI;
 
