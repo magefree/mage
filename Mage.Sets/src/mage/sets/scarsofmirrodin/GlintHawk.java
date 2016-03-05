@@ -28,10 +28,6 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,6 +35,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -59,6 +59,8 @@ public class GlintHawk extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        
+        // When Glint Hawk enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GlintHawkEffect()));
@@ -95,24 +97,24 @@ class GlintHawkEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean targetChosen = false;
-        Player player = game.getPlayer(source.getControllerId());
-        TargetPermanent target = new TargetPermanent(1, 1, filter, false);
-
-        if (target.canChoose(player.getId(), game)) {
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
-
-            if ( permanent != null ) {
-                targetChosen = true;
-                permanent.moveToZone(Zone.HAND, this.getId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            boolean targetChosen = false;
+            TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+            if (target.canChoose(controller.getId(), game) && controller.chooseUse(outcome, "Return an artifact you control to its owner's hand?", source, game)) {
+                controller.chooseTarget(Outcome.Sacrifice, target, source, game);
+                Permanent permanent = game.getPermanent(target.getFirstTarget());
+                if (permanent != null) {
+                    targetChosen = true;
+                    permanent.moveToZone(Zone.HAND, this.getId(), game, false);
+                }
             }
-        }
 
-        if ( !targetChosen ) {
-            new SacrificeSourceEffect().apply(game, source);
+            if (!targetChosen) {
+                new SacrificeSourceEffect().apply(game, source);
+            }
+            return true;
         }
-
         return false;
     }
 
