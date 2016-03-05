@@ -66,6 +66,7 @@ public enum CounterType {
     HEALING("healing"),
     HOOFPRINT("hoofprint"),
     ICE("ice"),
+    INTERVENTION("intervention"),
     JAVELIN("javelin"),
     KI("ki"),
     LEVEL("level"),
