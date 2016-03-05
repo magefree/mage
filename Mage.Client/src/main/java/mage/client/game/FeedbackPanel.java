@@ -43,7 +43,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanelBasic;
-import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
@@ -94,10 +93,10 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     public void changeGUISize() {
         setGUISize();
+        helper.changeGUISize();
     }
 
     private void setGUISize() {
-        helper.changeGUISize();
     }
 
     public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
@@ -112,7 +111,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper.setOriginalId(null); // reference to the feedback causing ability
         String lblText = addAdditionalText(message, options);
         this.helper.setTextArea(lblText);
-        this.lblMessage.setText(lblText);
+        //this.lblMessage.setText(lblText);
         this.mode = mode;
         switch (this.mode) {
             case INFORM:
@@ -239,14 +238,11 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.btnLeft.setVisible(false);
         this.btnRight.setVisible(false);
         this.btnSpecial.setVisible(false);
-        this.lblMessage.setText("");
     }
 
     private void customInitComponents() {
         btnRight = new javax.swing.JButton();
         btnLeft = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lblMessage = new MageTextArea();
         btnSpecial = new javax.swing.JButton();
         btnUndo = new javax.swing.JButton();
         btnUndo.setVisible(true);
@@ -268,13 +264,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 btnLeftActionPerformed(evt);
             }
         });
-
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        lblMessage.setBorder(null);
-        jScrollPane1.setViewportView(lblMessage);
-        jScrollPane1.setBorder(null);
 
         btnSpecial.setText("Special");
         btnSpecial.addActionListener(new java.awt.event.ActionListener() {
@@ -357,7 +346,5 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
     private javax.swing.JButton btnUndo;
-    private javax.swing.JScrollPane jScrollPane1;
-    private MageTextArea lblMessage;
     private HelperPanel helper;
 }

@@ -99,11 +99,14 @@ public class PlayersChatPanel extends javax.swing.JPanel {
         jScrollPaneTalk.setOpaque(false);
 
         jScrollPaneSystem.getViewport().setOpaque(false);
+        jScrollPaneSystem.setViewportBorder(null);
+
         colorPaneSystem.setExtBackgroundColor(new Color(0, 0, 0, CHAT_ALPHA)); // Alpha = 255 not transparent
         colorPaneSystem.setBorder(new EmptyBorder(5, 5, 5, 5));
         if (jScrollPanePlayers != null) {
             jScrollPanePlayers.setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPanePlayers.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
+            jScrollPanePlayers.setViewportBorder(null);
         }
 
     }

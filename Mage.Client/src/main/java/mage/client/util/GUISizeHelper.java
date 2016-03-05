@@ -55,7 +55,10 @@ public class GUISizeHelper {
     public static int gameDialogAreaFontSizeBig = 16;
     public static int gameDialogAreaFontSizeTooltip = 14;
     public static int gameDialogAreaFontSizeSmall = 11;
+    public static int gameDialogAreaTextHeight = 0;
+
     public static int gameDialogAreaButtonHigh = 16;
+
     public static Font gameDialogAreaFont = new java.awt.Font("Arial", 0, 12);
     public static int gameDialogButtonHeight;
     public static int gameDialogButtonWidth;
@@ -114,6 +117,8 @@ public class GUISizeHelper {
         gameDialogAreaFontSizeBig = feedbackFontSize;
         gameDialogAreaFontSizeTooltip = feedbackFontSize - 2;
         gameDialogAreaFontSizeSmall = (feedbackFontSize / 2) + 2;
+        gameDialogAreaTextHeight = GUISizeHelper.gameDialogAreaFontSizeBig + GUISizeHelper.gameDialogAreaFontSizeSmall + 30;
+
         gameDialogAreaButtonHigh = feedbackFontSize;
         gameDialogAreaFont = new Font("Arial", 0, feedbackFontSize);
         gameDialogButtonHeight = feedbackFontSize + 6;

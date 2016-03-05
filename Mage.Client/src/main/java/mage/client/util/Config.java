@@ -64,33 +64,33 @@ public class Config {
         } catch (IOException ex) {
             logger.fatal("Config error ", ex);
         }
-//        serverName = p.getProperty("server-name");
-//        port = Integer.parseInt(p.getProperty("port"));
-//        remoteServer = p.getProperty("remote-server");
-//        cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
-//        cardScalingFactorEnlarged = Double.valueOf(p.getProperty("card-scaling-factor-enlarged"));
-//        handScalingFactor = Double.valueOf(p.getProperty("hand-scaling-factor"));
-//        defaultGameType = p.getProperty("default-game-type", "Human");
-//        defaultDeckPath = p.getProperty("default-deck-path");
-//        defaultOtherPlayerIndex = p.getProperty("default-other-player-index");
-//        defaultComputerName = p.getProperty("default-computer-name");
-//
-//        dimensions = new CardDimensions(cardScalingFactor);
-//        dimensionsEnlarged = new CardDimensions(cardScalingFactorEnlarged);
-// activate instead this part, to run the UI editor for some panels without error
-        serverName = "localhost";
-        port = 17171;
-        remoteServer = "mage-server";
-        cardScalingFactor = 0.4;
-        cardScalingFactorEnlarged = 0.5;
-        handScalingFactor = 1.3;
+        serverName = p.getProperty("server-name");
+        port = Integer.parseInt(p.getProperty("port"));
+        remoteServer = p.getProperty("remote-server");
+        cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
+        cardScalingFactorEnlarged = Double.valueOf(p.getProperty("card-scaling-factor-enlarged"));
+        handScalingFactor = Double.valueOf(p.getProperty("hand-scaling-factor"));
         defaultGameType = p.getProperty("default-game-type", "Human");
-        defaultDeckPath = "";
-        defaultOtherPlayerIndex = "1";
-        defaultComputerName = "Computer";
+        defaultDeckPath = p.getProperty("default-deck-path");
+        defaultOtherPlayerIndex = p.getProperty("default-other-player-index");
+        defaultComputerName = p.getProperty("default-computer-name");
 
         dimensions = new CardDimensions(cardScalingFactor);
         dimensionsEnlarged = new CardDimensions(cardScalingFactorEnlarged);
+// activate instead this part, to run the UI editor for some panels without error
+//        serverName = "localhost";
+//        port = 17171;
+//        remoteServer = "mage-server";
+//        cardScalingFactor = 0.4;
+//        cardScalingFactorEnlarged = 0.5;
+//        handScalingFactor = 1.3;
+//        defaultGameType = p.getProperty("default-game-type", "Human");
+//        defaultDeckPath = "";
+//        defaultOtherPlayerIndex = "1";
+//        defaultComputerName = "Computer";
+//
+//        dimensions = new CardDimensions(cardScalingFactor);
+//        dimensionsEnlarged = new CardDimensions(cardScalingFactorEnlarged);
 
     }
 

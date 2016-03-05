@@ -31,6 +31,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,11 +39,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.UUID;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
@@ -69,10 +71,10 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
     private javax.swing.JButton btnUndo;
-
     //private javax.swing.JButton btnEndTurn;
     //private javax.swing.JButton btnStopTimer;
-    private MageTextArea textArea;
+    private JScrollPane textAreaScrollPane;
+    private MageTextArea dialogTextArea;
     JPanel buttonContainer;
 
     private javax.swing.JButton linkLeft;
@@ -114,11 +116,15 @@ public class HelperPanel extends JPanel {
     }
 
     private void setGUISize() {
-        buttonContainer.setPreferredSize(new Dimension(getWidth(), GUISizeHelper.gameDialogButtonHeight + 20));
-        buttonContainer.setMinimumSize(new Dimension(160, GUISizeHelper.gameDialogButtonHeight + 20));
-        buttonContainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, GUISizeHelper.gameDialogButtonHeight + 20));
+        //this.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
+        textAreaScrollPane.setMaximumSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
+        textAreaScrollPane.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
 
-        Dimension buttonDimension = new Dimension(GUISizeHelper.gameDialogButtonWidth, GUISizeHelper.gameDialogButtonHeight);
+//        dialogTextArea.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
+//        dialogTextArea.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
+//        buttonContainer.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogButtonHeight + 4));
+//        buttonContainer.setMinimumSize(new Dimension(160, GUISizeHelper.gameDialogButtonHeight + 20));
+//        buttonContainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, GUISizeHelper.gameDialogButtonHeight + 4));
         btnLeft.setFont(GUISizeHelper.gameDialogAreaFont);
         btnRight.setFont(GUISizeHelper.gameDialogAreaFont);
         btnSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
@@ -145,22 +151,25 @@ public class HelperPanel extends JPanel {
     private void initComponents() {
         initPopupMenuTriggerOrder();
         setBackground(new Color(0, 0, 0, 100));
-//        setBorder(new LineBorder(Color.WHITE, 1));
-
+        setLayout(new GridLayout(0, 1));
         setOpaque(false);
 
-        textArea = new MageTextArea();
-//        textArea.setBorder(new LineBorder(Color.GREEN, 1));
-        textArea.setText("<Empty>");
-        add(textArea);
+        dialogTextArea = new MageTextArea();
+        dialogTextArea.setText("<Empty>");
+        dialogTextArea.setOpaque(false);
+
+        textAreaScrollPane = new JScrollPane(dialogTextArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        textAreaScrollPane.setOpaque(false);
+        textAreaScrollPane.setBackground(new Color(0, 0, 0, 0));
+        textAreaScrollPane.getViewport().setOpaque(false);
+        textAreaScrollPane.setBorder(null);
+        textAreaScrollPane.setViewportBorder(null);
+        add(textAreaScrollPane);
 
         buttonContainer = new JPanel();
-//        buttonContainer.setBorder(new LineBorder(Color.RED, 1));
         buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 0));
         buttonContainer.setOpaque(false);
         add(buttonContainer);
-
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         btnSpecial = new JButton("Special");
         btnSpecial.setVisible(false);
@@ -243,7 +252,7 @@ public class HelperPanel extends JPanel {
         });
 
         // sets a darker background and higher simiss time fur tooltip in the feedback / helper panel
-        textArea.addMouseListener(new MouseAdapter() {
+        dialogTextArea.addMouseListener(new MouseAdapter() {
 
             @Override
             public void mouseEntered(MouseEvent me) {
@@ -334,11 +343,11 @@ public class HelperPanel extends JPanel {
 
     public void setBasicMessage(String message) {
         this.message = message;
-        this.textArea.setText(message, this.getWidth());
+        this.dialogTextArea.setText(message, this.getWidth());
     }
 
     public void setTextArea(String message) {
-        this.textArea.setText(message, this.getWidth());
+        this.dialogTextArea.setText(message, this.getWidth());
     }
 
     @Override

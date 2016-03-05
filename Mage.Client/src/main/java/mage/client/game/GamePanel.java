@@ -73,6 +73,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -194,8 +195,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private MageDialogState choiceWindowState;
 
-    private int feedbackAreaHeight;
     private boolean initComponents;
+
+    private Timer resizeTimer;
 
     private enum PopUpMenuType {
 
@@ -210,9 +212,6 @@ public final class GamePanel extends javax.swing.JPanel {
     public GamePanel() {
         initComponents = true;
         initComponents();
-        initPopupMenuTriggerOrder();
-
-        setGUISize();
 
         pickNumber = new PickNumberDialog();
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
@@ -257,27 +256,35 @@ public final class GamePanel extends javax.swing.JPanel {
 
             }
         });
-        // Resize the width of the stack area if the size of the play area is chnaged
+        // Resize the width of the stack area if the size of the play area is changed
         ComponentAdapter componentAdapterPlayField = new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                Thread worker = new Thread() {
-                    @Override
-                    public void run() {
-                        SwingUtilities.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (!initComponents) {
-                                    setGUISize();
-                                }
-                            }
-                        });
+                if (!initComponents) {
+                    if (resizeTimer.isRunning()) {
+                        resizeTimer.restart();
+                    } else {
+                        resizeTimer.start();
                     }
-                };
-                worker.start();
-
+                }
             }
         };
+
+        resizeTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        resizeTimer.stop();
+                        setGUISize();
+                        feedbackPanel.changeGUISize();
+
+                    }
+                });
+            }
+        });
+
         jPanel3.addComponentListener(componentAdapterPlayField);
         initComponents = false;
     }
@@ -387,9 +394,6 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane0.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
-
-        feedbackAreaHeight = GUISizeHelper.gameDialogAreaFontSizeBig + GUISizeHelper.gameDialogAreaFontSizeSmall + GUISizeHelper.gameDialogAreaButtonHigh + 60;
-        helper.setPreferredSize(new Dimension(100, feedbackAreaHeight));
         stackObjects.setCardDimension(GUISizeHelper.handCardDimension);
         int newStackWidth = jPanel3.getWidth() * GUISizeHelper.stackWidth / 100;
         if (newStackWidth < 360) {
@@ -398,10 +402,12 @@ public final class GamePanel extends javax.swing.JPanel {
         Dimension newDimension = new Dimension(jPanel3.getWidth() - newStackWidth, GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
         handContainer.setPreferredSize(newDimension);
         handContainer.setMaximumSize(newDimension);
+
         newDimension = new Dimension(newStackWidth, STACK_MIN_CARDS_OFFSET_Y + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
         stackObjects.setPreferredSize(newDimension);
         stackObjects.setMinimumSize(newDimension);
         stackObjects.setMaximumSize(newDimension);
+
         newDimension = new Dimension(newStackWidth, (int) pnlShortCuts.getPreferredSize().getHeight());
         pnlShortCuts.setPreferredSize(newDimension);
         pnlShortCuts.setMinimumSize(newDimension);
@@ -1347,10 +1353,6 @@ public final class GamePanel extends javax.swing.JPanel {
         lblPriority.setLabelFor(txtPriority);
         lblPriority.setText("Priority Player:");
 
-        // feedbackPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.MAGENTA, 5));
-        // feedbackPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 50, 50), 2));
-        // feedbackPanel.setMaximumSize(new java.awt.Dimension(208, 121));
-        // feedbackPanel.setMinimumSize(new java.awt.Dimension(208, 121));
         bigCard.setBorder(new LineBorder(Color.black, 1, true));
 
         int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -1653,6 +1655,10 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        initPopupMenuTriggerOrder();
+
+        setGUISize();
+
         // Replay panel to control replay of games
         javax.swing.GroupLayout gl_pnlReplay = new javax.swing.GroupLayout(pnlReplay);
         pnlReplay.setLayout(gl_pnlReplay);
@@ -1762,9 +1768,8 @@ public final class GamePanel extends javax.swing.JPanel {
         jPhases.addMouseListener(phasesMouseAdapter);
 
         pnlReplay.setOpaque(false);
+
         helper = new HelperPanel();
-        // helper.setBorder(new LineBorder(Color.MAGENTA, 2));
-        helper.setPreferredSize(new Dimension(100, 90));
         feedbackPanel.setHelperPanel(helper);
 
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);

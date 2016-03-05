@@ -126,6 +126,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         if (jScrollPaneTxt != null) {
             jScrollPaneTxt.setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
+            jScrollPaneTxt.setViewportBorder(null);
         }
     }
 

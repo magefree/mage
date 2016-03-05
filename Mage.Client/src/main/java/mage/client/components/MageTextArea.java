@@ -19,8 +19,6 @@ public class MageTextArea extends JEditorPane {
         setEditable(false);
         setBackground(new Color(0, 0, 0, 0)); // transparent background
         setFocusable(false);
-        // setBorder(BorderFactory.createLineBorder(Color.red));
-        // setSelectionColor(new Color(0, 0, 0, 0));
     }
 
     @Override
