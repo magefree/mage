@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -59,7 +58,6 @@ public class DisruptingShoal extends CardImpl {
         super(ownerId, 33, "Disrupting Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-
 
         // You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("a blue card with converted mana cost X from your hand");
@@ -100,9 +98,8 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DynamicValue amount = new ExileFromHandCostCardConvertedMana();
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null && spell.getConvertedManaCost() == amount.calculate(game, source, this)) {
+        if (spell != null && new ExileFromHandCostCardConvertedMana().isConvertedManaCostEqual(game, source, this, spell.getConvertedManaCost())) {
             return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
         }
         return false;
