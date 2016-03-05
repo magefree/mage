@@ -113,7 +113,12 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} or another Ally enters the battlefield under your control, you may destroy target artifact. If that artifact is put into a graveyard this way, {this} deals damage to that artifact's controller equal to the number of Allies you control.";
+        
+        // originally returned fullText, user reported that because the trigger text is so lengthy, they cannot click Yes/No buttons
+        //String fullText = "Whenever {this} or another Ally enters the battlefield under your control, you may destroy target artifact. If that artifact is put into a graveyard this way, {this} deals damage to that artifact's controller equal to the number of Allies you control.";
+        String condensedText = "Whenever {this} or another Ally you enters the battlefield under your control, you may destroy target artifact. If you do, {this} deals damage to that controller equal to the number of Allies you control.";
+        
+        return condensedText;
     }
 }
 
