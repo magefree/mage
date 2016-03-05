@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
@@ -83,20 +85,36 @@ public class ColorPane extends JEditorPane {
                 });
             }
 
-            private void setPopupVisibility(final Point location, final Component container, final boolean show)
-                    throws InterruptedException {
-                final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (location != null) {
-                            container.setLocation(location);
-                        }
-                        tooltipCounter += show ? 1 : -1;
-                        container.setVisible(tooltipCounter > 0);
-                        c.repaint();
-                    }
-                });
+        });
+        
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                tooltipCounter = 1; // will decrement and become effectively zero on leaving the pane
+                try {
+                    setPopupVisibility(null, MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER), false);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+    }
+    
+    private void setPopupVisibility(final Point location, final Component container, final boolean show)
+            throws InterruptedException {
+        final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if (location != null) {
+                    container.setLocation(location);
+                }
+                tooltipCounter += show ? 1 : -1;
+                if (tooltipCounter < 0) {
+                    tooltipCounter = 0;
+                }
+                container.setVisible(tooltipCounter > 0);
+                c.repaint();
             }
         });
     }
