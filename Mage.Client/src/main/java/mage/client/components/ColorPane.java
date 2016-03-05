@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -59,23 +60,12 @@ public class ColorPane extends JEditorPane {
                         try {
                             final Component container = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
                             if (e.getEventType() == EventType.EXITED) {
-                                setPopupVisibility(null, container, false);
+                                setPopupVisibility(container, false);
                             }
                             if (e.getEventType() == EventType.ENTERED) {
                                 CardInfoPane cardInfoPane = (CardInfoPane) MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
                                 cardInfoPane.setCard(new CardView(card.getMockCard()), container);
-                                Point mousePosition = MageFrame.getDesktop().getMousePosition();
-                                int popupY = 0;
-                                if (mousePosition == null) { // switched to another window
-                                    popupY = getLocationOnScreen().y;
-                                } else {
-                                    popupY = mousePosition.y;
-                                }
-                                Point location = new Point(getLocationOnScreen().x - container.getWidth(), popupY);
-                                Component parentComponent = MageFrame.getInstance();
-                                location = GuiDisplayUtil.keepComponentInsideParent(location, parentComponent.getLocationOnScreen(),
-                                        container, parentComponent);
-                                setPopupVisibility(location, container, true);
+                                setPopupVisibility(container, true);
                             }
                         } catch (InterruptedException e1) {
                             e1.printStackTrace();
@@ -92,7 +82,7 @@ public class ColorPane extends JEditorPane {
             public void mouseExited(MouseEvent e) {
                 tooltipCounter = 1; // will decrement and become effectively zero on leaving the pane
                 try {
-                    setPopupVisibility(null, MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER), false);
+                    setPopupVisibility(MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER), false);
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
@@ -100,15 +90,16 @@ public class ColorPane extends JEditorPane {
         });
     }
     
-    private void setPopupVisibility(final Point location, final Component container, final boolean show)
+    private void setPopupVisibility(final Component container, final boolean show)
             throws InterruptedException {
         final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                if (location != null) {
-                    container.setLocation(location);
-                }
+                Point location = new Point(getLocationOnScreen().x - container.getWidth(), MouseInfo.getPointerInfo().getLocation().y);
+                Component parentComponent = MageFrame.getInstance();
+                location = GuiDisplayUtil.keepComponentInsideParent(location, parentComponent.getLocationOnScreen(), container, parentComponent);
+                container.setLocation(location);
                 tooltipCounter += show ? 1 : -1;
                 if (tooltipCounter < 0) {
                     tooltipCounter = 0;

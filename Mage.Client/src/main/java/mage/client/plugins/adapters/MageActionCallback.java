@@ -182,24 +182,14 @@ public class MageActionCallback implements ActionCallback {
 
                     ((CardInfoPane) popup2).setCard(data.card, popupContainer);
 
-                    if (data.locationOnScreen == null) {
-                        data.locationOnScreen = data.component.getLocationOnScreen();
-                    }
-
-                    Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
-                    location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popup2, parentComponent);
-                    location.translate(-parentPoint.x, -parentPoint.y);
-
-                    ThreadUtils.sleep(200);
-
-                    showPopup(popupContainer, location);
+                    showPopup(popupContainer, popup2);
 
                 } catch (InterruptedException e) {
                     LOGGER.warn(e.getMessage());
                 }
             }
 
-            public void showPopup(final Component popupContainer, final Point location) throws InterruptedException {
+            public void showPopup(final Component popupContainer, final Component infoPane) throws InterruptedException {
                 final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
@@ -207,6 +197,13 @@ public class MageActionCallback implements ActionCallback {
                         if (!popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
                             return;
                         }
+                        if (data.locationOnScreen == null) {
+                            data.locationOnScreen = data.component.getLocationOnScreen();
+                        }
+
+                        Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
+                        location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, infoPane, parentComponent);
+                        location.translate(-parentPoint.x, -parentPoint.y);
                         popupContainer.setLocation(location);
                         popupContainer.setVisible(true);
                         c.repaint();
