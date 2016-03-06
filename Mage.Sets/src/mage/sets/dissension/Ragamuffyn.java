@@ -65,8 +65,8 @@ public class Ragamuffyn extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Hellbent - {tap}, Sacrifice a creature or land: Draw a card. Activate this ability only if you have no cards in hand.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,new DrawCardSourceControllerEffect(1),new TapSourceCost(), HellbentCondition.getInstance(),
-            "Hellbent - {T}, Sacrifice a creature or land: Draw a card. Activate this ability only if you have no cards in hand.");
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,new DrawCardSourceControllerEffect(1),new TapSourceCost(), HellbentCondition.getInstance());
+        ability.setAbilityWord(AbilityWord.HELLBENT);
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
