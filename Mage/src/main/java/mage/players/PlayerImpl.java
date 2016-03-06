@@ -1065,10 +1065,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         //20091005 - 114.2a
-        if (!playLandAbility.canActivate(this.playerId, game)) {
-            return false;
-        }
-        if (!ignoreTiming && !game.canPlaySorcery(playerId)) {
+        if (!ignoreTiming && !playLandAbility.canActivate(this.playerId, game)) {
             return false;
         }
         //20091005 - 305.1
@@ -2725,7 +2722,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
                                     break;
                                 }
-                                if (canPlay((ActivatedAbility) ability, available, card, game) && game.canPlaySorcery(playerId)) {
+                                if (canPlay((ActivatedAbility) ability, available, card, game)) {
                                     playable.add(card.getId());
                                     break Abilities;
                                 }
