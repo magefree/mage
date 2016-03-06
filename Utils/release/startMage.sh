@@ -1,5 +1,5 @@
 #!/bin/sh
-cd ./client
+cd ./mage-client
 ./startClient.sh
-cd ../server
+cd ../mage-server
 ./startServer.sh
