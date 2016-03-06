@@ -2725,7 +2725,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(), ability.getSourceId(), playerId), ability, game, true)) {
                                     break;
                                 }
-                                if (canPlay((ActivatedAbility) ability, available, card, game)) {
+                                if (canPlay((ActivatedAbility) ability, available, card, game) && game.canPlaySorcery(playerId)) {
                                     playable.add(card.getId());
                                     break Abilities;
                                 }
