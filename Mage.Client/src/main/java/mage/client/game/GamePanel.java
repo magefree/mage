@@ -413,6 +413,8 @@ public final class GamePanel extends javax.swing.JPanel {
         pnlShortCuts.setMinimumSize(newDimension);
         pnlShortCuts.setMaximumSize(newDimension);
 
+        txtSpellsCast.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
+
         GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
     }
 
@@ -1259,8 +1261,6 @@ public final class GamePanel extends javax.swing.JPanel {
         feedbackPanel = new mage.client.game.FeedbackPanel();
 
         txtSpellsCast = new javax.swing.JLabel();
-        Font font = new Font("SansSerif", Font.BOLD, 12);
-        txtSpellsCast.setFont(font);
         Border paddingBorder = BorderFactory.createEmptyBorder(4, 4, 4, 4);
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 2);
         txtSpellsCast.setBorder(BorderFactory.createCompoundBorder(border, paddingBorder));
