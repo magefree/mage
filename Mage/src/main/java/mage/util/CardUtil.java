@@ -29,7 +29,6 @@ package mage.util;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -37,8 +36,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.AlternativeCost;
-import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.HybridManaCost;
@@ -151,7 +148,6 @@ public class CardUtil {
      */
     public static void increaseCost(Ability ability, int increaseCount) {
         adjustAbilityCost(ability, -increaseCount);
-        adjustAlternativeCosts(ability, -increaseCount);
     }
 
     /**
@@ -162,7 +158,6 @@ public class CardUtil {
      */
     public static void reduceCost(Ability ability, int reduceCount) {
         adjustAbilityCost(ability, reduceCount);
-        adjustAlternativeCosts(ability, reduceCount);
     }
 
     /**
@@ -173,7 +168,6 @@ public class CardUtil {
      */
     public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
         CardUtil.adjustAbilityCost((Ability) spellAbility, reduceCount);
-        adjustAlternativeCosts(spellAbility, reduceCount);
     }
 
     public static ManaCosts<ManaCost> increaseCost(ManaCosts<ManaCost> manaCosts, int increaseCount) {
@@ -182,40 +176,6 @@ public class CardUtil {
 
     public static ManaCosts<ManaCost> reduceCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
         return adjustCost(manaCosts, reduceCount);
-    }
-
-    private static void adjustAlternativeCosts(Ability ability, int reduceCount) {
-        for (AlternativeCost alternativeCost : ability.getAlternativeCosts()) {
-            if (alternativeCost instanceof AlternativeCostImpl) {
-                AlternativeCostImpl impl = (AlternativeCostImpl) alternativeCost;
-                ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
-                boolean updated = false;
-                Iterator it = impl.iterator();
-                while (it.hasNext()) {
-                    Object cost = it.next();
-                    if (cost instanceof ManaCosts) {
-                        for (Object object : ((ManaCosts) cost)) {
-                            if (object instanceof ManaCost) {
-                                ManaCost manaCost = (ManaCost) object;
-                                Mana mana = manaCost.getOptions().get(0);
-                                int colorless = mana != null ? mana.getGeneric() : 0;
-                                if (!updated && colorless > 0) {
-                                    if ((colorless - reduceCount) > 0) {
-                                        int newColorless = colorless - reduceCount;
-                                        it.remove();
-                                        adjustedCost.add(new GenericManaCost(newColorless));
-                                    }
-                                    updated = true;
-                                } else {
-                                    adjustedCost.add(manaCost);
-                                }
-                            }
-                        }
-                    }
-                }
-                impl.add(adjustedCost);
-            }
-        }
     }
 
     /**

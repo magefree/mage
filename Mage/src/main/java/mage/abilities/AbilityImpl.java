@@ -34,7 +34,6 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -97,7 +96,6 @@ public abstract class AbilityImpl implements Ability {
     protected ManaCosts<ManaCost> manaCosts;
     protected ManaCosts<ManaCost> manaCostsToPay;
     protected Costs<Cost> costs;
-    protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<>();
     protected Costs<Cost> optionalCosts;
     protected Modes modes;
     protected Zone zone;
@@ -141,9 +139,6 @@ public abstract class AbilityImpl implements Ability {
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
         this.optionalCosts = ability.optionalCosts.copy();
-        for (AlternativeCost cost : ability.alternativeCosts) {
-            this.alternativeCosts.add((AlternativeCost) cost.copy());
-        }
         if (ability.watchers != null) {
             this.watchers = new ArrayList<>();
             for (Watcher watcher : ability.watchers) {
@@ -398,12 +393,9 @@ public abstract class AbilityImpl implements Ability {
             activatorId = ((ActivatedAbilityImpl) this).getActivatorId();
         }
 
-        if (!useAlternativeCost(game)) { // old way still used?
-
-            //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this ability before adding additional costs and applying cost modification effects)
-            if (!manaCostsToPay.pay(this, game, sourceId, activatorId, false, null)) {
-                return false; // cancel during mana payment
-            }
+        //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this ability before adding additional costs and applying cost modification effects)
+        if (!manaCostsToPay.pay(this, game, sourceId, activatorId, false, null)) {
+            return false; // cancel during mana payment
         }
 
         //20100716 - 601.2g
@@ -593,18 +585,6 @@ public abstract class AbilityImpl implements Ability {
     public void reset(Game game) {
     }
 
-    // Is this still needed?
-    protected boolean useAlternativeCost(Game game) {
-        for (AlternativeCost cost : alternativeCosts) {
-            if (cost.isAvailable(game, this)) {
-                if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), this, game)) {
-                    return cost.pay(this, game, sourceId, controllerId, false, null);
-                }
-            }
-        }
-        return false;
-    }
-
     @Override
     public boolean checkIfClause(Game game) {
         return true;
@@ -674,11 +654,6 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public ManaCosts<ManaCost> getManaCostsToPay() {
         return manaCostsToPay;
-    }
-
-    @Override
-    public List<AlternativeCost> getAlternativeCosts() {
-        return alternativeCosts;
     }
 
     @Override
@@ -840,13 +815,6 @@ public abstract class AbilityImpl implements Ability {
         if (cost != null) {
             this.manaCosts.add(cost);
             this.manaCostsToPay.add(cost);
-        }
-    }
-
-    @Override
-    public void addAlternativeCost(AlternativeCost cost) {
-        if (cost != null) {
-            this.alternativeCosts.add(cost);
         }
     }
 

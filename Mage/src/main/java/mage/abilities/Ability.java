@@ -31,7 +31,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCost;
@@ -168,22 +167,6 @@ public interface Ability extends Controllable, Serializable {
      * @param cost The {@link ManaCost} to add.
      */
     void addManaCost(ManaCost cost);
-
-    /**
-     * Gets all {@link AlternativeCost} associated with this ability.
-     *
-     * @return All {@link AlternativeCost}'s that can be paid instead of the
-     * {@link ManaCosts}
-     */
-    List<AlternativeCost> getAlternativeCosts();
-
-    /**
-     * Adds an {@link AlternativeCost} this ability that may be paid instead of
-     * any other cost.
-     *
-     * @param cost The {@link AlternativeCost} to add.
-     */
-    void addAlternativeCost(AlternativeCost cost);
 
     /**
      * TODO Method is unused, keep it around?
@@ -323,7 +306,6 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Activates this ability prompting the controller to pay any mandatory
-     * {@link Costs} or {@link AlternativeCost} associated with this ability.
      *
      * @param game A reference the {@link Game} for which this ability should be
      * activated within.

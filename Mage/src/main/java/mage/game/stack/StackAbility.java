@@ -40,7 +40,6 @@ import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
@@ -315,15 +314,6 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public void addChoice(Choice choice) {
-    }
-
-    @Override
-    public List<AlternativeCost> getAlternativeCosts() {
-        return ability.getAlternativeCosts();
-    }
-
-    @Override
-    public void addAlternativeCost(AlternativeCost cost) {
     }
 
     @Override

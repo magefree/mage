@@ -58,7 +58,6 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -2437,7 +2436,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-            // old alternate costs
+
             for (Ability objectAbility : sourceObject.getAbilities()) {
                 if (objectAbility instanceof AlternativeCostSourceAbility) {
                     if (objectAbility.getCosts().canPay(ability, ability.getSourceId(), playerId, game)) {
@@ -2445,13 +2444,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
-
-            for (AlternativeCost cost : ability.getAlternativeCosts()) {
-                if (cost.isAvailable(game, ability) && cost.canPay(ability, ability.getSourceId(), playerId, game)) {
-                    return true;
-                }
-            }
-            // new alternate costs
             if (canPlayCardByAlternateCost(card, available, ability, game)) {
                 return true;
             }
