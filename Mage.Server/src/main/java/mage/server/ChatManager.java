@@ -112,8 +112,8 @@ public class ChatManager {
             if (message.startsWith("\\") || message.startsWith("/")) {
                 User user = UserManager.getInstance().getUserByName(userName);
                 if (user != null) {
-                    if (!performUserCommand(user, message, chatId)) {
-                        performUserCommand(user, "/LIST", chatId);
+                    if (!performUserCommand(user, message, chatId, false)) {
+                        performUserCommand(user, message, chatId, true);
                     }
                     return;
                 }
@@ -122,8 +122,18 @@ public class ChatManager {
         }
     }
 
-    private boolean performUserCommand(User user, String message, UUID chatId) {
+    private boolean performUserCommand(User user, String message, UUID chatId, boolean doError) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
+        if (doError) {
+            message += new StringBuilder("<br/>Invalid User Command '" + message + "'.")
+                    .append("<br/>List of commands:")
+                    .append("<br/>\\history or \\h [username] - shows the history of a player")
+                    .append("<br/>\\list or \\l - Show a list of commands")
+                    .append("<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name").toString();
+            chatSessions.get(chatId).broadcastInfoToUser(user, message);
+            return true;
+        }
+
         if (command.startsWith("H ") || command.startsWith("HISTORY ")) {
             message = UserManager.getInstance().getUserHistory(message.substring(command.startsWith("H ") ? 3 : 9));
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
