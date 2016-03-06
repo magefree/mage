@@ -27,18 +27,24 @@
  */
 package mage.sets.zendikar;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
@@ -54,8 +60,7 @@ public class InfernoTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new InfernoTrapAlternativeCost());
-        this.getSpellAbility().addWatcher(new ControllerDamagedByCreatureWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), InfernoTrapCondition.getInstance()), new InfernoTrapWatcher());
 
         // Inferno Trap deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
@@ -72,71 +77,76 @@ public class InfernoTrap extends CardImpl {
     }
 }
 
-class ControllerDamagedByCreatureWatcher extends Watcher {
+class InfernoTrapCondition implements Condition {
 
-    int numCreaturesDamagedController;
+    private static final InfernoTrapCondition fInstance = new InfernoTrapCondition();
 
-    public ControllerDamagedByCreatureWatcher() {
-        super("ControllerDamagedByCreatureWatcher", WatcherScope.GAME);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
-    public ControllerDamagedByCreatureWatcher(final ControllerDamagedByCreatureWatcher watcher) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        InfernoTrapWatcher watcher = (InfernoTrapWatcher) game.getState().getWatchers().get(InfernoTrapWatcher.class.getName());
+        if (watcher != null) {
+            Set<MageObjectReference> damagingCreatures = watcher.getDamagingCreatures(source.getControllerId());
+            return !damagingCreatures.isEmpty() && damagingCreatures.size() > 1;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "If you've been dealt damage by two or more creatures this turn";
+    }
+}
+
+class InfernoTrapWatcher extends Watcher {
+
+    Map<UUID, Set<MageObjectReference>> playerDamagedByCreature = new HashMap<>();
+
+    public InfernoTrapWatcher() {
+        super(InfernoTrapWatcher.class.getName(), WatcherScope.GAME);
+    }
+
+    public InfernoTrapWatcher(final InfernoTrapWatcher watcher) {
         super(watcher);
+        playerDamagedByCreature.putAll(watcher.playerDamagedByCreature);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER
                 && event.getTargetId().equals(controllerId)) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
-                numCreaturesDamagedController += 1;
-                if (numCreaturesDamagedController >= 2) {
-                    condition = true;
+            Permanent damageBy = game.getPermanentOrLKIBattlefield(event.getSourceId());
+            if (damageBy != null && damageBy.getCardType().contains(CardType.CREATURE)) {
+                Set<MageObjectReference> damagingCreatures;
+                if (playerDamagedByCreature.containsKey(event.getTargetId())) {
+                    damagingCreatures = playerDamagedByCreature.get(event.getTargetId());
+                } else {
+                    damagingCreatures = new HashSet<>();
+                    playerDamagedByCreature.put(event.getTargetId(), damagingCreatures);
+                }
+                MageObjectReference damagingCreature = new MageObjectReference(damageBy, game);
+                if (!damagingCreatures.contains(damagingCreature)) {
+                    damagingCreatures.add(damagingCreature);
                 }
             }
         }
     }
 
+    public Set<MageObjectReference> getDamagingCreatures(UUID playerId) {
+        return playerDamagedByCreature.get(playerId);
+    }
+
     @Override
     public void reset() {
         super.reset();
-        numCreaturesDamagedController = 0;
+        playerDamagedByCreature.clear();
     }
 
     @Override
-    public ControllerDamagedByCreatureWatcher copy() {
-        return new ControllerDamagedByCreatureWatcher(this);
-    }
-}
-
-class InfernoTrapAlternativeCost extends AlternativeCostImpl {
-
-    public InfernoTrapAlternativeCost() {
-        super("you may pay {R} rather than pay Inferno Trap's mana cost");
-        this.add(new ManaCostsImpl("{R}"));
-    }
-
-    public InfernoTrapAlternativeCost(final InfernoTrapAlternativeCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public InfernoTrapAlternativeCost copy() {
-        return new InfernoTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        ControllerDamagedByCreatureWatcher watcher = (ControllerDamagedByCreatureWatcher) game.getState().getWatchers().get("ControllerDamagedByCreatureWatcher");
-        if (watcher != null && watcher.conditionMet()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getText() {
-        return "If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost";
+    public InfernoTrapWatcher copy() {
+        return new InfernoTrapWatcher(this);
     }
 }

@@ -27,8 +27,12 @@
  */
 package mage.sets.zendikar;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -43,9 +47,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.Watcher;
 
-import java.util.UUID;
-import mage.abilities.costs.Cost;
-
 /**
  *
  * @author jeffwadsworth
@@ -57,10 +58,8 @@ public class RuneflareTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-
         // If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new RuneflareTrapAlternativeCost());
-        this.getSpellAbility().addWatcher(new CardsDrawnOpponentWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RavenousTrapCondition.getInstance()), new CardsDrawnWatcher());
 
         // Runeflare Trap deals damage to target player equal to the number of cards in that player's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new TargetPlayerCardsInHandCount()));
@@ -106,26 +105,46 @@ class TargetPlayerCardsInHandCount implements DynamicValue {
     }
 }
 
-class CardsDrawnOpponentWatcher extends Watcher {
+class RuneflareTrapCondition implements Condition {
 
-    int cardsDrawn;
+    private static final RuneflareTrapCondition fInstance = new RuneflareTrapCondition();
 
-    public CardsDrawnOpponentWatcher() {
-        super("CardsDrawnOpponentWatcher", WatcherScope.GAME);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
-    public CardsDrawnOpponentWatcher(final CardsDrawnOpponentWatcher watcher) {
+    @Override
+    public boolean apply(Game game, Ability source) {
+        CardsDrawnWatcher watcher = (CardsDrawnWatcher) game.getState().getWatchers().get("CardsDrawnWatcher");
+        return watcher != null && watcher.opponentDrewXOrMoreCards(source.getControllerId(), 3, game);
+    }
+
+    @Override
+    public String toString() {
+        return "If an opponent drew three or more cards this turn";
+    }
+}
+
+class CardsDrawnWatcher extends Watcher {
+
+    private final Map<UUID, Integer> playerCardsDrawn = new HashMap<>();
+
+    public CardsDrawnWatcher() {
+        super("CardsDrawnWatcher", WatcherScope.GAME);
+    }
+
+    public CardsDrawnWatcher(final CardsDrawnWatcher watcher) {
         super(watcher);
-        this.cardsDrawn = watcher.cardsDrawn;
+        playerCardsDrawn.putAll(watcher.playerCardsDrawn);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD
-                && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            cardsDrawn += 1;
-            if (cardsDrawn >= 3) {
-                condition = true;
+        if (event.getType() == GameEvent.EventType.DREW_CARD) {
+            if (playerCardsDrawn.containsKey(event.getPlayerId())) {
+                playerCardsDrawn.put(event.getPlayerId(), playerCardsDrawn.get(event.getPlayerId()) + 1);
+            } else {
+                playerCardsDrawn.put(event.getPlayerId(), 1);
             }
         }
     }
@@ -133,42 +152,25 @@ class CardsDrawnOpponentWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        cardsDrawn = 0;
+        playerCardsDrawn.clear();
     }
 
-    @Override
-    public CardsDrawnOpponentWatcher copy() {
-        return new CardsDrawnOpponentWatcher(this);
-    }
-}
-
-class RuneflareTrapAlternativeCost extends AlternativeCostImpl<Cost> {
-
-    public RuneflareTrapAlternativeCost() {
-        super("you may pay {R} rather than pay Runeflare Trap's mana cost");
-        this.add(new ManaCostsImpl("{R}"));
-    }
-
-    public RuneflareTrapAlternativeCost(final RuneflareTrapAlternativeCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public RuneflareTrapAlternativeCost copy() {
-        return new RuneflareTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        CardsDrawnOpponentWatcher watcher = (CardsDrawnOpponentWatcher) game.getState().getWatchers().get("CardsDrawnOpponentWatcher");
-        if (watcher != null && watcher.conditionMet()) {
-            return true;
+    public boolean opponentDrewXOrMoreCards(UUID playerId, int x, Game game) {
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            for (Map.Entry<UUID, Integer> entry : playerCardsDrawn.entrySet()) {
+                if (game.isOpponent(player, playerId)) {
+                    if (entry.getValue() >= x) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
 
     @Override
-    public String getText() {
-        return "If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost";
+    public CardsDrawnWatcher copy() {
+        return new CardsDrawnWatcher(this);
     }
 }

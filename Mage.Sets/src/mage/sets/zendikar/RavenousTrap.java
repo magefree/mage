@@ -29,8 +29,9 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -51,9 +52,7 @@ public class RavenousTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(
-                new RavenousTrapAlternativeCost());
-        this.getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), RavenousTrapCondition.getInstance()), new CardsPutIntoGraveyardWatcher());
 
         // Exile all cards from target player's graveyard.
         this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());
@@ -70,24 +69,16 @@ public class RavenousTrap extends CardImpl {
     }
 }
 
-class RavenousTrapAlternativeCost extends AlternativeCostImpl {
+class RavenousTrapCondition implements Condition {
 
-    public RavenousTrapAlternativeCost() {
-        super("If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost");
-        this.add(new GenericManaCost(0));
-    }
+    private static final RavenousTrapCondition fInstance = new RavenousTrapCondition();
 
-    public RavenousTrapAlternativeCost(final RavenousTrapAlternativeCost cost) {
-        super(cost);
+    public static Condition getInstance() {
+        return fInstance;
     }
 
     @Override
-    public RavenousTrapAlternativeCost copy() {
-        return new RavenousTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
+    public boolean apply(Game game, Ability source) {
         CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
         if (watcher != null) {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
@@ -100,7 +91,7 @@ class RavenousTrapAlternativeCost extends AlternativeCostImpl {
     }
 
     @Override
-    public String getText() {
-        return "If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay {this}'s mana cost";
+    public String toString() {
+        return "If an opponent had three or more cards put into his or her graveyard from anywhere this turn";
     }
 }

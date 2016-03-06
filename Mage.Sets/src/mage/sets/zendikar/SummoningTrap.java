@@ -27,11 +27,13 @@
  */
 package mage.sets.zendikar;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -64,8 +66,8 @@ public class SummoningTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost.
-        this.getSpellAbility().addAlternativeCost(new SummoningTrapAlternativeCost());
-        this.getSpellAbility().addWatcher(new SummoningTrapWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), SummoningTrapCondition.getInstance()), new SummoningTrapWatcher());
+
         // Look at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new SummoningTrapEffect());
     }
@@ -80,14 +82,37 @@ public class SummoningTrap extends CardImpl {
     }
 }
 
+class SummoningTrapCondition implements Condition {
+
+    private static final SummoningTrapCondition fInstance = new SummoningTrapCondition();
+
+    public static Condition getInstance() {
+        return fInstance;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        SummoningTrapWatcher watcher = (SummoningTrapWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
+        return watcher != null && watcher.creatureSpellOfPlayerWasCountered(source.getControllerId());
+    }
+
+    @Override
+    public String toString() {
+        return "If a creature spell you cast this turn was countered by a spell or ability an opponent controlled";
+    }
+}
+
 class SummoningTrapWatcher extends Watcher {
 
+    Set<UUID> players = new HashSet<>();
+
     public SummoningTrapWatcher() {
-        super("CreatureSpellCountered", WatcherScope.PLAYER);
+        super("CreatureSpellCountered", WatcherScope.GAME);
     }
 
     public SummoningTrapWatcher(final SummoningTrapWatcher watcher) {
         super(watcher);
+        this.players.addAll(watcher.players);
     }
 
     @Override
@@ -97,52 +122,34 @@ class SummoningTrapWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) {// no need to check - condition has already occured
-            return;
-        }
         if (event.getType() == EventType.COUNTERED) {
             StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
             if (stackObject == null) {
                 stackObject = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
             }
-            StackObject counterObject = game.getStack().getStackObject(event.getSourceId());
-            if (counterObject == null) {
-                counterObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
+            if (stackObject != null
+                    && !players.contains(stackObject.getControllerId())
+                    && stackObject.getCardType().contains(CardType.CREATURE)) {
+                StackObject counterObject = game.getStack().getStackObject(event.getSourceId());
+                if (counterObject == null) {
+                    counterObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
+                }
+                if (counterObject != null && game.getOpponents(stackObject.getControllerId()).contains(counterObject.getControllerId())) {
+                    players.add(stackObject.getControllerId());
+                }
             }
-            if (stackObject != null && counterObject != null
-                    && stackObject.getCardType().contains(CardType.CREATURE)
-                    && game.getOpponents(controllerId).contains(counterObject.getControllerId())) {
-                condition = true;
-            }
+
         }
     }
-}
 
-class SummoningTrapAlternativeCost extends AlternativeCostImpl<Cost> {
-
-    public SummoningTrapAlternativeCost() {
-        super("you may pay {0} rather than pay Summoning Trap's mana cost");
-        this.add(new GenericManaCost(0));
-    }
-
-    public SummoningTrapAlternativeCost(final SummoningTrapAlternativeCost cost) {
-        super(cost);
+    public boolean creatureSpellOfPlayerWasCountered(UUID playerId) {
+        return players.contains(playerId);
     }
 
     @Override
-    public SummoningTrapAlternativeCost copy() {
-        return new SummoningTrapAlternativeCost(this);
-    }
-
-    @Override
-    public boolean isAvailable(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("CreatureSpellCountered", source.getControllerId());
-        return watcher != null && watcher.conditionMet();
-    }
-
-    @Override
-    public String getText() {
-        return "If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay Summoning Trap's mana cost";
+    public void reset() {
+        super.reset();
+        players.clear();
     }
 }
 
