@@ -140,4 +140,37 @@ public class CircleOfAfflictionTest extends CardTestPlayerBase {
         assertLife(playerA, 12); // 12 damage - 4 drains = 8 net life total loss
         assertLife(playerB, 16); // 4 drains
     }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testTwoAttackersDamageDifferentColors() {
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1); // {1}{W} 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant", 1); // {3}{R} 3/3
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        // As Circle of Affliction enters the battlefield, choose a color.
+        // Whenever a source of the chosen color deals damage to you, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.
+        addCard(Zone.HAND, playerA, "Circle of Affliction", 1);// {1}{B}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Circle of Affliction");
+        setChoice(playerA, "White");
+
+        attack(2, playerB, "Silvercoat Lion");
+        attack(2, playerB, "Hill Giant");
+        addTarget(playerA, playerB);
+        setChoice(playerA, "Yes");
+        addTarget(playerA, playerB); // should not be able to drain Hill Giant with white selected
+        setChoice(playerA, "Yes");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Circle of Affliction", 1);
+
+        assertLife(playerA, 16); // 5 life loss from combat - 1 drain = 4 net life total loss
+        assertLife(playerB, 19);
+    }
 }
