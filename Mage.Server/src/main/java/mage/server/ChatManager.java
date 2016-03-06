@@ -113,7 +113,7 @@ public class ChatManager {
                 User user = UserManager.getInstance().getUserByName(userName);
                 if (user != null) {
                     if (!performUserCommand(user, message, chatId)) {
-                        performUserCommand(user, "LIST", chatId);
+                        performUserCommand(user, "/LIST", chatId);
                     }
                     return;
                 }
