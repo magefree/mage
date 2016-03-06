@@ -78,29 +78,28 @@ public class NantukoMentor extends CardImpl {
 
 class NantukoMentorBoostTargetEffect extends ContinuousEffectImpl {
 
-public NantukoMentorBoostTargetEffect() {
-    super(Duration.EndOfTurn, Outcome.BoostCreature);
-    staticText = "Target creature gets +X/+X until end of turn, where X is that creature's power.";
-}
-
-public NantukoMentorBoostTargetEffect(final NantukoMentorBoostTargetEffect effect) {
-    super(effect);
-}
-
-@Override
-public NantukoMentorBoostTargetEffect copy() {
-    return new NantukoMentorBoostTargetEffect(this);
-}
-
-@Override
-public boolean apply(Game game, Ability source){
-    Permanent target = game.getPermanent(source.getFirstTarget());
-    if (target != null) {
-        MageInt power = target.getPower();
-        target.addPower(power.getValue());
-        target.addToughness(power.getValue());
+    public NantukoMentorBoostTargetEffect() {
+        super(Duration.EndOfTurn, Outcome.BoostCreature);
+        staticText = "Target creature gets +X/+X until end of turn, where X is that creature's power.";
     }
-    return true;
-}
 
+    public NantukoMentorBoostTargetEffect(final NantukoMentorBoostTargetEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public NantukoMentorBoostTargetEffect copy() {
+        return new NantukoMentorBoostTargetEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source){
+        Permanent target = game.getPermanent(source.getFirstTarget());
+        if (target != null) {
+            MageInt power = target.getPower();
+            target.addPower(power.getValue());
+            target.addToughness(power.getValue());
+        }
+        return true;
+    }
 }
