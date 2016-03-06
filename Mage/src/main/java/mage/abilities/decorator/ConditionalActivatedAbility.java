@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -23,7 +23,7 @@ import mage.game.Game;
 public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     private static final Effects emptyEffects = new Effects();
-    
+
     private final Condition condition;
     private String ruleText = null;
 
@@ -31,7 +31,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         super(zone, effect, cost);
         this.condition = condition;
     }
-    
+
     public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
         super(zone, effect, cost);
         this.condition = condition;
@@ -82,6 +82,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         if (ruleText != null && !ruleText.isEmpty()) {
             return ruleText;
         }
-        return new StringBuilder(super.getRule()).append(" Activate this ability only ").append(condition.toString()).append(".").toString();
+        return super.getRule() + " Activate this ability only " + condition.toString();
     }
 }
