@@ -39,6 +39,7 @@ Islandwalk|new|
 Level up|cost|
 Lifelink|instance|
 Living weapon|new|
+Madness|card, cost|
 Menace|new|
 Miracle|cost|
 Mountaincycling|cost|
