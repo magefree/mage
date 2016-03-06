@@ -36,6 +36,7 @@ package mage.client.table;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Point;
@@ -323,9 +324,26 @@ public class TablesPanel extends javax.swing.JPanel {
         newimg = img.getScaledInstance(GUISizeHelper.menuFont.getSize(), GUISizeHelper.menuFont.getSize(), java.awt.Image.SCALE_SMOOTH);
         btnStateFinished.setIcon(new ImageIcon(newimg));
 
+        int iconSize = 48 + GUISizeHelper.menuFont.getSize() * 2 - 15;
+        icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/match_new.png"));
+        img = icon.getImage();
+        newimg = img.getScaledInstance(iconSize, iconSize, java.awt.Image.SCALE_SMOOTH);
+        btnNewTable.setIcon(new ImageIcon(newimg));
+
+        icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/tourney_new.png"));
+        img = icon.getImage();
+        newimg = img.getScaledInstance(iconSize, iconSize, java.awt.Image.SCALE_SMOOTH);
+        btnNewTournament.setIcon(new ImageIcon(newimg));
+
         for (JToggleButton component : filterButtons) {
             component.setFont(GUISizeHelper.menuFont);
         }
+        Dimension newDimension = new Dimension((int) jPanelBottom.getPreferredSize().getWidth(), GUISizeHelper.menuFont.getSize() + 28);
+        jPanelBottom.setMinimumSize(newDimension);
+        jPanelBottom.setPreferredSize(newDimension);
+        jButtonFooterNext.setFont(GUISizeHelper.menuFont);
+        jLabelFooterLabel.setFont(new Font(GUISizeHelper.menuFont.getName(), Font.BOLD, GUISizeHelper.menuFont.getSize()));
+        jLabelFooterText.setFont(GUISizeHelper.menuFont);
     }
 
     private void saveDividerLocations() {
@@ -509,8 +527,8 @@ public class TablesPanel extends javax.swing.JPanel {
             this.jPanelBottom.setVisible(false);
         } else {
             this.jPanelBottom.setVisible(true);
-            this.jLabel2.setText(serverMessages.get(0));
-            this.jButtonNext.setVisible(serverMessages.size() > 1);
+            this.jLabelFooterText.setText(serverMessages.get(0));
+            this.jButtonFooterNext.setVisible(serverMessages.size() > 1);
         }
     }
 
@@ -684,9 +702,9 @@ public class TablesPanel extends javax.swing.JPanel {
         tableCompleted = new javax.swing.JTable();
         chatPanelMain = new mage.client.table.PlayersChatPanel();
         jPanelBottom = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButtonNext = new javax.swing.JButton();
+        jButtonFooterNext = new javax.swing.JButton();
+        jLabelFooterLabel = new javax.swing.JLabel();
+        jLabelFooterText = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridBagLayout());
 
@@ -1092,7 +1110,7 @@ public class TablesPanel extends javax.swing.JPanel {
         );
         jPanelTablesLayout.setVerticalGroup(
             jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanelTables);
@@ -1107,45 +1125,29 @@ public class TablesPanel extends javax.swing.JPanel {
         add(jSplitPane1, gridBagConstraints);
 
         jPanelBottom.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelBottom.setPreferredSize(new java.awt.Dimension(664, 39));
+        jPanelBottom.setPreferredSize(new java.awt.Dimension(516, 37));
+        jPanelBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Message of the Day:");
-        jLabel1.setAlignmentY(0.3F);
-
-        jLabel2.setText("You are playing Mage version 0.7.5. Welcome! -- Mage dev team --");
-
-        jButtonNext.setText("Next");
-        jButtonNext.setMaximumSize(new java.awt.Dimension(55, 25));
-        jButtonNext.setMinimumSize(new java.awt.Dimension(55, 25));
-        jButtonNext.setPreferredSize(new java.awt.Dimension(55, 25));
-        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFooterNext.setText("Next");
+        jButtonFooterNext.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonFooterNext.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonFooterNext.setOpaque(false);
+        jButtonFooterNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNextActionPerformed(evt);
+                jButtonFooterNextActionPerformed(evt);
             }
         });
+        jPanelBottom.add(jButtonFooterNext);
 
-        javax.swing.GroupLayout jPanelBottomLayout = new javax.swing.GroupLayout(jPanelBottom);
-        jPanelBottom.setLayout(jPanelBottomLayout);
-        jPanelBottomLayout.setHorizontalGroup(
-            jPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBottomLayout.createSequentialGroup()
-                .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1350, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanelBottomLayout.setVerticalGroup(
-            jPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBottomLayout.createSequentialGroup()
-                .addGroup(jPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabelFooterLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelFooterLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelFooterLabel.setText("Message of the Day:");
+        jLabelFooterLabel.setAlignmentY(0.3F);
+        jPanelBottom.add(jLabelFooterLabel);
+
+        jLabelFooterText.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelFooterText.setText("You are playing Mage version 0.7.5. Welcome! -- Mage dev team --");
+        jPanelBottom.add(jLabelFooterText);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 2;
@@ -1193,17 +1195,17 @@ public class TablesPanel extends javax.swing.JPanel {
         newTableDialog.showDialog(roomId);
     }//GEN-LAST:event_btnNewTableActionPerformed
 
-    private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
+    private void jButtonFooterNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFooterNextActionPerformed
         synchronized (this) {
             if (messages != null && !messages.isEmpty()) {
                 currentMessage++;
                 if (currentMessage >= messages.size()) {
                     currentMessage = 0;
                 }
-                this.jLabel2.setText(messages.get(currentMessage));
+                this.jLabelFooterText.setText(messages.get(currentMessage));
             }
         }
-    }//GEN-LAST:event_jButtonNextActionPerformed
+    }//GEN-LAST:event_jButtonFooterNextActionPerformed
 
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
         setTableFilter();
@@ -1248,9 +1250,9 @@ public class TablesPanel extends javax.swing.JPanel {
     private mage.client.table.PlayersChatPanel chatPanelMain;
     private javax.swing.JToolBar filterBar1;
     private javax.swing.JToolBar filterBar2;
-    private javax.swing.JButton jButtonNext;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButtonFooterNext;
+    private javax.swing.JLabel jLabelFooterLabel;
+    private javax.swing.JLabel jLabelFooterText;
     private javax.swing.JPanel jPanelBottom;
     private javax.swing.JPanel jPanelTables;
     private javax.swing.JPanel jPanelTop;
