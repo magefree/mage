@@ -111,7 +111,10 @@ public class ChatManager {
         if (chatSession != null) {
             if (message.startsWith("\\") || message.startsWith("/")) {
                 User user = UserManager.getInstance().getUserByName(userName);
-                if (user != null && performUserCommand(user, message, chatId)) {
+                if (user != null) {
+                    if (!performUserCommand(user, message, chatId)) {
+                        performUserCommand(user, "LIST", chatId);
+                    }
                     return;
                 }
             }
