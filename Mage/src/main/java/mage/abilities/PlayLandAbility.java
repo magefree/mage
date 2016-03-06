@@ -56,7 +56,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
             return false;
         }
         //20091005 - 114.2a
-        return game.getActivePlayerId().equals(playerId) && game.getPlayer(playerId).canPlayLand();
+        return game.getActivePlayerId().equals(playerId) && game.getPlayer(playerId).canPlayLand() && game.canPlaySorcery(playerId);
     }
 
     @Override

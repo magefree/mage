@@ -1064,10 +1064,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         //20091005 - 114.2a
-        if (!playLandAbility.canActivate(this.playerId, game)) {
-            return false;
-        }
-        if (!ignoreTiming && !game.canPlaySorcery(playerId)) {
+        if (!ignoreTiming && !playLandAbility.canActivate(this.playerId, game)) {
             return false;
         }
         //20091005 - 305.1
