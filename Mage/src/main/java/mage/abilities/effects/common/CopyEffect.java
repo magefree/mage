@@ -92,8 +92,12 @@ public class CopyEffect extends ContinuousEffectImpl {
             permanent = game.getPermanentEntering(copyToObjectId);
             if (permanent != null) {
                 copyToPermanent(permanent, game, source);
-                // set reference to the permanent later on the battlefield so we have to add already one to the zone change counter
-                affectedObjectList.add(new MageObjectReference(permanent.getId(), game.getState().getZoneChangeCounter(copyToObjectId) + 1, game));
+                // set reference to the permanent later on the battlefield so we have to add already one (if no token) to the zone change counter
+                int ZCCDiff = 1;
+                if (permanent instanceof PermanentToken) {
+                    ZCCDiff = 0;
+                }
+                affectedObjectList.add(new MageObjectReference(permanent.getId(), game.getState().getZoneChangeCounter(copyToObjectId) + ZCCDiff, game));
             }
         }
     }

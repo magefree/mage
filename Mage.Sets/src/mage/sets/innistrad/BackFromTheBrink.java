@@ -103,7 +103,7 @@ class BackFromTheBrinkCost extends CostImpl {
             Player controller = game.getPlayer(controllerId);
             if (controller != null) {
                 Card card = controller.getGraveyard().get(targets.getFirstTarget(), game);
-                if (card != null && controller.moveCards(card, null, Zone.EXILED, ability, game)) {
+                if (card != null && controller.moveCards(card, Zone.EXILED, ability, game)) {
                     ability.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
                     paid = card.getManaCost().pay(ability, game, sourceId, controllerId, noMana);
                 }
