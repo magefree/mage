@@ -318,10 +318,23 @@ public class TestPlayer implements Player {
                     }
                 }
             } else {
+                boolean originOnly = false;
+                boolean copyOnly = false;
+                if (targetName.endsWith("]")) {
+                    if (targetName.endsWith("[no copy]")) {
+                        originOnly = true;
+                        targetName = targetName.substring(0, targetName.length() - 9);
+                    }
+                    if (targetName.endsWith("[only copy]")) {
+                        copyOnly = true;
+                        targetName = targetName.substring(0, targetName.length() - 11);
+                    }
+                }
                 for (UUID id : currentTarget.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
                     if (!currentTarget.getTargets().contains(id)) {
                         MageObject object = game.getObject(id);
                         if (object != null
+                                && ((object.isCopy() && !originOnly) || (!object.isCopy() && !copyOnly))
                                 && ((!targetName.isEmpty() && object.getName().startsWith(targetName)) || (targetName.isEmpty() && object.getName().isEmpty()))) {
                             if (currentTarget.getNumberOfTargets() == 1) {
                                 currentTarget.clearChosen();
