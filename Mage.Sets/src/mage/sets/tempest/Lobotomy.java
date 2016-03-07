@@ -156,7 +156,7 @@ class LobotomyEffect extends OneShotEffect {
             if (!cardsToExile.isEmpty()) {
                 controller.moveCards(cardsToExile, null, Zone.EXILED, source, game);
             }
-            targetPlayer.shuffleLibrary(game);
+            targetPlayer.shuffleLibrary(source, game);
             return true;
         }
         return false;

@@ -99,7 +99,7 @@ class ExtractEffect extends OneShotEffect {
                     player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
-            targetPlayer.shuffleLibrary(game);
+            targetPlayer.shuffleLibrary(source, game);
             return true;
         }
         return false;

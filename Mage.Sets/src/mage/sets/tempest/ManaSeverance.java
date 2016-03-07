@@ -75,7 +75,7 @@ class ManaSeveranceEffect extends SearchEffect {
                     }
                 }
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
 
         }

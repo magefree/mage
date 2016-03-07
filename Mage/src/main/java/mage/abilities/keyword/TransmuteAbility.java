@@ -88,7 +88,7 @@ class TransmuteEffect extends OneShotEffect {
                     controller.moveCards(revealed, null, Zone.HAND, source, game);
                 }
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
 

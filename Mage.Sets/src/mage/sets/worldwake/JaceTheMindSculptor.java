@@ -196,7 +196,7 @@ class JaceTheMindSculptorEffect3 extends OneShotEffect {
             for (Card card : player.getHand().getCards(game)) {
                 card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return true;
         }
         return false;

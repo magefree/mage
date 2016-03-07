@@ -110,7 +110,7 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
             for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)){
                 permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             
             player.drawCards(7, game);
             

@@ -1275,8 +1275,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void shuffleLibrary(Game game) {
-        computerPlayer.shuffleLibrary(game);
+    public void shuffleLibrary(Ability source, Game game) {
+        computerPlayer.shuffleLibrary(source, game);
     }
 
     @Override

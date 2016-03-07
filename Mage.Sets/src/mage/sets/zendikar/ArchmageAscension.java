@@ -173,7 +173,7 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     card.moveToZone(Zone.HAND, id, game, false);
-                    player.shuffleLibrary(game);
+                    player.shuffleLibrary(source, game);
                 }
             }
         }

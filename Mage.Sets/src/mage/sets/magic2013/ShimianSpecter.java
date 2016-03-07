@@ -157,7 +157,7 @@ class ShimianSpecterEffect extends OneShotEffect {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
-                targetPlayer.shuffleLibrary(game);
+                targetPlayer.shuffleLibrary(source, game);
             }
             return true;
         }

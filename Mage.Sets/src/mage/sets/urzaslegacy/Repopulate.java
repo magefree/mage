@@ -93,7 +93,7 @@ class RepopulateEffect extends OneShotEffect {
             {
                 card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return true;
         }
         return false;

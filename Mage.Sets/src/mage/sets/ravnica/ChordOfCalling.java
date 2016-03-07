@@ -104,10 +104,10 @@ class ChordofCallingSearchEffect extends OneShotEffect {
                     card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
                 }
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return true;
         }
-        player.shuffleLibrary(game);
+        player.shuffleLibrary(source, game);
         return false;
     }
 

@@ -113,7 +113,7 @@ class ElvishSoultillerEffect extends OneShotEffect {
             filter.add(new SubtypePredicate(typeChoice.getChoice()));
             cardsToLibrary.addAll(controller.getGraveyard().getCards(filter, source.getSourceId(), source.getControllerId(), game));
             controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

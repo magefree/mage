@@ -86,7 +86,7 @@ class TimetwisterEffect extends OneShotEffect {
             if (player != null) {
                 player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
                 player.moveCards(player.getGraveyard(), Zone.GRAVEYARD, Zone.LIBRARY, source, game);
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
             }
         }
         return true;

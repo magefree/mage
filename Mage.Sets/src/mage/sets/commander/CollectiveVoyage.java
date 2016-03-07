@@ -111,7 +111,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
                             }
 
                         }
-                        player.shuffleLibrary(game);
+                        player.shuffleLibrary(source, game);
                     }
 
                 }

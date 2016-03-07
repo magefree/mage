@@ -108,11 +108,11 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
                     controller.revealCards(name, cards, game);
                 }
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         if (forceShuffle) {
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
         }
         return false;
     }

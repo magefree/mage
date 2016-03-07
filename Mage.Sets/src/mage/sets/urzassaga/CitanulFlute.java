@@ -121,10 +121,10 @@ class CitanulFluteSearchEffect extends OneShotEffect {
                 }
                 player.revealCards(name, cards, game);
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return true;
         }
-	player.shuffleLibrary(game);
+	player.shuffleLibrary(source, game);
         return false;
     }
 }

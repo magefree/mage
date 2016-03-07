@@ -98,7 +98,7 @@ class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {
                 owner.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
-                owner.shuffleLibrary(game);
+                owner.shuffleLibrary(source, game);
                 return true;
             }
         }

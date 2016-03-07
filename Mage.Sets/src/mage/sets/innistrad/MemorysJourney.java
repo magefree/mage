@@ -108,7 +108,7 @@ class MemorysJourneyEffect extends OneShotEffect {
                 }
             }
             if (shuffle) {
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
             }
             return true;
         }

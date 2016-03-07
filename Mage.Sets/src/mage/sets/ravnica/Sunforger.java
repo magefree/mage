@@ -132,7 +132,7 @@ class SunforgerEffect extends OneShotEffect {
                     }
                 }
             }
-            you.shuffleLibrary(game);
+            you.shuffleLibrary(source, game);
             return true;
         }
         return false;

@@ -95,7 +95,7 @@ class TimeSpiralEffect extends OneShotEffect {
                 for (Card card : player.getGraveyard().getCards(game)) {
                     card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
             }
         }
         return true;

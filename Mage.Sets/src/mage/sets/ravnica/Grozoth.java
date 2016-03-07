@@ -130,7 +130,7 @@ class GrozothEffect extends SearchEffect {
                 player.revealCards(sourceCard.getIdName(), cards, game);
                 player.moveCards(cards, Zone.LIBRARY, Zone.HAND, source, game);
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return true;
         }
         return false;

@@ -112,7 +112,7 @@ class CorpseHarvesterEffect extends OneShotEffect {
         searchCard(you, source, game, cards, "Zombie");
         searchCard(you, source, game, cards, "Swamp");
         you.revealCards("Corpse Harvester", cards, game);
-        you.shuffleLibrary(game);
+        you.shuffleLibrary(source, game);
         return true;
     }
 

@@ -333,7 +333,7 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     void reset();
 
-    void shuffleLibrary(Game game);
+    void shuffleLibrary(Ability source, Game game);
 
     int drawCards(int num, Game game);
 

@@ -126,10 +126,10 @@ class TransmuteArtifactEffect extends SearchEffect {
                     }
                 }
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
-        controller.shuffleLibrary(game);
+        controller.shuffleLibrary(source, game);
         return false;
     }
 

@@ -124,7 +124,7 @@ class ClarionUltimatumEffect extends OneShotEffect {
         }
 
         controller.moveCards(chosenCards, Zone.BATTLEFIELD, source, game, true, false, false, null);
-        controller.shuffleLibrary(game);
+        controller.shuffleLibrary(source, game);
         return true;
     }
 }

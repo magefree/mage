@@ -107,7 +107,7 @@ class PraetorsGraspEffect extends OneShotEffect {
                     game.addEffect(new PraetorsGraspRevealEffect(card.getId()), source);
                 }
             }
-            opponent.shuffleLibrary(game);
+            opponent.shuffleLibrary(source, game);
             return true;
         }
         return false;

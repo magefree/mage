@@ -109,7 +109,7 @@ class WhirlpoolWarriorActivatedEffect extends OneShotEffect {
                     if (cardsHand > 0) {
                         playerCards.put(playerId, cardsHand);
                         player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
-                        player.shuffleLibrary(game);
+                        player.shuffleLibrary(source, game);
                     }
                 }
             }

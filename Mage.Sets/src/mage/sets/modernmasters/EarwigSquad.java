@@ -114,7 +114,7 @@ class EarwigSquadEffect extends OneShotEffect {
                     }
                 }
             }
-            opponent.shuffleLibrary(game);
+            opponent.shuffleLibrary(source, game);
             return true;
         }
         return false;

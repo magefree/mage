@@ -99,7 +99,7 @@ class ProteanHulkEffect extends OneShotEffect {
         if (controller != null) {
             Cards cardsPicked = this.ProteanHulkSearch(game, source);
             controller.moveCards(cardsPicked.getCards(game), Zone.BATTLEFIELD, source, game);
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

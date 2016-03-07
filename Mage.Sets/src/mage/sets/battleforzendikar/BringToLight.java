@@ -105,7 +105,7 @@ class BringToLightEffect extends OneShotEffect {
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             if (card != null) {
                 if (controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
                     if (card.getSpellAbility() != null) {

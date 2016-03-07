@@ -111,7 +111,7 @@ class BirthingPodEffect extends OneShotEffect {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

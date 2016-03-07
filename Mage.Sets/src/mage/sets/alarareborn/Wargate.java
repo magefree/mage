@@ -96,7 +96,7 @@ class WargateEffect extends OneShotEffect {
                 }
             }
         }
-        controller.shuffleLibrary(game);
+        controller.shuffleLibrary(source, game);
         return false;
     }
 

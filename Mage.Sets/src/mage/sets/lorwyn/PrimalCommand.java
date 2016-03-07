@@ -124,7 +124,7 @@ class PrimalCommandShuffleGraveyardEffect extends OneShotEffect {
             for (Card card: player.getGraveyard().getCards(game)) {
                 player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
             }                 
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return true;
         }
         return false;

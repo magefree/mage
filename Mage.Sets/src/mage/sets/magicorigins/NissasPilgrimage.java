@@ -118,7 +118,7 @@ class NissasPilgrimageEffect extends OneShotEffect {
                     }
                 }
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

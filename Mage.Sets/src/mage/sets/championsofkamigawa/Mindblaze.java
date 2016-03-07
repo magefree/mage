@@ -129,7 +129,7 @@ class MindblazeEffect extends OneShotEffect {
             if (player.getLibrary().count(filter, game) == count) {
                 player.damage(8, source.getSourceId(), game.copy(), false, true);
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
         }
         return false;
     }

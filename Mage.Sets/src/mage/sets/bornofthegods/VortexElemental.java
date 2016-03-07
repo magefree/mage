@@ -124,7 +124,7 @@ class VortexElementalEffect extends OneShotEffect {
             for (UUID playerId: playersToShuffle){
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.shuffleLibrary(game);
+                    player.shuffleLibrary(source, game);
                 }
             }
 

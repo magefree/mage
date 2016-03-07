@@ -90,7 +90,7 @@ public class RevealAndShuffleIntoLibrarySourceEffect extends OneShotEffect {
                     controller.moveCardToLibraryWithInfo((Card)sourceObject, source.getSourceId(), game, fromZone, true, true);
                 }
                 if (!cards.isEmpty()) {
-                    controller.shuffleLibrary(game);
+                    controller.shuffleLibrary(source, game);
                 }
             }
             return true;

@@ -128,7 +128,7 @@ class DarkSupplicantEffect extends OneShotEffect {
                     }
                 }
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
         }
         // Graveyard check
         if (player.chooseUse(Outcome.Benefit, "Do you want to search your graveyard for Scion of Darkness?", source, game)) {

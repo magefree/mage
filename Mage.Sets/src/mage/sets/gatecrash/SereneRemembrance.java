@@ -106,10 +106,10 @@ class SereneRemembranceEffect extends OneShotEffect {
         result |= card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
         Player player = game.getPlayer(card.getOwnerId());
         if (player != null){
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
         }
         if (graveyardPlayer != null && !graveyardPlayer.equals(player)) {
-            graveyardPlayer.shuffleLibrary(game);
+            graveyardPlayer.shuffleLibrary(source, game);
         }
         return result;
     }

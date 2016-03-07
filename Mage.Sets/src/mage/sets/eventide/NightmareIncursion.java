@@ -122,7 +122,7 @@ class NightmareIncursionEffect extends OneShotEffect {
             }
         }
         if (targetPlayer != null) {
-            targetPlayer.shuffleLibrary(game);
+            targetPlayer.shuffleLibrary(source, game);
         }
         return result;
     }

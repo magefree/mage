@@ -111,7 +111,7 @@ class YavimayaDryadEffect extends SearchEffect {
                 targetPlayer.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                         Zone.BATTLEFIELD, source, game, true, false, false, null);
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

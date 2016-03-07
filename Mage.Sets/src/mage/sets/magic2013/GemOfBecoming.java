@@ -106,7 +106,7 @@ class GemOfBecomingEffect extends OneShotEffect {
         searchLand(player, source, game, cards, "Mountain");
 
         player.revealCards("Gem of Becoming", cards, game);
-        player.shuffleLibrary(game);
+        player.shuffleLibrary(source, game);
 
         return false;
     }

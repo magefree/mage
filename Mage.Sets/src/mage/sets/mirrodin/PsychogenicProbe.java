@@ -83,7 +83,7 @@ class PsychogenicProbeTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType().equals(EventType.LIBRARY_SHUFFLED);
     }
-    
+
     @java.lang.Override
     public boolean checkTrigger(GameEvent event, Game game) {
         for (Effect effect : this.getEffects()) {
@@ -94,6 +94,6 @@ class PsychogenicProbeTriggeredAbility extends TriggeredAbilityImpl {
 
     @java.lang.Override
     public String getRule() {
-        return "Whenever a spell or ability causes a player to shuffle his or her library, Psychogenic Probe deals 2 damage to him or her.";
+        return "Whenever a spell or ability causes a player to shuffle his or her library, {this}    deals 2 damage to him or her.";
     }
 }

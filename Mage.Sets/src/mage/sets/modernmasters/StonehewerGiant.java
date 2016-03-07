@@ -123,7 +123,7 @@ class StonehewerGiantEffect extends OneShotEffect {
                 }
             }
         }
-        player.shuffleLibrary(game);
+        player.shuffleLibrary(source, game);
         return true;
     }
 }

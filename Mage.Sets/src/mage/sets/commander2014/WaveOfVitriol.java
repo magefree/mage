@@ -138,7 +138,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
             }
             controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
             for (Player player : playersToShuffle) {
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
             }
 
             return true;

@@ -105,10 +105,10 @@ class ScapeshiftEffect extends OneShotEffect {
         if (controller.searchLibrary(target, game)) {
             controller.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                     Zone.BATTLEFIELD, source, game, true, false, false, null);
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
-        controller.shuffleLibrary(game);
+        controller.shuffleLibrary(source, game);
         return false;
     }
 

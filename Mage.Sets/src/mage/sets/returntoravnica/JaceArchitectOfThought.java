@@ -311,7 +311,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
                     controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
         }
 
         ExileZone jaceExileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));

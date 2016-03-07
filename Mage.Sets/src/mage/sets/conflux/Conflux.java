@@ -173,7 +173,7 @@ class ConfluxEffect extends OneShotEffect {
             for (Card card : cards.getCards(game)) {
                 card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
             }
-            you.shuffleLibrary(game);
+            you.shuffleLibrary(source, game);
         }
         return true;
     }

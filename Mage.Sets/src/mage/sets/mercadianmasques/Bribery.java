@@ -93,7 +93,7 @@ class BriberyEffect extends OneShotEffect {
                 Card card = opponent.getLibrary().getCard(target.getFirstTarget(), game);
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            opponent.shuffleLibrary(game);
+            opponent.shuffleLibrary(source, game);
             return true;
         }
         return false;

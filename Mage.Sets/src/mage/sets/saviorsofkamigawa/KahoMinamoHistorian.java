@@ -126,7 +126,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
                     }
                 }
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
 
         }

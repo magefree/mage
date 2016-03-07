@@ -544,7 +544,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void shuffleLibrary(Game game) {
+    public void shuffleLibrary(Ability source, Game game) {
 
     }
 

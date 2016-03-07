@@ -176,7 +176,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                 }
             }
             if (mulliganedCards.get(playerId).size() > 0) {
-                player.shuffleLibrary(this);
+                player.shuffleLibrary(null, this);
             }
         }
     }

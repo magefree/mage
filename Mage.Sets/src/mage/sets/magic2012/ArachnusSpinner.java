@@ -140,7 +140,7 @@ class ArachnusSpinnerEffect extends OneShotEffect {
                     zone = Zone.LIBRARY;
                 }
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
         }
         if (card != null) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());

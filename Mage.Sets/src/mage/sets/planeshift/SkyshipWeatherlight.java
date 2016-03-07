@@ -102,7 +102,7 @@ class SkyshipWeatherlightEffect extends SearchEffect {
                     }
                 }
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

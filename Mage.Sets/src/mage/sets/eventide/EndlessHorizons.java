@@ -115,7 +115,7 @@ class EndlessHorizonsEffect extends SearchEffect {
                     }
                 }
             }
-            you.shuffleLibrary(game);
+            you.shuffleLibrary(source, game);
             return true;
 
         }

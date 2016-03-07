@@ -109,10 +109,10 @@ class ReshapeSearchEffect extends OneShotEffect {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
-        controller.shuffleLibrary(game);
+        controller.shuffleLibrary(source, game);
         return false;
     }
 

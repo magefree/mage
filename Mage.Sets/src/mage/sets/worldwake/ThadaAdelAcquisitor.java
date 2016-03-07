@@ -114,7 +114,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
                 }
             }
         }
-        damagedPlayer.shuffleLibrary(game);
+        damagedPlayer.shuffleLibrary(source, game);
         return true;
     }
 

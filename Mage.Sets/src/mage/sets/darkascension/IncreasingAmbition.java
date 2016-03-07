@@ -114,7 +114,7 @@ class IncreasingAmbitionEffect extends SearchEffect {
                     }
                 }
                 // shuffle anyway
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
                 return true;
             }
         }

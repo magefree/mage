@@ -118,7 +118,7 @@ public class ShapeAnew extends CardImpl {
                 targetController.moveCards(artifactCard, Zone.BATTLEFIELD, source, game);
             }
             targetController.putCardsOnTopOfLibrary(nonArtifactCards, game, source, false);
-            targetController.shuffleLibrary(game);
+            targetController.shuffleLibrary(source, game);
             return true;
         }
 

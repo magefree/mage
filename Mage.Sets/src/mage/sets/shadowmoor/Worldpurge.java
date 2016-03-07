@@ -114,7 +114,7 @@ class WorldpurgeEffect extends OneShotEffect {
                         }
                     }
                     player.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
-                    player.shuffleLibrary(game);
+                    player.shuffleLibrary(source, game);
                 }
             }
             game.emptyManaPools();

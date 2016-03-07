@@ -105,21 +105,21 @@ class ScionOfTheUrDragonEffect extends SearchEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability ability) {
-        Player player = game.getPlayer(ability.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             if (player.searchLibrary(target, game)) {
                 for (UUID cardId : target.getTargets()) {
                     Card card = player.getLibrary().getCard(cardId, game);
                     if (card != null) {
-                        player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, ability, game);
-                        CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, card, ability.getSourceId());
-                        game.addEffect(copyEffect, ability);
+                        player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                        CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, card, source.getSourceId());
+                        game.addEffect(copyEffect, source);
                     }
                 }
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return true;
         }
         return false;

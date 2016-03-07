@@ -87,7 +87,7 @@ class ArchangelsLightEffect extends OneShotEffect {
             for (Card card: controller.getGraveyard().getCards(game)) {
                 controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
             }            
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

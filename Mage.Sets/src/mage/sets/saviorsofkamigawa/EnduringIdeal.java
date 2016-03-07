@@ -101,7 +101,7 @@ class EnduringIdealEffect extends OneShotEffect {
                 applied = false;
             } else {
                 applied = controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
-                controller.shuffleLibrary(game);
+                controller.shuffleLibrary(source, game);
             }
         }
         return applied;

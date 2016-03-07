@@ -111,7 +111,7 @@ class GaeasBlessingEffect extends OneShotEffect {
                 }
             }
             if (shuffle) {
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
             }
             return true;
         }
@@ -189,7 +189,7 @@ class GaeasBlessingGraveToLibraryEffect extends OneShotEffect {
             }               
             controller.getLibrary().addAll(controller.getGraveyard().getCards(game), game);
             controller.getGraveyard().clear();
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

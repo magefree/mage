@@ -94,7 +94,7 @@ class MirrorMadPhantasmEffect extends OneShotEffect {
             Player player = game.getPlayer(perm.getOwnerId());
             if (player != null) {
                 perm.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
                 Cards cards = new CardsImpl();
                 while (true) {
                     Card card = player.getLibrary().removeFromTop(game);

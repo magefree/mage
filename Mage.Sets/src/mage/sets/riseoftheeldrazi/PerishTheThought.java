@@ -101,7 +101,7 @@ class PerishTheThoughtEffect extends OneShotEffect {
                         if (chosenCard != null) {
                             if (targetOpponent != null) {
                                 chosenCard.moveToZone(Zone.LIBRARY, id, game, false);
-                                targetOpponent.shuffleLibrary(game);
+                                targetOpponent.shuffleLibrary(source, game);
                             }
                         }
                     }

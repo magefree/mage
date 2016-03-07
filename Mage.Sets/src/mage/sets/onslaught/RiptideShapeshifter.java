@@ -119,7 +119,7 @@ class RiptideShapeshifterEffect extends OneShotEffect {
             }
             controller.revealCards(sourceObject.getIdName(), revealedCards, game);
             controller.moveCards(revealedCards, Zone.LIBRARY, source, game);
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

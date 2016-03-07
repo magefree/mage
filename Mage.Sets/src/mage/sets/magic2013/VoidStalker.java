@@ -94,13 +94,13 @@ class VoidStalkerEffect extends OneShotEffect {
             p.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             Player pl = game.getPlayer(p.getControllerId());
             if (pl != null)
-                pl.shuffleLibrary(game);
+                pl.shuffleLibrary(source, game);
         }
         if (s != null) {
             s.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             Player pl = game.getPlayer(s.getControllerId());
             if (pl != null)
-                pl.shuffleLibrary(game);
+                pl.shuffleLibrary(source, game);
         }
         return true;
     }

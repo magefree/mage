@@ -106,7 +106,7 @@ class CaravanVigilEffect extends OneShotEffect {
                     controller.revealCards(sourceObject.getIdName(), cards, game);
                 }
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

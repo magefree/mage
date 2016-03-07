@@ -125,10 +125,10 @@ class KodamasReachEffect extends OneShotEffect {
                 }
 
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
-        controller.shuffleLibrary(game);
+        controller.shuffleLibrary(source, game);
         return false;
 
     }

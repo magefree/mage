@@ -201,10 +201,10 @@ public class NightDealings extends CardImpl {
                     player.revealCards(name, cards, game);
                     game.informPlayers(player.getLogName() + " reveals " + card.getName());
                 }
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
                 return true;
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return false;
         }
     }

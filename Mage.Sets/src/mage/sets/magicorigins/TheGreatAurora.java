@@ -120,7 +120,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
                     for (Permanent permanent : list) {
                         player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
                     }
-                    player.shuffleLibrary(game);
+                    player.shuffleLibrary(source, game);
                 }
             }
 

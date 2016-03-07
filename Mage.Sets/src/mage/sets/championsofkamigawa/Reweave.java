@@ -132,7 +132,7 @@ class ReweaveEffect extends OneShotEffect {
                                 cards.remove(card);
                             }
                             library.addAll(cards.getCards(game), game);
-                            permanentController.shuffleLibrary(game);
+                            permanentController.shuffleLibrary(source, game);
                         }
                     }
                     return true;

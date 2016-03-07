@@ -106,7 +106,7 @@ class TrenchGorgerEffect extends OneShotEffect {
                 controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                 count++;
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             game.addEffect(new SetPowerToughnessSourceEffect(count, count, Duration.EndOfGame, SubLayer.SetPT_7b), source);
             return true;
         }

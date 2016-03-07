@@ -88,7 +88,7 @@ class LongTermPlansEffect extends OneShotEffect {
             if (player.searchLibrary(target, game)) {
                 Card card = player.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {
-                    player.shuffleLibrary(game);
+                    player.shuffleLibrary(source, game);
                     Card cardTop = null;
                     Card cardSecond = null;
                     if (player.getLibrary().size() > 0) {

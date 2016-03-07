@@ -186,7 +186,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
      */
     protected void mayShuffle(Player player, Ability source, Game game) {
         if (this.mayShuffleAfter && player.chooseUse(Outcome.Benefit, "Shuffle your library?", source, game)) {
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
         }
     }
 

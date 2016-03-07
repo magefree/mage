@@ -106,7 +106,7 @@ class VeteranExplorerEffect extends OneShotEffect {
                 }
             }
             for (Player player: usingPlayers) {
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
             }
             return true;
         }

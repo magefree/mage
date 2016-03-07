@@ -95,7 +95,7 @@ class ShardConvergenceEffect extends OneShotEffect {
         searchLand(player, source, game, cards, "Mountain");
 
         player.revealCards("Shard Convergence", cards, game);
-        player.shuffleLibrary(game);
+        player.shuffleLibrary(source, game);
 
         return true;
     }

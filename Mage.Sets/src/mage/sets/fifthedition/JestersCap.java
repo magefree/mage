@@ -104,7 +104,7 @@ class JestersCapEffect extends OneShotEffect {
                     applied |= player.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
-            targetPlayer.shuffleLibrary(game);
+            targetPlayer.shuffleLibrary(source, game);
         }
         return applied;
     }

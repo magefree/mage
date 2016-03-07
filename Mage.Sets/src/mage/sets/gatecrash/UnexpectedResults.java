@@ -111,7 +111,7 @@ class UnexpectedResultEffect extends OneShotEffect {
             return false;
         }
         if (controller.getLibrary().size() > 0) {
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             Card card = controller.getLibrary().getFromTop(game);
             if (card == null) {
                 return false;

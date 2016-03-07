@@ -151,7 +151,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
                     }
                 }
             }
-            you.shuffleLibrary(game);
+            you.shuffleLibrary(source, game);
         }
         return false;
     }

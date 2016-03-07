@@ -102,7 +102,7 @@ class LifesFinaleEffect extends OneShotEffect {
             if (player.searchLibrary(target, game, opponent.getId())) {
                 player.moveCards(new CardsImpl(target.getTargets()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
-            opponent.shuffleLibrary(game);
+            opponent.shuffleLibrary(source, game);
             return true;
         }
         return false;

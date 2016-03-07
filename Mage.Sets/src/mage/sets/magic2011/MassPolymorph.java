@@ -112,7 +112,7 @@ class MassPolymorphEffect extends OneShotEffect {
             controller.revealCards(sourceObject.getIdName(), revealed, game);
             controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game, false, false, true, null);
             controller.putCardsOnTopOfLibrary(nonCreatureCards, game, source, false);
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

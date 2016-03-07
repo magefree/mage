@@ -111,7 +111,7 @@ class WildPairEffect extends OneShotEffect {
                         controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                     }
                 }
-                controller.shuffleLibrary(game);
+                controller.shuffleLibrary(source, game);
                 return true;
             }
         }

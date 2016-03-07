@@ -137,7 +137,7 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
                     player.putInHand(card, game);
                 }
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return true;
         }
         return false;

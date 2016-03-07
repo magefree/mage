@@ -107,7 +107,7 @@ class HauntingEchoesEffect extends OneShotEffect {
                     }
                 }
             }
-            targetPlayer.shuffleLibrary(game);
+            targetPlayer.shuffleLibrary(source, game);
             return true;
         }
         return false;

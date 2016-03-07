@@ -1403,13 +1403,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void shuffleLibrary(Game game) {
+    public void shuffleLibrary(Ability source, Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SHUFFLE_LIBRARY, playerId, playerId))) {
             this.library.shuffle();
             if (!game.isSimulation()) {
-                game.informPlayers(getLogName() + " shuffles his or her library.");
+                game.informPlayers(getLogName() + "'s library is shuffled");
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SHUFFLED, playerId, playerId));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SHUFFLED, playerId, (source == null ? null : source.getSourceId()), playerId));
         }
     }
 

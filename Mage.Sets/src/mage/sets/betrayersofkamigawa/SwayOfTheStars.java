@@ -98,7 +98,7 @@ class SwayOfTheStarsEffect extends OneShotEffect {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controller.getId(), source.getSourceId(), game)) {
                     permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
             }
         }
         return true;

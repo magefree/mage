@@ -123,7 +123,7 @@ class OreskosExplorerEffect extends OneShotEffect {
                 controller.moveCards(cards.getCards(game), Zone.HAND, source, game);
             }
         }
-        controller.shuffleLibrary(game);
+        controller.shuffleLibrary(source, game);
         return true;
     }
 }

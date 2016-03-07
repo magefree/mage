@@ -128,10 +128,10 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
-        controller.shuffleLibrary(game);
+        controller.shuffleLibrary(source, game);
         return false;
     }
 }

@@ -128,7 +128,7 @@ class GomazoaEffect extends OneShotEffect {
             for (UUID player : players) {
                 Player owner = game.getPlayer(player);
                 if (owner != null) {
-                    owner.shuffleLibrary(game);
+                    owner.shuffleLibrary(source, game);
                 }
             }
             return true;

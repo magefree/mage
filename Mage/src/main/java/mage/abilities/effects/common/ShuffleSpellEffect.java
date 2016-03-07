@@ -63,7 +63,7 @@ public class ShuffleSpellEffect extends OneShotEffect implements MageSingleton {
                 if (controller.moveCards(spell, Zone.LIBRARY, source, game) && !spell.isCopy()) {
                     Player owner = game.getPlayer(spell.getCard().getOwnerId());
                     if (owner != null) {
-                        owner.shuffleLibrary(game);
+                        owner.shuffleLibrary(source, game);
                     }
 
                 }

@@ -126,7 +126,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
                     }
                 }
             }
-            targetOpponent.shuffleLibrary(game);
+            targetOpponent.shuffleLibrary(source, game);
             return true;
         }
         return false;

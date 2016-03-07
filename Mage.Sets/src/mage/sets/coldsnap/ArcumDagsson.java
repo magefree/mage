@@ -125,7 +125,7 @@ class ArcumDagssonEffect extends OneShotEffect {
                             player.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
                     }
-                    player.shuffleLibrary(game);
+                    player.shuffleLibrary(source, game);
                 }
                 return true;
             }

@@ -122,10 +122,10 @@ class GiftsUngivenEffect extends OneShotEffect {
                 player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 player.moveCards(cardsToKeep, Zone.LIBRARY, Zone.HAND, source, game);
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return true;
         }
-        player.shuffleLibrary(game);
+        player.shuffleLibrary(source, game);
         return false;
     }
 }

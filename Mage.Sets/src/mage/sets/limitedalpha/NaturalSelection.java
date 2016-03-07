@@ -120,7 +120,7 @@ class  NaturalSelectionEffect extends OneShotEffect {
             card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
         }
         if (you.chooseUse(Outcome.Neutral, "You may have that player shuffle his or her library", source, game)){
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
         }
         return true;
     }

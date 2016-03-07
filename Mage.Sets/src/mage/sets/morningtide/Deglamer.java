@@ -97,7 +97,7 @@ class DeglamerShuffleIntoLibraryEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
             if (permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true) ) {
-                game.getPlayer(permanent.getOwnerId()).shuffleLibrary(game);
+                game.getPlayer(permanent.getOwnerId()).shuffleLibrary(source, game);
                 return true;
             }
         }

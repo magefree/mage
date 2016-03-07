@@ -58,7 +58,7 @@ public class ShuffleLibraryTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-			player.shuffleLibrary(game);
+			player.shuffleLibrary(source, game);
             return true;
         }
         return false;

@@ -75,12 +75,12 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
                     player.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                             Zone.BATTLEFIELD, source, game, tapped, false, ownerIsController, null);
                 }
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
                 return true;
             }
 
             if (forceShuffle) {
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
             }
         }
 

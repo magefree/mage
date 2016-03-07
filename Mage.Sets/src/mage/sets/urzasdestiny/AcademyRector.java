@@ -108,7 +108,7 @@ class AcademyRectorEffect extends OneShotEffect {
             if (targetCard != null) {
                 controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
         return false;

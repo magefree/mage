@@ -101,7 +101,7 @@ class PathToExileEffect extends OneShotEffect {
                         player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                     }
                 }
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
             }
             return true;
         }

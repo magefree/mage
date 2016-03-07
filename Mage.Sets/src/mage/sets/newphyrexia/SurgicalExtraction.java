@@ -157,7 +157,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                         }
                     }
                 }
-                owner.shuffleLibrary(game);
+                owner.shuffleLibrary(source, game);
                 return true;
             }
         }

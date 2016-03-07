@@ -98,7 +98,7 @@ class MoltenPsycheEffect extends OneShotEffect {
                         cardsToDraw.put(playerId, cardsInHand);
                     }
                     player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
-                    player.shuffleLibrary(game);
+                    player.shuffleLibrary(source, game);
                 }
             }
 

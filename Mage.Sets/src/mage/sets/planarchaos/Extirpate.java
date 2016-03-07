@@ -149,7 +149,7 @@ class ExtirpateEffect extends OneShotEffect {
                     }
                 }
             }
-            owner.shuffleLibrary(game);
+            owner.shuffleLibrary(source, game);
             return true;
         }
         return false;

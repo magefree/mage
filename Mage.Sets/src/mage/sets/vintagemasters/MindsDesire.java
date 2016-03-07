@@ -95,7 +95,7 @@ class MindsDesireEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
             if (controller.getLibrary().size() > 0) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {

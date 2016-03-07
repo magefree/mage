@@ -69,7 +69,7 @@ class AcquireEffect extends OneShotEffect {
             if (targetCard != null) {
                 controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
             }
-            opponent.shuffleLibrary(game);
+            opponent.shuffleLibrary(source, game);
             return true;
         }
         return false;

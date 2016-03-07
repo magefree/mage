@@ -141,7 +141,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
             game.informPlayers("No nonland permanent card with converted mana cost " + count + " or less to choose.");
         }
         controller.moveCards(cards, Zone.LIBRARY, source, game);
-        controller.shuffleLibrary(game);
+        controller.shuffleLibrary(source, game);
         return true;
     }
 

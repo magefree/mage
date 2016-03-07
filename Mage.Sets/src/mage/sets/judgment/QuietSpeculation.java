@@ -109,10 +109,10 @@ class SearchLibraryPutInGraveEffect extends SearchEffect {
                 player.revealCards("Quiet Speculation", cards, game);
                 player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
-            player.shuffleLibrary(game);
+            player.shuffleLibrary(source, game);
             return true;
         }
-        player.shuffleLibrary(game);
+        player.shuffleLibrary(source, game);
         return false;
     }
 

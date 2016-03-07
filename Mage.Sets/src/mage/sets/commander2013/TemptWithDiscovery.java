@@ -134,7 +134,7 @@ class TemptWithDiscoveryEffect extends OneShotEffect {
             for (UUID playerId : playersShuffle) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.shuffleLibrary(game);
+                    player.shuffleLibrary(source, game);
                 }
             }
             return true;

@@ -134,7 +134,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
                     zone = Zone.LIBRARY;
                 }
             }
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
         }
         // aura card found - attach it
         if (card != null) {
