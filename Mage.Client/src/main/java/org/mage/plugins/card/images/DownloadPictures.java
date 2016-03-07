@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.imageio.IIOImage;
@@ -67,6 +67,7 @@ import org.mage.plugins.card.utils.CardImageUtils;
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
     private static final Logger logger = Logger.getLogger(DownloadPictures.class);
+    private static final Random rnd = new Random();
 
     private JProgressBar bar;
     private final JOptionPane dlg;
@@ -570,8 +571,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                 // Logger.getLogger(this.getClass()).info(url.toString());
                 URLConnection httpConn = url.openConnection(p);
-                // images download from magiccards.info may not work with default 'User-Agent: Java/1.x.x' request header
-                httpConn.setRequestProperty("User-Agent", UUID.randomUUID().toString());
+                setUpConnection(httpConn);
+
                 httpConn.connect();
                 int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
                 if (responseCode == 200) {
@@ -636,6 +637,33 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             }
             synchronized (sync) {
                 update(cardIndex + 1, count);
+            }
+        }
+
+        private void setUpConnection(URLConnection httpConn) {
+            // images download from magiccards.info may not work with default 'User-Agent: Java/1.x.x' request header
+            switch (rnd.nextInt(3)) {
+                // chrome
+                case 0:
+                    httpConn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+                    httpConn.setRequestProperty("Accept-Encoding", "gzip, deflate, sdch");
+                    httpConn.setRequestProperty("Accept-Language", "en-US,en;q=0.8");
+                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36");
+                    break;
+                // ff
+                case 1:
+                    httpConn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+                    httpConn.setRequestProperty("Accept-Encoding", "gzip, deflate");
+                    httpConn.setRequestProperty("Accept-Language", "en-US;q=0.5,en;q=0.3");
+                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0");
+                    break;
+                // ie
+                case 2:
+                    httpConn.setRequestProperty("Accept", "text/html, application/xhtml+xml, */*");
+                    httpConn.setRequestProperty("Accept-Encoding", "gzip, deflate");
+                    httpConn.setRequestProperty("Accept-Language", "en-US");
+                    httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko");
+                    break;
             }
         }
 
