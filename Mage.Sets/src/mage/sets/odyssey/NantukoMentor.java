@@ -33,7 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -43,6 +45,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -60,7 +63,7 @@ public class NantukoMentor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}, {tap}: Target creature gets +X/+X until end of turn, where X is that creature's power.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NantukoMentorBoostTargetEffect(), new ManaCostsImpl("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NantukoMentorEffect(), new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -76,29 +79,29 @@ public class NantukoMentor extends CardImpl {
     }
 }
 
-class NantukoMentorBoostTargetEffect extends ContinuousEffectImpl {
+class NantukoMentorEffect extends OneShotEffect {
 
-    public NantukoMentorBoostTargetEffect() {
-        super(Duration.EndOfTurn, Outcome.BoostCreature);
-        staticText = "Target creature gets +X/+X until end of turn, where X is that creature's power.";
+    public NantukoMentorEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Target creature gets +X/+X until end of turn, where X is that creature's power";
     }
 
-    public NantukoMentorBoostTargetEffect(final NantukoMentorBoostTargetEffect effect) {
+    public NantukoMentorEffect(final NantukoMentorEffect effect) {
         super(effect);
     }
 
     @Override
-    public NantukoMentorBoostTargetEffect copy() {
-        return new NantukoMentorBoostTargetEffect(this);
+    public NantukoMentorEffect copy() {
+        return new NantukoMentorEffect(this);
     }
 
     @Override
-    public boolean apply(Game game, Ability source){
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target != null) {
-            MageInt power = target.getPower();
-            target.addPower(power.getValue());
-            target.addToughness(power.getValue());
+    public boolean apply(Game game, Ability source) {
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (targetPermanent != null) {
+            ContinuousEffect effect = new BoostTargetEffect(targetPermanent.getPower().getValue(), targetPermanent.getPower().getValue(), Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(targetPermanent, game));
+            game.addEffect(effect, source);
         }
         return true;
     }
