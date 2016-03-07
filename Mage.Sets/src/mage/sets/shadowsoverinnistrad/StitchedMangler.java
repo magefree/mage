@@ -54,7 +54,7 @@ public class StitchedMangler extends CardImpl {
     }
 
     public StitchedMangler(UUID ownerId) {
-        super(ownerId, 89, "Stiched Mangler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        super(ownerId, 89, "Stitched Mangler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Zombie");
         this.subtype.add("Horror");
