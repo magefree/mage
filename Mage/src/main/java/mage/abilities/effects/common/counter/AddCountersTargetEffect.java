@@ -34,6 +34,7 @@ import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -85,6 +86,8 @@ public class AddCountersTargetEffect extends OneShotEffect {
             int affectedTargets = 0;
             for (UUID uuid : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(uuid);
+                Player player = game.getPlayer(uuid);
+                Card card = game.getCard(targetPointer.getFirst(game, source));
                 if (permanent != null) {
                     if (counter != null) {
                         Counter newCounter = counter.copy();
@@ -102,18 +105,23 @@ public class AddCountersTargetEffect extends OneShotEffect {
                                     + numberAdded + " " + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
                         }
                     }
-                } else {
-                    Player player = game.getPlayer(uuid);
-                    if (player != null) {
-                        Counter newCounter = counter.copy();
-                        newCounter.add(amount.calculate(game, source, this));
-                        player.addCounters(newCounter, game);
-                        affectedTargets++;
-                        if (!game.isSimulation()) {
-                            game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                                    + counter.getCount() + " " + counter.getName().toLowerCase() + " counter on " + player.getLogName());
-                        }
+                } else if (player != null) {
+                    Counter newCounter = counter.copy();
+                    newCounter.add(amount.calculate(game, source, this));
+                    player.addCounters(newCounter, game);
+                    affectedTargets++;
+                    if (!game.isSimulation()) {
+                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
+                                + counter.getCount() + " " + counter.getName().toLowerCase() + " counter on " + player.getLogName());
                     }
+                } else if (card != null && counter != null) {
+                    card.addCounters(counter.getName(), counter.getCount(), game);
+                    if (!game.isSimulation()) {
+                        game.informPlayers(new StringBuilder("Added ").append(counter.getCount()).append(" ").append(counter.getName())
+                                .append(" counter to ").append(card.getName())
+                                .append(" (").append(card.getCounters(game).getCount(counter.getName())).append(")").toString());
+                    }
+                    return true;
                 }
             }
             return affectedTargets > 0;
