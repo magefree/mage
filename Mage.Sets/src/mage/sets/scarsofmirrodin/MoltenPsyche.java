@@ -30,7 +30,6 @@ package mage.sets.scarsofmirrodin;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
@@ -97,7 +96,7 @@ class MoltenPsycheEffect extends OneShotEffect {
                     if (cardsInHand > 0) {
                         cardsToDraw.put(playerId, cardsInHand);
                     }
-                    player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
+                    player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
                     player.shuffleLibrary(source, game);
                 }
             }
@@ -117,9 +116,11 @@ class MoltenPsycheEffect extends OneShotEffect {
             if (MetalcraftCondition.getInstance().apply(game, source)) {
                 MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get("CardsDrawn");
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        player.damage(watcher.getDraws(playerId), source.getSourceId(), game, false, true);
+                    if (game.isOpponent(controller, playerId)) {
+                        Player player = game.getPlayer(playerId);
+                        if (player != null) {
+                            player.damage(watcher.getDraws(playerId), source.getSourceId(), game, false, true);
+                        }
                     }
                 }
             }
@@ -146,9 +147,7 @@ class MoltenPsycheWatcher extends Watcher {
 
     public MoltenPsycheWatcher(final MoltenPsycheWatcher watcher) {
         super(watcher);
-        for (Entry<UUID, Integer> entry : watcher.draws.entrySet()) {
-            draws.put(entry.getKey(), entry.getValue());
-        }
+        this.draws.putAll(watcher.draws);
     }
 
     @Override
