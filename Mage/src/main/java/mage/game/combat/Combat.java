@@ -830,8 +830,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 blockIsValid = true;
                                 break CombatGroups;
                             } else // check if the blocker blocks a attacker that must be blocked at least by one and is the only blocker, this block is also valid
-                            {
-                                if (combatGroup.getBlockers().size() == 1) {
+                             if (combatGroup.getBlockers().size() == 1) {
                                     if (mustBeBlockedByAtLeastOne.containsKey(forcingAttackerId)) {
                                         if (mustBeBlockedByAtLeastOne.get(forcingAttackerId).contains(creatureForcedToBlock.getId())) {
                                             blockIsValid = true;
@@ -839,7 +838,6 @@ public class Combat implements Serializable, Copyable<Combat> {
                                         }
                                     }
                                 }
-                            }
                         }
                     }
                 }
@@ -1113,7 +1111,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     public boolean removePlaneswalkerFromCombat(UUID planeswalkerId, Game game, boolean withInfo) {
         boolean result = false;
         for (CombatGroup group : groups) {
-            if (group.getDefenderId().equals(planeswalkerId)) {
+            if (group.getDefenderId() != null && group.getDefenderId().equals(planeswalkerId)) {
                 group.removeAttackedPlaneswalker(planeswalkerId);
                 result = true;
             }
