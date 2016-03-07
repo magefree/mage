@@ -123,12 +123,15 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
             sb.delete(sb.length() - 2, sb.length());
             FILTER.setMessage(sb.toString());
             TargetPermanent target = new TargetPermanent(FILTER);
+            target.setNotTarget(true);
             if (controller != null
                     && controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
-                game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
-                aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
-                return targetPermanent.addAttachment(aura.getId(), game);
+                if (!targetPermanent.cantBeEnchantedBy(aura, game)) {
+                    game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
+                    aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
+                    return targetPermanent.addAttachment(aura.getId(), game);
+                }
             }
         }
         return false;
