@@ -29,7 +29,6 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -44,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LevelX2
  */
 public class StitchedMangler extends CardImpl {
 
@@ -55,7 +54,7 @@ public class StitchedMangler extends CardImpl {
     }
 
     public StitchedMangler(UUID ownerId) {
-        super(ownerId, 89, "Stitched Mangler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        super(ownerId, 89, "Stiched Mangler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Zombie");
         this.subtype.add("Horror");
@@ -66,8 +65,8 @@ public class StitchedMangler extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // When Stitched Mangler enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
-        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("That creature"));
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

@@ -29,24 +29,26 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  * @author nantuko
  */
 public class ThrabenSentry extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public ThrabenSentry(UUID ownerId) {
         super(ownerId, 38, "Thraben Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -64,7 +66,7 @@ public class ThrabenSentry extends CardImpl {
 
         // Whenever another creature you control dies, you may transform Thraben Sentry.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ThrabenSentryTriggeredAbility());
+        this.addAbility(new DiesCreatureTriggeredAbility(new TransformSourceEffect(true), true, filter));
     }
 
     public ThrabenSentry(final ThrabenSentry card) {
@@ -74,46 +76,5 @@ public class ThrabenSentry extends CardImpl {
     @Override
     public ThrabenSentry copy() {
         return new ThrabenSentry(this);
-    }
-}
-
-class ThrabenSentryTriggeredAbility extends TriggeredAbilityImpl {
-
-    public ThrabenSentryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), true);
-    }
-
-    public ThrabenSentryTriggeredAbility(ThrabenSentryTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ThrabenSentryTriggeredAbility copy() {
-        return new ThrabenSentryTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent source = game.getPermanent(this.sourceId);
-        if (source == null) {
-            return false;
-        }
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        Permanent permanent = zEvent.getTarget();
-        return permanent != null && permanent.getCardType().contains(CardType.CREATURE) &&
-                zEvent.getToZone() == Zone.GRAVEYARD &&
-                zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                permanent.getControllerId().equals(this.getControllerId()) &&
-                !source.isTransformed();
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another creature you control dies, you may transform Thraben Sentry";
     }
 }
