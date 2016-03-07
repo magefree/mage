@@ -1296,6 +1296,7 @@ public final class GamePanel extends javax.swing.JPanel {
         gameChatPanel.setConnectedChat(userChatPanel);
         gameChatPanel.disableInput();
         gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
+        gameChatPanel.enableHyperlinks();
         jSplitPane2 = new javax.swing.JSplitPane();
         handContainer = new HandPanel();
         handCards = new HashMap<>();

@@ -351,6 +351,10 @@ public class ChatPanelBasic extends javax.swing.JPanel {
             this.txtMessage.repaint();
         }
     }
+    
+    public void enableHyperlinks() {
+        txtConversation.enableHyperlinks();
+    }
 
     private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped
         handleKeyTyped(evt);

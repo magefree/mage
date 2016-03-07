@@ -39,10 +39,14 @@ public class ColorPane extends JEditorPane {
     HTMLDocument doc = new HTMLDocument();
     private int tooltipDelay;
     private int tooltipCounter;
+    private boolean hyperlinkEnabled = false;
 
     public ColorPane() {
         this.setEditorKit(kit);
         this.setDocument(doc);
+    }
+
+    private void addHyperlinkHandlers() {
         addHyperlinkListener(new HyperlinkListener() {
 
             @Override
@@ -62,7 +66,7 @@ public class ColorPane extends JEditorPane {
                             if (e.getEventType() == EventType.EXITED) {
                                 setPopupVisibility(container, false);
                             }
-                            if (e.getEventType() == EventType.ENTERED) {
+                            if (e.getEventType() == EventType.ENTERED && card != null) {
                                 CardInfoPane cardInfoPane = (CardInfoPane) MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
                                 cardInfoPane.setCard(new CardView(card.getMockCard()), container);
                                 setPopupVisibility(container, true);
@@ -76,7 +80,7 @@ public class ColorPane extends JEditorPane {
             }
 
         });
-        
+
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
@@ -89,20 +93,21 @@ public class ColorPane extends JEditorPane {
             }
         });
     }
-    
-    private void setPopupVisibility(final Component container, final boolean show)
-            throws InterruptedException {
+
+    private void setPopupVisibility(final Component container, final boolean show) throws InterruptedException {
         final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Point location = new Point(getLocationOnScreen().x - container.getWidth(), MouseInfo.getPointerInfo().getLocation().y);
-                Component parentComponent = MageFrame.getInstance();
-                location = GuiDisplayUtil.keepComponentInsideParent(location, parentComponent.getLocationOnScreen(), container, parentComponent);
-                container.setLocation(location);
                 tooltipCounter += show ? 1 : -1;
                 if (tooltipCounter < 0) {
                     tooltipCounter = 0;
+                }
+                if (tooltipCounter > 0) {
+                    Point location = new Point(getLocationOnScreen().x - container.getWidth(), MouseInfo.getPointerInfo().getLocation().y);
+                    Component parentComponent = MageFrame.getInstance();
+                    location = GuiDisplayUtil.keepComponentInsideParent(location, parentComponent.getLocationOnScreen(), container, parentComponent);
+                    container.setLocation(location);
                 }
                 container.setVisible(tooltipCounter > 0);
                 c.repaint();
@@ -131,7 +136,9 @@ public class ColorPane extends JEditorPane {
 
     public void append(String text) {
         try {
-            text = text.replaceAll("(<font color=[^>]*>([^<]*)) (\\[[0-9a-fA-F]*\\])</font>", "<a href=\"#$2\">$1</a> $3");
+            if (hyperlinkEnabled) {
+                text = text.replaceAll("(<font color=[^>]*>([^<]*)) (\\[[0-9a-fA-F]*\\])</font>", "<a href=\"#$2\">$1</a> $3");
+            }
             setEditable(true);
             kit.insertHTML(doc, doc.getLength(), text, 0, 0, null);
             setEditable(false);
@@ -163,4 +170,9 @@ public class ColorPane extends JEditorPane {
         super.paintChildren(g);
     }
 
+    public void enableHyperlinks(){
+        hyperlinkEnabled = true;
+        addHyperlinkHandlers();
+    }
+    
 }
