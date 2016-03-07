@@ -28,28 +28,51 @@
 
 package mage.client.util.audio;
 
-import javax.sound.sampled.Clip;
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
  * @author LevelX2
  */
-public class MageClip  {
+public class MageClip {
 
-    private final Clip clip;
     private final AudioGroup audioGroup;
+    private String filename;
+    private byte buf[];
 
-    public MageClip(Clip clip, AudioGroup audioGroup) {
-        this.clip = clip;
+    public MageClip(String filename, AudioGroup audioGroup) {
+        this.filename = filename;
         this.audioGroup = audioGroup;
+        loadStream();
     }
 
-    public Clip getClip() {
-        return clip;
+    private void loadStream() {
+        File file = new File(filename);
+        try {
+            AudioInputStream soundIn = AudioSystem.getAudioInputStream(file);
+            byte tmp[] = new byte[(int) file.length()];
+            int read = 0;
+            read = soundIn.read(tmp, 0, tmp.length);
+            buf = new byte[read];
+            System.arraycopy(tmp, 0, buf, 0, read); // truncate the buffer to the actual audio size
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public AudioGroup getAudioGroup() {
         return audioGroup;
     }
-    
+
+    public byte[] getBuffer(){
+        return buf;
+    }
+
 }

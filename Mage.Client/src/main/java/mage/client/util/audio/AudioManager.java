@@ -55,8 +55,8 @@ public class AudioManager {
     /**
      * AudioManager singleton.
      */
-    private static final AudioManager audioManager = new AudioManager();;
-
+    private static final AudioManager audioManager = new AudioManager();
+    private final LinePool linePool = new LinePool();
 
     public static AudioManager getManager() {
         return audioManager;
@@ -64,263 +64,237 @@ public class AudioManager {
 
     public static void playNextPage() {
         if (audioManager.nextPageClip == null) {
-            audioManager.nextPageClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPrevPage.wav"),
-                            AudioGroup.OtherSounds);
+            audioManager.nextPageClip = new MageClip(Constants.BASE_SOUND_PATH + "OnPrevPage.wav", AudioGroup.OtherSounds);
         }
         checkAndPlayClip(getManager().nextPageClip);
     }
 
     public static void playPrevPage() {
         if (audioManager.prevPageClip == null) {
-            audioManager.prevPageClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPrevPage.wav"),
-                            AudioGroup.OtherSounds);
-        }        
+            audioManager.prevPageClip = new MageClip(Constants.BASE_SOUND_PATH + "OnPrevPage.wav", AudioGroup.OtherSounds);
+        }
         checkAndPlayClip(getManager().prevPageClip);
     }
 
     public static void playAnotherTab() {
         if (audioManager.anotherTabClip == null) {
-            audioManager.anotherTabClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnNextPage.wav"),
-                    AudioGroup.OtherSounds);    
+            audioManager.anotherTabClip = new MageClip(Constants.BASE_SOUND_PATH + "OnNextPage.wav", AudioGroup.OtherSounds);
         }
         checkAndPlayClip(getManager().anotherTabClip);
     }
 
     public static void playNextPhase() {
         if (audioManager.nextPhaseClip == null) {
-            audioManager.nextPhaseClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnNextPhase.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.nextPhaseClip = new MageClip(Constants.BASE_SOUND_PATH + "OnNextPhase.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().nextPhaseClip);
     }
 
     public static void playEndTurn() {
         if (audioManager.endTurnClip == null) {
-            audioManager.endTurnClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnEndTurn.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.endTurnClip = new MageClip(Constants.BASE_SOUND_PATH + "OnEndTurn.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().endTurnClip);
     }
 
     public static void playTapPermanent() {
         if (audioManager.tapPermanentClip == null) {
-            audioManager.tapPermanentClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnTapPermanent.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.tapPermanentClip = new MageClip(Constants.BASE_SOUND_PATH + "OnTapPermanent.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().tapPermanentClip);
     }
 
     public static void playSummon() {
         if (audioManager.summonClip == null) {
-            audioManager.summonClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnSummon.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.summonClip = new MageClip(Constants.BASE_SOUND_PATH + "OnSummon.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().summonClip);
     }
 
     public static void playDiedCreature() {
         if (audioManager.diedCreatureClip == null) {
-            audioManager.diedCreatureClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnSummon-.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.diedCreatureClip = new MageClip(Constants.BASE_SOUND_PATH + "OnSummon-.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().diedCreatureClip);
     }
 
     public static void playDraw() {
         if (audioManager.drawClip == null) {
-            audioManager.drawClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnDraw.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.drawClip = new MageClip(Constants.BASE_SOUND_PATH + "OnDraw.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().drawClip);
     }
 
     public static void playButtonOk() {
         if (audioManager.buttonOkClip == null) {
-            audioManager.buttonOkClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnButtonOk.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.buttonOkClip = new MageClip(Constants.BASE_SOUND_PATH + "OnButtonOk.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().buttonOkClip);
     }
 
     public static void playButtonCancel() {
         if (audioManager.buttonCancelClip == null) {
-            audioManager.buttonCancelClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnButtonCancel.wav"),
-                            AudioGroup.SkipSounds);
+            audioManager.buttonCancelClip = new MageClip(Constants.BASE_SOUND_PATH + "OnButtonCancel.wav", AudioGroup.SkipSounds);
 
-        }        
+        }
         checkAndPlayClip(getManager().buttonCancelClip);
     }
 
     public static void playAttack() {
         if (audioManager.attackClip == null) {
-            audioManager.attackClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnAttack.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.attackClip = new MageClip(Constants.BASE_SOUND_PATH + "OnAttack.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().attackClip);
     }
 
     public static void playBlock() {
         if (audioManager.blockClip == null) {
-            audioManager.blockClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnBlock.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.blockClip = new MageClip(Constants.BASE_SOUND_PATH + "OnBlock.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().blockClip);
     }
 
     public static void playAddPermanent() {
         if (audioManager.addPermanentClip == null) {
-            audioManager.addPermanentClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnAddPermanent.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.addPermanentClip = new MageClip(Constants.BASE_SOUND_PATH + "OnAddPermanent.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().addPermanentClip);
     }
 
     public static void playAddArtifact() {
         if (audioManager.addArtifactClip == null) {
-            audioManager.addArtifactClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnAddArtifact.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.addArtifactClip = new MageClip(Constants.BASE_SOUND_PATH + "OnAddArtifact.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().addArtifactClip);
     }
 
     public static void playStackNew() {
         if (audioManager.updateStackClip == null) {
-            audioManager.updateStackClip = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnStackNew.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.updateStackClip = new MageClip(Constants.BASE_SOUND_PATH + "OnStackNew.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().updateStackClip);
     }
 
     public static void playOnHover() {
         if (audioManager.onHover == null) {
-            audioManager.onHover = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnHover.wav"),
-                            AudioGroup.GameSounds);
-        }        
+            audioManager.onHover = new MageClip(Constants.BASE_SOUND_PATH + "OnHover.wav", AudioGroup.GameSounds);
+        }
         checkAndPlayClip(getManager().onHover);
     }
 
     public static void playOnCountdown1() {
         if (audioManager.onCountdown1 == null) {
-            audioManager.onCountdown1 = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnCountdown1.wav"),
-                            AudioGroup.DraftSounds);
+            audioManager.onCountdown1 = new MageClip(Constants.BASE_SOUND_PATH + "OnCountdown1.wav", AudioGroup.DraftSounds);
         }
         checkAndPlayClip(getManager().onCountdown1);
     }
 
     public static void playOnDraftSelect() {
         if (audioManager.onDraftSelect == null) {
-            audioManager.onDraftSelect = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnDraftSelect.wav"),
-                            AudioGroup.DraftSounds);
+            audioManager.onDraftSelect = new MageClip(Constants.BASE_SOUND_PATH + "OnDraftSelect.wav", AudioGroup.DraftSounds);
         }
         checkAndPlayClip(getManager().onDraftSelect);
     }
 
     public static void playOnSkipButton() {
         if (audioManager.onSkipButton == null) {
-            audioManager.onSkipButton = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnSkipButton.wav"),
-                            AudioGroup.SkipSounds);
+            audioManager.onSkipButton = new MageClip(Constants.BASE_SOUND_PATH + "OnSkipButton.wav", AudioGroup.SkipSounds);
         }
         checkAndPlayClip(getManager().onSkipButton);
     }
 
     public static void playOnSkipButtonCancel() {
         if (audioManager.onSkipButtonCancel == null) {
-            audioManager.onSkipButtonCancel = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnSkipButtonCancel.wav"),
-                            AudioGroup.SkipSounds);
+            audioManager.onSkipButtonCancel = new MageClip(Constants.BASE_SOUND_PATH + "OnSkipButtonCancel.wav", AudioGroup.SkipSounds);
         }
         checkAndPlayClip(getManager().onSkipButtonCancel);
     }
 
     public static void playPlayerJoinedTable() {
         if (audioManager.playerJoinedTable == null) {
-            audioManager.playerJoinedTable = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerJoined.wav"),
-                    AudioGroup.OtherSounds);
+            audioManager.playerJoinedTable = new MageClip(Constants.BASE_SOUND_PATH + "OnPlayerJoined.wav", AudioGroup.OtherSounds);
         }
         checkAndPlayClip(getManager().playerJoinedTable);
     }
 
     public static void playYourGameStarted() {
         if (audioManager.yourGameStarted == null) {
-            audioManager.yourGameStarted = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnGameStart.wav"),
-                    AudioGroup.OtherSounds);
+            audioManager.yourGameStarted = new MageClip(Constants.BASE_SOUND_PATH + "OnGameStart.wav", AudioGroup.OtherSounds);
         }
         checkAndPlayClip(getManager().yourGameStarted);
     }
+
     public static void playTournamentStarted() {
         if (audioManager.tournamentStarted == null) {
-            audioManager.tournamentStarted = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnTournamentStart.wav"),
-                    AudioGroup.OtherSounds);
+            audioManager.tournamentStarted = new MageClip(Constants.BASE_SOUND_PATH + "OnTournamentStart.wav", AudioGroup.OtherSounds);
         }
         checkAndPlayClip(getManager().tournamentStarted);
     }
+
     public static void playPlayerWhispered() {
         if (audioManager.playerWhispered == null) {
-            audioManager.playerWhispered = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerWhispered.wav"),
-                            AudioGroup.OtherSounds);
+            audioManager.playerWhispered = new MageClip(Constants.BASE_SOUND_PATH + "OnPlayerWhispered.wav", AudioGroup.OtherSounds);
         }
         checkAndPlayClip(getManager().playerWhispered);
     }
 
     public static void playPlayerSubmittedDeck() {
-        if(audioManager.playerSubmittedDeck == null) {
-            audioManager.playerSubmittedDeck = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerSubmittedDeck.wav"),
-                        AudioGroup.OtherSounds);   
+        if (audioManager.playerSubmittedDeck == null) {
+            audioManager.playerSubmittedDeck = new MageClip(Constants.BASE_SOUND_PATH + "OnPlayerSubmittedDeck.wav",
+                    AudioGroup.OtherSounds);
         }
         checkAndPlayClip(getManager().playerSubmittedDeck);
     }
 
     public static void playPlayerLeft() {
-        if(audioManager.playerLeft == null) {      
-            audioManager.playerLeft = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerLeft.wav"),
-                            AudioGroup.OtherSounds);       
-        }        
+        if (audioManager.playerLeft == null) {
+            audioManager.playerLeft = new MageClip(Constants.BASE_SOUND_PATH + "OnPlayerLeft.wav", AudioGroup.OtherSounds);
+        }
         checkAndPlayClip(getManager().playerLeft);
     }
 
     public static void playPlayerQuitTournament() {
-        if(audioManager.playerQuitTournament== null) {
-            audioManager.playerQuitTournament = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerQuitTournament.wav"),
-                            AudioGroup.OtherSounds);
+        if (audioManager.playerQuitTournament == null) {
+            audioManager.playerQuitTournament = new MageClip(Constants.BASE_SOUND_PATH + "OnPlayerQuitTournament.wav",
+                    AudioGroup.OtherSounds);
         }
         checkAndPlayClip(getManager().playerQuitTournament);
     }
 
     public static void playPlayerLost() {
-        if(audioManager.playerLost == null) {        
-            audioManager.playerLost = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerLost.wav"),
-                            AudioGroup.GameSounds); 
+        if (audioManager.playerLost == null) {
+            audioManager.playerLost = new MageClip(Constants.BASE_SOUND_PATH + "OnPlayerLost.wav", AudioGroup.GameSounds);
         }
         checkAndPlayClip(getManager().playerLost);
     }
 
     public static void playPlayerWon() {
-        if(audioManager.playerWon == null) {
-            audioManager.playerWon = new MageClip(audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerWon.wav"),
-                            AudioGroup.GameSounds);
+        if (audioManager.playerWon == null) {
+            audioManager.playerWon = new MageClip(Constants.BASE_SOUND_PATH + "OnPlayerWon.wav", AudioGroup.GameSounds);
         }
         checkAndPlayClip(getManager().playerWon);
     }
 
     private static void checkAndPlayClip(MageClip mageClip) {
         try {
-            if (mageClip != null && mageClip.getClip() != null) {
+            if (mageClip != null) {
                 boolean playSound = false;
                 switch (mageClip.getAudioGroup()) {
-                    case GameSounds:
-                        playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_GAME_ON, "true").equals("true");
-                        break;
-                    case DraftSounds:
-                        playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_DRAFT_ON, "true").equals("true");
-                        break;
-                    case SkipSounds:
-                        playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_SKIP_BUTTONS_ON, "true").equals("true");
-                        break;
-                    case OtherSounds:
-                        playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_OTHER_ON, "true").equals("true");
+                case GameSounds:
+                    playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_GAME_ON, "true").equals("true");
+                    break;
+                case DraftSounds:
+                    playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_DRAFT_ON, "true").equals("true");
+                    break;
+                case SkipSounds:
+                    playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_SKIP_BUTTONS_ON, "true").equals("true");
+                    break;
+                case OtherSounds:
+                    playSound = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_OTHER_ON, "true").equals("true");
                 }
 
                 if (playSound) {
-                    audioManager.play(mageClip.getClip());
+                    audioManager.play(mageClip);
                 }
             }
         } catch (Exception e) {
@@ -328,36 +302,8 @@ public class AudioManager {
         }
     }
 
-    public void play(final Clip clip) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                clip.setFramePosition(0);
-                clip.start();
-            }
-        }).start();
+    public void play(final MageClip mageClip) {
+        linePool.playSound(mageClip);
     }
-
-    private Clip loadClip(String filename) {
-        try {
-            File soundFile = new File(filename);
-            AudioInputStream soundIn = AudioSystem
-                    .getAudioInputStream(soundFile);
-            AudioFormat format = new AudioFormat(
-                    AudioFormat.Encoding.PCM_SIGNED, AudioSystem.NOT_SPECIFIED,
-                    16, 2, 4, AudioSystem.NOT_SPECIFIED, true);
-            DataLine.Info info = new DataLine.Info(Clip.class, format);
-
-            Clip clip = (Clip) AudioSystem.getLine(info);
-            clip.open(soundIn);
-
-            return clip;
-        } catch (Exception e) {
-            log.error("Couldn't load sound: " + filename + ".", e);
-        }
-
-        return null;
-    }
-
 
 }
