@@ -27,9 +27,10 @@ public class LinePool {
 
     /*
      * Initially all the lines are in the freeLines pool. When a sound plays, one line is being selected randomly from
-     * the activeLines and then, if it's empty, from freeLines pool and used to play the sound. The line is moved to
+     * the activeLines and then, if it's empty, from the freeLines pool and used to play the sound. The line is moved to
      * busyLines. When a sound stops, the line is moved to activeLines if it contains <= elements than alwaysActive
-     * parameter, else it's moved to the freeLines pool.
+     * parameter, else it's moved to the freeLines pool. Every 30 seconds the lines in the freeLines pool are closed
+     * from the timer thread to prevent deadlocks in PulseAudio internals.
      */
 
     private Mixer mixer;
@@ -101,14 +102,13 @@ public class LinePool {
                 byte[] buffer = mageClip.getBuffer();
                 line.write(buffer, 0, buffer.length);
                 synchronized (LinePool.this) {
-                    boolean hasQueue = queue.size() > 0;
                     busyLines.remove(line);
                     if (activeLines.size() < LinePool.this.alwaysActive) {
                         activeLines.add(line);
                     } else {
                         freeLines.add(line);
                     }
-                    if (hasQueue) {
+                    if (queue.size() > 0) {
                         playSound(queue.poll());
                     }
                 }
