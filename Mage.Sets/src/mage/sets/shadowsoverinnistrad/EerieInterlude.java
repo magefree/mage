@@ -37,7 +37,7 @@ public class EerieInterlude extends mage.sets.blessedvscursed.EerieInterlude {
 
     public EerieInterlude(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 994; //TODO: Fix card number
+        this.cardNumber = 16;
         this.expansionSetCode = "SOI";
     }
 
