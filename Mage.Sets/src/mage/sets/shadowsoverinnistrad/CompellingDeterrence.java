@@ -49,7 +49,7 @@ import mage.target.common.TargetNonlandPermanent;
 public class CompellingDeterrence extends CardImpl {
 
     public CompellingDeterrence(UUID ownerId) {
-        super(ownerId, 996, "Compelling Deterrence", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        super(ownerId, 52, "Compelling Deterrence", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "SOI";
 
         // Return target nonland permanent to its owner's hand. Then that player discards a card if you control a Zombie.

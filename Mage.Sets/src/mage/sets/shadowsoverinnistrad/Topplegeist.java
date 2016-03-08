@@ -63,7 +63,7 @@ public class Topplegeist extends CardImpl {
     }
 
     public Topplegeist(UUID ownerId) {
-        super(ownerId, 995, "Topplegeist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        super(ownerId, 45, "Topplegeist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
