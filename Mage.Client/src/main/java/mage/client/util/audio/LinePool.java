@@ -9,10 +9,13 @@ import java.util.TimerTask;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.Mixer.Info;
 import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.LineEvent.Type;
 
 import mage.utils.ThreadUtils;
 
@@ -43,16 +46,11 @@ public class LinePool {
     public LinePool(AudioFormat audioFormat, int size, int alwaysActive) {
         format = audioFormat;
         this.alwaysActive = alwaysActive;
-        Info[] mixerInfos = AudioSystem.getMixerInfo();
-        Mixer.Info mInfo = null;
-        if (mixerInfos.length > 0) {
-            mInfo = mixerInfos[0];
-        }
-        mixer = AudioSystem.getMixer(mInfo);
+        mixer = AudioSystem.getMixer(null);
         DataLine.Info lineInfo = new DataLine.Info(SourceDataLine.class, audioFormat);
         for (int i = 0; i < size; i++) {
             try {
-                final SourceDataLine line = (SourceDataLine) mixer.getLine(lineInfo);
+                SourceDataLine line = (SourceDataLine) mixer.getLine(lineInfo);
                 freeLines.add(line);
             } catch (LineUnavailableException e) {
                 e.printStackTrace();
@@ -64,7 +62,9 @@ public class LinePool {
             public void run() {
                 synchronized (LinePool.this) {
                     for (SourceDataLine sourceDataLine : freeLines) {
-                        sourceDataLine.close();
+                        if (sourceDataLine.isOpen()) {
+                            sourceDataLine.close();
+                        }
                     }
                 }
             }
@@ -91,27 +91,40 @@ public class LinePool {
 
             @Override
             public void run() {
-                try {
-                    if (!line.isOpen()) {
-                        line.open();
+                synchronized (LinePool.this) {
+                    try {
+                        if (!line.isOpen()) {
+                            line.open();
+                            line.addLineListener(new LineListener() {
+
+                                @Override
+                                public void update(LineEvent event) {
+                                    if (event.getType() != Type.STOP) {
+                                        return;
+                                    }
+                                    synchronized (LinePool.this) {
+                                        busyLines.remove(line);
+                                        if (activeLines.size() < LinePool.this.alwaysActive) {
+                                            activeLines.add(line);
+                                        } else {
+                                            freeLines.add(line);
+                                        }
+                                        if (queue.size() > 0) {
+                                            playSound(queue.poll());
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        line.start();
+                    } catch (LineUnavailableException e) {
+                        e.printStackTrace();
                     }
-                    line.start();
-                } catch (LineUnavailableException e) {
-                    e.printStackTrace();
                 }
                 byte[] buffer = mageClip.getBuffer();
                 line.write(buffer, 0, buffer.length);
-                synchronized (LinePool.this) {
-                    busyLines.remove(line);
-                    if (activeLines.size() < LinePool.this.alwaysActive) {
-                        activeLines.add(line);
-                    } else {
-                        freeLines.add(line);
-                    }
-                    if (queue.size() > 0) {
-                        playSound(queue.poll());
-                    }
-                }
+                line.drain();
+                line.stop();
             }
         });
     }
