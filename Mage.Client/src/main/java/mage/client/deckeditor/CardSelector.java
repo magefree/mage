@@ -183,6 +183,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     public void changeGUISize() {
         setGUISize();
         cardGrid.changeGUISize();
+        if (currentView instanceof CardGrid) {
+            this.currentView.drawCards(sortSetting);
+        }
     }
 
     private void setGUISize() {
