@@ -77,9 +77,9 @@ public class ProgenitorMimic extends CardImpl {
                         new SourceMatchesFilterCondition(filter),
                         "At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.")
         );
-        effect = new CopyPermanentEffect();
+        effect = new CopyPermanentEffect(applier);
         effect.setText("as a copy of any creature on the battlefield except it gains \"At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature.\"");
-        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(applier), true));
+        this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
     public ProgenitorMimic(final ProgenitorMimic card) {

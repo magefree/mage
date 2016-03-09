@@ -162,6 +162,7 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Progenitor Mimic", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Bloodrage Vampire", 1); // 3/1
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Progenitor Mimic");
         setChoice(playerB, "Captivating Vampire");
@@ -177,6 +178,9 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Captivating Vampire", 2);
+
+        assertPowerToughness(playerB, "Bloodrage Vampire", 3, 1); // +0 because all Captivating Vampire are controlled by playerB
+
         assertPowerToughness(playerA, "Captivating Vampire", 3, 3, Filter.ComparisonScope.All); // +1 from the other Captivating Vampire
         assertPowerToughness(playerA, "Child of Night", 4, 3, Filter.ComparisonScope.All); // +2 from the two Captivating Vampire
 

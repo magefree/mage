@@ -632,6 +632,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             game.fireEvent(new GameEvent(EventType.GAINED_CONTROL, objectId, objectId, controllerId));
 
             return true;
+        } else if (isCopy()) {// Because the previous copied abilities can be from another controller chnage controller in any case for abilities
+            this.getAbilities(game).setControllerId(controllerId);
+            game.getContinuousEffects().setController(objectId, controllerId);
         }
         return false;
     }
