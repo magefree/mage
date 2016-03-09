@@ -861,6 +861,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         this.isSelected = card.isSelected();
 
         boolean updateImage = !gameCard.getName().equals(card.getName()) || gameCard.isFaceDown() != card.isFaceDown(); // update after e.g. turning a night/day card
+        if (updateImage && gameCard.canTransform() && card.canTransform() && transformed) {
+            if (card.getSecondCardFace() != null && card.getSecondCardFace().getName().equals(gameCard.getName())) {
+                transformed = false;
+            }
+        }
         this.gameCard = card;
 
         String cardType = getType(card);
@@ -875,7 +880,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             updateImage();
             if (card.canTransform()) {
                 BufferedImage transformIcon;
-                if (card.isTransformed()) {
+                if (transformed) {
                     transformIcon = ImageManagerImpl.getInstance().getNightImage();
                 } else {
                     transformIcon = ImageManagerImpl.getInstance().getDayImage();
@@ -1181,8 +1186,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public void toggleTransformed() {
         this.transformed = !this.transformed;
         if (transformed) {
-            BufferedImage night = ImageManagerImpl.getInstance().getNightImage();
             if (dayNightButton != null) { // if transformbable card is copied, button can be null
+                BufferedImage night = ImageManagerImpl.getInstance().getNightImage();
                 dayNightButton.setIcon(new ImageIcon(night));
             }
             if (this.gameCard.getSecondCardFace() == null) {
@@ -1194,14 +1199,13 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 update(this.gameCard.getSecondCardFace());
             }
         } else {
-            BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
             if (dayNightButton != null) { // if transformbable card is copied, button can be null
+                BufferedImage day = ImageManagerImpl.getInstance().getDayImage();
                 dayNightButton.setIcon(new ImageIcon(day));
             }
             if (!isPermanent) { // use only for custom transformation (when pressing day-night button)
-                this.gameCard = this.temporary;
+                update(this.temporary);
                 this.temporary = null;
-                update(this.gameCard);
             }
         }
         String temp = this.gameCard.getAlternateName();
