@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -45,6 +46,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * 702.32. Flashback
@@ -206,7 +208,9 @@ class FlashbackEffect extends OneShotEffect {
                 }
                 spellAbility.setCostModificationActive(false); // prevents to apply cost modification twice for flashbacked spells
                 if (controller.cast(spellAbility, game, false)) {
-                    game.addEffect(new FlashbackReplacementEffect(), source);
+                    ContinuousEffect effect = new FlashbackReplacementEffect();
+                    effect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())));
+                    game.addEffect(effect, source);
                     return true;
                 }
                 return false;
@@ -256,8 +260,16 @@ class FlashbackReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getSourceId())
+        if (event.getTargetId().equals(source.getSourceId())
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED;
+                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
+            discard();
+            int zcc = game.getState().getZoneChangeCounter(source.getSourceId());
+            if (((FixedTarget) getTargetPointer()).getZoneChangeCounter() == zcc) {
+                return true;
+            }
+
+        }
+        return false;
     }
 }

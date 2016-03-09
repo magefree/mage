@@ -214,4 +214,35 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertHandCount(playerA, 0);
 
     }
+
+    /**
+     * I cast Runic Repetition targeting a Silent Departure in exile, and
+     * afterwards I cast the Silent Departure from my hand. When it resolves, it
+     * goes back to exile instead of ending up in my graveyard. Looks like a
+     * problem with Runic Repetition?
+     */
+    @Test
+    public void testFlashbackReturnToHandAndCastAgain() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
+        // Return target creature to its owner's hand.
+        // Flashback {4}{U}
+        addCard(Zone.GRAVEYARD, playerA, "Silent Departure", 1); // {U}
+        addCard(Zone.HAND, playerA, "Runic Repetition", 1);// {2}{U}
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
+        addTarget(playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Runic Repetition");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silent Departure", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Silvercoat Lion", 2);
+        assertExileCount("Silent Departure", 0);
+        assertGraveyardCount(playerA, "Silent Departure", 1);
+        assertGraveyardCount(playerA, "Runic Repetition", 1);
+
+    }
 }
