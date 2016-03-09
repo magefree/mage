@@ -29,7 +29,6 @@ package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.PutLandFromHandOntoBattlefieldEffect;
@@ -37,8 +36,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -57,9 +54,7 @@ public class SakuraTribeScout extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: You may put a land card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCardInHand(new FilterLandCard()));
-        this.addAbility(ability);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLandFromHandOntoBattlefieldEffect(), new TapSourceCost()));
     }
 
     public SakuraTribeScout(final SakuraTribeScout card) {
