@@ -540,6 +540,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the tournament?");
         message.setButton1("No", null);
         message.setButton2("Yes", PlayerAction.CLIENT_QUIT_TOURNAMENT);
+        message.setTournamentId(tournamentId);
         MageFrame.getInstance().showUserRequestDialog(message);
     }//GEN-LAST:event_btnQuitTournamentActionPerformed
 
