@@ -10,17 +10,20 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineEvent.Type;
 import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
-import javax.sound.sampled.Mixer.Info;
 import javax.sound.sampled.SourceDataLine;
-import javax.sound.sampled.LineEvent.Type;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import mage.utils.ThreadUtils;
 
 public class LinePool {
 
+    private final Logger log = LoggerFactory.getLogger(getClass());
     private static final int LINE_CLEANUP_INTERVAL = 30000;
     AudioFormat format;
     Set<SourceDataLine> freeLines = new HashSet<>();
@@ -64,6 +67,7 @@ public class LinePool {
                     for (SourceDataLine sourceDataLine : freeLines) {
                         if (sourceDataLine.isOpen()) {
                             sourceDataLine.close();
+                            log.debug("Closed line {}", sourceDataLine);
                         }
                     }
                 }
@@ -74,6 +78,8 @@ public class LinePool {
     public void playSound(final MageClip mageClip) {
         final SourceDataLine line;
         synchronized (LinePool.this) {
+            log.debug("Playing {}", mageClip.getFilename());
+            logLineStats();
             if (activeLines.size() > 0) {
                 line = activeLines.iterator().next();
             } else if (freeLines.size() > 0) {
@@ -81,11 +87,13 @@ public class LinePool {
             } else {
                 // no lines available, queue sound to play it when a line is available
                 queue.add(mageClip);
+                log.debug("Sound {} queued.", mageClip.getFilename());
                 return;
             }
             freeLines.remove(line);
             activeLines.remove(line);
             busyLines.add(line);
+            logLineStats();
         }
         ThreadUtils.threadPool.submit(new Runnable() {
 
@@ -99,18 +107,25 @@ public class LinePool {
 
                                 @Override
                                 public void update(LineEvent event) {
+                                    log.debug("Event: {}", event);
                                     if (event.getType() != Type.STOP) {
                                         return;
                                     }
                                     synchronized (LinePool.this) {
+                                        log.debug("Before stop on line {}", line);
+                                        logLineStats();
                                         busyLines.remove(line);
                                         if (activeLines.size() < LinePool.this.alwaysActive) {
                                             activeLines.add(line);
                                         } else {
                                             freeLines.add(line);
                                         }
+                                        log.debug("After stop on line {}", line);
+                                        logLineStats();
                                         if (queue.size() > 0) {
-                                            playSound(queue.poll());
+                                            MageClip queuedSound = queue.poll();
+                                            log.debug("Playing queued sound {}", queuedSound);
+                                            playSound(queuedSound);
                                         }
                                     }
                                 }
@@ -122,10 +137,16 @@ public class LinePool {
                     }
                 }
                 byte[] buffer = mageClip.getBuffer();
+                log.debug("Before write to line {}", line);
                 line.write(buffer, 0, buffer.length);
                 line.drain();
                 line.stop();
+                log.debug("Line completed: {}", line);
             }
         });
+    }
+
+    private void logLineStats() {
+        log.debug("Free lines: {} Active: {} Busy: {}", freeLines.size(), activeLines.size(), busyLines.size());
     }
 }

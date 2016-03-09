@@ -75,4 +75,8 @@ public class MageClip {
         return buf;
     }
 
+    public String getFilename() {
+        return filename;
+    }
+
 }
