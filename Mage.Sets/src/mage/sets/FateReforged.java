@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
 import java.util.ArrayList;
@@ -45,9 +44,10 @@ import mage.constants.SetType;
  */
 public class FateReforged extends ExpansionSet {
 
-    private static final FateReforged fINSTANCE =  new FateReforged();
+    private static final FateReforged fINSTANCE = new FateReforged();
 
     List<CardInfo> savedSpecialRares = new ArrayList<>();
+    List<CardInfo> savedSpecialCommon = new ArrayList<>();
 
     public static FateReforged getInstance() {
         return fINSTANCE;
@@ -57,31 +57,32 @@ public class FateReforged extends ExpansionSet {
         super("Fate Reforged", "FRF", "mage.sets.fatereforged", new GregorianCalendar(2015, 1, 23).getTime(), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
         this.parentSet = KhansOfTarkir.getInstance();
-        this.hasBasicLands = true;
+        this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.numBoosterSpecial = 1;
+        this.numBoosterSpecial = 1; // a speical land slot that can contain basic lands (language dependent) the common lands or the rare fetch lands from KTK
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
+        this.numBoosterDoubleFaced = -1;
         this.ratioBoosterMythic = 8;
     }
 
     @Override
     public List<CardInfo> getCardsByRarity(Rarity rarity) {
+        // Common cards retrievement of Fate Reforged boosters - prevent the retrievement of the common lands (e.g. Blossoming Sands)
         if (rarity.equals(Rarity.COMMON)) {
             List<CardInfo> savedCardsInfos = savedCards.get(rarity);
             if (savedCardsInfos == null) {
                 CardCriteria criteria = new CardCriteria();
                 criteria.setCodes(this.code).notTypes(CardType.LAND);
-                criteria.rarities(rarity).doubleFaced(false);
                 if (maxCardNumberInBooster != Integer.MAX_VALUE) {
                     criteria.maxCardNumber(maxCardNumberInBooster);
                 }
                 savedCardsInfos = CardRepository.instance.findCards(criteria);
                 savedCards.put(rarity, savedCardsInfos);
             }
-            // Return a copy of the saved cards information, as not to modify the original.
+            // Return a copy of the saved cards information, as not to let modify the original.
             return new ArrayList<>(savedCardsInfos);
         } else {
             return super.getCardsByRarity(rarity);
@@ -90,9 +91,18 @@ public class FateReforged extends ExpansionSet {
 
     @Override
     public List<CardInfo> getSpecialCommon() {
-        CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.COMMON).setCodes(this.code).types(CardType.LAND);
-        return CardRepository.instance.findCards(criteria);
+        List<CardInfo> specialCommons = new ArrayList<>();
+        if (savedSpecialCommon.isEmpty()) {
+            // the 10 common lands from Fate Reforged can show up in the basic lands slot
+            // http://magic.wizards.com/en/articles/archive/feature/fetching-look-fate-reforged-2014-12-24
+            CardCriteria criteria = new CardCriteria();
+            criteria.rarities(Rarity.COMMON).setCodes(this.code).types(CardType.LAND);
+            savedSpecialCommon = CardRepository.instance.findCards(criteria);
+            criteria.rarities(Rarity.LAND).setCodes(this.code);
+            savedSpecialCommon.addAll(CardRepository.instance.findCards(criteria));
+        }
+        specialCommons.addAll(savedSpecialCommon);
+        return specialCommons;
     }
 
     @Override
@@ -117,5 +127,5 @@ public class FateReforged extends ExpansionSet {
         }
         specialRares.addAll(savedSpecialRares);
         return specialRares;
-    }      
+    }
 }

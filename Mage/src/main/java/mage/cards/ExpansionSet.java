@@ -67,7 +67,7 @@ public abstract class ExpansionSet implements Serializable {
     protected int ratioBoosterMythic;
 
     protected String packageName;
-    protected int maxCardNumberInBooster;
+    protected int maxCardNumberInBooster; // used to ommit cards with collector numbers beyond the regular cards in a set for boosters
 
     protected final EnumMap<Rarity, List<CardInfo>> savedCards;
 
@@ -304,7 +304,7 @@ public abstract class ExpansionSet implements Serializable {
             savedCardsInfos = CardRepository.instance.findCards(criteria);
             savedCards.put(rarity, savedCardsInfos);
         }
-        // Return a copy of the saved cards information, as not to modify the original.
+        // Return a copy of the saved cards information, as not to let modify the original.
         return new ArrayList<>(savedCardsInfos);
     }
 
