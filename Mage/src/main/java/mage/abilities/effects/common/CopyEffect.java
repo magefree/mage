@@ -136,8 +136,14 @@ public class CopyEffect extends ContinuousEffectImpl {
         }
 
         permanent.removeAllAbilities(source.getSourceId(), game);
-        for (Ability ability : copyFromObject.getAbilities()) {
-            permanent.addAbility(ability, getSourceId(), game, false); // no new Id so consumed replacement effects are known while new continuousEffects.apply happen.
+        if (copyFromObject instanceof Permanent) {
+            for (Ability ability : ((Permanent) copyFromObject).getAbilities(game)) {
+                permanent.addAbility(ability, getSourceId(), game, false); // no new Id so consumed replacement effects are known while new continuousEffects.apply happen.
+            }
+        } else {
+            for (Ability ability : copyFromObject.getAbilities()) {
+                permanent.addAbility(ability, getSourceId(), game, false); // no new Id so consumed replacement effects are known while new continuousEffects.apply happen.
+            }
         }
         permanent.getPower().setValue(copyFromObject.getPower().getValue());
         permanent.getToughness().setValue(copyFromObject.getToughness().getValue());
