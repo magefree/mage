@@ -41,18 +41,15 @@ import java.util.*;
  */
 public class DeckGeneratorPool
 {
-    // Constants for a 40 card deck
-    private static final int CREATURE_COUNT_40 = 15;
-    private static final int LAND_COUNT_40 = 17;
-    private static final int NONCREATURE_COUNT_40 = 8;
-    // Constants for a 60 card deck
-    private static final int CREATURE_COUNT_60 = 23;
-    private static final int LAND_COUNT_60 = 24;
-    private static final int NONCREATURE_COUNT_60 = 13;
+
+
+    public static int DEFAULT_CREATURE_PERCENTAGE = 38;
+    public static int DEFAULT_NON_CREATURE_PERCENTAGE = 21;
+    public static int DEFAULT_LAND_PERCENTAGE = 41;
 
     private final List<ColoredManaSymbol> allowedColors;
     private boolean colorlessAllowed;
-    private final List<DeckGeneratorCMC> poolCMCs;
+    private final List<DeckGeneratorCMC.CMC> poolCMCs;
     private final int creatureCount;
     private final int nonCreatureCount;
     private final int landCount;
@@ -69,7 +66,21 @@ public class DeckGeneratorPool
     private List<Card> reserveSpells = new ArrayList<>();
     private Deck deck;
 
-    public DeckGeneratorPool(final int deckSize, final List<ColoredManaSymbol> allowedColors, boolean isSingleton, boolean colorlessAllowed)
+    /**
+     * Creates a card pool with specified criterea used when generating a deck.
+     *
+     * @param deckSize the size of the complete deck
+     * @param creaturePercentage what percentage of creatures to use when generating the deck.
+     * @param nonCreaturePercentage percentage of non-creatures to use when generating the deck.
+     * @param landPercentage percentage of lands to use when generating the deck.
+     * @param allowedColors which card colors are allowed in the generated deck.
+     * @param isSingleton if the deck only has 1 copy of each non-land card.
+     * @param colorlessAllowed if colourless mana symbols are allowed in costs in the deck.
+     * @param isAdvanced if the user has provided advanced options to generate the deck.
+     * @param deckGeneratorCMC the CMC curve to use for this deck
+     */
+    public DeckGeneratorPool(final int deckSize, final int creaturePercentage, final int nonCreaturePercentage, final int landPercentage,
+                             final List<ColoredManaSymbol> allowedColors, boolean isSingleton, boolean colorlessAllowed, boolean isAdvanced, DeckGeneratorCMC deckGeneratorCMC)
     {
         this.deckSize = deckSize;
         this.allowedColors = allowedColors;
@@ -78,28 +89,26 @@ public class DeckGeneratorPool
 
         this.deck = new Deck();
 
-        if(this.deckSize > 40) {
-            this.creatureCount = CREATURE_COUNT_60;
-            this.nonCreatureCount = NONCREATURE_COUNT_60;
-            this.landCount = LAND_COUNT_60;
-            poolCMCs = new ArrayList<DeckGeneratorCMC>() {{
-                add(new DeckGeneratorCMC(0, 2, 0.20f));
-                add(new DeckGeneratorCMC(3, 5, 0.50f));
-                add(new DeckGeneratorCMC(6, 7, 0.25f));
-                add(new DeckGeneratorCMC(8, 100, 0.05f));
-            }};
-
-        }
-        else {
-            this.creatureCount = CREATURE_COUNT_40;
-            this.nonCreatureCount = NONCREATURE_COUNT_40;
-            this.landCount = LAND_COUNT_40;
-            poolCMCs = new ArrayList<DeckGeneratorCMC>() {{
-                add(new DeckGeneratorCMC(0, 2, 0.30f));
-                add(new DeckGeneratorCMC(3, 4, 0.45f));
-                add(new DeckGeneratorCMC(5, 6, 0.20f));
-                add(new DeckGeneratorCMC(7, 100, 0.05f));
-            }};
+        // Advanced (CMC Slider panel and curve drop-down in the dialog)
+        if(isAdvanced) {
+            this.creatureCount = (int)Math.ceil((deckSize / 100.0) * creaturePercentage);
+            this.nonCreatureCount = (int)Math.ceil((deckSize / 100.0)* nonCreaturePercentage);
+            this.landCount = (int)Math.ceil((deckSize / 100.0)* landPercentage);
+            if(this.deckSize == 60) {
+                this.poolCMCs = deckGeneratorCMC.get60CardPoolCMC();
+            } else {
+                this.poolCMCs = deckGeneratorCMC.get40CardPoolCMC();
+            }
+        } else {
+            // Ignore the advanced group, just use defaults
+            this.creatureCount = (int)Math.ceil((deckSize / 100.0) * DEFAULT_CREATURE_PERCENTAGE);
+            this.nonCreatureCount = (int)Math.ceil((deckSize / 100.0) * DEFAULT_NON_CREATURE_PERCENTAGE);
+            this.landCount = (int)Math.ceil((deckSize / 100.0) * DEFAULT_LAND_PERCENTAGE);
+            if(this.deckSize == 60) {
+                this.poolCMCs = DeckGeneratorCMC.Default.get60CardPoolCMC();
+            } else {
+                this.poolCMCs = DeckGeneratorCMC.Default.get40CardPoolCMC();
+            }
         }
 
         if(allowedColors.size() == 1) {
@@ -114,15 +123,14 @@ public class DeckGeneratorPool
      * @param cardsCount the number of total cards.
      * @return a list of CMC ranges, with the amount of cards for each CMC range
      */
-    public List<DeckGeneratorCMC> getCMCsForSpellCount(int cardsCount) {
-        List<DeckGeneratorCMC> adjustedCMCs = new ArrayList<>(this.poolCMCs);
+    public List<DeckGeneratorCMC.CMC> getCMCsForSpellCount(int cardsCount) {
+        List<DeckGeneratorCMC.CMC> adjustedCMCs = new ArrayList<>(this.poolCMCs);
         // For each CMC calculate how many spell cards are needed, given the total amount of cards
-        for(DeckGeneratorCMC deckCMC : adjustedCMCs) {
+        for(DeckGeneratorCMC.CMC deckCMC : adjustedCMCs) {
             deckCMC.setAmount((int)Math.ceil(deckCMC.percentage * cardsCount));
         }
         return adjustedCMCs;
     }
-
 
     /**
      * Verifies if the spell card supplied is valid for this pool of cards.
@@ -391,43 +399,52 @@ public class DeckGeneratorPool
 
             int spellsNeeded = nonLandSize-spellSize;
 
-            // If we haven't got enough spells in reserve to fulfil the amount we need, we can't continue.
-            if(reserveSpells.size() < spellsNeeded) {
-                throw new IllegalStateException("Not enough cards found to generate deck. Please try again");
-            }
+            // If we haven't got enough spells in reserve to fulfil the amount we need, skip adding any.
+            if(reserveSpells.size() >= spellsNeeded) {
 
-            List<Card> spellsToAdd = new ArrayList<>(spellsNeeded);
+                List<Card> spellsToAdd = new ArrayList<>(spellsNeeded);
 
-            // Initial reservoir
-            for(int i = 0; i < spellsNeeded; i++)
-                spellsToAdd.add(reserveSpells.get(i));
+                // Initial reservoir
+                for (int i = 0; i < spellsNeeded; i++)
+                    spellsToAdd.add(reserveSpells.get(i));
 
-            for(int i = spellsNeeded+1; i < reserveSpells.size()-1; i++) {
-                int j = random.nextInt(i);
-                Card randomCard = reserveSpells.get(j);
-                if (isValidSpellCard(randomCard) && j < spellsToAdd.size()) {
-                    spellsToAdd.set(j, randomCard);
+                for (int i = spellsNeeded + 1; i < reserveSpells.size() - 1; i++) {
+                    int j = random.nextInt(i);
+                    Card randomCard = reserveSpells.get(j);
+                    if (isValidSpellCard(randomCard) && j < spellsToAdd.size()) {
+                        spellsToAdd.set(j, randomCard);
+                    }
                 }
+                // Add randomly selected spells needed
+                deckCards.addAll(spellsToAdd);
             }
-            // Add randomly selected spells needed
-            deckCards.addAll(spellsToAdd);
         }
+
         // More spells than needed
         else if(spellSize > (deckSize - landCount)) {
-
             int spellsRemoved = (spellSize)-(deckSize-landCount);
             for(int i = 0; i < spellsRemoved; ++i) {
                 deckCards.remove(random.nextInt(deckCards.size()));
             }
         }
 
-        // Not strictly necessary as we check when adding cards, but worth double checking anyway.
+        // Check we have exactly the right amount of cards for a deck.
         if(deckCards.size() != nonLandSize) {
-            throw new IllegalStateException("Not enough cards found to generate deck. Please try again");
+            throw new IllegalStateException("Not enough cards found to generate deck.");
         }
-
         // Return the fixed amount
         return deckCards;
+    }
+
+    /**
+     * Returns if this land taps for the given color.
+     * Basic string matching to check the ability adds one of the chosen mana when tapped.
+     * @param ability MockAbility of the land card
+     * @param symbol colored mana symbol.
+     * @return if the ability is tapping to produce the mana the symbol represents.
+     */
+    private boolean landTapsForAllowedColor(String ability, String symbol)  {
+        return ability.matches(".*Add \\{" + symbol + "\\} to your mana pool.");
     }
 
     /**
@@ -453,17 +470,6 @@ public class DeckGeneratorPool
             }
         }
         return false;
-    }
-
-    /**
-     * Returns if this land taps for the given color.
-     * Basic string matching to check the ability adds one of the chosen mana when tapped.
-     * @param ability MockAbility of the land card
-     * @param symbol colored mana symbol.
-     * @return if the ability is tapping to produce the mana the symbol represents.
-     */
-    private boolean landTapsForAllowedColor(String ability, String symbol)  {
-        return ability.matches(".*Add \\{" + symbol + "\\} to your mana pool.");
     }
 
     /**
