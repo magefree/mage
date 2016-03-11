@@ -39,12 +39,6 @@ public class BloodArtistTest extends CardTestPlayerBase {
         assertLife(playerB, 17);
     }
 
-    /**
-     * There is realy something wrong with sacrifice effects triggers. Had
-     * Zulaport Cutthroat on battlefield and tried Altar's Reap and Bone
-     * Splinters on it. Neither triggered ZC's abbility. Tried the same with
-     * Blood Artist on battlefield, same result - no trigger.
-     */
     @Test
     public void testWithBoneSplinters() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
