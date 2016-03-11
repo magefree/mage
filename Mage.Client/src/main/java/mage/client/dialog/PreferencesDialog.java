@@ -3052,7 +3052,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static boolean isSaveImagesToZip() {
-        return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_SAVE_TO_ZIP, "false").equals("true");
+        return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_SAVE_TO_ZIP, "true").equals("true");
     }
 
     private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue) {
