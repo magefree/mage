@@ -66,7 +66,7 @@ public class WuSpy extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new WuSpyEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-    
+
     }
 
     public WuSpy(final WuSpy card) {
@@ -80,40 +80,35 @@ public class WuSpy extends CardImpl {
 }
 
 class WuSpyEffect extends OneShotEffect {
-    
+
     WuSpyEffect() {
         super(Outcome.Exile);
-        this.staticText = "Look at the top two cards of target player's library. Put one of them into his or her graveyard";
+        this.staticText = "look at the top two cards of target player's library. Put one of them into his or her graveyard";
     }
-    
+
     WuSpyEffect(final WuSpyEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public WuSpyEffect copy() {
         return new WuSpyEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (controller != null && opponent != null) {
             Cards cards = new CardsImpl();
-            int numLooked = Math.min(2, opponent.getLibrary().size());
-            if (numLooked > 0) {
-                for (int i = 0; i < numLooked; i++) {
-                    cards.add(opponent.getLibrary().removeFromTop(game));
-                }
-                TargetCard target = new TargetCardInLibrary(new FilterCard("card to discard"));
-                controller.choose(Outcome.Discard, cards, target, game);
+            cards.addAll(opponent.getLibrary().getTopCards(game, 2));
+            if (!cards.isEmpty()) {
+                TargetCard target = new TargetCardInLibrary(new FilterCard("card to put into graveyard"));
+                controller.choose(Outcome.Benefit, cards, target, game);
                 Card card = cards.get(target.getFirstTarget(), game);
-                cards.remove(card);
-                opponent.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                if (cards.size() == 1) {
-                    card = cards.get(cards.iterator().next(), game);
-                    opponent.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
+                if (card != null) {
+                    cards.remove(card);
+                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
                 }
             }
             return true;
