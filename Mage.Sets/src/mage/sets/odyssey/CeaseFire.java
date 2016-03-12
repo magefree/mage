@@ -37,8 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterCreatureSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -74,11 +73,7 @@ public class CeaseFire extends CardImpl {
 
 class CeaseFireEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private static final FilterSpell filter = new FilterSpell();
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
+    private static final FilterCreatureSpell filter = new FilterCreatureSpell();
 
     public CeaseFireEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
@@ -92,11 +87,6 @@ class CeaseFireEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public CeaseFireEffect copy() {
         return new CeaseFireEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -115,9 +105,9 @@ class CeaseFireEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getPlayerId().equals(source.getFirstTarget())) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (filter.match((Spell) object, game)) {
+        if (event.getPlayerId().equals(getTargetPointer().getFirst(game, source))) {
+            Spell spell = game.getStack().getSpell(event.getSourceId());
+            if (spell != null && filter.match(spell, game)) {
                 return true;
             }
         }
