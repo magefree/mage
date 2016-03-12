@@ -29,14 +29,11 @@ package mage.sets.fifthedition;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.UntapEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -53,7 +50,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -77,8 +73,7 @@ public class InstillEnergy extends CardImpl {
         Ability haste = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(asThough, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature can attack as though it had haste."));
         this.addAbility(haste);
         // {0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.
-        Ability gainedAbility = new LimitedTimesIfConditionActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new GenericManaCost(0), MyTurnCondition.getInstance(), 1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "{0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.")));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new GenericManaCost(0), 1, MyTurnCondition.getInstance()));
     }
 
     public InstillEnergy(final InstillEnergy card) {
@@ -116,106 +111,5 @@ class CanAttackAsThoughItHadHasteEnchantedEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         return enchantment != null && enchantment.getAttachedTo() != null && enchantment.getAttachedTo().equals(objectId);
-    }
-}
-
-class LimitedTimesIfConditionActivatedAbility extends ActivateIfConditionActivatedAbility {
-
-    class ActivationInfo {
-
-        public int turnNum;
-        public int activationCounter;
-
-        public ActivationInfo(int turnNum, int activationCounter) {
-            this.turnNum = turnNum;
-            this.activationCounter = activationCounter;
-        }
-    }
-
-    private int maxActivationsPerTurn;
-
-    public LimitedTimesIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
-        this(zone, effect, cost, condition, 1);
-    }
-
-    public LimitedTimesIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, int maxActivationsPerTurn) {
-        super(zone, effect, cost, condition);
-        this.maxActivationsPerTurn = maxActivationsPerTurn;
-    }
-
-    public LimitedTimesIfConditionActivatedAbility(LimitedTimesIfConditionActivatedAbility ability) {
-        super(ability);
-        this.maxActivationsPerTurn = ability.maxActivationsPerTurn;
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (super.canActivate(playerId, game)) {
-            ActivationInfo activationInfo = getActivationInfo(game);
-            return activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter < maxActivationsPerTurn;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (canActivate(this.controllerId, game)) {
-            if (super.activate(game, noMana)) {
-                ActivationInfo activationInfo = getActivationInfo(game);
-                if (activationInfo == null) {
-                    activationInfo = new ActivationInfo(game.getTurnNum(), 1);
-                } else if (activationInfo.turnNum != game.getTurnNum()) {
-                    activationInfo.turnNum = game.getTurnNum();
-                    activationInfo.activationCounter = 1;
-                } else {
-                    activationInfo.activationCounter++;
-                }
-                setActivationInfo(activationInfo, game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        return super.resolve(game);
-    }
-
-    @Override
-    public String getRule() {
-        StringBuilder sb = new StringBuilder(super.getRule());
-        sb.replace(sb.length() - 1, sb.length() - 1, " and "); //suppress super()'s final period
-        switch (maxActivationsPerTurn) {
-            case 1:
-                sb.append("only once");
-                break;
-            case 2:
-                sb.append("no more than twice");
-                break;
-            default:
-                sb.append("no more than ").append(CardUtil.numberToText(maxActivationsPerTurn)).append(" times");
-        }
-        sb.append(" each turn.");
-        return sb.toString();
-    }
-
-    @Override
-    public LimitedTimesIfConditionActivatedAbility copy() {
-        return new LimitedTimesIfConditionActivatedAbility(this);
-    }
-
-    private ActivationInfo getActivationInfo(Game game) {
-        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn", sourceId, game));
-        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount", sourceId, game));
-        if (turnNum == null || activationCount == null) {
-            return null;
-        }
-        return new ActivationInfo(turnNum, activationCount);
-    }
-
-    private void setActivationInfo(ActivationInfo activationInfo, Game game) {
-        game.getState().setValue(CardUtil.getCardZoneString("activationsTurn", sourceId, game), activationInfo.turnNum);
-        game.getState().setValue(CardUtil.getCardZoneString("activationsCount", sourceId, game), activationInfo.activationCounter);
     }
 }

@@ -28,17 +28,12 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
@@ -49,6 +44,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -67,11 +66,11 @@ public class BrutalDeceiver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}: Look at the top card of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));  
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));
 
         // {2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains first strike until end of turn.
-        Ability ability = new BrutalDeceiverAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl("{2}"));
-        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(),Duration.EndOfTurn));
+        Ability ability = new BrutalDeceiverAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}"));
+        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);
     }
 
@@ -87,36 +86,36 @@ public class BrutalDeceiver extends CardImpl {
 
 class BrutalDeceiverAbility extends LimitedTimesPerTurnActivatedAbility {
 
-        public BrutalDeceiverAbility(Zone zone, Effect effect, Cost cost) {
+    public BrutalDeceiverAbility(Zone zone, Effect effect, Cost cost) {
         super(zone, effect, cost);
     }
 
-        public BrutalDeceiverAbility(BrutalDeceiverAbility ability) {
+    public BrutalDeceiverAbility(BrutalDeceiverAbility ability) {
         super(ability);
     }
 
-        @Override
-        public BrutalDeceiverAbility copy() {
-                return new BrutalDeceiverAbility(this);
-        }
+    @Override
+    public BrutalDeceiverAbility copy() {
+        return new BrutalDeceiverAbility(this);
+    }
 
-        @Override
+    @Override
     public boolean checkIfClause(Game game) {
-                Player player = game.getPlayer(this.getControllerId());
-                if (player != null) {
-                    Cards cards = new CardsImpl();
-                    Card card = player.getLibrary().getFromTop(game);
-                    cards.add(card);
-                    player.revealCards("Brutal Deceiver", cards, game);
-                    if (card != null && card.getCardType().contains(CardType.LAND)) {
-                            return true;
-                    }
-                }
-        return false;
+        Player player = game.getPlayer(this.getControllerId());
+        if (player != null) {
+            Cards cards = new CardsImpl();
+            Card card = player.getLibrary().getFromTop(game);
+            cards.add(card);
+            player.revealCards("Brutal Deceiver", cards, game);
+            if (card != null && card.getCardType().contains(CardType.LAND)) {
+                return true;
+            }
         }
+        return false;
+    }
 
-        @Override
+    @Override
     public String getRule() {
-        return "{2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains first strike until end of turn. Activate this ability only once each turn."; 
+        return "{2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains first strike until end of turn. Activate this ability only once each turn.";
     }
 }
