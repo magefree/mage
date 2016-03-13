@@ -31,13 +31,14 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreatureSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -68,7 +69,9 @@ public class SteelGolem extends CardImpl {
 }
 
 class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
-    
+
+    private static final FilterCreatureSpell filter = new FilterCreatureSpell();
+
     public SteelGolemEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You can't cast creature spells";
@@ -84,15 +87,15 @@ class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getPlayerId().equals(source.getControllerId())) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object.getCardType().contains(CardType.CREATURE)) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
+            Spell spell = game.getStack().getSpell(event.getSourceId());
+            if (spell != null && filter.match(spell, game)) {
                 return true;
             }
         }
@@ -100,4 +103,3 @@ class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
 }
-

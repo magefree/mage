@@ -32,9 +32,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
+import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
@@ -48,6 +48,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -68,16 +69,16 @@ public class EbonPraetor extends CardImpl {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // At the beginning of your upkeep, put a -2/-2 counter on Ebon Praetor.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M2M2.createInstance()), TargetController.YOU, false));
-        
+
         // Sacrifice a creature: Remove a -2/-2 counter from Ebon Praetor. If the sacrificed creature was a Thrull, put a +1/+0 counter on Ebon Praetor. Activate this ability only during your upkeep and only once each turn.
-        Ability ability = new EbonPraetorAbility(new RemoveCounterSourceEffect(CounterType.M2M2.createInstance()), 
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.M2M2.createInstance()),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))), 1, new IsStepCondition(PhaseStep.UPKEEP, true));
         ability.addEffect(new EbonPraetorEffect());
         this.addAbility(ability);
     }
@@ -89,37 +90,6 @@ public class EbonPraetor extends CardImpl {
     @Override
     public EbonPraetor copy() {
         return new EbonPraetor(this);
-    }
-}
-
-class EbonPraetorAbility extends LimitedTimesPerTurnActivatedAbility {
-
-    public EbonPraetorAbility(Effect effect, Cost cost) {
-        super(Zone.BATTLEFIELD, effect, cost);
-    }
-
-    public EbonPraetorAbility(final EbonPraetorAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EbonPraetorAbility copy() {
-        return new EbonPraetorAbility(this);
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (!game.getActivePlayerId().equals(controllerId) || !PhaseStep.UPKEEP.equals(game.getStep().getType())) {
-            return false;
-        }
-        return super.canActivate(playerId, game);
-    }
-
-    @Override
-    public String getRule() {
-        StringBuilder sb = new StringBuilder("");
-        sb.append(super.getRule()).append(" <i>Activate this ability only during your upkeep.</i>");
-        return sb.toString();
     }
 }
 

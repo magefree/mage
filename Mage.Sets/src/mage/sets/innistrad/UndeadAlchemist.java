@@ -85,7 +85,7 @@ public class UndeadAlchemist extends CardImpl {
 class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
 
     public UndeadAlchemistTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileTargetEffect(), true);
+        super(Zone.BATTLEFIELD, new ExileTargetEffect(), false);
         this.addEffect(new CreateTokenEffect(new ZombieToken()));
     }
 

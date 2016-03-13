@@ -186,4 +186,36 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Deadbridge Chant returns the battlefield Progenitor Mimic, but it's copy
+     * effect doesn't applied. It's 0/0, game put it into graveyard.
+     */
+    @Test
+    public void testDeadbridgeChant() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        // When Deadbridge Chant enters the battlefield, put the top ten cards of your library into your graveyard.
+        // At the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.
+        addCard(Zone.HAND, playerA, "Deadbridge Chant", 1); // {4}{B}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+
+        // You may have Progenitor Mimic enter the battlefield as a copy of any creature on the battlefield except
+        // it gains "At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield
+        // that's a copy of this creature."
+        addCard(Zone.LIBRARY, playerA, "Progenitor Mimic", 10);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deadbridge Chant");
+        setChoice(playerA, "Silvercoat Lion"); // Copied by Progenitor Mimic returned by Deadbridge Chant on upkeep of turn 3
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Deadbridge Chant", 1);
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 2);
+        assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
+
+        assertGraveyardCount(playerA, "Progenitor Mimic", 9);
+    }
 }

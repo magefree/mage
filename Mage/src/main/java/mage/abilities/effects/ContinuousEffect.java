@@ -76,6 +76,10 @@ public interface ContinuousEffect extends Effect {
 
     Set<DependencyType> getDependencyTypes();
 
+    void addDependencyType(DependencyType dependencyType);
+
+    void setDependedToType(DependencyType dependencyType);
+
     @Override
     void newId();
 

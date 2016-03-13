@@ -1278,6 +1278,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     if (executingRollback()) {
                                         return;
                                     }
+                                    getState().handleSimultaneousEvent(this); // needed here to handle triggers e.g. from paying costs like sacrificing a creatures before LKIShort is cleared
                                     applyEffects();
                                 }
                                 if (isPaused()) {

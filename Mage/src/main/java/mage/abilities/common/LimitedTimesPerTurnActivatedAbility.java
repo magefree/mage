@@ -24,12 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.common;
 
 import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -54,24 +54,33 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
     }
 
     private int maxActivationsPerTurn;
+    private Condition condition;
 
     public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
         this(zone, effect, cost, 1);
     }
 
     public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost, int maxActivationsPerTurn) {
-        super(zone, effect, cost);
-        this.maxActivationsPerTurn = maxActivationsPerTurn;
+        this(zone, effect, cost, maxActivationsPerTurn, null);
     }
 
-    public LimitedTimesPerTurnActivatedAbility(LimitedTimesPerTurnActivatedAbility ability) {
+    public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost, int maxActivationsPerTurn, Condition condition) {
+        super(zone, effect, cost);
+        this.maxActivationsPerTurn = maxActivationsPerTurn;
+        this.condition = condition;
+    }
+
+    public LimitedTimesPerTurnActivatedAbility(final LimitedTimesPerTurnActivatedAbility ability) {
         super(ability);
         this.maxActivationsPerTurn = ability.maxActivationsPerTurn;
+        this.condition = ability.condition;
     }
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        return super.canActivate(playerId, game) && hasMoreActivationsThisTurn(game);
+        return super.canActivate(playerId, game)
+                && hasMoreActivationsThisTurn(game)
+                && (condition == null || condition.apply(game, this));
     }
 
     private boolean hasMoreActivationsThisTurn(Game game) {
@@ -86,13 +95,11 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
                 ActivationInfo activationInfo = getActivationInfo(game);
                 if (activationInfo == null) {
                     activationInfo = new ActivationInfo(game.getTurnNum(), 1);
+                } else if (activationInfo.turnNum != game.getTurnNum()) {
+                    activationInfo.turnNum = game.getTurnNum();
+                    activationInfo.activationCounter = 1;
                 } else {
-                    if (activationInfo.turnNum != game.getTurnNum()) {
-                        activationInfo.turnNum = game.getTurnNum();
-                        activationInfo.activationCounter = 1;
-                    } else {
-                        activationInfo.activationCounter++;
-                    }
+                    activationInfo.activationCounter++;
                 }
                 setActivationInfo(activationInfo, game);
                 return true;
@@ -109,7 +116,10 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder(super.getRule()).append(" Activate this ability ");
-        switch(maxActivationsPerTurn) {
+        if (condition != null) {
+            sb.append("only ").append(condition.toString()).append(" and ");
+        }
+        switch (maxActivationsPerTurn) {
             case 1:
                 sb.append("only once");
                 break;
@@ -127,6 +137,7 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
     public LimitedTimesPerTurnActivatedAbility copy() {
         return new LimitedTimesPerTurnActivatedAbility(this);
     }
+
     private ActivationInfo getActivationInfo(Game game) {
         Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn", sourceId, game));
         Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount", sourceId, game));
@@ -135,7 +146,7 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
         }
         return new ActivationInfo(turnNum, activationCount);
     }
-    
+
     private void setActivationInfo(ActivationInfo activationInfo, Game game) {
         game.getState().setValue(CardUtil.getCardZoneString("activationsTurn", sourceId, game), activationInfo.turnNum);
         game.getState().setValue(CardUtil.getCardZoneString("activationsCount", sourceId, game), activationInfo.activationCounter);

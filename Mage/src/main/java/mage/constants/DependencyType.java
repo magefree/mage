@@ -46,5 +46,6 @@ public enum DependencyType {
     BecomeMountain,
     BecomePlains,
     BecomeSwamp,
-    EnchantmentAddingRemoving;
+    EnchantmentAddingRemoving,
+    LooseDefenderEffect;
 }

@@ -30,16 +30,15 @@ package mage.sets.antiquities;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
-import mage.abilities.costs.Cost;
+import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -54,7 +53,9 @@ public class GateToPhyrexia extends CardImpl {
         this.expansionSetCode = "ATQ";
 
         // Sacrifice a creature: Destroy target artifact. Activate this ability only during your upkeep and only once each turn.
-        Ability ability = new GateToPhyrexiaAbility(new DestroyTargetEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))),
+                1, new IsStepCondition(PhaseStep.UPKEEP, true));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
@@ -66,34 +67,5 @@ public class GateToPhyrexia extends CardImpl {
     @Override
     public GateToPhyrexia copy() {
         return new GateToPhyrexia(this);
-    }
-}
-
-class GateToPhyrexiaAbility extends LimitedTimesPerTurnActivatedAbility {
-
-    public GateToPhyrexiaAbility(Effect effect, Cost cost) {
-        super(Zone.BATTLEFIELD, effect, cost);
-    }
-
-    public GateToPhyrexiaAbility(final GateToPhyrexiaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GateToPhyrexiaAbility copy() {
-        return new GateToPhyrexiaAbility(this);
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (!game.getActivePlayerId().equals(controllerId) || !PhaseStep.UPKEEP.equals(game.getStep().getType())) {
-            return false;
-        }
-        return super.canActivate(playerId, game);
-    }
-
-    @Override
-    public String getRule() {
-         return "Sacrifice a creature: Destroy target artifact. Activate this ability only during your upkeep and only once each turn.";
     }
 }
