@@ -236,6 +236,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_DECK_GENERATOR_ARTIFACTS = "newDeckGeneratorArtifacts";
     public static final String KEY_NEW_DECK_GENERATOR_NON_BASIC_LANDS = "newDeckGeneratorNonBasicLands";
     public static final String KEY_NEW_DECK_GENERATOR_COLORLESS = "newDeckGeneratorColorless";
+    public static final String KEY_NEW_DECK_GENERATOR_ADVANCED = "newDeckGeneratorAdvanced";
+    public static final String KEY_NEW_DECK_GENERATOR_CREATURE_PERCENTAGE = "newDeckGeneratorCreaturePercentage";
+    public static final String KEY_NEW_DECK_GENERATOR_NON_CREATURE_PERCENTAGE = "newDeckGeneratorNonCreaturePercentage";
+    public static final String KEY_NEW_DECK_GENERATOR_LAND_PERCENTAGE = "newDeckGeneratorLandPercentage";
+    public static final String KEY_NEW_DECK_GENERATOR_ADVANCED_CMC = "newDeckGeneratorAdvancedCMC";
+
 
     // used to save and restore the settings for the cardArea (draft, sideboarding, deck builder)
     public static final String KEY_DRAFT_VIEW = "draftView";
