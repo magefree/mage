@@ -12,7 +12,7 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-public class ThoughtKnotSeerTests extends CardTestPlayerBase {
+public class ThoughtKnotSeerTest extends CardTestPlayerBase {
     
     /**
      * Reported bug
