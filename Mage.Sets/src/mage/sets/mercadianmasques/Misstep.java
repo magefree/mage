@@ -27,21 +27,23 @@
  */
 package mage.sets.mercadianmasques;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -86,15 +88,20 @@ class MisstepEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
-                effect.setTargetPointer(new FixedTarget(creature.getId()));
-                game.addEffect(effect, source);                
-            }
-            return true;
+    Player player = game.getPlayer(source.getFirstTarget());
+         if (player != null) {
+         List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
+         for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+           doNotUntapNextUntapStep.add(creature); 
         }
+        if (!doNotUntapNextUntapStep.isEmpty()) {
+                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("", player.getId());
+                effect.setText("those creatures don't untap during that player's next untap step");
+                effect.setTargetPointer(new FixedTargets(doNotUntapNextUntapStep, game));
+                game.addEffect(effect, source);
+             }
+             return true;
+         }
         return false;
     }
 }
