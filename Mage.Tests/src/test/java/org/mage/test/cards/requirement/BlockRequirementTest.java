@@ -156,7 +156,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
     }
 
-      /**
+    /**
      * Okk is red creature that can't block unless a creature with greater power also blocks.
      */
     @Test

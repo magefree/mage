@@ -94,6 +94,5 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
         assertHandCount(playerB, "Silvercoat Lion", 1);
         assertHandCount(playerB, "Pillarfield Ox", 1);
         assertExileCount(playerB, 0);
-
     }
 }
