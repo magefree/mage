@@ -27,27 +27,25 @@
  */
 package mage.sets.darkascension;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
+import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -58,7 +56,6 @@ public class ClingingMists extends CardImpl {
     public ClingingMists(UUID ownerId) {
         super(ownerId, 109, "Clinging Mists", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "DKA";
-
 
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(null, Duration.EndOfTurn, true));
@@ -94,11 +91,15 @@ class ClingingMistsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             creature.tap(game);
-            ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
-            effect.setTargetPointer(new FixedTarget(creature.getId()));
-            game.addEffect(effect, source);                
+            doNotUntapNextUntapStep.add(creature);
+        }
+        if (!doNotUntapNextUntapStep.isEmpty()) {
+            ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("This creature");
+            effect.setTargetPointer(new FixedTargets(doNotUntapNextUntapStep, game));
+            game.addEffect(effect, source);
         }
         return true;
     }

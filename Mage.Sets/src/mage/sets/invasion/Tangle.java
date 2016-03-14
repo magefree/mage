@@ -27,12 +27,14 @@
  */
 package mage.sets.invasion;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -43,7 +45,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -54,7 +56,6 @@ public class Tangle extends CardImpl {
     public Tangle(UUID ownerId) {
         super(ownerId, 213, "Tangle", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "INV";
-
 
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
@@ -99,9 +100,13 @@ class TangleEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent permanent :game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                doNotUntapNextUntapStep.add(permanent);
+            }
+            if (!doNotUntapNextUntapStep.isEmpty()) {
+                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("This creature");
+                effect.setTargetPointer(new FixedTargets(doNotUntapNextUntapStep, game));
                 game.addEffect(effect, source);
             }
             return true;
