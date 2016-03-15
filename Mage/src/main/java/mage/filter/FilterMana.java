@@ -114,4 +114,14 @@ public class FilterMana implements Serializable {
     public FilterMana copy() {
         return new FilterMana(this);
     }
+
+    @Override
+    public String toString() {
+        return (black ? "{B}" : "")
+                + (green ? "{G}" : "")
+                + (red ? "{R}" : "")
+                + (blue ? "{U}" : "")
+                + (white ? "{W}" : "");
+    }
+
 }
