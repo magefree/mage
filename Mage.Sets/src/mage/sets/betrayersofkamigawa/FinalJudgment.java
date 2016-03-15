@@ -27,18 +27,12 @@
  */
 package mage.sets.betrayersofkamigawa;
 
+import java.util.UUID;
+import mage.abilities.effects.common.ExileAllEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
-import java.util.UUID;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -51,8 +45,7 @@ public class FinalJudgment extends CardImpl {
         this.expansionSetCode = "BOK";
 
         // Exile all creatures.
-        this.getSpellAbility().addEffect(new FinalJudgmentEffect());
-
+        this.getSpellAbility().addEffect(new ExileAllEffect(new FilterCreaturePermanent()));
     }
 
     public FinalJudgment(final FinalJudgment card) {
@@ -63,36 +56,4 @@ public class FinalJudgment extends CardImpl {
     public FinalJudgment copy() {
         return new FinalJudgment(this);
     }
-}
-
-class FinalJudgmentEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
-    public FinalJudgmentEffect() {
-        super(Outcome.Exile);
-        staticText = "Exile all creatures";
-    }
-
-    public FinalJudgmentEffect(final FinalJudgmentEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToExile(null, null,source.getSourceId(), game);
-        }
-        return true;
-    }
-
-    @Override
-    public FinalJudgmentEffect copy() {
-        return new FinalJudgmentEffect(this);
-    }
-
 }
