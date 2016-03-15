@@ -42,8 +42,8 @@ import mage.constants.Zone;
  * @author fireshoes
  */
 public class AvacynThePurifier extends CardImpl {
-    
-    private static final String rule = "Whenever this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent";
+
+    private static final String rule = "Whenever this creature transforms into {this}, it deals 3 damage to each other creature and each opponent";
 
     public AvacynThePurifier(UUID ownerId) {
         super(ownerId, 5, "Avacyn, the Purifier", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "");
@@ -52,6 +52,7 @@ public class AvacynThePurifier extends CardImpl {
         this.subtype.add("Angel");
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
+        this.color.setRed(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;
