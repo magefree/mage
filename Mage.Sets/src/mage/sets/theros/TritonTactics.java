@@ -27,8 +27,10 @@
  */
 package mage.sets.theros;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -52,7 +54,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
@@ -69,7 +71,7 @@ public class TritonTactics extends CardImpl {
         // Up to two target creatures each get +0/+3 until end of turn. Untap those creatures.
         // At this turn's next end of combat, tap each creature that was blocked by one of those
         // creatures this turn and it doesn't untap during its controller's next untap step.
-        Effect effect = new BoostTargetEffect(0,3, Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(0, 3, Duration.EndOfTurn);
         effect.setText("Up to two target creatures each get +0/+3 until end of turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
@@ -77,7 +79,6 @@ public class TritonTactics extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new TritonTacticsTriggeredAbility()));
 
         this.getSpellAbility().addWatcher(new BlockedCreaturesWatcher());
-
 
     }
 
@@ -110,7 +111,7 @@ class TritonTacticsUntapTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<String> targets = new HashSet<>();
-        for (UUID target: targetPointer.getTargets(game, source)) {
+        for (UUID target : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
                 permanent.untap(game);
@@ -189,16 +190,20 @@ class TritonTacticsEndOfCombatEffect extends OneShotEffect {
         Object object = game.getState().getValue("blockedAttackers" + source.getSourceId());
         if (object != null && object instanceof Map) {
             attackerMap = (Map<Integer, Set<String>>) object;
-            for (Set<String> attackerSet :attackerMap.values()) {
+            for (Set<String> attackerSet : attackerMap.values()) {
+                List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
                 for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                     if (attackerSet.contains(CardUtil.getCardZoneString(null, creature.getId(), game))) {
                         // tap creature and add the not untap effect
                         creature.tap(game);
-                        ContinuousEffect effect  = new DontUntapInControllersNextUntapStepTargetEffect();
-                        effect.setTargetPointer(new FixedTarget(creature.getId()));
-                        game.addEffect(effect, source);
+                        doNotUntapNextUntapStep.add(creature);
                         game.informPlayers(new StringBuilder("Triton Tactics: ").append(creature.getName()).append(" doesn't untap during its controller's next untap step").toString());
                     }
+                }
+                if (!doNotUntapNextUntapStep.isEmpty()) {
+                    ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("This creature");
+                    effect.setTargetPointer(new FixedTargets(doNotUntapNextUntapStep, game));
+                    game.addEffect(effect, source);
                 }
             }
         }

@@ -28,25 +28,18 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -66,7 +59,11 @@ public class LorthosTheTidemaker extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Whenever Lorthos, the Tidemaker attacks, you may pay {8}. If you do, tap up to eight target permanents. Those permanents don't untap during their controllers' next untap steps.
-        AttacksTriggeredAbility ability = new AttacksTriggeredAbility(new LorthosTheTideMakerEffect(), true);
+        DoIfCostPaid effect = new DoIfCostPaid(new TapTargetEffect(), new GenericManaCost(8), "Pay {8} to tap up to 8 target permanents? (They don't untap during their controllers' next untap steps)");
+        AttacksTriggeredAbility ability = new AttacksTriggeredAbility(effect, false);
+        Effect effect2 = new DontUntapInControllersNextUntapStepTargetEffect();
+        effect2.setText("Those permanents don't untap during their controllers' next untap steps");
+        effect.addEffect(effect2);
         ability.addTarget(new TargetPermanent(0, 8, filter, false));
         this.addAbility(ability);
     }
@@ -78,46 +75,5 @@ public class LorthosTheTidemaker extends CardImpl {
     @Override
     public LorthosTheTidemaker copy() {
         return new LorthosTheTidemaker(this);
-    }
-}
-
-class LorthosTheTideMakerEffect extends OneShotEffect {
-
-    public LorthosTheTideMakerEffect() {
-        super(Outcome.Tap);
-        this.staticText = "you may pay {8}. If you do, tap up to eight target permanents. Those permanents don't untap during their controllers' next untap steps";
-    }
-
-    public LorthosTheTideMakerEffect(final LorthosTheTideMakerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LorthosTheTideMakerEffect copy() {
-        return new LorthosTheTideMakerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cost cost = new ManaCostsImpl("{8}");
-            if (player.chooseUse(Outcome.Tap, "Pay " + cost.getText() + " and " + staticText, source, game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
-                    for (UUID target : this.targetPointer.getTargets(game, source)) {
-                        Permanent permanent = game.getPermanent(target);
-                        if (permanent != null) {
-                            permanent.tap(game);
-                            ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
-                            effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                            game.addEffect(effect, source);
-                        }
-                    }
-                    return false;
-                }
-            }
-        }
-        return false;
     }
 }

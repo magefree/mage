@@ -27,13 +27,15 @@
  */
 package mage.sets.commander;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfClashWonEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -43,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -54,7 +56,6 @@ public class PollenLullaby extends CardImpl {
     public PollenLullaby(UUID ownerId) {
         super(ownerId, 26, "Pollen Lullaby", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "CMD";
-
 
         // Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
@@ -86,10 +87,13 @@ class PollenLullabyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-                creature.tap(game);
+            List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+                doNotUntapNextUntapStep.add(creature);
+            }
+            if (!doNotUntapNextUntapStep.isEmpty()) {
                 ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("This creature");
-                effect.setTargetPointer(new FixedTarget(creature.getId()));
+                effect.setTargetPointer(new FixedTargets(doNotUntapNextUntapStep, game));
                 game.addEffect(effect, source);
             }
             return true;
@@ -103,4 +107,3 @@ class PollenLullabyEffect extends OneShotEffect {
     }
 
 }
-

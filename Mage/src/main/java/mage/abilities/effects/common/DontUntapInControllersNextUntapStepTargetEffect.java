@@ -27,6 +27,8 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -45,8 +47,10 @@ import mage.game.permanent.Permanent;
  */
 public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private int validForTurnNum;
+    private UUID onlyIfControlledByPlayer;
     private String targetName;
+    // holds the info what target was already handled in Untap of its controller
+    private final Map<UUID, Boolean> handledTargetsDuringTurn = new HashMap<>();
 
     /**
      * Attention: This effect won't work with targets controlled by different
@@ -55,19 +59,30 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
      *
      */
     public DontUntapInControllersNextUntapStepTargetEffect() {
-        super(Duration.Custom, Outcome.Detriment, false, true);
+        this("");
     }
 
     public DontUntapInControllersNextUntapStepTargetEffect(String targetName) {
-        this();
+        this(targetName, null);
+    }
+
+    /**
+     *
+     * @param targetName used as target text for the generated rule text
+     * @param onlyIfControlledByPlayer the effect only works if the permanent is
+     * controlled by that controller, null = it works for all players
+     */
+    public DontUntapInControllersNextUntapStepTargetEffect(String targetName, UUID onlyIfControlledByPlayer) {
+        super(Duration.Custom, Outcome.Detriment, false, true);
         this.targetName = targetName;
+        this.onlyIfControlledByPlayer = onlyIfControlledByPlayer;
     }
 
     public DontUntapInControllersNextUntapStepTargetEffect(final DontUntapInControllersNextUntapStepTargetEffect effect) {
         super(effect);
-        this.validForTurnNum = effect.validForTurnNum;
         this.targetName = effect.targetName;
-
+        this.handledTargetsDuringTurn.putAll(effect.handledTargetsDuringTurn);
+        this.onlyIfControlledByPlayer = effect.onlyIfControlledByPlayer;
     }
 
     @Override
@@ -97,42 +112,40 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // the check for turn number is needed if multiple effects are added to prevent untap in next untap step of controller
-        // if we don't check for turn number, every untap step of a turn only one effect would be used instead of correctly only one time
-        // to skip the untap effect.
-
-        // Discard effect if it's related to a previous turn
-        if (validForTurnNum > 0 && validForTurnNum < game.getTurnNum()) {
-            discard();
-            return false;
-        }
-        // remember the turn of the untap step the effect has to be applied
+        // the check if a permanent untap pahse is already handled is needed if multiple effects are added to prevent untap in next untap step of controller
+        // if we don't check it for every untap step of a turn only one effect would be consumed instead of all be valid for the next untap step
         if (GameEvent.EventType.UNTAP_STEP.equals(event.getType())) {
-            UUID controllerId = null;
+            boolean allHandled = true;
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    controllerId = permanent.getControllerId();
+                    if (game.getActivePlayerId().equals(permanent.getControllerId())
+                            || (game.getActivePlayerId().equals(onlyIfControlledByPlayer))) { // if effect works only for specific player, all permanents have to be set to handled in that players untap step
+                        if (!handledTargetsDuringTurn.containsKey(targetId)) {
+                            // it's the untep step of the current controller and the effect was not handled for this target yet, so do it now
+                            handledTargetsDuringTurn.put(targetId, false);
+                            allHandled = false;
+                        } else if (!handledTargetsDuringTurn.get(targetId)) {
+                            // if it was already ready to be handled on an previous Untap step set it to done if not already so
+                            handledTargetsDuringTurn.put(targetId, true);
+                        }
+                    } else {
+                        allHandled = false;
+                    }
                 }
             }
-            if (controllerId == null) { // no more targets on the battlefield, effect can be discarded
+            if (allHandled) {
                 discard();
-                return false;
-            }
-
-            if (game.getActivePlayerId().equals(controllerId)) {
-                if (validForTurnNum == game.getTurnNum()) { // the turn has a second untap step but the effect is already related to the first untap step
-                    discard();
-                    return false;
-                }
-                validForTurnNum = game.getTurnNum();
             }
         }
 
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
-            if (targetPointer.getTargets(game, source).contains(event.getTargetId())) {
+            if (handledTargetsDuringTurn.containsKey(event.getTargetId())
+                    && !handledTargetsDuringTurn.get(event.getTargetId())
+                    && getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
+                    handledTargetsDuringTurn.put(event.getTargetId(), true);
                     return true;
                 }
             }

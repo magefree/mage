@@ -315,7 +315,8 @@ public abstract class AbilityImpl implements Ability {
         VariableManaCost variableManaCost = handleManaXCosts(game, noMana, controller);
         String announceString = handleOtherXCosts(game, controller);
         // For effects from cards like Void Winnower x costs have to be set
-        if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, getId(), getSourceId(), getControllerId()), this)) {
+        if (this.getAbilityType().equals(AbilityType.SPELL)
+                && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, getId(), getSourceId(), getControllerId()), this)) {
             return false;
         }
         for (Mode mode : this.getModes().getSelectedModes()) {

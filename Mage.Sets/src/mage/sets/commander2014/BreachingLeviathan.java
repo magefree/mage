@@ -27,6 +27,8 @@
  */
 package mage.sets.commander2014;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -46,7 +48,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -105,10 +107,14 @@ class BreachingLeviathanEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        List<Permanent> doNotUntapNextUntapStep = new ArrayList<>();
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             creature.tap(game);
-            ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
-            effect.setTargetPointer(new FixedTarget(creature.getId()));
+            doNotUntapNextUntapStep.add(creature);
+        }
+        if (!doNotUntapNextUntapStep.isEmpty()) {
+            ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("This creature");
+            effect.setTargetPointer(new FixedTargets(doNotUntapNextUntapStep, game));
             game.addEffect(effect, source);
         }
         return true;
