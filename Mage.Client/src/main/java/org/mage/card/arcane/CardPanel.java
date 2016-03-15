@@ -880,7 +880,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             updateImage();
             if (card.canTransform()) {
                 BufferedImage transformIcon;
-                if (transformed) {
+                if (transformed || card.isTransformed()) {
                     transformIcon = ImageManagerImpl.getInstance().getNightImage();
                 } else {
                     transformIcon = ImageManagerImpl.getInstance().getDayImage();
