@@ -42,8 +42,11 @@ import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -86,7 +89,7 @@ class ScreamsFromWithinEffect extends OneShotEffect {
 
     public ScreamsFromWithinEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "return Screams from Within from your graveyard to the battlefield";
+        staticText = "return {this} from your graveyard to the battlefield";
     }
 
     public ScreamsFromWithinEffect(final ScreamsFromWithinEffect effect) {
@@ -95,10 +98,16 @@ class ScreamsFromWithinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceEnchantmentCard = game.getCard(source.getSourceId());
+        Card aura = game.getCard(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
-        if (sourceEnchantmentCard != null && player != null) {
-            return player.moveCards(sourceEnchantmentCard, Zone.BATTLEFIELD, source, game);
+        if (aura != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD && player != null && player.getGraveyard().contains(source.getSourceId())) {
+            for (Permanent creaturePermanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game)) {
+                for (Target target : aura.getSpellAbility().getTargets()) {
+                    if (target.canTarget(creaturePermanent.getId(), game)) {
+                        return player.moveCards(aura, Zone.BATTLEFIELD, source, game);
+                    }
+                }
+            }
         }
         return false;
     }
