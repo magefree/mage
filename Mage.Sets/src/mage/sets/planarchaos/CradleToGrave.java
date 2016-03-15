@@ -45,10 +45,11 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CradleToGrave extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature that came into play this turn");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature that entered the battlefield this turn");
 
     static {
-        filter.add(Predicates.and(Predicates.not(new ColorPredicate(ObjectColor.BLACK)), new EnteredThisTurnPredicate()));
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        filter.add(new EnteredThisTurnPredicate());
     }
     
     public CradleToGrave(UUID ownerId) {
