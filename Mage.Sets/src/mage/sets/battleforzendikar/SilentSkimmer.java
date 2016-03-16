@@ -31,13 +31,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.SetTargetPointer;
 
 /**
  *
@@ -60,8 +59,7 @@ public class SilentSkimmer extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Silent Skimmer attacks, defending player loses 2 life.
-        this.addAbility(new AttacksTriggeredAbility(new LoseLifeTargetEffect(2), false,
-                "Whenever {this} attacks, defending player loses 2 life", SetTargetPointer.PLAYER));
+        this.addAbility(new AttacksTriggeredAbility(new LoseLifeDefendingPlayerEffect(2, true), false));
 
     }
 
