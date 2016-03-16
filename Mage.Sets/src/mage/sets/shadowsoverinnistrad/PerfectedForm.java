@@ -47,6 +47,7 @@ public class PerfectedForm extends CardImpl {
         this.subtype.add("Horror");
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
+        this.color.setBlue(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

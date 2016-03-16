@@ -53,8 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Rattlechains extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("spirit");
-    private static final FilterCard filterCard = new FilterCard("spirit cards");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit");
+    private static final FilterCard filterCard = new FilterCard("Spirit spells");
 
     static {
         filter.add(new SubtypePredicate("Spirit"));
@@ -79,7 +79,7 @@ public class Rattlechains extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
-        // You may cast spirit cards as though they had flash.
+        // You may cast Spirit spells as though they had flash.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filterCard, false)));
     }
 

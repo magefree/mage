@@ -59,6 +59,7 @@ public class InsidiousMist extends CardImpl {
         this.subtype.add("Elemental");
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
+        this.color.setBlue(true);
 
         this.nightCard = true;
         this.canTransform = true;

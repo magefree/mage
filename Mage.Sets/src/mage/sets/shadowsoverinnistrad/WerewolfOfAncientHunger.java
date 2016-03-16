@@ -59,6 +59,7 @@ public class WerewolfOfAncientHunger extends CardImpl {
         this.subtype.add("Werewolf");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
+        this.color.setGreen(true);
 
         this.nightCard = true;
         this.canTransform = true;

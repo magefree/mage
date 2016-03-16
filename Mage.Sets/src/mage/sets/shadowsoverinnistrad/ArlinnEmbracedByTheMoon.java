@@ -66,6 +66,8 @@ public class ArlinnEmbracedByTheMoon extends CardImpl {
         super(ownerId, 243, "Arlinn, Embraced by the Moon", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "");
         this.expansionSetCode = "SOI";
         this.subtype.add("Arlinn");
+        this.color.setRed(true);
+        this.color.setGreen(true);
 
         this.nightCard = true;
         this.canTransform = true;

@@ -51,6 +51,7 @@ public class LunarchInquisitors extends CardImpl {
         this.subtype.add("Cleric");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+        this.color.setWhite(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

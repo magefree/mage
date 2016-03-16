@@ -51,6 +51,7 @@ public class AwokenHorror extends CardImpl {
         this.subtype.add("Horror");
         this.power = new MageInt(7);
         this.toughness = new MageInt(8);
+        this.color.setBlue(true);
 
         this.nightCard = true;
 
