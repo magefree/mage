@@ -121,6 +121,9 @@ public class DontUntapInOpponentsNextUntapStepAllEffect extends ContinuousRuleMo
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
                 Player controller = game.getPlayer(source.getControllerId());
+                if (!permanent.getControllerId().equals(getTargetPointer().getFirst(game, source))) {
+                    return false;
+                }
                 if (controller != null && !game.isOpponent(controller, permanent.getControllerId())) {
                     return false;
                 }
