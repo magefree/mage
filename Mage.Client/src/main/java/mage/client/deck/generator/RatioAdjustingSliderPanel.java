@@ -55,12 +55,10 @@ public class RatioAdjustingSliderPanel extends JPanel {
 
         // Slider stores its initial value to revert to when reset
         private int defaultValue;
-        private boolean adjust;
 
-        public JStorageSlider(int min, int max, int value, boolean adjust) {
+        public JStorageSlider(int min, int max, int value) {
             super(min, max, value);
             defaultValue = value;
-            this.adjust = adjust;
             setMinorTickSpacing(5);
             setMajorTickSpacing(10);
             setPaintTicks(true);
@@ -70,10 +68,6 @@ public class RatioAdjustingSliderPanel extends JPanel {
 
         public void resetDefault() {
             this.setValue(defaultValue);
-        }
-
-        public boolean isAdjust() {
-            return adjust;
         }
 
     }
@@ -92,10 +86,8 @@ public class RatioAdjustingSliderPanel extends JPanel {
                         fireSliderChangedEvent((JStorageSlider) e.getSource());
                     }
                 });
-                if (slider.isAdjust()) {
-                    adjustableCount++;
-                }
             }
+            adjustableCount = storageSliders.size() - 1;
         }
 
         public void fireSliderChangedEvent(JStorageSlider source) {
@@ -108,7 +100,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
 
         private void updateSliderPosition(JStorageSlider source) {
             int maximum = MAXIMUM;
-            int excess = 100;
+            int excess = MAXIMUM;
             int sign = 0;
             for (JStorageSlider slider : storageSliders) {
                 excess -= slider.getValue();
@@ -122,7 +114,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
             for (int i = storageSliders.size() - 1; i >= 0; i--) {
                 JStorageSlider slider = storageSliders.get(i);
                 int value = slider.getValue();
-                if (slider != source && slider.isAdjust()) {
+                if (slider != source && maximum < MAXIMUM) {
                     slider.setMaximum(maximum);
                     if (excess >= addition) {
                         value += addition * sign;
@@ -154,9 +146,9 @@ public class RatioAdjustingSliderPanel extends JPanel {
     private void initPanel() {
 
         // Create three sliders with default values
-        creatureSlider = new JStorageSlider(0, MAXIMUM, DeckGeneratorPool.DEFAULT_CREATURE_PERCENTAGE, true);
-        nonCreatureSlider = new JStorageSlider(0, MAXIMUM, DeckGeneratorPool.DEFAULT_NON_CREATURE_PERCENTAGE, true);
-        landSlider = new JStorageSlider(0, MAXIMUM, DeckGeneratorPool.DEFAULT_LAND_PERCENTAGE, false);
+        creatureSlider = new JStorageSlider(0, MAXIMUM, DeckGeneratorPool.DEFAULT_CREATURE_PERCENTAGE);
+        nonCreatureSlider = new JStorageSlider(0, MAXIMUM, DeckGeneratorPool.DEFAULT_NON_CREATURE_PERCENTAGE);
+        landSlider = new JStorageSlider(0, MAXIMUM, DeckGeneratorPool.DEFAULT_LAND_PERCENTAGE);
 
         sg = new AdjustingSliderGroup(creatureSlider, nonCreatureSlider, landSlider);
 
