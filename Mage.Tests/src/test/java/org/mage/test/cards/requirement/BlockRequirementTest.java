@@ -29,6 +29,7 @@ package org.mage.test.cards.requirement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -178,9 +179,45 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        // Hill giant is still alive and Played B looses 3 lives
+        // Hill giant is still alive and Played B loses 3 lives
         assertPermanentCount(playerA, "Hill Giant", 1);
         assertLife(playerB, 17);
+    }
+    
+    /**
+     * Reported bug:
+     * When Breaker of Armies is granted Menace and there is only 1 valid blocker, the game enters a state
+     * that cannot be continued. He must be blocked by all creatures that are able, however, with menace
+     * the only valid blocks would be by more than one creature, so the expected behavior is no blocks can be made.
+     */
+    @Ignore
+    @Test
+    public void testBreakerOfArmiesWithMenace() {
 
+        // {8}
+        // All creatures able to block Breaker of Armies do so.
+        addCard(Zone.BATTLEFIELD, playerA, "Breaker of Armies", 1); // 10/8      
+
+        // 3/3 Vanilla creature
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant", 1);        
+
+          
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
+        // {2}{B} Enchanted creature gets +2/+1 and has menace. 
+        addCard(Zone.HAND, playerA, "Untamed Hunger", 1);
+        castSpell(1,PhaseStep.PRECOMBAT_MAIN, playerA, "Untamed Hunger", "Breaker of Armies");
+
+        attack(1, playerA, "Breaker of Armies");
+        
+        // not allowed due to Breaker of Armies having menace
+        block(1, playerB, "Hill Giant", "Breaker of Armies");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        // Hill giant is still alive
+        assertPermanentCount(playerA, "Hill Giant", 1);
+        // Player B was unable to block, so goes down to 10 life
+        assertLife(playerB, 10);
     }
 }
