@@ -215,6 +215,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
         for (JStorageSlider slider : sg.getSliders()) {
             slider.resetDefault();
         }
+        sg.updateSliderPosition(landSlider);
     }
 
     public int getCreaturePercentage() {
