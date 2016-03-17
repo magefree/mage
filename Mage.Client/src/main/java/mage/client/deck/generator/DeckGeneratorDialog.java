@@ -289,15 +289,15 @@ public class DeckGeneratorDialog {
         adjustingSliderPanel = new RatioAdjustingSliderPanel();
 
         // Restore saved slider values
-        String creaturePercentage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_CREATURE_PERCENTAGE,
-                                Integer.toString(DeckGeneratorPool.DEFAULT_CREATURE_PERCENTAGE));
-        adjustingSliderPanel.setCreaturePercentage(Integer.parseInt(creaturePercentage));
-        String nonCreaturePercentage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_NON_CREATURE_PERCENTAGE,
-                Integer.toString(DeckGeneratorPool.DEFAULT_NON_CREATURE_PERCENTAGE));
-        adjustingSliderPanel.setNonCreaturePercentage(Integer.parseInt(nonCreaturePercentage));
         String landPercentage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_LAND_PERCENTAGE,
                 Integer.toString(DeckGeneratorPool.DEFAULT_LAND_PERCENTAGE));
         adjustingSliderPanel.setLandPercentage(Integer.parseInt(landPercentage));
+        String nonCreaturePercentage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_NON_CREATURE_PERCENTAGE,
+                Integer.toString(DeckGeneratorPool.DEFAULT_NON_CREATURE_PERCENTAGE));
+        adjustingSliderPanel.setNonCreaturePercentage(Integer.parseInt(nonCreaturePercentage));
+        String creaturePercentage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_CREATURE_PERCENTAGE,
+                Integer.toString(DeckGeneratorPool.DEFAULT_CREATURE_PERCENTAGE));
+        adjustingSliderPanel.setCreaturePercentage(Integer.parseInt(creaturePercentage));
         advancedPanel.add(adjustingSliderPanel, c);
 
         // Reset
@@ -306,7 +306,7 @@ public class DeckGeneratorDialog {
         c.ipady = 0;
         c.weightx = 1.0;
         c.anchor = GridBagConstraints.LAST_LINE_END;
-        c.insets = new Insets(10,10, 0, 0);
+        c.insets = new Insets(10, 10, 0, 0);
         c.gridx = 2;
         c.gridwidth = 1;
         c.gridy = 2;
@@ -418,12 +418,10 @@ public class DeckGeneratorDialog {
     }
 
     public DeckGeneratorCMC getDeckGeneratorCMC() {
-        DeckGeneratorCMC selectedCMC = (DeckGeneratorCMC)cbCMC.getSelectedItem();
+        DeckGeneratorCMC selectedCMC = (DeckGeneratorCMC) cbCMC.getSelectedItem();
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_ADVANCED_CMC, selectedCMC.name());
         return selectedCMC;
     }
-
-
 
     public String getSelectedColors() {
         if (selectedColors != null) {
