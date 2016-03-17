@@ -41,7 +41,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -54,7 +54,7 @@ public class TamiyosJournal extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clues");
     
     static {
-        filter.add(new NamePredicate("Clue"));
+        filter.add(new SubtypePredicate("Clue"));
     }
 
     public TamiyosJournal(UUID ownerId) {
