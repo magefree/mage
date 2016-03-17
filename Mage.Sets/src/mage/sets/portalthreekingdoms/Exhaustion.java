@@ -27,8 +27,6 @@
  */
 package mage.sets.portalthreekingdoms;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
@@ -44,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTargets;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
