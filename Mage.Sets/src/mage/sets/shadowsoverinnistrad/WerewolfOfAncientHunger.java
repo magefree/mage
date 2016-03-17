@@ -32,7 +32,9 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.TransformedCondition;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInAllHandsCount;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -71,7 +73,9 @@ public class WerewolfOfAncientHunger extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Werewolf of Ancient Hunger's power and toughness are each equal to the total number of cards in all players' hands.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllHandsCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, 
+                new ConditionalContinuousEffect(new SetPowerToughnessSourceEffect(new CardsInAllHandsCount(), Duration.EndOfGame),
+                new TransformedCondition(false), "{this}'s power and toughness are each equal to the total number of cards in all players' hands")));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf of Ancient Hunger.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

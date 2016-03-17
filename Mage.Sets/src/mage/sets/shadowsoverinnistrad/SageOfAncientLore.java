@@ -34,6 +34,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
+import mage.abilities.condition.common.TransformedCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
@@ -68,7 +70,9 @@ public class SageOfAncientLore extends CardImpl {
 
         // Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.
         DynamicValue xValue= new CardsInControllerHandCount();
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, 
+                new ConditionalContinuousEffect(new SetPowerToughnessSourceEffect(xValue, Duration.EndOfGame),
+                new TransformedCondition(true), "{this}'s power and toughness are each equal to the total number of cards in your hand")));
 
         // When Sage of Ancient Lore enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
