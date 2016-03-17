@@ -35,22 +35,21 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
-import mage.game.events.GameEvent;
 
 /**
  *
  * @author LoneFox
  */
-
 public class RampageAbility extends BecomesBlockedTriggeredAbility {
 
     private final String rule;
 
     public RampageAbility(int amount) {
         super(null, false);
-        rule = "rampage " + amount;
+        rule = "rampage " + amount + "(Whenever this creature becomes blocked, it gets +"
+                + amount + "/+" + amount + " until end of turn for each creature blocking it beyond the first.)";
         RampageValue rv = new RampageValue(amount);
-        this.addEffect(new BoostSourceEffect(rv, rv, Duration.EndOfTurn));
+        this.addEffect(new BoostSourceEffect(rv, rv, Duration.EndOfTurn, true));
     }
 
     public RampageAbility(final RampageAbility ability) {
@@ -68,7 +67,6 @@ public class RampageAbility extends BecomesBlockedTriggeredAbility {
         return rule;
     }
 }
-
 
 class RampageValue implements DynamicValue {
 
@@ -89,11 +87,10 @@ class RampageValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int count = 0;
-        for(CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if(combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
-                 int blockers = combatGroup.getBlockers().size();
-                 return blockers > 1 ? (blockers - 1) * amount : 0;
+        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if (combatGroup.getAttackers().contains(sourceAbility.getSourceId())) {
+                int blockers = combatGroup.getBlockers().size();
+                return blockers > 1 ? (blockers - 1) * amount : 0;
             }
         }
         return 0;
@@ -101,6 +98,7 @@ class RampageValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "Rampage " + amount;
+        return "rampage " + amount + "(Whenever this creature becomes blocked, it gets +"
+                + amount + "/+" + amount + " until end of turn for each creature blocking it beyond the first.)";
     }
 }
