@@ -32,7 +32,7 @@ public class BecomesBlockedTest extends CardTestPlayerBase {
         
         attack(1, playerA, "Rabid Elephant");
         block(1, playerB, "Savannah Lions", "Rabid Elephant");
-        //block(1, playerB, "Hill Giant", "Rabid Elephant");                
+        block(1, playerB, "Hill Giant", "Rabid Elephant");                
 
         // test passes if PhaseStep ends at DECLARE_BLOCKERS
         //setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
@@ -40,6 +40,6 @@ public class BecomesBlockedTest extends CardTestPlayerBase {
         execute();
         
         // blocked by 2 creatures, so gets +2/+2 twice, making it 7/8
-        assertPowerToughness(playerA, "Rabid Elephant", 3, 4);
+        assertPowerToughness(playerA, "Rabid Elephant", 7, 8);
     }
 }
