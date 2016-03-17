@@ -46,6 +46,7 @@ import java.util.List;
 public class RatioAdjustingSliderPanel extends JPanel {
 
     private static final int MAXIMUM = 100;
+    private int adjustableCount;
     private JStorageSlider creatureSlider, nonCreatureSlider, landSlider;
     private List<JLabel> textLabels = new ArrayList<>();
     private AdjustingSliderGroup sg;
@@ -91,6 +92,9 @@ public class RatioAdjustingSliderPanel extends JPanel {
                         fireSliderChangedEvent((JStorageSlider) e.getSource());
                     }
                 });
+                if (slider.isAdjust()) {
+                    adjustableCount++;
+                }
             }
         }
 
@@ -105,24 +109,31 @@ public class RatioAdjustingSliderPanel extends JPanel {
         private void updateSliderPosition(JStorageSlider source) {
             int maximum = MAXIMUM;
             int excess = 100;
+            int sign = 0;
             for (JStorageSlider slider : storageSliders) {
                 excess -= slider.getValue();
             }
-            int addition = excess / (storageSliders.size() - 1); // divide the deficit between all sliders except this one
+            sign = Integer.signum(excess);
+            excess = Math.abs(excess);
+            int addition = excess / (adjustableCount - 1); // divide the deficit between all adjustable sliders except this one
             if (addition == 0 && excess != 0) {
-                addition = Integer.signum(excess);
+                addition = 1;
             }
             for (int i = storageSliders.size() - 1; i >= 0; i--) {
                 JStorageSlider slider = storageSliders.get(i);
                 int value = slider.getValue();
                 if (slider != source && slider.isAdjust()) {
                     slider.setMaximum(maximum);
-                    if (excess > addition) {
-                        value += addition;
+                    if (excess >= addition) {
+                        value += addition * sign;
                         excess -= addition;
                     } else {
-                        value += excess;
+                        value += excess * sign;
                         excess = 0;
+                    }
+                    if (value < 0) {
+                        excess += value;
+                        value = 0;
                     }
                     slider.setValue(value);
                 }
