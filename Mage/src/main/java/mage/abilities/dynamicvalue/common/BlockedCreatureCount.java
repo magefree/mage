@@ -50,8 +50,9 @@ public class BlockedCreatureCount implements DynamicValue {
         this(message, false);
     }
 
-    public BlockedCreatureCount(String message, boolean beyondTheFist) {
+    public BlockedCreatureCount(String message, boolean beyondTheFirst) {
         this.message = message;
+        this.beyondTheFirst = beyondTheFirst;
     }
 
     public BlockedCreatureCount(final BlockedCreatureCount dynamicValue) {

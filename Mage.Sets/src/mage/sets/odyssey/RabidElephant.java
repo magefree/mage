@@ -55,7 +55,7 @@ public class RabidElephant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Rabid Elephant becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
-        DynamicValue value = new MultipliedValue(new BlockedCreatureCount(),2);
+        DynamicValue value = new MultipliedValue(new BlockedCreatureCount(), 2);
         Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
         effect.setText("it gets +2/+2 until end of turn for each creature blocking it");
         this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
