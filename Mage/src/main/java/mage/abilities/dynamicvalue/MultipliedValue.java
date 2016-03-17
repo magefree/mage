@@ -38,21 +38,21 @@ import mage.game.Game;
 public class MultipliedValue implements DynamicValue {
 
     private final DynamicValue value;
-    private final int multplier;
+    private final int multiplier;
 
     public MultipliedValue(DynamicValue value, int multiplier) {
         this.value = value.copy();
-        this.multplier = multiplier;
+        this.multiplier = multiplier;
     }
 
     MultipliedValue(final MultipliedValue dynamicValue) {
         this.value = dynamicValue.value.copy();
-        this.multplier = dynamicValue.multplier;
+        this.multiplier = dynamicValue.multiplier;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return multplier * value.calculate(game, sourceAbility, effect);
+        return multiplier * value.calculate(game, sourceAbility, effect);
     }
 
     @Override
@@ -63,10 +63,10 @@ public class MultipliedValue implements DynamicValue {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (multplier == 2) {
+        if (multiplier == 2) {
             sb.append("twice ");
         } else {
-            sb.append(multplier).append(" * ");
+            sb.append(multiplier).append(" * ");
         }
         return sb.append(value.toString()).toString();
     }
