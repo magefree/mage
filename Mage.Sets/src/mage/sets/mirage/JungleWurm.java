@@ -56,7 +56,7 @@ public class JungleWurm extends CardImpl {
         // Whenever Jungle Wurm becomes blocked, it gets -1/-1 until end of turn for each creature blocking it beyond the first.
         BlockedCreatureCount blockedCreatureCount = new BlockedCreatureCount("each creature blocking it beyond the first", true);
         DynamicValue value = new MultipliedValue(blockedCreatureCount, -1);
-        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("it gets -1/-1 until end of turn for each creature blocking it beyond the first");
         this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
     }

@@ -61,6 +61,7 @@ public class WaywardDisciple extends CardImpl {
         this.subtype.add("Cleric");
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
+        this.color.setBlack(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

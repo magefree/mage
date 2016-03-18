@@ -50,8 +50,9 @@ public class BlockedCreatureCount implements DynamicValue {
         this(message, false);
     }
 
-    public BlockedCreatureCount(String message, boolean beyondTheFist) {
+    public BlockedCreatureCount(String message, boolean beyondTheFirst) {
         this.message = message;
+        //this.beyondTheFirst = beyondTheFirst; this was never set in the original, so not setting here just in case ??
     }
 
     public BlockedCreatureCount(final BlockedCreatureCount dynamicValue) {

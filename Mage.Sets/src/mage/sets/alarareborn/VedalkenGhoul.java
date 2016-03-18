@@ -29,17 +29,11 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -53,13 +47,11 @@ public class VedalkenGhoul extends CardImpl {
         this.subtype.add("Vedalken");
         this.subtype.add("Zombie");
 
-
-        
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever Vedalken Ghoul becomes blocked, defending player loses 4 life.
-        this.addAbility(new VedalkenGhoulTriggeredAbility());
+        this.addAbility(new BecomesBlockedTriggeredAbility(new LoseLifeDefendingPlayerEffect(4, true), false));
 
     }
 
@@ -70,45 +62,5 @@ public class VedalkenGhoul extends CardImpl {
     @Override
     public VedalkenGhoul copy() {
         return new VedalkenGhoul(this);
-    }
-}
-
-class VedalkenGhoulTriggeredAbility extends TriggeredAbilityImpl {
-
-    public VedalkenGhoulTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(4), false);
-    }
-
-    public VedalkenGhoulTriggeredAbility(final VedalkenGhoulTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CREATURE_BLOCKED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getSourceId())) {
-            UUID defendingPlayer = game.getCombat().getDefenderId(this.getSourceId());
-            if (defendingPlayer != null) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(defendingPlayer));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes blocked, defending player loses 4 life.";
-    }
-
-    @Override
-    public VedalkenGhoulTriggeredAbility copy() {
-        return new VedalkenGhoulTriggeredAbility(this);
     }
 }

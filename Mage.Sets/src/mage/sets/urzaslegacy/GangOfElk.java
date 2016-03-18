@@ -57,7 +57,7 @@ public class GangOfElk extends CardImpl {
 
         // Whenever Gang of Elk becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
         DynamicValue value = new MultipliedValue(new BlockedCreatureCount(), 2);
-        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("it gets +2/+2 until end of turn for each creature blocking it");
         this.addAbility(new BecomesBlockedTriggeredAbility(effect, false));
     }

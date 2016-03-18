@@ -47,6 +47,7 @@ public class HeirToTheNight extends CardImpl {
         this.subtype.add("Berserker");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
+        this.color.setBlack(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

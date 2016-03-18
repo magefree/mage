@@ -66,14 +66,14 @@ public class SpinedSliver extends CardImpl {
 
         // Whenever a Sliver becomes blocked, that Sliver gets +1/+1 until end of turn for each creature blocking it.
         BlockedCreatureCount value = new BlockedCreatureCount();
-        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
         Ability ability = new BecomesBlockedByCreatureTriggeredAbility(effect, false);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
                         Duration.WhileOnBattlefield, filter,
                         "Whenever a Sliver becomes blocked, that Sliver gets +1/+1 until end of turn for each creature blocking it.")));
-        }
+    }
 
     public SpinedSliver(final SpinedSliver card) {
         super(card);

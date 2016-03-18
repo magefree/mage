@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
@@ -623,22 +624,50 @@ public class CardUtil {
 
         for (String rule : card.getRules()) {
             rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-            if (rule.matches(regexBlack)) {
+            if (!mana.isBlack() && rule.matches(regexBlack)) {
                 mana.setBlack(true);
             }
-            if (rule.matches(regexBlue)) {
+            if (!mana.isBlue() && rule.matches(regexBlue)) {
                 mana.setBlue(true);
             }
-            if (rule.matches(regexGreen)) {
+            if (!mana.isGreen() && rule.matches(regexGreen)) {
                 mana.setGreen(true);
             }
-            if (rule.matches(regexRed)) {
+            if (!mana.isRed() && rule.matches(regexRed)) {
                 mana.setRed(true);
             }
-            if (rule.matches(regexWhite)) {
+            if (!mana.isWhite() && rule.matches(regexWhite)) {
                 mana.setWhite(true);
             }
         }
+        if (card.canTransform()) {
+            Card secondCard = card.getSecondCardFace();
+            ObjectColor color = secondCard.getColor(null);
+            mana.setBlack(mana.isBlack() || color.isBlack());
+            mana.setGreen(mana.isGreen() || color.isGreen());
+            mana.setRed(mana.isRed() || color.isRed());
+            mana.setBlue(mana.isBlue() || color.isBlue());
+            mana.setWhite(mana.isWhite() || color.isWhite());
+            for (String rule : secondCard.getRules()) {
+                rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+                if (!mana.isBlack() && rule.matches(regexBlack)) {
+                    mana.setBlack(true);
+                }
+                if (!mana.isBlue() && rule.matches(regexBlue)) {
+                    mana.setBlue(true);
+                }
+                if (!mana.isGreen() && rule.matches(regexGreen)) {
+                    mana.setGreen(true);
+                }
+                if (!mana.isRed() && rule.matches(regexRed)) {
+                    mana.setRed(true);
+                }
+                if (!mana.isWhite() && rule.matches(regexWhite)) {
+                    mana.setWhite(true);
+                }
+            }
+        }
+
         return mana;
     }
 

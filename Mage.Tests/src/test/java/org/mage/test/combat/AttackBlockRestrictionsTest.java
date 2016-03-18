@@ -1,6 +1,5 @@
 package org.mage.test.combat;
 
-
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -35,11 +34,13 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests attacking creature doesn't untap after being blocked by Wall of Frost
+     * Tests attacking creature doesn't untap after being blocked by Wall of
+     * Frost
      */
     @Test
     public void testWallofWrost() {
-        addCard(Zone.BATTLEFIELD, playerA, "Wall of Frost");
+        // Whenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step.
+        addCard(Zone.BATTLEFIELD, playerA, "Wall of Frost"); // 0/7
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
         attack(2, playerB, "Craw Wurm");
@@ -56,9 +57,8 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests card that says that it can't block specific cards
-     * Hunted Ghoul:
-     *   Hunted Ghoul can't block Humans.
+     * Tests card that says that it can't block specific cards Hunted Ghoul:
+     * Hunted Ghoul can't block Humans.
      */
     @Test
     public void testFilteredBlocking() {
@@ -76,9 +76,8 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests card that says that it can't block specific cards still can block others
-     * Hunted Ghoul:
-     *   Hunted Ghoul can't block Humans.
+     * Tests card that says that it can't block specific cards still can block
+     * others Hunted Ghoul: Hunted Ghoul can't block Humans.
      */
     @Test
     public void testFilteredBlocking2() {
@@ -176,7 +175,8 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests "Creatures with power less than Champion of Lambholt's power can't block creatures you control."
+     * Tests "Creatures with power less than Champion of Lambholt's power can't
+     * block creatures you control."
      */
     @Test
     public void testChampionOfLambholt() {
@@ -244,22 +244,22 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         assertCounterCount(playerA, CounterType.POISON, 1);
     }
-    
+
     @Test
     public void testCantBeBlockedTormentedSoul() {
         addCard(Zone.BATTLEFIELD, playerB, "Tormented Soul");
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Memnite");
-        
+
         attack(2, playerB, "Tormented Soul");
         block(2, playerA, "Tormented Soul", "Memnite");
-        
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-        
+
         assertPermanentCount(playerA, "Memnite", 1);
         assertPermanentCount(playerB, "Tormented Soul", 1);
-        
+
         assertLife(playerA, 19);
     }
 

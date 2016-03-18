@@ -43,6 +43,7 @@ class ClueArtifactToken extends Token {
         super("Clue", "colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\"");
         this.setOriginalExpansionSetCode("SOI");
         this.cardType.add(CardType.ARTIFACT);
+        this.subtype.add("Clue");
 
         // {2}, Sacrifice this artifact: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));

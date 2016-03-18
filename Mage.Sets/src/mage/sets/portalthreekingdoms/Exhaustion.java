@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.DontUntapInOpponentsNextUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -40,7 +40,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
@@ -54,7 +53,6 @@ public class Exhaustion extends CardImpl {
     public Exhaustion(UUID ownerId) {
         super(ownerId, 42, "Exhaustion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "PTK";
-
 
         // Creatures and lands target opponent controls don't untap during his or her next untap step.
         this.getSpellAbility().addEffect(new ExhaustionEffect());
@@ -72,36 +70,35 @@ public class Exhaustion extends CardImpl {
 }
 
 class ExhaustionEffect extends OneShotEffect {
-    
+
     private static final FilterPermanent filter = new FilterPermanent();
-    
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
     }
-    
+
     ExhaustionEffect() {
         super(Outcome.Detriment);
         this.staticText = "Creatures and lands target opponent controls don't untap during his or her next untap step.";
     }
-    
+
     ExhaustionEffect(final ExhaustionEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public ExhaustionEffect copy() {
         return new ExhaustionEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
+   
         if (player != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                game.addEffect(effect, source);                      
-            }
+            ContinuousEffect effect = new DontUntapInOpponentsNextUntapStepAllEffect(filter);
+            effect.setTargetPointer(new FixedTarget(player.getId()));
+            game.addEffect(effect, source);                      
             return true;
         }
         return false;

@@ -152,12 +152,10 @@ class GuardianOfTazeemEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        if (land != null && targetCreature != null) {
-            if (land.hasSubtype("Island")) {
-                ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("that creature");
-                effect.setTargetPointer(new FixedTarget(targetCreature, game));
-                game.addEffect(effect, source);
-            }
+        if (land != null && targetCreature != null && land.hasSubtype("Island")) {
+            ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("that creature");
+            effect.setTargetPointer(new FixedTarget(targetCreature, game));
+            game.addEffect(effect, source);
         }
         return true;
     }

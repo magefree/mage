@@ -38,7 +38,7 @@ import mage.game.Game;
 public class MultipliedValue implements DynamicValue {
 
     private final DynamicValue value;
-    private final int multplier;
+    private final int multplier; // should be renamed to multiplier but don't want to break your stuff
 
     public MultipliedValue(DynamicValue value, int multiplier) {
         this.value = value.copy();

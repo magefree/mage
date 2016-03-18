@@ -55,13 +55,14 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Markedagain
  */
 public class BeastmastersMagemark extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control that are enchanted");
+
     static {
         filter.add(new EnchantedPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
-    
+
     public BeastmastersMagemark(UUID ownerId) {
         super(ownerId, 80, "Beastmaster's Magemark", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "GPT";
@@ -74,13 +75,13 @@ public class BeastmastersMagemark extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Creatures you control that are enchanted get +1/+1.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.WhileOnBattlefield, filter, false));        
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
         this.addAbility(ability);
         // Whenever a creature you control that's enchanted becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
         BlockedCreatureCount value = new BlockedCreatureCount();
-        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn);
+        Effect effect = new BoostSourceEffect(value, value, Duration.EndOfTurn, true);
         effect.setText("it gets +1/+1 until end of turn for each creature blocking it");
-        this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false,filter,false));
+        this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false, filter, false));
     }
 
     public BeastmastersMagemark(final BeastmastersMagemark card) {
