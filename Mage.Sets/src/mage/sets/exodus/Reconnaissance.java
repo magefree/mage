@@ -27,8 +27,6 @@
  */
 package mage.sets.exodus;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,13 +38,11 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AttackingPredicate;
 
 /**
  *
@@ -54,12 +50,19 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Reconnaissance extends CardImpl {
 
+    private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature controlled by you");
+
+    static {
+        filter.add(new AttackingPredicate());
+    }
+
     public Reconnaissance(UUID ownerId) {
         super(ownerId, 17, "Reconnaissance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "EXO";
 
         // {0}: Remove target attacking creature you control from combat and untap it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReconnaissanceRemoveFromCombatEffect(), new ManaCostsImpl("{0}"));
+        ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
@@ -91,28 +94,13 @@ class ReconnaissanceRemoveFromCombatEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<UUID> attackers = game.getCombat().getAttackers();
+        Permanent creature = game.getPermanent(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
 
-        if (!attackers.isEmpty() && player != null) {
-            List<PermanentIdPredicate> uuidPredicates = new ArrayList<>();
-            for (UUID creatureId : attackers) {
-                uuidPredicates.add(new PermanentIdPredicate(creatureId));
-            }
-
-            FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature controlled by you");
-            filter.add(Predicates.or(uuidPredicates));
-
-            Target target = new TargetControlledCreaturePermanent(0, 1, filter, false);
-            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                player.choose(Outcome.Benefit, target, source.getSourceId(), game);
-                Permanent creature = game.getPermanent(target.getFirstTarget());
-                if (creature != null) {
-                    creature.removeFromCombat(game);
-                    creature.untap(game);
-                    return true;
-                }
-            }
+        if (creature != null && player != null && creature.isAttacking()) {
+            creature.removeFromCombat(game);
+            creature.untap(game);
+            return true;
         }
         return false;
     }
