@@ -28,6 +28,8 @@
 
 package mage.choices;
 
+import mage.cards.repository.CardRepository;
+
 /**
  *
  * @author tre3qwerty
@@ -36,19 +38,7 @@ public class ChoiceLandType extends ChoiceImpl {
 
     public ChoiceLandType() {
         super(true);
-        this.choices.add("Forest");
-        this.choices.add("Island");
-        this.choices.add("Mountain");
-        this.choices.add("Plains");
-        this.choices.add("Swamp");
-        this.choices.add("Desert");
-        this.choices.add("Gate");
-        this.choices.add("Lair");
-        this.choices.add("Locus");
-        this.choices.add("Urza's");
-        this.choices.add("Mine");
-        this.choices.add("Power-Plant");
-        this.choices.add("Tower");
+        this.setChoices(CardRepository.instance.getLandTypes());
         this.message = "Choose a land type";
     }
 
