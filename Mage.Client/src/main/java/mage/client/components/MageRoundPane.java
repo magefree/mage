@@ -22,7 +22,8 @@ public class MageRoundPane extends JPanel {
     private int X_OFFSET = 30;
     private int Y_OFFSET = 30;
     private BufferedImage shadow = null;
-    private final Color backgroundColor = new Color(255, 255, 255, 200);
+    private final Color defaultBackgroundColor = new Color(255, 255, 255, 200);
+    private Color backgroundColor = defaultBackgroundColor;
     private final int alpha = 0;
 
     @Override
@@ -97,6 +98,14 @@ public class MageRoundPane extends JPanel {
 
     public void showDialog(boolean bShow) {
         setVisible(bShow);
+    }
+
+    public void resetBackgroundColor() {
+        this.backgroundColor = defaultBackgroundColor;
+    }
+    
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 
     /**

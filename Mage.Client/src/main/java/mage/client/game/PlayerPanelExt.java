@@ -105,6 +105,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final Border GREEN_BORDER = new LineBorder(Color.green, 3);
     private static final Border RED_BORDER = new LineBorder(Color.red, 2);
     private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
+    private final Color greenBackgroundColor = new Color(180, 255, 180);
 
     private int avatarId = -1;
     private String flagName;
@@ -268,15 +269,29 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (player.isActive()) {
             this.avatar.setBorder(GREEN_BORDER);
             this.btnPlayer.setBorder(GREEN_BORDER);
-        } else if (player.hasLeft()) {
-            this.avatar.setBorder(RED_BORDER);
-            this.btnPlayer.setBorder(RED_BORDER);
+            setGreenBackgroundColor();
         } else {
-            this.avatar.setBorder(EMPTY_BORDER);
-            this.btnPlayer.setBorder(EMPTY_BORDER);
+            resetBackgroundColor();
+            if (player.hasLeft()) {
+                this.avatar.setBorder(RED_BORDER);
+                this.btnPlayer.setBorder(RED_BORDER);
+            } else {
+                this.avatar.setBorder(EMPTY_BORDER);
+                this.btnPlayer.setBorder(EMPTY_BORDER);
+            }
         }
 
         update(player.getManaPool());
+    }
+
+    private void resetBackgroundColor() {
+        panelBackground.resetBackgroundColor();
+        zonesPanel.setBackground(null);
+    }
+
+    private void setGreenBackgroundColor() {
+        panelBackground.setBackgroundColor(greenBackgroundColor);
+        zonesPanel.setBackground(greenBackgroundColor);
     }
 
     /**
