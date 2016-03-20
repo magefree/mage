@@ -576,4 +576,35 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Wurm", 2);
 
     }
+
+    /**
+     * A Phantasmal Image that was copying a Voice of Resurgence died and left
+     * no token behind.
+     */
+    @Test
+    public void testVoiceOfResurgence() {
+        // Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, put a green and white Elemental creature token onto the battlefield with "This creature's power and toughness are each equal to the number of creatures you control."
+        addCard(Zone.BATTLEFIELD, playerB, "Voice of Resurgence");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image"); // not targeted
+        setChoice(playerB, "Voice of Resurgence");
+
+        attack(2, playerB, "Voice of Resurgence");
+        block(2, playerA, "Voice of Resurgence", "Voice of Resurgence");
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 20);
+        assertLife(playerA, 20);
+
+        assertGraveyardCount(playerA, "Phantasmal Image", 1);
+        assertGraveyardCount(playerB, "Voice of Resurgence", 1);
+
+        assertPermanentCount(playerB, "Elemental", 1);
+        assertPermanentCount(playerA, "Elemental", 1);
+
+    }
 }

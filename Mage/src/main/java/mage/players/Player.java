@@ -753,7 +753,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card to
-     * graveyard into the game log
+     * library into the game log
      *
      * @param card
      * @param sourceId

@@ -80,6 +80,7 @@ class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public VoiceOfResurgenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new VoiceOfResurgenceToken()), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     public VoiceOfResurgenceTriggeredAbility(final VoiceOfResurgenceTriggeredAbility ability) {

@@ -42,7 +42,7 @@ public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.additionalEffect = additionalEffect;
         this.staticText = "exile {this}, then return " + (gender.equals(Gender.MALE) ? "him" : "her")
-                + " to the battlefield transformed under" + (gender.equals(Gender.MALE) ? "his" : "her") + " owner's control";
+                + " to the battlefield transformed under " + (gender.equals(Gender.MALE) ? "his" : "her") + " owner's control";
     }
 
     public ExileAndReturnTransformedSourceEffect(final ExileAndReturnTransformedSourceEffect effect) {
