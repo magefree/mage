@@ -29,6 +29,7 @@ package mage.sets.onslaught;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -43,7 +44,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -70,8 +70,6 @@ public class Standardize extends CardImpl {
     }
 }
 
-
-
 class StandardizeEffect extends OneShotEffect {
 
     public StandardizeEffect() {
@@ -87,9 +85,9 @@ class StandardizeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
         String chosenType = "";
-        if (player != null && permanent != null) {
+        if (player != null && sourceObject != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose a creature type other than Wall");
             Set<String> types = CardRepository.instance.getCreatureTypes();
@@ -100,7 +98,7 @@ class StandardizeEffect extends OneShotEffect {
                     return false;
                 }
             }
-            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
+            game.informPlayers(sourceObject.getLogName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
             chosenType = typeChoice.getChoice();
             if (chosenType != null && !chosenType.isEmpty()) {
                 // ADD TYPE TO TARGET
