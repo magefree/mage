@@ -37,6 +37,12 @@ import mage.players.Player;
  * 702.33b. Casting a spell using its madness ability follows the rules for
  * paying alternative costs in rules 601.2b and 601.2e-g.
  *
+ * SOI Changes: If you discard a card with madness, you exile it instead of
+ * putting it into your graveyard. Note that the mandatory discard into exile is
+ * a small change from previous rules. Before, you could discard a card with
+ * madness into your graveyard and skip the whole madness thing. This may be
+ * relevant with cards like Jace, Vryn's Prodigy.
+ *
  * @author LevelX2
  */
 public class MadnessAbility extends StaticAbility {
@@ -47,7 +53,7 @@ public class MadnessAbility extends StaticAbility {
     public MadnessAbility(Card card, ManaCosts madnessCost) {
         super(Zone.HAND, new MadnessReplacementEffect((ManaCosts<ManaCost>) madnessCost));
         addSubAbility(new MadnessTriggeredAbility((ManaCosts<ManaCost>) madnessCost));
-        rule = "Madness " + madnessCost.getText() + " <i>(If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)</i>";
+        rule = "Madness " + madnessCost.getText() + " <i>(If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)</i>";
     }
 
     public MadnessAbility(final MadnessAbility ability) {
@@ -96,11 +102,10 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                if (controller.chooseUse(outcome, "Move " + card.getLogName() + " to exile to cast it by Madness?", source, game)) {
-                    controller.moveCardToExileWithInfo(card, source.getSourceId(), "Madness", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true);
+                if (controller.moveCardToExileWithInfo(card, source.getSourceId(), "Madness", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true)) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MADNESS_CARD_EXILED, card.getId(), card.getId(), controller.getId()));
-                    return true;
                 }
+                return true;
             }
         }
         return false;
@@ -160,7 +165,7 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
                 Player owner = game.getPlayer(card.getOwnerId());
                 if (owner != null) {
                     // if cast was not successfull, the card is moved to graveyard
-                    owner.moveCards(card, Zone.EXILED, Zone.GRAVEYARD, this, game);
+                    owner.moveCards(card, Zone.GRAVEYARD, this, game);
                 }
             }
             return false;
@@ -197,7 +202,7 @@ class MadnessCastEffect extends OneShotEffect {
     public MadnessCastEffect(ManaCosts<ManaCost> madnessCost) {
         super(Outcome.Benefit);
         this.madnessCost = madnessCost;
-        staticText = "cast it by paying " + madnessCost.getText() + " rather than paying its mana cost. If that player doesn’t, he or she puts this card into his or her graveyard.";
+        staticText = "you may cast it by paying " + madnessCost.getText() + " instead of putting it into your graveyard";
     }
 
     public MadnessCastEffect(final MadnessCastEffect effect) {
@@ -212,14 +217,15 @@ class MadnessCastEffect extends OneShotEffect {
         if (card != null) {
             owner = game.getPlayer(card.getOwnerId());
         }
-        if (owner != null && card != null) {
+        if (owner != null && card != null
+                && owner.chooseUse(outcome, "Cast " + card.getLogName() + " by madness?", source, game)) {
             ManaCosts<ManaCost> costRef = card.getSpellAbility().getManaCostsToPay();
             // replace with the new cost
             costRef.clear();
             costRef.add(madnessCost);
             boolean result = owner.cast(card.getSpellAbility(), game, false);
             // Reset the casting costs (in case the player cancels cast and plays the card later)
-            // TODO: CHeck if this is neccessary
+            // TODO: Check if this is neccessary
             costRef.clear();
             for (ManaCost manaCost : card.getSpellAbility().getManaCosts()) {
                 costRef.add(manaCost);
@@ -247,7 +253,6 @@ class MadnessCondition implements Condition {
         if (fInstance == null) {
             fInstance = new MadnessCondition();
         }
-
         return fInstance;
     }
 
