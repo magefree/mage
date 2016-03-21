@@ -49,6 +49,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.target.common.TargetOpponent;
 import mage.util.MessageToClient;
 
 /**
@@ -99,34 +100,72 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        /**
+         * 04.11.2015 If any opponent has a creature card in his or her
+         * graveyard as Dawnbreak Reclaimer’s ability resolves, then you must
+         * choose one of those cards. You can’t choose a different opponent with
+         * no creature cards in his or her graveyard to avoid returning one of
+         * those cards.
+         *
+         * 04.11.2015 If there are no creature cards in any opponent’s graveyard
+         * as Dawnbreak Reclaimer’s ability resolves, you’ll still have the
+         * option to return a creature card from your graveyard to the
+         * battlefield. You choose which opponent will choose a creature card in
+         * your graveyard.
+         */
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            TargetCardInOpponentsGraveyard targetCreature = new TargetCardInOpponentsGraveyard(new FilterCreatureCard("a creature card in an opponent's graveyard"));
-            if (controller.choose(Outcome.Detriment, targetCreature, source.getSourceId(), game)) {
-                Card creatureCard = game.getCard(targetCreature.getFirstTarget());
-                Player opponent = game.getPlayer(creatureCard.getOwnerId());
+            TargetCardInOpponentsGraveyard targetOpponentGraveyard = new TargetCardInOpponentsGraveyard(new FilterCreatureCard("a creature card in an opponent's graveyard"));
+            Player opponent = null;
+            Card cardOpponentGraveyard = null;
+            if (targetOpponentGraveyard.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                controller.choose(Outcome.Detriment, targetOpponentGraveyard, source.getSourceId(), game);
+                cardOpponentGraveyard = game.getCard(targetOpponentGraveyard.getFirstTarget());
+                if (cardOpponentGraveyard != null) {
+                    opponent = game.getPlayer(cardOpponentGraveyard.getOwnerId());
+                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + cardOpponentGraveyard.getIdName() + " of " + opponent.getLogName());
+                }
+            }
+            if (opponent == null) {
+                // if no card from opponent was available controller has to chose an opponent to select a creature card in controllers graveyard
+                TargetOpponent targetOpponent = new TargetOpponent(true);
+                controller.choose(outcome, targetOpponent, source.getSourceId(), game);
+                opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null) {
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + creatureCard.getIdName() + " of " + opponent.getLogName());
-                    FilterCreatureCard filter = new FilterCreatureCard("a creature card in " + controller.getName() + "'s the graveyard");
-                    filter.add(new OwnerIdPredicate(controller.getId()));
-                    TargetCardInGraveyard targetCard = new TargetCardInGraveyard(filter);
-                    targetCard.setNotTarget(true);
-                    if (opponent.choose(outcome, targetCard, source.getSourceId(), game)) {
-                        Card controllerCreatureCard = game.getCard(targetCard.getFirstTarget());
-                        if (controllerCreatureCard != null) {
-                            MessageToClient message = new MessageToClient("Return those cards to the battlefield under their owners' control?",
-                                    "Opponent's creature card: " + creatureCard.getLogName() + " - Your creature: " + controllerCreatureCard.getLogName());
-                            if (controller.chooseUse(outcome, message, source, game)) {
-                                Set<Card> cards = new HashSet<>();
-                                cards.add(creatureCard);
-                                cards.add(controllerCreatureCard);
-                                opponent.moveCards(cards, Zone.BATTLEFIELD, source, game, false, false, true, null);
-                            }
-                        }
+                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName() + " to select a creature card from his or her graveyard");
+                }
+            }
+            if (opponent != null) {
+                FilterCreatureCard filter = new FilterCreatureCard("a creature card in " + controller.getName() + "'s the graveyard");
+                filter.add(new OwnerIdPredicate(controller.getId()));
+                TargetCardInGraveyard targetControllerGaveyard = new TargetCardInGraveyard(filter);
+                targetControllerGaveyard.setNotTarget(true);
+                Card controllerCreatureCard = null;
+                if (targetControllerGaveyard.canChoose(source.getSourceId(), opponent.getId(), game)
+                        && opponent.choose(outcome, targetControllerGaveyard, source.getSourceId(), game)) {
+                    controllerCreatureCard = game.getCard(targetControllerGaveyard.getFirstTarget());
+                    if (controllerCreatureCard != null) {
+                        game.informPlayers(sourceObject.getLogName() + ": " + opponent.getLogName() + " has chosen " + controllerCreatureCard.getIdName() + " of " + controller.getLogName());
+                    }
+                }
+                Set<Card> cards = new HashSet<>();
+                if (cardOpponentGraveyard != null) {
+                    cards.add(cardOpponentGraveyard);
+                }
+                if (controllerCreatureCard != null) {
+                    cards.add(controllerCreatureCard);
+                }
+                if (!cards.isEmpty()) {
+                    MessageToClient message = new MessageToClient("Return those cards to the battlefield under their owners' control?",
+                            "Opponent's creature card: " + (cardOpponentGraveyard == null ? "none" : cardOpponentGraveyard.getLogName())
+                            + ", your creature card: " + (controllerCreatureCard == null ? "none" : controllerCreatureCard.getLogName()));
+                    if (controller.chooseUse(outcome, message, source, game)) {
+                        controller.moveCards(cards, Zone.BATTLEFIELD, source, game, false, false, true, null);
                     }
                 }
             }
+
             return true;
         }
         return false;
