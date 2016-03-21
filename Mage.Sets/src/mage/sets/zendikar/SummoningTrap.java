@@ -48,6 +48,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -92,7 +93,7 @@ class SummoningTrapCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SummoningTrapWatcher watcher = (SummoningTrapWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
+        SummoningTrapWatcher watcher = (SummoningTrapWatcher) game.getState().getWatchers().get("CreatureSpellCountered");
         return watcher != null && watcher.creatureSpellOfPlayerWasCountered(source.getControllerId());
     }
 
@@ -123,19 +124,20 @@ class SummoningTrapWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.COUNTERED) {
-            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-            if (stackObject == null) {
-                stackObject = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
+            StackObject conteredSpell = game.getStack().getStackObject(event.getTargetId());
+            if (conteredSpell == null) {
+                conteredSpell = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
             }
-            if (stackObject != null
-                    && !players.contains(stackObject.getControllerId())
-                    && stackObject.getCardType().contains(CardType.CREATURE)) {
-                StackObject counterObject = game.getStack().getStackObject(event.getSourceId());
-                if (counterObject == null) {
-                    counterObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
+            if (conteredSpell != null
+                    && conteredSpell instanceof Spell
+                    && !players.contains(conteredSpell.getControllerId())
+                    && conteredSpell.getCardType().contains(CardType.CREATURE)) {
+                StackObject counteringStackObject = game.getStack().getStackObject(event.getSourceId());
+                if (counteringStackObject == null) {
+                    counteringStackObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
                 }
-                if (counterObject != null && game.getOpponents(stackObject.getControllerId()).contains(counterObject.getControllerId())) {
-                    players.add(stackObject.getControllerId());
+                if (counteringStackObject != null && game.getOpponents(conteredSpell.getControllerId()).contains(counteringStackObject.getControllerId())) {
+                    players.add(conteredSpell.getControllerId());
                 }
             }
 
