@@ -38,6 +38,48 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class DisruptingShoalTest extends CardTestPlayerBase {
 
+    @Test
+    public void testWithManaPaymentEqual() {
+        addCard(Zone.HAND, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        // You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost.
+        // Counter target spell if its converted mana cost is X.
+        addCard(Zone.HAND, playerB, "Disrupting Shoal");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);  // {X}{U}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disrupting Shoal", "Silvercoat Lion");
+        setChoice(playerB, "X=2");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Disrupting Shoal", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+    }
+
+    @Test
+    public void testWithManaPaymentDifferent() {
+        addCard(Zone.HAND, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        // You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost.
+        // Counter target spell if its converted mana cost is X.
+        addCard(Zone.HAND, playerB, "Disrupting Shoal");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);  // {X}{U}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Disrupting Shoal", "Silvercoat Lion");
+        setChoice(playerB, "X=1");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Disrupting Shoal", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+    }
+
     /**
      * Test that Disrupting Shoal can be played with alternate casting costs And
      * the X Value is equal to the CMC of the exiled blue card

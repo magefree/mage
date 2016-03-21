@@ -33,7 +33,6 @@ import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
-import mage.cards.SplitCard;
 import mage.game.Game;
 
 /**
@@ -58,38 +57,6 @@ public class ExileFromHandCostCardConvertedMana implements DynamicValue {
             }
         }
         return sourceAbility.getManaCostsToPay().getX();
-    }
-
-    /**
-     * This method does only work to compare the cmc for one (or the first card)
-     * exiled as a cost
-     *
-     * @param game
-     * @param sourceAbility
-     * @param effect
-     * @param amount cmc to compare against
-     * @return
-     */
-    public boolean isConvertedManaCostEqual(Game game, Ability sourceAbility, Effect effect, int amount) {
-        for (Cost cost : sourceAbility.getCosts()) {
-            if (cost.isPaid() && cost instanceof ExileFromHandCost) {
-                for (Card card : ((ExileFromHandCost) cost).getCards()) {
-                    if (card instanceof SplitCard) {
-                        if (((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() == amount) {
-                            return true;
-                        }
-                        if (((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() == amount) {
-                            return true;
-                        }
-                    } else if (card.getManaCost().convertedManaCost() == amount) {
-                        return true;
-                    }
-                    return false;
-                }
-
-            }
-        }
-        return false;
     }
 
     @Override
