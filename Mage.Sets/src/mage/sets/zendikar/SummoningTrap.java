@@ -124,20 +124,20 @@ class SummoningTrapWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.COUNTERED) {
-            StackObject conteredSpell = game.getStack().getStackObject(event.getTargetId());
-            if (conteredSpell == null) {
-                conteredSpell = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
+            StackObject counteredSpell = game.getStack().getStackObject(event.getTargetId());
+            if (counteredSpell == null) {
+                counteredSpell = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
             }
-            if (conteredSpell != null
-                    && conteredSpell instanceof Spell
-                    && !players.contains(conteredSpell.getControllerId())
-                    && conteredSpell.getCardType().contains(CardType.CREATURE)) {
+            if (counteredSpell != null
+                    && counteredSpell instanceof Spell
+                    && !players.contains(counteredSpell.getControllerId())
+                    && counteredSpell.getCardType().contains(CardType.CREATURE)) {
                 StackObject counteringStackObject = game.getStack().getStackObject(event.getSourceId());
                 if (counteringStackObject == null) {
                     counteringStackObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
                 }
-                if (counteringStackObject != null && game.getOpponents(conteredSpell.getControllerId()).contains(counteringStackObject.getControllerId())) {
-                    players.add(conteredSpell.getControllerId());
+                if (counteringStackObject != null && game.getOpponents(counteredSpell.getControllerId()).contains(counteringStackObject.getControllerId())) {
+                    players.add(counteredSpell.getControllerId());
                 }
             }
 
