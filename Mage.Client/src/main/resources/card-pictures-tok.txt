@@ -1,6 +1,14 @@
+#|Generate|TOK:SOI|Angel||
 #|Generate|TOK:SOI|Clue||
 #|Generate|TOK:SOI|Devil||
+#|Generate|TOK:SOI|Human Cleric||
+#|Generate|TOK:SOI|Human Soldier||
+#|Generate|TOK:SOI|Spirit||
+#|Generate|TOK:SOI|Vampire Knight||
 #|Generate|TOK:SOI|Wolf||
+#|Generate|TOK:SOI|Zombie||
+#|Generate|EMBLEM!:SOI|Emblem Arlinn, Embraced by the Moon||
+#|Generate|EMBLEM!:SOI|Emblem Jace, Unraveler of Secrets||
 
 |Generate|TOK:OGW|Angel||
 |Generate|TOK:OGW|Elemental|1|

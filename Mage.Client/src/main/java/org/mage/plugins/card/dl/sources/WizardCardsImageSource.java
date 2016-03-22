@@ -130,6 +130,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DDN", "Duel Decks: Speed vs. Cunning");
         setsAliases.put("DDO", "Duel Decks: Elspeth vs. Kiora");
         setsAliases.put("DDP", "Duel Decks: Zendikar vs. Eldrazi");
+        setsAliases.put("DDQ", "Duel Decks: Blessed vs. Cursed");
         setsAliases.put("DGM", "Dragon's Maze");
         setsAliases.put("DIS", "Dissension");
         setsAliases.put("DKA", "Dark Ascension");
@@ -138,6 +139,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DST", "Darksteel");
         setsAliases.put("DTK", "Dragons of Tarkir");
         setsAliases.put("EMN", "Eldritch Moon");
+        setsAliases.put("EMA", "Eternal Masters");
         setsAliases.put("EVE", "Eventide");
         setsAliases.put("EVG", "Duel Decks: Elves vs. Goblins");
         setsAliases.put("EXO", "Exodus");
