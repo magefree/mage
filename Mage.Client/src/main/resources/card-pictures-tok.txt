@@ -1,14 +1,21 @@
-#|Generate|TOK:SOI|Angel||
-#|Generate|TOK:SOI|Clue||
-#|Generate|TOK:SOI|Devil||
-#|Generate|TOK:SOI|Human Cleric||
-#|Generate|TOK:SOI|Human Soldier||
-#|Generate|TOK:SOI|Spirit||
-#|Generate|TOK:SOI|Vampire Knight||
-#|Generate|TOK:SOI|Wolf||
-#|Generate|TOK:SOI|Zombie||
-#|Generate|EMBLEM!:SOI|Emblem Arlinn, Embraced by the Moon||
-#|Generate|EMBLEM!:SOI|Emblem Jace, Unraveler of Secrets||
+|Generate|TOK:SOI|Angel||
+|Generate|TOK:SOI|Clue|1|
+|Generate|TOK:SOI|Clue|2|
+|Generate|TOK:SOI|Clue|3|
+|Generate|TOK:SOI|Clue|4|
+|Generate|TOK:SOI|Clue|5|
+|Generate|TOK:SOI|Clue|6|
+|Generate|TOK:SOI|Devil||
+|Generate|TOK:SOI|Human Cleric||
+|Generate|TOK:SOI|Human Soldier||
+|Generate|TOK:SOI|Insect||
+|Generate|TOK:SOI|Ooze||
+|Generate|TOK:SOI|Spirit||
+|Generate|TOK:SOI|Vampire Knight||
+|Generate|TOK:SOI|Wolf||
+|Generate|TOK:SOI|Zombie||
+|Generate|EMBLEM!:SOI|Emblem Arlinn, Embraced by the Moon||
+|Generate|EMBLEM!:SOI|Emblem Jace, Unraveler of Secrets||
 
 |Generate|TOK:OGW|Angel||
 |Generate|TOK:OGW|Elemental|1|
@@ -22,10 +29,10 @@
 |Generate|TOK:OGW|Plant||
 |Generate|TOK:OGW|Zombie||
 
-#|Generate|TOK:DDQ|Angel||
-#|Generate|TOK:DDQ|Human||
-#|Generate|TOK:DDQ|Spirit||
-#|Generate|TOK:DDQ|Zombie||
+|Generate|TOK:DDQ|Angel||
+|Generate|TOK:DDQ|Human||
+|Generate|TOK:DDQ|Spirit||
+|Generate|TOK:DDQ|Zombie||
 
 |Generate|TOK:C15|Angel||
 |Generate|TOK:C15|Bear||
