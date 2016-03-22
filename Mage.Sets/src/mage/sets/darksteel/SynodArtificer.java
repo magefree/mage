@@ -52,6 +52,8 @@ import mage.target.TargetPermanent;
  */
 public class SynodArtificer extends CardImpl {
     
+    private final UUID tapId;
+    private final UUID untapId;
     private static final FilterPermanent filter = new FilterPermanent("Target noncreature artifacts");
     
     static {
@@ -71,20 +73,23 @@ public class SynodArtificer extends CardImpl {
         Effect tapEffect = new TapTargetEffect();
         tapEffect.setText("Tap X target noncreature artifacts.");
         Ability tapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, tapEffect, new ManaCostsImpl("{X}"));
-        tapAbility.addCost(new TapSourceCost());        
+        tapAbility.addCost(new TapSourceCost());  
         this.addAbility(tapAbility);
         
         // {X}, {tap}: Untap X target noncreature artifacts.
         Effect untapEffect = new UntapTargetEffect();
         untapEffect.setText("Untap X target noncreature artifacts.");
         Ability untapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, untapEffect, new ManaCostsImpl("{X}"));
-        untapAbility.addCost(new TapSourceCost());        
-        this.addAbility(untapAbility);        
+        untapAbility.addCost(new TapSourceCost());
+        this.addAbility(untapAbility);
+        
+        tapId = tapAbility.getOriginalId();
+        untapId = untapAbility.getOriginalId();
     }
     
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SimpleActivatedAbility) {            
+        if (ability.getOriginalId().equals(tapId) || ability.getOriginalId().equals(untapId)) {          
             ability.getTargets().clear();
             ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), filter));  
         }
@@ -92,6 +97,8 @@ public class SynodArtificer extends CardImpl {
 
     public SynodArtificer(final SynodArtificer card) {
         super(card);
+        this.tapId = card.tapId;
+        this.untapId = card.untapId;
     }
 
     @Override
