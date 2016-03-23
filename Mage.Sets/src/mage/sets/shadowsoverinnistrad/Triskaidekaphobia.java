@@ -51,7 +51,7 @@ public class Triskaidekaphobia extends CardImpl {
         super(ownerId, 141, "Triskaidekaphobia", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.expansionSetCode = "SOI";
 
-            // At the beginning of your upkeep, choose one &mdash Each player with exactly 13 life loses the game, then each player gains 1 life.
+        // At the beginning of your upkeep, choose one &mdash Each player with exactly 13 life loses the game, then each player gains 1 life.
         // Each player with exactly 13 life loses the game, then each player loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new TriskaidekaphobiaGainLifeEffect(), TargetController.YOU, false);
         Mode mode = new Mode();
