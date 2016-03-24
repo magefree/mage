@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 public class SilverfurPartisan extends CardImpl {
 
     public SilverfurPartisan(UUID ownerId) {
-        super(ownerId, 226, "Silverfur Partisan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        super(ownerId, 228, "Silverfur Partisan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Wolf");
         this.subtype.add("Warrior");
