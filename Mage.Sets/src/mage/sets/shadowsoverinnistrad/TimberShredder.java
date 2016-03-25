@@ -53,6 +53,7 @@ public class TimberShredder extends CardImpl {
         this.subtype.add("Werewolf");
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
+        this.color.setGreen(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;
