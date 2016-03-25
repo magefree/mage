@@ -46,7 +46,7 @@ import mage.constants.Zone;
 public class EmberEyeWolf extends CardImpl {
 
     public EmberEyeWolf(UUID ownerId) {
-        super(ownerId, 154, "Ember-Eye Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        super(ownerId, 154, "Ember-Eye Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Wolf");
         this.power = new MageInt(1);
