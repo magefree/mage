@@ -27,11 +27,7 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -39,13 +35,14 @@ import mage.constants.Rarity;
  */
 public class LilianasIndignation extends CardImpl {
 
+    /*
     public LilianasIndignation(UUID ownerId) {
         super(ownerId, 120, "Liliana's Indignation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}");
         this.expansionSetCode = "SOI";
         this.power = new MageInt(Put the top X cards of your library into your graveyard. Target player loses 2 life for each creature card put into your graveyard this way.);
-        this.toughness = new MageInt(
-);
+        this.toughness = new MageInt();
     }
+*/
 
     public LilianasIndignation(final LilianasIndignation card) {
         super(card);
