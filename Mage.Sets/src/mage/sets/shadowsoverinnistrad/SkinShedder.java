@@ -27,18 +27,14 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
 public class SkinShedder extends CardImpl {
-
+/*
     public SkinShedder(UUID ownerId) {
         super(ownerId, 182b, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "SOI";
@@ -47,7 +43,7 @@ public class SkinShedder extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
     }
-
+*/
     public SkinShedder(final SkinShedder card) {
         super(card);
     }
@@ -56,4 +52,5 @@ public class SkinShedder extends CardImpl {
     public SkinShedder copy() {
         return new SkinShedder(this);
     }
+
 }
