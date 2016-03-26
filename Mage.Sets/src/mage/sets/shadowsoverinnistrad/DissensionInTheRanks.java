@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DissensionInTheRank extends CardImpl {
+public class DissensionInTheRanks extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creature");
 
@@ -50,34 +50,34 @@ public class DissensionInTheRank extends CardImpl {
         filter.add(new BlockingPredicate());
     }
 
-    public DissensionInTheRank(UUID ownerId) {
-        super(ownerId, 152, "Dissension in the Rank", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
+    public DissensionInTheRanks(UUID ownerId) {
+        super(ownerId, 152, "Dissension in the Ranks", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
         this.expansionSetCode = "SOI";
 
         // Target blocking creature fights another target blocking creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addTarget(new TargetOtherCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new DissensionInTheRanksTarget(filter));
 
     }
 
-    public DissensionInTheRank(final DissensionInTheRank card) {
+    public DissensionInTheRanks(final DissensionInTheRanks card) {
         super(card);
     }
 
     @Override
-    public DissensionInTheRank copy() {
-        return new DissensionInTheRank(this);
+    public DissensionInTheRanks copy() {
+        return new DissensionInTheRanks(this);
     }
 }
 
-class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
+class DissensionInTheRanksTarget extends TargetCreaturePermanent {
 
-    public TargetOtherCreaturePermanent(FilterCreaturePermanent filter) {
+    public DissensionInTheRanksTarget(FilterCreaturePermanent filter) {
         super(1, 1, filter, false);
     }
 
-    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
+    public DissensionInTheRanksTarget(final DissensionInTheRanksTarget target) {
         super(target);
     }
 
@@ -90,8 +90,8 @@ class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
     }
 
     @Override
-    public TargetOtherCreaturePermanent copy() {
-        return new TargetOtherCreaturePermanent(this);
+    public DissensionInTheRanksTarget copy() {
+        return new DissensionInTheRanksTarget(this);
     }
 
 }
