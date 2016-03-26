@@ -25,70 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.common.FilterBlockingCreature;
 
 /**
  *
  * @author MarcoMarin
  */
-public class UncleIstvan extends CardImpl {
+public class Piety extends CardImpl {
 
-    public UncleIstvan(UUID ownerId) {
-        super(ownerId, 16, "Uncle Istvan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");
-        this.expansionSetCode = "DRK";
-        this.subtype.add("Human");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public static final FilterBlockingCreature filter = new FilterBlockingCreature();
+    
+    public Piety(UUID ownerId) {
+        super(ownerId, 64, "Piety", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "ARN";
 
-        // Prevent all damage that would be dealt to Uncle Istvan by creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect(CardType.CREATURE)));
+        // Blocking creatures get +0/+3 until end of turn.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false)));
+        //this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_POST, "end Piety", true, new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false)));
     }
 
-    public UncleIstvan(final UncleIstvan card) {
+    public Piety(final Piety card) {
         super(card);
     }
 
     @Override
-    public UncleIstvan copy() {
-        return new UncleIstvan(this);
-    }
-}
-
-class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffect {
-    
-    private CardType cardType;
-      
-    public PreventDamageToSourceByCardTypeEffect(){
-        this(null);
-    }
-
-    public PreventDamageToSourceByCardTypeEffect(CardType cardT){
-        super(Duration.WhileOnBattlefield);
-        cardType = cardT;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (game.getObject(event.getSourceId()).getCardType().contains(cardType)){
-                if (event.getTargetId().equals(source.getSourceId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public Piety copy() {
+        return new Piety(this);
     }
 }
