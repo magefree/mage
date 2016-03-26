@@ -111,7 +111,6 @@ class VildinPackAlphaEffect extends OneShotEffect {
             }
             return true;
         }
-        game.getBattlefield().getAllActivePermanents(controllerPermanentId);
         return false;
     }
 }
