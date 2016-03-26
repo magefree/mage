@@ -117,7 +117,6 @@ public class TestPlayer implements Player {
     private int maxCallsWithoutAction = 100;
     private int foundNoAction = 0;
     private boolean AIPlayer;
-
     private final List<PlayerAction> actions = new ArrayList<>();
     private final List<String> choices = new ArrayList<>();
     private final List<String> targets = new ArrayList<>();
@@ -1928,7 +1927,12 @@ public class TestPlayer implements Player {
     public boolean getPassedUntilStackResolved() {
         return computerPlayer.getPassedUntilStackResolved();
     }
-
+    
+    @Override
+    public boolean getPassedUntilEndStepBeforeMyTurn() {
+        return computerPlayer.getPassedUntilEndStepBeforeMyTurn();
+    }
+    
     @Override
     public void revokePermissionToSeeHandCards() {
         computerPlayer.revokePermissionToSeeHandCards();
