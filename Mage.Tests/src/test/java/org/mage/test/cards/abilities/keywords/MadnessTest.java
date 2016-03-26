@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -40,39 +39,31 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class MadnessTest extends CardTestPlayerBase {
 
     /**
-     * 702.34. Madness
-     * 702.34a Madness is a keyword that represents two abilities. The first is a static ability that functions
-     * while the card with madness is in a player’s hand. The second is a triggered ability that
-     * functions when the first ability is applied. “Madness [cost]” means “If a player would discard
-     * this card, that player discards it, but may exile it instead of putting it into his or her graveyard”
-     * and “When this card is exiled this way, its owner may cast it by paying [cost] rather than paying
-     * its mana cost. If that player doesn’t, he or she puts this card into his or her graveyard.”
-     * 702.34b Casting a spell using its madness ability follows the rules for paying alternative costs in
-     * rules 601.2b and 601.2e–g.
-     * 
-     */
-
-    /** 
-     * 	Arrogant Wurm
-     * 	3GG
-     * 	Creature -- Wurm
-     * 	4/4
-     * 	Trample
-     * 	Madness {2}{G} (If you discard this card, you may cast it for its 
-     *  madness cost instead of putting it into your graveyard.)
+     * 702.34. Madness 702.34a Madness is a keyword that represents two
+     * abilities. The first is a static ability that functions while the card
+     * with madness is in a player’s hand. The second is a triggered ability
+     * that functions when the first ability is applied. “Madness [cost]” means
+     * “If a player would discard this card, that player discards it, but may
+     * exile it instead of putting it into his or her graveyard” and “When this
+     * card is exiled this way, its owner may cast it by paying [cost] rather
+     * than paying its mana cost. If that player doesn’t, he or she puts this
+     * card into his or her graveyard.” 702.34b Casting a spell using its
+     * madness ability follows the rules for paying alternative costs in rules
+     * 601.2b and 601.2e–g.
      *
      */
-    
     /**
-     * Raven's Crime
-     * B
-     * Sorcery
-     * Target player discards a card.
-     * Retrace (You may cast this card from your graveyard by discarding a land 
-     * card in addition to paying its other costs.)
-     * 
+     * Arrogant Wurm 3GG Creature -- Wurm 4/4 Trample Madness {2}{G} (If you
+     * discard this card, you may cast it for its madness cost instead of
+     * putting it into your graveyard.)
+     *
      */
-
+    /**
+     * Raven's Crime B Sorcery Target player discards a card. Retrace (You may
+     * cast this card from your graveyard by discarding a land card in addition
+     * to paying its other costs.)
+     *
+     */
     @Test
     public void testMadness() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
@@ -91,7 +82,7 @@ public class MadnessTest extends CardTestPlayerBase {
         assertHandCount(playerA, 0);
 
     }
-    
+
     @Test
     public void testNoMadness() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
@@ -109,6 +100,32 @@ public class MadnessTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Raven's Crime", 1);
         assertGraveyardCount(playerA, "Arrogant Wurm", 1);
         assertHandCount(playerA, 0);
+
+    }
+
+    @Test
+    public void testFalkenrathGorger() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+
+        // Each Vampire creature card you own that isn't on the battlefield has madness. Its madness cost is equal to its mana cost.
+        addCard(Zone.BATTLEFIELD, playerA, "Falkenrath Gorger", 1);
+
+        // Sacrifice a creature: Vampire Aristocrat gets +2/+2 until end of turn.
+        addCard(Zone.HAND, playerA, "Vampire Aristocrat");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 6);
+        // Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead.
+        addCard(Zone.HAND, playerB, "Haunting Hymn");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Haunting Hymn", playerA);
+        setChoice(playerA, "Yes");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Haunting Hymn", 1);
+        assertGraveyardCount(playerB, "Haunting Hymn", 1);
+        assertPermanentCount(playerA, "Vampire Aristocrat", 1);
 
     }
 

@@ -58,6 +58,7 @@ public class MadnessAbility extends StaticAbility {
 
     public MadnessAbility(final MadnessAbility ability) {
         super(ability);
+        this.rule = ability.rule;
     }
 
     @Override
@@ -103,6 +104,7 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
                 if (controller.moveCardToExileWithInfo(card, source.getSourceId(), "Madness", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true)) {
+                    game.applyEffects(); // needed to add Madness ability to cards (e.g. by Falkenrath Gorger)
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MADNESS_CARD_EXILED, card.getId(), card.getId(), controller.getId()));
                 }
                 return true;

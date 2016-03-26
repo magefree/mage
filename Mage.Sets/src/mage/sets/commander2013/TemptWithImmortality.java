@@ -55,7 +55,6 @@ public class TemptWithImmortality extends CardImpl {
         super(ownerId, 95, "Tempt with Immortality", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "C13";
 
-
         // Tempting offer - Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from his or her graveyard to the battlefield. For each player who does, return a creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new TemptWithImmortalityEffect());
     }
@@ -99,15 +98,15 @@ class TemptWithImmortalityEffect extends OneShotEffect {
                 if (opponent != null) {
                     FilterCard filter = new FilterCreatureCard("creature card from your graveyard");
                     filter.add(new OwnerIdPredicate(opponent.getId()));
-                    Target targetOpponent = new TargetCardInGraveyard(filter);
+                    Target targetCardOpponent = new TargetCardInGraveyard(filter);
 
-                    if (targetOpponent.canChoose(source.getSourceId(), opponent.getId(), game)) {
-                        if (opponent.chooseUse(outcome, new StringBuilder("Return a creature card from your graveyard to the battlefield?").toString(), source, game)) {
-                            if (opponent.chooseTarget(outcome, targetOpponent, source, game)) {
-                                Card card = game.getCard(targetOpponent.getFirstTarget());
+                    if (targetCardOpponent.canChoose(source.getSourceId(), opponent.getId(), game)) {
+                        if (opponent.chooseUse(outcome, "Return a creature card from your graveyard to the battlefield?", source, game)) {
+                            if (opponent.chooseTarget(outcome, targetCardOpponent, source, game)) {
+                                Card card = game.getCard(targetCardOpponent.getFirstTarget());
                                 if (card != null) {
                                     opponentsReturnedCreatures++;
-                                    card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                                    opponent.moveCards(card, Zone.BATTLEFIELD, source, game);
                                 }
                             }
                         }
@@ -132,7 +131,7 @@ class TemptWithImmortalityEffect extends OneShotEffect {
             if (player.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    return card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                    return player.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
         }
