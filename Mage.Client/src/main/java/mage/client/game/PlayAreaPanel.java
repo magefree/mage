@@ -184,6 +184,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                         gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
                         break;
                     }
+                    case "F11": {
+                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN, gameId, null);
+                        break;
+                    }
                 }
             }
         };
@@ -229,7 +233,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem = new JMenuItem("<html><b>F9</b> - Everything until your own next turn");
         menuItem.setActionCommand("F9");
         menuItem.setToolTipText(tooltipText);
-        menuItem.setMnemonic(KeyEvent.VK_N);
+        menuItem.setMnemonic(KeyEvent.VK_V);
+        skipMenu.add(menuItem);
+        menuItem.addActionListener(skipListener);
+        
+        menuItem = new JMenuItem("<html><b>F11</b> - Everything until end step prior to your own next turn");
+        menuItem.setActionCommand("F11");
+        menuItem.setToolTipText(tooltipText);
+        menuItem.setMnemonic(KeyEvent.VK_P);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 

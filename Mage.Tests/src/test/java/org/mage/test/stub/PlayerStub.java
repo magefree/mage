@@ -348,8 +348,14 @@ public class PlayerStub implements Player {
         return false;
     }
 
+        
     @Override
     public boolean getPassedAllTurns() {
+        return false;
+    }
+    
+    @Override
+    public boolean getPassedUntilEndStepBeforeMyTurn() {
         return false;
     }
 

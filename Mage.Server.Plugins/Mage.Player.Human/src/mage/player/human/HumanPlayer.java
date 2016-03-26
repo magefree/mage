@@ -91,6 +91,7 @@ import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
 import mage.players.Player;
 import mage.players.PlayerImpl;
+import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
@@ -589,6 +590,21 @@ public class HumanPlayer extends PlayerImpl {
                     return false;
                 }
             }
+            if (passedUntilEndStepBeforeMyTurn) {
+
+                if (!game.getTurn().getStepType().equals(PhaseStep.END_TURN)) {
+                    if (passWithManaPoolCheck(game)) {
+                        return false;
+                    }
+                } else {
+                    PlayerList playerList = game.getState().getPlayerList(playerId);
+                    if (!playerList.getPrevious().equals(game.getActivePlayerId())) {
+                        if (passWithManaPoolCheck(game)) {
+                            return false;
+                        }
+                    }
+                }
+            }
             if (game.getStack().isEmpty()) {
                 passedUntilStackResolved = false;
                 boolean dontCheckPassStep = false;
@@ -878,7 +894,7 @@ public class HumanPlayer extends PlayerImpl {
         FilterCreatureForCombat filter = filterCreatureForCombat.copy();
         filter.add(new ControllerIdPredicate(attackingPlayerId));
         while (!abort) {
-            if (passedAllTurns
+            if (passedAllTurns || passedUntilEndStepBeforeMyTurn
                     || (!getUserData().getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction() && (passedTurn || passedUntilEndOfTurn || passedUntilNextMain))) {
                 return;
             }
