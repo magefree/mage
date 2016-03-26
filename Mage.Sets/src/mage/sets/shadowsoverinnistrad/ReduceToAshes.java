@@ -25,44 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class PredatorsStrike extends CardImpl {
+public class ReduceToAshes extends CardImpl {
 
-    public PredatorsStrike(UUID ownerId) {
-        super(ownerId, 128, "Predator's Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "MRD";
+    public ReduceToAshes(UUID ownerId) {
+        super(ownerId, 176, "Reduce to Ashes", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
+        this.expansionSetCode = "SOI";
 
-        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
-        effect.setText("Target creature gets +3/+3");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains trample until end of turn");
-        this.getSpellAbility().addEffect(effect);
+        // Reduce to Ashes deals 5 damage to target creature. If that creature would die this turn, exile it instead.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // If that creature would die this turn, exile it instead.
+        Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
+        effect.setText("If that creature would die this turn, exile it instead");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }
 
-    public PredatorsStrike(final PredatorsStrike card) {
+    public ReduceToAshes(final ReduceToAshes card) {
         super(card);
     }
 
-    @java.lang.Override
-    public PredatorsStrike copy() {
-        return new PredatorsStrike(this);
+    @Override
+    public ReduceToAshes copy() {
+        return new ReduceToAshes(this);
     }
 }

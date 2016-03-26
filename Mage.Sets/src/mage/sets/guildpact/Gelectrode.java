@@ -28,9 +28,6 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,10 +36,10 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -51,26 +48,17 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Gelectrode extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
-
     public Gelectrode(UUID ownerId) {
         super(ownerId, 113, "Gelectrode", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Weird");
-
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
-        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), new FilterInstantOrSorcerySpell("an instant or sorcery spell"), true));
     }
 
     public Gelectrode(final Gelectrode card) {

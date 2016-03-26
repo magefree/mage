@@ -25,44 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class PredatorsStrike extends CardImpl {
+public class UlrichsKindred extends CardImpl {
 
-    public PredatorsStrike(UUID ownerId) {
-        super(ownerId, 128, "Predator's Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "MRD";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking Wolf or Werewolf");
 
-        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
-        effect.setText("Target creature gets +3/+3");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains trample until end of turn");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+    static {
+        filter.add(Predicates.or(new SubtypePredicate("Wolf"), new SubtypePredicate("Werewolf")));
+        filter.add(new AttackingPredicate());
     }
 
-    public PredatorsStrike(final PredatorsStrike card) {
+    public UlrichsKindred(UUID ownerId) {
+        super(ownerId, 187, "Ulrich's Kindred", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "SOI";
+        this.subtype.add("Wolf");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // {3}{G}: Target attacking Wolf or Werewolf gains indestructible until end of turn.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
+                new ManaCostsImpl<>("{3}{G}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+
+    }
+
+    public UlrichsKindred(final UlrichsKindred card) {
         super(card);
     }
 
-    @java.lang.Override
-    public PredatorsStrike copy() {
-        return new PredatorsStrike(this);
+    @Override
+    public UlrichsKindred copy() {
+        return new UlrichsKindred(this);
     }
 }

@@ -60,10 +60,12 @@ public class PressIntoService extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
         this.getSpellAbility().addEffect(effect);
         effect = new UntapTargetEffect();
+        effect.setText("Untap that creature");
         effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Suppor
+        effect.setText("It gains haste until end of turn");
         this.getSpellAbility().addEffect(effect);
     }
 

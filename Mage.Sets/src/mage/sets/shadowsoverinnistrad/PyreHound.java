@@ -25,44 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
+import mage.counters.CounterType;
+import mage.filter.common.FilterInstantOrSorcerySpell;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class PredatorsStrike extends CardImpl {
+public class PyreHound extends CardImpl {
 
-    public PredatorsStrike(UUID ownerId) {
-        super(ownerId, 128, "Predator's Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "MRD";
+    public PyreHound(UUID ownerId) {
+        super(ownerId, 174, "Pyre Hound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "SOI";
+        this.subtype.add("Elemental");
+        this.subtype.add("Hound");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
-        effect.setText("Target creature gets +3/+3");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains trample until end of turn");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Whenever you cast an instant or sorcery spell, put a +1/+1 counter on Pyre Hound.
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                new FilterInstantOrSorcerySpell("an instant or sorcery spell"), true));
     }
 
-    public PredatorsStrike(final PredatorsStrike card) {
+    public PyreHound(final PyreHound card) {
         super(card);
     }
 
-    @java.lang.Override
-    public PredatorsStrike copy() {
-        return new PredatorsStrike(this);
+    @Override
+    public PyreHound copy() {
+        return new PyreHound(this);
     }
 }

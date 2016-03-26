@@ -25,44 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class PredatorsStrike extends CardImpl {
+public class SenselessRage extends CardImpl {
 
-    public PredatorsStrike(UUID ownerId) {
-        super(ownerId, 128, "Predator's Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "MRD";
+    public SenselessRage(UUID ownerId) {
+        super(ownerId, 180, "Senseless Rage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+        this.expansionSetCode = "SOI";
+        this.subtype.add("Aura");
 
-        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
-        effect.setText("Target creature gets +3/+3");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains trample until end of turn");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // Enchanted creature gets +2/+2.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+
+        // Madness {1}{R}
+        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}")));
     }
 
-    public PredatorsStrike(final PredatorsStrike card) {
+    public SenselessRage(final SenselessRage card) {
         super(card);
     }
 
-    @java.lang.Override
-    public PredatorsStrike copy() {
-        return new PredatorsStrike(this);
+    @Override
+    public SenselessRage copy() {
+        return new SenselessRage(this);
     }
 }

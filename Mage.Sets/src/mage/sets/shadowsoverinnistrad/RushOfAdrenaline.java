@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
@@ -40,16 +40,17 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class PredatorsStrike extends CardImpl {
+public class RushOfAdrenaline extends CardImpl {
 
-    public PredatorsStrike(UUID ownerId) {
-        super(ownerId, 128, "Predator's Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "MRD";
+    public RushOfAdrenaline(UUID ownerId) {
+        super(ownerId, 177, "Rush of Adrenaline", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
+        this.expansionSetCode = "SOI";
 
-        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
-        effect.setText("Target creature gets +3/+3");
+        // Target creature gets +2/+1 and gains trample until end of turn.
+        Effect effect = new BoostTargetEffect(2, 1, Duration.EndOfTurn);
+        effect.setText("Target creature gets +2/+1");
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
@@ -57,12 +58,12 @@ public class PredatorsStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PredatorsStrike(final PredatorsStrike card) {
+    public RushOfAdrenaline(final RushOfAdrenaline card) {
         super(card);
     }
 
-    @java.lang.Override
-    public PredatorsStrike copy() {
-        return new PredatorsStrike(this);
+    @Override
+    public RushOfAdrenaline copy() {
+        return new RushOfAdrenaline(this);
     }
 }

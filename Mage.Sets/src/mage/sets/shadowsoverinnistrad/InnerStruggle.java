@@ -25,44 +25,72 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class PredatorsStrike extends CardImpl {
+public class InnerStruggle extends CardImpl {
 
-    public PredatorsStrike(UUID ownerId) {
-        super(ownerId, 128, "Predator's Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "MRD";
+    public InnerStruggle(UUID ownerId) {
+        super(ownerId, 167, "Inner Struggle", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
+        this.expansionSetCode = "SOI";
 
-        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
-        effect.setText("Target creature gets +3/+3");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains trample until end of turn");
-        this.getSpellAbility().addEffect(effect);
+        // Target creature deals damage to itself equal to its power.
+        this.getSpellAbility().addEffect(new InnerStruggleEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+
     }
 
-    public PredatorsStrike(final PredatorsStrike card) {
+    public InnerStruggle(final InnerStruggle card) {
         super(card);
     }
 
-    @java.lang.Override
-    public PredatorsStrike copy() {
-        return new PredatorsStrike(this);
+    @Override
+    public InnerStruggle copy() {
+        return new InnerStruggle(this);
+    }
+}
+
+class InnerStruggleEffect extends OneShotEffect {
+
+    public InnerStruggleEffect() {
+        super(Outcome.Damage);
+        this.staticText = "Target creature deals damage to itself equal to its power";
+    }
+
+    public InnerStruggleEffect(final InnerStruggleEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public InnerStruggleEffect copy() {
+        return new InnerStruggleEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (targetCreature != null) {
+                targetCreature.damage(targetCreature.getPower().getValue(), source.getSourceId(), game, false, true);
+            }
+            return true;
+        }
+        return false;
     }
 }

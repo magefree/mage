@@ -28,61 +28,54 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileSourceFromGraveCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.MageInt;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.TargetSpell;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author LevelX2
  */
-public class Geistblast extends CardImpl {
+public class KessigForgemaster extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell you control");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
-    public Geistblast(UUID ownerId) {
-        super(ownerId, 160, "Geistblast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
+    public KessigForgemaster(UUID ownerId) {
+        super(ownerId, 169, "Kessig Forgemaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "SOI";
+        this.subtype.add("Human");
+        this.subtype.add("Shaman");
+        this.subtype.add("Werewolf");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Geistblast deals 2 damage to target creature or player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.canTransform = true;
+        this.secondSideCard = new FlameheartWerewolf(ownerId);
 
-        // {2}{U}, Exile Geist from your graveyard: Copy target instant or sorcery you control. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new CopyTargetSpellEffect(), new ManaCostsImpl<>("{2}{U}"));
-        ability.addTarget(new TargetSpell(filter));
-        ability.addCost(new ExileSourceFromGraveCost());
-        this.addAbility(ability);
+        // Whenever Kessig Forgemaster blocks or becomes blocked by a creature, Kessig Forgemaster deals 1 damage to that creature.
+        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
+
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Kessig Forgemaster.
+        this.addAbility(new TransformAbility());
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
+        this.addAbility(new ConditionalTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.NO_SPELLS_TRANSFORM_RULE));
 
     }
 
-    public Geistblast(final Geistblast card) {
+    public KessigForgemaster(final KessigForgemaster card) {
         super(card);
     }
 
     @Override
-    public Geistblast copy() {
-        return new Geistblast(this);
+    public KessigForgemaster copy() {
+        return new KessigForgemaster(this);
     }
 }

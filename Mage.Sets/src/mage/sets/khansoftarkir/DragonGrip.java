@@ -61,12 +61,11 @@ public class DragonGrip extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Aura");
 
-
         // Ferocious - If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash.
         AsThoughEffect effect = new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame);
         effect.setText("<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ConditionalAsThoughEffect(effect,
-                        FerociousCondition.getInstance())));
+                FerociousCondition.getInstance())));
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -78,7 +77,7 @@ public class DragonGrip extends CardImpl {
         // Enchanted creature gets +2/+0 and has first strike.
         Effect effect2 = new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield);
         effect2.setText("Enchanted creature gets +2/+0");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect2);
         effect2 = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect2.setText("and has first strike");
         ability.addEffect(effect2);

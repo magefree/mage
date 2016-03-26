@@ -25,13 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -40,29 +42,35 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class PredatorsStrike extends CardImpl {
+public class MalevolentWhispers extends CardImpl {
 
-    public PredatorsStrike(UUID ownerId) {
-        super(ownerId, 128, "Predator's Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
-        this.expansionSetCode = "MRD";
+    public MalevolentWhispers(UUID ownerId) {
+        super(ownerId, 173, "Malevolent Whispers", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
+        this.expansionSetCode = "SOI";
 
-        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
-        effect.setText("Target creature gets +3/+3");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains trample until end of turn");
-        this.getSpellAbility().addEffect(effect);
+        // Gain control of target creature until end of turn. Untap that creature. It gets +2/+0 and gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
+        this.getSpellAbility().addEffect(effect);
+        effect = new UntapTargetEffect();
+        effect.setText("Untap that creature");
+        this.getSpellAbility().addEffect(effect);
+        effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
+        effect.setText("It gets +2/+0 and gains haste until end of turn");
+        this.getSpellAbility().addEffect(effect);
+
+        // Madness {3}{R}
+        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{R}")));
     }
 
-    public PredatorsStrike(final PredatorsStrike card) {
+    public MalevolentWhispers(final MalevolentWhispers card) {
         super(card);
     }
 
-    @java.lang.Override
-    public PredatorsStrike copy() {
-        return new PredatorsStrike(this);
+    @Override
+    public MalevolentWhispers copy() {
+        return new MalevolentWhispers(this);
     }
 }
