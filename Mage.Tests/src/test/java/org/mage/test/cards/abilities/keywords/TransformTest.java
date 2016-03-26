@@ -136,4 +136,23 @@ public class TransformTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void TestEnchantmentToCreature() {
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Fireball", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Infernal Scarring", 1);
+
+        // {B}: Put the top card of your library into your graveyard.
+        // <i>Delirium</i> &mdash At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
+        addCard(Zone.BATTLEFIELD, playerA, "Autumnal Gloom");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Autumnal Gloom", 0);
+        assertPermanentCount(playerA, "Ancient of the Equinox", 1);
+
+    }
+
 }

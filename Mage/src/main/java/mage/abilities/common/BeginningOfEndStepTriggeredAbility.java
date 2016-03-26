@@ -135,17 +135,21 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
                 sb.insert(0, "you may ");
             }
         }
+        String abilityWordRule = "";
+        if (abilityWord != null) {
+            abilityWordRule = "<i>" + abilityWord.toString() + "</i> &mdash ";
+        }
         switch (targetController) {
             case YOU:
-                return sb.insert(0, generateConditionString()).insert(0, "At the beginning of your end step, ").toString();
+                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of your end step, ").toString();
             case NEXT:
-                return sb.insert(0, generateConditionString()).insert(0, "At the beginning of the end step, ").toString();
+                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of the end step, ").toString();
             case OPPONENT:
-                return sb.insert(0, generateConditionString()).insert(0, "At the beginning of each opponent's end step, ").toString();
+                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each opponent's end step, ").toString();
             case ANY:
-                return sb.insert(0, generateConditionString()).insert(0, "At the beginning of each end step, ").toString();
+                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of each end step, ").toString();
             case CONTROLLER_ATTACHED_TO:
-                return sb.insert(0, generateConditionString()).insert(0, "At the beginning of the end step of enchanted creature's controller, ").toString();
+                return sb.insert(0, generateConditionString()).insert(0, abilityWordRule + "At the beginning of the end step of enchanted creature's controller, ").toString();
         }
         return "";
     }

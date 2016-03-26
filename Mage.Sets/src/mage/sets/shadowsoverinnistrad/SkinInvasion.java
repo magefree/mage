@@ -27,88 +27,94 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesAttachedTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class LilianasIndignation extends CardImpl {
+public class SkinInvasion extends CardImpl {
 
-    public LilianasIndignation(UUID ownerId) {
-        super(ownerId, 120, "Liliana's Indignation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}");
+    public SkinInvasion(UUID ownerId) {
+        super(ownerId, 182, "Skin Invasion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "SOI";
+        this.subtype.add("Aura");
 
-        // Put the top X cards of your library into your graveyard. Target player loses 2 life for each creature card put into your graveyard this way.
-        this.getSpellAbility().addEffect(new LilianasIndignationEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.canTransform = true;
+        this.secondSideCard = new SkinShedder(ownerId);
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // Enchanted creature attacks each combat if able.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
+
+        // When enchanted creature dies, return Skin Invasion to the battlefield transformed under your control.
+        this.addAbility(new TransformAbility());
+        this.addAbility(new DiesAttachedTriggeredAbility(new SkinInvasionEffect(), "enchanted creature", false));
     }
 
-    public LilianasIndignation(final LilianasIndignation card) {
+    public SkinInvasion(final SkinInvasion card) {
         super(card);
     }
 
     @Override
-    public LilianasIndignation copy() {
-        return new LilianasIndignation(this);
+    public SkinInvasion copy() {
+        return new SkinInvasion(this);
     }
 }
 
-class LilianasIndignationEffect extends OneShotEffect {
+class SkinInvasionEffect extends OneShotEffect {
 
-    public LilianasIndignationEffect() {
-        super(Outcome.LoseLife);
-        this.staticText = "Put the top X cards of your library into your graveyard. Target player loses 2 life for each creature card put into your graveyard this way";
+    public SkinInvasionEffect() {
+        super(Outcome.PutCardInPlay);
+        this.staticText = "return {this} to the battlefield transformed under your control";
     }
 
-    public LilianasIndignationEffect(final LilianasIndignationEffect effect) {
+    public SkinInvasionEffect(final SkinInvasionEffect effect) {
         super(effect);
     }
 
     @Override
-    public LilianasIndignationEffect copy() {
-        return new LilianasIndignationEffect(this);
+    public SkinInvasionEffect copy() {
+        return new SkinInvasionEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int x = source.getManaCostsToPay().getX();
-            if (x > 0) {
-                Cards cardsToGraveyard = new CardsImpl();
-                cardsToGraveyard.addAll(controller.getLibrary().getTopCards(game, x));
-                if (!cardsToGraveyard.isEmpty()) {
-                    Set<Card> movedCards = controller.moveCardsToGraveyardWithInfo(cardsToGraveyard.getCards(game), source, game, Zone.LIBRARY);
-                    Cards cardsMoved = new CardsImpl();
-                    cardsMoved.addAll(movedCards);
-                    int creatures = cardsMoved.count(new FilterCreatureCard(), game);
-                    if (creatures > 0) {
-                        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-                        if (targetPlayer != null) {
-                            targetPlayer.loseLife(creatures * 2, game);
-                        }
-
-                    }
-                }
-            }
+        if (card != null && controller != null) {
+            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             return true;
         }
         return false;
     }
+
 }

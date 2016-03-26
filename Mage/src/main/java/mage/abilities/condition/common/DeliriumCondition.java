@@ -61,4 +61,10 @@ public class DeliriumCondition implements Condition {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "if there are four or more card types among cards in your graveyard";
+    }
+
 }

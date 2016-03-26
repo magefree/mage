@@ -27,7 +27,13 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -35,20 +41,21 @@ import mage.cards.CardImpl;
  */
 public class AncientOfTheEquinox extends CardImpl {
 
-    /*
-    public AncientOfTheEquinox(UUID ownerId) {        
-        super(ownerId, 194b, "Ancient of the Equinox", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public AncientOfTheEquinox(UUID ownerId) {
+        super(ownerId, 194, "Ancient of the Equinox", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "SOI";
         this.subtype.add("Treefolk");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+        this.color.setGreen(true);
+        this.nightCard = true;
+        this.canTransform = true;
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
     }
-    */
 
     public AncientOfTheEquinox(final AncientOfTheEquinox card) {
         super(card);

@@ -28,36 +28,49 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class AutumnalGloom extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public AutumnalGloom(UUID ownerId) {
+        super(ownerId, 194, "Autumnal Gloom", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
-        this.nightCard = true;
+        this.canTransform = true;
+        this.secondSideCard = new AncientOfTheEquinox(ownerId);
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // {B}: Put the top card of your library into your graveyard.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveControllerEffect(1), new ManaCostsImpl("{B}")));
+
+        // <i>Delirium</i> &mdash; At the beginning of your end step, if there are four or more card types among cards in your graveyard, transform Autumnal Gloom.
+        this.addAbility(new TransformAbility());
+        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), TargetController.YOU, DeliriumCondition.getInstance(), false);
+        ability.setAbilityWord(AbilityWord.DELIRIUM);
+        this.addAbility(ability);
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public AutumnalGloom(final AutumnalGloom card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public AutumnalGloom copy() {
+        return new AutumnalGloom(this);
     }
-
 }

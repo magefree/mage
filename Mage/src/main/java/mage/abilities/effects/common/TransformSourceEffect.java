@@ -24,13 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -44,7 +43,8 @@ public class TransformSourceEffect extends OneShotEffect {
     private boolean fromDayToNight;
 
     /**
-     * @param fromDayToNight Defines whether we transform from "day" side to "night" or vice versa.
+     * @param fromDayToNight Defines whether we transform from "day" side to
+     * "night" or vice versa.
      */
     public TransformSourceEffect(boolean fromDayToNight) {
         this(fromDayToNight, false);
@@ -75,20 +75,21 @@ public class TransformSourceEffect extends OneShotEffect {
             if (permanent.canTransform()) {
                 // check not to transform twice the same side
                 if (permanent.isTransformed() != fromDayToNight) {
-                    if (withoutTrigger) {                        
+                    if (withoutTrigger) {
                         permanent.setTransformed(fromDayToNight);
                     } else {
                         permanent.transform(game);
                     }
                     if (!game.isSimulation()) {
                         if (fromDayToNight) {
-                            game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());                    
+                            game.informPlayers(permanent.getIdName() + " transforms into " + permanent.getSecondCardFace().getIdName());
                         } else {
-                            game.informPlayers(new StringBuilder(permanent.getSecondCardFace().getName()).append(" transforms into ").append(permanent.getName()).toString());                    
+                            game.informPlayers(permanent.getSecondCardFace().getIdName() + " transforms into " + permanent.getIdName());
                         }
                     }
                 }
             }
+
             return true;
         }
         return false;
