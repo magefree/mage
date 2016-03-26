@@ -900,6 +900,22 @@ public class TableController {
         return null;
     }
 
+    public boolean isUserStillActive(UUID userId) {
+        UUID playerId = userPlayerMap.get(userId);
+        if (playerId != null) {
+            if (tournament != null) {
+                TournamentPlayer tournamentPlayer = tournament.getPlayer(playerId);
+                if (tournamentPlayer != null) {
+                    return tournamentPlayer.isInTournament();
+                }
+            } else if (match != null) {
+                MatchPlayer matchPlayer = match.getPlayer(playerId);
+                return matchPlayer != null && !matchPlayer.hasQuit();
+            }
+        }
+        return false;
+    }
+
     public boolean isMatchTableStillValid() {
         // check only normal match table with state != Finished
         if (!table.isTournament()) {

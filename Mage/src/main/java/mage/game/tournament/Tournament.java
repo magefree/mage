@@ -1,16 +1,16 @@
 /*
  *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.tournament;
 
 import java.util.Collection;
@@ -48,56 +47,86 @@ import mage.players.Player;
 public interface Tournament {
 
     UUID getId();
+
     void addPlayer(Player player, String playerType);
+
     void removePlayer(UUID playerId);
+
     TournamentPlayer getPlayer(UUID playerId);
+
     Collection<TournamentPlayer> getPlayers();
+
     Collection<Round> getRounds();
+
     List<ExpansionSet> getSets();
 
     void updateResults();
+
     void setBoosterInfo(String setInfo);
+
     /**
-     * Gives back a String that shows the included sets (e.g. "3xRTR" or "1xDGM 1xGTC 1xRTR") or cube name
+     * Gives back a String that shows the included sets (e.g. "3xRTR" or "1xDGM
+     * 1xGTC 1xRTR") or cube name
+     *
      * @return String
      */
     String getBoosterInfo();
+
     void submitDeck(UUID playerId, Deck deck);
+
     void updateDeck(UUID playerId, Deck deck);
+
     void autoSubmit(UUID playerId, Deck deck);
+
     boolean allJoined();
+
     boolean isDoneConstructing();
+
     void quit(UUID playerId);
+
     void leave(UUID playerId);
+
     void nextStep();
 
     void addTableEventListener(Listener<TableEvent> listener);
+
     void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
+
     void fireConstructEvent(UUID playerId);
 
     TournamentOptions getOptions();
-    
+
     // tournament times
     void setStartTime();
+
     Date getStartTime();
+
     Date getEndTime();
 
     Date getStepStartTime();
+
     void setStepStartTime(Date date);
 
     // tournament type
-    TournamentType getTournamentType(); 
+    TournamentType getTournamentType();
+
     void setTournamentType(TournamentType tournamentType);
+
     // tournamentState
-    String getTournamentState(); 
+    String getTournamentState();
+
     void setTournamentState(String tournamentState);
-    
+
     int getNumberRounds();
+
     void cleanUpOnTournamentEnd();
+
     boolean isAbort();
+
     void setAbort(boolean abort);
 
     void clearDraft();
+
     Draft getDraft();
 
     TourneyProto toProto();

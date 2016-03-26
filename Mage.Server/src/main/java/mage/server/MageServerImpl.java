@@ -239,25 +239,28 @@ public class MageServerImpl implements MageServer {
             public TableView execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 User user = UserManager.getInstance().getUser(userId);
-
-                // check if the user satisfies the quitRatio requirement.
-                if (user != null) {
-                    int quitRatio = options.getQuitRatio();
-                    if (quitRatio < user.getMatchQuitRatio()) {
-                        String message = new StringBuilder("Your quit ratio ").append(user.getMatchQuitRatio())
-                                .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
-                        user.showUserMessage("Create table", message);
-                        throw new MageException("No message");
-                    }
+                if (user == null) {
+                    logger.error("User for session not found. session = " + sessionId);
+                    return null;
+                }
+                // check if user can create another table
+                int notStartedTables = user.getNumberOfNotStartedTables();
+                if (notStartedTables > 1) {
+                    user.showUserMessage("Create table", "You have already " + notStartedTables + " not started table" + (notStartedTables == 1 ? "" : "s") + ". You can't create another.");
+                    throw new MageException("No message");
+                }
+                // check if the user itself satisfies the quitRatio requirement.
+                int quitRatio = options.getQuitRatio();
+                if (quitRatio < user.getMatchQuitRatio()) {
+                    user.showUserMessage("Create table", "Your quit ratio " + user.getMatchQuitRatio() + "% is higher than the table requirement " + quitRatio + "%");
+                    throw new MageException("No message");
                 }
 
                 TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
                 if (logger.isDebugEnabled()) {
-                    if (user != null) {
-                        logger.debug("TABLE created - tableId: " + table.getTableId() + " " + table.getTableName());
-                        logger.debug("- " + user.getName() + " userId: " + user.getId());
-                        logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));
-                    }
+                    logger.debug("TABLE created - tableId: " + table.getTableId() + " " + table.getTableName());
+                    logger.debug("- " + user.getName() + " userId: " + user.getId());
+                    logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));
                 }
                 LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
                 return table;
@@ -273,6 +276,16 @@ public class MageServerImpl implements MageServer {
                 try {
                     UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                     User user = UserManager.getInstance().getUser(userId);
+                    if (user == null) {
+                        logger.error("User for session not found. session = " + sessionId);
+                        return null;
+                    }
+                    // check if user can create another table
+                    int notStartedTables = user.getNumberOfNotStartedTables();
+                    if (notStartedTables > 1) {
+                        user.showUserMessage("Create table", "You have already " + notStartedTables + " not started table" + (notStartedTables == 1 ? "" : "s") + ". You can't create another.");
+                        throw new MageException("No message");
+                    }
                     // check AI players max
                     String maxAiOpponents = ConfigSettings.getInstance().getMaxAiOpponents();
                     if (maxAiOpponents != null) {
@@ -284,21 +297,17 @@ public class MageServerImpl implements MageServer {
                             }
                         }
                         if (aiPlayers > max) {
-                            if (user != null) {
-                                user.showUserMessage("Create tournament", "It's only allowed to use a maximum of " + max + " AI players.");
-                            }
+                            user.showUserMessage("Create tournament", "It's only allowed to use a maximum of " + max + " AI players.");
                             throw new MageException("No message");
                         }
                     }
                     // check if the user satisfies the quitRatio requirement.
-                    if (user != null) {
-                        int quitRatio = options.getQuitRatio();
-                        if (quitRatio < user.getTourneyQuitRatio()) {
-                            String message = new StringBuilder("Your quit ratio ").append(user.getTourneyQuitRatio())
-                                    .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
-                            user.showUserMessage("Create tournament", message);
-                            throw new MageException("No message");
-                        }
+                    int quitRatio = options.getQuitRatio();
+                    if (quitRatio < user.getTourneyQuitRatio()) {
+                        String message = new StringBuilder("Your quit ratio ").append(user.getTourneyQuitRatio())
+                                .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
+                        user.showUserMessage("Create tournament", message);
+                        throw new MageException("No message");
                     }
                     TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(userId, options);
                     logger.debug("Tournament table " + table.getTableId() + " created");

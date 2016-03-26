@@ -39,6 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
 import mage.constants.ManaType;
+import mage.constants.TableState;
 import mage.game.Table;
 import mage.game.result.ResultProtos;
 import mage.game.tournament.TournamentPlayer;
@@ -563,8 +564,8 @@ public class User {
     }
 
     public static String userStatsToHistory(ResultProtos.UserStatsProto proto) {
-        return "Matches:" + userStatsToMatchHistory(proto) +
-                " Tourneys: " + userStatsToTourneyHistory(proto);
+        return "Matches:" + userStatsToMatchHistory(proto)
+                + " Tourneys: " + userStatsToTourneyHistory(proto);
     }
 
     public int getTourneyQuitRatio() {
@@ -600,9 +601,9 @@ public class User {
         if (matches == 0) {
             return 0;
         }
-        int quits = proto.getMatchesIdleTimeout() +
-                proto.getMatchesTimerTimeout() +
-                proto.getMatchesQuit();
+        int quits = proto.getMatchesIdleTimeout()
+                + proto.getMatchesTimerTimeout()
+                + proto.getMatchesQuit();
         return 100 * quits / matches;
     }
 
@@ -632,9 +633,9 @@ public class User {
         if (tourneys == 0) {
             return 0;
         }
-        int quits = proto.getTourneysQuitDuringDrafting() +
-                proto.getTourneysQuitDuringConstruction() +
-                proto.getTourneysQuitDuringRound();
+        int quits = proto.getTourneysQuitDuringDrafting()
+                + proto.getTourneysQuitDuringConstruction()
+                + proto.getTourneysQuitDuringRound();
         return 100 * quits / tourneys;
     }
 
@@ -647,4 +648,28 @@ public class User {
         }
     }
 
+    public int getNumberOfNotStartedTables() {
+        int number = 0;
+        for (Table table : tables.values()) {
+            if (table.getState().equals(TableState.WAITING) || table.getState().equals(TableState.STARTING)) {
+                number++;
+            }
+        }
+        return number;
+    }
+
+    public int getNumberOfNotFinishedTables() {
+        int number = 0;
+        for (Table table : tables.values()) {
+            if (table.getState().equals(TableState.FINISHED)) {
+                number++;
+            } else {
+                TableController tableController = TableManager.getInstance().getController(table.getId());
+                if (tableController != null && tableController.isUserStillActive(userId)) {
+                    number++;
+                }
+            }
+        }
+        return number;
+    }
 }
