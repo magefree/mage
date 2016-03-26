@@ -152,11 +152,7 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public String getTargetName() {
-        StringBuilder sb = new StringBuilder(targetName);
-        if (isRandom()) {
-            sb.append(" chosen at random");
-        }
-        return sb.toString();
+        return targetName + (isRandom() ? " chosen at random" : "");
     }
 
     @Override
@@ -334,10 +330,8 @@ public abstract class TargetImpl implements Target {
                 } else {
                     return chosen;
                 }
-            } else {
-                if (!getTargetController(game, playerId).chooseTarget(outcome, this, source, game)) {
-                    return chosen;
-                }
+            } else if (!getTargetController(game, playerId).chooseTarget(outcome, this, source, game)) {
+                return chosen;
             }
             chosen = targets.size() >= getNumberOfTargets();
         }

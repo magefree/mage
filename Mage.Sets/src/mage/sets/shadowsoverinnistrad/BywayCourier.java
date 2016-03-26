@@ -29,6 +29,8 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -37,28 +39,26 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class BywayCourier extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public BywayCourier(UUID ownerId) {
+        super(ownerId, 196, "Byway Courier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
-
-        this.nightCard = true;
-
+        this.subtype.add("Human");
+        this.subtype.add("Scout");
         this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(2);
+
+        // When Byway Courier dies, investigate.
+        this.addAbility(new DiesTriggeredAbility(new InvestigateEffect(), false));
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public BywayCourier(final BywayCourier card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public BywayCourier copy() {
+        return new BywayCourier(this);
     }
-
 }

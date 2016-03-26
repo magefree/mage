@@ -29,36 +29,38 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SacrificeAllTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class GrafMole extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public GrafMole(UUID ownerId) {
+        super(ownerId, 207, "Graf Mole", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
-
-        this.nightCard = true;
-
-        this.power = new MageInt(3);
+        this.subtype.add("Mole");
+        this.subtype.add("Beast");
+        this.power = new MageInt(2);
         this.toughness = new MageInt(4);
+
+        // Whenever you sacrifice a Clue, you gain 3 life.
+        this.addAbility(new SacrificeAllTriggeredAbility(new GainLifeEffect(3), new FilterCreaturePermanent("Clue", "a Clue"), TargetController.YOU, false));
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public GrafMole(final GrafMole card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public GrafMole copy() {
+        return new GrafMole(this);
     }
-
 }

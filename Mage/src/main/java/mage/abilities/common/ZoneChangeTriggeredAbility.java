@@ -94,7 +94,7 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder(rule).append(super.getRule()).toString();
+        return rule + super.getRule();
     }
 
     @Override

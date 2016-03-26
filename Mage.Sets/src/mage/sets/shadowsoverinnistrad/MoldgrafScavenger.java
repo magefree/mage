@@ -29,36 +29,42 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class MoldgrafScavenger extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public MoldgrafScavenger(UUID ownerId) {
+        super(ownerId, 218, "Moldgraf Scavenger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
-
-        this.nightCard = true;
-
-        this.power = new MageInt(3);
+        this.subtype.add("Fungus");
+        this.power = new MageInt(0);
         this.toughness = new MageInt(4);
+
+        // <i>Delirium</i> &mdash; Moldgraf Scavenger gets +3/+0 as long as there are four or more card types among cards in your graveyard.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield),
+                DeliriumCondition.getInstance(),
+                "<i>Delirium</i> &mdash; {this} gets +3/+0 as long as there are four or more card types among cards in your graveyard")));
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public MoldgrafScavenger(final MoldgrafScavenger card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public MoldgrafScavenger copy() {
+        return new MoldgrafScavenger(this);
     }
-
 }

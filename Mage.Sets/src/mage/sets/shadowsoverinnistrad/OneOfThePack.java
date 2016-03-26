@@ -29,36 +29,44 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class OneOfThePack extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public OneOfThePack(UUID ownerId) {
+        super(ownerId, 229, "One of the Pack", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
+        this.subtype.add("Werewolf");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(6);
 
         this.nightCard = true;
+        this.canTransform = true;
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform One of the Pack.
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
+        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public OneOfThePack(final OneOfThePack card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public OneOfThePack copy() {
+        return new OneOfThePack(this);
     }
-
 }

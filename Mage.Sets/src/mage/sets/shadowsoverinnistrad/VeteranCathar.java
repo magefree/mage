@@ -29,36 +29,46 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class VeteranCathar extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public VeteranCathar(UUID ownerId) {
+        super(ownerId, 238, "Veteran Cathar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        this.nightCard = true;
+        // {3}{W}: Target Human gains double strike until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{3}{W}"));
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("Human", "Human")));
+        this.addAbility(ability);
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public VeteranCathar(final VeteranCathar card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public VeteranCathar copy() {
+        return new VeteranCathar(this);
     }
-
 }

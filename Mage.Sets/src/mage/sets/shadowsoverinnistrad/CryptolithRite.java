@@ -28,37 +28,37 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class CryptolithRite extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public CryptolithRite(UUID ownerId) {
+        super(ownerId, 200, "Cryptolith Rite", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
 
-        this.nightCard = true;
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Creature you control have "{T}: Add one mana of any color to your mana pool."
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+                new AnyColorManaAbility(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("creature"), false)));
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public CryptolithRite(final CryptolithRite card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public CryptolithRite copy() {
+        return new CryptolithRite(this);
     }
-
 }

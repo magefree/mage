@@ -48,8 +48,8 @@ public class AncientOfTheEquinox extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.color.setGreen(true);
+
         this.nightCard = true;
-        this.canTransform = true;
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

@@ -28,37 +28,40 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class RootOut extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public RootOut(UUID ownerId) {
+        super(ownerId, 224, "Root Out", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
 
-        this.nightCard = true;
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Destroy target artifact or enchantment.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        // Investigate.
+        Effect effect = new InvestigateEffect();
+        effect.setText("<br>Investigate. <i>(Put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\")</i>");
+        this.getSpellAbility().addEffect(effect);
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public RootOut(final RootOut card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public RootOut copy() {
+        return new RootOut(this);
     }
-
 }

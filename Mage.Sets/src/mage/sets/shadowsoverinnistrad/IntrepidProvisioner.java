@@ -29,36 +29,53 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class IntrepidProvisioner extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Human", "another target Human you control");
 
-        this.nightCard = true;
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+    static {
+        filter.add(new AnotherPredicate());
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public IntrepidProvisioner(UUID ownerId) {
+        super(ownerId, 213, "Intrepid Provisioner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "SOI";
+        this.subtype.add("Human");
+        this.subtype.add("Scout");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // When Intrepid Provisioner enters the battlefield, another target Human you control gets +2/+2 until end of turn.
+        Ability ability = new EntersBattlefieldAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), false);
+        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        this.addAbility(ability);
+        
+    }
+
+    public IntrepidProvisioner(final IntrepidProvisioner card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public IntrepidProvisioner copy() {
+        return new IntrepidProvisioner(this);
     }
-
 }

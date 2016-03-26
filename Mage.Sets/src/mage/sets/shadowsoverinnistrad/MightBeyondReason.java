@@ -28,37 +28,43 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class MightBeyondReason extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public MightBeyondReason(UUID ownerId) {
+        super(ownerId, 217, "Might Beyond Reason", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
 
-        this.nightCard = true;
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Put two +1/+1 counter on target creature.
+        // <i>Delirium</i> &mdash; Put three +1/+1 counter on that creature instead if there are four or more card types among cards in your graveyard.
+        getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)),
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)),
+                DeliriumCondition.getInstance(),
+                "Put two +1/+1 counter on target creature.<br>"
+                + "<i>Delirium</i> &mdash; Put three +1/+1 counter on that creature instead if there are four or more card types among cards in your graveyard"
+        ));
+        getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public MightBeyondReason(final MightBeyondReason card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public MightBeyondReason copy() {
+        return new MightBeyondReason(this);
     }
-
 }

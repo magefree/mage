@@ -29,36 +29,49 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class LoamDryad extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
-        this.nightCard = true;
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+    static {
+        filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public LoamDryad(UUID ownerId) {
+        super(ownerId, 216, "Loam Dryad", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "SOI";
+        this.subtype.add("Dryad");
+        this.subtype.add("Horror");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+
+        // {T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
+        Ability ability = new AnyColorManaAbility();
+        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        this.addAbility(ability);
+    }
+
+    public LoamDryad(final LoamDryad card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public LoamDryad copy() {
+        return new LoamDryad(this);
     }
-
 }

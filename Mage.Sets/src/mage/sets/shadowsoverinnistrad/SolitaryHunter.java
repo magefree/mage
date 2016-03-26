@@ -29,36 +29,48 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class SolitaryHunter extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public SolitaryHunter(UUID ownerId) {
+        super(ownerId, 229, "Solitary Hunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
-
-        this.nightCard = true;
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.subtype.add("Werewolf");
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+
+        this.canTransform = true;
+        this.secondSideCard = new OneOfThePack(ownerId);
+
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Solitary Hunter.
+        this.addAbility(new TransformAbility());
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
+        this.addAbility(new ConditionalTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public SolitaryHunter(final SolitaryHunter card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public SolitaryHunter copy() {
+        return new SolitaryHunter(this);
     }
-
 }

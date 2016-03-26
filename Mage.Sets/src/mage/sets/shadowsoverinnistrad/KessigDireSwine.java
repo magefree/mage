@@ -29,36 +29,43 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class KessigDireSwine extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public KessigDireSwine(UUID ownerId) {
+        super(ownerId, 214, "Kessig Dire Swine", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
+        this.subtype.add("Boar");
         this.subtype.add("Horror");
-        this.color.setRed(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-        this.nightCard = true;
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // <i>Delirium</i> &mdash; Kessig Dire Swine has trample as long as there are four or more card types among cards in your graveyard.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
+                        new DeliriumCondition(), "<i>Delirium</i> &mdash; {this} has trample as long as there are four or more card types among cards in your graveyard")));
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public KessigDireSwine(final KessigDireSwine card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public KessigDireSwine copy() {
+        return new KessigDireSwine(this);
     }
-
 }

@@ -28,37 +28,41 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class SkinShedder extends CardImpl {
+public class ConfrontTheUnknown extends CardImpl {
 
-    public SkinShedder(UUID ownerId) {
-        super(ownerId, 182, "Skin Shedder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public ConfrontTheUnknown(UUID ownerId) {
+        super(ownerId, 198, "Confront the Unknown", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Insect");
-        this.subtype.add("Horror");
-        this.color.setRed(true);
 
-        this.nightCard = true;
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        // Investigate, then target creature gets +1/+1 until end of turn.
+        Effect effect = new InvestigateEffect();
+        effect.setText("Investigate");
+        getSpellAbility().addEffect(effect);
+        effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
+        effect.setText(", then target creature gets +1/+1 until end of turn (<i>(To investigate, put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\")</i>");
+        getSpellAbility().addEffect(effect);
+        getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SkinShedder(final SkinShedder card) {
+    public ConfrontTheUnknown(final ConfrontTheUnknown card) {
         super(card);
     }
 
     @Override
-    public SkinShedder copy() {
-        return new SkinShedder(this);
+    public ConfrontTheUnknown copy() {
+        return new ConfrontTheUnknown(this);
     }
-
 }

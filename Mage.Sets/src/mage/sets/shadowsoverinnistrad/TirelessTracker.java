@@ -29,19 +29,18 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.SacrificeAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -61,7 +60,7 @@ public class TirelessTracker extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), new FilterLandPermanent("a land"), false, null, true));
 
         // Whenever you sacrifice a Clue, put a +1/+1 counter on Tireless Tracker.
-        this.addAbility(new TirelessTrackerTriggeredAbility());
+        this.addAbility(new SacrificeAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterCreaturePermanent("Clue", "a Clue"), TargetController.YOU, false));
     }
 
     public TirelessTracker(final TirelessTracker card) {
@@ -71,37 +70,5 @@ public class TirelessTracker extends CardImpl {
     @Override
     public TirelessTracker copy() {
         return new TirelessTracker(this);
-    }
-}
-
-class TirelessTrackerTriggeredAbility extends TriggeredAbilityImpl {
-
-    public TirelessTrackerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-    }
-
-    public TirelessTrackerTriggeredAbility(final TirelessTrackerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TirelessTrackerTriggeredAbility copy() {
-        return new TirelessTrackerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getSubtype().contains("Clue");
-    }
-
-    @Override
-    public String getRule() {
-        return "When you sacrifice a Clue, " + super.getRule();
     }
 }
