@@ -36,8 +36,10 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -48,10 +50,12 @@ import mage.filter.predicate.permanent.TokenPredicate;
 public class UlvenwaldMysteries extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
+    private static final FilterControlledPermanent filterClue = new FilterControlledPermanent("a Clue");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.not(new TokenPredicate()));
+        filterClue.add(new SubtypePredicate("Clue"));
     }
 
     public UlvenwaldMysteries(UUID ownerId) {
@@ -62,7 +66,7 @@ public class UlvenwaldMysteries extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new InvestigateEffect(), false, filter));
 
         // Whenever you sacrifice a Clue, put a 1/1 white Human Soldier creature token onto the battlefield.
-        this.addAbility(new SacrificeAllTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken()), new FilterCreaturePermanent("Clue", "a Clue"), TargetController.YOU, false));
+        this.addAbility(new SacrificeAllTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken()), filterClue, TargetController.YOU, false));
     }
 
     public UlvenwaldMysteries(final UlvenwaldMysteries card) {

@@ -48,7 +48,7 @@ import mage.counters.CounterType;
 public class MarkovDreadknight extends CardImpl {
 
     public MarkovDreadknight(UUID ownerId) {
-        super(ownerId, 998, "Markov Dreadknight", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        super(ownerId, 122, "Markov Dreadknight", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Vampire");
         this.subtype.add("Knight");
