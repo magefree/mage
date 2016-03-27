@@ -31,7 +31,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -62,6 +66,8 @@ public class KindlyStranger extends CardImpl {
 
         // <i>Delirium</i> &mdash; {2}{B}: Transform Kindly Stranger. Activate this ability only if there are four or more card types among cards in your graveyard.
         this.addAbility(new TransformAbility());
+        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+                new TransformSourceEffect(true), new ManaCostsImpl<>("{2}{B}"), DeliriumCondition.getInstance()));
 
         // When this creature transforms into Demon-Possessed Witch, you may destroy target creature.
         this.addAbility(new DemonPossessedWitchAbility());
@@ -109,7 +115,6 @@ class DemonPossessedWitchAbility extends TriggeredAbilityImpl {
         }
         return super.isInUseableZone(game, source, event);
     }
-
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
