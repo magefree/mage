@@ -27,15 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import java.util.UUID;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -47,11 +46,10 @@ public class CripplingChill extends CardImpl {
         super(ownerId, 46, "Crippling Chill", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "AVR";
 
-
         // Tap target creature. It doesn't untap during its controller's next untap step.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
+        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("It"));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
