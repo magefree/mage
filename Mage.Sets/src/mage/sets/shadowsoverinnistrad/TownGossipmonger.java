@@ -64,7 +64,7 @@ public class TownGossipmonger extends CardImpl {
         this.toughness = new MageInt(1);
         
         this.canTransform = true;
-        this.secondSideCard = new IncitedRabbled(ownerId);
+        this.secondSideCard = new IncitedRabble(ownerId);
 
         // {T}, Tap an untapped creature you control: Transform Town Gossipmonger.
         this.addAbility(new TransformAbility());
