@@ -29,15 +29,14 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -51,18 +50,19 @@ public class KitsuneDiviner extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Spirit");
 
-        static {
-            filter.add(new SubtypePredicate("Spirit"));
-        }
+    static {
+        filter.add(new SubtypePredicate("Spirit"));
+    }
 
-        public KitsuneDiviner (UUID ownerId) {
+    public KitsuneDiviner (UUID ownerId) {
         super(ownerId, 26, "Kitsune Diviner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Fox");
         this.subtype.add("Cleric");
-
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
+        
+        // {T}: Tap target Spirit.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
