@@ -37,7 +37,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -45,6 +46,12 @@ import mage.target.TargetPlayer;
  * @author LevelX2
  */
 public class FleetingMemories extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Clue");
+
+    static {
+        filter.add(new SubtypePredicate("Clue"));
+    }
 
     public FleetingMemories(UUID ownerId) {
         super(ownerId, 62, "Fleeting Memories", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
@@ -54,7 +61,7 @@ public class FleetingMemories extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect(), false));
 
         // Whenever you sacrifice a Clue, target player puts the top three cards of his or her graveyard into his or her graveyard.
-        Ability ability = new SacrificeAllTriggeredAbility(new PutTopCardOfLibraryIntoGraveTargetEffect(3), new FilterCreaturePermanent("Clue", "a Clue"), TargetController.YOU, false);
+        Ability ability = new SacrificeAllTriggeredAbility(new PutTopCardOfLibraryIntoGraveTargetEffect(3), filter, TargetController.YOU, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
