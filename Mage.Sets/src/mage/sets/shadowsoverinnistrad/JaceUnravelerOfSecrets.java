@@ -30,6 +30,7 @@ package mage.sets.shadowsoverinnistrad;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -57,6 +58,8 @@ public class JaceUnravelerOfSecrets extends CardImpl {
         super(ownerId, 69, "Jace, Unraveler of Secrets", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Jace");
+
+        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
         // +1: Scry 1, then draw a card.
         Ability ability = new LoyaltyAbility(new ScryEffect(1), 1);
