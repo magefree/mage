@@ -5,7 +5,10 @@
  */
 package mage.abilities.effects.keyword;
 
+import mage.abilities.Ability;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.token.ClueArtifactToken;
 
 /**
@@ -21,6 +24,15 @@ public class InvestigateEffect extends CreateTokenEffect {
 
     public InvestigateEffect(final InvestigateEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (super.apply(game, source)) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.INVESTIGATED, source.getSourceId(), source.getSourceId(), source.getControllerId()));
+            return true;
+        }
+        return false;
     }
 
     @Override
