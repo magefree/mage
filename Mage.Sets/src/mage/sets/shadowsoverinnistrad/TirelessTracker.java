@@ -39,14 +39,21 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author fireshoes
  */
 public class TirelessTracker extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Clue");
+
+    static {
+        filter.add(new SubtypePredicate("Clue"));
+    }
 
     public TirelessTracker(UUID ownerId) {
         super(ownerId, 233, "Tireless Tracker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -57,10 +64,10 @@ public class TirelessTracker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever a land enters the battlefield under your control, investigate. <i>(Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")</i>
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), new FilterLandPermanent("a land"), false, null, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), new FilterControlledLandPermanent("a land"), false, null, true));
 
         // Whenever you sacrifice a Clue, put a +1/+1 counter on Tireless Tracker.
-        this.addAbility(new SacrificeAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterCreaturePermanent("Clue", "a Clue"), TargetController.YOU, false));
+        this.addAbility(new SacrificeAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, TargetController.YOU, false));
     }
 
     public TirelessTracker(final TirelessTracker card) {
