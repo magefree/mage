@@ -30,7 +30,7 @@ package mage.sets.shadowsoverinnistrad;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -64,10 +64,10 @@ public class IntrepidProvisioner extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // When Intrepid Provisioner enters the battlefield, another target Human you control gets +2/+2 until end of turn.
-        Ability ability = new EntersBattlefieldAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), false);
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
-        
+
     }
 
     public IntrepidProvisioner(final IntrepidProvisioner card) {
