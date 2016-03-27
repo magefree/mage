@@ -1191,6 +1191,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
+    public boolean canTransform(Game game) {
+        for (Map.Entry entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            RestrictionEffect effect = (RestrictionEffect) entry.getKey();
+            for (Ability ability : (HashSet<Ability>) entry.getValue()) {
+                if (!effect.canTransform(game)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @Override
     public void setAttacking(boolean attacking) {
         this.attacking = attacking;
     }

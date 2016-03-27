@@ -249,6 +249,14 @@ public interface Permanent extends Card, Controllable {
      */
     boolean canUseActivatedAbilities(Game game);
 
+    /**
+     * Checks by restriction effects if the permanent can transform
+     *
+     * @param game
+     * @return true - permanent can transform
+     */
+    boolean canTransform(Game game);
+
     boolean removeFromCombat(Game game);
 
     boolean removeFromCombat(Game game, boolean withInfo);
