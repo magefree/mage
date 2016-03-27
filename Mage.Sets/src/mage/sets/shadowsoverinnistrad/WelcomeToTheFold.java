@@ -90,13 +90,13 @@ class WelcomeToTheFoldEffect extends GainControlTargetEffect {
     public void init(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int maxPower = 2;
+            int maxToughness = 2;
             ManaCosts manaCosts = source.getManaCostsToPay();
             if (!manaCosts.getVariableCosts().isEmpty()) {
-                maxPower = source.getManaCostsToPay().getX();
+                maxToughness = source.getManaCostsToPay().getX();
             }
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent != null && permanent.getPower().getValue() <= maxPower) {
+            if (permanent != null && permanent.getToughness().getValue() <= maxToughness) {
                 this.discard();
                 return;
             }
