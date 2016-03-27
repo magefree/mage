@@ -32,7 +32,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,7 +60,10 @@ public class MalevolentWhispers extends CardImpl {
         effect.setText("Untap that creature");
         this.getSpellAbility().addEffect(effect);
         effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
-        effect.setText("It gets +2/+0 and gains haste until end of turn");
+        effect.setText("It gets +2/+0");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains haste until end of turn");
         this.getSpellAbility().addEffect(effect);
 
         // Madness {3}{R}
