@@ -58,4 +58,22 @@ public class AlteredEgoTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 5, 5);
     }
 
+    @Test
+    public void testNoCreatureToCopyAvailable() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        // Altered Ego can't be countered.
+        // You may have Altered Ego enter the battlefield as a copy of any creature on the battlefield, except it enters with an additional X +1/+1 counters on it.
+        addCard(Zone.HAND, playerA, "Altered Ego"); // {X}{2}{G}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Altered Ego");
+        setChoice(playerA, "X=3");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Altered Ego", 0);
+        assertGraveyardCount(playerA, "Altered Ego", 1);
+
+    }
 }

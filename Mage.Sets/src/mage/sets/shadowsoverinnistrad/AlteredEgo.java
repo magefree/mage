@@ -29,6 +29,7 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
@@ -37,8 +38,11 @@ import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -60,7 +64,7 @@ public class AlteredEgo extends CardImpl {
         Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), null);
         effect.setText("a copy of any creature on the battlefield");
         EntersBattlefieldAbility ability = new EntersBattlefieldAbility(effect, true);
-        effect = new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance());
+        effect = new AlteredEgoAddCountersEffect(CounterType.P1P1.createInstance());
         effect.setText(", except it enters with an additional X +1/+1 counters on it");
         ability.addEffect(effect);
         this.addAbility(ability);
@@ -74,4 +78,33 @@ public class AlteredEgo extends CardImpl {
     public AlteredEgo copy() {
         return new AlteredEgo(this);
     }
+}
+
+class AlteredEgoAddCountersEffect extends EntersBattlefieldWithXCountersEffect {
+
+    public AlteredEgoAddCountersEffect(Counter counter) {
+        super(counter);
+    }
+
+    public AlteredEgoAddCountersEffect(EntersBattlefieldWithXCountersEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        if (permanent != null) {
+            // except only takes place if something was copied
+            if (permanent.isCopy()) {
+                return super.apply(game, source);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public EntersBattlefieldWithXCountersEffect copy() {
+        return new AlteredEgoAddCountersEffect(this);
+    }
+
 }
