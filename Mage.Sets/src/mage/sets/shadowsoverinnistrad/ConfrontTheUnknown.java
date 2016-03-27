@@ -28,6 +28,7 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
@@ -35,6 +36,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,16 +46,23 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ConfrontTheUnknown extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("each Clue you control");
+
+    static {
+        filter.add(new SubtypePredicate("Clue"));
+    }
+
     public ConfrontTheUnknown(UUID ownerId) {
         super(ownerId, 198, "Confront the Unknown", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "SOI";
 
-        // Investigate, then target creature gets +1/+1 until end of turn.
+        // Investigate, then target creature gets +1/+1 until end of turn for each Clue you control.
         Effect effect = new InvestigateEffect();
         effect.setText("Investigate");
         getSpellAbility().addEffect(effect);
-        effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-        effect.setText(", then target creature gets +1/+1 until end of turn (<i>(To investigate, put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\")</i>");
+        effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.EndOfTurn);
+        effect.setText(", then target creature gets +1/+1 until end of turn for each Clue you control. <i>(To investigate, "
+                + "put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\")</i>");
         getSpellAbility().addEffect(effect);
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
