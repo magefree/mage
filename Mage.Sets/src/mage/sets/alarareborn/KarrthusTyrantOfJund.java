@@ -73,10 +73,6 @@ public class KarrthusTyrantOfJund extends CardImpl {
         this.expansionSetCode = "ARB";
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
-
-
-
-        
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
