@@ -48,7 +48,7 @@ public class CrowOfDarkTidings extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Bird");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(1);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
