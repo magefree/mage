@@ -91,7 +91,7 @@ class BriarbridgePatrolCondition implements Condition {
         PermanentsSacrificedWatcher watcher = (PermanentsSacrificedWatcher) game.getState().getWatchers().get(PermanentsSacrificedWatcher.class.getName());
         if (watcher != null) {
             List<Permanent> sacrificedPermanents = watcher.getThisTurnSacrificedPermanents(source.getControllerId());
-            if (!sacrificedPermanents.isEmpty()) {
+            if (sacrificedPermanents != null && !sacrificedPermanents.isEmpty()) {
                 int amountOfClues = 0;
                 for (Permanent permanent : sacrificedPermanents) {
                     if (permanent.getSubtype().contains("Clue")) {
