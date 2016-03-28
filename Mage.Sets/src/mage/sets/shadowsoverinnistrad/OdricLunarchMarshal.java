@@ -72,7 +72,7 @@ public class OdricLunarchMarshal extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of each combat, creatures you control gain first strike until end of turn if a creature you control has first strike. The same is true for flying, deathtouch, double strike, haste, hexproof, indestructible, lifelink, menace, reach, skulk, trample, and vigilance.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new OdricLunarchMarshalEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new OdricLunarchMarshalEffect(), TargetController.ANY, false));
     }
 
     public OdricLunarchMarshal(final OdricLunarchMarshal card) {
