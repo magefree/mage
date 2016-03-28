@@ -106,4 +106,8 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
         return true;
     }
 
+    public boolean canTransform(Game game) {
+        return true;
+    }
+
 }

@@ -72,7 +72,7 @@ public class TransformSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (permanent.canTransform()) {
+            if (permanent.canTransform(game)) {
                 // check not to transform twice the same side
                 if (permanent.isTransformed() != fromDayToNight) {
                     if (withoutTrigger) {
