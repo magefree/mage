@@ -57,7 +57,7 @@ public class WolfOfDevilsBreach extends CardImpl {
 
         // Whenever Wolf of Devil's Breach attacks, you may pay {1}{R} and discard a card. If you do, Wolf of Devil's Breach deals 
         // damage to target creature or planeswalker equal to the discarded card's converted mana cost.
-        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(new DiscardCostCardConvertedMana()), new ManaCostsImpl("{1}{R}")), false,
+        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(new DiscardCostCardConvertedMana()), new ManaCostsImpl("{1}{R}")), true,
                 "Whenever {this} attacks you may pay {1}{R} and discard a card. If you do, {this} deals damage to target creature or planeswalker "
                         + "equal to the discarded card's converted mana cost.");
         ability.addCost(new DiscardCardCost());

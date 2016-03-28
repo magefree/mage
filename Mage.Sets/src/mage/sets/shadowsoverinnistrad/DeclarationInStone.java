@@ -36,6 +36,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ClueArtifactToken;
@@ -70,6 +73,11 @@ public class DeclarationInStone extends CardImpl {
 }
 
 class DeclarationInStoneEffect extends OneShotEffect {
+    
+    private static final FilterCreaturePermanent nonTokenFilter = new FilterCreaturePermanent("nontoken creature");
+    static{
+        nonTokenFilter.add(Predicates.not(new TokenPredicate()));
+    }
 
     public DeclarationInStoneEffect() {
         super(Outcome.Exile);
@@ -99,7 +107,11 @@ class DeclarationInStoneEffect extends OneShotEffect {
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controllerPermanentId)) {
                         if (permanent != null && permanent.getName().equals(name)) {
                             you.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
-                            exiledCount++;
+                                                        
+                            // exiled count only matters for non-tokens
+                            if (nonTokenFilter.match(permanent, game)) {                                
+                                exiledCount++;
+                            }
                         }
                     }
                 }
