@@ -58,7 +58,7 @@ public class SlayersPlate extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +4/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 2)));
 
         // Whenever equipped creature dies, if it was a Human, put a 1/1 white Spirit creature token with flying onto the battlefield.
         this.addAbility(new SlayersPlateTriggeredAbility());
