@@ -25,70 +25,78 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.mastersedition;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
+import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+
 
 /**
  *
  * @author MarcoMarin
  */
-public class UncleIstvan extends CardImpl {
+public class YdwenEfreet extends CardImpl {
 
-    public UncleIstvan(UUID ownerId) {
-        super(ownerId, 16, "Uncle Istvan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");
-        this.expansionSetCode = "DRK";
-        this.subtype.add("Human");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public YdwenEfreet(UUID ownerId) {
+        super(ownerId, 112, "Ydwen Efreet", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
+        this.expansionSetCode = "MED";
+        this.subtype.add("Efreet");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(6);
 
-        // Prevent all damage that would be dealt to Uncle Istvan by creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect(CardType.CREATURE)));
+        // Whenever Ydwen Efreet blocks, flip a coin. If you lose the flip, remove Ydwen Efreet from combat and it can't block this turn. Creatures it was blocking that had become blocked by only Ydwen Efreet this combat become unblocked.
+        this.addAbility(new BlocksTriggeredAbility(new YdwenEfreetEffect(), false));
     }
 
-    public UncleIstvan(final UncleIstvan card) {
+    public YdwenEfreet(final YdwenEfreet card) {
         super(card);
     }
 
     @Override
-    public UncleIstvan copy() {
-        return new UncleIstvan(this);
+    public YdwenEfreet copy() {
+        return new YdwenEfreet(this);
     }
 }
 
-class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffect {
-    
-    private CardType cardType;
-      
-    public PreventDamageToSourceByCardTypeEffect(){
-        this(null);
+class YdwenEfreetEffect extends OneShotEffect {
+
+    public YdwenEfreetEffect() {
+        super(Outcome.Damage);
+        staticText = "flip a coin. If you lose the flip, remove {this} from combat and it can't block.";
     }
 
-    public PreventDamageToSourceByCardTypeEffect(CardType cardT){
-        super(Duration.WhileOnBattlefield);
-        cardType = cardT;
+    public YdwenEfreetEffect(YdwenEfreetEffect effect) {
+        super(effect);
     }
-    
+
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (game.getObject(event.getSourceId()).getCardType().contains(cardType)){
-                if (event.getTargetId().equals(source.getSourceId())) {
-                    return true;
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent creature = game.getPermanent(source.getSourceId());
+        if (controller != null && creature != null) {
+            if (controller.flipCoin(game)) {
+                return true;
+            } else {
+                creature.removeFromCombat(game);
+                creature.setMaxBlocks(0);
+                return true;
                 }
             }
-        }
         return false;
+    }
+
+    @Override
+    public YdwenEfreetEffect copy() {
+        return new YdwenEfreetEffect(this);
     }
 }

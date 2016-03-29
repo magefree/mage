@@ -25,70 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.BlockedByIdPredicate;
+import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
 
 /**
  *
  * @author MarcoMarin
  */
-public class UncleIstvan extends CardImpl {
+public class AbuJafar extends CardImpl {
 
-    public UncleIstvan(UUID ownerId) {
-        super(ownerId, 16, "Uncle Istvan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");
-        this.expansionSetCode = "DRK";
+    public AbuJafar(UUID ownerId) {
+        super(ownerId, 55, "Abu Ja'far", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "ARN";
         this.subtype.add("Human");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
 
-        // Prevent all damage that would be dealt to Uncle Istvan by creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect(CardType.CREATURE)));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
+                                 new BlockingAttackerIdPredicate(this.getId())));
+        
+        // When Abu Ja'far dies, destroy all creatures blocking or blocked by it. They can't be regenerated.        
+        this.addAbility(new DiesTriggeredAbility(new DestroyAllEffect(filter), true));              
     }
 
-    public UncleIstvan(final UncleIstvan card) {
+    public AbuJafar(final AbuJafar card) {
         super(card);
     }
 
     @Override
-    public UncleIstvan copy() {
-        return new UncleIstvan(this);
-    }
-}
-
-class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffect {
-    
-    private CardType cardType;
-      
-    public PreventDamageToSourceByCardTypeEffect(){
-        this(null);
-    }
-
-    public PreventDamageToSourceByCardTypeEffect(CardType cardT){
-        super(Duration.WhileOnBattlefield);
-        cardType = cardT;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (game.getObject(event.getSourceId()).getCardType().contains(cardType)){
-                if (event.getTargetId().equals(source.getSourceId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public AbuJafar copy() {
+        return new AbuJafar(this);
     }
 }

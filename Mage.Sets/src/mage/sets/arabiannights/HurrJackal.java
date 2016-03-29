@@ -25,70 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+
+import mage.abilities.effects.common.CantBeRegeneratedTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author MarcoMarin
  */
-public class UncleIstvan extends CardImpl {
+public class HurrJackal extends CardImpl {
 
-    public UncleIstvan(UUID ownerId) {
-        super(ownerId, 16, "Uncle Istvan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");
-        this.expansionSetCode = "DRK";
-        this.subtype.add("Human");
+    public HurrJackal(UUID ownerId) {
+        super(ownerId, 48, "Hurr Jackal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "ARN";
+        this.subtype.add("Hound");
         this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(1);
 
-        // Prevent all damage that would be dealt to Uncle Istvan by creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect(CardType.CREATURE)));
+        // {tap}: Target creature can't be regenerated this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeRegeneratedTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public UncleIstvan(final UncleIstvan card) {
+    public HurrJackal(final HurrJackal card) {
         super(card);
     }
 
     @Override
-    public UncleIstvan copy() {
-        return new UncleIstvan(this);
-    }
-}
-
-class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffect {
-    
-    private CardType cardType;
-      
-    public PreventDamageToSourceByCardTypeEffect(){
-        this(null);
-    }
-
-    public PreventDamageToSourceByCardTypeEffect(CardType cardT){
-        super(Duration.WhileOnBattlefield);
-        cardType = cardT;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (game.getObject(event.getSourceId()).getCardType().contains(cardType)){
-                if (event.getTargetId().equals(source.getSourceId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public HurrJackal copy() {
+        return new HurrJackal(this);
     }
 }
