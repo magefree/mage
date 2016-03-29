@@ -54,7 +54,7 @@ public class UncleIstvan extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Prevent all damage that would be dealt to Uncle Istvan by creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect(CardType.CREATURE)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceBySubtypeEffect("Creature")));
     }
 
     public UncleIstvan(final UncleIstvan card) {
@@ -67,23 +67,23 @@ public class UncleIstvan extends CardImpl {
     }
 }
 
-class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffect {
+class PreventDamageToSourceBySubtypeEffect extends PreventAllDamageToSourceEffect {
     
-    private CardType cardType;
+    private String subtype;
       
-    public PreventDamageToSourceByCardTypeEffect(){
-        this(null);
+    public PreventDamageToSourceBySubtypeEffect(){
+        this("a");
     }
 
-    public PreventDamageToSourceByCardTypeEffect(CardType cardT){
+    public PreventDamageToSourceBySubtypeEffect(String sub){
         super(Duration.WhileOnBattlefield);
-        cardType = cardT;
+        subtype = sub;
     }
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (game.getObject(event.getSourceId()).getCardType().contains(cardType)){
+            if (game.getObject(event.getSourceId()).hasSubtype(subtype)){
                 if (event.getTargetId().equals(source.getSourceId())) {
                     return true;
                 }

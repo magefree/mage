@@ -109,7 +109,6 @@ public enum CounterType {
     VELOCITY("velocity"),
     VERSE("verse"),
     VITALITY("vitality"),
-    WIND("wind"),
     WISH("wish");
 
     private final String name;
