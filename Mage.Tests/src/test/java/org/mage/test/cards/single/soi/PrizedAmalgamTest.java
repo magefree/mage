@@ -79,4 +79,25 @@ public class PrizedAmalgamTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Prized Amalgam", 0); // should not recur
         assertGraveyardCount(playerB, "Prized Amalgam", 1); // stays in grave
     }
+    
+    /*    
+    * Test opponent returning a card from your graveyard to battlefield.
+    */
+    @Test
+    public void testOpponentReturnsCreatureFromYourGrave() {
+        
+        addCard(Zone.HAND, playerA, "Necromantic Summons", 1); // Put target creature card from a graveyard onto the battlefield under your control.    
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.GRAVEYARD, playerB, "Merfolk Looter", 1); // {U} 1/1  
+        addCard(Zone.GRAVEYARD, playerB, "Prized Amalgam", 1);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necromantic Summons");
+        addTarget(playerA, "Merfolk Looter");
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        
+        assertPermanentCount(playerA, "Merfolk Looter", 1);
+        assertPermanentCount(playerB, "Prized Amalgam", 0); // should not recur
+        assertGraveyardCount(playerB, "Prized Amalgam", 1); // stays in grave
+    }
 }
