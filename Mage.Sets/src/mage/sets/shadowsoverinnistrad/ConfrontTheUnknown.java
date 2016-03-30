@@ -60,7 +60,7 @@ public class ConfrontTheUnknown extends CardImpl {
         Effect effect = new InvestigateEffect();
         effect.setText("Investigate");
         getSpellAbility().addEffect(effect);
-        effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.EndOfTurn);
+        effect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.EndOfTurn, true);
         effect.setText(", then target creature gets +1/+1 until end of turn for each Clue you control. <i>(To investigate, "
                 + "put a colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\")</i>");
         getSpellAbility().addEffect(effect);

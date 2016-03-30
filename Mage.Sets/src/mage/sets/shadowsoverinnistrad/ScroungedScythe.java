@@ -1,3 +1,4 @@
+
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
@@ -55,6 +56,8 @@ public class ScroungedScythe extends CardImpl {
         super(ownerId, 256, "Scrounged Scythe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "");
         this.expansionSetCode = "SOI";
         this.subtype.add("Equipment");
+
+        this.nightCard = true;
 
         // Equipped creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
