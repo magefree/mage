@@ -48,6 +48,7 @@ public class PersistentNightmare extends CardImpl {
         this.subtype.add("Nightmare");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        this.color.setBlue(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

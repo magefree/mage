@@ -28,20 +28,24 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.SacrificeAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -66,7 +70,7 @@ public class UlvenwaldMysteries extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new InvestigateEffect(), false, filter));
 
         // Whenever you sacrifice a Clue, put a 1/1 white Human Soldier creature token onto the battlefield.
-        this.addAbility(new SacrificeAllTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken()), filterClue, TargetController.YOU, false));
+        this.addAbility(new UlvenwaldMysteriesTriggeredAbility());
     }
 
     public UlvenwaldMysteries(final UlvenwaldMysteries card) {
@@ -76,5 +80,38 @@ public class UlvenwaldMysteries extends CardImpl {
     @Override
     public UlvenwaldMysteries copy() {
         return new UlvenwaldMysteries(this);
+    }
+}
+
+class UlvenwaldMysteriesTriggeredAbility extends TriggeredAbilityImpl {
+
+    public UlvenwaldMysteriesTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanSoldierToken()));
+        setLeavesTheBattlefieldTrigger(true);
+    }
+
+    public UlvenwaldMysteriesTriggeredAbility(final UlvenwaldMysteriesTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public UlvenwaldMysteriesTriggeredAbility copy() {
+        return new UlvenwaldMysteriesTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SACRIFICED_PERMANENT;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getPlayerId().equals(this.getControllerId())
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getSubtype().contains("Clue");
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you sacrifice a Clue, " + super.getRule();
     }
 }

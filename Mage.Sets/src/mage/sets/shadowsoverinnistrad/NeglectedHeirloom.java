@@ -1,4 +1,3 @@
-
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
@@ -29,54 +28,89 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.EquippedHasSubtypeCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
-import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author fireshoes
+ * @author halljared
  */
-public class ScroungedScythe extends CardImpl {
+public class NeglectedHeirloom extends CardImpl {
 
-    private static final String staticText = "As long as equipped creature is a Human, it has menace";
-
-    public ScroungedScythe(UUID ownerId) {
-        super(ownerId, 256, "Scrounged Scythe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "");
+    public NeglectedHeirloom(UUID ownerId) {
+        super(ownerId, 260, "Neglected Heirloom", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Equipment");
 
-        this.nightCard = true;
+        this.canTransform = true;
+        this.secondSideCard = new AshmouthBlade(ownerId);
 
         // Equipped creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        // Equip {1}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
 
-        // As long as equipped creature is a Human, it has menace.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT),
-                new EquippedHasSubtypeCondition("Human"), staticText)));
+        // When equipped creature transforms, transform Neglected Heirloom.
+        this.addAbility(new TransformAbility());
+        this.addAbility(new NeglectedHeirloomTriggeredAbility());
 
-        // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public ScroungedScythe(final ScroungedScythe card) {
+    public NeglectedHeirloom(final NeglectedHeirloom card) {
         super(card);
     }
 
     @Override
-    public ScroungedScythe copy() {
-        return new ScroungedScythe(this);
+    public NeglectedHeirloom copy() {
+        return new NeglectedHeirloom(this);
+    }
+
+}
+
+class NeglectedHeirloomTriggeredAbility extends TriggeredAbilityImpl {
+
+    public NeglectedHeirloomTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), false);
+    }
+
+    public NeglectedHeirloomTriggeredAbility(final NeglectedHeirloomTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TRANSFORMED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.TRANSFORMED) {
+            if (game.getPermanent(event.getTargetId()).getAttachments().contains(this.getSourceId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public NeglectedHeirloomTriggeredAbility copy() {
+        return new NeglectedHeirloomTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "When equipped creature transforms, transform Neglected Heirloom.";
     }
 }

@@ -96,7 +96,7 @@ class WelcomeToTheFoldEffect extends GainControlTargetEffect {
                 maxToughness = source.getManaCostsToPay().getX();
             }
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent != null && permanent.getToughness().getValue() <= maxToughness) {
+            if (permanent != null && permanent.getToughness().getValue() > maxToughness) {
                 this.discard();
                 return;
             }

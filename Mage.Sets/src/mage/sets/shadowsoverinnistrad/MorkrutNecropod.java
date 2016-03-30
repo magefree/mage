@@ -36,7 +36,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -49,9 +48,11 @@ public class MorkrutNecropod extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another creature or land");
 
-    static {
-        filter.add(Predicates.or(Predicates.and(new AnotherPredicate(), new CardTypePredicate(CardType.CREATURE)),
-                new CardTypePredicate(CardType.LAND)));
+    static {       
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE), 
+                new CardTypePredicate(CardType.LAND)));        
+        filter.add(new AnotherPredicate());
     }
 
     public MorkrutNecropod(UUID ownerId) {
@@ -66,7 +67,7 @@ public class MorkrutNecropod extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Whenever Morkrut Necropod attacks or blocks, sacrifice another creature or land.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new SacrificeControllerEffect(new FilterLandPermanent(), 1, ""), false));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new SacrificeControllerEffect(filter, 1, ""), false));
     }
 
     public MorkrutNecropod(final MorkrutNecropod card) {

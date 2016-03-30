@@ -51,6 +51,7 @@ public class IncitedRabble extends CardImpl {
         this.subtype.add("Human");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
+        this.color.setRed(true);
         
         // this card is the second face of double-faced card
         this.nightCard = true;
