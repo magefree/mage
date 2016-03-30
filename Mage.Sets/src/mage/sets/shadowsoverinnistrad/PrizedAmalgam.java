@@ -37,9 +37,11 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -49,6 +51,11 @@ import mage.game.events.GameEvent;
  * @author LevelX2
  */
 public class PrizedAmalgam extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public PrizedAmalgam(UUID ownerId) {
         super(ownerId, 249, "Prized Amalgam", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
@@ -59,7 +66,7 @@ public class PrizedAmalgam extends CardImpl {
 
         // Whenever a creature enters the battlefield, if it entered from your graveyard or you cast it from your graveyard, return Prized Amalgam from your graveyard to the battlefield tapped at the beginning of the next end step.
         this.addAbility(new PrizedAmalgamTriggerdAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(true))), new FilterCreaturePermanent()));
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(true))), filter));
     }
 
     public PrizedAmalgam(final PrizedAmalgam card) {
