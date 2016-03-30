@@ -56,6 +56,7 @@ public class LoneWolfOfTheNatterknolls extends CardImpl {
         this.subtype.add("Werewolf");
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
+        this.color.setGreen(true);
 
         this.nightCard = true;
         this.canTransform = true;

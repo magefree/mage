@@ -54,6 +54,7 @@ public class FlameheartWerewolf extends CardImpl {
         this.subtype.add("Werewolf");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
+        this.color.setRed(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

@@ -62,6 +62,7 @@ public class VildinPackAlpha extends CardImpl {
         this.subtype.add("Werewolf");
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
+        this.color.setRed(true);
 
         this.canTransform = true;
         this.nightCard = true;

@@ -53,6 +53,8 @@ public class GatstafRavagers extends CardImpl {
         this.subtype.add("Werewolf");
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
+        
+        this.color.setRed(true);
 
         this.canTransform = true;
         this.nightCard = true;
