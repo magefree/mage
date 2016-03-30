@@ -29,16 +29,19 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SacrificeAllTriggeredAbility;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
 
 /**
@@ -61,7 +64,7 @@ public class FleetingMemories extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect(), false));
 
         // Whenever you sacrifice a Clue, target player puts the top three cards of his or her graveyard into his or her graveyard.
-        Ability ability = new SacrificeAllTriggeredAbility(new PutTopCardOfLibraryIntoGraveTargetEffect(3), filter, TargetController.YOU, false);
+        Ability ability = new FleetingMemoriesTriggeredAbility();
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -73,5 +76,38 @@ public class FleetingMemories extends CardImpl {
     @Override
     public FleetingMemories copy() {
         return new FleetingMemories(this);
+    }
+}
+
+class FleetingMemoriesTriggeredAbility extends TriggeredAbilityImpl {
+
+    public FleetingMemoriesTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(3));
+        setLeavesTheBattlefieldTrigger(true);
+    }
+
+    public FleetingMemoriesTriggeredAbility(final FleetingMemoriesTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public FleetingMemoriesTriggeredAbility copy() {
+        return new FleetingMemoriesTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SACRIFICED_PERMANENT;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getPlayerId().equals(this.getControllerId())
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getSubtype().contains("Clue");
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you sacrifice a Clue, " + super.getRule();
     }
 }
