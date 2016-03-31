@@ -115,7 +115,7 @@ public class ThingInTheIce extends CardImpl {
 
 class AwokenHorrorAbility extends TriggeredAbilityImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblue creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Horror creatures");
 
     static {
         filter.add(Predicates.not(new SubtypePredicate("Horror")));
