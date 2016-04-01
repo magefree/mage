@@ -54,7 +54,7 @@ public class PrizedAmalgamTest extends CardTestPlayerBase {
         
         assertPermanentCount(playerA, "Gravecrawler", 1);
         assertPermanentCount(playerA, "Prized Amalgam", 1);
-        assertTapped("Prized Amalgam", true);        
+        assertTapped("Prized Amalgam", true);
     }
     
     /**
@@ -97,7 +97,8 @@ public class PrizedAmalgamTest extends CardTestPlayerBase {
         execute();
         
         assertPermanentCount(playerA, "Merfolk Looter", 1);
-        assertPermanentCount(playerB, "Prized Amalgam", 0); // should not recur
-        assertGraveyardCount(playerB, "Prized Amalgam", 1); // stays in grave
+        assertPermanentCount(playerB, "Prized Amalgam", 1);
+        assertGraveyardCount(playerB, "Prized Amalgam", 0);
+        assertTapped("Prized Amalgam", true);
     }
 }
