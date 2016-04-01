@@ -124,15 +124,17 @@ class CreepingDreadEffect extends OneShotEffect {
                     TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
                     if(opponent.choose(Outcome.Discard, opponent.getHand(), target, game)) {
                         Card card = opponent.getHand().get(target.getFirstTarget(), game);
-                        if (card != null) {
-                            for (CardType cType : typesChosen) {
-                                for (CardType oType : card.getCardType()) {
-                                    if (cType == oType) {
-                                        opponentsAffected.add(opponent);
-                                        break;
+                        if (card != null) {                            
+                            if (!typesChosen.isEmpty()) {
+                                for (CardType cType : typesChosen) {
+                                    for (CardType oType : card.getCardType()) {
+                                        if (cType == oType) {
+                                            opponentsAffected.add(opponent);
+                                            break;
+                                        }
                                     }
                                 }
-                            }
+                            }    
                             
                             cardsChosen.put(opponent, card);
                         }
@@ -148,11 +150,13 @@ class CreepingDreadEffect extends OneShotEffect {
             }
             
             // everyone discards the card at the same time
-            for (Map.Entry<Player, Card> entry : cardsChosen.entrySet()) {
-                Player player = entry.getKey();
-                Card cardChosen = entry.getValue();
-                if (player != null && cardChosen != null) {
-                    player.discard(cardChosen, source, game);
+            if (!cardsChosen.isEmpty()) {                
+                for (Map.Entry<Player, Card> entry : cardsChosen.entrySet()) {
+                    Player player = entry.getKey();
+                    Card cardChosen = entry.getValue();
+                    if (player != null && cardChosen != null) {
+                        player.discard(cardChosen, source, game);
+                    }
                 }
             }
             
