@@ -27,10 +27,10 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -102,7 +102,7 @@ class CreepingDreadEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             
-            List<CardType> typesChosen = new ArrayList<>();
+            Set<CardType> typesChosen = new HashSet<>();
             Map<Player,Card> cardsChosen = new HashMap<>();
             if(!controller.getHand().isEmpty()) {      
                 
@@ -110,13 +110,13 @@ class CreepingDreadEffect extends OneShotEffect {
                 if(controller.choose(Outcome.Discard, controller.getHand(), controllerTarget, game)) {
                     Card card = controller.getHand().get(controllerTarget.getFirstTarget(), game);
                     if (card != null) {
-                        typesChosen = card.getCardType();
+                        typesChosen = new HashSet<>(card.getCardType());
                         cardsChosen.put(controller, card);
                     }
                 }
             }
             
-            ArrayList<Player> opponentsAffected = new ArrayList<>();
+            Set<Player> opponentsAffected = new HashSet<>();
             for (UUID playerId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(playerId);
                 // opponent discards a card - if it is same card type as controller, add to opponentsAffected
@@ -141,13 +141,6 @@ class CreepingDreadEffect extends OneShotEffect {
                     }
                 }
             }
-
-            // each opponent who discarded a card of the same type loses 3 life
-            if (!opponentsAffected.isEmpty()) {
-                for(Player opponent : opponentsAffected) {
-                    opponent.loseLife(3, game);
-                }
-            }
             
             // everyone discards the card at the same time
             if (!cardsChosen.isEmpty()) {                
@@ -157,6 +150,13 @@ class CreepingDreadEffect extends OneShotEffect {
                     if (player != null && cardChosen != null) {
                         player.discard(cardChosen, source, game);
                     }
+                }
+            }            
+            
+            // each opponent who discarded a card of the same type loses 3 life
+            if (!opponentsAffected.isEmpty()) {
+                for(Player opponent : opponentsAffected) {
+                    opponent.loseLife(3, game);
                 }
             }
             
