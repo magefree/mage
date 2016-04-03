@@ -27,6 +27,8 @@
  */
 package mage.sets.visions;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -36,10 +38,8 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.constants.ZoneDetail;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
@@ -70,14 +70,6 @@ public class Desertion extends CardImpl {
 
 class DesertionEffect extends OneShotEffect {
 
-    private static final FilterSpell filter = new FilterSpell("artifact or creature spell");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
-    }
-
     public DesertionEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.";
@@ -96,7 +88,18 @@ class DesertionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game, Zone.BATTLEFIELD, false, ZoneDetail.NONE);
+            Spell targetSpell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+            if (targetSpell != null) {                
+                Set<CardType> cardTypes = new HashSet<>(targetSpell.getCardType());
+                if (!cardTypes.isEmpty()) {
+                    //targetPointer.getFirst(game, source)
+                    if (cardTypes.contains(CardType.ARTIFACT) || cardTypes.contains(CardType.CREATURE)) {
+                        return game.getStack().counter(targetSpell.getId(), source.getSourceId(), game, Zone.BATTLEFIELD, false, ZoneDetail.NONE);
+                    } else {
+                        return game.getStack().counter(targetSpell.getId(), source.getSourceId(), game);
+                    }
+                }
+            }
         }
         return false;
     }
