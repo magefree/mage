@@ -99,23 +99,23 @@ class JaceUnravelerOfSecretsEmblem extends Emblem {
         this.setName("EMBLEM: Jace, Unraveler of Secrets");
         Effect effect = new CounterTargetEffect();
         effect.setText("counter that spell");
-        this.getAbilities().add(new JaceUnravelerOfSecretsTriggertAbility(effect, false));
+        this.getAbilities().add(new JaceUnravelerOfSecretsTriggeredAbility(effect, false));
     }
 }
 
-class JaceUnravelerOfSecretsTriggertAbility extends SpellCastOpponentTriggeredAbility {
+class JaceUnravelerOfSecretsTriggeredAbility extends SpellCastOpponentTriggeredAbility {
 
-    public JaceUnravelerOfSecretsTriggertAbility(Effect effect, boolean optional) {
+    public JaceUnravelerOfSecretsTriggeredAbility(Effect effect, boolean optional) {
         super(effect, optional);
     }
 
-    public JaceUnravelerOfSecretsTriggertAbility(SpellCastOpponentTriggeredAbility ability) {
+    public JaceUnravelerOfSecretsTriggeredAbility(SpellCastOpponentTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public SpellCastOpponentTriggeredAbility copy() {
-        return super.copy(); //To change body of generated methods, choose Tools | Templates.
+        return super.copy();
     }
 
     @Override
@@ -137,5 +137,4 @@ class JaceUnravelerOfSecretsTriggertAbility extends SpellCastOpponentTriggeredAb
     public String getRule() {
         return "Whenever an opponent casts his or her first spell each turn, counter that spell.";
     }
-
 }
