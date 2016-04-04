@@ -183,19 +183,22 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                Object obj = e.getSource();
+                if (obj instanceof MageCard) {
+                    this.cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "pick-a-card");
+                    this.hidePopup();
+                    AudioManager.playOnDraftSelect();
+                }
+            }
+        }
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) { // only left click select
-            Object obj = e.getSource();
-            if (obj instanceof MageCard) {
-                this.cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "pick-a-card");
-                this.hidePopup();
-                AudioManager.playOnDraftSelect();
-            }
-        }
-        if (e.getButton() == MouseEvent.BUTTON3) { // only right click mark
+        if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) { // left or right click
             Object obj = e.getSource();
             if (obj instanceof MageCard) {
                 if (this.markedCard != null) {
