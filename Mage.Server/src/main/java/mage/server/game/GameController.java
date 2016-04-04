@@ -556,6 +556,12 @@ public class GameController implements GameCallback {
             case MANA_AUTO_PAYMENT_RESTRICTED_ON:
                 game.setManaPaymentModeRestricted(getPlayerId(userId), true);
                 break;
+            case USE_FIRST_MANA_ABILITY_ON:
+                game.setUseFirstManaAbility(getPlayerId(userId), true);
+                break;
+            case USE_FIRST_MANA_ABILITY_OFF:
+                game.setUseFirstManaAbility(getPlayerId(userId), false);
+                break;
             case ADD_PERMISSION_TO_SEE_HAND_CARDS:
                 if (data instanceof UUID) {
                     UUID playerId = getPlayerId(userId);

@@ -22,6 +22,7 @@ public class UserData implements Serializable {
     protected boolean passPriorityCast;
     protected boolean passPriorityActivation;
     protected boolean autoOrderTrigger;
+    protected boolean useFirstManaAbility;
 
     protected String matchHistory;
     protected int matchQuitRatio;
@@ -31,7 +32,7 @@ public class UserData implements Serializable {
     public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced,
             boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
             String flagName, boolean askMoveToGraveOrder, boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted,
-            boolean passPriorityCast, boolean passPriorityActivation, boolean autoOrderTrigger) {
+            boolean passPriorityCast, boolean passPriorityActivation, boolean autoOrderTrigger, boolean useFirstManaAbility) {
         this.groupId = userGroup.getGroupId();
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
@@ -45,6 +46,7 @@ public class UserData implements Serializable {
         this.passPriorityCast = passPriorityCast;
         this.passPriorityActivation = passPriorityActivation;
         this.autoOrderTrigger = autoOrderTrigger;
+        this.useFirstManaAbility = useFirstManaAbility;
         this.matchHistory = "";
         this.matchQuitRatio = 0;
         this.tourneyHistory = "";
@@ -65,10 +67,11 @@ public class UserData implements Serializable {
         this.passPriorityCast = userData.passPriorityCast;
         this.passPriorityActivation = userData.passPriorityActivation;
         this.autoOrderTrigger = userData.autoOrderTrigger;
+        this.useFirstManaAbility = useFirstManaAbility;
     }
 
     public static UserData getDefaultUserDataView() {
-        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, getDefaultFlagName(), false, true, true, false, false, false);
+        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, getDefaultFlagName(), false, true, true, false, false, false, false);
     }
 
     public void setGroupId(int groupId) {
@@ -173,6 +176,14 @@ public class UserData implements Serializable {
 
     public void setAutoOrderTrigger(boolean autoOrderTrigger) {
         this.autoOrderTrigger = autoOrderTrigger;
+    }
+
+    public boolean isUseFirstManaAbility() {
+        return useFirstManaAbility;
+    }
+
+    public void setUseFirstManaAbility(boolean useFirstManaAbility) {
+        this.useFirstManaAbility = useFirstManaAbility;
     }
 
     public String getHistory() {
