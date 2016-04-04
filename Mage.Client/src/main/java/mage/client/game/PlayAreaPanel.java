@@ -54,6 +54,7 @@ import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE;
+import static mage.client.dialog.PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY;
 import mage.client.util.GUISizeHelper;
 import mage.constants.PlayerAction;
 import mage.view.PlayerView;
@@ -75,6 +76,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
     private JCheckBoxMenuItem manaPoolMenuItem1;
     private JCheckBoxMenuItem manaPoolMenuItem2;
+    private JCheckBoxMenuItem useFirstManaAbilityItem;
     private JCheckBoxMenuItem allowViewHandCardsMenuItem;
 
     public static final int PANEL_HEIGHT = 242;
@@ -263,7 +265,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 boolean manaPoolAutomatic = ((JCheckBoxMenuItem) e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT, manaPoolAutomatic ? "true" : "false");
-                gamePanel.setMenuStates(manaPoolAutomatic, manaPoolMenuItem2.getState());
+                gamePanel.setMenuStates(manaPoolAutomatic, manaPoolMenuItem2.getState(), useFirstManaAbilityItem.getState());
                 gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON : PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
             }
         });
@@ -281,8 +283,26 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 boolean manaPoolAutomaticRestricted = ((JCheckBoxMenuItem) e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, manaPoolAutomaticRestricted ? "true" : "false");
-                gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolAutomaticRestricted);
+                gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolAutomaticRestricted, useFirstManaAbilityItem.getState());
                 gamePanel.getSession().sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON : PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
+            }
+        });        
+        
+        useFirstManaAbilityItem = new JCheckBoxMenuItem("Use first mana ability when tapping lands", false);
+        useFirstManaAbilityItem.setMnemonic(KeyEvent.VK_F);
+        useFirstManaAbilityItem.setToolTipText("<html>Use the first mana ability when<br>"
+                + " tapping lands for mana<br>"
+                + "You can hold Alt+1 whilst tapping lands to use this feature");
+        manaPoolMenu.add(useFirstManaAbilityItem);
+
+        // Use first mana ability of lands
+        useFirstManaAbilityItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean useFirstManaAbility = ((JCheckBoxMenuItem) e.getSource()).getState();
+                PreferencesDialog.saveValue(KEY_USE_FIRST_MANA_ABILITY, useFirstManaAbility ? "true" : "false");
+                gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolMenuItem2.getState(), useFirstManaAbility);
+                gamePanel.getSession().sendPlayerAction(useFirstManaAbility ? PlayerAction.USE_FIRST_MANA_ABILITY_ON: PlayerAction.USE_FIRST_MANA_ABILITY_OFF, gameId, null);
             }
         });
 
@@ -610,12 +630,15 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.playingMode = playingMode;
     }
 
-    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted) {
+    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted, boolean useFirstManaAbility) {
         if (manaPoolMenuItem1 != null) {
             manaPoolMenuItem1.setSelected(manaPoolAutomatic);
         }
         if (manaPoolMenuItem2 != null) {
             manaPoolMenuItem2.setSelected(manaPoolAutomaticRestricted);
+        }
+        if (useFirstManaAbilityItem != null) {            
+            useFirstManaAbilityItem.setSelected(useFirstManaAbility);
         }
     }
 
