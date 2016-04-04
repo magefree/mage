@@ -172,5 +172,36 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Evermind", 1);
         assertHandCount(playerA, 3); // Evermind + 1 card from Evermind spliced on cast Into the fray and 1 from the copied spell with splice
     }
+    
+    /**
+     * {4}{U} Enchantment (Enchant Player)
+     * Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell 
+     * and may choose new targets for the copy he or she controls.
+     * 
+     * Reported bug: "A player with Curse of Echoes attached to them played Bribery and the player who controlled the curse had control 
+     * of all 3 copies. This seems to be the case for all spells."
+     */
+    @Test
+    public void testCurseOfEchoes() {
+        
+        addCard(Zone.HAND, playerA, "Curse of Echoes");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Echoes");
+        addTarget(playerA, playerB);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt");
+        addTarget(playerB, playerA); // original target
+        setChoice(playerA, "Yes");
+        addTarget(playerA, playerB);
+        
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertLife(playerA, 17); // still takes original spell's damage
+        assertLife(playerB, 17); // copy redirected
+    }
 
 }
