@@ -38,7 +38,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -90,7 +89,9 @@ class FlamebladeAngelTriggeredAbility extends TriggeredAbilityImpl {
 
     @java.lang.Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event instanceof DamageEvent;
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE 
+                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @java.lang.Override
