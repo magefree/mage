@@ -67,7 +67,7 @@ public class UserData implements Serializable {
         this.passPriorityCast = userData.passPriorityCast;
         this.passPriorityActivation = userData.passPriorityActivation;
         this.autoOrderTrigger = userData.autoOrderTrigger;
-        this.useFirstManaAbility = useFirstManaAbility;
+        this.useFirstManaAbility = userData.useFirstManaAbility;
     }
 
     public static UserData getDefaultUserDataView() {
