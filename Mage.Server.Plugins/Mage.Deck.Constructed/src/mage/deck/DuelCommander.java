@@ -32,7 +32,7 @@ package mage.deck;
  * @author LevelX2
  */
 public class DuelCommander extends Commander {
-    
+
     public DuelCommander() {
         super("Duel Commander");
         banned.add("Ancestral Recall");
@@ -44,6 +44,7 @@ public class DuelCommander extends Commander {
         banned.add("Entomb");
         banned.add("Fastbond");
         banned.add("Food Chain");
+        banned.add("Gaea's Cradle");
         banned.add("Gifts Ungiven");
         banned.add("Grim Monolith");
         banned.add("Grindstone");
@@ -86,6 +87,8 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Erayo, Soratami Ascendant");
         bannedCommander.add("Oloro, Ageless Ascetic");
         bannedCommander.add("Rofellos, Llanowar Emissary");
+        bannedCommander.add("Tasigur, the Golden Fang");
+        bannedCommander.add("Yisan, the Wanderer Bard");
         bannedCommander.add("Zur the Enchanter");
     }
 
