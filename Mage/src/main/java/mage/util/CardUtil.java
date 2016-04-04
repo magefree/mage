@@ -78,11 +78,11 @@ public class CardUtil {
         // Enchantment subtypes
         "Aura", "Curse", "Shrine",
         // Artifact subtypes
-        "Equipment", "Fortification", "Contraption",
+        "Clue", "Equipment", "Fortification", "Contraption",
         // Land subtypes
         "Desert", "Gate", "Lair", "Locus", "Urza's", "Mine", "Power-Plant", "Tower",
         // Planeswalker subtypes
-        "Ajani", "Ashiok", "Bolas", "Chandra", "Dack", "Daretti", "Domri", "Elspeth", "Freyalise", "Garruk", "Gideon", "Jace",
+        "Ajani", "Arlinn", "Ashiok", "Bolas", "Chandra", "Dack", "Daretti", "Domri", "Elspeth", "Freyalise", "Garruk", "Gideon", "Jace",
         "Karn", "Kiora", "Koth", "Liliana", "Nahiri", "Nissa", "Narset", "Nixilis", "Ral", "Sarkhan", "Sorin", "Tamiyo", "Teferi",
         "Tezzeret", "Tibalt", "Ugin", "Venser", "Vraska", "Xenagos",
         // Instant sorcery subtypes
