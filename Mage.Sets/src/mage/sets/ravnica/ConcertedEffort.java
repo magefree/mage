@@ -85,6 +85,7 @@ class ConcertedEffortEffect extends OneShotEffect {
     private static final FilterControlledCreaturePermanent filterProtection = new FilterControlledCreaturePermanent();
     private static final FilterControlledCreaturePermanent filterTrample = new FilterControlledCreaturePermanent();
     private static final FilterControlledCreaturePermanent filterVigilance = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filterCreatures = new FilterControlledCreaturePermanent();
 
     static {
         filterFlying.add(new AbilityPredicate(FlyingAbility.class));
@@ -115,29 +116,29 @@ class ConcertedEffortEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         // Flying
         if (game.getBattlefield().contains(filterFlying, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Fear
         if (game.getBattlefield().contains(filterFear, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // First strike
         if (game.getBattlefield().contains(filterFirstStrike, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Double strike
         if (game.getBattlefield().contains(filterDoubleStrike, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Landwalk
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterLandwalk, source.getControllerId(), game)) {
             for (Ability ability : permanent.getAbilities(game)) {
                 if (ability instanceof LandwalkAbility) {
-                    game.addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn), source);
+                    game.addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn, filterCreatures), source);
                 }
             }
         }
@@ -146,19 +147,19 @@ class ConcertedEffortEffect extends OneShotEffect {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterProtection, source.getControllerId(), game)) {
             for (Ability ability : permanent.getAbilities(game)) {
                 if (ability instanceof ProtectionAbility) {
-                    game.addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn), source);
+                    game.addEffect(new GainAbilityControlledEffect(ability, Duration.EndOfTurn, filterCreatures), source);
                 }
             }
         }
 
         // Trample
         if (game.getBattlefield().contains(filterTrample, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
 
         // Vigilance
         if (game.getBattlefield().contains(filterVigilance, source.getControllerId(), 1, game)) {
-            game.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), source);
+            game.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filterCreatures), source);
         }
         return true;
     }
