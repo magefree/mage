@@ -27,12 +27,13 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -100,7 +101,7 @@ class EngulfTheShoreEffect extends OneShotEffect {
             int islands = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
             FilterPermanent creatureFilter = new FilterCreaturePermanent();
             creatureFilter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, islands + 1));
-            Cards cardsToHand = new CardsImpl();
+            Set<Card> cardsToHand = new HashSet<>();
             for (Permanent permanent : game.getBattlefield().getActivePermanents(creatureFilter, source.getControllerId(), source.getSourceId(), game)) {
                 cardsToHand.add(permanent);
             }
