@@ -31,14 +31,20 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.DiscardCostCardConvertedMana;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.game.Game;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 /**
@@ -55,12 +61,15 @@ public class WolfOfDevilsBreach extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Whenever Wolf of Devil's Breach attacks, you may pay {1}{R} and discard a card. If you do, Wolf of Devil's Breach deals 
+        // Whenever Wolf of Devil's Breach attacks, you may pay {1}{R} and discard a card. If you do, Wolf of Devil's Breach deals
         // damage to target creature or planeswalker equal to the discarded card's converted mana cost.
-        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(new DiscardCostCardConvertedMana()), new ManaCostsImpl("{1}{R}")), true,
+        Costs toPay = new CostsImpl<>();
+        toPay.add(new ManaCostsImpl<>("{1}{R}"));
+        toPay.add(new DiscardCardCost());
+        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(new WolfOfDevilsBreachDiscardCostCardConvertedMana()), toPay,
+                "Pay {1}{R} and discard a card to let {this} do damage to target creature or planeswalker equal to the discarded card's converted mana cost?", true), false,
                 "Whenever {this} attacks you may pay {1}{R} and discard a card. If you do, {this} deals damage to target creature or planeswalker "
-                        + "equal to the discarded card's converted mana cost.");
-        ability.addCost(new DiscardCardCost());
+                + "equal to the discarded card's converted mana cost.");
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);
     }
@@ -72,5 +81,46 @@ public class WolfOfDevilsBreach extends CardImpl {
     @Override
     public WolfOfDevilsBreach copy() {
         return new WolfOfDevilsBreach(this);
+    }
+}
+
+class WolfOfDevilsBreachDiscardCostCardConvertedMana implements DynamicValue {
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        for (Effect sourceEffect : sourceAbility.getEffects()) {
+            if (sourceEffect instanceof DoIfCostPaid) {
+                Cost doCosts = ((DoIfCostPaid) sourceEffect).getCost();
+                if (doCosts instanceof Costs) {
+                    Costs costs = (Costs) doCosts;
+                    for (Object cost : costs) {
+                        if (cost instanceof DiscardCardCost) {
+                            DiscardCardCost discardCost = (DiscardCardCost) cost;
+                            int cmc = 0;
+                            for (Card card : discardCost.getCards()) {
+                                cmc += card.getManaCost().convertedManaCost();
+                            }
+                            return cmc;
+                        }
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public WolfOfDevilsBreachDiscardCostCardConvertedMana copy() {
+        return new WolfOfDevilsBreachDiscardCostCardConvertedMana();
+    }
+
+    @Override
+    public String toString() {
+        return "";
+    }
+
+    @Override
+    public String getMessage() {
+        return "the discarded card's converted mana cost";
     }
 }
