@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.condition.common.EquippedCondition;
+import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -71,7 +71,7 @@ public class AvacynianMissionaries extends CardImpl {
 
         // At the beginning of your end step, if Avacynian Missionaries is equipped, transform it.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), TargetController.YOU, new EquippedCondition(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), TargetController.YOU, new EquippedSourceCondition(), false));
 
         // When this creature transforms into Lunarch Inquisitors, you may exile another target creature until Lunarch Inquisitors leaves the battlefield.
         Ability ability = new LunarchInquisitorsAbility();
