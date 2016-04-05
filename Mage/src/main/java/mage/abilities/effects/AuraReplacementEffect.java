@@ -208,6 +208,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             Card card = game.getCard(event.getTargetId());
             if (card != null && (card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura") ||
                     (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null &&
+                    card.getSecondCardFace() != null &&
                     card.getSecondCardFace().getCardType().contains(CardType.ENCHANTMENT) &&
                     card.getSecondCardFace().hasSubtype("Aura")))) {
                 return true;
