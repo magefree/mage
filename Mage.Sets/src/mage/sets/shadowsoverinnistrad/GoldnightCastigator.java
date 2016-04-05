@@ -51,9 +51,9 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class GoldknightCastigator extends CardImpl {
+public class GoldnightCastigator extends CardImpl {
 
-    public GoldknightCastigator(UUID ownerId) {
+    public GoldnightCastigator(UUID ownerId) {
         super(ownerId, 162, "Goldknight Castigator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Angel");
@@ -71,13 +71,13 @@ public class GoldknightCastigator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoldknightCastigatorDoubleDamageEffect()));
     }
 
-    public GoldknightCastigator(final GoldknightCastigator card) {
+    public GoldnightCastigator(final GoldnightCastigator card) {
         super(card);
     }
 
     @Override
-    public GoldknightCastigator copy() {
-        return new GoldknightCastigator(this);
+    public GoldnightCastigator copy() {
+        return new GoldnightCastigator(this);
     }
 }
 
