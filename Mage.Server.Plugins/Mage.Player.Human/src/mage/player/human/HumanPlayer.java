@@ -1255,10 +1255,11 @@ public class HumanPlayer extends PlayerImpl {
             if (ability instanceof ManaAbility) {
                 activateAbility(ability, game);
                 return;
-            }         
-        } else {       
-            game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(abilities.values()));
-        }
+            }
+        } 
+        
+        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(abilities.values()));
+        
         waitForResponse(game);
         if (response.getUUID() != null && isInGame()) {
             if (abilities.containsKey(response.getUUID())) {
