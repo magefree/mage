@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
 public class GoldnightCastigator extends CardImpl {
 
     public GoldnightCastigator(UUID ownerId) {
-        super(ownerId, 162, "Goldknight Castigator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        super(ownerId, 162, "Goldnight Castigator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Angel");
         this.power = new MageInt(4);
@@ -67,8 +67,8 @@ public class GoldnightCastigator extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // If a source would deal damage to you, it deals double that damage to you instead.
-        // If a source would deal damage to Goldknight Castigator, it deals double that damage to Goldknight Castigator instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoldknightCastigatorDoubleDamageEffect()));
+        // If a source would deal damage to Goldnight Castigator, it deals double that damage to Goldkight Castigator instead.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoldnightCastigatorDoubleDamageEffect()));
     }
 
     public GoldnightCastigator(final GoldnightCastigator card) {
@@ -81,21 +81,21 @@ public class GoldnightCastigator extends CardImpl {
     }
 }
 
-class GoldknightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
+class GoldnightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
 
-    public GoldknightCastigatorDoubleDamageEffect() {
+    public GoldnightCastigatorDoubleDamageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a source would deal damage to you, it deals double that damage to you instead."
-            + "<BR>If a source would deal damage to Goldknight Castigator, it deals double that damage to {this} instead.";
+            + "<BR>If a source would deal damage to Goldnight Castigator, it deals double that damage to {this} instead.";
     }
 
-    public GoldknightCastigatorDoubleDamageEffect(final GoldknightCastigatorDoubleDamageEffect effect) {
+    public GoldnightCastigatorDoubleDamageEffect(final GoldnightCastigatorDoubleDamageEffect effect) {
         super(effect);
     }
 
     @Override
-    public GoldknightCastigatorDoubleDamageEffect copy() {
-        return new GoldknightCastigatorDoubleDamageEffect(this);
+    public GoldnightCastigatorDoubleDamageEffect copy() {
+        return new GoldnightCastigatorDoubleDamageEffect(this);
     }
 
     @Override
