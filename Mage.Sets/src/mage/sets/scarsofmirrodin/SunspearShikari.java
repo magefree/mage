@@ -28,18 +28,17 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.EquippedCondition;
+import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -59,10 +58,10 @@ public class SunspearShikari extends CardImpl {
 
         // As long as Sunspear Shikari is equipped, it has first strike and lifelink.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), 
-                EquippedCondition.getInstance(), "As long as {this} is equipped, it has first strike");
+                EquippedSourceCondition.getInstance(), "As long as {this} is equipped, it has first strike");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()), 
-                EquippedCondition.getInstance(), "and lifelink");
+                EquippedSourceCondition.getInstance(), "and lifelink");
         ability.addEffect(effect2);
         this.addAbility(ability);
     }

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.EquippedCondition;
+import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -74,12 +74,12 @@ public class RakshaGoldenCub extends CardImpl {
         // As long as Raksha Golden Cub is equipped, Cat creatures you control get +2/+2 and have double strike.
         Effect effect1 = new ConditionalContinuousEffect(
                 new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false),
-                EquippedCondition.getInstance(),
+                EquippedSourceCondition.getInstance(),
                 "As long as {this} is equipped, Cat creatures you control get +2/+2");
         
         Effect effect2 = new ConditionalContinuousEffect(
                 new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false),
-                EquippedCondition.getInstance(),
+                EquippedSourceCondition.getInstance(),
                 "As long as {this} is equipped, Cat creatures you control have double strike");
         effect2.setText("and have double strike");
         
