@@ -33,11 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
@@ -75,7 +73,7 @@ public class WerewolfRansacker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect(WerewolfRansackerAbility.RULE_TEXT)));
+        this.addAbility(new WerewolfRansackerAbility());
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
@@ -93,9 +91,9 @@ public class WerewolfRansacker extends CardImpl {
 }
 
 class WerewolfRansackerAbility extends TriggeredAbilityImpl {
-    
+
     public static final String RULE_TEXT = "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller";
-    
+
     public WerewolfRansackerAbility() {
         super(Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
         Target target = new TargetPermanent(new FilterArtifactPermanent());
@@ -159,8 +157,9 @@ class WerewolfRansackerEffect extends OneShotEffect {
                         affectedTargets++;
                         if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                             Player player = game.getPlayer(permanent.getControllerId());
-                            if (player != null)
+                            if (player != null) {
                                 player.damage(3, source.getSourceId(), game, false, true);
+                            }
                         }
                     }
                 }

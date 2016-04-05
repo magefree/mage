@@ -28,11 +28,7 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
@@ -40,6 +36,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 
 /**
@@ -60,11 +58,6 @@ public class AfflictedDeserter extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.
-        Ability ability1 = new WerewolfRansackerAbility();
-        ability1.setRuleVisible(false); // rule will be shown only on the other face of the card but triggers only on this side
-        this.addAbility(ability1);
-
         // At the beginning of each upkeep, if no spells were cast last turn, transform Afflicted Deserter.
         this.addAbility(new TransformAbility());
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
@@ -80,5 +73,3 @@ public class AfflictedDeserter extends CardImpl {
         return new AfflictedDeserter(this);
     }
 }
-
-

@@ -1167,6 +1167,9 @@ public abstract class AbilityImpl implements Ability {
     public MageObject getSourceObjectIfItStillExists(Game game) {
         MageObject currentObject = game.getObject(getSourceId());
         if (currentObject != null) {
+            if (sourceObject == null) {
+                setSourceObject(currentObject, game);
+            }
             MageObjectReference mor = new MageObjectReference(currentObject, game);
             if (mor.getZoneChangeCounter() == getSourceObjectZoneChangeCounter()) {
                 // source object has meanwhile not changed zone

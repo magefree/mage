@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -78,20 +79,30 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = null;
+            Cards cardsToMove = new CardsImpl();
             if (fromExileZone) {
                 UUID exilZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 if (exilZoneId != null) {
                     ExileZone exileZone = game.getExile().getExileZone(exilZoneId);
-                    if (exileZone != null && getTargetPointer().getFirst(game, source) != null) {
-                        card = exileZone.get(getTargetPointer().getFirst(game, source), game);
+                    if (exileZone != null) {
+                        for (UUID cardId : getTargetPointer().getTargets(game, source)) {
+                            Card card = exileZone.get(cardId, game);
+                            if (card != null) {
+                                cardsToMove.add(card);
+                            }
+                        }
                     }
                 }
             } else {
-                card = game.getCard(getTargetPointer().getFirst(game, source));
+                for (UUID cardId : getTargetPointer().getTargets(game, source)) {
+                    Card card = game.getCard(cardId);
+                    if (card != null) {
+                        cardsToMove.add(card);
+                    }
+                }
             }
-            if (card != null) {
-                controller.moveCards(new CardsImpl(card).getCards(game),
+            if (!cardsToMove.isEmpty()) {
+                controller.moveCards(cardsToMove.getCards(game),
                         Zone.BATTLEFIELD, source, game, tapped, false, true, null);
                 return true;
             }

@@ -29,20 +29,24 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author fireshoes
  */
 public class AwokenHorror extends CardImpl {
-
-    private static final String rule = "Whenever this creature transforms into Awoken Horrow, return all non-Horror creatures to their owners' hands";
 
     public AwokenHorror(UUID ownerId) {
         super(ownerId, 92, "Awoken Horror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
@@ -56,7 +60,7 @@ public class AwokenHorror extends CardImpl {
         this.nightCard = true;
 
         // When this creature transforms into Awoken Horrow, return all non-Horror creatures to their owners' hands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect(rule)));
+        this.addAbility(new AwokenHorrorAbility());
     }
 
     public AwokenHorror(final AwokenHorror card) {
@@ -66,5 +70,57 @@ public class AwokenHorror extends CardImpl {
     @Override
     public AwokenHorror copy() {
         return new AwokenHorror(this);
+    }
+}
+
+class AwokenHorrorAbility extends TriggeredAbilityImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Horror creatures");
+
+    static {
+        filter.add(Predicates.not(new SubtypePredicate("Horror")));
+    }
+
+    public AwokenHorrorAbility() {
+        super(Zone.BATTLEFIELD, new ReturnToHandFromBattlefieldAllEffect(filter), false);
+    }
+
+    public AwokenHorrorAbility(final AwokenHorrorAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public AwokenHorrorAbility copy() {
+        return new AwokenHorrorAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TRANSFORMED;
+    }
+
+//    @Override
+//    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+//        Permanent currentSourceObject = (Permanent) getSourceObjectIfItStillExists(game);
+//        if (currentSourceObject != null && currentSourceObject.isTransformed()) {
+//            // hard to check if the not transformed source hat the ability. But if it was transformed it probably had it, but maybe no perfect solution
+//            return true;
+//        }
+//        return false;
+//    }
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getTargetId().equals(sourceId)) {
+            Permanent permanent = game.getPermanent(sourceId);
+            if (permanent != null && permanent.isTransformed()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever this creature transforms into Awoken Horrow, return all non-Horror creatures to their owners' hands.";
     }
 }
