@@ -28,9 +28,9 @@
 package mage.abilities.condition.common;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -38,15 +38,15 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class EnchantedCondition implements Condition {
+public class EnchantedSourceCondition implements Condition {
 
     private int numberOfEnchantments;
 
-    public EnchantedCondition() {
+    public EnchantedSourceCondition() {
         this(1);
     }
 
-    public EnchantedCondition(int numberOfEnchantments) {
+    public EnchantedSourceCondition(int numberOfEnchantments) {
         this.numberOfEnchantments = numberOfEnchantments;
     }
 
@@ -58,12 +58,17 @@ public class EnchantedCondition implements Condition {
             for (UUID uuid : permanent.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
                 if (attached != null && attached.getCardType().contains(CardType.ENCHANTMENT)) {
-                    if (++numberOfFoundEnchantments  >= numberOfEnchantments) {
+                    if (++numberOfFoundEnchantments >= numberOfEnchantments) {
                         return true;
                     }
                 }
             }
         }
         return (numberOfFoundEnchantments >= numberOfEnchantments);
+    }
+
+    @Override
+    public String toString() {
+        return "enchanted";
     }
 }

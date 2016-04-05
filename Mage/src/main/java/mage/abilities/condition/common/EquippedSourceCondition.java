@@ -38,9 +38,9 @@ import mage.game.permanent.Permanent;
  *
  * @author nantuko
  */
-public class EquippedCondition implements Condition {
+public class EquippedSourceCondition implements Condition {
 
-    private static final EquippedCondition fInstance = new EquippedCondition();
+    private static final EquippedSourceCondition fInstance = new EquippedSourceCondition();
 
     public static Condition getInstance() {
         return fInstance;
@@ -59,4 +59,10 @@ public class EquippedCondition implements Condition {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "equipped";
+    }
+
 }

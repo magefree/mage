@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.EquippedCondition;
+import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -73,7 +73,7 @@ public class AuriokSteelshaper extends CardImpl {
         // As long as Auriok Steelshaper is equipped, each creature you control that's a Soldier or a Knight gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, soldiersOrKnights, false),
-                EquippedCondition.getInstance(),
+                EquippedSourceCondition.getInstance(),
                 "As long as {this} is equipped, each creature you control that's a Soldier or a Knight gets +1/+1"
         )));
     }
