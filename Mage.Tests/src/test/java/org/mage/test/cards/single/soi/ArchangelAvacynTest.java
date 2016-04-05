@@ -9,25 +9,29 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * {3}{W}{W} Angel - day
- * 
-    Flash
-    Flying, vigilance
-    When Archangel Avacyn enters the battlefield, creatures you control gain indestructible until end of turn.
- *  When a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.
- * 
- * (Night) - red card
- * When this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.
- * 
+ *
+ * Flash Flying, vigilance When Archangel Avacyn enters the battlefield,
+ * creatures you control gain indestructible until end of turn. When a non-Angel
+ * creature you control dies, transform Archangel Avacyn at the beginning of the
+ * next upkeep.
+ *
+ * (Night) - red card When this creature transforms into Avacyn, the Purifier,
+ * it deals 3 damage to each other creature and each opponent.
+ *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class ArchangelAvacynTest extends CardTestPlayerBase {
-    
+
     /**
-     *  Reported bug: "Archangel Avacyn damages herself when she transforms"
+     * Reported bug: "Archangel Avacyn damages herself when she transforms"
      */
     @Test
     public void basicTransformTest() {
-        
+        // Flash
+        // Flying
+        // Vigilance
+        // When Archangel Avacyn enters the battlefield, creatures you control gain indestructible until end of turn.
+        // When a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.
         addCard(Zone.BATTLEFIELD, playerA, "Archangel Avacyn");
         addCard(Zone.BATTLEFIELD, playerA, "Wall of Omens"); // 0/4
         addCard(Zone.HAND, playerA, "Elite Vanguard"); // 2/1
@@ -36,20 +40,20 @@ public class ArchangelAvacynTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Wall of Roots"); // 0/5
         addCard(Zone.HAND, playerB, "Shock");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Shock");
         addTarget(playerB, "Elite Vanguard");
         setStopAt(3, PhaseStep.DRAW);
         execute();
-        
+
         assertPermanentCount(playerA, "Avacyn, the Purifier", 1);
         assertPermanentCount(playerA, "Wall of Omens", 1);
         assertGraveyardCount(playerA, "Elite Vanguard", 1);
         assertPermanentCount(playerB, "Wall of Roots", 1);
         assertGraveyardCount(playerB, "Hill Giant", 1);
         assertGraveyardCount(playerB, "Shock", 1);
-        
+
         Permanent avacyn = getPermanent("Avacyn, the Purifier", playerA);
         Assert.assertEquals("Damage to Avacyn, the Purifier should be 0 not 3", 0, avacyn.getDamage());
     }
