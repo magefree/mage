@@ -51,10 +51,10 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class GoldknightCastigator extends CardImpl {
+public class GoldnightCastigator extends CardImpl {
 
-    public GoldknightCastigator(UUID ownerId) {
-        super(ownerId, 162, "Goldknight Castigator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+    public GoldnightCastigator(UUID ownerId) {
+        super(ownerId, 162, "Goldnight Castigator", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Angel");
         this.power = new MageInt(4);
@@ -67,35 +67,35 @@ public class GoldknightCastigator extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // If a source would deal damage to you, it deals double that damage to you instead.
-        // If a source would deal damage to Goldknight Castigator, it deals double that damage to Goldknight Castigator instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoldknightCastigatorDoubleDamageEffect()));
+        // If a source would deal damage to Goldnight Castigator, it deals double that damage to Goldkight Castigator instead.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoldnightCastigatorDoubleDamageEffect()));
     }
 
-    public GoldknightCastigator(final GoldknightCastigator card) {
+    public GoldnightCastigator(final GoldnightCastigator card) {
         super(card);
     }
 
     @Override
-    public GoldknightCastigator copy() {
-        return new GoldknightCastigator(this);
+    public GoldnightCastigator copy() {
+        return new GoldnightCastigator(this);
     }
 }
 
-class GoldknightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
+class GoldnightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
 
-    public GoldknightCastigatorDoubleDamageEffect() {
+    public GoldnightCastigatorDoubleDamageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a source would deal damage to you, it deals double that damage to you instead."
-            + "<BR>If a source would deal damage to Goldknight Castigator, it deals double that damage to {this} instead.";
+            + "<BR>If a source would deal damage to Goldnight Castigator, it deals double that damage to {this} instead.";
     }
 
-    public GoldknightCastigatorDoubleDamageEffect(final GoldknightCastigatorDoubleDamageEffect effect) {
+    public GoldnightCastigatorDoubleDamageEffect(final GoldnightCastigatorDoubleDamageEffect effect) {
         super(effect);
     }
 
     @Override
-    public GoldknightCastigatorDoubleDamageEffect copy() {
-        return new GoldknightCastigatorDoubleDamageEffect(this);
+    public GoldnightCastigatorDoubleDamageEffect copy() {
+        return new GoldnightCastigatorDoubleDamageEffect(this);
     }
 
     @Override
