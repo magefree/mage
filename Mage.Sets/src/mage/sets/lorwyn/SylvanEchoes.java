@@ -28,43 +28,67 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DoIfClashWonEffect;
-import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.abilities.effects.common.UntapAllLandsControllerEffect;
-import mage.filter.common.FilterLandPermanent;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
  * @author Styxo
  */
-public class WoodlandGuidance extends CardImpl {
+public class SylvanEchoes extends CardImpl {
 
-    public WoodlandGuidance(UUID ownerId) {
-        super(ownerId, 243, "Woodland Guidance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
+    public SylvanEchoes(UUID ownerId) {
+        super(ownerId, 237, "Sylvan Echoes", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "LRW";
 
-        // Return target card from your graveyard to your hand
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
-
-        // Clash with an opponent. If you win, untap all Forest you control
-        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new UntapAllLandsControllerEffect(new FilterLandPermanent("Forest", "Forests"))));
-
-        // Remove WoodlandGuidance from the game 
-        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+        // Whenever you clahs and you win, you may draw a card
+        this.addAbility(new SylvanEchoesTriggeredAbility());
     }
 
-    public WoodlandGuidance(final WoodlandGuidance card) {
+    public SylvanEchoes(final SylvanEchoes card) {
         super(card);
     }
 
     @Override
-    public WoodlandGuidance copy() {
-        return new WoodlandGuidance(this);
+    public SylvanEchoes copy() {
+        return new SylvanEchoes(this);
+    }
+}
+
+class SylvanEchoesTriggeredAbility extends TriggeredAbilityImpl {
+
+    public SylvanEchoesTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
+    }
+
+    public SylvanEchoesTriggeredAbility(final SylvanEchoesTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public SylvanEchoesTriggeredAbility copy() {
+        return new SylvanEchoesTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CLASHED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getData().equals("controller") && event.getPlayerId().equals(getControllerId())
+                || event.getData().equals("opponent") && event.getTargetId().equals(getControllerId());
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you clash and you win, " + super.getRule();
     }
 }

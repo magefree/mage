@@ -181,7 +181,18 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     if (cardOpponent != null) {
                         opponent.moveCardToLibraryWithInfo(cardOpponent, source.getSourceId(), game, Zone.LIBRARY, topOpponent, true);
                     }
-                    game.fireEvent(new GameEvent(EventType.CLASHED, opponent.getId(), source.getSourceId(), controller.getId(), 0, cmcController > cmcOpponent));
+                    // fire CLASHED event with info about who won
+                    String winner = "draw";
+                    if (cmcController > cmcOpponent) {
+                        winner = "controller";
+                    }
+                    if (cmcOpponent > cmcController) {
+                        winner = "opponent";
+                    }
+                    GameEvent gameEvent = new GameEvent(EventType.CLASHED, opponent.getId(), source.getSourceId(), controller.getId());
+                    gameEvent.setData(winner);
+                    game.fireEvent(gameEvent);
+
                     // set opponent to DoIfClashWonEffect
                     for (Effect effect : source.getEffects()) {
                         if (effect instanceof DoIfClashWonEffect) {
