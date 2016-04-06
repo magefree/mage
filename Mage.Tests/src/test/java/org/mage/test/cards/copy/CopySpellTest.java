@@ -88,6 +88,38 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
         assertAbility(playerB, "Silvercoat Lion", FlyingAbility.getInstance(), false);
     }
+    
+    /**
+     *  Reported bug: "Silverfur Partisan and fellow wolves did not trigger off of copies of Strength of Arms made by Zada, Hedron Grinder. 
+     * Not sure about other spells, but I imagine similar results."
+     */
+    @Test
+    public void ZadaHedronSilverfurPartisan() {
+    
+        // {2}{G}
+        // Trample
+        // Whenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell, put a 2/2 green Wolf creature token onto the battlefield.
+        addCard(Zone.BATTLEFIELD, playerA, "Silverfur Partisan"); // 2/2 Wolf Warrior
+        
+        // Whenever you cast an instant or sorcery spell that targets only Zada, Hedron Grinder, copy that spell for each other creature you control that the spell could target. Each copy targets a different one of those creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Zada, Hedron Grinder", 1);   
+        
+        // Target creature gets +3/+3 until end of turn.
+        addCard(Zone.HAND, playerA, "Giant Growth", 1); // {G}   
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        //castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Village Messenger");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Zada, Hedron Grinder");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Giant Growth", 1);
+        assertPowerToughness(playerA, "Silverfur Partisan", 5, 5);
+        assertPowerToughness(playerA, "Zada, Hedron Grinder", 6, 6);
+        assertPermanentCount(playerA, "Wolf", 1); // created from Silverfur ability
+    }
 
     @Test
     public void ZadaHedronGrinderBoostWithCharm() {
