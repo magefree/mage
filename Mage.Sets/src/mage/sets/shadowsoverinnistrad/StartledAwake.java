@@ -33,7 +33,6 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -64,7 +63,7 @@ public class StartledAwake extends CardImpl {
 
         // {3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new TransformAbility());
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{3}{U}{U}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new StartledAwakeReturnTransformedEffect(), new ManaCostsImpl("{3}{U}{U}"));
         this.addAbility(ability);
 
     }

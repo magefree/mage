@@ -1239,6 +1239,14 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public synchronized void setUseFirstManaAbility(UUID playerId, boolean useFirstManaAbility) {
+        Player player = state.getPlayer(playerId);
+        if (player != null) {
+            player.getUserData().setUseFirstManaAbility(useFirstManaAbility);
+        }
+    }    
+
+    @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
         int errorContinueCounter = 0;
         int bookmark = 0;

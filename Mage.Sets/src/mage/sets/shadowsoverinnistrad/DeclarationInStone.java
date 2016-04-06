@@ -74,6 +74,7 @@ public class DeclarationInStone extends CardImpl {
 
 class DeclarationInStoneEffect extends OneShotEffect {
     
+    private static final FilterCreaturePermanent creaturesOnly = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent nonTokenFilter = new FilterCreaturePermanent("nontoken creature");
     static{
         nonTokenFilter.add(Predicates.not(new TokenPredicate()));
@@ -106,7 +107,11 @@ class DeclarationInStoneEffect extends OneShotEffect {
                     String name = targetPermanent.getName();
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controllerPermanentId)) {
                         if (permanent != null && permanent.getName().equals(name)) {
-                            you.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                            
+                            // only exile creatures (reported bug on awakened lands targetted exiling all other lands of same name)
+                            if (creaturesOnly.match(permanent, game)) {
+                                you.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                            }
                                                         
                             // exiled count only matters for non-tokens
                             if (nonTokenFilter.match(permanent, game)) {                                

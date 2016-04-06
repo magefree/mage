@@ -59,6 +59,7 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.AbilityType;
+import mage.constants.CardType;
 import mage.constants.Constants;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
@@ -1249,7 +1250,16 @@ public class HumanPlayer extends PlayerImpl {
                 return;
             }
         }
+        if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.getCardType().contains(CardType.LAND)){
+            ActivatedAbility ability = abilities.values().iterator().next();
+            if (ability instanceof ManaAbility) {
+                activateAbility(ability, game);
+                return;
+            }
+        } 
+        
         game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(abilities.values()));
+        
         waitForResponse(game);
         if (response.getUUID() != null && isInGame()) {
             if (abilities.containsKey(response.getUUID())) {

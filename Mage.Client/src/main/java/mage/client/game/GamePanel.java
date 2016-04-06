@@ -129,6 +129,7 @@ import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_LAST;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_FIRST;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_LAST;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
+import mage.constants.UseFirstManaAbilityMode;
 import mage.constants.Zone;
 import mage.game.events.PlayerQueryEvent;
 import mage.remote.Session;
@@ -594,7 +595,9 @@ public final class GamePanel extends javax.swing.JPanel {
         // default menu states
         setMenuStates(
                 PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
-                PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"));
+                PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
+                false
+        );
 
         updateGame(game);
     }
@@ -893,10 +896,11 @@ public final class GamePanel extends javax.swing.JPanel {
      *
      * @param manaPoolAutomatic
      * @param manaPoolAutomaticRestricted
+     * @param useFirstManaAbility
      */
-    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted) {
+    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted, boolean useFirstManaAbility) {
         for (PlayAreaPanel playAreaPanel : players.values()) {
-            playAreaPanel.setMenuStates(manaPoolAutomatic, manaPoolAutomaticRestricted);
+            playAreaPanel.setMenuStates(manaPoolAutomatic, manaPoolAutomaticRestricted, useFirstManaAbility);
         }
     }
 
@@ -1589,6 +1593,19 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        KeyStroke ksAlt1 = KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.ALT_MASK);
+        this.getInputMap(c).put(ksAlt1, "USEFIRSTMANAABILITY");
+        this.getActionMap().put("USEFIRSTMANAABILITY", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                session.sendPlayerAction(PlayerAction.USE_FIRST_MANA_ABILITY_ON, gameId, null);                
+                setMenuStates(
+                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
+                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
+                        true);
+            }
+        });
+
         final BasicSplitPaneUI myUi = (BasicSplitPaneUI) jSplitPane0.getUI();
         final BasicSplitPaneDivider divider = myUi.getDivider();
         final JButton upArrowButton = (JButton) divider.getComponent(0);
@@ -1616,6 +1633,19 @@ public final class GamePanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent actionEvent) {
                 ActionCallback callback = Plugins.getInstance().getActionCallback();
                 ((MageActionCallback) callback).hideEnlargedCard();
+            }
+        });
+
+        KeyStroke ksAlt1Released = KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.ALT_MASK, true);
+        this.getInputMap(c).put(ksAlt1Released, "USEFIRSTMANAABILITY_RELEASE");
+        this.getActionMap().put("USEFIRSTMANAABILITY_RELEASE", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                session.sendPlayerAction(PlayerAction.USE_FIRST_MANA_ABILITY_OFF, gameId, null);
+                setMenuStates(
+                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
+                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
+                        false);
             }
         });
 

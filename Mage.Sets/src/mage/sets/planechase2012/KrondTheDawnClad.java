@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.condition.common.EnchantedCondition;
+import mage.abilities.condition.common.EnchantedSourceCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -63,7 +63,7 @@ public class KrondTheDawnClad extends CardImpl {
         // Whenever Krond the Dawn-Clad attacks, if it's enchanted, exile target permanent.
         Ability ability = new ConditionalTriggeredAbility(
                 new AttacksTriggeredAbility(new ExileTargetEffect(), false),
-                new EnchantedCondition(),
+                new EnchantedSourceCondition(),
                 "Whenever {this} attacks, if it's enchanted, exile target permanent.");
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

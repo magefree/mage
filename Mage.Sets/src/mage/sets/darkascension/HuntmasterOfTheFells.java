@@ -27,36 +27,24 @@
  */
 package mage.sets.darkascension;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.WolfToken;
-import mage.game.stack.StackObject;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetOpponent;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -78,9 +66,6 @@ public class HuntmasterOfTheFells extends CardImpl {
 
         // Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.
         this.addAbility(new HuntmasterOfTheFellsAbility());
-
-        // Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
-        this.addAbility(new RavagerOfTheFellsAbility());
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
         this.addAbility(new TransformAbility());
@@ -113,8 +98,6 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl {
     public HuntmasterOfTheFellsAbility copy() {
         return new HuntmasterOfTheFellsAbility(this);
     }
-    
-
 
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
@@ -126,12 +109,12 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl {
         }
         return super.isInUseableZone(game, source, event);
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TRANSFORMED || event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TRANSFORMED && event.getTargetId().equals(this.getSourceId())) {
@@ -149,142 +132,5 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever this creature enters the battlefield or transforms into {this}, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.";
-    }
-
-}
-
-class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
-
-    public RavagerOfTheFellsAbility() {
-        super(Zone.BATTLEFIELD, new RavagerOfTheFellsEffect(), false);
-        Target target1 = new TargetOpponent();
-        this.addTarget(target1);
-        this.addTarget(new RavagerOfTheFellsTarget());
-        // Rule only shown on the night side
-        this.setRuleVisible(false);
-    }
-
-    public RavagerOfTheFellsAbility(final RavagerOfTheFellsAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RavagerOfTheFellsAbility copy() {
-        return new RavagerOfTheFellsAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        Permanent currentSourceObject = (Permanent) getSourceObjectIfItStillExists(game);
-        if (currentSourceObject != null && currentSourceObject.isNightCard()) {
-            return true;
-        }
-        return super.isInUseableZone(game, source, event);
-    }
-
-    
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(sourceId)) {
-            Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.isTransformed()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.";
-    }
-
-}
-
-class RavagerOfTheFellsEffect extends OneShotEffect {
-
-    public RavagerOfTheFellsEffect() {
-        super(Outcome.Damage);
-    }
-
-    public RavagerOfTheFellsEffect(final RavagerOfTheFellsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RavagerOfTheFellsEffect copy() {
-        return new RavagerOfTheFellsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
-        if (player != null) {
-            player.damage(2, source.getSourceId(), game, false, true);
-        }
-        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (creature != null) {
-            creature.damage(2, source.getSourceId(), game, false, true);
-        }
-        return true;
-    }
-
-}
-
-class RavagerOfTheFellsTarget extends TargetPermanent {
-
-    public RavagerOfTheFellsTarget() {
-        super(0, 1, new FilterCreaturePermanent(), false);
-    }
-
-    public RavagerOfTheFellsTarget(final RavagerOfTheFellsTarget target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        UUID firstTarget = source.getFirstTarget();
-        Permanent permanent = game.getPermanent(id);
-        if (firstTarget != null && permanent != null && permanent.getControllerId().equals(firstTarget)) {
-            return super.canTarget(id, source, game);
-        }
-        return false;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
-        Set<UUID> possibleTargets = new HashSet<>();
-        MageObject object = game.getObject(sourceId);
-
-        for (StackObject item: game.getState().getStack()) {
-            if (item.getId().equals(sourceId)) {
-                object = item;
-            }
-            if (item.getSourceId().equals(sourceId)) {
-                object = item;
-            }
-        }
-
-        if (object instanceof StackObject) {
-            UUID playerId = ((StackObject)object).getStackAbility().getFirstTarget();
-            for (UUID targetId : availablePossibleTargets) {
-                Permanent permanent = game.getPermanent(targetId);
-                if(permanent != null && permanent.getControllerId().equals(playerId)){
-                    possibleTargets.add(targetId);
-                }
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public RavagerOfTheFellsTarget copy() {
-        return new RavagerOfTheFellsTarget(this);
     }
 }

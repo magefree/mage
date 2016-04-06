@@ -32,6 +32,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -89,6 +90,10 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         Card card = game.getCard(event.getTargetId());
         UUID sourceId = event.getSourceId();
         UUID controllerId = event.getPlayerId();
+
+        if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null) {
+            card = card.getSecondCardFace();
+        }
 
         // Aura cards that go to battlefield face down (Manifest) don't have to select targets
         if (card.isFaceDown(game)) {
@@ -167,6 +172,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         }
         Player targetPlayer = game.getPlayer(targetId);
         if (targetCard != null || targetPermanent != null || targetPlayer != null) {
+            card = game.getCard(event.getTargetId());
             card.removeFromZone(game, fromZone, sourceId);
             card.updateZoneChangeCounter(game);
             PermanentCard permanent = new PermanentCard(card, (controllingPlayer == null ? card.getOwnerId() : controllingPlayer.getId()), game);
@@ -200,7 +206,12 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (((ZoneChangeEvent) event).getToZone().equals(Zone.BATTLEFIELD)
                 && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.STACK))) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")) {
+            if (card != null && (card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")
+                    || // in case of transformable enchantments
+                    (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null
+                    && card.getSecondCardFace() != null
+                    && card.getSecondCardFace().getCardType().contains(CardType.ENCHANTMENT)
+                    && card.getSecondCardFace().hasSubtype("Aura")))) {
                 return true;
             }
         }

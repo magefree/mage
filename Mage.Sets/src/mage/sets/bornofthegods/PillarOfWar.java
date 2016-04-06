@@ -29,9 +29,8 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.EnchantedCondition;
+import mage.abilities.condition.common.EnchantedSourceCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
@@ -61,7 +60,7 @@ public class PillarOfWar extends CardImpl {
         // As long as Pillar of War is enchanted, it can attack as though it didn't have defender.
         Effect effect = new ConditionalAsThoughEffect(
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
-                new EnchantedCondition());
+                new EnchantedSourceCondition());
         effect.setText("As long as {this} is enchanted, it can attack as though it didn't have defender");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));        
         

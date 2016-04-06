@@ -29,13 +29,15 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SacrificeAllTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -52,7 +54,7 @@ public class GrafMole extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you sacrifice a Clue, you gain 3 life.
-        this.addAbility(new SacrificeAllTriggeredAbility(new GainLifeEffect(3), new FilterCreaturePermanent("Clue", "a Clue"), TargetController.YOU, false));
+        this.addAbility(new GrafMoleTriggeredAbility());
     }
 
     public GrafMole(final GrafMole card) {
@@ -62,5 +64,38 @@ public class GrafMole extends CardImpl {
     @Override
     public GrafMole copy() {
         return new GrafMole(this);
+    }
+}
+
+class GrafMoleTriggeredAbility extends TriggeredAbilityImpl {
+
+    public GrafMoleTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(3));
+        setLeavesTheBattlefieldTrigger(true);
+    }
+
+    public GrafMoleTriggeredAbility(final GrafMoleTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public GrafMoleTriggeredAbility copy() {
+        return new GrafMoleTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SACRIFICED_PERMANENT;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getPlayerId().equals(this.getControllerId())
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getSubtype().contains("Clue");
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you sacrifice a Clue, " + super.getRule();
     }
 }

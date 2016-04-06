@@ -30,7 +30,7 @@ package mage.sets.urzasdestiny;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.condition.common.EnchantedCondition;
+import mage.abilities.condition.common.EnchantedSourceCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -76,7 +76,7 @@ public class RayneAcademyChancellor extends CardImpl {
 class RayneAcademyChancellorTriggeredAbility extends TriggeredAbilityImpl {
     
     RayneAcademyChancellorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(2), new DrawCardSourceControllerEffect(1), new EnchantedCondition(), "you may draw a card. You may draw an additional card if {this} is enchanted."), true);
+        super(Zone.BATTLEFIELD, new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(2), new DrawCardSourceControllerEffect(1), new EnchantedSourceCondition(), "you may draw a card. You may draw an additional card if {this} is enchanted."), true);
     }
     
     RayneAcademyChancellorTriggeredAbility(final RayneAcademyChancellorTriggeredAbility ability) {

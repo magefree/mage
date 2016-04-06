@@ -41,20 +41,22 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
+import mage.watchers.common.CastFromGraveyardWatcher;
 
 /**
  *
  * @author LevelX2
  */
 public class PrizedAmalgam extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
+
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
     public PrizedAmalgam(UUID ownerId) {
@@ -66,7 +68,8 @@ public class PrizedAmalgam extends CardImpl {
 
         // Whenever a creature enters the battlefield, if it entered from your graveyard or you cast it from your graveyard, return Prized Amalgam from your graveyard to the battlefield tapped at the beginning of the next end step.
         this.addAbility(new PrizedAmalgamTriggerdAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(true))), filter));
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceFromGraveyardToBattlefieldEffect(true))), filter),
+                new CastFromGraveyardWatcher());
     }
 
     public PrizedAmalgam(final PrizedAmalgam card) {
@@ -96,7 +99,20 @@ class PrizedAmalgamTriggerdAbility extends EntersBattlefieldAllTriggeredAbility 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return super.checkTrigger(event, game) && ((EntersTheBattlefieldEvent) event).getFromZone().equals(Zone.GRAVEYARD);
+        if (super.checkTrigger(event, game)) {
+            EntersTheBattlefieldEvent entersEvent = (EntersTheBattlefieldEvent) event;
+            if (entersEvent.getFromZone().equals(Zone.GRAVEYARD)) {
+                return true;
+            }
+            if (entersEvent.getFromZone().equals(Zone.STACK) && entersEvent.getTarget().getControllerId().equals(getControllerId())) {
+                CastFromGraveyardWatcher watcher = (CastFromGraveyardWatcher) game.getState().getWatchers().get(CastFromGraveyardWatcher.class.getName());
+                if (watcher != null) {
+                    int zcc = game.getState().getZoneChangeCounter(event.getSourceId());
+                    return watcher.spellWasCastFromGraveyard(event.getSourceId(), zcc - 1);
+                }
+            }
+        }
+        return false;
     }
 
     @Override

@@ -348,6 +348,8 @@ public interface Game extends MageItem, Serializable {
     void setManaPaymentMode(UUID playerId, boolean autoPayment);
 
     void setManaPaymentModeRestricted(UUID playerId, boolean autoPaymentRestricted);
+    
+    void setUseFirstManaAbility(UUID playerId, boolean useFirstManaAbility);
 
     void undo(UUID playerId);
 

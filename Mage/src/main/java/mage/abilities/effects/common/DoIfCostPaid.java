@@ -90,6 +90,10 @@ public class DoIfCostPaid extends OneShotEffect {
         return game.getPlayer(source.getControllerId());
     }
 
+    public Cost getCost() {
+        return cost;
+    }
+
     @Override
     public String getText(Mode mode) {
         if (!staticText.isEmpty()) {

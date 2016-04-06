@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.deck;
 
 import mage.cards.decks.Constructed;
@@ -64,7 +63,7 @@ public class Vintage extends Constructed {
         banned.add("Timmerian Fiends");
         banned.add("Unexpected Potential");
         banned.add("Worldknit");
-                   
+
         restricted.add("Ancestral Recall");
         restricted.add("Balance");
         restricted.add("Black Lotus");
@@ -79,6 +78,7 @@ public class Vintage extends Constructed {
         restricted.add("Imperial Seal");
         restricted.add("Library of Alexandria");
         restricted.add("Lion’s Eye Diamond");
+        restricted.add("Lodestone Golem");
         restricted.add("Lotus Petal");
         restricted.add("Mana Crypt");
         restricted.add("Mana Vault");
@@ -107,7 +107,6 @@ public class Vintage extends Constructed {
         restricted.add("Windfall");
         restricted.add("Yawgmoth’s Bargain");
         restricted.add("Yawgmoth’s Will");
-
 
     }
 }

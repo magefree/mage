@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.EnchantedCondition;
+import mage.abilities.condition.common.EnchantedSourceCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -72,7 +72,7 @@ public class KitsuneMystic extends CardImpl {
         // At the beginning of the end step, if Kitsune Mystic is enchanted by two or more Auras, flip it.
         this.addAbility(new ConditionalTriggeredAbility(
                 new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new AutumnTailKitsuneSage())),
-                new EnchantedCondition(2), "At the beginning of the end step, if {this} is enchanted by two or more Auras, flip it."));
+                new EnchantedSourceCondition(2), "At the beginning of the end step, if {this} is enchanted by two or more Auras, flip it."));
     }
 
     public KitsuneMystic(final KitsuneMystic card) {
