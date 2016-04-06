@@ -77,6 +77,7 @@ class ErdwalIlluminatorTriggeredAbility extends TriggeredAbilityImpl {
 
     public ErdwalIlluminatorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InvestigateEffect(), false);
+        addWatcher(new InvestigatedWatcher());
     }
 
     public ErdwalIlluminatorTriggeredAbility(final ErdwalIlluminatorTriggeredAbility ability) {
@@ -126,9 +127,9 @@ class InvestigatedWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (EventType.INVESTIGATED.equals(event.getType())) {
             if (!timesInvestigated.containsKey(event.getPlayerId())) {
-                timesInvestigated.put(event.getPlayerId(), timesInvestigated.get(event.getPlayerId()) + 1);
-            } else {
                 timesInvestigated.put(event.getPlayerId(), 1);
+            } else {
+                timesInvestigated.put(event.getPlayerId(), timesInvestigated.get(event.getPlayerId()) + 1);
             }
         }
     }
