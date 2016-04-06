@@ -27,9 +27,12 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -181,4 +184,33 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Timber Shredder", 1); // Night-side card of Hinterland Logger, Werewolf (non-human)
         assertPermanentCount(playerA, "Wolf", 1); // wolf token created
     }
+
+    /**
+     * Yeah, it sounds like the same thing. When Startled Awake is in the
+     * graveyard, you can pay CMC 5 to return it, flipped, to the battlefield as
+     * a 1/1 creature. However, after paying the 5 it returns unflipped and just
+     * stays on the battlefield as a sorcery, of which it can't be interacted
+     * with at all wording of the card."
+     */
+    @Test
+    public void testStartledAwake() {
+        // Target opponent puts the top thirteen cards of his or her library into his or her graveyard.
+        // {3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
+        addCard(Zone.HAND, playerA, "Startled Awake"); // SORCERY {2}{U}{U}"
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Startled Awake");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{U}{U}");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, 13);
+        assertGraveyardCount(playerA, "Startled Awake", 0);
+        assertPermanentCount(playerA, "Persistent Nightmare", 1); // Night-side card of Startled Awake
+        Permanent nightmare = getPermanent("Persistent Nightmare", playerA);
+        Assert.assertTrue("Has to have creature card type", nightmare.getCardType().contains(CardType.CREATURE));
+        Assert.assertFalse("Has not to have sorcery card type", nightmare.getCardType().contains(CardType.SORCERY));
+    }
+
 }
