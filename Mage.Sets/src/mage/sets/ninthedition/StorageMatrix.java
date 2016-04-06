@@ -112,16 +112,18 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
                             }
                         }
                         String choosenType = choiceImpl.getChoice();
-                        game.informPlayers(storageMatrix.getLogName() + ": " + player.getLogName() + " chose to untap " + choosenType);
+                        if (choosenType != null) {
+                            game.informPlayers(storageMatrix.getLogName() + ": " + player.getLogName() + " chose to untap " + choosenType);
 
-                        if (choosenType.equals(CardType.ARTIFACT.toString())) {
-                            type = CardType.ARTIFACT;
-                        } else if (choosenType.equals(CardType.LAND.toString())) {
-                            type = CardType.LAND;
-                        } else {
-                            type = CardType.CREATURE;
+                            if (choosenType.equals(CardType.ARTIFACT.toString())) {
+                                type = CardType.ARTIFACT;
+                            } else if (choosenType.equals(CardType.LAND.toString())) {
+                                type = CardType.LAND;
+                            } else {
+                                type = CardType.CREATURE;
+                            }
+                            applies = true;
                         }
-                        applies = true;
                     }
                 }
             }

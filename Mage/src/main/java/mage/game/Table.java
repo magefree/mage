@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.game;
 
 import java.io.Serializable;
@@ -65,7 +64,8 @@ public class Table implements Serializable {
     private TableRecorder recorder;
 
     public interface TableRecorder {
-          void record(Table table);
+
+        void record(Table table);
     };
 
     protected TableEventSource tableEventSource = new TableEventSource();
@@ -74,14 +74,14 @@ public class Table implements Serializable {
         this(roomId, gameType, name, controllerName, validator, playerTypes, recorder);
         this.tournament = tournament;
         this.isTournament = true;
-        setState(TableState.WAITING);        
+        setState(TableState.WAITING);
     }
 
     public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, TableRecorder recorder, Match match) {
         this(roomId, gameType, name, controllerName, validator, playerTypes, recorder);
         this.match = match;
-        this.isTournament = false;        
-        setState(TableState.WAITING);        
+        this.isTournament = false;
+        setState(TableState.WAITING);
     }
 
     protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, TableRecorder recorder) {
@@ -100,7 +100,7 @@ public class Table implements Serializable {
     private void createSeats(List<String> playerTypes) {
         int i = 0;
         seats = new Seat[numSeats];
-        for(String playerType: playerTypes) {
+        for (String playerType : playerTypes) {
             seats[i] = new Seat(playerType);
             i++;
         }
@@ -115,7 +115,7 @@ public class Table implements Serializable {
     }
 
     public void initGame() {
-        setState(TableState.DUELING);        
+        setState(TableState.DUELING);
     }
 
     public void initTournament() {
@@ -124,7 +124,7 @@ public class Table implements Serializable {
     }
 
     public void endTournament() {
-        setState(TableState.FINISHED);        
+        setState(TableState.FINISHED);
     }
 
     public void initDraft() {
@@ -138,8 +138,8 @@ public class Table implements Serializable {
     }
 
     /**
-     * All activities of the table end
-     * (only replay of games (if active) and display tournament results)
+     * All activities of the table end (only replay of games (if active) and
+     * display tournament results)
      *
      */
     public void closeTable() {
@@ -151,7 +151,7 @@ public class Table implements Serializable {
 
     /**
      * Complete remove of the table, release all objects
-     * 
+     *
      */
     public void cleanUp() {
         if (match != null) {
@@ -190,7 +190,7 @@ public class Table implements Serializable {
     }
 
     private boolean isReady() {
-        for (int i = 0; i < numSeats; i++ ) {
+        for (int i = 0; i < numSeats; i++) {
             if (seats[i].getPlayer() == null) {
                 return false;
             }
@@ -207,7 +207,7 @@ public class Table implements Serializable {
     }
 
     public Seat getNextAvailableSeat(String playerType) {
-        for (int i = 0; i < numSeats; i++ ) {
+        for (int i = 0; i < numSeats; i++) {
             if (seats[i].getPlayer() == null && seats[i].getPlayerType().equals(playerType)) {
                 return seats[i];
             }
@@ -216,7 +216,7 @@ public class Table implements Serializable {
     }
 
     public boolean allSeatsAreOccupied() {
-        for (int i = 0; i < numSeats; i++ ) {
+        for (int i = 0; i < numSeats; i++) {
             if (seats[i].getPlayer() == null) {
                 return false;
             }
@@ -225,7 +225,7 @@ public class Table implements Serializable {
     }
 
     public void leaveNotStartedTable(UUID playerId) {
-        for (int i = 0; i < numSeats; i++ ) {
+        for (int i = 0; i < numSeats; i++) {
             Player player = seats[i].getPlayer();
             if (player != null && player.getId().equals(playerId)) {
                 seats[i].setPlayer(null);
@@ -296,15 +296,15 @@ public class Table implements Serializable {
             return tournament.getStartTime();
         } else {
             return match.getStartTime();
-        }        
+        }
     }
-    
+
     public Date getEndTime() {
         if (isTournament) {
             return tournament.getEndTime();
         } else {
             return match.getEndTime();
-        }        
+        }
     }
 
     public TableProto toProto() {

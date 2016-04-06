@@ -108,8 +108,10 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (card != null) {
-                controller.moveCards(card, null, Zone.HAND, source, game);
-                sourcePermanent.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, false);
+                controller.moveCards(card, Zone.HAND, source, game);
+                if (sourcePermanent != null) {
+                    sourcePermanent.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, false);
+                }
                 controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             }
             return true;
