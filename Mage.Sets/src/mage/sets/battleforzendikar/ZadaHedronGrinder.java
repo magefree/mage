@@ -183,19 +183,20 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
             for (Permanent creature : game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 if (!creature.getId().equals(source.getSourceId()) && usedTarget.canTarget(source.getControllerId(), creature.getId(), source, game)) {
                     Spell copy = spell.copySpell(source.getControllerId());
+                    game.getStack().push(copy);
                     setTarget:
-                    for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
+                    for (Mode mode : copy.getSpellAbility().getModes().getSelectedModes()) {
                         for (Target target : mode.getTargets()) {
                             if (target.getClass().equals(usedTarget.getClass())) {
                                 target.clearChosen(); // For targets with Max > 1 we need to clear before the text is comapred
                                 if (target.getMessage().equals(usedTarget.getMessage())) {
-                                    target.add(creature.getId(), game);
+                                    target.addTarget(creature.getId(), copy.getSpellAbility(), game, false);
                                     break setTarget;
                                 }
                             }
                         }
                     }
-                    game.getStack().push(copy);
+
                     String activateMessage = copy.getActivatedMessage(game);
                     if (activateMessage.startsWith(" casts ")) {
                         activateMessage = activateMessage.substring(6);
