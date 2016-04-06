@@ -91,7 +91,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         UUID sourceId = event.getSourceId();
         UUID controllerId = event.getPlayerId();
 
-        if(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null) {
+        if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null) {
             card = card.getSecondCardFace();
         }
 
@@ -206,10 +206,12 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (((ZoneChangeEvent) event).getToZone().equals(Zone.BATTLEFIELD)
                 && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.STACK))) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && (card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura") ||
-                    (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null &&
-                    card.getSecondCardFace().getCardType().contains(CardType.ENCHANTMENT) &&
-                    card.getSecondCardFace().hasSubtype("Aura")))) {
+            if (card != null && (card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")
+                    || // in case of transformable enchantments
+                    (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null
+                    && card.getSecondCardFace() != null
+                    && card.getSecondCardFace().getCardType().contains(CardType.ENCHANTMENT)
+                    && card.getSecondCardFace().hasSubtype("Aura")))) {
                 return true;
             }
         }
