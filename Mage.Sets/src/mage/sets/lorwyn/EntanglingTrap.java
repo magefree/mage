@@ -27,6 +27,8 @@
  */
 package mage.sets.lorwyn;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,6 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.abilities.effects.Effect;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -60,13 +63,10 @@ public class EntanglingTrap extends CardImpl {
         super(ownerId, 13, "Entangling Trap", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "LRW";
 
-
         // Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step.
-        Ability ability = new EntanglingClashTriggeredAbility();
+        Ability ability = new EntanglingTrapTriggeredAbility();
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addEffect(new TapTargetEffect());
         this.addAbility(ability);
-
     }
 
     public EntanglingTrap(final EntanglingTrap card) {
@@ -79,19 +79,19 @@ public class EntanglingTrap extends CardImpl {
     }
 }
 
-class EntanglingClashTriggeredAbility extends TriggeredAbilityImpl {
+class EntanglingTrapTriggeredAbility extends TriggeredAbilityImpl {
 
-    public EntanglingClashTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
+    public EntanglingTrapTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new TapTargetEffect());
     }
 
-    public EntanglingClashTriggeredAbility(final EntanglingClashTriggeredAbility ability) {
+    public EntanglingTrapTriggeredAbility(final EntanglingTrapTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public EntanglingClashTriggeredAbility copy() {
-        return new EntanglingClashTriggeredAbility(this);
+    public EntanglingTrapTriggeredAbility copy() {
+        return new EntanglingTrapTriggeredAbility(this);
     }
 
     @Override
@@ -101,13 +101,24 @@ class EntanglingClashTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(getControllerId())) {
-            if (event.getFlag()) { // clash won
-                addEffect(new DontUntapInControllersNextUntapStepTargetEffect("that creature"));
+        //remove effects from previous triggers
+        List<Effect> effects = getEffects();
+        List<Effect> effectsToRemove = new ArrayList<>();
+        for (Effect effect : effects) {
+            if (effect instanceof DontUntapInControllersNextUntapStepTargetEffect) {
+                effectsToRemove.add(effect);
             }
-            return true;
         }
-        return false;
+        for (Effect effect : effectsToRemove) {
+            effects.remove(effect);
+        }
+
+        if (event.getData().equals("controller") && event.getPlayerId().equals(getControllerId())
+                || event.getData().equals("opponent") && event.getTargetId().equals(getControllerId())) {
+            addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
+        }
+
+        return true;
     }
 
     @Override
