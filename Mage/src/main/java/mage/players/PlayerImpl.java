@@ -123,7 +123,6 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -3249,9 +3248,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             default:
                 throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
         }
-        if (!successfulMovedCards.isEmpty()) {
-            game.fireEvent(new ZoneChangeGroupEvent(successfulMovedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
-        }
         return successfulMovedCards.size() > 0;
     }
 
@@ -3267,7 +3263,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (cards.isEmpty()) {
             return true;
         }
-        game.fireEvent(new ZoneChangeGroupEvent(cards, source == null ? null : source.getSourceId(), this.getId(), null, Zone.EXILED));
         boolean result = false;
         for (Card card : cards) {
             Zone fromZone = game.getState().getZone(card.getId());
@@ -3368,7 +3363,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
         }
-        game.fireEvent(new ZoneChangeGroupEvent(movedCards, source == null ? null : source.getSourceId(), this.getId(), fromZone, Zone.GRAVEYARD));
         return movedCards;
     }
 

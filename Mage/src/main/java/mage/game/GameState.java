@@ -32,8 +32,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
@@ -59,6 +63,8 @@ import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
 import mage.game.command.CommandObject;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.stack.SpellStack;
@@ -655,7 +661,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         if (!simultaneousEvents.isEmpty() && !getTurn().isEndTurnRequested()) {
             // it can happen, that the events add new simultaneous events, so copy the list before
             List<GameEvent> eventsToHandle = new ArrayList<>();
+            List<GameEvent> eventGroups = createEventGroups(simultaneousEvents, game);
             eventsToHandle.addAll(simultaneousEvents);
+            eventsToHandle.addAll(eventGroups);
             simultaneousEvents.clear();
             for (GameEvent event : eventsToHandle) {
                 this.handleEvent(event, game);
@@ -682,6 +690,76 @@ public class GameState implements Serializable, Copyable<GameState> {
             return true;
         }
         return effects.replaceEvent(event, game);
+    }
+
+    public List<GameEvent> createEventGroups(List<GameEvent> events, Game game) {
+
+        class ZoneChangeData {
+
+            private final Zone fromZone;
+            private final Zone toZone;
+            private final UUID sourceId;
+            private final UUID playerId;
+
+            public ZoneChangeData(UUID sourceId, UUID playerId, Zone fromZone, Zone toZone) {
+                this.sourceId = sourceId;
+                this.playerId = playerId;
+                this.fromZone = fromZone;
+                this.toZone = toZone;
+            }
+
+            @Override
+            public int hashCode() {
+                return (this.fromZone.ordinal() + 1) * 1
+                        + (this.toZone.ordinal() + 1) * 10
+                        + (this.sourceId != null ? this.sourceId.hashCode() : 0)
+                        + (this.playerId != null ? this.playerId.hashCode() : 0);
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                if (obj instanceof ZoneChangeData) {
+                    ZoneChangeData data = (ZoneChangeData) obj;
+                    return this.fromZone == data.fromZone
+                            && this.toZone == data.toZone
+                            && this.sourceId == data.sourceId
+                            && this.playerId == data.playerId;
+                }
+                return false;
+            }
+        }
+
+        Map<ZoneChangeData, List<GameEvent>> eventsByKey = new HashMap<>();
+        List<GameEvent> groupEvents = new LinkedList<>();
+        for (GameEvent event : events) {
+            if (event instanceof ZoneChangeEvent) {
+                ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
+                ZoneChangeData key = new ZoneChangeData(castEvent.getSourceId(), castEvent.getPlayerId(), castEvent.getFromZone(), castEvent.getToZone());
+                if (eventsByKey.containsKey(key)) {
+                    eventsByKey.get(key).add(event);
+                } else {
+                    List<GameEvent> list = new LinkedList<>();
+                    list.add(event);
+                    eventsByKey.put(key, list);
+                }
+            }
+        }
+        for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
+            Set<Card> movedCards = new LinkedHashSet<>();
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
+                GameEvent event = it.next();
+                ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
+                UUID targetId = castEvent.getTargetId();
+                Card card = game.getCard(targetId);
+                movedCards.add(card);
+            }
+            ZoneChangeData eventData = entry.getKey();
+            if (!movedCards.isEmpty()) {
+                ZoneChangeGroupEvent event = new ZoneChangeGroupEvent(movedCards, eventData.sourceId, eventData.playerId, eventData.fromZone, eventData.toZone);
+                groupEvents.add(event);
+            }
+        }
+        return groupEvents;
     }
 
     public void addCard(Card card) {
