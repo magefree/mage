@@ -70,4 +70,29 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Mountain", 0);
     }
 
+    /**
+     * Tron mana doesn't work with Oath of Nissa. (e.g. can't cast Chandra,
+     * Flamecaller with Urza's Tower, Power Plant, and Mine.)
+     */
+
+    @Test
+    public void testOathOfNissa() {
+        // When Oath of Nissa enters the battlefield, look at the top three cards of your library. You may reveal a creature, land, or planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        // You may spend mana as though it were mana of any color to cast planeswalker spells.
+        addCard(Zone.BATTLEFIELD, playerA, "Oath of Nissa");
+        addCard(Zone.BATTLEFIELD, playerA, "Urza's Mine");
+        addCard(Zone.BATTLEFIELD, playerA, "Urza's Tower");
+        addCard(Zone.BATTLEFIELD, playerA, "Urza's Power Plant");
+        // +1: Put two 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
+        // 0: Discard all the cards in your hand, then draw that many cards plus one.
+        // -X: Chandra, Flamecaller deals X damage to each creature.
+        addCard(Zone.HAND, playerA, "Chandra, Flamecaller"); // {4}{R}{R}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chandra, Flamecaller");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Chandra, Flamecaller", 1);
+    }
 }
