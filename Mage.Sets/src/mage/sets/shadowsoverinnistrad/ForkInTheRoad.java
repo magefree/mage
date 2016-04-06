@@ -112,11 +112,13 @@ class ForkInTheRoadEffect extends OneShotEffect {
                         controller.moveCards(card, Zone.HAND, source, game);
                         revealed.remove(card);
                     }
-                    card = revealed.getCards(game).iterator().next();
-                    if (card != null) {
-                        controller.moveCards(card, Zone.GRAVEYARD, source, game);
+                    if (!revealed.isEmpty()) {
+                        card = revealed.getCards(game).iterator().next();
+                        if (card != null) {
+                            controller.moveCards(card, Zone.GRAVEYARD, source, game);
+                        }
                     }
-                } else if (target.getTargets().size() == 1) {
+                } else if (target.getTargets().size() == 1 && !revealed.isEmpty()) {
                     Card card = revealed.getCards(game).iterator().next();
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);

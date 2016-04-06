@@ -364,19 +364,21 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             Map<UUID, Integer> assigned = new HashMap<>();
             for (UUID attackerId : attackerOrder) {
                 Permanent attacker = game.getPermanent(attackerId);
-                int lethalDamage;
-                if (blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
-                    lethalDamage = 1;
-                } else {
-                    lethalDamage = attacker.getToughness().getValue() - attacker.getDamage();
+                if (attacker != null) {
+                    int lethalDamage;
+                    if (blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+                        lethalDamage = 1;
+                    } else {
+                        lethalDamage = attacker.getToughness().getValue() - attacker.getDamage();
+                    }
+                    if (lethalDamage >= damage) {
+                        assigned.put(attackerId, damage);
+                        break;
+                    }
+                    int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + attacker.getName(), game);
+                    assigned.put(attackerId, damageAssigned);
+                    damage -= damageAssigned;
                 }
-                if (lethalDamage >= damage) {
-                    assigned.put(attackerId, damage);
-                    break;
-                }
-                int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + attacker.getName(), game);
-                assigned.put(attackerId, damageAssigned);
-                damage -= damageAssigned;
             }
 
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {

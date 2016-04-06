@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -182,7 +183,8 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public Set<Card> getCards(Game game) {
         Set<Card> cards = new LinkedHashSet<>();
-        for (UUID cardId : this) {
+        for (Iterator<UUID> it = this.iterator(); it.hasNext();) { // Changed to iterator becuase of ConcurrentModificationException
+            UUID cardId = it.next();
             Card card = game.getCard(cardId);
             if (card != null) { // this can happen during the cancelation (player concedes) of a game
                 cards.add(card);

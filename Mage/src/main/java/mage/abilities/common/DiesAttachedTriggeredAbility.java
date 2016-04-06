@@ -62,7 +62,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             boolean triggered = false;
-            if (zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
+            if (zEvent.getTarget().getAttachments() != null && zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
                 triggered = true;
             } else {
                 // If both (attachment and attached went to graveyard at the same time, the attachemnets can be already removed from the attached object.)

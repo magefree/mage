@@ -27,9 +27,10 @@
  */
 package mage.abilities.condition.common;
 
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.cards.Card;
+import mage.constants.CardType;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -38,9 +39,9 @@ import mage.players.Player;
  */
 public class TopLibraryCardTypeCondition implements Condition {
 
-    public static enum CheckType {CREATURE, LAND, SORCERY, INSTANT}
-
-    ;
+    public static enum CheckType {
+        CREATURE, LAND, SORCERY, INSTANT
+    };
 
     private TopLibraryCardTypeCondition.CheckType type;
 
@@ -53,19 +54,22 @@ public class TopLibraryCardTypeCondition implements Condition {
         boolean conditionApplies = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && controller.getLibrary().size() > 0) {
-            switch (this.type) {
-                case CREATURE:
-                    conditionApplies |= controller.getLibrary().getFromTop(game).getCardType().contains(CardType.CREATURE);
-                    break;
-                case LAND:
-                    conditionApplies |= controller.getLibrary().getFromTop(game).getCardType().contains(CardType.LAND);
-                    break;
-                case SORCERY:
-                    conditionApplies |= controller.getLibrary().getFromTop(game).getCardType().contains(CardType.SORCERY);
-                    break;
-                case INSTANT:
-                    conditionApplies |= controller.getLibrary().getFromTop(game).getCardType().contains(CardType.INSTANT);
-                    break;
+            Card card = controller.getLibrary().getFromTop(game);
+            if (card != null) {
+                switch (this.type) {
+                    case CREATURE:
+                        conditionApplies |= card.getCardType().contains(CardType.CREATURE);
+                        break;
+                    case LAND:
+                        conditionApplies |= card.getCardType().contains(CardType.LAND);
+                        break;
+                    case SORCERY:
+                        conditionApplies |= card.getCardType().contains(CardType.SORCERY);
+                        break;
+                    case INSTANT:
+                        conditionApplies |= card.getCardType().contains(CardType.INSTANT);
+                        break;
+                }
             }
         }
         return conditionApplies;
