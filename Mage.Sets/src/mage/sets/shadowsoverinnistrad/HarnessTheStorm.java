@@ -103,8 +103,8 @@ class HarnessTheStormTriggeredAbility extends SpellCastControllerTriggeredAbilit
     }
 
     @Override
-    public SpellCastControllerTriggeredAbility copy() {
-        return super.copy(); //To change body of generated methods, choose Tools | Templates.
+    public HarnessTheStormTriggeredAbility copy() {
+        return new HarnessTheStormTriggeredAbility(this);
     }
 
 }
