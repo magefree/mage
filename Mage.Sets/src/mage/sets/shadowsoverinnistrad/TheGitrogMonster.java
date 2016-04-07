@@ -27,6 +27,7 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -108,7 +109,12 @@ class TheGitrogMonsterTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
         if (Zone.GRAVEYARD == zEvent.getToZone()) {
             for (Card card : zEvent.getCards()) {
-                if (card.getOwnerId().equals(getControllerId()) && card.getCardType().contains(CardType.LAND)) {
+                UUID cardOwnerId = card.getOwnerId();
+                List<CardType> cardType = card.getCardType();
+                if(cardOwnerId != null
+                        && card.getOwnerId().equals(getControllerId())
+                        && cardType != null
+                        && cardType.contains(CardType.LAND)) {
                     return true;
                 }
             }
