@@ -122,15 +122,6 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        Permanent currentSourceObject = (Permanent) getSourceObjectIfItStillExists(game);
-        if (currentSourceObject != null && currentSourceObject.isNightCard()) {
-            return true;
-        }
-        return super.isInUseableZone(game, source, event);
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(sourceId)) {
             Permanent permanent = game.getPermanent(sourceId);

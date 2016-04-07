@@ -99,15 +99,6 @@ class AwokenHorrorAbility extends TriggeredAbilityImpl {
         return event.getType() == GameEvent.EventType.TRANSFORMED;
     }
 
-//    @Override
-//    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-//        Permanent currentSourceObject = (Permanent) getSourceObjectIfItStillExists(game);
-//        if (currentSourceObject != null && currentSourceObject.isTransformed()) {
-//            // hard to check if the not transformed source hat the ability. But if it was transformed it probably had it, but maybe no perfect solution
-//            return true;
-//        }
-//        return false;
-//    }
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(sourceId)) {

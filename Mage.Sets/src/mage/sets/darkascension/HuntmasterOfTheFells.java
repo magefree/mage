@@ -29,7 +29,6 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -97,17 +96,6 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl {
     @Override
     public HuntmasterOfTheFellsAbility copy() {
         return new HuntmasterOfTheFellsAbility(this);
-    }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        if (event.getType() == GameEvent.EventType.TRANSFORMED) {
-            Permanent currentSourceObject = (Permanent) getSourceObjectIfItStillExists(game);
-            if (currentSourceObject != null && !currentSourceObject.isNightCard()) {
-                return true;
-            }
-        }
-        return super.isInUseableZone(game, source, event);
     }
 
     @Override

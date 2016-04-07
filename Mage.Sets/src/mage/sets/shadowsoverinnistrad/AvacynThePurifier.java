@@ -30,7 +30,6 @@ package mage.sets.shadowsoverinnistrad;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -100,15 +99,6 @@ class AvacynThePurifierAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        Permanent currentSourceObject = (Permanent) getSourceObjectIfItStillExists(game);
-        if (currentSourceObject != null && currentSourceObject.isNightCard()) {
-            return true;
-        }
-        return super.isInUseableZone(game, source, event);
     }
 
     @Override

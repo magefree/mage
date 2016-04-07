@@ -29,7 +29,6 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
@@ -104,15 +103,6 @@ class LunarchInquisitorsAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        Permanent currentSourceObject = (Permanent) getSourceObjectIfItStillExists(game);
-        if (currentSourceObject != null && currentSourceObject.isNightCard()) {
-            return true;
-        }
-        return super.isInUseableZone(game, source, event);
     }
 
     @Override
