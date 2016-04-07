@@ -27,7 +27,6 @@
  */
 package mage.sets.jacevschandra;
 
-import java.util.Arrays;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -42,10 +41,10 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.game.permanent.token.ElementalShamanToken;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 
 /**
@@ -131,19 +130,11 @@ class HostilityEffect extends PreventionEffectImpl {
     }
 }
 
-class HostilityElementalToken extends Token {
+class HostilityElementalToken extends ElementalShamanToken {
 
     public HostilityElementalToken() {
-        super("Elemental Shaman", "3/1 red Elemental Shaman creature token with haste");
-        availableImageSetCodes.addAll(Arrays.asList("LRW", "DD2"));
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Elemental");
-        subtype.add("Shaman");
-        power = new MageInt(3);
-        toughness = new MageInt(1);
-
+        super();
+        description = description + " with haste";
         addAbility(HasteAbility.getInstance());
     }
-
 }
