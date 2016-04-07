@@ -22,7 +22,7 @@ public class UserData implements Serializable {
     protected boolean passPriorityCast;
     protected boolean passPriorityActivation;
     protected boolean autoOrderTrigger;
-    protected boolean useFirstManaAbility;
+    protected boolean useFirstManaAbility = false;
 
     protected String matchHistory;
     protected int matchQuitRatio;
