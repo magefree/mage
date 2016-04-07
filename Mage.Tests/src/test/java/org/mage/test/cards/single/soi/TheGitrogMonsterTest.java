@@ -70,4 +70,29 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "The Gitrog Monster", 1);
         assertHandCount(playerA, 2); // 1 for turn, 1 more for land sacrificed
     }
+
+    /**
+     * Basic sacrifice test when there is a land
+     */
+    @Test
+    public void boardSweeperWithTokens() {
+
+        addCard(Zone.HAND, playerA, "The Gitrog Monster", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        addCard(Zone.HAND, playerB, "Planar Outburst", 1); // destroy all non-land creatures
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 7);
+        addCard(Zone.BATTLEFIELD, playerB, "Archangel of Tithes", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Gitrog Monster");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Raise the Alarm");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Planar Outburst");
+
+        setStopAt(3, PhaseStep.DRAW);
+        execute();
+
+        assertPermanentCount(playerA, "The Gitrog Monster", 0);
+        assertPermanentCount(playerB, "Planar Outburst", 0);
+    }
 }
