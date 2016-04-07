@@ -105,6 +105,10 @@ if (!exists $cards{$cardName}) {
 foreach my $setName (keys %{$cards{$cardName}}) {
     if (exists $knownSets{$setName}) {
         my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . toCamelCase($cardName) . ".java";
+        print "gvim $fileName\n";
+        my $fileName2 = $fileName;
+        $fileName2 =~ s/\//\\/img;
+        print "gvim $fileName2\n";
         if(-e $fileName) {
             die "$cardName is already implemented (set found in: $setName).\n";
         }
@@ -128,6 +132,10 @@ my $baseRarity = '';
 foreach my $setName (keys %{$cards{$cardName}}) {
     if (exists $knownSets{$setName}) {
         my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . toCamelCase($cardName) . ".java";
+        print "gvim $fileName\n";
+        my $fileName2 = $fileName;
+        $fileName2 =~ s/\//\\/img;
+        print "gvim $fileName2\n";
         my $result;
 
         $vars{'set'} = $knownSets{$setName};
