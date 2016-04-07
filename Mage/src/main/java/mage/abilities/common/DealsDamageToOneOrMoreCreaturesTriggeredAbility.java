@@ -38,6 +38,7 @@ public class DealsDamageToOneOrMoreCreaturesTriggeredAbility extends DealsDamage
                 }
             } else {
                 game.getState().setValue("damageStep" + getOriginalId(), null);
+                return true;
             }
             // TODO: check that if the source did non combat damage to multiple targets at the same time, it may only trigger one time
             // I don't know currently how this can happen for a source creature that this has not already build in
