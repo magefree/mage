@@ -88,8 +88,8 @@ class DaysUndoingEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
-                player.moveCards(player.getGraveyard(), Zone.GRAVEYARD, Zone.LIBRARY, source, game);
+                player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
+                player.moveCards(player.getGraveyard(), Zone.LIBRARY, source, game);
                 player.shuffleLibrary(source, game);
 
             }
