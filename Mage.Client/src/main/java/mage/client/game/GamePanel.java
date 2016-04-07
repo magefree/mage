@@ -98,6 +98,7 @@ import mage.client.dialog.PickPileDialog;
 import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE;
+import static mage.client.dialog.PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
@@ -596,7 +597,7 @@ public final class GamePanel extends javax.swing.JPanel {
         setMenuStates(
                 PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
                 PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
-                false
+                PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true")
         );
 
         updateGame(game);
@@ -1602,7 +1603,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 setMenuStates(
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
-                        true);
+                        PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"));
             }
         });
 
@@ -1645,7 +1646,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 setMenuStates(
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
-                        false);
+                        PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"));
             }
         });
 
