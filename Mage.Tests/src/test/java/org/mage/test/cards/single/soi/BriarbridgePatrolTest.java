@@ -2,6 +2,8 @@ package org.mage.test.cards.single.soi;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -34,5 +36,30 @@ public class BriarbridgePatrolTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Briarbridge Patrol", 1);
         assertPermanentCount(playerB, "Elite Vanguard", 0);
         assertGraveyardCount(playerB, "Elite Vanguard", 1);
+    }
+    
+    /**
+     * Reported bug: Briarbridge Patrol investigate doesn't trigger from noncombat damage like Rabid Bite
+     */
+    @Test
+    public void dealtNonCombatDamageToCreatureInvestigate() {
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Briarbridge Patrol", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Wall of Roots", 1);
+        // {1}{G} Sorcery Target creature you control deals damage equal to its power to target creature you don't control.
+        addCard(Zone.HAND, playerA, "Rabid Bite"); 
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rabid Bite", "Briarbridge Patrol");
+        addTarget(playerA, "Wall of Roots");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Clue", 1);
+        assertPermanentCount(playerA, "Briarbridge Patrol", 1);
+        assertPermanentCount(playerB, "Wall of Roots", 1);
+        
+        Permanent wall = getPermanent("Wall of Roots", playerB);
+        Assert.assertEquals("Wall of Roots should have 3 damage to it", 3, wall.getDamage());
     }
 }
