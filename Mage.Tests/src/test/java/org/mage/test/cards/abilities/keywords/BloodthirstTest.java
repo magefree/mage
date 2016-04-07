@@ -47,17 +47,17 @@ public class BloodthirstTest extends CardTestPlayerBase {
      */
     @Test
     public void testNormal() {
-//        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-//        addCard(Zone.BATTLEFIELD, playerB, "Isao, Enlightened Bushi");
-//
-//        attack(2, playerB, "Isao, Enlightened Bushi");
-//        block(2, playerA, "Elite Vanguard", "Isao, Enlightened Bushi");
-//
-//        setStopAt(2, PhaseStep.END_COMBAT);
-//        execute();
-//
-//        assertPowerToughness(playerB, "Isao, Enlightened Bushi", 4, 3);
-//        assertPermanentCount(playerA, "Elite Vanguard", 0);
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Isao, Enlightened Bushi");
+
+        attack(2, playerB, "Isao, Enlightened Bushi");
+        block(2, playerA, "Elite Vanguard", "Isao, Enlightened Bushi");
+
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPowerToughness(playerB, "Isao, Enlightened Bushi", 4, 3);
+        assertPermanentCount(playerA, "Elite Vanguard", 0);
     }
 
     /**
@@ -66,11 +66,14 @@ public class BloodthirstTest extends CardTestPlayerBase {
     @Test
     public void testBloodlord() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         // Bloodthirst 3
         // Whenever you cast a Vampire creature spell, it gains bloodthirst 3
         addCard(Zone.BATTLEFIELD, playerA, "Bloodlord of Vaasgoth");
         addCard(Zone.HAND, playerA, "Barony Vampire"); // 3/2  {2}{B}
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barony Vampire");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -86,7 +89,7 @@ public class BloodthirstTest extends CardTestPlayerBase {
             }
         }
         Assert.assertTrue("Baron Vampire is missing the bloodthirst ability", bloodthirstFound);
-
+        assertPowerToughness(playerA, "Barony Vampire", 6, 5);
     }
 
 }
