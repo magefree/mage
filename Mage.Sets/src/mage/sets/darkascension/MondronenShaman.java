@@ -28,9 +28,6 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,6 +36,9 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
@@ -49,9 +49,9 @@ public class MondronenShaman extends CardImpl {
     public MondronenShaman(UUID ownerId) {
         super(ownerId, 98, "Mondronen Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "DKA";
-        this.subtype.add("Human");
-        this.subtype.add("Werewolf");
+        this.subtype.add("Human");        
         this.subtype.add("Shaman");
+        this.subtype.add("Werewolf");
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

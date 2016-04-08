@@ -27,6 +27,7 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -87,13 +88,21 @@ class CrawlingSensationTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (Zone.GRAVEYARD == zEvent.getToZone()) {
+        if (zEvent != null && Zone.GRAVEYARD == zEvent.getToZone() && zEvent.getCards() != null) {
             Integer usedOnTurn = (Integer) game.getState().getValue("usedOnTurn" + getOriginalId());
             if (usedOnTurn == null || usedOnTurn < game.getTurnNum()) {
-                for (Card card : zEvent.getCards()) {
-                    if (card.getOwnerId().equals(getControllerId()) && card.getCardType().contains(CardType.LAND)) {
-                        game.getState().setValue("usedOnTurn" + getOriginalId(), game.getTurnNum());
-                        return true;
+                for (Card card : zEvent.getCards()) {                       
+                    if (card != null) {
+                        UUID cardOwnerId = card.getOwnerId();
+                        List<CardType> cardType = card.getCardType();
+
+                        if (cardOwnerId != null 
+                                && card.getOwnerId().equals(getControllerId()) 
+                                && cardType != null
+                                && card.getCardType().contains(CardType.LAND)) {
+                            game.getState().setValue("usedOnTurn" + getOriginalId(), game.getTurnNum());
+                            return true;
+                        }
                     }
                 }
             }

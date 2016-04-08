@@ -62,7 +62,7 @@ public class NivixAerieOfTheFiremind extends CardImpl {
         // {tap}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         
-        // {2}{U}{R}, {tap}: Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery.
+        // {2}{U}{R}, {tap}: Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NivixAerieOfTheFiremindEffect(), new ManaCostsImpl<>("{2}{U}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -82,7 +82,7 @@ class NivixAerieOfTheFiremindEffect extends OneShotEffect {
     
     NivixAerieOfTheFiremindEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery";
+        this.staticText = "Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery card";
     }
     
     NivixAerieOfTheFiremindEffect(final NivixAerieOfTheFiremindEffect effect) {
