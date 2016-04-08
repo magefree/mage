@@ -1175,13 +1175,13 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs costs) {
-
-    }
-
-    @Override
     public UUID getCastSourceIdWithAlternateMana() {
         return null;
+    }
+    
+    @Override
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
+        
     }
 
     @Override
