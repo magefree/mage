@@ -38,6 +38,8 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -66,9 +68,11 @@ public class NeckBreaker extends CardImpl {
         this.canTransform = true;
 
         // Attacking creatures you control get +1/+0 and have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        SimpleStaticAbility boostAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature()),
-                new TransformedCondition(false), "Attacking creatures you control get +1/+0")));
+                new TransformedCondition(false), "Attacking creatures you control get +1/+0"));
+        boostAbility.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, new FilterAttackingCreature()));
+        this.addAbility(boostAbility);
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Neck Breaker.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
