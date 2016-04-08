@@ -25,41 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.legions;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author jeffwadsworth
+ * @author Wehk
  */
-public class Fallowsage extends CardImpl {
+public class TotemSpeaker extends CardImpl {
 
-    public Fallowsage(UUID ownerId) {
-        super(ownerId, 63, "Fallowsage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "LRW";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
+    private static final FilterPermanent filter = new FilterPermanent("a Beast");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    static {
+        filter.add(new SubtypePredicate("Beast"));
+    }    
+    
+    public TotemSpeaker(UUID ownerId) {
+        super(ownerId, 141, "Totem Speaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Elf");
+        this.subtype.add("Druid");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Whenever Fallowsage becomes tapped, you may draw a card.
-        this.addAbility(new BecomesTappedSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
+        // Whenever a Beast enters the battlefield, you may gain 3 life.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), filter, true));
     }
 
-    public Fallowsage(final Fallowsage card) {
+    public TotemSpeaker(final TotemSpeaker card) {
         super(card);
     }
 
     @Override
-    public Fallowsage copy() {
-        return new Fallowsage(this);
+    public TotemSpeaker copy() {
+        return new TotemSpeaker(this);
     }
 }

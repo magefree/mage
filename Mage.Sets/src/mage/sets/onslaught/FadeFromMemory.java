@@ -25,41 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.keyword.CyclingAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
- * @author jeffwadsworth
+ * @author Wehk
  */
-public class Fallowsage extends CardImpl {
+public class FadeFromMemory extends CardImpl {
 
-    public Fallowsage(UUID ownerId) {
-        super(ownerId, 63, "Fallowsage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "LRW";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
+    public FadeFromMemory(UUID ownerId) {
+        super(ownerId, 144, "Fade from Memory", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
+        this.expansionSetCode = "ONS";
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Whenever Fallowsage becomes tapped, you may draw a card.
-        this.addAbility(new BecomesTappedSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
+        // Exile target card from a graveyard.
+        this.getSpellAbility().addEffect(new ExileTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard());
+        // Cycling {B}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
     }
 
-    public Fallowsage(final Fallowsage card) {
+    public FadeFromMemory(final FadeFromMemory card) {
         super(card);
     }
 
     @Override
-    public Fallowsage copy() {
-        return new Fallowsage(this);
+    public FadeFromMemory copy() {
+        return new FadeFromMemory(this);
     }
 }
