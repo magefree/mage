@@ -45,7 +45,7 @@ public class TransformedCondition implements Condition {
     }
 
     /**
-     * The condition checks wether a permanent is transformed or not.
+     * The condition checks whether a permanent is transformed or not.
      *
      * @param  notCondition if true the condition is true when the permanent is not transformed
      * @return true if the condition is true, false if the condition is false
