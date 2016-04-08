@@ -73,8 +73,10 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
     /**
      * Tron mana doesn't work with Oath of Nissa. (e.g. can't cast Chandra,
      * Flamecaller with Urza's Tower, Power Plant, and Mine.)
+     *
+     * AI don't get the Planeswalker as playable card (probably because of the
+     * as thought effect)
      */
-
     @Test
     public void testOathOfNissa() {
         // When Oath of Nissa enters the battlefield, look at the top three cards of your library. You may reveal a creature, land, or planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

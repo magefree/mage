@@ -194,7 +194,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean getPassedUntilStackResolved();
 
     boolean getPassedUntilEndStepBeforeMyTurn();
-    
+
     boolean getPassedAllTurns();
 
     AbilityType getJustActivatedType();
@@ -791,11 +791,11 @@ public interface Player extends MageItem, Copyable<Player> {
      * cost
      * @param costs alternate other costs you need to pay
      */
-    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, mage.abilities.costs.Costs costs);
+    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs);
 
     UUID getCastSourceIdWithAlternateMana();
 
-    ManaCosts getCastSourceIdManaCosts();
+    ManaCosts<ManaCost> getCastSourceIdManaCosts();
 
     Costs<Cost> getCastSourceIdCosts();
 

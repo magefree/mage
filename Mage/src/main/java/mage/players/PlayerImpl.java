@@ -865,7 +865,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
-        if (cards.size() != 0) {
+        if (!cards.isEmpty()) {
             if (!anyOrder) {
                 for (UUID objectId : cards) {
                     moveObjectToLibrary(objectId, source == null ? null : source.getSourceId(), game, false, false);
@@ -938,7 +938,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts, mage.abilities.costs.Costs costs) {
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
         castSourceIdWithAlternateMana = sourceId;
         castSourceIdManaCosts = manaCosts;
         castSourceIdCosts = costs;
@@ -2442,9 +2442,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (available == null) {
                         return true;
                     }
+                    boolean spendAnyMana = game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
                     for (Mana mana : abilityOptions) {
                         for (Mana avail : available) {
-                            if (mana.enough(avail)) {
+                            if (spendAnyMana && mana.count() <= avail.count()) {
+                                return true;
+                            }
+                            if (mana.enough(avail)) { // here we need to check if spend mana as though allow to pay the mana cost
                                 return true;
                             }
                         }
