@@ -25,41 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
 
 /**
  *
- * @author jeffwadsworth
+ * @author Wehk
  */
-public class Fallowsage extends CardImpl {
+public class SerpentineBasilisk extends CardImpl {
 
-    public Fallowsage(UUID ownerId) {
-        super(ownerId, 63, "Fallowsage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "LRW";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
-
+    public SerpentineBasilisk(UUID ownerId) {
+        super(ownerId, 280, "Serpentine Basilisk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Basilisk");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // Whenever Fallowsage becomes tapped, you may draw a card.
-        this.addAbility(new BecomesTappedSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
+        // Whenever Serpentine Basilisk deals combat damage to a creature, destroy that creature at end of combat.
+        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(
+                new CreateDelayedTriggeredAbilityEffect(
+                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat")), true), false, true));
+        // Morph {1}{G}{G}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{G}{G}")));
     }
 
-    public Fallowsage(final Fallowsage card) {
+    public SerpentineBasilisk(final SerpentineBasilisk card) {
         super(card);
     }
 
     @Override
-    public Fallowsage copy() {
-        return new Fallowsage(this);
+    public SerpentineBasilisk copy() {
+        return new SerpentineBasilisk(this);
     }
 }

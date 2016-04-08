@@ -25,41 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.lorwyn;
+package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author jeffwadsworth
+ * @author Wehk
  */
-public class Fallowsage extends CardImpl {
+public class ProfanePrayers extends CardImpl {
 
-    public Fallowsage(UUID ownerId) {
-        super(ownerId, 63, "Fallowsage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "LRW";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
+    private static final FilterPermanent filter = new FilterPermanent("Cleric on the battlefield");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    static {
+        filter.add(new SubtypePredicate("Cleric"));
+    }
+    
+    public ProfanePrayers(UUID ownerId) {
+        super(ownerId, 162, "Profane Prayers", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
+        this.expansionSetCode = "ONS";
 
-        // Whenever Fallowsage becomes tapped, you may draw a card.
-        this.addAbility(new BecomesTappedSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
+        // Profane Prayers deals X damage to target creature or player and you gain X life, where X is the number of Clerics on the battlefield.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public Fallowsage(final Fallowsage card) {
+    public ProfanePrayers(final ProfanePrayers card) {
         super(card);
     }
 
     @Override
-    public Fallowsage copy() {
-        return new Fallowsage(this);
+    public ProfanePrayers copy() {
+        return new ProfanePrayers(this);
     }
 }
