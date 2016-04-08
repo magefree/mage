@@ -27,6 +27,7 @@
  */
 package mage.sets.khansoftarkir;
 
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -127,11 +128,21 @@ class SidisiBroodTyrantTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        if (Zone.LIBRARY == zEvent.getFromZone() && Zone.GRAVEYARD == zEvent.getToZone()) {
+        if (zEvent != null && Zone.LIBRARY == zEvent.getFromZone() && Zone.GRAVEYARD == zEvent.getToZone() && zEvent.getCards() != null) {
             for (Card card : zEvent.getCards()) {
-                if (card.getOwnerId().equals(getControllerId()) && card.getCardType().contains(CardType.CREATURE)) {
-                    return true;
+                if (card != null) {         
+                    
+                    UUID cardOwnerId = card.getOwnerId();
+                    List<CardType> cardType = card.getCardType();
+                    
+                    if (cardOwnerId != null
+                            && card.getOwnerId().equals(getControllerId()) 
+                            && cardType != null
+                            && card.getCardType().contains(CardType.CREATURE)) {
+                        return true;
+                    }
                 }
+                
             }
         }
         return false;
