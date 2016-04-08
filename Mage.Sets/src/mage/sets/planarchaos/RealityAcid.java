@@ -72,7 +72,7 @@ public class RealityAcid extends CardImpl {
         ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)));
         ability.setRuleVisible(false);
         this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(3));
+        this.addAbility(new VanishingUpkeepAbility(3, "aura"));
         this.addAbility(new VanishingSacrificeAbility());
 
         // When Reality Acid leaves the battlefield, enchanted permanent's controller sacrifices it.

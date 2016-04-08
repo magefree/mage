@@ -31,7 +31,6 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import mage.MageInt;
 import mage.constants.CardType;
 
@@ -44,7 +43,7 @@ public class InsectToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("M10", "MM2"));
+        tokenImageSets.addAll(Arrays.asList("M10", "MM2", "SOI"));
     }
 
     public InsectToken() {

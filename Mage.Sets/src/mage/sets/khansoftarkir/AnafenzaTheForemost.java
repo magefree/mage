@@ -80,7 +80,7 @@ public class AnafenzaTheForemost extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
 
-        // If a creature card would be put into an opponent's graveyard from anywhere, exile it instead.
+        // If a nontoken creature an opponent owns would die or a creature card not on the battlefield would be put into an opponent's graveyard, exile that card instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnafenzaTheForemostEffect()));
     }
 
@@ -98,7 +98,7 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
 
     public AnafenzaTheForemostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a creature card would be put into an opponent's graveyard from anywhere, exile it instead";
+        staticText = "If a nontoken creature an opponent owns would die or a creature card not on the battlefield would be put into an opponent's graveyard, exile that card instead";
     }
 
     public AnafenzaTheForemostEffect(final AnafenzaTheForemostEffect effect) {

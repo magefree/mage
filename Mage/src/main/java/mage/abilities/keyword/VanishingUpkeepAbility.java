@@ -13,10 +13,18 @@ import mage.util.CardUtil;
 public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
     private int vanishingAmount;
+    private String permanentType;
 
     public VanishingUpkeepAbility(int vanishingEffect) {
         super(new VanishingEffect(), TargetController.YOU, false);
         this.vanishingAmount = vanishingEffect;
+        this.permanentType = "creature";
+    }
+    
+    public VanishingUpkeepAbility(int vanishingEffect, String permanentType) {
+        super(new VanishingEffect(), TargetController.YOU, false);
+        this.vanishingAmount = vanishingEffect;
+        this.permanentType = permanentType;
     }
 
     public VanishingUpkeepAbility(final VanishingUpkeepAbility ability) {
@@ -33,11 +41,11 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     public String getRule() {
         if(vanishingAmount > 0) {
             return "Vanishing " + vanishingAmount
-                + " <i>(This permanent enters the battlefield with " + CardUtil.numberToText(vanishingAmount)
+                + " <i>(This " + permanentType + " enters the battlefield with " + CardUtil.numberToText(vanishingAmount)
                 + " time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)</i>";
         }
         else {
-            return "Vanishing <i>(At the beginning of your upkeep, remove a time counter from this permanent. When the last is removed, sacrifice it.)</i>";
+            return "Vanishing <i>(At the beginning of your upkeep, remove a time counter from this " + permanentType + ". When the last is removed, sacrifice it.)</i>";
         }
     }
 }
