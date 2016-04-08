@@ -28,38 +28,40 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.CardImpl;
+import mage.counters.CounterType;
 
 /**
  *
- * @author jeffwadsworth
+ * @author Wehk
  */
-public class Fallowsage extends CardImpl {
+public class VeteranOfTheDepths extends CardImpl {
 
-    public Fallowsage(UUID ownerId) {
-        super(ownerId, 63, "Fallowsage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+    public VeteranOfTheDepths(UUID ownerId) {
+        super(ownerId, 46, "Veteran of the Depths", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Merfolk");
-        this.subtype.add("Wizard");
-
+        this.subtype.add("Soldier");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Fallowsage becomes tapped, you may draw a card.
-        this.addAbility(new BecomesTappedSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
+        // Whenever Veteran of the Depths becomes tapped, you may put a +1/+1 counter on it.
+         Ability ability = new BecomesTappedSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
+         this.addAbility(ability);
     }
 
-    public Fallowsage(final Fallowsage card) {
+    public VeteranOfTheDepths(final VeteranOfTheDepths card) {
         super(card);
     }
 
     @Override
-    public Fallowsage copy() {
-        return new Fallowsage(this);
+    public VeteranOfTheDepths copy() {
+        return new VeteranOfTheDepths(this);
     }
 }
