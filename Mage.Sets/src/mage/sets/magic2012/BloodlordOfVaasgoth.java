@@ -134,10 +134,7 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
             }
             Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
             if (spell != null) { // Bloodthirst checked while spell is on the stack so needed to give it already to the spell
-                Ability ability1 = ability.copy();
-                ability1.setSourceId(spell.getSourceId());
-                ability1.setControllerId(spell.getControllerId());
-                game.getState().addAbility(ability1, spell);
+                game.getState().addOtherAbility(spell.getCard(), ability, true);
             }
         }
         return true;

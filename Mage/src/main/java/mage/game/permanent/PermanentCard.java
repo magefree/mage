@@ -29,6 +29,7 @@ package mage.game.permanent;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -53,7 +54,7 @@ public class PermanentCard extends PermanentImpl {
 
     public PermanentCard(Card card, UUID controllerId, Game game) {
         super(card.getId(), card.getOwnerId(), controllerId, card.getName());
-        // this.card = card.copy();
+
         this.card = card;
         this.zoneChangeCounter = card.getZoneChangeCounter(game); // local value already set to the raised number
         init(card, game);
@@ -61,7 +62,11 @@ public class PermanentCard extends PermanentImpl {
 
     private void init(Card card, Game game) {
         copyFromCard(card);
-
+        // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
+        Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
+        if (otherAbilities != null) {
+            abilities.addAll(otherAbilities);
+        }
         /*if (card.getCardType().contains(CardType.PLANESWALKER)) {
          this.loyalty = new MageInt(card.getLoyalty().getValue());
          }*/
