@@ -127,6 +127,7 @@ class JaceUnravelerOfSecretsTriggeredAbility extends SpellCastOpponentTriggeredA
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }
+                    return true;
                 }
             }
         }
