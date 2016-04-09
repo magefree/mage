@@ -25,51 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.sets.antiquities;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.abilities.common.ZoneChangeAllTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
  *
- * @author MarcoMarin 
+ * @author MarcoMarin
  */
-public class Oubliette extends CardImpl {
+public class TabletOfEpityr extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature");
     
-    public Oubliette(UUID ownerId) {
-        super(ownerId, 11, "Oubliette", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ARN";
+    public TabletOfEpityr(UUID ownerId) {
+        super(ownerId, 32, "Tablet of Epityr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "ATQ";
 
-        // When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        Target target = new TargetPermanent(filter);
-        ability1.addTarget(target);
-        this.addAbility(ability1);
-        
-        // When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD, true), false);
-        this.addAbility(ability2);
+        // Whenever an artifact you control is put into a graveyard from the battlefield, you may pay {1}. If you do, you gain 1 life.
+        Effect effect = new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1));
+        effect.setText("you may pay {1}. If you do, you gain 1 life.");
+        Ability ability = new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,
+                effect, new FilterControlledArtifactPermanent(),
+                "Whenever an artifact you control is put into a graveyard from the battlefield, ", true);
+        this.addAbility(ability);
     }
 
-    public Oubliette(final Oubliette card) {
+    public TabletOfEpityr(final TabletOfEpityr card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public TabletOfEpityr copy() {
+        return new TabletOfEpityr(this);
     }
 }

@@ -25,51 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.sets.masterseditioniv;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author MarcoMarin 
+ * @author MarcoMarin
  */
-public class Oubliette extends CardImpl {
+public class Rakalite extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature");
-    
-    public Oubliette(UUID ownerId) {
-        super(ownerId, 11, "Oubliette", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ARN";
+    public Rakalite(UUID ownerId) {
+        super(ownerId, 223, "Rakalite", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
+        this.expansionSetCode = "ME4";
 
-        // When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        Target target = new TargetPermanent(filter);
-        ability1.addTarget(target);
-        this.addAbility(ability1);
-        
-        // When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD, true), false);
-        this.addAbility(ability2);
+        // {2}: Prevent the next 1 damage that would be dealt to target creature or player this turn. Return Rakalite to its owner's hand at the beginning of the next end step.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                                new PreventDamageToTargetEffect(Duration.EndOfTurn, 1, false), new GenericManaCost(2));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true))));
+
+        this.addAbility(ability);
     }
 
-    public Oubliette(final Oubliette card) {
+    public Rakalite(final Rakalite card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public Rakalite copy() {
+        return new Rakalite(this);
     }
 }

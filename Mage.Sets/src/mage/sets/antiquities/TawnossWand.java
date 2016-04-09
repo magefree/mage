@@ -25,51 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.sets.antiquities;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author MarcoMarin 
+ * @author MarcoMarin
  */
-public class Oubliette extends CardImpl {
+public class TawnossWand extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature");
-    
-    public Oubliette(UUID ownerId) {
-        super(ownerId, 11, "Oubliette", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ARN";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
 
-        // When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        Target target = new TargetPermanent(filter);
-        ability1.addTarget(target);
-        this.addAbility(ability1);
-        
-        // When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD, true), false);
-        this.addAbility(ability2);
+    static {
+        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
-    public Oubliette(final Oubliette card) {
+    public TawnossWand(UUID ownerId) {
+        super(ownerId, 34, "Tawnos's Wand", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "ATQ";
+
+        // {2}, {tap}: Target creature with power 2 or less is unblockable this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new TapSourceCost());
+        ability.addCost(new ManaCostsImpl("{2}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));        
+        this.addAbility(ability);        
+    }
+
+    public TawnossWand(final TawnossWand card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public TawnossWand copy() {
+        return new TawnossWand(this);
     }
 }

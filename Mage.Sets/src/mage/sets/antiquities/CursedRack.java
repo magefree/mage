@@ -25,51 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.sets.antiquities;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author MarcoMarin 
+ * @author MarcoMarin
  */
-public class Oubliette extends CardImpl {
+public class CursedRack extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature");
-    
-    public Oubliette(UUID ownerId) {
-        super(ownerId, 11, "Oubliette", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ARN";
+    public CursedRack(UUID ownerId) {
+        super(ownerId, 13, "Cursed Rack", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "ATQ";
 
-        // When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        Target target = new TargetPermanent(filter);
-        ability1.addTarget(target);
-        this.addAbility(ability1);
-        
-        // When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD, true), false);
-        this.addAbility(ability2);
+        // As Cursed Rack enters the battlefield, choose an opponent.
+        // The chosen player's maximum hand size is four.
+        Effect effect = new MaximumHandSizeControllerEffect(4, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
+
     }
 
-    public Oubliette(final Oubliette card) {
+    public CursedRack(final CursedRack card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public CursedRack copy() {
+        return new CursedRack(this);
     }
 }

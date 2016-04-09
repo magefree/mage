@@ -25,51 +25,70 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.sets.antiquities;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author MarcoMarin 
+ * @author MarcoMarin
  */
-public class Oubliette extends CardImpl {
+public class ArgothianTreefolk extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature");
-    
-    public Oubliette(UUID ownerId) {
-        super(ownerId, 11, "Oubliette", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ARN";
+    public ArgothianTreefolk(UUID ownerId) {
+        super(ownerId, 60, "Argothian Treefolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "ATQ";
+        this.subtype.add("Treefolk");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(5);
 
-        // When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        Target target = new TargetPermanent(filter);
-        ability1.addTarget(target);
-        this.addAbility(ability1);
-        
-        // When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD, true), false);
-        this.addAbility(ability2);
+        // Prevent all damage that would be dealt to Argothian Treefolk by artifact sources.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect(CardType.ARTIFACT)));
     }
 
-    public Oubliette(final Oubliette card) {
+    public ArgothianTreefolk(final ArgothianTreefolk card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public ArgothianTreefolk copy() {
+        return new ArgothianTreefolk(this);
+    }
+}
+
+class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffect {
+    
+    private CardType cardType;
+      
+    public PreventDamageToSourceByCardTypeEffect(){
+        this(null);
+    }
+
+    public PreventDamageToSourceByCardTypeEffect(CardType cardT){
+        super(Duration.WhileOnBattlefield);
+        cardType = cardT;
+    }
+    
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (super.applies(event, source, game)) {
+            if (game.getObject(event.getSourceId()).getCardType().contains(cardType)){
+                if (event.getTargetId().equals(source.getSourceId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

@@ -25,51 +25,74 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.sets.antiquities;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.ObjectColor;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 
 /**
  *
- * @author MarcoMarin 
+ * @author MarcoMarin
  */
-public class Oubliette extends CardImpl {
+public class UrzasChalice extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature");
-    
-    public Oubliette(UUID ownerId) {
-        super(ownerId, 11, "Oubliette", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ARN";
+    public UrzasChalice(UUID ownerId) {
+        super(ownerId, 40, "Urza's Chalice", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "ATQ";
 
-        // When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        Target target = new TargetPermanent(filter);
-        ability1.addTarget(target);
-        this.addAbility(ability1);
-        
-        // When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD, true), false);
-        this.addAbility(ability2);
+        // Whenever a player casts an artifact spell, you may pay {1}. If you do, you gain 1 life.
+        this.addAbility(new UrzasChaliceAbility());
     }
 
-    public Oubliette(final Oubliette card) {
+    public UrzasChalice(final UrzasChalice card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public UrzasChalice copy() {
+        return new UrzasChalice(this);
     }
+}
+class UrzasChaliceAbility extends TriggeredAbilityImpl {
+
+    public UrzasChaliceAbility() {
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);
+    }
+
+    public UrzasChaliceAbility(final UrzasChaliceAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public UrzasChaliceAbility copy() {
+        return new UrzasChaliceAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        return spell != null && spell.getCardType().contains(CardType.ARTIFACT);
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a player casts an artifact spell, you may pay {1}. If you do, you gain 1 life.";
+    }
+
 }

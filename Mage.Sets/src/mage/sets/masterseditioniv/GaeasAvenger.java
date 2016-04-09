@@ -25,51 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.sets.masterseditioniv;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
+
 
 /**
  *
- * @author MarcoMarin 
+ * @author MarcoMarin
  */
-public class Oubliette extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature");
+public class GaeasAvenger extends CardImpl {
     
-    public Oubliette(UUID ownerId) {
-        super(ownerId, 11, "Oubliette", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
-        this.expansionSetCode = "ARN";
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts opponent control");
 
-        // When Oubliette enters the battlefield, exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        Target target = new TargetPermanent(filter);
-        ability1.addTarget(target);
-        this.addAbility(ability1);
-        
-        // When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD, true), false);
-        this.addAbility(ability2);
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public Oubliette(final Oubliette card) {
+    public GaeasAvenger(UUID ownerId) {
+        super(ownerId, 155, "Gaea's Avenger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "ME4";
+        this.subtype.add("Treefolk");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Gaea's Avenger's power and toughness are each equal to 1 plus the number of artifacts your opponents control.
+        
+        SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new IntPlusDynamicValue(1, new PermanentsOnBattlefieldCount(filter)), Duration.EndOfGame);
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
+    }
+
+    public GaeasAvenger(final GaeasAvenger card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public GaeasAvenger copy() {
+        return new GaeasAvenger(this);
     }
 }
+
