@@ -31,19 +31,24 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
-import mage.players.Player;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author MarcoMarin, Watch out! This one I actually made from scratch!(1st time \o/) Not even checked similars :) beware!
+ * @author MarcoMarin, Watch out! This one I actually made from scratch!(1st
+ * time \o/) Not even checked similars :) beware!
  */
 public class GhazbanOgre extends CardImpl {
 
@@ -54,9 +59,9 @@ public class GhazbanOgre extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Ghazb&aacute;n Ogre.
+        // At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Ghazbán Ogre.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GhazbanOgreEffect(), TargetController.YOU, false));
-        
+
     }
 
     public GhazbanOgre(final GhazbanOgre card) {
@@ -68,42 +73,53 @@ public class GhazbanOgre extends CardImpl {
         return new GhazbanOgre(this);
     }
 }
+
 class GhazbanOgreEffect extends OneShotEffect {
-    
+
     public GhazbanOgreEffect() {
         super(Outcome.GainControl);
-        this.staticText = "the player with the most life gains control of Ghazban Ogre";
+        this.staticText = "the player with the most life gains control of {this}";
     }
-    
+
     public GhazbanOgreEffect(final GhazbanOgreEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public GhazbanOgreEffect copy() {
         return new GhazbanOgreEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player newOwner = null;
-        int lowLife = Integer.MIN_VALUE;
-        boolean tie = false;
-        for (UUID playerID : game.getPlayerList()){
-            Player player = game.getPlayer(playerID);        
-            if (player.getLife() > lowLife){
-                lowLife = player.getLife();
-                newOwner = player;
-                tie = false;
-            }else if (player.getLife() == lowLife){ 
-                tie = true;
-            }        
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            if (sourcePermanent != null) {
+                Player newController = null;
+                int lowLife = Integer.MIN_VALUE;
+                boolean tie = false;
+                for (UUID playerID : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+                    Player player = game.getPlayer(playerID);
+                    if (player != null) {
+                        if (player.getLife() > lowLife) {
+                            lowLife = player.getLife();
+                            newController = player;
+                            tie = false;
+                        } else if (player.getLife() == lowLife) {
+                            tie = true;
+                        }
+                    }
+                }
+                if (!controller.equals(newController) && !tie && newController != null) {
+                    ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
+                    effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
+                    game.addEffect(effect, source);
+                }
+            }
+            return true;
         }
-        if (!tie){
-           game.getPermanent(source.getId()).changeControllerId(newOwner.getId(), game);
-        }
-        
-        return true;
-                        
+        return false;
+
     }
 }
