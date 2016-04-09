@@ -28,14 +28,13 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -56,10 +55,7 @@ public class Biovisionary extends CardImpl {
         super(ownerId, 146, "Biovisionary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        
-
-        
+        this.subtype.add("Wizard");       
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
