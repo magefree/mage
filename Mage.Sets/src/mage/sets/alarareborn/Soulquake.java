@@ -28,14 +28,13 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -53,12 +52,8 @@ public class Soulquake extends CardImpl {
         super(ownerId, 30, "Soulquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}{B}{B}");
         this.expansionSetCode = "ARB";
 
-
-        
-
         // Return all creatures on the battlefield and all creature cards in graveyards to their owners' hands.
         this.getSpellAbility().addEffect(new SoulquakeEffect());
-
     }
 
     public Soulquake(final Soulquake card) {
