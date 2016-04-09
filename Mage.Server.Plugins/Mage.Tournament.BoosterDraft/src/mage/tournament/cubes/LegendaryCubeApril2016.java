@@ -33,12 +33,12 @@ import mage.game.draft.DraftCube;
  *
  * @author fireshoes
  */
-
 public class LegendaryCubeApril2016 extends DraftCube {
-    
-public LegendaryCubeApril2016() {
-    super("Legendary Cube April 2016 (566 cards)"); http://magic.wizards.com/en/MTGO/articles/archive/legendary-cube-cardlist
-    
+
+    public LegendaryCubeApril2016() {
+        super("Legendary Cube April 2016 (566 cards)");
+        http://magic.wizards.com/en/MTGO/articles/archive/legendary-cube-cardlist
+
         cubeCards.add(new DraftCube.CardIdentity("Abundant Growth", ""));
         cubeCards.add(new DraftCube.CardIdentity("Academy Elite", ""));
         cubeCards.add(new DraftCube.CardIdentity("Adamaro, First to Desire", ""));
@@ -382,7 +382,7 @@ public LegendaryCubeApril2016() {
         cubeCards.add(new DraftCube.CardIdentity("Ojutai, Soul of Winter", ""));
         cubeCards.add(new DraftCube.CardIdentity("Okina, Temple to the Grandfathers", ""));
         cubeCards.add(new DraftCube.CardIdentity("Omnath, Locus of Mana", ""));
-        cubeCards.add(new DraftCube.CardIdentity("Opalesence", ""));
+        cubeCards.add(new DraftCube.CardIdentity("Opalescence", ""));
         cubeCards.add(new DraftCube.CardIdentity("Opulent Palace", ""));
         cubeCards.add(new DraftCube.CardIdentity("Oran-Rief, the Vastwood", ""));
         cubeCards.add(new DraftCube.CardIdentity("Orim, Samite Healer", ""));
@@ -605,5 +605,5 @@ public LegendaryCubeApril2016() {
         cubeCards.add(new DraftCube.CardIdentity("Zur the Enchanter", ""));
         cubeCards.add(new DraftCube.CardIdentity("Zurgo Bellstriker", ""));
         cubeCards.add(new DraftCube.CardIdentity("Zurgo Helmsmasher", ""));
-    }    
+    }
 }
