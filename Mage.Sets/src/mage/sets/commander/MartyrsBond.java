@@ -141,9 +141,9 @@ class MartyrsBondEffect extends OneShotEffect {
             Card sourceCard = game.getCard(source.getSourceId());
             Permanent saccedPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null && sourceCard != null) {
+            if (controller != null && sourceCard != null && saccedPermanent != null) {
                 FilterControlledPermanent filter = new FilterControlledPermanent();
-                String message = "permanent with a type (";
+                String message = "permanent with type (";
                 boolean firstType = true;
 
                 ArrayList<CardTypePredicate> cardTypes = new ArrayList<>();
@@ -154,7 +154,7 @@ class MartyrsBondEffect extends OneShotEffect {
                         message += type;
                         firstType = false;
                     } else {
-                        message += ", " + type;
+                        message += " or " + type;
                     }
                 }
                 message += ") to sacrifice";
@@ -177,9 +177,9 @@ class MartyrsBondEffect extends OneShotEffect {
                     Permanent permanent = game.getPermanent(permID);
                     if (permanent != null) {
                         permanent.sacrifice(source.getSourceId(), game);
+                        return true;
                     }
                 }
-                return true;
             }
         }
         return false;
