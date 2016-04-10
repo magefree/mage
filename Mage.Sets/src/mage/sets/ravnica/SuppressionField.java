@@ -92,5 +92,4 @@ class SuppressionFieldCostReductionEffect extends CostModificationEffectImpl {
     public SuppressionFieldCostReductionEffect copy() {
         return new SuppressionFieldCostReductionEffect(this);
     }
-
 }

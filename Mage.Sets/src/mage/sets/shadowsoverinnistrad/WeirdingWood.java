@@ -29,7 +29,7 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
@@ -66,7 +66,7 @@ public class WeirdingWood extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // When Weirding Wood enters the battlefield, investigate.
-        this.addAbility(new AsEntersBattlefieldAbility(new InvestigateEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect()));
 
         // Enchanted land has "{T}: Add two mana of any one color to your mana pool."
         Ability gainedAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
