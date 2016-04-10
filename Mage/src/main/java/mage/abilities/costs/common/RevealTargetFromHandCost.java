@@ -51,7 +51,7 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     public RevealTargetFromHandCost(TargetCardInHand target) {
         this.addTarget(target);
-        this.text = (target.getNumberOfTargets() == 0 ? "you may " : "") + "reveal " + target.getTargetName();
+        this.text = (target.getNumberOfTargets() == 0 ? "You may reveal " : "Reveal ") + target.getTargetName();
         this.revealedCards = new ArrayList<>();
     }
 
