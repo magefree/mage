@@ -79,6 +79,7 @@ public class DromokasCommand extends CardImpl {
         Mode mode = new Mode();
         Effect effect = new SacrificeEffect(filterEnchantment, 1, "target player");
         effect.setText("Target player sacrifices an enchantment");
+        effect.setApplyEffectsAfter(); // so P/T chnaging effects take place before the fighting effect is applied
         mode.getEffects().add(effect);
         mode.getTargets().add(new TargetPlayer());
         this.getSpellAbility().getModes().addMode(mode);
