@@ -53,7 +53,7 @@ public class ChangelingHero extends CardImpl {
         this.addAbility(ChangelingAbility.getInstance());
         
         // Champion a creature
-        this.addAbility(new ChampionAbility(this, ""));
+        this.addAbility(new ChampionAbility(this, "", true));
         
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
