@@ -222,11 +222,7 @@ class OublietteReturnEffect extends OneShotEffect {
                 }
                 if (oubliette == null) return false;//1st stab at getting those counters back
                 for(Counter c : ((Oubliette)oubliette).godHelpMe.values()){ //would be nice if could just use that copy function to set the whole field
-<<<<<<< HEAD
-                    if(c!=null) newPermanent.getCounters(game).addCounter(c);
-=======
-                    newPermanent.getCounters(game).addCounter(c);
->>>>>>> 013c506facb3e0cdc381116053e4fc7e90b17a42
+                    if(c!=null) newPermanent.getCounters(game).addCounter(c);                    
                 }
                     
             }
