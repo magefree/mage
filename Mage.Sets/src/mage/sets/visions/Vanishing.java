@@ -25,44 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.visions;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.PhaseOutAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Quercitron
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Chill extends CardImpl {
+public class Vanishing extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Red spells");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+    public Vanishing(UUID ownerId) {
+        super(ownerId, 39, "Vanishing", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
+        this.expansionSetCode = "VIS";
+        this.subtype.add("Aura");
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        
+        // {U}{U}: Enchanted creature phases out.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutAttachedEffect(), new ManaCostsImpl("{U}{U}")));
     }
 
-    public Chill(UUID ownerId) {
-        super(ownerId, 56, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "TMP";
-
-        // Red spells cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasementAllEffect(filter, 2)));
-    }
-
-    public Chill(final Chill card) {
+    public Vanishing(final Vanishing card) {
         super(card);
     }
 
     @Override
-    public Chill copy() {
-        return new Chill(this);
+    public Vanishing copy() {
+        return new Vanishing(this);
     }
 }

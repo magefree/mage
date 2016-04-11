@@ -25,44 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.abilities.effects.common.combat;
 
-import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author Quercitron
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Chill extends CardImpl {
+public class CantBlockActivateAttachedEffect extends RestrictionEffect {
 
-    private static final FilterCard filter = new FilterCard("Red spells");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+    public CantBlockActivateAttachedEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "Enchanted creature can't block, and its activated abilities can't be activated";
     }
 
-    public Chill(UUID ownerId) {
-        super(ownerId, 56, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "TMP";
-
-        // Red spells cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasementAllEffect(filter, 2)));
-    }
-
-    public Chill(final Chill card) {
-        super(card);
+    public CantBlockActivateAttachedEffect(final CantBlockActivateAttachedEffect effect) {
+        super(effect);
     }
 
     @Override
-    public Chill copy() {
-        return new Chill(this);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            if (permanent.getId().equals(enchantment.getAttachedTo())) {
+                return true;
+            }
+        }
+        return false;
     }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public CantBlockActivateAttachedEffect copy() {
+        return new CantBlockActivateAttachedEffect(this);
+    }
+
 }

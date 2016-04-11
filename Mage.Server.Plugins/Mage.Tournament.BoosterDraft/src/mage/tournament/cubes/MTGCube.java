@@ -172,7 +172,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Falkenrath Aristocrat", ""));
         cubeCards.add(new CardIdentity("Fauna Shaman", ""));
         cubeCards.add(new CardIdentity("Figure of Destiny", ""));
-        cubeCards.add(new CardIdentity("Fire // Ice ", ""));
+        cubeCards.add(new CardIdentity("Fire // Ice", ""));
         cubeCards.add(new CardIdentity("Fire Imp", ""));
         cubeCards.add(new CardIdentity("Firebolt", ""));
         cubeCards.add(new CardIdentity("Firedrinker Satyr", ""));

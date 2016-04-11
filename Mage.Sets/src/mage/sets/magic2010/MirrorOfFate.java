@@ -46,6 +46,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInExile;
 
 /**
  *
@@ -145,10 +146,10 @@ class FaceUpPredicate implements Predicate<Card> {
     }
 }
 
-class MirrorOfFateTarget extends TargetCard {
+class MirrorOfFateTarget extends TargetCardInExile {
 
     public MirrorOfFateTarget() {
-        super(0, 7, Zone.EXILED, new FilterCard());
+        super(0, 7, new FilterCard(), null);
         filter.add(new FaceUpPredicate());
         this.targetName = "face-up exiled cards you own";
     }

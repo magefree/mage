@@ -25,44 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author Quercitron
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Chill extends CardImpl {
+public class PhaseOutAttachedEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("Red spells");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+    public PhaseOutAttachedEffect() {
+        super(Outcome.Detriment);
+        this.staticText = "Enchanted creature phases out";
     }
 
-    public Chill(UUID ownerId) {
-        super(ownerId, 56, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "TMP";
-
-        // Red spells cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasementAllEffect(filter, 2)));
-    }
-
-    public Chill(final Chill card) {
-        super(card);
+    public PhaseOutAttachedEffect(final PhaseOutAttachedEffect effect) {
+        super(effect);
     }
 
     @Override
-    public Chill copy() {
-        return new Chill(this);
+    public PhaseOutAttachedEffect copy() {
+        return new PhaseOutAttachedEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if(enchantment != null) {
+            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+            if(enchanted != null) {
+                return enchanted.phaseOut(game);
+            }
+        }
+        return false;
     }
 }

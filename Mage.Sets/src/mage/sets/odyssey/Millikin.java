@@ -25,44 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
+import mage.MageInt;
+import mage.abilities.costs.common.PutTopCardOfYourLibraryToGraveyardCost;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author Quercitron
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Chill extends CardImpl {
+public class Millikin extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Red spells");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+    public Millikin(UUID ownerId) {
+        super(ownerId, 302, "Millikin", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
+        this.expansionSetCode = "ODY";
+        this.subtype.add("Construct");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
+
+        // {tap}, Put the top card of your library into your graveyard: Add {C} to your mana pool.
+        ColorlessManaAbility ability = new ColorlessManaAbility();
+        ability.addCost(new PutTopCardOfYourLibraryToGraveyardCost());
+        ability.setUndoPossible(false);
+        this.addAbility(ability);
     }
 
-    public Chill(UUID ownerId) {
-        super(ownerId, 56, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "TMP";
-
-        // Red spells cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasementAllEffect(filter, 2)));
-    }
-
-    public Chill(final Chill card) {
+    public Millikin(final Millikin card) {
         super(card);
     }
 
     @Override
-    public Chill copy() {
-        return new Chill(this);
+    public Millikin copy() {
+        return new Millikin(this);
     }
 }

@@ -42,8 +42,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
@@ -55,15 +55,14 @@ public class GaeasBlessing extends CardImpl {
         super(ownerId, 77, "Gaea's Blessing", Rarity.SPECIAL, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "TSB";
 
-
         // Target player shuffles up to three target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new GaeasBlessingEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new GaeasBlessingTarget());
-        
+
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        
+
         // When Gaea's Blessing is put into your graveyard from your library, shuffle your graveyard into your library.
         this.addAbility(new GaeasBlessingTriggeredAbility());
     }
@@ -119,10 +118,10 @@ class GaeasBlessingEffect extends OneShotEffect {
     }
 }
 
-class GaeasBlessingTarget extends TargetCard {
+class GaeasBlessingTarget extends TargetCardInGraveyard {
 
     public GaeasBlessingTarget() {
-        super(0, 3, Zone.GRAVEYARD, new FilterCard());
+        super(0, 3, new FilterCard());
     }
 
     public GaeasBlessingTarget(final GaeasBlessingTarget target) {
@@ -148,8 +147,9 @@ class GaeasBlessingTarget extends TargetCard {
 }
 
 class GaeasBlessingTriggeredAbility extends ZoneChangeTriggeredAbility {
+
     public GaeasBlessingTriggeredAbility() {
-        super(Zone.LIBRARY, Zone.GRAVEYARD, new GaeasBlessingGraveToLibraryEffect(), "",  false);
+        super(Zone.LIBRARY, Zone.GRAVEYARD, new GaeasBlessingGraveToLibraryEffect(), "", false);
     }
 
     public GaeasBlessingTriggeredAbility(final GaeasBlessingTriggeredAbility ability) {
@@ -161,7 +161,6 @@ class GaeasBlessingTriggeredAbility extends ZoneChangeTriggeredAbility {
         return new GaeasBlessingTriggeredAbility(this);
     }
 
- 
     @Override
     public String getRule() {
         return "When {this} is put into your graveyard from your library, shuffle your graveyard into your library.";
@@ -184,9 +183,9 @@ class GaeasBlessingGraveToLibraryEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             game.informPlayers(new StringBuilder(controller.getLogName()).append(" shuffle his or her graveyard into his or her library").toString());
-            for (Card card: controller.getGraveyard().getCards(game)) {
+            for (Card card : controller.getGraveyard().getCards(game)) {
                 controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
-            }               
+            }
             controller.getLibrary().addAll(controller.getGraveyard().getCards(game), game);
             controller.getGraveyard().clear();
             controller.shuffleLibrary(source, game);

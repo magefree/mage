@@ -25,44 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
+import mage.abilities.dynamicvalue.MultipliedValue;
+import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author Quercitron
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Chill extends CardImpl {
+public class LifeBurst extends CardImpl {
+    
+    private static final FilterCard filter = new FilterCard("card named Life Burst");
 
-    private static final FilterCard filter = new FilterCard("Red spells");
     static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+        filter.add(new NamePredicate("Life Burst"));
     }
 
-    public Chill(UUID ownerId) {
-        super(ownerId, 56, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "TMP";
+    public LifeBurst(UUID ownerId) {
+        super(ownerId, 30, "Life Burst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "ODY";
 
-        // Red spells cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasementAllEffect(filter, 2)));
+        // Target player gains 4 life, then gains 4 life for each card named Life Burst in each graveyard.
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(4));
+        Effect effect = new GainLifeTargetEffect(new MultipliedValue(new CardsInAllGraveyardsCount(filter), 4));
+        effect.setText(", then gains 4 life for each card named {source} in each graveyard");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Chill(final Chill card) {
+    public LifeBurst(final LifeBurst card) {
         super(card);
     }
 
     @Override
-    public Chill copy() {
-        return new Chill(this);
+    public LifeBurst copy() {
+        return new LifeBurst(this);
     }
 }

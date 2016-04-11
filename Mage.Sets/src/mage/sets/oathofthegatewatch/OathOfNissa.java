@@ -52,7 +52,6 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetCard;
 
 /**
@@ -123,8 +122,8 @@ class OathOfNissaEffect extends OneShotEffect {
                         if (number == 1) {
                             card = topCards.getCards(filter, source.getSourceId(), source.getControllerId(), game).iterator().next();
                         } else {
-                            Target target = new TargetCard(Zone.LIBRARY, filter);
-                            controller.chooseTarget(outcome, target, source, game);
+                            TargetCard target = new TargetCard(Zone.LIBRARY, filter);
+                            controller.choose(outcome, topCards, target, game);
                             card = topCards.get(target.getFirstTarget(), game);
                         }
                         if (card != null) {

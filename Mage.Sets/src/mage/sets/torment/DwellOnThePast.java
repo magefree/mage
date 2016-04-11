@@ -40,8 +40,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
@@ -111,10 +111,10 @@ class DwellOnThePastEffect extends OneShotEffect {
     }
 }
 
-class DwellOnThePastTarget extends TargetCard {
+class DwellOnThePastTarget extends TargetCardInGraveyard {
 
     public DwellOnThePastTarget() {
-        super(0, 4, Zone.GRAVEYARD, new FilterCard("cards from target player's graveyard"));
+        super(0, 4, new FilterCard("cards from target player's graveyard"));
     }
 
     public DwellOnThePastTarget(final DwellOnThePastTarget target) {

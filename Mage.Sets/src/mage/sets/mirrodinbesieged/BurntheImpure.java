@@ -96,5 +96,4 @@ class BurntheImpureEffect extends OneShotEffect {
         }
         return false;
     }
-
 }

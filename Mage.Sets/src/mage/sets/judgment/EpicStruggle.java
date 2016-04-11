@@ -25,44 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.judgment;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.constants.TargetController;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author Quercitron
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Chill extends CardImpl {
+public class EpicStruggle extends CardImpl {
+    
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control twenty or more creatures");
 
-    private static final FilterCard filter = new FilterCard("Red spells");
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+    public EpicStruggle(UUID ownerId) {
+        super(ownerId, 112, "Epic Struggle", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
+        this.expansionSetCode = "JUD";
+
+        // At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
+        this.addAbility(new ConditionalTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
+                new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 19),
+                "At the beginning of your upkeep, if you control twenty or more creatures, you win the game."));
     }
 
-    public Chill(UUID ownerId) {
-        super(ownerId, 56, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "TMP";
-
-        // Red spells cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasementAllEffect(filter, 2)));
-    }
-
-    public Chill(final Chill card) {
+    public EpicStruggle(final EpicStruggle card) {
         super(card);
     }
 
     @Override
-    public Chill copy() {
-        return new Chill(this);
+    public EpicStruggle copy() {
+        return new EpicStruggle(this);
     }
 }
