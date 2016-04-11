@@ -41,8 +41,8 @@ import mage.players.Player;
  */
 public class LoseLifeDefendingPlayerEffect extends OneShotEffect {
 
-    protected DynamicValue amount;
-    protected boolean attackerIsSource;
+    private DynamicValue amount;
+    private boolean attackerIsSource;
 
     /**
      *
@@ -57,6 +57,7 @@ public class LoseLifeDefendingPlayerEffect extends OneShotEffect {
     public LoseLifeDefendingPlayerEffect(DynamicValue amount, boolean attackerIsSource) {
         super(Outcome.Damage);
         this.amount = amount;
+        this.attackerIsSource = attackerIsSource;
     }
 
     public LoseLifeDefendingPlayerEffect(final LoseLifeDefendingPlayerEffect effect) {

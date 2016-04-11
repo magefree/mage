@@ -60,7 +60,6 @@ public class SilentSkimmer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Silent Skimmer attacks, defending player loses 2 life.
         this.addAbility(new AttacksTriggeredAbility(new LoseLifeDefendingPlayerEffect(2, true), false));
-
     }
 
     public SilentSkimmer(final SilentSkimmer card) {
