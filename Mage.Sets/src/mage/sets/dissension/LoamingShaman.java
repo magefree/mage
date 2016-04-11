@@ -41,8 +41,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
@@ -109,10 +109,10 @@ class LoamingShamanEffect extends OneShotEffect {
     }
 }
 
-class LoamingShamanTargetCardsInGraveyard extends TargetCard {
+class LoamingShamanTargetCardsInGraveyard extends TargetCardInGraveyard {
 
     public LoamingShamanTargetCardsInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
-        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
+        super(minNumTargets, maxNumTargets, filter);
         this.targetName = filter.getMessage();
     }
 
@@ -131,14 +131,11 @@ class LoamingShamanTargetCardsInGraveyard extends TargetCard {
                     || !card.getOwnerId().equals(targetCard.getOwnerId())) {
                 return false;
             }
-        } else {
-            if (targetCard == null || !targetCard.getOwnerId().equals(targetPlayerId)) {
-                return false;
-            }
+        } else if (targetCard == null || !targetCard.getOwnerId().equals(targetPlayerId)) {
+            return false;
         }
         return super.canTarget(id, source, game);
     }
-
 
     @Override
     public LoamingShamanTargetCardsInGraveyard copy() {

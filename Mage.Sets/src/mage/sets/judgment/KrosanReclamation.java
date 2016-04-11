@@ -43,8 +43,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
@@ -60,7 +60,7 @@ public class KrosanReclamation extends CardImpl {
         this.getSpellAbility().addEffect(new KrosanReclamationEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new KrosanReclamationTarget());
-        
+
         // Flashback {1}{G}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{G}"), TimingRule.INSTANT));
     }
@@ -116,10 +116,10 @@ class KrosanReclamationEffect extends OneShotEffect {
     }
 }
 
-class KrosanReclamationTarget extends TargetCard {
+class KrosanReclamationTarget extends TargetCardInGraveyard {
 
     public KrosanReclamationTarget() {
-        super(0, 2, Zone.GRAVEYARD, new FilterCard());
+        super(0, 2, new FilterCard());
     }
 
     public KrosanReclamationTarget(final KrosanReclamationTarget target) {

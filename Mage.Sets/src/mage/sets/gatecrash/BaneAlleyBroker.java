@@ -53,7 +53,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetCard;
+import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 
@@ -160,10 +160,10 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
     }
 }
 
-class TargetCardInBaneAlleyBrokerExile extends TargetCard {
+class TargetCardInBaneAlleyBrokerExile extends TargetCardInExile {
 
-    public TargetCardInBaneAlleyBrokerExile(UUID CardId) {
-        super(1, 1, Zone.EXILED, new FilterCard("card exiled with Bane Alley Broker"));
+    public TargetCardInBaneAlleyBrokerExile(UUID cardId) {
+        super(1, 1, new FilterCard("card exiled with Bane Alley Broker"), null);
     }
 
     public TargetCardInBaneAlleyBrokerExile(final TargetCardInBaneAlleyBrokerExile target) {

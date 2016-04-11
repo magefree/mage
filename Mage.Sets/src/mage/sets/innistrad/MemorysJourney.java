@@ -29,22 +29,22 @@ package mage.sets.innistrad;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
@@ -55,7 +55,6 @@ public class MemorysJourney extends CardImpl {
     public MemorysJourney(UUID ownerId) {
         super(ownerId, 66, "Memory's Journey", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ISD";
-
 
         // Target player shuffles up to three target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new MemorysJourneyEffect());
@@ -116,10 +115,10 @@ class MemorysJourneyEffect extends OneShotEffect {
     }
 }
 
-class MemorysJourneyTarget extends TargetCard {
+class MemorysJourneyTarget extends TargetCardInGraveyard {
 
     public MemorysJourneyTarget() {
-        super(0, 3, Zone.GRAVEYARD, new FilterCard());
+        super(0, 3, new FilterCard());
     }
 
     public MemorysJourneyTarget(final MemorysJourneyTarget target) {

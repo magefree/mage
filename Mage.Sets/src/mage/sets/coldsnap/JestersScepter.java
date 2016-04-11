@@ -27,7 +27,6 @@
  */
 package mage.sets.coldsnap;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -56,7 +55,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInExile;
@@ -137,66 +135,6 @@ class JestersScepterEffect extends OneShotEffect {
     }
 }
 
-class TargetCardInJestersScepterExile extends TargetCard {
-
-    public TargetCardInJestersScepterExile(UUID CardId) {
-        super(1, 1, Zone.EXILED, new FilterCard("card exiled with Jester's Scepter"));
-    }
-
-    public TargetCardInJestersScepterExile(final TargetCardInJestersScepterExile target) {
-        super(target);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        Card sourceCard = game.getCard(sourceId);
-        if (sourceCard != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
-            ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null && exile.size() > 0) {
-                possibleTargets.addAll(exile);
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        Card sourceCard = game.getCard(sourceId);
-        if (sourceCard != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
-            ExileZone exile = game.getExile().getExileZone(exileId);
-            if (exile != null && exile.size() > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        Card card = game.getCard(id);
-        if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
-            ExileZone exile = null;
-            Card sourceCard = game.getCard(source.getSourceId());
-            if (sourceCard != null) {
-                UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                exile = game.getExile().getExileZone(exileId);
-            }
-            if (exile != null && exile.contains(id)) {
-                return filter.match(card, source.getControllerId(), game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public TargetCardInJestersScepterExile copy() {
-        return new TargetCardInJestersScepterExile(this);
-    }
-}
-
 class JestersScepterLookAtCardEffect extends AsThoughEffectImpl {
 
     public JestersScepterLookAtCardEffect() {
@@ -261,8 +199,8 @@ class JestersScepterCost extends CostImpl {
                     if (controller.moveCardToGraveyardWithInfo(card, sourceId, game, Zone.EXILED)) {
                         // Split Card check
                         if (card instanceof SplitCard) {
-                            game.getState().setValue(sourceId + "_nameOfExiledCardPayment", ((SplitCard)card).getLeftHalfCard().getName());
-                            game.getState().setValue(sourceId + "_nameOfExiledCardPayment2", ((SplitCard)card).getRightHalfCard().getName());
+                            game.getState().setValue(sourceId + "_nameOfExiledCardPayment", ((SplitCard) card).getLeftHalfCard().getName());
+                            game.getState().setValue(sourceId + "_nameOfExiledCardPayment2", ((SplitCard) card).getRightHalfCard().getName());
                             paid = true;
                             return paid;
                         }
@@ -307,7 +245,7 @@ class JestersScepterCounterEffect extends OneShotEffect {
             String nameOfExiledCardPayment2 = (String) game.getState().getValue(source.getSourceId() + "_nameOfExiledCardPayment2");
             if (nameOfExiledCardPayment != null) {
                 if (nameOfExiledCardPayment.matches(spell.getName())
-                || nameOfExiledCardPayment2.matches(spell.getName())) {
+                        || nameOfExiledCardPayment2.matches(spell.getName())) {
                     return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game);
                 }
             }
