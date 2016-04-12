@@ -61,7 +61,7 @@ public class CanopyCrawler extends CardImpl {
         this.addAbility(new AmplifyAbility(AmplifyEffect.AmplifyFactor.Amplify1));
         // {tap}: Target creature gets +1/+1 until end of turn for each +1/+1 counter on Canopy Crawler.
         CountersCount count = new CountersCount(CounterType.P1P1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(count, count, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(count, count, Duration.EndOfTurn, true), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
