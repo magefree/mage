@@ -28,13 +28,16 @@
 
 package mage.deck;
 
+import java.util.ArrayList;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
-import mage.constants.SetType;
-
-import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -45,18 +48,23 @@ public class Standard extends Constructed {
     public Standard() {
         super("Constructed - Standard");
         GregorianCalendar current = new GregorianCalendar();
-        GregorianCalendar cutoff;
-        // month is zero based so January = 0
-        if (current.get(Calendar.MONTH) > 8) {
-            cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 1, Calendar.SEPTEMBER, 1);
-        }
-        else {
-            cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 2, Calendar.SEPTEMBER, 1);
-        }
-        for (ExpansionSet set: Sets.getInstance().values()) {
-            if (set.getReleaseDate().after(cutoff.getTime()) &&
-                    (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION)){
+        List<ExpansionSet> sets = new ArrayList(Sets.getInstance().values());
+        Collections.sort(sets, new Comparator<ExpansionSet>() {
+            @Override
+            public int compare(final ExpansionSet lhs, ExpansionSet rhs) {
+                return lhs.getReleaseDate().after(rhs.getReleaseDate()) ? -1 : 1;
+            }
+        });
+        int blocksAdded = 0;
+        for (Iterator<ExpansionSet> iter = sets.iterator(); iter.hasNext() && blocksAdded < 3; ) {
+            ExpansionSet set = iter.next();
+            if (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION) {    // Still adding core sets because of Magic Origins
                 setCodes.add(set.getCode());
+                if (set.getReleaseDate().before(current.getTime())  // This stops spoiled sets from counting as "new" blocks
+                        && set.getParentSet() == null
+                        && set.getSetType() == SetType.EXPANSION) {
+                    blocksAdded++;
+                }
             }
         }
     }
