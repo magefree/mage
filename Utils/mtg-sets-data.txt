@@ -170,6 +170,7 @@ Vanguard Set 4|VG4|
 Vintage Masters|VMA|
 Visions|VIS|
 Weatherlight|WTH|
+Welcome Deck 2016|W16|
 World Magic Cup Qualifier|WMCQ|
 Worldwake|WWK|
 WPN Gateway|GRC|

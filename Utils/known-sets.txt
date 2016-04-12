@@ -157,6 +157,7 @@ Urza's Saga|urzassaga|
 Visions|visions|
 Vintage Masters|vintagemasters|
 Weatherlight|weatherlight|
+Welcome Deck 2016|welcomedeck2016|
 World Magic Cup Qualifier|worldmagiccupqualifier|
 Worldwake|worldwake|
 WPN Gateway|wpngateway|
