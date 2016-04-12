@@ -30,8 +30,8 @@ package mage.sets.morningtide;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -47,6 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -103,8 +104,10 @@ class PacksDisdainEffect extends OneShotEffect {
             }
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
             filter.add(new SubtypePredicate(typeChoice.getChoice()));
-            DynamicValue negativePermanentsCount = new MultipliedValue(new PermanentsOnBattlefieldCount(filter), -1);
-            return new BoostTargetEffect(negativePermanentsCount, negativePermanentsCount, Duration.EndOfTurn, true).apply(game, source);
+            DynamicValue negativePermanentsCount = new PermanentsOnBattlefieldCount(filter, -1);
+            ContinuousEffect effect = new BoostTargetEffect(negativePermanentsCount, negativePermanentsCount, Duration.EndOfTurn, true);
+            effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+            game.addEffect(effect, source);
         }
         return false;
     }
