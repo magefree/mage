@@ -99,7 +99,7 @@ class OublietteEffect extends OneShotEffect {
 
     public OublietteEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature. When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.";
+        this.staticText = "4Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature. When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.";
     }
 
     public OublietteEffect(final OublietteEffect effect) {
@@ -117,13 +117,9 @@ class OublietteEffect extends OneShotEffect {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment == null) {
             enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
+        }        
+        UUID targetId=source.getFirstTarget();
         
-        UUID targetId=null;
-        for(Ability abil: enchantment.getAbilities(game)){
-            targetId=abil.getFirstTarget();
-            if(targetId!=null) break; //Oubliette should have only 1
-        }
         if (targetId==null) return false; // if previous scan somehow failed, simply quit
         
         if (enchantment != null) { //back to code (mostly) copied from Flickerform
@@ -138,14 +134,15 @@ class OublietteEffect extends OneShotEffect {
                     }
                 }
                 
-                ((Oubliette)enchantment).godHelpMe = enchantedCreature.getCounters(game);
+                //((Oubliette)enchantment.getMainCard()).godHelpMe = enchantedCreature.getCounters(game);
+                //((Oubliette)game.getCard(source.getSourceId())).godHelpMe = enchantedCreature.getCounters(game).copy();
                 
                 if (!(enchantedCreature instanceof Token)) {
                 
                     // If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature
                     LeavesBattlefieldTriggeredAbility triggeredAbility = new LeavesBattlefieldTriggeredAbility(
                             new OublietteReturnEffect(enchantedCreature.getId(), exileZoneId, enchantment), false);
-                    enchantment.addAbility(triggeredAbility, game);                    
+                    enchantment.addAbility(triggeredAbility, source.getSourceId(), game);                    
                 }
                 return true;
             }
