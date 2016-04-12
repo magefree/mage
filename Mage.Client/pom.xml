@@ -26,6 +26,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.mage</groupId>
+            <artifactId>mage-deck-constructed</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.googlecode.jspf</groupId>
             <artifactId>jspf-core</artifactId>
             <version>0.9.1</version>

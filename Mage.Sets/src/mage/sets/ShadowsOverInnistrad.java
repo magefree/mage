@@ -44,7 +44,7 @@ public class ShadowsOverInnistrad extends ExpansionSet {
     }
 
     private ShadowsOverInnistrad() {
-        super("Shadows over Innistrad", "SOI", "mage.sets.shadowsoverinnistrad", new GregorianCalendar(2016, 4, 8).getTime(), SetType.EXPANSION);
+        super("Shadows over Innistrad", "SOI", "mage.sets.shadowsoverinnistrad", new GregorianCalendar(2016, 3, 8).getTime(), SetType.EXPANSION);
         this.blockName = "Shadows over Innistrad";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
