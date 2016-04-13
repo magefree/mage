@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 
@@ -58,7 +58,7 @@ public class StoneSeederHierophant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a land enters the battlefield under your control, untap Stone-Seeder Hierophant.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new FilterLandPermanent("a land"), false, null, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new FilterControlledLandPermanent("a land"), false, null, true));
 
         // {tap}: Untap target land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
