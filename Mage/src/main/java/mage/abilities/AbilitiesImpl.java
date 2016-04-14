@@ -110,7 +110,8 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                         rules.add(Character.toUpperCase(rule.charAt(0)) + rule.substring(1));
                     }
                 } else { // logging so we can still can be made aware of rule problems a card has
-                    logger.fatal("Error in rule text generation of " + source + ": Create a bug report or fix the source code");
+                    String cardName = ((SpellAbility) ability).getCardName();
+                    logger.fatal("Error in rule text generation of " + cardName + ": Create a bug report or fix the source code");
                 }
             }
         }

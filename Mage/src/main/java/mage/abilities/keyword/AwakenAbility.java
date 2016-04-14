@@ -29,6 +29,7 @@ package mage.abilities.keyword;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -142,7 +143,13 @@ public class AwakenAbility extends SpellAbility {
                 if (source == null) {
                     logger.fatal("Source was null in AwakenAbility: Create a bug report or fix the source code");
                 } else if (source.getTargets() == null) {
-                    logger.fatal("getTargets was null in AwakenAbility for " + source + " : Create a bug report or fix the source code");
+                    MageObject sourceObj = source.getSourceObject(game);
+                    if (sourceObj != null) {                        
+                        Class<? extends MageObject> sourceClass = sourceObj.getClass();
+                        if (sourceClass != null) {                            
+                            logger.fatal("getTargets was null in AwakenAbility for " + sourceClass.toString() + " : Create a bug report or fix the source code");
+                        }                        
+                    }
                 }
             }
             return true;
