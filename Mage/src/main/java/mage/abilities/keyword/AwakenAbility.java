@@ -120,19 +120,21 @@ public class AwakenAbility extends SpellAbility {
         @Override
         public boolean apply(Game game, Ability source) {
             UUID targetId = null;
-            for (Target target : source.getTargets()) {
-                if (target.getFilter().getMessage().equals(filterMessage)) {
-                    targetId = target.getFirstTarget();
+            if (source != null && source.getTargets() != null) {
+                for (Target target : source.getTargets()) {
+                    if (target.getFilter() != null && target.getFilter().getMessage().equals(filterMessage)) {
+                        targetId = target.getFirstTarget();
+                    }
                 }
-            }
-            if (targetId != null) {
-                FixedTarget fixedTarget = new FixedTarget(targetId);
-                ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.Custom);
-                continuousEffect.setTargetPointer(fixedTarget);
-                game.addEffect(continuousEffect, source);
-                Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(awakenValue));
-                effect.setTargetPointer(fixedTarget);
-                return effect.apply(game, source);
+                if (targetId != null) {
+                    FixedTarget fixedTarget = new FixedTarget(targetId);
+                    ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.Custom);
+                    continuousEffect.setTargetPointer(fixedTarget);
+                    game.addEffect(continuousEffect, source);
+                    Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(awakenValue));
+                    effect.setTargetPointer(fixedTarget);
+                    return effect.apply(game, source);
+                }
             }
             return true;
         }
