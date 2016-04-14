@@ -30,25 +30,34 @@ package mage.sets.morningtide;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author BursegSardaukar
  */
 public class StinkdrinkerBandit extends CardImpl {
+    
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Rogue");
+
+    static {
+        filter.add(new SubtypePredicate("Rogue"));
+    }
 
     public StinkdrinkerBandit(UUID ownerId) {
         super(ownerId, 80, "Stinkdrinker Bandit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -62,8 +71,10 @@ public class StinkdrinkerBandit extends CardImpl {
         // Prowl {1}, {B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Goblin or Rogue.)
         this.addAbility(new ProwlAbility(this, "{1}{B}"));
 
-        // Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn.
-        this.addAbility(new StinkdrinkerBanditTriggeredAbility());
+        // Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn.        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+            new StinkdrinkerBanditTriggeredAbility(), Duration.WhileOnBattlefield,
+            filter, "Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn")));   
     }
 
     public StinkdrinkerBandit(final StinkdrinkerBandit card) {
@@ -79,7 +90,7 @@ public class StinkdrinkerBandit extends CardImpl {
 class StinkdrinkerBanditTriggeredAbility extends TriggeredAbilityImpl {
 
     public StinkdrinkerBanditTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostTargetEffect(2, 1, Duration.EndOfTurn));
+        super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn));
     }
 
     public StinkdrinkerBanditTriggeredAbility(final StinkdrinkerBanditTriggeredAbility ability) {
@@ -93,17 +104,18 @@ class StinkdrinkerBanditTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.UNBLOCKED_ATTACKER);
+        return event.getType().equals(EventType.DECLARED_BLOCKERS);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent attackingCreature = game.getPermanent(event.getTargetId());
-        if (attackingCreature != null && attackingCreature.hasSubtype("Rogue")) {
-            for (Effect effect : getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+        Permanent sourcePermanent = game.getPermanent(getSourceId());
+        if (sourcePermanent.isAttacking()) {
+            for (CombatGroup combatGroup: game.getCombat().getGroups()) {
+                if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
+                    return true;
+                }
             }
-            return true;
         }
         return false;
     }
