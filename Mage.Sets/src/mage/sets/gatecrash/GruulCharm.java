@@ -32,10 +32,9 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.*;
-import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
+import mage.abilities.effects.common.continuous.GainControlAllEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -44,19 +43,17 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.other.OwnerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class GruulCharm extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
     private static final FilterPermanent filter2 = new FilterPermanent("all permanents you own");
     private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("creature with flying");
-    
+
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
         filter2.add(new OwnerPredicate(TargetController.YOU));
@@ -70,12 +67,12 @@ public class GruulCharm extends CardImpl {
 
         // Choose one - Creatures without flying can't block this turn;
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
-        
+
         // or gain control of all permanents you own;
         Mode mode = new Mode();
         mode.getEffects().add(new GainControlAllEffect(Duration.EndOfGame, filter2));
         this.getSpellAbility().addMode(mode);
-        
+
         // or Gruul Charm deals 3 damage to each creature with flying.
         Mode mode2 = new Mode();
         mode2.getEffects().add(new DamageAllEffect(3, filter3));
@@ -89,40 +86,5 @@ public class GruulCharm extends CardImpl {
     @Override
     public GruulCharm copy() {
         return new GruulCharm(this);
-    }
-}
-
-class GainControlAllEffect extends ContinuousEffectImpl {
-
-    final FilterPermanent filter;
-
-    public GainControlAllEffect(Duration duration, FilterPermanent filter) {
-        super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.filter = filter;
-    }
-
-    public GainControlAllEffect(final GainControlAllEffect effect) {
-        super(effect);
-        this.filter = effect.filter.copy();
-    }
-
-    @Override
-    public GainControlAllEffect copy() {
-        return new GainControlAllEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            if (permanent != null) {
-                permanent.changeControllerId(source.getControllerId(), game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Gain control of all permanents you own";
     }
 }
