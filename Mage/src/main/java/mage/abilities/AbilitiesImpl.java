@@ -40,6 +40,7 @@ import mage.abilities.mana.ManaAbility;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.ThreadLocalStringBuilder;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -47,6 +48,8 @@ import mage.util.ThreadLocalStringBuilder;
  * @param <T>
  */
 public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
+    
+    private static final Logger logger = Logger.getLogger(AbilitiesImpl.class);
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
@@ -102,8 +105,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                     rules.add(sbRule.toString());
                 }
                 String rule = ability.getRule();
-                if (rule != null && rule.length() > 0) {
-                    rules.add(Character.toUpperCase(rule.charAt(0)) + rule.substring(1));
+                if (rule != null) {
+                    if (rule.length() > 0) {
+                        rules.add(Character.toUpperCase(rule.charAt(0)) + rule.substring(1));
+                    }
+                } else { // logging so we can still can be made aware of rule problems a card has
+                    logger.fatal("Error in rule text generation of " + source + ": Create a bug report or fix the source code");
                 }
             }
         }
