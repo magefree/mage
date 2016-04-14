@@ -78,7 +78,7 @@ class PacksDisdainEffect extends OneShotEffect {
 
     PacksDisdainEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control.";
+        this.staticText = "Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control";
     }
 
     PacksDisdainEffect(final PacksDisdainEffect effect) {
@@ -108,6 +108,7 @@ class PacksDisdainEffect extends OneShotEffect {
             ContinuousEffect effect = new BoostTargetEffect(negativePermanentsCount, negativePermanentsCount, Duration.EndOfTurn, true);
             effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
             game.addEffect(effect, source);
+            return true;
         }
         return false;
     }

@@ -36,7 +36,7 @@ public class GainLifeOpponentCost extends CostImpl {
 
     public GainLifeOpponentCost(int amount) {
         this.amount = amount;
-        this.text = new StringBuilder("an opponent gains ").append(amount).append(" life").toString();
+        this.text = "an opponent gains " + amount + " life";
     }
 
     public GainLifeOpponentCost(GainLifeOpponentCost cost) {

@@ -27,6 +27,7 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -41,9 +42,12 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.SpellsCastWatcher;
@@ -106,7 +110,7 @@ class JaceUnravelerOfSecretsEmblem extends Emblem {
 class JaceUnravelerOfSecretsTriggeredAbility extends SpellCastOpponentTriggeredAbility {
 
     public JaceUnravelerOfSecretsTriggeredAbility(Effect effect, boolean optional) {
-        super(effect, optional);
+        super(Zone.COMMAND, effect, new FilterSpell(), optional);
     }
 
     public JaceUnravelerOfSecretsTriggeredAbility(SpellCastOpponentTriggeredAbility ability) {
@@ -115,7 +119,7 @@ class JaceUnravelerOfSecretsTriggeredAbility extends SpellCastOpponentTriggeredA
 
     @Override
     public SpellCastOpponentTriggeredAbility copy() {
-        return super.copy();
+        return new JaceUnravelerOfSecretsTriggeredAbility(this);
     }
 
     @Override
@@ -123,7 +127,8 @@ class JaceUnravelerOfSecretsTriggeredAbility extends SpellCastOpponentTriggeredA
         if (super.checkTrigger(event, game)) {
             SpellsCastWatcher watcher = (SpellsCastWatcher) game.getState().getWatchers().get(SpellsCastWatcher.class.getName());
             if (watcher != null) {
-                if (watcher.getSpellsCastThisTurn(event.getPlayerId()) == null) {
+                List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
+                if (spells != null && spells.size() == 1) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }
