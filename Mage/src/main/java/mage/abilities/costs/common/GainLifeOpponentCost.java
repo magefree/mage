@@ -26,17 +26,17 @@ import mage.target.TargetPlayer;
 public class GainLifeOpponentCost extends CostImpl {
 
     private static final FilterPlayer filter = new FilterPlayer("opponent that can gain life");
-    
+
     static {
         filter.add(new PlayerPredicate(TargetController.OPPONENT));
         filter.add(new PlayerCanGainLifePredicate()); // you can't pay the costs by letting a player gain life that can't get life by rule changing effect
     }
-    
+
     private final int amount;
 
     public GainLifeOpponentCost(int amount) {
         this.amount = amount;
-        this.text = new StringBuilder("you may have an opponent gain ").append(amount).append(" life").toString();
+        this.text = new StringBuilder("an opponent gains ").append(amount).append(" life").toString();
     }
 
     public GainLifeOpponentCost(GainLifeOpponentCost cost) {
