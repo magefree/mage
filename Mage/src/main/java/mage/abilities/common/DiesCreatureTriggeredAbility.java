@@ -23,12 +23,12 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional, boolean another) {
-        this(effect, optional, new FilterCreaturePermanent("another creature"));
+        this(effect, optional, new FilterCreaturePermanent(optional ? "another creature" : "a creature"));
         filter.add(new AnotherPredicate());
     }
 
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional, boolean another, boolean setTargetPointer) {
-        this(effect, optional, new FilterCreaturePermanent("another creature"));
+        this(effect, optional, new FilterCreaturePermanent(optional ? "another creature" : "a creature"));
         filter.add(new AnotherPredicate());
         this.setTargetPointer = setTargetPointer;
     }
