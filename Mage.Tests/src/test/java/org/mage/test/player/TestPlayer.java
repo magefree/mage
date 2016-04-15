@@ -1442,6 +1442,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void removeCounters(String name, int amount, Ability source, Game game) {
+        computerPlayer.removeCounters(name, amount, source, game);
+    }
+
+    @Override
     public Abilities<Ability> getAbilities() {
         return computerPlayer.getAbilities();
     }
@@ -1927,12 +1932,12 @@ public class TestPlayer implements Player {
     public boolean getPassedUntilStackResolved() {
         return computerPlayer.getPassedUntilStackResolved();
     }
-    
+
     @Override
     public boolean getPassedUntilEndStepBeforeMyTurn() {
         return computerPlayer.getPassedUntilEndStepBeforeMyTurn();
     }
-    
+
     @Override
     public void revokePermissionToSeeHandCards() {
         computerPlayer.revokePermissionToSeeHandCards();

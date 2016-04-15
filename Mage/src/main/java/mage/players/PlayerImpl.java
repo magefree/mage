@@ -1839,6 +1839,18 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
+    @Override
+    public void removeCounters(String name, int amount, Ability source, Game game) {
+        for (int i = 0; i < amount; i++) {
+            counters.removeCounter(name, 1);
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED,
+                    getId(), (source == null ? null : source.getSourceId()), (source == null ? null : source.getControllerId()));
+            event.setData(name);
+            event.setAmount(1);
+            game.fireEvent(event);
+        }
+    }
+
     protected boolean canDamage(MageObject source, Game game) {
         for (ProtectionAbility ability : abilities.getProtectionAbilities()) {
             if (!ability.canTarget(source, game)) {
