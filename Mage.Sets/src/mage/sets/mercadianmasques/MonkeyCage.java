@@ -91,7 +91,7 @@ class MonkeyCageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
          Permanent creature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
          if(creature != null) {
-             int cmc = creature.getManaCost().convertedManaCost();
+             int cmc = creature.getConvertedManaCost();
              return new CreateTokenEffect(new ApeToken(), cmc).apply(game, source);
          }
          return false;

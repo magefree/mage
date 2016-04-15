@@ -57,7 +57,7 @@ public class SacrificeCostConvertedMana implements DynamicValue {
                 SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
                 int totalCMC = 0;
                 for(Permanent permanent : sacrificeCost.getPermanents()) {
-                    totalCMC += permanent.getManaCost().convertedManaCost();
+                    totalCMC += permanent.getConvertedManaCost();
                 }
                 return totalCMC;
             }

@@ -119,7 +119,7 @@ class DralnusPetEffect extends OneShotEffect {
                 int cmc = 0;
                 for (Cost cost : spellAbility.getCosts()) {
                     if (cost instanceof DiscardCardCost && ((DiscardCardCost) cost).getCards().size() > 0) {
-                        cmc = ((DiscardCardCost) cost).getCards().get(0).getManaCost().convertedManaCost();
+                        cmc = ((DiscardCardCost) cost).getCards().get(0).getConvertedManaCost();
                     }
                     if (cmc > 0) {
                         return new AddCountersSourceEffect(CounterType.P1P1.createInstance(cmc), true).apply(game, source);

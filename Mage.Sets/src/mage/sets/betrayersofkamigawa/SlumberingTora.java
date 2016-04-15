@@ -107,7 +107,7 @@ public class SlumberingTora extends CardImpl {
                             int convManaCosts = 0;
                             for (Cost cost: source.getCosts()) {
                                 if (cost instanceof DiscardTargetCost && ((DiscardTargetCost)cost).getCards().size() > 0) {
-                                    convManaCosts = ((DiscardTargetCost)cost).getCards().get(0).getManaCost().convertedManaCost();
+                                    convManaCosts = ((DiscardTargetCost)cost).getCards().get(0).getConvertedManaCost();
                                     break;
                                 }
                             }

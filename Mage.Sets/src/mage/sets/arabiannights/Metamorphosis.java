@@ -88,7 +88,7 @@ class MetamorphosisEffect extends OneShotEffect {
         int amount = 0;
         for (Cost cost: source.getCosts()) {
             if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
-                amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getManaCost().convertedManaCost()+1;
+                amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getConvertedManaCost()+1;
                 break;
             }
         }

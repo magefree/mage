@@ -98,7 +98,7 @@ class PlaneswalkersFavorEffect extends OneShotEffect {
             Card card = opponent.getHand().getRandom(game);
             if (card != null) {
                 revealed.add(card);
-                int boostValue = card.getManaCost().convertedManaCost();
+                int boostValue = card.getConvertedManaCost();
                 opponent.revealCards("Planeswalker's Favor", revealed, game);
                 ContinuousEffect effect = new BoostTargetEffect(boostValue, boostValue, Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(source.getTargets().get(1).getFirstTarget()));

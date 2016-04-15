@@ -98,7 +98,7 @@ class PunishmentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent != null
-                    && permanent.getManaCost().convertedManaCost() == source.getManaCostsToPay().getX()
+                    && permanent.getConvertedManaCost() == source.getManaCostsToPay().getX()
                     && (permanent.getCardType().contains(CardType.ARTIFACT)
                             || permanent.getCardType().contains(CardType.CREATURE)
                             || permanent.getCardType().contains(CardType.ENCHANTMENT))) {

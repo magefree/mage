@@ -48,8 +48,7 @@ public interface StackObject extends MageObject, Controllable {
 
     Ability getStackAbility();
 
-    int getConvertedManaCost();
-
+//     int getConvertedManaCost();
     boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget);
 
     @Override

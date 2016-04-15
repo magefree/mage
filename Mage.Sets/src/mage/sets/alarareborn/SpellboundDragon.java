@@ -104,7 +104,7 @@ class SpellboundDragonEffect extends OneShotEffect {
         you.choose(Outcome.Discard, target, source.getSourceId(), game);
         Card card = you.getHand().get(target.getFirstTarget(), game);
         if (card != null && you.discard(card, source, game)) {
-            int cmc = card.getManaCost().convertedManaCost();
+            int cmc = card.getConvertedManaCost();
             if (dragon != null) {
                 game.addEffect(new BoostSourceEffect(cmc, 0, Duration.EndOfTurn), source);
                 return true;

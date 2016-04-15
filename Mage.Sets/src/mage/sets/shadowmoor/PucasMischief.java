@@ -135,7 +135,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
             Permanent target1 = game.getPermanent(source.getFirstTarget());
             Permanent opponentPermanent = game.getPermanent(id);
             if (target1 != null && opponentPermanent != null) {
-                return target1.getManaCost().convertedManaCost() >= opponentPermanent.getManaCost().convertedManaCost();
+                return target1.getConvertedManaCost() >= opponentPermanent.getConvertedManaCost();
             }
         }
         return false;
@@ -148,7 +148,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
             MageObject targetSource = game.getObject(sourceId);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                    if (firstTarget.getManaCost().convertedManaCost() >= permanent.getManaCost().convertedManaCost()) {
+                    if (firstTarget.getConvertedManaCost() >= permanent.getConvertedManaCost()) {
                         possibleTargets.add(permanent.getId());
                     }
                 }

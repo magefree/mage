@@ -86,7 +86,7 @@ public class ExileFromHandCost extends CostImpl {
                 if (card == null) {
                     return false;
                 }
-                cmc += card.getManaCost().convertedManaCost();
+                cmc += card.getConvertedManaCost();
                 this.cards.add(card);
             }
             Cards cardsToExile = new CardsImpl();

@@ -118,7 +118,7 @@ public class CardInfo {
         this.className = card.getClass().getCanonicalName();
         this.power = card.getPower().toString();
         this.toughness = card.getToughness().toString();
-        this.convertedManaCost = card.getManaCost().convertedManaCost();
+        this.convertedManaCost = card.getConvertedManaCost();
         this.rarity = card.getRarity();
         this.splitCard = card.isSplitCard();
 

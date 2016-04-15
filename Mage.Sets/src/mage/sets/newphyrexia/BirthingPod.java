@@ -102,7 +102,7 @@ class BirthingPodEffect extends OneShotEffect {
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (sacrificedPermanent != null && controller != null) {
-            int newConvertedCost = sacrificedPermanent.getManaCost().convertedManaCost() + 1;
+            int newConvertedCost = sacrificedPermanent.getConvertedManaCost() + 1;
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, newConvertedCost));
             filter.add(new CardTypePredicate(CardType.CREATURE));

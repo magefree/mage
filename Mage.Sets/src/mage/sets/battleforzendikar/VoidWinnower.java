@@ -145,7 +145,7 @@ class VoidWinnowerCantBlockEffect extends RestrictionEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(permanent.getControllerId())) {
             // the low bit will always be set on an odd number.
-            return (permanent.getManaCost().convertedManaCost() & 1) == 0;
+            return (permanent.getConvertedManaCost() & 1) == 0;
         }
         return false;
     }

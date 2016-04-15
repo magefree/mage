@@ -114,14 +114,14 @@ class SeasonsPastTarget extends TargetCardInYourGraveyard {
         for (UUID targetId : this.getTargets()) {
             Card card = game.getCard(targetId);
             if (card != null) {
-                usedCMC.add(card.getManaCost().convertedManaCost());
+                usedCMC.add(card.getConvertedManaCost());
             }
         }
         Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> leftPossibleTargets = new HashSet<>();
         for (UUID targetId : possibleTargets) {
             Card card = game.getCard(targetId);
-            if (card != null && !usedCMC.contains(card.getManaCost().convertedManaCost())) {
+            if (card != null && !usedCMC.contains(card.getConvertedManaCost())) {
                 leftPossibleTargets.add(targetId);
             }
         }
@@ -135,11 +135,11 @@ class SeasonsPastTarget extends TargetCardInYourGraveyard {
             for (UUID targetId : this.getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null) {
-                    usedCMC.add(card.getManaCost().convertedManaCost());
+                    usedCMC.add(card.getConvertedManaCost());
                 }
             }
             Card card = game.getCard(objectId);
-            return card != null && !usedCMC.contains(card.getManaCost().convertedManaCost());
+            return card != null && !usedCMC.contains(card.getConvertedManaCost());
         }
         return false;
     }

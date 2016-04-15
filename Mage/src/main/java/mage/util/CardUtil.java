@@ -598,10 +598,10 @@ public class CardUtil {
             Card card = (Card) object;
             if (card instanceof SplitCard) {
                 SplitCard splitCard = (SplitCard) card;
-                cmcObject.add(splitCard.getLeftHalfCard().getManaCost().convertedManaCost());
-                cmcObject.add(splitCard.getRightHalfCard().getManaCost().convertedManaCost());
+                cmcObject.add(splitCard.getLeftHalfCard().getConvertedManaCost());
+                cmcObject.add(splitCard.getRightHalfCard().getConvertedManaCost());
             } else {
-                cmcObject.add(card.getManaCost().convertedManaCost());
+                cmcObject.add(card.getConvertedManaCost());
             }
         }
         return cmcObject;

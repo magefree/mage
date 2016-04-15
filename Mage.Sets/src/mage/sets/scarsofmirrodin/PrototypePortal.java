@@ -82,7 +82,7 @@ public class PrototypePortal extends CardImpl {
             if (card.getImprinted().size() > 0) {
                 Card imprinted = game.getCard(card.getImprinted().get(0));
                 if (imprinted != null) {
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaCost().convertedManaCost()));
+                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getConvertedManaCost()));
                 }
             }
         }

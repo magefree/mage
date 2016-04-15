@@ -60,7 +60,7 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = controller.getGraveyard().get(source.getSourceId(), game);
         if (card != null) {
-            return controller.moveCards(card, null, Zone.HAND, source, game);
+            return controller.moveCards(card, Zone.HAND, source, game);
         }
         return false;
     }

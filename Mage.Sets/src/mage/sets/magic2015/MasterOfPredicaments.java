@@ -114,10 +114,10 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                 boolean guessWrong;
                 if (attackedPlayer.chooseUse(Outcome.Detriment, "Is the chosen card's converted mana cost greater than 4?", source, game)) {
                     game.informPlayers(attackedPlayer.getLogName() + " guessed that the chosen card's converted mana cost is greater than 4");
-                    guessWrong = cardFromHand.getManaCost().convertedManaCost() <= 4;
+                    guessWrong = cardFromHand.getConvertedManaCost() <= 4;
                 } else {
                     game.informPlayers(attackedPlayer.getLogName() + " guessed that the chosen card's converted mana cost is not greater than 4");
-                    guessWrong = cardFromHand.getManaCost().convertedManaCost() > 4;
+                    guessWrong = cardFromHand.getConvertedManaCost() > 4;
                 }
                 game.informPlayers(attackedPlayer.getLogName() + " guessed " + (guessWrong ? "wrong" : "right"));
                 if (guessWrong) {

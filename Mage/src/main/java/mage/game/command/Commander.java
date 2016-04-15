@@ -151,6 +151,11 @@ public class Commander implements CommandObject {
     }
 
     @Override
+    public int getConvertedManaCost() {
+        return card.getConvertedManaCost();
+    }
+
+    @Override
     public MageInt getPower() {
         return card.getPower();
     }

@@ -88,7 +88,7 @@ class HereticsPunishmentEffect extends OneShotEffect {
             int maxCost = 0;
             Set<Card> cardList = controller.getLibrary().getTopCards(game, 3);
             for (Card card : cardList) {
-                int test = card.getManaCost().convertedManaCost();
+                int test = card.getConvertedManaCost();
                 if (test > maxCost) {
                     maxCost = test;
                 }

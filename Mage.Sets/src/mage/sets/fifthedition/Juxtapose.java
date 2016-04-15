@@ -180,13 +180,13 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
         int highestCMC = -1;
         for (Permanent permanent : permanents) {
-            if (highestCMC < permanent.getManaCost().convertedManaCost()) {
-                highestCMC = permanent.getManaCost().convertedManaCost();
+            if (highestCMC < permanent.getConvertedManaCost()) {
+                highestCMC = permanent.getConvertedManaCost();
             }
         }
         List<Permanent> result = new ArrayList<>();
         for (Permanent permanent : permanents) {
-            if (permanent.getManaCost().convertedManaCost() == highestCMC) {
+            if (permanent.getConvertedManaCost() == highestCMC) {
                 result.add(permanent);
             }
         }

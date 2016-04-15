@@ -162,7 +162,7 @@ class LivingLoreSetPowerToughnessSourceEffect extends ContinuousEffectImpl {
                 break;
             }
             if (exiledCard != null) {
-                int value = exiledCard.getManaCost().convertedManaCost();
+                int value = exiledCard.getConvertedManaCost();
                 permanent.getPower().setValue(value);
                 permanent.getToughness().setValue(value);
             }

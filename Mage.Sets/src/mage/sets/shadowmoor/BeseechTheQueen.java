@@ -75,7 +75,7 @@ class BeseechTheQueenPredicate implements Predicate<Card> {
 
     @Override
     public final boolean apply(Card input, Game game) {
-        if(input.getManaCost().convertedManaCost() <= game.getBattlefield().getAllActivePermanents(new FilterControlledLandPermanent(), input.getOwnerId(), game).size()){
+        if(input.getConvertedManaCost() <= game.getBattlefield().getAllActivePermanents(new FilterControlledLandPermanent(), input.getOwnerId(), game).size()){
             return true;
         }
         return false;

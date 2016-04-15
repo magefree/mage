@@ -88,7 +88,7 @@ class CrumbleEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            int cost = permanent.getManaCost().convertedManaCost();
+            int cost = permanent.getConvertedManaCost();
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 player.gainLife(cost, game);

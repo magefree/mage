@@ -81,7 +81,7 @@ class AncientOozePowerToughnessValue implements DynamicValue {
         int value = 0;
         for(Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), sourceAbility.getControllerId(), game)){
             if(creature != null && !sourceAbility.getSourceId().equals(creature.getId())){
-                value += creature.getManaCost().convertedManaCost();
+                value += creature.getConvertedManaCost();
             }
         }
         return value;

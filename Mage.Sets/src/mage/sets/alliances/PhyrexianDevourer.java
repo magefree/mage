@@ -135,7 +135,7 @@ class PhyrexianDevourerEffect extends OneShotEffect {
                 }
             }
             if (card != null) {
-                int amount = card.getManaCost().convertedManaCost();
+                int amount = card.getConvertedManaCost();
                 if (amount > 0) {
                     return new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount)).apply(game, source);
                 }

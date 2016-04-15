@@ -110,7 +110,7 @@ class HitEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.sacrifice(source.getSourceId(), game);
-                    int damage = permanent.getManaCost().convertedManaCost();
+                    int damage = permanent.getConvertedManaCost();
                     if (damage > 0) {
                         targetPlayer.damage(damage, source.getSourceId(), game, false, true);
                     }

@@ -100,7 +100,7 @@ class HellholeRatsEffect extends OneShotEffect {
             Cards cards = targetPlayer.discard(1, false, source, game);
             if (!cards.isEmpty()) {
                 for (Card card : cards.getCards(game)) {
-                    damage = card.getManaCost().convertedManaCost();
+                    damage = card.getConvertedManaCost();
                 }
                 targetPlayer.damage(damage, source.getSourceId(), game, false, true);
             }

@@ -95,7 +95,7 @@ class InduceParanoiaEffect extends OneShotEffect {
         StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (spell != null) { 
             game.getStack().counter(spell.getId(), source.getSourceId(), game);
-            int spellCMC = spell.getManaCost().convertedManaCost();
+            int spellCMC = spell.getConvertedManaCost();
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
                 player.moveCards(player.getLibrary().getTopCards(game, spellCMC), Zone.GRAVEYARD, source, game);

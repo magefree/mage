@@ -160,6 +160,11 @@ public class Emblem implements CommandObject {
     }
 
     @Override
+    public int getConvertedManaCost() {
+        return 0;
+    }
+
+    @Override
     public MageInt getPower() {
         return MageInt.EmptyMageInt;
     }

@@ -108,7 +108,7 @@ class SoulTitheEffect extends OneShotEffect {
             if(permanent != null) {
                 Player player = game.getPlayer(permanent.getControllerId());
                 if(player != null) {
-                    int cmc = permanent.getManaCost().convertedManaCost();
+                    int cmc = permanent.getConvertedManaCost();
                     if (player.chooseUse(Outcome.Benefit, "Pay {" + cmc + "} for " + permanent.getName() + "? (otherwise you sacrifice it)", source, game)) {
                         Cost cost = new GenericManaCost(cmc);
                         if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {

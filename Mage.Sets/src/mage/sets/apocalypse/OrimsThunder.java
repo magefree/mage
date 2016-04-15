@@ -103,7 +103,7 @@ class OrimsThunderEffect2 extends OneShotEffect {
         MageObject firstTarget = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         Permanent secondTarget = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (firstTarget != null) {
-            damage = firstTarget.getManaCost().convertedManaCost();
+            damage = firstTarget.getConvertedManaCost();
         }
         boolean kicked = KickedCondition.getInstance().apply(game, source);
         if (kicked && secondTarget != null) {

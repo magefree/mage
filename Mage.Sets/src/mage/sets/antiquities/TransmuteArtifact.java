@@ -98,7 +98,7 @@ class TransmuteArtifactEffect extends SearchEffect {
         if (controller.chooseTarget(Outcome.Sacrifice, targetArtifact, source, game)) {
             Permanent permanent = game.getPermanent(targetArtifact.getFirstTarget());
             if (permanent != null) {
-                convertedManaCost = permanent.getManaCost().convertedManaCost();
+                convertedManaCost = permanent.getConvertedManaCost();
                 sacrifice = permanent.sacrifice(source.getSourceId(), game);
             }
         } else {
@@ -111,11 +111,11 @@ class TransmuteArtifactEffect extends SearchEffect {
                     Card card = controller.getLibrary().getCard(cardId, game);
                     if (card != null) {
                         //If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield.
-                        if (card.getManaCost().convertedManaCost() <= convertedManaCost) {
+                        if (card.getConvertedManaCost() <= convertedManaCost) {
                             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                         } else {
                             //If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield.
-                            GenericManaCost cost = new GenericManaCost(card.getManaCost().convertedManaCost() - convertedManaCost);
+                            GenericManaCost cost = new GenericManaCost(card.getConvertedManaCost() - convertedManaCost);
                             if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                             } else {

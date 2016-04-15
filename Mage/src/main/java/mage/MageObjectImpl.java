@@ -166,6 +166,14 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public int getConvertedManaCost() {
+        if (manaCost != null) {
+            return manaCost.convertedManaCost();
+        }
+        return 0;
+    }
+
+    @Override
     public void adjustChoices(Ability ability, Game game) {
     }
 

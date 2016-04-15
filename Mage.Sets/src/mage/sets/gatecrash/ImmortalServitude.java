@@ -89,7 +89,7 @@ class ImmortalServitudeEffect extends OneShotEffect {
         int count = source.getManaCostsToPay().getX();
         Set<Card> cards = you.getGraveyard().getCards(new FilterCreatureCard(), game);
         for (Card card : cards) {
-            if (card.getManaCost().convertedManaCost() == count
+            if (card.getConvertedManaCost() == count
                     && card != null) {
                 card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
             }

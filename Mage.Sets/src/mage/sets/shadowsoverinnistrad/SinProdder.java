@@ -113,7 +113,7 @@ class SinProdderEffect extends OneShotEffect {
                         Player opponent = game.getPlayer(opponentUuid);
                         if (opponent != null && !putInGraveyard && opponent.chooseUse(Outcome.Damage, sb.toString(), source, game)) {
                             putInGraveyard = true;
-                            opponent.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
+                            opponent.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
                         }
                     }
                     if (putInGraveyard) {

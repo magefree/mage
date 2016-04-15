@@ -93,7 +93,7 @@ class CerebralEruptionEffect extends OneShotEffect {
             Cards cards = new CardsImpl(card);
             player.revealCards(sourceObject.getIdName(), cards, game);
             game.getState().setValue(source.getSourceId().toString(), card);
-            int damage = card.getManaCost().convertedManaCost();
+            int damage = card.getConvertedManaCost();
             player.damage(damage, source.getSourceId(), game, false, true);
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                 perm.damage(damage, source.getSourceId(), game, false, true);

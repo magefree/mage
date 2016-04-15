@@ -99,7 +99,7 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int xValue = source.getManaCostsToPay().getX();
         for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            if (permanent.getManaCost().convertedManaCost() == xValue) {
+            if (permanent.getConvertedManaCost() == xValue) {
                 PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", permanent.getControllerId());
                 if (watcher != null && watcher.hasSourceDoneDamage(source.getSourceId(), game)) {
                     permanent.destroy(source.getSourceId(), game, false);

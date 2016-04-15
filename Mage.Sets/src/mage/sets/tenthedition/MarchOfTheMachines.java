@@ -107,7 +107,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
                     for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
                         Permanent permanent = it.next().getPermanent(game);
                         if (permanent != null){
-                            int manaCost = permanent.getManaCost().convertedManaCost();
+                            int manaCost = permanent.getConvertedManaCost();
                             permanent.getPower().setValue(manaCost);
                             permanent.getToughness().setValue(manaCost);
                         }
