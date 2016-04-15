@@ -1244,7 +1244,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (player != null) {
             player.getUserData().setUseFirstManaAbility(useFirstManaAbility);
         }
-    }    
+    }
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
@@ -1963,6 +1963,8 @@ public abstract class GameImpl implements Game, Serializable {
             message = "Play instants and activated abilities.";
         }
         playerQueryEventSource.select(playerId, message);
+        getState().clearLookedAt();
+        getState().clearRevealed();
     }
 
     @Override
