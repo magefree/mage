@@ -30,7 +30,6 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -189,7 +188,6 @@ public class LandfallTest extends CardTestPlayerBase {
      21:10: Attacker: Inkmoth Nexus 1b5 unblocked
      */
     @Test
-    @Ignore
     public void testGroundswellWithLandfall() {
         // Target creature gets +2/+2 until end of turn.
         //Landfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead.
