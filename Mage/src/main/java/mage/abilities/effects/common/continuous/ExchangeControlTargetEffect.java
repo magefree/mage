@@ -107,6 +107,10 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
                 UUID uuid = source.getTargets().get(1).getFirstTarget();
                 permanent2 = game.getPermanent(uuid);
             }
+            else if (permanent2 == null) {
+                UUID uuid = source.getTargets().get(0).getFirstTarget();
+                permanent2 = game.getPermanent(uuid);
+            }
         }
         if (permanent1 != null && permanent2 != null) {
             // exchange works only for two different controllers
