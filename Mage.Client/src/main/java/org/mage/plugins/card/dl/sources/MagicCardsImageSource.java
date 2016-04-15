@@ -16,6 +16,7 @@ public class MagicCardsImageSource implements CardImageSource {
 
     private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
+            put("W16", "welcome-deck-2016");
             put("EMA", "eternal-masters");
             put("EMN", "eldritch-moon");
             put("SOI", "shadows-over-innistrad");
