@@ -30,7 +30,6 @@ package mage.sets.mirrodin;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -64,7 +63,6 @@ public class ConfusionInTheRanks extends CardImpl {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
     private final UUID originalId;
-    private MageObjectReference enteringPermanentMor;
 
     public ConfusionInTheRanks(UUID ownerId) {
         super(ownerId, 87, "Confusion in the Ranks", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
@@ -86,7 +84,6 @@ public class ConfusionInTheRanks extends CardImpl {
     public ConfusionInTheRanks(final ConfusionInTheRanks card) {
         super(card);
         this.originalId = card.originalId;
-        this.enteringPermanentMor = card.enteringPermanentMor;
     }
 
     @java.lang.Override
@@ -99,7 +96,6 @@ public class ConfusionInTheRanks extends CardImpl {
             if (enteringPermanentId != null) {
                 Permanent enteringPermanent = game.getPermanent(enteringPermanentId);
                 if (enteringPermanent != null) {
-                    enteringPermanentMor = new MageObjectReference(enteringPermanent, game);
                     ability.setControllerId(enteringPermanent.getControllerId());
                     ability.getTargets().clear();
                     FilterPermanent filterTarget = new FilterPermanent();
