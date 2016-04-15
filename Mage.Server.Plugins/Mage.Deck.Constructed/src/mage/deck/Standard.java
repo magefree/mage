@@ -29,14 +29,14 @@
 package mage.deck;
 
 import java.util.ArrayList;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.decks.Constructed;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
+import mage.cards.decks.Constructed;
 import mage.constants.SetType;
 
 /**
@@ -58,7 +58,7 @@ public class Standard extends Constructed {
         int blocksAdded = 0;
         for (Iterator<ExpansionSet> iter = sets.iterator(); iter.hasNext() && blocksAdded < 3; ) {
             ExpansionSet set = iter.next();
-            if (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION) {    // Still adding core sets because of Magic Origins
+            if (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION || set.getSetType() == SetType.SUPPLEMENTAL_STANDARD_LEGAL) {    // Still adding core sets because of Magic Origins
                 setCodes.add(set.getCode());
                 if (set.getReleaseDate().before(current.getTime())  // This stops spoiled sets from counting as "new" blocks
                         && set.getParentSet() == null

@@ -1,7 +1,6 @@
 package mage.client.util.sets;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -47,7 +46,7 @@ public class ConstructedFormats {
 
     public static List<String> getSetsByFormat(final String format) {
     	if(!format.equals(ALL)) {
-    		return underlyingSetCodesPerFormat.get(format);
+            return underlyingSetCodesPerFormat.get(format);
     	}
         return all;
 
@@ -65,7 +64,7 @@ public class ConstructedFormats {
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
         	expansionInfo.put(set.getName(), set);
         	formats.add(set.getName());
-            if (set.getType().equals(SetType.CORE) || set.getType().equals(SetType.EXPANSION)) {
+            if (set.getType().equals(SetType.CORE) || set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.SUPPLEMENTAL_STANDARD_LEGAL)) {
                 if (STANDARD_CARDS.getSetCodes().contains(set.getCode())) {
                     if(underlyingSetCodesPerFormat.get(STANDARD) == null) {
                     	underlyingSetCodesPerFormat.put(STANDARD, new ArrayList<String>());
