@@ -58,7 +58,8 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
      * first creature
      */
     @Test
-    @Ignore // Produces sometime error probably because of wrong mana usage of the AI - Not solved yet
+    @Ignore
+    // TODO: find out why sometimes Produces error probably because of wrong mana usage of the AI - Not solved yet
     public void testSimpleCast2() {
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
         addCard(Zone.HAND, playerA, "Silvercoat Lion");

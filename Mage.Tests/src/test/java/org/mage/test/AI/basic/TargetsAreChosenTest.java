@@ -199,7 +199,7 @@ public class TargetsAreChosenTest extends CardTestPlayerBaseAI {
      * Test that AI counters creature spell
      */
     @Test
-    @Ignore   // counter spells don't seem to be cast by AI
+    @Ignore  // counter spells don't seem to be cast by AI
     public void testRewind() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         // Counter target spell. Untap up to four lands.

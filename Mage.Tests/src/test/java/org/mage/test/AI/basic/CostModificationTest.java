@@ -44,7 +44,8 @@ public class CostModificationTest extends CardTestPlayerBaseAI {
      * Once played, I am stuck at "Waiting for Computer" forever...
      */
     @Test
-    @Ignore // TODO: Check why sometimes Silvercoat Lion is not cast from AI
+    @Ignore
+    // TODO: Check why sometimes Silvercoat Lion is not cast from AI
     public void testFluctuator() {
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
         // Destroy all artifacts, creatures, and enchantments.
