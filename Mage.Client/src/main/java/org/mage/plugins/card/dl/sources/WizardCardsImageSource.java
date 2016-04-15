@@ -239,6 +239,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("VGO", "MTGO Vanguard");
         setsAliases.put("VIS", "Visions");
         setsAliases.put("VMA", "Vintage Masters");
+        setsAliases.put("W16", "Welcome Deck 2016");
         setsAliases.put("WMCQ", "World Magic Cup Qualifier");
         setsAliases.put("WTH", "Weatherlight");
         setsAliases.put("WWK", "Worldwake");
