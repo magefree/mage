@@ -25,13 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.venservskoth;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -41,7 +42,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -52,49 +52,50 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author LevelX
+ *
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class OtherworldlyJourney extends CardImpl {
+public class VanishIntoMemory extends CardImpl {
 
-    public OtherworldlyJourney(UUID ownerId) {
-        super(ownerId, 37, "Otherworldly Journey", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Arcane");
+    public VanishIntoMemory(UUID ownerId) {
+        super(ownerId, 31, "Vanish into Memory", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
+        this.expansionSetCode = "DDI";
 
-        // Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
-        this.getSpellAbility().addEffect(new OtherworldlyJourneyEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Exile target creature. You draw cards equal to that creature's power.        
+        // At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to that creature's toughness.
+        this.getSpellAbility().addEffect(new VanishIntoMemoryEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());        
     }
 
-    public OtherworldlyJourney(final OtherworldlyJourney card) {
+    public VanishIntoMemory(final VanishIntoMemory card) {
         super(card);
     }
 
     @Override
-    public OtherworldlyJourney copy() {
-        return new OtherworldlyJourney(this);
+    public VanishIntoMemory copy() {
+        return new VanishIntoMemory(this);
     }
-
 }
 
-class OtherworldlyJourneyEffect extends OneShotEffect {
+class VanishIntoMemoryEffect extends OneShotEffect {
 
-    private static final String effectText = "Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it";
-
-    OtherworldlyJourneyEffect() {
-        super(Outcome.Benefit);
-        staticText = effectText;
+    public VanishIntoMemoryEffect() {
+        super(Outcome.Detriment);
+        staticText = "Exile target creature. You draw cards equal to that creature's power. At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to that creature's toughness.";
     }
 
-    OtherworldlyJourneyEffect(OtherworldlyJourneyEffect effect) {
+    public VanishIntoMemoryEffect(final VanishIntoMemoryEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Otherworldly Journey", source.getSourceId(), game)) {
+        Player you = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (permanent != null && sourceObject != null) {
+            if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game)) {
+                you.drawCards(permanent.getPower().getValue(), game);
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                 // only if permanent is in exile (tokens would be stop to exist)
                 if (exile != null && !exile.isEmpty()) {
@@ -102,7 +103,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
                     if (card != null) {
                         //create delayed triggered ability
                         DelayedTriggeredAbility delayedAbility
-                                = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OtherworldlyJourneyReturnFromExileEffect(new MageObjectReference(card, game)));
+                                = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new VanishIntoMemoryReturnFromExileEffect(new MageObjectReference(card, game)));
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());
                         delayedAbility.setSourceObject(source.getSourceObject(game), game);
@@ -116,30 +117,29 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
     }
 
     @Override
-    public OtherworldlyJourneyEffect copy() {
-        return new OtherworldlyJourneyEffect(this);
+    public VanishIntoMemoryEffect copy() {
+        return new VanishIntoMemoryEffect(this);
     }
-
 }
 
-class OtherworldlyJourneyReturnFromExileEffect extends OneShotEffect {
+class VanishIntoMemoryReturnFromExileEffect extends OneShotEffect {
 
     MageObjectReference objectToReturn;
 
-    public OtherworldlyJourneyReturnFromExileEffect(MageObjectReference objectToReturn) {
+    public VanishIntoMemoryReturnFromExileEffect(MageObjectReference objectToReturn) {
         super(Outcome.PutCardInPlay);
         this.objectToReturn = objectToReturn;
-        staticText = "return that card to the battlefield under its owner's control with a +1/+1 counter on it";
+        staticText = "return that card to the battlefield under its owner's control";
     }
 
-    public OtherworldlyJourneyReturnFromExileEffect(final OtherworldlyJourneyReturnFromExileEffect effect) {
+    public VanishIntoMemoryReturnFromExileEffect(final VanishIntoMemoryReturnFromExileEffect effect) {
         super(effect);
         this.objectToReturn = effect.objectToReturn;
     }
 
     @Override
-    public OtherworldlyJourneyReturnFromExileEffect copy() {
-        return new OtherworldlyJourneyReturnFromExileEffect(this);
+    public VanishIntoMemoryReturnFromExileEffect copy() {
+        return new VanishIntoMemoryReturnFromExileEffect(this);
     }
 
     @Override
@@ -148,7 +148,7 @@ class OtherworldlyJourneyReturnFromExileEffect extends OneShotEffect {
         if (card != null && objectToReturn.refersTo(card, game)) {
             Player owner = game.getPlayer(card.getOwnerId());
             if (owner != null) {
-                game.addEffect(new OtherworldlyJourneyEntersBattlefieldEffect(objectToReturn), source);
+                game.addEffect(new VanishIntoMemoryEntersBattlefieldEffect(objectToReturn), source);
                 owner.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
             }
         }
@@ -156,17 +156,17 @@ class OtherworldlyJourneyReturnFromExileEffect extends OneShotEffect {
     }
 }
 
-class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
+class VanishIntoMemoryEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     MageObjectReference objectToReturn;
 
-    public OtherworldlyJourneyEntersBattlefieldEffect(MageObjectReference objectToReturn) {
+    public VanishIntoMemoryEntersBattlefieldEffect(MageObjectReference objectToReturn) {
         super(Duration.Custom, Outcome.BoostCreature);
         this.objectToReturn = objectToReturn;
-        staticText = "that card returns to the battlefield with a +1/+1 counter on it";
+        staticText = "discard cards equal to that creature's toughness.";
     }
 
-    public OtherworldlyJourneyEntersBattlefieldEffect(OtherworldlyJourneyEntersBattlefieldEffect effect) {
+    public VanishIntoMemoryEntersBattlefieldEffect(VanishIntoMemoryEntersBattlefieldEffect effect) {
         super(effect);
         this.objectToReturn = effect.objectToReturn;
     }
@@ -188,14 +188,17 @@ class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(), game);
+            Player you = game.getPlayer(source.getControllerId());
+            if (you != null) {                
+                you.discard(permanent.getToughness().getValue(), false, source, game);
+            }
             discard(); // use only once
         }
         return false;
     }
 
     @Override
-    public OtherworldlyJourneyEntersBattlefieldEffect copy() {
-        return new OtherworldlyJourneyEntersBattlefieldEffect(this);
+    public VanishIntoMemoryEntersBattlefieldEffect copy() {
+        return new VanishIntoMemoryEntersBattlefieldEffect(this);
     }
 }
