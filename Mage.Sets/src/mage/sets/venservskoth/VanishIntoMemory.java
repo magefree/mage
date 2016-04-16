@@ -32,7 +32,7 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -103,7 +103,7 @@ class VanishIntoMemoryEffect extends OneShotEffect {
                     if (card != null) {
                         //create delayed triggered ability
                         DelayedTriggeredAbility delayedAbility
-                                = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new VanishIntoMemoryReturnFromExileEffect(new MageObjectReference(card, game)));
+                                = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new VanishIntoMemoryReturnFromExileEffect(new MageObjectReference(card, game)));
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());
                         delayedAbility.setSourceObject(source.getSourceObject(game), game);
