@@ -210,6 +210,11 @@ public class GameEvent implements Serializable {
         DAMAGE_CREATURE, DAMAGED_CREATURE,
         DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER,
         DESTROY_PERMANENT,
+        /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
+         targetId    id of the permanent to destroy
+         playerId    controller of the permanent to detroy
+         */
+        DESTROY_PERMANENT_BY_LEGENDARY_RULE,
         /* DESTROYED_PERMANENT
          targetId    id of the destroyed creature
          sourceId    sourceId of the ability with the destroy effect

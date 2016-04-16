@@ -1891,18 +1891,20 @@ public abstract class GameImpl implements Game, Serializable {
                 filterLegendName.add(new NamePredicate(legend.getName()));
                 filterLegendName.add(new ControllerIdPredicate(legend.getControllerId()));
                 if (getBattlefield().contains(filterLegendName, legend.getControllerId(), this, 2)) {
-                    Player controller = this.getPlayer(legend.getControllerId());
-                    if (controller != null) {
-                        Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                        targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
-                        controller.chooseTarget(Outcome.Benefit, targetLegendaryToKeep, null, this);
-                        for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
-                            if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
-                                movePermanentToGraveyardWithInfo(dupLegend);
+                    if (!replaceEvent(GameEvent.getEvent(GameEvent.EventType.DESTROY_PERMANENT_BY_LEGENDARY_RULE, legend.getId(), legend.getControllerId()))) {
+                        Player controller = this.getPlayer(legend.getControllerId());
+                        if (controller != null) {
+                            Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
+                            targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
+                            controller.chooseTarget(Outcome.Benefit, targetLegendaryToKeep, null, this);
+                            for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
+                                if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
+                                    movePermanentToGraveyardWithInfo(dupLegend);
+                                }
                             }
                         }
+                        return true;
                     }
-                    return true;
                 }
             }
         }
