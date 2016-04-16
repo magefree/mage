@@ -116,7 +116,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected HashSet<MageObjectReference> dealtDamageByThisTurn;
     protected UUID attachedTo;
     protected int attachedToZoneChangeCounter;
-    protected UUID pairedCard;
+    protected MageObjectReference pairedPermanent;
     protected Counters counters;
     protected List<Counter> markedDamage;
     protected int timesLoyaltyUsed = 0;
@@ -179,7 +179,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.transformed = permanent.transformed;
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
-        this.pairedCard = permanent.pairedCard;
+        this.pairedPermanent = permanent.pairedPermanent;
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
 
         this.morphed = permanent.morphed;
@@ -1318,18 +1318,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setPairedCard(UUID pairedCard) {
-        this.pairedCard = pairedCard;
+    public void setPairedCard(MageObjectReference pairedCard) {
+        this.pairedPermanent = pairedCard;
     }
 
     @Override
-    public UUID getPairedCard() {
-        return pairedCard;
+    public MageObjectReference getPairedCard() {
+        return pairedPermanent;
     }
 
     @Override
     public void clearPairedCard() {
-        this.pairedCard = null;
+        this.pairedPermanent = null;
     }
 
     @Override

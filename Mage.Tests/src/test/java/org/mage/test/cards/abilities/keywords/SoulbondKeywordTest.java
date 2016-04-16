@@ -9,7 +9,6 @@ import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -318,9 +317,12 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testRebondOnNextCreature() {
-        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        // When Phantasmal Bear becomes the target of a spell or ability, sacrifice it.
         addCard(Zone.HAND, playerA, "Phantasmal Bear");
+        // Soulbond
+        // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
         addCard(Zone.HAND, playerA, "Trusted Forcemage");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
@@ -329,10 +331,10 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Trusted Forcemage");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Bear");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Bear");
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Elite Vanguard", 0);
@@ -347,7 +349,9 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
      */
     @Test
     public void testGrantingAbility() {
-        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // 2/1
+        // Soulbond
+        // As long as Nearheath Pilgrim is paired with another creature, both creatures have lifelink.
         addCard(Zone.HAND, playerA, "Nearheath Pilgrim");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
@@ -391,42 +395,39 @@ public class SoulbondKeywordTest extends CardTestPlayerBase {
         Assert.assertEquals(trustedForcemange.getPairedCard(), null);
         Assert.assertEquals(eliteVanguard.getPairedCard(), null);
     }
-    
+
     /*
      * Reported bug: Soulbond should use the stack, but unable to use instant speed removal since no trigger occurs
-    */
+     */
     @Test
-    @Ignore 
     // Soulbond does not currently use the stack, so this test will fail until then
     public void testRespondToSoulboundWithRemoval() {
-        
+
         // When Palinchron enters the battlefield, untap up to seven lands.
         // {2}{U}{U}: Return Palinchron to its owner's hand.
         addCard(Zone.BATTLEFIELD, playerA, "Palinchron"); // 4/5 flying
-        
+
         // Soulbond
         // As long as Deadeye Navigator is paired with another creature, each of those creatures has "{1}{U}: Exile this creature, then return it to the battlefield under your control."
         addCard(Zone.HAND, playerA, "Deadeye Navigator"); // 5/5
         addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
-        addCard(Zone.BATTLEFIELD, playerB, "Doom Blade", 1); // {1}{B} instant: Destroy target non-black creature
+        addCard(Zone.HAND, playerB, "Doom Blade", 1); // {1}{B} instant: Destroy target non-black creature
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deadeye Navigator");
         setChoice(playerA, "Yes");
-        addTarget(playerA, "Palinchron");
+        setChoice(playerA, "Palinchron");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Doom Blade", "Deadeye Navigator");
-        
-        // Deadeye's ability should not be usable since was Destroyed before Soulbond trigger resolved
+
+        // Deadeye's ability should not be usable since was destroyed before Soulbond trigger resolved
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}:");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-                 
+
         Permanent palinchron = getPermanent("Palinchron", playerA);
-        Permanent deadeye = getPermanent("Deadeye Navigator", playerA);
         Assert.assertEquals(null, palinchron.getPairedCard()); // should not be paired
-        Assert.assertEquals(null, deadeye.getPairedCard()); // should not be paired
-        assertGraveyardCount(playerA, "Deadeye Navigator", 1);           
-        assertGraveyardCount(playerB, "Doom Blade", 1);        
+        assertGraveyardCount(playerA, "Deadeye Navigator", 1);
+        assertGraveyardCount(playerB, "Doom Blade", 1);
         assertPermanentCount(playerA, "Palinchron", 1);
     }
 }

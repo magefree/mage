@@ -57,7 +57,7 @@ public class TandemLookout extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Soulbond
-        this.addAbility(SoulbondAbility.getInstance());
+        this.addAbility(new SoulbondAbility());
 
         // As long as Tandem Lookout is paired with another creature, each of those creatures has "Whenever this creature deals damage to an opponent, draw a card."
         Ability ability = new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1));

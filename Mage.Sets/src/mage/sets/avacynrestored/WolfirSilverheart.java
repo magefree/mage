@@ -54,7 +54,7 @@ public class WolfirSilverheart extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Soulbond
-        this.addAbility(SoulbondAbility.getInstance());
+        this.addAbility(new SoulbondAbility());
 
         // As long as Wolfir Silverheart is paired with another creature, each of those creatures gets +4/+4.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostPairedEffect(4, 4, ruleText)));

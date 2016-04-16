@@ -27,20 +27,19 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -83,17 +82,26 @@ class FloweringLumberknotEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            if (permanent.getPairedCard() == null) {
-                return true; // not paired => can't attack or block
+            if (permanent.getPairedCard() != null) {
+                Permanent paired = permanent.getPairedCard().getPermanent(game);
+                if (paired != null) {
+                    boolean found = false;
+                    for (Ability ability : paired.getAbilities(game)) {
+                        if (ability instanceof SoulbondAbility) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        return false;// paired => can attack or block
+                    }
+                }
             }
-            Permanent paired = game.getPermanent(permanent.getPairedCard());
-            if (paired != null && paired.getAbilities().contains(SoulbondAbility.getInstance())) {
-                return false; // paired => can attack or block
-            }
-            // can't attack or block otherwise
+            // can't attack or block 
             return true;
         }
         return false;
+
     }
 
     @Override

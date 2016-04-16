@@ -327,14 +327,14 @@ public interface Permanent extends Card, Controllable {
      *
      * @param pairedCard
      */
-    void setPairedCard(UUID pairedCard);
+    void setPairedCard(MageObjectReference pairedCard);
 
     /**
      * Gets paired card. Can return null.
      *
      * @return
      */
-    UUID getPairedCard();
+    MageObjectReference getPairedCard();
 
     /**
      * Makes permanent paired with no other permanent.

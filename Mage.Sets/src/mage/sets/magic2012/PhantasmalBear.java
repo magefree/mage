@@ -28,12 +28,12 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -50,6 +50,7 @@ public class PhantasmalBear extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // When Phantasmal Bear becomes the target of a spell or ability, sacrifice it.
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 

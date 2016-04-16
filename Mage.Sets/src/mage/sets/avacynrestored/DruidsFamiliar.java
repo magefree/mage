@@ -55,7 +55,7 @@ public class DruidsFamiliar extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Soulbond
-        this.addAbility(SoulbondAbility.getInstance());
+        this.addAbility(new SoulbondAbility());
 
         // As long as Druid's Familiar is paired with another creature, each of those creatures gets +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostPairedEffect(2, 2, ruleText)));

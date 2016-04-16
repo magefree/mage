@@ -839,7 +839,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         }
         if (permanent.getPairedCard() != null) {
-            Permanent pairedCard = game.getPermanent(permanent.getPairedCard());
+            Permanent pairedCard = permanent.getPairedCard().getPermanent(game);
             if (pairedCard != null) {
                 pairedCard.clearPairedCard();
             }

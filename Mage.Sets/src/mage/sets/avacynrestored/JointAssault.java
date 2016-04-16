@@ -27,20 +27,20 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -50,7 +50,6 @@ public class JointAssault extends CardImpl {
     public JointAssault(UUID ownerId) {
         super(ownerId, 183, "Joint Assault", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "AVR";
-
 
         // Target creature gets +2/+2 until end of turn. If it's paired with a creature, that creature also gets +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new JointAssaultBoostTargetEffect(2, 2, Duration.EndOfTurn));
@@ -69,9 +68,9 @@ public class JointAssault extends CardImpl {
 
 class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
 
-    private int power;
-    private int toughness;
-    private UUID paired;
+    private final int power;
+    private final int toughness;
+    private MageObjectReference paired;
 
     public JointAssaultBoostTargetEffect(int power, int toughness, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
@@ -116,10 +115,10 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
         }
 
         if (this.paired != null) {
-            Permanent paired = game.getPermanent(this.paired);
-            if (paired != null) {
-                paired.addPower(power);
-                paired.addToughness(toughness);
+            Permanent pairedPermanent = this.paired.getPermanent(game);
+            if (pairedPermanent != null) {
+                pairedPermanent.addPower(power);
+                pairedPermanent.addToughness(toughness);
                 affectedTargets++;
             }
         }

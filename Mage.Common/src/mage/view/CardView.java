@@ -186,16 +186,14 @@ public class CardView extends SimpleCardView {
                 this.rules.add("You may cast this card as a 2/2 face-down creature, with no text,"
                         + " no name, no subtypes, and no mana cost by paying {3} rather than paying its mana cost.");
                 return;
+            } else if (card instanceof Permanent) {
+                this.power = Integer.toString(card.getPower().getValue());
+                this.toughness = Integer.toString(card.getToughness().getValue());
+                this.cardTypes = card.getCardType();
+                this.faceDown = ((Permanent) card).isFaceDown(game);
             } else {
-                if (card instanceof Permanent) {
-                    this.power = Integer.toString(card.getPower().getValue());
-                    this.toughness = Integer.toString(card.getToughness().getValue());
-                    this.cardTypes = card.getCardType();
-                    this.faceDown = ((Permanent) card).isFaceDown(game);
-                } else {
-                    // this.hideInfo = true;
-                    return;
-                }
+                // this.hideInfo = true;
+                return;
             }
         }
 
@@ -203,18 +201,16 @@ public class CardView extends SimpleCardView {
         if (card.isSplitCard()) {
             splitCard = (SplitCard) card;
             rotate = true;
-        } else {
-            if (card instanceof Spell) {
-                switch (((Spell) card).getSpellAbility().getSpellAbilityType()) {
-                    case SPLIT_FUSED:
-                        splitCard = (SplitCard) ((Spell) card).getCard();
-                        rotate = true;
-                        break;
-                    case SPLIT_LEFT:
-                    case SPLIT_RIGHT:
-                        rotate = true;
-                        break;
-                }
+        } else if (card instanceof Spell) {
+            switch (((Spell) card).getSpellAbility().getSpellAbilityType()) {
+                case SPLIT_FUSED:
+                    splitCard = (SplitCard) ((Spell) card).getCard();
+                    rotate = true;
+                    break;
+                case SPLIT_LEFT:
+                case SPLIT_RIGHT:
+                    rotate = true;
+                    break;
             }
         }
         if (splitCard != null) {
@@ -241,7 +237,7 @@ public class CardView extends SimpleCardView {
             this.mageObjectType = MageObjectType.PERMANENT;
             Permanent permanent = (Permanent) card;
             this.loyalty = Integer.toString(permanent.getCounters().getCount(CounterType.LOYALTY));
-            this.pairedCard = permanent.getPairedCard();
+            this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
             if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
                 controlledByOwner = false;
             }
@@ -421,12 +417,10 @@ public class CardView extends SimpleCardView {
         if (card != null) {
             if (card instanceof Permanent) {
                 this.mageObjectType = MageObjectType.PERMANENT;
+            } else if (card.isCopy()) {
+                this.mageObjectType = MageObjectType.COPY_CARD;
             } else {
-                if (card.isCopy()) {
-                    this.mageObjectType = MageObjectType.COPY_CARD;
-                } else {
-                    this.mageObjectType = MageObjectType.CARD;
-                }
+                this.mageObjectType = MageObjectType.CARD;
             }
             if (card instanceof PermanentToken) {
                 this.mageObjectType = MageObjectType.TOKEN;

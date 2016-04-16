@@ -58,7 +58,7 @@ public class DeadeyeNavigator extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Soulbond
-        this.addAbility(SoulbondAbility.getInstance());
+        this.addAbility(new SoulbondAbility());
 
         // As long as Deadeye Navigator is paired with another creature, each of those creatures has "{1}{U}: Exile this creature, then return it to the battlefield under your control."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(true), new ManaCostsImpl("{1}{U}"));
