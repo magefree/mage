@@ -104,22 +104,21 @@ class PsychicRebuttalEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        StackObject stackObject = game.getState().getStack().getStackObject(getTargetPointer().getFirst(game, source));
-        if (stackObject != null) {
-            game.getStack().counter(stackObject.getId(), source.getSourceId(), game);
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+        if (spell != null) {
+            game.getStack().counter(spell.getId(), source.getSourceId(), game);
 
             if (SpellMasteryCondition.getInstance().apply(game, source)
-                    && controller.chooseUse(Outcome.PlayForFree, "Copy " + stackObject.getName() + " (you may choose new targets for the copy)?", source, game)) {
+                    && controller.chooseUse(Outcome.PlayForFree, "Copy " + spell.getName() + " (you may choose new targets for the copy)?", source, game)) {
 
-                Spell copy = ((Spell) stackObject).copySpell(source.getControllerId());
-                game.getStack().push(copy);
-                copy.chooseNewTargets(game, source.getControllerId());
-                Player player = game.getPlayer(source.getControllerId());
-                String activateMessage = copy.getActivatedMessage(game);
-                if (activateMessage.startsWith(" casts ")) {
-                    activateMessage = activateMessage.substring(6);
+                StackObject newStackObject = spell.createCopyOnStack(game, source, source.getControllerId(), true);
+                if (newStackObject != null && newStackObject instanceof Spell) {
+                    String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
+                    if (activateMessage.startsWith(" casts ")) {
+                        activateMessage = activateMessage.substring(6);
+                    }
+                    game.informPlayers(controller.getLogName() + activateMessage);
                 }
-                game.informPlayers(player.getLogName() + activateMessage);
             }
 
             return true;

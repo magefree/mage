@@ -48,6 +48,7 @@ import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.player.ai.ComputerPlayer;
@@ -173,6 +174,7 @@ public class RandomPlayer extends ComputerPlayer {
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
                 if (ability.activate(game, false)) {
+                    game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability.getSourceId(), ability.getControllerId()));
                     actionCount++;
                     return true;
                 }

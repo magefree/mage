@@ -56,6 +56,8 @@ import mage.constants.ZoneDetail;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -873,4 +875,14 @@ public class Spell extends StackObjImpl implements Card {
         throw new UnsupportedOperationException("Not supported for Spell");
     }
 
+    @Override
+    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
+        Spell copy = this.copySpell(newControllerId);
+        game.getStack().push(copy);
+        if (chooseNewTargets) {
+            copy.chooseNewTargets(game, newControllerId);
+        }
+        game.fireEvent(new GameEvent(EventType.COPIED_STACKOBJECT, copy.getId(), this.getId(), newControllerId));
+        return copy;
+    }
 }

@@ -39,6 +39,7 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
@@ -96,6 +97,7 @@ class ForkEffect extends OneShotEffect {
             copy.getColor(game).setRed(true);
             game.getStack().push(copy);
             copy.chooseNewTargets(game, controller.getId());
+            game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, copy.getId(), spell.getId(), source.getControllerId()));
             return true;
         }
         return false;

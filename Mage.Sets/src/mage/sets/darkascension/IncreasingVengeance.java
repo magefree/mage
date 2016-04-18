@@ -40,6 +40,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetSpell;
@@ -99,17 +100,17 @@ class IncreasingVengeanceEffect extends OneShotEffect {
         if (controller != null) {
             Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
             if (spell != null) {
-                Spell copy = spell.copySpell(source.getControllerId());
-                game.getStack().push(copy);
-                copy.chooseNewTargets(game, source.getControllerId());
-                game.informPlayers(new StringBuilder(controller.getLogName()).append(copy.getActivatedMessage(game)).toString());
+                StackObject stackObjectCopy = spell.createCopyOnStack(game, source, source.getControllerId(), true);
+                if (stackObjectCopy != null && stackObjectCopy instanceof Spell) {
+                    game.informPlayers(new StringBuilder(controller.getLogName()).append(((Spell) stackObjectCopy).getActivatedMessage(game)).toString());
+                }
                 Spell sourceSpell = (Spell) game.getStack().getStackObject(source.getSourceId());
                 if (sourceSpell != null) {
                     if (sourceSpell.getFromZone() == Zone.GRAVEYARD) {
-                        copy = spell.copySpell(source.getControllerId());
-                        game.getStack().push(copy);
-                        copy.chooseNewTargets(game, source.getControllerId());
-                        game.informPlayers(new StringBuilder(controller.getLogName()).append(copy.getActivatedMessage(game)).toString());
+                        stackObjectCopy = spell.createCopyOnStack(game, source, source.getControllerId(), true);
+                        if (stackObjectCopy != null && stackObjectCopy instanceof Spell) {
+                            game.informPlayers(new StringBuilder(controller.getLogName()).append(((Spell) stackObjectCopy).getActivatedMessage(game)).toString());
+                        }
                     }
                 }
                 return true;

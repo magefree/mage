@@ -34,6 +34,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
@@ -57,16 +58,16 @@ public class CopyTargetSpellEffect extends OneShotEffect {
             spell = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
         }
         if (spell != null) {
-            Spell copy = spell.copySpell(source.getControllerId());;
-            game.getStack().push(copy);
-            copy.chooseNewTargets(game, source.getControllerId());
+            StackObject newStackObject = spell.createCopyOnStack(game, source, source.getControllerId(), true);
             Player player = game.getPlayer(source.getControllerId());
-            String activateMessage = copy.getActivatedMessage(game);
-            if (activateMessage.startsWith(" casts ")) {
-                activateMessage = activateMessage.substring(6);
-            }
-            if (!game.isSimulation()) {
-                game.informPlayers(player.getLogName() + activateMessage);
+            if (player != null && newStackObject != null && newStackObject instanceof Spell) {
+                String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
+                if (activateMessage.startsWith(" casts ")) {
+                    activateMessage = activateMessage.substring(6);
+                }
+                if (!game.isSimulation()) {
+                    game.informPlayers(player.getLogName() + activateMessage);
+                }
             }
             return true;
         }

@@ -50,6 +50,8 @@ public interface StackObject extends MageObject, Controllable {
 
 //     int getConvertedManaCost();
     boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget);
+    
+    StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets);
 
     @Override
     StackObject copy();

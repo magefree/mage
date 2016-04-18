@@ -140,10 +140,7 @@ class EpicPushEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (spell != null) {
-            // don't change the targets of the in the origin copied spell
-            Spell copySpell = spell.copy();
-            game.getStack().push(copySpell);
-            copySpell.chooseNewTargets(game, source.getControllerId());
+            spell.createCopyOnStack(game, source, source.getControllerId(), true);
             return true;
         }
 

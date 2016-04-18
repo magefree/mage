@@ -45,6 +45,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -106,14 +107,14 @@ class CopySourceSpellEffect extends OneShotEffect {
         if (controller != null) {
             Spell spell = game.getStack().getSpell(source.getSourceId());
             if (spell != null) {
-                Spell spellCopy = spell.copySpell(source.getControllerId());;
-                game.getStack().push(spellCopy);
-                spellCopy.chooseNewTargets(game, controller.getId());
-                String activateMessage = spellCopy.getActivatedMessage(game);
-                if (activateMessage.startsWith(" casts ")) {
-                    activateMessage = activateMessage.substring(6);
+                StackObject stackObjectCopy = spell.createCopyOnStack(game, source, source.getControllerId(), true);
+                if (stackObjectCopy != null && stackObjectCopy instanceof Spell) {
+                    String activateMessage = ((Spell) stackObjectCopy).getActivatedMessage(game);
+                    if (activateMessage.startsWith(" casts ")) {
+                        activateMessage = activateMessage.substring(6);
+                    }
+                    game.informPlayers(controller.getLogName() + " copies " + activateMessage);
                 }
-                game.informPlayers(controller.getLogName() + " copies " + activateMessage);
                 return true;
             }
         }

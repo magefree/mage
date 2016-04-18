@@ -1239,6 +1239,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (!ability.isUsesStack()) {
                     ability.resolve(game);
                 }
+                else {
+                    game.fireEvent(new GameEvent(EventType.TRIGGERED_ABILITY, ability.getId(), ability.getSourceId(), ability.getControllerId()));
+                }
                 game.removeBookmark(bookmark);
                 return true;
             }
