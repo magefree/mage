@@ -41,6 +41,7 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
@@ -103,14 +104,14 @@ class ChainOfVaporEffect extends OneShotEffect {
                     if (player.chooseUse(outcome, "Copy the spell?", source, game)) {
                         Spell spell = game.getStack().getSpell(source.getSourceId());
                         if (spell != null) {
-                            Spell copy = spell.copySpell(player.getId());
-                            game.getStack().push(copy);
-                            copy.chooseNewTargets(game, player.getId());
-                            String activateMessage = copy.getActivatedMessage(game);
-                            if (activateMessage.startsWith(" casts ")) {
-                                activateMessage = activateMessage.substring(6);
+                            StackObject newStackObject = spell.createCopyOnStack(game, source, player.getId(), true);
+                            if (newStackObject != null && newStackObject instanceof Spell) {
+                                String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
+                                if (activateMessage.startsWith(" casts ")) {
+                                    activateMessage = activateMessage.substring(6);
+                                }
+                                game.informPlayers(player.getLogName() + " " + activateMessage);
                             }
-                            game.informPlayers(player.getLogName() + " " + activateMessage);
                         }
                     }
                 }

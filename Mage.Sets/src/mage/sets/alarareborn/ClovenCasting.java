@@ -28,22 +28,18 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.players.Player;
 
 /**
  *
@@ -65,8 +61,9 @@ public class ClovenCasting extends CardImpl {
         this.expansionSetCode = "ARB";
 
         // Whenever you cast a multicolored instant or sorcery spell, you may pay {1}. If you do, copy that spell. You may choose new targets for the copy.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ClovenCastingEffect(), new GenericManaCost(1)), filter, true, true));
-
+        Effect effect = new CopyTargetSpellEffect();
+        effect.setText("copy that spell. You may choose new targets for the copy");
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new GenericManaCost(1)), filter, true, true));
     }
 
     public ClovenCasting(final ClovenCasting card) {
@@ -76,40 +73,5 @@ public class ClovenCasting extends CardImpl {
     @Override
     public ClovenCasting copy() {
         return new ClovenCasting(this);
-    }
-}
-
-class ClovenCastingEffect extends OneShotEffect {
-
-    public ClovenCastingEffect() {
-        super(Outcome.Copy);
-        staticText = "copy that spell. You may choose new targets for the copy";
-    }
-
-    public ClovenCastingEffect(final ClovenCastingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null) {
-            Spell copy = spell.copySpell(source.getControllerId());
-            game.getStack().push(copy);
-            copy.chooseNewTargets(game, source.getControllerId());
-            Player player = game.getPlayer(source.getControllerId());
-            String activateMessage = copy.getActivatedMessage(game);
-            if (activateMessage.startsWith(" casts ")) {
-                activateMessage = activateMessage.substring(6);
-            }
-            game.informPlayers(player.getLogName() + " copies " + activateMessage);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ClovenCastingEffect copy() {
-        return new ClovenCastingEffect(this);
     }
 }

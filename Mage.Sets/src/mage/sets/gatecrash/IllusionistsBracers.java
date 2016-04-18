@@ -102,7 +102,7 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
             if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
                 Effect effect = this.getEffects().get(0);
-                effect.setValue("stackAbility", stackAbility.getStackAbility());
+                effect.setValue("stackAbility", stackAbility);
                 return true;
             }
         }
@@ -133,21 +133,11 @@ class CopyActivatedAbilityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Ability ability = (Ability) getValue("stackAbility");
+        StackAbility ability = (StackAbility) getValue("stackAbility");
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (ability != null && controller != null && sourcePermanent != null) {
-            Ability newAbility = ability.copy();
-            newAbility.newId();
-            game.getStack().push(new StackAbility(newAbility, source.getControllerId()));
-            if (newAbility.getTargets().size() > 0) {
-                if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", source, game)) {
-                    newAbility.getTargets().clearChosen();
-                    if (newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), source.getControllerId(), newAbility, false, game) == false) {
-                        return false;
-                    }
-                }
-            }
+            ability.createCopyOnStack(game, source, source.getControllerId(), true);
             game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(": ").append(controller.getLogName()).append(" copied activated ability").toString());
             return true;
         }
