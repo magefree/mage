@@ -31,6 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.common.SourceHasRemainedOnBattlefieldCondition;
 import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -108,9 +110,21 @@ class DragonlordSilumgarEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (controller != null && sourcePermanent != null && target != null
-                && controller.getId().equals(sourcePermanent.getControllerId())) {
-            game.addEffect(new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom), new SourceOnBattlefieldControlUnchangedCondition(), null), source);
+
+        
+        if (controller != null && sourcePermanent != null && target != null && controller.getId().equals(sourcePermanent.getControllerId())) {
+            SourceHasRemainedOnBattlefieldCondition condition = new SourceHasRemainedOnBattlefieldCondition();
+            condition.setPermanentId(sourcePermanent.getId());
+            SourceHasRemainedOnBattlefieldCondition conditionTarget = new SourceHasRemainedOnBattlefieldCondition();
+            conditionTarget.setPermanentId(target.getId());
+            
+            CompoundCondition conditionBoth = new CompoundCondition(condition, conditionTarget);               
+            
+            game.addEffect(new ConditionalContinuousEffect(
+                    new GainControlTargetEffect(Duration.Custom),
+                    new CompoundCondition(new SourceOnBattlefieldControlUnchangedCondition(), conditionBoth),
+                    null),
+                    source);
             if (!game.isSimulation()) {
                 game.informPlayers(sourcePermanent.getLogName() + ": " + controller.getLogName() + " gained control of " + target.getLogName());
             }
