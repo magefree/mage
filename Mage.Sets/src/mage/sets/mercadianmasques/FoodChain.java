@@ -108,7 +108,7 @@ class FoodChainManaEffect extends ManaEffect {
         for (Cost cost: source.getCosts()) {
             if (cost.isPaid() && cost instanceof ExileTargetCost) {
                 for (Card card : ((ExileTargetCost) cost).getPermanents()) {
-                    manaCostExiled += card.getManaCost().convertedManaCost();
+                    manaCostExiled += card.getConvertedManaCost();
                 }
             }
         }

@@ -100,7 +100,7 @@ class PhyrexianDelverEffect extends OneShotEffect {
             if (game.getState().getZone(creatureCard.getId()).equals(Zone.GRAVEYARD)) {
                 result = controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game);;
             }
-            controller.loseLife(creatureCard.getManaCost().convertedManaCost(), game);
+            controller.loseLife(creatureCard.getConvertedManaCost(), game);
             return result;
         }
         return false;

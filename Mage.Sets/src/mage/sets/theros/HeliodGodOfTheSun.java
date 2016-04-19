@@ -93,10 +93,10 @@ public class HeliodGodOfTheSun extends CardImpl {
 class HeliodGodOfTheSunToken extends Token {
 
     public HeliodGodOfTheSunToken() {
-        super("Cleric", "2/1 white Cleric enchantment creature");
+        super("Cleric", "2/1 white Cleric enchantment creature token");
         this.cardType.add(CardType.CREATURE);
         this.cardType.add(CardType.ENCHANTMENT);
-        
+
         this.subtype.add("Cleric");
         this.color.setWhite(true);
 

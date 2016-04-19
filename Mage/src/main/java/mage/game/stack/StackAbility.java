@@ -580,4 +580,21 @@ public class StackAbility extends StackObjImpl implements Ability {
     public void setCanFizzle(boolean canFizzle) {
         throw new UnsupportedOperationException("Not supported.");
     }
+
+    @Override
+    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
+        Ability newAbility = this.copy();
+        newAbility.newId();
+        StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
+        game.getStack().push(newStackAbility);
+        if (chooseNewTargets && newAbility.getTargets().size() > 0) {
+            Player controller = game.getPlayer(newControllerId);
+            if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", source, game)) {
+                newAbility.getTargets().clearChosen();
+                newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), newControllerId, newAbility, false, game);
+            }
+        }
+        game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
+        return newStackAbility;
+    }
 }

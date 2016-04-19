@@ -96,7 +96,7 @@ class UndyingFlamesEffect extends OneShotEffect {
             if (card != null) {
                 you.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                 if (!card.getCardType().contains(CardType.LAND)) {
-                    int damage = card.getManaCost().convertedManaCost();
+                    int damage = card.getConvertedManaCost();
                     if (damage > 0) {
                         Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                         if (creature != null) {
@@ -107,7 +107,7 @@ class UndyingFlamesEffect extends OneShotEffect {
                         }
                         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                         if (player != null) {
-                            player.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
+                            player.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
                             game.informPlayers(new StringBuilder(sourceCard.getName()).append(" deals ").append(damage).append(" damage to ").append(player.getLogName()).toString());
                             applied = true;
                             break;

@@ -80,6 +80,7 @@
         <tournamentType name="Booster Draft Elimination" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationCubeTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Random)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RandomBoosterDraftEliminationTournament" typeName="mage.tournament.RandomBoosterDraftEliminationTournamentType"/>
+        <tournamentType name="Booster Draft Elimination (Rich Man)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManDraftEliminationTournament" typeName="mage.tournament.RichManDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Swiss" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissCubeTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Random)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RandomBoosterDraftSwissTournament" typeName="mage.tournament.RandomBoosterDraftSwissTournamentType"/>
@@ -111,14 +112,15 @@
     </draftCubes>
     <deckTypes>
         <deckType name="Constructed - Standard" jar="mage-deck-constructed.jar" className="mage.deck.Standard"/>
-        <deckType name="Constructed - Eternal" jar="mage-deck-constructed.jar" className="mage.deck.Eternal"/>
         <deckType name="Constructed - Extended" jar="mage-deck-constructed.jar" className="mage.deck.Extended"/>
         <deckType name="Constructed - Modern" jar="mage-deck-constructed.jar" className="mage.deck.Modern"/>
+        <deckType name="Constructed - Eternal" jar="mage-deck-constructed.jar" className="mage.deck.Eternal"/>
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed.jar" className="mage.deck.Legacy"/>
         <deckType name="Constructed - Vintage" jar="mage-deck-constructed.jar" className="mage.deck.Vintage"/>
         <deckType name="Constructed - Pauper" jar="mage-deck-constructed.jar" className="mage.deck.Pauper"/>
         <deckType name="Constructed - Historical Type 2" jar="mage-deck-constructed.jar" className="mage.deck.HistoricalType2"/>
         <deckType name="Constructed - Super Type 2" jar="mage-deck-constructed.jar" className="mage.deck.SuperType2"/>
+        <deckType name="Constructed - Freeform" jar="mage-deck-constructed.jar" className="mage.deck.Freeform"/>
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed.jar" className="mage.deck.DuelCommander"/>
         <deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed.jar" className="mage.deck.TinyLeaders"/>
@@ -130,6 +132,7 @@
         <deckType name="Block Constructed - Return to Ravnica" jar="mage-deck-constructed.jar" className="mage.deck.ReturnToRavnicaBlock"/>
         <deckType name="Block Constructed - Scars of Mirrodin" jar="mage-deck-constructed.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
         <deckType name="Block Constructed - Shadowmoor" jar="mage-deck-constructed.jar" className="mage.deck.ShadowmoorBlock"/>
+        <deckType name="Block Constructed - Shadows over Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.ShadowsOverInnistradBlock"/>
         <deckType name="Block Constructed - Shards of Alara" jar="mage-deck-constructed.jar" className="mage.deck.ShardsOfAlaraBlock"/>
         <deckType name="Block Constructed - Theros" jar="mage-deck-constructed.jar" className="mage.deck.TherosBlock"/>
         <deckType name="Block Constructed - Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.ZendikarBlock"/>

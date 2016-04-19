@@ -1159,6 +1159,9 @@ public abstract class AbilityImpl implements Ability {
     public MageObject getSourceObject(Game game) {
         if (sourceObject == null) {
             setSourceObject(null, game);
+            if (sourceObject == null) {
+                logger.warn("Source object could not be retrieved: " + this.getRule());
+            }
         }
         return sourceObject;
     }

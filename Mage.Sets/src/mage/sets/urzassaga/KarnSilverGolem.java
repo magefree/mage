@@ -124,7 +124,7 @@ class KarnSilverGolemEffect extends ContinuousEffectImpl {
 
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    int cmc = artifact.getManaCost().convertedManaCost();
+                    int cmc = artifact.getConvertedManaCost();
                     artifact.getPower().setValue(cmc);
                     artifact.getToughness().setValue(cmc);
                 }

@@ -119,7 +119,7 @@ class OpalescenceEffect extends ContinuousEffectImpl {
 
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        int manaCost = permanent.getManaCost().convertedManaCost();
+                        int manaCost = permanent.getConvertedManaCost();
                         permanent.getPower().setValue(manaCost);
                         permanent.getToughness().setValue(manaCost);
                     }

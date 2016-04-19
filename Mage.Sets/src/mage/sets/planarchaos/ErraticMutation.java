@@ -109,7 +109,7 @@ class ErraticMutationEffect extends OneShotEffect {
             }
             // the nonland card
             if (nonLandCard != null) {
-                int boostValue = nonLandCard.getManaCost().convertedManaCost();
+                int boostValue = nonLandCard.getConvertedManaCost();
                 // unboost target
                 ContinuousEffect effect = new BoostTargetEffect(boostValue, -boostValue, Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));

@@ -112,13 +112,13 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
             if (cost.isPaid() && cost instanceof ExileFromHandCost) {
                 for (Card card : ((ExileFromHandCost) cost).getCards()) {
                     if (card instanceof SplitCard) {
-                        if (((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() == amount) {
+                        if (((SplitCard) card).getLeftHalfCard().getConvertedManaCost() == amount) {
                             return true;
                         }
-                        if (((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() == amount) {
+                        if (((SplitCard) card).getRightHalfCard().getConvertedManaCost() == amount) {
                             return true;
                         }
-                    } else if (card.getManaCost().convertedManaCost() == amount) {
+                    } else if (card.getConvertedManaCost() == amount) {
                         return true;
                     }
                 }

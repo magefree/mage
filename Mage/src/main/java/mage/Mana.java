@@ -816,11 +816,11 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Returns if this objects mana contains any mana the same as the passed in
+     * Returns if this objects mana contains any coloured mana the same as the passed in
      * {@link Mana}'s mana.
      *
      * @param mana the mana to check for
-     * @return true if this contains any of the same type of mana that this has
+     * @return true if this contains any of the same type of coloured mana that this has
      */
     public boolean containsAny(final Mana mana) {
         if (mana.black > 0 && this.black > 0) {
@@ -833,9 +833,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return true;
         } else if (mana.green > 0 && this.green > 0) {
             return true;
-        } else if (mana.colorless > 0 && this.colorless > 0) {
-            return true;
-        }
+        } 
 
         return false;
     }

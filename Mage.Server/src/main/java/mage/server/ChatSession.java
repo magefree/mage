@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server;
 
 import java.text.DateFormat;
@@ -73,16 +72,16 @@ public class ChatSession {
 
     public void kill(UUID userId, DisconnectReason reason) {
 
-        try {            
+        try {
             if (reason == null) {
                 logger.fatal("User kill without disconnect reason  userId: " + userId);
                 reason = DisconnectReason.Undefined;
             }
             if (reason != null && userId != null && clients.containsKey(userId)) {
                 String userName = clients.get(userId);
-                if (!reason.equals(DisconnectReason.LostConnection)) { // for lost connection the user will be reconnected or session expire so no remove of chat yet                    
+                if (!reason.equals(DisconnectReason.LostConnection)) { // for lost connection the user will be reconnected or session expire so no remove of chat yet
                     clients.remove(userId);
-                    logger.debug(userName + "(" + reason.toString() + ")" + " removed from chatId " + chatId);                    
+                    logger.debug(userName + "(" + reason.toString() + ")" + " removed from chatId " + chatId);
                 }
                 String message;
                 switch (reason) {
@@ -126,7 +125,7 @@ public class ChatSession {
 
     public boolean broadcastWhisperToUser(User fromUser, User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
-            toUser.fireCallback(new ClientCallback("chatMessage", chatId, 
+            toUser.fireCallback(new ClientCallback("chatMessage", chatId,
                     new ChatMessage(new StringBuilder("Whisper from ").append(fromUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, SoundToPlay.PlayerWhispered)));
             if (clients.containsKey(fromUser.getId())) {
                 fromUser.fireCallback(new ClientCallback("chatMessage", chatId,
@@ -153,22 +152,22 @@ public class ChatSession {
         if (!message.isEmpty()) {
             boolean remove = false;
             final String msg = message;
-            final String time = (withTime ? timeFormatter.format(new Date()):"");
+            final String time = (withTime ? timeFormatter.format(new Date()) : "");
             final String username = userName;
             logger.trace("Broadcasting '" + msg + "' for " + chatId);
-            for (UUID userId: clients.keySet()) {
+            for (UUID userId : clients.keySet()) {
                 User user = UserManager.getInstance().getUser(userId);
                 if (user != null) {
                     user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
-                }
-                else {
-                    logger.error("User not found but connected to chat - userId: " + userId + "  chatId: " + chatId);
+                } else {
+                    // Happens when a user post to a chat while other users left chat at nearly the same time
+                    logger.trace("User not found but connected to chat - userId: " + userId + "  chatId: " + chatId);
                     clientsToRemove.add(userId);
                     remove = true;
                 }
             }
             if (remove) {
-                for (UUID userIdToRemove: clientsToRemove) {
+                for (UUID userIdToRemove : clientsToRemove) {
                     clients.remove(userIdToRemove);
                 }
                 clientsToRemove.clear();
@@ -198,5 +197,5 @@ public class ChatSession {
     public String getInfo() {
         return info;
     }
-    
+
 }

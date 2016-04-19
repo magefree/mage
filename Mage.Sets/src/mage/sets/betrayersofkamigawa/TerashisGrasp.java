@@ -83,7 +83,7 @@ public class TerashisGrasp extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Permanent targetPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
             if (targetPermanent != null) {
-                int cost = targetPermanent.getManaCost().convertedManaCost();
+                int cost = targetPermanent.getConvertedManaCost();
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
                     player.gainLife(cost, game);

@@ -53,6 +53,7 @@ import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentController;
 import mage.server.tournament.TournamentManager;
 import mage.server.tournament.TournamentSession;
+import mage.server.util.ServerMessagesUtil;
 import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
@@ -63,7 +64,7 @@ import org.apache.log4j.Logger;
  */
 public class User {
 
-    private static final Logger LOGGER = Logger.getLogger(User.class);
+    private static final Logger logger = Logger.getLogger(User.class);
 
     public enum UserState {
 
@@ -131,15 +132,15 @@ public class User {
         if (sessionId.isEmpty()) {
             userState = UserState.Disconnected;
             lostConnection();
-            LOGGER.trace("USER - lost connection: " + userName + " id: " + userId);
+            logger.trace("USER - lost connection: " + userName + " id: " + userId);
 
         } else if (userState == UserState.Created) {
             userState = UserState.Connected;
-            LOGGER.trace("USER - created: " + userName + " id: " + userId);
+            logger.trace("USER - created: " + userName + " id: " + userId);
         } else {
             userState = UserState.Reconnected;
             reconnect();
-            LOGGER.trace("USER - reconnected: " + userName + " id: " + userId);
+            logger.trace("USER - reconnected: " + userName + " id: " + userId);
         }
     }
 
@@ -150,6 +151,7 @@ public class User {
             GameManager.getInstance().stopWatching(gameId, userId);
             iterator.remove();
         }
+        ServerMessagesUtil.getInstance().incLostConnection();
     }
 
     public boolean isConnected() {
@@ -275,17 +277,18 @@ public class User {
 
     public boolean isExpired(Date expired) {
         if (lastActivity.before(expired)) {
-            LOGGER.trace(userName + " is expired!");
+            logger.trace(userName + " is expired!");
             userState = UserState.Expired;
             return true;
         }
-        LOGGER.trace(new StringBuilder("isExpired: User ").append(userName).append(" lastActivity: ").append(lastActivity).append(" expired: ").append(expired).toString());
+        logger.trace("isExpired: User " + userName + " lastActivity: " + lastActivity + " expired: " + expired);
         return false;
         /*userState == UserState.Disconnected && */
 
     }
 
     private void reconnect() {
+        logger.trace(userName + " started reconnect");
         for (Entry<UUID, Table> entry : tables.entrySet()) {
             ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
         }
@@ -316,6 +319,8 @@ public class User {
             TableController controller = TableManager.getInstance().getController(entry.getKey());
             ccSideboard(entry.getValue(), entry.getKey(), controller.getRemainingTime(), controller.getOptions().isLimited());
         }
+        ServerMessagesUtil.getInstance().incReconnects();
+        logger.trace(userName + " ended reconnect");
     }
 
     public void addGame(UUID playerId, GameSessionPlayer gameSession) {
@@ -363,35 +368,35 @@ public class User {
     }
 
     public void remove(DisconnectReason reason) {
-        LOGGER.trace("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
+        logger.trace("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
         for (DraftSession draftSession : draftSessions.values()) {
             draftSession.setKilled();
         }
         draftSessions.clear();
-        LOGGER.trace("REMOVE " + getName() + " Tournament sessions " + userTournaments.size());
+        logger.trace("REMOVE " + getName() + " Tournament sessions " + userTournaments.size());
         for (UUID tournamentId : userTournaments.values()) {
             TournamentManager.getInstance().quit(tournamentId, getId());
         }
         userTournaments.clear();
-        LOGGER.trace("REMOVE " + getName() + " Tables " + tables.size());
+        logger.trace("REMOVE " + getName() + " Tables " + tables.size());
         for (Entry<UUID, Table> entry : tables.entrySet()) {
-            LOGGER.debug("-- leave tableId: " + entry.getValue().getId());
+            logger.debug("-- leave tableId: " + entry.getValue().getId());
             TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
         tables.clear();
-        LOGGER.trace("REMOVE " + getName() + " Game sessions: " + gameSessions.size());
+        logger.trace("REMOVE " + getName() + " Game sessions: " + gameSessions.size());
         for (GameSessionPlayer gameSessionPlayer : gameSessions.values()) {
-            LOGGER.debug("-- kill game session of gameId: " + gameSessionPlayer.getGameId());
+            logger.debug("-- kill game session of gameId: " + gameSessionPlayer.getGameId());
             GameManager.getInstance().quitMatch(gameSessionPlayer.getGameId(), userId);
             gameSessionPlayer.quitGame();
         }
         gameSessions.clear();
-        LOGGER.trace("REMOVE " + getName() + " watched Games " + watchedGames.size());
+        logger.trace("REMOVE " + getName() + " watched Games " + watchedGames.size());
         for (UUID gameId : watchedGames) {
             GameManager.getInstance().stopWatching(gameId, userId);
         }
         watchedGames.clear();
-        LOGGER.trace("REMOVE " + getName() + " Chats ");
+        logger.trace("REMOVE " + getName() + " Chats ");
         ChatManager.getInstance().removeUser(userId, reason);
     }
 
@@ -450,11 +455,11 @@ public class User {
                                 }
                             } else {
                                 // can happen if tournamet has just ended
-                                LOGGER.debug(getName() + " tournament player missing - tableId:" + table.getId(), null);
+                                logger.debug(getName() + " tournament player missing - tableId:" + table.getId(), null);
                                 tablesToDelete.add(tableEntry.getKey());
                             }
                         } else {
-                            LOGGER.error(getName() + " tournament key missing - tableId: " + table.getId(), null);
+                            logger.error(getName() + " tournament key missing - tableId: " + table.getId(), null);
                         }
                     } else {
                         switch (table.getState()) {

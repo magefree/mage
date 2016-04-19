@@ -92,21 +92,10 @@ class StrionicResonatorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(targetPointer.getFirst(game, source));
         if (stackAbility != null) {
-            Ability ability = (Ability) stackAbility.getStackAbility();
             Player controller = game.getPlayer(source.getControllerId());
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (ability != null && controller != null && sourcePermanent != null) {
-                Ability newAbility = ability.copy();
-                newAbility.newId();
-                game.getStack().push(new StackAbility(newAbility, source.getControllerId()));
-                if (newAbility.getTargets().size() > 0) {
-                    if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", source, game)) {
-                        newAbility.getTargets().clearChosen();
-                        if (newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), source.getControllerId(), newAbility, false, game) == false) {
-                            return false;
-                        }
-                    }
-                }
+            if (controller != null && sourcePermanent != null) {
+                stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
                 game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(": ").append(controller.getLogName()).append(" copied activated ability").toString());
                 return true;
             }

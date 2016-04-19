@@ -196,7 +196,7 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
                             }
                         }
                     }
-
+                    game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, copy.getId(), spell.getId(), source.getControllerId()));
                     String activateMessage = copy.getActivatedMessage(game);
                     if (activateMessage.startsWith(" casts ")) {
                         activateMessage = activateMessage.substring(6);

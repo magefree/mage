@@ -105,7 +105,7 @@ class StormchaserChimeraEffect extends OneShotEffect {
             player.revealCards(sourcePermanent.getName(), cards, game);
 
             if (card != null) {
-                game.addEffect(new BoostSourceEffect(card.getManaCost().convertedManaCost(), 0, Duration.EndOfTurn), source);
+                game.addEffect(new BoostSourceEffect(card.getConvertedManaCost(), 0, Duration.EndOfTurn), source);
                 return true;
             }
         }

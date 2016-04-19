@@ -106,11 +106,11 @@ class ErraticExplosionEffect extends OneShotEffect {
             if (nonLandCard != null) {
                 Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                 if (targetCreature != null) {
-                    targetCreature.damage(nonLandCard.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
+                    targetCreature.damage(nonLandCard.getConvertedManaCost(), source.getSourceId(), game, false, true);
                 } else {
                     Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                     if (targetPlayer != null) {
-                        targetPlayer.damage(nonLandCard.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
+                        targetPlayer.damage(nonLandCard.getConvertedManaCost(), source.getSourceId(), game, false, true);
                     }
                 }
             }

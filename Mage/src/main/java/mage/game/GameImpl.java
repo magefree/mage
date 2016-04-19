@@ -131,7 +131,6 @@ import mage.watchers.common.DamageDoneWatcher;
 import mage.watchers.common.MorbidWatcher;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
 import mage.watchers.common.PlayerLostLifeWatcher;
-import mage.watchers.common.SoulbondWatcher;
 import org.apache.log4j.Logger;
 
 public abstract class GameImpl implements Game, Serializable {
@@ -1007,7 +1006,6 @@ public abstract class GameImpl implements Game, Serializable {
         }
         watchers.add(new MorbidWatcher());
         watchers.add(new CastSpellLastTurnWatcher());
-        watchers.add(new SoulbondWatcher());
         watchers.add(new PlayerLostLifeWatcher());
         watchers.add(new BlockedAttackerWatcher());
         watchers.add(new DamageDoneWatcher());
@@ -1244,7 +1242,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (player != null) {
             player.getUserData().setUseFirstManaAbility(useFirstManaAbility);
         }
-    }    
+    }
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
@@ -1687,7 +1685,7 @@ public abstract class GameImpl implements Game, Serializable {
                 if (perm.getPairedCard() != null) {
                     //702.93e.: ...another player gains control
                     // ...or the creature it's paired with leaves the battlefield.
-                    Permanent paired = getPermanent(perm.getPairedCard());
+                    Permanent paired = perm.getPairedCard().getPermanent(this);
                     if (paired == null || !perm.getControllerId().equals(paired.getControllerId()) || paired.getPairedCard() == null) {
                         perm.setPairedCard(null);
                         if (paired != null) {
@@ -1698,7 +1696,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             } else if (perm.getPairedCard() != null) {
                 //702.93e.: ...stops being a creature
-                Permanent paired = getPermanent(perm.getPairedCard());
+                Permanent paired = perm.getPairedCard().getPermanent(this);
                 perm.setPairedCard(null);
                 if (paired != null) {
                     paired.setPairedCard(null);
@@ -1893,18 +1891,20 @@ public abstract class GameImpl implements Game, Serializable {
                 filterLegendName.add(new NamePredicate(legend.getName()));
                 filterLegendName.add(new ControllerIdPredicate(legend.getControllerId()));
                 if (getBattlefield().contains(filterLegendName, legend.getControllerId(), this, 2)) {
-                    Player controller = this.getPlayer(legend.getControllerId());
-                    if (controller != null) {
-                        Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                        targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
-                        controller.chooseTarget(Outcome.Benefit, targetLegendaryToKeep, null, this);
-                        for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
-                            if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
-                                movePermanentToGraveyardWithInfo(dupLegend);
+                    if (!replaceEvent(GameEvent.getEvent(GameEvent.EventType.DESTROY_PERMANENT_BY_LEGENDARY_RULE, legend.getId(), legend.getControllerId()))) {
+                        Player controller = this.getPlayer(legend.getControllerId());
+                        if (controller != null) {
+                            Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
+                            targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
+                            controller.chooseTarget(Outcome.Benefit, targetLegendaryToKeep, null, this);
+                            for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
+                                if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
+                                    movePermanentToGraveyardWithInfo(dupLegend);
+                                }
                             }
                         }
+                        return true;
                     }
-                    return true;
                 }
             }
         }
@@ -1963,6 +1963,8 @@ public abstract class GameImpl implements Game, Serializable {
             message = "Play instants and activated abilities.";
         }
         playerQueryEventSource.select(playerId, message);
+        getState().clearLookedAt();
+        getState().clearRevealed();
     }
 
     @Override

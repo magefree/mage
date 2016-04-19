@@ -108,7 +108,7 @@ class HoardSmelterEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         Card targeted = game.getCard(source.getFirstTarget());
         if (targeted != null) {
-            costValue = targeted.getManaCost().convertedManaCost();
+            costValue = targeted.getConvertedManaCost();
         }
     }
 

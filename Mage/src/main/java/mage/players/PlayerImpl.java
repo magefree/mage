@@ -839,7 +839,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         }
         if (permanent.getPairedCard() != null) {
-            Permanent pairedCard = game.getPermanent(permanent.getPairedCard());
+            Permanent pairedCard = permanent.getPairedCard().getPermanent(game);
             if (pairedCard != null) {
                 pairedCard.clearPairedCard();
             }
@@ -1238,6 +1238,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 if (!ability.isUsesStack()) {
                     ability.resolve(game);
+                }
+                else {
+                    game.fireEvent(new GameEvent(EventType.TRIGGERED_ABILITY, ability.getId(), ability.getSourceId(), ability.getControllerId()));
                 }
                 game.removeBookmark(bookmark);
                 return true;
@@ -1836,6 +1839,18 @@ public abstract class PlayerImpl implements Player, Serializable {
                 counters.addCounter(eventCounter);
                 game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), counter.getCount()));
             }
+        }
+    }
+
+    @Override
+    public void removeCounters(String name, int amount, Ability source, Game game) {
+        for (int i = 0; i < amount; i++) {
+            counters.removeCounter(name, 1);
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED,
+                    getId(), (source == null ? null : source.getSourceId()), (source == null ? null : source.getControllerId()));
+            event.setData(name);
+            event.setAmount(1);
+            game.fireEvent(event);
         }
     }
 

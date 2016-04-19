@@ -36,6 +36,8 @@ public class SiftThroughSandsTest extends CardTestPlayerBase {
      *
     */
     
+    // TODO: This test fails sometimes if building the complete test project
+    // The cause is still unknown
     // test that The Unspeakable is put onto the battlefield
     @Test
     public void testTheUnspeakable() {

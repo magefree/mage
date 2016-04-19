@@ -198,5 +198,4 @@ class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
     public OtherworldlyJourneyEntersBattlefieldEffect copy() {
         return new OtherworldlyJourneyEntersBattlefieldEffect(this);
     }
-
 }

@@ -29,6 +29,7 @@ package mage.abilities.keyword;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -51,12 +52,15 @@ import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author LevelX2
  */
 public class AwakenAbility extends SpellAbility {
+    
+    private static final Logger logger = Logger.getLogger(AwakenAbility.class);
 
     static private String filterMessage = "a land you control to awake";
 
@@ -120,19 +124,33 @@ public class AwakenAbility extends SpellAbility {
         @Override
         public boolean apply(Game game, Ability source) {
             UUID targetId = null;
-            for (Target target : source.getTargets()) {
-                if (target.getFilter().getMessage().equals(filterMessage)) {
-                    targetId = target.getFirstTarget();
+            if (source != null && source.getTargets() != null) {
+                for (Target target : source.getTargets()) {
+                    if (target.getFilter() != null && target.getFilter().getMessage().equals(filterMessage)) {
+                        targetId = target.getFirstTarget();
+                    }
                 }
-            }
-            if (targetId != null) {
-                FixedTarget fixedTarget = new FixedTarget(targetId);
-                ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.Custom);
-                continuousEffect.setTargetPointer(fixedTarget);
-                game.addEffect(continuousEffect, source);
-                Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(awakenValue));
-                effect.setTargetPointer(fixedTarget);
-                return effect.apply(game, source);
+                if (targetId != null) {
+                    FixedTarget fixedTarget = new FixedTarget(targetId);
+                    ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.Custom);
+                    continuousEffect.setTargetPointer(fixedTarget);
+                    game.addEffect(continuousEffect, source);
+                    Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(awakenValue));
+                    effect.setTargetPointer(fixedTarget);
+                    return effect.apply(game, source);
+                }
+            } else { // source should never be null, but we are seeing a lot of NPEs from this section
+                if (source == null) {
+                    logger.fatal("Source was null in AwakenAbility: Create a bug report or fix the source code");
+                } else if (source.getTargets() == null) {
+                    MageObject sourceObj = source.getSourceObject(game);
+                    if (sourceObj != null) {                        
+                        Class<? extends MageObject> sourceClass = sourceObj.getClass();
+                        if (sourceClass != null) {                            
+                            logger.fatal("getTargets was null in AwakenAbility for " + sourceClass.toString() + " : Create a bug report or fix the source code");
+                        }                        
+                    }
+                }
             }
             return true;
         }

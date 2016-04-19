@@ -84,7 +84,7 @@ public class EliteArcanist extends CardImpl {
             if (sourcePermanent != null && sourcePermanent.getImprinted() != null && !sourcePermanent.getImprinted().isEmpty()) {
                 Card imprintedInstant = game.getCard(sourcePermanent.getImprinted().get(0));
                 if (imprintedInstant != null) {
-                    int cmc = imprintedInstant.getManaCost().convertedManaCost();
+                    int cmc = imprintedInstant.getConvertedManaCost();
                     if (cmc > 0) {
                         ability.getManaCostsToPay().clear();
                         ability.getManaCostsToPay().add(new GenericManaCost(cmc));

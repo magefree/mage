@@ -93,8 +93,8 @@ class HedronMatrixEffect extends ContinuousEffectImpl {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(equipment.getAttachedTo());
             if (creature != null) {
-                creature.addPower(creature.getManaCost().convertedManaCost());
-                creature.addToughness(creature.getManaCost().convertedManaCost());
+                creature.addPower(creature.getConvertedManaCost());
+                creature.addToughness(creature.getConvertedManaCost());
             }
         }
         return true;

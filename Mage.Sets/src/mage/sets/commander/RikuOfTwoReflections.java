@@ -29,17 +29,15 @@ package mage.sets.commander;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.PutTokenOntoBattlefieldCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
@@ -49,9 +47,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.players.Player;
 
 /**
  *
@@ -82,10 +77,12 @@ public class RikuOfTwoReflections extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an instant or sorcery spell, you may pay {U}{R}. If you do, copy that spell. You may choose new targets for the copy.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new RikuOfTwoReflectionsCopyEffect(), new ManaCostsImpl("{U}{R}")), filter, false, true));
+        Effect effect = new CopyTargetSpellEffect();
+        effect.setText("copy that spell. You may choose new targets for the copy");
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new ManaCostsImpl("{U}{R}")), filter, false, true));
 
         // Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, put a token that's a copy of that creature onto the battlefield.
-        Effect effect = new DoIfCostPaid(new PutTokenOntoBattlefieldCopyTargetEffect(),
+        effect = new DoIfCostPaid(new PutTokenOntoBattlefieldCopyTargetEffect(),
                 new ManaCostsImpl("{G}{U}"), "Put a token that's a copy of that creature onto the battlefield?");
         effect.setText("you may pay {G}{U}. If you do, put a token that's a copy of that creature onto the battlefield");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterPermanent, false, SetTargetPointer.PERMANENT, null));
@@ -98,40 +95,5 @@ public class RikuOfTwoReflections extends CardImpl {
     @Override
     public RikuOfTwoReflections copy() {
         return new RikuOfTwoReflections(this);
-    }
-}
-
-class RikuOfTwoReflectionsCopyEffect extends OneShotEffect {
-
-    public RikuOfTwoReflectionsCopyEffect() {
-        super(Outcome.Copy);
-        staticText = "copy that spell. You may choose new targets for the copy";
-    }
-
-    public RikuOfTwoReflectionsCopyEffect(final RikuOfTwoReflectionsCopyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null) {
-            Spell copy = spell.copySpell(source.getControllerId());;
-            game.getStack().push(copy);
-            copy.chooseNewTargets(game, source.getControllerId());
-            Player player = game.getPlayer(source.getControllerId());
-            String activateMessage = copy.getActivatedMessage(game);
-            if (activateMessage.startsWith(" casts ")) {
-                activateMessage = activateMessage.substring(6);
-            }
-            game.informPlayers(player.getLogName() + " copies " + activateMessage);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public RikuOfTwoReflectionsCopyEffect copy() {
-        return new RikuOfTwoReflectionsCopyEffect(this);
     }
 }

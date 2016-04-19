@@ -123,7 +123,7 @@ public class BanefulOmen extends CardImpl {
                 player.revealCards("Baneful Omen", cards, game);
 
                 if (card != null) {
-                    int loseLife = card.getManaCost().convertedManaCost();
+                    int loseLife = card.getConvertedManaCost();
                     Set<UUID> opponents = game.getOpponents(source.getControllerId());
                     for (UUID opponentUuid : opponents) {
                         Player opponent = game.getPlayer(opponentUuid);

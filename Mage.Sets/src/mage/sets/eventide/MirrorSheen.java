@@ -31,10 +31,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -43,9 +42,7 @@ import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetSpell;
 
@@ -56,7 +53,7 @@ import mage.target.TargetSpell;
  */
 public class MirrorSheen extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell();
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell that targets you");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
@@ -68,7 +65,7 @@ public class MirrorSheen extends CardImpl {
         this.expansionSetCode = "EVE";
 
         // {1}{UR}{UR}: Copy target instant or sorcery spell that targets you. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirrorSheenEffect(), new ManaCostsImpl("{1}{U/R}{U/R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{1}{U/R}{U/R}"));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
 
@@ -81,41 +78,6 @@ public class MirrorSheen extends CardImpl {
     @Override
     public MirrorSheen copy() {
         return new MirrorSheen(this);
-    }
-}
-
-class MirrorSheenEffect extends OneShotEffect {
-
-    public MirrorSheenEffect() {
-        super(Outcome.Copy);
-        staticText = "Copy target instant or sorcery spell that targets you.  You may choose new targets for the copy";
-    }
-
-    public MirrorSheenEffect(final MirrorSheenEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(source.getFirstTarget());
-        if (spell != null) {
-            Spell copy = spell.copySpell(source.getControllerId());
-            game.getStack().push(copy);
-            copy.chooseNewTargets(game, source.getControllerId());
-            Player player = game.getPlayer(source.getControllerId());
-            String activateMessage = copy.getActivatedMessage(game);
-            if (activateMessage.startsWith(" casts ")) {
-                activateMessage = activateMessage.substring(6);
-            }
-            game.informPlayers(player.getLogName() + " copies " + activateMessage);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public MirrorSheenEffect copy() {
-        return new MirrorSheenEffect(this);
     }
 }
 

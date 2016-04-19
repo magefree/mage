@@ -27,27 +27,21 @@
  */
 package mage.sets.weatherlight;
 
-import java.util.Iterator;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffects;
-import mage.abilities.effects.ContinuousEffectsList;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffect;
-import mage.abilities.mana.ManaAbility;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.events.GameEvent.EventType;
-import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -117,7 +111,6 @@ class ManaWebTriggeredAbility extends TriggeredAbilityImpl {
 
 class ManaWebeffect extends OneShotEffect {
 
-    private int attackers;
     private final static FilterLandPermanent filter = new FilterLandPermanent("an opponent taps a land");
 
     public ManaWebeffect() {

@@ -102,7 +102,7 @@ class EnergyTapEffect extends OneShotEffect {
         if (targetCreature != null) {
             applied = targetCreature.tap(game);
             if (applied) {
-                player.getManaPool().addMana(new Mana(0, 0, 0, 0, 0, 0, 0, targetCreature.getManaCost().convertedManaCost()), game, source);
+                player.getManaPool().addMana(new Mana(0, 0, 0, 0, 0, 0, 0, targetCreature.getConvertedManaCost()), game, source);
             }
         }
         return applied;

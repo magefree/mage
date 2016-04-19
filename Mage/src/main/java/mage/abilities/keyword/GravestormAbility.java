@@ -109,9 +109,7 @@ class GravestormEffect extends OneShotEffect {
                         game.informPlayers("Gravestorm: " + spell.getName() + " will be copied " + gravestormCount + " time" + (gravestormCount > 1 ? "s" : ""));
                     }
                     for (int i = 0; i < gravestormCount; i++) {
-                        Spell copy = spell.copySpell(source.getControllerId());
-                        game.getStack().push(copy);
-                        copy.chooseNewTargets(game, source.getControllerId());
+                        spell.createCopyOnStack(game, source, source.getControllerId(), true);
                     }
                 }
             }

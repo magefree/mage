@@ -11,8 +11,8 @@ import mage.remote.traffic.ZippedObjectImpl;
 public class CompressUtil {
 
     /**
-     * Defines should data be compressed or not. True by default.
-     * Read from system property:
+     * Defines should data be compressed or not. True by default. Read from
+     * system property:
      */
     private static boolean compressData = true;
 
@@ -28,10 +28,12 @@ public class CompressUtil {
     /**
      * Hidden constructor
      */
-    private CompressUtil() {}
+    private CompressUtil() {
+    }
 
     /**
-     * Decompress data, but only if it was compressed previously return original object otherwise.
+     * Decompress data, but only if it was compressed previously return original
+     * object otherwise.
      *
      * @param data Data to decompress
      * @return Decompressed object
@@ -40,7 +42,7 @@ public class CompressUtil {
         if (data == null || !(data instanceof ZippedObject)) {
             return data;
         }
-        return ((ZippedObject)data).unzip();
+        return ((ZippedObject) data).unzip();
     }
 
     /**
@@ -51,7 +53,7 @@ public class CompressUtil {
      */
     public static Object compress(Object data) {
         if (data != null && compressData) {
-            return new ZippedObjectImpl<Object>(data);
+            return new ZippedObjectImpl<>(data);
         }
         return null;
     }

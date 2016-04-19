@@ -158,7 +158,7 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
                     UUID permanentId = targetPointer.getFirst(game, source);
                     Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
                     if (permanent != null){
-                        int manaCost = permanent.getManaCost().convertedManaCost();
+                        int manaCost = permanent.getConvertedManaCost();
                         permanent.getPower().setValue(manaCost);
                         permanent.getToughness().setValue(manaCost);
                     }

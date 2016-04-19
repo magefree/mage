@@ -64,7 +64,6 @@ public class Leeches extends CardImpl {
     }
 }
 
-
 class LeechesEffect extends OneShotEffect {
 
     public LeechesEffect() {
@@ -91,7 +90,7 @@ class LeechesEffect extends OneShotEffect {
 
         int countPoisonCounters = targetPlayer.getCounters().getCount(CounterType.POISON);
         if (countPoisonCounters > 0) {
-            targetPlayer.getCounters().removeCounter(CounterType.POISON, countPoisonCounters);
+            targetPlayer.removeCounters(CounterType.POISON.getName(), countPoisonCounters, source, game);
             targetPlayer.damage(countPoisonCounters, source.getSourceId(), game, false, true);
             return true;
         }

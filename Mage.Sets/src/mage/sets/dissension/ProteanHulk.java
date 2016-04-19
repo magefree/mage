@@ -132,7 +132,7 @@ class ProteanHulkEffect extends OneShotEffect {
                     if (librarySearchLimit == 0) {
                         break;
                     }
-                    manaCostLeftToFetch -= card.getManaCost().convertedManaCost();
+                    manaCostLeftToFetch -= card.getConvertedManaCost();
                     filter = new FilterCreatureCard("number of creature cards with total converted mana cost 6 or less (" + manaCostLeftToFetch + " CMC left)");
                     filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, manaCostLeftToFetch + 1));
                     target = new TargetCardInLibrary(0, 1, filter);

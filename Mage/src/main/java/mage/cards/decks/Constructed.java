@@ -60,6 +60,10 @@ public class Constructed extends DeckValidator {
         super(name);
     }
 
+    public List<String> getSetCodes() {
+        return setCodes;
+    }
+
     @Override
     public boolean validate(Deck deck) {
         logger.debug("DECK validate start: " + name + " deckname: " + deck.getName());
@@ -141,7 +145,7 @@ public class Constructed extends DeckValidator {
         logger.debug("DECK validate end: " + name + " deckname: " + deck.getName() + " invalids:" + invalid.size());
         return valid;
     }
-    
+
     /**
      * Checks if the given card is legal in any of the given rarities
      * @param card - the card to check

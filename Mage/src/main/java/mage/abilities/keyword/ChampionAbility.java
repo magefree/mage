@@ -39,11 +39,13 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -74,8 +76,8 @@ public class ChampionAbility extends StaticAbility {
     protected String[] subtypes;
     protected String objectDescription;
 
-    public ChampionAbility(Card card, String subtype) {
-        this(card, new String[]{subtype});
+    public ChampionAbility(Card card, String subtype, boolean requiresCreature) {
+        this(card, new String[]{subtype}, requiresCreature);
     }
 
     /**
@@ -85,8 +87,9 @@ public class ChampionAbility extends StaticAbility {
      * @param card
      * @param subtypes subtypes to champion with, if empty all creatures can be
      * used
+     * @param requiresCreature for cards that specifically require championing another creature
      */
-    public ChampionAbility(Card card, String[] subtypes) {
+    public ChampionAbility(Card card, String[] subtypes, boolean requiresCreature) {
         super(Zone.BATTLEFIELD, null);
 
         this.subtypes = subtypes;
@@ -110,6 +113,9 @@ public class ChampionAbility extends StaticAbility {
         FilterControlledPermanent filter = new FilterControlledPermanent(objectDescription);
         if (!subtypesPredicates.isEmpty()) {
             filter.add(Predicates.or(subtypesPredicates));
+        }
+        if (requiresCreature) {
+            filter.add(new CardTypePredicate(CardType.CREATURE));
         }
         filter.add(new AnotherPredicate());
 

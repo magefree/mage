@@ -64,7 +64,7 @@ public class DiregrafEscort extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Soulbond
-        this.addAbility(SoulbondAbility.getInstance());
+        this.addAbility(new SoulbondAbility());
 
         // As long as Diregraf Escort is paired with another creature, both creatures have protection from Zombies.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(new ProtectionAbility(filter), ruleText)));

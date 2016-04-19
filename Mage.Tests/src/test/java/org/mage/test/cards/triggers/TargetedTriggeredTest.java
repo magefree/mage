@@ -46,7 +46,7 @@ public class TargetedTriggeredTest extends CardTestPlayerBase {
      */
     @Test
     @Ignore
-    // this does currently not work in test, because the target event will be fired earlier during tests,
+    // this does not currently work in test, because the target event will be fired earlier during tests,
     // so the zone change counter for the fixed target of the counterspell will not work
     public void testKiraGreatGlassSpinnerFirstSpellTurn() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);

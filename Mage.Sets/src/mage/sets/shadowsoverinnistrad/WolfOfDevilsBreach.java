@@ -98,7 +98,7 @@ class WolfOfDevilsBreachDiscardCostCardConvertedMana implements DynamicValue {
                             DiscardCardCost discardCost = (DiscardCardCost) cost;
                             int cmc = 0;
                             for (Card card : discardCost.getCards()) {
-                                cmc += card.getManaCost().convertedManaCost();
+                                cmc += card.getConvertedManaCost();
                             }
                             return cmc;
                         }

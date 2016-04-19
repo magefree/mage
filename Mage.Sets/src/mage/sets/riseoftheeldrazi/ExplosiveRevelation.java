@@ -104,7 +104,7 @@ class ExplosiveRevelationEffect extends OneShotEffect {
                 player.revealCards("Explosive Revelation", cards, game);
             }
             // the nonland card
-            int damage = card.getManaCost().convertedManaCost();
+            int damage = card.getConvertedManaCost();
             // assign damage to target
             for (UUID targetId: targetPointer.getTargets(game, source)) {
                 Permanent targetedCreature = game.getPermanent(targetId);

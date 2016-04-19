@@ -68,20 +68,19 @@ public class UginTest extends CardTestPlayerBase {
         block(3, playerB, "Ashaya, the Awoken World", "Silvercoat Lion");
 
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X: Exile each permanent with converted mana cost X or less that's one or more colors");
-        setChoice(playerA, "X=0");
+        setChoice(playerA, "X=3");
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Ugin, the Spirit Dragon", 1);
-        assertCounterCount("Ugin, the Spirit Dragon", CounterType.LOYALTY, 9);  // 7 + 2 - 0
+        assertCounterCount("Ugin, the Spirit Dragon", CounterType.LOYALTY, 6);  // 7 + 2 - 3
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Ashaya, the Awoken World", 0);
 
         assertExileCount("Nissa, Vastwood Seer", 1);
-
-        assertCounterCount("Quest for the Gravelord", CounterType.QUEST, 1);
+        assertExileCount("Quest for the Gravelord", 1);
 
         assertLife(playerA, 20);
         assertLife(playerB, 17);

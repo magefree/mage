@@ -91,7 +91,7 @@ class IgniteMemoriesEffect extends OneShotEffect {
             Card card = player.getHand().getRandom(game);
             revealed.add(card);
             player.revealCards("Ignite Memories", revealed, game);
-            player.damage(card.getManaCost().convertedManaCost(), id, game, false, true);
+            player.damage(card.getConvertedManaCost(), id, game, false, true);
             return true;
         }
         return false;

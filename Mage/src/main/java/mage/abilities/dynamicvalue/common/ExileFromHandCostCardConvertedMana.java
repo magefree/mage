@@ -51,7 +51,7 @@ public class ExileFromHandCostCardConvertedMana implements DynamicValue {
             if (cost.isPaid() && cost instanceof ExileFromHandCost) {
                 int xValue = 0;
                 for (Card card : ((ExileFromHandCost) cost).getCards()) {
-                    xValue += card.getManaCost().convertedManaCost();
+                    xValue += card.getConvertedManaCost();
                 }
                 return xValue;
             }

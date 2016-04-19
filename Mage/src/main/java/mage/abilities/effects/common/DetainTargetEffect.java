@@ -136,7 +136,7 @@ class DetainRestrictionEffect extends RestrictionEffect {
         for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.addInfo(new StringBuilder("detain").append(getId()).toString(), "[Detained]", game);
+                permanent.addInfo("detain" + getId(), CardUtil.addToolTipMarkTags("Detained"), game);
             }
         }
     }

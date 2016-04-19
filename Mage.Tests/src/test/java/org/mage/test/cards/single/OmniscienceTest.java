@@ -160,7 +160,7 @@ public class OmniscienceTest extends CardTestPlayerBase {
      * working.
      */
     @Test
-    @Ignore  // targeting of fused/split spells not supported by thestplayer
+    @Ignore  // targeting of fused/split spells not supported by testplayer
     public void testCastingFusedSpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);

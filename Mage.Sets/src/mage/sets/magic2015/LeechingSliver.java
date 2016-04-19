@@ -29,22 +29,26 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
+import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.SetTargetPointer;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  * @author noxx
  */
 public class LeechingSliver extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Sliver you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver you control");
 
     static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Sliver"));
     }
 
@@ -57,7 +61,7 @@ public class LeechingSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a Sliver you control attacks, defending player loses 1 life.
-        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new LoseLifeDefendingPlayerEffect(1, true), false, filter, true));
+        this.addAbility(new AttacksAllTriggeredAbility(new LoseLifeDefendingPlayerEffect(1, true), false, filter, SetTargetPointer.PERMANENT, true));
     }
 
     public LeechingSliver(final LeechingSliver card) {

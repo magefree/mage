@@ -88,14 +88,14 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
         for (UUID targetId : this.getTargets()) {
             Card card = game.getCard(targetId);
             if (card != null) {
-                cmcLeft -= card.getManaCost().convertedManaCost();
+                cmcLeft -= card.getConvertedManaCost();
             }
         }
         Set<UUID> possibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> leftPossibleTargets = new HashSet<>();
         for (UUID targetId : possibleTargets) {
             Card card = game.getCard(targetId);
-            if (card != null && card.getManaCost().convertedManaCost() <= cmcLeft) {
+            if (card != null && card.getConvertedManaCost() <= cmcLeft) {
                 leftPossibleTargets.add(targetId);
             }
         }
@@ -110,11 +110,11 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
             for (UUID targetId : this.getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null) {
-                    cmcLeft -= card.getManaCost().convertedManaCost();
+                    cmcLeft -= card.getConvertedManaCost();
                 }
             }
             Card card = game.getCard(objectId);
-            return card != null && card.getManaCost().convertedManaCost() <= cmcLeft;
+            return card != null && card.getConvertedManaCost() <= cmcLeft;
         }
         return false;
     }

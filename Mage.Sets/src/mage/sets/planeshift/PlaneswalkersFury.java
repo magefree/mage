@@ -90,7 +90,7 @@ class PlaneswalkersFuryEffect extends OneShotEffect {
             if (card != null) {
                 revealed.add(card);
                 opponent.revealCards("Planeswalker's Fury", revealed, game);
-                opponent.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
+                opponent.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
             }
             return true;
         }

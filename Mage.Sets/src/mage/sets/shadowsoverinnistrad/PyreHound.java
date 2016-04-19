@@ -56,7 +56,7 @@ public class PyreHound extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // Whenever you cast an instant or sorcery spell, put a +1/+1 counter on Pyre Hound.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new FilterInstantOrSorcerySpell("an instant or sorcery spell"), true));
+                new FilterInstantOrSorcerySpell("an instant or sorcery spell"), false));
     }
 
     public PyreHound(final PyreHound card) {

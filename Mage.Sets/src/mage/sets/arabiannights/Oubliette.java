@@ -49,7 +49,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 

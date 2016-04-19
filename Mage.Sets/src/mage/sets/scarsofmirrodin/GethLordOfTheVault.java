@@ -124,7 +124,7 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                 Player player = game.getPlayer(card.getOwnerId());
                 if (player != null) {
-                    player.moveCards(player.getLibrary().getTopCards(game, card.getManaCost().convertedManaCost()), Zone.GRAVEYARD, source, game);
+                    player.moveCards(player.getLibrary().getTopCards(game, card.getConvertedManaCost()), Zone.GRAVEYARD, source, game);
                 }
             }
             return true;

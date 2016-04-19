@@ -106,7 +106,10 @@ public class ManaPoolItem implements Serializable {
     }
 
     public UUID getSourceId() {
-        return sourceObject.getId();
+        if (sourceObject != null) {
+            return sourceObject.getId();
+        }
+        return null;
     }
 
     public UUID getOriginalId() {

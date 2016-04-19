@@ -44,6 +44,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetSpell;
@@ -104,15 +105,15 @@ class MeletisCharlatanCopyTargetSpellEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
-            Spell copy = spell.copySpell(source.getControllerId());
-            game.getStack().push(copy);
-            copy.chooseNewTargets(game, spell.getControllerId());
+            StackObject newStackObject = spell.createCopyOnStack(game, source, spell.getControllerId(), true);
             Player player = game.getPlayer(spell.getControllerId());
-            String activateMessage = copy.getActivatedMessage(game);
-            if (activateMessage.startsWith(" casts ")) {
-                activateMessage = activateMessage.substring(6);
+            if (player != null && newStackObject != null && newStackObject instanceof Spell) {
+                String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
+                if (activateMessage.startsWith(" casts ")) {
+                    activateMessage = activateMessage.substring(6);
+                }
+                game.informPlayers(player.getLogName() + " copies " + activateMessage);
             }
-            game.informPlayers(player.getLogName() + " copies " + activateMessage);;
             return true;
         }
         return false;

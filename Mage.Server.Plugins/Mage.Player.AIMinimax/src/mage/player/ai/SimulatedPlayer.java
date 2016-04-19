@@ -28,6 +28,8 @@
 
 package mage.player.ai;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
@@ -41,9 +43,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import org.apache.log4j.Logger;
-
-import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  *
@@ -239,7 +238,9 @@ public class SimulatedPlayer extends ComputerPlayer {
             if (logger.isDebugEnabled())
                 logger.debug("simulating -- triggered ability:" + ability);
             game.getStack().push(new StackAbility(ability, playerId));
-            ability.activate(game, false);
+            if (ability.activate(game, false) && ability.isUsesStack()) {
+                game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability.getSourceId(), ability.getControllerId()));
+            }
             game.applyEffects();
             game.getPlayers().resetPassed();
         }
@@ -258,6 +259,9 @@ public class SimulatedPlayer extends ComputerPlayer {
         Game sim = game.copy();
         sim.getStack().push(new StackAbility(ability, playerId));
         ability.activate(sim, false);
+        if (ability.activate(sim, false) && ability.isUsesStack()) {
+            game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability.getSourceId(), ability.getControllerId()));
+        }
         sim.applyEffects();
         SimulationNode newNode = new SimulationNode(parent, sim, playerId);
         logger.debug(indent(newNode.getDepth()) + "simulating -- node #:" + SimulationNode.getCount() + " triggered ability option");

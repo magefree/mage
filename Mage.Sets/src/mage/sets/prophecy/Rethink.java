@@ -87,7 +87,7 @@ class RethinkEffect extends OneShotEffect {
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
-                GenericManaCost cost = new GenericManaCost(spell.getManaCost().convertedManaCost());
+                GenericManaCost cost = new GenericManaCost(spell.getConvertedManaCost());
                 if (!cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }

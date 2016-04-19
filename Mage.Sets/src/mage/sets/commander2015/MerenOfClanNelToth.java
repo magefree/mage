@@ -122,7 +122,7 @@ class MerenOfClanNelTothEffect extends OneShotEffect {
             if (card != null) {
                 Zone targetZone = Zone.HAND;
                 String text = " put into hand of ";
-                if (card.getManaCost().convertedManaCost() <= amount) {
+                if (card.getConvertedManaCost() <= amount) {
                     targetZone = Zone.BATTLEFIELD;
                     text = " put onto battlefield for ";
                 }

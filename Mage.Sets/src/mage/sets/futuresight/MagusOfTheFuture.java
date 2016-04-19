@@ -55,9 +55,9 @@ public class MagusOfTheFuture extends CardImpl {
 
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
-        
+
         // You may play the top card of your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(new FilterCard())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect()));
     }
 
     public MagusOfTheFuture(final MagusOfTheFuture card) {

@@ -103,7 +103,7 @@ class PainSeerEffect extends OneShotEffect {
 
             if (card != null &&
                 card.moveToZone(Zone.HAND, source.getSourceId(), game, false)) {
-                player.loseLife(card.getManaCost().convertedManaCost(), game);
+                player.loseLife(card.getConvertedManaCost(), game);
                 return true;
             }
         }

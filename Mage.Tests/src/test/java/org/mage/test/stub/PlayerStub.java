@@ -348,12 +348,11 @@ public class PlayerStub implements Player {
         return false;
     }
 
-        
     @Override
     public boolean getPassedAllTurns() {
         return false;
     }
-    
+
     @Override
     public boolean getPassedUntilEndStepBeforeMyTurn() {
         return false;
@@ -1020,6 +1019,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void removeCounters(String name, int amount, Ability source, Game game) {
+
+    }
+
+    @Override
     public List<UUID> getAttachments() {
         return null;
     }
@@ -1178,10 +1182,10 @@ public class PlayerStub implements Player {
     public UUID getCastSourceIdWithAlternateMana() {
         return null;
     }
-    
+
     @Override
     public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
-        
+
     }
 
     @Override

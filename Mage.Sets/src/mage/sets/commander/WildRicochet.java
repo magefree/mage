@@ -28,18 +28,15 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
+import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.target.TargetStackObject;
 
 /**
@@ -61,9 +58,11 @@ public class WildRicochet extends CardImpl {
         this.expansionSetCode = "CMD";
 
         // You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy.
-        this.getSpellAbility().addEffect(new WildRicochetEffect());
+        this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect());
+        Effect effect = new CopyTargetSpellEffect();
+        effect.setText("Then copy that spell. You may choose new targets for the copy");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetStackObject(filter));
-
     }
 
     public WildRicochet(final WildRicochet card) {
@@ -73,39 +72,5 @@ public class WildRicochet extends CardImpl {
     @Override
     public WildRicochet copy() {
         return new WildRicochet(this);
-    }
-}
-
-class WildRicochetEffect extends OneShotEffect {
-
-    public WildRicochetEffect() {
-        super(Outcome.Neutral);
-        staticText = "You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy";
-    }
-
-    public WildRicochetEffect(final WildRicochetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(source.getFirstTarget());
-        Player you = game.getPlayer(source.getControllerId());
-        if (spell != null && you != null && you.chooseUse(Outcome.Benefit, "Do you wish to choose new targets for " + spell.getName() + "?", source, game)) {
-            spell.chooseNewTargets(game, you.getId());
-        }
-        if (spell != null) {
-            Spell copy = spell.copySpell(source.getControllerId());;
-            game.getStack().push(copy);
-            if (you != null && you.chooseUse(Outcome.Benefit, "Do you wish to choose new targets for the copied " + spell.getName() + "?", source, game)) {
-                return copy.chooseNewTargets(game, you.getId());
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public WildRicochetEffect copy() {
-        return new WildRicochetEffect(this);
     }
 }

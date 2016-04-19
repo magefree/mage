@@ -24,10 +24,8 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.server.util;
-
-import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,10 +39,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import org.apache.log4j.Logger;
 
 /**
- * Handles server messages (Messages of the Day).
- * Reloads messages every 5 minutes.
+ * Handles server messages (Messages of the Day). Reloads messages every 5
+ * minutes.
  *
  * @author nantuko
  */
@@ -66,6 +65,8 @@ public class ServerMessagesUtil {
     private static long startDate;
     private static final AtomicInteger gamesStarted = new AtomicInteger(0);
     private static final AtomicInteger tournamentsStarted = new AtomicInteger(0);
+    private static final AtomicInteger lostConnection = new AtomicInteger(0);
+    private static final AtomicInteger reconnects = new AtomicInteger(0);
 
     static {
         pathToExternalMessages = System.getProperty("messagesPath");
@@ -102,6 +103,7 @@ public class ServerMessagesUtil {
             newMessages.addAll(motdMessages);
         }
         newMessages.add(getServerStatistics());
+        newMessages.add(getServerStatistics2());
 
         lock.writeLock().lock();
         try {
@@ -166,7 +168,7 @@ public class ServerMessagesUtil {
 
     private String getServerStatistics() {
         long current = System.currentTimeMillis();
-        long hours = ((current - startDate)/(1000*60*60));
+        long hours = ((current - startDate) / (1000 * 60 * 60));
         StringBuilder statistics = new StringBuilder("Server uptime: ");
         statistics.append(hours);
         statistics.append(" hour(s), games played: ");
@@ -176,12 +178,25 @@ public class ServerMessagesUtil {
         return statistics.toString();
     }
 
+    private String getServerStatistics2() {
+        long current = System.currentTimeMillis();
+        long minutes = ((current - startDate) / (1000 * 60));
+        if (minutes == 0) {
+            minutes = 1;
+        }
+        StringBuilder statistics = new StringBuilder("Disconnects: ");
+        statistics.append(lostConnection.get());
+        statistics.append(" avg/hour ").append(lostConnection.get() * 60 / minutes);
+        statistics.append(" Reconnects: ").append(reconnects.get());
+        statistics.append(" avg/hour ").append(reconnects.get() * 60 / minutes);
+        return statistics.toString();
+    }
+
 //    private Timer timer = new Timer(1000 * 60, new ActionListener() {
 //        public void actionPerformed(ActionEvent e) {
 //            reloadMessages();
 //        }
 //    });
-
     public void setStartDate(long milliseconds) {
         this.startDate = milliseconds;
     }
@@ -200,5 +215,18 @@ public class ServerMessagesUtil {
         } while (!tournamentsStarted.compareAndSet(value, value + 1));
     }
 
+    public void incReconnects() {
+        int value;
+        do {
+            value = reconnects.get();
+        } while (!reconnects.compareAndSet(value, value + 1));
+    }
+
+    public void incLostConnection() {
+        int value;
+        do {
+            value = lostConnection.get();
+        } while (!lostConnection.compareAndSet(value, value + 1));
+    }
 
 }

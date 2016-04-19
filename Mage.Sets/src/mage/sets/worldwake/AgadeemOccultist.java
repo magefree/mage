@@ -112,7 +112,7 @@ class AgadeemOccultistEffect extends OneShotEffect {
                 if (!target.getTargets().isEmpty()) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        if (card.getManaCost().convertedManaCost() <= allycount) {
+                        if (card.getConvertedManaCost() <= allycount) {
                             return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                         }
                     }

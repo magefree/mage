@@ -110,9 +110,9 @@ class DiscipleOfDeceitEffect extends OneShotEffect {
                     if (card == null) {
                         return false;
                     }
-                    String targetName = new StringBuilder("card with converted mana cost of ").append(card.getManaCost().convertedManaCost()).toString();
+                    String targetName = new StringBuilder("card with converted mana cost of ").append(card.getConvertedManaCost()).toString();
                     FilterCard filter = new FilterCard(targetName);
-                    filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, card.getManaCost().convertedManaCost()));
+                    filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, card.getConvertedManaCost()));
                     return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true).apply(game, source);                    
                 }
             }

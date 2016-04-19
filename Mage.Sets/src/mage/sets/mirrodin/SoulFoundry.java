@@ -86,7 +86,7 @@ public class SoulFoundry extends CardImpl {
                     Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
                     if (imprinted != null) {
                         ability.getManaCostsToPay().clear();
-                        ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaCost().convertedManaCost()));
+                        ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getConvertedManaCost()));
                     }
                 }
             }
