@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -44,7 +45,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -60,7 +61,10 @@ public class DragonWhelp extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new ManaCostsImpl("{R}"));
@@ -80,6 +84,17 @@ public class DragonWhelp extends CardImpl {
 
 class DragonWhelpEffect extends OneShotEffect {
 
+    class ActivationInfo {
+
+        public int turnNum;
+        public int activationCounter;
+
+        public ActivationInfo(int turnNum, int activationCounter) {
+            this.turnNum = turnNum;
+            this.activationCounter = activationCounter;
+        }
+    }
+
     public DragonWhelpEffect() {
         super(Outcome.Damage);
         this.staticText = "If this ability has been activated four or more times this turn, sacrifice {this} at the beginning of the next end step";
@@ -96,46 +111,28 @@ class DragonWhelpEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Integer amount = (Integer) game.getState().getValue(source.getSourceId().toString() + "DragonWhelp");
-        if (amount == null) {
-            amount = 0;
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DragonWhelpDelayedEffect());
+        ActivationInfo activationInfo = getActivationInfo(source, game);
+        ++activationInfo.activationCounter;
+        setActivationInfo(activationInfo, source, game);
+        if (activationInfo.activationCounter == 4) {
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect());
             game.addDelayedTriggeredAbility(delayedAbility, source);
         }
-        amount++;
-        game.getState().setValue(source.getSourceId().toString() + "DragonWhelp", amount);
-
         return true;
     }
-}
 
-class DragonWhelpDelayedEffect extends OneShotEffect {
-
-    public DragonWhelpDelayedEffect() {
-        super(Outcome.Damage);
-        this.staticText = "If this ability has been activated four or more times this turn, sacrifice {this} at the beginning of the next end step";
-    }
-
-    public DragonWhelpDelayedEffect(final DragonWhelpDelayedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DragonWhelpDelayedEffect copy() {
-        return new DragonWhelpDelayedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Integer amount = (Integer) game.getState().getValue(source.getSourceId().toString() + "DragonWhelp");
-        if (amount != null && amount >= 4) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
-            }
+    private ActivationInfo getActivationInfo(Ability source, Game game) {
+        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn", source.getSourceId(), game));
+        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount", source.getSourceId(), game));
+        if (turnNum == null || activationCount == null) {
+            turnNum = game.getTurnNum();
+            activationCount = 0;
         }
-        game.getState().setValue(source.getSourceId().toString() + "DragonWhelp", null);
+        return new ActivationInfo(turnNum, activationCount);
+    }
 
-        return true;
+    private void setActivationInfo(ActivationInfo activationInfo, Ability source, Game game) {
+        game.getState().setValue(CardUtil.getCardZoneString("activationsTurn", source.getSourceId(), game), activationInfo.turnNum);
+        game.getState().setValue(CardUtil.getCardZoneString("activationsCount", source.getSourceId(), game), activationInfo.activationCounter);
     }
 }
