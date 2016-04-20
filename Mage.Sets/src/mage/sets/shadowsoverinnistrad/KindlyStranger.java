@@ -29,23 +29,15 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
 
 /**
  *
@@ -67,9 +59,6 @@ public class KindlyStranger extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new TransformSourceEffect(true), new ManaCostsImpl<>("{2}{B}"), DeliriumCondition.getInstance()));
-
-        // When this creature transforms into Demon-Possessed Witch, you may destroy target creature.
-        this.addAbility(new DemonPossessedWitchAbility());
     }
 
     public KindlyStranger(final KindlyStranger card) {
@@ -79,46 +68,5 @@ public class KindlyStranger extends CardImpl {
     @Override
     public KindlyStranger copy() {
         return new KindlyStranger(this);
-    }
-}
-
-class DemonPossessedWitchAbility extends TriggeredAbilityImpl {
-
-    public DemonPossessedWitchAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
-        Target target = new TargetPermanent(new FilterCreaturePermanent());
-        this.addTarget(target);
-        // Rule only shown on the night side
-        this.setRuleVisible(false);
-    }
-
-    public DemonPossessedWitchAbility(final DemonPossessedWitchAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DemonPossessedWitchAbility copy() {
-        return new DemonPossessedWitchAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(sourceId)) {
-            Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.isTransformed()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When this creature transforms into Demon-Possessed Witch, you may destroy target creature.";
     }
 }

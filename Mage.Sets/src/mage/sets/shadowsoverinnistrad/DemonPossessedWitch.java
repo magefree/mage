@@ -29,12 +29,18 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -57,7 +63,7 @@ public class DemonPossessedWitch extends CardImpl {
         this.nightCard = true;
 
         // When this creature transforms into Demon-Possessed Witch, you may destroy target creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect(rule)));
+        this.addAbility(new DemonPossessedWitchAbility());
     }
 
     public DemonPossessedWitch(final DemonPossessedWitch card) {
@@ -67,5 +73,44 @@ public class DemonPossessedWitch extends CardImpl {
     @Override
     public DemonPossessedWitch copy() {
         return new DemonPossessedWitch(this);
+    }
+}
+
+class DemonPossessedWitchAbility extends TriggeredAbilityImpl {
+
+    public DemonPossessedWitchAbility() {
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
+        Target target = new TargetPermanent(new FilterCreaturePermanent());
+        this.addTarget(target);
+    }
+
+    public DemonPossessedWitchAbility(final DemonPossessedWitchAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public DemonPossessedWitchAbility copy() {
+        return new DemonPossessedWitchAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TRANSFORMED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getTargetId().equals(sourceId)) {
+            Permanent permanent = game.getPermanent(sourceId);
+            if (permanent != null && permanent.isTransformed()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When this creature transforms into Demon-Possessed Witch, you may destroy target creature.";
     }
 }
