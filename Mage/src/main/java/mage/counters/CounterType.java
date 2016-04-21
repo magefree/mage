@@ -46,6 +46,7 @@ public enum CounterType {
     CORPSE("corpse"),
     CREDIT("credit"),
     CRYSTAL("crystal"),
+    CUBE("cube"),
     DELAY("delay"),
     DEPLETION("depletion"),
     DESPAIR("despair"),

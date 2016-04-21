@@ -25,20 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivationInfo;
-import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -46,67 +44,61 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author MarcoMarin
  */
-public class DragonWhelp extends CardImpl {
+public class DelifsCone extends CardImpl {
 
-    public DragonWhelp(UUID ownerId) {
-        super(ownerId, 133, "Dragon Whelp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Dragon");
+    public DelifsCone(UUID ownerId) {
+        super(ownerId, 169, "Delif's Cone", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
+        this.expansionSetCode = "FEM";
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
+        Ability ability2 = new AttacksAndIsNotBlockedTriggeredAbility(new DelifsConeEffect(), true);
+        ability2.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn));
+        // {tap}, Sacrifice Delif's Cone: This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{R}"));
-        ability.addEffect(new DragonWhelpEffect());
+                new GainAbilityTargetEffect(ability2, Duration.EndOfTurn),
+                new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        
         this.addAbility(ability);
+        
     }
 
-    public DragonWhelp(final DragonWhelp card) {
+    public DelifsCone(final DelifsCone card) {
         super(card);
     }
 
     @Override
-    public DragonWhelp copy() {
-        return new DragonWhelp(this);
+    public DelifsCone copy() {
+        return new DelifsCone(this);
     }
 }
-
-class DragonWhelpEffect extends OneShotEffect {
-
-    public DragonWhelpEffect() {
+class DelifsConeEffect extends OneShotEffect{
+                      
+    public DelifsConeEffect() {
         super(Outcome.Damage);
-        this.staticText = "If this ability has been activated four or more times this turn, sacrifice {this} at the beginning of the next end step";
+        this.setText("you may gain life equal to its power");
     }
-
-    public DragonWhelpEffect(final DragonWhelpEffect effect) {
+    
+    public DelifsConeEffect(final DelifsConeEffect effect) {
         super(effect);
     }
-
+    
     @Override
-    public DragonWhelpEffect copy() {
-        return new DragonWhelpEffect(this);
+    public DelifsConeEffect copy() {
+        return new DelifsConeEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ActivationInfo activationInfo = ActivationInfo.getInstance(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-        activationInfo.addActivation(game);
-        if (activationInfo.getActivationCounter() == 4) {
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect());
-            game.addDelayedTriggeredAbility(delayedAbility, source);
-        }
-        return true;
+        Permanent perm = game.getPermanent(source.getSourceId());
+        GainLifeEffect lifeEffect = new GainLifeEffect(perm.getPower().getValue());
+        return lifeEffect.apply(game, source);        
     }
-
 }

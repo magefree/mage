@@ -25,23 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
 import mage.MageInt;
+import static mage.Mana.BlackMana;
 import mage.abilities.Ability;
 import mage.abilities.ActivationInfo;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -49,53 +48,49 @@ import mage.game.Game;
 
 /**
  *
- * @author North
+ * @author MarcoMarin
  */
-public class DragonWhelp extends CardImpl {
+public class InitiatesOfTheEbonHand extends CardImpl {
 
-    public DragonWhelp(UUID ownerId) {
-        super(ownerId, 133, "Dragon Whelp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Dragon");
+    public InitiatesOfTheEbonHand(UUID ownerId) {
+        super(ownerId, 16, "Initiates of the Ebon Hand", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{R}"));
-        ability.addEffect(new DragonWhelpEffect());
+        // {1}: Add {B} to your mana pool. If this ability has been activated four or more times this turn, sacrifice Initiates of the Ebon Hand at the beginning of the next end step.
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD,
+                new BasicManaEffect(BlackMana(1)),
+                new ManaCostsImpl("{1}"));
+        ability.addEffect(new InitiatesOfTheEbonHandEffect());
         this.addAbility(ability);
     }
 
-    public DragonWhelp(final DragonWhelp card) {
+    public InitiatesOfTheEbonHand(final InitiatesOfTheEbonHand card) {
         super(card);
     }
 
     @Override
-    public DragonWhelp copy() {
-        return new DragonWhelp(this);
+    public InitiatesOfTheEbonHand copy() {
+        return new InitiatesOfTheEbonHand(this);
     }
 }
 
-class DragonWhelpEffect extends OneShotEffect {
+class InitiatesOfTheEbonHandEffect extends OneShotEffect {
 
-    public DragonWhelpEffect() {
+    public InitiatesOfTheEbonHandEffect() {
         super(Outcome.Damage);
         this.staticText = "If this ability has been activated four or more times this turn, sacrifice {this} at the beginning of the next end step";
     }
 
-    public DragonWhelpEffect(final DragonWhelpEffect effect) {
+    public InitiatesOfTheEbonHandEffect(final InitiatesOfTheEbonHandEffect effect) {
         super(effect);
     }
 
     @Override
-    public DragonWhelpEffect copy() {
-        return new DragonWhelpEffect(this);
+    public InitiatesOfTheEbonHandEffect copy() {
+        return new InitiatesOfTheEbonHandEffect(this);
     }
 
     @Override
