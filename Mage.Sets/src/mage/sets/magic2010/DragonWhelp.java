@@ -30,6 +30,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.ActivationInfo;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -45,7 +46,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.util.CardUtil;
 
 /**
  *
@@ -84,17 +84,6 @@ public class DragonWhelp extends CardImpl {
 
 class DragonWhelpEffect extends OneShotEffect {
 
-    class ActivationInfo {
-
-        public int turnNum;
-        public int activationCounter;
-
-        public ActivationInfo(int turnNum, int activationCounter) {
-            this.turnNum = turnNum;
-            this.activationCounter = activationCounter;
-        }
-    }
-
     public DragonWhelpEffect() {
         super(Outcome.Damage);
         this.staticText = "If this ability has been activated four or more times this turn, sacrifice {this} at the beginning of the next end step";
@@ -111,28 +100,13 @@ class DragonWhelpEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ActivationInfo activationInfo = getActivationInfo(source, game);
-        ++activationInfo.activationCounter;
-        setActivationInfo(activationInfo, source, game);
-        if (activationInfo.activationCounter == 4) {
+        ActivationInfo activationInfo = ActivationInfo.getInstance(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        activationInfo.addActivation(game);
+        if (activationInfo.getActivationCounter() == 4) {
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect());
             game.addDelayedTriggeredAbility(delayedAbility, source);
         }
         return true;
     }
 
-    private ActivationInfo getActivationInfo(Ability source, Game game) {
-        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn", source.getSourceId(), game));
-        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount", source.getSourceId(), game));
-        if (turnNum == null || activationCount == null) {
-            turnNum = game.getTurnNum();
-            activationCount = 0;
-        }
-        return new ActivationInfo(turnNum, activationCount);
-    }
-
-    private void setActivationInfo(ActivationInfo activationInfo, Ability source, Game game) {
-        game.getState().setValue(CardUtil.getCardZoneString("activationsTurn", source.getSourceId(), game), activationInfo.turnNum);
-        game.getState().setValue(CardUtil.getCardZoneString("activationsCount", source.getSourceId(), game), activationInfo.activationCounter);
-    }
 }
