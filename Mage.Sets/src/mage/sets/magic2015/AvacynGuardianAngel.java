@@ -30,7 +30,6 @@ package mage.sets.magic2015;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -151,8 +150,6 @@ class AvacynGuardianAngelPreventToPlayerEffect extends PreventionEffectImpl {
     public AvacynGuardianAngelPreventToPlayerEffect(AvacynGuardianAngelPreventToPlayerEffect effect) {
         super(effect);
     }
-
-
 
     @Override
     public boolean apply(Game game, Ability source) {
