@@ -49,7 +49,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -74,8 +73,8 @@ public class Oubliette extends CardImpl {
         this.addAbility(ability1);
         
         // When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        //Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD, true), false);
-        //this.addAbility(ability2);
+        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new OublietteReturnEffect(), false);
+        this.addAbility(ability2);
     }
 
     public Oubliette(final Oubliette card) {
@@ -99,7 +98,7 @@ class OublietteEffect extends OneShotEffect {
 
     public OublietteEffect() {
         super(Outcome.Detriment);
-        this.staticText = "4Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature. When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.";
+        this.staticText = "Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature. When Oubliette leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.";
     }
 
     public OublietteEffect(final OublietteEffect effect) {
@@ -125,7 +124,7 @@ class OublietteEffect extends OneShotEffect {
         if (enchantment != null) { //back to code (mostly) copied from Flickerform
             Permanent enchantedCreature = game.getPermanent(targetId);
             if (enchantedCreature != null) {
-                UUID exileZoneId = UUID.randomUUID();
+                UUID exileZoneId = source.getSourceId();
                 enchantedCreature.moveToExile(exileZoneId, enchantment.getName(), source.getSourceId(), game);
                 for (UUID attachementId : enchantedCreature.getAttachments()) {
                     Permanent attachment = game.getPermanent(attachementId);
@@ -134,16 +133,20 @@ class OublietteEffect extends OneShotEffect {
                     }
                 }
                 
-                //((Oubliette)enchantment.getMainCard()).godHelpMe = enchantedCreature.getCounters(game);
-                //((Oubliette)game.getCard(source.getSourceId())).godHelpMe = enchantedCreature.getCounters(game).copy();
-                
+                //((Oubliette)enchantment.getMainCard()).godHelpMe = enchantedCreature.getCounters(game); //why doesn't work? should return the same card, no?
+                ((Oubliette)game.getCard(source.getSourceId())).godHelpMe = enchantedCreature.getCounters(game).copy();
+                /*
                 if (!(enchantedCreature instanceof Token)) {
                 
                     // If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature
                     LeavesBattlefieldTriggeredAbility triggeredAbility = new LeavesBattlefieldTriggeredAbility(
-                            new OublietteReturnEffect(enchantedCreature.getId(), exileZoneId, enchantment), false);
-                    enchantment.addAbility(triggeredAbility, source.getSourceId(), game);                    
-                }
+                            new OublietteReturnEffect(), false);
+                    //enchantment.addAbility(triggeredAbility, source.getSourceId(), game, false);
+                    //Card card = game.getCard(source.getSourceId());
+                    //game.getState().addOtherAbility(card, triggeredAbility);
+                
+                    
+                }*/
                 return true;
             }
         }
@@ -161,24 +164,15 @@ class OublietteReturnEffect extends OneShotEffect {
         filterAura.add(new SubtypePredicate("Aura"));
     }
 
-    private final UUID enchantedCardId;
-    private final UUID exileZoneId;
-    private final Permanent oubliette;
     
-    public OublietteReturnEffect(UUID enchantedCardId, UUID exileZoneId, Permanent oubliette) {
+    public OublietteReturnEffect() {
         super(Outcome.Benefit);
-        this.enchantedCardId = enchantedCardId;
-        this.exileZoneId = exileZoneId;
-        this.oubliette = oubliette;
         this.staticText = "return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.";
         
     }
 
     public OublietteReturnEffect(final OublietteReturnEffect effect) {
         super(effect);
-        this.enchantedCardId = effect.enchantedCardId;
-        this.exileZoneId = effect.exileZoneId;
-        this.oubliette = effect.oubliette;
     }
 
     @Override
@@ -188,19 +182,23 @@ class OublietteReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
-        Card enchantedCard = exileZone.get(enchantedCardId, game);
-        if (enchantedCard != null) {
+        ExileZone exileZone = game.getExile().getExileZone(source.getSourceId());
+        
+        FilterCard filter = new FilterCard();
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+        //There should be only 1 there, but the for each loop seems the most practical to get to it
+        for (Card enchantedCard : exileZone.getCards(filter, game)){
+            if (enchantedCard == null) continue;
             enchantedCard.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), enchantedCard.getOwnerId());
-            Permanent newPermanent = game.getPermanent(enchantedCardId);
+            Permanent newPermanent = game.getPermanent(enchantedCard.getId());
             if (newPermanent != null) {
                 newPermanent.tap(game);
                 for (Card enchantment : exileZone.getCards(game)) {
                     if (filterAura.match(enchantment, game)) {
                         boolean canTarget = false;
                         for (Target target : enchantment.getSpellAbility().getTargets()) {
-                            Filter filter = target.getFilter();
-                            if (filter.match(newPermanent, game)) {
+                            Filter filter2 = target.getFilter();
+                            if (filter2.match(newPermanent, game)) {
                                 canTarget = true;
                                 break;
                             }
@@ -217,6 +215,7 @@ class OublietteReturnEffect extends OneShotEffect {
                         }
                     }
                 }
+                Card oubliette = game.getCard(source.getSourceId());
                 if (oubliette == null) return false;//1st stab at getting those counters back
                 for(Counter c : ((Oubliette)oubliette).godHelpMe.values()){ //would be nice if could just use that copy function to set the whole field
                     if(c!=null) newPermanent.getCounters(game).addCounter(c);                    
@@ -225,6 +224,7 @@ class OublietteReturnEffect extends OneShotEffect {
             }
             return true;
         }
+        
         return false;
     }
 }
