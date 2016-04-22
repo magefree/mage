@@ -29,42 +29,43 @@ package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
-import mage.abilities.effects.common.DoIfClashWonEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.SwitchPowerToughnessSourceEffect;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author Styxo
  */
-public class Ringskipper extends CardImpl {
+public class TurtleshellChangeling extends CardImpl {
 
-    public Ringskipper(UUID ownerId) {
-        super(ownerId, 81, "Ringskipper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+    public TurtleshellChangeling(UUID ownerId) {
+        super(ownerId, 94, "Turtleshell Changeling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+        this.subtype.add("Shapesifter");
 
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(4);
 
-        //Flying
-        this.addAbility(FlyingAbility.getInstance());
+        //Changeling
+        this.addAbility(ChangelingAbility.getInstance());
 
-        //When {this} is put into graveyard from play, clash with an opponent. If you win return {this} to its owner's hand 
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfClashWonEffect(new ReturnToHandSourceEffect())));
+        //{1}{U}: Switch {this}'s power and toughness until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
     }
 
-    public Ringskipper(final Ringskipper card) {
+    public TurtleshellChangeling(final TurtleshellChangeling card) {
         super(card);
     }
 
     @Override
-    public Ringskipper copy() {
-        return new Ringskipper(this);
+    public TurtleshellChangeling copy() {
+        return new TurtleshellChangeling(this);
     }
 }

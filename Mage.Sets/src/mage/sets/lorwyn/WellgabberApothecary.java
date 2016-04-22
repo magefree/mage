@@ -29,42 +29,55 @@ package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
-import mage.abilities.effects.common.DoIfClashWonEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Styxo
  */
-public class Ringskipper extends CardImpl {
+public class WellgabberApothecary extends CardImpl {
 
-    public Ringskipper(UUID ownerId) {
-        super(ownerId, 81, "Ringskipper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "LRW";
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target tapped Merfolk or Kithkin creature this turn");
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        //Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        //When {this} is put into graveyard from play, clash with an opponent. If you win return {this} to its owner's hand 
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfClashWonEffect(new ReturnToHandSourceEffect())));
+    static {
+        filter.add(new TappedPredicate());
+        filter.add(Predicates.or(new SubtypePredicate("Merfolk"), new SubtypePredicate("Kithkin")));
     }
 
-    public Ringskipper(final Ringskipper card) {
+    public WellgabberApothecary(UUID ownerId) {
+        super(ownerId, 47, "Wellgabber Apothecary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Cleric");
+
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // {1}{W} : Prevent all damage that would be dealt to target tapped Merfolk or Kithkin creatuer this turn
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new ManaCostsImpl("{1}{W}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+
+    }
+
+    public WellgabberApothecary(final WellgabberApothecary card) {
         super(card);
     }
 
     @Override
-    public Ringskipper copy() {
-        return new Ringskipper(this);
+    public WellgabberApothecary copy() {
+        return new WellgabberApothecary(this);
     }
 }

@@ -29,42 +29,44 @@ package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.DoIfClashWonEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Styxo
  */
-public class Ringskipper extends CardImpl {
+public class SpringjackKnight extends CardImpl {
 
-    public Ringskipper(UUID ownerId) {
-        super(ownerId, 81, "Ringskipper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+    public SpringjackKnight(UUID ownerId) {
+        super(ownerId, 41, "Springjack Knight", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+        this.subtype.add("Kithkin");
+        this.subtype.add("Knight");
 
-        this.power = new MageInt(1);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        //Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        //When {this} is put into graveyard from play, clash with an opponent. If you win return {this} to its owner's hand 
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfClashWonEffect(new ReturnToHandSourceEffect())));
+        //Whenever {this} attacks, clash with an opponent. If you win, target creature gains double strike until end of turn.
+        Ability ability = new AttacksTriggeredAbility(new DoIfClashWonEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn)), false);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public Ringskipper(final Ringskipper card) {
+    public SpringjackKnight(final SpringjackKnight card) {
         super(card);
     }
 
     @Override
-    public Ringskipper copy() {
-        return new Ringskipper(this);
+    public SpringjackKnight copy() {
+        return new SpringjackKnight(this);
     }
 }
