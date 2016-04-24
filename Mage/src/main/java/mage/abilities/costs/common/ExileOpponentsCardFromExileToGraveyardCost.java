@@ -27,11 +27,7 @@ import mage.target.common.TargetCardInExile;
 public class ExileOpponentsCardFromExileToGraveyardCost extends CostImpl {
 
     public ExileOpponentsCardFromExileToGraveyardCost(boolean thatPlayersText) {
-        if (false) {
-            this.text = "put a card an opponent owns from exile into its owner's graveyard";
-        } else {
-            this.text = "put a card an opponent owns from exile into that player's graveyard";
-        }
+        this.text = "put a card an opponent owns from exile into that player's graveyard";
     }
 
     public ExileOpponentsCardFromExileToGraveyardCost(ExileOpponentsCardFromExileToGraveyardCost cost) {
