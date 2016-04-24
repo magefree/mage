@@ -124,7 +124,7 @@ class ActivatedLoyaltyAbilityWatcher extends Watcher {
         return new ActivatedLoyaltyAbilityWatcher(this);
     }
 
-    public boolean activatedLayaltyAbility(UUID playerId) {
+    public boolean activatedLoyaltyAbility(UUID playerId) {
         return playerIds.contains(playerId);
     }
 }
@@ -177,7 +177,7 @@ class TheChainVeilCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         ActivatedLoyaltyAbilityWatcher watcher = (ActivatedLoyaltyAbilityWatcher) game.getState().getWatchers().get("ActivatedLoyaltyAbilityWatcher");
         if (watcher != null) {
-            if (!watcher.activatedLayaltyAbility(source.getControllerId())) {
+            if (!watcher.activatedLoyaltyAbility(source.getControllerId())) {
                 return true;
             }
         }
