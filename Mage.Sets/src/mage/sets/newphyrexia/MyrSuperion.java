@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreatureCard;
  */
 public class MyrSuperion extends CardImpl {
 
-    private static FilterCreatureCard filter = new FilterCreatureCard();
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public MyrSuperion(UUID ownerId) {
         super(ownerId, 146, "Myr Superion", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
