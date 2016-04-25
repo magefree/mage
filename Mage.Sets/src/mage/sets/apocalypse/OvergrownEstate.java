@@ -28,13 +28,13 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -49,10 +49,7 @@ public class OvergrownEstate extends CardImpl {
     public OvergrownEstate(UUID ownerId) {
         super(ownerId, 113, "Overgrown Estate", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}{W}");
         this.expansionSetCode = "APC";
-
-
-
-
+        
         // Sacrifice a land: You gain 3 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
