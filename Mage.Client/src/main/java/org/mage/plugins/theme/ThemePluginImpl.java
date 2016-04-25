@@ -1,22 +1,19 @@
 package org.mage.plugins.theme;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.Map;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import mage.client.dialog.PreferencesDialog;
 import mage.components.ImagePanel;
 import mage.interfaces.plugin.ThemePlugin;
-import mage.client.dialog.PreferencesDialog;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.*;
-import java.io.InputStream;
-import java.util.Map;
 
 @PluginImplementation
 @Author(name = "nantuko")
@@ -67,9 +64,9 @@ public class ThemePluginImpl implements ThemePlugin {
     public void applyInGame(Map<String, JComponent> ui) {
         BufferedImage backgroundImage;
         try {
-            if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BATTLEFIELD_IMAGE_DEFAULT,"true").equals("true")) {
+            if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BATTLEFIELD_IMAGE_DEFAULT, "true").equals("true")) {
                 backgroundImage = loadbuffer_default();
-            } else if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BATTLEFIELD_IMAGE_RANDOM,"true").equals("true")) {
+            } else if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BATTLEFIELD_IMAGE_RANDOM, "true").equals("true")) {
                 backgroundImage = loadbuffer_random();
             } else if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BATTLEFIELD_IMAGE, "") != null) {
                 backgroundImage = loadbuffer_selected();
@@ -89,7 +86,7 @@ public class ThemePluginImpl implements ThemePlugin {
 
                 unsetOpaque(ui.get("jSplitPane1"));
                 unsetOpaque(ui.get("pnlBattlefield"));
-                unsetOpaque(ui.get("jPanel3"));
+                unsetOpaque(ui.get("pnlHelperHandButtonsStackArea"));
                 unsetOpaque(ui.get("hand"));
                 unsetOpaque(ui.get("gameChatPanel"));
                 unsetOpaque(ui.get("userChatPanel"));

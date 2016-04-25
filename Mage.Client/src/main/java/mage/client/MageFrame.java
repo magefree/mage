@@ -1069,11 +1069,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (setActive) {
             setActive(tablesPane);
         } else // if other panel was already shown, mamke sure it's topmost again
-        {
-            if (topPanebefore != null) {
+         if (topPanebefore != null) {
                 setActive(topPanebefore);
             }
-        }
     }
 
     public void hideGames() {
@@ -1358,13 +1356,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     disableButtons();
                     hideGames();
                     hideTables();
+                    session.disconnect(false);
                     if (errorCall) {
                         UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect?");
                         message.setButton1("No", null);
                         message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
                         showUserRequestDialog(message);
-                    } else {
-                        session.disconnect(false);
                     }
                 }
             }

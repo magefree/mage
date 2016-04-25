@@ -130,7 +130,6 @@ import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_LAST;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_FIRST;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_LAST;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
-import mage.constants.UseFirstManaAbilityMode;
 import mage.constants.Zone;
 import mage.game.events.PlayerQueryEvent;
 import mage.remote.Session;
@@ -287,7 +286,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        jPanel3.addComponentListener(componentAdapterPlayField);
+        pnlHelperHandButtonsStackArea.addComponentListener(componentAdapterPlayField);
         initComponents = false;
     }
 
@@ -296,7 +295,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         components.put("jSplitPane1", jSplitPane1);
         components.put("pnlBattlefield", pnlBattlefield);
-        components.put("jPanel3", jPanel3);
+        components.put("pnlHelperHandButtonsStackArea", pnlHelperHandButtonsStackArea);
         components.put("hand", handContainer);
         components.put("gameChatPanel", gameChatPanel);
         components.put("userChatPanel", userChatPanel);
@@ -397,11 +396,15 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
         stackObjects.setCardDimension(GUISizeHelper.handCardDimension);
-        int newStackWidth = jPanel3.getWidth() * GUISizeHelper.stackWidth / 100;
+
+        txtSpellsCast.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
+        GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
+
+        int newStackWidth = pnlHelperHandButtonsStackArea.getWidth() * GUISizeHelper.stackWidth / 100;
         if (newStackWidth < 410) {
             newStackWidth = 410;
         }
-        Dimension newDimension = new Dimension(jPanel3.getWidth() - newStackWidth, GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
+        Dimension newDimension = new Dimension(pnlHelperHandButtonsStackArea.getWidth() - newStackWidth, GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
         handContainer.setPreferredSize(newDimension);
         handContainer.setMaximumSize(newDimension);
 
@@ -414,10 +417,6 @@ public final class GamePanel extends javax.swing.JPanel {
         pnlShortCuts.setPreferredSize(newDimension);
         pnlShortCuts.setMinimumSize(newDimension);
         pnlShortCuts.setMaximumSize(newDimension);
-
-        txtSpellsCast.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
-
-        GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
     }
 
     private void saveDividerLocations() {
@@ -1260,7 +1259,7 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         jSplitPane0 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        pnlHelperHandButtonsStackArea = new javax.swing.JPanel();
         pnlShortCuts = new javax.swing.JPanel();
         lblPhase = new javax.swing.JLabel();
         txtPhase = new javax.swing.JLabel();
@@ -1599,7 +1598,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.getActionMap().put("USEFIRSTMANAABILITY", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                session.sendPlayerAction(PlayerAction.USE_FIRST_MANA_ABILITY_ON, gameId, null);                
+                session.sendPlayerAction(PlayerAction.USE_FIRST_MANA_ABILITY_ON, gameId, null);
                 setMenuStates(
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
@@ -1853,53 +1852,53 @@ public final class GamePanel extends javax.swing.JPanel {
         phasesContainer.add(empty1, ratio);
         phasesContainer.add(jPhases);
 
-        javax.swing.GroupLayout gl_jPanel3 = new javax.swing.GroupLayout(jPanel3);
-        gl_jPanel3.setHorizontalGroup(
-                gl_jPanel3.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_jPanel3.createSequentialGroup()
+        javax.swing.GroupLayout gl_helperHandButtonsStackArea = new javax.swing.GroupLayout(pnlHelperHandButtonsStackArea);
+        gl_helperHandButtonsStackArea.setHorizontalGroup(
+                gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
                         //                        .addGap(0)
-                        .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
-                                .addGroup(gl_jPanel3.createSequentialGroup()
-                                        .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+                                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
                                                 .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         )
-                                        .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
                                                 .addComponent(pnlShortCuts, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
                                                 .addComponent(stackObjects, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
                                         )
                                 )
                                 .addGap(0)
                                 //.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(gl_jPanel3.createSequentialGroup()
+                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
                                         .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                         .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 )))
         );
-        gl_jPanel3.setVerticalGroup(
-                gl_jPanel3.createParallelGroup(Alignment.TRAILING)
-                .addGroup(gl_jPanel3.createSequentialGroup()
-                        .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
+        gl_helperHandButtonsStackArea.setVerticalGroup(
+                gl_helperHandButtonsStackArea.createParallelGroup(Alignment.TRAILING)
+                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
                                 .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                 .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         )
                         //.addPreferredGap(ComponentPlacement.RELATED)
-                        .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
-                                .addGroup(gl_jPanel3.createSequentialGroup()
+                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
                                         .addGap(2)
                                         .addComponent(pnlShortCuts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(stackObjects, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 )
-                                .addGroup(gl_jPanel3.createSequentialGroup()
+                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
                                         .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 )
                         )
                 )
         );
-        jPanel3.setLayout(gl_jPanel3);
+        pnlHelperHandButtonsStackArea.setLayout(gl_helperHandButtonsStackArea);
 
-        jSplitPane1.setLeftComponent(jPanel3);
+        jSplitPane1.setLeftComponent(pnlHelperHandButtonsStackArea);
         jSplitPane1.setRightComponent(jSplitPane2);
 
         // Set individual area sizes of big card pane
@@ -2298,7 +2297,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private HelperPanel helper;
     private mage.client.chat.ChatPanelBasic userChatPanel;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel pnlHelperHandButtonsStackArea;
     private javax.swing.JSplitPane jSplitPane0;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblActivePlayer;
