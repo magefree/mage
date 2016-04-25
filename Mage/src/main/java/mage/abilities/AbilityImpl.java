@@ -1191,8 +1191,6 @@ public abstract class AbilityImpl implements Ability {
     public void setSourceObject(MageObject sourceObject, Game game) {
         if (sourceObject == null) {
             this.sourceObject = game.getObject(sourceId);
-            // if permanent get card /permanent instead of spell
-
         } else {
             this.sourceObject = sourceObject;
         }

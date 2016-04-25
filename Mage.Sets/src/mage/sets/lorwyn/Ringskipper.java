@@ -29,18 +29,13 @@ package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ClashEffect;
+import mage.abilities.effects.common.DoIfClashWonEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -60,8 +55,8 @@ public class Ringskipper extends CardImpl {
         //Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        //When Ringskipper is put into graveyard from play, clash with an opponent. If you win return Ringskipper to its owner's hand 
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new RingskipperEffect()));
+        //When {this} is put into graveyard from play, clash with an opponent. If you win return {this} to its owner's hand 
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfClashWonEffect(new ReturnToHandSourceEffect())));
     }
 
     public Ringskipper(final Ringskipper card) {
@@ -71,36 +66,5 @@ public class Ringskipper extends CardImpl {
     @Override
     public Ringskipper copy() {
         return new Ringskipper(this);
-    }
-}
-
-class RingskipperEffect extends OneShotEffect {
-
-    public RingskipperEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "clash with an opponent. If you win return Ringskipper to its owner's hand";
-    }
-
-    public RingskipperEffect(final RingskipperEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RingskipperEffect copy() {
-        return new RingskipperEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (ClashEffect.getInstance().apply(game, source)) {
-                ReturnToHandSourceEffect effect = new ReturnToHandSourceEffect();
-                effect.apply(game, source);
-            }
-
-            return true;
-        }
-        return false;
     }
 }

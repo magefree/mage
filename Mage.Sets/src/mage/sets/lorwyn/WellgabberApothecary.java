@@ -25,48 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author Styxo
  */
-public class KindlyStranger extends CardImpl {
+public class WellgabberApothecary extends CardImpl {
 
-    public KindlyStranger(UUID ownerId) {
-        super(ownerId, 119, "Kindly Stranger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "SOI";
-        this.subtype.add("Human");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target tapped Merfolk or Kithkin creature this turn");
+
+    static {
+        filter.add(new TappedPredicate());
+        filter.add(Predicates.or(new SubtypePredicate("Merfolk"), new SubtypePredicate("Kithkin")));
+    }
+
+    public WellgabberApothecary(UUID ownerId) {
+        super(ownerId, 47, "Wellgabber Apothecary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Cleric");
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.canTransform = true;
-        this.secondSideCard = new DemonPossessedWitch(ownerId);
+        // {1}{W} : Prevent all damage that would be dealt to target tapped Merfolk or Kithkin creatuer this turn
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new ManaCostsImpl("{1}{W}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
 
-        // <i>Delirium</i> &mdash; {2}{B}: Transform Kindly Stranger. Activate this ability only if there are four or more card types among cards in your graveyard.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new TransformSourceEffect(true), new ManaCostsImpl<>("{2}{B}"), DeliriumCondition.getInstance()));
     }
 
-    public KindlyStranger(final KindlyStranger card) {
+    public WellgabberApothecary(final WellgabberApothecary card) {
         super(card);
     }
 
     @Override
-    public KindlyStranger copy() {
-        return new KindlyStranger(this);
+    public WellgabberApothecary copy() {
+        return new WellgabberApothecary(this);
     }
 }

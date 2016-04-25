@@ -47,6 +47,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -130,7 +131,10 @@ public class ManaPool implements Serializable {
         for (ManaPoolItem mana : manaItems) {
             if (filter != null) {
                 if (!filter.match(mana.getSourceObject(), game)) {
-                    continue;
+                    // Prevent that cost reduction by convoke is filtered out
+                    if (!(mana.getSourceObject() instanceof Spell) || ability.getSourceId().equals(mana.getSourceId())) {
+                        continue;
+                    }
                 }
             }
             if (!manaType.equals(unlockedManaType) && autoPayment && autoPaymentRestricted && mana.count() == mana.getStock()) {

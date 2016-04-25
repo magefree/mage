@@ -48,6 +48,14 @@ public class SourceHasRemainedInSameZoneCondition implements Condition {
         this.idToCheck = idToCheck;
         this.timesChangedZones = -1;
     }
+    
+    public SourceHasRemainedInSameZoneCondition(UUID idToCheck, Game game) {
+        this.idToCheck = idToCheck;
+        this.timesChangedZones = -1;
+        if (this.idToCheck != null && game != null && game.getCard(this.idToCheck) != null) {
+            this.timesChangedZones = game.getState().getZoneChangeCounter(this.idToCheck);
+        }
+    }
 
     public SourceHasRemainedInSameZoneCondition getInstance(UUID cardId) {
         return new SourceHasRemainedInSameZoneCondition(cardId);

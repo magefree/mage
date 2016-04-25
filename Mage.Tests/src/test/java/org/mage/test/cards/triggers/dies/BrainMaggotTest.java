@@ -36,13 +36,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class BrainMaggotTest extends CardTestPlayerBase {
 
     /**
-     * When Brain Maggot enters the battlefield, target opponent reveals his or her hand and
-     * you choose a nonland card from it. Exile that card until Brain Maggot leaves the battlefield.
-     * 
+     * When Brain Maggot enters the battlefield, target opponent reveals his or
+     * her hand and you choose a nonland card from it. Exile that card until
+     * Brain Maggot leaves the battlefield.
+     *
      */
     @Test
     public void testCardFromHandWillBeExiled() {
@@ -61,10 +61,10 @@ public class BrainMaggotTest extends CardTestPlayerBase {
         assertExileCount("Bloodflow Connoisseur", 1);
     }
 
-
     @Test
     public void testCardFromHandWillBeExiledAndReturn() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        // When Brain Maggot enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card until Brain Maggot leaves the battlefield.
         addCard(Zone.HAND, playerA, "Brain Maggot", 2);
 
         addCard(Zone.HAND, playerB, "Bloodflow Connoisseur", 1);

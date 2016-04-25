@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
@@ -39,20 +38,18 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class NecromancyTest extends CardTestPlayerBase {
 
-    /** 
-     * Necromancy
-     * Enchantment, 2B (3)
-     * You may cast Necromancy as though it had flash. If you cast it any time a 
-     * sorcery couldn't have been cast, the controller of the permanent it 
-     * becomes sacrifices it at the beginning of the next cleanup step.
-     * When Necromancy enters the battlefield, if it's on the battlefield, it 
-     * becomes an Aura with "enchant creature put onto the battlefield with 
-     * Necromancy." Put target creature card from a graveyard onto the 
-     * battlefield under your control and attach Necromancy to it. When 
-     * Necromancy leaves the battlefield, that creature's controller sacrifices it.
+    /**
+     * Necromancy Enchantment, 2B (3) You may cast Necromancy as though it had
+     * flash. If you cast it any time a sorcery couldn't have been cast, the
+     * controller of the permanent it becomes sacrifices it at the beginning of
+     * the next cleanup step. When Necromancy enters the battlefield, if it's on
+     * the battlefield, it becomes an Aura with "enchant creature put onto the
+     * battlefield with Necromancy." Put target creature card from a graveyard
+     * onto the battlefield under your control and attach Necromancy to it. When
+     * Necromancy leaves the battlefield, that creature's controller sacrifices
+     * it.
      *
      */
-
     @Test
     public void testNecromancy() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
@@ -60,7 +57,7 @@ public class NecromancyTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Craw Wurm");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necromancy");
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -77,7 +74,7 @@ public class NecromancyTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Craw Wurm");
 
         castSpell(1, PhaseStep.UPKEEP, playerA, "Necromancy");
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -87,14 +84,20 @@ public class NecromancyTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Check if Necromancy is sacrificed if cast as instant and if the
+     * reanimated creature will be sacrificed.
+     */
     @Test
     public void testNecromancyFlashSacrifice() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        // If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
+        // When Necromancy leaves the battlefield, that creature's controller sacrifices it.
         addCard(Zone.HAND, playerA, "Necromancy");
-        addCard(Zone.GRAVEYARD, playerA, "Craw Wurm");
+        addCard(Zone.GRAVEYARD, playerA, "Craw Wurm"); // 6/4
 
         castSpell(1, PhaseStep.UPKEEP, playerA, "Necromancy");
-        
+
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -114,7 +117,7 @@ public class NecromancyTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necromancy"); // enchanting the Craw Wurm
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disenchant", "Necromancy"); // if Necromancy leaves, the enchanted creature has to leave too
-        
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -124,5 +127,5 @@ public class NecromancyTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Necromancy", 1);
         assertGraveyardCount(playerA, "Craw Wurm", 1);
     }
-    
+
 }

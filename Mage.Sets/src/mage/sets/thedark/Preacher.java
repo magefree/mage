@@ -25,48 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.sets.thedark;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author spjspj
  */
-public class KindlyStranger extends CardImpl {
+public class Preacher extends mage.sets.mastersedition.Preacher {
 
-    public KindlyStranger(UUID ownerId) {
-        super(ownerId, 119, "Kindly Stranger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "SOI";
-        this.subtype.add("Human");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-
-        this.canTransform = true;
-        this.secondSideCard = new DemonPossessedWitch(ownerId);
-
-        // <i>Delirium</i> &mdash; {2}{B}: Transform Kindly Stranger. Activate this ability only if there are four or more card types among cards in your graveyard.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new TransformSourceEffect(true), new ManaCostsImpl<>("{2}{B}"), DeliriumCondition.getInstance()));
+    public Preacher(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 89;
+        this.expansionSetCode = "DRK";
     }
 
-    public KindlyStranger(final KindlyStranger card) {
+    public Preacher(final Preacher card) {
         super(card);
     }
 
     @Override
-    public KindlyStranger copy() {
-        return new KindlyStranger(this);
+    public Preacher copy() {
+        return new Preacher(this);
     }
 }

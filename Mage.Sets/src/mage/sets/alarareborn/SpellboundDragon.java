@@ -55,9 +55,6 @@ public class SpellboundDragon extends CardImpl {
         super(ownerId, 90, "Spellbound Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Dragon");
-
-
-
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

@@ -137,7 +137,8 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
             if (zEvent.isDiesEvent() && zEvent.getTarget() != null
                     && zEvent.getTarget().getCardType().contains(CardType.CREATURE)
                     && !(zEvent.getTarget() instanceof PermanentToken)) {
-                int count = amountOfCreaturesThatDied.containsKey(zEvent.getTarget().getControllerId()) ? amountOfCreaturesThatDied.get(zEvent.getTarget().getControllerId()) : 0;
+                int count = amountOfCreaturesThatDied.containsKey(zEvent.getTarget().getControllerId())
+                        ? amountOfCreaturesThatDied.get(zEvent.getTarget().getControllerId()) : 0;
                 amountOfCreaturesThatDied.put(zEvent.getTarget().getControllerId(), ++count);
             }
         }
@@ -145,6 +146,7 @@ class VileRedeemerNonTokenCreaturesDiedWatcher extends Watcher {
 
     @Override
     public void reset() {
+        super.reset();
         amountOfCreaturesThatDied.clear();
     }
 

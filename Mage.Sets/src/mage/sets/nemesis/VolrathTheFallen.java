@@ -25,48 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowsoverinnistrad;
+package mage.sets.nemesis;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.dynamicvalue.common.DiscardCostCardConvertedMana;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
- * @author fireshoes
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class KindlyStranger extends CardImpl {
+public class VolrathTheFallen extends CardImpl {
 
-    public KindlyStranger(UUID ownerId) {
-        super(ownerId, 119, "Kindly Stranger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "SOI";
-        this.subtype.add("Human");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+    public VolrathTheFallen(UUID ownerId) {
+        super(ownerId, 75, "Volrath the Fallen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
+        this.expansionSetCode = "NMS";
+        this.supertype.add("Legendary");
+        this.subtype.add("Shapeshifter");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(4);
 
-        this.canTransform = true;
-        this.secondSideCard = new DemonPossessedWitch(ownerId);
-
-        // <i>Delirium</i> &mdash; {2}{B}: Transform Kindly Stranger. Activate this ability only if there are four or more card types among cards in your graveyard.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new TransformSourceEffect(true), new ManaCostsImpl<>("{2}{B}"), DeliriumCondition.getInstance()));
+        // {1}{B}, Discard a creature card: 
+        // Volrath the Fallen gets +X/+X until end of turn, where X is the discarded card's converted mana cost.
+        Effect effect = new BoostSourceEffect(new DiscardCostCardConvertedMana(),new DiscardCostCardConvertedMana(),Duration.EndOfTurn);
+        effect.setText("{this} gets +X/+X until end of turn, where X is the discarded card's converted mana cost");
+        
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD, 
+                effect,
+                new ManaCostsImpl("{1}{B}"));
+        ability.addCost(new DiscardCardCost(new FilterCreatureCard()));
+        this.addAbility(ability);
     }
 
-    public KindlyStranger(final KindlyStranger card) {
+    public VolrathTheFallen(final VolrathTheFallen card) {
         super(card);
     }
 
     @Override
-    public KindlyStranger copy() {
-        return new KindlyStranger(this);
+    public VolrathTheFallen copy() {
+        return new VolrathTheFallen(this);
     }
 }
