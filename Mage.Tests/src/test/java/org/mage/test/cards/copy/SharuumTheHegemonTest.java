@@ -29,7 +29,6 @@ package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -60,11 +59,11 @@ public class SharuumTheHegemonTest extends CardTestPlayerBase {
         [4] Since fake-Sharuum entered the battlefield, its EtB ability triggers.
         [5] State-based actions are checked and you are prompted to keep one Sharuum. You sacrifice real-Sharuum.
             * 116.2a Triggered abilities can trigger at any time, including while a spell is being cast, an ability is being activated, or a spell or
-            * ability is resolving. (See rule 603, “Handling Triggered Abilities.”) However, nothing actually happens at the time an ability triggers. 
-            * Each time a player would receive priority, each ability that has triggered but hasn’t yet been put on the stack is put on the stack. See rule 116.5
+            * ability is resolving. (See rule 603, "Handling Triggered Abilities.") However, nothing actually happens at the time an ability triggers. 
+            * Each time a player would receive priority, each ability that has triggered but hasn't yet been put on the stack is put on the stack. See rule 116.5
             * 116.5. Each time a player would get priority, the game first performs all applicable state-based actions as a single event (see rule 704,
-            * “State-Based Actions”), then repeats this process until no state-based actions are performed. Then triggered abilities are put on the stack
-            * (see rule 603, “Handling Triggered Abilities”). These steps repeat in order until no further state-based actions are performed and no abilities
+            * "State-Based Actions"), then repeats this process until no state-based actions are performed. Then triggered abilities are put on the stack
+            * (see rule 603, "Handling Triggered Abilities"). These steps repeat in order until no further state-based actions are performed and no abilities
             * trigger. Then the player who would have received priority does so.
         [6] Once State-based actions are finished, triggered abilities go on the stack. You put the EtB from [4] choosing real-Sharuum.
         [7] Real-Sharuum enters the battlefield.

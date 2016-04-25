@@ -35,7 +35,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -43,9 +42,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierTokenWithHaste;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -102,10 +99,10 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
     public void reset(Game game) {
         /**
          * Blaze Commando's ability triggers each time an instant or sorcery spell you control
-         * deals damage (or, put another way, the number of times the word “deals” appears in
+         * deals damage (or, put another way, the number of times the word "deals" appears in
          * its instructions), no matter how much damage is dealt or how many players or permanents
-         * are dealt damage. For example, if you cast Punish the Enemy and it “deals 3 damage to
-         * target player and 3 damage to target creature,” Blaze Commando's ability will trigger
+         * are dealt damage. For example, if you cast Punish the Enemy and it "deals 3 damage to
+         * target player and 3 damage to target creature," Blaze Commando's ability will trigger
          * once and you'll get two Soldier tokens.
          */
         handledStackObjects.clear();
