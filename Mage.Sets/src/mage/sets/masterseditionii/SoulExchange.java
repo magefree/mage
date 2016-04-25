@@ -33,6 +33,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -95,17 +96,20 @@ class SoulExchangeEffect extends OneShotEffect{
         if (!effect.apply(game, source)) return false;
         
         for (Cost c : source.getCosts()){
-            if (!c.getTargets().isEmpty()){
+         /*   if (!c.getTargets().isEmpty()){
                 UUID t = c.getTargets().getFirstTarget();
-                Permanent exiled = game.getPermanentOrLKIBattlefield(t);
-                if (exiled == null) return false;
-                if (exiled.getSubtype().contains("Thrull")){
-                    game.getPermanent(source.getFirstTarget()).addCounters(CounterType.P2P2.createInstance(), game);
-                }
+                Permanent exiled = game.getPermanentOrLKIBattlefield(t);*/
+            if (c.isPaid() && c instanceof ExileTargetCost) {
+                for (Permanent exiled : ((ExileTargetCost) c).getPermanents()) {
+                  if (exiled != null){
+                      if(exiled.getSubtype().contains("Thrull")){
+                        game.getPermanent(source.getFirstTarget()).addCounters(CounterType.P2P2.createInstance(), game);
+                        return true;
+                        }
+                  } else return false;                   
+                }                               
             }
-        }        
-        
-        
+        }     
         return true;         
     }
 }

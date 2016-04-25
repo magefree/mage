@@ -96,7 +96,7 @@ class DelifsCubeEffect extends OneShotEffect{
     public DelifsCubeEffect(UUID cubeId) {
         super(Outcome.Benefit);
         this.cubeId = cubeId;
-        this.setText("This turn, when target creature you control attacks and isn't blocked, it assigns no combat damage this turn and you put a cube counter on Delif's Cube.");
+        this.setText("This turn, when target creature you control attacks and isn't blocked, it assigns no combat damage this turn and you put a cube counter on Delif's Cube");
     }
     
     public DelifsCubeEffect(final DelifsCubeEffect effect) {

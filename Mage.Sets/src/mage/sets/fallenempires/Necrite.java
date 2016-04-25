@@ -64,7 +64,6 @@ public class Necrite extends CardImpl {
         // Whenever Necrite attacks and isn't blocked, you may sacrifice it. If you do, destroy target creature defending player controls. It can't be regenerated.
         DoIfCostPaid effect = new DoIfCostPaid(new DestroyTargetEffect(true), new SacrificeSourceCost(), "Sacrifice {this} to destroy target creature defending player controls?");
         effect.setText("you may sacrifice it. If you do, destroy target creature defending player controls. It can't be regenerated.");
-        effect.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn));
         Ability ability = new NecriteTriggeredAbility(effect);
         this.addAbility(ability);
         
@@ -102,6 +101,7 @@ class NecriteTriggeredAbility extends AttacksAndIsNotBlockedTriggeredAbility{
             FilterPermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(defendingPlayerId));
             Target target = new TargetPermanent(filter);
+            this.getTargets().clear();
             this.addTarget(target);
             return true;
         }
