@@ -37,7 +37,7 @@ public class LegendaryCubeApril2016 extends DraftCube {
 
     public LegendaryCubeApril2016() {
         super("Legendary Cube April 2016 (566 cards)");
-        http://magic.wizards.com/en/MTGO/articles/archive/legendary-cube-cardlist
+        // http://magic.wizards.com/en/MTGO/articles/archive/legendary-cube-cardlist
 
         cubeCards.add(new DraftCube.CardIdentity("Abundant Growth", ""));
         cubeCards.add(new DraftCube.CardIdentity("Academy Elite", ""));
