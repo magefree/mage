@@ -29,7 +29,6 @@ package mage.sets.antiquities;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
@@ -64,24 +63,21 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TawnossCoffin extends CardImpl {
 
-    public Counters godHelpMe=null;
-      
+    public Counters godHelpMe = null;
+
     public TawnossCoffin(UUID ownerId) {
         super(ownerId, 33, "Tawnos's Coffin", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "ATQ";
 
         // You may choose not to untap Tawnos's Coffin during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
-        // {3}, {tap}: Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature. 
+        // {3}, {tap}: Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TawnossCoffinEffect(), new TapSourceCost());
         ability.addCost(new ManaCostsImpl("{3}"));
-        ability.addTarget(new TargetCreaturePermanent());        
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        //When Tawnos's Coffin leaves the battlefield...
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new TawnossCoffinReturnEffect(), false);
-        this.addAbility(ability2);
-        //or becomes untapped, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it, and if you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
-        Ability ability3 = new BecomesUnTappedSourceTriggeredAbility(new TawnossCoffinReturnEffect(), false);
+        //When Tawnos's Coffin leaves the battlefield or becomes untapped, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it, and if you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.
+        Ability ability3 = new TawnossCoffinTriggeredAbility(new TawnossCoffinReturnEffect(), false);
         this.addAbility(ability3);
     }
 
@@ -94,41 +90,41 @@ public class TawnossCoffin extends CardImpl {
         return new TawnossCoffin(this);
     }
 }
-class BecomesUnTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    public BecomesUnTappedSourceTriggeredAbility(Effect effect, boolean isOptional) {
-        super(Zone.BATTLEFIELD, effect, isOptional);
+class TawnossCoffinTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
+
+    public TawnossCoffinTriggeredAbility(Effect effect, boolean isOptional) {
+        super(effect, isOptional);
     }
 
-    public BecomesUnTappedSourceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
-
-    public BecomesUnTappedSourceTriggeredAbility(final BecomesUnTappedSourceTriggeredAbility ability) {
+    public TawnossCoffinTriggeredAbility(final TawnossCoffinTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public BecomesUnTappedSourceTriggeredAbility copy() {
-        return new BecomesUnTappedSourceTriggeredAbility(this);
+    public TawnossCoffinTriggeredAbility copy() {
+        return new TawnossCoffinTriggeredAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UNTAPPED;
+        return super.checkEventType(event, game) || event.getType().equals(GameEvent.EventType.UNTAPPED);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(sourceId);
+        if (event.getType().equals(GameEvent.EventType.UNTAPPED)) {
+            return event.getTargetId().equals(sourceId);
+        } else {
+            return super.checkTrigger(event, game);
+        }
     }
 
     @Override
     public String getRule() {
-        return "When {this} becomes untapped, " + super.getRule();
+        return "When {this} leaves the battlefield or becomes untapped, " + super.getRule();
     }
 }
-
 
 class TawnossCoffinEffect extends OneShotEffect {
 
@@ -140,7 +136,7 @@ class TawnossCoffinEffect extends OneShotEffect {
 
     public TawnossCoffinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature. When TawnossCoffin leaves the battlefield, return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.";
+        this.staticText = "exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature";
     }
 
     public TawnossCoffinEffect(final TawnossCoffinEffect effect) {
@@ -158,11 +154,12 @@ class TawnossCoffinEffect extends OneShotEffect {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment == null) {
             enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }        
-        UUID targetId=source.getFirstTarget();
-        
-        if (targetId==null) return false; // if previous scan somehow failed, simply quit
-        
+        }
+        UUID targetId = source.getFirstTarget();
+
+        if (targetId == null) {
+            return false; // if previous scan somehow failed, simply quit
+        }
         if (enchantment != null) { //back to code (mostly) copied from Flickerform
             Permanent enchantedCreature = game.getPermanent(targetId);
             if (enchantedCreature != null) {
@@ -174,17 +171,17 @@ class TawnossCoffinEffect extends OneShotEffect {
                         attachment.moveToExile(exileZoneId, enchantment.getName(), source.getSourceId(), game);
                     }
                 }
-                
+
                 //((TawnossCoffin)enchantment.getMainCard()).godHelpMe = enchantedCreature.getCounters(game); //why doesn't work? should return the same card, no?
-                ((TawnossCoffin)game.getCard(source.getSourceId())).godHelpMe = enchantedCreature.getCounters(game).copy();
-                
+                ((TawnossCoffin) game.getCard(source.getSourceId())).godHelpMe = enchantedCreature.getCounters(game).copy();
+
                 if (!(enchantedCreature instanceof Token)) {
-                
+
                     // If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature
                     /*LeavesBattlefieldTriggeredAbility triggeredAbility = new LeavesBattlefieldTriggeredAbility(
                             new TawnossCoffinReturnEffect(), false);
-                    enchantment.addAbility(triggeredAbility, source.getSourceId(), game);                    
-                    */
+                    enchantment.addAbility(triggeredAbility, source.getSourceId(), game);
+                     */
                 }
                 return true;
             }
@@ -203,11 +200,10 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
         filterAura.add(new SubtypePredicate("Aura"));
     }
 
-    
     public TawnossCoffinReturnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent.";
-        
+        this.staticText = "return the exiled card to the battlefield under its owner's control tapped with the noted number and kind of counters on it. If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent";
+
     }
 
     public TawnossCoffinReturnEffect(final TawnossCoffinReturnEffect effect) {
@@ -222,12 +218,14 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ExileZone exileZone = game.getExile().getExileZone(source.getSourceId());
-        
+
         FilterCard filter = new FilterCard();
         filter.add(new CardTypePredicate(CardType.CREATURE));
         //There should be only 1 there, but the for each loop seems the most practical to get to it
-        for (Card enchantedCard : exileZone.getCards(filter, game)){
-            if (enchantedCard == null) continue;
+        for (Card enchantedCard : exileZone.getCards(filter, game)) {
+            if (enchantedCard == null) {
+                continue;
+            }
             enchantedCard.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), enchantedCard.getOwnerId());
             Permanent newPermanent = game.getPermanent(enchantedCard.getId());
             if (newPermanent != null) {
@@ -255,15 +253,19 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
                     }
                 }
                 Card oubliette = game.getCard(source.getSourceId());
-                if (oubliette == null) return false;//1st stab at getting those counters back
-                for(Counter c : ((TawnossCoffin)oubliette).godHelpMe.values()){ //would be nice if could just use that copy function to set the whole field
-                    if(c!=null) newPermanent.getCounters(game).addCounter(c);                    
+                if (oubliette == null) {
+                    return false;//1st stab at getting those counters back
                 }
-                    
+                for (Counter c : ((TawnossCoffin) oubliette).godHelpMe.values()) { //would be nice if could just use that copy function to set the whole field
+                    if (c != null) {
+                        newPermanent.getCounters(game).addCounter(c);
+                    }
+                }
+
             }
             return true;
         }
-        
+
         return false;
     }
 }
