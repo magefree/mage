@@ -28,7 +28,6 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

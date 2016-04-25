@@ -40,7 +40,6 @@ import mage.game.draft.Draft;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
-import static mage.game.events.TableEvent.EventType.CONSTRUCT;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.result.ResultProtos.TourneyQuitStatus;

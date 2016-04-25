@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.mana.ColorlessManaAbility;

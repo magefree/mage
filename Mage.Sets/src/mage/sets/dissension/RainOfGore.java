@@ -39,7 +39,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import static mage.game.events.GameEvent.EventType.GAIN_LIFE;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 

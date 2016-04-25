@@ -37,8 +37,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
-import mage.target.common.TargetCardInHand;
 
 /**
  *

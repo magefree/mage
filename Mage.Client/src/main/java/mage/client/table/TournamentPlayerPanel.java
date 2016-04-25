@@ -38,7 +38,6 @@ import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.remote.Session;
 

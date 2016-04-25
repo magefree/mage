@@ -28,7 +28,6 @@
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
-import mage.game.draft.DraftCube.CardIdentity;
 
 /**
  *

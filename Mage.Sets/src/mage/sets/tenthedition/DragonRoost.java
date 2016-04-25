@@ -28,7 +28,6 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;

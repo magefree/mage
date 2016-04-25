@@ -33,7 +33,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

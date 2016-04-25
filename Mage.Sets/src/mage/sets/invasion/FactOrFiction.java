@@ -42,8 +42,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;

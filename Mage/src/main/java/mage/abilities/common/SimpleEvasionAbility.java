@@ -30,7 +30,6 @@ package mage.abilities.common;
 
 import mage.abilities.EvasionAbility;
 import mage.abilities.effects.Effect;
-import mage.constants.Zone;
 
 
 

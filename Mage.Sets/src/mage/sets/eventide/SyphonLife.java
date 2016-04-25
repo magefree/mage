@@ -31,12 +31,10 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
-import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 
 /**

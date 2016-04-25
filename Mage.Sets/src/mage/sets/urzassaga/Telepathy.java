@@ -28,8 +28,6 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
 import mage.cards.CardImpl;
@@ -37,8 +35,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *

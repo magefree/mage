@@ -29,7 +29,6 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;

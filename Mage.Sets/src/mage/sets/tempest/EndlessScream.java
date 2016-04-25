@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;

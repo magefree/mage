@@ -28,7 +28,6 @@
 package mage.sets.antiquities;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;

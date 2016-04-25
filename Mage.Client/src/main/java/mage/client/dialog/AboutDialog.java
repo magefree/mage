@@ -28,7 +28,6 @@
 
 package mage.client.dialog;
 
-import java.awt.KeyboardFocusManager;
 import mage.utils.MageVersion;
 
 /*

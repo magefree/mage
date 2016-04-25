@@ -34,7 +34,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.TargetsPermanentPredicate;
 import mage.target.TargetSpell;
 

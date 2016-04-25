@@ -30,7 +30,6 @@ package mage.sets.visions;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;

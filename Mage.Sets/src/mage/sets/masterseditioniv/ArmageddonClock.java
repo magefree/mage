@@ -31,14 +31,11 @@ import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -50,7 +47,6 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
 
 
 /**

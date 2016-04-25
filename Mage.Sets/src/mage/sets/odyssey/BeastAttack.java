@@ -28,7 +28,6 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;

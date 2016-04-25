@@ -12,8 +12,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import static mage.constants.TargetController.NOT_YOU;
-import static mage.constants.TargetController.OPPONENT;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;

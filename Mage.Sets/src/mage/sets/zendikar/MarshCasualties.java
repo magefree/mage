@@ -39,7 +39,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.keyword.KickerAbility;

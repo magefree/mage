@@ -28,7 +28,6 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.abilities.keyword.MiracleAbility;

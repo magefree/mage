@@ -29,7 +29,6 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

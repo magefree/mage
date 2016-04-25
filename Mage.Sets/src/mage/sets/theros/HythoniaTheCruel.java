@@ -30,7 +30,6 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
-import mage.abilities.effects.common.DestroyAllControlledTargetEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.MonstrosityAbility;

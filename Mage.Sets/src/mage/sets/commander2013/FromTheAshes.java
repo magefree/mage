@@ -28,7 +28,6 @@
 package mage.sets.commander2013;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;

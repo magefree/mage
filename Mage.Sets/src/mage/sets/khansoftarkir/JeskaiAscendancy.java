@@ -42,7 +42,6 @@ import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *

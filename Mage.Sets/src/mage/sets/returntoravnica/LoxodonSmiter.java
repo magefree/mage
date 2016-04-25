@@ -29,13 +29,11 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DiscardOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 

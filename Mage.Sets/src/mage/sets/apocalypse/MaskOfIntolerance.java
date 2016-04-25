@@ -41,7 +41,6 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *

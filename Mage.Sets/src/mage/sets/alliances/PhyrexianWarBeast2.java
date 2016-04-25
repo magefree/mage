@@ -28,7 +28,6 @@
 package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *

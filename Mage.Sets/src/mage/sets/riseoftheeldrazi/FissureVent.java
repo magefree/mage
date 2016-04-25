@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Mode;
-import mage.abilities.effects.common.DestroyMultiTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetArtifactPermanent;

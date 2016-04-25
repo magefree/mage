@@ -42,7 +42,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

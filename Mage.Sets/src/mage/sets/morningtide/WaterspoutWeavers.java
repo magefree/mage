@@ -30,15 +30,12 @@ package mage.sets.morningtide;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.KinshipAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**

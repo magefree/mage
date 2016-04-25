@@ -31,7 +31,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;

@@ -27,7 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;

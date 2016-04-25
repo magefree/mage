@@ -28,7 +28,6 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.constants.CardType;
 
 /**

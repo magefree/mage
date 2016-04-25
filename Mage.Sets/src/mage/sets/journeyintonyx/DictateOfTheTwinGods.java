@@ -42,8 +42,6 @@ import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import static mage.game.events.GameEvent.EventType.DAMAGE_CREATURE;
-import static mage.game.events.GameEvent.EventType.DAMAGE_PLAYER;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 

@@ -35,7 +35,6 @@ package mage.client.game;
 
 import java.util.UUID;
 import javax.swing.SwingUtilities;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import mage.client.MagePane;
 
 /**

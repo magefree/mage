@@ -29,7 +29,6 @@ package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;

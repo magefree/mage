@@ -30,7 +30,6 @@ package mage.sets.ravnica;
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.effects.common.DamageSelfEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

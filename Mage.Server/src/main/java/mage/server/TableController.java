@@ -49,7 +49,6 @@ import mage.game.draft.Draft;
 import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
-import static mage.game.events.TableEvent.EventType.SIDEBOARD;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.match.MatchPlayer;

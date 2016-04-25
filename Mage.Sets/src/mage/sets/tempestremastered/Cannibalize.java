@@ -27,8 +27,6 @@
  */
 package mage.sets.tempestremastered;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -40,14 +38,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

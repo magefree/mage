@@ -29,14 +29,11 @@ package mage.sets.visions;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SimpleTriggeredAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 
 /**
  *

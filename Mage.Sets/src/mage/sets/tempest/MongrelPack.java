@@ -33,7 +33,6 @@ import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;

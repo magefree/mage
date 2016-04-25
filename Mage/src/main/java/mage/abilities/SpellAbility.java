@@ -35,7 +35,6 @@ import mage.cards.SplitCard;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.SpellAbilityType;
-import static mage.constants.SpellAbilityType.SPLIT_FUSED;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;

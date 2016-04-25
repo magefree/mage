@@ -29,17 +29,13 @@ package mage.sets.arabiannights;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
-import mage.abilities.effects.common.PreventDamageBySourceEffect;
 import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;

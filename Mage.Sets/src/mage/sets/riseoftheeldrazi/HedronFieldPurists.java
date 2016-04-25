@@ -41,7 +41,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
-import mage.cards.CardImpl;
 import mage.cards.LevelerCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;

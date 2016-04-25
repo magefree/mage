@@ -34,9 +34,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import static mage.game.events.GameEvent.EventType.DAMAGE_CREATURE;
-import static mage.game.events.GameEvent.EventType.DAMAGE_PLANESWALKER;
-import static mage.game.events.GameEvent.EventType.DAMAGE_PLAYER;
 
 /**
  *

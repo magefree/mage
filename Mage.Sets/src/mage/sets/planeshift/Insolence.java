@@ -36,7 +36,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.target.TargetPermanent;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
 import mage.abilities.effects.common.DamageAttachedControllerEffect;

@@ -29,7 +29,6 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;

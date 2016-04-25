@@ -30,7 +30,6 @@ package mage.abilities.decorator;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.FixedCondition;
 import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.Duration;

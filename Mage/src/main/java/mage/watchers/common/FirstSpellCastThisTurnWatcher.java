@@ -7,8 +7,6 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import static mage.game.events.GameEvent.EventType.CAST_SPELL;
-import static mage.game.events.GameEvent.EventType.SPELL_CAST;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 

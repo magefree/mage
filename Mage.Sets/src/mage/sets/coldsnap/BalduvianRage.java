@@ -36,7 +36,6 @@ import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
