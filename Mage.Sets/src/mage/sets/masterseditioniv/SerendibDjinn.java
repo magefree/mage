@@ -121,13 +121,12 @@ class SerendibDjinnEffect extends OneShotEffect {
             player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
+                if (permanent.hasSubtype("Island")) {
+                    player.damage(3, source.getSourceId(), game, false, true);
+                }
                 permanent.sacrifice(source.getSourceId(), game);
                 return true;
             }
-           if (permanent.hasSubtype("Island")){
-            player.damage(3, source.getSourceId(), game, false, true);
-            return true;
-           }
         }
         return false;
     }
