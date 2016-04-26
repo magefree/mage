@@ -40,18 +40,14 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
-
-
 
 /**
  *
@@ -85,11 +81,12 @@ public class SerendibDjinn extends CardImpl {
         return new SerendibDjinn(this);
     }
 }
+
 class SerendibDjinnEffect extends OneShotEffect {
 
     public SerendibDjinnEffect() {
         super(Outcome.Damage);
-        this.staticText = "Sacrifice a Land. If it is an Island {this} deals 3 damage to you.";
+        this.staticText = "sacrifice a Land. If it is an Island {this} deals 3 damage to you";
     }
 
     public SerendibDjinnEffect(final SerendibDjinnEffect effect) {
@@ -103,30 +100,20 @@ class SerendibDjinnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
-        if (player == null || sourcePermanent == null) {
-            return false;
-        }
-
-        FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Controlled Land");
-        filter.add(new AnotherPredicate());
-
-        Target target = new TargetControlledPermanent(1, 1, filter, true);
-        
-        if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null) {
-                if (permanent.hasSubtype("Island")) {
-                    player.damage(3, source.getSourceId(), game, false, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Target target = new TargetControlledPermanent(1, 1, new FilterControlledLandPermanent(), true);
+            if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
+                controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+                Permanent permanent = game.getPermanent(target.getFirstTarget());
+                if (permanent != null) {
+                    permanent.sacrifice(source.getSourceId(), game);
+                    if (permanent.hasSubtype("Island")) {
+                        controller.damage(3, source.getSourceId(), game, false, true);
+                    }
                 }
-                permanent.sacrifice(source.getSourceId(), game);
-                return true;
             }
+            return true;
         }
         return false;
     }
