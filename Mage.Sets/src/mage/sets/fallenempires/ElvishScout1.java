@@ -44,7 +44,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**

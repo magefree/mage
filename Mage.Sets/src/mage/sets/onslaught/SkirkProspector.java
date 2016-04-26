@@ -33,7 +33,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;

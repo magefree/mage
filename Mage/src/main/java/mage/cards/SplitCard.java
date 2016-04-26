@@ -37,8 +37,6 @@ import mage.abilities.SpellAbility;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
-import static mage.constants.SpellAbilityType.SPLIT_LEFT;
-import static mage.constants.SpellAbilityType.SPLIT_RIGHT;
 import mage.constants.Zone;
 import mage.game.Game;
 

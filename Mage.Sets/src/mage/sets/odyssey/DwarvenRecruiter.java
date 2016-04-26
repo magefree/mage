@@ -29,7 +29,6 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.RecruiterEffect;
 import mage.cards.CardImpl;

@@ -29,7 +29,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.DamageDealtToAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
 import mage.abilities.effects.Effect;

@@ -41,7 +41,6 @@ import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

@@ -34,16 +34,13 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsMoreCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 
 /**

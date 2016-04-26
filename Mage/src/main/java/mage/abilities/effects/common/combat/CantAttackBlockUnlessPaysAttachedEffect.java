@@ -30,7 +30,6 @@ package mage.abilities.effects.common.combat;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
-import mage.abilities.effects.PayCostToAttackBlockEffectImpl.RestrictType;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
 import mage.constants.Outcome;

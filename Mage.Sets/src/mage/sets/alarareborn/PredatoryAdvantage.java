@@ -34,7 +34,6 @@ import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;

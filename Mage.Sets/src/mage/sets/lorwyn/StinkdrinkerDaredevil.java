@@ -36,7 +36,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**

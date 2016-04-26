@@ -27,7 +27,6 @@
  */
 package mage.sets.divinevsdemonic;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;

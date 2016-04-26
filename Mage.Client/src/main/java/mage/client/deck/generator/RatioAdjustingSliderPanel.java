@@ -31,9 +31,6 @@ package mage.client.deck.generator;
 import mage.client.deck.generator.DeckGeneratorPool;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;

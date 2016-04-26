@@ -30,7 +30,6 @@ package mage.sets.returntoravnica;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;

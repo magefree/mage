@@ -29,7 +29,6 @@ package mage.sets.dragonsmaze;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeControllerAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;

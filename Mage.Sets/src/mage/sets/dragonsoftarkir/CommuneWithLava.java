@@ -41,7 +41,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;

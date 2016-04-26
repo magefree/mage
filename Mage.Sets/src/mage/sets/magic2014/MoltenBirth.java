@@ -30,7 +30,6 @@ package mage.sets.magic2014;
 import java.util.Random;
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;

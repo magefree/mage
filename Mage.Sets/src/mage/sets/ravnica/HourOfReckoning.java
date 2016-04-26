@@ -28,7 +28,6 @@
 package mage.sets.ravnica;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
@@ -36,7 +35,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 /**

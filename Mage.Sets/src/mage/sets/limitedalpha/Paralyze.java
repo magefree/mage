@@ -35,7 +35,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;

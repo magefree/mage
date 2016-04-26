@@ -44,7 +44,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInASingleGraveyard;
 
 /**

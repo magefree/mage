@@ -29,7 +29,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorAllEffect;
 import mage.cards.CardImpl;

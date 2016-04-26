@@ -29,14 +29,9 @@ package mage.sets.urzassaga;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *

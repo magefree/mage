@@ -30,7 +30,6 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;

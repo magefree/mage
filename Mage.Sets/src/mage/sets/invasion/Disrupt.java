@@ -29,7 +29,6 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;

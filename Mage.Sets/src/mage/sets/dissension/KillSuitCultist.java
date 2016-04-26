@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;

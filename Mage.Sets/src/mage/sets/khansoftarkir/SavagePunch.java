@@ -28,7 +28,6 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.condition.FixedCondition;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.constants.TargetController;

@@ -38,7 +38,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
 import mage.players.Player;
 

@@ -38,8 +38,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
 import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
 import mage.target.common.TargetCreaturePermanent;
 

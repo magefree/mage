@@ -30,7 +30,6 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;

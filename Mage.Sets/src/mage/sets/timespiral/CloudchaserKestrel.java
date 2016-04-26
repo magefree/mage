@@ -42,7 +42,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 

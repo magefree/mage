@@ -30,7 +30,6 @@ package mage.sets.portal;
 import java.util.UUID;
 
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

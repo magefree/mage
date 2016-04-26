@@ -31,7 +31,6 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;

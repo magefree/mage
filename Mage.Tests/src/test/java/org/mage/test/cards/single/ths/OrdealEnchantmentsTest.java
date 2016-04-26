@@ -27,11 +27,8 @@
  */
 package org.mage.test.cards.single.ths;
 
-import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.permanent.Permanent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

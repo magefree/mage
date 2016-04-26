@@ -37,7 +37,6 @@ import mage.server.util.ThreadExecutor;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
-import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;

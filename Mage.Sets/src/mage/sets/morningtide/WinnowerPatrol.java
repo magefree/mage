@@ -30,13 +30,11 @@ package mage.sets.morningtide;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.abilityword.KinshipAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.game.permanent.token.WolfToken;
 
 /**
  *

@@ -37,7 +37,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 
 /**

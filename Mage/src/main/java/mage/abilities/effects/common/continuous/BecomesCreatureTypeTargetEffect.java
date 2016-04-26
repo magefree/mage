@@ -12,7 +12,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.repository.CardRepository;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;

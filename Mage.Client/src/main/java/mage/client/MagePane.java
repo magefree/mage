@@ -35,7 +35,6 @@ package mage.client;
 
 import java.awt.KeyboardFocusManager;
 import java.beans.PropertyVetoException;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**

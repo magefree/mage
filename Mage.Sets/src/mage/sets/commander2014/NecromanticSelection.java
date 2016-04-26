@@ -42,8 +42,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import static mage.constants.Layer.ColorChangingEffects_5;
-import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;

@@ -28,7 +28,6 @@
 package mage.sets.magicorigins;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;

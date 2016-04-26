@@ -28,7 +28,6 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;

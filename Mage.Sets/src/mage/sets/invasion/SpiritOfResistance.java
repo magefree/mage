@@ -34,7 +34,6 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageToControllerEffect;

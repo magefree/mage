@@ -30,8 +30,6 @@ package mage.sets.ravnica;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

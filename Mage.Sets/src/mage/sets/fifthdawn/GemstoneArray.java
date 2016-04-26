@@ -29,9 +29,7 @@ package mage.sets.fifthdawn;
 
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;

@@ -31,7 +31,6 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;

@@ -30,7 +30,6 @@ package mage.sets.portalsecondage;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;

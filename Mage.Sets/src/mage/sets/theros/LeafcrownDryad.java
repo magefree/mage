@@ -35,7 +35,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;

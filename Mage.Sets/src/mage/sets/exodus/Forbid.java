@@ -29,7 +29,6 @@ package mage.sets.exodus;
 
 import java.util.UUID;
 
-import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.BuybackAbility;

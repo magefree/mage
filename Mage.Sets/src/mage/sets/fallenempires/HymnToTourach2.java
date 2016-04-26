@@ -28,11 +28,6 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.target.TargetPlayer;
 
 /**
  *

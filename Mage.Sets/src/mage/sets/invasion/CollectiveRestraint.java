@@ -31,19 +31,14 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostImpl;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 

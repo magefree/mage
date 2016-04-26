@@ -31,7 +31,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.constants.SetTargetPointer;
-import static mage.constants.SetTargetPointer.PERMANENT;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;

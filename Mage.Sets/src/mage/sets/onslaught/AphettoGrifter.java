@@ -43,7 +43,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

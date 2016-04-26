@@ -33,8 +33,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import static mage.constants.Zone.BATTLEFIELD;
-import static mage.constants.Zone.GRAVEYARD;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;

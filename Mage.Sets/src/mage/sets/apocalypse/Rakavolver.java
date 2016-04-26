@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCostCondition;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;

@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
-import static mage.constants.SetTargetPointer.PERMANENT;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;

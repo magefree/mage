@@ -41,9 +41,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FirstTargetPointer;
 

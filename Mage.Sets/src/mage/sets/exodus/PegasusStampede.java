@@ -28,7 +28,6 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.BuybackAbility;

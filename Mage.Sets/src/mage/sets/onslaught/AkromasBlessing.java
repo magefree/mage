@@ -28,7 +28,6 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorAllEffect;
 import mage.abilities.keyword.CyclingAbility;

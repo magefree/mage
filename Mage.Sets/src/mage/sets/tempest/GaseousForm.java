@@ -28,7 +28,6 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.PreventAllDamageToAndByAttachedEffect;

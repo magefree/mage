@@ -29,13 +29,11 @@ package mage.sets.avacynrestored;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.condition.common.OneControlledCreatureCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.DemonToken;
 

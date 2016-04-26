@@ -28,7 +28,6 @@
 package mage.sets.bornofthegods.TokenAndCounters;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.game.permanent.token.Token;
 

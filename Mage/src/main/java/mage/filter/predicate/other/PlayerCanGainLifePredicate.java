@@ -27,7 +27,6 @@
  */
 package mage.filter.predicate.other;
 
-import mage.constants.TargetController;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;

@@ -28,12 +28,10 @@
 package mage.sets.morningtide;
 
 import java.util.List;
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ProwlAbility;
-import mage.cards.Card;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;

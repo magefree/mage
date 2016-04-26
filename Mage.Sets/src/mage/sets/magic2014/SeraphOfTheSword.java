@@ -30,7 +30,6 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;

@@ -29,7 +29,6 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.HeroicAbility;

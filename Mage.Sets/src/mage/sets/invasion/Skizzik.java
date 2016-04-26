@@ -31,8 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.HasteAbility;

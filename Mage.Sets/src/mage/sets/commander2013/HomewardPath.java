@@ -27,9 +27,7 @@
  */
 package mage.sets.commander2013;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;

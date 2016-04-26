@@ -41,7 +41,6 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**

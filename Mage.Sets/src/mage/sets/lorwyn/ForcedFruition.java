@@ -30,7 +30,6 @@ package mage.sets.lorwyn;
 import java.util.UUID;
 
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

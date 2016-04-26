@@ -28,14 +28,11 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TimingRule;
 import mage.target.TargetPermanent;
 
 /**

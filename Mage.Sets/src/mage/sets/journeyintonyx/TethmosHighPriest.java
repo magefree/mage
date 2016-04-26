@@ -39,7 +39,6 @@ import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.target.Target;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**

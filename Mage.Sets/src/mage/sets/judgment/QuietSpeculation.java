@@ -32,7 +32,6 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -45,7 +44,6 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.List;
 import java.util.UUID;
 
 /**

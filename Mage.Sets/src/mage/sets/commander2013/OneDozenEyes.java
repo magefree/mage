@@ -29,7 +29,6 @@ package mage.sets.commander2013;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EntwineAbility;

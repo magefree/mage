@@ -39,7 +39,6 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.ManaType;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**

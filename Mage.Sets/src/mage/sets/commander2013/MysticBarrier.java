@@ -50,7 +50,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
-import static mage.sets.commander2013.MysticBarrierChooseEffect.DIRECTION_CHOICE;
 
 /**
  *

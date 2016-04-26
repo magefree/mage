@@ -34,13 +34,11 @@ import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.game.permanent.token.SoldierToken;
-import mage.target.TargetPermanent;
 
 /**
  *

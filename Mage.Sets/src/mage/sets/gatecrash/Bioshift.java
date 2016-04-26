@@ -40,7 +40,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

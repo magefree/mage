@@ -29,7 +29,6 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;

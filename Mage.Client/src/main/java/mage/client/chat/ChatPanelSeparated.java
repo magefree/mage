@@ -28,7 +28,6 @@
 package mage.client.chat;
 
 import java.awt.Font;
-import static mage.client.chat.ChatPanelBasic.TIMESTAMP_COLOR;
 import mage.client.components.ColorPane;
 import mage.client.util.GUISizeHelper;
 import mage.view.ChatMessage;

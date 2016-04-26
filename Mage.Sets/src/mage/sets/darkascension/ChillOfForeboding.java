@@ -37,7 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.TimingRule;
 import mage.game.Game;

@@ -28,7 +28,6 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;

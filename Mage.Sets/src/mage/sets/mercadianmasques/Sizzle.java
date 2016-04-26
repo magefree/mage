@@ -29,13 +29,11 @@ package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 
-import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *

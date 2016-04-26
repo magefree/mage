@@ -27,7 +27,6 @@
  */
 package mage.sets.onslaught;
 
-import java.util.Set;
 import java.util.UUID;
 
 import mage.MageInt;
@@ -37,7 +36,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;

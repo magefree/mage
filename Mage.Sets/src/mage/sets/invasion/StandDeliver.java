@@ -30,7 +30,6 @@ package mage.sets.invasion;
 import java.util.UUID;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.CardImpl;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;

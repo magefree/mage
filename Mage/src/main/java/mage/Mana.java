@@ -31,7 +31,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
-import static mage.constants.ManaType.COLORLESS;
 import mage.filter.FilterMana;
 import mage.util.Copyable;
 import org.apache.log4j.Logger;

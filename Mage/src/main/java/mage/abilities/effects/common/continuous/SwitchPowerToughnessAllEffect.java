@@ -28,10 +28,7 @@
 
 package mage.abilities.effects.common.continuous;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;

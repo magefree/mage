@@ -30,7 +30,6 @@ package mage.sets.scourge;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
