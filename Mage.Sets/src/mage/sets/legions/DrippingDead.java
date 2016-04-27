@@ -25,46 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.legions;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.CantBlockAbility;
+import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.*;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
- * @author Loki
+ *
+ * @author fireshoes
  */
-public class GiantStrength extends CardImpl {
+public class DrippingDead extends CardImpl {
 
-    public GiantStrength(UUID ownerId) {
-        super(ownerId, 178, "Giant Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Aura");
+    public DrippingDead(UUID ownerId) {
+        super(ownerId, 67, "Dripping Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+        this.expansionSetCode = "LGN";
+        this.subtype.add("Zombie");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(1);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        // Dripping Dead can't block.
+        this.addAbility(new CantBlockAbility());
 
-        // Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        // Whenever Dripping Dead deals combat damage to a creature, destroy that creature. It can't be regenerated.
+        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DestroyTargetEffect(true), false, true));
     }
 
-    public GiantStrength(final GiantStrength card) {
+    public DrippingDead(final DrippingDead card) {
         super(card);
     }
 
     @Override
-    public GiantStrength copy() {
-        return new GiantStrength(this);
+    public DrippingDead copy() {
+        return new DrippingDead(this);
     }
 }

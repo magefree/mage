@@ -25,46 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.ravnica;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.*;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
- * @author Loki
+ *
+ * @author fireshoes
  */
-public class GiantStrength extends CardImpl {
+public class Mortipede extends CardImpl {
 
-    public GiantStrength(UUID ownerId) {
-        super(ownerId, 178, "Giant Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Aura");
+    public Mortipede(UUID ownerId) {
+        super(ownerId, 96, "Mortipede", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Insect");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(1);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-
-        // Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        // {2}{G}: All creatures able to block Mortipede this turn do so.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{G}")));
     }
 
-    public GiantStrength(final GiantStrength card) {
+    public Mortipede(final Mortipede card) {
         super(card);
     }
 
     @Override
-    public GiantStrength copy() {
-        return new GiantStrength(this);
+    public Mortipede copy() {
+        return new Mortipede(this);
     }
 }

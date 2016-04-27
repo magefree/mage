@@ -25,46 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.darksteel;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.CardImpl;
-import mage.constants.*;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
- * @author Loki
+ *
+ * @author fireshoes
  */
-public class GiantStrength extends CardImpl {
+public class QuicksilverBehemoth extends CardImpl {
 
-    public GiantStrength(UUID ownerId) {
-        super(ownerId, 178, "Giant Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Aura");
+    public QuicksilverBehemoth(UUID ownerId) {
+        super(ownerId, 30, "Quicksilver Behemoth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Beast");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        // Affinity for artifacts
+        this.addAbility(new AffinityForArtifactsAbility());
 
-        // Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        // When Quicksilver Behemoth attacks or blocks, return it to its owner's hand at end of combat.
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)));
+        effect.setText("return it to its owner's hand at end of combat");
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(effect, false));
     }
 
-    public GiantStrength(final GiantStrength card) {
+    public QuicksilverBehemoth(final QuicksilverBehemoth card) {
         super(card);
     }
 
     @Override
-    public GiantStrength copy() {
-        return new GiantStrength(this);
+    public QuicksilverBehemoth copy() {
+        return new QuicksilverBehemoth(this);
     }
 }

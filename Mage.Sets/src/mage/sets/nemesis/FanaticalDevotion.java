@@ -25,46 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.nemesis;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.*;
-import mage.target.TargetPermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author Loki
+ *
+ * @author fireshoes
  */
-public class GiantStrength extends CardImpl {
+public class FanaticalDevotion extends CardImpl {
 
-    public GiantStrength(UUID ownerId) {
-        super(ownerId, 178, "Giant Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Aura");
+    public FanaticalDevotion(UUID ownerId) {
+        super(ownerId, 8, "Fanatical Devotion", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+        this.expansionSetCode = "NMS";
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // Sacrifice a creature: Regenerate target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new RegenerateTargetEffect(),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-
-        // Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
     }
 
-    public GiantStrength(final GiantStrength card) {
+    public FanaticalDevotion(final FanaticalDevotion card) {
         super(card);
     }
 
     @Override
-    public GiantStrength copy() {
-        return new GiantStrength(this);
+    public FanaticalDevotion copy() {
+        return new FanaticalDevotion(this);
     }
 }

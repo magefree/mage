@@ -25,46 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.visions;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.MageInt;
+import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.constants.*;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 
 /**
- * @author Loki
+ *
+ * @author fireshoes
  */
-public class GiantStrength extends CardImpl {
+public class TalruumChampion extends CardImpl {
 
-    public GiantStrength(UUID ownerId) {
-        super(ownerId, 178, "Giant Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Aura");
+    public TalruumChampion(UUID ownerId) {
+        super(ownerId, 97, "Talruum Champion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        this.expansionSetCode = "VIS";
+        this.subtype.add("Minotaur");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        // First strike
+        this.addAbility(FirstStrikeAbility.getInstance());
 
-        // Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        // Whenever Talruum Champion blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
+        Effect effect = new LoseAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("that creature loses first strike until end of turn");
+        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(effect, false));
     }
 
-    public GiantStrength(final GiantStrength card) {
+    public TalruumChampion(final TalruumChampion card) {
         super(card);
     }
 
     @Override
-    public GiantStrength copy() {
-        return new GiantStrength(this);
+    public TalruumChampion copy() {
+        return new TalruumChampion(this);
     }
 }
