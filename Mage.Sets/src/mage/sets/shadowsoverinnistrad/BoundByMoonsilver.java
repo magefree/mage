@@ -34,23 +34,31 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CantAttackBlockTransformAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.effects.common.CantAttackBlockTransformAttachedEffect;
 import mage.constants.TimingRule;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author halljared
  */
 public class BoundByMoonsilver extends CardImpl {
+
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("another permanent");
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public BoundByMoonsilver(UUID ownerId) {
         super(ownerId, 7, "Bound by Moonsilver", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
@@ -71,7 +79,7 @@ public class BoundByMoonsilver extends CardImpl {
 
         // Sacrifice another permanent: Attach Bound by Moonsilver to target creature. Activate this ability only any time you could cast a sorcery and only once each turn.
         LimitedTimesPerTurnActivatedAbility limitedAbility = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "Attach {this} to target creature"),
-            new SacrificeTargetCost(new TargetControlledPermanent()), 1);
+                new SacrificeTargetCost(new TargetControlledPermanent(filter)), 1);
         limitedAbility.setTiming(TimingRule.SORCERY);
         limitedAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(limitedAbility);

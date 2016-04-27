@@ -32,6 +32,7 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
+import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.CardUtil;
@@ -118,6 +119,9 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
         StringBuilder sb = new StringBuilder(super.getRule()).append(" Activate this ability ");
         if (condition != null) {
             sb.append("only ").append(condition.toString()).append(" and ");
+        }
+        if (getTiming().equals(TimingRule.SORCERY)) {
+            sb.append("only any time you could cast a sorcery and ");
         }
         switch (maxActivationsPerTurn) {
             case 1:
