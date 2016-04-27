@@ -29,6 +29,7 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -59,13 +60,13 @@ import mage.target.targetpointer.FixedTarget;
 public class StarkeOfRath extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
-    
+
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE)));
     }
-    
+
     public StarkeOfRath(UUID ownerId) {
         super(ownerId, 205, "Starke of Rath", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "TMP";
@@ -79,7 +80,7 @@ public class StarkeOfRath extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StarkeOfRathEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
-        
+
     }
 
     public StarkeOfRath(final StarkeOfRath card) {
@@ -93,31 +94,31 @@ public class StarkeOfRath extends CardImpl {
 }
 
 class StarkeOfRathEffect extends OneShotEffect {
-    
+
     public StarkeOfRathEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target artifact or creature. That permanent's controller gains control of {this}";
     }
-    
+
     public StarkeOfRathEffect(final StarkeOfRathEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public StarkeOfRathEffect copy() {
         return new StarkeOfRathEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());        
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetPermanent != null) {
                 targetPermanent.destroy(source.getSourceId(), game, false);
             }
-            Permanent sourcePermanent = (Permanent) source.getSourceObjectIfItStillExists(game);
-            if (sourcePermanent != null && targetPermanent != null) {
+            MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+            if ((sourceObject instanceof Permanent) && targetPermanent != null) {
                 ContinuousEffect effect = new StarkeOfRathControlEffect();
                 effect.setTargetPointer(new FixedTarget(targetPermanent.getControllerId()));
                 game.addEffect(effect, source);

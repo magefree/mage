@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
@@ -55,11 +54,12 @@ import mage.players.Player;
  *
  * 702.82. Unearth
  *
- * 702.82a Unearth is an activated ability that functions while the card with unearth
- * is in a graveyard. "Unearth [cost]" means "[Cost]: Return this card from your graveyard
- * to the battlefield. It gains haste. Exile it at the beginning of the next end step.
- * If it would leave the battlefield, exile it instead of putting it anywhere else.
- * Activate this ability only any time you could cast a sorcery."
+ * 702.82a Unearth is an activated ability that functions while the card with
+ * unearth is in a graveyard. "Unearth [cost]" means "[Cost]: Return this card
+ * from your graveyard to the battlefield. It gains haste. Exile it at the
+ * beginning of the next end step. If it would leave the battlefield, exile it
+ * instead of putting it anywhere else. Activate this ability only any time you
+ * could cast a sorcery."
  *
  */
 public class UnearthAbility extends ActivatedAbilityImpl {
@@ -147,9 +147,9 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED) {
-                // started in graveyard goint to battlefield so current zone change counter has to be +1
+                // started in graveyard going to battlefield so current zone change counter has to be +1
                 return source.getSourceObjectZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(source.getSourceId());
             }
         }

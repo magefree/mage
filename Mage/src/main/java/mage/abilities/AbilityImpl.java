@@ -1176,7 +1176,7 @@ public abstract class AbilityImpl implements Ability {
             MageObjectReference mor = new MageObjectReference(currentObject, game);
             if (mor.getZoneChangeCounter() == getSourceObjectZoneChangeCounter()) {
                 // source object has meanwhile not changed zone
-                return sourceObject;
+                return currentObject;
             }
         }
         return null;

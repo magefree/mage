@@ -29,6 +29,7 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -115,22 +116,21 @@ class DungeonGeistsEffect extends ContinuousRuleModifyingEffectImpl {
         return event.getType() == GameEvent.EventType.UNTAP || event.getType() == GameEvent.EventType.ZONE_CHANGE || event.getType() == GameEvent.EventType.LOST_CONTROL;
     }
 
-
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Source must be on the battlefield (it's neccessary to check here because if as response to the enter
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
         // event will happen before this effect is applied ever)
-        Permanent sourcePermanent = (Permanent) source.getSourceObjectIfItStillExists(game);
-        if (sourcePermanent == null || !sourcePermanent.getControllerId().equals(source.getControllerId())) {
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        if (!(sourceObject instanceof Permanent) || !((Permanent) sourceObject).getControllerId().equals(source.getControllerId())) {
             discard();
             return false;
         }
-        switch(event.getType()) {
+        switch (event.getType()) {
             case ZONE_CHANGE:
                 // end effect if source does a zone move
                 if (event.getTargetId().equals(source.getSourceId())) {
-                    ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+                    ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                     if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                         discard();
                         return false;
@@ -147,14 +147,14 @@ class DungeonGeistsEffect extends ContinuousRuleModifyingEffectImpl {
                         discard();
                         return false;
                     }
-                }                
+                }
                 break;
             case LOST_CONTROL:
                 // end effect if source control is changed
                 if (event.getTargetId().equals(source.getSourceId())) {
                     discard();
                     return false;
-                }                
+                }
                 break;
         }
         return false;
@@ -163,7 +163,7 @@ class DungeonGeistsEffect extends ContinuousRuleModifyingEffectImpl {
 
 class DungeonGeistsWatcher extends Watcher {
 
-    DungeonGeistsWatcher () {
+    DungeonGeistsWatcher() {
         super("ControlLost", WatcherScope.CARD);
     }
 
@@ -179,7 +179,7 @@ class DungeonGeistsWatcher extends Watcher {
             return;
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(sourceId)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 condition = true;
                 game.replaceEvent(event);
