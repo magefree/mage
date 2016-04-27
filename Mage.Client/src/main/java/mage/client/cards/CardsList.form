@@ -37,7 +37,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelControl" max="32767" attributes="0"/>
+                  <Component id="panelControl" pref="703" max="32767" attributes="0"/>
                   <Component id="panelCardArea" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -48,7 +48,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="panelControl" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="panelCardArea" pref="330" max="32767" attributes="0"/>
+              <Component id="panelCardArea" pref="86" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,6 +68,9 @@
         </Property>
         <Property name="requestFocusEnabled" type="boolean" value="false"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="CardsList_panelControl"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -84,7 +87,9 @@
                   <Component id="lblInstantCount" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblEnchantmentCount" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                  <Component id="lblArtifactCount" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="chkPiles" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="cbSortBy" min="-2" max="-2" attributes="0"/>
@@ -92,7 +97,7 @@
                   <Component id="jToggleListView" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jToggleCardView" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="62" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -108,6 +113,7 @@
                           <Component id="lblInstantCount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEnchantmentCount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="chkPiles" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblArtifactCount" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="cbSortBy" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jToggleListView" min="-2" max="-2" attributes="0"/>
@@ -127,7 +133,7 @@
             <Property name="text" type="java.lang.String" value="999"/>
             <Property name="toolTipText" type="java.lang.String" value="Number of all cards in this area."/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -145,7 +151,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Number of lands."/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -163,7 +169,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Number of creatures."/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -181,7 +187,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Number of sorceries."/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -199,7 +205,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Number of instants."/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -217,7 +223,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Number of enchantments."/>
             <Property name="verticalAlignment" type="int" value="1"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>
@@ -317,6 +323,24 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleCardViewActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblArtifactCount">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="2"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/buttons/type_artifact.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="999"/>
+            <Property name="toolTipText" type="java.lang.String" value="Number of artifacts"/>
+            <Property name="verticalAlignment" type="int" value="1"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="inheritsPopupMenu" type="boolean" value="false"/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
