@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Vanishing extends CardImpl {
 
     public Vanishing(UUID ownerId) {
-        super(ownerId, 39, "Vanishing", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
+        super(ownerId, 48, "Vanishing", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "VIS";
         this.subtype.add("Aura");
 
@@ -59,7 +59,7 @@ public class Vanishing extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // {U}{U}: Enchanted creature phases out.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutAttachedEffect(), new ManaCostsImpl("{U}{U}")));
     }
