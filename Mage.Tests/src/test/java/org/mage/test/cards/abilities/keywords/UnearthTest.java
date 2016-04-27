@@ -74,5 +74,29 @@ public class UnearthTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Hellspark Elemental", 0);
         assertExileCount("Hellspark Elemental", 1);
     }
+    
+    /**
+     * Reported bug: Cards with unearth (e.g. Undead Leotau) are currently bugged. When you bring a creature back from the graveyard 
+     * with unearth, it [should] get exiled at end of turn normally, [but instead] a copy of the card stays on the battlefield 
+     * under your control permanently.
+     */
+    @Test
+    public void testUndeadLeotau() {
+        
+        //{R}: Undead Leotau gets +1/-1 until end of turn.
+        // Unearth {2}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.GRAVEYARD, playerA, "Undead Leotau", 1); // 3/4
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unearth");
+        attack(1, playerA, "Undead Leotau");
+        
+        setStopAt(2, PhaseStep.UNTAP);
+        execute();
 
+        assertGraveyardCount(playerA, "Undead Leotau", 0);
+        assertLife(playerB, 17);
+
+        assertPermanentCount(playerA, "Undead Leotau", 0);
+        assertExileCount("Undead Leotau", 1);              
+    }
 }

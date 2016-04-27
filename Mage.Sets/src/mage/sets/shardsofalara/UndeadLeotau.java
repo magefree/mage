@@ -29,16 +29,16 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -54,6 +54,9 @@ public class UndeadLeotau extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+        
+        // {R}: Undead Leotau gets +1/-1 until end of turn.
+        // Unearth {2}{B} 
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(+1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{B}")));
     }
