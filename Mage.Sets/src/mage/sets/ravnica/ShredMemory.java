@@ -46,7 +46,6 @@ public class ShredMemory extends CardImpl {
         super(ownerId, 105, "Shred Memory", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "RAV";
 
-
         // Exile up to four target cards from a single graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 4, new FilterCard("cards")));
