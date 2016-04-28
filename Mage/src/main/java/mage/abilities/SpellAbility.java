@@ -143,7 +143,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     public void clear() {
-        getChoices().clearChosen();
         getTargets().clearChosen();
         this.manaCosts.clearPaid();
         this.costs.clearPaid();

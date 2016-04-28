@@ -30,12 +30,6 @@ package mage.sets.gatecrash;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -48,6 +42,11 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,16 +57,6 @@ import mage.players.Player;
  * @author LevelX2
  */
 public class AngelicSkirmisher extends CardImpl {
-
-    private static final Choice abilityChoice = new ChoiceImpl(true);
-    private static final Set<String> abilityChoices = new HashSet<String>();
-    static {
-        abilityChoice.setMessage("Choose ability for your creatures");
-        abilityChoices.add("First strike");
-        abilityChoices.add("Vigilance");
-        abilityChoices.add("Lifelink");
-        abilityChoice.setChoices(abilityChoices);
-    }
 
     public AngelicSkirmisher(UUID ownerId) {
         super(ownerId, 3, "Angelic Skirmisher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
@@ -82,7 +71,6 @@ public class AngelicSkirmisher extends CardImpl {
 
         // At the beginning of each combat, choose first strike, vigilance or lifelink. Creatures you control gain that ability until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new AngelicSkirmisherEffect(), TargetController.ANY, false);
-        ability.addChoice(abilityChoice);
         this.addAbility(ability);
     }
 
@@ -108,17 +96,30 @@ class AngelicSkirmisherEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Choice abilityChoice = source.getChoices().get(0);
+        
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (controller != null && sourcePermanent != null && abilityChoice != null && abilityChoice.isChosen()) {
+        if (controller != null && sourcePermanent != null) {
+            Choice abilityChoice = new ChoiceImpl(true);
+            Set<String> abilityChoices = new HashSet<>(3);
+            abilityChoice.setMessage("Choose ability for your creatures");
+            abilityChoices.add("First strike");
+            abilityChoices.add("Vigilance");
+            abilityChoices.add("Lifelink");
+            abilityChoice.setChoices(abilityChoices);
             Ability ability = null;
-            if (abilityChoice.getChoice().equals("First strike")) {
-                ability = FirstStrikeAbility.getInstance();
-            } else if (abilityChoice.getChoice().equals("Vigilance")) {
-                ability = VigilanceAbility.getInstance();
-            } else if (abilityChoice.getChoice().equals("Lifelink")) {
-                ability = LifelinkAbility.getInstance();
+            switch (abilityChoice.getChoice()) {
+                case "First strike":
+                    ability = FirstStrikeAbility.getInstance();
+                    break;
+                case "Vigilance":
+                    ability = VigilanceAbility.getInstance();
+                    break;
+                case "Lifelink":
+                    ability = LifelinkAbility.getInstance();
+                    break;
+                default:
+                    break;
             }
             if (ability != null) {
                 GainAbilityControlledEffect effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, new FilterControlledCreaturePermanent());

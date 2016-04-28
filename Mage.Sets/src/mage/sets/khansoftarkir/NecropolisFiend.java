@@ -87,7 +87,7 @@ public class NecropolisFiend extends CardImpl {
     }
 
     @Override
-    public void adjustChoices(Ability ability, Game game) {
+    public void adjustCosts(Ability ability, Game game) {
         if (ability instanceof SimpleActivatedAbility) {
             Player controller = game.getPlayer(ability.getControllerId());
             if (controller != null) {
@@ -101,7 +101,7 @@ public class NecropolisFiend extends CardImpl {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SimpleActivatedAbility) {
             int xValue = ability.getManaCostsToPay().getX();
             for(Cost cost: ability.getCosts()) {

@@ -44,8 +44,6 @@ public interface MageObject extends MageItem, Serializable {
 
     MageInt getToughness();
 
-    void adjustChoices(Ability ability, Game game);
-
     void adjustCosts(Ability ability, Game game);
 
     void adjustTargets(Ability ability, Game game);

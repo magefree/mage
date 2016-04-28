@@ -35,21 +35,17 @@ import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
 import mage.game.permanent.token.GoatToken;
-import mage.players.Player;
 
 /**
  *
@@ -77,8 +73,12 @@ public class SpringjackPasture extends CardImpl {
         this.addAbility(ability);
 
         // {tap}, Sacrifice X Goats: Add X mana of any one color to your mana pool. You gain X life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpringjackPastureEffect(), new TapSourceCost());
-        ability.addChoice(new ChoiceColor());
+        ability = new DynamicManaAbility(
+                new Mana(0,0,0,0,0,0,1,0), 
+                new GetXValue(), 
+                new TapSourceCost(), 
+                "Add X mana of any one color to your mana pool",
+                true);
         ability.addCost(new SacrificeXTargetCost(filter));
         ability.addEffect(new GainLifeEffect(new GetXValue()));
         this.addAbility(ability);
@@ -92,45 +92,5 @@ public class SpringjackPasture extends CardImpl {
     @Override
     public SpringjackPasture copy() {
         return new SpringjackPasture(this);
-    }
-}
-
-class SpringjackPastureEffect extends OneShotEffect {
-
-    public SpringjackPastureEffect() {
-        super(Outcome.Benefit);
-        staticText = "Add X mana of any one color to your mana pool";
-    }
-
-    public SpringjackPastureEffect(final SpringjackPastureEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        if (you != null && choice != null) {
-            int count = new GetXValue().calculate(game, source, this);
-            if (choice.getColor().isBlack()) {
-                you.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0, 0), game, source);
-            } else if (choice.getColor().isBlue()) {
-                you.getManaPool().addMana(new Mana(0, 0, count, 0, 0, 0, 0, 0), game, source);
-            } else if (choice.getColor().isRed()) {
-                you.getManaPool().addMana(new Mana(count, 0, 0, 0, 0, 0, 0, 0), game, source);
-            } else if (choice.getColor().isGreen()) {
-                you.getManaPool().addMana(new Mana(0, count, 0, 0, 0, 0, 0, 0), game, source);
-            } else if (choice.getColor().isWhite()) {
-                you.getManaPool().addMana(new Mana(0, 0, 0, count, 0, 0, 0, 0), game, source);
-            }
-            return true;
-
-        }
-        return false;
-    }
-
-    @Override
-    public SpringjackPastureEffect copy() {
-        return new SpringjackPastureEffect(this);
     }
 }

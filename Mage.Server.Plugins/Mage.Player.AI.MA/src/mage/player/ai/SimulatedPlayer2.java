@@ -45,7 +45,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
-import mage.choices.Choice;
 import mage.constants.AbilityType;
 import mage.game.Game;
 import mage.game.combat.Combat;
@@ -451,9 +450,6 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             for (UUID targetId : target.getTargets()) {
                 newNode.getTargets().add(targetId);
             }
-        }
-        for (Choice choice : ability.getChoices()) {
-            newNode.getChoices().add(choice.getChoice());
         }
         parent.children.add(newNode);
     }

@@ -54,8 +54,6 @@ import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
-import mage.choices.Choice;
-import mage.choices.Choices;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.EffectType;
@@ -271,19 +269,7 @@ public abstract class AbilityImpl implements Ability {
         if (this.abilityType.equals(AbilityType.SPELL)) {
             game.getContinuousEffects().applySpliceEffects(this, game);
         }
-
-        if (sourceObject != null) {
-            sourceObject.adjustChoices(this, game);
-        }
-        // TODO: Because all (non targeted) choices have to be done during resolution
-        // this has to be removed, if all using effects are changed
-        for (Mode mode : this.getModes().getSelectedModes()) {
-            if (mode.getChoices().size() > 0 && mode.getChoices().choose(game, this) == false) {
-                logger.debug("activate failed - choice");
-                return false;
-            }
-        }
-
+        
         // if ability can be cast for no mana, clear the mana costs now, because additional mana costs must be paid.
         // For Flashback ability can be set X before, so the X costs have to be restored for the flashbacked ability
         if (noMana) {
@@ -688,11 +674,6 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public Choices getChoices() {
-        return getModes().getMode().getChoices();
-    }
-
-    @Override
     public Zone getZone() {
         return zone;
     }
@@ -837,13 +818,6 @@ public abstract class AbilityImpl implements Ability {
     public void addTarget(Target target) {
         if (target != null) {
             getTargets().add(target);
-        }
-    }
-
-    @Override
-    public void addChoice(Choice choice) {
-        if (choice != null) {
-            getChoices().add(choice);
         }
     }
 
@@ -1120,9 +1094,6 @@ public abstract class AbilityImpl implements Ability {
                     sb.append(target.getTargetedName(game));
                 }
             }
-        }
-        for (Choice choice : this.getChoices()) {
-            sb.append(" - ").append(choice.getMessage()).append(": ").append(choice.getChoice());
         }
         return sb.toString();
     }

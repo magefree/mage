@@ -250,11 +250,6 @@ public class PermanentCard extends PermanentImpl {
     }
 
     @Override
-    public void adjustChoices(Ability ability, Game game) {
-        card.adjustChoices(ability, game);
-    }
-
-    @Override
     public ManaCosts<ManaCost> getManaCost() {
         if (faceDown) { // face down permanent has always {0} mana costs
             manaCost.clear();

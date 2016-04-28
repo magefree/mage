@@ -30,7 +30,6 @@ package mage.sets.planarchaos;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -40,8 +39,6 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -52,10 +49,9 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.other.CounterCardPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPermanentOrSuspendedCard;
 
 /**
  *
@@ -72,7 +68,6 @@ public class FuryCharm extends CardImpl {
     public FuryCharm(UUID ownerId) {
         super(ownerId, 100, "Fury Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "PLC";
-
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);
@@ -92,34 +87,9 @@ public class FuryCharm extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
         // or remove two time counters from target permanent or suspended card.
         mode = new Mode();
-        Choice targetChoice = new ChoiceImpl();
-        targetChoice.setMessage("Choose what to target");
-        targetChoice.getChoices().add("Permanent");
-        targetChoice.getChoices().add("Suspended Card");
-        mode.getChoices().add(targetChoice);
+        mode.getTargets().add(new TargetPermanentOrSuspendedCard());
         mode.getEffects().add(new FuryCharmRemoveCounterEffect());
         this.getSpellAbility().getModes().addMode(mode);
-
-
-
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            for(Effect effect :ability.getEffects()) {
-                if (effect instanceof FuryCharmRemoveCounterEffect) {
-                    Choice targetChoice = ability.getChoices().get(0);
-                    if (targetChoice.getChoice().equals("Permanent")) {
-                        ability.addTarget(new TargetCreaturePermanent());
-                    }
-                    if (targetChoice.getChoice().equals("Suspended Card")) {
-                        Target target = new TargetCardInExile(1,1, filter, null, true);
-                        ability.addTarget(target);
-                    }
-                }
-            }
-        }
     }
 
     public FuryCharm(final FuryCharm card) {
@@ -152,12 +122,12 @@ class FuryCharmRemoveCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            permanent.removeCounters(CounterType.TIME.getName(), 2,  game);
+            permanent.removeCounters(CounterType.TIME.getName(), 2, game);
             return true;
         }
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
-            card.removeCounters(CounterType.TIME.getName(), 2,  game);
+            card.removeCounters(CounterType.TIME.getName(), 2, game);
             return true;
         }
         return false;

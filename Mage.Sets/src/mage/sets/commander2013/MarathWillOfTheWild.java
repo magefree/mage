@@ -27,11 +27,13 @@
  */
 package mage.sets.commander2013;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -55,9 +57,6 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
-import mage.abilities.costs.Cost;
 
 /**
  *
@@ -109,7 +108,7 @@ public class MarathWillOfTheWild extends CardImpl {
     }
 
     @Override
-    public void adjustChoices(Ability ability, Game game) {
+    public void adjustCosts(Ability ability, Game game) {
         if (ability instanceof SimpleActivatedAbility && ability.getModes().size() == 3) {
             Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
             if (sourcePermanent != null) {
@@ -124,7 +123,6 @@ public class MarathWillOfTheWild extends CardImpl {
                 }
             }
         }
-
     }
 
     public MarathWillOfTheWild(final MarathWillOfTheWild card) {

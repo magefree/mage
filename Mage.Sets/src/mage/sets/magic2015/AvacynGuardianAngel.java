@@ -30,9 +30,11 @@ package mage.sets.magic2015;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -40,12 +42,14 @@ import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -76,17 +80,15 @@ public class AvacynGuardianAngel extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // {1}{W}: Prevent all damage that would be dealt to another target creature this turn by sources of the color of your choice.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new AvacynGuardianAngelPreventToCreatureEffect(Duration.EndOfTurn, Integer.MAX_VALUE, false), 
-                new ManaCostsImpl("{1}{W}"));
-        ability.addChoice(new ChoiceColor());
+                new AvacynGuardianAngelPreventToCreatureEffect(), 
+                new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent(filter));        
         this.addAbility(ability);
         
         // {5}{W}{W}: Prevent all damage that would be dealt to target player this turn by sources of the color of your choice.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new AvacynGuardianAngelPreventToPlayerEffect(Duration.EndOfTurn, Integer.MAX_VALUE, false), 
-                new ManaCostsImpl("{5}{W}{W}"));
-        ability.addChoice(new ChoiceColor());
+                new AvacynGuardianAngelPreventToPlayerEffect(), 
+                new ManaCostsImpl<>("{5}{W}{W}"));
         ability.addTarget(new TargetPlayer());    
         this.addAbility(ability);
     }
@@ -101,18 +103,49 @@ public class AvacynGuardianAngel extends CardImpl {
     }
 }
 
-class AvacynGuardianAngelPreventToCreatureEffect extends PreventionEffectImpl {
-
-    public AvacynGuardianAngelPreventToCreatureEffect(Duration duration, int amount, boolean onlyCombat) {
-        super(duration, amount, onlyCombat, false);
+class AvacynGuardianAngelPreventToCreatureEffect extends OneShotEffect {
+    
+    AvacynGuardianAngelPreventToCreatureEffect() {
+        super(Outcome.PreventDamage);
         this.staticText = "Prevent all damage that would be dealt to another target creature this turn by sources of the color of your choice";
     }
-
-    public AvacynGuardianAngelPreventToCreatureEffect(AvacynGuardianAngelPreventToCreatureEffect effect) {
+    
+    AvacynGuardianAngelPreventToCreatureEffect(final AvacynGuardianAngelPreventToCreatureEffect effect) {
         super(effect);
     }
+    
+    @Override
+    public AvacynGuardianAngelPreventToCreatureEffect copy() {
+        return new AvacynGuardianAngelPreventToCreatureEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor();
+            if (controller.choose(Outcome.PreventDamage, choice, game)) {
+                game.addEffect(new AvacynGuardianAngelPreventToCreaturePreventionEffect(choice.getColor()), source);
+                return true;
+            }
+        }
+        return false;
+    }
+}
 
+class AvacynGuardianAngelPreventToCreaturePreventionEffect extends PreventionEffectImpl {
+    
+    private final ObjectColor color;
 
+    AvacynGuardianAngelPreventToCreaturePreventionEffect(ObjectColor color) {
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
+        this.color = color;
+    }
+
+    AvacynGuardianAngelPreventToCreaturePreventionEffect(AvacynGuardianAngelPreventToCreaturePreventionEffect effect) {
+        super(effect);
+        this.color = effect.color;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -124,9 +157,8 @@ class AvacynGuardianAngelPreventToCreatureEffect extends PreventionEffectImpl {
         if (super.applies(event, source, game)) {
             if (event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)
                     && event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-                ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
                 MageObject sourceObject = game.getObject(event.getSourceId());
-                if (sourceObject != null && choice != null && sourceObject.getColor(game).shares(choice.getColor())) {
+                if (sourceObject != null && sourceObject.getColor(game).shares(this.color)) {
                     return true;
                 }
             }
@@ -135,20 +167,53 @@ class AvacynGuardianAngelPreventToCreatureEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public AvacynGuardianAngelPreventToCreatureEffect copy() {
-        return new AvacynGuardianAngelPreventToCreatureEffect(this);
+    public AvacynGuardianAngelPreventToCreaturePreventionEffect copy() {
+        return new AvacynGuardianAngelPreventToCreaturePreventionEffect(this);
     }
 }
 
-class AvacynGuardianAngelPreventToPlayerEffect extends PreventionEffectImpl {
-
-    public AvacynGuardianAngelPreventToPlayerEffect(Duration duration, int amount, boolean onlyCombat) {
-        super(duration, amount, onlyCombat, false);
+class AvacynGuardianAngelPreventToPlayerEffect extends OneShotEffect {
+    
+    AvacynGuardianAngelPreventToPlayerEffect() {
+        super(Outcome.PreventDamage);
         this.staticText = "Prevent all damage that would be dealt to target player this turn by sources of the color of your choice";
     }
-
-    public AvacynGuardianAngelPreventToPlayerEffect(AvacynGuardianAngelPreventToPlayerEffect effect) {
+    
+    AvacynGuardianAngelPreventToPlayerEffect(final AvacynGuardianAngelPreventToPlayerEffect effect) {
         super(effect);
+    }
+    
+    @Override
+    public AvacynGuardianAngelPreventToPlayerEffect copy() {
+        return new AvacynGuardianAngelPreventToPlayerEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor();
+            if (controller.choose(Outcome.PreventDamage, choice, game)) {
+                game.addEffect(new AvacynGuardianAngelPreventToPlayerPreventionEffect(choice.getColor()), source);
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class AvacynGuardianAngelPreventToPlayerPreventionEffect extends PreventionEffectImpl {
+    
+    private final ObjectColor color;
+
+    AvacynGuardianAngelPreventToPlayerPreventionEffect(ObjectColor color) {
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
+        this.color = color;
+    }
+
+    AvacynGuardianAngelPreventToPlayerPreventionEffect(AvacynGuardianAngelPreventToPlayerPreventionEffect effect) {
+        super(effect);
+        this.color = effect.color;
     }
 
     @Override
@@ -161,9 +226,8 @@ class AvacynGuardianAngelPreventToPlayerEffect extends PreventionEffectImpl {
         if (super.applies(event, source, game)) {
             if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
                     && event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-                ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
                 MageObject sourceObject = game.getObject(event.getSourceId());
-                if (sourceObject != null && choice != null && sourceObject.getColor(game).shares(choice.getColor())) {
+                if (sourceObject != null && sourceObject.getColor(game).shares(this.color)) {
                     return true;
                 }
             }
@@ -172,7 +236,7 @@ class AvacynGuardianAngelPreventToPlayerEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public AvacynGuardianAngelPreventToPlayerEffect copy() {
-        return new AvacynGuardianAngelPreventToPlayerEffect(this);
+    public AvacynGuardianAngelPreventToPlayerPreventionEffect copy() {
+        return new AvacynGuardianAngelPreventToPlayerPreventionEffect(this);
     }
 }

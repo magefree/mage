@@ -44,6 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -52,6 +53,7 @@ import mage.game.permanent.Permanent;
 public class WashOut extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
@@ -60,9 +62,7 @@ public class WashOut extends CardImpl {
         super(ownerId, 87, "Wash Out", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "INV";
 
-
         // Return all permanents of the color of your choice to their owners' hands.
-        this.getSpellAbility().addChoice(new ChoiceColor());
         this.getSpellAbility().addEffect(new WashOutEffect());
 
     }
@@ -90,15 +90,19 @@ class WashOutEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterPermanent filter = new FilterPermanent();
-        ObjectColor color = ((ChoiceColor) source.getChoices().get(0)).getColor();
-        if (color != null) {
-            filter.add(new ColorPredicate(color));
-
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor();
+            controller.choose(Outcome.ReturnToHand, choice, game);
+            ObjectColor color = choice.getColor();
+            if (color != null) {
+                FilterPermanent filter = new FilterPermanent();
+                filter.add(new ColorPredicate(color));
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                    permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

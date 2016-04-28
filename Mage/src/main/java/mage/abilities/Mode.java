@@ -30,7 +30,6 @@ package mage.abilities;
 import java.io.Serializable;
 import java.util.UUID;
 import mage.abilities.effects.Effects;
-import mage.choices.Choices;
 import mage.target.Targets;
 
 /**
@@ -41,20 +40,17 @@ public class Mode implements Serializable {
 
     protected UUID id;
     protected Targets targets;
-    protected Choices choices;
     protected Effects effects;
 
     public Mode() {
         this.id = UUID.randomUUID();
         this.targets = new Targets();
-        this.choices = new Choices();
         this.effects = new Effects();
     }
 
     public Mode(Mode mode) {
         this.id = mode.id;
         this.targets = mode.targets.copy();
-        this.choices = mode.choices.copy();
         this.effects = mode.effects.copy();
     }
 
@@ -68,10 +64,6 @@ public class Mode implements Serializable {
 
     public Targets getTargets() {
         return targets;
-    }
-
-    public Choices getChoices() {
-        return choices;
     }
 
     public Effects getEffects() {

@@ -32,12 +32,14 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -46,6 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -65,8 +68,7 @@ public class PrismaticStrands extends CardImpl {
         this.expansionSetCode = "JUD";
 
         // Prevent all damage that sources of the color of your choice would deal this turn.
-        this.getSpellAbility().addEffect(new PrismaticStrandsEffect(Duration.EndOfTurn, Integer.MAX_VALUE, false));
-        this.getSpellAbility().addChoice(new ChoiceColor());
+        this.getSpellAbility().addEffect(new PrismaticStrandsEffect());
         
         // Flashback-Tap an untapped white creature you control.
         this.addAbility(new FlashbackAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1,1,filter,false)), TimingRule.INSTANT));
@@ -82,15 +84,47 @@ public class PrismaticStrands extends CardImpl {
     }
 }
 
-class PrismaticStrandsEffect extends PreventionEffectImpl {
-
-    public PrismaticStrandsEffect(Duration duration, int amount, boolean onlyCombat) {
-        super(duration, amount, onlyCombat, false);
+class PrismaticStrandsEffect extends OneShotEffect {
+    
+    PrismaticStrandsEffect() {
+        super(Outcome.PreventDamage);
         this.staticText = "Prevent all damage that sources of the color of your choice would deal this turn";
     }
-
-    public PrismaticStrandsEffect(PrismaticStrandsEffect effect) {
+    
+    PrismaticStrandsEffect(final PrismaticStrandsEffect effect) {
         super(effect);
+    }
+    
+    @Override
+    public PrismaticStrandsEffect copy() {
+        return new PrismaticStrandsEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor();
+            controller.choose(Outcome.PreventDamage, choice, game);
+            game.addEffect(new PrismaticStrandsPreventionEffect(choice.getColor()), source);
+            return true;
+        }
+        return false;
+    }
+}
+
+class PrismaticStrandsPreventionEffect extends PreventionEffectImpl {
+    
+    private final ObjectColor color;
+
+    PrismaticStrandsPreventionEffect(ObjectColor color) {
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
+        this.color = color;
+    }
+
+    PrismaticStrandsPreventionEffect(PrismaticStrandsPreventionEffect effect) {
+        super(effect);
+        this.color = effect.color;
     }
 
     @Override
@@ -104,9 +138,8 @@ class PrismaticStrandsEffect extends PreventionEffectImpl {
             if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER) 
                     || event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE) 
                     || event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER)) {
-                ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
                 MageObject sourceObject = game.getObject(event.getSourceId());
-                if (sourceObject != null && choice != null && sourceObject.getColor(game).shares(choice.getColor())) {
+                if (sourceObject != null && sourceObject.getColor(game).shares(this.color)) {
                     return true;
                 }
             }
@@ -115,7 +148,7 @@ class PrismaticStrandsEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public PrismaticStrandsEffect copy() {
-        return new PrismaticStrandsEffect(this);
+    public PrismaticStrandsPreventionEffect copy() {
+        return new PrismaticStrandsPreventionEffect(this);
     }
 }

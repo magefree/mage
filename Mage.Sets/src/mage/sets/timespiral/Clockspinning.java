@@ -31,13 +31,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
-import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
@@ -46,18 +43,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.Counter;
-import mage.counters.CounterType;
-import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.other.CounterCardPredicate;
-import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInExile;
+import mage.target.common.TargetPermanentOrSuspendedCard;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -74,39 +63,10 @@ public class Clockspinning extends CardImpl {
         this.addAbility(new BuybackAbility("{3}"));
 
         // Choose a counter on target permanent or suspended card. Remove that counter from that permanent or card or put another of those counters on it.
-        Choice targetChoice = new ChoiceImpl();
-        targetChoice.setMessage("Choose what to target");
-        targetChoice.getChoices().add("Permanent");
-        targetChoice.getChoices().add("Suspended Card");
-
-        this.getSpellAbility().addChoice(targetChoice);
+        this.getSpellAbility().addTarget(new TargetPermanentOrSuspendedCard());
         this.getSpellAbility().addEffect(new ClockspinningAddOrRemoveCounterEffect());
     }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            for (Effect effect : ability.getEffects()) {
-                if (effect instanceof ClockspinningAddOrRemoveCounterEffect) {
-                    Choice targetChoice = ability.getChoices().get(0);
-                    if (targetChoice.getChoice().equals("Permanent")) {
-                        FilterPermanent filter = new FilterPermanent("target permanent with a counter");
-                        filter.add(new CounterAnyPredicate());
-                        ability.addTarget(new TargetPermanent(filter));
-                    }
-                    if (targetChoice.getChoice().equals("Suspended Card")) {
-                        FilterCard suspendFilter = new FilterCard("suspended card");
-                        suspendFilter.add(new AbilityPredicate(SuspendAbility.class));
-                        suspendFilter.add(new CounterCardPredicate(CounterType.TIME));
-
-                        Target target = new TargetCardInExile(1, 1, suspendFilter, null, true);
-                        ability.addTarget(target);
-                    }
-                }
-            }
-        }
-    }
-
+    
     public Clockspinning(final Clockspinning card) {
         super(card);
     }
@@ -121,7 +81,7 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
 
     ClockspinningAddOrRemoveCounterEffect() {
         super(Outcome.Removal);
-        this.staticText = "Remove or add a counter from a target suspended card or a target permanent";
+        this.staticText = "Choose a counter on target permanent or suspended card. Remove that counter from that permanent or card or put another of those counters on it";
     }
 
     ClockspinningAddOrRemoveCounterEffect(final ClockspinningAddOrRemoveCounterEffect effect) {
@@ -139,7 +99,7 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
             String counterName = null;
             if (permanent.getCounters().size() > 1) {
                 Choice choice = new ChoiceImpl(true);
-                Set<String> choices = new HashSet<>();
+                Set<String> choices = new HashSet<>(2);
                 for (Counter counter : permanent.getCounters().values()) {
                     if (permanent.getCounters().getCount(counter.getName()) > 0) {
                         choices.add(counter.getName());

@@ -59,7 +59,6 @@ public class CarpetOfFlowers extends CardImpl {
         super(ownerId, 240, "Carpet of Flowers", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "USG";
 
-
         // At the beginning of each of your main phases, if you haven't added mana to your mana pool with this ability this turn, you may add up to X mana of any one color to your mana pool, where X is the number of Islands target opponent controls.
         this.addAbility(new CarpetOfFlowersTriggeredAbility());
     }
@@ -74,17 +73,14 @@ public class CarpetOfFlowers extends CardImpl {
     }
 }
 
-
-
 class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
-    public CarpetOfFlowersTriggeredAbility() {
+    CarpetOfFlowersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CarpetOfFlowersEffect(), true);
-        this.addChoice(new ChoiceColor());
         this.addTarget(new TargetOpponent());
     }
 
-    public CarpetOfFlowersTriggeredAbility(final CarpetOfFlowersTriggeredAbility ability) {
+    CarpetOfFlowersTriggeredAbility(final CarpetOfFlowersTriggeredAbility ability) {
         super(ability);
     }
 
@@ -106,34 +102,29 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        Boolean activated = (Boolean)game.getState().getValue(this.originalId.toString() + "addMana");
-        if (activated == null)
-        {
+        Boolean activatedThisTurn = (Boolean) game.getState().getValue(this.originalId.toString() + "addMana");
+        if (activatedThisTurn == null) {
             return true;
         }
-        else
-        {
-            return !activated;
+        else {
+            return !activatedThisTurn;
         }
     }
-    
 
-    
     @Override
     public boolean resolve(Game game) {
         boolean value = super.resolve(game);
-        if(value == true)
-        {
+        if (value == true) {
             game.getState().setValue(this.originalId.toString() + "addMana", Boolean.TRUE);
         }
         return value;
     }
-    
+
     @Override
     public void reset(Game game) {
         game.getState().setValue(this.originalId.toString() + "addMana", Boolean.FALSE);
     }
-        
+
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("At the beginning of each of your main phases, if you haven't added mana to your mana pool with this ability this turn");
@@ -142,9 +133,8 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
 }
 
-
 class CarpetOfFlowersEffect extends ManaEffect {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Island ");
 
     static {
@@ -164,19 +154,18 @@ class CarpetOfFlowersEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null){
+        if (controller != null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
-                controller.choose(Outcome.Protect, choice, game);
+                controller.choose(Outcome.Benefit, choice, game);
                 if (!controller.canRespond()) {
                     return false;
                 }
             }
             int countMax = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
             ChoiceImpl choiceCount = new ChoiceImpl(true);
-            LinkedHashSet<String> set = new LinkedHashSet<>();
-            for(int i = 0; i <= countMax; i++)
-            {
+            LinkedHashSet<String> set = new LinkedHashSet<>(countMax + 1);
+            for (int i = 0; i <= countMax; i++) {
                 set.add(Integer.toString(i));
             }
             choiceCount.setChoices(set);
@@ -201,8 +190,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
                     case "White":
                         mana.setWhite(count);
                         break;
-                    case "Colorless":
-                        mana.setGeneric(count);
+                    default:
                         break;
                 }
                 checkToFirePossibleEvents(mana, game, source);

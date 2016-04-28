@@ -32,23 +32,17 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  * @author LevelX2
@@ -88,76 +82,4 @@ public class PetalmaneBaku extends CardImpl {
     public PetalmaneBaku copy() {
         return new PetalmaneBaku(this);
     }
-
-    private class PetalmaneBakuManaAbility extends BasicManaAbility {
-
-        PetalmaneBakuManaAbility() {
-            super(new PetalmaneBakuManaEffect());
-            this.addChoice(new ChoiceColor());
-        }
-
-        PetalmaneBakuManaAbility(final PetalmaneBakuManaAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public PetalmaneBakuManaAbility copy() {
-            return new PetalmaneBakuManaAbility(this);
-        }
-    }
-
-    private class PetalmaneBakuManaEffect extends ManaEffect {
-
-        PetalmaneBakuManaEffect() {
-            super();
-            staticText = "Add X mana of any one color to your mana pool";
-        }
-
-        PetalmaneBakuManaEffect(final PetalmaneBakuManaEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-            Player player = game.getPlayer(source.getControllerId());
-
-            if (player != null && choice != null) {
-                int numberOfMana = 0;
-                for (Cost cost : source.getCosts()) {
-                    if (cost instanceof RemoveVariableCountersSourceCost) {
-                        numberOfMana = ((RemoveVariableCountersSourceCost) cost).getAmount();
-                    }
-                }
-                if (choice.getColor().isBlack()) {
-                    player.getManaPool().addMana(new Mana(0, 0, 0, 0, numberOfMana, 0, 0, 0), game, source);
-                    return true;
-                } else if (choice.getColor().isBlue()) {
-                    player.getManaPool().addMana(new Mana(0, 0, numberOfMana, 0, 0, 0, 0, 0), game, source);
-                    return true;
-                } else if (choice.getColor().isRed()) {
-                    player.getManaPool().addMana(new Mana(numberOfMana, 0, 0, 0, 0, 0, 0, 0), game, source);
-                    return true;
-                } else if (choice.getColor().isGreen()) {
-                    player.getManaPool().addMana(new Mana(0, numberOfMana, 0, 0, 0, 0, 0, 0), game, source);
-                    return true;
-                } else if (choice.getColor().isWhite()) {
-                    player.getManaPool().addMana(new Mana(0, 0, 0, numberOfMana, 0, 0, 0, 0), game, source);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public Mana getMana(Game game, Ability source) {
-            return null;
-        }
-
-        @Override
-        public PetalmaneBakuManaEffect copy() {
-            return new PetalmaneBakuManaEffect(this);
-        }
-    }
-
 }

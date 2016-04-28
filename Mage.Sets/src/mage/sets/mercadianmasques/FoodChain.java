@@ -30,6 +30,7 @@ package mage.sets.mercadianmasques;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileTargetCost;
@@ -41,6 +42,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -58,10 +60,8 @@ public class FoodChain extends CardImpl {
         super(ownerId, 246, "Food Chain", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "MMQ";
 
-
         // Exile a creature you control: Add X mana of any one color to your mana pool, where X is the exiled creature's converted mana cost plus one. Spend this mana only to cast creature spells.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new FoodChainManaEffect(), new ExileTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature you control"), true)));
-        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
     }
 
@@ -76,6 +76,7 @@ public class FoodChain extends CardImpl {
 }
 
 class FoodChainManaBuilder extends ConditionalManaBuilder {
+
     @Override
     public ConditionalMana build(Object... options) {
         return new CreatureCastConditionalMana(this.mana);
@@ -88,55 +89,58 @@ class FoodChainManaBuilder extends ConditionalManaBuilder {
 }
 
 class FoodChainManaEffect extends ManaEffect {
-    
+
     FoodChainManaEffect() {
         this.staticText = "Add X mana of any one color to your mana pool, where X is the exiled creature's converted mana cost plus one. Spend this mana only to cast creature spells.";
     }
-    
+
     FoodChainManaEffect(final FoodChainManaEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public FoodChainManaEffect copy() {
         return new FoodChainManaEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        int manaCostExiled = 0;
-        for (Cost cost: source.getCosts()) {
-            if (cost.isPaid() && cost instanceof ExileTargetCost) {
-                for (Card card : ((ExileTargetCost) cost).getPermanents()) {
-                    manaCostExiled += card.getConvertedManaCost();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int manaCostExiled = 0;
+            for (Cost cost : source.getCosts()) {
+                if (cost.isPaid() && cost instanceof ExileTargetCost) {
+                    for (Card card : ((ExileTargetCost) cost).getPermanents()) {
+                        manaCostExiled += card.getConvertedManaCost();
+                    }
                 }
             }
+            ChoiceColor choice = new ChoiceColor();
+            controller.choose(Outcome.PutManaInPool, choice, game);
+            ObjectColor chosenColor = choice.getColor();
+            Mana mana = null;
+            if (chosenColor.isBlack()) {
+                mana = new FoodChainManaBuilder().setMana(Mana.BlackMana(manaCostExiled + 1), source, game).build();
+            }
+            else if (chosenColor.isBlue()) {
+                mana = new FoodChainManaBuilder().setMana(Mana.BlueMana(manaCostExiled + 1), source, game).build();
+            }
+            else if (chosenColor.isRed()) {
+                mana = new FoodChainManaBuilder().setMana(Mana.RedMana(manaCostExiled + 1), source, game).build();
+            }
+            else if (chosenColor.isGreen()) {
+                mana = new FoodChainManaBuilder().setMana(Mana.GreenMana(manaCostExiled + 1), source, game).build();
+            }
+            else if (chosenColor.isWhite()) {
+                mana = new FoodChainManaBuilder().setMana(Mana.WhiteMana(manaCostExiled + 1), source, game).build();
+            }
+            if (mana != null) {
+                checkToFirePossibleEvents(mana, game, source);
+                controller.getManaPool().addMana(mana, game, source);
+                return true;
+            }
         }
-        
-        ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        Mana mana = null;
-        if (choice.getColor().isBlack()) {
-            mana = new FoodChainManaBuilder().setMana(Mana.BlackMana(manaCostExiled + 1), source, game).build();
-        }
-        else if (choice.getColor().isBlue()) {
-            mana = new FoodChainManaBuilder().setMana(Mana.BlueMana(manaCostExiled + 1), source, game).build();
-        }
-        else if (choice.getColor().isRed()) {
-            mana = new FoodChainManaBuilder().setMana(Mana.RedMana(manaCostExiled + 1), source, game).build();
-        }
-        else if (choice.getColor().isGreen()) {
-            mana = new FoodChainManaBuilder().setMana(Mana.GreenMana(manaCostExiled + 1), source, game).build();
-        }
-        else if (choice.getColor().isWhite()) {
-            mana = new FoodChainManaBuilder().setMana(Mana.WhiteMana(manaCostExiled + 1), source, game).build();
-        }
-        
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && mana != null) {
-            checkToFirePossibleEvents(mana, game, source);
-            player.getManaPool().addMana(mana, game, source);
-            return true;
-        }
+
         return false;
     }
 
@@ -144,6 +148,5 @@ class FoodChainManaEffect extends ManaEffect {
     public Mana getMana(Game game, Ability source) {
         return null;
     }
-
 
 }

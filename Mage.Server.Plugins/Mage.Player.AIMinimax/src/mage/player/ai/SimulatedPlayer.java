@@ -35,7 +35,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.choices.Choice;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
@@ -269,9 +268,6 @@ public class SimulatedPlayer extends ComputerPlayer {
             for (UUID targetId: target.getTargets()) {
                 newNode.getTargets().add(targetId);
             }
-        }
-        for (Choice choice: ability.getChoices()) {
-            newNode.getChoices().add(choice.getChoice());
         }
         parent.children.add(newNode);
     }

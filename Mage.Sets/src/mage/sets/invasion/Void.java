@@ -28,17 +28,17 @@
 package mage.sets.invasion;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -59,16 +59,7 @@ public class Void extends CardImpl {
         super(ownerId, 287, "Void", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{R}");
         this.expansionSetCode = "INV";
 
-
         // Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals his or her hand and discards all nonland cards with converted mana cost equal to the number.
-        Choice numberChoice = new ChoiceImpl();
-        HashSet<String> numbers = new HashSet<String>();
-        for (int i = 0; i <= 30; i++) {
-            numbers.add(Integer.toString(i));
-        }
-        numberChoice.setChoices(numbers);
-        numberChoice.setMessage("Choose a number");
-        this.getSpellAbility().addChoice(numberChoice);
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new VoidEffect());
 
@@ -102,28 +93,38 @@ class VoidEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int number = Integer.parseInt(source.getChoices().get(0).getChoice());
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if ((permanent.getCardType().contains(CardType.ARTIFACT) || permanent.getCardType().contains(CardType.CREATURE))
-                    && permanent.getConvertedManaCost() == number) {
-                permanent.destroy(source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Choice numberChoice = new ChoiceImpl();
+            Set<String> numbers = new HashSet<>(16);
+            for (int i = 0; i <= 15; i++) {
+                numbers.add(Integer.toString(i));
             }
-        }
-        FilterCard filterCard = new FilterCard();
-        filterCard.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, number));
-        filterCard.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if (targetPlayer != null) {
-            targetPlayer.revealCards("Void", targetPlayer.getHand(), game);
-            for (Card card : targetPlayer.getHand().getCards(game)) {
-                if (filterCard.match(card, game)) {
-                    targetPlayer.discard(card, source, game);
+            numberChoice.setChoices(numbers);
+            numberChoice.setMessage("Choose a number");
+            controller.choose(Outcome.DestroyPermanent, numberChoice, game);
+            int number = Integer.parseInt(numberChoice.getChoice());
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
+                if ((permanent.getCardType().contains(CardType.ARTIFACT) || permanent.getCardType().contains(CardType.CREATURE))
+                        && permanent.getConvertedManaCost() == number) {
+                    permanent.destroy(source.getSourceId(), game, false);
                 }
             }
-        } else {
-            return false;
+            FilterCard filterCard = new FilterCard();
+            filterCard.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, number));
+            filterCard.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+
+            Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+            if (targetPlayer != null) {
+                targetPlayer.revealCards("Void", targetPlayer.getHand(), game);
+                for (Card card : targetPlayer.getHand().getCards(game)) {
+                    if (filterCard.match(card, game)) {
+                        targetPlayer.discard(card, source, game);
+                    }
+                }
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 }

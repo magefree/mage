@@ -49,8 +49,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
-import mage.choices.Choice;
-import mage.choices.Choices;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
@@ -308,15 +306,6 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public Choices getChoices() {
-        return ability.getChoices();
-    }
-
-    @Override
-    public void addChoice(Choice choice) {
-    }
-
-    @Override
     public ManaCosts<ManaCost> getManaCosts() {
         return ability.getManaCosts();
     }
@@ -352,14 +341,6 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     public void setExpansionSetCode(String expansionSetCode) {
         this.expansionSetCode = expansionSetCode;
-    }
-
-    @Override
-    public void adjustChoices(Ability ability, Game game) {
-        Card card = game.getCard(ability.getSourceId());
-        if (card != null) {
-            card.adjustChoices(ability, game);
-        }
     }
 
     @Override

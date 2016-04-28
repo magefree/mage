@@ -166,10 +166,6 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public void adjustChoices(Ability ability, Game game) {
-    }
-
-    @Override
     public void adjustCosts(Ability ability, Game game) {
     }
 

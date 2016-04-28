@@ -648,13 +648,6 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public void adjustChoices(Ability ability, Game game) {
-        if (card != null) {
-            card.adjustChoices(ability, game);
-        }
-    }
-
-    @Override
     public void adjustCosts(Ability ability, Game game) {
         if (card != null) {
             card.adjustCosts(ability, game);

@@ -2812,8 +2812,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             } else {
                 addTargetOptions(options, ability, 0, game);
             }
-        } else if (ability.getChoices().getUnchosen().size() > 0) {
-            addChoiceOptions(options, ability, 0, game);
         } else if (ability.getCosts().getTargets().getUnchosen().size() > 0) {
             addCostTargetOptions(options, ability, 0, game);
         }
@@ -2834,8 +2832,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 } else {
                     addTargetOptions(options, newOption, 0, game);
                 }
-            } else if (newOption.getChoices().getUnchosen().size() > 0) {
-                addChoiceOptions(options, newOption, 0, game);
             } else if (newOption.getCosts().getTargets().getUnchosen().size() > 0) {
                 addCostTargetOptions(options, newOption, 0, game);
             } else {
@@ -2863,22 +2859,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             if (targetNum < option.getTargets().size() - 2) {
                 addTargetOptions(options, newOption, targetNum + 1, game);
-            } else if (option.getChoices().size() > 0) {
-                addChoiceOptions(options, newOption, 0, game);
-            } else if (option.getCosts().getTargets().size() > 0) {
-                addCostTargetOptions(options, newOption, 0, game);
-            } else {
-                options.add(newOption);
-            }
-        }
-    }
-
-    private void addChoiceOptions(List<Ability> options, Ability option, int choiceNum, Game game) {
-        for (String choice : option.getChoices().get(choiceNum).getChoices()) {
-            Ability newOption = option.copy();
-            newOption.getChoices().get(choiceNum).setChoice(choice);
-            if (choiceNum < option.getChoices().size() - 1) {
-                addChoiceOptions(options, newOption, choiceNum + 1, game);
             } else if (option.getCosts().getTargets().size() > 0) {
                 addCostTargetOptions(options, newOption, 0, game);
             } else {

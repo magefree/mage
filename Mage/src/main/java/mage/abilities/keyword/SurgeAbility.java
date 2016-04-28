@@ -53,7 +53,6 @@ public class SurgeAbility extends SpellAbility {
         this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
         this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
         this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
-        this.getChoices().addAll(card.getSpellAbility().getChoices().copy());
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.timing = card.getSpellAbility().getTiming();
         this.setRuleAtTheTop(true);

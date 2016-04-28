@@ -35,6 +35,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.choices.Choice;
 import mage.choices.ChoiceLeftOrRight;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -62,7 +63,6 @@ public class OrderOfSuccession extends CardImpl {
 
 
         // Choose left or right. Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature he or she chose.
-        this.getSpellAbility().addChoice(new ChoiceLeftOrRight());
         this.getSpellAbility().addEffect(new OrderOfSuccessionEffect());
     }
 
@@ -96,8 +96,10 @@ class OrderOfSuccessionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Map<UUID, UUID> playerCreature = new HashMap<>();
-            boolean left = source.getChoices().get(0).getChoice().equals("Left");
+            Map<UUID, UUID> playerCreature = new HashMap<>(2);
+            Choice choice = new ChoiceLeftOrRight();
+            controller.choose(Outcome.Neutral, choice, game);
+            boolean left = choice.getChoice().equals("Left");
             PlayerList playerList = game.getState().getPlayerList().copy();
             // set playerlist to controller
             while (!playerList.get().equals(source.getControllerId()) && controller.canRespond()) {

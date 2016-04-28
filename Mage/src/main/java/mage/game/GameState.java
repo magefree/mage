@@ -56,7 +56,6 @@ import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.choices.Choice;
 import mage.constants.Zone;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -322,12 +321,6 @@ public class GameState implements Serializable, Copyable<GameState> {
                         sb.append(target.getTargets());
                     }
                 }
-                if (!mode.getChoices().isEmpty()) {
-                    sb.append("choices");
-                    for (Choice choice : mode.getChoices()) {
-                        sb.append(choice.getChoice());
-                    }
-                }
             }
         }
 
@@ -378,12 +371,6 @@ public class GameState implements Serializable, Copyable<GameState> {
                     sb.append("targets");
                     for (Target target : mode.getTargets()) {
                         sb.append(target.getTargets());
-                    }
-                }
-                if (!mode.getChoices().isEmpty()) {
-                    sb.append("choices");
-                    for (Choice choice : mode.getChoices()) {
-                        sb.append(choice.getChoice());
                     }
                 }
             }

@@ -27,54 +27,38 @@
  */
 package mage.sets.modernmasters;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.other.CounterCardPredicate;
+import mage.filter.common.FilterPermanentOrSuspendedCard;
 import mage.filter.predicate.other.OwnerPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
-import mage.target.common.TargetCardInExile;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.Target;
+import mage.target.common.TargetPermanentOrSuspendedCard;
 
 /**
  *
  * @author LevelX2
  */
 public class RiftElemental extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("suspended card you own");
-    static {
-        filter.add(new CounterCardPredicate(CounterType.TIME));
-        filter.add(new AbilityPredicate(SuspendAbility.class));
-        filter.add(new OwnerPredicate(TargetController.YOU));
-    }
 
     public RiftElemental(UUID ownerId) {
         super(ownerId, 127, "Rift Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
@@ -85,28 +69,9 @@ public class RiftElemental extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{R}, Remove a time counter from a permanent you control or suspended card you own: Rift Elemental gets +2/+0 until end of turn.
-        Choice targetChoice = new ChoiceImpl();
-        targetChoice.setMessage("Choose what to target");
-        targetChoice.getChoices().add("Permanent");
-        targetChoice.getChoices().add("Suspended Card");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,0,Duration.EndOfTurn), new ManaCostsImpl("{1}{R}"));
-        ability.addChoice(targetChoice);
-        ability.addCost(new RemoveCounterFromCardCost(new TargetCardInExile(1,1,filter, null, true), CounterType.TIME));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
+        ability.addCost(new RiftElementalCost());
         this.addAbility(ability);
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (ability instanceof ActivatedAbility && !ability.getChoices().isEmpty()) {
-            ability.getCosts().clear();
-            Choice targetChoice = ability.getChoices().get(0);
-            if (targetChoice.getChoice().equals("Permanent")) {
-                ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(), CounterType.TIME));
-            }
-            if (targetChoice.getChoice().equals("Suspended Card")) {
-                ability.addCost(new RemoveCounterFromCardCost(new TargetCardInExile(1,1,filter, null, true), CounterType.TIME));
-            }
-        }
     }
 
     public RiftElemental(final RiftElemental card) {
@@ -119,88 +84,55 @@ public class RiftElemental extends CardImpl {
     }
 }
 
-class RemoveCounterFromCardCost extends CostImpl {
+class RiftElementalCost extends CostImpl {
 
-    private TargetCard target;
-    private String name;
-    private CounterType counterTypeToRemove;
-
-    public RemoveCounterFromCardCost(TargetCard target) {
-        this(target, null);
+    private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard("permanent you control with a time counter or suspended card you own");
+    static {
+        filter.getPermanentFilter().add(new ControllerPredicate(TargetController.YOU));
+        filter.getPermanentFilter().add(new CounterPredicate(CounterType.TIME));
+        filter.getCardFilter().add(new OwnerPredicate(TargetController.YOU));
     }
 
-    public RemoveCounterFromCardCost(TargetCard target, CounterType counterTypeToRemove) {
-        this.target = target;
-        this.counterTypeToRemove = counterTypeToRemove;
-        text = setText();
+    RiftElementalCost() {
+        text = "Remove a time counter from a permanent you control or suspended card you own";
     }
 
-    public RemoveCounterFromCardCost(final RemoveCounterFromCardCost cost) {
+    RiftElementalCost(final RiftElementalCost cost) {
         super(cost);
-        this.target = cost.target.copy();
-        this.name = cost.name;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         paid = false;
         Player controller = game.getPlayer(controllerId);
-        if (target.choose(Outcome.UnboostCreature, controllerId, sourceId, game)) {
-            for (UUID targetId: (List<UUID>)target.getTargets()) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    if (card.getCounters(game).size() > 0 && (counterTypeToRemove == null || card.getCounters(game).containsKey(counterTypeToRemove))) {
-                        String counterName = null;
-                        if (counterTypeToRemove != null) {
-                            counterName = counterTypeToRemove.getName();
-                        } else {
-                            if (card.getCounters(game).size() > 1 && counterTypeToRemove == null) {
-                                Choice choice = new ChoiceImpl(true);
-                                Set<String> choices = new HashSet<String>();
-                                for (Counter counter : card.getCounters(game).values()) {
-                                    if (card.getCounters(game).getCount(counter.getName()) > 0) {
-                                        choices.add(counter.getName());
-                                    }
-                                }
-                                choice.setChoices(choices);
-                                choice.setMessage("Choose a counter to remove from " + card.getName());
-                                controller.choose(Outcome.UnboostCreature, choice, game);
-                                counterName = choice.getChoice();
-                            } else {
-                                for (Counter counter : card.getCounters(game).values()) {
-                                    if (counter.getCount() > 0) {
-                                        counterName = counter.getName();
-                                    }
-                                }
-                            }
-                        }
-                        if (counterName != null) {
-                            card.removeCounters(counterName, 1, game);
-                            if (card.getCounters(game).getCount(counterName) == 0 ){
-                                card.getCounters(game).removeCounter(counterName);
-                            }
-                            this.paid = true;
-                            game.informPlayers(new StringBuilder(controller.getLogName()).append(" removes a ").append(counterName).append(" counter from ").append(card.getName()).toString());
-                        }
+        if (controller != null) {
+            Target target = new TargetPermanentOrSuspendedCard(filter, true);
+            if (target.choose(Outcome.Neutral, controllerId, sourceId, game)) {
+                Permanent permanent = game.getPermanent(target.getFirstTarget());
+                if (permanent != null) {
+                    permanent.removeCounters(CounterType.TIME.createInstance(), game);
+                    this.paid = true;
+                }
+                else {
+                    Card card = game.getCard(target.getFirstTarget());
+                    if (card != null) {
+                        card.removeCounters(CounterType.TIME.createInstance(), game);
+                        this.paid = true;
                     }
                 }
             }
         }
-        target.clearChosen();
         return paid;
     }
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return target.canChoose(controllerId, game);
-    }
-
-    private String setText() {
-        return "Remove a time counter from a permanent you control or suspended card you own";
+        Target target = new TargetPermanentOrSuspendedCard(filter, true);
+        return target.canChoose(sourceId, controllerId, game);
     }
 
     @Override
-    public RemoveCounterFromCardCost copy() {
-        return new RemoveCounterFromCardCost(this);
+    public RiftElementalCost copy() {
+        return new RiftElementalCost(this);
     }
 }

@@ -37,8 +37,6 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
-import mage.choices.Choice;
-import mage.choices.Choices;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.EffectType;
@@ -247,20 +245,6 @@ public interface Ability extends Controllable, Serializable {
      * @param target The {@link Target} to add.
      */
     void addTarget(Target target);
-
-    /**
-     * Choices
-     *
-     * @return
-     */
-    Choices getChoices();
-
-    /**
-     * TODO: Javadoc me
-     *
-     * @param choice
-     */
-    void addChoice(Choice choice);
 
     /**
      * Retrieves the {@link Zone} that this ability is active within.
