@@ -134,7 +134,7 @@ class BoostCreatureEffectEffect extends ContinuousEffectImpl {
 
     public BoostCreatureEffectEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "Creatures you control of the chosen type get +1/+1 for each charge counter on Door of Destinies";
+        staticText = "Creatures you control of the chosen type get +1/+1 for each charge counter on {this}";
     }
 
     public BoostCreatureEffectEffect(final BoostCreatureEffectEffect effect) {
