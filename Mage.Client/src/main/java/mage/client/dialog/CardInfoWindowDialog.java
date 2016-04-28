@@ -36,6 +36,9 @@ package mage.client.dialog;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.beans.PropertyVetoException;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
@@ -46,6 +49,8 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.constants.CardType;
+import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.ExileView;
 import mage.view.SimpleCardsView;
@@ -158,7 +163,8 @@ public class CardInfoWindowDialog extends MageDialog {
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId, boolean revertOrder) {
         cards.loadCards(showCards, bigCard, gameId, revertOrder);
         if (showType.equals(ShowType.GRAVEYARD)) {
-            String titel = name + "'s Graveyard (" + showCards.size() + ")";
+            int qty = qtyCardTypes(showCards);
+            String titel = name + "'s Graveyard (" + showCards.size() + ")  -  " + qty + ((qty == 1) ? " Card Type" : " Card Types");
             setTitle(titel);
             this.setTitelBarToolTip(titel);
         }
@@ -199,6 +205,17 @@ public class CardInfoWindowDialog extends MageDialog {
         });
     }
 
+        private int qtyCardTypes(mage.view.CardsView cardsView){
+        Set<String> cardTypesPresent = new LinkedHashSet<String>() {};
+        for (CardView card : cardsView.values()){
+            List<CardType> cardTypes = card.getCardTypes();
+            for (CardType cardType : cardTypes){
+                cardTypesPresent.add(cardType.toString());
+            }
+        }
+        if (cardTypesPresent.isEmpty()) return 0;
+        else return cardTypesPresent.size();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
