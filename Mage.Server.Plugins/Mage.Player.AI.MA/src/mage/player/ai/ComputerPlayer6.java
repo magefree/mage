@@ -266,7 +266,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     protected void act(Game game) {
-        if (actions == null || actions.size() == 0) {
+        if (actions == null || actions.isEmpty()) {
             pass(game);
         } else {
             boolean usedStack = false;
@@ -277,6 +277,9 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     for (Target target : ability.getTargets()) {
                         for (UUID id : target.getTargets()) {
                             target.updateTarget(id, game);
+                            if (!target.isNotTarget()) {
+                                game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, ability.getSourceId(), ability.getControllerId()));
+                            }
                         }
                     }
                     Player player = game.getPlayer(ability.getFirstTarget());
@@ -1200,6 +1203,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             }
         }
     }
+
     /*
      * private boolean shouldAttack(Game game, UUID attackingPlayerId, UUID
      * defenderId, Permanent attacker, List<Permanent> blockers, int
