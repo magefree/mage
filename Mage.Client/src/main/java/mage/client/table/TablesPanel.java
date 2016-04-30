@@ -604,7 +604,7 @@ public class TablesPanel extends javax.swing.JPanel {
             formatFilterList.add(RowFilter.regexFilter("^Limited", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatOther.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("^Momir Basic|^Constructed - Pauper|^Constructed - Extended|^Constructed - Historical|^Constructed - Super", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Momir Basic|^Constructed - Pauper|^Constructed - Extended|^Constructed - Historical|^Constructed - Super|^Freeform", TableTableModel.COLUMN_DECK_TYPE));
         }
 
         List<RowFilter<Object, Object>> skillFilterList = new ArrayList<>();
@@ -1015,7 +1015,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
         btnFormatOther.setSelected(true);
         btnFormatOther.setText("Other");
-        btnFormatOther.setToolTipText("Other formats (Pauper, Extended, etc.)");
+        btnFormatOther.setToolTipText("Other formats (Freeform, Pauper, Extended, etc.)");
         btnFormatOther.setFocusPainted(false);
         btnFormatOther.setFocusable(false);
         btnFormatOther.setRequestFocusEnabled(false);
@@ -1106,7 +1106,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelTables.setLayout(jPanelTablesLayout);
         jPanelTablesLayout.setHorizontalGroup(
             jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+            .addComponent(jSplitPaneTables, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE)
         );
         jPanelTablesLayout.setVerticalGroup(
             jPanelTablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
