@@ -113,12 +113,12 @@ class MurmursFromBeyondEffect extends OneShotEffect {
                     TargetCard target = new TargetCard(1, Zone.LIBRARY, new FilterCard());
                     opponent.chooseTarget(outcome, cards, target, source, game);
                     cardToGraveyard = game.getCard(target.getFirstTarget());
-                }                
-                if (cardToGraveyard != null) {                    
-                    controller.moveCards(cardToGraveyard,Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                }
+                if (cardToGraveyard != null) {
+                    controller.moveCards(cardToGraveyard, Zone.GRAVEYARD, source, game);
                     cards.remove(cardToGraveyard);
                 }
-                controller.moveCards(cards, Zone.LIBRARY, Zone.HAND, source, game);
+                controller.moveCards(cards, Zone.HAND, source, game);
             }
             return true;
         }
