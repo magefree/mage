@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -42,7 +42,6 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -57,73 +56,52 @@ import mage.game.permanent.Permanent;
 
 /**
  *
- * @author MarcoMarin
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class ClockworkAvian extends CardImpl {
+public class ClockworkBeast extends CardImpl {
 
-    public ClockworkAvian(UUID ownerId) {
-        super(ownerId, 324, "Clockwork Avian", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "4ED";
-        this.subtype.add("Bird");
+    public ClockworkBeast(UUID ownerId) {
+        super(ownerId, 236, "Clockwork Beast", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        this.expansionSetCode = "LEA";
+        this.subtype.add("Beast");
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Clockwork Avian enters the battlefield with four +1/+0 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P0.createInstance(4)), "{this} enters the battlefield with four +1/+0 counters on it"));
-        // At end of combat, if Clockwork Avian attacked or blocked this combat, remove a +1/+0 counter from it.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkAvianEffect(), false));
-        // {X}, {tap}: Put up to X +1/+0 counters on Clockwork Avian. This ability can't cause the total number of +1/+0 counters on Clockwork Avian to be greater than four. Activate this ability only during your upkeep.
+        // Clockwork Beast enters the battlefield with seven +1/+0 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P0.createInstance(7)), "{this} enters the battlefield with seven +1/+0 counters on it"));
+        
+        // At end of combat, if Clockwork Beast attacked or blocked this combat, remove a +1/+0 counter from it.
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkBeastEffect(), false));
+                
+        // {X}, {tap}: Put up to X +1/+0 counters on Clockwork Beast. This ability can't cause the total number of +1/+0 counters on Clockwork Beast to be greater than seven. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
-                new AvianAddCountersSourceEffect(CounterType.P1P0.createInstance(), new ManacostVariableValue(), true, true), new ManaCostsImpl("{X}"), new IsStepCondition(PhaseStep.UPKEEP), null);
+                new BeastAddCountersSourceEffect(CounterType.P1P0.createInstance(), new ManacostVariableValue(), true, true), new ManaCostsImpl("{X}"), new IsStepCondition(PhaseStep.UPKEEP), null);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public ClockworkAvian(final ClockworkAvian card) {
+    public ClockworkBeast(final ClockworkBeast card) {
         super(card);
     }
 
     @Override
-    public ClockworkAvian copy() {
-        return new ClockworkAvian(this);
+    public ClockworkBeast copy() {
+        return new ClockworkBeast(this);
     }
 }
 
-class AvianAddCountersSourceEffect extends AddCountersSourceEffect {
+class ClockworkBeastEffect extends OneShotEffect {
 
-    public AvianAddCountersSourceEffect (Counter counter, DynamicValue amount, boolean informPlayers, boolean putOnCard){
-        super(counter, amount, informPlayers, putOnCard);        
-    }
-        
-    @Override
-    public boolean apply(Game game, Ability source) {
-        //record how many counters
-        Counters permCounters = game.getPermanent(source.getSourceId()).getCounters();
-        int countersWas = permCounters.getCount(CounterType.P1P0);
-        if (countersWas < 4){
-            super.apply(game, source);  
-            if (permCounters.getCount(CounterType.P1P0)>4){
-                permCounters.removeCounter(CounterType.P1P0, permCounters.getCount(CounterType.P1P0)-4);
-            }//if countersWas < 4 then counter is min(current,4); there is no setCounters function tho        
-        }//else this is a rare case of an Avian getting boosted by outside sources :) Which is the sole purpose of this if, for the benefit of this rare but not impossible case :p       
-        return true;
-    }
-}
-
-class ClockworkAvianEffect extends OneShotEffect {
-
-    ClockworkAvianEffect() {
+    ClockworkBeastEffect() {
         super(Outcome.UnboostCreature);
         staticText = "remove a +1/+0 counter from {this} at end of combat";
     }
 
-    ClockworkAvianEffect(final ClockworkAvianEffect effect) {
+    ClockworkBeastEffect(final ClockworkBeastEffect effect) {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
@@ -133,8 +111,28 @@ class ClockworkAvianEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
-    public ClockworkAvianEffect copy() {
-        return new ClockworkAvianEffect(this);
+    @Override
+    public ClockworkBeastEffect copy() {
+        return new ClockworkBeastEffect(this);
+    }
+}
+
+class BeastAddCountersSourceEffect extends AddCountersSourceEffect {
+
+    public BeastAddCountersSourceEffect (Counter counter, DynamicValue amount, boolean informPlayers, boolean putOnCard){
+        super(counter, amount, informPlayers, putOnCard);        
+    }
+        
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Counters permCounters = game.getPermanent(source.getSourceId()).getCounters();
+        int countersWas = permCounters.getCount(CounterType.P1P0);
+        if (countersWas < 7){
+            super.apply(game, source);  
+            if (permCounters.getCount(CounterType.P1P0) > 7){
+                permCounters.removeCounter(CounterType.P1P0, permCounters.getCount(CounterType.P1P0) - 7);
+            }//if countersWas < 7 then counter is min(current,7); there is no setCounters function though
+        }//else this is a rare case of a Beast getting boosted by outside sources. Which is the sole purpose of this if, for the benefit of this rare but not impossible case     
+        return true;
     }
 }
