@@ -27,8 +27,16 @@
  */
 package mage.sets;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.GregorianCalendar;
+import java.util.List;
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -43,6 +51,8 @@ public class ShadowsOverInnistrad extends ExpansionSet {
         return fINSTANCE;
     }
 
+    protected final EnumMap<Rarity, List<CardInfo>> savedDoubleFacedCards;
+
     private ShadowsOverInnistrad() {
         super("Shadows over Innistrad", "SOI", "mage.sets.shadowsoverinnistrad", new GregorianCalendar(2016, 3, 8).getTime(), SetType.EXPANSION);
         this.blockName = "Shadows over Innistrad";
@@ -53,5 +63,55 @@ public class ShadowsOverInnistrad extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = 1;
+        savedDoubleFacedCards = new EnumMap<>(Rarity.class);
     }
+
+    /* add double faced card for SOI booster
+     * add only common or uncommon
+     */
+    @Override
+    public void addDoubleFace(List<Card> booster) {
+        for (int i = 0; i < numBoosterDoubleFaced; i++) {
+            List<CardInfo> doubleFacedCards;
+            if (rnd.nextInt(15) < 10) {
+                doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.COMMON);
+            } else {
+                doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.UNCOMMON);
+            }
+            addToBooster(booster, doubleFacedCards);
+        }
+    }
+
+    public List<CardInfo> getDoubleFacedCardsByRarity(Rarity rarity) {
+        List<CardInfo> savedCardsInfos = savedDoubleFacedCards.get(rarity);
+        if (savedCardsInfos == null) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes(getCode());
+            criteria.rarities(rarity);
+            criteria.doubleFaced(true);
+            savedCardsInfos = CardRepository.instance.findCards(criteria);
+            savedDoubleFacedCards.put(rarity, savedCardsInfos);
+        }
+        // Return a copy of the saved cards information, as not to let modify the original.
+        return new ArrayList<>(savedCardsInfos);
+    }
+
+    @Override
+    public int getNumberOfSpecialCommons() {
+        // Then about an eighth of the packs will have a second double-faced card, which will be a rare or mythic rare.
+        return rnd.nextInt(8) == 0 ? 1 : 0;
+    }
+
+    @Override
+    public void addSpecialCommon(List<Card> booster, int number) {
+        // number is here always 1
+        List<CardInfo> doubleFacedCards;
+        if (rnd.nextInt(8) > 0) {
+            doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.RARE);
+        } else {
+            doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.MYTHIC);
+        }
+        addToBooster(booster, doubleFacedCards);
+    }
+
 }

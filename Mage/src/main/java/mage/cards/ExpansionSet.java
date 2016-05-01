@@ -163,14 +163,23 @@ public abstract class ExpansionSet implements Serializable {
                 }
             }
         }
+        int numSpecialCommons = getNumberOfSpecialCommons();
+        int numCommonsToGenerate = numBoosterCommon - numSpecialCommons;
+
         List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
-        for (int i = 0; i < numBoosterCommon; i++) {
+        for (int i = 0; i < numCommonsToGenerate; i++) {
             addToBooster(booster, commons);
         }
+
+        if (numSpecialCommons > 0) { // e.g. used to conditionaly replace common cards in the booster
+            addSpecialCommon(booster, numSpecialCommons);
+        }
+
         List<CardInfo> uncommons = getCardsByRarity(Rarity.UNCOMMON);
         for (int i = 0; i < numBoosterUncommon; i++) {
             addToBooster(booster, uncommons);
         }
+
         List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
         List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
         for (int i = 0; i < numBoosterRare; i++) {
@@ -182,75 +191,11 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         if (numBoosterDoubleFaced > 0) {
-            this.addDoubleFace(booster);
+            addDoubleFace(booster);
         }
 
         if (numBoosterSpecial > 0) {
-            int specialCards = 0;
-            List<CardInfo> specialBonus = getSpecialBonus();
-            if (specialBonus != null) {
-                specialCards += specialBonus.size();
-            }
-            List<CardInfo> specialMythic = getSpecialMythic();
-            if (specialMythic != null) {
-                specialCards += specialMythic.size();
-            }
-            List<CardInfo> specialRare = getSpecialRare();
-            if (specialRare != null) {
-                specialCards += specialRare.size();
-            }
-            List<CardInfo> specialUncommon = getSpecialUncommon();
-            if (specialUncommon != null) {
-                specialCards += specialUncommon.size();
-            }
-            List<CardInfo> specialCommon = getSpecialCommon();
-            if (specialCommon != null) {
-                specialCards += specialCommon.size();
-            }
-            if (specialCards > 0) {
-                for (int i = 0; i < numBoosterSpecial; i++) {
-                    if (rnd.nextInt(15) < 10) {
-                        if (specialCommon != null && !specialCommon.isEmpty()) {
-                            addToBooster(booster, specialCommon);
-                        } else {
-                            i--;
-                        }
-                        continue;
-                    }
-                    if (rnd.nextInt(4) < 3) {
-                        if (specialUncommon != null && !specialUncommon.isEmpty()) {
-                            addToBooster(booster, specialUncommon);
-                        } else {
-                            i--;
-                        }
-                        continue;
-                    }
-                    if (rnd.nextInt(8) < 7) {
-                        if (specialRare != null && !specialRare.isEmpty()) {
-                            addToBooster(booster, specialRare);
-                        } else {
-                            i--;
-                        }
-                        continue;
-                    }
-                    if (specialMythic != null && !specialMythic.isEmpty()) {
-                        if (specialBonus != null && !specialBonus.isEmpty()) {
-                            if (rnd.nextInt(3) < 2) {
-                                addToBooster(booster, specialMythic);
-                                continue;
-                            }
-                        } else {
-                            addToBooster(booster, specialMythic);
-                            continue;
-                        }
-                    } else {
-                        i--;
-                    }
-                    if (specialBonus != null && !specialBonus.isEmpty()) {
-                        addToBooster(booster, specialBonus);
-                    }
-                }
-            }
+            addSpecial(booster);
         }
 
         return booster;
@@ -259,7 +204,7 @@ public abstract class ExpansionSet implements Serializable {
     /* add double faced card for Innistrad booster
      * rarity near as the normal distribution
      */
-    private void addDoubleFace(List<Card> booster) {
+    public void addDoubleFace(List<Card> booster) {
         for (int i = 0; i < numBoosterDoubleFaced; i++) {
             CardCriteria criteria = new CardCriteria();
             criteria.setCodes(this.code).doubleFaced(true);
@@ -274,6 +219,93 @@ public abstract class ExpansionSet implements Serializable {
             }
             List<CardInfo> doubleFacedCards = CardRepository.instance.findCards(criteria);
             addToBooster(booster, doubleFacedCards);
+        }
+    }
+
+    /**
+     * Can be overwritten if sometimes special cards will be generated instead
+     * of common slots
+     *
+     * @return
+     */
+    public int getNumberOfSpecialCommons() {
+        return 0;
+    }
+
+    /**
+     * Can be overwritten to add a replacement for common card in boosters
+     *
+     * @param booster
+     */
+    public void addSpecialCommon(List<Card> booster, int number) {
+
+    }
+
+    private void addSpecial(List<Card> booster) {
+        int specialCards = 0;
+        List<CardInfo> specialBonus = getSpecialBonus();
+        if (specialBonus != null) {
+            specialCards += specialBonus.size();
+        }
+        List<CardInfo> specialMythic = getSpecialMythic();
+        if (specialMythic != null) {
+            specialCards += specialMythic.size();
+        }
+        List<CardInfo> specialRare = getSpecialRare();
+        if (specialRare != null) {
+            specialCards += specialRare.size();
+        }
+        List<CardInfo> specialUncommon = getSpecialUncommon();
+        if (specialUncommon != null) {
+            specialCards += specialUncommon.size();
+        }
+        List<CardInfo> specialCommon = getSpecialCommon();
+        if (specialCommon != null) {
+            specialCards += specialCommon.size();
+        }
+        if (specialCards > 0) {
+            for (int i = 0; i < numBoosterSpecial; i++) {
+                if (rnd.nextInt(15) < 10) {
+                    if (specialCommon != null && !specialCommon.isEmpty()) {
+                        addToBooster(booster, specialCommon);
+                    } else {
+                        i--;
+                    }
+                    continue;
+                }
+                if (rnd.nextInt(4) < 3) {
+                    if (specialUncommon != null && !specialUncommon.isEmpty()) {
+                        addToBooster(booster, specialUncommon);
+                    } else {
+                        i--;
+                    }
+                    continue;
+                }
+                if (rnd.nextInt(8) < 7) {
+                    if (specialRare != null && !specialRare.isEmpty()) {
+                        addToBooster(booster, specialRare);
+                    } else {
+                        i--;
+                    }
+                    continue;
+                }
+                if (specialMythic != null && !specialMythic.isEmpty()) {
+                    if (specialBonus != null && !specialBonus.isEmpty()) {
+                        if (rnd.nextInt(3) < 2) {
+                            addToBooster(booster, specialMythic);
+                            continue;
+                        }
+                    } else {
+                        addToBooster(booster, specialMythic);
+                        continue;
+                    }
+                } else {
+                    i--;
+                }
+                if (specialBonus != null && !specialBonus.isEmpty()) {
+                    addToBooster(booster, specialBonus);
+                }
+            }
         }
     }
 
@@ -335,4 +367,5 @@ public abstract class ExpansionSet implements Serializable {
     public void removeSavedCards() {
         savedCards.clear();
     }
+
 }
