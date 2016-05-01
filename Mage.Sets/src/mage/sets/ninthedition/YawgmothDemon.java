@@ -33,8 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -82,7 +82,7 @@ class YawgmothDemonEffect extends OneShotEffect {
 
     public YawgmothDemonEffect() {
         super(Outcome.Detriment);
-        this.staticText = "you may sacrifice an artifact. If you don't, tap {this} and it deals 2 damage to you.";
+        this.staticText = "you may sacrifice an artifact. If you don't, tap {this} and it deals 2 damage to you";
     }
 
     public YawgmothDemonEffect(final YawgmothDemonEffect effect) {
@@ -98,14 +98,18 @@ class YawgmothDemonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
             int artifacts = game.getBattlefield().countAll(new FilterArtifactPermanent(), source.getControllerId(), game);
+            boolean artifactSacrificed = false;
             if (artifacts < 1 || !controller.chooseUse(outcome, "Sacrifice an artifact?", source, game)) {
                 if (new SacrificeControllerEffect(new FilterArtifactPermanent(), 1, "").apply(game, source)) {
-                    if (sourceObject != null) {
-                        sourceObject.tap(game);
-                        controller.damage(2, source.getSourceId(), game, false, true);
-                    }
+                    artifactSacrificed = true;
+                }
+            }
+            if (!artifactSacrificed) {
+                Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+                if (sourceObject != null) {
+                    sourceObject.tap(game);
+                    controller.damage(2, source.getSourceId(), game, false, true);
                 }
             }
             return true;
