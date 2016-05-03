@@ -100,7 +100,7 @@ class YawgmothDemonEffect extends OneShotEffect {
         if (controller != null) {
             int artifacts = game.getBattlefield().countAll(new FilterArtifactPermanent(), source.getControllerId(), game);
             boolean artifactSacrificed = false;
-            if (artifacts < 1 || !controller.chooseUse(outcome, "Sacrifice an artifact?", source, game)) {
+            if (artifacts > 0 && controller.chooseUse(outcome, "Sacrifice an artifact?", source, game)) {
                 if (new SacrificeControllerEffect(new FilterArtifactPermanent(), 1, "").apply(game, source)) {
                     artifactSacrificed = true;
                 }
