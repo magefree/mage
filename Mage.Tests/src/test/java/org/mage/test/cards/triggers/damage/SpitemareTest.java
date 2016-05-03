@@ -23,7 +23,7 @@ public class SpitemareTest extends CardTestPlayerBase {
     public void combatDamageTargetCreature() {
         
         addCard(Zone.BATTLEFIELD, playerA, "Bronze Sable", 1); // 2/1
-        addCard(Zone.BATTLEFIELD, playerA, "Hill Giant", 1); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1); // 2/2
         
         /**
          * {2}{R/W}{R/W}
@@ -34,12 +34,12 @@ public class SpitemareTest extends CardTestPlayerBase {
         
         attack(1, playerA, "Bronze Sable");
         block(1, playerB, "Spitemare", "Bronze Sable");
-        addTarget(playerB, "Hill Giant");
+        addTarget(playerB, "Grizzly Bears");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         
         assertGraveyardCount(playerA, "Bronze Sable", 1);
-        assertGraveyardCount(playerA, "Hill Giant", 1);
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
         assertPermanentCount(playerB, "Spitemare", 1);
     }
     
