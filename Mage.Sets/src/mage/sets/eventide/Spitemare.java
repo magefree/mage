@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -127,10 +128,16 @@ class SpitemareEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player target = game.getPlayer(source.getFirstTarget());
-        if (target != null) {
-            target.damage((Integer) this.getValue("damageAmount"), source.getSourceId(), game, false, true);
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            player.damage((Integer) this.getValue("damageAmount"), source.getSourceId(), game, false, true);
+            return true;
         }
-        return true;
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            permanent.damage((Integer) this.getValue("damageAmount"), source.getSourceId(), game, false, true);
+            return true;
+        }
+        return false;
     }
 }
