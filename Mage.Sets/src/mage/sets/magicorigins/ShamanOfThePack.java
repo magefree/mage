@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetOpponent;
@@ -48,8 +48,8 @@ import mage.target.common.TargetOpponent;
  * @author fireshoes
  */
 public class ShamanOfThePack extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("equal to the number of elves you control");
+
+    private static final FilterPermanent filter = new FilterPermanent("equal to the number of elves you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
