@@ -102,8 +102,10 @@ class SacrificeAllLandCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        if (!game.getPlayer(controllerId).canPaySacrificeCost()) {
-            return false;
+    	for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), ability.getControllerId(), game)){
+            if (!game.getPlayer(controllerId).canPaySacrificeCost(permanent, sourceId, controllerId, game)) {
+                return false;
+            }
         }
         return true;
     }

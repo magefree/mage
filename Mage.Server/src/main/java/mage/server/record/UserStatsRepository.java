@@ -171,7 +171,7 @@ public enum UserStatsRepository {
                 }
             }
         }
-        return new ArrayList(updatedUsers);
+        return new ArrayList<>(updatedUsers);
     }
 
     public void closeDB() {

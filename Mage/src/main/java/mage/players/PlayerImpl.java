@@ -99,6 +99,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
@@ -200,9 +201,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean canGainLife = true;
     protected boolean canLoseLife = true;
     protected boolean canPayLifeCost = true;
-    protected boolean canPaySacrificeCost = true;
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
+    
+    protected FilterPermanent sacrificeCostFilter;
 
     protected final List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
 
@@ -299,7 +301,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.inRange.addAll(player.inRange);
         this.userData = player.userData;
         this.canPayLifeCost = player.canPayLifeCost;
-        this.canPaySacrificeCost = player.canPaySacrificeCost;
+        this.sacrificeCostFilter = player.sacrificeCostFilter;
         this.alternativeSourceCosts.addAll(player.alternativeSourceCosts);
         this.storedBookmark = player.storedBookmark;
 
@@ -378,7 +380,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.inRange.clear();
         this.inRange.addAll(player.getInRange());
         this.canPayLifeCost = player.canPayLifeCost();
-        this.canPaySacrificeCost = player.canPaySacrificeCost();
+        this.sacrificeCostFilter = player.getSacrificeCostFilter() != null ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
@@ -476,7 +478,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canGainLife = true;
         this.canLoseLife = true;
         this.canPayLifeCost = true;
-        this.canPaySacrificeCost = true;
+        this.sacrificeCostFilter = null;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = false;
         this.topCardRevealed = false;
@@ -2937,13 +2939,18 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean canPaySacrificeCost() {
-        return canPaySacrificeCost;
+    public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game) {
+        return sacrificeCostFilter == null || !sacrificeCostFilter.match(permanent, sourceId, controllerId, game);
     }
 
     @Override
-    public void setCanPaySacrificeCost(boolean canPaySacrificeCost) {
-        this.canPaySacrificeCost = canPaySacrificeCost;
+    public void setCanPaySacrificeCostFilter(FilterPermanent filter) {
+        this.sacrificeCostFilter = filter;
+    }
+    
+    @Override
+    public FilterPermanent getSacrificeCostFilter() {
+    	return sacrificeCostFilter;
     }
 
     @Override

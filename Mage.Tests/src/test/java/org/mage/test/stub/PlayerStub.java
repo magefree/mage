@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -61,6 +62,7 @@ import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Graveyard;
 import mage.game.Table;
@@ -208,16 +210,19 @@ public class PlayerStub implements Player {
         return false;
     }
 
-    @Override
-    public void setCanPaySacrificeCost(boolean canPaySacrificeCost) {
+	@Override
+	public void setCanPaySacrificeCostFilter(FilterPermanent filter) {
+	}
 
-    }
+	@Override
+	public FilterPermanent getSacrificeCostFilter() {
+		return null;
+	}
 
-    @Override
-    public boolean canPaySacrificeCost() {
-        return false;
-    }
-
+	@Override
+	public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game) {
+		return false;
+	}
     @Override
     public void setLifeTotalCanChange(boolean lifeTotalCanChange) {
 

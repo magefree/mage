@@ -59,11 +59,9 @@ public class SacrificeSourceCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        if (!game.getPlayer(controllerId).canPaySacrificeCost()) {
-            return false;
-        }
         Permanent permanent = game.getPermanent(sourceId);
-        return permanent != null;
+        
+        return permanent != null && game.getPlayer(controllerId).canPaySacrificeCost(permanent, sourceId, controllerId, game);
     }
 
     @Override

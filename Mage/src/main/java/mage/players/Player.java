@@ -62,6 +62,7 @@ import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Graveyard;
 import mage.game.Table;
@@ -132,9 +133,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canPayLifeCost();
 
-    void setCanPaySacrificeCost(boolean canPaySacrificeCost);
+    void setCanPaySacrificeCostFilter(FilterPermanent filter);
+    
+    FilterPermanent getSacrificeCostFilter();
 
-    boolean canPaySacrificeCost();
+    boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game);
 
     void setLifeTotalCanChange(boolean lifeTotalCanChange);
 

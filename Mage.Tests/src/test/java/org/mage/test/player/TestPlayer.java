@@ -1731,13 +1731,18 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean canPaySacrificeCost() {
-        return computerPlayer.canPaySacrificeCost();
+    public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game) {
+        return computerPlayer.canPaySacrificeCost(permanent, sourceId, controllerId, game);
+    }
+    
+    @Override
+    public FilterPermanent getSacrificeCostFilter() {
+        return computerPlayer.getSacrificeCostFilter();
     }
 
     @Override
-    public void setCanPaySacrificeCost(boolean canPaySacrificeCost) {
-        computerPlayer.setCanPaySacrificeCost(canPaySacrificeCost);
+    public void setCanPaySacrificeCostFilter(FilterPermanent permanent) {
+        computerPlayer.setCanPaySacrificeCostFilter(permanent);
     }
 
     @Override
