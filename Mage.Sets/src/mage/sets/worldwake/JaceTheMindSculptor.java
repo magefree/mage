@@ -28,10 +28,12 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.BrainstormEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -41,11 +43,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -66,7 +66,7 @@ public class JaceTheMindSculptor extends CardImpl {
         this.addAbility(ability1);
 
         // 0: Draw three cards, then put two cards from your hand on top of your library in any order.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new JaceTheMindSculptorEffect2(), 0);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new BrainstormEffect(), 0);
         this.addAbility(ability2);
 
         // −1: Return target creature to its owner's hand.
@@ -75,7 +75,7 @@ public class JaceTheMindSculptor extends CardImpl {
         this.addAbility(ability3);
 
         // −12: Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.
-        LoyaltyAbility ability4 = new LoyaltyAbility(new JaceTheMindSculptorEffect3(), -12);
+        LoyaltyAbility ability4 = new LoyaltyAbility(new JaceTheMindSculptorEffect2(), -12);
         ability4.addTarget(new TargetPlayer());
         this.addAbility(ability4);
 
@@ -135,7 +135,7 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect {
 
     public JaceTheMindSculptorEffect2() {
         super(Outcome.DrawCard);
-        staticText = "Draw three cards, then put two cards from your hand on top of your library in any order";
+        staticText = "Exile all cards from target player's library, then that player shuffles his or her hand into his or her library";
     }
 
     public JaceTheMindSculptorEffect2(final JaceTheMindSculptorEffect2 effect) {
@@ -145,39 +145,6 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect {
     @Override
     public JaceTheMindSculptorEffect2 copy() {
         return new JaceTheMindSculptorEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.drawCards(3, game);
-            TargetCardInHand target = new TargetCardInHand(2, 2, new FilterCard());
-            controller.chooseTarget(Outcome.Detriment, target, source, game);
-            Cards cardsToLibrary = new CardsImpl(target.getTargets());
-            if (!cardsToLibrary.isEmpty()) {
-                controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, true);
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
-class JaceTheMindSculptorEffect3 extends OneShotEffect {
-
-    public JaceTheMindSculptorEffect3() {
-        super(Outcome.DrawCard);
-        staticText = "Exile all cards from target player's library, then that player shuffles his or her hand into his or her library";
-    }
-
-    public JaceTheMindSculptorEffect3(final JaceTheMindSculptorEffect3 effect) {
-        super(effect);
-    }
-
-    @Override
-    public JaceTheMindSculptorEffect3 copy() {
-        return new JaceTheMindSculptorEffect3(this);
     }
 
     @Override
