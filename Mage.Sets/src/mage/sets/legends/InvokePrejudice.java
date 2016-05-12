@@ -28,7 +28,6 @@
 package mage.sets.legends;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -40,16 +39,11 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterCreatureSpell;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -77,8 +71,6 @@ public class InvokePrejudice extends CardImpl {
 }
 
 class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCreatureSpell spellCard = new FilterCreatureSpell("creature spell");
 
     public InvokePrejudiceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InvokePrejudiceEffect(), false);
@@ -113,14 +105,9 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
         boolean castCreatureIsRed = card.getColor(game).isRed();
         boolean castCreatureIsGreen = card.getColor(game).isGreen();
 
-        UUID uuid = getControllerId();
-        Player controller = game.getPlayer(uuid);
-
         // Compare to colours of creatures of controller on bf
         boolean hasToPay = true;
         boolean gotACreature = false;
-        FilterCreaturePermanent controllerCreaturesFilter = new FilterCreaturePermanent();
-        controllerCreaturesFilter.add(new ControllerIdPredicate(controller.getId()));
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), getControllerId(), game)) {
             gotACreature = true;
@@ -180,7 +167,6 @@ class InvokePrejudiceEffect extends CounterUnlessPaysEffect {
         if (spell != null) {
             Card card = spell.getCard();
             if (card != null) {
-                GenericManaCost cost = new GenericManaCost(card.getConvertedManaCost());
                 CounterUnlessPaysEffect effect = new CounterUnlessPaysEffect(new GenericManaCost(card.getConvertedManaCost()));
                 effect.setTargetPointer(new FixedTarget(spell.getId()));
                 result = effect.apply(game, source);
