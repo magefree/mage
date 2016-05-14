@@ -97,7 +97,7 @@ class StrategicPlanningEffect extends OneShotEffect {
                 if (controller.choose(Outcome.Benefit, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
+                        controller.moveCards(card, Zone.HAND, source, game);
                         cards.remove(card);
                     }
                 }

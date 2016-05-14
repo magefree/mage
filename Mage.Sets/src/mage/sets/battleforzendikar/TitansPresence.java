@@ -101,7 +101,7 @@ class TitansPresenceEffect extends OneShotEffect {
             if (!revealedCards.isEmpty()) {
                 Card card = revealedCards.iterator().next();
                 if (card != null && card.getPower().getValue() >= creature.getPower().getValue()) {
-                    controller.moveCards(creature, null, Zone.EXILED, source, game);
+                    controller.moveCards(creature, Zone.EXILED, source, game);
                 }
             }
             return true;

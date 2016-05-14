@@ -89,7 +89,7 @@ class CompellingDeterrenceEffect extends OneShotEffect {
         Player player = game.getPlayer(target.getControllerId());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && player != null) {
-            player.moveCards(target, null, Zone.HAND, source, game);
+            player.moveCards(target, Zone.HAND, source, game);
             FilterPermanent FILTER = new FilterPermanent();
             FILTER.add(new SubtypePredicate("Zombie"));
             if (game.getState().getBattlefield().countAll(FILTER, controller.getId(), game) > 0) {

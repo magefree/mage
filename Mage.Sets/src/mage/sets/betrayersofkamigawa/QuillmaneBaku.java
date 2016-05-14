@@ -132,7 +132,7 @@ public class QuillmaneBaku extends CardImpl {
             }
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                controller.moveCards(permanent, null, Zone.HAND, source, game);
+                controller.moveCards(permanent, Zone.HAND, source, game);
             }
             return true;
         }

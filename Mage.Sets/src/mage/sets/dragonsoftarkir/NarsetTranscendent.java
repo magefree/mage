@@ -119,7 +119,7 @@ class NarsetTranscendentEffect1 extends OneShotEffect {
                 controller.lookAtCards(sourceObject.getIdName(), cards, game);
                 if (!card.getCardType().contains(CardType.CREATURE) && !card.getCardType().contains(CardType.LAND)) {
                     if (controller.chooseUse(outcome, "Reveal " + card.getLogName() + " and put it into your hand?", source, game)) {
-                        controller.moveCards(card, null, Zone.HAND, source, game);
+                        controller.moveCards(card, Zone.HAND, source, game);
                         controller.revealCards(sourceObject.getIdName(), cards, game);
                     }
                 }

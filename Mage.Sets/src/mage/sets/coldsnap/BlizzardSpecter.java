@@ -113,7 +113,7 @@ class ReturnToHandEffect extends OneShotEffect {
             targetPlayer.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                targetPlayer.moveCards(permanent, null, Zone.HAND, source, game);
+                targetPlayer.moveCards(permanent, Zone.HAND, source, game);
             }
 
         }

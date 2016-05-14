@@ -100,7 +100,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
                 if (target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        controller.moveCards(card, null, Zone.HAND, source, game);
+                        controller.moveCards(card, Zone.HAND, source, game);
                         cardReturned = true;
                     }
                 }

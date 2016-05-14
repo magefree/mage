@@ -136,7 +136,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        targetPlayer.moveCards(permanent, null, Zone.HAND, source, game);
+                        targetPlayer.moveCards(permanent, Zone.HAND, source, game);
                     }
                 }
 
@@ -148,7 +148,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        targetPlayer.moveCards(permanent, null, Zone.HAND, source, game);
+                        targetPlayer.moveCards(permanent, Zone.HAND, source, game);
                     }
                 }
 
@@ -160,7 +160,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        targetPlayer.moveCards(permanent, null, Zone.HAND, source, game);
+                        targetPlayer.moveCards(permanent, Zone.HAND, source, game);
                     }
                 }
 
@@ -172,7 +172,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
                 if (target.choose(Outcome.ReturnToHand, targetPlayer.getId(), source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        targetPlayer.moveCards(permanent, null, Zone.HAND, source, game);
+                        targetPlayer.moveCards(permanent, Zone.HAND, source, game);
                     }
                 }
 

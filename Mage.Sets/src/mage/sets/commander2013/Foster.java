@@ -123,7 +123,7 @@ class FosterEffect extends OneShotEffect {
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getName(), cards, game);
             if (cardFound != null) {
-                controller.moveCards(cardFound, Zone.LIBRARY, Zone.HAND, source, game);
+                controller.moveCards(cardFound, Zone.HAND, source, game);
                 cards.remove(cardFound);
             }
             controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);

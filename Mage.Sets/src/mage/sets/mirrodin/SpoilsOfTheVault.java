@@ -100,7 +100,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
             if (card != null) {
                 cardsToReveal.add(card);
                 if (card.getName().equals(cardName)) {
-                    controller.moveCards(card, null, Zone.HAND, source, game);
+                    controller.moveCards(card, Zone.HAND, source, game);
                     break;
                 } else {
                     cardsToExile.add(card);

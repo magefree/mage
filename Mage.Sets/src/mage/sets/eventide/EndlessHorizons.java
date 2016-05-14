@@ -153,7 +153,7 @@ class EndlessHorizonsEffect2 extends OneShotEffect {
                 } else {
                     card = exZone.getRandom(game);
                 }
-                controller.moveCards(card, null, Zone.HAND, source, game);
+                controller.moveCards(card, Zone.HAND, source, game);
             }
             return true;
         }

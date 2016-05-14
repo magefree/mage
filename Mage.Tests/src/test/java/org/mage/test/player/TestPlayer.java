@@ -1859,7 +1859,7 @@ public class TestPlayer implements Player {
     @Override
     @Deprecated
     public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return computerPlayer.moveCards(card, fromZone, toZone, source, game);
+        return computerPlayer.moveCards(card, toZone, source, game);
     }
 
     @Override

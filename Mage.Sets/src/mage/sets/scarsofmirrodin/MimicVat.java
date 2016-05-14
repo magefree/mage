@@ -154,7 +154,7 @@ class MimicVatEffect extends OneShotEffect {
         // return older cards to graveyard
         for (UUID imprinted : permanent.getImprinted()) {
             Card card = game.getCard(imprinted);
-            controller.moveCards(card, Zone.EXILED, Zone.GRAVEYARD, source, game);
+            controller.moveCards(card, Zone.GRAVEYARD, source, game);
         }
         permanent.clearImprinted(game);
 

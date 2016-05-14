@@ -109,7 +109,7 @@ class FathomFeederEffect extends OneShotEffect {
             if (player != null) {
                 Card card = player.getLibrary().getFromTop(game);
                 if (card != null) {
-                    player.moveCards(card, Zone.LIBRARY, Zone.EXILED, source, game);
+                    player.moveCards(card, Zone.EXILED, source, game);
                 }
             }
         }

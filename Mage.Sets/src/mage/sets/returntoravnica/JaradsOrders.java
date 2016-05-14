@@ -104,13 +104,13 @@ class JaradsOrdersEffect extends OneShotEffect {
                         TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
                         controller.choose(Outcome.Benefit, revealed, target2, game);
                         Card card = revealed.get(target2.getFirstTarget(), game);
-                        controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
+                        controller.moveCards(card, Zone.HAND, source, game);
                         revealed.remove(card);
                         card = revealed.getCards(game).iterator().next();
-                        controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                        controller.moveCards(card, Zone.GRAVEYARD, source, game);
                     } else if (target.getTargets().size() == 1) {
                         Card card = revealed.getCards(game).iterator().next();
-                        controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
+                        controller.moveCards(card, Zone.HAND, source, game);
                     }
 
                 }

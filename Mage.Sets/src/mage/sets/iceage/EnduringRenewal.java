@@ -122,7 +122,7 @@ class EnduringRenewalReplacementEffect extends ReplacementEffectImpl {
             cards.add(card);
             controller.revealCards("Top card of " + controller.getName() + "'s library", cards, game);
             if (card.getCardType().contains(CardType.CREATURE)) {
-                controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                controller.moveCards(card, Zone.GRAVEYARD, source, game);
                 return true;
             }
         }

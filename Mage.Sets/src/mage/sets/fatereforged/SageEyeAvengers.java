@@ -100,7 +100,7 @@ class SageEyeAvengersEffect extends OneShotEffect {
         if (sourceObject != null && controller != null) {
             Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetCreature != null && targetCreature.getPower().getValue() < sourceObject.getPower().getValue()) {
-                controller.moveCards(targetCreature, null, Zone.HAND, source, game);
+                controller.moveCards(targetCreature, Zone.HAND, source, game);
             }
             return true;
         }

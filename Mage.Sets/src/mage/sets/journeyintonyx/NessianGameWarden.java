@@ -119,7 +119,7 @@ class NessianGameWardenEffect extends OneShotEffect {
                 if (card != null) {
                     controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
                     cards.remove(card);
-                    controller.moveCards(card, null, Zone.HAND, source, game);
+                    controller.moveCards(card, Zone.HAND, source, game);
                 }
             }
         }

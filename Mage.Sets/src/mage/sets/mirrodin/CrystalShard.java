@@ -110,7 +110,7 @@ class CrystalShardEffect extends OneShotEffect {
                         cost.pay(source, game, targetCreature.getControllerId(), targetCreature.getControllerId(), false, null);
                     }
                     if (!cost.isPaid()) {
-                        controller.moveCards(targetCreature, Zone.BATTLEFIELD, Zone.HAND, source, game);
+                        controller.moveCards(targetCreature, Zone.HAND, source, game);
                     }
                 }
             }

@@ -170,7 +170,7 @@ class WrexialReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
             if (card instanceof Card) {
-                return controller.moveCards((Card) card, null, Zone.EXILED, source, game);
+                return controller.moveCards((Card) card, Zone.EXILED, source, game);
             }
         }
         return false;

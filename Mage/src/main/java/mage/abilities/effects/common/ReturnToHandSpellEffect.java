@@ -31,7 +31,7 @@ public class ReturnToHandSpellEffect extends OneShotEffect implements MageSingle
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
-            controller.moveCards(spellCard, null, Zone.HAND, source, game);
+            controller.moveCards(spellCard, Zone.HAND, source, game);
             return true;
         }
         return false;

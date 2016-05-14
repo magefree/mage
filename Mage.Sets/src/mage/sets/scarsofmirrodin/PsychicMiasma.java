@@ -85,7 +85,7 @@ class PsychicMiasmaEffect extends OneShotEffect {
             if (discardedCard != null && discardedCard.getCardType().contains(CardType.LAND)) {
                 Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
                 if (spellCard != null) {
-                    player.moveCards(spellCard, null, Zone.HAND, source, game);
+                    player.moveCards(spellCard, Zone.HAND, source, game);
                 }
             }
             return true;

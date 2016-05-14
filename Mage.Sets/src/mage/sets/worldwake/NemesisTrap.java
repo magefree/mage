@@ -111,7 +111,7 @@ class NemesisTrapEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && targetedCreature != null) {
             // exile target
-            controller.moveCards(targetedCreature, null, Zone.EXILED, source, game);
+            controller.moveCards(targetedCreature, Zone.EXILED, source, game);
             // create token
             PutTokenOntoBattlefieldCopyTargetEffect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
             effect.setTargetPointer(new FixedTarget(targetedCreature, game));

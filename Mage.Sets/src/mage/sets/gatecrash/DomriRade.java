@@ -122,7 +122,7 @@ class DomriRadeEffect1 extends OneShotEffect {
                 controller.lookAtCards(sourceObject.getName(), cards, game);
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     if (controller.chooseUse(outcome, "Reveal " + card.getName() + " and put it into your hand?", source, game)) {
-                        controller.moveCards(card, null, Zone.HAND, source, game);
+                        controller.moveCards(card, Zone.HAND, source, game);
                         controller.revealCards(sourceObject.getIdName(), cards, game);
                     }
                 }

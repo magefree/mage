@@ -109,7 +109,7 @@ class SatyrWayfinderEffect extends OneShotEffect {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);
-                        controller.moveCards(card, null, Zone.HAND, source, game);
+                        controller.moveCards(card, Zone.HAND, source, game);
                     }
 
                 }

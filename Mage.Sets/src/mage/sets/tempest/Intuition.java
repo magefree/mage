@@ -120,7 +120,7 @@ class IntuitionEffect extends SearchEffect {
                 Card card = cards.get(targetCard.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
+                    controller.moveCards(card, Zone.HAND, source, game);
                 }
                 controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);                
             }

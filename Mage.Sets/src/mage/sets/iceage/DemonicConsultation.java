@@ -118,7 +118,7 @@ class DemonicConsultationEffect extends OneShotEffect {
                     }
                 }
             }
-            controller.moveCards(cardToHand, null, Zone.HAND, source, game);
+            controller.moveCards(cardToHand, Zone.HAND, source, game);
             controller.revealCards(sourceObject.getIdName(), cardsToReaveal, game);
             cardsToReaveal.remove(cardToHand);
             controller.moveCards(cardsToReaveal, null, Zone.EXILED, source, game);

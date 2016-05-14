@@ -111,7 +111,7 @@ class GhastlordOfFugueEffect extends OneShotEffect {
                 chosenCard = game.getCard(target.getFirstTarget());
             }
             if (chosenCard != null) {
-                controller.moveCards(chosenCard, Zone.HAND, Zone.EXILED, source, game);
+                controller.moveCards(chosenCard, Zone.EXILED, source, game);
             }
             return true;
         }

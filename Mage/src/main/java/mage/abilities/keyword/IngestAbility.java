@@ -62,7 +62,7 @@ class IngestEffect extends OneShotEffect {
         if (targetPlayer != null) {
             Card card = targetPlayer.getLibrary().getFromTop(game);
             if (card != null) {
-                targetPlayer.moveCards(card, Zone.LIBRARY, Zone.EXILED, source, game);
+                targetPlayer.moveCards(card, Zone.EXILED, source, game);
             }
             return true;
         }

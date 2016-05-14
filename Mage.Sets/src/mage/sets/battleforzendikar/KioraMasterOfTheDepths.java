@@ -178,7 +178,7 @@ class KioraRevealEffect extends OneShotEffect {
                         Card card = cards.get(target.getFirstTarget(), game);
                         if (card != null) {
                             cards.remove(card);
-                            controller.moveCards(card, null, Zone.HAND, source, game);
+                            controller.moveCards(card, Zone.HAND, source, game);
                         }
                     }
 
@@ -187,7 +187,7 @@ class KioraRevealEffect extends OneShotEffect {
                         Card card = cards.get(target.getFirstTarget(), game);
                         if (card != null) {
                             cards.remove(card);
-                            controller.moveCards(card, null, Zone.HAND, source, game);
+                            controller.moveCards(card, Zone.HAND, source, game);
                         }
                     }
                 }

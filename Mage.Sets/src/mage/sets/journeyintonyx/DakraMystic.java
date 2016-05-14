@@ -107,7 +107,7 @@ class DakraMysticEffect extends OneShotEffect {
                 for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);                    
                     if (player != null && player.getLibrary().size() > 0) {
-                        player.moveCards(player.getLibrary().getFromTop(game), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                        player.moveCards(player.getLibrary().getFromTop(game), Zone.GRAVEYARD, source, game);
                     }
                 }                
             } else {

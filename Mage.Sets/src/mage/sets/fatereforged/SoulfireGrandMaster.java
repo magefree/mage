@@ -207,7 +207,7 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
             if (sourceCard != null) {
                 Player player = game.getPlayer(sourceCard.getOwnerId());
                 if (player != null) {
-                    player.moveCards(sourceCard, null, Zone.HAND, source, game);
+                    player.moveCards(sourceCard, Zone.HAND, source, game);
                     discard();
                     return true;
                 }

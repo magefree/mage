@@ -90,7 +90,7 @@ class PulseOfTheForgeReturnToHandEffect extends OneShotEffect {
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null && player.getLife() > controller.getLife()) {
                 Card card = game.getCard(source.getSourceId());
-                controller.moveCards(card, null, Zone.HAND, source, game);
+                controller.moveCards(card, Zone.HAND, source, game);
                 return true;
             }
         }

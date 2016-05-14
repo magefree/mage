@@ -103,7 +103,7 @@ class ScryingSheetsEffect extends OneShotEffect {
                 controller.lookAtCards(sourceObject.getIdName(), cards, game);
                 if (card.getSupertype().contains("Snow")) {
                     if (controller.chooseUse(outcome, "Reveal " + card.getLogName() + " and put it into your hand?", source, game)) {
-                        controller.moveCards(card, null, Zone.HAND, source, game);
+                        controller.moveCards(card, Zone.HAND, source, game);
                         controller.revealCards(sourceObject.getIdName(), cards, game);
                     }
                 }

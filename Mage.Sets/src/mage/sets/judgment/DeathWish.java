@@ -99,7 +99,7 @@ class DeathWishEffect extends OneShotEffect {
                     if (controller.choose(Outcome.Benefit, cards, target, game)) {
                         Card card = controller.getSideboard().get(target.getFirstTarget(), game);
                         if (card != null) {
-                            controller.moveCards(card, null, Zone.HAND, source, game);
+                            controller.moveCards(card, Zone.HAND, source, game);
                         }
                     }
                 }

@@ -110,7 +110,7 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl {
             else{
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    player.moveCards(card, Zone.STACK, Zone.GRAVEYARD, source, game);
+                    player.moveCards(card, Zone.GRAVEYARD, source, game);
                 }
                 return true;
             }

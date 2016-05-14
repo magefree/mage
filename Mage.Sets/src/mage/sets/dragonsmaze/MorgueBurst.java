@@ -91,7 +91,7 @@ class MorgueBurstEffect extends OneShotEffect {
         if (card != null) {
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
-                player.moveCards(card, null, Zone.HAND, source, game);
+                player.moveCards(card, Zone.HAND, source, game);
                 int damage = card.getPower().getValue();
                 Permanent creature = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
                 if (creature != null) {

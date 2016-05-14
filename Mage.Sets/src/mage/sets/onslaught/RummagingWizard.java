@@ -98,7 +98,7 @@ class RummagingWizardLookLibraryEffect extends OneShotEffect {
                     cards.add(card);
                     controller.lookAtCards("Rummaging Wizard", cards, game);
                     if (controller.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", source, game)) {
-                        return controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                        return controller.moveCards(card, Zone.GRAVEYARD, source, game);
                     }
 
                 }

@@ -112,7 +112,7 @@ class EvolutionaryLeapEffect extends OneShotEffect {
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 if (filter.match(card, game)) {
                     // put creature card in hand
-                    controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
+                    controller.moveCards(card, Zone.HAND, source, game);
                     // remove it from revealed card list
                     cards.remove(card);
                 }

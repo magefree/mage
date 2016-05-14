@@ -252,7 +252,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
             for (UUID cardUuid : cardsToHand) {
                 Card card = cardsToHand.get(cardUuid, game);
                 if (card != null) {
-                    player.moveCards(card, null, Zone.HAND, source, game);
+                    player.moveCards(card, Zone.HAND, source, game);
                 }
             }
 

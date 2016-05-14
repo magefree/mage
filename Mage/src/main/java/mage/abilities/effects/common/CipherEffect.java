@@ -104,7 +104,7 @@ public class CipherEffect extends OneShotEffect {
                     if (!game.isSimulation()) {
                         game.informPlayers(new StringBuilder(sourceCard.getLogName()).append(": Spell ciphered to ").append(targetCreature.getLogName()).toString());
                     }
-                    return controller.moveCards(sourceCard, null, Zone.EXILED, source, game);
+                    return controller.moveCards(sourceCard, Zone.EXILED, source, game);
                 } else {
                     return false;
                 }

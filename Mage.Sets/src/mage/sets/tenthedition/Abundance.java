@@ -108,7 +108,7 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
             while (controller.getLibrary().size() > 0) {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
-                    controller.moveCards(card, null, Zone.HAND, source, game);
+                    controller.moveCards(card, Zone.HAND, source, game);
                     break;
                 }
                 cards.add(card);

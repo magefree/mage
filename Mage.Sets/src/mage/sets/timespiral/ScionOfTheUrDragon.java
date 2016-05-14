@@ -113,7 +113,7 @@ class ScionOfTheUrDragonEffect extends SearchEffect {
                 for (UUID cardId : target.getTargets()) {
                     Card card = player.getLibrary().getCard(cardId, game);
                     if (card != null) {
-                        player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                        player.moveCards(card, Zone.GRAVEYARD, source, game);
                         CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, card, source.getSourceId());
                         game.addEffect(copyEffect, source);
                     }

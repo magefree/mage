@@ -94,7 +94,7 @@ class WhirlpoolWhelmEffect extends OneShotEffect {
             if (topOfLibrary) {
                 controller.moveCardToLibraryWithInfo(creature, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
             } else {
-                controller.moveCards(creature, null, Zone.HAND, source, game);
+                controller.moveCards(creature, Zone.HAND, source, game);
             }
             return true;
         }
