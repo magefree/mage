@@ -89,7 +89,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
      *
      * @param playerId null the token is controlled/owned by the controller of
      * the source ability
-     * @param additionalCardType the token gains tis card types in addition
+     * @param additionalCardType the token gains this card type in addition
      * @param gainsHaste the token gains haste
      * @param number number of tokens to put into play
      * @param tapped
