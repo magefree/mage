@@ -102,7 +102,7 @@ class DemonicConsultationEffect extends OneShotEffect {
             game.informPlayers("Card named: " + name);
 
             // Exile the top six cards of your library,
-            controller.moveCards(controller.getLibrary().getTopCards(game, 6), null, Zone.EXILED, source, game);
+            controller.moveCards(controller.getLibrary().getTopCards(game, 6), Zone.EXILED, source, game);
 
             // then reveal cards from the top of your library until you reveal the named card.
             Cards cardsToReaveal = new CardsImpl();

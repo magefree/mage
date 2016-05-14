@@ -97,7 +97,7 @@ class BookBurningMillEffect extends OneShotEffect {
             if (millCards) {
                 Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
                 if (targetPlayer != null) {
-                    targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, 6), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, 6), Zone.GRAVEYARD, source, game);
                 }
             }
             return true;

@@ -96,7 +96,7 @@ class SanityGrindingEffect extends OneShotEffect {
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
         if (targetOpponent != null) {
             targetOpponent.moveCards(targetOpponent.getLibrary().getTopCards(game, new ChromaSanityGrindingCount(revealed).calculate(game, source, this)),
-                    Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    Zone.GRAVEYARD, source, game);
         }
         return controller.putCardsOnBottomOfLibrary(revealed, game, source, true);
     }

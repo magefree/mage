@@ -106,7 +106,7 @@ class CloudhoofKirinEffect extends OneShotEffect {
                 }
             }
             if (targetPlayer != null) {
-                return targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, spell.getConvertedManaCost()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                return targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, spell.getConvertedManaCost()), Zone.GRAVEYARD, source, game);
             }
         }
         return false;

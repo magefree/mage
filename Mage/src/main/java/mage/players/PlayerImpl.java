@@ -3102,7 +3102,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
         }
-        return moveCards(cardList, fromZone, toZone, source, game);
+        return moveCards(cardList, toZone, source, game);
     }
 
     @Override
@@ -3111,12 +3111,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (card != null) {
             cardList.add(card);
         }
-        return moveCards(cardList, fromZone, toZone, source, game);
+        return moveCards(cardList, toZone, source, game);
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return moveCards(cards, toZone, source, game, false, false, false, null);
+    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game) {
+        return moveCards(cards, toZone, source, game);
     }
 
     @Override
@@ -3139,7 +3139,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game) {
+    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         return moveCards(cards, toZone, source, game, false, false, false, null);
     }
 

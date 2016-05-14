@@ -90,7 +90,7 @@ class PsychicSpiralEffect extends OneShotEffect {
             if (cardsInGraveyard > 0) {
                 Player targetPlayer = game.getPlayer(source.getFirstTarget());
                 if (targetPlayer != null) {
-                    targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, cardsInGraveyard), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, cardsInGraveyard), Zone.GRAVEYARD, source, game);
                 }
             }
             return true;

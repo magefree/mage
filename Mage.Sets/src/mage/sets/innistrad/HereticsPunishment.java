@@ -93,7 +93,7 @@ class HereticsPunishmentEffect extends OneShotEffect {
                     maxCost = test;
                 }
             }
-            controller.moveCards(cardList, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            controller.moveCards(cardList, Zone.GRAVEYARD, source, game);
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
                 permanent.damage(maxCost, source.getSourceId(), game, false, true);

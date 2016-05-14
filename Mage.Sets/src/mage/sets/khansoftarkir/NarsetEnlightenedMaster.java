@@ -102,7 +102,7 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null && sourceObject != null) {
             Set<Card> cards = player.getLibrary().getTopCards(game, 4);
-            player.moveCards(cards, Zone.LIBRARY, Zone.EXILED, source, game);
+            player.moveCards(cards, Zone.EXILED, source, game);
             for (Card card : cards) {
                 if (game.getState().getZone(card.getId()) == Zone.EXILED
                         && !card.getCardType().contains(CardType.CREATURE)

@@ -113,7 +113,7 @@ class WarpWorldEffect extends OneShotEffect {
                 Integer count = 0;
                 if (set != null) {
                     count = set.size();
-                    player.moveCards(set, Zone.BATTLEFIELD, Zone.LIBRARY, source, game);
+                    player.moveCards(set, Zone.LIBRARY, source, game);
                 }
 
                 if (count > 0) {

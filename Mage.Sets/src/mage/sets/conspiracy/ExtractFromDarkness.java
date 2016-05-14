@@ -83,7 +83,7 @@ class ExtractFromDarknessMillEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.moveCards(player.getLibrary().getTopCards(game, 2), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                player.moveCards(player.getLibrary().getTopCards(game, 2), Zone.GRAVEYARD, source, game);
             }
         }
         return true;

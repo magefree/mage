@@ -27,8 +27,10 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
+import java.util.LinkedHashMap;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -133,7 +135,10 @@ class HarnessTheStormEffect extends OneShotEffect {
             Card card = controller.getGraveyard().get(getTargetPointer().getFirst(game, source), game);
             if (card != null) {
                 if (controller.chooseUse(outcome, "Cast " + card.getIdName() + " from your graveyard?", source, game)) {
-                    controller.cast(card.getSpellAbility(), game, false);
+                    //LinkedHashMap<UUID, ActivatedAbility> useableAbilities = controller.getUseableActivatedAbilities(object, zone, game);
+                    //if (useableAbilities != null && useableAbilities.size() > 0) {
+                    	//controller.activateAbility(useableAbilities, card, game);
+                    //}
                 }
             }
             return true;

@@ -86,7 +86,7 @@ class GrindclockEffect extends OneShotEffect {
         int amount = game.getPermanent(source.getSourceId()).getCounters().getCount(CounterType.CHARGE);
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
-            targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, amount), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
             return true;
         }
         return false;

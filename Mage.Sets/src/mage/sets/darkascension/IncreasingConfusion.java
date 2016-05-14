@@ -90,7 +90,7 @@ class IncreasingConfusionEffect extends OneShotEffect {
                 if (spell.getFromZone() == Zone.GRAVEYARD) {
                     amount *= 2;
                 }
-                player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
                 return true;
             }
         }

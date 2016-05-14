@@ -131,7 +131,7 @@ class MindcrankEffect extends OneShotEffect {
             if (amount == null) {
                 amount = 0;
             }
-            targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, amount), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
         }
         return true;
     }

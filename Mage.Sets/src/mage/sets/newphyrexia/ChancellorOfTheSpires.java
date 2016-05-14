@@ -136,7 +136,7 @@ class ChancellorOfTheSpiresEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
-                opponent.moveCards(opponent.getLibrary().getTopCards(game, 7), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                opponent.moveCards(opponent.getLibrary().getTopCards(game, 7), Zone.GRAVEYARD, source, game);
             }
         }
         return true;

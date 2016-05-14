@@ -93,7 +93,7 @@ class PsychicStrikeEffect extends OneShotEffect {
         if (stackObject != null) {
             Player controller = game.getPlayer(stackObject.getControllerId());
             if (controller != null) {
-                controller.moveCards(controller.getLibrary().getTopCards(game, 2), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                controller.moveCards(controller.getLibrary().getTopCards(game, 2), Zone.GRAVEYARD, source, game);
             }
         }
         return countered;

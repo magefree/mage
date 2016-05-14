@@ -92,7 +92,7 @@ class CrumblingSanctuaryEffect extends PreventionEffectImpl {
         Player player = game.getPlayer(event.getTargetId());
         if(player != null) {
             preventDamageAction(event, source, game);
-            player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.LIBRARY, Zone.EXILED, source, game);
+            player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.EXILED, source, game);
             return true;
         }
         return false;

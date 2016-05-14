@@ -124,7 +124,7 @@ class BrokenAmbitionsEffect extends OneShotEffect {
                     game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }
                 if (ClashEffect.getInstance().apply(game, source)) {
-                    controller.moveCards(controller.getLibrary().getTopCards(game, 4), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    controller.moveCards(controller.getLibrary().getTopCards(game, 4), Zone.GRAVEYARD, source, game);
                 }
             return true;
         }

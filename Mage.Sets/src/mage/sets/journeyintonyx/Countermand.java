@@ -92,7 +92,7 @@ class CountermandEffect extends OneShotEffect {
         if (stackObject != null) {
             Player controller = game.getPlayer(stackObject.getControllerId());
             if (controller != null) {
-                controller.moveCards(controller.getLibrary().getTopCards(game, 4), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                controller.moveCards(controller.getLibrary().getTopCards(game, 4), Zone.GRAVEYARD, source, game);
             }
         }
         return countered;

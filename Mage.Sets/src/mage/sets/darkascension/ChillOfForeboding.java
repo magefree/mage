@@ -90,7 +90,7 @@ class ChillOfForebodingEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.moveCards(player.getLibrary().getTopCards(game, 5), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                player.moveCards(player.getLibrary().getTopCards(game, 5), Zone.GRAVEYARD, source, game);
             }
         }
         return true;

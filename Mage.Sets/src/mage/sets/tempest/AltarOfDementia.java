@@ -102,7 +102,7 @@ class AltarOfDementiaEffect extends OneShotEffect {
                 }
             }
             if (amount > 0) {
-                player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
             }
             return true;            
         }

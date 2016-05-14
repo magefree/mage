@@ -125,7 +125,7 @@ class TrialEffect extends OneShotEffect {
                     }
                 }
             }
-            controller.moveCards(toHand, null, Zone.HAND, source, game);
+            controller.moveCards(toHand, Zone.HAND, source, game);
             return true;
         }
         return false;

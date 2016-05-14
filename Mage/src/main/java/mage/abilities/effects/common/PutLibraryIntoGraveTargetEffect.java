@@ -74,7 +74,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            player.moveCards(player.getLibrary().getTopCards(game, amount.calculate(game, source, this)), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            player.moveCards(player.getLibrary().getTopCards(game, amount.calculate(game, source, this)), Zone.GRAVEYARD, source, game);
             return true;
         }
         return false;

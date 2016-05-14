@@ -107,7 +107,7 @@ class JaceMindseekerEffect extends OneShotEffect {
         Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetOpponent != null) {
             Set<Card> allCards = targetOpponent.getLibrary().getTopCards(game, 5);
-            targetOpponent.moveCards(allCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            targetOpponent.moveCards(allCards, Zone.GRAVEYARD, source, game);
             for (Card card : allCards) {
                 if (filter.match(card, game)) {
                     Zone zone = game.getState().getZone(card.getId());

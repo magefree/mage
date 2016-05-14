@@ -137,7 +137,7 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getTargetId());
         if (player != null) {
-            return player.moveCards(player.getLibrary().getTopCards(game, event.getAmount()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            return player.moveCards(player.getLibrary().getTopCards(game, event.getAmount()), Zone.GRAVEYARD, source, game);
         }
         return true;
     }
