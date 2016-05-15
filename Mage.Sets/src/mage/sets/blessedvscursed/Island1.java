@@ -36,7 +36,7 @@ import java.util.UUID;
 public class Island1 extends mage.cards.basiclands.Island {
 
     public Island1(UUID ownerId) {
-        super(ownerId, 38);
+        super(ownerId, 35);
         this.expansionSetCode = "DDQ";
     }
 

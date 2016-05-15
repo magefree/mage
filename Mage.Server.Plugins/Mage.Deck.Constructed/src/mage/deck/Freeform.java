@@ -37,7 +37,7 @@ import mage.cards.decks.DeckValidator;
 public class Freeform extends DeckValidator {
 
     public Freeform() {
-        super("Freeform");
+        super("Constructed - Freeform");
     }
 
     @Override
