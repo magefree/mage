@@ -86,6 +86,8 @@ public class NewTournamentDialog extends MageDialog {
     private final List<JComboBox> packs = new ArrayList<>();
     private final int CONSTRUCTION_TIME_MIN = 6;
     private final int CONSTRUCTION_TIME_MAX = 30;
+    private boolean isRandom = false;
+    private boolean isRichMan = false;
 
     private boolean automaticChange = false;
 
@@ -315,7 +317,6 @@ public class NewTournamentDialog extends MageDialog {
         spnConstructTime.setToolTipText("The time players have to build their deck.");
 
         player1Panel.setPreferredSize(new java.awt.Dimension(400, 44));
-
         pnlOtherPlayers.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlOtherPlayers.setLayout(new java.awt.GridLayout(0, 1, 2, 0));
 
@@ -549,10 +550,15 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getLimitedOptions().setIsRandom(tournamentType.isRandom());
             if (tournamentType.isCubeBooster()) {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
-            } else if (tournamentType.isRandom()) {
+            } else if (tournamentType.isRandom() || tournamentType.isRichMan()) {
+                this.isRandom = tournamentType.isRandom();
+                this.isRichMan = tournamentType.isRichMan();
                 tOptions.getLimitedOptions().getSetCodes().clear();
                 ArrayList<String> selected = randomPackSelector.getSelectedPacks();
                 int maxPacks = 3 * (players.size() + 1);
+                if (tournamentType.isRichMan()) {
+                    maxPacks = 36;
+                }
                 if (selected.size() > maxPacks ){
                     StringBuilder infoString = new StringBuilder("More sets were selected than needed. ");
                     infoString.append(maxPacks);
@@ -580,7 +586,7 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getMatchOptions().setGameType(((GameTypeView) this.cbGameType.getSelectedItem()).getName());
             tOptions.getMatchOptions().setLimited(false);
         }
-        
+
         tOptions.getMatchOptions().setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
         tOptions.getMatchOptions().setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());
         tOptions.getMatchOptions().setWinsNeeded((Integer)this.spnNumWins.getValue());
@@ -598,7 +604,7 @@ public class NewTournamentDialog extends MageDialog {
         if (session.joinTournamentTable(
                 roomId,
                 table.getTableId(),
-                this.player1Panel.getPlayerName(), 
+                this.player1Panel.getPlayerName(),
                 "Human", 1,
                 DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),
                 tOptions.getPassword())) {
@@ -673,9 +679,11 @@ public class NewTournamentDialog extends MageDialog {
         this.spnNumPlayers.setModel(new SpinnerNumberModel(numPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
         createPlayers((Integer) spnNumPlayers.getValue() - 1);
-        
+
         if (tournamentType.isLimited()) {
-            if (tournamentType.isRandom()){
+            this.isRandom = tournamentType.isRandom();
+            this.isRichMan = tournamentType.isRichMan();                 
+            if (this.isRandom || this.isRichMan){
                 createRandomPacks();
             }else{
                 createPacks(tournamentType.getNumBoosters());
@@ -695,8 +703,8 @@ public class NewTournamentDialog extends MageDialog {
     }
     /**
      * Sets elements of the panel to visible or not visible
-     * 
-     * @param tournamentType 
+     *
+     * @param tournamentType
      */
     private void activatePanelElements(TournamentTypeView tournamentType) {
         this.pnlDraftOptions.setVisible(tournamentType.isDraft());
@@ -719,7 +727,7 @@ public class NewTournamentDialog extends MageDialog {
                 this.lblPacks.setVisible(false);
                 this.pnlPacks.setVisible(false);
                 this.pnlRandomPacks.setVisible(false);
-            } else if (tournamentType.isRandom()){
+            } else if (tournamentType.isRandom() || tournamentType.isRichMan()){
                 this.lblDraftCube.setVisible(false);
                 this.cbDraftCube.setVisible(false);
                 this.lblPacks.setVisible(true);
@@ -745,7 +753,7 @@ public class NewTournamentDialog extends MageDialog {
     private void createRandomPacks() {
         if (pnlRandomPacks.getComponentCount() == 0) {
             if (randomPackSelector == null) {
-                randomPackSelector = new RandomPacksSelectorDialog();
+                randomPackSelector = new RandomPacksSelectorDialog(isRandom, isRichMan);
                 randomPackSelector.setLocationRelativeTo(this);
             }
             txtRandomPacks = new JTextArea();
@@ -787,6 +795,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void showRandomPackSelectorDialog() {
+        randomPackSelector.setType(isRandom, isRichMan);
         randomPackSelector.showDialog();
         StringBuilder packList = new StringBuilder();
         for (String str : randomPackSelector.getSelectedPacks()) {
@@ -838,7 +847,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void createPlayers(int numPlayers) {
-        // add/remove player panels        
+        // add/remove player panels
         if (numPlayers > players.size()) {
             while (players.size() != numPlayers) {
                 TournamentPlayerPanel playerPanel = new TournamentPlayerPanel();
@@ -915,7 +924,7 @@ public class NewTournamentDialog extends MageDialog {
                 this.cbSkillLevel.setSelectedItem(skillLevel);
                 break;
             }
-        }        
+        }
         int constructionTime = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME, "600")) / 60;
         if (constructionTime < CONSTRUCTION_TIME_MIN || constructionTime > CONSTRUCTION_TIME_MAX) {
             constructionTime = CONSTRUCTION_TIME_MIN;
@@ -945,7 +954,7 @@ public class NewTournamentDialog extends MageDialog {
             if (tournamentType.isDraft()) {
                 numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, "4"));
                 setTournamentOptions(numPlayers);
-                if (!tournamentType.isRandom()){
+                if (!(tournamentType.isRandom() || tournamentType.isRichMan())){
                     loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT, ""));
                 }
 
@@ -1086,4 +1095,4 @@ public class NewTournamentDialog extends MageDialog {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-}
+} 

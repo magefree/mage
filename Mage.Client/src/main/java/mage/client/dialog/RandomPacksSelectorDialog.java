@@ -22,13 +22,28 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
      * Creates new form RandomPacksSelectorDialog
      */
     private boolean boxesCreated;
+    private boolean isRandomDraft;
+    private boolean isRichManDraft;
+    private String title = "";
     public final static String randomDraftDescription = ("The selected packs will be randomly distributed to players. Each player may open different packs. Duplicates will be avoided.");
-    
-    public RandomPacksSelectorDialog() {
+
+    public RandomPacksSelectorDialog(boolean isRandomDraft, boolean isRichManDraft) {
         initComponents();
+        setType(isRandomDraft, isRichManDraft);
         this.pnlApply.setToolTipText(randomDraftDescription);
         this.pnlSelect.setToolTipText(randomDraftDescription);
         boxesCreated = false;
+    }
+
+    public void setType(boolean isRandomDraft, boolean isRichManDraft) {
+        this.isRandomDraft = isRandomDraft;
+        this.isRichManDraft = isRichManDraft;
+        if (this.isRandomDraft) {
+            title = "Random Booster Draft Packs Selector";
+        } else if (this.isRichManDraft) {
+            title = "Rich Man Booster Draft Packs Selector";
+        }
+        setTitle(title);
     }
 
     public void showDialog() {
@@ -56,7 +71,7 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
            }
        }
    }
-    
+
     public ArrayList<String> getSelectedPacks() {
         ArrayList<String> returnVal = new ArrayList<>();
         for (Component pack: pnlPacks.getComponents()){
@@ -103,7 +118,7 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         btnApply = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Random Booster Draft Packs Selector");
+        setTitle(title);
         setModal(true);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setPreferredSize(new java.awt.Dimension(600, 450));
@@ -138,7 +153,11 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         pnlApply.setLayout(new javax.swing.BoxLayout(pnlApply, javax.swing.BoxLayout.LINE_AXIS));
 
         btnApply.setText("Apply");
-        btnApply.setToolTipText("At least two packs must be selected");
+        if (isRandomDraft) {
+            btnApply.setToolTipText("At least 2 packs must be selected");
+        } else if (isRichManDraft) {
+            btnApply.setToolTipText("At least 1 pack must be selected");
+        }
         btnApply.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApplyActionPerformed(evt);
@@ -189,13 +208,15 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosing
 
     public void doApply() {
-        if (getSelectedPacks().size() < 2) {
+        if (getSelectedPacks().size() < 2 && isRandomDraft) {
             JOptionPane.showMessageDialog(this, "At least 2 sets must be selected", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (getSelectedPacks().size() < 1 && isRichManDraft) {
+            JOptionPane.showMessageDialog(this, "At least 1 set must be selected", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             this.setVisible(false);
         }
     }
-    
+
     private void setAllCheckBoxes(boolean value) {
         for (Component pack : pnlPacks.getComponents()) {
             JCheckBox thePack = (JCheckBox) pack;
@@ -211,4 +232,4 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     private java.awt.Panel pnlPacks;
     private javax.swing.JPanel pnlSelect;
     // End of variables declaration//GEN-END:variables
-}
+} 
