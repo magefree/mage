@@ -30,7 +30,6 @@ package mage.abilities.costs.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -52,7 +51,7 @@ public class SacrificeTargetCost extends CostImpl {
     public SacrificeTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);
         target.setNotTarget(true); // sacrifice is never targeted
-        this.text = "sacrifice a " + target.getTargetName();
+        this.text = "sacrifice " + (target.getTargetName().startsWith("an") || target.getTargetName().startsWith("a ") ? "" : "a ") + target.getTargetName();
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
@@ -100,14 +99,14 @@ public class SacrificeTargetCost extends CostImpl {
                 activator = controllerId;
             }
         }
-        
+
         int validTargets = 0;
-        for (Permanent permanent :game.getBattlefield().getAllActivePermanents(((TargetControlledPermanent)targets.get(0)).getFilter(), controllerId, game)) {
-        	if(game.getPlayer(activator).canPaySacrificeCost(permanent, sourceId, controllerId, game)) {
-        		validTargets++;
-        	}
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(((TargetControlledPermanent) targets.get(0)).getFilter(), controllerId, game)) {
+            if (game.getPlayer(activator).canPaySacrificeCost(permanent, sourceId, controllerId, game)) {
+                validTargets++;
+            }
         }
-        
+
         return validTargets > 0;
     }
 

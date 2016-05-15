@@ -210,6 +210,7 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Foundry Street Denizen", 1, 1);
 
     }
+
     /*
      I casted a Silence the Believers on a manifested card. It moved to the exile zone face-down.
      */

@@ -56,11 +56,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AmbushCommander extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an Elf");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf", "an Elf");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Forests you control");
 
     static {
-        filter.add(new SubtypePredicate("Elf"));
         filter2.add(new SubtypePredicate("Forest"));
     }
 

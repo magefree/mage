@@ -28,8 +28,6 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -41,6 +39,7 @@ import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,7 +55,7 @@ public class FiendOfTheShadows extends CardImpl {
 
     private UUID exileId = UUID.randomUUID();
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a human");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Human");
 
     static {
         filter.add(new SubtypePredicate("Human"));
@@ -118,10 +117,10 @@ class FiendOfTheShadowsEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (affectedControllerId.equals(source.getControllerId())) {
-                ExileZone zone = game.getExile().getExileZone(exileId);
-                if (zone != null && zone.contains(objectId)) {
-                    return true;
-                }
+            ExileZone zone = game.getExile().getExileZone(exileId);
+            if (zone != null && zone.contains(objectId)) {
+                return true;
+            }
         }
         return false;
     }
