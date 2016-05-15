@@ -42,7 +42,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -69,6 +72,7 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.components.ImagePanel;
+import mage.constants.CardType;
 import static mage.constants.Constants.DEFAULT_AVATAR_ID;
 import static mage.constants.Constants.MAX_AVATAR_ID;
 import static mage.constants.Constants.MIN_AVATAR_ID;
@@ -78,6 +82,8 @@ import mage.utils.timer.PriorityTimer;
 import mage.view.ManaPoolView;
 import mage.view.PlayerView;
 import org.mage.card.arcane.ManaSymbols;
+import mage.players.Player;
+import mage.view.CardView;
 
 /**
  * Enhanced player pane.
@@ -215,7 +221,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             changedFontGrave = false;
         }
         graveLabel.setText(Integer.toString(graveCards));
-
+        graveLabel.setToolTipText("Card Types: " +  qtyCardTypes(player.getGraveyard()));
+        
         int exileCards = player.getExile().size();
         if (exileCards > 99) {
             if (!changedFontExile) {
@@ -439,7 +446,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         // Grave count and open graveyard button
         r = new Rectangle(21, 21);
-        graveLabel.setToolTipText("Graveyard");
+        graveLabel.setToolTipText("Card Types: 0");
         Image imageGrave = ImageHelper.getImageFromResources("/info/grave.png");
         BufferedImage resizedGrave = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageGrave, BufferedImage.TYPE_INT_ARGB), r);
 
@@ -858,6 +865,18 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         return player;
     }
 
+    private int qtyCardTypes(mage.view.CardsView cardsView){
+        Set<String> cardTypesPresent = new LinkedHashSet<String>() {};
+        for (CardView card : cardsView.values()){
+            List<CardType> cardTypes = card.getCardTypes();
+            for (CardType cardType : cardTypes){
+                cardTypesPresent.add(cardType.toString());
+            }
+        }
+        if (cardTypesPresent.isEmpty()) return 0;
+        else return cardTypesPresent.size();
+    }
+    
     private HoverButton avatar;
     private JLabel avatarFlag;
     private JButton btnPlayer;

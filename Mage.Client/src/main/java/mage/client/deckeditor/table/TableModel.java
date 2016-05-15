@@ -123,6 +123,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         int instantCount = 0;
         int sorceryCount = 0;
         int enchantmentCount = 0;
+        int artifactCount = 0;
         if (!merge) {
             this.clearCards();
             for (CardView card : showCards.values()) {
@@ -148,6 +149,9 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                     }
                     if (card.getCardTypes().contains(CardType.ENCHANTMENT)) {
                         enchantmentCount++;
+                    }
+                    if (card.getCardTypes().contains(CardType.ARTIFACT)) {
+                        artifactCount++;
                     }
                 }
             }
@@ -199,7 +203,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             }
 
             if (updateCountsCallback != null) {
-                updateCountsCallback.update(cards.size(), creatureCount, landCount, sorceryCount, instantCount, enchantmentCount);
+                updateCountsCallback.update(cards.size(), creatureCount, landCount, sorceryCount, instantCount, enchantmentCount, artifactCount);
             }
         }
 
