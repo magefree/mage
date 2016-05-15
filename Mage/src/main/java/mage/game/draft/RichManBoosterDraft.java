@@ -67,7 +67,7 @@ public class RichManBoosterDraft extends DraftImpl {
             UUID nextId = table.getNext();
             DraftPlayer next = players.get(nextId);
             while (true) {
-                List<Card> nextBooster = sets.get(0).createBooster();
+                List<Card> nextBooster = sets.get(cardNum % sets.size()).createBooster();
                 next.setBooster(nextBooster);
                 if (nextId == startId) {
                     break;
