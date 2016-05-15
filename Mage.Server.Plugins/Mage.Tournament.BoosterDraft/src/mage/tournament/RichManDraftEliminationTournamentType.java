@@ -44,7 +44,8 @@ public class RichManDraftEliminationTournamentType extends TournamentType {
         this.limited = true;
         this.cubeBooster = false;
         this.elimination = true;
-        this.isRandom = true;
+        this.isRandom = false;
+        this.isRichMan = true;
     }
 
-}
+} 

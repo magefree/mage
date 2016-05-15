@@ -111,4 +111,4 @@ public class RichManBoosterDraft extends DraftImpl {
         int time = richManTimes[cardNum - 1] * timing.getFactor();
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
-}
+} 

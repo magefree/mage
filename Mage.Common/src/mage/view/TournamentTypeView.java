@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.view;
 
 import java.io.Serializable;
@@ -36,6 +35,7 @@ import mage.game.tournament.TournamentType;
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentTypeView implements Serializable {
+
     private static final long serialVersionUID = 2L;
 
     private final String name;
@@ -47,7 +47,7 @@ public class TournamentTypeView implements Serializable {
     private final boolean cubeBooster;
     private final boolean elimination;
     private final boolean random;
-
+    private final boolean richMan;
 
     public TournamentTypeView(TournamentType tournamentType) {
         this.name = tournamentType.getName();
@@ -59,6 +59,7 @@ public class TournamentTypeView implements Serializable {
         this.cubeBooster = tournamentType.isCubeBooster();
         this.elimination = tournamentType.isElimination();
         this.random = tournamentType.isRandom();
+        this.richMan = tournamentType.isRichMan();
     }
 
     @Override
@@ -98,7 +99,11 @@ public class TournamentTypeView implements Serializable {
         return elimination;
     }
 
-    public boolean isRandom(){
+    public boolean isRandom() {
         return random;
     }
-}
+
+    public boolean isRichMan() {
+        return richMan;
+    }
+} 

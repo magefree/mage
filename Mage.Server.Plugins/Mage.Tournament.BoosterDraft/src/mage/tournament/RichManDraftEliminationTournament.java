@@ -86,4 +86,4 @@ public class RichManDraftEliminationTournament extends TournamentSingleEliminati
                 break;
         }
     }
-}
+} 
