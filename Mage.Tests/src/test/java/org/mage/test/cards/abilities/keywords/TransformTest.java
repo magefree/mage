@@ -213,4 +213,36 @@ public class TransformTest extends CardTestPlayerBase {
         Assert.assertFalse("Has not to have sorcery card type", nightmare.getCardType().contains(CardType.SORCERY));
     }
 
+    /**
+     * When copy token of Lambholt Pacifist transforms with "its transform
+     * ability", I see below error. Then rollback.
+     *
+     * 701.25a Only permanents represented by double-faced cards can transform.
+     * (See rule 711, “Double-Faced Cards.”) If a spell or ability instructs a
+     * player to transform any permanent that isn‘t represented by a
+     * double-faced card, nothing happens.
+     */
+    @Test
+    public void testTransformCopy() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        // Lambholt Pacifist can't attack unless you control a creature with power 4 or greater.
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Pacifist.
+        addCard(Zone.HAND, playerA, "Lambholt Pacifist"); // {1}{G}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+        // You may have Clone enter the battlefield as a copy of any creature on the battlefield.
+        addCard(Zone.HAND, playerB, "Clone"); // {3}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lambholt Pacifist");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
+        setChoice(playerB, "Lambholt Pacifist");
+
+        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Lambholt Butcher", 1);
+
+        assertPermanentCount(playerB, "Lambholt Pacifist", 1);
+    }
 }

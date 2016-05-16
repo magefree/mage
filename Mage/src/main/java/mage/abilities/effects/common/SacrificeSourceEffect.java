@@ -62,7 +62,7 @@ public class SacrificeSourceEffect extends OneShotEffect {
             // Check if the effect was installed by the spell the source was cast by (e.g. Necromancy), if not don't sacrifice the permanent
             if (source.getSourceObject(game) instanceof Spell) {
                 sourceObject = game.getPermanent(source.getSourceId());
-                if (sourceObject.getZoneChangeCounter(game) > source.getSourceObjectZoneChangeCounter() + 1) {
+                if (sourceObject != null && sourceObject.getZoneChangeCounter(game) > source.getSourceObjectZoneChangeCounter() + 1) {
                     return false;
                 }
             }

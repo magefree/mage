@@ -128,4 +128,27 @@ public class NecromancyTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Craw Wurm", 1);
     }
 
+    /**
+     * I was playing a legendary cube, flashed in a Necromancy to block and when
+     * the creature I reanimated died the game bugged out and I lost.
+     */
+    @Test
+    public void testBlockWithNecromancyCreature() {
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, "Necromancy"); // {2}{B}
+        addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
+
+        attack(2, playerB, "Silvercoat Lion");
+        castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Necromancy"); // enchanting the Silvercoat Lion
+        block(2, playerA, "Silvercoat Lion", "Silvercoat Lion");
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Necromancy", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+    }
 }
