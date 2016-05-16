@@ -46,21 +46,22 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 public class RampartCrawler extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
+
     static {
         filter.add(new SubtypePredicate("Wall"));
     }
 
     public RampartCrawler(UUID ownerId) {
-		super(ownerId, 156, "Rampart Crawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Lizard");
-		this.subtype.add("Mercenary");
+        super(ownerId, 156, "Rampart Crawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Lizard");
+        this.subtype.add("Mercenary");
 
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-	
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
         // Rampart Crawler can't be blocked by Walls.
-		this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     public RampartCrawler(final RampartCrawler card) {
@@ -71,5 +72,4 @@ public class RampartCrawler extends CardImpl {
     public RampartCrawler copy() {
         return new RampartCrawler(this);
     }
-
 }

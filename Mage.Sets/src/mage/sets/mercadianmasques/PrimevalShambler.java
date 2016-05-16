@@ -46,16 +46,16 @@ import mage.cards.CardImpl;
 public class PrimevalShambler extends CardImpl {
 
     public PrimevalShambler(UUID ownerId) {
-		super(ownerId, 152, "Primeval Shambler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Horror");
-		this.subtype.add("Mercenary");
+        super(ownerId, 152, "Primeval Shambler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Horror");
+        this.subtype.add("Mercenary");
 
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-	
-		// {B}: Primeval Shambler gets +1/+1 until end of turn.
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // {B}: Primeval Shambler gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
     public PrimevalShambler(final PrimevalShambler card) {
@@ -66,5 +66,4 @@ public class PrimevalShambler extends CardImpl {
     public PrimevalShambler copy() {
         return new PrimevalShambler(this);
     }
-
 }

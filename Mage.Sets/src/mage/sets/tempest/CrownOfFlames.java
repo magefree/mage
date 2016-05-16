@@ -48,10 +48,9 @@ import mage.target.common.TargetCreaturePermanent;
 public class CrownOfFlames extends CardImpl {
 
     public CrownOfFlames(UUID ownerId) {
-            super(ownerId, 169, "Crown of Flames", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
+        super(ownerId, 169, "Crown of Flames", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
-
         
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

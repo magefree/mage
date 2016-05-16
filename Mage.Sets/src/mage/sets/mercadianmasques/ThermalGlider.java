@@ -45,34 +45,34 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class ThermalGlider extends CardImpl {
 
-	private static final FilterCard filter = new FilterCard("Red");
+    private static final FilterCard filter = new FilterCard("Red");
 
-	static {
-		filter.add(new ColorPredicate(ObjectColor.RED));
-	}
+    static {
+        filter.add(new ColorPredicate(ObjectColor.RED));
+    }
 
-	public ThermalGlider(UUID ownerId) {
-		super(ownerId, 53, "Thermal Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Human");
-		this.subtype.add("Rebel");
+    public ThermalGlider(UUID ownerId) {
+        super(ownerId, 53, "Thermal Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Human");
+        this.subtype.add("Rebel");
 
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
-		
-		// Flying
-		this.addAbility(FlyingAbility.getInstance());
-		// Protection from red
-		this.addAbility(new ProtectionAbility(filter));
-	}
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-	public ThermalGlider(final ThermalGlider card) {
-		super(card);
-	}
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-	@Override
-	public ThermalGlider copy() {
-		return new ThermalGlider(this);
-	}
+        // Protection from red
+        this.addAbility(new ProtectionAbility(filter));
+    }
 
+    public ThermalGlider(final ThermalGlider card) {
+        super(card);
+    }
+
+    @Override
+    public ThermalGlider copy() {
+        return new ThermalGlider(this);
+    }
 }

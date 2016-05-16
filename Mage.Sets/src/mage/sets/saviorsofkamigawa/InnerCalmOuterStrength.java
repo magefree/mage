@@ -45,10 +45,9 @@ import mage.target.common.TargetCreaturePermanent;
 public class InnerCalmOuterStrength extends CardImpl {
 
     public InnerCalmOuterStrength(UUID ownerId) {
-            super(ownerId, 133, "Inner Calm, Outer Strength", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
+        super(ownerId, 133, "Inner Calm, Outer Strength", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
-
 
         // Target creature gets +X/+X until end of turn, where X is the number of cards in your hand.
         DynamicValue xValue= new CardsInControllerHandCount();

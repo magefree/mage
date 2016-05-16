@@ -49,15 +49,15 @@ import mage.target.common.TargetAttackingCreature;
 public class Condemn extends CardImpl {
 
     public Condemn(UUID ownerId) {
-            super(ownerId, 13, "Condemn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        super(ownerId, 13, "Condemn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "10E";
 
         // Put target attacking creature on the bottom of its owner's library.
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
+
         // Its controller gains life equal to its toughness.
         this.getSpellAbility().addEffect(new CondemnEffect());
-
     }
 
     public Condemn(final Condemn card) {
@@ -68,7 +68,6 @@ public class Condemn extends CardImpl {
     public Condemn copy() {
         return new Condemn(this);
     }
-
 }
 
 class CondemnEffect extends OneShotEffect {
@@ -99,5 +98,4 @@ class CondemnEffect extends OneShotEffect {
         }
         return false;
     }
-
 }

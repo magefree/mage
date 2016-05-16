@@ -45,34 +45,34 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class NightwindGlider extends CardImpl {
 
-	private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter = new FilterCard("Black");
 
-	static {
-		filter.add(new ColorPredicate(ObjectColor.BLACK));
-	}
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
 
-	public NightwindGlider(UUID ownerId) {
-		super(ownerId, 31, "Nightwind Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Human");
-		this.subtype.add("Rebel");
+    public NightwindGlider(UUID ownerId) {
+        super(ownerId, 31, "Nightwind Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Human");
+        this.subtype.add("Rebel");
 
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
-		
-		// Flying
-		this.addAbility(FlyingAbility.getInstance());
-		// Protection from black
-		this.addAbility(new ProtectionAbility(filter));
-	}
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-	public NightwindGlider(final NightwindGlider card) {
-		super(card);
-	}
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-	@Override
-	public NightwindGlider copy() {
-		return new NightwindGlider(this);
-	}
+        // Protection from black
+        this.addAbility(new ProtectionAbility(filter));
+    }
 
+    public NightwindGlider(final NightwindGlider card) {
+        super(card);
+    }
+
+    @Override
+    public NightwindGlider copy() {
+        return new NightwindGlider(this);
+    }
 }

@@ -55,22 +55,22 @@ public class CateranPersuader extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate("Mercenary"));
-		filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 2));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 2));
     }
 
     public CateranPersuader(UUID ownerId) {
-		super(ownerId, 124, "Cateran Persuader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Human");
-		this.subtype.add("Mercenary");
+        super(ownerId, 124, "Cateran Persuader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Human");
+        this.subtype.add("Mercenary");
 
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
-	
-		// {1}, {T}: Search your library for a Mercenary permanent card with converted mana cost 1 or less and put it onto the battlefield. Then shuffle your library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-		ability.addManaCost(new GenericManaCost(1));
-		this.addAbility(ability);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // {1}, {T}: Search your library for a Mercenary permanent card with converted mana cost 1 or less and put it onto the battlefield. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(1));
+        this.addAbility(ability);
     }
 
     public CateranPersuader(final CateranPersuader card) {
@@ -81,5 +81,4 @@ public class CateranPersuader extends CardImpl {
     public CateranPersuader copy() {
         return new CateranPersuader(this);
     }
-
 }

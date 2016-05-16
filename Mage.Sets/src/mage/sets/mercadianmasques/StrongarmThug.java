@@ -53,16 +53,16 @@ public class StrongarmThug extends CardImpl {
     }
 
     public StrongarmThug(UUID ownerId) {
-		super(ownerId, 165, "Strongarm Thug", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Human");
-		this.subtype.add("Mercenary");
+        super(ownerId, 165, "Strongarm Thug", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Human");
+        this.subtype.add("Mercenary");
 
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-	
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
         // When Strongarm Thug enters the battlefield, you may return target Mercenary card from your graveyard to your hand.
-		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
@@ -75,5 +75,4 @@ public class StrongarmThug extends CardImpl {
     public StrongarmThug copy() {
         return new StrongarmThug(this);
     }
-
 }

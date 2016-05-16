@@ -52,32 +52,32 @@ public class UrborgSkeleton extends CardImpl {
     private static final String staticText = "If Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it";
 
     public UrborgSkeleton(UUID ownerId) {
-       super(ownerId, 134, "Urborg Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-       this.expansionSetCode = "INV";
-       this.subtype.add("Skeleton");
+        super(ownerId, 134, "Urborg Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Skeleton");
 
-       this.power = new MageInt(0);
-       this.toughness = new MageInt(1);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
 
-       // Kicker {3} (You may pay an additional {3} as you cast this spell.)
-       this.addAbility(new KickerAbility("{3}"));
+        // Kicker {3} (You may pay an additional {3} as you cast this spell.)
+        this.addAbility(new KickerAbility("{3}"));
 
-       // {B}: Regenerate Urborg Skeleton.
-       this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+        // {B}: Regenerate Urborg Skeleton.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
 
-       // If Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it.
-       Ability ability = new EntersBattlefieldAbility(
-               new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-               KickedCondition.getInstance(), staticText,"");
-       this.addAbility(ability);
+        // If Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it.
+        Ability ability = new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
+                KickedCondition.getInstance(), staticText,"");
+        this.addAbility(ability);
     }
 
     public UrborgSkeleton(final UrborgSkeleton card) {
-       super(card);
+        super(card);
     }
 
     @Override
     public UrborgSkeleton copy() {
-       return new UrborgSkeleton(this);
+        return new UrborgSkeleton(this);
     }
 }

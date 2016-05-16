@@ -66,93 +66,92 @@ import mage.util.CardUtil;
 public class NightveilSpecter extends CardImpl {
 
     public NightveilSpecter(UUID ownerId) {
-      super(ownerId, 222, "Nightveil Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}{U/B}");
-      this.expansionSetCode = "GTC";
-      this.subtype.add("Specter");
+        super(ownerId, 222, "Nightveil Specter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}{U/B}");
+        this.expansionSetCode = "GTC";
+        this.subtype.add("Specter");
 
-      this.power = new MageInt(2);
-      this.toughness = new MageInt(3);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-      // Flying
-      this.addAbility(FlyingAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-      // Whenever Nightveil Specter deals combat damage to a player, that player exiles the top card of his or her library.     
-      this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new NightveilSpecterExileEffect(),false, true));
+        // Whenever Nightveil Specter deals combat damage to a player, that player exiles the top card of his or her library.     
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new NightveilSpecterExileEffect(),false, true));
 
-      // You may play cards exiled with Nightveil Specter.
-      this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NightveilSpecterEffect()));
+        // You may play cards exiled with Nightveil Specter.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NightveilSpecterEffect()));
     }
 
     public NightveilSpecter(final NightveilSpecter card) {
-      super(card);
+        super(card);
     }
 
     @Override
     public NightveilSpecter copy() {
-      return new NightveilSpecter(this);
+        return new NightveilSpecter(this);
     }
 }
 
 class NightveilSpecterExileEffect extends OneShotEffect {
 
     public NightveilSpecterExileEffect() {
-      super(Outcome.Discard);
-      staticText = "that player exiles the top card of his or her library";
+        super(Outcome.Discard);
+        staticText = "that player exiles the top card of his or her library";
     }
 
     public NightveilSpecterExileEffect(final NightveilSpecterExileEffect effect) {
-      super(effect);
+        super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-      Player player = game.getPlayer(targetPointer.getFirst(game, source));
-      if (player != null) {
-          Card card = player.getLibrary().removeFromTop(game);
-          MageObject sourceObject = game.getObject(source.getSourceId());
-          if (card != null && sourceObject != null) {
-              player.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-              return true;
-          }
-      }
-      return false;
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if (player != null) {
+            Card card = player.getLibrary().removeFromTop(game);
+            MageObject sourceObject = game.getObject(source.getSourceId());
+            if (card != null && sourceObject != null) {
+                player.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public NightveilSpecterExileEffect copy() {
-      return new NightveilSpecterExileEffect(this);
+        return new NightveilSpecterExileEffect(this);
     }
 }
 
 class NightveilSpecterEffect extends AsThoughEffectImpl {
 
     public NightveilSpecterEffect() {
-      super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-      staticText = "You may play cards exiled with {this}";
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        staticText = "You may play cards exiled with {this}";
     }
 
     public NightveilSpecterEffect(final NightveilSpecterEffect effect) {
-      super(effect);
+        super(effect);
     }
-
 
     @Override
     public boolean apply(Game game, Ability source) {
-      return true;
+        return true;
     }
 
     @Override
     public NightveilSpecterEffect copy() {
-      return new NightveilSpecterEffect(this);
+        return new NightveilSpecterEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-      Card card = game.getCard(objectId);
-      if (affectedControllerId.equals(source.getControllerId()) && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
-          ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-          return zone != null && zone.contains(card.getId());
-      }
-      return false;
+        Card card = game.getCard(objectId);
+        if (affectedControllerId.equals(source.getControllerId()) && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
+            ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+            return zone != null && zone.contains(card.getId());
+        }
+        return false;
     }
 }

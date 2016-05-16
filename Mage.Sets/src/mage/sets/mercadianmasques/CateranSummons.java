@@ -51,11 +51,10 @@ public class CateranSummons extends CardImpl {
     }
 
     public CateranSummons(UUID ownerId) {
-		super(ownerId, 126, "Cateran Summons", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
-		this.expansionSetCode = "MMQ";
+        super(ownerId, 126, "Cateran Summons", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
+        this.expansionSetCode = "MMQ";
 
-	
-		// Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
+        // Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
@@ -67,5 +66,4 @@ public class CateranSummons extends CardImpl {
     public CateranSummons copy() {
         return new CateranSummons(this);
     }
-
 }

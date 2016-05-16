@@ -41,26 +41,24 @@ import mage.cards.CardImpl;
 public class ShardlessAgent extends CardImpl {
 
     public ShardlessAgent(UUID ownerId) {
-       super(ownerId, 104, "Shardless Agent", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT,CardType.CREATURE}, "{1}{G}{U}");
-       this.expansionSetCode = "PC2";
-       this.subtype.add("Human");
-       this.subtype.add("Rogue");
+        super(ownerId, 104, "Shardless Agent", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT,CardType.CREATURE}, "{1}{G}{U}");
+        this.expansionSetCode = "PC2";
+        this.subtype.add("Human");
+        this.subtype.add("Rogue");
 
-       this.power = new MageInt(2);
-       this.toughness = new MageInt(2);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-       // Cascade
-       this.addAbility(new CascadeAbility());
-
+        // Cascade
+        this.addAbility(new CascadeAbility());
     }
 
     public ShardlessAgent(final ShardlessAgent card) {
-       super(card);
+        super(card);
     }
 
     @Override
     public ShardlessAgent copy() {
-       return new ShardlessAgent(this);
+        return new ShardlessAgent(this);
     }
 }
-

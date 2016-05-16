@@ -46,15 +46,17 @@ import mage.cards.CardImpl;
 public class MoltingHarpy extends CardImpl {
 
     public MoltingHarpy(UUID ownerId) {
-		super(ownerId, 148, "Molting Harpy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Harpy");
-		this.subtype.add("Mercenary");
+        super(ownerId, 148, "Molting Harpy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Harpy");
+        this.subtype.add("Mercenary");
 
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(1);
-	
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // At the beginning of your upkeep, sacrifice Molting Harpy unless you pay {2}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{2}")), TargetController.YOU, false));
     }
@@ -67,5 +69,4 @@ public class MoltingHarpy extends CardImpl {
     public MoltingHarpy copy() {
         return new MoltingHarpy(this);
     }
-
 }

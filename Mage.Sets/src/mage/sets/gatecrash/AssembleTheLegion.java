@@ -47,22 +47,21 @@ import mage.game.permanent.token.SoldierTokenWithHaste;
 public class AssembleTheLegion extends CardImpl {
 
     public AssembleTheLegion(UUID ownerId) {
-       super(ownerId, 142, "Assemble the Legion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{W}");
-       this.expansionSetCode = "GTC";
+        super(ownerId, 142, "Assemble the Legion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{W}");
+        this.expansionSetCode = "GTC";
 
-
-       // At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on Assemble the Legion.
-       Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.MUSTER.createInstance()), TargetController.YOU, false);
-       ability.addEffect(new CreateTokenEffect(new SoldierTokenWithHaste(), new CountersCount(CounterType.MUSTER)));
-       this.addAbility(ability);
+        // At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on Assemble the Legion.
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.MUSTER.createInstance()), TargetController.YOU, false);
+        ability.addEffect(new CreateTokenEffect(new SoldierTokenWithHaste(), new CountersCount(CounterType.MUSTER)));
+        this.addAbility(ability);
     }
 
     public AssembleTheLegion(final AssembleTheLegion card) {
-       super(card);
+        super(card);
     }
 
     @Override
     public AssembleTheLegion copy() {
-       return new AssembleTheLegion(this);
+        return new AssembleTheLegion(this);
     }
 }

@@ -43,14 +43,14 @@ import mage.cards.CardImpl;
 public class SkulkingFugitive extends CardImpl {
 
     public SkulkingFugitive(UUID ownerId) {
-		super(ownerId, 161, "Skulking Fugitive", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Horror");
-		this.subtype.add("Mercenary");
+        super(ownerId, 161, "Skulking Fugitive", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Horror");
+        this.subtype.add("Mercenary");
 
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(4);
-	
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+
         // When Skulking Fugitive becomes the target of a spell or ability, sacrifice it.
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
@@ -63,5 +63,4 @@ public class SkulkingFugitive extends CardImpl {
     public SkulkingFugitive copy() {
         return new SkulkingFugitive(this);
     }
-
 }

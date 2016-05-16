@@ -52,18 +52,18 @@ import mage.target.common.TargetCardInHand;
 public class StampedeDriver extends CardImpl {
 
     public StampedeDriver(UUID ownerId) {
-		super(ownerId, 122, "Stampede Driver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "NMS";
-		this.subtype.add("Human");
-		this.subtype.add("Spellshaper");
+        super(ownerId, 122, "Stampede Driver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "NMS";
+        this.subtype.add("Human");
+        this.subtype.add("Spellshaper");
 
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-	
-		// {1}{G}, {T}, Discard a card: Creatures you control get +1/+1 and gain trample until end of turn.
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {1}{G}, {T}, Discard a card: Creatures you control get +1/+1 and gain trample until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}"));
-		ability.addCost(new TapSourceCost());
-		ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
         this.addAbility(ability);
     }

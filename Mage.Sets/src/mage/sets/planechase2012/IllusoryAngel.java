@@ -44,26 +44,26 @@ import mage.constants.Zone;
 public class IllusoryAngel extends CardImpl {
 
     public IllusoryAngel(UUID ownerId) {
-       super(ownerId, 19, "Illusory Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-       this.expansionSetCode = "PC2";
-       this.subtype.add("Angel");
-       this.subtype.add("Illusion");
-       this.power = new MageInt(4);
-       this.toughness = new MageInt(4);
+        super(ownerId, 19, "Illusory Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "PC2";
+        this.subtype.add("Angel");
+        this.subtype.add("Illusion");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-       // Flying
-       this.addAbility(FlyingAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-       // Cast Illusory Angel only if you've cast another spell this turn.
-       this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
+        // Cast Illusory Angel only if you've cast another spell this turn.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
     }
 
     public IllusoryAngel(final IllusoryAngel card) {
-       super(card);
+        super(card);
     }
 
     @Override
     public IllusoryAngel copy() {
-       return new IllusoryAngel(this);
+        return new IllusoryAngel(this);
     }
 }

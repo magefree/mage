@@ -59,21 +59,22 @@ public class LongForgottenGohei extends CardImpl {
     }
 
     public LongForgottenGohei(UUID ownerId) {
-            super(ownerId, 261, "Long-Forgotten Gohei", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-            this.expansionSetCode = "CHK";
-            
-            // Arcane spells you cast cost {1} less to cast.
-            this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(arcaneFilter, 1)));
-            
-            // Spirit creatures you control get +1/+1.
-            this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, spiritFilter, false)));
+        super(ownerId, 261, "Long-Forgotten Gohei", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "CHK";
+
+        // Arcane spells you cast cost {1} less to cast.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(arcaneFilter, 1)));
+
+        // Spirit creatures you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, spiritFilter, false)));
     }
 
     public LongForgottenGohei(final LongForgottenGohei card) {
-            super(card);
+        super(card);
     }
+
     @Override
     public LongForgottenGohei copy() {
-            return new LongForgottenGohei(this);
+        return new LongForgottenGohei(this);
     }
 }

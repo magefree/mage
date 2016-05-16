@@ -60,21 +60,21 @@ public class RamosianCaptain extends CardImpl {
     }
 
     public RamosianCaptain(UUID ownerId) {
-		super(ownerId, 35, "Ramosian Captain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Human");
-		this.subtype.add("Rebel");
+        super(ownerId, 35, "Ramosian Captain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Human");
+        this.subtype.add("Rebel");
 
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-	
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-		// {5}, {T}: Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-		ability.addManaCost(new GenericManaCost(5));
-		this.addAbility(ability);
+        // {5}, {T}: Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(5));
+        this.addAbility(ability);
     }
 
     public RamosianCaptain(final RamosianCaptain card) {
@@ -85,5 +85,4 @@ public class RamosianCaptain extends CardImpl {
     public RamosianCaptain copy() {
         return new RamosianCaptain(this);
     }
-
 }

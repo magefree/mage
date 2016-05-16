@@ -63,20 +63,21 @@ public class CateranOverlord extends CardImpl {
     }
 
     public CateranOverlord(UUID ownerId) {
-		super(ownerId, 123, "Cateran Overlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Horror");
-		this.subtype.add("Mercenary");
+        super(ownerId, 123, "Cateran Overlord", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Horror");
+        this.subtype.add("Mercenary");
 
-		this.power = new MageInt(7);
-		this.toughness = new MageInt(5);
-	
-		// Sacrifice a creature: Regenerate Cateran Overlord.
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(5);
+
+        // Sacrifice a creature: Regenerate Cateran Overlord.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
-		// {6}, {T}: Search your library for a Mercenary permanent card with converted mana cost 6 or less and put it onto the battlefield. Then shuffle your library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-		ability.addManaCost(new GenericManaCost(6));
-		this.addAbility(ability);
+
+        // {6}, {T}: Search your library for a Mercenary permanent card with converted mana cost 6 or less and put it onto the battlefield. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(6));
+        this.addAbility(ability);
     }
 
     public CateranOverlord(final CateranOverlord card) {
@@ -87,5 +88,4 @@ public class CateranOverlord extends CardImpl {
     public CateranOverlord copy() {
         return new CateranOverlord(this);
     }
-
 }

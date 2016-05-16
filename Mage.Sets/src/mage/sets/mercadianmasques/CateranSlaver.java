@@ -60,19 +60,21 @@ public class CateranSlaver extends CardImpl {
     }
 
     public CateranSlaver(UUID ownerId) {
-		super(ownerId, 125, "Cateran Slaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Horror");
-		this.subtype.add("Mercenary");
+        super(ownerId, 125, "Cateran Slaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Horror");
+        this.subtype.add("Mercenary");
 
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(5);
-	
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // Swampwalk
         this.addAbility(new SwampwalkAbility());
-		// {5}, {T}: Search your library for a Mercenary permanent card with converted mana cost 5 or less and put it onto the battlefield. Then shuffle your library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-		ability.addManaCost(new GenericManaCost(5));
-		this.addAbility(ability);
+
+        // {5}, {T}: Search your library for a Mercenary permanent card with converted mana cost 5 or less and put it onto the battlefield. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(5));
+        this.addAbility(ability);
     }
 
     public CateranSlaver(final CateranSlaver card) {
@@ -83,5 +85,4 @@ public class CateranSlaver extends CardImpl {
     public CateranSlaver copy() {
         return new CateranSlaver(this);
     }
-
 }

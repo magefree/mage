@@ -61,13 +61,14 @@ public class TriadOfFates extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent filterCounter = new FilterCreaturePermanent("creature that has a fate counter on it");
+
     static {
         filter.add(new AnotherPredicate());
         filterCounter.add(new CounterPredicate(CounterType.FATE));
     }
 
     public TriadOfFates(UUID ownerId) {
-            super(ownerId, 206, "Triad of Fates", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
+        super(ownerId, 206, "Triad of Fates", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
         this.expansionSetCode = "THS";
         this.supertype.add("Legendary");
         this.subtype.add("Human");
@@ -82,6 +83,7 @@ public class TriadOfFates extends CardImpl {
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
+
         // {W}, {T}: Exile target creature that has a fate counter on it, then return it to the battlefield under its owner's control.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new ManaCostsImpl("{W}"));
         ability.addCost(new TapSourceCost());
@@ -89,6 +91,7 @@ public class TriadOfFates extends CardImpl {
         ability.addTarget(target);
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
         this.addAbility(ability);
+
         // {B}, {T}: Exile target creature that has a fate counter on it. Its controller draws two cards.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());
@@ -96,7 +99,6 @@ public class TriadOfFates extends CardImpl {
         ability.addTarget(target);
         ability.addEffect(new DrawCardControllerTargetEffect());
         this.addAbility(ability);
-
     }
 
     public TriadOfFates(final TriadOfFates card) {

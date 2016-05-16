@@ -48,28 +48,29 @@ import mage.target.common.TargetNonlandPermanent;
 public class ThrullParasite extends CardImpl {
 
     public ThrullParasite(UUID ownerId) {
-       super(ownerId, 81, "Thrull Parasite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
-       this.expansionSetCode = "GTC";
-       this.subtype.add("Thrull");
+        super(ownerId, 81, "Thrull Parasite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "GTC";
+        this.subtype.add("Thrull");
 
-       this.power = new MageInt(1);
-       this.toughness = new MageInt(1);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-       // Extort
-       this.addAbility(new ExtortAbility());
-       // {tap}, Pay 2 life: Remove a counter from target nonland permanent.
-       Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterTargetEffect(), new TapSourceCost());
-       ability.addTarget(new TargetNonlandPermanent());
-       ability.addCost(new PayLifeCost(2));
-       this.addAbility(ability);
+        // Extort
+        this.addAbility(new ExtortAbility());
+
+        // {tap}, Pay 2 life: Remove a counter from target nonland permanent.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetNonlandPermanent());
+        ability.addCost(new PayLifeCost(2));
+        this.addAbility(ability);
     }
 
     public ThrullParasite(final ThrullParasite card) {
-       super(card);
+        super(card);
     }
 
     @Override
     public ThrullParasite copy() {
-       return new ThrullParasite(this);
+        return new ThrullParasite(this);
     }
 }

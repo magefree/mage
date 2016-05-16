@@ -60,19 +60,21 @@ public class CateranEnforcer extends CardImpl {
     }
 
     public CateranEnforcer(UUID ownerId) {
-		super(ownerId, 121, "Cateran Enforcer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-		this.expansionSetCode = "MMQ";
-		this.subtype.add("Horror");
-		this.subtype.add("Mercenary");
+        super(ownerId, 121, "Cateran Enforcer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Horror");
+        this.subtype.add("Mercenary");
 
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(3);
-	
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
+
+        // Fear
         this.addAbility(FearAbility.getInstance());
-		// {4}, {T}: Search your library for a Mercenary permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-		ability.addManaCost(new GenericManaCost(4));
-		this.addAbility(ability);
+        
+        // {4}, {T}: Search your library for a Mercenary permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addManaCost(new GenericManaCost(4));
+        this.addAbility(ability);
     }
 
     public CateranEnforcer(final CateranEnforcer card) {
@@ -83,5 +85,4 @@ public class CateranEnforcer extends CardImpl {
     public CateranEnforcer copy() {
         return new CateranEnforcer(this);
     }
-
 }
