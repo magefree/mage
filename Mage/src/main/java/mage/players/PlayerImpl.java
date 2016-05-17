@@ -1314,6 +1314,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this.getId(), game)) {
                 for (Ability ability : object.getAbilities()) {
                     if (canUse || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
+                        if (ability.getManaCosts().isEmpty() && ability.getCosts().isEmpty() && ability instanceof SpellAbility && !(ability.getSourceId() == getCastSourceIdWithAlternateMana())) {
+                            continue; // You can't play spells that have no costs, unless you can play them without paying their mana costs
+                        }
                         ability.setControllerId(this.getId());
                         if (ability instanceof ActivatedAbility && ability.getZone().match(Zone.HAND)
                                 && ((ActivatedAbility) ability).canActivate(playerId, game)) {
