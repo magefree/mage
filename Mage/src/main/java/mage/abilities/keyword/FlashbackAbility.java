@@ -197,7 +197,6 @@ class FlashbackEffect extends OneShotEffect {
                 spellAbility.getManaCostsToPay().clear();
                 spellAbility.getManaCostsToPay().addAll(source.getManaCostsToPay());
                 // needed to get e.g. paid costs from Conflagrate
-                spellAbility.getCosts().clear();
                 for (Cost cost : source.getCosts()) {
                     if (!(cost instanceof VariableCost)) {
                         spellAbility.getCosts().add(cost);

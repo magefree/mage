@@ -60,7 +60,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
         setChoice(playerA, "Fracturing Gust");
 
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {2}{G/W}{G/W}{G/W}"); // now snapcaster mage is died so -13/-13
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {2}{G/W}{G/W}{G/W}"); // now snapcaster mage is dead so -13/-13
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -243,6 +243,25 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertExileCount("Silent Departure", 0);
         assertGraveyardCount(playerA, "Silent Departure", 1);
         assertGraveyardCount(playerA, "Runic Repetition", 1);
+    }
+    
+    @Test
+    public void testAltarsReap() {
+    	
+        addCard(Zone.LIBRARY, playerA, "Island", 2);
+        addCard(Zone.GRAVEYARD, playerA, "Altar's Reap", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 4);
+        addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        setChoice(playerA, "Altar's Reap");
 
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {1}{B}");
+        setChoice(playerA, "Snapcaster Mage");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        
+        assertGraveyardCount(playerA, "Snapcaster Mage", 1);
     }
 }
