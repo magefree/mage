@@ -29,6 +29,10 @@ public class UserData implements Serializable {
     protected String tourneyHistory;
     protected int tourneyQuitRatio;
 
+    private int generalRating;
+    private int constructedRating;
+    private int limitedRating;
+
     public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced,
             boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
             String flagName, boolean askMoveToGraveOrder, boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted,
@@ -68,6 +72,7 @@ public class UserData implements Serializable {
         this.passPriorityActivation = userData.passPriorityActivation;
         this.autoOrderTrigger = userData.autoOrderTrigger;
         this.useFirstManaAbility = userData.useFirstManaAbility;
+        // todo: why we don't copy user stats here?
     }
 
     public static UserData getDefaultUserDataView() {
@@ -225,8 +230,31 @@ public class UserData implements Serializable {
         return tourneyQuitRatio;
     }
 
+    public int getGeneralRating() {
+        return generalRating;
+    }
+
+    public void setGeneralRating(int generalRating) {
+        this.generalRating = generalRating;
+    }
+
+    public int getConstructedRating() {
+        return constructedRating;
+    }
+
+    public void setConstructedRating(int constructedRating) {
+        this.constructedRating = constructedRating;
+    }
+
+    public int getLimitedRating() {
+        return limitedRating;
+    }
+
+    public void setLimitedRating(int limitedRating) {
+        this.limitedRating = limitedRating;
+    }
+
     public static String getDefaultFlagName() {
         return "world.png";
     }
-
 }

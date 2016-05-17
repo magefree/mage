@@ -20,6 +20,22 @@ message MatchProto {
   optional int32 games = 4;
   optional int32 draws = 5;
   repeated MatchPlayerProto players = 6;
+  optional MatchOptionsProto match_options = 7;
+  optional int64 end_time_ms = 8;
+}
+
+message MatchOptionsProto {
+  optional string name = 1;
+  optional bool limited = 2;
+  optional bool rated = 3;
+  optional SkillLevel skill_level = 4;
+  optional int32 wins_needed = 5;
+}
+
+enum SkillLevel {
+  BEGINNER = 0;
+  CASUAL = 1;
+  SERIOUS = 2;
 }
 
 message MatchPlayerProto {
@@ -27,6 +43,7 @@ message MatchPlayerProto {
   optional int32 wins = 2;
   optional MatchQuitStatus quit = 3;
   optional bool bye = 4;
+  optional bool human = 5;
 }
 
 enum MatchQuitStatus {
@@ -74,4 +91,14 @@ message UserStatsProto {
   optional int32 matches_idle_timeout = 7;
   optional int32 matches_timer_timeout = 8;
   optional int32 matches_quit = 9;
+
+  optional GlickoRatingProto general_glicko_rating = 10;
+  optional GlickoRatingProto constructed_glicko_rating = 11;
+  optional GlickoRatingProto limited_glicko_rating = 12;
+}
+
+message GlickoRatingProto {
+  required double rating = 1;
+  required double rating_deviation = 2;
+  optional int64 last_game_time_ms = 3;
 }

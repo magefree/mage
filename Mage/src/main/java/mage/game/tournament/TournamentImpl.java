@@ -584,7 +584,9 @@ public abstract class TournamentImpl implements Tournament {
                             .setGames(match.getNumGames())
                             .setDraws(match.getDraws())
                             .addPlayers(matchToProto(match, pair.getPlayer1()))
-                            .addPlayers(matchToProto(match, pair.getPlayer2()));
+                            .addPlayers(matchToProto(match, pair.getPlayer2()))
+                            .setMatchOptions(match.getOptions().toProto())
+                            .setEndTimeMs((match.getEndTime() != null ? match.getEndTime() : new Date()).getTime());
                 }
             }
             for (TournamentPlayer tp : round.getPlayerByes()) {
@@ -602,6 +604,7 @@ public abstract class TournamentImpl implements Tournament {
                 MatchQuitStatus.QUIT;
         return MatchPlayerProto.newBuilder()
                 .setName(player.getPlayer().getName())
+                .setHuman(player.getPlayer().isHuman())
                 .setWins(matchPlayer.getWins())
                 .setQuit(quit)
                 .build();

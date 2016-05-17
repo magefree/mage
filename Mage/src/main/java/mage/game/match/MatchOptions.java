@@ -35,6 +35,7 @@ import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
+import mage.game.result.ResultProtos;
 
 /**
  *
@@ -55,6 +56,7 @@ public class MatchOptions implements Serializable {
     protected SkillLevel skillLevel;
     protected boolean rollbackTurnsAllowed;
     protected int quitRatio;
+    protected boolean rated;
 
     /**
      * Time each player has during the game to play using his\her priority.
@@ -176,5 +178,37 @@ public class MatchOptions implements Serializable {
 
     public void setQuitRatio(int quitRatio) {
         this.quitRatio = quitRatio;
+    }
+
+    public boolean isRated() {
+        return rated;
+    }
+
+    public void setRated(boolean rated) {
+        this.rated = rated;
+    }
+
+    public ResultProtos.MatchOptionsProto toProto() {
+        ResultProtos.MatchOptionsProto.Builder builder = ResultProtos.MatchOptionsProto.newBuilder()
+                .setName(this.getName())
+                .setLimited(this.isLimited())
+                .setRated(this.isRated())
+                .setWinsNeeded(this.getWinsNeeded());
+
+        ResultProtos.SkillLevel skillLevel = ResultProtos.SkillLevel.BEGINNER;
+        switch (this.getSkillLevel()) {
+            case BEGINNER:
+                skillLevel = ResultProtos.SkillLevel.BEGINNER;
+                break;
+            case CASUAL:
+                skillLevel = ResultProtos.SkillLevel.CASUAL;
+                break;
+            case SERIOUS:
+                skillLevel = ResultProtos.SkillLevel.SERIOUS;
+                break;
+        }
+        builder.setSkillLevel(skillLevel);
+
+        return builder.build();
     }
 }

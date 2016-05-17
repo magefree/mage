@@ -497,7 +497,9 @@ public abstract class MatchImpl implements Match {
                 .setGameType(this.getOptions().getGameType())
                 .setDeckType(this.getOptions().getDeckType())
                 .setGames(this.getNumGames())
-                .setDraws(this.getDraws());
+                .setDraws(this.getDraws())
+                .setMatchOptions(this.getOptions().toProto())
+                .setEndTimeMs((this.getEndTime() != null ? this.getEndTime() : new Date()).getTime());
         for (MatchPlayer matchPlayer : this.getPlayers()) {
             MatchQuitStatus status = !matchPlayer.hasQuit() ? MatchQuitStatus.NO_MATCH_QUIT :
                     matchPlayer.getPlayer().hasTimerTimeout() ? MatchQuitStatus.TIMER_TIMEOUT :
@@ -505,6 +507,7 @@ public abstract class MatchImpl implements Match {
                     MatchQuitStatus.QUIT;
             builder.addPlayersBuilder()
                     .setName(matchPlayer.getName())
+                    .setHuman(matchPlayer.getPlayer().isHuman())
                     .setQuit(status)
                     .setWins(matchPlayer.getWins());
         }
