@@ -65,7 +65,7 @@ public class BattleForZendikar extends ExpansionSet {
         // Zendikar Expeditions 1-25
         // Approximately as rare as opening a foil mythic = 8 * 6 = ~every 48th booster includes one.
         // I set it to 20 to get it more often
-        this.ratioBoosterSpecialLand = 20;
+        this.ratioBoosterSpecialLand = 48;
     }
 
     @Override

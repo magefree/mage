@@ -37,22 +37,25 @@ public class GathererSets implements Iterable<DownloadJob> {
     
     private static final String[] withMythics = {"M10", "M11", "M12", "M13", "M14", "M15", "ORI",
                                                  "DDF", "DDG", "DDH", "DDI", "DDJ", "DDK", "DDL", "DDM", "DDN", 
-                                                 "DD3", "DD3B", "DDO", "DDP", "DDQ",
+                                                 "DD3", "DD3B", "DDO", "DDP", "DDQ", "DDR",
                                                  "FVD", "FVE", "FVL", "FVR",
-                                                 "V12", "V13", "V14", "V15",
+                                                 "V12", "V13", "V14", "V15", "V16",
                                                  "ALA", "CON", "ARB",
                                                  "ZEN", "WWK", "ROE", 
                                                  "SOM", "MBS", "NPH",
-                                                 "CMD", "C13", "C14", "PC2",
+                                                 "CMD", "C13", "C14", "C15", "C16", 
+                                                 "PC2", "PCA",
                                                  "ISD", "DKA", "AVR", 
                                                  "RTR", "GTC", "DGM",
-                                                 "MMA", "MM2",
+                                                 "MMA", "MM2", "EMA",
                                                  "THS", "BNG", "JOU",
-                                                 "CNS", "VMA", "TPR",
+                                                 "CNS", "CN2",
+                                                 "VMA", "TPR",
                                                  "KTK", "FRF", "DTK",
                                                  "BFZ", "EXP", "OGW",
                                                  "SOI", "EMN",
-                                                 "EMA"};
+                                                 "KLD", "AER"
+                                                };
     private static final HashMap<String, String> symbolsReplacements = new HashMap<>();
 
     static {

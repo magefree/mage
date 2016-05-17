@@ -1,3 +1,4 @@
+Aether Revolt|aetherrevolt|
 Alara Reborn|alarareborn|
 Alliances|alliances|
 Antiquities|antiquities|
@@ -19,8 +20,10 @@ Coldsnap|coldsnap|
 Commander 2013 Edition|commander2013|
 Commander 2014 Edition|commander2014|
 Commander 2015|commander2015|
+Commander 2016|commander2016|
 Commander's Arsenal|commandersarsenal|
 Conflux|conflux|
+Conspiracy: Take the Crown|conspiracytakethecrown|
 Dark Ascension|darkascension|
 Darksteel|darksteel|
 Dissension|dissension|
@@ -42,6 +45,7 @@ Duel Decks: Izzet vs. Golgari|izzetvsgolgari|
 Duel Decks: Jace vs. Chandra|jacevschandra|
 Duel Decks: Jace vs. Vraska|jacevsvraska|
 Duel Decks: Knights vs. Dragons|knightsvsdragons|
+Duel Decks: Nissa vs. Ob Nixilis|nissavsobnixilis|
 Duel Decks: Phyrexia vs. the Coalition|phyrexiavsthecoalition|
 Duel Decks: Sorin vs. Tibalt|sorinvstibalt|
 Duel Decks: Speed vs. Cunning|speedvscunning|
@@ -59,11 +63,12 @@ Fifth Dawn|fifthdawn|
 Fifth Edition|fifthedition|
 Fourth Edition|fourthedition|
 Friday Night Magic|fridaynightmagic|
-From the Vault: Angels|ftvangels||
+From the Vault: Angels|ftvangels|
 From the Vault: Annihilation|ftvannihilation|
 From the Vault: Dragons|ftvdragons|
 From the Vault: Exiled|ftvexiled|
 From the Vault: Legends|ftvlegends|
+From the Vault: Lore|ftvlore|
 From the Vault: Realms|ftvrealms|
 From the Vault: Relics|ftvrelics|
 From the Vault: Twenty|ftvtwenty|
@@ -79,6 +84,7 @@ Invasion|invasion|
 Judge Promo|judgepromo|
 Journey into Nyx|journeyintonyx|
 Judgment|judgment|
+Kaladesh|kaladesh|
 Khans of Tarkir|khansoftarkir|
 Launch Party|launchparty|
 Legends|legends|
@@ -117,6 +123,7 @@ Onslaught|onslaught|
 Planar Chaos|planarchaos|
 Planechase 2012 Edition|planechase2012|
 Planechase|planechase|
+Planechase Anthology|planechaseanthology|
 Planeshift|planeshift|
 Portal Second Age|portalsecondage|
 Portal Three Kingdoms|portalthreekingdoms|

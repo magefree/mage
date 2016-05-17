@@ -8,7 +8,6 @@ package mage.sets;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -42,7 +41,7 @@ public class OathOfTheGatewatch extends ExpansionSet {
         this.ratioBoosterMythic = 8;
 
         // Zendikar Expeditions 26-45
-        this.ratioBoosterSpecialLand = 20;
+        this.ratioBoosterSpecialLand = 48;
     }
 
     @Override

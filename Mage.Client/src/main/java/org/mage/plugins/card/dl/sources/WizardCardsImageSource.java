@@ -88,6 +88,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("7ED", "Seventh Edition");
         setsAliases.put("8ED", "Eighth Edition");
         setsAliases.put("9ED", "Ninth Edition");
+        setsAliases.put("AER", "Aether Revolt");
         setsAliases.put("ALA", "Shards of Alara");
         setsAliases.put("ALL", "Alliances");
         setsAliases.put("APC", "Apocalypse");
@@ -105,10 +106,12 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("C13", "Commander 2013 Edition");
         setsAliases.put("C14", "Commander 2014");
         setsAliases.put("C15", "Commander 2015");
+        setsAliases.put("C16", "Commander 2016");
         setsAliases.put("CHK", "Champions of Kamigawa");
         setsAliases.put("CHR", "Chronicles");
         setsAliases.put("CMD", "Magic: The Gathering-Commander");
         setsAliases.put("CNS", "Magic: The Gathering—Conspiracy");
+        setsAliases.put("CN2", "Conspiracy: Take the Crown");
         setsAliases.put("CON", "Conflux");
         setsAliases.put("CSP", "Coldsnap");
         setsAliases.put("DD2", "Duel Decks: Jace vs. Chandra");
@@ -131,6 +134,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DDO", "Duel Decks: Elspeth vs. Kiora");
         setsAliases.put("DDP", "Duel Decks: Zendikar vs. Eldrazi");
         setsAliases.put("DDQ", "Duel Decks: Blessed vs. Cursed");
+        setsAliases.put("DDR", "Duel Decks: Nissa vs Ob Nixilis");
         setsAliases.put("DGM", "Dragon's Maze");
         setsAliases.put("DIS", "Dissension");
         setsAliases.put("DKA", "Dark Ascension");
@@ -163,6 +167,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("JOU", "Journey into Nyx");
         setsAliases.put("JR", "Judge Promo");
         setsAliases.put("JUD", "Judgment");
+        setsAliases.put("KLD", "Kaladesh");
         setsAliases.put("KTK", "Khans of Tarkir");
         setsAliases.put("LEA", "Limited Edition Alpha");
         setsAliases.put("LEB", "Limited Edition Beta");
@@ -232,6 +237,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("V13", "From the Vault: Twenty");
         setsAliases.put("V14", "From the Vault: Annihilation (2014)");
         setsAliases.put("V15", "From the Vault: Angels (2015)");
+        setsAliases.put("V16", "From the Vault: Lore (2016)");
         setsAliases.put("VG1", "Vanguard Set 1");
         setsAliases.put("VG2", "Vanguard Set 2");
         setsAliases.put("VG3", "Vanguard Set 3");

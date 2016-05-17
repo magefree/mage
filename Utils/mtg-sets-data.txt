@@ -7,6 +7,7 @@ Classic Sixth Edition|6ED|
 Seventh Edition|7ED|
 Eighth Edition|8ED|
 Tenth Edition|10E|
+Aether Revolt|AER|
 Alliances|ALL|
 Asia Pacific Land Program|APAC|
 Apocalypse|APC|
@@ -29,7 +30,9 @@ Clash Pack|CLASH|
 Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
 Commander 2015|C15|
+Commander 2016|C16|
 Commander's Arsenal|CMA|
+Conspiracy: Take the Crown|CN2|
 Conflux|CON|
 Coldsnap|CSP|
 Dark Ascension|DKA|
@@ -55,6 +58,7 @@ Duel Decks: Heroes vs. Monsters|DDL|
 Duel Decks: Jace vs. Chandra|DD2|
 Duel Decks: Jace vs. Vraska|DDM|
 Duel Decks: Knights vs. Dragons|DDG|
+Duel Decks: Nissa vs. Ob Nixilis|DDR|
 Duel Decks: Phyrexia vs. the Coalition|DDE|
 Duel Decks: Sorin vs. Tibalt|DDK|
 Duel Decks: Speed vs. Cunning|DDN|
@@ -85,6 +89,7 @@ Invasion|INV|
 Journey into Nyx|JOU|
 Judge Promo|JR|
 Judgment|JUD|
+Kaladesh|KLD|
 Khans of Tarkir|KTK|
 Launch Party|MLP|
 Limited Edition Alpha|LEA|
@@ -122,6 +127,7 @@ Nemesis|NMS|
 Oath of the Gatewatch|OGW|
 Odyssey|ODY|
 Onslaught|ONS|
+Planechase Anthology|PCA|
 Prophecy|PCY|
 Premium Deck Series: Fire and Lightning|PD2|
 Premium Deck Series: Graveborn|PD3|
@@ -163,6 +169,7 @@ From the Vault: Realms|V12|
 From the Vault: Twenty|V13|
 From the Vault: Annihilation|V14|
 From the Vault: Angels|V15|
+From the Vault: Lore|V16|
 Vanguard Set 1|VG1|
 Vanguard Set 2|VG2|
 Vanguard Set 3|VG3|

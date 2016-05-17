@@ -16,6 +16,10 @@ public class MagicCardsImageSource implements CardImageSource {
 
     private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
+            put("C16", "commander-2016");
+            put("AER", "aether-revolt");
+            put("KLD", "kaladesh");
+            put("CN2", "conspiracy-take-the-crown");
             put("W16", "welcome-deck-2016");
             put("EMA", "eternal-masters");
             put("EMN", "eldritch-moon");
@@ -40,6 +44,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("V13", "from-the-vault-twenty");
             put("V14", "from-the-vault-annihilation");
             put("V15", "from-the-vault-angels");
+            put("V16", "from-the-vault-lore");
             put("CLASH", "clash-pack");
             put("TPR", "tempest-remastered");
             put("ORI", "magic-origins");
@@ -120,6 +125,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("DDO", "duel-decks-elspeth-vs-kiora");
             put("DDP", "duel-decks-zendikar-vs-eldrazi");
             put("DDQ", "duel-decks-blessed-vs-cursed");
+            put("DDR", "duel-decks-nissa-vs-ob-nixilis");
         }
         private static final long serialVersionUID = 1L;
     };
