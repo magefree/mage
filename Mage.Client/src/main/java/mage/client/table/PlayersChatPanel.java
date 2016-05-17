@@ -72,7 +72,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
     private final List<String> players = new ArrayList<>();
     private final UserTableModel userTableModel;
-    private static final int[] DEFAULT_COLUMNS_WIDTH = {20, 100, 40, 100, 40, 100, 80, 80};
+    private static final int[] DEFAULT_COLUMNS_WIDTH = {20, 100, 40, 40, 40, 100, 40, 100, 80, 80};
 
 
     /*
@@ -152,7 +152,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
     class UserTableModel extends AbstractTableModel {
 
-        private final String[] columnNames = new String[]{"Loc", "Players", "Matches", "MQP", "Tourneys", "TQP", "Games", "Connection"};
+        private final String[] columnNames = new String[]{"Loc", "Players", "Constructed Rating", "Limited Rating", "Matches", "MQP", "Tourneys", "TQP", "Games", "Connection"};
         private UsersView[] players = new UsersView[0];
 
         public void loadData(Collection<RoomUsersView> roomUserInfoList) throws MageRemoteException {
@@ -162,7 +162,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             TableColumnModel tcm = th.getColumnModel();
 
             tcm.getColumn(jTablePlayers.convertColumnIndexToView(1)).setHeaderValue("Players (" + this.players.length + ")");
-            tcm.getColumn(jTablePlayers.convertColumnIndexToView(6)).setHeaderValue(
+            tcm.getColumn(jTablePlayers.convertColumnIndexToView(8)).setHeaderValue(
                     "Games " + roomUserInfo.getNumberActiveGames()
                     + (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads() : " (")
                     + " limit: " + roomUserInfo.getNumberMaxGames() + ")");
@@ -188,16 +188,20 @@ public class PlayersChatPanel extends javax.swing.JPanel {
                 case 1:
                     return players[arg0].getUserName();
                 case 2:
-                    return players[arg0].getMatchHistory();
+                    return players[arg0].getConstructedRating();
                 case 3:
-                    return players[arg0].getMatchQuitRatio();
+                    return players[arg0].getLimitedRating();
                 case 4:
-                    return players[arg0].getTourneyHistory();
+                    return players[arg0].getMatchHistory();
                 case 5:
-                    return players[arg0].getTourneyQuitRatio();
+                    return players[arg0].getMatchQuitRatio();
                 case 6:
-                    return players[arg0].getInfoGames();
+                    return players[arg0].getTourneyHistory();
                 case 7:
+                    return players[arg0].getTourneyQuitRatio();
+                case 8:
+                    return players[arg0].getInfoGames();
+                case 9:
                     return players[arg0].getInfoPing();
             }
             return "";
@@ -217,26 +221,32 @@ public class PlayersChatPanel extends javax.swing.JPanel {
                                 + "<br>(the number behind the header text is the number of currently connected users to the server)";
                         break;
                     case 2:
+                        tooltipText = "<HTML><b>Constructed  player rating</b>";
+                        break;
+                    case 3:
+                        tooltipText = "<HTML><b>Limited  player rating</b>";
+                        break;
+                    case 4:
                         tooltipText = "<HTML><b>Number of matches the user played so far</b>"
                                 + "<br>Q = number of matches quit"
                                 + "<br>I = number of matches lost because of idle timeout"
                                 + "<br>T = number of matches lost because of match timeout";
                         break;
-                    case 3:
+                    case 5:
                         tooltipText = "<HTML><b>Percent-Ratio of matches played related to matches quit</b>"
                                 + "<br>this calculation does not include tournament matches";
                         break;
-                    case 4:
+                    case 6:
                         tooltipText = "<HTML><b>Number of tournaments the user played so far</b>"
                                 + "<br>D = number of tournaments left during draft phase"
                                 + "<br>C = number of tournaments left during constructing phase"
                                 + "<br>R = number of tournaments left during rounds";
                         break;
-                    case 5:
+                    case 7:
                         tooltipText = "<HTML><b>Percent-Ratio of tournament matches played related to tournament matches quit</b>"
                                 + "<br>this calculation does not include non tournament matches";
                         break;
-                    case 6:
+                    case 8:
                         tooltipText = "<HTML><b>Current activities of the player</b>"
                                 + "<BR>the header itself shows the number of currently active games"
                                 + "<BR>T: = number of games threads "
@@ -245,7 +255,7 @@ public class PlayersChatPanel extends javax.swing.JPanel {
                                 + "<BR><i>(if the number of started games exceed that limit, the games have to wait"
                                 + "<BR>until active games end)</i>";
                         break;
-                    case 7:
+                    case 9:
                         tooltipText = "<HTML><b>Latency of the user's connection to the server</b>";
                         break;
                 }
@@ -270,8 +280,10 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             switch (columnIndex) {
                 case 0:
                     return Icon.class;
+                case 2:
                 case 3:
                 case 5:
+                case 7:
                     return Integer.class;
                 default:
                     return String.class;

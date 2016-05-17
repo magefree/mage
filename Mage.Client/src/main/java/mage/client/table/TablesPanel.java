@@ -107,7 +107,7 @@ import org.apache.log4j.Logger;
 public class TablesPanel extends javax.swing.JPanel {
 
     private static final Logger LOGGER = Logger.getLogger(TablesPanel.class);
-    private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 120, 180, 80, 120, 80, 60, 40, 60};
+    private static final int[] DEFAULT_COLUMNS_WIDTH = {35, 150, 120, 180, 80, 120, 80, 60, 40, 40, 60};
 
     private TableTableModel tableModel;
     private MatchesTableModel matchesModel;
@@ -158,7 +158,7 @@ public class TablesPanel extends javax.swing.JPanel {
         filterButtons = new JToggleButton[]{btnStateWaiting, btnStateActive, btnStateFinished,
             btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,
             btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
-            btnSkillBeginner, btnSkillCasual, btnSkillSerious};
+            btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated};
 
         JComponent[] components = new JComponent[]{chatPanelMain, jSplitPane1, jScrollPaneTablesActive, jScrollPaneTablesFinished, jPanelTop, jPanelTables};
         for (JComponent component : components) {
@@ -618,7 +618,16 @@ public class TablesPanel extends javax.swing.JPanel {
             skillFilterList.add(RowFilter.regexFilter(SkillLevel.SERIOUS.toString(), TableTableModel.COLUMN_SKILL));
         }
 
-        if (stateFilterList.isEmpty() || typeFilterList.isEmpty() || formatFilterList.isEmpty() || skillFilterList.isEmpty()) { // no selection
+        List<RowFilter<Object, Object>> ratingFilterList = new ArrayList<>();
+        if (btnRated.isSelected()){
+            ratingFilterList.add(RowFilter.regexFilter("^Rated", TableTableModel.COLUMN_RATING));
+        }
+        if (btnUnrated.isSelected()){
+            ratingFilterList.add(RowFilter.regexFilter("^Unrated", TableTableModel.COLUMN_RATING));
+        }
+
+        if (stateFilterList.isEmpty() || typeFilterList.isEmpty() || formatFilterList.isEmpty()
+                || skillFilterList.isEmpty() || ratingFilterList.isEmpty()) { // no selection
             activeTablesSorter.setRowFilter(RowFilter.regexFilter("Nothing", TableTableModel.COLUMN_SKILL));
         } else {
             List<RowFilter<Object, Object>> filterList = new ArrayList<>();
@@ -645,6 +654,12 @@ public class TablesPanel extends javax.swing.JPanel {
                 filterList.add(RowFilter.orFilter(skillFilterList));
             } else if (skillFilterList.size() == 1) {
                 filterList.addAll(skillFilterList);
+            }
+
+            if (ratingFilterList.size() > 1) {
+                filterList.add(RowFilter.orFilter(ratingFilterList));
+            } else if (ratingFilterList.size() == 1) {
+                filterList.addAll(ratingFilterList);
             }
 
             if (filterList.size() == 1) {
@@ -680,6 +695,9 @@ public class TablesPanel extends javax.swing.JPanel {
         btnSkillBeginner = new javax.swing.JToggleButton();
         btnSkillCasual = new javax.swing.JToggleButton();
         btnSkillSerious = new javax.swing.JToggleButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
+        btnRated = new javax.swing.JToggleButton();
+        btnUnrated = new javax.swing.JToggleButton();
         filterBar2 = new javax.swing.JToolBar();
         btnFormatBlock = new javax.swing.JToggleButton();
         btnFormatStandard = new javax.swing.JToggleButton();
@@ -883,6 +901,41 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         filterBar1.add(btnSkillSerious);
 
+        filterBar1.add(jSeparator4);
+
+        btnRated.setSelected(true);
+        btnRated.setText("Rated");
+        btnRated.setToolTipText("Shows all rated tables.");
+        btnRated.setFocusPainted(false);
+        btnRated.setFocusable(false);
+        btnRated.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRated.setRequestFocusEnabled(false);
+        btnRated.setVerifyInputWhenFocusTarget(false);
+        btnRated.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRated.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar1.add(btnRated);
+
+        btnUnrated.setSelected(true);
+        btnUnrated.setText("Unrated");
+        btnUnrated.setToolTipText("Shows all unrated tables.");
+        btnUnrated.setFocusPainted(false);
+        btnUnrated.setFocusable(false);
+        btnUnrated.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUnrated.setRequestFocusEnabled(false);
+        btnUnrated.setVerifyInputWhenFocusTarget(false);
+        btnUnrated.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUnrated.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar1.add(btnUnrated);
+
+        // second filter line
         filterBar2.setFloatable(false);
         filterBar2.setFocusable(false);
         filterBar2.setOpaque(false);
@@ -1241,6 +1294,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnSkillBeginner;
     private javax.swing.JToggleButton btnSkillCasual;
     private javax.swing.JToggleButton btnSkillSerious;
+    private javax.swing.JToggleButton btnRated;
+    private javax.swing.JToggleButton btnUnrated;
     private javax.swing.JToggleButton btnStateActive;
     private javax.swing.JToggleButton btnStateFinished;
     private javax.swing.JToggleButton btnStateWaiting;
@@ -1262,6 +1317,7 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPaneTables;
     private javax.swing.JTable tableCompleted;
@@ -1282,10 +1338,11 @@ class TableTableModel extends AbstractTableModel {
     public static final int COLUMN_INFO = 4;
     public static final int COLUMN_STATUS = 5;
     public static final int COLUMN_SKILL = 7;
-    public static final int COLUMN_QUIT_RATIO = 8;
-    public static final int ACTION_COLUMN = 9; // column the action is located (starting with 0)
+    public static final int COLUMN_RATING = 8;
+    public static final int COLUMN_QUIT_RATIO = 9;
+    public static final int ACTION_COLUMN = 10; // column the action is located (starting with 0)
 
-    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Skill Level", "Quit %", "Action"};
+    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Skill Level", "Rating", "Quit %", "Action"};
 
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
@@ -1332,8 +1389,10 @@ class TableTableModel extends AbstractTableModel {
             case 7:
                 return tables[arg0].getSkillLevel();
             case 8:
-                return tables[arg0].getQuitRatio();
+                return tables[arg0].isRated() ? "Rated" : "Unrated";
             case 9:
+                return tables[arg0].getQuitRatio();
+            case 10:
                 switch (tables[arg0].getTableState()) {
 
                     case WAITING:
@@ -1360,14 +1419,14 @@ class TableTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 10:
-                return tables[arg0].isTournament();
             case 11:
+                return tables[arg0].isTournament();
+            case 12:
                 if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
                 }
                 return null;
-            case 12:
+            case 13:
                 return tables[arg0].getTableId();
         }
         return "";
@@ -1495,9 +1554,9 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
 
 class MatchesTableModel extends AbstractTableModel {
 
-    public static final int ACTION_COLUMN = 6; // column the action is located (starting with 0)
-    public static final int GAMES_LIST_COLUMN = 7;
-    private final String[] columnNames = new String[]{"Deck Type", "Players", "Game Type", "Result", "Start Time", "End Time", "Action"};
+    public static final int ACTION_COLUMN = 7; // column the action is located (starting with 0)
+    public static final int GAMES_LIST_COLUMN = 8;
+    private final String[] columnNames = new String[]{"Deck Type", "Players", "Game Type", "Rating", "Result", "Start Time", "End Time", "Action"};
     private MatchView[] matches = new MatchView[0];
     private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
@@ -1526,20 +1585,22 @@ class MatchesTableModel extends AbstractTableModel {
             case 2:
                 return matches[arg0].getGameType();
             case 3:
-                return matches[arg0].getResult();
+                return matches[arg0].isRated() ? "Rated" : "Unrated";
             case 4:
+                return matches[arg0].getResult();
+            case 5:
                 if (matches[arg0].getStartTime() != null) {
                     return timeFormatter.format(matches[arg0].getStartTime());
                 } else {
                     return "";
                 }
-            case 5:
+            case 6:
                 if (matches[arg0].getEndTime() != null) {
                     return timeFormatter.format(matches[arg0].getEndTime());
                 } else {
                     return "";
                 }
-            case 6:
+            case 7:
                 if (matches[arg0].isTournament()) {
                     return "Show";
                 } else if (matches[arg0].isReplayAvailable()) {
@@ -1547,7 +1608,7 @@ class MatchesTableModel extends AbstractTableModel {
                 } else {
                     return "None";
                 }
-            case 7:
+            case 8:
                 return matches[arg0].getGames();
         }
         return "";

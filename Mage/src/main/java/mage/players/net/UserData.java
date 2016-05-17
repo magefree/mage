@@ -195,7 +195,10 @@ public class UserData implements Serializable {
         if (UserGroup.COMPUTER.equals(this.groupId)) {
             return "";
         }
-        return "Matches: " + this.matchHistory + " (" + this.matchQuitRatio + "%) Tourneys: " + this.tourneyHistory + " (" + this.tourneyQuitRatio + "%)";
+        // todo: add preference to hide rating?
+        return "Matches: " + this.matchHistory + " (" + this.matchQuitRatio + "%), Tourneys: " + this.tourneyHistory + " (" + this.tourneyQuitRatio + "%)"
+                + ", Constructed Rating: " + getConstructedRating()
+                + ", Limited Rating: " + getLimitedRating();
     }
 
     public void setMatchHistory(String history) {

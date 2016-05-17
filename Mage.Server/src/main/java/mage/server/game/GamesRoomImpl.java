@@ -116,7 +116,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             try {
                 users.add(new UsersView(user.getUserData().getFlagName(), user.getName(),
                         user.getMatchHistory(), user.getMatchQuitRatio(), user.getTourneyHistory(),
-                        user.getTourneyQuitRatio(), user.getGameInfo(), user.getPingInfo()));
+                        user.getTourneyQuitRatio(), user.getGameInfo(), user.getPingInfo(),
+                        user.getUserData().getGeneralRating(), user.getUserData().getConstructedRating(),
+                        user.getUserData().getLimitedRating()));
             } catch (Exception ex) {
                 LOGGER.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
                 users.add(new UsersView(
@@ -127,7 +129,10 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                         user.getTourneyHistory() != null ? user.getTourneyHistory() : "<no tourney history>",
                         user.getTourneyQuitRatio(),
                         "[exception]",
-                        user.getPingInfo() != null ? user.getPingInfo() : "<no ping>"));
+                        user.getPingInfo() != null ? user.getPingInfo() : "<no ping>",
+                        user.getUserData() != null ? user.getUserData().getGeneralRating() : 0,
+                        user.getUserData() != null ? user.getUserData().getConstructedRating() : 0,
+                        user.getUserData() != null ? user.getUserData().getLimitedRating() : 0));
             }
         }
 

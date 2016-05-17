@@ -199,14 +199,16 @@ public class UserManager {
 
     public String getUserHistory(String userName) {
         User user = getUserByName(userName);
-        if (user == null) {
-            UserStats userStats = UserStatsRepository.instance.getUser(userName);
-            if (userStats == null) {
-                return "User " + userName + " not found";
-            }
-            return "History of user " + userName + ": " + User.userStatsToHistory(userStats.getProto());
+        if (user != null) {
+            return "History of user " + userName + " - " + user.getUserData().getHistory();
         }
-        return "History of user " + userName + ": " + user.getUserData().getHistory();
+
+        UserStats userStats = UserStatsRepository.instance.getUser(userName);
+        if (userStats != null) {
+            return "History of user " + userName + " - " + User.userStatsToHistory(userStats.getProto());
+        }
+
+        return "User " + userName + " not found";
     }
 
     public void updateUserHistory() {

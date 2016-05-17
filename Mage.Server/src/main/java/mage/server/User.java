@@ -578,8 +578,11 @@ public class User {
     }
 
     public static String userStatsToHistory(ResultProtos.UserStatsProto proto) {
+        // todo: add preference to hide rating?
         return "Matches:" + userStatsToMatchHistory(proto)
-                + " Tourneys: " + userStatsToTourneyHistory(proto);
+                + ", Tourneys: " + userStatsToTourneyHistory(proto)
+                + ", Constructed Rating: " + userStatsToConstructedRating(proto)
+                + ", Limited Rating: " + userStatsToLimitedRating(proto);
     }
 
     public int getTourneyQuitRatio() {

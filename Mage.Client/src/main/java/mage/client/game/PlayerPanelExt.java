@@ -316,6 +316,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
             basicTooltipText = "<HTML>Name: " + player.getName()
                     + "<br/>Country: " + countryname
+                    + "<br/>Constructed rating: " + player.getUserData().getConstructedRating()
+                    + "<br/>Limited rating: " + player.getUserData().getLimitedRating()
                     + "<br/>Deck hash code: " + player.getDeckHashCode()
                     + "<br/>This match wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)"
                     + (player.getUserData() == null ? "" : "<br/>History: " + player.getUserData().getHistory());
