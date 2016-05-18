@@ -364,6 +364,8 @@ public class Spell extends StackObjImpl implements Card {
                     player.moveCards(card, zone, counteringAbility, game, false, false, owner, null);
                 }
             }
+        } else {
+        	card.removeFromZone(game, Zone.STACK, sourceId);
         }
     }
 
