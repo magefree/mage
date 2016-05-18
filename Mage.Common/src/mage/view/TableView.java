@@ -63,6 +63,8 @@ public class TableView implements Serializable {
     private List<SeatView> seats = new ArrayList<>();
     private List<UUID> games = new ArrayList<>();
     private final String quitRatio;
+    private final boolean limited;
+    private final boolean rated;
 
     public TableView(Table table) {    
         this.tableId = table.getId();
@@ -132,6 +134,8 @@ public class TableView implements Serializable {
             this.additionalInfo = addInfo.toString();
             this.skillLevel = table.getMatch().getOptions().getSkillLevel();
             this.quitRatio = Integer.toString(table.getMatch().getOptions().getQuitRatio());
+            this.limited = table.getMatch().getOptions().isLimited();
+            this.rated = table.getMatch().getOptions().isRated();
         } else {
         // TOURNAMENT
             if (table.getTournament().getOptions().getNumberRounds() > 0) {
@@ -179,6 +183,8 @@ public class TableView implements Serializable {
             this.deckType =  table.getDeckType() + " " + table.getTournament().getBoosterInfo() + (tableNameInfo != null ? tableNameInfo : "");
             this.skillLevel = table.getTournament().getOptions().getMatchOptions().getSkillLevel();
             this.quitRatio = Integer.toString(table.getTournament().getOptions().getQuitRatio());
+            this.limited = table.getTournament().getOptions().getMatchOptions().isLimited();
+            this.rated = table.getTournament().getOptions().getMatchOptions().isRated();
         }
     }
 
@@ -235,5 +241,13 @@ public class TableView implements Serializable {
 
     public String getQuitRatio() {
         return quitRatio;
+    }
+
+    public boolean isLimited() {
+        return limited;
+    }
+
+    public boolean isRated() {
+        return rated;
     }
 }

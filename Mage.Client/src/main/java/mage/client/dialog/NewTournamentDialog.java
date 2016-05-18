@@ -175,6 +175,7 @@ public class NewTournamentDialog extends MageDialog {
         lblPlayer1 = new javax.swing.JLabel();
         lblConstructionTime = new javax.swing.JLabel();
         chkRollbackTurnsAllowed = new javax.swing.JCheckBox();
+        chkRated = new javax.swing.JCheckBox();
         spnConstructTime = new javax.swing.JSpinner();
         player1Panel = new mage.client.table.NewPlayerPanel();
         pnlPlayers = new javax.swing.JPanel();
@@ -314,6 +315,9 @@ public class NewTournamentDialog extends MageDialog {
         chkRollbackTurnsAllowed.setText("Allow rollbacks");
         chkRollbackTurnsAllowed.setToolTipText("<HTML>Allow to rollback to the start of previous turns<br> if all players agree. ");
 
+        chkRated.setText("Rated");
+        chkRated.setToolTipText("Indicates if matches will be rated.");
+
         spnConstructTime.setToolTipText("The time players have to build their deck.");
 
         player1Panel.setPreferredSize(new java.awt.Dimension(400, 44));
@@ -416,7 +420,9 @@ public class NewTournamentDialog extends MageDialog {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(lblQuitRatio)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                  .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(chkRated))
                                         .addComponent(cbTournamentType, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblName)
@@ -462,7 +468,8 @@ public class NewTournamentDialog extends MageDialog {
                     .addComponent(lblNumWins)
                     .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblQuitRatio)
-                    .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkRated))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbTournamentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -594,6 +601,7 @@ public class NewTournamentDialog extends MageDialog {
         tOptions.getMatchOptions().setAttackOption(MultiplayerAttackOption.LEFT);
         tOptions.getMatchOptions().setRange(RangeOfInfluence.ALL);
         tOptions.getMatchOptions().setRollbackTurnsAllowed(this.chkRollbackTurnsAllowed.isSelected());
+        tOptions.getMatchOptions().setRated(this.chkRated.isSelected());
         saveTournamentSettingsToPrefs(tOptions);
 
         table = session.createTournamentTable(roomId, tOptions);
@@ -969,6 +977,7 @@ public class NewTournamentDialog extends MageDialog {
         }
         this.cbAllowSpectators.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS, "Yes").equals("Yes"));
         this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS, "Yes").equals("Yes"));
+        this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED, "No").equals("Yes"));
     }
 
     private void loadBoosterPacks(String packString) {
@@ -1041,6 +1050,7 @@ public class NewTournamentDialog extends MageDialog {
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS, (tOptions.isWatchingAllowed()?"Yes":"No"));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS, (tOptions.getMatchOptions().isRollbackTurnsAllowed()?"Yes":"No"));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED, (tOptions.getMatchOptions().isRated() ? "Yes" : "No"));
     }
 
 
@@ -1061,6 +1071,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JComboBox cbTimeLimit;
     private javax.swing.JComboBox cbTournamentType;
     private javax.swing.JCheckBox chkRollbackTurnsAllowed;
+    private javax.swing.JCheckBox chkRated;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lbDeckType;
     private javax.swing.JLabel lbSkillLevel;

@@ -335,11 +335,17 @@ public class TableWaitingDialog extends MageDialog {
 
 class TableWaitModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{"Seat", "Loc", "Player Name", "Player Type", "History"};
+    private final String[] columnNames = new String[]{"Seat", "Loc", "Player Name", "Constructed Rating", "Player Type", "History"};
     private SeatView[] seats = new SeatView[0];
+    private boolean limited;
 
     public void loadData(TableView table) {
         seats = table.getSeats().toArray(new SeatView[0]);
+        if (limited != table.isLimited()) {
+            limited = table.isLimited();
+            columnNames[3] = limited ? "Limited Rating" : "Constructed Rating";
+            this.fireTableStructureChanged();
+        }
         this.fireTableDataChanged();
     }
 
@@ -368,8 +374,10 @@ class TableWaitModel extends AbstractTableModel {
                 case 2:
                     return seats[arg0].getPlayerName();
                 case 3:
-                    return seats[arg0].getPlayerType();
+                    return limited ? seats[arg0].getLimitedRating() : seats[arg0].getConstructedRating();
                 case 4:
+                    return seats[arg0].getPlayerType();
+                case 5:
                     return seats[arg0].getHistory();
             }
         }
@@ -392,6 +400,8 @@ class TableWaitModel extends AbstractTableModel {
         switch (columnIndex) {
             case 1:
                 return Icon.class;
+            case 3:
+                return Integer.class;
             default:
                 return String.class;
         }

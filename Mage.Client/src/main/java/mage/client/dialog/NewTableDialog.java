@@ -34,9 +34,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.UUID;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.*;
+
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
@@ -105,6 +104,7 @@ public class NewTableDialog extends MageDialog {
         lblGameType = new javax.swing.JLabel();
         cbGameType = new javax.swing.JComboBox();
         chkRollbackTurnsAllowed = new javax.swing.JCheckBox();
+        chkRated = new javax.swing.JCheckBox();
         lblFreeMulligans = new javax.swing.JLabel();
         spnFreeMulligans = new javax.swing.JSpinner();
         lblNumPlayers = new javax.swing.JLabel();
@@ -152,6 +152,9 @@ public class NewTableDialog extends MageDialog {
 
         chkRollbackTurnsAllowed.setText("Allow rollbacks");
         chkRollbackTurnsAllowed.setToolTipText("<HTML>Allow to rollback to the start of previous turns<br>\nif all players agree.\n");
+
+        chkRated.setText("Rated");
+        chkRated.setToolTipText("Indicates if matches will be rated.");
 
         lblFreeMulligans.setText("Free Mulligans:");
         lblFreeMulligans.setToolTipText("The number of mulligans a player can use without decreasing the number of drawn cards.");
@@ -250,7 +253,9 @@ public class NewTableDialog extends MageDialog {
                                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chkRated)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblQuitRatio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -310,6 +315,7 @@ public class NewTableDialog extends MageDialog {
                     .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbDeckType)
                     .addComponent(lblQuitRatio)
+                    .addComponent(chkRated)
                     .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,6 +393,7 @@ public class NewTableDialog extends MageDialog {
         options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
         options.setWinsNeeded((Integer) this.spnNumWins.getValue());
         options.setRollbackTurnsAllowed(chkRollbackTurnsAllowed.isSelected());
+        options.setRated(chkRated.isSelected());
         options.setFreeMulligans((Integer) this.spnFreeMulligans.getValue());
         options.setPassword(this.txtPassword.getText());
         options.setQuitRatio((Integer) this.spnQuitRatio.getValue());
@@ -627,6 +634,7 @@ public class NewTableDialog extends MageDialog {
         }
         this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, "2")));
         this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED, "Yes").equals("Yes"));
+        this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RATED, "No").equals("Yes"));
         this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS, "0")));
 
         int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, "1"));
@@ -669,6 +677,7 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, options.getGameType());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, Integer.toString(options.getWinsNeeded()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED, options.isRollbackTurnsAllowed() ? "Yes" : "No");
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RATED, options.isRated() ? "Yes" : "No");
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS, Integer.toString(options.getFreeMulligans()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, deckFile);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, spnNumPlayers.getValue().toString());
@@ -698,6 +707,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JComboBox cbSkillLevel;
     private javax.swing.JComboBox cbTimeLimit;
     private javax.swing.JCheckBox chkRollbackTurnsAllowed;
+    private javax.swing.JCheckBox chkRated;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;

@@ -45,6 +45,9 @@ public class SeatView implements Serializable {
     private final String playerName;
     private final String playerType;
     private final String history;
+    private final int generalRating;
+    private final int constructedRating;
+    private final int limitedRating;
 
     public SeatView(Seat seat) {
         if (seat.getPlayer() != null) {
@@ -53,15 +56,24 @@ public class SeatView implements Serializable {
             if (seat.getPlayer().getUserData() == null) {
                 this.flagName = UserData.getDefaultFlagName();
                 this.history = "";
+                this.generalRating = 0;
+                this.constructedRating = 0;
+                this.limitedRating = 0;
             } else {
                 this.flagName = seat.getPlayer().getUserData().getFlagName();
                 this.history = seat.getPlayer().getUserData().getHistory();
+                this.generalRating = seat.getPlayer().getUserData().getGeneralRating();
+                this.constructedRating = seat.getPlayer().getUserData().getConstructedRating();
+                this.limitedRating = seat.getPlayer().getUserData().getLimitedRating();
             }
         } else {
             // Empty seat
             this.playerName = "";
             this.flagName = "";
             this.history = "";
+            this.generalRating = 0;
+            this.constructedRating = 0;
+            this.limitedRating = 0;
         }
         this.playerType = seat.getPlayerType();
     }
@@ -86,4 +98,15 @@ public class SeatView implements Serializable {
         return history;
     }
 
+    public int getGeneralRating() {
+        return generalRating;
+    }
+
+    public int getConstructedRating() {
+        return constructedRating;
+    }
+
+    public int getLimitedRating() {
+        return limitedRating;
+    }
 }

@@ -58,6 +58,7 @@ public class MatchView implements Serializable {
     private Date endTime;
     private boolean replayAvailable;
     private final boolean isTournament;
+    private boolean rated;
 
     public MatchView(Table table) {
         this.tableId = table.getId();
@@ -117,7 +118,7 @@ public class MatchView implements Serializable {
         this.startTime = match.getStartTime();
         this.endTime = match.getEndTime();
         this.replayAvailable = match.isReplayAvailable();
-
+        this.rated = match.getOptions().isRated();
     }
 
     // used for tournaments
@@ -153,6 +154,7 @@ public class MatchView implements Serializable {
         this.startTime = table.getTournament().getStartTime();
         this.endTime = table.getTournament().getEndTime();
         this.replayAvailable = false;
+        this.rated = table.getTournament().getOptions().getMatchOptions().isRated();
     }
 
     public UUID getMatchId() {
@@ -207,4 +209,7 @@ public class MatchView implements Serializable {
         return tableId;
     }
 
+    public boolean isRated() {
+        return rated;
+    }
 }

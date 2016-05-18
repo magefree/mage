@@ -48,6 +48,8 @@ import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
 import mage.server.game.GameSessionPlayer;
+import mage.server.rating.GlickoRating;
+import mage.server.rating.GlickoRatingSystem;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentController;
@@ -108,7 +110,6 @@ public class User {
         this.watchedGames = new ArrayList<>();
         this.tablesToDelete = new ArrayList<>();
         this.sessionId = "";
-        this.userStats = null;
     }
 
     public String getName() {
@@ -535,15 +536,23 @@ public class User {
         }
         userStats = UserStatsRepository.instance.getUser(this.userName);
         if (userStats != null) {
-            userData.setMatchHistory(userStatsToMatchHistory(userStats.getProto()));
-            userData.setMatchQuitRatio(userStatsToMatchQuitRatio(userStats.getProto()));
-            userData.setTourneyHistory(userStatsToTourneyHistory(userStats.getProto()));
-            userData.setTourneyQuitRatio(userStatsToTourneyQuitRatio(userStats.getProto()));
+            ResultProtos.UserStatsProto userStatsProto = userStats.getProto();
+
+            userData.setMatchHistory(userStatsToMatchHistory(userStatsProto));
+            userData.setMatchQuitRatio(userStatsToMatchQuitRatio(userStatsProto));
+            userData.setTourneyHistory(userStatsToTourneyHistory(userStatsProto));
+            userData.setTourneyQuitRatio(userStatsToTourneyQuitRatio(userStatsProto));
+            userData.setGeneralRating(userStatsToGeneralRating(userStatsProto));
+            userData.setConstructedRating(userStatsToConstructedRating(userStatsProto));
+            userData.setLimitedRating(userStatsToLimitedRating(userStatsProto));
         } else {
             userData.setMatchHistory("0");
             userData.setMatchQuitRatio(0);
             userData.setTourneyHistory("0");
             userData.setTourneyQuitRatio(0);
+            userData.setGeneralRating(GlickoRatingSystem.getDefaultDisplayedRating());
+            userData.setConstructedRating(GlickoRatingSystem.getDefaultDisplayedRating());
+            userData.setLimitedRating(GlickoRatingSystem.getDefaultDisplayedRating());
         }
     }
 
@@ -569,8 +578,11 @@ public class User {
     }
 
     public static String userStatsToHistory(ResultProtos.UserStatsProto proto) {
+        // todo: add preference to hide rating?
         return "Matches:" + userStatsToMatchHistory(proto)
-                + " Tourneys: " + userStatsToTourneyHistory(proto);
+                + ", Tourneys: " + userStatsToTourneyHistory(proto)
+                + ", Constructed Rating: " + userStatsToConstructedRating(proto)
+                + ", Limited Rating: " + userStatsToLimitedRating(proto);
     }
 
     public int getTourneyQuitRatio() {
@@ -642,6 +654,48 @@ public class User {
                 + proto.getTourneysQuitDuringConstruction()
                 + proto.getTourneysQuitDuringRound();
         return 100 * quits / tourneys;
+    }
+
+    private static int userStatsToGeneralRating(ResultProtos.UserStatsProto proto) {
+        GlickoRating glickoRating;
+        if (proto.hasGeneralGlickoRating()) {
+            ResultProtos.GlickoRatingProto glickoRatingProto = proto.getGeneralGlickoRating();
+            glickoRating = new GlickoRating(
+                    glickoRatingProto.getRating(),
+                    glickoRatingProto.getRatingDeviation(),
+                    glickoRatingProto.getLastGameTimeMs());
+        } else {
+            glickoRating = GlickoRatingSystem.getInitialRating();
+        }
+        return GlickoRatingSystem.getDisplayedRating(glickoRating);
+    }
+
+    private static int userStatsToConstructedRating(ResultProtos.UserStatsProto proto) {
+        GlickoRating glickoRating;
+        if (proto.hasConstructedGlickoRating()) {
+            ResultProtos.GlickoRatingProto glickoRatingProto = proto.getConstructedGlickoRating();
+            glickoRating = new GlickoRating(
+                    glickoRatingProto.getRating(),
+                    glickoRatingProto.getRatingDeviation(),
+                    glickoRatingProto.getLastGameTimeMs());
+        } else {
+            glickoRating = GlickoRatingSystem.getInitialRating();
+        }
+        return GlickoRatingSystem.getDisplayedRating(glickoRating);
+    }
+
+    private static int userStatsToLimitedRating(ResultProtos.UserStatsProto proto) {
+        GlickoRating glickoRating;
+        if (proto.hasLimitedGlickoRating()) {
+            ResultProtos.GlickoRatingProto glickoRatingProto = proto.getLimitedGlickoRating();
+            glickoRating = new GlickoRating(
+                    glickoRatingProto.getRating(),
+                    glickoRatingProto.getRatingDeviation(),
+                    glickoRatingProto.getLastGameTimeMs());
+        } else {
+            glickoRating = GlickoRatingSystem.getInitialRating();
+        }
+        return GlickoRatingSystem.getDisplayedRating(glickoRating);
     }
 
     private static void joinStrings(StringBuilder joined, List<String> strings, String separator) {

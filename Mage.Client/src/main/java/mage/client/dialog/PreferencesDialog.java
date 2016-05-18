@@ -210,6 +210,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_NUMBER_PLAYERS = "newTableNumberPlayers";
     public static final String KEY_NEW_TABLE_PLAYER_TYPES = "newTablePlayerTypes";
     public static final String KEY_NEW_TABLE_QUIT_RATIO = "newTableQuitRatio";
+    public static final String KEY_NEW_TABLE_RATED = "newTableRated";
 
     // pref setting for new tournament dialog
     public static final String KEY_NEW_TOURNAMENT_NAME = "newTournamentName";
@@ -229,6 +230,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS = "newTournamentAllowRollbacks";
     public static final String KEY_NEW_TOURNAMENT_DECK_FILE = "newTournamentDeckFile";
     public static final String KEY_NEW_TOURNAMENT_QUIT_RATIO = "newTournamentQuitRatio";
+    public static final String KEY_NEW_TOURNAMENT_RATED = "newTournamentRated";
 
     // pref setting for deck generator
     public static final String KEY_NEW_DECK_GENERATOR_DECK_SIZE = "newDeckGeneratorDeckSize";
