@@ -38,7 +38,6 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.SoldierToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class StrengthOfArms extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("If you control an Equipment,");
     static {
         filter.add(new SubtypePredicate("Equipment"));
@@ -56,11 +55,11 @@ public class StrengthOfArms extends CardImpl {
         super(ownerId, 40, "Strength of Arms", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "SOI";
 
-        // Target creature gets +2/+2 until end of turn. 
+        // Target creature gets +2/+2 until end of turn.
         // If you control an Equipment, put a 1/1 white Human Soldier creature token onto the battlefield.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));        
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new SoldierToken()),                
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new HumanSoldierToken()),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0),
                 "If you control an Equipment, put a 1/1 white Human Soldier creature token onto the battlefield."));
     }
