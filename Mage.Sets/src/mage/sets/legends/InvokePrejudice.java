@@ -28,12 +28,12 @@
 package mage.sets.legends;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -92,54 +92,31 @@ class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Card card = game.getCard(event.getSourceId());
-
-        if (card == null || !(card.getCardType().contains(CardType.CREATURE))) {
-            return false;
-        }
-
-        // Get colors of the card
-        boolean castCreatureIsWhite = card.getColor(game).isWhite();
-        boolean castCreatureIsBlue = card.getColor(game).isBlue();
-        boolean castCreatureIsBlack = card.getColor(game).isBlack();
-        boolean castCreatureIsRed = card.getColor(game).isRed();
-        boolean castCreatureIsGreen = card.getColor(game).isGreen();
-
-        // Compare to colours of creatures of controller on bf
-        boolean hasToPay = true;
-        boolean gotACreature = false;
-
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), getControllerId(), game)) {
-            gotACreature = true;
-            if (castCreatureIsWhite && permanent.getColor(game).isWhite()) {
-                hasToPay = false;
-            }
-            if (castCreatureIsBlue && permanent.getColor(game).isBlue()) {
-                hasToPay = false;
-            }
-            if (castCreatureIsBlack && permanent.getColor(game).isBlack()) {
-                hasToPay = false;
-            }
-            if (castCreatureIsRed && permanent.getColor(game).isRed()) {
-                hasToPay = false;
-            }
-            if (castCreatureIsGreen && permanent.getColor(game).isGreen()) {
-                hasToPay = false;
+        if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
+            Spell spell = (Spell) game.getObject(event.getTargetId());
+            if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
+                boolean creatureSharesAColor = false;
+                ObjectColor spellColor = spell.getColor(game);
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(), getControllerId(), game)) {
+                    if (spellColor.shares(permanent.getColor(game))) {
+                        creatureSharesAColor = true;
+                        break;
+                    }
+                }
+                if (!creatureSharesAColor) {
+                    for (Effect effect : getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    }
+                    return true;
+                }
             }
         }
-
-        if (hasToPay || !gotACreature) {
-            for (Effect effect : getEffects()) {
-                effect.setTargetPointer(new FixedTarget(card.getId()));
-            }
-        }
-
-        return hasToPay || !gotACreature;
+        return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, counter that spell unless that player pays {X}, where X is its converted mana cost.";
+        return "Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, " + super.getRule();
     }
 }
 
@@ -163,14 +140,10 @@ class InvokePrejudiceEffect extends CounterUnlessPaysEffect {
     public boolean apply(Game game, Ability source) {
         boolean result = true;
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-
         if (spell != null) {
-            Card card = spell.getCard();
-            if (card != null) {
-                CounterUnlessPaysEffect effect = new CounterUnlessPaysEffect(new GenericManaCost(card.getConvertedManaCost()));
-                effect.setTargetPointer(new FixedTarget(spell.getId()));
-                result = effect.apply(game, source);
-            }
+            CounterUnlessPaysEffect effect = new CounterUnlessPaysEffect(new GenericManaCost(spell.getConvertedManaCost()));
+            effect.setTargetPointer(getTargetPointer());
+            result = effect.apply(game, source);
         }
         return result;
     }
