@@ -231,8 +231,11 @@ public enum UserStatsRepository {
             outcome = 0.5;
         }
 
-        ResultProtos.UserStatsProto player1StatsProto = getUserStatsProto(player1.getName(), matchEndTimeMs);
-        ResultProtos.UserStatsProto player2StatsProto = getUserStatsProto(player2.getName(), matchEndTimeMs);
+        // get players stats
+        UserStats player1Stats = getOrCreateUserStats(player1.getName(), tableEndTimeMs);
+        ResultProtos.UserStatsProto player1StatsProto = player1Stats.getProto();
+        UserStats player2Stats = getOrCreateUserStats(player2.getName(), tableEndTimeMs);
+        ResultProtos.UserStatsProto player2StatsProto = player2Stats.getProto();
 
         ResultProtos.UserStatsProto.Builder player1StatsBuilder =
                 ResultProtos.UserStatsProto.newBuilder(player1StatsProto);
@@ -305,8 +308,8 @@ public enum UserStatsRepository {
         }
 
 
-        this.update(new UserStats(player1StatsBuilder.build(), matchEndTimeMs));
-        this.update(new UserStats(player2StatsBuilder.build(), matchEndTimeMs));
+        this.update(new UserStats(player1StatsBuilder.build(), player1Stats.getEndTimeMs()));
+        this.update(new UserStats(player2StatsBuilder.build(), player2Stats.getEndTimeMs()));
     }
 
     private void updateRating(
@@ -351,16 +354,14 @@ public enum UserStatsRepository {
                 .setLastGameTimeMs(tableEndTimeMs);
     }
 
-    private ResultProtos.UserStatsProto getUserStatsProto(String playerName, long endTimeMs) {
-        UserStats player1Stats = this.getUser(playerName);
-        ResultProtos.UserStatsProto player1StatsProto;
-        if (player1Stats != null) {
-            player1StatsProto = player1Stats.getProto();
-        } else {
-            player1StatsProto = ResultProtos.UserStatsProto.newBuilder().setName(playerName).build();
-            this.add(new UserStats(player1StatsProto, endTimeMs));
+    private UserStats getOrCreateUserStats(String playerName, long endTimeMs) {
+        UserStats userStats = this.getUser(playerName);
+        if (userStats == null) {
+            ResultProtos.UserStatsProto userStatsProto = ResultProtos.UserStatsProto.newBuilder().setName(playerName).build();
+            userStats = new UserStats(userStatsProto, endTimeMs);
+            this.add(userStats);
         }
-        return player1StatsProto;
+        return userStats;
     }
 
     public void closeDB() {
