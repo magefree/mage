@@ -27,8 +27,6 @@
  */
 package mage.sets.zendikar;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -40,12 +38,10 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.watchers.Watcher;
+import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
 
 /**
  *
@@ -59,7 +55,7 @@ public class RuneflareTrap extends CardImpl {
         this.subtype.add("Trap");
 
         // If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RavenousTrapCondition.getInstance()), new CardsDrawnWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{R}"), RuneflareTrapCondition.getInstance()), new CardsAmountDrawnThisTurnWatcher());
 
         // Runeflare Trap deals damage to target player equal to the number of cards in that player's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new TargetPlayerCardsInHandCount()));
@@ -115,62 +111,13 @@ class RuneflareTrapCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CardsDrawnWatcher watcher = (CardsDrawnWatcher) game.getState().getWatchers().get("CardsDrawnWatcher");
+        CardsAmountDrawnThisTurnWatcher watcher =
+                (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.BASIC_KEY);
         return watcher != null && watcher.opponentDrewXOrMoreCards(source.getControllerId(), 3, game);
     }
 
     @Override
     public String toString() {
         return "If an opponent drew three or more cards this turn";
-    }
-}
-
-class CardsDrawnWatcher extends Watcher {
-
-    private final Map<UUID, Integer> playerCardsDrawn = new HashMap<>();
-
-    public CardsDrawnWatcher() {
-        super("CardsDrawnWatcher", WatcherScope.GAME);
-    }
-
-    public CardsDrawnWatcher(final CardsDrawnWatcher watcher) {
-        super(watcher);
-        playerCardsDrawn.putAll(watcher.playerCardsDrawn);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD) {
-            if (playerCardsDrawn.containsKey(event.getPlayerId())) {
-                playerCardsDrawn.put(event.getPlayerId(), playerCardsDrawn.get(event.getPlayerId()) + 1);
-            } else {
-                playerCardsDrawn.put(event.getPlayerId(), 1);
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        playerCardsDrawn.clear();
-    }
-
-    public boolean opponentDrewXOrMoreCards(UUID playerId, int x, Game game) {
-        Player player = game.getPlayer(playerId);
-        if (player != null) {
-            for (Map.Entry<UUID, Integer> entry : playerCardsDrawn.entrySet()) {
-                if (game.isOpponent(player, playerId)) {
-                    if (entry.getValue() >= x) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public CardsDrawnWatcher copy() {
-        return new CardsDrawnWatcher(this);
     }
 }
