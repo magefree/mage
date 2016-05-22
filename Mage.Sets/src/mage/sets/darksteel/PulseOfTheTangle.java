@@ -76,7 +76,7 @@ class PulseOfTheTangleReturnToHandEffect extends OneShotEffect {
 
     PulseOfTheTangleReturnToHandEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Then if an opponent controls more creatures than you, return Pulse of the Tangle to its owner's hand";
+        this.staticText = "Then if an opponent controls more creatures than you, return {this} to its owner's hand";
     }
 
     PulseOfTheTangleReturnToHandEffect(final PulseOfTheTangleReturnToHandEffect effect) {
@@ -93,6 +93,7 @@ class PulseOfTheTangleReturnToHandEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         FilterControlledCreaturePermanent controllerFilter = new FilterControlledCreaturePermanent();
         PermanentsOnBattlefieldCount controllerCount = new PermanentsOnBattlefieldCount(controllerFilter);
+        int controllerAmount = controllerCount.calculate(game, source, this);
         boolean check = false;
         if (controller != null) {
             for (UUID opponentID : game.getOpponents(controller.getId())) {
@@ -100,7 +101,7 @@ class PulseOfTheTangleReturnToHandEffect extends OneShotEffect {
                     FilterCreaturePermanent opponentFilter = new FilterCreaturePermanent();
                     opponentFilter.add(new ControllerIdPredicate(opponentID));
                     PermanentsOnBattlefieldCount opponentCreatureCount = new PermanentsOnBattlefieldCount(opponentFilter);
-                    check = opponentCreatureCount.calculate(game, source, this) > controllerCount.calculate(game, source, this);
+                    check = opponentCreatureCount.calculate(game, source, this) > controllerAmount;
                     if (check) {
                         break;
                     }

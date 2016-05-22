@@ -105,8 +105,8 @@ class MurderousSpoilsEffect extends OneShotEffect {
                 }
             }
             for (Permanent p : attachments) {
-                ContinuousEffect gainControl = new GainControlTargetEffect(Duration.EndOfGame);
-                gainControl.setTargetPointer(new FixedTarget(p.getId()));
+                ContinuousEffect gainControl = new GainControlTargetEffect(Duration.Custom);
+                gainControl.setTargetPointer(new FixedTarget(p, game));
                 game.addEffect(gainControl, source);
             }
             target.destroy(source.getId(), game, true);

@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -42,7 +41,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -139,7 +137,7 @@ public class DroolingOgre extends CardImpl {
 
         @Override
         public String getRule() {
-            return "Whenever a player casts an artifact spell, that player gains control of {this}";
+            return "Whenever a player casts an artifact spell, that player gains control of {this}.";
         }
     }
 }

@@ -28,23 +28,25 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.costs.common.DiscardXTargetCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
-import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
@@ -70,8 +72,11 @@ public class PsychicOverload extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
         // Enchanted permanent doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        
         // Enchanted permanent has "Discard two artifact cards: Untap this permanent."
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new DiscardTargetCost(new TargetCardInHand(2, new FilterArtifactCard("two artifact cards")))));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new DiscardTargetCost(new TargetCardInHand(2, new FilterArtifactCard("two artifact cards"))));       
+        Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted permanent has \"Discard two artifact cards: Untap this permanent.\"");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,  effect));
     }
 
     public PsychicOverload(final PsychicOverload card) {
