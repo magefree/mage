@@ -28,13 +28,13 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -53,7 +53,6 @@ public class LastStand extends CardImpl {
     public LastStand(UUID ownerId) {
         super(ownerId, 100, "Last Stand", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}{U}{B}{R}{G}");
         this.expansionSetCode = "PC2";
-
 
         // Target opponent loses 2 life for each Swamp you control. Last Stand deals damage equal to the number of Mountains you control to target creature. Put a 1/1 green Saproling creature token onto the battlefield for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.
         this.getSpellAbility().addEffect(new LastStandEffect());
@@ -108,7 +107,7 @@ class LastStandEffect extends OneShotEffect {
             Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (opponent != null) {
                 int swamps = game.getBattlefield().count(filterSwamp, source.getSourceId(), source.getControllerId(), game);
-                opponent.damage(swamps, source.getSourceId(), game, false, true);
+                opponent.loseLife(swamps * 2, game);
             }
             // Last Stand deals damage equal to the number of Mountains you control to target creature.
             Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
@@ -125,7 +124,7 @@ class LastStandEffect extends OneShotEffect {
             }
             // You gain 2 life for each Plains you control.
             int plains = game.getBattlefield().count(filterPlains, source.getSourceId(), source.getControllerId(), game);
-            controller.gainLife(plains, game);
+            controller.gainLife(plains * 2, game);
             // Draw a card for each Island you control, then discard that many cards
             int islands = game.getBattlefield().count(filterIsland, source.getSourceId(), source.getControllerId(), game);
             if (islands > 0) {
