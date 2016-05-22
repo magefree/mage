@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
@@ -142,7 +142,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  *
  */
-public class SuspendAbility extends ActivatedAbilityImpl {
+public class SuspendAbility extends SpecialAction {
 
     private String ruleText;
     private boolean gainedTemporary;
@@ -160,7 +160,9 @@ public class SuspendAbility extends ActivatedAbilityImpl {
     }
 
     public SuspendAbility(int suspend, ManaCost cost, Card card, boolean shortRule) {
-        super(Zone.HAND, new SuspendExileEffect(suspend), cost);
+        super(Zone.HAND);
+        this.addCost(cost);
+        this.addEffect(new SuspendExileEffect(suspend));
         this.usesStack = false;
         if (suspend == Integer.MAX_VALUE) {
             VariableManaCost xCosts = new VariableManaCost();
