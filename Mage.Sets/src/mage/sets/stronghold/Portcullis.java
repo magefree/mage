@@ -63,7 +63,7 @@ public class Portcullis extends CardImpl {
 
         // Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature.
         String rule = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature";
-        TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PortcullisExileEffect(), filter, false, SetTargetPointer.PERMANENT, rule, true);
+        TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PortcullisExileEffect(), filter, false, SetTargetPointer.PERMANENT, rule);
 
         MoreThanXCreaturesOnBFCondition condition = new MoreThanXCreaturesOnBFCondition(2);
         this.addAbility(new ConditionalTriggeredAbility(ability, condition, rule));
