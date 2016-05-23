@@ -44,6 +44,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -88,11 +89,6 @@ class CoatOfArmsEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
@@ -112,9 +108,11 @@ class CoatOfArmsEffect extends ContinuousEffectImpl {
         for (Permanent permanent : permanents) {
             if (!permanent.getId().equals(target.getId())) {
                 for (String subtype : targetSubtype) {
-                    if (permanent.hasSubtype(subtype)) {
-                        amount++;
-                        break;
+                    if (!CardUtil.isNonCreatureSubtype(subtype)) {
+                        if (permanent.hasSubtype(subtype)) {
+                            amount++;
+                            break;
+                        }
                     }
                 }
             }

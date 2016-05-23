@@ -251,7 +251,8 @@ public class UndyingTest extends CardTestPlayerBase {
         // Sacrifice a creature: Add {C}{C} to your mana pool.
         addCard(Zone.BATTLEFIELD, playerA, "Ashnod's Altar", 1);
         // Whenever a Human deals damage to you, destroy it.
-        // Other non-Human creatures you control get +1/+1 and have undying.
+        // Other non-Human creatures you control get +1/+1 and have undying
+        // (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.).
         addCard(Zone.BATTLEFIELD, playerA, "Mikaeus, the Unhallowed", 1);
 
         // Flying
