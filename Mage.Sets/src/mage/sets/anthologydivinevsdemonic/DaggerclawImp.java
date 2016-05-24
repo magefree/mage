@@ -38,7 +38,7 @@ public class DaggerclawImp extends mage.sets.guildpact.DaggerclawImp {
     public DaggerclawImp(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 33;
-        this.expansionSetCode = "DD3A";
+        this.expansionSetCode = "DD3DVD";
     }
 
     public DaggerclawImp(final DaggerclawImp card) {

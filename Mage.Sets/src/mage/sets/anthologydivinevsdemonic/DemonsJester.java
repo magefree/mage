@@ -38,7 +38,7 @@ public class DemonsJester extends mage.sets.dissension.DemonsJester {
     public DemonsJester(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 38;
-        this.expansionSetCode = "DD3A";
+        this.expansionSetCode = "DD3DVD";
     }
 
     public DemonsJester(final DemonsJester card) {

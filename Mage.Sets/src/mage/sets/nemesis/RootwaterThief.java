@@ -57,7 +57,7 @@ public class RootwaterThief extends CardImpl {
 
     public RootwaterThief(UUID ownerId) {
         super(ownerId, 40, "Rootwater Thief", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
         this.power = new MageInt(1);

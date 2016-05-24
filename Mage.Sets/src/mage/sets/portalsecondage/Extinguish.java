@@ -50,7 +50,7 @@ public class Extinguish extends CardImpl {
 
     public Extinguish(UUID ownerId) {
         super(ownerId, 38, "Extinguish", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "PO2";
+        this.expansionSetCode = "P02";
 
         // Counter target sorcery spell.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

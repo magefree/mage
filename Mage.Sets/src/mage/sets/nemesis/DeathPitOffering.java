@@ -60,7 +60,7 @@ public class DeathPitOffering extends CardImpl {
     
     public DeathPitOffering(UUID ownerId) {
         super(ownerId, 56, "Death Pit Offering", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
 
         // When Death Pit Offering enters the battlefield, sacrifice all creatures you control.

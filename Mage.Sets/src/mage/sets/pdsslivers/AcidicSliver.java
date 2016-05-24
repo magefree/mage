@@ -38,7 +38,7 @@ public class AcidicSliver extends mage.sets.stronghold.AcidicSliver {
     public AcidicSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 13;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public AcidicSliver(final AcidicSliver card) {

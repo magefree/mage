@@ -53,7 +53,7 @@ public class StampedeDriver extends CardImpl {
 
     public StampedeDriver(UUID ownerId) {
         super(ownerId, 122, "Stampede Driver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Human");
         this.subtype.add("Spellshaper");
 

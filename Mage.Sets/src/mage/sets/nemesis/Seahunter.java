@@ -56,7 +56,7 @@ public class Seahunter extends CardImpl {
 
     public Seahunter(UUID ownerId) {
         super(ownerId, 41, "Seahunter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Human");
         this.subtype.add("Mercenary");
 

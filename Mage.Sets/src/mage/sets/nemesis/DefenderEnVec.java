@@ -50,7 +50,7 @@ public class DefenderEnVec extends CardImpl {
 
     public DefenderEnVec(UUID ownerId) {
         super(ownerId, 5, "Defender en-Vec", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(2);

@@ -39,7 +39,7 @@ public class DragonWhelp extends mage.sets.magic2010.DragonWhelp {
     public DragonWhelp(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 4;
-        this.expansionSetCode = "FVD";
+        this.expansionSetCode = "DRB";
         this.rarity = Rarity.RARE;
     }
 

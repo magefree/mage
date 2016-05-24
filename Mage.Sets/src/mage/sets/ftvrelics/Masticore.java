@@ -39,7 +39,7 @@ public class Masticore extends mage.sets.urzasdestiny.Masticore {
     public Masticore(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 7;
-        this.expansionSetCode = "FVR";
+        this.expansionSetCode = "V10";
         this.rarity = Rarity.MYTHIC;
     }
 

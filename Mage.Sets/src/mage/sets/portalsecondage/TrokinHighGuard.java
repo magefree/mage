@@ -41,7 +41,7 @@ public class TrokinHighGuard extends CardImpl {
 
     public TrokinHighGuard(UUID ownerId) {
         super(ownerId, 146, "Trokin High Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "PO2";
+        this.expansionSetCode = "P02";
         this.subtype.add("Human");
         this.subtype.add("Knight");
 

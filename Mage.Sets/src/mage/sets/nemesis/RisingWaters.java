@@ -56,7 +56,7 @@ public class RisingWaters extends CardImpl {
 
     public RisingWaters(UUID ownerId) {
         super(ownerId, 38, "Rising Waters", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Lands don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 

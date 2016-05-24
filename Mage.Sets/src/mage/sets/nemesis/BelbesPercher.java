@@ -43,7 +43,7 @@ public class BelbesPercher extends CardImpl {
 
     public BelbesPercher(UUID ownerId) {
         super(ownerId, 53, "Belbe's Percher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Bird");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

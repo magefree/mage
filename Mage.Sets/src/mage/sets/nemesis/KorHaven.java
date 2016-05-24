@@ -50,7 +50,7 @@ public class KorHaven extends CardImpl {
 
     public KorHaven(UUID ownerId) {
         super(ownerId, 141, "Kor Haven", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.supertype.add("Legendary");
 
         // {tap}: Add {C} to your mana pool.

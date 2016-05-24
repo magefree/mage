@@ -59,7 +59,7 @@ public class DefiantFalcon extends CardImpl {
 
     public DefiantFalcon(UUID ownerId) {
         super(ownerId, 6, "Defiant Falcon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Rebel");
         this.subtype.add("Bird");
         this.power = new MageInt(1);

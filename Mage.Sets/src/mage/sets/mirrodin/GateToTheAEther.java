@@ -67,21 +67,21 @@ public class GateToTheAEther extends CardImpl {
 }
 
 class GateToTheAEtherEffect extends OneShotEffect {
-    
+
     GateToTheAEtherEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "that player reveals the top card of his or her library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield";
     }
-    
+
     GateToTheAEtherEffect(final GateToTheAEtherEffect effect) {
         super(effect);
     }
-    
+
     @java.lang.Override
     public GateToTheAEtherEffect copy() {
         return new GateToTheAEtherEffect(this);
     }
-    
+
     @java.lang.Override
     public boolean apply(Game game, Ability source) {
         Player activePlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));

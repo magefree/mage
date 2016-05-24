@@ -57,7 +57,7 @@ public class DownhillCharge extends CardImpl {
 
     public DownhillCharge(UUID ownerId) {
         super(ownerId, 79, "Downhill Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // You may sacrifice a Mountain rather than pay Downhill Charge's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));

@@ -47,7 +47,7 @@ public class SealOfCleansing extends CardImpl {
     
     public SealOfCleansing(UUID ownerId) {
         super(ownerId, 18, "Seal of Cleansing", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Sacrifice Seal of Cleansing: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());

@@ -52,7 +52,7 @@ public class MoggAlarm extends CardImpl {
     
     public MoggAlarm(UUID ownerId) {
         super(ownerId, 93, "Mogg Alarm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // You may sacrifice two Mountains rather than pay Mogg Alarm's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));

@@ -38,7 +38,7 @@ public class ConeOfFlame extends mage.sets.knightsvsdragons.ConeOfFlame {
     public ConeOfFlame(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 54;
-        this.expansionSetCode = "DD3D";
+        this.expansionSetCode = "DD3JVC";
     }
 
     public ConeOfFlame(final ConeOfFlame card) {

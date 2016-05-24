@@ -111,9 +111,9 @@ class BattletideAlchemistEffect extends PreventionEffectImpl {
                         game.informPlayers("Battletide Alchemist prevented " + toPrevent + " damage to " + targetPlayer.getName());
                         game.fireEvent(GameEvent.getEvent(
                                 GameEvent.EventType.PREVENTED_DAMAGE,
-                                targetPlayer.getId(), 
-                                source.getSourceId(), 
-                                source.getControllerId(), 
+                                targetPlayer.getId(),
+                                source.getSourceId(),
+                                source.getControllerId(),
                                 toPrevent));
                     }
                 }

@@ -61,7 +61,7 @@ public class RathiFiend extends CardImpl {
 
     public RathiFiend(UUID ownerId) {
         super(ownerId, 68, "Rathi Fiend", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Horror");
         this.subtype.add("Mercenary");
 

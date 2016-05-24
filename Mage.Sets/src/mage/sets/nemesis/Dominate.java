@@ -50,7 +50,7 @@ public class Dominate extends CardImpl {
 
     public Dominate(UUID ownerId) {
         super(ownerId, 31, "Dominate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{1}{U}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Gain control of target creature with converted mana cost X or less.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true));

@@ -57,7 +57,7 @@ public class TangleWire extends CardImpl {
 
     public TangleWire(UUID ownerId) {
         super(ownerId, 139, "Tangle Wire", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Fading 4
         this.addAbility(new FadingAbility(4, this));

@@ -58,7 +58,7 @@ public class SivvisRuse extends CardImpl {
 
     public SivvisRuse(UUID ownerId) {
         super(ownerId, 21, "Sivvi's Ruse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // If an opponent controls a Mountain and you control a Plains, you may cast Sivvi's Ruse without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Mountain and you control a Plains",

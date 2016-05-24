@@ -52,7 +52,7 @@ public class PhyrexianDriver extends CardImpl {
 
     public PhyrexianDriver(UUID ownerId) {
         super(ownerId, 64, "Phyrexian Driver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Zombie");
         this.subtype.add("Mercenary");
 

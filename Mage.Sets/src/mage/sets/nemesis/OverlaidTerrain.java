@@ -56,7 +56,7 @@ public class OverlaidTerrain extends CardImpl {
 
     public OverlaidTerrain(UUID ownerId) {
         super(ownerId, 108, "Overlaid Terrain", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // As Overlaid Terrain enters the battlefield, sacrifice all lands you control.
         this.addAbility(new AsEntersBattlefieldAbility(new SacrificeAllLandEffect()));

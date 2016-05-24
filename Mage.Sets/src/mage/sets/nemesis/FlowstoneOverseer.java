@@ -49,7 +49,7 @@ public class FlowstoneOverseer extends CardImpl {
 
     public FlowstoneOverseer(UUID ownerId) {
         super(ownerId, 82, "Flowstone Overseer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Beast");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

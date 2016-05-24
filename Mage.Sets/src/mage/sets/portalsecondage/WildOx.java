@@ -42,7 +42,7 @@ public class WildOx extends CardImpl {
 
     public WildOx(UUID ownerId) {
         super(ownerId, 90, "Wild Ox", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "PO2";
+        this.expansionSetCode = "P02";
         this.subtype.add("Ox");
 
         this.power = new MageInt(3);

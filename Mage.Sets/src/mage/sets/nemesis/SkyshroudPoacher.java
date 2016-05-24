@@ -56,7 +56,7 @@ public class SkyshroudPoacher extends CardImpl {
     
     public SkyshroudPoacher(UUID ownerId) {
         super(ownerId, 119, "Skyshroud Poacher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Human");
         this.subtype.add("Rebel");
 

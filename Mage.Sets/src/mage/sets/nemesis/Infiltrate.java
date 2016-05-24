@@ -42,7 +42,7 @@ public class Infiltrate extends CardImpl {
 
     public Infiltrate(UUID ownerId) {
         super(ownerId, 33, "Infiltrate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Target creature is unblockable this turn.
         this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect());

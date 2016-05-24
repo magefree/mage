@@ -56,7 +56,7 @@ public class Daze extends CardImpl {
 
     public Daze(UUID ownerId) {
         super(ownerId, 30, "Daze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
 
         // You may return an Island you control to its owner's hand rather than pay Daze's mana cost.

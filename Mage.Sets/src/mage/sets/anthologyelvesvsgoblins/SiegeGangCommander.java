@@ -38,7 +38,7 @@ public class SiegeGangCommander extends mage.sets.magic2010.SiegeGangCommander {
     public SiegeGangCommander(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 32;
-        this.expansionSetCode = "DD3B";
+        this.expansionSetCode = "DD3EVG";
     }
 
     public SiegeGangCommander(final SiegeGangCommander card) {

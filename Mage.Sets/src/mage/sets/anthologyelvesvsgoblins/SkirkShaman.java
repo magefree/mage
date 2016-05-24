@@ -38,7 +38,7 @@ public class SkirkShaman extends mage.sets.elvesvsgoblins.SkirkShaman {
     public SkirkShaman(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 52;
-        this.expansionSetCode = "DD3B";
+        this.expansionSetCode = "DD3EVG";
     }
 
     public SkirkShaman(final SkirkShaman card) {

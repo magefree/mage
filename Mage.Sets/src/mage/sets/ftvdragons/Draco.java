@@ -52,7 +52,7 @@ public class Draco extends CardImpl {
 
     public Draco(UUID ownerId) {
         super(ownerId, 3, "Draco", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{16}");
-        this.expansionSetCode = "FVD";
+        this.expansionSetCode = "DRB";
         this.subtype.add("Dragon");
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

@@ -51,7 +51,7 @@ public class VolrathTheFallen extends CardImpl {
 
     public VolrathTheFallen(UUID ownerId) {
         super(ownerId, 75, "Volrath the Fallen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.supertype.add("Legendary");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(6);

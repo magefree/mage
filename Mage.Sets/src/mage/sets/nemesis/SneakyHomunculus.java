@@ -56,7 +56,7 @@ public class SneakyHomunculus extends CardImpl {
 
     public SneakyHomunculus(UUID ownerId) {
         super(ownerId, 44, "Sneaky Homunculus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Homunculus");
         this.subtype.add("Illusion");
 

@@ -43,7 +43,7 @@ public class OffBalance extends CardImpl {
 
     public OffBalance(UUID ownerId) {
         super(ownerId, 15, "Off Balance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Target creature can't attack or block this turn.
         this.getSpellAbility().addEffect(new CantAttackBlockTargetEffect(Duration.EndOfTurn));

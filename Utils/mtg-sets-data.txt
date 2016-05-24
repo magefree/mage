@@ -1,3 +1,4 @@
+Tenth Edition|10E|
 Unlimited Edition|2ED|
 Revised Edition|3ED|
 Fourth Edition|4ED|
@@ -6,92 +7,94 @@ Fifth Edition|5ED|
 Classic Sixth Edition|6ED|
 Seventh Edition|7ED|
 Eighth Edition|8ED|
-Tenth Edition|10E|
+Ninth Edition|9ED|
 Aether Revolt|AER|
+Shards of Alara|ALA|
 Alliances|ALL|
 Asia Pacific Land Program|APAC|
 Apocalypse|APC|
 Alara Reborn|ARB|
+Archenemy|ARC|
 Arena League|ARENA|
 Arabian Nights|ARN|
 Anthologies|ATH|
 Antiquities|ATQ|
-Archenemy|ARC|
 Avacyn Restored|AVR|
 Battle for Zendikar|BFZ|
+Born of the Gods|BNG|
 Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
-Born of the Gods|BNG|
-Champions of Kamigawa|CHK|
-Champs|CP|
-Chronicles|CHR|
-Clash Pack|CLASH|
 Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
-Commander 2015|C15|
-Commander 2016|C16|
+Commander 2015 Edition|C15|
+Commander 2016 Edition|C16|
+Champions of Kamigawa|CHK|
+Chronicles|CHR|
+Clash Pack|CLASH|
 Commander's Arsenal|CMA|
+Commander|CMD|
 Conspiracy: Take the Crown|CN2|
+Conspiracy|CNS|
 Conflux|CON|
+Champs|CP|
 Coldsnap|CSP|
-Dark Ascension|DKA|
-Darksteel|DST|
-Dissension|DIS|
-Deckmasters|DKM|
-Dragon's Maze|DGM|
-The Dark|DRK|
-Dragons of Tarkir|DTK|
-Duel Decks: Ajani vs. Nicol Bolas|DDH|
-Duel Decks: Anthology, Elves vs. Goblins|DD3|
-Duel Decks: Anthology, Divine vs. Demonic|DD3|
-Duel Decks: Anthology, Garruk vs. Liliana|DD3|
-Duel Decks: Anthology, Jace vs. Chandra|DD3|
-Duel Decks: Blessed vs. Cursed|DDQ|
-Duel Decks: Elves vs. Goblins|EVG|
-Duel Decks: Divine vs. Demonic|DDC|
-Duel Decks: Elspeth vs. Kiora|DDO|
-Duel Decks: Elspeth vs. Tezzeret|DDF|
-Duel Decks: Garruk vs. Liliana|DDD|
-Duel Decks: Izzet vs. Golgari|DDJ|
-Duel Decks: Heroes vs. Monsters|DDL|
 Duel Decks: Jace vs. Chandra|DD2|
-Duel Decks: Jace vs. Vraska|DDM|
-Duel Decks: Knights vs. Dragons|DDG|
-Duel Decks: Nissa vs. Ob Nixilis|DDR|
+Duel Decks: Anthology, Divine vs. Demonic|DD3DVD|
+Duel Decks: Anthology, Elves vs. Goblins|DD3EVG|
+Duel Decks: Anthology, Garruk vs. Liliana|DD3GVL|
+Duel Decks: Anthology, Jace vs. Chandra|DD3JVC|
+Duel Decks: Divine vs. Demonic|DDC|
+Duel Decks: Garruk vs. Liliana|DDD|
 Duel Decks: Phyrexia vs. the Coalition|DDE|
-Duel Decks: Sorin vs. Tibalt|DDK|
-Duel Decks: Speed vs. Cunning|DDN|
+Duel Decks: Elspeth vs. Tezzeret|DDF|
+Duel Decks: Knights vs. Dragons|DDG|
+Duel Decks: Ajani vs. Nicol Bolas|DDH|
 Duel Decks: Venser vs. Koth|DDI|
+Duel Decks: Izzet vs. Golgari|DDJ|
+Duel Decks: Sorin vs. Tibalt|DDK|
+Duel Decks: Heroes vs. Monsters|DDL|
+Duel Decks: Jace vs. Vraska|DDM|
+Duel Decks: Speed vs. Cunning|DDN|
+Duel Decks: Elspeth vs. Kiora|DDO|
 Duel Decks: Zendikar vs. Eldrazi|DDP|
-Eldritch Moon|EMN|
+Duel Decks: Blessed vs. Cursed|DDQ|
+Duel Decks: Nissa vs. Ob Nixilis|DDR|
+Dragon's Maze|DGM|
+Dissension|DIS|
+Dark Ascension|DKA|
+Deckmasters|DKM|
+From the Vault: Dragons|DRB|
+The Dark|DRK|
+Darksteel|DST|
+Dragons of Tarkir|DTK|
 Eternal Masters|EMA|
+Eldritch Moon|EMN|
 European Land Program|EURO|
 Eventide|EVE|
+Duel Decks: Elves vs. Goblins|EVG|
 Exodus|EXO|
+Zendikar Expeditions|EXP|
 Fallen Empires|FEM|
-Fate Reforged|FRF|
 Friday Night Magic|FNMP|
-From the Vault: Dragons|FVD|
-From the Vault: Exiled|FVE|
-From the Vault: Legends|FVL|
-From the Vault: Relics|FVR|
+Fate Reforged|FRF|
 Future Sight|FUT|
-Gatecrash|GTC|
 Guildpact|GPT|
 Grand Prix|GPX|
+WPN Gateway|GRC|
+Gatecrash|GTC|
+Guru|GUR|
+Premium Deck Series: Slivers|H09|
 Homelands|HML|
 Planechase|HOP|
-Planechase 2012 Edition|PC2|
 Ice Age|ICE|
-Innistrad|ISD|
 Invasion|INV|
+Innistrad|ISD|
 Journey into Nyx|JOU|
 Judge Promo|JR|
 Judgment|JUD|
 Kaladesh|KLD|
 Khans of Tarkir|KTK|
-Launch Party|MLP|
 Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|
 Legends|LEG|
@@ -103,68 +106,65 @@ Magic 2012|M12|
 Magic 2013|M13|
 Magic 2014|M14|
 Magic 2015|M15|
-Magic Origins|ORI|
-Magic Player Rewards|MPRP|
-Magic: The Gathering-Commander|CMD|
-Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
-Masters Edition|MED|
+Mirrodin Besieged|MBS|
 Masters Edition II|ME2|
 Masters Edition III|ME3|
 Masters Edition IV|ME4|
+Masters Edition|MED|
 Game Day|MGDC|
 Mirage|MIR|
+Launch Party|MLP|
+Modern Masters 2015|MM2|
+Modern Masters|MMA|
 Mercadian Masques|MMQ|
 Morningtide|MOR|
-Modern Masters|MMA|
-Modern Masters 2015|MM2|
+Magic Player Rewards|MPRP|
 Mirrodin|MRD|
-Mirrodin Besieged|MBS|
-MTGO Vanguard|VGO|
+Nemesis|NEM|
 New Phyrexia|NPH|
-Ninth Edition|9ED|
-Nemesis|NMS|
-Oath of the Gatewatch|OGW|
 Odyssey|ODY|
+Oath of the Gatewatch|OGW|
 Onslaught|ONS|
+Magic Origins|ORI|
+Portal Second Age|P02|
+Planechase 2012 Edition|PC2|
 Planechase Anthology|PCA|
 Prophecy|PCY|
-Premium Deck Series: Fire and Lightning|PD2|
+Premium Deck Series: Fire & Lightning|PD2|
 Premium Deck Series: Graveborn|PD3|
-Premium Deck Series: Slivers|PDS|
 Planar Chaos|PLC|
 Planeshift|PLS|
 Portal|POR|
-Portal Second Age|PO2|
 Prerelease Events|PTC|
 Portal Three Kingdoms|PTK|
-Premium Deck Series: Fire and Lightning|PD2|
-Premium Deck Series: Slivers|PDS|
 Ravnica: City of Guilds|RAV|
-Return to Ravnica|RTR|
 Rise of the Eldrazi|ROE|
-Scars of Mirrodin|SOM|
-Scourge|SCG|
-Shadowmoor|SHM|
-Shards of Alara|ALA|
-Shadows over Innistrad|SOI|
-Saviors of Kamigawa|SOK|
+Return to Ravnica|RTR|
 Starter 2000|S00|
 Starter 1999|S99|
+Scourge|SCG|
+Shadowmoor|SHM|
+Shadows over Innistrad|SOI|
+Saviors of Kamigawa|SOK|
+Scars of Mirrodin|SOM|
 Stronghold|STH|
 Super Series|SUS|
-Tempest|TMP|
-Tempest Remastered|TPR|
 Theros|THS|
+Tempest|TMP|
 Torment|TOR|
-Time Spiral|TSP|
+Tempest Remastered|TPR|
 Time Spiral "Timeshifted"|TSB|
+Time Spiral|TSP|
+Urza's Destiny|UDS|
 Ugin's Fate|UGIN|
 Unglued|UGL|
-Unhinged|UNH|
-Urza's Destiny|UDS|
 Urza's Legacy|ULG|
+Unhinged|UNH|
 Urza's Saga|USG|
+From the Vault: Exiled|V09|
+From the Vault: Relics|V10|
+From the Vault: Legends|V11|
 From the Vault: Realms|V12|
 From the Vault: Twenty|V13|
 From the Vault: Annihilation|V14|
@@ -174,12 +174,11 @@ Vanguard Set 1|VG1|
 Vanguard Set 2|VG2|
 Vanguard Set 3|VG3|
 Vanguard Set 4|VG4|
-Vintage Masters|VMA|
+MTGO Vanguard|VGO|
 Visions|VIS|
-Weatherlight|WTH|
+Vintage Masters|VMA|
 Welcome Deck 2016|W16|
 World Magic Cup Qualifier|WMCQ|
+Weatherlight|WTH|
 Worldwake|WWK|
-WPN Gateway|GRC|
 Zendikar|ZEN|
-Zendikar Expeditions|EXP|

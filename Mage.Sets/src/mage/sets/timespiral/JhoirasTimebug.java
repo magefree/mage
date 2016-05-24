@@ -54,7 +54,7 @@ import mage.target.common.TargetPermanentOrSuspendedCard;
  * @author emerald000
  */
 public class JhoirasTimebug extends CardImpl {
-    
+
     private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard("permanent you control or suspended card you own");
     static {
         filter.getPermanentFilter().add(new ControllerPredicate(TargetController.YOU));
@@ -85,21 +85,21 @@ public class JhoirasTimebug extends CardImpl {
 }
 
 class JhoirasTimebugEffect extends OneShotEffect {
-    
+
     JhoirasTimebugEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose target permanent you control or suspended card you own. If that permanent or card has a time counter on it, you may remove a time counter from it or put another time counter on it";
     }
-    
+
     JhoirasTimebugEffect(final JhoirasTimebugEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public JhoirasTimebugEffect copy() {
         return new JhoirasTimebugEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());

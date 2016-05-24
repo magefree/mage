@@ -38,7 +38,7 @@ public class SerrasEmbrace extends mage.sets.tenthedition.SerrasEmbrace {
     public SerrasEmbrace(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 21;
-        this.expansionSetCode = "DD3A";
+        this.expansionSetCode = "DD3DVD";
     }
 
     public SerrasEmbrace(final SerrasEmbrace card) {

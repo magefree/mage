@@ -48,7 +48,7 @@ public class Viseling extends CardImpl {
 
     public Viseling(UUID ownerId) {
         super(ownerId, 140, "Viseling", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Construct");
 
         this.power = new MageInt(2);

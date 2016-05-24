@@ -48,7 +48,7 @@ public class PhyrexianProwler extends CardImpl {
 
     public PhyrexianProwler(UUID ownerId) {
         super(ownerId, 65, "Phyrexian Prowler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Zombie");
         this.subtype.add("Mercenary");
         this.power = new MageInt(3);

@@ -38,7 +38,7 @@ public class DuskImp extends mage.sets.tenthedition.DuskImp {
     public DuskImp(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 34;
-        this.expansionSetCode = "DD3A";
+        this.expansionSetCode = "DD3DVD";
     }
 
     public DuskImp(final DuskImp card) {

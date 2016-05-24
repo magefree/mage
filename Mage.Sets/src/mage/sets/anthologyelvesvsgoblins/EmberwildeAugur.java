@@ -38,7 +38,7 @@ public class EmberwildeAugur extends mage.sets.elvesvsgoblins.EmberwildeAugur {
     public EmberwildeAugur(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 35;
-        this.expansionSetCode = "DD3B";
+        this.expansionSetCode = "DD3EVG";
     }
 
     public EmberwildeAugur(final EmberwildeAugur card) {

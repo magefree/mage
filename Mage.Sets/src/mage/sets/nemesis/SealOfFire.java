@@ -47,7 +47,7 @@ public class SealOfFire extends CardImpl {
 
     public SealOfFire(UUID ownerId) {
         super(ownerId, 98, "Seal of Fire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
 
         // Sacrifice Seal of Fire: Seal of Fire deals 2 damage to target creature or player.

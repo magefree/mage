@@ -42,7 +42,7 @@ public class NorwoodArchers extends CardImpl {
 
     public NorwoodArchers(UUID ownerId) {
         super(ownerId, 76, "Norwood Archers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "PO2";
+        this.expansionSetCode = "P02";
         this.subtype.add("Elf");
         this.subtype.add("Archer");
 

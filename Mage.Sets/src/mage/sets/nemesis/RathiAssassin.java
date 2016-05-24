@@ -70,7 +70,7 @@ public class RathiAssassin extends CardImpl {
 
     public RathiAssassin(UUID ownerId) {
         super(ownerId, 67, "Rathi Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Zombie");
         this.subtype.add("Mercenary");
         this.subtype.add("Assassin");

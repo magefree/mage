@@ -38,7 +38,7 @@ public class LysAlanaHuntmaster extends mage.sets.lorwyn.LysAlanaHuntmaster {
     public LysAlanaHuntmaster(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 10;
-        this.expansionSetCode = "DD3B";
+        this.expansionSetCode = "DD3EVG";
     }
 
     public LysAlanaHuntmaster(final LysAlanaHuntmaster card) {

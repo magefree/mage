@@ -39,7 +39,7 @@ public class MemoryJar extends mage.sets.urzaslegacy.MemoryJar {
     public MemoryJar(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 8;
-        this.expansionSetCode = "FVR";
+        this.expansionSetCode = "V10";
         this.rarity = Rarity.MYTHIC;
     }
 

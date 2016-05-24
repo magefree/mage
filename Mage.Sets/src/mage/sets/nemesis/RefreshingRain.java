@@ -57,7 +57,7 @@ public class RefreshingRain extends CardImpl {
 
     public RefreshingRain(UUID ownerId) {
         super(ownerId, 110, "Refreshing Rain", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // If an opponent controls a Swamp and you control a Forest, you may cast Refreshing Rain without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Swamp and you control a Forest",

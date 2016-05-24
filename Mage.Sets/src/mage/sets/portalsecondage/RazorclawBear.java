@@ -45,7 +45,7 @@ public class RazorclawBear extends CardImpl {
 
     public RazorclawBear(UUID ownerId) {
         super(ownerId, 82, "Razorclaw Bear", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "PO2";
+        this.expansionSetCode = "P02";
         this.subtype.add("Bear");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

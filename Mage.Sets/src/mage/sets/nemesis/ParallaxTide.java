@@ -50,7 +50,7 @@ public class ParallaxTide extends CardImpl {
 
     public ParallaxTide(UUID ownerId) {
         super(ownerId, 37, "Parallax Tide", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
 
         // Fading 5

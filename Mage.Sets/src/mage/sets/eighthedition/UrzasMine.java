@@ -35,19 +35,18 @@ import java.util.UUID;
  */
 public class UrzasMine extends mage.sets.fifthedition.UrzasMine {
 
-        public UrzasMine(UUID ownerId) {
-                super(ownerId);
-                this.cardNumber = 328;
-                this.expansionSetCode = "8ED";
-        }
+    public UrzasMine(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 328;
+        this.expansionSetCode = "8ED";
+    }
 
-        public UrzasMine(final UrzasMine card) {
-                super(card);
-        }
+    public UrzasMine(final UrzasMine card) {
+        super(card);
+    }
 
-        @Override
-        public UrzasMine copy() {
-                return new UrzasMine(this);
-        }
-
+    @Override
+    public UrzasMine copy() {
+        return new UrzasMine(this);
+    }
 }

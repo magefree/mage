@@ -60,7 +60,7 @@ public class KillSwitch extends CardImpl {
 
     public KillSwitch(UUID ownerId) {
         super(ownerId, 133, "Kill Switch", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // {2}, {tap}: Tap all other artifacts. They don't untap during their controllers' untap steps for as long as Kill Switch remains tapped.
         FilterArtifactPermanent filter = new FilterArtifactPermanent();

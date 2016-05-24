@@ -38,7 +38,7 @@ public class BladewingTheRisen extends mage.sets.commander.BladewingTheRisen {
     public BladewingTheRisen(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 1;
-        this.expansionSetCode = "FVD";
+        this.expansionSetCode = "DRB";
     }
 
     public BladewingTheRisen(final BladewingTheRisen card) {

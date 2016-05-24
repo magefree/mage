@@ -38,7 +38,7 @@ public class RithTheAwakener extends mage.sets.invasion.RithTheAwakener {
     public RithTheAwakener(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 12;
-        this.expansionSetCode = "FVD";
+        this.expansionSetCode = "DRB";
     }
 
     public RithTheAwakener(final RithTheAwakener card) {

@@ -38,7 +38,7 @@ public class ClotSliver extends mage.sets.tempest.ClotSliver {
     public ClotSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 5;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public ClotSliver(final ClotSliver card) {

@@ -38,7 +38,7 @@ public class ThunderDragon extends mage.sets.starter1999.ThunderDragon {
     public ThunderDragon(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 14;
-        this.expansionSetCode = "FVD";
+        this.expansionSetCode = "DRB";
     }
 
     public ThunderDragon(final ThunderDragon card) {

@@ -38,7 +38,7 @@ public class BroodSliver extends mage.sets.legions.BroodSliver {
     public BroodSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 22;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public BroodSliver(final BroodSliver card) {

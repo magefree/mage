@@ -41,7 +41,7 @@ public class DakmorScorpion extends CardImpl {
 
     public DakmorScorpion(UUID ownerId) {
         super(ownerId, 10, "Dakmor Scorpion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "PO2";
+        this.expansionSetCode = "P02";
         this.subtype.add("Scorpion");
 
         this.power = new MageInt(2);

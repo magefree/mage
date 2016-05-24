@@ -38,7 +38,7 @@ public class RavenousRats extends mage.sets.tenthedition.RavenousRats {
     public RavenousRats(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 37;
-        this.expansionSetCode = "DD3C";
+        this.expansionSetCode = "DD3GVL";
     }
 
     public RavenousRats(final RavenousRats card) {

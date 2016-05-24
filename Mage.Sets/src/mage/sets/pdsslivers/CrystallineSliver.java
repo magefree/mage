@@ -38,7 +38,7 @@ public class CrystallineSliver extends mage.sets.stronghold.CrystallineSliver {
     public CrystallineSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 11;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public CrystallineSliver(final CrystallineSliver card) {

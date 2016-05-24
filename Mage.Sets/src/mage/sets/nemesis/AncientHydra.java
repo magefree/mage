@@ -50,7 +50,7 @@ public class AncientHydra extends CardImpl {
 
     public AncientHydra(UUID ownerId) {
         super(ownerId, 76, "Ancient Hydra", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Hydra");
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);

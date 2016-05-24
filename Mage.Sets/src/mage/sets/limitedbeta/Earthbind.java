@@ -54,7 +54,7 @@ public class Earthbind extends CardImpl {
 
     public Earthbind(UUID ownerId) {
         super(ownerId, 146, "Earthbind", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "3ED";
+        this.expansionSetCode = "LEB";
         this.subtype.add("Aura");
 
         // Enchant creature

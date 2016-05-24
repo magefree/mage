@@ -38,7 +38,7 @@ public class DistantMelody extends mage.sets.morningtide.DistantMelody {
     public DistantMelody(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 27;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public DistantMelody(final DistantMelody card) {

@@ -39,7 +39,7 @@ public class FlowstoneCrusher extends mage.sets.ninthedition.FlowstoneCrusher {
     public FlowstoneCrusher(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 81;
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.rarity = Rarity.COMMON;
     }
 

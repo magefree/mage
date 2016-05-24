@@ -38,7 +38,7 @@ public class SignInBlood extends mage.sets.magic2010.SignInBlood {
     public SignInBlood(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 49;
-        this.expansionSetCode = "DD3C";
+        this.expansionSetCode = "DD3GVL";
     }
 
     public SignInBlood(final SignInBlood card) {

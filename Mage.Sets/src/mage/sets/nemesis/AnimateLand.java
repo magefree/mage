@@ -45,7 +45,7 @@ public class AnimateLand extends CardImpl {
 
     public AnimateLand(UUID ownerId) {
         super(ownerId, 101, "Animate Land", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Until end of turn, target land becomes a 3/3 creature that's still a land.
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new AnimatedLand(), false, true, Duration.EndOfTurn));

@@ -38,7 +38,7 @@ public class FungusSliver extends mage.sets.timespiral.FungusSliver {
     public FungusSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 21;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public FungusSliver(final FungusSliver card) {

@@ -38,7 +38,7 @@ public class GemhideSliver extends mage.sets.timespiral.GemhideSliver {
     public GemhideSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 8;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public GemhideSliver(final GemhideSliver card) {

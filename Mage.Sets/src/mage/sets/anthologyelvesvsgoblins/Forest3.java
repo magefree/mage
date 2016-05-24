@@ -37,7 +37,7 @@ public class Forest3 extends mage.cards.basiclands.Forest {
 
     public Forest3(UUID ownerId) {
         super(ownerId, 30);
-        this.expansionSetCode = "DD3B";
+        this.expansionSetCode = "DD3EVG";
     }
 
     public Forest3(final Forest3 card) {

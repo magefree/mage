@@ -38,7 +38,7 @@ public class NecroticSliver extends mage.sets.planarchaos.NecroticSliver {
     public NecroticSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 20;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public NecroticSliver(final NecroticSliver card) {

@@ -38,7 +38,7 @@ public class FlametongueKavu extends mage.sets.planechase.FlametongueKavu {
     public FlametongueKavu(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 42;
-        this.expansionSetCode = "DD3D";
+        this.expansionSetCode = "DD3JVC";
     }
 
     public FlametongueKavu(final FlametongueKavu card) {

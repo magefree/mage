@@ -38,7 +38,7 @@ public class MartyrOfFrost extends mage.sets.coldsnap.MartyrOfFrost {
     public MartyrOfFrost(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 2;
-        this.expansionSetCode = "DD3D";
+        this.expansionSetCode = "DD3JVC";
     }
 
     public MartyrOfFrost(final MartyrOfFrost card) {

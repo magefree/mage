@@ -39,7 +39,7 @@ public class GoblinLackey extends mage.sets.urzassaga.GoblinLackey {
     public GoblinLackey(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 5;
-        this.expansionSetCode = "FVE";
+        this.expansionSetCode = "V09";
         this.rarity = Rarity.MYTHIC;
     }
 

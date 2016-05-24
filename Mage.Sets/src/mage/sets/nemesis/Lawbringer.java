@@ -57,7 +57,7 @@ public class Lawbringer extends CardImpl {
 
     public Lawbringer(UUID ownerId) {
         super(ownerId, 10, "Lawbringer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Kor");
         this.subtype.add("Rebel");
         this.power = new MageInt(2);

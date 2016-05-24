@@ -38,7 +38,7 @@ public class StonewoodInvoker extends mage.sets.elvesvsgoblins.StonewoodInvoker 
     public StonewoodInvoker(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 11;
-        this.expansionSetCode = "DD3B";
+        this.expansionSetCode = "DD3EVG";
     }
 
     public StonewoodInvoker(final StonewoodInvoker card) {

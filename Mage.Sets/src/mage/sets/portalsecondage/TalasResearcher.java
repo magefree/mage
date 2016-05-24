@@ -47,7 +47,7 @@ public class TalasResearcher extends CardImpl {
 
     public TalasResearcher(UUID ownerId) {
         super(ownerId, 51, "Talas Researcher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.expansionSetCode = "PO2";
+        this.expansionSetCode = "P02";
         this.subtype.add("Human");
         this.subtype.add("Pirate");
         this.subtype.add("Wizard");

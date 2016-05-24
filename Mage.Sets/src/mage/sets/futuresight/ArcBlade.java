@@ -51,7 +51,7 @@ public class ArcBlade extends CardImpl {
         super(ownerId, 94, "Arc Blade", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "FUT";
 
-        // Arc Blade deals 2 damage to target creature or player. 
+        // Arc Blade deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         // Exile Arc Blade
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
@@ -60,7 +60,7 @@ public class ArcBlade extends CardImpl {
         effect.setText("with 3 time counters on it");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        
+
         // Suspend 3-{2}{R}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{R}"), this));
     }

@@ -58,7 +58,7 @@ public class MoggSalvage extends CardImpl {
 
     public MoggSalvage(UUID ownerId) {
         super(ownerId, 94, "Mogg Salvage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // If an opponent controls an Island and you control a Mountain, you may cast Mogg Salvage without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls an Island and you control a Mountain",

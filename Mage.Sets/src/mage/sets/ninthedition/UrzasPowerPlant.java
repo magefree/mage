@@ -35,19 +35,18 @@ import java.util.UUID;
  */
 public class UrzasPowerPlant extends mage.sets.fifthedition.UrzasPowerPlant {
 
-        public UrzasPowerPlant(UUID ownerId) {
-                super(ownerId);
-                this.cardNumber = 328;
-                this.expansionSetCode = "9ED";
-        }
+    public UrzasPowerPlant(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 328;
+        this.expansionSetCode = "9ED";
+    }
 
-        public UrzasPowerPlant(final UrzasPowerPlant card) {
-                super(card);
-        }
+    public UrzasPowerPlant(final UrzasPowerPlant card) {
+        super(card);
+    }
 
-        @Override
-        public UrzasPowerPlant copy() {
-                return new UrzasPowerPlant(this);
-        }
-
+    @Override
+    public UrzasPowerPlant copy() {
+        return new UrzasPowerPlant(this);
+    }
 }

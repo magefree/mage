@@ -38,7 +38,7 @@ public class SwordOfBodyAndMind extends mage.sets.scarsofmirrodin.SwordOfBodyAnd
     public SwordOfBodyAndMind(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 14;
-        this.expansionSetCode = "FVR";
+        this.expansionSetCode = "V10";
     }
 
     public SwordOfBodyAndMind(final SwordOfBodyAndMind card) {

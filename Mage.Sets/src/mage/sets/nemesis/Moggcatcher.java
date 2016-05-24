@@ -56,7 +56,7 @@ public class Moggcatcher extends CardImpl {
 
     public Moggcatcher(UUID ownerId) {
         super(ownerId, 96, "Moggcatcher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Human");
         this.subtype.add("Mercenary");
 

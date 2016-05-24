@@ -38,7 +38,7 @@ public class GenjuOfTheCedars extends mage.sets.betrayersofkamigawa.GenjuOfTheCe
     public GenjuOfTheCedars(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 13;
-        this.expansionSetCode = "DD3C";
+        this.expansionSetCode = "DD3GVL";
     }
 
     public GenjuOfTheCedars(final GenjuOfTheCedars card) {

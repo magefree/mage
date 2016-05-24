@@ -38,7 +38,7 @@ public class AncestralVision extends mage.sets.timespiral.AncestralVision {
     public AncestralVision(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 21;
-        this.expansionSetCode = "DD3D";
+        this.expansionSetCode = "DD3JVC";
     }
 
     public AncestralVision(final AncestralVision card) {

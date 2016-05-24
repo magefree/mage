@@ -38,7 +38,7 @@ public class Progenitus extends mage.sets.conflux.Progenitus {
     public Progenitus(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 9;
-        this.expansionSetCode = "FVL";
+        this.expansionSetCode = "V11";
     }
 
     public Progenitus(final Progenitus card) {

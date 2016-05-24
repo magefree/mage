@@ -38,7 +38,7 @@ public class SootImp extends mage.sets.eventide.SootImp {
     public SootImp(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 37;
-        this.expansionSetCode = "DD3A";
+        this.expansionSetCode = "DD3DVD";
     }
 
     public SootImp(final SootImp card) {
