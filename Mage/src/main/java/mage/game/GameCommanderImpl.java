@@ -39,16 +39,12 @@ import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
 import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.MultiplayerAttackOption;
-import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
 import mage.watchers.common.CommanderInfoWatcher;
 
 public abstract class GameCommanderImpl extends GameImpl {
@@ -116,69 +112,73 @@ public abstract class GameCommanderImpl extends GameImpl {
     //TODO implement may look at exile cards
     @Override
     public void mulligan(UUID playerId) {
-        Player player = getPlayer(playerId);
-        TargetCardInHand target = new TargetCardInHand(1, player.getHand().size(), new FilterCard("card to mulligan"));
-        target.setNotTarget(true);
-        target.setRequired(false);
-        if (player.choose(Outcome.Exile, player.getHand(), target, this)) {
-            int numCards = target.getTargets().size();
-            for (UUID uuid : target.getTargets()) {
-                Card card = player.getHand().get(uuid, this);
-                if (card != null) {
-                    if (!mulliganedCards.containsKey(playerId)) {
-                        mulliganedCards.put(playerId, new CardsImpl());
-                    }
-                    player.getHand().remove(card);
-                    getExile().add(card);
-                    getState().setZone(card.getId(), Zone.EXILED);
-                    card.setFaceDown(true, this);
-                    mulliganedCards.get(playerId).add(card);
-                }
-            }
-            int deduction = 1;
-            if (freeMulligans > 0) {
-                if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
-                    int used = usedFreeMulligans.get(player.getId());
-                    if (used < freeMulligans) {
-                        deduction = 0;
-                        usedFreeMulligans.put(player.getId(), used + 1);
-                    }
-                } else {
-                    deduction = 0;
-                    {
-
-                    }
-                    usedFreeMulligans.put(player.getId(), 1);
-                }
-            }
-            player.drawCards(numCards - deduction, this);
-            fireInformEvent(new StringBuilder(player.getLogName())
-                    .append(" mulligans ")
-                    .append(numCards)
-                    .append(numCards == 1 ? " card" : " cards")
-                    .append(deduction == 0 ? " for free and draws " : " down to ")
-                    .append(Integer.toString(player.getHand().size()))
-                    .append(player.getHand().size() <= 1 ? " card" : " cards").toString());
-        }
+        super.mulligan(playerId);
+        // Paris mulligan - no longer used by default for commander
+//        Player player = getPlayer(playerId);
+//        TargetCardInHand target = new TargetCardInHand(1, player.getHand().size(), new FilterCard("card to mulligan"));
+//        target.setNotTarget(true);
+//        target.setRequired(false);
+//        if (player.choose(Outcome.Exile, player.getHand(), target, this)) {
+//            int numCards = target.getTargets().size();
+//            for (UUID uuid : target.getTargets()) {
+//                Card card = player.getHand().get(uuid, this);
+//                if (card != null) {
+//                    if (!mulliganedCards.containsKey(playerId)) {
+//                        mulliganedCards.put(playerId, new CardsImpl());
+//                    }
+//                    player.getHand().remove(card);
+//                    getExile().add(card);
+//                    getState().setZone(card.getId(), Zone.EXILED);
+//                    card.setFaceDown(true, this);
+//                    mulliganedCards.get(playerId).add(card);
+//                }
+//            }
+//            int deduction = 1;
+//            if (freeMulligans > 0) {
+//                if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
+//                    int used = usedFreeMulligans.get(player.getId());
+//                    if (used < freeMulligans) {
+//                        deduction = 0;
+//                        usedFreeMulligans.put(player.getId(), used + 1);
+//                    }
+//                } else {
+//                    deduction = 0;
+//                    {
+//
+//                    }
+//                    usedFreeMulligans.put(player.getId(), 1);
+//                }
+//            }
+//            player.drawCards(numCards - deduction, this);
+//            fireInformEvent(new StringBuilder(player.getLogName())
+//                    .append(" mulligans ")
+//                    .append(numCards)
+//                    .append(numCards == 1 ? " card" : " cards")
+//                    .append(deduction == 0 ? " for free and draws " : " down to ")
+//                    .append(Integer.toString(player.getHand().size()))
+//                    .append(player.getHand().size() <= 1 ? " card" : " cards").toString());
+//        }
     }
 
     @Override
     public void endMulligan(UUID playerId) {
-        //return cards to
-        Player player = getPlayer(playerId);
-        if (player != null && mulliganedCards.containsKey(playerId)) {
-            for (Card card : mulliganedCards.get(playerId).getCards(this)) {
-                if (card != null) {
-                    getExile().removeCard(card, this);
-                    player.getLibrary().putOnTop(card, this);
-                    getState().setZone(card.getId(), Zone.LIBRARY);
-                    card.setFaceDown(false, this);
-                }
-            }
-            if (mulliganedCards.get(playerId).size() > 0) {
-                player.shuffleLibrary(null, this);
-            }
-        }
+        super.endMulligan(playerId);
+        // Paris mulligan - no longer used by default for commander
+//        //return cards to
+//        Player player = getPlayer(playerId);
+//        if (player != null && mulliganedCards.containsKey(playerId)) {
+//            for (Card card : mulliganedCards.get(playerId).getCards(this)) {
+//                if (card != null) {
+//                    getExile().removeCard(card, this);
+//                    player.getLibrary().putOnTop(card, this);
+//                    getState().setZone(card.getId(), Zone.LIBRARY);
+//                    card.setFaceDown(false, this);
+//                }
+//            }
+//            if (mulliganedCards.get(playerId).size() > 0) {
+//                player.shuffleLibrary(null, this);
+//            }
+//        }
     }
 
     /* 20130711
