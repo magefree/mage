@@ -27,8 +27,9 @@
  */
 package mage.sets.eternalmasters;
 
-import java.util.UUID;
 import mage.constants.Rarity;
+
+import java.util.UUID;
 
 /**
  *
