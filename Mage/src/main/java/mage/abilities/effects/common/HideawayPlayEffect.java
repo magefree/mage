@@ -37,6 +37,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  * @author LevelX2
  *
@@ -75,7 +77,8 @@ public class HideawayPlayEffect extends OneShotEffect {
                  * and you haven't already played a land that turn. This counts as your land play for the turn.
                  */
                 if (card.getCardType().contains(CardType.LAND)) {
-                    if (controller.getLandsPlayed() > 0 || !game.getActivePlayerId().equals(controller.getId())) {
+                    UUID playerId = controller.getId();
+                    if (!game.getActivePlayerId().equals(playerId) || !game.getPlayer(playerId).canPlayLand()) {
                         return false;
                     }
                 }

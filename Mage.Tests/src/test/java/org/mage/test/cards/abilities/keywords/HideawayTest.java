@@ -194,4 +194,34 @@ public class HideawayTest extends CardTestPlayerBase {
         assertTapped("Windbrisk Heights", true);
         Assert.assertEquals(playerA.getLandsPlayed(), 1);
     }
+
+    @Test
+    public void testCanPlayMoreLandsIfAble() {
+        addCard(Zone.HAND, playerA, "Windbrisk Heights");
+        addCard(Zone.LIBRARY, playerA, "Ghost Quarter");
+        addCard(Zone.HAND, playerA, "Plains");
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Auriok Champion", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Fastbond", 1);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Windbrisk Heights");
+        setChoice(playerA, "Ghost Quarter");
+
+        playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
+
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+
+        activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Ghost Quarter", 1);
+        assertTapped("Windbrisk Heights", true);
+        Assert.assertEquals(playerA.getLandsPlayed(), 2);
+    }
 }
