@@ -40,7 +40,7 @@ public class WinterOrb extends mage.sets.limitedalpha.WinterOrb {
         super(ownerId);
         this.cardNumber = 234;
         this.expansionSetCode = "EMA";
-        this.rarity = Rarity.;
+        this.rarity = Rarity.RARE;
     }
 
     public WinterOrb(final WinterOrb card) {
