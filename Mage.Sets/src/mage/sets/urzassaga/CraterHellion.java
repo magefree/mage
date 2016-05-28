@@ -25,20 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.urzassaga;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -47,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Backfir3
  */
-public class CraterHellion extends CardImpl{
+public class CraterHellion extends CardImpl {
 
     public CraterHellion(UUID ownerId) {
         super(ownerId, 179, "Crater Hellion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
@@ -58,10 +57,11 @@ public class CraterHellion extends CardImpl{
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-    this.addAbility(new EchoAbility("{4}{R}{R}"));
+        // Echo 4RR (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
+        this.addAbility(new EchoAbility("{4}{R}{R}"));
 
-    //When Crater Hellion enters the battlefield, it deals 4 damage to each other creature.
-    this.addAbility(new EntersBattlefieldTriggeredAbility(new CraterHellionEffect(), false));
+        //When Crater Hellion enters the battlefield, it deals 4 damage to each other creature.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CraterHellionEffect(), false));
     }
 
     public CraterHellion(final CraterHellion card) {
@@ -79,7 +79,7 @@ class CraterHellionEffect extends OneShotEffect {
 
     public CraterHellionEffect() {
         super(Outcome.Damage);
-                staticText = "it deals 4 damage to each other creature";
+        staticText = "it deals 4 damage to each other creature";
     }
 
     public CraterHellionEffect(final CraterHellionEffect effect) {
@@ -93,12 +93,12 @@ class CraterHellionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
-            for (Permanent permanent: permanents) {
-                if(!permanent.getId().equals(source.getSourceId())) {
-                    permanent.damage(4, source.getSourceId(), game, false, true);
-                }
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+        for (Permanent permanent : permanents) {
+            if (!permanent.getId().equals(source.getSourceId())) {
+                permanent.damage(4, source.getSourceId(), game, false, true);
             }
-            return true;
+        }
+        return true;
     }
 }

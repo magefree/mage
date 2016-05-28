@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Algid
  */
-public class Memnarch extends CardImpl{
+public class Memnarch extends CardImpl {
 
     public Memnarch(UUID ownerId) {
         super(ownerId, 129, "Memnarch", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

@@ -43,7 +43,7 @@ import mage.constants.Rarity;
  *
  * @author Loki
  */
-public class KnotvineMystic extends CardImpl{
+public class KnotvineMystic extends CardImpl {
 
     public KnotvineMystic(UUID ownerId) {
         super(ownerId, 114, "Knotvine Mystic", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
