@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class CephalidSage extends mage.sets.torment.CephalidSage {
 
@@ -40,6 +41,7 @@ public class CephalidSage extends mage.sets.torment.CephalidSage {
         super(ownerId);
         this.cardNumber = 41;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public CephalidSage(final CephalidSage card) {

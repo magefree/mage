@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class NightsWhisper extends mage.sets.fifthdawn.NightsWhisper {
 
@@ -40,6 +41,7 @@ public class NightsWhisper extends mage.sets.fifthdawn.NightsWhisper {
         super(ownerId);
         this.cardNumber = 100;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public NightsWhisper(final NightsWhisper card) {

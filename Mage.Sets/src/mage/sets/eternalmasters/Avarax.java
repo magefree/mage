@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class Avarax extends mage.sets.onslaught.Avarax {
 
@@ -40,6 +41,7 @@ public class Avarax extends mage.sets.onslaught.Avarax {
         super(ownerId);
         this.cardNumber = 117;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public Avarax(final Avarax card) {

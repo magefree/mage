@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class RallyThePeasants extends mage.sets.innistrad.RallyThePeasants {
 
@@ -40,6 +41,7 @@ public class RallyThePeasants extends mage.sets.innistrad.RallyThePeasants {
         super(ownerId);
         this.cardNumber = 25;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public RallyThePeasants(final RallyThePeasants card) {

@@ -32,24 +32,23 @@ import mage.constants.Rarity;
 
 /**
  *
- * @author spjspj
- *
+ * @author LevelX2
  */
-public class UndyingRage extends mage.sets.heroesvsmonsters.UndyingRage {
+public class ProwlingPangolin extends mage.sets.onslaught.ProwlingPangolin {
 
-    public UndyingRage(UUID ownerId) {
+    public ProwlingPangolin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = 104;
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }
 
-    public UndyingRage(final UndyingRage card) {
+    public ProwlingPangolin(final ProwlingPangolin card) {
         super(card);
     }
 
     @Override
-    public UndyingRage copy() {
-        return new UndyingRage(this);
+    public ProwlingPangolin copy() {
+        return new ProwlingPangolin(this);
     }
 }

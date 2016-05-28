@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class EliteVanguard extends mage.sets.magic2010.EliteVanguard {
 
@@ -40,6 +41,7 @@ public class EliteVanguard extends mage.sets.magic2010.EliteVanguard {
         super(ownerId);
         this.cardNumber = 8;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public EliteVanguard(final EliteVanguard card) {

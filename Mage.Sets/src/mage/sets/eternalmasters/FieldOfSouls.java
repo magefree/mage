@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class FieldOfSouls extends mage.sets.tempestremastered.FieldOfSouls {
 
@@ -40,6 +41,7 @@ public class FieldOfSouls extends mage.sets.tempestremastered.FieldOfSouls {
         super(ownerId);
         this.cardNumber = 11;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.UNCOMMON;
     }
 
     public FieldOfSouls(final FieldOfSouls card) {

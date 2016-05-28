@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class PeregrineDrake extends mage.sets.urzassaga.PeregrineDrake {
 
@@ -40,6 +41,7 @@ public class PeregrineDrake extends mage.sets.urzassaga.PeregrineDrake {
         super(ownerId);
         this.cardNumber = 64;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public PeregrineDrake(final PeregrineDrake card) {

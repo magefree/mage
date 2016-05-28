@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class ElvishVanguard extends mage.sets.onslaught.ElvishVanguard {
 
@@ -40,6 +41,7 @@ public class ElvishVanguard extends mage.sets.onslaught.ElvishVanguard {
         super(ownerId);
         this.cardNumber = 164;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public ElvishVanguard(final ElvishVanguard card) {

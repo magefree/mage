@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class PhantomMonster extends mage.sets.fifthedition.PhantomMonster {
 
@@ -40,6 +41,7 @@ public class PhantomMonster extends mage.sets.fifthedition.PhantomMonster {
         super(ownerId);
         this.cardNumber = 65;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public PhantomMonster(final PhantomMonster card) {

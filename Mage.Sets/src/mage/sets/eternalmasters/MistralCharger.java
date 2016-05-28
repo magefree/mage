@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class MistralCharger extends mage.sets.dissension.MistralCharger {
 
@@ -40,6 +41,7 @@ public class MistralCharger extends mage.sets.dissension.MistralCharger {
         super(ownerId);
         this.cardNumber = 20;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public MistralCharger(final MistralCharger card) {

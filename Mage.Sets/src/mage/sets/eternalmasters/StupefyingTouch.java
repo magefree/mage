@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class StupefyingTouch extends mage.sets.torment.StupefyingTouch {
 
@@ -40,6 +41,7 @@ public class StupefyingTouch extends mage.sets.torment.StupefyingTouch {
         super(ownerId);
         this.cardNumber = 74;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public StupefyingTouch(final StupefyingTouch card) {

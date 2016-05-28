@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class Humble extends mage.sets.urzassaga.Humble {
 
@@ -40,6 +41,7 @@ public class Humble extends mage.sets.urzassaga.Humble {
         super(ownerId);
         this.cardNumber = 14;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public Humble(final Humble card) {

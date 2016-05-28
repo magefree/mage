@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class TidalWave extends mage.sets.mirage.TidalWave {
 
@@ -40,6 +41,7 @@ public class TidalWave extends mage.sets.mirage.TidalWave {
         super(ownerId);
         this.cardNumber = 75;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public TidalWave(final TidalWave card) {

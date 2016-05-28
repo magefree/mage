@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class MerfolkLooter extends mage.sets.magic2012.MerfolkLooter {
 
@@ -40,6 +41,7 @@ public class MerfolkLooter extends mage.sets.magic2012.MerfolkLooter {
         super(ownerId);
         this.cardNumber = 61;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.UNCOMMON;
     }
 
     public MerfolkLooter(final MerfolkLooter card) {

@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class DragonEgg extends mage.sets.magic2014.DragonEgg {
 
@@ -40,6 +41,7 @@ public class DragonEgg extends mage.sets.magic2014.DragonEgg {
         super(ownerId);
         this.cardNumber = 126;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public DragonEgg(final DragonEgg card) {

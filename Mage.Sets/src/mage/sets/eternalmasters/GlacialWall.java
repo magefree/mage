@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class GlacialWall extends mage.sets.fifthedition.GlacialWall {
 
@@ -40,6 +41,7 @@ public class GlacialWall extends mage.sets.fifthedition.GlacialWall {
         super(ownerId);
         this.cardNumber = 53;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public GlacialWall(final GlacialWall card) {

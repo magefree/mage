@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class MonkIdealist extends mage.sets.urzassaga.MonkIdealist {
 
@@ -40,6 +41,7 @@ public class MonkIdealist extends mage.sets.urzassaga.MonkIdealist {
         super(ownerId);
         this.cardNumber = 21;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public MonkIdealist(final MonkIdealist card) {

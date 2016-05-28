@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class OrcishOriflamme extends mage.sets.limitedalpha.OrcishOriflamme {
 
@@ -40,6 +41,7 @@ public class OrcishOriflamme extends mage.sets.limitedalpha.OrcishOriflamme {
         super(ownerId);
         this.cardNumber = 140;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public OrcishOriflamme(final OrcishOriflamme card) {

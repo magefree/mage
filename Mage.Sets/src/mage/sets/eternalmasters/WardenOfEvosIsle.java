@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class WardenOfEvosIsle extends mage.sets.magic2014.WardenOfEvosIsle {
 
@@ -40,6 +41,7 @@ public class WardenOfEvosIsle extends mage.sets.magic2014.WardenOfEvosIsle {
         super(ownerId);
         this.cardNumber = 76;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public WardenOfEvosIsle(final WardenOfEvosIsle card) {
