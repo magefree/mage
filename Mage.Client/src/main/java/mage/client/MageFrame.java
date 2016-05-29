@@ -823,7 +823,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         desktopPane = new MageJDesktop();
         mageToolbar = new javax.swing.JToolBar();
-        btnSendFeedback = new javax.swing.JButton();
+        btnPreferences = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         btnConnect = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
@@ -833,7 +833,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btnCollectionViewer = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
-        btnPreferences = new javax.swing.JButton();
+        btnSendFeedback = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         btnAbout = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
@@ -854,16 +854,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.setMinimumSize(new java.awt.Dimension(566, 60));
         mageToolbar.setPreferredSize(new java.awt.Dimension(614, 60));
 
-        btnSendFeedback.setText("Feedback");
-        btnSendFeedback.setFocusable(false);
-        btnSendFeedback.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnSendFeedback.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnSendFeedback.addActionListener(new java.awt.event.ActionListener() {
+        btnPreferences.setText("Preferences");
+        btnPreferences.setFocusable(false);
+        btnPreferences.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPreferences.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPreferences.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSendFeedbackActionPerformed(evt);
+                btnPreferencesActionPerformed(evt);
             }
         });
-        mageToolbar.add(btnSendFeedback);
+        mageToolbar.add(btnPreferences);
         mageToolbar.add(jSeparator4);
 
         btnConnect.setText("Connect");
@@ -914,16 +914,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnCollectionViewer);
         mageToolbar.add(jSeparator5);
 
-        btnPreferences.setText("Preferences");
-        btnPreferences.setFocusable(false);
-        btnPreferences.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPreferences.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnPreferences.addActionListener(new java.awt.event.ActionListener() {
+        btnSendFeedback.setText("Feedback");
+        btnSendFeedback.setFocusable(false);
+        btnSendFeedback.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSendFeedback.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSendFeedback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPreferencesActionPerformed(evt);
+                btnSendFeedbackActionPerformed(evt);
             }
         });
-        mageToolbar.add(btnPreferences);
+        mageToolbar.add(btnSendFeedback);
         mageToolbar.add(jSeparator6);
 
         btnAbout.setText("About");
@@ -1069,9 +1069,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (setActive) {
             setActive(tablesPane);
         } else // if other panel was already shown, mamke sure it's topmost again
-         if (topPanebefore != null) {
+        {
+            if (topPanebefore != null) {
                 setActive(topPanebefore);
             }
+        }
     }
 
     public void hideGames() {
