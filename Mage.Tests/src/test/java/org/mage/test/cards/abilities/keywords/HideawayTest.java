@@ -118,6 +118,110 @@ public class HideawayTest extends CardTestPlayerBase {
         Permanent permanent = getPermanent("Ulamog, the Ceaseless Hunger", playerA);
         Card card = currentGame.getCard(permanent.getId());
         Assert.assertFalse("Previous exiled card may be no longer face down", card.isFaceDown(currentGame));
+    }
 
+    @Test
+    public void testCannotPlayLandIfPlayedLand() {
+        addCard(Zone.HAND, playerA, "Windbrisk Heights");
+        addCard(Zone.HAND, playerA, "Plains");
+        addCard(Zone.LIBRARY, playerA, "Ghost Quarter");
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Auriok Champion", 3);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Windbrisk Heights");
+        setChoice(playerA, "Ghost Quarter");
+
+        playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
+
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+
+        activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Ghost Quarter", 0);
+        assertTapped("Windbrisk Heights", true);
+    }
+
+    @Test
+    public void testCannotPlayLandIfNotOwnTurn() {
+        addCard(Zone.HAND, playerA, "Mosswort Bridge");
+        addCard(Zone.LIBRARY, playerA, "Ghost Quarter");
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Dross Crocodile", 2);// 5/1
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mosswort Bridge");
+        setChoice(playerA, "Ghost Quarter");
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Ghost Quarter", 0);
+        assertTapped("Mosswort Bridge", true);
+    }
+
+    @Test
+    public void testCanPlayLandIfNotPlayedLand() {
+        addCard(Zone.HAND, playerA, "Windbrisk Heights");
+        addCard(Zone.LIBRARY, playerA, "Ghost Quarter");
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Auriok Champion", 3);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Windbrisk Heights");
+        setChoice(playerA, "Ghost Quarter");
+
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+
+        activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Ghost Quarter", 1);
+        assertTapped("Windbrisk Heights", true);
+        Assert.assertEquals(playerA.getLandsPlayed(), 1);
+    }
+
+    @Test
+    public void testCanPlayMoreLandsIfAble() {
+        addCard(Zone.HAND, playerA, "Windbrisk Heights");
+        addCard(Zone.LIBRARY, playerA, "Ghost Quarter");
+        addCard(Zone.HAND, playerA, "Plains");
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Auriok Champion", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Fastbond", 1);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Windbrisk Heights");
+        setChoice(playerA, "Ghost Quarter");
+
+        playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
+
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+
+        activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Ghost Quarter", 1);
+        assertTapped("Windbrisk Heights", true);
+        Assert.assertEquals(playerA.getLandsPlayed(), 2);
     }
 }

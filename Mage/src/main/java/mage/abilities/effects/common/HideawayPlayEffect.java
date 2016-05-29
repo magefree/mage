@@ -30,11 +30,14 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -68,7 +71,19 @@ public class HideawayPlayEffect extends OneShotEffect {
             if (controller.chooseUse(Outcome.PlayForFree, "Do you want to play " + card.getIdName() + " for free now?", source, game)) {
                 card.setFaceDown(false, game);
                 int zcc = card.getZoneChangeCounter(game);
-                if (!controller.playCard(card, game, true, false)) {
+
+                /* 702.74. Hideaway, rulings:
+                 * If the removed card is a land, you may play it as a result of the last ability only if it's your turn
+                 * and you haven't already played a land that turn. This counts as your land play for the turn.
+                 */
+                if (card.getCardType().contains(CardType.LAND)) {
+                    UUID playerId = controller.getId();
+                    if (!game.getActivePlayerId().equals(playerId) || !game.getPlayer(playerId).canPlayLand()) {
+                        return false;
+                    }
+                }
+
+                if (!controller.playCard(card, game, true, true)) {
                     if (card.getZoneChangeCounter(game) == zcc) {
                         card.setFaceDown(true, game);
                     }
