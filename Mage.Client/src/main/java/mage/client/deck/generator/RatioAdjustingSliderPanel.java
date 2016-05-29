@@ -28,8 +28,6 @@
 
 package mage.client.deck.generator;
 
-import mage.client.deck.generator.DeckGeneratorPool;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -42,8 +40,6 @@ import java.util.List;
  */
 public class RatioAdjustingSliderPanel extends JPanel {
 
-    private static final int MAXIMUM = 100;
-    private int adjustableCount;
     private JStorageSlider creatureSlider, nonCreatureSlider, landSlider;
     private List<JLabel> textLabels = new ArrayList<>();
     private AdjustingSliderGroup sg;
@@ -52,9 +48,11 @@ public class RatioAdjustingSliderPanel extends JPanel {
 
         // Slider stores its initial value to revert to when reset
         private int defaultValue;
+        private int previousValue;
 
         public JStorageSlider(int min, int max, int value) {
             super(min, max, value);
+            previousValue = value;
             defaultValue = value;
             setMinorTickSpacing(5);
             setMajorTickSpacing(10);
@@ -63,19 +61,30 @@ public class RatioAdjustingSliderPanel extends JPanel {
             setLabelTable(createStandardLabels(10));
         }
 
+        public int getPreviousValue() {
+            return previousValue;
+        }
+
+        public void setPreviousValue(int value) {
+            previousValue = value;
+        }
+
         public void resetDefault() {
             this.setValue(defaultValue);
+            previousValue = defaultValue;
         }
 
     }
 
-    private class AdjustingSliderGroup {
+    private class AdjustingSliderGroup
+    {
         private final ArrayList<JStorageSlider> storageSliders;
         private int sliderIndex = 0;
 
-        AdjustingSliderGroup(JStorageSlider... sliders) {
+        AdjustingSliderGroup(JStorageSlider... sliders)
+        {
             storageSliders = new ArrayList<>();
-            for (JStorageSlider slider : sliders) {
+            for(JStorageSlider slider: sliders) {
                 storageSliders.add(slider);
                 slider.addChangeListener(new ChangeListener() {
                     @Override
@@ -84,49 +93,36 @@ public class RatioAdjustingSliderPanel extends JPanel {
                     }
                 });
             }
-            adjustableCount = storageSliders.size() - 1;
         }
-
         public void fireSliderChangedEvent(JStorageSlider source) {
             // We don't want to do anything if the value isn't changing
-            if (!source.getValueIsAdjusting())
+            if(!source.getValueIsAdjusting())
                 return;
             // Update the slider depending on how much it's changed relative to its previous position
-            updateSliderPosition(source);
+            int change = (source.getValue() - source.getPreviousValue());
+            updateSliderPosition(change, source);
         }
 
-        private void updateSliderPosition(JStorageSlider source) {
-            int maximum = MAXIMUM;
-            int excess = MAXIMUM;
-            int sign = 0;
-            for (JStorageSlider slider : storageSliders) {
-                excess -= slider.getValue();
-            }
-            sign = Integer.signum(excess);
-            excess = Math.abs(excess);
-            int addition = excess / (adjustableCount - 1); // divide the deficit between all adjustable sliders except this one
-            if (addition == 0 && excess != 0) {
-                addition = 1;
-            }
-            for (int i = storageSliders.size() - 1; i >= 0; i--) {
-                JStorageSlider slider = storageSliders.get(i);
-                int value = slider.getValue();
-                if (slider != source && maximum < MAXIMUM) {
-                    slider.setMaximum(maximum);
-                    if (excess >= addition) {
-                        value += addition * sign;
-                        excess -= addition;
-                    } else {
-                        value += excess * sign;
-                        excess = 0;
+        private void updateSliderPosition(int change, JStorageSlider source) {
+            int remaining = change;
+            while (remaining != 0)  {
+                // Get the currently indexed slider
+                JStorageSlider slider = storageSliders.get(sliderIndex);
+                // If it's not the slider that fired the event
+                if (slider != source)  {
+                    // Check we don't go over the upper and lower bounds
+                    if (remaining < 0 || (remaining > 0 && slider.getValue() > 0)) {
+                        // Adjust the currently selected slider by +/- 1
+                        int adjustment = Integer.signum(remaining);
+                        slider.setValue(slider.getValue() - adjustment);
+                        remaining -= adjustment;
                     }
-                    if (value < 0) {
-                        excess += value;
-                        value = 0;
-                    }
-                    slider.setValue(value);
                 }
-                maximum -= value;
+                // Select the next slider in the list of sliders
+                sliderIndex = (sliderIndex + 1) % storageSliders.size();
+            }
+            for (JStorageSlider slider : storageSliders)  {
+                slider.setPreviousValue(slider.getValue());
             }
         }
 
@@ -143,9 +139,9 @@ public class RatioAdjustingSliderPanel extends JPanel {
     private void initPanel() {
 
         // Create three sliders with default values
-        creatureSlider = new JStorageSlider(0, MAXIMUM, DeckGeneratorPool.DEFAULT_CREATURE_PERCENTAGE);
-        nonCreatureSlider = new JStorageSlider(0, MAXIMUM, DeckGeneratorPool.DEFAULT_NON_CREATURE_PERCENTAGE);
-        landSlider = new JStorageSlider(0, MAXIMUM, DeckGeneratorPool.DEFAULT_LAND_PERCENTAGE);
+        creatureSlider = new JStorageSlider(0, 100, DeckGeneratorPool.DEFAULT_CREATURE_PERCENTAGE);
+        nonCreatureSlider = new JStorageSlider(0, 100, DeckGeneratorPool.DEFAULT_NON_CREATURE_PERCENTAGE);
+        landSlider = new JStorageSlider(0, 100, DeckGeneratorPool.DEFAULT_LAND_PERCENTAGE);
 
         sg = new AdjustingSliderGroup(creatureSlider, nonCreatureSlider, landSlider);
 
@@ -177,7 +173,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
         return sliderPanel;
     }
 
-    private static JLabel createChangingPercentageLabel(final JSlider slider) {
+    private static JLabel createChangingPercentageLabel(final JSlider slider)  {
 
         final JLabel label = new JLabel("      " + String.valueOf(slider.getValue()) + "%");
 
@@ -187,7 +183,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
                 String value = String.valueOf(slider.getValue());
                 StringBuilder labelBuilder = new StringBuilder();
                 // Pad with spaces so all percentage labels are of equal size
-                for (int i = 0; i < (5 - value.length()); i++) {
+                for(int i = 0; i < (5-value.length()); i++) {
                     labelBuilder.append("  ");
                 }
                 labelBuilder.append(value);
@@ -200,19 +196,18 @@ public class RatioAdjustingSliderPanel extends JPanel {
 
     @Override
     public void setEnabled(boolean enabled) {
-        for (JStorageSlider slider : sg.getSliders()) {
+        for(JStorageSlider slider: sg.getSliders()) {
             slider.setEnabled(enabled);
         }
-        for (JLabel label : textLabels) {
+        for(JLabel label: textLabels) {
             label.setEnabled(enabled);
         }
     }
 
     public void resetValues() {
-        for (JStorageSlider slider : sg.getSliders()) {
+        for(JStorageSlider slider: sg.getSliders()) {
             slider.resetDefault();
         }
-        sg.updateSliderPosition(landSlider);
     }
 
     public int getCreaturePercentage() {
@@ -229,17 +224,20 @@ public class RatioAdjustingSliderPanel extends JPanel {
 
     public void setCreaturePercentage(int percentage) {
         creatureSlider.setValue(percentage);
-        sg.updateSliderPosition(creatureSlider);
+        creatureSlider.previousValue = percentage;
     }
 
     public void setNonCreaturePercentage(int percentage) {
         nonCreatureSlider.setValue(percentage);
-        sg.updateSliderPosition(nonCreatureSlider);
+        nonCreatureSlider.previousValue = percentage;
     }
 
     public void setLandPercentage(int percentage) {
         landSlider.setValue(percentage);
-        sg.updateSliderPosition(landSlider);
+        landSlider.previousValue = percentage;
     }
+
+
+
 
 }
