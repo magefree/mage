@@ -31,14 +31,8 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.VanishingSacrificeAbility;
@@ -76,10 +70,9 @@ public class LostAuramancers extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
 
         // When Lost Auramancers dies, if it had no time counters on it, you may search your library
-        // for an enchantment card and put it onto the battlefield. If you do, shuffle your library.        
+        // for an enchantment card and put it onto the battlefield. If you do, shuffle your library.
         this.addAbility(new LostAuramancersAbility());
     }
-
 
     public LostAuramancers(final LostAuramancers card) {
         super(card);
@@ -89,24 +82,21 @@ public class LostAuramancers extends CardImpl {
     public LostAuramancers copy() {
         return new LostAuramancers(this);
     }
-    
+
 }
-    
-class LostAuramancersAbility extends DiesTriggeredAbility {
+
+class LostAuramancersAbility extends PutIntoGraveFromBattlefieldSourceTriggeredAbility {
 
     public LostAuramancersAbility() {
-
         super(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterEnchantmentCard())));
     }
-    
-    
 
     public LostAuramancersAbility(final LostAuramancersAbility ability) {
         super(ability);
     }
 
     @Override
-    public DiesTriggeredAbility copy() {
+    public LostAuramancersAbility copy() {
         return new LostAuramancersAbility(this);
     }
 
@@ -123,6 +113,6 @@ class LostAuramancersAbility extends DiesTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When Lost Auramancers is put into a graveyard from play, if it had no time counters on it, you may search your library for an enchantment card and put it into play. If you do, shuffle your library.";
+        return "When {this} is put into a graveyard from play, if it had no time counters on it, you may search your library for an enchantment card and put it into play. If you do, shuffle your library.";
     }
 }
