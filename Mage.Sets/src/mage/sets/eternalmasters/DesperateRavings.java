@@ -28,11 +28,12 @@
 package mage.sets.eternalmasters;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author spjspj
-
+ *
  */
 public class DesperateRavings extends mage.sets.innistrad.DesperateRavings {
 
@@ -40,6 +41,7 @@ public class DesperateRavings extends mage.sets.innistrad.DesperateRavings {
         super(ownerId);
         this.cardNumber = 125;
         this.expansionSetCode = "EMA";
+        this.rarity = Rarity.COMMON;
     }
 
     public DesperateRavings(final DesperateRavings card) {
