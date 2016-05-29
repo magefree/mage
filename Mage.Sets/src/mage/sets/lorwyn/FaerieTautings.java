@@ -28,14 +28,13 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -49,7 +48,8 @@ public class FaerieTautings extends CardImpl {
         this.subtype.add("Faerie");
 
         // Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life
-        this.addAbility(new FaerieTautingsTriggeredAbility());
+        this.addAbility(new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), true), OnOpponentsTurnCondition.getInstance(),
+                "Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life."));
 
     }
 
@@ -60,37 +60,5 @@ public class FaerieTautings extends CardImpl {
     @Override
     public FaerieTautings copy() {
         return new FaerieTautings(this);
-    }
-}
-
-class FaerieTautingsTriggeredAbility extends TriggeredAbilityImpl {
-
-    FaerieTautingsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), true);
-    }
-
-    FaerieTautingsTriggeredAbility(final FaerieTautingsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FaerieTautingsTriggeredAbility copy() {
-        return new FaerieTautingsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.controllerId)
-                && game.getOpponents(this.controllerId).contains(game.getActivePlayerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a spell during an opponent's turn, " + super.getRule();
     }
 }

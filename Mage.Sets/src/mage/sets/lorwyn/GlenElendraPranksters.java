@@ -29,15 +29,15 @@ package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -57,7 +57,10 @@ public class GlenElendraPranksters extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
-        this.addAbility(new GlenElendraPrankstersTriggeredAbility());
+        Ability ability = new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), true), OnOpponentsTurnCondition.getInstance(),
+                "Whenever you cast a spell during an opponent's turn, you may have target creature get -1/-1 until end of turn.");
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public GlenElendraPranksters(final GlenElendraPranksters card) {
@@ -67,36 +70,5 @@ public class GlenElendraPranksters extends CardImpl {
     @Override
     public GlenElendraPranksters copy() {
         return new GlenElendraPranksters(this);
-    }
-}
-class GlenElendraPrankstersTriggeredAbility extends TriggeredAbilityImpl {
-    GlenElendraPrankstersTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);
-        this.addTarget(new TargetControlledCreaturePermanent());
-    }
-
-    GlenElendraPrankstersTriggeredAbility(final GlenElendraPrankstersTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GlenElendraPrankstersTriggeredAbility copy() {
-        return new GlenElendraPrankstersTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.controllerId)
-                && game.getOpponents(this.controllerId).contains(game.getActivePlayerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a spell during an opponent's turn, " + super.getRule();
     }
 }

@@ -29,17 +29,16 @@ package mage.sets.modernmasters;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -60,8 +59,10 @@ public class DreamspoilerWitches extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a spell during an opponent's turn, you may have target creature get -1/-1 until end of turn.
-        this.addAbility(new DreamspoilerWitchesTriggeredAbility());
-
+        Ability ability = new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true), OnOpponentsTurnCondition.getInstance(),
+                "Whenever you cast a spell during an opponent's turn, you may have target creature get -1/-1 until end of turn.");
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public DreamspoilerWitches(final DreamspoilerWitches card) {
@@ -71,37 +72,5 @@ public class DreamspoilerWitches extends CardImpl {
     @Override
     public DreamspoilerWitches copy() {
         return new DreamspoilerWitches(this);
-    }
-}
-
-class DreamspoilerWitchesTriggeredAbility extends TriggeredAbilityImpl {
-    DreamspoilerWitchesTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostTargetEffect(-1,-1, Duration.EndOfTurn), true);
-        this.addTarget(new TargetCreaturePermanent());
-    }
-
-    DreamspoilerWitchesTriggeredAbility(final DreamspoilerWitchesTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DreamspoilerWitchesTriggeredAbility copy() {
-        return new DreamspoilerWitchesTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.controllerId)
-                && game.getOpponents(this.controllerId).contains(game.getActivePlayerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast a spell during an opponent's turn, " + super.getRule();
     }
 }
