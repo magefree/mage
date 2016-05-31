@@ -27,13 +27,14 @@
  */
 package mage.cards.decks.importer;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -46,7 +47,7 @@ public class TxtDeckImporter extends DeckImporter {
     public static final Set<String> IGNORE_NAMES = new HashSet<>(Arrays.asList(SET_VALUES));
 
     private boolean sideboard = false;
-    private int emptyLinesInARow = 0;
+    private int nonEmptyLinesTotal = 0;
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
@@ -57,14 +58,14 @@ public class TxtDeckImporter extends DeckImporter {
         if (line.startsWith("//")) {
             return;
         }
-        if (line.length() == 0) {
-            emptyLinesInARow++;
-            if (emptyLinesInARow > 1) {
-                sideboard = true;
-            }
+
+        // Start the sideboard on empty line that follows
+        // at least 1 non-empty line
+        if (line.length() == 0 && nonEmptyLinesTotal > 0) {
+            sideboard = true;
             return;
         } else {
-            emptyLinesInARow = 0;
+            nonEmptyLinesTotal++;
         }
 
         line = line.replace("\t", " "); // changing tabs to blanks as delimiter
