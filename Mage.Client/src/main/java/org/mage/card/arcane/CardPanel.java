@@ -52,8 +52,6 @@ import mage.view.PermanentView;
 import mage.view.StackAbilityView;
 import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
-import org.mage.card.arcane.ScaledImagePanel.MultipassType;
-import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
@@ -304,9 +302,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         imagePanel = new ScaledImagePanel();
         imagePanel.setBorder(BorderFactory.createLineBorder(Color.white));
         add(imagePanel);
-        imagePanel.setScaleLarger(true);
-        imagePanel.setScalingType(ScalingType.nearestNeighbor);
-        imagePanel.setScalingMultiPassType(MultipassType.none);
 
         String cardType = getType(newGameCard);
         tooltipText.setText(getText(cardType, newGameCard));
@@ -387,7 +382,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         titleText.setText(!displayTitleAnyway && hasImage ? "" : card.getName());
     }
 
-    private void setImage(Image srcImage) {
+    private void setImage(BufferedImage srcImage) {
         synchronized (imagePanel) {
             imagePanel.setImage(srcImage);
             repaint();
@@ -411,10 +406,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     @Override
     public String getZone() {
         return zone;
-    }
-
-    public void setScalingType(ScalingType scalingType) {
-        imagePanel.setScalingType(scalingType);
     }
 
     public void setDisplayEnabled(boolean displayEnabled) {
@@ -618,12 +609,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             int offsetX = Math.round((CARD_SIZE_FULL.width - cardWidth) / 10.0f);
 
             ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
-        }
-
-        if (isAnimationPanel || cardWidth < 200) {
-            imagePanel.setScalingType(ScalingType.nearestNeighbor);
-        } else {
-            imagePanel.setScalingType(ScalingType.bilinear);
         }
     }
 
