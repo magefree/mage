@@ -40,10 +40,10 @@ import mage.constants.Rarity;
  *
  * @author Styxo
  */
-public class FaerieTautings extends CardImpl {
+public class FaerieTauntings extends CardImpl {
 
-    public FaerieTautings(UUID ownerId) {
-        super(ownerId, 112, "Faerie Tautings", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{2}{B}");
+    public FaerieTauntings(UUID ownerId) {
+        super(ownerId, 112, "Faerie Tauntings", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Faerie");
 
@@ -53,12 +53,12 @@ public class FaerieTautings extends CardImpl {
 
     }
 
-    public FaerieTautings(final FaerieTautings card) {
+    public FaerieTauntings(final FaerieTauntings card) {
         super(card);
     }
 
     @Override
-    public FaerieTautings copy() {
-        return new FaerieTautings(this);
+    public FaerieTauntings copy() {
+        return new FaerieTauntings(this);
     }
 }
