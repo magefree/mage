@@ -228,7 +228,7 @@ public class DraftPanel extends javax.swing.JPanel {
         int height = left * 18;
         lblTableImage.setSize(new Dimension(lblTableImage.getWidth(), height));
         Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() == 2 ? "/draft/table_left.png" : "/draft/table_right.png");
-        BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), lblTableImage.getWidth());
+        BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), lblTableImage.getWidth(), lblTableImage.getHeight());
         lblTableImage.setIcon(new ImageIcon(resizedTable));
 
         int count = 0;

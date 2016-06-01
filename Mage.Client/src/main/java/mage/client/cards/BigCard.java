@@ -54,6 +54,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.ImageHelper;
 import mage.constants.EnlargeMode;
 import org.jdesktop.swingx.JXPanel;
+import mage.client.util.TransformedImageCache;
 
 /**
  * Class for displaying big image of the card
@@ -103,7 +104,13 @@ public class BigCard extends JComponent {
 
     }
     
-    public void setCard(UUID cardId, EnlargeMode enlargeMode, Image image, List<String> strings) {
+    public void setCard(UUID cardId, EnlargeMode enlargeMode, Image image, List<String> strings, boolean rotate) {
+        if (rotate && getWidth() > getHeight()) {
+            image = TransformedImageCache.getRotatedResizedImage((BufferedImage)image, getHeight(), getWidth(), Math.toRadians(90.0));
+        } else {
+            image = TransformedImageCache.getResizedImage((BufferedImage)image, getWidth(), getHeight());
+        }
+
         if (this.cardId == null || !enlargeMode.equals(this.enlargeMode) || !this.cardId.equals(cardId)) {
             if (this.panel != null) {
                 remove(this.panel);

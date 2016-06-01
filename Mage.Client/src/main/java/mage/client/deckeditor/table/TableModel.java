@@ -409,8 +409,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 Image image = Plugins.getInstance().getOriginalImage(card);
                 if (image != null && image instanceof BufferedImage) {
                     // XXX: scaled to fit width
-                    image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
-                    bigCard.setCard(card.getId(), EnlargeMode.NORMAL, image, new ArrayList<String>());
+                    bigCard.setCard(card.getId(), EnlargeMode.NORMAL, image, new ArrayList<String>(), false);
                 } else {
                     drawCardText(card);
                 }
