@@ -116,6 +116,7 @@ import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
 import mage.client.util.EDTExceptionHandler;
 import mage.client.util.GUISizeHelper;
+import mage.client.util.ImageCaches;
 import mage.client.util.SettingsManager;
 import mage.client.util.SystemUtil;
 import mage.client.util.audio.MusicPlayer;
@@ -1455,6 +1456,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void changeGUISize() {
+        ImageCaches.flush();
         setGUISize();
         Plugins.getInstance().changeGUISize();
         CountryUtil.changeGUISize();
