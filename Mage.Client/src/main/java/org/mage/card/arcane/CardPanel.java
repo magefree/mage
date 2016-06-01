@@ -1056,7 +1056,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         if (gameCard.hideInfo()) {
             return;
         }
-        if (getMousePosition(true) != null) {
+        if (this.contains(e.getPoint())) {
             return;
         }
         if (tooltipShowing) {
