@@ -139,9 +139,7 @@ public class ColorPane extends JEditorPane {
             if (hyperlinkEnabled) {
                 text = text.replaceAll("(<font color=[^>]*>([^<]*)) (\\[[0-9a-fA-F]*\\])</font>", "<a href=\"#$2\">$1</a> $3");
             }
-            setEditable(true);
             kit.insertHTML(doc, doc.getLength(), text, 0, 0, null);
-            setEditable(false);
             int len = getDocument().getLength();
             setCaretPosition(len);
 
