@@ -155,6 +155,7 @@ public class MageActionCallback implements ActionCallback {
                 }
                 data.locationOnScreen = data.component.getLocationOnScreen();
             }
+            data.popupText.updateText();
             tooltipPopup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
             tooltipPopup.show();
             // hack to get popup to resize to fit text
