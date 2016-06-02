@@ -363,4 +363,32 @@ public class KickerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Sunscape Battlemage", 1);
 
     }
+
+    /**
+     * Paying the Kicker on "Marsh Casualties" has no effect. Target player's
+     * creatures still only get -1/-1 instead of -2/-2. Was playing against AI.
+     * It was me who cast the spell.
+     *
+     */
+    @Test
+    public void testMarshCasualties() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+
+        // Kicker {3}
+        // Creatures target player controls get -1/-1 until end of turn. If Marsh Casualties was kicked, those creatures get -2/-2 until end of turn instead.
+        addCard(Zone.HAND, playerA, "Marsh Casualties", 1); // 2/2  {2}{W}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser", 1); // 3/3
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Marsh Casualties", playerB);
+        setChoice(playerA, "Yes");  // Pay Kicker
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertTappedCount("Swamp", true, 5);
+        assertGraveyardCount(playerA, "Marsh Casualties", 1);
+        assertPowerToughness(playerB, "Centaur Courser", 1, 1);
+
+    }
 }

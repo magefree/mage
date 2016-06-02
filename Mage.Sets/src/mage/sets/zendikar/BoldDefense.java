@@ -28,21 +28,19 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  * @author nantuko, Loki
@@ -53,12 +51,16 @@ public class BoldDefense extends CardImpl {
         super(ownerId, 3, "Bold Defense", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ZEN";
 
-
         // Kicker {3}{W} (You may pay an additional {3}{W} as you cast this spell.)
         this.addAbility(new KickerAbility("{3}{W}"));
 
         // Creatures you control get +1/+1 until end of turn. If Bold Defense was kicked, instead creatures you control get +2/+2 and gain first strike until end of turn.
-        this.getSpellAbility().addEffect(new BoldDefenseEffect());
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn),
+                new BoostTargetEffect(1, 1, Duration.EndOfTurn), new LockedInCondition(KickedCondition.getInstance()),
+                "Creatures you control get +1/+1 until end of turn. If {this} was kicked, instead creatures you control get +2/+2"));
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false),
+                null, new LockedInCondition(KickedCondition.getInstance()),
+                "and gain first strike until end of turn"));
     }
 
     public BoldDefense(final BoldDefense card) {
@@ -68,36 +70,5 @@ public class BoldDefense extends CardImpl {
     @Override
     public BoldDefense copy() {
         return new BoldDefense(this);
-    }
-}
-
-class BoldDefenseEffect extends OneShotEffect {
-
-    public BoldDefenseEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "Creatures you control get +1/+1 until end of turn. If {this} was kicked, instead creatures you control get +2/+2 and gain first strike until end of turn";
-    }
-
-    public BoldDefenseEffect(final BoldDefenseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BoldDefenseEffect copy() {
-        return new BoldDefenseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (KickedCondition.getInstance().apply(game, source)) {
-                game.addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn), source);
-                game.addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false), source);
-            } else {
-                game.addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn), source);
-            }
-        }
-        return false;
     }
 }

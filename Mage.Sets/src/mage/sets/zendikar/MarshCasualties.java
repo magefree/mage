@@ -28,20 +28,20 @@
 package mage.sets.zendikar;
 
 import java.util.Iterator;
+import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
-import mage.MageObjectReference;
-import mage.abilities.keyword.KickerAbility;
 
 /**
  *
@@ -64,7 +64,7 @@ public class MarshCasualties extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
                 new MarshCasualtiesEffect(-2, -2),
                 new MarshCasualtiesEffect(-1, -1),
-                KickedCondition.getInstance(),
+                new LockedInCondition(KickedCondition.getInstance()),
                 ruleText));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

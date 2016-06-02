@@ -55,8 +55,8 @@ public class ExplosiveGrowth extends CardImpl {
         // Target creature gets +2/+2 until end of turn. If Explosive Growth was kicked, that creature gets +5/+5 until end of turn instead.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(5, 5, Duration.EndOfTurn),
-          new BoostTargetEffect(2, 2, Duration.EndOfTurn), new LockedInCondition(KickedCondition.getInstance()),
-          "Target creature gets +2/+2 until end of turn. If Explosive Growth was kicked, that creature gets +5/+5 until end of turn instead."));
+                new BoostTargetEffect(2, 2, Duration.EndOfTurn), new LockedInCondition(KickedCondition.getInstance()),
+                "Target creature gets +2/+2 until end of turn. If {this} was kicked, that creature gets +5/+5 until end of turn instead."));
     }
 
     public ExplosiveGrowth(final ExplosiveGrowth card) {

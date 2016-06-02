@@ -28,6 +28,7 @@
 package mage.sets.invasion;
 
 import java.util.UUID;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
@@ -48,12 +49,12 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  * @author fireshoes
  */
 public class SavageOffensive extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-   }
+    }
 
     public SavageOffensive(UUID ownerId) {
         super(ownerId, 162, "Savage Offensive", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
@@ -61,15 +62,15 @@ public class SavageOffensive extends CardImpl {
 
         // Kicker {G}
         this.addAbility(new KickerAbility("{G}"));
-        
+
         // Creatures you control gain first strike until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter));
-        
+
         // If Savage Offensive was kicked, they get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-            new AddContinuousEffectToGame(new BoostControlledEffect(1, 1, Duration.EndOfTurn)), 
-            KickedCondition.getInstance(),
-            "If {this} was kicked, they get +1/+1 until end of turn."));
+                new AddContinuousEffectToGame(new BoostControlledEffect(1, 1, Duration.EndOfTurn)),
+                new LockedInCondition(KickedCondition.getInstance()),
+                "If {this} was kicked, they get +1/+1 until end of turn."));
     }
 
     public SavageOffensive(final SavageOffensive card) {
