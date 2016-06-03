@@ -38,7 +38,7 @@ public class ConsumeSpirit extends mage.sets.magic2010.ConsumeSpirit {
     public ConsumeSpirit(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 56;
-        this.expansionSetCode = "DD3A";
+        this.expansionSetCode = "DD3DVD";
     }
 
     public ConsumeSpirit(final ConsumeSpirit card) {

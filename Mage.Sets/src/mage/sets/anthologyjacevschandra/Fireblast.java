@@ -38,7 +38,7 @@ public class Fireblast extends mage.sets.visions.Fireblast {
     public Fireblast(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 55;
-        this.expansionSetCode = "DD3D";
+        this.expansionSetCode = "DD3JVC";
     }
 
     public Fireblast(final Fireblast card) {

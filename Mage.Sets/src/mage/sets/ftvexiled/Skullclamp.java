@@ -39,7 +39,7 @@ public class Skullclamp extends mage.sets.darksteel.Skullclamp {
     public Skullclamp(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 12;
-        this.expansionSetCode = "FVE";
+        this.expansionSetCode = "V09";
         this.rarity = Rarity.MYTHIC;
     }
 

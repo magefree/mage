@@ -45,7 +45,7 @@ public class RejuvenationChamber extends CardImpl {
 
     public RejuvenationChamber(UUID ownerId) {
         super(ownerId, 137, "Rejuvenation Chamber", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Fading 2
         this.addAbility(new FadingAbility(2, this));

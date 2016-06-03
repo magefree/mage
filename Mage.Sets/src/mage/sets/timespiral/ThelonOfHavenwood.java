@@ -58,7 +58,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  * @author emerald000
  */
 public class ThelonOfHavenwood extends CardImpl {
-    
+
     private static final FilterCard filterCard = new FilterCard("a Fungus card from a graveyard");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Fungus on the battlefield");
     static {
@@ -77,7 +77,7 @@ public class ThelonOfHavenwood extends CardImpl {
 
         // Each Fungus creature gets +1/+1 for each spore counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThelonOfHavenwoodBoostEffect()));
-        
+
         // {B}{G}, Exile a Fungus card from a graveyard: Put a spore counter on each Fungus on the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.SPORE.createInstance(), filterPermanent), new ManaCostsImpl<>("{B}{G}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInASingleGraveyard(1, 1, filterCard)));
@@ -95,7 +95,7 @@ public class ThelonOfHavenwood extends CardImpl {
 }
 
 class ThelonOfHavenwoodBoostEffect extends ContinuousEffectImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Fungus creature");
     static {
         filter.add(new SubtypePredicate("Fungus"));

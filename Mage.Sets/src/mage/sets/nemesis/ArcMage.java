@@ -50,7 +50,7 @@ public class ArcMage extends CardImpl {
 
     public ArcMage(UUID ownerId) {
         super(ownerId, 77, "Arc Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Human");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(2);

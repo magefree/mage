@@ -38,7 +38,7 @@ public class GenjuOfTheFens extends mage.sets.betrayersofkamigawa.GenjuOfTheFens
     public GenjuOfTheFens(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 47;
-        this.expansionSetCode = "DD3C";
+        this.expansionSetCode = "DD3GVL";
     }
 
     public GenjuOfTheFens(final GenjuOfTheFens card) {

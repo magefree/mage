@@ -38,7 +38,7 @@ public class Deathgreeter extends mage.sets.shardsofalara.Deathgreeter {
     public Deathgreeter(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 33;
-        this.expansionSetCode = "DD3C";
+        this.expansionSetCode = "DD3GVL";
     }
 
     public Deathgreeter(final Deathgreeter card) {

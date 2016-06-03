@@ -38,7 +38,7 @@ public class ArmorSliver extends mage.sets.tempest.ArmorSliver {
     public ArmorSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 16;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public ArmorSliver(final ArmorSliver card) {

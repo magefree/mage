@@ -53,7 +53,7 @@ public class StrongholdGambit extends CardImpl {
 
     public StrongholdGambit(UUID ownerId) {
         super(ownerId, 100, "Stronghold Gambit", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Each player chooses a card in his or her hand. Then each player reveals his or her chosen card. The owner of each creature card revealed this way with the lowest converted mana cost puts it onto the battlefield.
         getSpellAbility().addEffect(new StrongholdGambitEffect());

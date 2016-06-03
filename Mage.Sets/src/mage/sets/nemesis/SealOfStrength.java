@@ -48,7 +48,7 @@ public class SealOfStrength extends CardImpl {
 
     public SealOfStrength(UUID ownerId) {
         super(ownerId, 115, "Seal of Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
 
         // Sacrifice Seal of Strength: Target creature gets +3/+3 until end of turn.

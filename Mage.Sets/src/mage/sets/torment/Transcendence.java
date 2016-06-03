@@ -59,10 +59,10 @@ public class Transcendence extends CardImpl {
 
         // You don't lose the game for having 0 or less life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));
-        
+
         // When you have 20 or more life, you lose the game.
         this.addAbility(new TranscendenceStateTriggeredAbility());
-        
+
         // Whenever you lose life, you gain 2 life for each 1 life you lost.
         this.addAbility(new TranscendenceLoseLifeTriggeredAbility());
     }
@@ -147,24 +147,24 @@ class TranscendenceLoseLifeTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class TranscendenceLoseLifeEffect extends OneShotEffect {
-    
+
     private int amount = 0;
-    
+
     TranscendenceLoseLifeEffect() {
         super(Outcome.GainLife);
         this.staticText = "you gain 2 life for each 1 life you lost";
     }
-    
+
     TranscendenceLoseLifeEffect(final TranscendenceLoseLifeEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
-    
+
     @Override
     public TranscendenceLoseLifeEffect copy() {
         return new TranscendenceLoseLifeEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -174,7 +174,7 @@ class TranscendenceLoseLifeEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
     public void setAmount(int amount) {
         this.amount = amount;
     }

@@ -38,7 +38,7 @@ public class UlamogTheInfiniteGyre extends mage.sets.riseoftheeldrazi.UlamogTheI
     public UlamogTheInfiniteGyre(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 14;
-        this.expansionSetCode = "FVL";
+        this.expansionSetCode = "V11";
     }
 
     public UlamogTheInfiniteGyre(final UlamogTheInfiniteGyre card) {

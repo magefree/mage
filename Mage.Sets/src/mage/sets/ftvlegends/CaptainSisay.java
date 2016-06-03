@@ -39,7 +39,7 @@ public class CaptainSisay extends mage.sets.invasion.CaptainSisay {
     public CaptainSisay(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 2;
-        this.expansionSetCode = "FVL";
+        this.expansionSetCode = "V11";
         this.rarity = Rarity.MYTHIC;
     }
 

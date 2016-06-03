@@ -52,7 +52,7 @@ public class BelbesPortal extends CardImpl {
 
     public BelbesPortal(UUID ownerId) {
         super(ownerId, 127, "Belbe's Portal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // As Belbe's Portal enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.PutCreatureInPlay)));

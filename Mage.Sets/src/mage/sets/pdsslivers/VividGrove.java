@@ -38,7 +38,7 @@ public class VividGrove extends mage.sets.lorwyn.VividGrove {
     public VividGrove(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 36;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public VividGrove(final VividGrove card) {

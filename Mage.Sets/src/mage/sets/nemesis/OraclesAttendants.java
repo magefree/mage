@@ -55,7 +55,7 @@ public class OraclesAttendants extends CardImpl {
 
     public OraclesAttendants(UUID ownerId) {
         super(ownerId, 16, "Oracle's Attendants", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

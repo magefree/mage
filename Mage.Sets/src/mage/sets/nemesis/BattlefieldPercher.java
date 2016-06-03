@@ -48,7 +48,7 @@ public class BattlefieldPercher extends CardImpl {
 
     public BattlefieldPercher(UUID ownerId) {
         super(ownerId, 52, "Battlefield Percher", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Bird");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

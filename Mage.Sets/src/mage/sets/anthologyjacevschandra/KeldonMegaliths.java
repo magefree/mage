@@ -38,7 +38,7 @@ public class KeldonMegaliths extends mage.sets.jacevschandra.KeldonMegaliths {
     public KeldonMegaliths(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 58;
-        this.expansionSetCode = "DD3D";
+        this.expansionSetCode = "DD3JVC";
     }
 
     public KeldonMegaliths(final KeldonMegaliths card) {

@@ -51,7 +51,7 @@ public class BlindingAngel extends CardImpl {
 
     public BlindingAngel(UUID ownerId) {
         super(ownerId, 3, "Blinding Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Angel");
 
         this.power = new MageInt(2);

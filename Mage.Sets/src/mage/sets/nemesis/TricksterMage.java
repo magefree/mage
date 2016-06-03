@@ -61,7 +61,7 @@ public class TricksterMage extends CardImpl {
 
     public TricksterMage(UUID ownerId) {
         super(ownerId, 49, "Trickster Mage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Human");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(1);

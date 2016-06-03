@@ -38,7 +38,7 @@ public class FrenzySliver extends mage.sets.futuresight.FrenzySliver {
     public FrenzySliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 6;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public FrenzySliver(final FrenzySliver card) {

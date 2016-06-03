@@ -51,7 +51,7 @@ public class FlowstoneArmor extends CardImpl {
 
     public FlowstoneArmor(UUID ownerId) {
         super(ownerId, 131, "Flowstone Armor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // You may choose not to untap Flowstone Armor during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());

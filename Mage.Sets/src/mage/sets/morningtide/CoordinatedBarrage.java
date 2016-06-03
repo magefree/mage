@@ -70,21 +70,21 @@ public class CoordinatedBarrage extends CardImpl {
 }
 
 class CoordinatedBarrageEffect extends OneShotEffect {
-    
+
     CoordinatedBarrageEffect() {
         super(Outcome.Damage);
         this.staticText = "Choose a creature type. Coordinated Barrage deals damage to target attacking or blocking creature equal to the number of permanents you control of the chosen type";
     }
-    
+
     CoordinatedBarrageEffect(final CoordinatedBarrageEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public CoordinatedBarrageEffect copy() {
         return new CoordinatedBarrageEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());

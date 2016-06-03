@@ -38,7 +38,7 @@ public class SpinelessThug extends mage.sets.tenthedition.SpinelessThug {
     public SpinelessThug(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 71;
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
     }
 
     public SpinelessThug(final SpinelessThug card) {

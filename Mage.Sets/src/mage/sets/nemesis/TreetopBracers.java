@@ -53,7 +53,7 @@ public class TreetopBracers extends CardImpl {
 
     public TreetopBracers(UUID ownerId) {
         super(ownerId, 123, "Treetop Bracers", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Aura");
 
         // Enchant creature

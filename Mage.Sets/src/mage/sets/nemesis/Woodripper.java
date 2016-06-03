@@ -50,7 +50,7 @@ public class Woodripper extends CardImpl {
 
     public Woodripper(UUID ownerId) {
         super(ownerId, 125, "Woodripper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Beast");
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);

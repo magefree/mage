@@ -60,7 +60,7 @@ public class RathiIntimidator extends CardImpl {
 
     public RathiIntimidator(UUID ownerId) {
         super(ownerId, 69, "Rathi Intimidator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Horror");
         this.subtype.add("Mercenary");
 

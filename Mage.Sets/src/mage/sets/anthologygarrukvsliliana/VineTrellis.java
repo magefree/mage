@@ -38,7 +38,7 @@ public class VineTrellis extends mage.sets.mercadianmasques.VineTrellis {
     public VineTrellis(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 4;
-        this.expansionSetCode = "DD3C";
+        this.expansionSetCode = "DD3GVL";
     }
 
     public VineTrellis(final VineTrellis card) {

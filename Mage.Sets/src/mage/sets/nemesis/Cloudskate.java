@@ -43,7 +43,7 @@ public class Cloudskate extends CardImpl {
 
     public Cloudskate(UUID ownerId) {
         super(ownerId, 29, "Cloudskate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Illusion");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

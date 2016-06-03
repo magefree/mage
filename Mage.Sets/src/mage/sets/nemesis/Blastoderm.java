@@ -43,7 +43,7 @@ public class Blastoderm extends CardImpl {
 
     public Blastoderm(UUID ownerId) {
         super(ownerId, 102, "Blastoderm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Beast");
 
         this.power = new MageInt(5);

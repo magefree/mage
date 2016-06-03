@@ -53,7 +53,7 @@ public class RathsEdge extends CardImpl {
 
     public RathsEdge(UUID ownerId) {
         super(ownerId, 142, "Rath's Edge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.supertype.add("Legendary");
 
         // {tap}: Add {C} to your mana pool.

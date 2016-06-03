@@ -54,7 +54,7 @@ public class AvengerEnDal extends CardImpl {
 
     public AvengerEnDal(UUID ownerId) {
         super(ownerId, 2, "Avenger en-Dal", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Human");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(1);

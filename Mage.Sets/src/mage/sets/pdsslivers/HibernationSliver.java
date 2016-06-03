@@ -38,7 +38,7 @@ public class HibernationSliver extends mage.sets.stronghold.HibernationSliver {
     public HibernationSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 12;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public HibernationSliver(final HibernationSliver card) {

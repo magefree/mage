@@ -57,7 +57,7 @@ public class Lightbringer extends CardImpl {
 
     public Lightbringer(UUID ownerId) {
         super(ownerId, 11, "Lightbringer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Kor");
         this.subtype.add("Rebel");
         this.power = new MageInt(2);

@@ -38,7 +38,7 @@ public class KokushoTheEveningStar extends mage.sets.championsofkamigawa.Kokusho
     public KokushoTheEveningStar(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 9;
-        this.expansionSetCode = "FVD";
+        this.expansionSetCode = "DRB";
     }
 
     public KokushoTheEveningStar(final KokushoTheEveningStar card) {

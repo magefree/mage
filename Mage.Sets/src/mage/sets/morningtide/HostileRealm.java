@@ -65,7 +65,7 @@ public class HostileRealm extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted land has "{T}: Target creature can't block this turn."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent());

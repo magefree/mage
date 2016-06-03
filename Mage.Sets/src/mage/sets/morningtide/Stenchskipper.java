@@ -55,15 +55,15 @@ public class Stenchskipper extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // At the beginning of the end step, if you control no Goblins, sacrifice Stenchskipper.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new SacrificeSourceEffect(),
                 TargetController.ANY,
                 new PermanentsOnTheBattlefieldCondition(
-                        new FilterControlledCreaturePermanent("Goblin", "if you control no Goblins"), 
-                        PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 
+                        new FilterControlledCreaturePermanent("Goblin", "if you control no Goblins"),
+                        PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN,
                         1),
                 false));
     }

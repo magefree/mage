@@ -52,7 +52,7 @@ public class Ensnare extends CardImpl {
 
     public Ensnare(UUID ownerId) {
         super(ownerId, 32, "Ensnare", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // You may return two Islands you control to their owner's hand rather than pay Ensnare's mana cost.
         AlternativeCostSourceAbility ability;   

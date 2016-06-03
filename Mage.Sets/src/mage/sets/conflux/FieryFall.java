@@ -45,7 +45,7 @@ public class FieryFall extends CardImpl {
 
     public FieryFall (UUID ownerId) {
         super(ownerId, 63, "Fiery Fall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{R}");
-        this.expansionSetCode = "CON";        
+        this.expansionSetCode = "CON";
 
         
         // Fiery Fall deals 5 damage to target creature.

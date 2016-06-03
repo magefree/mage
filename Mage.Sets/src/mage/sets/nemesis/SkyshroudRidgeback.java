@@ -42,7 +42,7 @@ public class SkyshroudRidgeback extends CardImpl {
 
     public SkyshroudRidgeback(UUID ownerId) {
         super(ownerId, 120, "Skyshroud Ridgeback", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Beast");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

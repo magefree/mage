@@ -48,7 +48,7 @@ public class FanaticalDevotion extends CardImpl {
 
     public FanaticalDevotion(UUID ownerId) {
         super(ownerId, 8, "Fanatical Devotion", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Sacrifice a creature: Regenerate target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

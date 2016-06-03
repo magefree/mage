@@ -38,7 +38,7 @@ public class KreshTheBloodbraided extends mage.sets.shardsofalara.KreshTheBloodb
     public KreshTheBloodbraided(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 5;
-        this.expansionSetCode = "FVL";
+        this.expansionSetCode = "V11";
     }
 
     public KreshTheBloodbraided(final KreshTheBloodbraided card) {

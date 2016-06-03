@@ -49,7 +49,7 @@ public class JoltingMerfolk extends CardImpl {
 
     public JoltingMerfolk(UUID ownerId) {
         super(ownerId, 34, "Jolting Merfolk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Merfolk");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

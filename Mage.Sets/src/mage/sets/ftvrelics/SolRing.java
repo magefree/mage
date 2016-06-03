@@ -39,7 +39,7 @@ public class SolRing extends mage.sets.revisededition.SolRing {
     public SolRing(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 12;
-        this.expansionSetCode = "FVR";
+        this.expansionSetCode = "V10";
         this.rarity = Rarity.MYTHIC;
     }
 

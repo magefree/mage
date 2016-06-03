@@ -38,7 +38,7 @@ public class VirulentSliver extends mage.sets.futuresight.VirulentSliver {
     public VirulentSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 2;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public VirulentSliver(final VirulentSliver card) {

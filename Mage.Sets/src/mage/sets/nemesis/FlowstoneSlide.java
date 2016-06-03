@@ -38,7 +38,7 @@ public class FlowstoneSlide extends mage.sets.tenthedition.FlowstoneSlide {
     public FlowstoneSlide(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 83;
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
     }
 
     public FlowstoneSlide(final FlowstoneSlide card) {

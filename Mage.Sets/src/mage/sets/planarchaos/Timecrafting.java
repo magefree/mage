@@ -49,7 +49,7 @@ import mage.target.common.TargetPermanentOrSuspendedCard;
  * @author emerald000
  */
 public class Timecrafting extends CardImpl {
-    
+
     private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard("permanent with a time counter on it or suspended card");
     static {
         filter.getPermanentFilter().add(new CounterPredicate(CounterType.TIME));
@@ -62,7 +62,7 @@ public class Timecrafting extends CardImpl {
         // Choose one - Remove X time counters from target permanent or suspended card;
         this.getSpellAbility().addEffect(new TimecraftingRemoveEffect());
         this.getSpellAbility().addTarget(new TargetPermanentOrSuspendedCard());
-        
+
         // or put X time counters on target permanent with a time counter on it or suspended card.
         Mode mode = new Mode();
         mode.getEffects().add(new TimecraftingAddEffect());
@@ -81,21 +81,21 @@ public class Timecrafting extends CardImpl {
 }
 
 class TimecraftingRemoveEffect extends OneShotEffect {
-    
+
     TimecraftingRemoveEffect() {
         super(Outcome.Benefit);
         this.staticText = "Remove X time counters from target permanent or suspended card";
     }
-    
+
     TimecraftingRemoveEffect(final TimecraftingRemoveEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public TimecraftingRemoveEffect copy() {
         return new TimecraftingRemoveEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -118,21 +118,21 @@ class TimecraftingRemoveEffect extends OneShotEffect {
 }
 
 class TimecraftingAddEffect extends OneShotEffect {
-    
+
     TimecraftingAddEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put X time counters on target permanent with a time counter on it or suspended card";
     }
-    
+
     TimecraftingAddEffect(final TimecraftingAddEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public TimecraftingAddEffect copy() {
         return new TimecraftingAddEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());

@@ -53,7 +53,7 @@ public class ParallaxDementia extends CardImpl {
 
     public ParallaxDementia(UUID ownerId) {
         super(ownerId, 62, "Parallax Dementia", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Aura");
 
         // Enchant creature

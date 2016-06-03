@@ -39,7 +39,7 @@ public class SliverOverlord extends mage.sets.scourge.SliverOverlord {
     public SliverOverlord(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 24;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
         this.rarity = Rarity.MYTHIC;
     }
 

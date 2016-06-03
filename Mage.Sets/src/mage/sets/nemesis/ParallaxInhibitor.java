@@ -57,7 +57,7 @@ public class ParallaxInhibitor extends CardImpl {
 
     public ParallaxInhibitor(UUID ownerId) {
         super(ownerId, 134, "Parallax Inhibitor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // {1}, {tap}, Sacrifice Parallax Inhibitor: Put a fade counter on each permanent with fading you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

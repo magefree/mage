@@ -39,7 +39,7 @@ public class MoxDiamond extends mage.sets.stronghold.MoxDiamond {
     public MoxDiamond(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 10;
-        this.expansionSetCode = "FVR";
+        this.expansionSetCode = "V10";
         this.rarity = Rarity.MYTHIC;
     }
 

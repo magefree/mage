@@ -44,7 +44,7 @@ public class SilkenfistFighter extends CardImpl {
 
     public SilkenfistFighter(UUID ownerId) {
         super(ownerId, 19, "Silkenfist Fighter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Kor");
         this.subtype.add("Soldier");
         this.power = new MageInt(1);

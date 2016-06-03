@@ -57,7 +57,7 @@ public class Massacre extends CardImpl {
 
     public Massacre(UUID ownerId) {
         super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
 
         // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.

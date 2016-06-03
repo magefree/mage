@@ -48,7 +48,7 @@ public class SealOfRemoval extends CardImpl {
     
     public SealOfRemoval(UUID ownerId) {
         super(ownerId, 42, "Seal of Removal", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
 
         // Sacrifice Seal of Removal: Return target creature to its owner's hand.

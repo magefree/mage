@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author emerald000
  */
 public class PulsemageAdvocate extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("cards from an opponent's graveyard");
     static {
         filter.add(new OwnerPredicate(TargetController.NOT_YOU));
@@ -87,21 +87,21 @@ public class PulsemageAdvocate extends CardImpl {
 }
 
 class PulsemageAdvocateEffect extends OneShotEffect {
-    
+
     PulsemageAdvocateEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return three target cards from an opponent's graveyard to his or her hand. Return target creature card from your graveyard to the battlefield";
     }
-    
+
     PulsemageAdvocateEffect(final PulsemageAdvocateEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PulsemageAdvocateEffect copy() {
         return new PulsemageAdvocateEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());

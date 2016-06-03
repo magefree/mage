@@ -38,7 +38,7 @@ public class WirewoodLodge extends mage.sets.onslaught.WirewoodLodge {
     public WirewoodLodge(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 26;
-        this.expansionSetCode = "DD3B";
+        this.expansionSetCode = "DD3EVG";
     }
 
     public WirewoodLodge(final WirewoodLodge card) {

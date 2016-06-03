@@ -53,7 +53,7 @@ public class ShriekingMogg extends CardImpl {
     
     public ShriekingMogg(UUID ownerId) {
         super(ownerId, 99, "Shrieking Mogg", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Goblin");
 
         this.power = new MageInt(1);

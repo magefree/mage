@@ -38,7 +38,7 @@ public class SoulbrightFlamekin extends mage.sets.lorwyn.SoulbrightFlamekin {
     public SoulbrightFlamekin(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 37;
-        this.expansionSetCode = "DD3D";
+        this.expansionSetCode = "DD3JVC";
     }
 
     public SoulbrightFlamekin(final SoulbrightFlamekin card) {

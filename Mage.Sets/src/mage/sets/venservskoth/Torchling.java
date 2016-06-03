@@ -69,22 +69,22 @@ public class Torchling extends CardImpl {
 
         // {R}: Untap Torchling.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ColoredManaCost(ColoredManaSymbol.R)));
-        
+
         // {R}: Target creature blocks Torchling this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
         // {R}: Change the target of target spell that targets only Torchling.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseNewTargetsTargetEffect(true, true), new ColoredManaCost(ColoredManaSymbol.R));
         FilterSpell filter = new FilterSpell("spell that targets only " + this.getName());
         filter.add(new TorchlingTargetPredicate(this.getId()));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
-        
+
         // {1}: Torchling gets +1/-1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new GenericManaCost(1)));
-        
+
         // {1}: Torchling gets -1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new GenericManaCost(1)));
     }

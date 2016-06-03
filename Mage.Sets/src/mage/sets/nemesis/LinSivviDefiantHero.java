@@ -71,7 +71,7 @@ public class LinSivviDefiantHero extends CardImpl {
 
     public LinSivviDefiantHero(UUID ownerId) {
         super(ownerId, 12, "Lin Sivvi, Defiant Hero", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Rebel");

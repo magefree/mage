@@ -51,7 +51,7 @@ public class AccumulatedKnowledge extends CardImpl {
 
     public AccumulatedKnowledge(UUID ownerId) {
         super(ownerId, 26, "Accumulated Knowledge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
 
         // Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.

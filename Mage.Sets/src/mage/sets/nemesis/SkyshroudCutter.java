@@ -52,7 +52,7 @@ public class SkyshroudCutter extends CardImpl {
     
     public SkyshroudCutter(UUID ownerId) {
         super(ownerId, 118, "Skyshroud Cutter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Beast");
 
         this.power = new MageInt(2);

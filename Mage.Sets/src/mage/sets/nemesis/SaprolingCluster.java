@@ -48,7 +48,7 @@ public class SaprolingCluster extends CardImpl {
 
     public SaprolingCluster(UUID ownerId) {
         super(ownerId, 114, "Saproling Cluster", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // {1}, Discard a card: Put a 1/1 green Saproling creature token onto the battlefield. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()) , new GenericManaCost(1));

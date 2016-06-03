@@ -38,7 +38,7 @@ public class Blastoderm extends mage.sets.nemesis.Blastoderm {
     public Blastoderm(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 7;
-        this.expansionSetCode = "DD3C";
+        this.expansionSetCode = "DD3GVL";
     }
 
     public Blastoderm(final Blastoderm card) {

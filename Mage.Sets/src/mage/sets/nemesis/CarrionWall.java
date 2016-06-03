@@ -47,7 +47,7 @@ public class CarrionWall extends CardImpl {
 
     public CarrionWall(UUID ownerId) {
         super(ownerId, 54, "Carrion Wall", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Wall");
 
         this.power = new MageInt(3);

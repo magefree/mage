@@ -38,7 +38,7 @@ public class MudbuttonTorchrunner extends mage.sets.lorwyn.MudbuttonTorchrunner 
     public MudbuttonTorchrunner(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 46;
-        this.expansionSetCode = "DD3B";
+        this.expansionSetCode = "DD3EVG";
     }
 
     public MudbuttonTorchrunner(final MudbuttonTorchrunner card) {

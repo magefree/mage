@@ -47,7 +47,7 @@ public class VoidmageApprentice extends CardImpl {
 
     public VoidmageApprentice(UUID ownerId) {
         super(ownerId, 4, "Voidmage Apprentice", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "DD3D";
+        this.expansionSetCode = "DD3JVC";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

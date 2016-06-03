@@ -38,7 +38,7 @@ public class SnuffOut extends mage.sets.mercadianmasques.SnuffOut {
     public SnuffOut(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 53;
-        this.expansionSetCode = "DD3C";
+        this.expansionSetCode = "DD3GVL";
     }
 
     public SnuffOut(final SnuffOut card) {

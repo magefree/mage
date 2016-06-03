@@ -51,7 +51,7 @@ public class VoiceOfTruth extends CardImpl {
 
     public VoiceOfTruth(UUID ownerId) {
         super(ownerId, 25, "Voice of Truth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Angel");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

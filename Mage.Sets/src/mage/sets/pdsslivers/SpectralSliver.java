@@ -38,7 +38,7 @@ public class SpectralSliver extends mage.sets.legions.SpectralSliver {
     public SpectralSliver(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 17;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public SpectralSliver(final SpectralSliver card) {

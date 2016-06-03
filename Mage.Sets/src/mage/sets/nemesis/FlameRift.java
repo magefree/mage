@@ -42,7 +42,7 @@ public class FlameRift extends CardImpl {
 
     public FlameRift(UUID ownerId) {
         super(ownerId, 80, "Flame Rift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
 
         // Flame Rift deals 4 damage to each player.

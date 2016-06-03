@@ -47,7 +47,7 @@ public class FlowstoneWall extends CardImpl {
 
     public FlowstoneWall(UUID ownerId) {
         super(ownerId, 86, "Flowstone Wall", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Wall");
         this.power = new MageInt(0);
         this.toughness = new MageInt(6);

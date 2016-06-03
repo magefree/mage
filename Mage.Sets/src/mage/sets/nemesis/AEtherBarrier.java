@@ -56,7 +56,7 @@ public class AEtherBarrier extends CardImpl {
 
     public AEtherBarrier(UUID ownerId) {
         super(ownerId, 27, "AEther Barrier", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
 
         // Whenever a player casts a creature spell, that player sacrifices a permanent unless he or she pays {1}.
         this.addAbility(new SpellCastAllTriggeredAbility(

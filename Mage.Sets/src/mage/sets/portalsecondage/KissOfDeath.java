@@ -43,7 +43,7 @@ public class KissOfDeath extends CardImpl {
 
     public KissOfDeath(UUID ownerId) {
         super(ownerId, 16, "Kiss of Death", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "PO2";
+        this.expansionSetCode = "P02";
 
         // Kiss of Death deals 4 damage to target opponent. You gain 4 life.
             this.getSpellAbility().addEffect(new DamageTargetEffect(4));

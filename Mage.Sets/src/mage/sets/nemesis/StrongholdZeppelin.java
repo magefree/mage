@@ -43,7 +43,7 @@ public class StrongholdZeppelin extends CardImpl {
 
     public StrongholdZeppelin(UUID ownerId) {
         super(ownerId, 47, "Stronghold Zeppelin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Human");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

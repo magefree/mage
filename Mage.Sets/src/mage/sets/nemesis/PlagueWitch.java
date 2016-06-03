@@ -50,7 +50,7 @@ public class PlagueWitch extends CardImpl {
 
     public PlagueWitch(UUID ownerId) {
         super(ownerId, 66, "Plague Witch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Elf");
         this.subtype.add("Spellshaper");
         this.power = new MageInt(1);

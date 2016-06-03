@@ -48,7 +48,7 @@ public class RustingGolem extends CardImpl {
 
     public RustingGolem(UUID ownerId) {
         super(ownerId, 138, "Rusting Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Golem");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

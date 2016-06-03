@@ -43,7 +43,7 @@ public class SkyshroudBehemoth extends CardImpl {
 
     public SkyshroudBehemoth(UUID ownerId) {
         super(ownerId, 116, "Skyshroud Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Beast");
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);

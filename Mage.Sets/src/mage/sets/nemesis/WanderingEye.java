@@ -46,7 +46,7 @@ public class WanderingEye extends CardImpl {
 
     public WanderingEye(UUID ownerId) {
         super(ownerId, 50, "Wandering Eye", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Illusion");
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

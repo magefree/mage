@@ -38,7 +38,7 @@ public class Repulse extends mage.sets.invasion.Repulse {
     public Repulse(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 25;
-        this.expansionSetCode = "DD3D";
+        this.expansionSetCode = "DD3JVC";
     }
 
     public Repulse(final Repulse card) {

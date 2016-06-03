@@ -47,7 +47,7 @@ public class EbonDragon extends CardImpl {
 
     public EbonDragon(UUID ownerId) {
         super(ownerId, 6, "Ebon Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        this.expansionSetCode = "FVD";
+        this.expansionSetCode = "DRB";
         this.subtype.add("Dragon");
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

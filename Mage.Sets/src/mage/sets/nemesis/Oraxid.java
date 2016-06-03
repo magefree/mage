@@ -51,7 +51,7 @@ public class Oraxid extends CardImpl {
 
     public Oraxid(UUID ownerId) {
         super(ownerId, 35, "Oraxid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "NMS";
+        this.expansionSetCode = "NEM";
         this.subtype.add("Crab");
         this.subtype.add("Beast");
         this.power = new MageInt(2);

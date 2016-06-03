@@ -38,7 +38,7 @@ public class Firebolt extends mage.sets.odyssey.Firebolt {
     public Firebolt(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 49;
-        this.expansionSetCode = "DD3D";
+        this.expansionSetCode = "DD3JVC";
     }
 
     public Firebolt(final Firebolt card) {

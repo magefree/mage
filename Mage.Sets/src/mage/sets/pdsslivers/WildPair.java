@@ -38,7 +38,7 @@ public class WildPair extends mage.sets.planarchaos.WildPair {
     public WildPair(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 30;
-        this.expansionSetCode = "PDS";
+        this.expansionSetCode = "H09";
     }
 
     public WildPair(final WildPair card) {

@@ -38,7 +38,7 @@ public class Mutilate extends mage.sets.magic2013.Mutilate {
     public Mutilate(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 55;
-        this.expansionSetCode = "DD3C";
+        this.expansionSetCode = "DD3GVL";
     }
 
     public Mutilate(final Mutilate card) {
