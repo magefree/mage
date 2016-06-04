@@ -116,7 +116,7 @@ public class DeckValidatorTest extends CardTestPlayerBase {
     @Test
     public void testModernCounterspell1() {
         ArrayList<CardNameAmount> deckList = new ArrayList<>();
-        deckList.add(new CardNameAmount("DD3D", 24, 4));
+        deckList.add(new CardNameAmount("DD3JVC", 24, 4));
         deckList.add(new CardNameAmount("Mountain", 56));
         Assert.assertFalse("Counterspell not allowed in modern", testDeckValid(new Modern(), deckList));
 
