@@ -25,38 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.odyssey;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
-import mage.abilities.effects.common.UntapAllThatAttackedEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.watchers.common.AttackedThisTurnWatcher;
+import mage.constants.TimingRule;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LevelX2
  */
-public class RelentlessAssault extends CardImpl {
+public class SeizeTheDay extends CardImpl {
 
-    public RelentlessAssault(UUID ownerId) {
-        super(ownerId, 214, "Relentless Assault", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "7ED";
+    public SeizeTheDay(UUID ownerId) {
+        super(ownerId, 220, "Seize the Day", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}");
+        this.expansionSetCode = "ODY";
 
-        // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
-        this.getSpellAbility().addEffect(new UntapAllThatAttackedEffect());
+        // Untap target creature. After this main phase, there is an additional combat phase followed by an additional main phase.
+        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
+
+        // Flashback {2}{R}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.SORCERY));
     }
 
-    public RelentlessAssault(final RelentlessAssault card) {
+    public SeizeTheDay(final SeizeTheDay card) {
         super(card);
     }
 
     @Override
-    public RelentlessAssault copy() {
-        return new RelentlessAssault(this);
+    public SeizeTheDay copy() {
+        return new SeizeTheDay(this);
     }
 }

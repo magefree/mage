@@ -35,7 +35,6 @@ Clash Pack|CLASH|
 Commander's Arsenal|CMA|
 Commander|CMD|
 Conspiracy: Take the Crown|CN2|
-Conspiracy|CNS|
 Conflux|CON|
 Champs|CP|
 Coldsnap|CSP|
@@ -106,6 +105,7 @@ Magic 2012|M12|
 Magic 2013|M13|
 Magic 2014|M14|
 Magic 2015|M15|
+Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
 Mirrodin Besieged|MBS|
 Masters Edition II|ME2|

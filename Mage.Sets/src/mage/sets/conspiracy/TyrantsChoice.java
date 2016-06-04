@@ -64,21 +64,21 @@ public class TyrantsChoice extends CardImpl {
 }
 
 class TyrantsChoiceEffect extends OneShotEffect {
-    
+
     TyrantsChoiceEffect() {
         super(Outcome.Benefit);
         this.staticText = "<i>Will of the council</i> - Starting with you, each player votes for death or torture. If death gets more votes, each opponent sacrifices a creature. If torture gets more votes or the vote is tied, each opponent loses 4 life";
     }
-    
+
     TyrantsChoiceEffect(final TyrantsChoiceEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public TyrantsChoiceEffect copy() {
         return new TyrantsChoiceEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -90,11 +90,10 @@ class TyrantsChoiceEffect extends OneShotEffect {
                 if (player != null) {
                     if (player.chooseUse(Outcome.Sacrifice, "Choose death?", source, game)) {
                         deathCount++;
-                        game.informPlayers(player.getLogName() + " has chosen: death");
-                    }
-                    else {
+                        game.informPlayers(player.getLogName() + " has voted for death");
+                    } else {
                         tortureCount++;
-                        game.informPlayers(player.getLogName() + " has chosen: torture");
+                        game.informPlayers(player.getLogName() + " has voted for torture");
                     }
                 }
             }

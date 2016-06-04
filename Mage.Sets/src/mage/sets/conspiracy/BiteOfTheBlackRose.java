@@ -94,10 +94,10 @@ class BiteOfTheBlackRoseEffect extends OneShotEffect {
                 if (player != null) {
                     if (player.chooseUse(Outcome.ExtraTurn, "Choose sickness?", source, game)) {
                         sicknessCount++;
-                        game.informPlayers(player.getLogName() + " has chosen: sickness");
+                        game.informPlayers(player.getLogName() + " has voted for sickness");
                     } else {
                         psychosisCount++;
-                        game.informPlayers(player.getLogName() + " has chosen: psychosis");
+                        game.informPlayers(player.getLogName() + " has voted for psychosis");
                     }
                 }
             }

@@ -47,8 +47,9 @@ import mage.target.TargetSpell;
  * @author fireshoes
  */
 public class SplitDecision extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
+
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
@@ -101,10 +102,10 @@ class SplitDecisionEffect extends OneShotEffect {
                 if (player != null) {
                     if (player.chooseUse(Outcome.ExtraTurn, "Choose denial?", source, game)) {
                         denialCount++;
-                        game.informPlayers(player.getLogName() + " has chosen: denial");
+                        game.informPlayers(player.getLogName() + " has voted for denial");
                     } else {
                         duplicationCount++;
-                        game.informPlayers(player.getLogName() + " has chosen: duplication");
+                        game.informPlayers(player.getLogName() + " has voted for duplication");
                     }
                 }
             }

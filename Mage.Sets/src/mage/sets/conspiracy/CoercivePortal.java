@@ -68,21 +68,21 @@ public class CoercivePortal extends CardImpl {
 }
 
 class CoercivePortalEffect extends OneShotEffect {
-    
+
     CoercivePortalEffect() {
         super(Outcome.Benefit);
         this.staticText = "<i>Will of the council</i> - At the beginning of your upkeep, starting with you, each player votes for carnage or homage. If carnage gets more votes, sacrifice Coercive Portal and destroy all nonland permanents. If homage gets more votes or the vote is tied, draw a card";
     }
-    
+
     CoercivePortalEffect(final CoercivePortalEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public CoercivePortalEffect copy() {
         return new CoercivePortalEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -94,17 +94,16 @@ class CoercivePortalEffect extends OneShotEffect {
                 if (player != null) {
                     if (player.chooseUse(Outcome.DestroyPermanent, "Choose carnage?", source, game)) {
                         carnageCount++;
-                        game.informPlayers(player.getLogName() + " has chosen: carnage");
-                    }
-                    else {
+                        game.informPlayers(player.getLogName() + " has voted for carnage");
+                    } else {
                         homageCount++;
-                        game.informPlayers(player.getLogName() + " has chosen: homage");
+                        game.informPlayers(player.getLogName() + " has voted for homage");
                     }
                 }
             }
             if (carnageCount > homageCount) {
                 new SacrificeSourceEffect().apply(game, source);
-                new CoercivePortalDestroyEffect().apply(game, source);                
+                new CoercivePortalDestroyEffect().apply(game, source);
             } else {
                 controller.drawCards(1, game);
             }
@@ -115,7 +114,7 @@ class CoercivePortalEffect extends OneShotEffect {
 }
 
 class CoercivePortalDestroyEffect extends OneShotEffect {
-    
+
     private static final FilterPermanent filter = new FilterNonlandPermanent();
 
     public CoercivePortalDestroyEffect() {

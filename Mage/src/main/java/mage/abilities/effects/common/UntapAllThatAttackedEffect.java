@@ -25,38 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.abilities.effects.common;
 
+import java.util.Set;
 import java.util.UUID;
-import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
-import mage.abilities.effects.common.UntapAllThatAttackedEffect;
-import mage.cards.CardImpl;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
+ * !!!! This effect needs the adding of the watcher in the using card class
  *
- * @author Quercitron
+ * this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
+ *
+ * @author LevelX2
  */
-public class RelentlessAssault extends CardImpl {
+public class UntapAllThatAttackedEffect extends OneShotEffect {
 
-    public RelentlessAssault(UUID ownerId) {
-        super(ownerId, 214, "Relentless Assault", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
-        this.expansionSetCode = "7ED";
-
-        // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
-        this.getSpellAbility().addEffect(new UntapAllThatAttackedEffect());
-        this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
+    public UntapAllThatAttackedEffect() {
+        super(Outcome.Benefit);
+        staticText = " Untap all creatures that attacked this turn";
     }
 
-    public RelentlessAssault(final RelentlessAssault card) {
-        super(card);
+    public UntapAllThatAttackedEffect(final UntapAllThatAttackedEffect effect) {
+        super(effect);
     }
 
     @Override
-    public RelentlessAssault copy() {
-        return new RelentlessAssault(this);
+    public UntapAllThatAttackedEffect copy() {
+        return new UntapAllThatAttackedEffect(this);
     }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Watcher watcher = game.getState().getWatchers().get("AttackedThisTurn");
+        if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
+            Set<UUID> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
+            for (UUID uuid : attackedThisTurn) {
+                Permanent permanent = game.getPermanent(uuid);
+                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+                    permanent.untap(game);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
 }

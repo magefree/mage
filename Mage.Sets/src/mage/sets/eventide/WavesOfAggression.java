@@ -27,24 +27,13 @@
  */
 package mage.sets.eventide;
 
-import java.util.Set;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
+import mage.abilities.effects.common.UntapAllThatAttackedEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TurnPhase;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.game.turn.TurnMod;
-import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
@@ -59,8 +48,8 @@ public class WavesOfAggression extends CardImpl {
 
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
-        this.getSpellAbility().addEffect(new WavesOfAggressionUntapEffect());
-        this.getSpellAbility().addEffect(new WavesOfAggressionAddPhasesEffect());
+        this.getSpellAbility().addEffect(new UntapAllThatAttackedEffect());
+        this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
         // Retrace
         this.addAbility(new RetraceAbility(this));
     }
@@ -72,119 +61,5 @@ public class WavesOfAggression extends CardImpl {
     @Override
     public WavesOfAggression copy() {
         return new WavesOfAggression(this);
-    }
-}
-
-class WavesOfAggressionUntapEffect extends OneShotEffect {
-
-    public WavesOfAggressionUntapEffect() {
-        super(Outcome.Benefit);
-        staticText = "Untap all creatures that attacked this turn";
-    }
-
-    public WavesOfAggressionUntapEffect(final WavesOfAggressionUntapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WavesOfAggressionUntapEffect copy() {
-        return new WavesOfAggressionUntapEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("AttackedThisTurn");
-        if (watcher != null && watcher instanceof AttackedThisTurnWatcher) {
-            Set<UUID> attackedThisTurn = ((AttackedThisTurnWatcher) watcher).getAttackedThisTurnCreatures();
-            for (UUID uuid : attackedThisTurn) {
-                Permanent permanent = game.getPermanent(uuid);
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
-                    permanent.untap(game);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-}
-
-class WavesOfAggressionAddPhasesEffect extends OneShotEffect {
-
-    public WavesOfAggressionAddPhasesEffect() {
-        super(Outcome.Benefit);
-        staticText = "After this main phase, there is an additional combat phase followed by an additional main phase";
-    }
-
-    public WavesOfAggressionAddPhasesEffect(final WavesOfAggressionAddPhasesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WavesOfAggressionAddPhasesEffect copy() {
-        return new WavesOfAggressionAddPhasesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // 15.07.2006 If it's somehow not a main phase when Fury of the Horde resolves, all it does is untap all creatures that attacked that turn. No new phases are created.
-        if (TurnPhase.PRECOMBAT_MAIN.equals(game.getTurn().getPhaseType()) || TurnPhase.POSTCOMBAT_MAIN.equals(game.getTurn().getPhaseType())) {
-            // we can't add two turn modes at once, will add additional post combat on delayed trigger resolution
-            TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
-            game.getState().getTurnMods().add(combat);
-            WavesOfAggressionDelayedAddMainPhaseAbility delayedTriggeredAbility = new WavesOfAggressionDelayedAddMainPhaseAbility();
-            delayedTriggeredAbility.setConnectedTurnMod(combat.getId());
-            game.addDelayedTriggeredAbility(delayedTriggeredAbility, source);
-            return true;
-        }
-        return false;
-    }
-}
-
-class WavesOfAggressionDelayedAddMainPhaseAbility extends DelayedTriggeredAbility {
-
-    private UUID connectedTurnMod;
-    private boolean enabled;
-
-    public WavesOfAggressionDelayedAddMainPhaseAbility() {
-        super(null, Duration.EndOfTurn);
-        this.usesStack = false; // don't show this to the user
-    }
-
-    public WavesOfAggressionDelayedAddMainPhaseAbility(WavesOfAggressionDelayedAddMainPhaseAbility ability) {
-        super(ability);
-        this.connectedTurnMod = ability.connectedTurnMod;
-        this.enabled = ability.enabled;
-    }
-
-    @Override
-    public WavesOfAggressionDelayedAddMainPhaseAbility copy() {
-        return new WavesOfAggressionDelayedAddMainPhaseAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.PHASE_CHANGED || event.getType() == EventType.COMBAT_PHASE_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.PHASE_CHANGED && this.connectedTurnMod.equals(event.getSourceId())) {
-            enabled = true;
-        }
-        if (event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE && enabled) {
-            // add additional post combat main phase after that - after phase == null because add it after this combat
-            game.getState().getTurnMods().add(new TurnMod(getControllerId(), TurnPhase.POSTCOMBAT_MAIN, null, false));
-            enabled = false;
-        }
-        return false;
-    }
-
-    public void setConnectedTurnMod(UUID connectedTurnMod) {
-        this.connectedTurnMod = connectedTurnMod;
-    }
-
-    @Override
-    public String getRule() {
-        return "add additional post combat main phase";
     }
 }
