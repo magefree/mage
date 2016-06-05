@@ -27,28 +27,6 @@
  */
 package mage.client.deckeditor;
 
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.Timer;
-import javax.swing.filechooser.FileFilter;
 import mage.cards.Card;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
@@ -62,7 +40,6 @@ import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.deck.generator.DeckGenerator.DeckGeneratorException;
-
 import mage.client.dialog.AddLandDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
@@ -74,6 +51,21 @@ import mage.remote.Session;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.filechooser.FileFilter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 /**
  *
@@ -573,7 +565,27 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnImport.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImportActionPerformed(evt);
+                Object[] options = {"File", "Clipboard"};
+
+                int n = JOptionPane.showOptionDialog(MageFrame.getDesktop(),
+                        "Where would you like to import from?",
+                        "Deck import",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]
+                );
+
+                logger.info(n);
+
+                switch (n) {
+                    case 0:
+                        btnImportActionPerformed(evt);
+                        break;
+                    case 1:
+                        btnImportFromClipboardActionPerformed(evt);
+                }
             }
         });
 
@@ -688,6 +700,27 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE));
+    }
+
+    /**
+     * @param evt ActionEvent
+     */
+    private void btnImportFromClipboardActionPerformed(ActionEvent evt) {
+        final DeckImportFromClipboardDialog dialog = new DeckImportFromClipboardDialog();
+        dialog.pack();
+        dialog.setVisible(true);
+
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                try {
+                    deck = Deck.load(DeckImporterUtil.importDeck(dialog.getTmpPath()), true, true);
+                    refreshDeck();
+                } catch (GameException e1) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
