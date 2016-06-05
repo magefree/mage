@@ -59,7 +59,7 @@ import org.apache.log4j.Logger;
  * @author LevelX2
  */
 public class AwakenAbility extends SpellAbility {
-    
+
     private static final Logger logger = Logger.getLogger(AwakenAbility.class);
 
     static private String filterMessage = "a land you control to awake";
@@ -87,6 +87,7 @@ public class AwakenAbility extends SpellAbility {
     public AwakenAbility(final AwakenAbility ability) {
         super(ability);
         this.awakenValue = ability.awakenValue;
+        this.rule = ability.rule;
     }
 
     @Override
@@ -138,16 +139,15 @@ public class AwakenAbility extends SpellAbility {
                     effect.setTargetPointer(fixedTarget);
                     return effect.apply(game, source);
                 }
-            } else { // source should never be null, but we are seeing a lot of NPEs from this section
-                if (source == null) {
-                    logger.fatal("Source was null in AwakenAbility: Create a bug report or fix the source code");
-                } else if (source.getTargets() == null) {
-                    MageObject sourceObj = source.getSourceObject(game);
-                    if (sourceObj != null) {                        
-                        Class<? extends MageObject> sourceClass = sourceObj.getClass();
-                        if (sourceClass != null) {                            
-                            logger.fatal("getTargets was null in AwakenAbility for " + sourceClass.toString() + " : Create a bug report or fix the source code");
-                        }                        
+            } else // source should never be null, but we are seeing a lot of NPEs from this section
+            if (source == null) {
+                logger.fatal("Source was null in AwakenAbility: Create a bug report or fix the source code");
+            } else if (source.getTargets() == null) {
+                MageObject sourceObj = source.getSourceObject(game);
+                if (sourceObj != null) {
+                    Class<? extends MageObject> sourceClass = sourceObj.getClass();
+                    if (sourceClass != null) {
+                        logger.fatal("getTargets was null in AwakenAbility for " + sourceClass.toString() + " : Create a bug report or fix the source code");
                     }
                 }
             }
