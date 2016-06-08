@@ -66,7 +66,7 @@ public class Clockspinning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanentOrSuspendedCard());
         this.getSpellAbility().addEffect(new ClockspinningAddOrRemoveCounterEffect());
     }
-    
+
     public Clockspinning(final Clockspinning card) {
         super(card);
     }
@@ -159,26 +159,33 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
             if (player.chooseUse(Outcome.Neutral, "Do you want to to remove a counter?", source, game)) {
                 RemoveCounterTargetEffect effect = new RemoveCounterTargetEffect();
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-                return effect.apply(game, source);
+                effect.apply(game, source);
             } else {
                 Counter counter = selectCounterType(game, source, permanent);
-                AddCountersTargetEffect effect = new AddCountersTargetEffect(counter);
-                effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-                return effect.apply(game, source);
+
+                if (counter != null) {
+                    AddCountersTargetEffect effect = new AddCountersTargetEffect(counter);
+                    effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+                    effect.apply(game, source);
+                }
             }
+            return true;
         }
         if (player != null && card != null) {
             if (player.chooseUse(Outcome.Neutral, "Do you want to to remove a counter?", source, game)) {
                 Counter counter = selectCounterType(game, source, card);
                 RemoveCounterTargetEffect effect = new RemoveCounterTargetEffect(counter);
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-                return effect.apply(game, source);
+                effect.apply(game, source);
             } else {
                 Counter counter = selectCounterType(game, source, card);
-                AddCountersTargetEffect effect = new AddCountersTargetEffect(counter);
-                effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-                return effect.apply(game, source);
+                if (counter != null) {
+                    AddCountersTargetEffect effect = new AddCountersTargetEffect(counter);
+                    effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
+                    effect.apply(game, source);
+                }
             }
+            return true;
         }
 
         return false;

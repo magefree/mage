@@ -82,28 +82,26 @@ public class AddCountersTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
+        if (controller != null && sourceObject != null && counter != null) {
             int affectedTargets = 0;
             for (UUID uuid : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(uuid);
                 Player player = game.getPlayer(uuid);
                 Card card = game.getCard(targetPointer.getFirst(game, source));
                 if (permanent != null) {
-                    if (counter != null) {
-                        Counter newCounter = counter.copy();
-                        int calculated = amount.calculate(game, source, this);
-                        if (calculated > 0 && newCounter.getCount() > 0) {
-                            newCounter.remove(newCounter.getCount());
-                        }
-                        newCounter.add(calculated);
-                        int before = permanent.getCounters().getCount(counter.getName());
-                        permanent.addCounters(newCounter, game);
-                        int numberAdded = permanent.getCounters().getCount(counter.getName()) - before;
-                        affectedTargets++;
-                        if (!game.isSimulation()) {
-                            game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                                    + numberAdded + " " + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
-                        }
+                    Counter newCounter = counter.copy();
+                    int calculated = amount.calculate(game, source, this);
+                    if (calculated > 0 && newCounter.getCount() > 0) {
+                        newCounter.remove(newCounter.getCount());
+                    }
+                    newCounter.add(calculated);
+                    int before = permanent.getCounters().getCount(counter.getName());
+                    permanent.addCounters(newCounter, game);
+                    int numberAdded = permanent.getCounters().getCount(counter.getName()) - before;
+                    affectedTargets++;
+                    if (!game.isSimulation()) {
+                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
+                                + numberAdded + " " + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
                     }
                 } else if (player != null) {
                     Counter newCounter = counter.copy();
@@ -114,7 +112,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
                                 + counter.getCount() + " " + counter.getName().toLowerCase() + " counter on " + player.getLogName());
                     }
-                } else if (card != null && counter != null) {
+                } else if (card != null) {
                     card.addCounters(counter.getName(), counter.getCount(), game);
                     if (!game.isSimulation()) {
                         game.informPlayers(new StringBuilder("Added ").append(counter.getCount()).append(" ").append(counter.getName())
