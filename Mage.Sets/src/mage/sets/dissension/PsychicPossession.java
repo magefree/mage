@@ -99,10 +99,7 @@ class PsychicPossessionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        if (event.getType() == EventType.DRAW_CARD || event.getType() == EventType.DREW_CARD) {
-            return event.getType() == EventType.DREW_CARD;
-        }
-        return false;
+        return event.getType() == EventType.DREW_CARD;
     }
 
     @Override
