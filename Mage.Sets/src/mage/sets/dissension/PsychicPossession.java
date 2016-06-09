@@ -119,4 +119,5 @@ class PsychicPossessionTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever enchanted opponent draws a card, you may draw a card";
     }
+
 }
