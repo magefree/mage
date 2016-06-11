@@ -103,7 +103,7 @@ class EyeOfTheStormAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getZone() == Zone.HAND) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
+            if (spell != null && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
@@ -152,17 +152,19 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
             if (controller.moveCardsToExile(spell, source, game, true, exileZoneId, EyeOfTheStorm.getIdName())) {
                 EyeOfTheStorm.imprint(card.getId(), game);
 
-                Player player = game.getPlayer(spell.getControllerId());
-
                 if (EyeOfTheStorm != null && EyeOfTheStorm.getImprinted() != null && EyeOfTheStorm.getImprinted().size() > 0 && controller != null) {
                     CardsImpl copiedCards = new CardsImpl();
                     for (UUID uuid : EyeOfTheStorm.getImprinted()) {
                         card = game.getCard(uuid);
-                        if (card.isSplitCard()) {
-                            copiedCards.add(((SplitCard) card).getLeftHalfCard());
-                            copiedCards.add(((SplitCard) card).getRightHalfCard());
-                        } else {
-                            copiedCards.add(card);
+
+                        // Check if owner of card is still in game
+                        if (game.getPlayer(card.getOwnerId()) != null) {
+                            if (card.isSplitCard()) {
+                                copiedCards.add(((SplitCard) card).getLeftHalfCard());
+                                copiedCards.add(((SplitCard) card).getRightHalfCard());
+                            } else {
+                                copiedCards.add(card);
+                            }
                         }
                     }
 
