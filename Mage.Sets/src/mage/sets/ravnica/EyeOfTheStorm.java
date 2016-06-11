@@ -158,7 +158,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                         card = game.getCard(uuid);
 
                         // Check if owner of card is still in game
-                        if (game.getPlayer(card.getOwnerId()) != null) {
+                        if (card != null && game.getPlayer(card.getOwnerId()) != null) {
                             if (card.isSplitCard()) {
                                 copiedCards.add(((SplitCard) card).getLeftHalfCard());
                                 copiedCards.add(((SplitCard) card).getRightHalfCard());
