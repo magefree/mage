@@ -625,9 +625,19 @@ public class TablesPanel extends javax.swing.JPanel {
         if (btnUnrated.isSelected()){
             ratingFilterList.add(RowFilter.regexFilter("^Unrated", TableTableModel.COLUMN_RATING));
         }
+        
+        // Password
+        List<RowFilter<Object, Object>> passwordFilterList = new ArrayList<>();
+        if (btnOpen.isSelected()) {
+            passwordFilterList.add(RowFilter.regexFilter("^$", TableTableModel.COLUMN_PASSWORD));
+        }
+        if (btnPassword.isSelected()) {
+            passwordFilterList.add(RowFilter.regexFilter("^\\*\\*\\*$", TableTableModel.COLUMN_PASSWORD));
+        }
 
         if (stateFilterList.isEmpty() || typeFilterList.isEmpty() || formatFilterList.isEmpty()
-                || skillFilterList.isEmpty() || ratingFilterList.isEmpty()) { // no selection
+                || skillFilterList.isEmpty() || ratingFilterList.isEmpty()
+                || passwordFilterList.isEmpty()) { // no selection
             activeTablesSorter.setRowFilter(RowFilter.regexFilter("Nothing", TableTableModel.COLUMN_SKILL));
         } else {
             List<RowFilter<Object, Object>> filterList = new ArrayList<>();
@@ -660,6 +670,12 @@ public class TablesPanel extends javax.swing.JPanel {
                 filterList.add(RowFilter.orFilter(ratingFilterList));
             } else if (ratingFilterList.size() == 1) {
                 filterList.addAll(ratingFilterList);
+            }
+            
+             if (passwordFilterList.size() > 1) {
+                filterList.add(RowFilter.orFilter(passwordFilterList));
+            } else if (passwordFilterList.size() == 1) {
+                filterList.addAll(passwordFilterList);
             }
 
             if (filterList.size() == 1) {
@@ -710,6 +726,9 @@ public class TablesPanel extends javax.swing.JPanel {
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btnFormatLimited = new javax.swing.JToggleButton();
         btnFormatOther = new javax.swing.JToggleButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
+        btnOpen = new javax.swing.JToggleButton();
+        btnPassword = new javax.swing.JToggleButton();
         btnQuickStart = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanelTables = new javax.swing.JPanel();
@@ -1079,6 +1098,39 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
         filterBar2.add(btnFormatOther);
+        filterBar2.add(jSeparator5);
+
+        btnOpen.setSelected(true);
+        btnOpen.setText("Open");
+        btnOpen.setToolTipText("Show open games");
+        btnOpen.setFocusPainted(false);
+        btnOpen.setFocusable(false);
+        btnOpen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnOpen.setRequestFocusEnabled(false);
+        btnOpen.setVerifyInputWhenFocusTarget(false);
+        btnOpen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar2.add(btnOpen);
+
+        btnPassword.setSelected(true);
+        btnPassword.setText("PW");
+        btnPassword.setToolTipText("Show passworded games");
+        btnPassword.setFocusPainted(false);
+        btnPassword.setFocusable(false);
+        btnPassword.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPassword.setRequestFocusEnabled(false);
+        btnPassword.setVerifyInputWhenFocusTarget(false);
+        btnPassword.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar2.add(btnPassword);
 
         btnQuickStart.setText("Quick Start");
         btnQuickStart.setFocusable(false);
@@ -1290,6 +1342,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnFormatVintage;
     private javax.swing.JButton btnNewTable;
     private javax.swing.JButton btnNewTournament;
+    private javax.swing.JToggleButton btnOpen;
+    private javax.swing.JToggleButton btnPassword;
     private javax.swing.JButton btnQuickStart;
     private javax.swing.JToggleButton btnSkillBeginner;
     private javax.swing.JToggleButton btnSkillCasual;
@@ -1337,12 +1391,14 @@ class TableTableModel extends AbstractTableModel {
     public static final int COLUMN_GAME_TYPE = 3;
     public static final int COLUMN_INFO = 4;
     public static final int COLUMN_STATUS = 5;
-    public static final int COLUMN_SKILL = 7;
-    public static final int COLUMN_RATING = 8;
-    public static final int COLUMN_QUIT_RATIO = 9;
-    public static final int ACTION_COLUMN = 10; // column the action is located (starting with 0)
+    public static final int COLUMN_PASSWORD = 6;
+    public static final int COLUMN_CREATED = 7;
+    public static final int COLUMN_SKILL = 8;
+    public static final int COLUMN_RATING = 9;
+    public static final int COLUMN_QUIT_RATIO = 10;
+    public static final int ACTION_COLUMN = 11; // column the action is located (starting with 0)
 
-    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Skill Level", "Rating", "Quit %", "Action"};
+    private final String[] columnNames = new String[]{"M/T", "Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Password", "Created / Started", "Skill Level", "Rating", "Quit %", "Action"};
 
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
@@ -1385,14 +1441,16 @@ class TableTableModel extends AbstractTableModel {
             case 5:
                 return tables[arg0].getTableStateText();
             case 6:
-                return timeFormatter.format(tables[arg0].getCreateTime());
+                return tables[arg0].isPassworded() ? "***" : "";
             case 7:
-                return tables[arg0].getSkillLevel();
+                return timeFormatter.format(tables[arg0].getCreateTime());
             case 8:
-                return tables[arg0].isRated() ? "Rated" : "Unrated";
+                return tables[arg0].getSkillLevel();
             case 9:
-                return tables[arg0].getQuitRatio();
+                return tables[arg0].isRated() ? "Rated" : "Unrated";
             case 10:
+                return tables[arg0].getQuitRatio();
+            case 11:
                 switch (tables[arg0].getTableState()) {
 
                     case WAITING:
@@ -1419,14 +1477,14 @@ class TableTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 11:
-                return tables[arg0].isTournament();
             case 12:
+                return tables[arg0].isTournament();
+            case 13:
                 if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
                 }
                 return null;
-            case 13:
+            case 14:
                 return tables[arg0].getTableId();
         }
         return "";
