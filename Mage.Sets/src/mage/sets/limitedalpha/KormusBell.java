@@ -54,7 +54,7 @@ public class KormusBell extends CardImpl {
 
         // All Swamps are 1/1 black creatures that are still lands.
         ContinuousEffect effect = new BecomesCreatureAllEffect(new KormusBellToken(), "lands", new FilterPermanent("Swamp", "Swamps"), Duration.WhileOnBattlefield);
-        effect.getDependencyTypes().add(DependencyType.BecomeSwamp);
+        effect.setDependedToType(DependencyType.BecomeSwamp);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

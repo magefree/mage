@@ -109,6 +109,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.startingTurn = effect.startingTurn;
         this.startingControllerId = effect.startingControllerId;
         this.dependencyTypes = effect.dependencyTypes;
+        this.dependendToType = effect.dependendToType;
         this.characterDefining = effect.characterDefining;
     }
 
