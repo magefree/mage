@@ -158,7 +158,7 @@ public class TablesPanel extends javax.swing.JPanel {
         filterButtons = new JToggleButton[]{btnStateWaiting, btnStateActive, btnStateFinished,
             btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,
             btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatLegacy, btnFormatVintage, btnFormatCommander, btnFormatTinyLeader, btnFormatLimited, btnFormatOther,
-            btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated};
+            btnSkillBeginner, btnSkillCasual, btnSkillSerious, btnRated, btnUnrated, btnOpen, btnPassword};
 
         JComponent[] components = new JComponent[]{chatPanelMain, jSplitPane1, jScrollPaneTablesActive, jScrollPaneTablesFinished, jPanelTop, jPanelTables};
         for (JComponent component : components) {
