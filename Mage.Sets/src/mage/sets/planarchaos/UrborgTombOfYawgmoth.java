@@ -77,6 +77,7 @@ class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
     public AddCardSubtypeAllEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "";
+        addDependencyType(DependencyType.BecomeSwamp);
     }
 
     public AddCardSubtypeAllEffect(final AddCardSubtypeAllEffect effect) {
