@@ -49,7 +49,6 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -130,12 +129,17 @@ class WaveOfVitriolEffect extends OneShotEffect {
             Set<Player> playersToShuffle = new LinkedHashSet<>();
             for (Map.Entry<Player, Integer> entry : sacrificedLands.entrySet()) {
                 if (entry.getKey().chooseUse(Outcome.PutLandInPlay, "Search your library for up to " + entry.getValue() + " basic lands?", source, game)) {
-                    Target target = new TargetCardInLibrary(0, entry.getValue(), new FilterBasicLandCard());
-                    entry.getKey().chooseTarget(outcome, target, source, game);
-                    toBattlefield.addAll(target.getTargets());
-                    playersToShuffle.add(entry.getKey());
+
+                    TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), new FilterBasicLandCard());
+                    if (entry.getKey().searchLibrary(target, game)) {
+                        if (target.getTargets().size() > 0) {
+                            toBattlefield.addAll(target.getTargets());
+                            playersToShuffle.add(entry.getKey());
+                        }
+                    }
                 }
             }
+
             controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
             for (Player player : playersToShuffle) {
                 player.shuffleLibrary(source, game);
