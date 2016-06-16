@@ -184,7 +184,7 @@ public class ImageCache {
     }
 
     public static BufferedImage getWizardsCard(BufferedImage image) {
-        if (image.getWidth() == 265 && image.getHeight() == 370) {
+        if (image != null && image.getWidth() == 265 && image.getHeight() == 370) {
             BufferedImage crop = new BufferedImage(256, 360, BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics2D = crop.createGraphics();
             graphics2D.drawImage(image, 0, 0, 255, 360, 5, 5, 261, 365, null);
