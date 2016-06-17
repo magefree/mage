@@ -61,7 +61,7 @@ public class LeechingSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a Sliver you control attacks, defending player loses 1 life.
-        this.addAbility(new AttacksAllTriggeredAbility(new LoseLifeDefendingPlayerEffect(1, true), false, filter, SetTargetPointer.PLAYER, false));
+        this.addAbility(new AttacksAllTriggeredAbility(new LoseLifeDefendingPlayerEffect(1, false), false, filter, SetTargetPointer.PLAYER, false));
     }
 
     public LeechingSliver(final LeechingSliver card) {
