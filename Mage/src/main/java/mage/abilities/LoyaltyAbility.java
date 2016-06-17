@@ -24,16 +24,15 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities;
 
-import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.abilities.costs.common.PayLoyaltyCost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 
 /**
  *
@@ -60,6 +59,7 @@ public class LoyaltyAbility extends ActivatedAbilityImpl {
         super(Zone.BATTLEFIELD, effects, new PayVariableLoyaltyCost());
         this.timing = TimingRule.SORCERY;
     }
+
     public LoyaltyAbility(LoyaltyAbility ability) {
         super(ability);
     }
