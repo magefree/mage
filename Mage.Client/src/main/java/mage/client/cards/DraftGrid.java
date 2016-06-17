@@ -183,7 +183,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getClickCount() == 2) {
+        if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0)) { // double clicks and repeated double clicks
             if (e.getButton() == MouseEvent.BUTTON1) {
                 Object obj = e.getSource();
                 if (obj instanceof MageCard) {

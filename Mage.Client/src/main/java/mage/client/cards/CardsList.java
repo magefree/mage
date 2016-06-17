@@ -200,7 +200,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         mainTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (e.getClickCount() == 2 && !e.isConsumed()) {
+                if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0) && !e.isConsumed()) { // double clicks and repeated double clicks
                     e.consume();
                     if (e.isAltDown()) {
                         handleAltDoubleClick();
@@ -755,7 +755,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     public void mousePressed(MouseEvent e) {
         if (e.getClickCount() >= 1 && !e.isConsumed()) {
             Object obj = e.getSource();
-            if (e.getClickCount() == 2) {
+            if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0)) { // double clicks and repeated double clicks
                 e.consume();
                 if (obj instanceof Card) {
                     if (e.isAltDown()) {
