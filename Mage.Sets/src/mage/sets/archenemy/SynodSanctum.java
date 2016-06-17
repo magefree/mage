@@ -70,7 +70,7 @@ public class SynodSanctum extends CardImpl {
         // {2}, {tap}: Exile target permanent you control.
         SynodSanctumEffect effect = new SynodSanctumEffect();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost (new TapSourceCost());
+        ability.addCost(new TapSourceCost());
         Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
