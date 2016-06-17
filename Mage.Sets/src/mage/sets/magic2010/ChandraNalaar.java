@@ -59,14 +59,17 @@ public class ChandraNalaar extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 
+        // +1: Chandra Nalaar deals 1 damage to target player.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);
         ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
+        // -X: Chandra Nalaar deals X damage to target creature.
         LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(ChandraNalaarXValue.getDefault()));
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
 
+        // -8: Chandra Nalaar deals 10 damage to target player and each creature he or she controls.
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(10));
         effects1.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent()));
