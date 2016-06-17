@@ -69,16 +69,15 @@ public class SynodSanctum extends CardImpl {
 
         // {2}, {tap}: Exile target permanent you control.
         SynodSanctumEffect effect = new SynodSanctumEffect();
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        ability.addCost(new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
+        ability.addCost(new TapSourceCost());
         Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
 
         // {2}, Sacrifice Synod Sanctum: Return all cards exiled with Synod Sanctum to the battlefield under your control.
         SynodSanctumEffect2 effect2 = new SynodSanctumEffect2();
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new TapSourceCost());
-        ability2.addCost(new ManaCostsImpl("{2}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new ManaCostsImpl("{2}"));
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);
     }
@@ -97,7 +96,7 @@ class SynodSanctumEffect extends OneShotEffect {
 
     SynodSanctumEffect() {
         super(Outcome.Benefit);
-        staticText = "Exile target permanent you own";
+        staticText = "Exile target permanent you control";
     }
 
     SynodSanctumEffect(SynodSanctumEffect effect) {
@@ -117,7 +116,6 @@ class SynodSanctumEffect extends OneShotEffect {
                     }
                 }
             }
-
         }
         return false;
     }
