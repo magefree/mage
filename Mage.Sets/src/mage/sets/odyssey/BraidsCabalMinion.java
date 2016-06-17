@@ -44,17 +44,16 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author cbt33, North (Karma)
  */
- 
 public class BraidsCabalMinion extends CardImpl {
-    
-        public static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
-            
-           static{
-               filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-               				new CardTypePredicate(CardType.CREATURE),
-              				new CardTypePredicate(CardType.LAND)));
-           }
-    
+
+    public static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
+
+    static {
+        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.LAND)));
+    }
+
     public BraidsCabalMinion(UUID ownerId) {
         super(ownerId, 117, "Braids, Cabal Minion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "ODY";
@@ -66,8 +65,8 @@ public class BraidsCabalMinion extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each player's upkeep, that player sacrifices an artifact, creature, or land.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeEffect(filter, 1, ""), TargetController.ANY, false));
-    
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeEffect(filter, 1, "that player"), TargetController.ANY, false));
+
     }
 
     public BraidsCabalMinion(final BraidsCabalMinion card) {
