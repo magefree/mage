@@ -714,7 +714,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     private boolean checkPassStep(Game game) {
-        if (game.getActivePlayerId().equals(playerId)) {
+        if (playerId.equals(game.getActivePlayerId())) {
             return !this.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
         } else {
             return !this.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
