@@ -689,7 +689,7 @@ public class HumanPlayer extends PlayerImpl {
                             result = true;
                         } else {
                             Player actingPlayer = null;
-                            if (game.getPriorityPlayerId().equals(playerId)) {
+                            if (playerId.equals(game.getPriorityPlayerId())) {
                                 actingPlayer = this;
                             } else if (getPlayersUnderYourControl().contains(game.getPriorityPlayerId())) {
                                 actingPlayer = game.getPlayer(game.getPriorityPlayerId());
@@ -1241,16 +1241,16 @@ public class HumanPlayer extends PlayerImpl {
                 return;
             }
         }
-        if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.getCardType().contains(CardType.LAND)){
+        if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.getCardType().contains(CardType.LAND)) {
             ActivatedAbility ability = abilities.values().iterator().next();
             if (ability instanceof ManaAbility) {
                 activateAbility(ability, game);
                 return;
             }
-        } 
-        
+        }
+
         game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(abilities.values()));
-        
+
         waitForResponse(game);
         if (response.getUUID() != null && isInGame()) {
             if (abilities.containsKey(response.getUUID())) {
