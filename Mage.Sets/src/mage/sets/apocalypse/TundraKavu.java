@@ -74,7 +74,6 @@ public class TundraKavu extends CardImpl {
     }
 }
 
-
 class TundraKavuEffect extends BecomesBasicLandTargetEffect {
 
     public TundraKavuEffect() {
@@ -86,6 +85,7 @@ class TundraKavuEffect extends BecomesBasicLandTargetEffect {
         super(effect);
     }
 
+    @Override
     public TundraKavuEffect copy() {
         return new TundraKavuEffect(this);
     }
@@ -94,14 +94,18 @@ class TundraKavuEffect extends BecomesBasicLandTargetEffect {
     public void init(Ability source, Game game) {
         landTypes.clear();
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null) {
+        if (controller != null) {
             Set<String> choiceSet = new LinkedHashSet<>();
             choiceSet.add("Island");
             choiceSet.add("Plains");
             ChoiceImpl choice = new ChoiceImpl(true);
             choice.setChoices(choiceSet);
             choice.setMessage("Choose a basic land type");
-            controller.choose(outcome, choice, game);
+            while (!controller.choose(outcome, choice, game)) {
+                if (!controller.canRespond()) {
+                    return;
+                }
+            }
             landTypes.add(choice.getChoice());
         } else {
             this.discard();
