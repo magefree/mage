@@ -251,20 +251,28 @@ class TableListSorter implements Comparator<Table> {
             } else {
                 return two.getEndTime().compareTo(one.getEndTime());
             }
+        } else if (one.getEndTime() != null) {
+            return -1;
         }
+
         if (two.getStartTime() != null) {
             if (one.getStartTime() == null) {
                 return 1;
             } else {
                 return two.getStartTime().compareTo(one.getStartTime());
             }
+        } else if (one.getStartTime() != null) {
+            return -1;
         }
+
         if (two.getCreateTime() != null) {
             if (one.getCreateTime() == null) {
                 return 1;
             } else {
                 return two.getCreateTime().compareTo(one.getCreateTime());
             }
+        } else if (one.getCreateTime() != null) {
+            return -1;
         }
         return 0;
     }
