@@ -50,6 +50,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -111,7 +112,8 @@ class SynodSanctumEffect extends OneShotEffect {
             if (getTargetPointer().getFirst(game, source) != null) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
-                    if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+                    UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                    if (exileZone != null && controller.moveCardToExileWithInfo(permanent, exileZone, sourceObject.getIdName(), source.getId(), game, Zone.BATTLEFIELD, true)) {
                         return true;
                     }
                 }
@@ -139,7 +141,15 @@ class SynodSanctumEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exile = game.getExile().getExileZone(source.getSourceId());
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+        if (exileId == null) {
+            return false;
+        }
+        ExileZone exile = game.getExile().getExileZone(exileId);
+        if (exile == null) {
+            return false;
+        }
+
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         boolean allReturned = true;
