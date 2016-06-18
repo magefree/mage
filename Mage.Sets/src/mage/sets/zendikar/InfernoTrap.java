@@ -90,7 +90,7 @@ class InfernoTrapCondition implements Condition {
         InfernoTrapWatcher watcher = (InfernoTrapWatcher) game.getState().getWatchers().get(InfernoTrapWatcher.class.getName());
         if (watcher != null) {
             Set<MageObjectReference> damagingCreatures = watcher.getDamagingCreatures(source.getControllerId());
-            return !damagingCreatures.isEmpty() && damagingCreatures.size() > 1;
+            return damagingCreatures != null && damagingCreatures.size() > 1;
         }
         return false;
     }

@@ -28,6 +28,7 @@
 package mage.players;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -139,6 +140,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     private static final Logger logger = Logger.getLogger(PlayerImpl.class);
 
     private static Random rnd = new Random();
+    private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     /**
      * Used to cancel waiting requests send to the player
@@ -203,7 +205,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean canPayLifeCost = true;
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
-    
+
     protected FilterPermanent sacrificeCostFilter;
 
     protected final List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
@@ -1232,8 +1234,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 if (!ability.isUsesStack()) {
                     ability.resolve(game);
-                }
-                else {
+                } else {
                     game.fireEvent(new GameEvent(EventType.TRIGGERED_ABILITY, ability.getId(), ability.getSourceId(), ability.getControllerId()));
                 }
                 game.removeBookmark(bookmark);
@@ -2950,10 +2951,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void setCanPaySacrificeCostFilter(FilterPermanent filter) {
         this.sacrificeCostFilter = filter;
     }
-    
+
     @Override
     public FilterPermanent getSacrificeCostFilter() {
-    	return sacrificeCostFilter;
+        return sacrificeCostFilter;
     }
 
     @Override
@@ -3016,7 +3017,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.LOOK_AT_FACE_DOWN, this.getId(), game)) {
             if (chooseUse(Outcome.Benefit, "Look at that card?", null, game)) {
                 Cards cards = new CardsImpl(card);
-                this.lookAtCards(getName(), cards, game);
+                this.lookAtCards(getName() + " - " + sdf.format(System.currentTimeMillis()), cards, game);
                 return true;
             }
         }

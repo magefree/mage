@@ -487,6 +487,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     attackerPerms.add(game.getPermanent(attackerId));
                 }
                 UUID attackerId = player.chooseAttackerOrder(attackerPerms, game);
+                if (!player.isInGame()) {
+                    break;
+                }
                 attackerOrder.add(attackerId);
                 attackerList.remove(attackerId);
             }
