@@ -32,12 +32,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author nantuko
  */
 public class TransformSourceEffect extends OneShotEffect {
+
+    private static final Logger logger = Logger.getLogger(TransformSourceEffect.class);
 
     private boolean withoutTrigger;
     private boolean fromDayToNight;
@@ -82,7 +86,11 @@ public class TransformSourceEffect extends OneShotEffect {
                     }
                     if (!game.isSimulation()) {
                         if (fromDayToNight) {
-                            game.informPlayers(permanent.getIdName() + " transforms into " + permanent.getSecondCardFace().getIdName());
+                            if (permanent.getSecondCardFace() != null) {
+                                game.informPlayers(permanent.getIdName() + " transforms into " + permanent.getSecondCardFace().getIdName());
+                            } else {
+                                logger.error("Can't get SecondCardFace " + permanent.getName() + " Token: " + (permanent instanceof PermanentToken ? "Yes" : "No"));
+                            }
                         } else {
                             game.informPlayers(permanent.getSecondCardFace().getIdName() + " transforms into " + permanent.getIdName());
                         }

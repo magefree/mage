@@ -167,8 +167,9 @@ class CurseOfEchoesEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Copy target ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for the copy");
-        return sb.toString();
+        if (mode.getTargets().size() > 0) {
+            return "Copy target " + mode.getTargets().get(0).getTargetName() + ". You may choose new targets for the copy";
+        }
+        return "No target";
     }
 }
