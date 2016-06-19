@@ -39,6 +39,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -51,6 +52,7 @@ public class WinterOrb extends CardImpl {
         super(ownerId, 275, "Winter Orb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "LEA";
 
+        // As long as Winter Orb is untapped, players can't untap more than one land during their untap steps.
         // Players can't untap more than one land during their untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WinterOrbEffect()));
 
@@ -72,7 +74,7 @@ class WinterOrbEffect extends RestrictionUntapNotMoreThanEffect {
 
     public WinterOrbEffect() {
         super(Duration.WhileOnBattlefield, 1, filter);
-        staticText = "Players can't untap more than one land during their untap steps";
+        staticText = "As long as Winter Orb is untapped, players can't untap more than one land during their untap steps";
     }
 
     public WinterOrbEffect(final WinterOrbEffect effect) {
@@ -81,8 +83,8 @@ class WinterOrbEffect extends RestrictionUntapNotMoreThanEffect {
 
     @Override
     public boolean applies(Player player, Ability source, Game game) {
-        // applied to all players
-        return true;
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        return sourceObject != null && !sourceObject.isTapped();
     }
 
     @Override
