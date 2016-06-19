@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class MasterworkOfIngenuity extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
+    private static final FilterPermanent filter = new FilterPermanent("equipment");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
