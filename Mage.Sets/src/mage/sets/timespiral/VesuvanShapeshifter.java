@@ -89,7 +89,7 @@ public class VesuvanShapeshifter extends CardImpl {
 
         // At the beginning of your upkeep, you may turn this creature face down
         effect = new VesuvanShapeshifterFaceDownEffect();
-        ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
+        ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
         this.addAbility(ability);
     }
 
