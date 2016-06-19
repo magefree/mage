@@ -1,5 +1,5 @@
 XMage.de 1    (Europe/Germany) fast :xmage.de:17171
-woogerworks   (North America/USA)       :xmage.woogerworks.info:17171
+woogerworks   (North America/USA)       :xmage.woogerworks.com:17171
 XMage Testserver  (Europe/France) 1.4.8v0  :176.31.186.181:17171
 XMage BR      (South America/Brazil) :ec2-54-233-67-0.sa-east-1.compute.amazonaws.com:17171
 XMage.tahiti                         :xmage.tahiti.one:443
