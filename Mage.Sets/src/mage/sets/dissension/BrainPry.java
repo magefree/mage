@@ -31,11 +31,9 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -54,6 +52,7 @@ public class BrainPry extends CardImpl {
         this.expansionSetCode = "DIS";
 
         //Name a nonland card. Target player reveals his or her hand. That player discards a card with that name. If he or she can't, you draw a card.
+        this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new BrainPryEffect());
     }
@@ -72,7 +71,7 @@ class BrainPryEffect extends OneShotEffect {
 
     public BrainPryEffect() {
         super(Outcome.Discard);
-        staticText = "Name a nonland card. Target player reveals his or her hand. That player discards a card with that name. If he or she can't, you draw a card";
+        staticText = "Target player reveals his or her hand. That player discards a card with that name. If he or she can't, you draw a card";
     }
 
     public BrainPryEffect(final BrainPryEffect effect) {
@@ -84,21 +83,9 @@ class BrainPryEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (targetPlayer != null && controller != null && sourceObject != null) {
-            Choice cardChoice = new ChoiceImpl(true);
-            cardChoice.setMessage("Name a nonland card.");
-            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-            cardChoice.clearChoice();
-
-            while (!controller.choose(Outcome.Discard, cardChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-
-            String cardName = cardChoice.getChoice();
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        if (targetPlayer != null && controller != null && sourceObject != null && cardName != null) {
             Boolean hasDiscarded = false;
-            game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
             for (Card card : targetPlayer.getHand().getCards(game)) {
                 if (card.getName().equals(cardName)) {
                     targetPlayer.discard(card, source, game);
@@ -106,11 +93,9 @@ class BrainPryEffect extends OneShotEffect {
                     break;
                 }
             }
-
             if (!hasDiscarded) {
                 controller.drawCards(1, game);
             }
-
             controller.lookAtCards(sourceObject.getName() + " Hand", targetPlayer.getHand(), game);
         }
         return true;

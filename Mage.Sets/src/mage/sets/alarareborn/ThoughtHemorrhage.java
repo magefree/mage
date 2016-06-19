@@ -56,9 +56,6 @@ public class ThoughtHemorrhage extends CardImpl {
         super(ownerId, 47, "Thought Hemorrhage", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");
         this.expansionSetCode = "ARB";
 
-
-        
-
         // Name a nonland card. Target player reveals his or her hand. Thought Hemorrhage deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME));
@@ -93,7 +90,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
-        if (sourceObject != null && controller != null && cardName != null && !cardName.isEmpty()) {        
+        if (sourceObject != null && controller != null && cardName != null && !cardName.isEmpty()) {
             Player targetPlayer = game.getPlayer(source.getFirstTarget());
             if (targetPlayer != null) {
                 targetPlayer.revealCards("hand of " + targetPlayer.getName(), targetPlayer.getHand(), game);
@@ -123,7 +120,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                 // search cards in hand
                 TargetCardInHand targetCardsHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCards);
                 controller.chooseTarget(outcome, targetPlayer.getGraveyard(), targetCardsHand, source, game);
-                for(UUID cardId:  targetCardsHand.getTargets()) {
+                for (UUID cardId : targetCardsHand.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
@@ -134,14 +131,14 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                 // If the player has no nonland cards in his or her hand, you can still search that player's library and have him or her shuffle it.
                 TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
                 controller.searchLibrary(targetCardsLibrary, game, targetPlayer.getId());
-                for(UUID cardId:  targetCardsLibrary.getTargets()) {
+                for (UUID cardId : targetCardsLibrary.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
                 targetPlayer.shuffleLibrary(source, game);
-                return true;     
+                return true;
             }
         }
         return false;

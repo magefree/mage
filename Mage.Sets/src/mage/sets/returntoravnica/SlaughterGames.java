@@ -28,23 +28,17 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
+import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -65,9 +59,9 @@ public class SlaughterGames extends CardImpl {
         this.addAbility(ability);
 
         // Name a nonland card. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
+        this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME));
         this.getSpellAbility().addEffect(new SlaughterGamesEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-
     }
 
     public SlaughterGames(final SlaughterGames card) {
@@ -92,42 +86,13 @@ class SlaughterGamesEffect extends SearchTargetGraveyardHandLibraryForCardNameAn
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        Player controller = game.getPlayer(source.getControllerId());
-        if (player != null && controller != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-            cardChoice.clearChoice();
-            cardChoice.setMessage("Name a nonland card");
-
-            while (!controller.choose(Outcome.Exile, cardChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-            String cardName;
-            cardName = cardChoice.getChoice();
-            MageObject sourceObject = game.getObject(source.getSourceId());
-            if (sourceObject != null) {
-                game.informPlayers(sourceObject.getName() + " named card: [" + cardName + "]");
-            }
-
-            super.applySearchAndExile(game, source, cardName, player.getId());
-        }
-        return true;
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
+        return super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
     }
 
     @Override
     public SlaughterGamesEffect copy() {
         return new SlaughterGamesEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Name a nonland card. ");
-        sb.append(super.getText(mode));
-        return sb.toString();
     }
 
 }
