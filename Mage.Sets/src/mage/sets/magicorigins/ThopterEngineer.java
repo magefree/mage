@@ -49,7 +49,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  */
 public class ThopterEngineer extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Artifact creatures");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Artifact creatures you control");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
@@ -66,7 +66,7 @@ public class ThopterEngineer extends CardImpl {
         // When Thopter Engineer enters the battlefield, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), 1)));
 
-         // Artifact creatures you control have haste.
+        // Artifact creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
