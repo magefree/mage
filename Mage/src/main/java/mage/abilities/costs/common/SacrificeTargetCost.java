@@ -51,7 +51,9 @@ public class SacrificeTargetCost extends CostImpl {
     public SacrificeTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);
         target.setNotTarget(true); // sacrifice is never targeted
-        this.text = "sacrifice " + (target.getTargetName().startsWith("an") || target.getTargetName().startsWith("a ") ? "" : "a ") + target.getTargetName();
+        this.text = "sacrifice "
+                + ((target.getNumberOfTargets() != 1 || (target.getTargetName().startsWith("an") || target.getTargetName().startsWith("a ")))
+                ? "" : "a ") + target.getTargetName();
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
@@ -101,13 +103,16 @@ public class SacrificeTargetCost extends CostImpl {
         }
 
         int validTargets = 0;
+        int neededtargets = targets.get(0).getNumberOfTargets();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(((TargetControlledPermanent) targets.get(0)).getFilter(), controllerId, game)) {
             if (game.getPlayer(activator).canPaySacrificeCost(permanent, sourceId, controllerId, game)) {
                 validTargets++;
+                if (validTargets >= neededtargets) {
+                    return true;
+                }
             }
         }
-
-        return validTargets > 0;
+        return false;
     }
 
     @Override
