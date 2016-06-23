@@ -109,7 +109,7 @@ class EmrakulThePromisedEndCostReductionEffect extends CostModificationEffectImp
 
     EmrakulThePromisedEndCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {1} less to cast for each creature card in your graveyard";
+        staticText = "{this} costs {1} less to cast for each card type among cards in your graveyard";
     }
 
     EmrakulThePromisedEndCostReductionEffect(EmrakulThePromisedEndCostReductionEffect effect) {
