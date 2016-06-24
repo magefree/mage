@@ -27,6 +27,7 @@
  */
 package mage.client.game;
 
+import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -391,6 +392,7 @@ public final class GamePanel extends javax.swing.JPanel {
         stackObjects.setCardDimension(GUISizeHelper.handCardDimension);
 
         txtSpellsCast.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
+        txtHoldPriority.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
         GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
 
         int newStackWidth = pnlHelperHandButtonsStackArea.getWidth() * GUISizeHelper.stackWidth / 100;
@@ -589,7 +591,8 @@ public final class GamePanel extends javax.swing.JPanel {
         setMenuStates(
                 PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
                 PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
-                PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true")
+                PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
+                holdingPriority
         );
 
         updateGame(game);
@@ -957,9 +960,9 @@ public final class GamePanel extends javax.swing.JPanel {
      * @param manaPoolAutomaticRestricted
      * @param useFirstManaAbility
      */
-    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted, boolean useFirstManaAbility) {
+    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted, boolean useFirstManaAbility, boolean holdPriority) {
         for (PlayAreaPanel playAreaPanel : players.values()) {
-            playAreaPanel.setMenuStates(manaPoolAutomatic, manaPoolAutomaticRestricted, useFirstManaAbility);
+            playAreaPanel.setMenuStates(manaPoolAutomatic, manaPoolAutomaticRestricted, useFirstManaAbility, holdPriority);
         }
     }
 
@@ -1201,6 +1204,14 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void select(String message, GameView gameView, int messageId, Map<String, Serializable> options) {
+        holdingPriority = false;
+        txtHoldPriority.setVisible(false);
+        setMenuStates(
+            PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
+            PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
+            PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
+            false);
+
         updateGame(gameView, options);
         boolean controllingPlayer = false;
         for (PlayerView playerView : gameView.getPlayers()) {
@@ -1339,6 +1350,14 @@ public final class GamePanel extends javax.swing.JPanel {
         txtSpellsCast.setBackground(Color.LIGHT_GRAY);
         txtSpellsCast.setOpaque(true);
         txtSpellsCast.setToolTipText("spells cast during the current turn");
+
+        txtHoldPriority = new javax.swing.JLabel();
+        txtHoldPriority.setText("Hold");
+        txtHoldPriority.setBorder(BorderFactory.createCompoundBorder(border, paddingBorder));
+        txtHoldPriority.setBackground(Color.LIGHT_GRAY);
+        txtHoldPriority.setOpaque(true);
+        txtHoldPriority.setToolTipText("Holding priority after the next spell cast or ability activation");
+        txtHoldPriority.setVisible(false);
 
         btnCancelSkip = new javax.swing.JButton(); // F3
         btnSkipToNextTurn = new javax.swing.JButton(); // F4
@@ -1670,7 +1689,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 setMenuStates(
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
-                        PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"));
+                        PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
+                        holdingPriority);
             }
         });
 
@@ -1713,7 +1733,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 setMenuStates(
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
                         PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
-                        PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"));
+                        PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
+                        holdingPriority);
             }
         });
 
@@ -1829,6 +1850,7 @@ public final class GamePanel extends javax.swing.JPanel {
                         .addComponent(btnSkipToEndStepBeforeYourTurn)
                 )
                 .addGroup(gl_pnlShortCuts.createSequentialGroup()
+                        .addComponent(txtHoldPriority)
                         .addComponent(txtSpellsCast)
                         .addComponent(btnSwitchHands)
                         .addComponent(btnCancelSkip)
@@ -1862,6 +1884,7 @@ public final class GamePanel extends javax.swing.JPanel {
                                 .addComponent(btnSkipToEndStepBeforeYourTurn)
                         )
                         .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtHoldPriority)
                                 .addComponent(txtSpellsCast)
                                 .addComponent(btnSwitchHands)
                                 .addComponent(btnCancelSkip)
@@ -2343,6 +2366,48 @@ public final class GamePanel extends javax.swing.JPanel {
         return feedbackPanel;
     }
 
+    // Use Cmd on OSX since Ctrl+click is already used to simulate right click
+    private static int holdPriorityMask = System.getProperty("os.name").contains("Mac OS X") ? InputEvent.META_DOWN_MASK : InputEvent.CTRL_DOWN_MASK;
+
+    public void handleEvent(AWTEvent event) {
+        if(event instanceof InputEvent) {
+            int id = event.getID();
+            boolean isActionEvent = false;
+            if(id == MouseEvent.MOUSE_PRESSED)
+                isActionEvent = true;
+            else if(id == KeyEvent.KEY_PRESSED)
+            {
+                KeyEvent key = (KeyEvent)event;
+                int keyCode = key.getKeyCode();
+                if(keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE)
+                    isActionEvent = true;
+            }
+            if(isActionEvent) {
+                InputEvent input = (InputEvent)event;
+                if((input.getModifiersEx() & holdPriorityMask) != 0) {
+                    setMenuStates(
+                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
+                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
+                        PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
+                        true);
+                    holdPriority(true);
+                }
+            }
+        }
+    }
+
+    public void holdPriority(boolean holdPriority) {
+        if(holdingPriority != holdPriority) {
+            holdingPriority = holdPriority;
+            txtHoldPriority.setVisible(holdPriority);
+            if(holdPriority)
+                session.sendPlayerAction(PlayerAction.HOLD_PRIORITY, gameId, null);
+            else
+                session.sendPlayerAction(PlayerAction.UNHOLD_PRIORITY, gameId, null);
+        }
+    }
+
+    private boolean holdingPriority;
     private mage.client.components.ability.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
 
@@ -2397,6 +2462,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private JPanel jPhases;
     private JPanel phasesContainer;
     private javax.swing.JLabel txtSpellsCast;
+    private javax.swing.JLabel txtHoldPriority;
 
     private HoverButton currentStep;
     private Point prevPoint;

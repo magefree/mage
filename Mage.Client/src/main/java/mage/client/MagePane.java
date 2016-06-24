@@ -33,6 +33,7 @@
  */
 package mage.client;
 
+import java.awt.AWTEvent;
 import java.awt.KeyboardFocusManager;
 import java.beans.PropertyVetoException;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -89,6 +90,9 @@ public abstract class MagePane extends javax.swing.JInternalFrame {
 
     public void deactivated() {
 
+    }
+
+    public void handleEvent(AWTEvent event) {
     }
 
     /**

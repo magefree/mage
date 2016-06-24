@@ -33,6 +33,7 @@
  */
 package mage.client.game;
 
+import java.awt.AWTEvent;
 import java.util.UUID;
 import javax.swing.SwingUtilities;
 import mage.client.MagePane;
@@ -132,8 +133,12 @@ public class GamePane extends MagePane {
         gamePanel.activated();
     }
 
+    @Override
+    public void handleEvent(AWTEvent event) {
+        gamePanel.handleEvent(event);
+    }
+
     private mage.client.game.GamePanel gamePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private UUID gameId;
-
 }
