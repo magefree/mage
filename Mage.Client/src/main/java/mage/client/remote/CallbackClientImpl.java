@@ -391,6 +391,7 @@ public class CallbackClientImpl implements CallbackClient {
                         .append("<br/><b>F2</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
                         .append("<br/><b>F4</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
                         .append("<br/><b>F5</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>F6</b> - Skip current turn but stop on declare attackers/blockers")
                         .append("<br/><b>F7</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
                         .append("<br/><b>F9</b> - Skip everything until your next turn")
                         .append("<br/><b>F11</b> - Skip everything until the end step just prior to your turn")

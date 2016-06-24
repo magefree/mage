@@ -169,11 +169,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     // priority control
     protected boolean passed; // player passed priority
     protected boolean passedTurn; // F4
+    protected boolean passedTurnSkipStack; // F6
     protected boolean passedUntilEndOfTurn; // F5
-    protected boolean passedUntilNextMain; // F6
-    protected boolean passedUntilStackResolved; // F8
+    protected boolean passedUntilNextMain; // F7
+    protected boolean passedUntilStackResolved; // F10
     protected boolean passedUntilEndStepBeforeMyTurn; // F11
-    protected Date dateLastAddedToStack; // F8
+    protected Date dateLastAddedToStack; // F10
     protected boolean skippedAtLeastOnce; // used to track if passed started in specific phase
     /**
      * This indicates that player passed all turns until his own turn starts
@@ -319,6 +320,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passed = player.passed;
 
         this.passedTurn = player.passedTurn;
+        this.passedTurnSkipStack = player.passedTurnSkipStack;
         this.passedUntilEndOfTurn = player.passedUntilEndOfTurn;
         this.passedUntilNextMain = player.passedUntilNextMain;
         this.skippedAtLeastOnce = player.skippedAtLeastOnce;
@@ -447,6 +449,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.playersUnderYourControl.clear();
         this.passed = false;
         this.passedTurn = false;
+        this.passedTurnSkipStack = false;
         this.passedUntilEndOfTurn = false;
         this.passedUntilNextMain = false;
         this.skippedAtLeastOnce = false;
@@ -611,6 +614,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void endOfTurn(Game game) {
         this.passedTurn = false;
+        this.passedTurnSkipStack = false;
     }
 
     @Override
@@ -1957,6 +1961,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void resetPlayerPassedActions() {
         this.passed = false;
         this.passedTurn = false;
+        this.passedTurnSkipStack = false;
         this.passedUntilEndOfTurn = false;
         this.passedUntilNextMain = false;
         this.passedUntilStackResolved = false;
@@ -2005,6 +2010,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 passedUntilNextMain = false;
                 passedUntilEndOfTurn = false;
                 passedTurn = false;
+                passedTurnSkipStack = false;
                 passedAllTurns = true;
                 passedUntilStackResolved = false;
                 passedUntilEndStepBeforeMyTurn = false;
@@ -2013,6 +2019,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case PASS_PRIORITY_UNTIL_TURN_END_STEP: // F5
                 passedUntilNextMain = false;
                 passedTurn = false;
+                passedTurnSkipStack = false;
                 passedAllTurns = false;
                 passedUntilEndOfTurn = true;
                 passedUntilStackResolved = false;
@@ -2027,11 +2034,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                 passedUntilStackResolved = false;
                 passedUntilEndStepBeforeMyTurn = false;
                 passedTurn = true;
+                passedTurnSkipStack = false;
+                this.skip();
+                break;
+            case PASS_PRIORITY_UNTIL_NEXT_TURN_SKIP_STACK: // F6
+                passedUntilNextMain = false;
+                passedAllTurns = false;
+                passedUntilEndOfTurn = false;
+                passedUntilStackResolved = false;
+                passedUntilEndStepBeforeMyTurn = false;
+                passedTurn = false;
+                passedTurnSkipStack = true;
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE: //F7
                 passedAllTurns = false;
                 passedTurn = false;
+                passedTurnSkipStack = false;
                 passedUntilEndOfTurn = false;
                 passedUntilNextMain = true;
                 passedUntilStackResolved = false;
@@ -2042,6 +2061,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case PASS_PRIORITY_UNTIL_STACK_RESOLVED: //F8
                 passedAllTurns = false;
                 passedTurn = false;
+                passedTurnSkipStack = false;
                 passedUntilEndOfTurn = false;
                 passedUntilNextMain = false;
                 passedUntilStackResolved = true;
@@ -2052,6 +2072,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN: //F11
                 passedAllTurns = false;
                 passedTurn = false;
+                passedTurnSkipStack = false;
                 passedUntilEndOfTurn = false;
                 passedUntilNextMain = false;
                 passedUntilStackResolved = false;
@@ -2061,6 +2082,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             case PASS_PRIORITY_CANCEL_ALL_ACTIONS:
                 passedAllTurns = false;
                 passedTurn = false;
+                passedTurnSkipStack = false;
                 passedUntilEndOfTurn = false;
                 passedUntilNextMain = false;
                 passedUntilStackResolved = false;
