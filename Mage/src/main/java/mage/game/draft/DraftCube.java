@@ -139,4 +139,17 @@ public abstract class DraftCube {
 
         return booster;
     }
+
+    void removeFromLeftCards(CardIdentity cardId) {
+        if (cardId == null) {
+            return;
+        }
+
+        for (int i = leftCubeCards.size() - 1; i >= 0; i--) {
+            if (leftCubeCards.get(i) == cardId) {
+                leftCubeCards.remove(i);
+                return;
+            }
+        }
+    }
 }
