@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class ThaliaHereticalCathar extends mage.sets.mediainserts.ThaliaHereticalCathar {
+public class ThaliaHereticCathar extends mage.sets.mediainserts.ThaliaHereticCathar {
 
-    public ThaliaHereticalCathar(UUID ownerId) {
+    public ThaliaHereticCathar(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 46;
         this.expansionSetCode = "EMN";
     }
 
-    public ThaliaHereticalCathar(final ThaliaHereticalCathar card) {
+    public ThaliaHereticCathar(final ThaliaHereticCathar card) {
         super(card);
     }
 
     @Override
-    public ThaliaHereticalCathar copy() {
-        return new ThaliaHereticalCathar(this);
+    public ThaliaHereticCathar copy() {
+        return new ThaliaHereticCathar(this);
     }
 }

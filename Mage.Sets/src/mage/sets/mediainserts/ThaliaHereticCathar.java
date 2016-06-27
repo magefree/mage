@@ -48,10 +48,10 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class ThaliaHereticalCathar extends CardImpl {
+public class ThaliaHereticCathar extends CardImpl {
 
-    public ThaliaHereticalCathar(UUID ownerId) {
-        super(ownerId, 156, "Thalia, Heretical Cathar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public ThaliaHereticCathar(UUID ownerId) {
+        super(ownerId, 156, "Thalia, Heretic Cathar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "MBP";
         this.supertype.add("Legendary");
         this.subtype.add("Human");
@@ -66,13 +66,13 @@ public class ThaliaHereticalCathar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThaliaTapEffect()));
     }
 
-    public ThaliaHereticalCathar(final ThaliaHereticalCathar card) {
+    public ThaliaHereticCathar(final ThaliaHereticCathar card) {
         super(card);
     }
 
     @Override
-    public ThaliaHereticalCathar copy() {
-        return new ThaliaHereticalCathar(this);
+    public ThaliaHereticCathar copy() {
+        return new ThaliaHereticCathar(this);
     }
 }
 
