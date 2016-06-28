@@ -52,6 +52,7 @@ import static mage.client.constants.Constants.FRAME_MAX_WIDTH;
 import static mage.client.constants.Constants.SYMBOL_MAX_SPACE;
 import mage.view.CardView;
 import org.mage.card.arcane.UI;
+import org.mage.plugins.card.images.ImageCache;
 
 /**
  *
@@ -66,21 +67,6 @@ public class ImageHelper {
         BufferedImage image = loadImage(ref);
         if (image != null) {
             return scaleImage(image, width, height);
-        }
-        return null;
-    }
-
-    /**
-     *
-     * @param ref - image name
-     * @param height - height after scaling
-     * @return a scaled image that preserves the original aspect ratio, with a
-     * specified height
-     */
-    public static BufferedImage loadImage(String ref, int height) {
-        BufferedImage image = loadImage(ref);
-        if (image != null) {
-            return scaleImage(image, height);
         }
         return null;
     }
@@ -107,67 +93,7 @@ public class ImageHelper {
     }
 
     public static BufferedImage scaleImage(BufferedImage image, int width, int height) {
-        BufferedImage scaledImage = image;
-        int w = image.getWidth();
-        int h = image.getHeight();
-        do {
-            w /= 2;
-            h /= 2;
-            if (w < width || h < height) {
-                w = width;
-                h = height;
-            }
-            BufferedImage newImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D graphics2D = newImage.createGraphics();
-            graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            graphics2D.drawImage(scaledImage, 0, 0, w, h, null);
-            graphics2D.dispose();
-            scaledImage = newImage;
-        } while (w != width || h != height);
-        return scaledImage;
-    }
-
-    public static BufferedImage scaleImage(BufferedImage image, int height) {
-        double ratio = height / (double) image.getHeight();
-        int width = (int) (image.getWidth() * ratio);
-        return scaleImage(image, width, height);
-    }
-
-    public static MemoryImageSource rotate(Image image, CardDimensions dimensions) {
-        int buffer[] = new int[dimensions.frameWidth * dimensions.frameHeight];
-        int rotate[] = new int[dimensions.frameHeight * dimensions.frameWidth];
-        PixelGrabber grabber = new PixelGrabber(image, 0, 0, dimensions.frameWidth, dimensions.frameHeight, buffer, 0, dimensions.frameWidth);
-        try {
-            grabber.grabPixels();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        for (int y = 0; y < dimensions.frameHeight; y++) {
-            for (int x = 0; x < dimensions.frameWidth; x++) {
-                rotate[((dimensions.frameWidth - x - 1) * dimensions.frameHeight) + y] = buffer[(y * dimensions.frameWidth) + x];
-            }
-        }
-
-        return new MemoryImageSource(dimensions.frameHeight, dimensions.frameWidth, rotate, 0, dimensions.frameHeight);
-
-    }
-
-    public static BufferedImage rotate(BufferedImage image, double angle) {
-        double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
-        int w = image.getWidth(), h = image.getHeight();
-        int neww = (int) Math.floor(w * cos + h * sin), newh = (int) Math.floor(h * cos + w * sin);
-
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice gs = ge.getDefaultScreenDevice();
-        GraphicsConfiguration gc = gs.getDefaultConfiguration();
-
-        BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
-        Graphics2D g = result.createGraphics();
-        g.translate((neww - w) / 2, (newh - h) / 2);
-        g.rotate(angle, w / 2, h / 2);
-        g.drawRenderedImage(image, null);
-        g.dispose();
-        return result;
+        return TransformedImageCache.getResizedImage(image, width, height);
     }
 
     public static void drawCosts(List<String> costs, Graphics2D g, int xOffset, int yOffset, ImageObserver o) {
@@ -191,26 +117,7 @@ public class ImageHelper {
      * @return
      */
     public static BufferedImage getResizedImage(BufferedImage original, int width, int height) {
-        ResampleOp resampleOp = new ResampleOp(width, height);
-        BufferedImage image = resampleOp.filter(original, null);
-        return image;
-    }
-
-    /**
-     * Returns an image scaled to fit width panel
-     *
-     * @param original
-     * @param width
-     * @return
-     */
-    public static BufferedImage getResizedImage(BufferedImage original, int width) {
-        if (width != original.getWidth()) {
-            double ratio = width / (double) original.getWidth();
-            int height = (int) (original.getHeight() * ratio);
-            return getResizedImage(original, width, height);
-        } else {
-            return original;
-        }
+        return TransformedImageCache.getResizedImage(original, width, height);
     }
 
     /**
@@ -223,17 +130,7 @@ public class ImageHelper {
      * @return scaled image
      */
     public static BufferedImage scale(BufferedImage sbi, int imageType, int dWidth, int dHeight) {
-        BufferedImage dbi = null;
-        if (sbi != null) {
-            double fWidth = dWidth / sbi.getWidth();
-            double fHeight = dHeight / sbi.getHeight();
-            dbi = new BufferedImage(dWidth, dHeight, imageType);
-            Graphics2D g = dbi.createGraphics();
-            AffineTransform at = AffineTransform.getScaleInstance(fWidth, fHeight);
-            g.drawRenderedImage(sbi, at);
-            g.dispose();
-        }
-        return dbi;
+        return TransformedImageCache.getResizedImage(sbi, dWidth, dHeight);
     }
 
     /**
@@ -244,9 +141,7 @@ public class ImageHelper {
      * @return
      */
     public static BufferedImage getResizedImage(BufferedImage original, Rectangle sizeNeed) {
-        ResampleOp resampleOp = new ResampleOp(sizeNeed.width, sizeNeed.height);
-        BufferedImage image = resampleOp.filter(original, null);
-        return image;
+        return TransformedImageCache.getResizedImage(original, sizeNeed.width, sizeNeed.height);
     }
 
     /**

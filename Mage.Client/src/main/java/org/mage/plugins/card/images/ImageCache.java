@@ -1,5 +1,6 @@
 package org.mage.plugins.card.images;
 
+import mage.client.util.TransformedImageCache;
 import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
@@ -274,7 +275,7 @@ public class ImageCache {
     }
 
     public static BufferedImage makeThumbnail(BufferedImage original, String path) {
-        BufferedImage image = getResizedImage(original, Constants.THUMBNAIL_SIZE_FULL);
+        BufferedImage image = TransformedImageCache.getResizedImage(original, Constants.THUMBNAIL_SIZE_FULL.width, Constants.THUMBNAIL_SIZE_FULL.height);
         TFile imageFile = getTFile(path);
         if (imageFile == null) {
             return null;
@@ -312,36 +313,7 @@ public class ImageCache {
             return original;
         }
 
-        ResampleOp resampleOp = new ResampleOp(tgtWidth, tgtHeight);
-        BufferedImage image = resampleOp.filter(original, null);
-        return image;
-    }
-
-    /**
-     * Returns an image scaled to the size appropriate for the card picture
-     * panel For future use.
-     */
-    private static BufferedImage getFullSizeImage(BufferedImage original, double scale) {
-        if (scale == 1) {
-            return original;
-        }
-        ResampleOp resampleOp = new ResampleOp((int) (original.getWidth() * scale), (int) (original.getHeight() * scale));
-        BufferedImage image = resampleOp.filter(original, null);
-        return image;
-    }
-
-    /**
-     * Returns an image scaled to the size appropriate for the card picture
-     * panel
-     *
-     * @param original
-     * @param sizeNeed
-     * @return
-     */
-    public static BufferedImage getResizedImage(BufferedImage original, Rectangle sizeNeed) {
-        ResampleOp resampleOp = new ResampleOp(sizeNeed.width, sizeNeed.height);
-        BufferedImage image = resampleOp.filter(original, null);
-        return image;
+        return TransformedImageCache.getResizedImage(original, tgtWidth, tgtHeight);
     }
 
     /**
@@ -364,11 +336,11 @@ public class ImageCache {
         }
 
         double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
-        if (scale > 1) {
-            scale = 1;
+        if (scale >= 1) {
+            return original;
         }
 
-        return getFullSizeImage(original, scale);
+        return TransformedImageCache.getResizedImage(original, (int)(original.getWidth() * scale), (int)(original.getHeight() * scale));
     }
 
     public static TFile getTFile(String path) {

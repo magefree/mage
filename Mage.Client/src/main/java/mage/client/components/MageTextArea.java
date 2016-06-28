@@ -13,6 +13,8 @@ import org.mage.card.arcane.UI;
  * @author nantuko
  */
 public class MageTextArea extends JEditorPane {
+    private String currentText;
+    private int currentPanelWidth;
 
     public MageTextArea() {
         UI.setHTMLEditorKit(this);
@@ -30,6 +32,12 @@ public class MageTextArea extends JEditorPane {
         if (text == null) {
             return;
         }
+
+        if(text.equals(currentText) && panelWidth == currentPanelWidth)
+            return;
+
+        currentText = text;
+        currentPanelWidth = panelWidth;
 
         final StringBuilder buffer = new StringBuilder(512);
         // Dialog is a java logical font family, so it should work on all systems
