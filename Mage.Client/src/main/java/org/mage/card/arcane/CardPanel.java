@@ -416,37 +416,19 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         String cardType = getType(newGameCard);
         tooltipText.setText(getText(cardType, newGameCard));
 
-        Util.threadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
-                    flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
-                    if (!loadImage) {
-                        return;
-                    }
-                    BufferedImage srcImage;
-                    if (gameCard.isFaceDown()) {
-                        srcImage = getFaceDownImage();
-                    } else {
-                        srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
-                    }
-                    if (srcImage != null) {
-                        hasImage = true;
-                        setText(gameCard);
-                        setImage(srcImage);
-                    }
-                    if (gameCard.isTransformed()) {
-                        toggleTransformed();
-                    }
-                    setText(gameCard);
-                } catch (Exception e) {
-                    LOGGER.fatal("Problem during image animation", e);
-                } catch (Error err) {
-                    LOGGER.error("Problem during image animation", err);
-                }
-            }
-        });
+        tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+        flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
+
+        if (!loadImage) {
+            return;
+        }
+
+        if (gameCard.isTransformed()) {
+            // this calls updateImage
+            toggleTransformed();
+        } else {
+            updateImage();
+        }
     }
 
     private void setTypeIcon(BufferedImage bufferedImage, String toolTipText) {
@@ -494,7 +476,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private void setImage(BufferedImage srcImage) {
         synchronized (imagePanel) {
-            imagePanel.setImage(srcImage);
+            if(srcImage != null)
+                imagePanel.setImage(srcImage);
+            else
+                imagePanel.clearImage();
             repaint();
         }
         doLayout();
@@ -852,15 +837,21 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         return cardYOffset;
     }
 
+    private int updateImageStamp;
+
     @Override
     public void updateImage() {
+        tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+        flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
+
+        final CardView gameCard = this.gameCard;
+        final int stamp = ++updateImageStamp;
+
         Util.threadPool.submit(new Runnable() {
             @Override
             public void run() {
                 try {
-                    tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
-                    flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
-                    BufferedImage srcImage;
+                    final BufferedImage srcImage;
                     if (gameCard.isFaceDown()) {
                         srcImage = getFaceDownImage();
                     } else if (cardWidth > THUMBNAIL_SIZE_FULL.width) {
@@ -868,11 +859,16 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     } else {
                         srcImage = ImageCache.getThumbnail(gameCard);
                     }
-                    if (srcImage != null) {
-                        hasImage = true;
-                        setText(gameCard);
-                        setImage(srcImage);
-                    }
+                    UI.invokeLater(new Runnable() {
+                        @Override
+                        public void run () {
+                            if(stamp == updateImageStamp) {
+                                hasImage = srcImage != null;
+                                setText(gameCard);
+                                setImage(srcImage);
+                            }
+                        }
+                    });
                 } catch (Exception e) {
                     e.printStackTrace();
                 } catch (Error err) {
