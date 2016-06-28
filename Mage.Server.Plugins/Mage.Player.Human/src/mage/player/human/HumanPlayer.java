@@ -577,7 +577,8 @@ public class HumanPlayer extends PlayerImpl {
                     return false;
                 }
             }
-            if (passedAllTurns) {
+
+            if (passedAllTurns || passedTurnSkipStack) {
                 if (passWithManaPoolCheck(game)) {
                     return false;
                 }
@@ -600,7 +601,7 @@ public class HumanPlayer extends PlayerImpl {
             if (game.getStack().isEmpty()) {
                 passedUntilStackResolved = false;
                 boolean dontCheckPassStep = false;
-                if (passedTurn) {
+                if (passedTurn || passedTurnSkipStack) {
                     if (passWithManaPoolCheck(game)) {
                         return false;
                     }
@@ -887,7 +888,7 @@ public class HumanPlayer extends PlayerImpl {
         filter.add(new ControllerIdPredicate(attackingPlayerId));
         while (!abort) {
             if (passedAllTurns || passedUntilEndStepBeforeMyTurn
-                    || (!getUserData().getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction() && (passedTurn || passedUntilEndOfTurn || passedUntilNextMain))) {
+                    || (!getUserData().getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction() && (passedTurn || passedTurnSkipStack || passedUntilEndOfTurn || passedUntilNextMain))) {
                 return;
             }
             Map<String, Serializable> options = new HashMap<>();

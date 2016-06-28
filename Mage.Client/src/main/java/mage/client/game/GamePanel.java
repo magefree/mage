@@ -1500,6 +1500,15 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0);
+        this.getInputMap(c).put(ks, "F6_PRESS");
+        this.getActionMap().put("F6_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                btnEndTurnSkipStackActionPerformed(actionEvent);
+            }
+        });
+
         btnSkipToNextMain.setContentAreaFilled(false);
         btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipMainButtonImage()));
@@ -2090,6 +2099,12 @@ public final class GamePanel extends javax.swing.JPanel {
         session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, true, false, false, false, false);
+    }
+
+    private void btnEndTurnSkipStackActionPerformed(java.awt.event.ActionEvent evt) {
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN_SKIP_STACK, gameId, null);
+        AudioManager.playOnSkipButton();
+        updateSkipButtons(true, false, false, false, true, false);
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
