@@ -92,7 +92,7 @@ class IonasBlessingEffect extends ContinuousEffectImpl {
 
     public IonasBlessingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = ", and can block an additional creature";
+        staticText = ", and can block an additional creature each combat";
     }
 
     public IonasBlessingEffect(final IonasBlessingEffect effect) {

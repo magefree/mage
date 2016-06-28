@@ -60,7 +60,7 @@ public class SakashimasStudent extends CardImpl {
 
         // You may have Sakashima's Student enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
         Effect effect = new CopyPermanentEffect(new FilterCreaturePermanent(), new AddSubtypeApplier("Ninja"));
-        effect.setText("as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types");
+        effect.setText("as a copy of any creature on the battlefield, except it's a Ninja in addition to its other creature types");
         this.addAbility(new EntersBattlefieldAbility(effect, true));
 
     }
