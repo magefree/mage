@@ -52,7 +52,7 @@ public class ThaliasLancers extends CardImpl {
     }
 
     public ThaliasLancers(UUID ownerId) {
-        super(ownerId, 57, "Thalia's Lancers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+        super(ownerId, 47, "Thalia's Lancers", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "EMN";
         this.subtype.add("Human");
         this.subtype.add("Knight");
