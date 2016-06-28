@@ -634,6 +634,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public final void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
+        if(cardWidth == this.cardWidth && cardHeight == this.cardHeight) {
+            setBounds(x - cardXOffset, y - cardYOffset, getWidth(), getHeight());
+            return;
+        }
+
         this.cardWidth = cardWidth;
         this.symbolWidth = cardWidth / 7;
         this.cardHeight = cardHeight;
@@ -656,6 +661,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             int height = cardYOffset * 2 + cardHeight;
             setBounds(x - cardXOffset, y - cardYOffset, width, height);
         }
+        if(imagePanel != null && imagePanel.getSrcImage() != null)
+            updateImage();
     }
 
     public int getXOffset(int cardWidth) {
