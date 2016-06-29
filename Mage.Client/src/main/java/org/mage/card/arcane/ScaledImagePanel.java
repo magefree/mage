@@ -1,11 +1,7 @@
 package org.mage.card.arcane;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-
 import javax.swing.JPanel;
 import mage.client.util.TransformedImageCache;
 
@@ -16,6 +12,11 @@ public class ScaledImagePanel extends JPanel {
     public ScaledImagePanel () {
         super(false);
         setOpaque(false);
+    }
+    
+    public void clearImage () {
+        srcImage = null;
+        repaint();
     }
 
     public void setImage(BufferedImage srcImage) {
