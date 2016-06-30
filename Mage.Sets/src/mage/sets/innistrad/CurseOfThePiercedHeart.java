@@ -58,7 +58,6 @@ public class CurseOfThePiercedHeart extends CardImpl {
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
-
         // Enchant player
         TargetPlayer target = new TargetPlayer();
         this.getSpellAbility().addTarget(target);
@@ -97,7 +96,7 @@ class CurseOfThePiercedHeartAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DRAW_STEP_PRE;
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
     }
 
     @Override

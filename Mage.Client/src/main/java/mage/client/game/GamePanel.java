@@ -30,6 +30,7 @@ package mage.client.game;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -156,6 +157,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final String CMD_AUTO_ORDER_RESET_ALL = "cmdAutoOrderResetAll";
 
     private final Map<UUID, PlayAreaPanel> players = new HashMap<>();
+    private final Map<UUID, Boolean> playersWhoLeft = new HashMap<>();
 
     // non modal frames
     private final Map<UUID, CardInfoWindowDialog> exiles = new HashMap<>();
@@ -309,6 +311,7 @@ public final class GamePanel extends javax.swing.JPanel {
             playAreaPanelEntry.getValue().CleanUp();
         }
         this.players.clear();
+        this.playersWhoLeft.clear();
 
         jLayeredPane.remove(abilityPicker);
         this.abilityPicker.cleanUp();
@@ -594,6 +597,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void addPlayers(GameView game) {
         this.players.clear();
+        this.playersWhoLeft.clear();
         this.pnlBattlefield.removeAll();
         //arrange players in a circle with the session player at the bottom left
         int numSeats = game.getPlayers().size();
@@ -614,6 +618,7 @@ public final class GamePanel extends javax.swing.JPanel {
         PlayAreaPanel playAreaPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
                 new PlayAreaPanelOptions(game.isPlayer(), game.isPlayer(), game.isRollbackTurnsAllowed()));
         players.put(player.getPlayerId(), playAreaPanel);
+        playersWhoLeft.put(player.getPlayerId(), false);
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 0.5;
@@ -622,8 +627,19 @@ public final class GamePanel extends javax.swing.JPanel {
             c.gridwidth = 2;
         }
         c.gridx = col;
-        c.gridy = row;
-        this.pnlBattlefield.add(playAreaPanel, c);
+        c.gridy = 0;
+
+        // Top panel (row=0)
+        JPanel topPanel = new JPanel();
+        topPanel.setOpaque(false);
+
+        // Bottom panel (row=1)
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setOpaque(false);
+        topPanel.setLayout(new GridBagLayout());
+        bottomPanel.setLayout(new GridBagLayout());
+
+        bottomPanel.add(playAreaPanel, c);
         playAreaPanel.setVisible(true);
         if (oddNumber) {
             col++;
@@ -646,13 +662,20 @@ public final class GamePanel extends javax.swing.JPanel {
             PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
                     new PlayAreaPanelOptions(game.isPlayer(), false, game.isRollbackTurnsAllowed()));
             players.put(player.getPlayerId(), playerPanel);
+            playersWhoLeft.put(player.getPlayerId(), false);
             c = new GridBagConstraints();
             c.fill = GridBagConstraints.BOTH;
             c.weightx = 0.5;
             c.weighty = 0.5;
             c.gridx = col;
-            c.gridy = row;
-            this.pnlBattlefield.add(playerPanel, c);
+            c.gridy = 0;
+
+            if (row == 0) {
+                topPanel.add(playerPanel, c);
+            } else {
+                bottomPanel.add(playerPanel, c);
+            }
+
             playerPanel.setVisible(true);
             playerNum++;
             if (playerNum >= numSeats) {
@@ -665,6 +688,16 @@ public final class GamePanel extends javax.swing.JPanel {
         for (PlayAreaPanel p : players.values()) {
             p.sizePlayer(smallMode);
         }
+
+        GridBagConstraints panelC = new GridBagConstraints();
+        panelC.fill = GridBagConstraints.BOTH;
+        panelC.weightx = 0.5;
+        panelC.weighty = 0.5;
+        panelC.gridwidth = 1;
+        panelC.gridy = 0;
+        this.pnlBattlefield.add(topPanel, panelC);
+        panelC.gridy = 1;
+        this.pnlBattlefield.add(bottomPanel, panelC);
     }
 
     public synchronized void updateGame(GameView game) {
@@ -836,6 +869,42 @@ public final class GamePanel extends javax.swing.JPanel {
             CombatManager.getInstance().showCombat(game.getCombat(), gameId);
         } else {
             CombatManager.getInstance().hideCombat(gameId);
+        }
+
+        for (PlayerView player : game.getPlayers()) {
+            if (player.hasLeft() && !playersWhoLeft.get(player.getPlayerId())) {
+                PlayAreaPanel playerLeftPanel = players.get(player.getPlayerId());
+                playersWhoLeft.put(player.getPlayerId(), true);
+
+                Container parent = playerLeftPanel.getParent();
+                GridBagLayout layout = (GridBagLayout) parent.getLayout();
+
+                for (Component otherPanel : parent.getComponents()) {
+
+                    if (otherPanel instanceof PlayAreaPanel) {
+                        GridBagConstraints gbc = layout.getConstraints(otherPanel);
+                        if (gbc.weightx > 0.1) {
+                            gbc.weightx = 0.99;
+                        }
+                        gbc.fill = GridBagConstraints.BOTH;
+                        gbc.anchor = GridBagConstraints.WEST;
+                        if (gbc.gridx > 0) {
+                            gbc.anchor = GridBagConstraints.EAST;
+                        }
+                        if (otherPanel == playerLeftPanel) {
+                            gbc.weightx = 0.01;
+                            Dimension d = playerLeftPanel.getPreferredSize();
+                            d.width = 95;
+                            otherPanel.setPreferredSize(d);
+                        }
+                        parent.remove(otherPanel);
+                        parent.add(otherPanel, gbc);
+                    }
+                }
+
+                parent.validate();
+                parent.repaint();
+            }
         }
 
         feedbackPanel.disableUndo();
@@ -1431,6 +1500,15 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
+        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0);
+        this.getInputMap(c).put(ks, "F6_PRESS");
+        this.getActionMap().put("F6_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                btnEndTurnSkipStackActionPerformed(actionEvent);
+            }
+        });
+
         btnSkipToNextMain.setContentAreaFilled(false);
         btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipMainButtonImage()));
@@ -2021,6 +2099,12 @@ public final class GamePanel extends javax.swing.JPanel {
         session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
         AudioManager.playOnSkipButton();
         updateSkipButtons(false, true, false, false, false, false);
+    }
+
+    private void btnEndTurnSkipStackActionPerformed(java.awt.event.ActionEvent evt) {
+        session.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN_SKIP_STACK, gameId, null);
+        AudioManager.playOnSkipButton();
+        updateSkipButtons(true, false, false, false, true, false);
     }
 
     private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {

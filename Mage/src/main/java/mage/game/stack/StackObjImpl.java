@@ -113,7 +113,7 @@ public abstract class StackObjImpl implements StackObject {
             if (this instanceof Spell) {
                 objectAbilities.addAll(((Spell) this).getSpellAbilities());
             } else {
-                objectAbilities.addAll(getAbilities());
+                objectAbilities.add(getStackAbility());
             }
             for (Ability ability : objectAbilities) {
                 // Some spells can have more than one mode
@@ -210,34 +210,36 @@ public abstract class StackObjImpl implements StackObject {
                                 again = true;
                             }
                         } else // if possible add the alternate Target - it may not be included in the old definition nor in the already selected targets of the new definition
-                        if (newTarget.getTargets().contains(tempTarget.getFirstTarget()) || target.getTargets().contains(tempTarget.getFirstTarget())) {
-                            if (targetController.isHuman()) {
-                                if (targetController.chooseUse(Outcome.Benefit, "This target was already selected from origin spell. Reset to original target?", ability, game)) {
-                                    // use previous target no target was selected
-                                    newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);
+                        {
+                            if (newTarget.getTargets().contains(tempTarget.getFirstTarget()) || target.getTargets().contains(tempTarget.getFirstTarget())) {
+                                if (targetController.isHuman()) {
+                                    if (targetController.chooseUse(Outcome.Benefit, "This target was already selected from origin spell. Reset to original target?", ability, game)) {
+                                        // use previous target no target was selected
+                                        newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);
+                                    } else {
+                                        again = true;
+                                    }
                                 } else {
+                                    newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);
+                                }
+                            } else if (!target.canTarget(getControllerId(), tempTarget.getFirstTarget(), ability, game)) {
+                                if (targetController.isHuman()) {
+                                    game.informPlayer(targetController, "This target is not valid!");
+                                    again = true;
+                                } else {
+                                    // keep the old
+                                    newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);
+                                }
+                            } else if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
+                                Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
+                                if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
+                                    game.informPlayer(targetController, "This target does not fullfil the target requirements (" + filterNewTarget.getMessage() + ")");
                                     again = true;
                                 }
                             } else {
-                                newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);
+                                // valid target was selected, add it to the new target definition
+                                newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), ability, game, false);
                             }
-                        } else if (!target.canTarget(getControllerId(), tempTarget.getFirstTarget(), ability, game)) {
-                            if (targetController.isHuman()) {
-                                game.informPlayer(targetController, "This target is not valid!");
-                                again = true;
-                            } else {
-                                // keep the old
-                                newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);
-                            }
-                        } else if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
-                            Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
-                            if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
-                                game.informPlayer(targetController, "This target does not fullfil the target requirements (" + filterNewTarget.getMessage() + ")");
-                                again = true;
-                            }
-                        } else {
-                            // valid target was selected, add it to the new target definition
-                            newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), ability, game, false);
                         }
                     } while (again && targetController.canRespond());
                 }

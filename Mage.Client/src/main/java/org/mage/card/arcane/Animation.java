@@ -8,6 +8,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class Animation {
+    private static boolean ENABLED = true;
+
     private static final long TARGET_MILLIS_PER_FRAME = 30;
 
     private static Timer timer = new Timer("Animation", true);
@@ -25,6 +27,18 @@ public abstract class Animation {
     }
 
     public Animation (final long duration, long delay) {
+        if(!ENABLED) {
+            UI.invokeLater(new Runnable() {
+                @Override
+                public void run () {
+                    start();
+                    //update(1.0f);
+                    end();
+                }
+            });
+            return;
+        }
+
         timerTask = new TimerTask() {
             @Override
             public void run () {
@@ -171,6 +185,12 @@ public abstract class Animation {
 
             @Override
             protected void end () {
+                if (!state) {
+                    parent.toggleTransformed();
+                }
+                state = true;
+                panel.transformAngle = 0;
+
                 parent.onEndAnimation();
                 parent.repaint();
             }

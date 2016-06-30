@@ -52,10 +52,10 @@ import mage.players.Player;
  * @author fireshoes
  */
 public class MoltenSentry extends CardImpl {
-    
+
     private final static String rule = "As Molten Sentry enters the battlefield, flip a coin. If the coin comes up heads, Molten Sentry enters the battlefield as a "
             + "5/2 creature with haste. If it comes up tails, Molten Sentry enters the battlefield as a 2/5 creature with defender.";
-    
+
     public MoltenSentry(UUID ownerId) {
         super(ownerId, 136, "Molten Sentry", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "RAV";
@@ -63,7 +63,7 @@ public class MoltenSentry extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // As Molten Sentry enters the battlefield, flip a coin. If the coin comes up heads, Molten Sentry enters the battlefield as a 5/2 creature with haste. 
+        // As Molten Sentry enters the battlefield, flip a coin. If the coin comes up heads, Molten Sentry enters the battlefield as a 5/2 creature with haste.
         // If it comes up tails, Molten Sentry enters the battlefield as a 2/5 creature with defender.
         this.addAbility(new EntersBattlefieldAbility(new MoltenSentryEffect(), null, rule, ""));
     }
@@ -91,7 +91,7 @@ class MoltenSentryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (controller != null && permanent != null) {
             if (controller.flipCoin(game)) {
                 game.informPlayers("Heads: Molten Sentry enters the battlefield as a 5/2 creature with haste");

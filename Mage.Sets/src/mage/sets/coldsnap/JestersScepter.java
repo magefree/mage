@@ -244,8 +244,8 @@ class JestersScepterCounterEffect extends OneShotEffect {
             String nameOfExiledCardPayment = (String) game.getState().getValue(source.getSourceId() + "_nameOfExiledCardPayment");
             String nameOfExiledCardPayment2 = (String) game.getState().getValue(source.getSourceId() + "_nameOfExiledCardPayment2");
             if (nameOfExiledCardPayment != null) {
-                if (nameOfExiledCardPayment.matches(spell.getName())
-                        || nameOfExiledCardPayment2.matches(spell.getName())) {
+                if (nameOfExiledCardPayment.equals(spell.getCard().getName())
+                        || (nameOfExiledCardPayment2 != null) && nameOfExiledCardPayment2.equals(spell.getCard().getName())) {
                     return game.getStack().counter(targetPointer.getFirst(game, source), source.getSourceId(), game);
                 }
             }

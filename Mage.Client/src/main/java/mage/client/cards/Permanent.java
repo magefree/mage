@@ -56,6 +56,8 @@ import mage.client.util.ImageHelper;
 import mage.constants.CardType;
 import mage.view.CounterView;
 import mage.view.PermanentView;
+import org.mage.plugins.card.images.ImageCache;
+import mage.client.util.TransformedImageCache;
 
 /**
  *
@@ -215,7 +217,7 @@ public class Permanent extends Card {
         Graphics2D g = (Graphics2D) tappedImage.getGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.drawImage(this.createImage(ImageHelper.rotate(small, dimension)), 0, 0, this);
+        g.drawImage(TransformedImageCache.getRotatedResizedImage(small, dimension.frameWidth, dimension.frameHeight, Math.toRadians(90.0)), 0, 0, this);
 
         g.dispose();
     }

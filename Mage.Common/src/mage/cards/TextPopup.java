@@ -39,6 +39,8 @@ package mage.cards;
  * @author BetaSteward_at_googlemail.com
  */
 public class TextPopup extends javax.swing.JPanel {
+    private String text;
+    private boolean needsUpdate;
 
     /** Creates new form TextPopup */
     public TextPopup() {
@@ -46,7 +48,17 @@ public class TextPopup extends javax.swing.JPanel {
     }
 
     public void setText(String text) {
-        popupText.setText(text);
+        if(!text.equals(this.text)) {
+            this.text = text;
+            this.needsUpdate = true;
+        }
+    }
+
+    public void updateText() {
+        if(this.needsUpdate) {
+            popupText.setText(this.text);
+            this.needsUpdate = false;
+        }
     }
 
     /** This method is called from within the constructor to

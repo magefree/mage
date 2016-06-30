@@ -284,6 +284,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (card.getCardNumber() > 0 && !card.getSetCode().isEmpty()
                         && !ignoreUrls.contains(card.getSetCode())) {
                     String cardName = card.getName();
+                    boolean isType2 = type2SetsFilter.contains(card.getSetCode());
                     CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", false, card.isDoubleFaced(), card.isNightCard());
                     if (url.getUsesVariousArt()) {
                         url.setDownloadName(createDownloadName(card));
@@ -291,10 +292,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                     url.setFlipCard(card.isFlipCard());
                     url.setSplitCard(card.isSplitCard());
-
-                    if (type2SetsFilter.contains(card.getSetCode())) {
-                        url.setType2(true);
-                    }
+                    url.setType2(isType2);
 
                     allCardsUrls.add(url);
                     if (card.isDoubleFaced()) {
@@ -302,6 +300,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             throw new IllegalStateException("Second side card can't have empty name.");
                         }
                         url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", false, card.isDoubleFaced(), true);
+                        url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
                     if (card.isFlipCard()) {
@@ -311,6 +310,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         url = new CardDownloadData(card.getFlipCardName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", false, card.isDoubleFaced(), card.isNightCard());
                         url.setFlipCard(true);
                         url.setFlippedSide(true);
+                        url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
                 } else if (card.getCardNumber() < 1) {

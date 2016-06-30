@@ -25,17 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  * @author Loki
@@ -51,9 +50,11 @@ public class KondaLordOfEiganjo extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+
         this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(new BushidoAbility(5));
         this.addAbility(IndestructibleAbility.getInstance());
+
+        this.addAbility(new BushidoAbility(5));
     }
 
     public KondaLordOfEiganjo(final KondaLordOfEiganjo card) {

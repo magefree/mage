@@ -112,6 +112,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final Border RED_BORDER = new LineBorder(Color.red, 2);
     private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
     private final Color greenBackgroundColor = new Color(180, 255, 180, 200);
+    private final Color deadBackgroundColor = new Color(200, 180, 180, 200);
 
     private int avatarId = -1;
     private String flagName;
@@ -222,7 +223,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
         graveLabel.setText(Integer.toString(graveCards));
         graveLabel.setToolTipText("Card Types: " +  qtyCardTypes(player.getGraveyard()));
-        
+
         int exileCards = player.getExile().size();
         if (exileCards > 99) {
             if (!changedFontExile) {
@@ -282,6 +283,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             if (player.hasLeft()) {
                 this.avatar.setBorder(RED_BORDER);
                 this.btnPlayer.setBorder(RED_BORDER);
+                setDeadBackgroundColor();
             } else {
                 this.avatar.setBorder(EMPTY_BORDER);
                 this.btnPlayer.setBorder(EMPTY_BORDER);
@@ -297,6 +299,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private void setGreenBackgroundColor() {
         panelBackground.setBackgroundColor(greenBackgroundColor);
+    }
+
+    private void setDeadBackgroundColor() {
+        panelBackground.setBackgroundColor(deadBackgroundColor);
     }
 
     /**
@@ -878,7 +884,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (cardTypesPresent.isEmpty()) return 0;
         else return cardTypesPresent.size();
     }
-    
+
     private HoverButton avatar;
     private JLabel avatarFlag;
     private JButton btnPlayer;

@@ -60,7 +60,7 @@ public class SwordOfKaldra extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +5/+5.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5,5, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5, 5, Duration.WhileOnBattlefield)));
         // Whenever equipped creature deals damage to a creature, exile that creature.
         this.addAbility(new SwordOfKaldraTriggeredAbility());
         // Equip {4}
@@ -80,16 +80,16 @@ public class SwordOfKaldra extends CardImpl {
 class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
 
     public SwordOfKaldraTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileTargetEffect("exile that creature"), false);
+        super(Zone.BATTLEFIELD, new ExileTargetEffect("exile that creature. (Exile it only if it's still on the battlefield.)"), false);
     }
 
     public SwordOfKaldraTriggeredAbility(final SwordOfKaldraTriggeredAbility ability) {
-            super(ability);
+        super(ability);
     }
 
     @java.lang.Override
     public SwordOfKaldraTriggeredAbility copy() {
-            return new SwordOfKaldraTriggeredAbility(this);
+        return new SwordOfKaldraTriggeredAbility(this);
     }
 
     @java.lang.Override
@@ -101,8 +101,8 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(this.getSourceId());
         if (equipment != null
-            && equipment.getAttachedTo() != null
-            && event.getSourceId().equals(equipment.getAttachedTo())) {
+                && equipment.getAttachedTo() != null
+                && event.getSourceId().equals(equipment.getAttachedTo())) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }
@@ -113,7 +113,7 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
 
     @java.lang.Override
     public String getRule() {
-            return "Whenever equipped creature deals damage to a creature, " + super.getRule();
+        return "Whenever equipped creature deals damage to a creature, " + super.getRule();
     }
 
 }

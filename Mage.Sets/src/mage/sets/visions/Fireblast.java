@@ -28,12 +28,12 @@
 package mage.sets.visions;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -42,12 +42,12 @@ import mage.target.common.TargetCreatureOrPlayer;
 /**
  *
  * @author jeffwadsworth
-
+ *
  */
 public class Fireblast extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain");
-    
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
+
     static {
         filter.add(new SubtypePredicate("Mountain"));
     }
@@ -56,14 +56,13 @@ public class Fireblast extends CardImpl {
         super(ownerId, 79, "Fireblast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
         this.expansionSetCode = "VIS";
 
-                
         // You may sacrifice two Mountains rather than pay Fireblast's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
-        
+
         // Fireblast deals 4 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        
+
     }
 
     public Fireblast(final Fireblast card) {

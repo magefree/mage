@@ -32,6 +32,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -54,6 +55,7 @@ public class CleansingBeam extends CardImpl {
         // Radiance — Cleansing Beam deals 2 damage to target creature and each other creature that shares a color with it.
         this.getSpellAbility().addEffect(new CleansingBeamEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setAbilityWord(AbilityWord.RADIANCE);
     }
 
     public CleansingBeam(final CleansingBeam card) {
@@ -67,6 +69,7 @@ public class CleansingBeam extends CardImpl {
 }
 
 class CleansingBeamEffect extends OneShotEffect {
+
     static final FilterPermanent filter = new FilterPermanent("creature");
 
     static {
@@ -75,7 +78,7 @@ class CleansingBeamEffect extends OneShotEffect {
 
     CleansingBeamEffect() {
         super(Outcome.Damage);
-        staticText = "Radiance - Cleansing Beam deals 2 damage to target creature and each other creature that shares a color with it";
+        staticText = "{this} deals 2 damage to target creature and each other creature that shares a color with it";
     }
 
     CleansingBeamEffect(final CleansingBeamEffect effect) {
@@ -89,7 +92,7 @@ class CleansingBeamEffect extends OneShotEffect {
             ObjectColor color = target.getColor(game);
             target.damage(2, source.getSourceId(), game, false, true);
             for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                if (p.getColor(game).shares(color)) {
+                if (!target.getId().equals(p.getId()) && p.getColor(game).shares(color)) {
                     p.damage(2, source.getSourceId(), game, false, true);
                 }
             }

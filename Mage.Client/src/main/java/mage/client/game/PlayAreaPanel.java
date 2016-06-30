@@ -178,6 +178,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                         gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
                         break;
                     }
+                    case "F6": {
+                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN_SKIP_STACK, gameId, null);
+                        break;
+                    }
                     case "F7": {
                         gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
                         break;
@@ -211,6 +215,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         popupMenu.add(skipMenu);
 
         String tooltipText = "<html>This skip actions stops if something goes to <br><b>stack</b> and if <b>attackers</b> or <b>blocker</b> have to be <b>declared</b>.";
+        String everythingTooltipText = "<html>This skip actions stops if <b>attackers</b> or <b>blocker</b> have to be <b>declared</b>, but not if something goes to the <b>stack</b>.";
         menuItem = new JMenuItem("<html><b>F4</b> - Phases until next turn");
         menuItem.setActionCommand("F4");
         menuItem.setToolTipText(tooltipText);
@@ -225,6 +230,13 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
+        menuItem = new JMenuItem("<html><b>F6</b> - Everything until the next turn");
+        menuItem.setActionCommand("F6");
+        menuItem.setToolTipText(everythingTooltipText);
+        menuItem.setMnemonic(KeyEvent.VK_U);
+        skipMenu.add(menuItem);
+        menuItem.addActionListener(skipListener);
+
         menuItem = new JMenuItem("<html><b>F7</b> - Phases until begin of next main phase");
         menuItem.setToolTipText(tooltipText);
         menuItem.setActionCommand("F7");
@@ -234,14 +246,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         menuItem = new JMenuItem("<html><b>F9</b> - Everything until your own next turn");
         menuItem.setActionCommand("F9");
-        menuItem.setToolTipText(tooltipText);
+        menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_V);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
         
         menuItem = new JMenuItem("<html><b>F11</b> - Everything until end step prior to your own next turn");
         menuItem.setActionCommand("F11");
-        menuItem.setToolTipText(tooltipText);
+        menuItem.setToolTipText(everythingTooltipText);
         menuItem.setMnemonic(KeyEvent.VK_P);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);

@@ -28,13 +28,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -44,6 +37,13 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -113,11 +113,11 @@ class PhyrexianIngesterImprintEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
-            if (targetPermanent != null) {
-                controller.moveCardToExileWithInfo(targetPermanent, getId(), sourceObject.getIdName() + " (Imprint)",  source.getSourceId(), game, Zone.BATTLEFIELD, true);
+            if (sourcePermanent != null && targetPermanent != null) {
+                controller.moveCardToExileWithInfo(targetPermanent, getId(), sourceObject.getIdName() + " (Imprint)", source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 sourcePermanent.imprint(targetPermanent.getId(), game);
                 return true;
-            }            
+            }
         }
         return false;
     }

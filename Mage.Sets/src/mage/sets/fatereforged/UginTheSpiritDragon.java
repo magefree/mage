@@ -27,6 +27,8 @@
  */
 package mage.sets.fatereforged;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -35,6 +37,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
@@ -48,7 +51,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -123,9 +125,9 @@ class UginTheSpiritDragonEffect2 extends OneShotEffect {
         FilterPermanent filter = new FilterPermanent("permanent with converted mana cost X or less that's one or more colors");
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, cmc + 1));
         filter.add(Predicates.not(new ColorlessPredicate()));
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
-        }
+        Set<Card> permanentsToExile = new HashSet<>();
+        permanentsToExile.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
+        controller.moveCards(permanentsToExile, Zone.EXILED, source, game);
         return true;
     }
 }

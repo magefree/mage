@@ -31,6 +31,8 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
+import mage.players.Player;
+import mage.players.PlayerList;
 
 /**
  *
@@ -38,7 +40,7 @@ import mage.game.Game;
  */
 public class TenOrLessLifeCondition implements Condition {
 
-    public static enum CheckType { AN_OPPONENT, CONTROLLER, TARGET_OPPONENT };
+    public static enum CheckType { AN_OPPONENT, CONTROLLER, TARGET_OPPONENT, EACH_PLAYER };
 
     private final CheckType type;
 
@@ -61,6 +63,19 @@ public class TenOrLessLifeCondition implements Condition {
                 break;
             case TARGET_OPPONENT:
                 //TODO: Implement this.
+                break;
+            case EACH_PLAYER:
+                int maxLife = 0;
+                PlayerList playerList = game.getState().getPlayersInRange(source.getControllerId(), game);
+                for ( UUID pid : playerList ) {
+                    Player p = game.getPlayer(pid);
+                    if (p != null) {
+                        if (maxLife < p.getLife()) {
+                        maxLife = p.getLife();
+                        }
+                    }
+                }
+                conditionApplies |= maxLife <= 10;
                 break;
         }
 

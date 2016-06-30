@@ -68,6 +68,8 @@ public class Glimmervoid extends CardImpl {
 
 class GlimmervoidTriggeredAbility extends TriggeredAbilityImpl {
 
+    static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
+
     GlimmervoidTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
@@ -82,17 +84,18 @@ class GlimmervoidTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @java.lang.Override
+    public boolean checkInterveningIfClause(Game game) {
+        return game.getBattlefield().countAll(filter, controllerId, game) == 0;
+    }
+
+    @java.lang.Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.END_TURN_STEP_PRE;
     }
 
     @java.lang.Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        FilterArtifactPermanent filter = new FilterArtifactPermanent();
-        if (!game.getBattlefield().contains(filter, controllerId, 1, game)) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @java.lang.Override

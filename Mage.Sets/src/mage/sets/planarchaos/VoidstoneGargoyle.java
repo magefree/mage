@@ -34,13 +34,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -49,9 +45,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -85,46 +78,6 @@ public class VoidstoneGargoyle extends CardImpl {
     public VoidstoneGargoyle copy() {
         return new VoidstoneGargoyle(this);
     }
-}
-
-class VoidstoneGargoyleChooseCardEffect extends OneShotEffect {
-
-    public VoidstoneGargoyleChooseCardEffect() {
-        super(Outcome.Detriment);
-        staticText = "name a nonland card";
-    }
-
-    public VoidstoneGargoyleChooseCardEffect(final VoidstoneGargoyleChooseCardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (controller != null && permanent != null) {
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-            cardChoice.clearChoice();
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-            String cardName = cardChoice.getChoice();
-            game.informPlayers(permanent.getLogName() + ", named card: [" + cardName + "]");
-            game.getState().setValue(source.getSourceId().toString(), cardName);
-            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName + "]"), game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public VoidstoneGargoyleChooseCardEffect copy() {
-        return new VoidstoneGargoyleChooseCardEffect(this);
-    }
-
 }
 
 class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectImpl {

@@ -577,7 +577,8 @@ public class HumanPlayer extends PlayerImpl {
                     return false;
                 }
             }
-            if (passedAllTurns) {
+
+            if (passedAllTurns || passedTurnSkipStack) {
                 if (passWithManaPoolCheck(game)) {
                     return false;
                 }
@@ -600,7 +601,7 @@ public class HumanPlayer extends PlayerImpl {
             if (game.getStack().isEmpty()) {
                 passedUntilStackResolved = false;
                 boolean dontCheckPassStep = false;
-                if (passedTurn) {
+                if (passedTurn || passedTurnSkipStack) {
                     if (passWithManaPoolCheck(game)) {
                         return false;
                     }
@@ -689,7 +690,7 @@ public class HumanPlayer extends PlayerImpl {
                             result = true;
                         } else {
                             Player actingPlayer = null;
-                            if (game.getPriorityPlayerId().equals(playerId)) {
+                            if (playerId.equals(game.getPriorityPlayerId())) {
                                 actingPlayer = this;
                             } else if (getPlayersUnderYourControl().contains(game.getPriorityPlayerId())) {
                                 actingPlayer = game.getPlayer(game.getPriorityPlayerId());
@@ -714,7 +715,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     private boolean checkPassStep(Game game) {
-        if (game.getActivePlayerId().equals(playerId)) {
+        if (playerId.equals(game.getActivePlayerId())) {
             return !this.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
         } else {
             return !this.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
@@ -887,7 +888,7 @@ public class HumanPlayer extends PlayerImpl {
         filter.add(new ControllerIdPredicate(attackingPlayerId));
         while (!abort) {
             if (passedAllTurns || passedUntilEndStepBeforeMyTurn
-                    || (!getUserData().getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction() && (passedTurn || passedUntilEndOfTurn || passedUntilNextMain))) {
+                    || (!getUserData().getUserSkipPrioritySteps().isStopOnDeclareAttackersDuringSkipAction() && (passedTurn || passedTurnSkipStack || passedUntilEndOfTurn || passedUntilNextMain))) {
                 return;
             }
             Map<String, Serializable> options = new HashMap<>();
@@ -1241,16 +1242,16 @@ public class HumanPlayer extends PlayerImpl {
                 return;
             }
         }
-        if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.getCardType().contains(CardType.LAND)){
+        if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.getCardType().contains(CardType.LAND)) {
             ActivatedAbility ability = abilities.values().iterator().next();
             if (ability instanceof ManaAbility) {
                 activateAbility(ability, game);
                 return;
             }
-        } 
-        
+        }
+
         game.fireGetChoiceEvent(playerId, name, object, new ArrayList<>(abilities.values()));
-        
+
         waitForResponse(game);
         if (response.getUUID() != null && isInGame()) {
             if (abilities.containsKey(response.getUUID())) {

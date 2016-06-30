@@ -56,8 +56,9 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class PrismaticStrands extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped white creature you control");
+
     static {
         filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new ColorPredicate(ObjectColor.WHITE));
@@ -69,9 +70,9 @@ public class PrismaticStrands extends CardImpl {
 
         // Prevent all damage that sources of the color of your choice would deal this turn.
         this.getSpellAbility().addEffect(new PrismaticStrandsEffect());
-        
+
         // Flashback-Tap an untapped white creature you control.
-        this.addAbility(new FlashbackAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1,1,filter,false)), TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)), TimingRule.INSTANT));
     }
 
     public PrismaticStrands(final PrismaticStrands card) {
@@ -85,36 +86,42 @@ public class PrismaticStrands extends CardImpl {
 }
 
 class PrismaticStrandsEffect extends OneShotEffect {
-    
+
     PrismaticStrandsEffect() {
         super(Outcome.PreventDamage);
         this.staticText = "Prevent all damage that sources of the color of your choice would deal this turn";
     }
-    
+
     PrismaticStrandsEffect(final PrismaticStrandsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PrismaticStrandsEffect copy() {
         return new PrismaticStrandsEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
             ChoiceColor choice = new ChoiceColor();
             controller.choose(Outcome.PreventDamage, choice, game);
-            game.addEffect(new PrismaticStrandsPreventionEffect(choice.getColor()), source);
-            return true;
+            if (choice.isChosen()) {
+                if (!game.isSimulation()) {
+                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen sources of the color " + choice.getChoice());
+                }
+                game.addEffect(new PrismaticStrandsPreventionEffect(choice.getColor()), source);
+                return true;
+            }
         }
         return false;
     }
 }
 
 class PrismaticStrandsPreventionEffect extends PreventionEffectImpl {
-    
+
     private final ObjectColor color;
 
     PrismaticStrandsPreventionEffect(ObjectColor color) {
@@ -135,8 +142,8 @@ class PrismaticStrandsPreventionEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER) 
-                    || event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE) 
+            if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
+                    || event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)
                     || event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER)) {
                 MageObject sourceObject = game.getObject(event.getSourceId());
                 if (sourceObject != null && sourceObject.getColor(game).shares(this.color)) {

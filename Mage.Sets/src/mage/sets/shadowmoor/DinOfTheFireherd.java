@@ -60,7 +60,6 @@ public class DinOfTheFireherd extends CardImpl {
         // Put a 5/5 black and red Elemental creature token onto the battlefield. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control.
         this.getSpellAbility().addEffect(new DinOfTheFireherdEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-        
     }
 
     public DinOfTheFireherd(final DinOfTheFireherd card) {
@@ -74,44 +73,44 @@ public class DinOfTheFireherd extends CardImpl {
 }
 
 class DinOfTheFireherdEffect extends OneShotEffect {
-    
+
     private final static FilterControlledCreaturePermanent blackCreatureFilter = new FilterControlledCreaturePermanent("black creatures you control");
     private final static FilterControlledCreaturePermanent redCreatureFilter = new FilterControlledCreaturePermanent("red creatures you control");
-    
+
     static {
         blackCreatureFilter.add(new ColorPredicate(ObjectColor.BLACK));
         redCreatureFilter.add(new ColorPredicate(ObjectColor.RED));
     }
-    
+
     public DinOfTheFireherdEffect() {
         super(Outcome.Neutral);
         this.staticText = "Put a 5/5 black and red Elemental creature token onto the battlefield. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control";
     }
-    
+
     public DinOfTheFireherdEffect(final DinOfTheFireherdEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DinOfTheFireherdEffect copy() {
         return new DinOfTheFireherdEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean applied = false;
-        int blackCreaturesControllerControls = game.getBattlefield().countAll(blackCreatureFilter, source.getControllerId(), game);
-        int redCreaturesControllerControls = game.getBattlefield().countAll(redCreatureFilter, source.getControllerId(), game);
-        
+        boolean applied;
         Token token = new DinOfTheFireherdToken();
         applied = token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-        
+
+        int blackCreaturesControllerControls = game.getBattlefield().countAll(blackCreatureFilter, source.getControllerId(), game);
+        int redCreaturesControllerControls = game.getBattlefield().countAll(redCreatureFilter, source.getControllerId(), game);
+
         Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetOpponent != null) {
             Effect effect = new SacrificeEffect(new FilterControlledCreaturePermanent(), blackCreaturesControllerControls, "Target Opponent");
             effect.setTargetPointer(new FixedTarget(targetOpponent.getId()));
             effect.apply(game, source);
-            
+
             Effect effect2 = new SacrificeEffect(new FilterControlledLandPermanent(), redCreaturesControllerControls, "Target Opponent");
             effect2.setTargetPointer(new FixedTarget(targetOpponent.getId()));
             effect2.apply(game, source);
@@ -122,6 +121,7 @@ class DinOfTheFireherdEffect extends OneShotEffect {
 }
 
 class DinOfTheFireherdToken extends Token {
+
     public DinOfTheFireherdToken() {
         super("", "5/5 black and red Elemental creature");
         cardType.add(CardType.CREATURE);

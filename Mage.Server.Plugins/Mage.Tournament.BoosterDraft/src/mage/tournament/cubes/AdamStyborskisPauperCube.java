@@ -34,7 +34,7 @@ import mage.game.draft.DraftCube;
  * @author fireshoes
  */
 public class AdamStyborskisPauperCube extends DraftCube {
-    
+
 public AdamStyborskisPauperCube() {
         super("Adam Styborkski's Cube (411 cards)"); // https://docs.google.com/spreadsheets/d/12iQhC4bHqFW7hEWxPBjyC8yBDehFZ0_4DkqzyA8EL3o/edit#gid=0
 
@@ -44,6 +44,7 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("AEther Adept", ""));
         cubeCards.add(new CardIdentity("AEthersnipe", ""));
         cubeCards.add(new CardIdentity("Agony Warp", ""));
+        cubeCards.add(new CardIdentity("Aim High", ""));
         cubeCards.add(new CardIdentity("Ambush Viper", ""));
         cubeCards.add(new CardIdentity("Apex Hawks", ""));
         cubeCards.add(new CardIdentity("Arachnus Web", ""));
@@ -67,7 +68,6 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Beetleback Chief", ""));
         cubeCards.add(new CardIdentity("Beetleform Mage", ""));
         cubeCards.add(new CardIdentity("Benthic Infiltrator", ""));
-        cubeCards.add(new CardIdentity("Blade of the Sixth Pride", ""));
         cubeCards.add(new CardIdentity("Blastoderm", ""));
         cubeCards.add(new CardIdentity("Blazing Torch", ""));
         cubeCards.add(new CardIdentity("Blightning", ""));
@@ -81,10 +81,9 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Boros Guildgate", ""));
         cubeCards.add(new CardIdentity("Branching Bolt", ""));
         cubeCards.add(new CardIdentity("Brute Force", ""));
-        cubeCards.add(new CardIdentity("Brute Strength", ""));
         cubeCards.add(new CardIdentity("Burst Lightning", ""));
         cubeCards.add(new CardIdentity("Butcher Ghoul", ""));
-        cubeCards.add(new CardIdentity("Cadaver Imp", ""));
+        cubeCards.add(new CardIdentity("Byway Courier", ""));
         cubeCards.add(new CardIdentity("Cage of Hands", ""));
         cubeCards.add(new CardIdentity("Calcite Snapper", ""));
         cubeCards.add(new CardIdentity("Capsize", ""));
@@ -93,6 +92,7 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Cavern Harpy", ""));
         cubeCards.add(new CardIdentity("Centaur Healer", ""));
         cubeCards.add(new CardIdentity("Center Soul", ""));
+        cubeCards.add(new CardIdentity("Cephalid Sage", ""));
         cubeCards.add(new CardIdentity("Chain Lightning", ""));
         cubeCards.add(new CardIdentity("Chainer's Edict", ""));
         cubeCards.add(new CardIdentity("Citanul Woodreaders", ""));
@@ -105,14 +105,13 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Coalition Honor Guard", ""));
         cubeCards.add(new CardIdentity("Cogwork Librarian", ""));
         cubeCards.add(new CardIdentity("Colossal Might", ""));
-        cubeCards.add(new CardIdentity("Comparative Analysis", ""));
         cubeCards.add(new CardIdentity("Compulsive Research", ""));
         cubeCards.add(new CardIdentity("Consume Strength", ""));
         cubeCards.add(new CardIdentity("Corpse Churn", ""));
         cubeCards.add(new CardIdentity("Corrupted Zendikon", ""));
         cubeCards.add(new CardIdentity("Counterspell", ""));
         cubeCards.add(new CardIdentity("Crippling Fatigue", ""));
-        cubeCards.add(new CardIdentity("Crocanura", ""));
+        cubeCards.add(new CardIdentity("Crow of Dark Tidings", ""));
         cubeCards.add(new CardIdentity("Crypt Rats", ""));
         cubeCards.add(new CardIdentity("Crystallization", ""));
         cubeCards.add(new CardIdentity("Cultivate", ""));
@@ -120,8 +119,7 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Curse of Chains", ""));
         cubeCards.add(new CardIdentity("Custodi Squire", ""));
         cubeCards.add(new CardIdentity("Daring Skyjek", ""));
-        cubeCards.add(new CardIdentity("Daru Lancer", ""));
-        cubeCards.add(new CardIdentity("Dauthi Slayer", ""));
+        cubeCards.add(new CardIdentity("Dauntless Cathar", ""));
         cubeCards.add(new CardIdentity("Dead Reveler", ""));
         cubeCards.add(new CardIdentity("Dead Weight", ""));
         cubeCards.add(new CardIdentity("Death Denied", ""));
@@ -145,18 +143,20 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Eldrazi Skyspawner", ""));
         cubeCards.add(new CardIdentity("Elephant Ambush", ""));
         cubeCards.add(new CardIdentity("Elephant Guide", ""));
+        cubeCards.add(new CardIdentity("Elite Vanguard", ""));
+        cubeCards.add(new CardIdentity("Emperor Crocodile", ""));
         cubeCards.add(new CardIdentity("Epic Confrontation", ""));
         cubeCards.add(new CardIdentity("Errant Ephemeron", ""));
         cubeCards.add(new CardIdentity("Esper Cormorants", ""));
         cubeCards.add(new CardIdentity("Essence Scatter", ""));
         cubeCards.add(new CardIdentity("Evincar's Justice", ""));
-        cubeCards.add(new CardIdentity("Evolution Charm", ""));
         cubeCards.add(new CardIdentity("Evolving Wilds", ""));
         cubeCards.add(new CardIdentity("Faceless Butcher", ""));
         cubeCards.add(new CardIdentity("Faith's Fetters", ""));
         cubeCards.add(new CardIdentity("Fall of the Hammer", ""));
         cubeCards.add(new CardIdentity("Feeling of Dread", ""));
         cubeCards.add(new CardIdentity("Fellwar Stone", ""));
+        cubeCards.add(new CardIdentity("Fertile Thicket", ""));
         cubeCards.add(new CardIdentity("Fervent Cathar", ""));
         cubeCards.add(new CardIdentity("Firebolt", ""));
         cubeCards.add(new CardIdentity("Firefiend Elemental", ""));
@@ -165,7 +165,6 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Flayer Husk", ""));
         cubeCards.add(new CardIdentity("Flurry of Horns", ""));
         cubeCards.add(new CardIdentity("Fortify", ""));
-        cubeCards.add(new CardIdentity("Foul Spirit", ""));
         cubeCards.add(new CardIdentity("Frilled Oculus", ""));
         cubeCards.add(new CardIdentity("Frostburn Weird", ""));
         cubeCards.add(new CardIdentity("Fyndhorn Elves", ""));
@@ -175,9 +174,9 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Ghastly Demise", ""));
         cubeCards.add(new CardIdentity("Ghirapur Gearcrafter", ""));
         cubeCards.add(new CardIdentity("Ghitu Slinger", ""));
+        cubeCards.add(new CardIdentity("Ghoulcaller's Accomplice", ""));
         cubeCards.add(new CardIdentity("Giant Growth", ""));
         cubeCards.add(new CardIdentity("Gideon's Lawkeeper", ""));
-        cubeCards.add(new CardIdentity("Gideon's Reproach", ""));
         cubeCards.add(new CardIdentity("Goblin Freerunner", ""));
         cubeCards.add(new CardIdentity("Goblin Heelcutter", ""));
         cubeCards.add(new CardIdentity("Gods Willing", ""));
@@ -195,15 +194,16 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Gurmag Angler", ""));
         cubeCards.add(new CardIdentity("Halimar Depths", ""));
         cubeCards.add(new CardIdentity("Halimar Wavewatch", ""));
-        cubeCards.add(new CardIdentity("Hand of Silumgar", ""));
         cubeCards.add(new CardIdentity("Harrow", ""));
         cubeCards.add(new CardIdentity("Harsh Sustenance", ""));
         cubeCards.add(new CardIdentity("Hissing Iguanar", ""));
         cubeCards.add(new CardIdentity("Hooting Mandrills", ""));
+        cubeCards.add(new CardIdentity("Humble", ""));
         cubeCards.add(new CardIdentity("Hymn to Tourach", ""));
         cubeCards.add(new CardIdentity("Imperiosaur", ""));
         cubeCards.add(new CardIdentity("Incinerate", ""));
         cubeCards.add(new CardIdentity("Inner-Flame Acolyte", ""));
+        cubeCards.add(new CardIdentity("Insolent Neonate", ""));
         cubeCards.add(new CardIdentity("Into the Roil", ""));
         cubeCards.add(new CardIdentity("Isolation Zone", ""));
         cubeCards.add(new CardIdentity("Izzet Chronarch", ""));
@@ -211,7 +211,6 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Jilt", ""));
         cubeCards.add(new CardIdentity("Journey to Nowhere", ""));
         cubeCards.add(new CardIdentity("Jungle Hollow", ""));
-        cubeCards.add(new CardIdentity("Jwar Isle Avenger", ""));
         cubeCards.add(new CardIdentity("Kabuto Moth", ""));
         cubeCards.add(new CardIdentity("Keldon Marauders", ""));
         cubeCards.add(new CardIdentity("Khalni Garden", ""));
@@ -231,6 +230,7 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Liliana's Specter", ""));
         cubeCards.add(new CardIdentity("Llanowar Elves", ""));
         cubeCards.add(new CardIdentity("Lone Missionary", ""));
+        cubeCards.add(new CardIdentity("Looming Spires", ""));
         cubeCards.add(new CardIdentity("Lotus Path Djinn", ""));
         cubeCards.add(new CardIdentity("Loyal Cathar", ""));
         cubeCards.add(new CardIdentity("Loyal Pegasus", ""));
@@ -239,9 +239,7 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Mana Leak", ""));
         cubeCards.add(new CardIdentity("Man-o'-War", ""));
         cubeCards.add(new CardIdentity("Mardu Hordechief", ""));
-        cubeCards.add(new CardIdentity("Mardu Scout", ""));
         cubeCards.add(new CardIdentity("Mardu Skullhunter", ""));
-        cubeCards.add(new CardIdentity("Martial Glory", ""));
         cubeCards.add(new CardIdentity("Maul Splicer", ""));
         cubeCards.add(new CardIdentity("Maze of Ith", ""));
         cubeCards.add(new CardIdentity("Mind Stone", ""));
@@ -250,30 +248,34 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Miscalculation", ""));
         cubeCards.add(new CardIdentity("Mishra's Factory", ""));
         cubeCards.add(new CardIdentity("Mist Raven", ""));
-        cubeCards.add(new CardIdentity("Misthoof Kirin", ""));
+        cubeCards.add(new CardIdentity("Mistral Charger", ""));
         cubeCards.add(new CardIdentity("Mogg Fanatic", ""));
         cubeCards.add(new CardIdentity("Mogg Flunkies", ""));
         cubeCards.add(new CardIdentity("Mogg War Marshal", ""));
         cubeCards.add(new CardIdentity("Moldervine Cloak", ""));
         cubeCards.add(new CardIdentity("Momentary Blink", ""));
         cubeCards.add(new CardIdentity("Morgue Theft", ""));
+        cubeCards.add(new CardIdentity("Mortuary Mire", ""));
         cubeCards.add(new CardIdentity("Mulldrifter", ""));
         cubeCards.add(new CardIdentity("Nameless Inversion", ""));
         cubeCards.add(new CardIdentity("Narcolepsy", ""));
-        cubeCards.add(new CardIdentity("Natural Connection", ""));
         cubeCards.add(new CardIdentity("Necromancer's Assistant", ""));
         cubeCards.add(new CardIdentity("Nessian Asp", ""));
         cubeCards.add(new CardIdentity("Nest Invader", ""));
         cubeCards.add(new CardIdentity("Nezumi Cutthroat", ""));
+        cubeCards.add(new CardIdentity("Night's Whisper", ""));
         cubeCards.add(new CardIdentity("Nightscape Familiar", ""));
         cubeCards.add(new CardIdentity("Ninja of the Deep Hours", ""));
         cubeCards.add(new CardIdentity("Oblivion Ring", ""));
         cubeCards.add(new CardIdentity("Okiba-Gang Shinobi", ""));
+        cubeCards.add(new CardIdentity("Oona's Grace", ""));
+        cubeCards.add(new CardIdentity("Orcish Oriflamme", ""));
         cubeCards.add(new CardIdentity("Orzhov Guildgate", ""));
         cubeCards.add(new CardIdentity("Otherworldly Journey", ""));
         cubeCards.add(new CardIdentity("Pacifism", ""));
         cubeCards.add(new CardIdentity("Path of Anger's Flame", ""));
         cubeCards.add(new CardIdentity("Penumbra Spider", ""));
+        cubeCards.add(new CardIdentity("Peregrine Drake", ""));
         cubeCards.add(new CardIdentity("Perilous Myr", ""));
         cubeCards.add(new CardIdentity("Pestermite", ""));
         cubeCards.add(new CardIdentity("Pestilence", ""));
@@ -303,7 +305,9 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Raise the Alarm", ""));
         cubeCards.add(new CardIdentity("Rakdos Guildgate", ""));
         cubeCards.add(new CardIdentity("Rakdos Shred-Freak", ""));
+        cubeCards.add(new CardIdentity("Rally the Peasants", ""));
         cubeCards.add(new CardIdentity("Rampant Growth", ""));
+        cubeCards.add(new CardIdentity("Rancid Rats", ""));
         cubeCards.add(new CardIdentity("Rancor", ""));
         cubeCards.add(new CardIdentity("Ranger's Guile", ""));
         cubeCards.add(new CardIdentity("Ray of Command", ""));
@@ -318,11 +322,12 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Ronin Houndmaster", ""));
         cubeCards.add(new CardIdentity("Rugged Highlands", ""));
         cubeCards.add(new CardIdentity("Runed Servitor", ""));
+        cubeCards.add(new CardIdentity("Rush of Adrenaline", ""));
         cubeCards.add(new CardIdentity("Rushing River", ""));
-        cubeCards.add(new CardIdentity("Saddleback Lagac", ""));
         cubeCards.add(new CardIdentity("Safehold Elite", ""));
         cubeCards.add(new CardIdentity("Sakura-Tribe Elder", ""));
         cubeCards.add(new CardIdentity("Sandsteppe Outcast", ""));
+        cubeCards.add(new CardIdentity("Sandstone Bridge", ""));
         cubeCards.add(new CardIdentity("Sangrite Backlash", ""));
         cubeCards.add(new CardIdentity("Sarkhan's Rage", ""));
         cubeCards.add(new CardIdentity("Savage Punch", ""));
@@ -340,7 +345,6 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Separatist Voidmage", ""));
         cubeCards.add(new CardIdentity("Seraph of Dawn", ""));
         cubeCards.add(new CardIdentity("Serrated Arrows", ""));
-        cubeCards.add(new CardIdentity("Shadow Glider", ""));
         cubeCards.add(new CardIdentity("Shaper Parasite", ""));
         cubeCards.add(new CardIdentity("Sheer Drop", ""));
         cubeCards.add(new CardIdentity("Shelter", ""));
@@ -351,6 +355,7 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Skinthinner", ""));
         cubeCards.add(new CardIdentity("Skirk Marauder", ""));
         cubeCards.add(new CardIdentity("Skyknight Legionnaire", ""));
+        cubeCards.add(new CardIdentity("Skyline Cascade", ""));
         cubeCards.add(new CardIdentity("Slash Panther", ""));
         cubeCards.add(new CardIdentity("Slippery Bogle", ""));
         cubeCards.add(new CardIdentity("Snakeform", ""));
@@ -367,14 +372,13 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Stormscape Apprentice", ""));
         cubeCards.add(new CardIdentity("Strider Harness", ""));
         cubeCards.add(new CardIdentity("Strip Mine", ""));
-        cubeCards.add(new CardIdentity("Sultai Emissary", ""));
         cubeCards.add(new CardIdentity("Sultai Scavenger", ""));
         cubeCards.add(new CardIdentity("Suppression Bonds", ""));
         cubeCards.add(new CardIdentity("Suq'Ata Lancer", ""));
         cubeCards.add(new CardIdentity("Sweep Away", ""));
         cubeCards.add(new CardIdentity("Swiftwater Cliffs", ""));
+        cubeCards.add(new CardIdentity("Sylvan Might", ""));
         cubeCards.add(new CardIdentity("Sylvok Lifestaff", ""));
-        cubeCards.add(new CardIdentity("Tail Slash", ""));
         cubeCards.add(new CardIdentity("Tajuru Pathwarden", ""));
         cubeCards.add(new CardIdentity("Teetering Peaks", ""));
         cubeCards.add(new CardIdentity("Temporal Isolation", ""));
@@ -384,6 +388,7 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Test of Faith", ""));
         cubeCards.add(new CardIdentity("Thornweald Archer", ""));
         cubeCards.add(new CardIdentity("Thornwood Falls", ""));
+        cubeCards.add(new CardIdentity("Thraben Inspector", ""));
         cubeCards.add(new CardIdentity("Thundering Giant", ""));
         cubeCards.add(new CardIdentity("Thundering Tanadon", ""));
         cubeCards.add(new CardIdentity("Time to Feed", ""));
@@ -394,13 +399,11 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Travel Preparations", ""));
         cubeCards.add(new CardIdentity("Treasure Cruise", ""));
         cubeCards.add(new CardIdentity("Triplicate Spirits", ""));
-        cubeCards.add(new CardIdentity("Trumpet Blast", ""));
         cubeCards.add(new CardIdentity("Tumble Magnet", ""));
-        cubeCards.add(new CardIdentity("Twin Bolt", ""));
         cubeCards.add(new CardIdentity("Typhoid Rats", ""));
         cubeCards.add(new CardIdentity("Ulamog's Crusher", ""));
-        cubeCards.add(new CardIdentity("Umara Entangler", ""));
         cubeCards.add(new CardIdentity("Undying Evil", ""));
+        cubeCards.add(new CardIdentity("Undying Rage", ""));
         cubeCards.add(new CardIdentity("Unearth", ""));
         cubeCards.add(new CardIdentity("Unmake", ""));
         cubeCards.add(new CardIdentity("Unnatural Aggression", ""));
@@ -410,6 +413,7 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Viashino Firstblade", ""));
         cubeCards.add(new CardIdentity("Vines of Vastwood", ""));
         cubeCards.add(new CardIdentity("Voidwielder", ""));
+        cubeCards.add(new CardIdentity("Voldaren Duelist", ""));
         cubeCards.add(new CardIdentity("Vulshok Morningstar", ""));
         cubeCards.add(new CardIdentity("Vulshok Sorcerer", ""));
         cubeCards.add(new CardIdentity("Vulturous Aven", ""));
@@ -417,8 +421,9 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Walker of the Grove", ""));
         cubeCards.add(new CardIdentity("Wall of Roots", ""));
         cubeCards.add(new CardIdentity("War Flare", ""));
+        cubeCards.add(new CardIdentity("Warden of Evos Isle", ""));
+        cubeCards.add(new CardIdentity("Warped Landscape", ""));
         cubeCards.add(new CardIdentity("Warren Pilferers", ""));
-        cubeCards.add(new CardIdentity("Waterfront Bouncer", ""));
         cubeCards.add(new CardIdentity("Wayfarer's Bauble", ""));
         cubeCards.add(new CardIdentity("Whirlpool Whelm", ""));
         cubeCards.add(new CardIdentity("Whispers of the Muse", ""));

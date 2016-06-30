@@ -27,6 +27,8 @@
  */
 package mage.watchers.common;
 
+import java.util.HashMap;
+import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
@@ -41,6 +43,7 @@ import mage.watchers.Watcher;
 public class CreaturesDiedWatcher extends Watcher {
 
     private int amountOfCreaturesThatDied;
+    private final HashMap<UUID, Integer> amountOfCreaturesThatDiedByController = new HashMap<>();
 
     public CreaturesDiedWatcher() {
         super("CreaturesDiedWatcher", WatcherScope.GAME);
@@ -49,6 +52,7 @@ public class CreaturesDiedWatcher extends Watcher {
     public CreaturesDiedWatcher(final CreaturesDiedWatcher watcher) {
         super(watcher);
         this.amountOfCreaturesThatDied = watcher.amountOfCreaturesThatDied;
+        this.amountOfCreaturesThatDiedByController.putAll(watcher.amountOfCreaturesThatDiedByController);
     }
 
     @Override
@@ -57,6 +61,11 @@ public class CreaturesDiedWatcher extends Watcher {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.isDiesEvent() && zEvent.getTarget() != null && zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
                 amountOfCreaturesThatDied++;
+                int amount = 0;
+                if (amountOfCreaturesThatDiedByController.containsKey(zEvent.getTarget().getControllerId())) {
+                    amount = amountOfCreaturesThatDiedByController.get(zEvent.getTarget().getControllerId());
+                }
+                amountOfCreaturesThatDiedByController.put(zEvent.getTarget().getControllerId(), amount + 1);
             }
         }
     }
@@ -64,10 +73,18 @@ public class CreaturesDiedWatcher extends Watcher {
     @Override
     public void reset() {
         amountOfCreaturesThatDied = 0;
+        amountOfCreaturesThatDiedByController.clear();
     }
 
     public int getAmountOfCreaturesDiesThisTurn() {
         return amountOfCreaturesThatDied;
+    }
+
+    public int getAmountOfCreaturesDiesThisTurn(UUID playerId) {
+        if (amountOfCreaturesThatDiedByController.containsKey(playerId)) {
+            return amountOfCreaturesThatDiedByController.get(playerId);
+        }
+        return 0;
     }
 
     @Override

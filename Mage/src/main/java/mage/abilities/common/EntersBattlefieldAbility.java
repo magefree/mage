@@ -49,7 +49,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
     /**
      *
      * @param effect effect that happens when the permanent enters the
-     * battlefiely
+     * battlefield
      * @param optional
      */
     public EntersBattlefieldAbility(Effect effect, boolean optional) {

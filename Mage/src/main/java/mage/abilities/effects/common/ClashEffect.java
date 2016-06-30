@@ -165,6 +165,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     // decide to put the cards on top or on the buttom of library in turn order beginning with the active player in turn order
                     PlayerList playerList = game.getPlayerList().copy();
                     playerList.setCurrent(game.getActivePlayerId());
+                    Player nextPlayer;
                     do {
                         Player current = playerList.getCurrent(game);
                         if (cardController != null && current.getId().equals(controller.getId())) {
@@ -173,7 +174,8 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                         if (cardOpponent != null && current.getId().equals(opponent.getId())) {
                             topOpponent = current.chooseUse(Outcome.Detriment, "Put " + cardOpponent.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
                         }
-                    } while (!playerList.getNext(game).getId().equals(game.getActivePlayerId()));
+                        nextPlayer = playerList.getNext(game);
+                    } while (nextPlayer != null && !nextPlayer.getId().equals(game.getActivePlayerId()));
                     // put the cards back to library
                     if (cardController != null) {
                         controller.moveCardToLibraryWithInfo(cardController, source.getSourceId(), game, Zone.LIBRARY, topController, true);

@@ -218,7 +218,9 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         ExileZone exileZone = game.getExile().getExileZone(source.getSourceId());
-
+        if (exileZone == null) {
+            return true;
+        }
         FilterCard filter = new FilterCard();
         filter.add(new CardTypePredicate(CardType.CREATURE));
         //There should be only 1 there, but the for each loop seems the most practical to get to it

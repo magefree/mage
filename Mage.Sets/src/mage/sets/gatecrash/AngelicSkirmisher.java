@@ -85,6 +85,7 @@ public class AngelicSkirmisher extends CardImpl {
 }
 
 class AngelicSkirmisherEffect extends OneShotEffect {
+
     AngelicSkirmisherEffect() {
         super(Outcome.AddAbility);
         staticText = "choose first strike, vigilance or lifelink. Creatures you control gain that ability until end of turn";
@@ -96,7 +97,6 @@ class AngelicSkirmisherEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
@@ -107,29 +107,32 @@ class AngelicSkirmisherEffect extends OneShotEffect {
             abilityChoices.add("Vigilance");
             abilityChoices.add("Lifelink");
             abilityChoice.setChoices(abilityChoices);
-            Ability ability = null;
-            switch (abilityChoice.getChoice()) {
-                case "First strike":
-                    ability = FirstStrikeAbility.getInstance();
-                    break;
-                case "Vigilance":
-                    ability = VigilanceAbility.getInstance();
-                    break;
-                case "Lifelink":
-                    ability = LifelinkAbility.getInstance();
-                    break;
-                default:
-                    break;
+            while (!controller.choose(outcome, abilityChoice, game)) {
+                if (!controller.canRespond()) {
+                    return false;
+                }
             }
-            if (ability != null) {
-                GainAbilityControlledEffect effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, new FilterControlledCreaturePermanent());
-                game.addEffect(effect, source);
-                game.informPlayers(new StringBuilder(sourcePermanent.getName())
-                        .append(": ")
-                        .append(controller.getLogName())
-                        .append(" has chosen ")
-                        .append(abilityChoice.getChoice().toLowerCase()).toString());
-                return true;
+            Ability ability = null;
+            if (abilityChoice.getChoice() != null) {
+                switch (abilityChoice.getChoice()) {
+                    case "First strike":
+                        ability = FirstStrikeAbility.getInstance();
+                        break;
+                    case "Vigilance":
+                        ability = VigilanceAbility.getInstance();
+                        break;
+                    case "Lifelink":
+                        ability = LifelinkAbility.getInstance();
+                        break;
+                    default:
+                        break;
+                }
+                if (ability != null) {
+                    GainAbilityControlledEffect effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, new FilterControlledCreaturePermanent());
+                    game.addEffect(effect, source);
+                    game.informPlayers(sourcePermanent.getName() + ": " + controller.getLogName() + " has chosen " + abilityChoice.getChoice().toLowerCase());
+                    return true;
+                }
             }
         }
         return false;

@@ -178,7 +178,9 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return emptyAbilites;
+        Abilities<Ability> abilities = new AbilitiesImpl<>();
+        abilities.add(ability);
+        return abilities;
     }
 
     @Override

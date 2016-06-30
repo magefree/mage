@@ -47,10 +47,8 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -71,16 +69,17 @@ public class GryffsBoon extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted creature gets +1/+0 and has flying.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);
-        this.addAbility(ability);        
-        
+        this.addAbility(ability);
+
         // {3}{W}: Return Gryff's Boon from your graveyard to the battlefield attached to target creature. Activate this ability only any time you could cast a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new GryffsBoonEffect(), new ManaCostsImpl("{3}{W}"));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
@@ -110,19 +109,11 @@ class GryffsBoonEffect extends OneShotEffect {
         Card aura = game.getCard(source.getSourceId());
         if (aura != null
                 && game.getState().getZone(aura.getId()).equals(Zone.GRAVEYARD)) {
-            Player controller = game.getPlayer(source.getControllerId());
-
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
-            if (controller != null
-                    && controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
-                Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
-                if (!targetPermanent.cantBeEnchantedBy(aura, game)) {
-                    game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
-                    aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controller.getId());
-                    return targetPermanent.addAttachment(aura.getId(), game);
-                }
+            Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (!targetPermanent.cantBeEnchantedBy(aura, game)) {
+                game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
+                aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+                return targetPermanent.addAttachment(aura.getId(), game);
             }
         }
         return false;

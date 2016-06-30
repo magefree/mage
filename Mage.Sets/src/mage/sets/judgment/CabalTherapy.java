@@ -29,19 +29,17 @@ package mage.sets.judgment;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.NameACardEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -59,12 +57,13 @@ public class CabalTherapy extends CardImpl {
         this.expansionSetCode = "JUD";
 
         // Name a nonland card. Target player reveals his or her hand and discards all cards with that name.
+        this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
-        
+
         // Flashback-Sacrifice a creature.
         this.addAbility(new FlashbackAbility(
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true)), 
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), true)),
                 TimingRule.SORCERY));
     }
 
@@ -95,25 +94,12 @@ class CabalTherapyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (targetPlayer != null && controller != null && sourceObject != null) {
-            Choice cardChoice = new ChoiceImpl(true);
-            cardChoice.setMessage("Name a nonland card.");
-            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-            cardChoice.clearChoice();
-
-            while (!controller.choose(Outcome.Discard, cardChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-
-            String cardName = cardChoice.getChoice();
-            game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
+            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
             for (Card card : targetPlayer.getHand().getCards(game)) {
                 if (card.getName().equals(cardName)) {
                     targetPlayer.discard(card, source, game);
                 }
             }
-
             controller.lookAtCards(sourceObject.getName() + " Hand", targetPlayer.getHand(), game);
         }
         return true;

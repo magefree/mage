@@ -58,7 +58,7 @@ public class IcatianJavelineers1 extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Icatian Javelineers enters the battlefield with a javelin counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.JAVELIN.createInstance())));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.JAVELIN.createInstance()), "with a javelin counter on it"));
 
         // {tap}, Remove a javelin counter from Icatian Javelineers: Icatian Javelineers deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());

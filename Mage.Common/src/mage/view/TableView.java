@@ -65,6 +65,7 @@ public class TableView implements Serializable {
     private final String quitRatio;
     private final boolean limited;
     private final boolean rated;
+    private final boolean passworded;
 
     public TableView(Table table) {    
         this.tableId = table.getId();
@@ -94,8 +95,7 @@ public class TableView implements Serializable {
         if (!table.isTournament()) {
         // MATCH
             if (table.getState().equals(TableState.WAITING) || table.getState().equals(TableState.READY_TO_START)) {
-                tableStateText = table.getState().toString() + " (" + table.getMatch().getPlayers().size() + "/"+ table.getSeats().length + ")" +
-                        (table.getMatch().getOptions().getPassword().isEmpty() ? "":" PW");
+                tableStateText = table.getState().toString() + " (" + table.getMatch().getPlayers().size() + "/"+ table.getSeats().length + ")";
             } else {
                 tableStateText = table.getState().toString();
             }
@@ -136,6 +136,7 @@ public class TableView implements Serializable {
             this.quitRatio = Integer.toString(table.getMatch().getOptions().getQuitRatio());
             this.limited = table.getMatch().getOptions().isLimited();
             this.rated = table.getMatch().getOptions().isRated();
+            this.passworded = !table.getMatch().getOptions().getPassword().isEmpty();
         } else {
         // TOURNAMENT
             if (table.getTournament().getOptions().getNumberRounds() > 0) {
@@ -155,9 +156,6 @@ public class TableView implements Serializable {
             switch (table.getState()) {
                 case WAITING:
                     stateText.append(" (").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats()).append(")");
-                    if (!table.getTournament().getOptions().getPassword().isEmpty()) {
-                        stateText.append(" PW");
-                    }
                 case READY_TO_START:
                 case STARTING:
                     infoText.append(" Time: ").append(table.getTournament().getOptions().getMatchOptions().getMatchTimeLimit().toString());
@@ -185,6 +183,7 @@ public class TableView implements Serializable {
             this.quitRatio = Integer.toString(table.getTournament().getOptions().getQuitRatio());
             this.limited = table.getTournament().getOptions().getMatchOptions().isLimited();
             this.rated = table.getTournament().getOptions().getMatchOptions().isRated();
+            this.passworded = !table.getTournament().getOptions().getPassword().isEmpty();
         }
     }
 
@@ -249,5 +248,9 @@ public class TableView implements Serializable {
 
     public boolean isRated() {
         return rated;
+    }
+    
+    public boolean isPassworded() {
+        return passworded;
     }
 }

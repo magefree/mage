@@ -28,13 +28,13 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class HamletCaptain extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Humans");
 
     static {
         filter.add(new SubtypePredicate("Human"));
