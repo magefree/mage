@@ -1,3 +1,10 @@
+|Generate|TOK:SOI|Eldrazi Horror||
+|Generate|TOK:SOI|Human||
+|Generate|TOK:SOI|Human Wizard||
+|Generate|TOK:SOI|Spirit||
+|Generate|TOK:SOI|Zombie|1|
+|Generate|TOK:SOI|Zombie|2|
+
 |Generate|TOK:SOI|Angel||
 |Generate|TOK:SOI|Clue|1|
 |Generate|TOK:SOI|Clue|2|
