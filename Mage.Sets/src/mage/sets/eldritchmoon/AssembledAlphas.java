@@ -53,7 +53,7 @@ public class AssembledAlphas extends CardImpl {
 
         // Whenever Assembled Alphas blocks or becomes blocked by a creature, Assembled Alphas deals 3 damage to that creature and 3 damage to that creature's controller.
         Ability ability = new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(3, true, "that creature"), false);
-        Effect effect = new DamageTargetControllerEffect(2);
+        Effect effect = new DamageTargetControllerEffect(3);
         effect.setText("and 3 damage to that creature's controller");
         ability.addEffect(effect);
         this.addAbility(ability);

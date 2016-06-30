@@ -104,7 +104,7 @@ class DocentOfPerfectionEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent("Wizards");
 
     static {
-        filter.add(new SubtypePredicate("Wizards"));
+        filter.add(new SubtypePredicate("Wizard"));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 

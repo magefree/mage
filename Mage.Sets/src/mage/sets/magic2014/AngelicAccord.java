@@ -54,7 +54,8 @@ public class AngelicAccord extends CardImpl {
 
 
         // At the beginning of each end step, if you gained 4 or more life this turn, put a 4/4 white Angel creature token with flying onto the battlefield.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), TargetController.ANY, new YouGainedLifeCondition(Condition.ComparisonType.GreaterThan, 3), false), new PlayerGainedLifeWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), TargetController.ANY,
+                new YouGainedLifeCondition(Condition.ComparisonType.GreaterThan, 3), false), new PlayerGainedLifeWatcher());
     }
 
     public AngelicAccord(final AngelicAccord card) {
@@ -82,7 +83,7 @@ class YouGainedLifeCondition extends IntCompareCondition {
         }
         return gainedLife;
     }
-    
+
     @Override
     public String toString() {
         return "if you gained 4 or more life this turn ";

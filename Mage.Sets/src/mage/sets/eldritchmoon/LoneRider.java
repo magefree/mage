@@ -30,11 +30,9 @@ package mage.sets.eldritchmoon;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.IntCompareCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -43,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -71,9 +70,8 @@ public class LoneRider extends CardImpl {
 
         // At the beginning of the end step, if you gained 3 or more life this turn, transform Lone Rider.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new YouGainedLifeCondition(Condition.ComparisonType.GreaterThan, 2),
-                "At the beginning of the end step, if you gained 3 or more life this turn, transform {this}"));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), TargetController.ANY,
+                new YouGainedLifeCondition(Condition.ComparisonType.GreaterThan, 2), false), new PlayerGainedLifeWatcher());
     }
 
     public LoneRider(final LoneRider card) {
