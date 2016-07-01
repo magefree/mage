@@ -67,7 +67,8 @@ public class CardPluginImpl implements CardPlugin {
 
     private int landStackMax = 5;
     // private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
-    private int cardWidthMin = 50, cardWidthMax = (int) GUISizeHelper.battlefieldCardDimension.getWidth();
+    private int cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();
+    private int cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();
 
     private boolean stackVertical = false;
 
@@ -101,8 +102,8 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     private void setGUISize() {
-        cardWidthMin = 50;
-        cardWidthMax = (int) GUISizeHelper.battlefieldCardDimension.getWidth();
+        cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();
+        cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();
     }
 
     @Override
@@ -261,6 +262,7 @@ public class CardPluginImpl implements CardPlugin {
             }
             //FIXME: -1 is too slow. why not binary search?
             cardWidth -= 3;
+
         }
 
         // Get size of all the rows.

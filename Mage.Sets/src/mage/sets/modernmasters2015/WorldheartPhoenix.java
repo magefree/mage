@@ -134,7 +134,7 @@ public class WorldheartPhoenix extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = game.getPermanentEntering(source.getSourceId());
             if (permanent != null) {
                 SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
                 if (spellAbility != null

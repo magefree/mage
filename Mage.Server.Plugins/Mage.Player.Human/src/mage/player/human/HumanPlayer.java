@@ -123,6 +123,8 @@ public class HumanPlayer extends PlayerImpl {
     protected Map<String, Boolean> requestAutoAnswerId = new HashMap<>();
     protected Map<String, Boolean> requestAutoAnswerText = new HashMap<>();
 
+    protected boolean holdingPriority;
+
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
         replacementEffectChoice = new ChoiceImpl(true);
@@ -565,7 +567,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean priority(Game game) {
         passed = false;
         if (!abort) {
-            if (getJustActivatedType() != null) {
+            if (getJustActivatedType() != null && !holdingPriority) {
                 if (userData.isPassPriorityCast() && getJustActivatedType().equals(AbilityType.SPELL)) {
                     setJustActivatedType(null);
                     pass(game);
@@ -661,6 +663,7 @@ public class HumanPlayer extends PlayerImpl {
             }
             while (canRespond()) {
                 updateGameStatePriority("priority", game);
+                holdingPriority = false;
                 game.firePriorityEvent(playerId);
                 waitForResponse(game);
                 if (game.executingRollback()) {
@@ -1464,6 +1467,12 @@ public class HumanPlayer extends PlayerImpl {
             case REQUEST_AUTO_ANSWER_TEXT_YES:
             case REQUEST_AUTO_ANSWER_RESET_ALL:
                 setRequestAutoAnswer(playerAction, game, data);
+                break;
+            case HOLD_PRIORITY:
+                holdingPriority = true;
+                break;
+            case UNHOLD_PRIORITY:
+                holdingPriority = false;
                 break;
             default:
                 super.sendPlayerAction(playerAction, game, data);
