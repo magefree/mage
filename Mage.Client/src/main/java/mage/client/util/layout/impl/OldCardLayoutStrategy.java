@@ -23,13 +23,12 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
     /**
      * This offset is used once to shift all attachments
      */
-    private static final int ATTACHMENTS_DX_OFFSET = 11;
+    private static final int ATTACHMENTS_MIN_DX_OFFSET = 12;
 
     /**
      * This offset is used for each attachment
      */
-    private static final int ATTACHMENT_DX_OFFSET = 0;
-    private static final int ATTACHMENT_DY_OFFSET = 11;
+    private static final int ATTACHMENT_MIN_DY_OFFSET = 12;
 
     @Override
     public void doLayout(JLayeredPane jLayeredPane, int width) {
@@ -56,7 +55,7 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
         perm.getLinks().clear();
         Rectangle rectangleBaseCard = perm.getBounds();
         if (!Plugins.getInstance().isCardPluginLoaded()) {
-            for (UUID attachmentId: permanent.getAttachments()) {
+            for (UUID attachmentId : permanent.getAttachments()) {
                 MagePermanent link = permanents.get(attachmentId);
                 if (link != null) {
                     perm.getLinks().add(link);
@@ -67,15 +66,16 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
             }
         } else {
             int index = permanent.getAttachments().size();
-            for (UUID attachmentId: permanent.getAttachments()) {
+            for (UUID attachmentId : permanent.getAttachments()) {
                 MagePermanent link = permanents.get(attachmentId);
                 if (link != null) {
                     link.setBounds(rectangleBaseCard);
                     perm.getLinks().add(link);
+                    int dyOffset = Math.max(perm.getHeight() / 10, ATTACHMENT_MIN_DY_OFFSET);
                     if (index == 1) {
-                        rectangleBaseCard.translate(ATTACHMENTS_DX_OFFSET, ATTACHMENT_DY_OFFSET); // do it once
+                        rectangleBaseCard.translate(Math.max(perm.getWidth() / 10, ATTACHMENTS_MIN_DX_OFFSET), dyOffset); // do it once
                     } else {
-                        rectangleBaseCard.translate(ATTACHMENT_DX_OFFSET, ATTACHMENT_DY_OFFSET);
+                        rectangleBaseCard.translate(0, dyOffset);
                     }
                     perm.setBounds(rectangleBaseCard);
                     jLayeredPane.moveToFront(link);

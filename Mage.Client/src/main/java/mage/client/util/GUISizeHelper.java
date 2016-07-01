@@ -69,7 +69,8 @@ public class GUISizeHelper {
     public static Dimension otherZonesCardDimension;
     public static int otherZonesCardVerticalOffset;
 
-    public static Dimension battlefieldCardDimension;
+    public static Dimension battlefieldCardMinDimension;
+    public static Dimension battlefieldCardMaxDimension;
 
     public static Dimension editorCardDimension;
     public static int editorCardOffsetSize;
@@ -144,8 +145,10 @@ public class GUISizeHelper {
             otherZonesCardVerticalOffset = otherZonesCardDimension.height / 10;
         }
 
-        int battlefieldCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_SIZE, 14);
-        battlefieldCardDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldCardSize / 42, CARD_IMAGE_HEIGHT * battlefieldCardSize / 42);
+        int battlefieldCardMinSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, 10);
+        battlefieldCardMinDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldCardMinSize / 42, CARD_IMAGE_HEIGHT * battlefieldCardMinSize / 42);
+        int battlefieldCardMaxSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, 14);
+        battlefieldCardMaxDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldCardMaxSize / 42, CARD_IMAGE_HEIGHT * battlefieldCardMaxSize / 42);
 
         int editorCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_EDITOR_SIZE, 14);
         editorCardDimension = new Dimension(CARD_IMAGE_WIDTH * editorCardSize / 42, CARD_IMAGE_HEIGHT * editorCardSize / 42);

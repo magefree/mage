@@ -104,7 +104,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GUI_DIALOG_FONT_SIZE = "guiDialogFontSize";
     public static final String KEY_GUI_FEEDBACK_AREA_SIZE = "guiFeedbackAreaSize";
     public static final String KEY_GUI_CARD_OTHER_ZONES_SIZE = "guiCardOtherZonesSize";
-    public static final String KEY_GUI_CARD_BATTLEFIELD_SIZE = "guiCardBattlefield";
+    public static final String KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE = "guiCardBattlefieldMinSize";
+    public static final String KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE = "guiCardBattlefieldMaxSize";
 
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
     public static final String KEY_DRAFT_LOG_AUTO_SAVE = "draftLogAutoSave";
@@ -244,7 +245,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_DECK_GENERATOR_NON_CREATURE_PERCENTAGE = "newDeckGeneratorNonCreaturePercentage";
     public static final String KEY_NEW_DECK_GENERATOR_LAND_PERCENTAGE = "newDeckGeneratorLandPercentage";
     public static final String KEY_NEW_DECK_GENERATOR_ADVANCED_CMC = "newDeckGeneratorAdvancedCMC";
-
 
     // used to save and restore the settings for the cardArea (draft, sideboarding, deck builder)
     public static final String KEY_DRAFT_VIEW = "draftView";
@@ -396,8 +396,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         labelCardSizeHand = new javax.swing.JLabel();
         sliderCardSizeOtherZones = new javax.swing.JSlider();
         labelCardSizeOtherZones = new javax.swing.JLabel();
-        sliderCardSizeBattlefield = new javax.swing.JSlider();
-        labelCardSizeBattlefield = new javax.swing.JLabel();
+        sliderCardSizeMinBattlefield = new javax.swing.JSlider();
+        labelCardSizeMinBattlefield = new javax.swing.JLabel();
+        sliderCardSizeMaxBattlefield = new javax.swing.JSlider();
+        labelCardSizeMaxBattlefield = new javax.swing.JLabel();
         sliderStackWidth = new javax.swing.JSlider();
         labelStackWidth = new javax.swing.JLabel();
         sliderGameFeedbackArea = new javax.swing.JSlider();
@@ -495,6 +497,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel32 = new javax.swing.JPanel();
         jPanel33 = new javax.swing.JPanel();
         tabConnection = new javax.swing.JPanel();
+        connection_servers = new javax.swing.JPanel();
+        lblURLServerList = new javax.swing.JLabel();
+        txtURLServerList = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
         lblProxyType = new javax.swing.JLabel();
         cbProxyType = new javax.swing.JComboBox<>();
         pnlProxySettings = new javax.swing.JPanel();
@@ -509,10 +515,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtPasswordField = new javax.swing.JPasswordField();
         rememberPswd = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
-        connection_servers = new javax.swing.JPanel();
-        lblURLServerList = new javax.swing.JLabel();
-        txtURLServerList = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -557,7 +559,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, showCardName)
                     .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
         main_cardLayout.setVerticalGroup(
             main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -917,7 +919,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         guiSizeGame.setMinimumSize(new java.awt.Dimension(600, 180));
         guiSizeGame.setPreferredSize(new java.awt.Dimension(600, 180));
         java.awt.GridBagLayout guiSizeGameLayout = new java.awt.GridBagLayout();
-        guiSizeGameLayout.columnWeights = new double[] {1.0, 1.0, 1.0};
+        guiSizeGameLayout.columnWeights = new double[] {1.0, 1.0, 1.0, 1.0};
         guiSizeGameLayout.rowWeights = new double[] {1.0, 0.2, 1.0, 0.2};
         guiSizeGame.setLayout(guiSizeGameLayout);
 
@@ -980,34 +982,63 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         guiSizeGame.add(labelCardSizeOtherZones, gridBagConstraints);
 
-        sliderCardSizeBattlefield.setMajorTickSpacing(5);
-        sliderCardSizeBattlefield.setMaximum(50);
-        sliderCardSizeBattlefield.setMinimum(10);
-        sliderCardSizeBattlefield.setMinorTickSpacing(1);
-        sliderCardSizeBattlefield.setPaintLabels(true);
-        sliderCardSizeBattlefield.setPaintTicks(true);
-        sliderCardSizeBattlefield.setSnapToTicks(true);
-        sliderCardSizeBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
-        sliderCardSizeBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        sliderCardSizeBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
+        sliderCardSizeMinBattlefield.setMajorTickSpacing(5);
+        sliderCardSizeMinBattlefield.setMaximum(50);
+        sliderCardSizeMinBattlefield.setMinimum(10);
+        sliderCardSizeMinBattlefield.setMinorTickSpacing(1);
+        sliderCardSizeMinBattlefield.setPaintLabels(true);
+        sliderCardSizeMinBattlefield.setPaintTicks(true);
+        sliderCardSizeMinBattlefield.setSnapToTicks(true);
+        sliderCardSizeMinBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        sliderCardSizeMinBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderCardSizeMinBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        guiSizeGame.add(sliderCardSizeBattlefield, gridBagConstraints);
+        guiSizeGame.add(sliderCardSizeMinBattlefield, gridBagConstraints);
 
-        labelCardSizeBattlefield.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCardSizeBattlefield.setText("Permanents");
-        labelCardSizeBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        labelCardSizeMinBattlefield.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCardSizeMinBattlefield.setText("Permanents min size");
+        labelCardSizeMinBattlefield.setToolTipText("<HTML>The minimum size of permanents on the battlefield");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        guiSizeGame.add(labelCardSizeBattlefield, gridBagConstraints);
+        guiSizeGame.add(labelCardSizeMinBattlefield, gridBagConstraints);
+
+        sliderCardSizeMaxBattlefield.setMajorTickSpacing(5);
+        sliderCardSizeMaxBattlefield.setMaximum(50);
+        sliderCardSizeMaxBattlefield.setMinimum(10);
+        sliderCardSizeMaxBattlefield.setMinorTickSpacing(1);
+        sliderCardSizeMaxBattlefield.setPaintLabels(true);
+        sliderCardSizeMaxBattlefield.setPaintTicks(true);
+        sliderCardSizeMaxBattlefield.setSnapToTicks(true);
+        sliderCardSizeMaxBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        sliderCardSizeMaxBattlefield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderCardSizeMaxBattlefield.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeGame.add(sliderCardSizeMaxBattlefield, gridBagConstraints);
+
+        labelCardSizeMaxBattlefield.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCardSizeMaxBattlefield.setText("Permanents max size");
+        labelCardSizeMaxBattlefield.setToolTipText("<HTML>The maximum size of permanents on the battlefield");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeGame.add(labelCardSizeMaxBattlefield, gridBagConstraints);
 
         sliderStackWidth.setMajorTickSpacing(20);
         sliderStackWidth.setMaximum(90);
@@ -2099,7 +2130,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabAvatarsLayout.createSequentialGroup()
                 .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 528, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 1, Short.MAX_VALUE))
+                .add(0, 0, Short.MAX_VALUE))
         );
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2109,6 +2140,47 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
+
+        connection_servers.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Servers"));
+
+        lblURLServerList.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblURLServerList.setText("URL server list:");
+        lblURLServerList.setToolTipText("");
+        lblURLServerList.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        lblURLServerList.setPreferredSize(new java.awt.Dimension(110, 16));
+        lblURLServerList.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        txtURLServerList.setToolTipText("The URL XMage tries to read a server list from.");
+        txtURLServerList.setPreferredSize(new java.awt.Dimension(300, 22));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
+        jLabel17.setText("e.g.: http://XMage.de/files/server-list.txt");
+
+        org.jdesktop.layout.GroupLayout connection_serversLayout = new org.jdesktop.layout.GroupLayout(connection_servers);
+        connection_servers.setLayout(connection_serversLayout);
+        connection_serversLayout.setHorizontalGroup(
+            connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(connection_serversLayout.createSequentialGroup()
+                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(connection_serversLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(lblURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(txtURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 370, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(connection_serversLayout.createSequentialGroup()
+                        .add(141, 141, 141)
+                        .add(jLabel17)))
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+        connection_serversLayout.setVerticalGroup(
+            connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(connection_serversLayout.createSequentialGroup()
+                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(lblURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel17))
+        );
 
         lblProxyType.setText("Proxy:");
 
@@ -2219,67 +2291,26 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        connection_servers.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Servers"));
-
-        lblURLServerList.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblURLServerList.setText("URL server list:");
-        lblURLServerList.setToolTipText("");
-        lblURLServerList.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        lblURLServerList.setPreferredSize(new java.awt.Dimension(110, 16));
-        lblURLServerList.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        txtURLServerList.setToolTipText("The URL XMage tries to read a server list from.");
-        txtURLServerList.setPreferredSize(new java.awt.Dimension(300, 22));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
-        jLabel17.setText("e.g.: http://XMage.de/files/server-list.txt");
-
-        org.jdesktop.layout.GroupLayout connection_serversLayout = new org.jdesktop.layout.GroupLayout(connection_servers);
-        connection_servers.setLayout(connection_serversLayout);
-        connection_serversLayout.setHorizontalGroup(
-            connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(connection_serversLayout.createSequentialGroup()
-                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(connection_serversLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(lblURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(txtURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 370, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(connection_serversLayout.createSequentialGroup()
-                        .add(141, 141, 141)
-                        .add(jLabel17)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        connection_serversLayout.setVerticalGroup(
-            connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(connection_serversLayout.createSequentialGroup()
-                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(lblURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel17))
-        );
-
         org.jdesktop.layout.GroupLayout tabConnectionLayout = new org.jdesktop.layout.GroupLayout(tabConnection);
         tabConnection.setLayout(tabConnectionLayout);
         tabConnectionLayout.setHorizontalGroup(
             tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(tabConnectionLayout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, tabConnectionLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(pnlProxySettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, tabConnectionLayout.createSequentialGroup()
                         .add(lblProxyType)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(connection_servers, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         tabConnectionLayout.setVerticalGroup(
             tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabConnectionLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(connection_servers, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(connection_servers, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(lblProxyType)
@@ -2325,7 +2356,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(6, 6, 6))
-            .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+            .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2399,8 +2430,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
             save(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "true", "false", UPDATE_CACHE_POLICY);
             sizeGUIChanged = true;
         }
-        if (getCachedValue(KEY_GUI_CARD_BATTLEFIELD_SIZE, 14) != dialog.sliderCardSizeBattlefield.getValue()) {
-            save(prefs, dialog.sliderCardSizeBattlefield, KEY_GUI_CARD_BATTLEFIELD_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+        if (getCachedValue(KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, 10) != dialog.sliderCardSizeMaxBattlefield.getValue()) {
+            save(prefs, dialog.sliderCardSizeMinBattlefield, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, 14) != dialog.sliderCardSizeMaxBattlefield.getValue()) {
+            save(prefs, dialog.sliderCardSizeMaxBattlefield, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, "true", "false", UPDATE_CACHE_POLICY);
             sizeGUIChanged = true;
         }
         if (sizeGUIChanged) {
@@ -2892,7 +2927,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "14");
         load(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "14");
         load(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "14");
-        load(prefs, dialog.sliderCardSizeBattlefield, KEY_GUI_CARD_BATTLEFIELD_SIZE, "14");
+        load(prefs, dialog.sliderCardSizeMinBattlefield, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, "10");
+        load(prefs, dialog.sliderCardSizeMaxBattlefield, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, "14");
     }
 
     private static void loadImagesSettings(Preferences prefs) {
@@ -3278,7 +3314,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_ACTIVATION, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_AUTO_ORDER_TRIGGER, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY, "false").equals("true")
-
         );
     }
 
@@ -3374,8 +3409,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
-    private javax.swing.JLabel labelCardSizeBattlefield;
     private javax.swing.JLabel labelCardSizeHand;
+    private javax.swing.JLabel labelCardSizeMaxBattlefield;
+    private javax.swing.JLabel labelCardSizeMinBattlefield;
     private javax.swing.JLabel labelCardSizeOtherZones;
     private javax.swing.JLabel labelDialogFont;
     private javax.swing.JLabel labelEditorCardOffset;
@@ -3404,8 +3440,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox showAbilityPickerForced;
     private javax.swing.JCheckBox showCardName;
     private javax.swing.JCheckBox showPlayerNamesPermanently;
-    private javax.swing.JSlider sliderCardSizeBattlefield;
     private javax.swing.JSlider sliderCardSizeHand;
+    private javax.swing.JSlider sliderCardSizeMaxBattlefield;
+    private javax.swing.JSlider sliderCardSizeMinBattlefield;
     private javax.swing.JSlider sliderCardSizeOtherZones;
     private javax.swing.JSlider sliderChatFontSize;
     private javax.swing.JSlider sliderDialogFont;
