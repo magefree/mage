@@ -41,6 +41,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -60,7 +61,7 @@ public class EldritchEvolution extends CardImpl {
         this.expansionSetCode = "EMN";
 
         // As an additional cost to cast Eldritch Evolution, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), true)));
 
         // Search your library for a creature card with converted mana cost X or less, where X is 2 plus the sacrificed creature's converted mana cost.
         // Put that card onto the battlefield, then shuffle your library. Exile Eldritch Evolution.
@@ -105,7 +106,7 @@ class EldritchEvolutionEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (sacrificedPermanent != null && controller != null) {
             int newConvertedCost = sacrificedPermanent.getConvertedManaCost() + 2;
-            FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost + "or less");
+            FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost + " or less");
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, newConvertedCost+1));
             filter.add(new CardTypePredicate(CardType.CREATURE));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
