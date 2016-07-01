@@ -67,7 +67,7 @@ public class StitchersGraft extends CardImpl {
         effect.setText("Equipped creature has \"Whenever equipped creature attacks, it doesn't untap during its controller's next untap step.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
-        // Whenever Stitcher's Graft becomes unequipped from a permanent, sacrifice that permanent.
+        // Whenever Stitcher's Graft becomes unattached from a permanent, sacrifice that permanent.
         this.addAbility(new UnattachedTriggeredAbility(new SacrificeEquippedEffect(), false));
 
         // Equip {2}
