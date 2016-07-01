@@ -27,16 +27,20 @@
  */
 package mage.client;
 
+import java.awt.AWTEvent;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.SplashScreen;
+import java.awt.Toolkit;
+import java.awt.event.AWTEventListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -225,6 +229,26 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         return instance;
     }
 
+    private void handleEvent(AWTEvent event) {
+        MagePane frame = activeFrame;
+
+        // support multiple mage panes
+        Object source = event.getSource();
+        if(source instanceof Component) {
+            Component component = (Component)source;
+            while(component != null) {
+                if(component instanceof MagePane) {
+                    frame = (MagePane)component;
+                    break;
+                }
+                component = component.getParent();
+            }
+        }
+
+        if(frame != null)
+            frame.handleEvent(event);
+    }
+
     /**
      * Creates new form MageFrame
      */
@@ -239,6 +263,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 exitApp();
             }
         });
+
+        Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+            @Override
+            public void eventDispatched(AWTEvent event) {
+                handleEvent(event);
+            }
+        }, AWTEvent.KEY_EVENT_MASK | AWTEvent.MOUSE_EVENT_MASK);
 
         TConfig config = TConfig.current();
         config.setArchiveDetector(new TArchiveDetector("zip"));

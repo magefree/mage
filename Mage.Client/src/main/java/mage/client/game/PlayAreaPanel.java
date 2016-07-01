@@ -78,6 +78,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private JCheckBoxMenuItem manaPoolMenuItem2;
     private JCheckBoxMenuItem useFirstManaAbilityItem;
     private JCheckBoxMenuItem allowViewHandCardsMenuItem;
+    private JCheckBoxMenuItem holdPriorityMenuItem;
 
     public static final int PANEL_HEIGHT = 242;
     public static final int PANEL_HEIGHT_SMALL = 190;
@@ -210,6 +211,19 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         popupMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
+        holdPriorityMenuItem = new JCheckBoxMenuItem("<html><b>" + (System.getProperty("os.name").contains("Mac OS X") ? "Cmd" : "Ctrl") + "+click</b> - Hold Priority");
+        holdPriorityMenuItem.setMnemonic(KeyEvent.VK_P);
+        holdPriorityMenuItem.setToolTipText("<html>Hold priority after casting a spell or activating an ability, instead of automatically passing priority.");
+        popupMenu.add(holdPriorityMenuItem);
+        holdPriorityMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean holdPriority = ((JCheckBoxMenuItem)e.getSource()).getState();
+                gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolMenuItem2.getState(), useFirstManaAbilityItem.getState(), holdPriority);
+                gamePanel.holdPriority(holdPriority);
+            }
+        });
+
         JMenu skipMenu = new JMenu("Skip");
         skipMenu.setMnemonic(KeyEvent.VK_S);
         popupMenu.add(skipMenu);
@@ -277,7 +291,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 boolean manaPoolAutomatic = ((JCheckBoxMenuItem) e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT, manaPoolAutomatic ? "true" : "false");
-                gamePanel.setMenuStates(manaPoolAutomatic, manaPoolMenuItem2.getState(), useFirstManaAbilityItem.getState());
+                gamePanel.setMenuStates(manaPoolAutomatic, manaPoolMenuItem2.getState(), useFirstManaAbilityItem.getState(), holdPriorityMenuItem.getState());
                 gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON : PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
             }
         });
@@ -295,7 +309,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 boolean manaPoolAutomaticRestricted = ((JCheckBoxMenuItem) e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, manaPoolAutomaticRestricted ? "true" : "false");
-                gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolAutomaticRestricted, useFirstManaAbilityItem.getState());
+                gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolAutomaticRestricted, useFirstManaAbilityItem.getState(), holdPriorityMenuItem.getState());
                 gamePanel.getSession().sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON : PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
             }
         });        
@@ -313,7 +327,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 boolean useFirstManaAbility = ((JCheckBoxMenuItem) e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_USE_FIRST_MANA_ABILITY, useFirstManaAbility ? "true" : "false");
-                gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolMenuItem2.getState(), useFirstManaAbility);
+                gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolMenuItem2.getState(), useFirstManaAbility, holdPriorityMenuItem.getState());
                 gamePanel.getSession().sendPlayerAction(useFirstManaAbility ? PlayerAction.USE_FIRST_MANA_ABILITY_ON: PlayerAction.USE_FIRST_MANA_ABILITY_OFF, gameId, null);
             }
         });
@@ -642,7 +656,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.playingMode = playingMode;
     }
 
-    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted, boolean useFirstManaAbility) {
+    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted, boolean useFirstManaAbility, boolean holdPriority) {
         if (manaPoolMenuItem1 != null) {
             manaPoolMenuItem1.setSelected(manaPoolAutomatic);
         }
@@ -651,6 +665,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         }
         if (useFirstManaAbilityItem != null) {            
             useFirstManaAbilityItem.setSelected(useFirstManaAbility);
+        }
+        if (holdPriorityMenuItem != null) {
+            holdPriorityMenuItem.setSelected(holdPriority);
         }
     }
 
