@@ -157,8 +157,8 @@ public class DeckGenerator {
     private static Deck generateDeck(int deckSize, List<ColoredManaSymbol> allowedColors, List<String> setsToUse) {
 
         genPool = new DeckGeneratorPool(deckSize, genDialog.getCreaturePercentage(), genDialog.getNonCreaturePercentage(),
-                                        genDialog.getLandPercentage(), allowedColors, genDialog.isSingleton(), genDialog.isColorless(),
-                                        genDialog.isAdvanced(), genDialog.getDeckGeneratorCMC());
+                genDialog.getLandPercentage(), allowedColors, genDialog.isSingleton(), genDialog.isColorless(),
+                genDialog.isAdvanced(), genDialog.getDeckGeneratorCMC());
 
         final String[] sets = setsToUse.toArray(new String[setsToUse.size()]);
 
@@ -232,12 +232,10 @@ public class DeckGenerator {
                                 genPool.addCard(card.copy());
                                 count++;
                             }
-                        } else {
-                            if (reservesAdded < (genPool.getDeckSize() / 2)) {
-                                added = genPool.tryAddReserve(card, cardCMC);
-                                if (added) {
-                                    reservesAdded++;
-                                }
+                        } else if (reservesAdded < (genPool.getDeckSize() / 2)) {
+                            added = genPool.tryAddReserve(card, cardCMC);
+                            if (added) {
+                                reservesAdded++;
                             }
                         }
                     }
@@ -326,6 +324,10 @@ public class DeckGenerator {
             String landName = DeckGeneratorPool.getBasicLandName(c.toString());
             criteria.rarities(Rarity.LAND).name(landName);
             List<CardInfo> cards = CardRepository.instance.findCards(criteria);
+            if (cards.isEmpty()) { // Workaround to get basic lands if lands are not available for the given sets
+                criteria.setCodes("ORI");
+                cards = CardRepository.instance.findCards(criteria);
+            }
             basicLandMap.put(landName, cards);
         }
         return basicLandMap;
