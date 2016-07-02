@@ -15,15 +15,15 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.util.Map;
-import mage.client.util.ImageHelper;
 
 /**
  *
  * @author user
  */
 public class TransformedImageCache {
-    private final static class Key
-    {
+
+    private final static class Key {
+
         final int width;
         final int height;
         final double angle;
@@ -70,8 +70,7 @@ public class TransformedImageCache {
 
     static Map<Key, Map<BufferedImage, BufferedImage>> IMAGE_CACHE;
 
-    static
-    {
+    static {
         // TODO: can we use a single map?
         IMAGE_CACHE = ImageCaches.register(new MapMaker().softValues().makeComputingMap(new Function<Key, Map<BufferedImage, BufferedImage>>() {
             @Override
@@ -79,10 +78,12 @@ public class TransformedImageCache {
                 return new MapMaker().weakKeys().softValues().makeComputingMap(new Function<BufferedImage, BufferedImage>() {
                     @Override
                     public BufferedImage apply(BufferedImage image) {
-                        if(key.width != image.getWidth() || key.height != image.getHeight())
+                        if (key.width != image.getWidth() || key.height != image.getHeight()) {
                             image = resizeImage(image, key.width, key.height);
-                        if(key.angle != 0.0)
+                        }
+                        if (key.angle != 0.0) {
                             image = rotateImage(image, key.angle);
+                        }
                         return image;
                     }
                 });
@@ -114,30 +115,28 @@ public class TransformedImageCache {
         return image;
     }
 
-    public static BufferedImage getResizedImage(BufferedImage image, int width, int height)
-    {
+    public static BufferedImage getResizedImage(BufferedImage image, int width, int height) {
         return getRotatedResizedImage(image, width, height, 0.0);
     }
 
-    public static BufferedImage getRotatedImage(BufferedImage image, double angle)
-    {
+    public static BufferedImage getRotatedImage(BufferedImage image, double angle) {
         return getRotatedResizedImage(image, -1, -1, angle);
     }
 
-    public static BufferedImage getRotatedResizedImage(BufferedImage image, int width, int height, double angle)
-    {
+    public static BufferedImage getRotatedResizedImage(BufferedImage image, int width, int height, double angle) {
         int imageWidth = image.getWidth();
         int imageHeight = image.getHeight();
 
-        if(angle == 0.0 && (width < 0 || imageWidth == width) && (height < 0 || imageHeight == height))
+        if (angle == 0.0 && (width < 0 || imageWidth == width) && (height < 0 || imageHeight == height)) {
             return image;
+        }
 
         int resWidth;
         int resHeight;
-        if(width < 0 && height < 0) {
+        if (width < 0 && height < 0) {
             resWidth = imageWidth;
             resHeight = imageHeight;
-        } else if((height < 0) || (width >= 0 && imageHeight * width <= imageWidth * height)) {
+        } else if ((height < 0) || (width >= 0 && imageHeight * width <= imageWidth * height)) {
             resWidth = width;
             resHeight = imageHeight * width / imageWidth;
         } else {
@@ -145,9 +144,15 @@ public class TransformedImageCache {
             resHeight = height;
         }
 
-        if(angle == 0.0 && imageWidth == resWidth && imageHeight == resHeight)
+        if (angle == 0.0 && imageWidth == resWidth && imageHeight == resHeight) {
             return image;
-
+        }
+        if (resWidth < 3) {
+            resWidth = 3;
+        }
+        if (resHeight < 3) {
+            resHeight = 3;
+        }
         return IMAGE_CACHE.get(new Key(resWidth, resHeight, angle)).get(image);
     }
 }
