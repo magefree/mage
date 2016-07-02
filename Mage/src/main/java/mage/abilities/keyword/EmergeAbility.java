@@ -70,12 +70,14 @@ public class EmergeAbility extends SpellAbility {
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        Player controller = game.getPlayer(this.getControllerId());
-        if (controller != null) {
-            for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), this.getControllerId(), this.getSourceId(), game)) {
-                ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getConvertedManaCost());
-                if (costToPay.canPay(this, this.getSourceId(), this.getControllerId(), game)) {
-                    return true;
+        if (super.canActivate(playerId, game)) {
+            Player controller = game.getPlayer(this.getControllerId());
+            if (controller != null) {
+                for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), this.getControllerId(), this.getSourceId(), game)) {
+                    ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getConvertedManaCost());
+                    if (costToPay.canPay(this, this.getSourceId(), this.getControllerId(), game)) {
+                        return true;
+                    }
                 }
             }
         }
