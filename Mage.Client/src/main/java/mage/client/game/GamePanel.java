@@ -619,7 +619,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         PlayerView player = game.getPlayers().get(playerSeat);
         PlayAreaPanel playAreaPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
-                new PlayAreaPanelOptions(game.isPlayer(), game.isPlayer(), game.isRollbackTurnsAllowed()));
+                new PlayAreaPanelOptions(game.isPlayer(), game.isPlayer(), game.isRollbackTurnsAllowed(), row == 0));
         players.put(player.getPlayerId(), playAreaPanel);
         playersWhoLeft.put(player.getPlayerId(), false);
         GridBagConstraints c = new GridBagConstraints();
@@ -663,7 +663,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
             player = game.getPlayers().get(playerNum);
             PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
-                    new PlayAreaPanelOptions(game.isPlayer(), false, game.isRollbackTurnsAllowed()));
+                    new PlayAreaPanelOptions(game.isPlayer(), false, game.isRollbackTurnsAllowed(), row == 0));
             players.put(player.getPlayerId(), playerPanel);
             playersWhoLeft.put(player.getPlayerId(), false);
             c = new GridBagConstraints();
@@ -1207,10 +1207,10 @@ public final class GamePanel extends javax.swing.JPanel {
         holdingPriority = false;
         txtHoldPriority.setVisible(false);
         setMenuStates(
-            PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
-            PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
-            PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
-            false);
+                PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
+                PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
+                PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
+                false);
 
         updateGame(gameView, options);
         boolean controllingPlayer = false;
@@ -2370,26 +2370,26 @@ public final class GamePanel extends javax.swing.JPanel {
     private static int holdPriorityMask = System.getProperty("os.name").contains("Mac OS X") ? InputEvent.META_DOWN_MASK : InputEvent.CTRL_DOWN_MASK;
 
     public void handleEvent(AWTEvent event) {
-        if(event instanceof InputEvent) {
+        if (event instanceof InputEvent) {
             int id = event.getID();
             boolean isActionEvent = false;
-            if(id == MouseEvent.MOUSE_PRESSED)
+            if (id == MouseEvent.MOUSE_PRESSED) {
                 isActionEvent = true;
-            else if(id == KeyEvent.KEY_PRESSED)
-            {
-                KeyEvent key = (KeyEvent)event;
+            } else if (id == KeyEvent.KEY_PRESSED) {
+                KeyEvent key = (KeyEvent) event;
                 int keyCode = key.getKeyCode();
-                if(keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE)
+                if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
                     isActionEvent = true;
+                }
             }
-            if(isActionEvent) {
-                InputEvent input = (InputEvent)event;
-                if((input.getModifiersEx() & holdPriorityMask) != 0) {
+            if (isActionEvent) {
+                InputEvent input = (InputEvent) event;
+                if ((input.getModifiersEx() & holdPriorityMask) != 0) {
                     setMenuStates(
-                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
-                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
-                        PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
-                        true);
+                            PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
+                            PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
+                            PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
+                            true);
                     holdPriority(true);
                 }
             }
@@ -2397,13 +2397,14 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void holdPriority(boolean holdPriority) {
-        if(holdingPriority != holdPriority) {
+        if (holdingPriority != holdPriority) {
             holdingPriority = holdPriority;
             txtHoldPriority.setVisible(holdPriority);
-            if(holdPriority)
+            if (holdPriority) {
                 session.sendPlayerAction(PlayerAction.HOLD_PRIORITY, gameId, null);
-            else
+            } else {
                 session.sendPlayerAction(PlayerAction.UNHOLD_PRIORITY, gameId, null);
+            }
         }
     }
 

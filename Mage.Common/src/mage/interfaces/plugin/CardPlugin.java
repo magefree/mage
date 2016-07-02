@@ -27,7 +27,7 @@ public interface CardPlugin extends Plugin {
 
     MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage);
 
-    int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards, Map<String, String> options);
+    int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards, boolean nonPermanentsOwnRow, boolean topPanel);
 
     /**
      * Download various symbols (mana, tap, set).

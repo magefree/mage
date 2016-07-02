@@ -82,6 +82,8 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     private boolean addedCreature;
 
     private boolean removedCreature;
+    // defines if the battlefield is within a top (means top row of player panels) or a bottom player panel
+    private boolean topPanelBattlefield;
 
     /**
      * Creates new form BattlefieldPanel
@@ -129,6 +131,14 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         jScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         jScrollPane.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
         cardDimension = GUISizeHelper.battlefieldCardMaxDimension;
+    }
+
+    public boolean isTopPanelBattlefield() {
+        return topPanelBattlefield;
+    }
+
+    public void setTopPanelBattlefield(boolean topPanelBattlefield) {
+        this.topPanelBattlefield = topPanelBattlefield;
     }
 
     public void update(Map<UUID, PermanentView> battlefield) {

@@ -31,16 +31,16 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
     private static final int ATTACHMENT_MIN_DY_OFFSET = 12;
 
     @Override
-    public void doLayout(JLayeredPane jLayeredPane, int width) {
-        Map<UUID, MagePermanent> permanents = ((BattlefieldPanel) jLayeredPane).getPermanents();
-        JLayeredPane jPanel = ((BattlefieldPanel) jLayeredPane).getMainPanel();
+    public void doLayout(BattlefieldPanel battlefieldPanel, int width) {
+        Map<UUID, MagePermanent> permanents = battlefieldPanel.getPermanents();
+        JLayeredPane jPanel = battlefieldPanel.getMainPanel();
 
-        int height = Plugins.getInstance().sortPermanents(((BattlefieldPanel) jLayeredPane).getUiComponentsList(), permanents.values());
+        int height = Plugins.getInstance().sortPermanents(battlefieldPanel.getUiComponentsList(), permanents.values(), battlefieldPanel.isTopPanelBattlefield());
         jPanel.setPreferredSize(new Dimension(width - 30, height));
 
-        for (PermanentView permanent : ((BattlefieldPanel) jLayeredPane).getBattlefield().values()) {
+        for (PermanentView permanent : battlefieldPanel.getBattlefield().values()) {
             if (permanent.getAttachments() != null) {
-                groupAttachments(jLayeredPane, jPanel, permanents, permanent);
+                groupAttachments(battlefieldPanel, jPanel, permanents, permanent);
             }
         }
 
@@ -95,7 +95,7 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
     }
 
     @Override
-    public void onAdd(JLayeredPane jLayeredPane) {
+    public void onAdd(BattlefieldPanel jLayeredPane) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

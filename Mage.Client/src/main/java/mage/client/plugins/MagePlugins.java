@@ -33,7 +33,7 @@ public interface MagePlugins {
 
     boolean isCounterPluginLoaded();
 
-    int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents);
+    int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents, boolean topRow);
 
     void downloadSymbols();
 

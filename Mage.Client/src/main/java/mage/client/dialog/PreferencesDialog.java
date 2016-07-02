@@ -574,7 +574,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game"));
 
         nonLandPermanentsInOnePile.setSelected(true);
-        nonLandPermanentsInOnePile.setLabel("Put non-land permanents in one pile");
+        nonLandPermanentsInOnePile.setText("Put non-land permanents in same row as creatures");
+        nonLandPermanentsInOnePile.setToolTipText("<html>If activated, all non land permanents are shown in one row.<br>\nFirst creatures than other permanents. If not activated, creatures are<br>\nshown in a separate row.");
         nonLandPermanentsInOnePile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nonLandPermanentsInOnePileActionPerformed(evt);

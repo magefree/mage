@@ -230,7 +230,8 @@
                 <Component class="javax.swing.JCheckBox" name="nonLandPermanentsInOnePile">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="label" type="java.lang.String" value="Put non-land permanents in one pile"/>
+                    <Property name="text" type="java.lang.String" value="Put non-land permanents in same row as creatures"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;If activated, all non land permanents are shown in one row.&lt;br&gt;&#xa;First creatures than other permanents. If not activated, creatures are&lt;br&gt;&#xa;shown in a separate row."/>
                   </Properties>
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="nonLandPermanentsInOnePile"/>

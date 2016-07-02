@@ -218,7 +218,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         holdPriorityMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean holdPriority = ((JCheckBoxMenuItem)e.getSource()).getState();
+                boolean holdPriority = ((JCheckBoxMenuItem) e.getSource()).getState();
                 gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolMenuItem2.getState(), useFirstManaAbilityItem.getState(), holdPriority);
                 gamePanel.holdPriority(holdPriority);
             }
@@ -264,7 +264,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.setMnemonic(KeyEvent.VK_V);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
-        
+
         menuItem = new JMenuItem("<html><b>F11</b> - Everything until end step prior to your own next turn");
         menuItem.setActionCommand("F11");
         menuItem.setToolTipText(everythingTooltipText);
@@ -312,8 +312,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolAutomaticRestricted, useFirstManaAbilityItem.getState(), holdPriorityMenuItem.getState());
                 gamePanel.getSession().sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON : PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
             }
-        });        
-        
+        });
+
         useFirstManaAbilityItem = new JCheckBoxMenuItem("Use first mana ability when tapping lands", false);
         useFirstManaAbilityItem.setMnemonic(KeyEvent.VK_F);
         useFirstManaAbilityItem.setToolTipText("<html>Use the first mana ability when<br>"
@@ -328,7 +328,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 boolean useFirstManaAbility = ((JCheckBoxMenuItem) e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_USE_FIRST_MANA_ABILITY, useFirstManaAbility ? "true" : "false");
                 gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolMenuItem2.getState(), useFirstManaAbility, holdPriorityMenuItem.getState());
-                gamePanel.getSession().sendPlayerAction(useFirstManaAbility ? PlayerAction.USE_FIRST_MANA_ABILITY_ON: PlayerAction.USE_FIRST_MANA_ABILITY_OFF, gameId, null);
+                gamePanel.getSession().sendPlayerAction(useFirstManaAbility ? PlayerAction.USE_FIRST_MANA_ABILITY_ON : PlayerAction.USE_FIRST_MANA_ABILITY_OFF, gameId, null);
             }
         });
 
@@ -606,6 +606,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         playerPanel = new PlayerPanelExt();
         btnCheat = new javax.swing.JButton();
         battlefieldPanel = new mage.client.game.BattlefieldPanel();
+        battlefieldPanel.setTopPanelBattlefield(options.topRow);
 
         btnCheat.setText("Cheat");
         btnCheat.addActionListener(new java.awt.event.ActionListener() {
@@ -663,7 +664,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         if (manaPoolMenuItem2 != null) {
             manaPoolMenuItem2.setSelected(manaPoolAutomaticRestricted);
         }
-        if (useFirstManaAbilityItem != null) {            
+        if (useFirstManaAbilityItem != null) {
             useFirstManaAbilityItem.setSelected(useFirstManaAbility);
         }
         if (holdPriorityMenuItem != null) {

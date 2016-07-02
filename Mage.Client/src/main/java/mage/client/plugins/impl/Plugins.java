@@ -123,10 +123,9 @@ public class Plugins implements MagePlugins {
     }
 
     @Override
-    public int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents) {
-        sortingOptions.put("nonLandPermanentsInOnePile", PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false"));
+    public int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents, boolean topRow) {
         if (this.cardPlugin != null) {
-            return this.cardPlugin.sortPermanents(ui, permanents, sortingOptions);
+            return this.cardPlugin.sortPermanents(ui, permanents, PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false").equals("true"), topRow);
         }
         return -1;
     }

@@ -123,7 +123,7 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents, Map<String, String> options) {
+    public int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents, boolean nonPermanentsOwnRow, boolean topPanel) {
         //TODO: add caching
         //requires to find out is position have been changed that includes:
         //adding/removing permanents, type change
@@ -151,7 +151,7 @@ public class CardPluginImpl implements CardPlugin {
 
             int insertIndex = -1;
 
-            // Find lands with the same name.
+            // Find already added lands with the same name.
             for (int i = 0, n = rowAllLands.size(); i < n; i++) {
                 Stack stack = rowAllLands.get(i);
                 MagePermanent firstPanel = stack.get(0);
@@ -204,12 +204,10 @@ public class CardPluginImpl implements CardPlugin {
         Row rowAllAttached = new Row(permanents, RowType.attached);
 
         boolean othersOnTheRight = true;
-        if (options != null && options.containsKey("nonLandPermanentsInOnePile")) {
-            if (options.get("nonLandPermanentsInOnePile").equals("true")) {
-                othersOnTheRight = false;
-                rowAllCreatures.addAll(rowAllOthers);
-                rowAllOthers.clear();
-            }
+        if (nonPermanentsOwnRow) {
+            othersOnTheRight = false;
+            rowAllCreatures.addAll(rowAllOthers);
+            rowAllOthers.clear();
         }
 
         cardWidth = cardWidthMax;
@@ -218,6 +216,7 @@ public class CardPluginImpl implements CardPlugin {
         playAreaHeight = rect.height;
         while (true) {
             rows.clear();
+            // calculate values based on the card size that is changing with every iteration
             cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
             extraCardSpacingX = Math.round(cardWidth * EXTRA_CARD_SPACING_X);
             cardSpacingX = cardHeight - cardWidth + extraCardSpacingX;
@@ -225,15 +224,26 @@ public class CardPluginImpl implements CardPlugin {
             stackSpacingX = stackVertical ? 0 : Math.round(cardWidth * STACK_SPACING_X);
             stackSpacingY = Math.round(cardHeight * STACK_SPACING_Y);
             attachmentSpacingY = Math.round(cardHeight * ATTACHMENT_SPACING_Y);
+            // clone data
             Row creatures = (Row) rowAllCreatures.clone();
             Row lands = (Row) rowAllLands.clone();
             Row others = (Row) rowAllOthers.clone();
+
             // Wrap all creatures and lands.
-            wrap(creatures, rows, -1);
-            int afterCreaturesIndex = rows.size();
-            wrap(lands, rows, afterCreaturesIndex);
-            int afterLandsIndex = rows.size();
-            wrap(others, rows, afterLandsIndex);
+            int addOthersIndex;
+            if (topPanel) {
+                wrap(lands, rows, -1);
+                wrap(others, rows, rows.size());
+                addOthersIndex = rows.size();
+                wrap(creatures, rows, addOthersIndex);
+            } else {
+                wrap(creatures, rows, -1);
+                addOthersIndex = rows.size();
+                wrap(lands, rows, rows.size());
+                wrap(others, rows, rows.size());
+
+            }
+
             // Store the current rows and others.
             List<Row> storedRows = new ArrayList<>(rows.size());
             for (Row row : rows) {
@@ -252,7 +262,7 @@ public class CardPluginImpl implements CardPlugin {
             rows = storedRows;
             others = storedOthers;
             // Try to put others on their own row(s) and fill in the rest.
-            wrap(others, rows, afterCreaturesIndex);
+            wrap(others, rows, addOthersIndex);
             for (Row row : rows) {
                 fillRow(others, rows, row);
             }

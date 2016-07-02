@@ -34,10 +34,11 @@ package mage.client.game;
  */
 public class PlayAreaPanelOptions {
 
-    public PlayAreaPanelOptions(boolean isPlayer, boolean playerItself, boolean rollbackTurnsAllowed) {
+    public PlayAreaPanelOptions(boolean isPlayer, boolean playerItself, boolean rollbackTurnsAllowed, boolean topRow) {
         this.isPlayer = isPlayer;
         this.playerItself = playerItself;
         this.rollbackTurnsAllowed = rollbackTurnsAllowed;
+        this.topRow = topRow;
     }
 
     /**
@@ -55,5 +56,10 @@ public class PlayAreaPanelOptions {
      * true if the player can rollback turns if all players agree
      */
     public boolean rollbackTurnsAllowed = false;
+
+    /**
+     * true if the battlefield is on the top row of player areas
+     */
+    public boolean topRow = false;
 
 }
