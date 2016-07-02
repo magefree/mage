@@ -29,6 +29,7 @@ package mage.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,11 +117,15 @@ public class PlayerView implements Serializable {
                 }
             }
         }
-        for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
-            if (showInBattlefield(permanent, state)) {
-                PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()), createdForPlayerId, game);
-                battlefield.put(view.getId(), view);
+        try {
+            for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
+                if (showInBattlefield(permanent, state)) {
+                    PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()), createdForPlayerId, game);
+                    battlefield.put(view.getId(), view);
+                }
             }
+        } catch (ConcurrentModificationException e) {
+            // can happen as a player left battlefield while PlayerView is created
         }
         this.topCard = player.isTopCardRevealed() && player.getLibrary().size() > 0
                 ? new CardView(player.getLibrary().getFromTop(game)) : null;
@@ -305,7 +310,7 @@ public class PlayerView implements Serializable {
     public boolean isPassedUntilStackResolved() {
         return passedUntilStackResolved;
     }
-    
+
     public boolean isPassedUntilEndStepBeforeMyTurn() {
         return passedUntilEndStepBeforeMyTurn;
     }

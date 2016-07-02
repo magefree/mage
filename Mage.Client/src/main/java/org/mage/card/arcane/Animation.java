@@ -1,13 +1,13 @@
 package org.mage.card.arcane;
 
-import mage.cards.MagePermanent;
-
-import javax.swing.*;
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.*;
+import mage.cards.MagePermanent;
 
 public abstract class Animation {
+
     private static boolean ENABLED = true;
 
     private static final long TARGET_MILLIS_PER_FRAME = 30;
@@ -22,15 +22,15 @@ public abstract class Animation {
     private FrameTimer frameTimer;
     private long elapsed;
 
-    public Animation (final long duration) {
+    public Animation(final long duration) {
         this(duration, 0);
     }
 
-    public Animation (final long duration, long delay) {
-        if(!ENABLED) {
+    public Animation(final long duration, long delay) {
+        if (!ENABLED) {
             UI.invokeLater(new Runnable() {
                 @Override
-                public void run () {
+                public void run() {
                     start();
                     //update(1.0f);
                     end();
@@ -41,7 +41,7 @@ public abstract class Animation {
 
         timerTask = new TimerTask() {
             @Override
-            public void run () {
+            public void run() {
                 if (frameTimer == null) {
                     start();
                     frameTimer = new FrameTimer();
@@ -51,7 +51,7 @@ public abstract class Animation {
                     cancel();
                     elapsed = duration;
                 }
-                update(elapsed / (float)duration);
+                update(elapsed / (float) duration);
                 if (elapsed == duration) {
                     end();
                 }
@@ -60,37 +60,39 @@ public abstract class Animation {
         timer.scheduleAtFixedRate(timerTask, delay, TARGET_MILLIS_PER_FRAME);
     }
 
-    protected abstract void update (float percentage);
+    protected abstract void update(float percentage);
 
-    protected void cancel () {
+    protected void cancel() {
         timerTask.cancel();
         end();
     }
 
-    protected void start () {
+    protected void start() {
     }
 
-    protected void end () {
+    protected void end() {
     }
 
     /**
-     * Uses averaging of the time between the past few frames to provide smooth animation.
+     * Uses averaging of the time between the past few frames to provide smooth
+     * animation.
      */
     private static class FrameTimer {
+
         private static final int SAMPLES = 6;
         private static final long MAX_FRAME = 100; // Max time for one frame, to weed out spikes.
 
         private long samples[] = new long[SAMPLES];
         private int sampleIndex;
 
-        public FrameTimer () {
+        public FrameTimer() {
             long currentTime = System.currentTimeMillis();
             for (int i = SAMPLES - 1; i >= 0; i--) {
                 samples[i] = currentTime - (SAMPLES - i) * TARGET_MILLIS_PER_FRAME;
             }
         }
 
-        public long getTimeSinceLastFrame () {
+        public long getTimeSinceLastFrame() {
             long currentTime = System.currentTimeMillis();
 
             int id = sampleIndex - 1;
@@ -112,19 +114,19 @@ public abstract class Animation {
             samples[sampleIndex] = currentTime;
             sampleIndex = (sampleIndex + 1) % SAMPLES;
 
-            return timeSinceOldestSample / (long)SAMPLES;
+            return timeSinceOldestSample / (long) SAMPLES;
         }
     }
 
-    public static void tapCardToggle (final CardPanel panel, final MagePermanent parent, final boolean tapped, final boolean flipped) {
+    public static void tapCardToggle(final CardPanel panel, final MagePermanent parent, final boolean tapped, final boolean flipped) {
         new Animation(300) {
             @Override
-            protected void start () {
+            protected void start() {
                 parent.onBeginAnimation();
             }
 
             @Override
-            protected void update (float percentage) {
+            protected void update(float percentage) {
                 if (tapped) {
                     panel.tappedAngle = CardPanel.TAPPED_ANGLE * percentage;
                     // reverse movement if untapping
@@ -142,7 +144,7 @@ public abstract class Animation {
             }
 
             @Override
-            protected void end () {
+            protected void end() {
                 if (tapped) {
                     panel.tappedAngle = panel.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
                 }
@@ -155,18 +157,18 @@ public abstract class Animation {
         };
     }
 
-    public static void transformCard (final CardPanel panel, final MagePermanent parent, final boolean transformed) {
+    public static void transformCard(final CardPanel panel, final MagePermanent parent, final boolean transformed) {
 
         new Animation(1200) {
             private boolean state = false;
 
             @Override
-            protected void start () {
+            protected void start() {
                 parent.onBeginAnimation();
             }
 
             @Override
-            protected void update (float percentage) {
+            protected void update(float percentage) {
                 double p = percentage * 2;
                 if (percentage > 0.5) {
                     if (!state) {
@@ -184,12 +186,12 @@ public abstract class Animation {
             }
 
             @Override
-            protected void end () {
+            protected void end() {
                 if (!state) {
                     parent.toggleTransformed();
                 }
                 state = true;
-                panel.transformAngle = 0;
+                panel.transformAngle = 1;
 
                 parent.onEndAnimation();
                 parent.repaint();
@@ -197,16 +199,16 @@ public abstract class Animation {
         };
     }
 
-    public static void moveCardToPlay (final int startX, final int startY, final int startWidth, final int endX, final int endY,
-        final int endWidth, final CardPanel animationPanel, final CardPanel placeholder, final JLayeredPane layeredPane,
-        final int speed) {
+    public static void moveCardToPlay(final int startX, final int startY, final int startWidth, final int endX, final int endY,
+            final int endWidth, final CardPanel animationPanel, final CardPanel placeholder, final JLayeredPane layeredPane,
+            final int speed) {
         UI.invokeLater(new Runnable() {
             @Override
-            public void run () {
+            public void run() {
                 final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
                 final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
                 final float a = 2f;
-                final float sqrta = (float)Math.sqrt(1 / a);
+                final float sqrta = (float) Math.sqrt(1 / a);
 
                 animationPanel.setCardBounds(startX, startY, startWidth, startHeight);
                 animationPanel.setAnimationPanel(true);
@@ -218,7 +220,7 @@ public abstract class Animation {
 
                 new Animation(700) {
                     @Override
-                    protected void update (float percentage) {
+                    protected void update(float percentage) {
                         float percent = percentage;
                         if (placeholder != null && !placeholder.isShowing()) {
                             cancel();
@@ -248,10 +250,10 @@ public abstract class Animation {
                     }
 
                     @Override
-                    protected void end () {
+                    protected void end() {
                         EventQueue.invokeLater(new Runnable() {
                             @Override
-                            public void run () {
+                            public void run() {
                                 if (placeholder != null) {
                                     placeholder.setDisplayEnabled(true);
                                     placeholder.setImage(animationPanel);
@@ -267,12 +269,12 @@ public abstract class Animation {
         });
     }
 
-    public static void moveCard (final int startX, final int startY, final int startWidth, final int endX, final int endY,
-        final int endWidth, final CardPanel animationPanel, final CardPanel placeholder, final JLayeredPane layeredPane,
-        final int speed) {
+    public static void moveCard(final int startX, final int startY, final int startWidth, final int endX, final int endY,
+            final int endWidth, final CardPanel animationPanel, final CardPanel placeholder, final JLayeredPane layeredPane,
+            final int speed) {
         UI.invokeLater(new Runnable() {
             @Override
-            public void run () {
+            public void run() {
                 final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
                 final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
 
@@ -286,7 +288,7 @@ public abstract class Animation {
 
                 new Animation(speed) {
                     @Override
-                    protected void update (float percentage) {
+                    protected void update(float percentage) {
                         int currentX = startX + Math.round((endX - startX) * percentage);
                         int currentY = startY + Math.round((endY - startY) * percentage);
                         int currentWidth = startWidth + Math.round((endWidth - startWidth) * percentage);
@@ -295,10 +297,10 @@ public abstract class Animation {
                     }
 
                     @Override
-                    protected void end () {
+                    protected void end() {
                         EventQueue.invokeLater(new Runnable() {
                             @Override
-                            public void run () {
+                            public void run() {
                                 if (placeholder != null) {
                                     placeholder.setDisplayEnabled(true);
                                     placeholder.setImage(animationPanel);
@@ -314,7 +316,7 @@ public abstract class Animation {
         });
     }
 
-    public static void shrinkCard () {
+    public static void shrinkCard() {
         final CardPanel overPanel, animationPanel;
         synchronized (enlargeLock) {
             overPanel = Animation.enlargedCardPanel;
@@ -325,7 +327,6 @@ public abstract class Animation {
             Animation.enlargedCardPanel = null;
             Animation.enlargedAnimationPanel = null;
         }
-
 
         animationPanel.setAnimationPanel(true);
         final JLayeredPane layeredPane = SwingUtilities.getRootPane(overPanel).getLayeredPane();
@@ -338,7 +339,7 @@ public abstract class Animation {
 
         new Animation(200) {
             @Override
-            protected void update (float percentage) {
+            protected void update(float percentage) {
                 int currentWidth = startWidth + Math.round((endWidth - startWidth) * percentage);
                 int currentHeight = startHeight + Math.round((endHeight - startHeight) * percentage);
                 Point startPos = SwingUtilities.convertPoint(overPanel.getParent(), overPanel.getCardLocation(), layeredPane);
@@ -353,12 +354,12 @@ public abstract class Animation {
             }
 
             @Override
-            protected void end () {
+            protected void end() {
                 animationPanel.setVisible(false);
                 animationPanel.repaint();
                 EventQueue.invokeLater(new Runnable() {
                     @Override
-                    public void run () {
+                    public void run() {
                         layeredPane.remove(animationPanel);
                     }
                 });
@@ -366,7 +367,7 @@ public abstract class Animation {
         };
     }
 
-    public static boolean isShowingEnlargedCard () {
+    public static boolean isShowingEnlargedCard() {
         synchronized (enlargeLock) {
             return enlargedAnimationPanel != null;
         }
@@ -378,18 +379,18 @@ public abstract class Animation {
         }
         new Animation(600 / count) {
             @Override
-            protected void start () {
+            protected void start() {
             }
 
             @Override
-            protected void update (float percentage) {
+            protected void update(float percentage) {
                 float alpha = percentage;
                 card.setAlpha(alpha);
                 card.repaint();
             }
 
             @Override
-            protected void end () {
+            protected void end() {
                 card.setAlpha(1.f);
             }
         };
@@ -401,18 +402,18 @@ public abstract class Animation {
         }
         new Animation(600 / count) {
             @Override
-            protected void start () {
+            protected void start() {
             }
 
             @Override
-            protected void update (float percentage) {
+            protected void update(float percentage) {
                 float alpha = 1 - percentage;
                 card.setAlpha(alpha);
                 card.repaint();
             }
 
             @Override
-            protected void end () {
+            protected void end() {
                 card.setAlpha(0f);
             }
         };
