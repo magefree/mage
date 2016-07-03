@@ -558,6 +558,7 @@ public abstract class GameImpl implements Game, Serializable {
     public void saveState(boolean bookmark) {
         if (!simulation && gameStates != null) {
             if (bookmark || saveGame) {
+                state.getPlayerList().setCurrent(playerList.get());
                 gameStates.save(state);
             }
         }
@@ -663,7 +664,7 @@ public abstract class GameImpl implements Game, Serializable {
                 GameState restore = gameStates.rollback(stateNum);
                 if (restore != null) {
                     state.restore(restore);
-                    playerList.setCurrent(state.getActivePlayerId());
+                    playerList.setCurrent(state.getPlayerList().get());
                 }
             }
         }
@@ -2778,7 +2779,7 @@ public abstract class GameImpl implements Game, Serializable {
                 if (restore != null) {
                     informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to start of turn " + restore.getTurnNum()));
                     state.restoreForRollBack(restore);
-                    playerList.setCurrent(state.getActivePlayerId());
+                    playerList.setCurrent(state.getPlayerList().get());
                     // because restore uses the objects without copy each copy the state again
                     gameStatesRollBack.put(getTurnNum(), state.copy());
                     executingRollback = true;
