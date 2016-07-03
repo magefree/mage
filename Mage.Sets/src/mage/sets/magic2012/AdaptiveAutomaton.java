@@ -34,7 +34,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -45,8 +45,6 @@ import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,6 +53,12 @@ import mage.game.permanent.Permanent;
  * @author nantuko
  */
 public class AdaptiveAutomaton extends CardImpl {
+
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public AdaptiveAutomaton(UUID ownerId) {
         super(ownerId, 201, "Adaptive Automaton", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
@@ -69,11 +73,7 @@ public class AdaptiveAutomaton extends CardImpl {
         // Adaptive Automaton is the chosen type in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AdaptiveAutomatonAddSubtypeEffect()));
         // Other creatures you control of the chosen type get +1/+1.
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("Other creatures you control of the chosen type");
-        filter.add(new ChosenSubtypePredicate(this.getId()));
-        filter.add(new AnotherPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
     public AdaptiveAutomaton(final AdaptiveAutomaton card) {

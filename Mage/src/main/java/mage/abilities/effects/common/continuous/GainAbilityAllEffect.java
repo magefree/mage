@@ -92,9 +92,10 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        setRuntimeData(source, game);
         if (this.affectedObjectsSet) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
@@ -121,8 +122,9 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
                 }
             }
         } else {
+            setRuntimeData(source, game);
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     perm.addAbility(ability, source.getSourceId(), game, false);
                 }
             }
@@ -131,7 +133,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             if (LKIBattlefield != null) {
                 for (MageObject mageObject : LKIBattlefield.values()) {
                     Permanent perm = (Permanent) mageObject;
-                    if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                    if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                         if (filter.match(perm, source.getSourceId(), source.getControllerId(), game)) {
                             perm.addAbility(ability, source.getSourceId(), game, false);
                         }
@@ -139,6 +141,28 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
                 }
             }
         }
+        return true;
+    }
+
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param source
+     * @param game
+     */
+    protected void setRuntimeData(Ability source, Game game) {
+
+    }
+
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param permanent
+     * @param source
+     * @param game
+     * @return
+     */
+    protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
         return true;
     }
 

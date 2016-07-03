@@ -60,14 +60,14 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     public SpellsCostReductionAllEffect(FilterCard filter, int amount) {
         this(filter, amount, false);
     }
-    
+
     public SpellsCostReductionAllEffect(FilterCard filter, int amount, boolean upTo) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = amount;
         this.upTo = upTo;
-        
-        this.staticText = filter.getMessage() + " cost " + (upTo ?"up to " :"") + "{" +amount + "} less to cast";
+
+        this.staticText = filter.getMessage() + " cost " + (upTo ? "up to " : "") + "{" + amount + "} less to cast";
     }
 
     protected SpellsCostReductionAllEffect(SpellsCostReductionAllEffect effect) {
@@ -109,16 +109,38 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
         return true;
     }
 
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param source
+     * @param game
+     */
+    protected void setRuntimeData(Ability source, Game game) {
+
+    }
+
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param card
+     * @param source
+     * @param game
+     * @return
+     */
+    protected boolean selectedByRuntimeData(Card card, Ability source, Game game) {
+        return true;
+    }
+
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
-                return this.filter.match(spell, game);
+                return this.filter.match(spell, game) && selectedByRuntimeData(spell, source, game);
             } else {
                 // used at least for flashback ability because Flashback ability doesn't use stack
                 Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && this.filter.match(sourceCard, game);
+                return sourceCard != null && this.filter.match(sourceCard, game) && selectedByRuntimeData(sourceCard, source, game);
             }
         }
         return false;

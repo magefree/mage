@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseLandTypeEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllOfChosenSubtypeEffect;
 import mage.abilities.keyword.PhasingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -40,7 +40,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 /**
  *
@@ -54,11 +53,11 @@ public class Shimmer extends CardImpl {
 
         // As Shimmer enters the battlefield, choose a land type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseLandTypeEffect(Outcome.Detriment)));
-        
+
         // Each land of the chosen type has phasing.
-        FilterLandPermanent filter = new FilterLandPermanent("Each land of the chosen type");
-        filter.add(new ChosenSubtypePredicate(this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(PhasingAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAllOfChosenSubtypeEffect(PhasingAbility.getInstance(), Duration.WhileOnBattlefield,
+                        new FilterLandPermanent("Each land of the chosen type"))));
     }
 
     public Shimmer(final Shimmer card) {
