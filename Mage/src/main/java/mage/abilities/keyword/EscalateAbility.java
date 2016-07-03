@@ -78,7 +78,7 @@ class EscalateEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int numCosts = abilityToModify.getModes().getSelectedModes().size() - 1;
         for (int i = 0; i < numCosts; i++) {
-            abilityToModify.addCost(cost);
+            abilityToModify.addCost(cost.copy());
         }
         return true;
     }
