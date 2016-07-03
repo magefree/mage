@@ -64,7 +64,7 @@ public class LamplighterOfSelhoff extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Lamplighter of Selhoff enters the battlefield, if you control another Zombie, you may a draw card. If you do, discard a card.
-        TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1,1));
+        TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1,1,true));
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0),
