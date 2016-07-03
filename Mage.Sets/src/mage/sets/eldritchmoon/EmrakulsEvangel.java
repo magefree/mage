@@ -55,8 +55,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class EmrakulsEvangel extends CardImpl {
         
-    public static int numSacrificed = 0;
-
     public EmrakulsEvangel(UUID ownerId) {
         super(ownerId, 156, "Emrakul's Evangel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "EMN";
