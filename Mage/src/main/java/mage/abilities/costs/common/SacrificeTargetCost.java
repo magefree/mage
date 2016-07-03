@@ -97,7 +97,7 @@ public class SacrificeTargetCost extends CostImpl {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
                 activator = ((ActivatedAbilityImpl) ability).getActivatorId();
             } else {
-                // Aktivator not filled?
+                // Activator not filled?
                 activator = controllerId;
             }
         }
@@ -123,5 +123,4 @@ public class SacrificeTargetCost extends CostImpl {
     public List<Permanent> getPermanents() {
         return permanents;
     }
-
 }

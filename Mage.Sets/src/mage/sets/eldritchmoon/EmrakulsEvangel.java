@@ -31,8 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -54,6 +54,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class EmrakulsEvangel extends CardImpl {
+        
+    public static int numSacrificed = 0;
 
     public EmrakulsEvangel(UUID ownerId) {
         super(ownerId, 156, "Emrakul's Evangel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -65,9 +67,7 @@ public class EmrakulsEvangel extends CardImpl {
 
         // {T}, Sacrifice Emrakul's Evangel and any number of other non-Eldrazi creatures: 
         // Put a 3/2 colorless Eldrazi Horror creature token onto the battlefield for each creature sacrificed this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EmrakulsEvangelEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new EmrakulsEvangelEffect(), new EmrakulsEvangelCost()));
     }
 
     public EmrakulsEvangel(final EmrakulsEvangel card) {
@@ -80,18 +80,68 @@ public class EmrakulsEvangel extends CardImpl {
     }
 }
 
-class EmrakulsEvangelEffect extends OneShotEffect {
-        
+class EmrakulsEvangelCost extends CostImpl {
+            
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Eldrazi creatures you control");
     
     static {
         filter.add(new AnotherPredicate());
         filter.add(Predicates.not(new SubtypePredicate("Eldrazi")));
+    }    
+    
+    private int numSacrificed = 1; // always sacrifices self at least
+
+    public EmrakulsEvangelCost() {
+        this.text = "Sacrifice {this} and any number of other non-Eldrazi creatures";
     }
+
+    public EmrakulsEvangelCost(EmrakulsEvangelCost cost) {
+        super(cost);
+        this.numSacrificed = cost.getNumSacrificed();
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+        Permanent selfPermanent = game.getPermanent(sourceId);
+        Player player = game.getPlayer(controllerId);
+        if (selfPermanent != null && player != null) {
+            paid = selfPermanent.sacrifice(sourceId, game); // sacrifice self
+            Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
+            player.chooseTarget(Outcome.Sacrifice, target, ability, game);
+            for (UUID permanentId : target.getTargets()) {
+                Permanent otherPermanent = game.getPermanent(permanentId);
+                if (otherPermanent != null) {
+                    if (otherPermanent.sacrifice(sourceId, game)) {
+                        numSacrificed++;
+                    }
+                }
+            }
+        }
+        return paid;
+    }
+    
+    public int getNumSacrificed() {
+        return numSacrificed;
+    }
+
+    @Override
+    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+        Permanent permanent = game.getPermanent(sourceId);
+        
+        return permanent != null && game.getPlayer(controllerId).canPaySacrificeCost(permanent, sourceId, controllerId, game);
+    }
+
+    @Override
+    public EmrakulsEvangelCost copy() {
+        return new EmrakulsEvangelCost(this);
+    }
+}
+
+class EmrakulsEvangelEffect extends OneShotEffect {
     
     EmrakulsEvangelEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Sacrifice Emrakul's Evangel and any number of other non-Eldrazi creatures: Put a 3/2 colorless Eldrazi Horror creature token onto the battlefield for each creature sacrificed this way.";
+        this.staticText = "Sacrifice {this} and any number of other non-Eldrazi creatures: Put a 3/2 colorless Eldrazi Horror creature token onto the battlefield for each creature sacrificed this way.";
     }
     
     EmrakulsEvangelEffect(final EmrakulsEvangelEffect effect) {
@@ -106,21 +156,16 @@ class EmrakulsEvangelEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-            player.chooseTarget(Outcome.Sacrifice, target, source, game);
-            int numSacrificed = 0;
-            for (UUID permanentId : target.getTargets()) {
-                Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null) {
-                    if (permanent.sacrifice(source.getSourceId(), game)) {
-                        numSacrificed++;
-                    }
+        if (player != null) {            
+            int tokensToCreate = 0;
+            for (Cost cost : source.getCosts()) {
+                if (cost instanceof EmrakulsEvangelCost) {
+                    tokensToCreate = ((EmrakulsEvangelCost) cost).getNumSacrificed();
                 }
             }
-            if (numSacrificed > 0) {
+            if (tokensToCreate > 0) {
                 EldraziHorrorToken token = new EldraziHorrorToken();
-                token.putOntoBattlefield(numSacrificed, game, source.getSourceId(), source.getControllerId());
+                token.putOntoBattlefield(tokensToCreate, game, source.getSourceId(), source.getControllerId());
             }
             return true;
         }

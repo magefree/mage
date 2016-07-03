@@ -68,5 +68,4 @@ public class SacrificeSourceCost extends CostImpl {
     public SacrificeSourceCost copy() {
         return new SacrificeSourceCost(this);
     }
-
 }
