@@ -67,6 +67,22 @@ public class CubeFactory {
         return draftCube;
     }
 
+    public DraftCube createDeckDraftCube(String draftCubeName, String chosenDckFile) {
+
+        DraftCube draftCube;
+        Constructor<?> con;
+        try {
+            con = draftCubes.get(draftCubeName).getConstructor(new Class[]{String.class});
+            draftCube = (DraftCube)con.newInstance(new Object[] {chosenDckFile});
+        } catch (Exception ex) {
+            logger.fatal("CubeFactory error", ex);
+            return null;
+        }
+        logger.debug("Draft cube created: " + draftCube.getName());
+
+        return draftCube;
+    }
+
     public Set<String> getDraftCubes() {
         return draftCubes.keySet();
     }

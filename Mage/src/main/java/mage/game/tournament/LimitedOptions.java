@@ -45,6 +45,7 @@ public class LimitedOptions implements Serializable {
     protected DraftCube draftCube;
     protected int numberBoosters;
     protected boolean isRandom;
+    protected String cubeFromDeckFilename = "";
 
     public List<String> getSetCodes() {
         return sets;
@@ -64,6 +65,14 @@ public class LimitedOptions implements Serializable {
 
     public void setDraftCubeName(String draftCubeName) {
         this.draftCubeName = draftCubeName;
+    }
+
+    public void setCubeFromDeckFilename(String cubeFromDeckFilename) {
+        this.cubeFromDeckFilename = cubeFromDeckFilename;
+    }
+
+    public String getCubeFromDeckFilename() {
+        return cubeFromDeckFilename;
     }
 
     public DraftCube getDraftCube() {
@@ -88,4 +97,5 @@ public class LimitedOptions implements Serializable {
     public void setIsRandom(boolean isRandom){
         this.isRandom = isRandom;
     }
+
 }
