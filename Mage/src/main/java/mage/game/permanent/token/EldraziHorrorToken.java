@@ -30,37 +30,28 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import mage.MageInt;
-import mage.Mana;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.CardType;
-import mage.constants.Zone;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class EldraziSpawnToken extends Token {
+public class EldraziHorrorToken extends Token {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ROE", "MM2", "DDP"));
+        tokenImageSets.addAll(Arrays.asList("EMN"));
     }
 
-    public EldraziSpawnToken() {
-        super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {C} to your mana pool.\"");
+    public EldraziHorrorToken() {
+        super("Eldrazi Horror", "3/2 colorless Eldrazi Horror creature");
         cardType.add(CardType.CREATURE);
         subtype.add("Eldrazi");
-        subtype.add("Spawn");
-        power = new MageInt(0);
-        toughness = new MageInt(1);
-        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
-
+        subtype.add("Horror");
+        power = new MageInt(3);
+        toughness = new MageInt(2);
         availableImageSetCodes = tokenImageSets;
-        // Get one of the three possible token images
-        this.setTokenType(new Random().nextInt(3) + 1);
     }
 }

@@ -119,7 +119,6 @@ class DracoplasmEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(source.getSourceId());
-
     }
 
     @Override
@@ -148,5 +147,4 @@ class DracoplasmEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
 }
