@@ -31,10 +31,10 @@
  *
  * Created on Jan 28, 2011, 12:15:56 PM
  */
-
 package mage.client.dialog;
 
 import java.awt.Component;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -44,9 +44,11 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.filechooser.FileFilter;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
@@ -65,7 +67,6 @@ import mage.view.GameTypeView;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;
-
 
 /**
  *
@@ -88,7 +89,7 @@ public class NewTournamentDialog extends MageDialog {
     private final int CONSTRUCTION_TIME_MAX = 30;
     private boolean isRandom = false;
     private boolean isRichMan = false;
-
+    private String cubeFromDeckFilename = "";
     private boolean automaticChange = false;
 
     /** Creates new form NewTournamentDialog */
@@ -557,6 +558,9 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getLimitedOptions().setIsRandom(tournamentType.isRandom());
             if (tournamentType.isCubeBooster()) {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
+                if (!(cubeFromDeckFilename.equals(""))) {
+                    tOptions.getLimitedOptions().setCubeFromDeckFilename(cubeFromDeckFilename);
+                }
             } else if (tournamentType.isRandom() || tournamentType.isRichMan()) {
                 this.isRandom = tournamentType.isRandom();
                 this.isRichMan = tournamentType.isRichMan();
@@ -649,8 +653,32 @@ public class NewTournamentDialog extends MageDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_spnNumWinsnumPlayersChanged
 
+    private JFileChooser fcSelectDeck = null;
+
+    protected String playerLoadDeck() {
+        if (fcSelectDeck == null) {
+            fcSelectDeck = new JFileChooser();
+            fcSelectDeck.setAcceptAllFileFilterUsed(false);
+            fcSelectDeck.addChoosableFileFilter(new DeckFilter());
+        }
+        String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
+        if (!lastFolder.isEmpty()) {
+            fcSelectDeck.setCurrentDirectory(new File(lastFolder));
+        }
+        int ret = fcSelectDeck.showDialog(this, "Select Deck");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = fcSelectDeck.getSelectedFile();
+            return (file.getPath());
+        }
+        return "";
+    }
+
+
     private void cbDraftCubeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDraftCubeActionPerformed
-        // TODO add your handling code here:
+        cubeFromDeckFilename = "";
+        if (cbDraftCube.getSelectedItem().toString().equals("Cube From Deck")) {
+            cubeFromDeckFilename = playerLoadDeck();
+        }
     }//GEN-LAST:event_cbDraftCubeActionPerformed
 
     private void cbDraftTimingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDraftTimingActionPerformed
@@ -676,6 +704,7 @@ public class NewTournamentDialog extends MageDialog {
         // this.cbRange.setEnabled(gameType.isUseRange());
         createPlayers((Integer) spnNumPlayers.getValue() - 1);
     }
+
     private void setTournamentOptions(int numPlayers) {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         activatePanelElements(tournamentType);
@@ -709,6 +738,7 @@ public class NewTournamentDialog extends MageDialog {
         this.revalidate();
         this.repaint();
     }
+
     /**
      * Sets elements of the panel to visible or not visible
      *
@@ -911,7 +941,6 @@ public class NewTournamentDialog extends MageDialog {
         automaticChange = false;
     }
 
-
     /**
      * set the tournament settings from java prefs
      */
@@ -1053,7 +1082,6 @@ public class NewTournamentDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED, (tOptions.getMatchOptions().isRated() ? "Yes" : "No"));
     }
 
-
     public TableView getTable() {
         return table;
     }
@@ -1106,4 +1134,28 @@ public class NewTournamentDialog extends MageDialog {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-} 
+}
+
+class DeckFilter extends FileFilter {
+
+    @Override
+    public boolean accept(File f) {
+        if (f.isDirectory()) {
+            return true;
+        }
+
+        String ext = null;
+        String s = f.getName();
+        int i = s.lastIndexOf('.');
+
+        if (i > 0 && i < s.length() - 1) {
+            ext = s.substring(i + 1).toLowerCase();
+        }
+        return (ext == null) ? false : ext.equals("dck");
+    }
+
+    @Override
+    public String getDescription() {
+        return "Deck Files";
+    }
+}
