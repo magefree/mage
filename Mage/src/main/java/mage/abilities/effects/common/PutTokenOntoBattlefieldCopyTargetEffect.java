@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
@@ -62,6 +63,9 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private boolean tapped;
     private boolean attacking;
     private UUID attackedPlayer;
+    private final int tokenPower;
+    private final int tokenToughness;
+    private boolean gainsFlying;
 
     public PutTokenOntoBattlefieldCopyTargetEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -71,6 +75,9 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.number = 1;
         this.additionalSubType = null;
         this.attackedPlayer = null;
+        this.tokenPower = Integer.MIN_VALUE;
+        this.tokenToughness = Integer.MIN_VALUE;
+        this.gainsFlying = false;
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId) {
@@ -100,6 +107,10 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer) {
+        this(playerId, additionalCardType, gainsHaste, number, tapped, attacking, null, Integer.MIN_VALUE, Integer.MIN_VALUE, false);
+    }
+    
+    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer, int power, int toughness, boolean gainsFlying) {
         super(Outcome.PutCreatureInPlay);
         this.playerId = playerId;
         this.additionalCardType = additionalCardType;
@@ -108,8 +119,11 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.number = number;
         this.tapped = tapped;
         this.attacking = attacking;
-        this.attackedPlayer = attackedPlayer;
-    }
+        this.attackedPlayer = attackedPlayer;        
+        this.tokenPower = power;
+        this.tokenToughness = toughness;
+        this.gainsFlying = gainsFlying;
+    }    
 
     public PutTokenOntoBattlefieldCopyTargetEffect(final PutTokenOntoBattlefieldCopyTargetEffect effect) {
         super(effect);
@@ -122,6 +136,9 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.attackedPlayer = effect.attackedPlayer;
+        this.tokenPower = effect.tokenPower;
+        this.tokenToughness = effect.tokenToughness;
+        this.gainsFlying = effect.gainsFlying;
     }
 
     @Override
@@ -162,18 +179,29 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
             return false;
         }
 
-        EmptyToken token = new EmptyToken();
+        EmptyToken token = new EmptyToken();        
         CardUtil.copyTo(token).from(copyFrom); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token);
+        
         if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
             token.getCardType().add(additionalCardType);
         }
         if (gainsHaste) {
             token.addAbility(HasteAbility.getInstance());
         }
+        if (gainsFlying) {
+            token.addAbility(FlyingAbility.getInstance());
+        }
+        if (tokenPower != Integer.MIN_VALUE) {
+            token.setPower(tokenPower);
+        }           
+        if (tokenToughness != Integer.MIN_VALUE){
+            token.setToughness(tokenToughness);
+        }
         if (additionalSubType != null && !token.getSubtype().contains(additionalSubType)) {
             token.getSubtype().add(additionalSubType);
         }
+        
         token.putOntoBattlefield(number, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
             Permanent tokenPermanent = game.getPermanent(tokenId);
