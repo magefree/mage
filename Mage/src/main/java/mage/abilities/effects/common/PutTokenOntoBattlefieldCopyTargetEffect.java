@@ -75,8 +75,8 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.number = 1;
         this.additionalSubType = null;
         this.attackedPlayer = null;
-        this.tokenPower = 0;
-        this.tokenToughness = 0;
+        this.tokenPower = Integer.MIN_VALUE;
+        this.tokenToughness = Integer.MIN_VALUE;
         this.gainsFlying = false;
     }
 
@@ -192,8 +192,10 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         if (gainsFlying) {
             token.addAbility(FlyingAbility.getInstance());
         }
-        if (tokenPower != 0 || tokenToughness != 0) {
+        if (tokenPower != Integer.MIN_VALUE) {
             token.setPower(tokenPower);
+        }           
+        if (tokenToughness != Integer.MIN_VALUE){
             token.setToughness(tokenToughness);
         }
         if (additionalSubType != null && !token.getSubtype().contains(additionalSubType)) {
