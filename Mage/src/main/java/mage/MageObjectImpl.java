@@ -54,8 +54,8 @@ public abstract class MageObjectImpl implements MageObject {
     protected List<String> supertype = new ArrayList<>();
     protected Abilities<Ability> abilities;
     protected String text;
-    protected MageInt power;
-    protected MageInt toughness;
+    public MageInt power;
+    public MageInt toughness;
     protected boolean copy;
 
     public MageObjectImpl() {

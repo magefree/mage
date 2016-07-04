@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
@@ -62,6 +63,9 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private boolean tapped;
     private boolean attacking;
     private UUID attackedPlayer;
+    private final int tokenPower;
+    private final int tokenToughness;
+    private boolean gainsFlying;
 
     public PutTokenOntoBattlefieldCopyTargetEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -71,6 +75,9 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.number = 1;
         this.additionalSubType = null;
         this.attackedPlayer = null;
+        this.tokenPower = 0;
+        this.tokenToughness = 0;
+        this.gainsFlying = false;
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId) {
@@ -100,6 +107,10 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer) {
+        this(playerId, additionalCardType, gainsHaste, number, tapped, attacking, null, 0, 0, false);
+    }
+    
+    public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer, int power, int toughness, boolean gainsFlying) {
         super(Outcome.PutCreatureInPlay);
         this.playerId = playerId;
         this.additionalCardType = additionalCardType;
@@ -108,8 +119,11 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.number = number;
         this.tapped = tapped;
         this.attacking = attacking;
-        this.attackedPlayer = attackedPlayer;
-    }
+        this.attackedPlayer = attackedPlayer;        
+        this.tokenPower = power;
+        this.tokenToughness = toughness;
+        this.gainsFlying = gainsFlying;
+    }    
 
     public PutTokenOntoBattlefieldCopyTargetEffect(final PutTokenOntoBattlefieldCopyTargetEffect effect) {
         super(effect);
@@ -122,6 +136,9 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.attackedPlayer = effect.attackedPlayer;
+        this.tokenPower = effect.tokenPower;
+        this.tokenToughness = effect.tokenToughness;
+        this.gainsFlying = effect.gainsFlying;
     }
 
     @Override
@@ -170,6 +187,13 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         }
         if (gainsHaste) {
             token.addAbility(HasteAbility.getInstance());
+        }
+        if (gainsFlying) {
+            token.addAbility(FlyingAbility.getInstance());
+        }
+        if (tokenPower != 0 || tokenToughness != 0) {
+            token.power.setValue(tokenPower);
+            token.toughness.setValue(tokenToughness);
         }
         if (additionalSubType != null && !token.getSubtype().contains(additionalSubType)) {
             token.getSubtype().add(additionalSubType);
