@@ -31,14 +31,13 @@ import java.util.UUID;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionAllOfChosenSubtypeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
 /**
  *
@@ -53,9 +52,8 @@ public class UrzasIncubator extends CardImpl {
         // As Urza's Incubator enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
         // Creature spells of the chosen type cost {2} less to cast.
-        FilterCreatureCard filter = new FilterCreatureCard("creature spells of the chosen type");
-        filter.add(new ChosenSubtypePredicate(this.getId()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionAllEffect(filter, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new SpellsCostReductionAllOfChosenSubtypeEffect(new FilterCreatureCard("creature spells of the chosen type"), 2)));
     }
 
     public UrzasIncubator(final UrzasIncubator card) {

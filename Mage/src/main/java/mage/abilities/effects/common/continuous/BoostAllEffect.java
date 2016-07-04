@@ -109,9 +109,10 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        setRuntimeData(source, game);
         if (this.affectedObjectsSet) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
@@ -135,8 +136,9 @@ public class BoostAllEffect extends ContinuousEffectImpl {
                 }
             }
         } else {
+            setRuntimeData(source, game);
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     perm.addPower(power.calculate(game, source, this));
                     perm.addToughness(toughness.calculate(game, source, this));
                 }
@@ -146,7 +148,29 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private void setText() {
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param source
+     * @param game
+     */
+    protected void setRuntimeData(Ability source, Game game) {
+
+    }
+
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param permanent
+     * @param source
+     * @param game
+     * @return
+     */
+    protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
+        return true;
+    }
+
+    protected void setText() {
         StringBuilder sb = new StringBuilder();
         if (excludeSource) {
             sb.append("Other ");
