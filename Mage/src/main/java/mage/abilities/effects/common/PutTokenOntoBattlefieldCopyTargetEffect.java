@@ -107,7 +107,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer) {
-        this(playerId, additionalCardType, gainsHaste, number, tapped, attacking, null, 0, 0, false);
+        this(playerId, additionalCardType, gainsHaste, number, tapped, attacking, null, Integer.MIN_VALUE, Integer.MIN_VALUE, false);
     }
     
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer, int power, int toughness, boolean gainsFlying) {
