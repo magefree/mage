@@ -29,6 +29,7 @@ package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.abilities.Mode;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -52,7 +53,9 @@ public class DarigaazsCharm extends CardImpl {
         this.expansionSetCode = "PLS";
 
         // Choose one - Return target creature card from your graveyard to your hand;
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("Return target creature card from your graveyard to your hand");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
 
         // or Darigaaz's Charm deals 3 damage to target creature or player;
