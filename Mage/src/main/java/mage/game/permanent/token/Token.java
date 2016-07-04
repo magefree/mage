@@ -81,6 +81,12 @@ public class Token extends MageObjectImpl {
         this.name = name;
         this.description = description;
     }
+    
+    public Token(String name, String description, int power, int toughness) {
+        this(name, description);
+        this.power.setValue(power);
+        this.toughness.setValue(toughness);
+    }
 
     public Token(String name, String description, ObjectColor color, List<String> subtype, int power, int toughness, Abilities<Ability> abilities) {
         this(name, description);
@@ -211,6 +217,14 @@ public class Token extends MageObjectImpl {
             return true;
         }
         return false;
+    }
+        
+    public void setPower(int power) {
+        this.power.setValue(power);
+    }
+    
+    public void setToughness(int toughness) {
+        this.toughness.setValue(toughness);
     }
 
     public int getTokenType() {
