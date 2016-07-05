@@ -55,10 +55,10 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class StromkirkMystic extends CardImpl {
+public class StromkirkOccultist extends CardImpl {
 
-    public StromkirkMystic(UUID ownerId) {
-        super(ownerId, 146, "Stromkirk Mystic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
+    public StromkirkOccultist(UUID ownerId) {
+        super(ownerId, 146, "Stromkirk Occultist", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "EMN";
         this.subtype.add("Vampire");
         this.subtype.add("Horror");
@@ -68,37 +68,37 @@ public class StromkirkMystic extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever Stromkirk Mystic deals combat damage to a player, exile the top card of your library. Until end of turn, you may cast that card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new StromkirkMysticExileEffect(), false));
+        // Whenever Stromkirk Mystic deals combat damage to a player, exile the top card of your library. Until end of turn, you may play that card.
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new StromkirkOccultistExileEffect(), false));
 
         // Madness {1}{R}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}")));
     }
 
-    public StromkirkMystic(final StromkirkMystic card) {
+    public StromkirkOccultist(final StromkirkOccultist card) {
         super(card);
     }
 
     @Override
-    public StromkirkMystic copy() {
-        return new StromkirkMystic(this);
+    public StromkirkOccultist copy() {
+        return new StromkirkOccultist(this);
     }
 }
 
-class StromkirkMysticExileEffect extends OneShotEffect {
+class StromkirkOccultistExileEffect extends OneShotEffect {
 
-    public StromkirkMysticExileEffect() {
+    public StromkirkOccultistExileEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Exile the top card of your library. Until end of turn, you may cast that card";
+        this.staticText = "Exile the top card of your library. Until end of turn, you may play that card";
     }
 
-    public StromkirkMysticExileEffect(final StromkirkMysticExileEffect effect) {
+    public StromkirkOccultistExileEffect(final StromkirkOccultistExileEffect effect) {
         super(effect);
     }
 
     @Override
-    public StromkirkMysticExileEffect copy() {
-        return new StromkirkMysticExileEffect(this);
+    public StromkirkOccultistExileEffect copy() {
+        return new StromkirkOccultistExileEffect(this);
     }
 
     @Override
@@ -111,7 +111,7 @@ class StromkirkMysticExileEffect extends OneShotEffect {
             if (card != null) {
                 String exileName = new StringBuilder(sourcePermanent.getIdName()).append(" <this card may be played the turn it was exiled>").toString();
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), exileName, source.getSourceId(), game, Zone.LIBRARY, true);
-                ContinuousEffect effect = new StromkirkMysticCastFromExileEffect();
+                ContinuousEffect effect = new StromkirkOccultistPlayFromExileEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
             }
@@ -121,14 +121,14 @@ class StromkirkMysticExileEffect extends OneShotEffect {
     }
 }
 
-class StromkirkMysticCastFromExileEffect extends AsThoughEffectImpl {
+class StromkirkOccultistPlayFromExileEffect extends AsThoughEffectImpl {
 
-    public StromkirkMysticCastFromExileEffect() {
+    public StromkirkOccultistPlayFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play the card from exile";
     }
 
-    public StromkirkMysticCastFromExileEffect(final StromkirkMysticCastFromExileEffect effect) {
+    public StromkirkOccultistPlayFromExileEffect(final StromkirkOccultistPlayFromExileEffect effect) {
         super(effect);
     }
 
@@ -138,8 +138,8 @@ class StromkirkMysticCastFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public StromkirkMysticCastFromExileEffect copy() {
-        return new StromkirkMysticCastFromExileEffect(this);
+    public StromkirkOccultistPlayFromExileEffect copy() {
+        return new StromkirkOccultistPlayFromExileEffect(this);
     }
 
     @Override
