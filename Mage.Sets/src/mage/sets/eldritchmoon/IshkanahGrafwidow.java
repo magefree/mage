@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SpiderToken;
 import mage.target.common.TargetOpponent;
@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
  */
 public class IshkanahGrafwidow extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each Spider you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("each Spider you control");
 
     static {
         filter.add(new SubtypePredicate("Spider"));
