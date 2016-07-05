@@ -55,7 +55,8 @@ public class CollectedCompany extends CardImpl {
         super(ownerId, 177, "Collected Company", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "DTK";
 
-        // Look at the top six cards of your library. Put up to two creature cards with converted mana cost 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in any order.
+        // Look at the top six cards of your library. Put up to two creature cards with converted mana cost 3 or less from among them onto the battlefield.
+        // Put the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(6, 2, filter, false, true, Zone.BATTLEFIELD, false));
 
     }
