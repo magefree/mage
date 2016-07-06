@@ -53,8 +53,8 @@ import mage.players.Player;
  */
 public class MoltenSentry extends CardImpl {
 
-    private final static String rule = "As Molten Sentry enters the battlefield, flip a coin. If the coin comes up heads, Molten Sentry enters the battlefield as a "
-            + "5/2 creature with haste. If it comes up tails, Molten Sentry enters the battlefield as a 2/5 creature with defender.";
+    private final static String rule = "As {this} enters the battlefield, flip a coin. If the coin comes up heads, {this} enters the battlefield as a "
+            + "5/2 creature with haste. If it comes up tails, {this} enters the battlefield as a 2/5 creature with defender.";
 
     public MoltenSentry(UUID ownerId) {
         super(ownerId, 136, "Molten Sentry", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -94,13 +94,13 @@ class MoltenSentryEffect extends OneShotEffect {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (controller != null && permanent != null) {
             if (controller.flipCoin(game)) {
-                game.informPlayers("Heads: Molten Sentry enters the battlefield as a 5/2 creature with haste");
+                game.informPlayers("Heads: " + permanent.getLogName() + " enters the battlefield as a 5/2 creature with haste");
                 game.addEffect(new SetPowerSourceEffect(new StaticValue(5), Duration.WhileOnBattlefield), source);
                 game.addEffect(new SetToughnessSourceEffect(new StaticValue(2), Duration.WhileOnBattlefield), source);
                 game.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield), source);
                 return true;
             } else {
-                game.informPlayers("Tails: Molten Sentry enters the battlefield as a 2/5 creature with defender");
+                game.informPlayers("Tails: " + permanent.getLogName() + " enters the battlefield as a 2/5 creature with defender");
                 game.addEffect(new SetPowerSourceEffect(new StaticValue(2), Duration.WhileOnBattlefield), source);
                 game.addEffect(new SetToughnessSourceEffect(new StaticValue(5), Duration.WhileOnBattlefield), source);
                 game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield), source);

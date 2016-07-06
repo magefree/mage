@@ -29,7 +29,6 @@ package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -46,8 +45,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -58,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class IdentityThief extends CardImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("target nontoken creature");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("target nontoken creature");
 
     static {
         filter.add(Predicates.not(new TokenPredicate()));
@@ -141,13 +140,10 @@ class IdentityThiefEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && permanent != null && sourcePermanent != null) {
+            CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, permanent, source.getSourceId());
             if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                 // Copy exiled permanent
-                MageObject mageObject = game.getObject(permanent.getId());
-                if (mageObject != null) {
-                    CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, mageObject, source.getSourceId());
-                    game.addEffect(copyEffect, source);
-                }
+                game.addEffect(copyEffect, source);
                 // Create delayed triggered ability
                 AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, false));
                 delayedAbility.setSourceId(source.getSourceId());
