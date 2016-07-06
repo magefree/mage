@@ -29,57 +29,70 @@ package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.util.functions.EmptyApplyToPermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class HanweirGarrison extends CardImpl {
+public class PermeatingMass extends CardImpl {
 
-    public HanweirGarrison(UUID ownerId) {
-        super(ownerId, 130, "Hanweir Garrison", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
+    public PermeatingMass(UUID ownerId) {
+        super(ownerId, 165, "Permeating Mass", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "EMN";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(2);
+        this.subtype.add("Spirit");
+        this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Whenever Hanweir Garrison attacks, put two 1/1 red Human creature tokens onto the battlefield tapped and attacking.
-        this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new RedHumanToken(), 2, true, true), false));
-
-        // <i>(Melds with Hanweir Battlements.)</i>
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("<i>(Melds with Hannweir Battlements.)</i>")));
+        // Whenever Permeating Mass deals combat damage to a creature, that creature becomes a copy of Permeating Mass.
+        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new PermeatingMassEffect(), false, true));
     }
 
-    public HanweirGarrison(final HanweirGarrison card) {
+    public PermeatingMass(final PermeatingMass card) {
         super(card);
     }
 
     @Override
-    public HanweirGarrison copy() {
-        return new HanweirGarrison(this);
+    public PermeatingMass copy() {
+        return new PermeatingMass(this);
     }
 }
 
-class RedHumanToken extends Token {
+class PermeatingMassEffect extends OneShotEffect {
 
-    public RedHumanToken() {
-        super("Human", "1/1 red Human creature token");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Human");
+    public PermeatingMassEffect() {
+        super(Outcome.Copy);
+        this.staticText = "that creature becomes a copy of {this}.";
+    }
 
-        this.color = ObjectColor.RED;
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public PermeatingMassEffect(final PermeatingMassEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public PermeatingMassEffect copy() {
+        return new PermeatingMassEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability ability) {
+        Permanent copyTo = game.getPermanent(getTargetPointer().getFirst(game, ability));
+        if (copyTo != null) {
+            Permanent copyFrom = game.getPermanent(ability.getSourceId());
+            if (copyFrom != null) {
+                game.copyPermanent(Duration.WhileOnBattlefield, copyFrom, copyTo.getId(), ability, new EmptyApplyToPermanent());
+            }
+        }
+        return true;
     }
 }

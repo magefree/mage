@@ -30,13 +30,16 @@ package mage.sets.eldritchmoon;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -78,6 +81,7 @@ public class BrunaTheFadingLight extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // <i>(Melds with Gisela, the Broken Blade.)</i>
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("<i>(Melds with Gisela, the Broken Blade.)</i>")));
     }
 
     public BrunaTheFadingLight(final BrunaTheFadingLight card) {

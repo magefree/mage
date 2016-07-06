@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class CollectiveResistance extends CardImpl {
+public class CollectiveDefiance extends CardImpl {
 
     private static final FilterPlayer filterDiscard = new FilterPlayer("player to discard and then draw cards");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature to be dealt damage");
@@ -63,8 +63,8 @@ public class CollectiveResistance extends CardImpl {
         filterDamageOpponent.add(new PlayerPredicate(TargetController.OPPONENT));
     }
 
-    public CollectiveResistance(UUID ownerId) {
-        super(ownerId, 123, "Collective Resistance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
+    public CollectiveDefiance(UUID ownerId) {
+        super(ownerId, 123, "Collective Defiance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "EMN";
 
         // Escalate {1}
@@ -75,10 +75,10 @@ public class CollectiveResistance extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(3);
 
         // Target player discards all cards in his or her hand, then draws that many cards.;
-        this.getSpellAbility().addEffect(new CollectiveResistanceEffect());
+        this.getSpellAbility().addEffect(new CollectiveDefianceEffect());
         this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterDiscard));
 
-        // Collective Resistance deals 4 damage to target creature.;
+        // Collective Defiance deals 4 damage to target creature.;
         Mode mode = new Mode();
         Effect effect = new DamageTargetEffect(4);
         effect.setText("{this} deals 4 damage to target creature");
@@ -86,7 +86,7 @@ public class CollectiveResistance extends CardImpl {
         mode.getTargets().add(new TargetCreaturePermanent(filterCreature));
         this.getSpellAbility().addMode(mode);
 
-        // Collective Resistance deals 3 damage to target opponent.
+        // Collective Defiance deals 3 damage to target opponent.
         mode = new Mode();
         effect = new DamageTargetEffect(3);
         effect.setText("{this} deals 3 damage to target opponent");
@@ -95,30 +95,30 @@ public class CollectiveResistance extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public CollectiveResistance(final CollectiveResistance card) {
+    public CollectiveDefiance(final CollectiveDefiance card) {
         super(card);
     }
 
     @Override
-    public CollectiveResistance copy() {
-        return new CollectiveResistance(this);
+    public CollectiveDefiance copy() {
+        return new CollectiveDefiance(this);
     }
 }
 
-class CollectiveResistanceEffect extends OneShotEffect {
+class CollectiveDefianceEffect extends OneShotEffect {
 
-    public CollectiveResistanceEffect() {
+    public CollectiveDefianceEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player discards all the cards in his or her hand, then draws that many cards";
     }
 
-    public CollectiveResistanceEffect(final CollectiveResistanceEffect effect) {
+    public CollectiveDefianceEffect(final CollectiveDefianceEffect effect) {
         super(effect);
     }
 
     @Override
-    public CollectiveResistanceEffect copy() {
-        return new CollectiveResistanceEffect(this);
+    public CollectiveDefianceEffect copy() {
+        return new CollectiveDefianceEffect(this);
     }
 
     @Override

@@ -29,57 +29,30 @@ package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.permanent.token.Token;
 
 /**
  *
  * @author fireshoes
  */
-public class HanweirGarrison extends CardImpl {
+public class FalkenrathReaver extends CardImpl {
 
-    public HanweirGarrison(UUID ownerId) {
-        super(ownerId, 130, "Hanweir Garrison", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
+    public FalkenrathReaver(UUID ownerId) {
+        super(ownerId, 127, "Falkenrath Reaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "EMN";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+        this.subtype.add("Vampire");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
-
-        // Whenever Hanweir Garrison attacks, put two 1/1 red Human creature tokens onto the battlefield tapped and attacking.
-        this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new RedHumanToken(), 2, true, true), false));
-
-        // <i>(Melds with Hanweir Battlements.)</i>
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("<i>(Melds with Hannweir Battlements.)</i>")));
+        this.toughness = new MageInt(2);
     }
 
-    public HanweirGarrison(final HanweirGarrison card) {
+    public FalkenrathReaver(final FalkenrathReaver card) {
         super(card);
     }
 
     @Override
-    public HanweirGarrison copy() {
-        return new HanweirGarrison(this);
-    }
-}
-
-class RedHumanToken extends Token {
-
-    public RedHumanToken() {
-        super("Human", "1/1 red Human creature token");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add("Human");
-
-        this.color = ObjectColor.RED;
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public FalkenrathReaver copy() {
+        return new FalkenrathReaver(this);
     }
 }

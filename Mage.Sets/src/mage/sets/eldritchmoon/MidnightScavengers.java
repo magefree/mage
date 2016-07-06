@@ -31,10 +31,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -66,8 +69,9 @@ public class MidnightScavengers extends CardImpl {
         Target target = new TargetCardInYourGraveyard(filter);
         ability.addTarget(target);
         this.addAbility(ability);
-        
+
         // <i>(Melds with Graf Rats.)</i>
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("<i>(Melds with Graf Rats.)</i>")));
     }
 
     public MidnightScavengers(final MidnightScavengers card) {
