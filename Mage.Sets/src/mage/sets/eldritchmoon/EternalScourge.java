@@ -63,7 +63,7 @@ public class EternalScourge extends CardImpl {
         // You may cast Eternal Scourge from exile.
         this.addAbility(new SimpleStaticAbility(Zone.EXILED, new EternalScourgePlayEffect()));
 
-        // When Eternal Scourge becomes the target of a spell or ability an opponent controls, exile it.
+        // When Eternal Scourge becomes the target of a spell or ability an opponent controls, exile Eternal Scourge.
         this.addAbility(new EternalScourgeAbility());
     }
 
@@ -139,6 +139,6 @@ class EternalScourgeAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} becomes the target of a spell or ability an opponent controls, exile it.";
+        return "Whenever {this} becomes the target of a spell or ability an opponent controls, exile {this}.";
     }
 }
