@@ -152,7 +152,7 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
             if (spell != null && spell.isFaceDown(game)) {
                 return false; // Face Down cast spell (Morph creature) has no name
             }
-            return card.getName().equals(creatureName);
+            return card.getName().equals(creatureName) && ownerId == card.getOwnerId();
         }
         return false;
     }
