@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -40,23 +40,25 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class TaigamsScheming extends CardImpl {
+public class ContingencyPlan extends CardImpl {
 
-    public TaigamsScheming(UUID ownerId) {
-        super(ownerId, 57, "Taigam's Scheming", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "KTK";
+    public ContingencyPlan(UUID ownerId) {
+        super(ownerId, 52, "Contingency Plan", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
+        this.expansionSetCode = "EMN";
+        this.supertype.add("SOrcery");
 
-        // Look at the top five cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order
+        // Look at the top five cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(5),
                 new FilterCard("cards"), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false));
+
     }
 
-    public TaigamsScheming(final TaigamsScheming card) {
+    public ContingencyPlan(final ContingencyPlan card) {
         super(card);
     }
 
     @Override
-    public TaigamsScheming copy() {
-        return new TaigamsScheming(this);
+    public ContingencyPlan copy() {
+        return new ContingencyPlan(this);
     }
 }

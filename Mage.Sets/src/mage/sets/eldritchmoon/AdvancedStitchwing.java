@@ -25,38 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
  * @author LevelX2
  */
-public class TaigamsScheming extends CardImpl {
+public class AdvancedStitchwing extends CardImpl {
 
-    public TaigamsScheming(UUID ownerId) {
-        super(ownerId, 57, "Taigam's Scheming", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "KTK";
+    public AdvancedStitchwing(UUID ownerId) {
+        super(ownerId, 49, "Advanced Stitchwing", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Zombie");
+        this.subtype.add("Horror");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
 
-        // Look at the top five cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(5),
-                new FilterCard("cards"), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // {2}{U}, Discard two cards: Return Advanced Stitchwing from your graveyard to the battlefield tapped.
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{2}{U}"));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
+        this.addAbility(ability);
     }
 
-    public TaigamsScheming(final TaigamsScheming card) {
+    public AdvancedStitchwing(final AdvancedStitchwing card) {
         super(card);
     }
 
     @Override
-    public TaigamsScheming copy() {
-        return new TaigamsScheming(this);
+    public AdvancedStitchwing copy() {
+        return new AdvancedStitchwing(this);
     }
 }

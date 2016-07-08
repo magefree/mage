@@ -193,42 +193,40 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             if (revealPickedCards) {
                 sb.append(". You may reveal ");
                 sb.append(filter.getMessage()).append(" from among them and put it into your ");
+            } else if (targetPickedCards.equals(Zone.BATTLEFIELD)) {
+                sb.append(". You ");
+                if (optional) {
+                    sb.append("may ");
+                }
+                sb.append("put ").append(filter.getMessage()).append(" from among them onto the ");
             } else {
-                if (targetPickedCards.equals(Zone.BATTLEFIELD)) {
-                    sb.append(". You ");
-                    if (optional) {
-                        sb.append("may ");
-                    }
-                    sb.append("put ").append(filter.getMessage()).append(" from among them onto the ");
-                } else {
-                    sb.append(". Put ");
-                    if (numberToPick.calculate(null, null, this) > 1) {
-                        if (upTo) {
-                            if (numberToPick.calculate(null, null, this) == (numberOfCards.calculate(null, null, this))) {
-                                sb.append("any number");
-                            } else {
-                                sb.append("up to ").append(CardUtil.numberToText(numberToPick.calculate(null, null, this)));
-                            }
+                sb.append(". Put ");
+                if (numberToPick.calculate(null, null, this) > 1) {
+                    if (upTo) {
+                        if (numberToPick.calculate(null, null, this) == (numberOfCards.calculate(null, null, this))) {
+                            sb.append("any number");
                         } else {
-                            sb.append(CardUtil.numberToText(numberToPick.calculate(null, null, this)));
+                            sb.append("up to ").append(CardUtil.numberToText(numberToPick.calculate(null, null, this)));
                         }
                     } else {
-                        sb.append("one");
+                        sb.append(CardUtil.numberToText(numberToPick.calculate(null, null, this)));
                     }
-
-                    sb.append(" of them into your ");
+                } else {
+                    sb.append("one");
                 }
+
+                sb.append(" of them into your ");
             }
             sb.append(targetPickedCards.toString().toLowerCase());
 
             if (targetZoneLookedCards == Zone.LIBRARY) {
                 sb.append(". Put the rest ");
                 if (putOnTop) {
-                    sb.append("back ");
+                    sb.append("back on top");
                 } else {
-                    sb.append("on the bottom of your library ");
+                    sb.append("on the bottom");
                 }
-                sb.append("in any order");
+                sb.append(" of your library in any order");
             } else if (targetZoneLookedCards == Zone.GRAVEYARD) {
                 sb.append(" and the other into your graveyard");
             }

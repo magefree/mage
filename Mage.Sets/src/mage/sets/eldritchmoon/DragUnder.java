@@ -25,38 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class TaigamsScheming extends CardImpl {
+public class DragUnder extends CardImpl {
 
-    public TaigamsScheming(UUID ownerId) {
-        super(ownerId, 57, "Taigam's Scheming", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "KTK";
+    public DragUnder(UUID ownerId) {
+        super(ownerId, 57, "Drag Under", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
+        this.expansionSetCode = "EMN";
 
-        // Look at the top five cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(5),
-                new FilterCard("cards"), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false));
+        // Return target creature to its owner's hand.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public TaigamsScheming(final TaigamsScheming card) {
+    public DragUnder(final DragUnder card) {
         super(card);
     }
 
     @Override
-    public TaigamsScheming copy() {
-        return new TaigamsScheming(this);
+    public DragUnder copy() {
+        return new DragUnder(this);
     }
 }

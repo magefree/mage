@@ -25,38 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class TaigamsScheming extends CardImpl {
+public class Displace extends CardImpl {
 
-    public TaigamsScheming(UUID ownerId) {
-        super(ownerId, 57, "Taigam's Scheming", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "KTK";
+    public Displace(UUID ownerId) {
+        super(ownerId, 55, "Displace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
+        this.expansionSetCode = "EMN";
 
-        // Look at the top five cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(5),
-                new FilterCard("cards"), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false));
+        // Exile up to two target creatures you control, then return those cards to the battlefield under their owner's control.
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 2, new FilterControlledCreaturePermanent("creatures you control"), false));
+        Effect effect = new ExileTargetForSourceEffect();
+        effect.setText("Exile up to two target creatures you control");
+        this.getSpellAbility().addEffect(effect);
+        effect = new ReturnToBattlefieldUnderYourControlTargetEffect(true);
+        effect.setText(", then return those cards to the battlefield under their owner's control");
+        this.getSpellAbility().addEffect(effect);
     }
 
-    public TaigamsScheming(final TaigamsScheming card) {
+    public Displace(final Displace card) {
         super(card);
     }
 
     @Override
-    public TaigamsScheming copy() {
-        return new TaigamsScheming(this);
+    public Displace copy() {
+        return new Displace(this);
     }
 }

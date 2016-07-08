@@ -25,38 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.khansoftarkir;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 
 /**
  *
  * @author LevelX2
  */
-public class TaigamsScheming extends CardImpl {
+public class EnlightenedManiac extends CardImpl {
 
-    public TaigamsScheming(UUID ownerId) {
-        super(ownerId, 57, "Taigam's Scheming", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
-        this.expansionSetCode = "KTK";
+    public EnlightenedManiac(UUID ownerId) {
+        super(ownerId, 58, "Enlightened Maniac", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Human");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
 
-        // Look at the top five cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(5),
-                new FilterCard("cards"), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false));
+        // When Enlightened Maniac enters the battlefield, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
     }
 
-    public TaigamsScheming(final TaigamsScheming card) {
+    public EnlightenedManiac(final EnlightenedManiac card) {
         super(card);
     }
 
     @Override
-    public TaigamsScheming copy() {
-        return new TaigamsScheming(this);
+    public EnlightenedManiac copy() {
+        return new EnlightenedManiac(this);
     }
 }
