@@ -107,9 +107,9 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer) {
-        this(playerId, additionalCardType, gainsHaste, number, tapped, attacking, null, Integer.MIN_VALUE, Integer.MIN_VALUE, false);
+        this(playerId, additionalCardType, gainsHaste, number, tapped, attacking, attackedPlayer, Integer.MIN_VALUE, Integer.MIN_VALUE, false);
     }
-    
+
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId, CardType additionalCardType, boolean gainsHaste, int number, boolean tapped, boolean attacking, UUID attackedPlayer, int power, int toughness, boolean gainsFlying) {
         super(Outcome.PutCreatureInPlay);
         this.playerId = playerId;
@@ -119,11 +119,11 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.number = number;
         this.tapped = tapped;
         this.attacking = attacking;
-        this.attackedPlayer = attackedPlayer;        
+        this.attackedPlayer = attackedPlayer;
         this.tokenPower = power;
         this.tokenToughness = toughness;
         this.gainsFlying = gainsFlying;
-    }    
+    }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(final PutTokenOntoBattlefieldCopyTargetEffect effect) {
         super(effect);
@@ -179,10 +179,10 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
             return false;
         }
 
-        EmptyToken token = new EmptyToken();        
+        EmptyToken token = new EmptyToken();
         CardUtil.copyTo(token).from(copyFrom); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token);
-        
+
         if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
             token.getCardType().add(additionalCardType);
         }
@@ -194,14 +194,14 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         }
         if (tokenPower != Integer.MIN_VALUE) {
             token.setPower(tokenPower);
-        }           
-        if (tokenToughness != Integer.MIN_VALUE){
+        }
+        if (tokenToughness != Integer.MIN_VALUE) {
             token.setToughness(tokenToughness);
         }
         if (additionalSubType != null && !token.getSubtype().contains(additionalSubType)) {
             token.getSubtype().add(additionalSubType);
         }
-        
+
         token.putOntoBattlefield(number, game, source.getSourceId(), playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
             Permanent tokenPermanent = game.getPermanent(tokenId);

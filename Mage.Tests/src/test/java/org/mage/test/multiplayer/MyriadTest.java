@@ -157,7 +157,7 @@ public class MyriadTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerD, "Man-o'-War", 1);
         assertPermanentCount(playerC, "Silvercoat Lion", 0);
         assertPermanentCount(playerC, "Pillarfield Ox", 0);
-        assertPermanentCount(playerC, "Grizzly Bears", 1);
+        assertPermanentCount(playerC, "Grizzly Bears", 1); // not in range
 
         assertHandCount(playerC, "Silvercoat Lion", 2);
         assertHandCount(playerC, "Pillarfield Ox", 1);
