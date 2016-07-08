@@ -5,8 +5,6 @@
  */
 package org.mage.test.cards.single.ogw;
 
-import java.util.Set;
-import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -70,7 +68,6 @@ public class ThoughtKnotSeerTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Unsummon", 1);
         assertHandCount(playerB, "Thought-Knot Seer", 1);
-        Set<Card> hand = playerA.getHand().getCards(currentGame);
         assertHandCount(playerA, 1); // should have drawn a card from Thought-Knot Seer leaving
     }
 
@@ -97,7 +94,6 @@ public class ThoughtKnotSeerTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerB, "Thought-Knot Seer", 1);
-        Set<Card> hand = playerA.getHand().getCards(currentGame);
         assertHandCount(playerA, 1); // should have drawn a card from Thought-Knot Seer leaving
     }
 
@@ -125,7 +121,6 @@ public class ThoughtKnotSeerTest extends CardTestPlayerBase {
 
         assertExileCount(playerB, 1);
         assertExileCount("Thought-Knot Seer", 1);
-        Set<Card> hand = playerA.getHand().getCards(currentGame);
         assertHandCount(playerA, 1); // should have drawn a card from Thought-Knot Seer leaving
     }
 }
