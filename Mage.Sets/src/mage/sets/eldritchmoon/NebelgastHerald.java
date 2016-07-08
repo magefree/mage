@@ -25,62 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class GlassdustHulk extends CardImpl {
+public class NebelgastHerald extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterArtifactPermanent("another artifact");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Spirit");
+    private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
+        filter.add(new SubtypePredicate("Spirit"));
+        filterTarget.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public GlassdustHulk(UUID ownerId) {
-        super(ownerId, 7, "Glassdust Hulk", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{U}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Golem");
+    public NebelgastHerald(UUID ownerId) {
+        super(ownerId, 71, "Nebelgast Herald", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Spirit");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
-
-        // Whenever another artifact enters the battlefield under your control, Glassdust Hulk gets +1/+1 until end of turn and can't be blocked this turn.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter,
-                "Whenever another artifact enters the battlefield under your control, {this} gets +1/+1 until end of turn and can't be blocked this turn.");
-        ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn));
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever Nebelgast Herald or another Spirit enters the battlefield under your control, tap target creature an opponent controls.
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(), filter, false);
+        ability.addTarget(new TargetCreaturePermanent(filterTarget));
         this.addAbility(ability);
-
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{W/U}")));
     }
 
-    public GlassdustHulk(final GlassdustHulk card) {
+    public NebelgastHerald(final NebelgastHerald card) {
         super(card);
     }
 
     @Override
-    public GlassdustHulk copy() {
-        return new GlassdustHulk(this);
+    public NebelgastHerald copy() {
+        return new NebelgastHerald(this);
     }
 }

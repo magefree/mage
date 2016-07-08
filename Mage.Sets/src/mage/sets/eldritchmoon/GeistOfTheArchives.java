@@ -25,62 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class GlassdustHulk extends CardImpl {
+public class GeistOfTheArchives extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterArtifactPermanent("another artifact");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AnotherPredicate());
-    }
-
-    public GlassdustHulk(UUID ownerId) {
-        super(ownerId, 7, "Glassdust Hulk", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{U}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Golem");
-
-        this.power = new MageInt(3);
+    public GeistOfTheArchives(UUID ownerId) {
+        super(ownerId, 62, "Geist of the Archives", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Spirit");
+        this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        // Whenever another artifact enters the battlefield under your control, Glassdust Hulk gets +1/+1 until end of turn and can't be blocked this turn.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter,
-                "Whenever another artifact enters the battlefield under your control, {this} gets +1/+1 until end of turn and can't be blocked this turn.");
-        ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn));
-        this.addAbility(ability);
-
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{W/U}")));
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+        // At the beginning of your upkeep, scry 1.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ScryEffect(1), TargetController.YOU, false));
     }
 
-    public GlassdustHulk(final GlassdustHulk card) {
+    public GeistOfTheArchives(final GeistOfTheArchives card) {
         super(card);
     }
 
     @Override
-    public GlassdustHulk copy() {
-        return new GlassdustHulk(this);
+    public GeistOfTheArchives copy() {
+        return new GeistOfTheArchives(this);
     }
 }
