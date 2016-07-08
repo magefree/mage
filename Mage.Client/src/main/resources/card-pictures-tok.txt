@@ -1,9 +1,14 @@
-|Generate|TOK:SOI|Eldrazi Horror||
-|Generate|TOK:SOI|Human||
-|Generate|TOK:SOI|Human Wizard||
-|Generate|TOK:SOI|Spirit||
-|Generate|TOK:SOI|Zombie|1|
-|Generate|TOK:SOI|Zombie|2|
+|Generate|TOK:EMN|Eldrazi Horror||
+|Generate|TOK:EMN|Human||
+|Generate|TOK:EMN|Human Wizard||
+|Generate|TOK:EMN|Spider||
+|Generate|TOK:EMN|Spirit||
+|Generate|TOK:EMN|Zombie|1|
+|Generate|TOK:EMN|Zombie|2|
+|Generate|TOK:EMN|Zombie|3|
+|Generate|TOK:EMN|Zombie|4|
+|Generate|EMBLEM!:EMN|Emblem Liliana, the Last Hope||
+|Generate|EMBLEM!:EMN|Emblem Tamiyo, Field Researcher||
 
 |Generate|TOK:SOI|Angel||
 |Generate|TOK:SOI|Clue|1|
