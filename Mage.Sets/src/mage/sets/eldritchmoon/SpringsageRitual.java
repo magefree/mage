@@ -25,44 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class SpringsageRitual extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+    public SpringsageRitual(UUID ownerId) {
+        super(ownerId, 172, "Springsage Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
+        this.expansionSetCode = "EMN";
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+        // Destroy target artifact or enchantment. You gain 4 life.
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public SpringsageRitual(final SpringsageRitual card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public SpringsageRitual copy() {
+        return new SpringsageRitual(this);
     }
-
 }

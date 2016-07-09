@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -39,30 +39,29 @@ import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class PrimalDruid extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+    public PrimalDruid(UUID ownerId) {
+        super(ownerId, 167, "Primal Druid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+        // When Primal Druid dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public PrimalDruid(final PrimalDruid card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public PrimalDruid copy() {
+        return new PrimalDruid(this);
     }
-
 }

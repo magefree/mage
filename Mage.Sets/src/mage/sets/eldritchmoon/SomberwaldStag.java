@@ -25,44 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class SomberwaldStag extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+    static {
+        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public SomberwaldStag(UUID ownerId) {
+        super(ownerId, 169, "Somberwald Stag", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Elk");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
+
+        // When Somberwald Stag enters the battlefield, you may have it fight target creature you don't control.
+        Effect effect = new FightTargetSourceEffect();
+        effect.setText("you may have it fight target creature you don't control");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public SomberwaldStag(final SomberwaldStag card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public SomberwaldStag copy() {
+        return new SomberwaldStag(this);
     }
-
 }
