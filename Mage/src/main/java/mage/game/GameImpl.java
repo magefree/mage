@@ -2368,7 +2368,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             if (!game.isSimulation()) {
                 StringBuilder message = new StringBuilder(preventionSource.getLogName()).append(": Prevented ");
-                message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getName());
+                message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getLogName());
                 if (!targetName.isEmpty()) {
                     message.append(" to ").append(targetName);
                 }

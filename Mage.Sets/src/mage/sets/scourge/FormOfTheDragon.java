@@ -32,22 +32,19 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.SetPlayerLifeSourceEffect;
 import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -72,7 +69,7 @@ public class FormOfTheDragon extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each end step, your life total becomes 5.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new FormOfTheDragonEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SetPlayerLifeSourceEffect(5), TargetController.ANY, false));
 
         // Creatures without flying can't attack you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));
@@ -85,32 +82,5 @@ public class FormOfTheDragon extends CardImpl {
     @Override
     public FormOfTheDragon copy() {
         return new FormOfTheDragon(this);
-    }
-}
-
-class FormOfTheDragonEffect extends OneShotEffect {
-
-    FormOfTheDragonEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "your life total becomes 5";
-    }
-
-    FormOfTheDragonEffect(final FormOfTheDragonEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FormOfTheDragonEffect copy() {
-        return new FormOfTheDragonEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.setLife(5, game);
-            return true;
-        }
-        return false;
     }
 }

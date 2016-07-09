@@ -28,14 +28,13 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 
 /**
  *
@@ -50,6 +49,7 @@ public class BrambleCreeper extends CardImpl {
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
+        // Whenever Bramble Creeper attacks, it gets +5/+0 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn), false));
     }
 

@@ -28,10 +28,10 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,6 +55,7 @@ public class AltarsLight extends CardImpl {
         super(ownerId, 1, "Altar's Light", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
         this.expansionSetCode = "MRD";
 
+        // Exile target artifact or enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

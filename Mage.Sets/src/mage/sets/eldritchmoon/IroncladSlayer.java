@@ -25,54 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author Quercitron
+ * @author LevelX2
  */
-public class Sunstone extends CardImpl {
+public class IroncladSlayer extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow land");
+    private final static FilterCard filter = new FilterCard("Aura or Equipment card");
 
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(Predicates.or(new SubtypePredicate("Aura"), new SubtypePredicate("Equipment")));
     }
 
-    public Sunstone(UUID ownerId) {
-        super(ownerId, 316, "Sunstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ICE";
+    public IroncladSlayer(UUID ownerId) {
+        super(ownerId, 31, "Ironclad Slayer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // {2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.
-        Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage that would be dealt this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        // When Ironclad Slayer enters the battlefield, you may return target Aura or Equipment card from your graveyard to your hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 
-    public Sunstone(final Sunstone card) {
+    public IroncladSlayer(final IroncladSlayer card) {
         super(card);
     }
 
     @Override
-    public Sunstone copy() {
-        return new Sunstone(this);
+    public IroncladSlayer copy() {
+        return new IroncladSlayer(this);
     }
 }

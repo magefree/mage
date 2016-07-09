@@ -25,59 +25,69 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.SoldierToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class KnightCaptainOfEos extends CardImpl {
+public class ExtricatorOfFlesh extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Soldier");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Eldrazi creature");
 
     static {
-        filter.add(new SubtypePredicate("Soldier"));
+        filter.add(Predicates.not(new SubtypePredicate("Eldrazi")));
     }
 
-    public KnightCaptainOfEos(UUID ownerId) {
-        super(ownerId, 17, "Knight-Captain of Eos", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "ALA";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+    public ExtricatorOfFlesh(UUID ownerId) {
+        super(ownerId, 23, "Extricator of Flesh", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Horror");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(5);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // this card is the second face of double-faced card
+        this.nightCard = true;
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 2), false));
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new ManaCostsImpl("{W}"));
+        // Eldrazi you control have vigilance
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+                VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Eldrazi", "Eldrazi you control "))));
+
+        // {2}, {T}, Sacrifice a non-Eldrazi creature: Put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new EldraziHorrorToken()), new GenericManaCost(2));
+        ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
         this.addAbility(ability);
     }
 
-    public KnightCaptainOfEos(final KnightCaptainOfEos card) {
+    public ExtricatorOfFlesh(final ExtricatorOfFlesh card) {
         super(card);
     }
 
     @Override
-    public KnightCaptainOfEos copy() {
-        return new KnightCaptainOfEos(this);
+    public ExtricatorOfFlesh copy() {
+        return new ExtricatorOfFlesh(this);
     }
 }

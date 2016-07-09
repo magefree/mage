@@ -25,54 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LevelX2
  */
-public class Sunstone extends CardImpl {
+public class IronwrightsCleansing extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow land");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {
-        filter.add(new SupertypePredicate("Snow"));
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public Sunstone(UUID ownerId) {
-        super(ownerId, 316, "Sunstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ICE";
+    public IronwrightsCleansing(UUID ownerId) {
+        super(ownerId, 32, "Ironwright's Cleansing", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
+        this.expansionSetCode = "EMN";
 
-        // {2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.
-        Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage that would be dealt this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
+        // Exile target artifact or enchantment.
+        this.getSpellAbility().addEffect(new ExileTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+
     }
 
-    public Sunstone(final Sunstone card) {
+    public IronwrightsCleansing(final IronwrightsCleansing card) {
         super(card);
     }
 
     @Override
-    public Sunstone copy() {
-        return new Sunstone(this);
+    public IronwrightsCleansing copy() {
+        return new IronwrightsCleansing(this);
     }
 }

@@ -25,54 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.game.permanent.token.SoldierToken;
 
 /**
  *
- * @author Quercitron
+ * @author LevelX2
  */
-public class Sunstone extends CardImpl {
+public class ThrabenStandardBearer extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow land");
+    public ThrabenStandardBearer(UUID ownerId) {
+        super(ownerId, 48, "Thraben Standard Bearer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-    static {
-        filter.add(new SupertypePredicate("Snow"));
-    }
-
-    public Sunstone(UUID ownerId) {
-        super(ownerId, 316, "Sunstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ICE";
-
-        // {2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.
-        Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage that would be dealt this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        // {1}{W}, {T}, Discard a card: Put a 1/1 white Human Soldier creature token onto the battlefield.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl<>("{1}{W}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }
 
-    public Sunstone(final Sunstone card) {
+    public ThrabenStandardBearer(final ThrabenStandardBearer card) {
         super(card);
     }
 
     @Override
-    public Sunstone copy() {
-        return new Sunstone(this);
+    public ThrabenStandardBearer copy() {
+        return new ThrabenStandardBearer(this);
     }
 }

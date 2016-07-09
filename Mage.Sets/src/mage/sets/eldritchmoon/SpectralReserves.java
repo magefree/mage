@@ -25,54 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
  *
- * @author Quercitron
+ * @author LevelX2
  */
-public class Sunstone extends CardImpl {
+public class SpectralReserves extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow land");
+    public SpectralReserves(UUID ownerId) {
+        super(ownerId, 43, "Spectral Reserves", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
+        this.expansionSetCode = "EMN";
 
-    static {
-        filter.add(new SupertypePredicate("Snow"));
+        // Put two 1/1 white Spirit creature tokens with flying onto the battlefield. You gain 2 life.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken("EMN"), 2));
+        this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public Sunstone(UUID ownerId) {
-        super(ownerId, 316, "Sunstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ICE";
-
-        // {2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.
-        Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage that would be dealt this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
-    }
-
-    public Sunstone(final Sunstone card) {
+    public SpectralReserves(final SpectralReserves card) {
         super(card);
     }
 
     @Override
-    public Sunstone copy() {
-        return new Sunstone(this);
+    public SpectralReserves copy() {
+        return new SpectralReserves(this);
     }
 }

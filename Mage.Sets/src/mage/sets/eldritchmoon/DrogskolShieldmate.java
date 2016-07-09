@@ -25,54 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LevelX2
  */
-public class Sunstone extends CardImpl {
+public class DrogskolShieldmate extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow land");
+    public DrogskolShieldmate(UUID ownerId) {
+        super(ownerId, 22, "Drogskol Shieldmate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Spirit");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-    static {
-        filter.add(new SupertypePredicate("Snow"));
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+
+        // When Drogskol Shieldmate enters the battlefield, other creatures you control get +0/+1 until end of turn.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(0, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), true), false));
     }
 
-    public Sunstone(UUID ownerId) {
-        super(ownerId, 316, "Sunstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ICE";
-
-        // {2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.
-        Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage that would be dealt this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
-    }
-
-    public Sunstone(final Sunstone card) {
+    public DrogskolShieldmate(final DrogskolShieldmate card) {
         super(card);
     }
 
     @Override
-    public Sunstone copy() {
-        return new Sunstone(this);
+    public DrogskolShieldmate copy() {
+        return new DrogskolShieldmate(this);
     }
 }

@@ -42,24 +42,24 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX
  */
-public class PreventAllDamageByAllEffect extends PreventionEffectImpl {
+public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl {
 
     private FilterPermanent filter;
 
-    public PreventAllDamageByAllEffect(Duration duration) {
+    public PreventAllDamageByAllPermanentsEffect(Duration duration) {
         this(null, duration, false);
     }
 
-    public PreventAllDamageByAllEffect(Duration duration, boolean onlyCombat) {
+    public PreventAllDamageByAllPermanentsEffect(Duration duration, boolean onlyCombat) {
         this(null, duration, onlyCombat);
     }
 
-    public PreventAllDamageByAllEffect(FilterCreaturePermanent filter, Duration duration, boolean onlyCombat) {
+    public PreventAllDamageByAllPermanentsEffect(FilterCreaturePermanent filter, Duration duration, boolean onlyCombat) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
         this.filter = filter;
     }
 
-    public PreventAllDamageByAllEffect(final PreventAllDamageByAllEffect effect) {
+    public PreventAllDamageByAllPermanentsEffect(final PreventAllDamageByAllPermanentsEffect effect) {
         super(effect);
         if (effect.filter != null) {
             this.filter = effect.filter.copy();
@@ -67,8 +67,8 @@ public class PreventAllDamageByAllEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public PreventAllDamageByAllEffect copy() {
-        return new PreventAllDamageByAllEffect(this);
+    public PreventAllDamageByAllPermanentsEffect copy() {
+        return new PreventAllDamageByAllPermanentsEffect(this);
     }
 
     @Override

@@ -25,59 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.SoldierToken;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.Game;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class KnightCaptainOfEos extends CardImpl {
+public class FiendBinder extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Soldier");
+    private final UUID originalId;
 
-    static {
-        filter.add(new SubtypePredicate("Soldier"));
-    }
-
-    public KnightCaptainOfEos(UUID ownerId) {
-        super(ownerId, 17, "Knight-Captain of Eos", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        this.expansionSetCode = "ALA";
+    public FiendBinder(UUID ownerId) {
+        super(ownerId, 26, "Fiend Binder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "EMN";
         this.subtype.add("Human");
-        this.subtype.add("Knight");
-
-        this.power = new MageInt(2);
+        this.subtype.add("Soldier");
+        this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 2), false));
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new ManaCostsImpl("{W}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        // Whenever Fiend Binder attacks, tap target creature defending player controls.
+        Ability ability = new AttacksTriggeredAbility(new TapTargetEffect(), false);
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
+        originalId = ability.getOriginalId();
         this.addAbility(ability);
     }
 
-    public KnightCaptainOfEos(final KnightCaptainOfEos card) {
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability.getOriginalId().equals(originalId)) {
+            ability.getTargets().clear();
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+            UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
+            filter.add(new ControllerIdPredicate(defenderId));
+            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            ability.addTarget(target);
+        }
+    }
+
+    public FiendBinder(final FiendBinder card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
-    public KnightCaptainOfEos copy() {
-        return new KnightCaptainOfEos(this);
+    public FiendBinder copy() {
+        return new FiendBinder(this);
     }
 }

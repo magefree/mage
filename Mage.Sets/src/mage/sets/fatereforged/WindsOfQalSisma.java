@@ -32,7 +32,7 @@ import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -60,9 +60,9 @@ public class WindsOfQalSisma extends CardImpl {
         // Prevent all combat damage that would be dealt this turn.
         // Ferocious - If you control a creature with power 4 or greater, instead prevent all combat damage that would be dealt this turn by creatures your opponents control.
         Effect effect = new ConditionalReplacementEffect(
-                new PreventAllDamageByAllEffect(filter, Duration.EndOfTurn, true),
+                new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true),
                 new LockedInCondition(FerociousCondition.getInstance()),
-                new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
+                new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
         effect.setText("Prevent all combat damage that would be dealt this turn.<br>" +
                        "<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, instead prevent all combat damage that would be dealt this turn by creatures your opponents control");
         this.getSpellAbility().addEffect(effect);

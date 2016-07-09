@@ -25,54 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.Mode;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.keyword.EscalateAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LevelX2
  */
-public class Sunstone extends CardImpl {
+public class BorrowedGrace extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow land");
+    public BorrowedGrace(UUID ownerId) {
+        super(ownerId, 14, "Borrowed Grace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "EMN";
 
-    static {
-        filter.add(new SupertypePredicate("Snow"));
+        // Escalate {1}{W}
+        this.addAbility(new EscalateAbility(new ManaCostsImpl<>("{1}{W}")));
+
+        // Choose one or both &mdash;
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(2);
+
+        // Creatures you control get +2/+0 until end of turn.;
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
+
+        // Creatures you control get +0/+2 until end of turn.
+        Mode mode = new Mode();
+        mode.getEffects().add(new BoostControlledEffect(0, 2, Duration.EndOfTurn));
+        this.getSpellAbility().addMode(mode);
     }
 
-    public Sunstone(UUID ownerId) {
-        super(ownerId, 316, "Sunstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ICE";
-
-        // {2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.
-        Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage that would be dealt this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
-    }
-
-    public Sunstone(final Sunstone card) {
+    public BorrowedGrace(final BorrowedGrace card) {
         super(card);
     }
 
     @Override
-    public Sunstone copy() {
-        return new Sunstone(this);
+    public BorrowedGrace copy() {
+        return new BorrowedGrace(this);
     }
 }

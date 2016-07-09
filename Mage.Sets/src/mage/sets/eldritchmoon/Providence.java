@@ -25,54 +25,73 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.iceage;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.ChancellorAbility;
+import mage.abilities.effects.common.SetPlayerLifeSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
- * @author Quercitron
+ * @author LevelX2
  */
-public class Sunstone extends CardImpl {
+public class Providence extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a snow land");
+    private static String abilityText = "at the beginning of your first upkeep, your life total becomes 26";
 
-    static {
-        filter.add(new SupertypePredicate("Snow"));
-    }
+    public Providence(UUID ownerId) {
+        super(ownerId, 37, "Providence", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
+        this.expansionSetCode = "EMN";
 
-    public Sunstone(UUID ownerId) {
-        super(ownerId, 316, "Sunstone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "ICE";
-
-        // {2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.
-        Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage that would be dealt this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        // You may reveal this card from your opening hand. If you do, at the beginning of your first upkeep, your life total becomes 26.
+        Ability ability = new ChancellorAbility(new ProvidenceDelayedTriggeredAbility(), abilityText);
+        ability.setRuleAtTheTop(true);
         this.addAbility(ability);
+        // Your life total becomes 26.
+        this.getSpellAbility().addEffect(new SetPlayerLifeSourceEffect(26));
+
     }
 
-    public Sunstone(final Sunstone card) {
+    public Providence(final Providence card) {
         super(card);
     }
 
     @Override
-    public Sunstone copy() {
-        return new Sunstone(this);
+    public Providence copy() {
+        return new Providence(this);
+    }
+}
+
+class ProvidenceDelayedTriggeredAbility extends DelayedTriggeredAbility {
+
+    ProvidenceDelayedTriggeredAbility() {
+        super(new SetPlayerLifeSourceEffect(26));
+    }
+
+    ProvidenceDelayedTriggeredAbility(ProvidenceDelayedTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return game.getActivePlayerId().equals(controllerId);
+    }
+
+    @Override
+    public ProvidenceDelayedTriggeredAbility copy() {
+        return new ProvidenceDelayedTriggeredAbility(this);
     }
 }

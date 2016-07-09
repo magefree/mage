@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -61,7 +61,7 @@ public class GlacialCrevasses extends CardImpl {
         this.expansionSetCode = "ICE";
 
         // Sacrifice a snow Mountain: Prevent all combat damage that would be dealt this turn.
-        Effect effect = new PreventAllDamageByAllEffect(Duration.EndOfTurn, true);
+        Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt this turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

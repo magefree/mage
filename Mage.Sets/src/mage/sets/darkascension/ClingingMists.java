@@ -36,7 +36,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -58,7 +58,7 @@ public class ClingingMists extends CardImpl {
         this.expansionSetCode = "DKA";
 
         // Prevent all combat damage that would be dealt this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(null, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(null, Duration.EndOfTurn, true));
 
         // Fateful hour - If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ClingingMistsEffect(),

@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -60,7 +60,7 @@ public class SporeFlower extends CardImpl {
 
         // Remove three spore counters from Spore Flower: Prevent all combat damage that would be dealt this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PreventAllDamageByAllEffect(Duration.EndOfTurn, true),
+                new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true),
                 new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
     }
 

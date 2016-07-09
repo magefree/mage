@@ -30,7 +30,7 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -47,7 +47,7 @@ public class Respite extends CardImpl {
         this.expansionSetCode = "TMP";
 
         // Prevent all combat damage that would be dealt this turn. 
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
         
         // You gain 1 life for each attacking creature.
         this.getSpellAbility().addEffect(new GainLifeEffect(new AttackingCreatureCount()));
