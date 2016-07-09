@@ -25,44 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class HowlingChorus extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+    public HowlingChorus(UUID ownerId) {
+        super(ownerId, 168, "Howling Chorus", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Werewolf");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(5);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        // this card is the second face of double-faced card
+        this.nightCard = true;
 
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+        // Creatures with power less than Howling Chorus's power can't block it.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+
+        // Whenever Howling Chorus deals combat damage to a player, put a 3/2 colorless Eldrazi Horror creature token onto the battlefield.
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public HowlingChorus(final HowlingChorus card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public HowlingChorus copy() {
+        return new HowlingChorus(this);
     }
-
 }

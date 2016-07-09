@@ -25,44 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class SwiftSpinner extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
-
+    public SwiftSpinner(UUID ownerId) {
+        super(ownerId, 173, "Swift Spinner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Spider");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+        // Flash <i>(You may cast this spell any time you could cast an instant.)<i>
+        this.addAbility(FlashAbility.getInstance());
+
+        // Reach
+        this.addAbility(ReachAbility.getInstance());
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public SwiftSpinner(final SwiftSpinner card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public SwiftSpinner copy() {
+        return new SwiftSpinner(this);
     }
-
 }

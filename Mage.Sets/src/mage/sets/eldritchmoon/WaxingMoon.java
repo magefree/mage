@@ -25,44 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.common.TransformTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.constants.TargetController;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class WaxingMoon extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf you control");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+    static {
+        filter.add(new SubtypePredicate("Werewolf"));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public WaxingMoon(UUID ownerId) {
+        super(ownerId, 177, "Waxing Moon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "EMN";
+
+        // Transform up to one target Werewolf you control.
+        this.getSpellAbility().addEffect(new TransformTargetEffect(false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        // Creatures you control gain trample until end of turn.
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), "Creatures you control gain trample until end of turn"));
+    }
+
+    public WaxingMoon(final WaxingMoon card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public WaxingMoon copy() {
+        return new WaxingMoon(this);
     }
-
 }

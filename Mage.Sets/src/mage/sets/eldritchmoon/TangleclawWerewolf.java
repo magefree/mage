@@ -25,44 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class TangleclawWerewolf extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
-
+    public TangleclawWerewolf(UUID ownerId) {
+        super(ownerId, 174, "Tangleclaw Werewolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Werewolf");
+        this.subtype.add("Horror");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(4);
 
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+        this.canTransform = true;
+        this.secondSideCard = new FibrousEntangler(ownerId);
+
+        // Tangleclaw Werewolf can block an additional creature each combat.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
+
+        // {6}{G}: Transform Tangleclaw Werewolf.
+        this.addAbility(new TransformAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl<>("{6}{G}")));
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public TangleclawWerewolf(final TangleclawWerewolf card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public TangleclawWerewolf copy() {
+        return new TangleclawWerewolf(this);
     }
-
 }

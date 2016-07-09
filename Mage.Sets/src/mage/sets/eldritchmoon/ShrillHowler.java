@@ -25,44 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowerEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class ShrillHowler extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
-
-        this.power = new MageInt(2);
+    public ShrillHowler(UUID ownerId) {
+        super(ownerId, 168, "Shrill Howler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Werewolf");
+        this.subtype.add("Horror");
+        this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+        this.canTransform = true;
+        this.secondSideCard = new HowlingChorus(ownerId);
+
+        // Creatures with power less than Shrill Howler's power can't block it.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+
+        // {5}{G}: Transform Shrill Howler.
+        this.addAbility(new TransformAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl<>("{5}{G}")));
+
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public ShrillHowler(final ShrillHowler card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public ShrillHowler copy() {
+        return new ShrillHowler(this);
     }
-
 }

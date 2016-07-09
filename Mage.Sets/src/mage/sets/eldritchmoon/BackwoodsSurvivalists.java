@@ -25,44 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.constants.Zone;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class BackwoodsSurvivalists extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+    public BackwoodsSurvivalists(UUID ownerId) {
+        super(ownerId, 150, "Backwoods Survivalists", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+        // <i>Delirium</i> &mdash; Backwoods Survivalists gets +1/+1 and has trample as long as there are four or more card types among cards in your graveyard.
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), DeliriumCondition.getInstance(), "<i>Delirium</i> &mdash; {this} gets +1/+1");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), DeliriumCondition.getInstance(), "and has trample as long as there are four or more card types among cards in your graveyard."));
+        this.addAbility(ability);
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public BackwoodsSurvivalists(final BackwoodsSurvivalists card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public BackwoodsSurvivalists copy() {
+        return new BackwoodsSurvivalists(this);
     }
-
 }

@@ -25,44 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class WoodcuttersGrit extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+    public WoodcuttersGrit(UUID ownerId) {
+        super(ownerId, 179, "Woodcutter's Grit", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
+        this.expansionSetCode = "EMN";
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+        // Target creature you control gets +3/+3 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)</i>
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);
+        effect.setText("Target creature you control gets +3/+3");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains hexproof until end of turn. <i>(It can't be the target of spells or abilities your opponents control.)</i>");
+        this.getSpellAbility().addEffect(effect);
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public WoodcuttersGrit(final WoodcuttersGrit card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public WoodcuttersGrit copy() {
+        return new WoodcuttersGrit(this);
     }
-
 }

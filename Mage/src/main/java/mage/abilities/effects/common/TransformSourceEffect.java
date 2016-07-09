@@ -33,15 +33,12 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author nantuko
  */
 public class TransformSourceEffect extends OneShotEffect {
-
-    private static final Logger logger = Logger.getLogger(TransformSourceEffect.class);
 
     private boolean withoutTrigger;
     private boolean fromDayToNight;

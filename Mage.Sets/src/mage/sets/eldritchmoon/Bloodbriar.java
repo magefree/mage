@@ -25,44 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.common.SacrificeAllTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.constants.TargetController;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ViridianEmissary extends CardImpl {
+public class Bloodbriar extends CardImpl {
 
-    public ViridianEmissary(UUID ownerId) {
-        super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Elf");
-        this.subtype.add("Scout");
+    private final static FilterPermanent filter = new FilterPermanent("another permanent");
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new AnotherPredicate());
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    public Bloodbriar(UUID ownerId) {
+        super(ownerId, 151, "Bloodbriar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Plant");
+        this.subtype.add("Elemental");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // Whenever you sacrifice another permanent, put a +1/+1 counter on Bloodbriar.
+        this.addAbility(new SacrificeAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, TargetController.YOU, false));
+    }
+
+    public Bloodbriar(final Bloodbriar card) {
         super(card);
     }
 
     @Override
-    public ViridianEmissary copy() {
-        return new ViridianEmissary(this);
+    public Bloodbriar copy() {
+        return new Bloodbriar(this);
     }
-
 }
