@@ -25,42 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class WeeDragonauts extends CardImpl {
+public class WeaverOfLightning extends CardImpl {
 
-    public WeeDragonauts(UUID ownerId) {
-        super(ownerId, 137, "Wee Dragonauts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "GPT";
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new FilterInstantOrSorcerySpell(), false));
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public WeeDragonauts(final WeeDragonauts card) {
+    public WeaverOfLightning(UUID ownerId) {
+        super(ownerId, 149, "Weaver of Lightning", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Human");
+        this.subtype.add("Shaman");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
+
+        // Reach
+        this.addAbility(ReachAbility.getInstance());
+        // Whenever you cast an instant or sorcery spell, Weaver of Lightning deals 1 damage to target creature an opponent controls.
+        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(1), new FilterInstantOrSorcerySpell(), false);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public WeaverOfLightning(final WeaverOfLightning card) {
         super(card);
     }
 
     @Override
-    public WeeDragonauts copy() {
-        return new WeeDragonauts(this);
+    public WeaverOfLightning copy() {
+        return new WeaverOfLightning(this);
     }
 }

@@ -25,42 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterInstantOrSorcerySpell;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class WeeDragonauts extends CardImpl {
+public class HanweirTheWrithingTownship extends CardImpl {
 
-    public WeeDragonauts(UUID ownerId) {
-        super(ownerId, 137, "Wee Dragonauts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "GPT";
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+    public HanweirTheWrithingTownship(UUID ownerId) {
+        super(ownerId, 130, "Hanweir, the Writhing Township", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
+        this.expansionSetCode = "EMN";
+        this.supertype.add("Legendary");
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Ooze");
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(4);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new FilterInstantOrSorcerySpell(), false));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // Whenever Hanweir, the Writhing Township attacks, put two 3/2 colorless Eldrazi Horror creature tokens onto the battlefield tapped and attacking.
+        this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken(), 2, true, true), false));
     }
 
-    public WeeDragonauts(final WeeDragonauts card) {
+    public HanweirTheWrithingTownship(final HanweirTheWrithingTownship card) {
         super(card);
     }
 
     @Override
-    public WeeDragonauts copy() {
-        return new WeeDragonauts(this);
+    public HanweirTheWrithingTownship copy() {
+        return new HanweirTheWrithingTownship(this);
     }
 }

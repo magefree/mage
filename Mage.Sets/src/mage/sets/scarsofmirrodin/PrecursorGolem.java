@@ -46,6 +46,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GolemToken;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.Target;
 import mage.util.TargetAddress;
 
@@ -106,8 +107,8 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private boolean checkSpell(Spell spell, Game game) {
-        if (spell != null &&
-            (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
+        if (spell != null
+                && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
             UUID targetGolem = null;
             for (TargetAddress addr : TargetAddress.walk(spell)) {
                 Target targetInstance = addr.getTarget(spell);
@@ -118,8 +119,8 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
                     }
                     if (targetGolem == null) {
                         targetGolem = target;
-                    } else {
-                        // If a spell has multiple targets, but it's targeting the same Golem with all of them, Precursor Golem's last ability will trigger
+                    } else // If a spell has multiple targets, but it's targeting the same Golem with all of them, Precursor Golem's last ability will trigger
+                    {
                         if (!targetGolem.equals(target)) {
                             return false;
                         }
@@ -137,7 +138,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts an instant or sorcery spell that targets only a single Golem, that player copies that spell for each other Golem that spell could target. Each copy targets a different one of those Golems";
+        return "Whenever a player casts an instant or sorcery spell that targets only a single Golem, that player copies that spell for each other Golem that spell could target. Each copy targets a different one of those Golems.";
     }
 }
 
@@ -146,7 +147,7 @@ class PrecursorGolemCopySpellEffect extends CopySpellForEachItCouldTargetEffect<
     public PrecursorGolemCopySpellEffect() {
         this(new FilterCreaturePermanent("Golem", "Golem"));
     }
-    
+
     public PrecursorGolemCopySpellEffect(PrecursorGolemCopySpellEffect effect) {
         super(effect);
     }
@@ -154,7 +155,12 @@ class PrecursorGolemCopySpellEffect extends CopySpellForEachItCouldTargetEffect<
     private PrecursorGolemCopySpellEffect(FilterInPlay<Permanent> filter) {
         super(filter);
     }
-    
+
+    @Override
+    protected Player getPlayer(Game game, Ability source) {
+        return game.getPlayer(source.getControllerId());
+    }
+
     @Override
     protected Spell getSpell(Game game, Ability source) {
         return (Spell) getValue("triggeringSpell");

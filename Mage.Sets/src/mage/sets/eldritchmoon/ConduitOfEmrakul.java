@@ -25,42 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.Mana;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.constants.TargetController;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class WeeDragonauts extends CardImpl {
+public class ConduitOfEmrakul extends CardImpl {
 
-    public WeeDragonauts(UUID ownerId) {
-        super(ownerId, 137, "Wee Dragonauts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "GPT";
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+    public ConduitOfEmrakul(UUID ownerId) {
+        super(ownerId, 124, "Conduit of Emrakul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Eldrazi");
+        this.subtype.add("Werewolf");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(4);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new FilterInstantOrSorcerySpell(), false));
+        // this card is the second face of double-faced card
+        this.nightCard = true;
+
+        // Whenever Conduit of Emrakul attacks, add {C}{C} to your mana pool at the beginning of your next main phase this turn.
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(
+                new AtTheBeginOfMainPhaseDelayedTriggeredAbility(
+                        new AddManaToManaPoolSourceControllerEffect(Mana.GenericMana(2)), false, TargetController.YOU, AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN_THIS_TURN));
+        effect.setText("add {C}{C} to your mana pool at the beginning of your next main phase this turn");
+        this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public WeeDragonauts(final WeeDragonauts card) {
+    public ConduitOfEmrakul(final ConduitOfEmrakul card) {
         super(card);
     }
 
     @Override
-    public WeeDragonauts copy() {
-        return new WeeDragonauts(this);
+    public ConduitOfEmrakul copy() {
+        return new ConduitOfEmrakul(this);
     }
 }

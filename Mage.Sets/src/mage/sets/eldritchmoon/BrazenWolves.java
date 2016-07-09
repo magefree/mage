@@ -25,42 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterInstantOrSorcerySpell;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class WeeDragonauts extends CardImpl {
+public class BrazenWolves extends CardImpl {
 
-    public WeeDragonauts(UUID ownerId) {
-        super(ownerId, 137, "Wee Dragonauts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "GPT";
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
-
-        this.power = new MageInt(1);
+    public BrazenWolves(UUID ownerId) {
+        super(ownerId, 122, "Brazen Wolves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Wolf");
+        this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new FilterInstantOrSorcerySpell(), false));
+
+        // Whenever Brazen Wolves attacks, it gets +2/+0 until end of turn.
+        Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
+        effect.setText("it gets +2/+0 until end of turn");
+        this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public WeeDragonauts(final WeeDragonauts card) {
+    public BrazenWolves(final BrazenWolves card) {
         super(card);
     }
 
     @Override
-    public WeeDragonauts copy() {
-        return new WeeDragonauts(this);
+    public BrazenWolves copy() {
+        return new BrazenWolves(this);
     }
 }

@@ -25,42 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterInstantOrSorcerySpell;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class WeeDragonauts extends CardImpl {
+public class InsatiableGorgers extends CardImpl {
 
-    public WeeDragonauts(UUID ownerId) {
-        super(ownerId, 137, "Wee Dragonauts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "GPT";
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
-
-        this.power = new MageInt(1);
+    public InsatiableGorgers(UUID ownerId) {
+        super(ownerId, 134, "Insatiable Gorgers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Vampire");
+        this.subtype.add("Berserker");
+        this.power = new MageInt(5);
         this.toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new FilterInstantOrSorcerySpell(), false));
+
+        // Insatiable Gorgers attacks each combat if able.
+        this.addAbility(new AttacksEachCombatStaticAbility());
+
+        // Madness {3}{R}
+        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{R}")));
     }
 
-    public WeeDragonauts(final WeeDragonauts card) {
+    public InsatiableGorgers(final InsatiableGorgers card) {
         super(card);
     }
 
     @Override
-    public WeeDragonauts copy() {
-        return new WeeDragonauts(this);
+    public InsatiableGorgers copy() {
+        return new InsatiableGorgers(this);
     }
 }

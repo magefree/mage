@@ -25,20 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterInPlay;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -49,45 +49,49 @@ import mage.target.Target;
 import mage.util.TargetAddress;
 
 /**
- * @author duncant
+ *
+ * @author LevelX2
  */
-public class InkTreaderNephilim extends CardImpl {
+public class MirrorwingDragon extends CardImpl {
 
-    public InkTreaderNephilim(UUID ownerId) {
-        super(ownerId, 117, "Ink-Treader Nephilim", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{G}{W}{U}");
-        this.expansionSetCode = "GPT";
-        this.subtype.add("Nephilim");
+    public MirrorwingDragon(UUID ownerId) {
+        super(ownerId, 136, "Mirrorwing Dragon", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Dragon");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Whenever a player casts an instant or sorcery spell, if that spell targets only Ink-Treader Nephilim, copy the spell for each other creature that spell could target. Each copy targets a different one of those creatures.
-        this.addAbility(new InkTreaderNephilimTriggeredAbility());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever a player casts an instant or sorcery spell that targets only Mirrorwing Dragon,
+        // that player copies that spell for each other creature he or she controls that the spell could target.
+        // Each copy targets a different one of those creatures.
+        this.addAbility(new MirrorwingDragonCopyTriggeredAbility());
     }
 
-    public InkTreaderNephilim(final InkTreaderNephilim card) {
+    public MirrorwingDragon(final MirrorwingDragon card) {
         super(card);
     }
 
     @Override
-    public InkTreaderNephilim copy() {
-        return new InkTreaderNephilim(this);
+    public MirrorwingDragon copy() {
+        return new MirrorwingDragon(this);
     }
 }
 
-class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
+class MirrorwingDragonCopyTriggeredAbility extends TriggeredAbilityImpl {
 
-    InkTreaderNephilimTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new InkTreaderNephilimEffect(), false);
+    MirrorwingDragonCopyTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new MirrorwingDragonCopySpellEffect(), false);
     }
 
-    InkTreaderNephilimTriggeredAbility(final InkTreaderNephilimTriggeredAbility ability) {
+    MirrorwingDragonCopyTriggeredAbility(final MirrorwingDragonCopyTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public InkTreaderNephilimTriggeredAbility copy() {
-        return new InkTreaderNephilimTriggeredAbility(this);
+    public MirrorwingDragonCopyTriggeredAbility copy() {
+        return new MirrorwingDragonCopyTriggeredAbility(this);
     }
 
     @Override
@@ -98,59 +102,57 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
+        return checkSpell(spell, game);
+    }
+
+    private boolean checkSpell(Spell spell, Game game) {
         if (spell != null
                 && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
-            for (Effect effect : getEffects()) {
-                effect.setValue("triggeringSpell", spell);
+            for (TargetAddress addr : TargetAddress.walk(spell)) {
+                Target targetInstance = addr.getTarget(spell);
+                for (UUID target : targetInstance.getTargets()) {
+                    Permanent permanent = game.getPermanent(target);
+                    if (permanent == null || !permanent.getId().equals(getSourceId())) {
+                        return false;
+                    }
+                }
             }
+            getEffects().get(0).setValue("triggeringSpell", spell);
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean checkInterveningIfClause(Game game) {
-        Spell spell = (Spell) getEffects().get(0).getValue("triggeringSpell");
-        if (spell != null) {
-            boolean allTargetsInkTreaderNephilim = true;
-            boolean atLeastOneTargetsInkTreaderNephilim = false;
-            for (TargetAddress addr : TargetAddress.walk(spell)) {
-                Target targetInstance = addr.getTarget(spell);
-                for (UUID target : targetInstance.getTargets()) {
-                    allTargetsInkTreaderNephilim &= target.equals(sourceId);
-                    atLeastOneTargetsInkTreaderNephilim |= target.equals(sourceId);
-                }
-            }
-            if (allTargetsInkTreaderNephilim && atLeastOneTargetsInkTreaderNephilim) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public String getRule() {
-        return "Whenever a player casts an instant or sorcery spell, if that spell targets only {this}, copy the spell for each other creature that spell could target. Each copy targets a different one of those creatures.";
+        return "Whenever a player casts an instant or sorcery spell that targets only {this}, "
+                + "that player copies that spell for each creature he or she controls that the spell could target. "
+                + "Each copy targets a different one of those creatures.";
     }
 }
 
-class InkTreaderNephilimEffect extends CopySpellForEachItCouldTargetEffect<Permanent> {
+class MirrorwingDragonCopySpellEffect extends CopySpellForEachItCouldTargetEffect<Permanent> {
 
-    public InkTreaderNephilimEffect() {
-        this(new FilterCreaturePermanent());
+    public MirrorwingDragonCopySpellEffect() {
+        this(new FilterControlledCreaturePermanent());
+        this.staticText = "that player copies that spell for each creature he or she controls that the spell could target. Each copy targets a different one of those creatures.";
     }
 
-    public InkTreaderNephilimEffect(InkTreaderNephilimEffect effect) {
+    public MirrorwingDragonCopySpellEffect(MirrorwingDragonCopySpellEffect effect) {
         super(effect);
     }
 
-    private InkTreaderNephilimEffect(FilterInPlay<Permanent> filter) {
+    private MirrorwingDragonCopySpellEffect(FilterInPlay<Permanent> filter) {
         super(filter);
     }
 
     @Override
     protected Player getPlayer(Game game, Ability source) {
-        return game.getPlayer(source.getControllerId());
+        Spell spell = getSpell(game, source);
+        if (spell != null) {
+            return game.getPlayer(spell.getControllerId());
+        }
+        return null;
     }
 
     @Override
@@ -165,11 +167,10 @@ class InkTreaderNephilimEffect extends CopySpellForEachItCouldTargetEffect<Perma
 
     @Override
     protected void modifyCopy(Spell copy, Game game, Ability source) {
-        copy.setControllerId(source.getControllerId());
     }
 
     @Override
-    public InkTreaderNephilimEffect copy() {
-        return new InkTreaderNephilimEffect(this);
+    public MirrorwingDragonCopySpellEffect copy() {
+        return new MirrorwingDragonCopySpellEffect(this);
     }
 }

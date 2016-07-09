@@ -25,42 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.guildpact;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.constants.TargetController;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.TargetPermanent;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class WeeDragonauts extends CardImpl {
+public class StensiaInnkeeper extends CardImpl {
 
-    public WeeDragonauts(UUID ownerId) {
-        super(ownerId, 137, "Wee Dragonauts", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
-        this.expansionSetCode = "GPT";
-        this.subtype.add("Faerie");
-        this.subtype.add("Wizard");
+    private final static FilterLandPermanent filter = new FilterLandPermanent("land an opponent controls");
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new FilterInstantOrSorcerySpell(), false));
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public WeeDragonauts(final WeeDragonauts card) {
+    public StensiaInnkeeper(UUID ownerId) {
+        super(ownerId, 145, "Stensia Innkeeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Vampire");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // When Stensia Innkeeper enters the battlefield, tap target land an opponent controls. That land doesn't untap during its controller's next untap step.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
+        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("That land"));
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public StensiaInnkeeper(final StensiaInnkeeper card) {
         super(card);
     }
 
     @Override
-    public WeeDragonauts copy() {
-        return new WeeDragonauts(this);
+    public StensiaInnkeeper copy() {
+        return new StensiaInnkeeper(this);
     }
 }

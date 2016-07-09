@@ -72,6 +72,8 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
 
     protected abstract Spell getSpell(Game game, Ability source);
 
+    protected abstract Player getPlayer(Game game, Ability source);
+
     protected abstract boolean changeTarget(Target target, Game game, Ability source);
 
     protected abstract void modifyCopy(Spell copy, Game game, Ability source);
@@ -82,8 +84,8 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Player actingPlayer = getPlayer(game, source);
+        if (actingPlayer == null) {
             return false;
         }
         Spell spell = getSpell(game, source);
@@ -111,7 +113,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
             sampleTarget.setNotTarget(true);
 
             Map<UUID, Map<UUID, Spell>> playerTargetCopyMap = new HashMap<>();
-            for (UUID objId : sampleTarget.possibleTargets(controller.getId(), game)) {
+            for (UUID objId : sampleTarget.possibleTargets(actingPlayer.getId(), game)) {
                 MageItem obj = game.getObject(objId);
                 if (obj == null) {
                     obj = game.getPlayer(objId);
@@ -131,7 +133,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                     for (TargetAddress addr : targetsToBeChanged) {
                         // potential target must be legal for all targets that we're about to change
                         Target targetInstance = addr.getTarget(copy);
-                        legal &= targetInstance.canTarget(objId, addr.getSpellAbility(copy), game);
+                        legal &= targetInstance.canTarget(actingPlayer.getId(), objId, addr.getSpellAbility(copy), game);
                         if (!legal) {
                             break;
                         }
