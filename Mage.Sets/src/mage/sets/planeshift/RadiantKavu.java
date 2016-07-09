@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -61,7 +61,7 @@ public class RadiantKavu extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {R}{G}{W}: Prevent all combat damage blue creatures and black creatures would deal this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, (new PreventAllDamageByAllEffect(filter,
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, (new PreventAllDamageByAllPermanentsEffect(filter,
            Duration.EndOfTurn, true)), new ManaCostsImpl("{R}{G}{W}")));
     }
 
