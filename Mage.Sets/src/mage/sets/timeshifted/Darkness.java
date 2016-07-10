@@ -28,12 +28,7 @@
 package mage.sets.timeshifted;
 
 import java.util.UUID;
-<<<<<<< HEAD
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-=======
->>>>>>> origin/master
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
