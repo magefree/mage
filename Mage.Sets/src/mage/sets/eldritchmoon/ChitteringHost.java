@@ -56,6 +56,7 @@ public class ChitteringHost extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
+        this.nightCard = true; // Meld card
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Menace <i>(This creature can't be blocked except by two or more creatures.
