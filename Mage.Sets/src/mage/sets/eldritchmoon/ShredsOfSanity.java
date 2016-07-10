@@ -51,8 +51,8 @@ import mage.target.TargetCard;
  */
 public class ShredsOfSanity extends CardImpl {
 
-    private final static FilterCard filterInstant = new FilterCard();
-    private final static FilterCard filterSorcery = new FilterCard();
+    private final static FilterCard filterInstant = new FilterCard("an instant card in your graveyard");
+    private final static FilterCard filterSorcery = new FilterCard("a sorcery card in your graveyard");
 
     static {
         filterInstant.add(new CardTypePredicate(CardType.INSTANT));

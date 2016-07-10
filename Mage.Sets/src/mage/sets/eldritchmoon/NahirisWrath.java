@@ -117,7 +117,7 @@ class NahirisWrathAdditionalCost extends VariableCostImpl {
 
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
-        TargetCardInHand target = new TargetCardInHand(xValue, new FilterCard());
+        TargetCardInHand target = new TargetCardInHand(xValue, new FilterCard("cards to discard"));
         return new DiscardTargetCost(target);
     }
 }
