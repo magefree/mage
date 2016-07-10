@@ -30,7 +30,7 @@ package mage.sets.eldritchmoon;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -43,7 +43,9 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -56,11 +58,15 @@ public class DarkSalvation extends CardImpl {
         this.expansionSetCode = "EMN";
 
         // Target player puts X 2/2 black Zombie creature tokens onto the battlefield, then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls.
-        this.getSpellAbility().addEffect(new CreateTokenTargetEffect(new ZombieToken(), new GetXValue()));
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        Effect effect = new CreateTokenTargetEffect(new ZombieToken(), new ManacostVariableValue());
+        effect.setText("Target player puts X 2/2 black Zombie creature tokens onto the battlefield");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(), false));
 
         DynamicValue value = new ZombiesControlledByTargetCreaturesControllerCount();
-        Effect effect = new BoostTargetEffect(value, value, Duration.EndOfTurn, true);
+        effect = new BoostTargetEffect(value, value, Duration.EndOfTurn, true);
+        effect.setTargetPointer(new SecondTargetPointer());
         effect.setText(", then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls");
         this.getSpellAbility().addEffect(effect);
     }
