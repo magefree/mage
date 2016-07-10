@@ -5,10 +5,6 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
@@ -22,6 +18,8 @@ import javax.sound.sampled.SourceDataLine;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import mage.utils.ThreadUtils;
 
 public class LinePool {
 
@@ -43,25 +41,12 @@ public class LinePool {
 
     private Mixer mixer;
     private int alwaysActive;
-    private ThreadPoolExecutor threadPool;
-    private int threadCount;
 
     public LinePool() {
         this(new AudioFormat(22050, 16, 1, true, false), 4, 1);
     }
 
     public LinePool(AudioFormat audioFormat, int size, int alwaysActive) {
-        threadPool = new ThreadPoolExecutor(alwaysActive, size, 30L, TimeUnit.SECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
-            @Override
-            public Thread newThread (Runnable runnable) {
-                threadCount++;
-                Thread thread = new Thread(runnable, "Audio" + threadCount);
-                thread.setDaemon(true);
-                return thread;
-            }
-        });
-        threadPool.prestartAllCoreThreads();
-
         format = audioFormat;
         this.alwaysActive = alwaysActive;
         mixer = AudioSystem.getMixer(null);
@@ -110,7 +95,7 @@ public class LinePool {
             busyLines.add(line);
             logLineStats();
         }
-        threadPool.submit(new Runnable() {
+        ThreadUtils.threadPool.submit(new Runnable() {
 
             @Override
             public void run() {
