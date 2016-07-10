@@ -493,7 +493,10 @@ public abstract class AbilityImpl implements Ability {
         for (VariableCost variableCost : this.costs.getVariableCosts()) {
             if (!(variableCost instanceof VariableManaCost)) {
                 int xValue = variableCost.announceXValue(this, game);
-                costs.add(variableCost.getFixedCostsFromAnnouncedValue(xValue));
+                Cost fixedCost = variableCost.getFixedCostsFromAnnouncedValue(xValue);
+                if (fixedCost != null) {
+                    costs.add(fixedCost);
+                }
                 // set the xcosts to paid
                 variableCost.setAmount(xValue);
                 ((Cost) variableCost).setPaid();
