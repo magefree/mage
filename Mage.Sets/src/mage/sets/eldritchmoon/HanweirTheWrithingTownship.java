@@ -52,6 +52,8 @@ public class HanweirTheWrithingTownship extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);
 
+        this.nightCard = true;// Meld card
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Haste
