@@ -25,55 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.HellbentCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class TasteForMayhem extends CardImpl {
+public class SkirsdagSupplicant extends CardImpl {
 
-    public TasteForMayhem(UUID ownerId) {
-        super(ownerId, 75, "Taste for Mayhem", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "DIS";
-        this.subtype.add("Aura");
+    public SkirsdagSupplicant(UUID ownerId) {
+        super(ownerId, 104, "Skirsdag Supplicant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // {B}, {T}, Discard a card: Each player loses 2 life.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(2), new ManaCostsImpl("{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
-
-        // Enchanted creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0)));
-
-        // Hellbent - Enchanted creature gets an additional +2/+0 as long as you have no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(2, 0), HellbentCondition.getInstance(), "<i>Hellbent</i> &mdash; Enchanted creature gets an additional +2/+0 as long as you have no cards in hand")));
     }
 
-    public TasteForMayhem(final TasteForMayhem card) {
+    public SkirsdagSupplicant(final SkirsdagSupplicant card) {
         super(card);
     }
 
     @Override
-    public TasteForMayhem copy() {
-        return new TasteForMayhem(this);
+    public SkirsdagSupplicant copy() {
+        return new SkirsdagSupplicant(this);
     }
 }

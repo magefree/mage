@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.darksteel;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -47,47 +46,43 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class ChitteringRats extends CardImpl {
+public class PryingQuestions extends CardImpl {
 
-    public ChitteringRats(UUID ownerId) {
-        super(ownerId, 39, "Chittering Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "DST";
-        this.subtype.add("Rat");
+    public PryingQuestions(UUID ownerId) {
+        super(ownerId, 101, "Prying Questions", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
+        this.expansionSetCode = "EMN";
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // When Chittering Rats enters the battlefield, target opponent puts a card from his or her hand on top of his or her library.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ChitteringRatsEffect(), false);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        // Target opponent loses 3 life and puts a card from his or her hand on top of his or her library.
+        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
+        this.getSpellAbility().addEffect(new PryingQuestionsEffect());
 
     }
 
-    public ChitteringRats(final ChitteringRats card) {
+    public PryingQuestions(final PryingQuestions card) {
         super(card);
     }
 
     @Override
-    public ChitteringRats copy() {
-        return new ChitteringRats(this);
+    public PryingQuestions copy() {
+        return new PryingQuestions(this);
     }
 }
 
-class ChitteringRatsEffect extends OneShotEffect {
+class PryingQuestionsEffect extends OneShotEffect {
 
-    public ChitteringRatsEffect() {
+    public PryingQuestionsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "target opponent puts a card from his or her hand on top of his or her library";
+        this.staticText = "and puts a card from his or her hand on top of his or her library";
     }
 
-    public ChitteringRatsEffect(final ChitteringRatsEffect effect) {
+    public PryingQuestionsEffect(final PryingQuestionsEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChitteringRatsEffect copy() {
-        return new ChitteringRatsEffect(this);
+    public PryingQuestionsEffect copy() {
+        return new PryingQuestionsEffect(this);
     }
 
     @Override

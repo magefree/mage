@@ -25,55 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.HellbentCondition;
+import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class TasteForMayhem extends CardImpl {
+public class ThrabenFoulbloods extends CardImpl {
 
-    public TasteForMayhem(UUID ownerId) {
-        super(ownerId, 75, "Taste for Mayhem", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "DIS";
-        this.subtype.add("Aura");
+    public ThrabenFoulbloods(UUID ownerId) {
+        super(ownerId, 108, "Thraben Foulbloods", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "EMN";
+        this.subtype.add("Zombie");
+        this.subtype.add("Hound");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        // <i>Delirium</i> &mdash; Thraben Foulbloods gets +1/+1 and has menace as long as there are four or more card types among cards in your graveyard. <i>(A creature with menace can't be blocked except by two or more creatures.)<i>
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), DeliriumCondition.getInstance(), "<i>Delirium</i> &mdash; {this} gets +1/+1");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility()), DeliriumCondition.getInstance(),
+                "and has menace as long as there are four or more card types among cards in your graveyard.  <i>(A creature with menace can't be blocked except by two or more creatures.)<i>"));
         this.addAbility(ability);
-
-        // Enchanted creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0)));
-
-        // Hellbent - Enchanted creature gets an additional +2/+0 as long as you have no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(2, 0), HellbentCondition.getInstance(), "<i>Hellbent</i> &mdash; Enchanted creature gets an additional +2/+0 as long as you have no cards in hand")));
     }
 
-    public TasteForMayhem(final TasteForMayhem card) {
+    public ThrabenFoulbloods(final ThrabenFoulbloods card) {
         super(card);
     }
 
     @Override
-    public TasteForMayhem copy() {
-        return new TasteForMayhem(this);
+    public ThrabenFoulbloods copy() {
+        return new ThrabenFoulbloods(this);
     }
 }

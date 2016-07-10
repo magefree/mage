@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.HellbentCondition;
+import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -45,13 +45,13 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class TasteForMayhem extends CardImpl {
+public class StrangeAugmentation extends CardImpl {
 
-    public TasteForMayhem(UUID ownerId) {
-        super(ownerId, 75, "Taste for Mayhem", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "DIS";
+    public StrangeAugmentation(UUID ownerId) {
+        super(ownerId, 105, "Strange Augmentation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
+        this.expansionSetCode = "EMN";
         this.subtype.add("Aura");
 
         // Enchant creature
@@ -61,19 +61,20 @@ public class TasteForMayhem extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0)));
+        // Enchanted creature gets +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1)));
 
-        // Hellbent - Enchanted creature gets an additional +2/+0 as long as you have no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(2, 0), HellbentCondition.getInstance(), "<i>Hellbent</i> &mdash; Enchanted creature gets an additional +2/+0 as long as you have no cards in hand")));
+        // <i>Delirium</i> &mdash Enchanted creature gets an additional +2/+2 as long as there are four or more card types among cards in your graveyard.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(2, 2), DeliriumCondition.getInstance(),
+                "<i>Delirium</i> &mdash; Enchanted creature gets an additional +2/+2 as long as you have no cards in hand")));
     }
 
-    public TasteForMayhem(final TasteForMayhem card) {
+    public StrangeAugmentation(final StrangeAugmentation card) {
         super(card);
     }
 
     @Override
-    public TasteForMayhem copy() {
-        return new TasteForMayhem(this);
+    public StrangeAugmentation copy() {
+        return new StrangeAugmentation(this);
     }
 }

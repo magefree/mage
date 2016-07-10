@@ -25,55 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.sets.eldritchmoon;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.HellbentCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class TasteForMayhem extends CardImpl {
+public class RuthlessDisposal extends CardImpl {
 
-    public TasteForMayhem(UUID ownerId) {
-        super(ownerId, 75, "Taste for Mayhem", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
-        this.expansionSetCode = "DIS";
-        this.subtype.add("Aura");
+    public RuthlessDisposal(UUID ownerId) {
+        super(ownerId, 103, "Ruthless Disposal", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
+        this.expansionSetCode = "EMN";
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        // As an additional cost to cast Ruthless Disposal, discard a card and sacrifice a creature.
+        this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCard("card to discard"))));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        // Two target creatures each get -13/-13 until end of turn.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-13, -13, Duration.EndOfTurn));
 
-        // Enchanted creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0)));
-
-        // Hellbent - Enchanted creature gets an additional +2/+0 as long as you have no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(2, 0), HellbentCondition.getInstance(), "<i>Hellbent</i> &mdash; Enchanted creature gets an additional +2/+0 as long as you have no cards in hand")));
     }
 
-    public TasteForMayhem(final TasteForMayhem card) {
+    public RuthlessDisposal(final RuthlessDisposal card) {
         super(card);
     }
 
     @Override
-    public TasteForMayhem copy() {
-        return new TasteForMayhem(this);
+    public RuthlessDisposal copy() {
+        return new RuthlessDisposal(this);
     }
 }
