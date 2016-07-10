@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 
@@ -47,7 +47,7 @@ public class Darkness extends CardImpl {
 
 
         // Prevent all combat damage that would be dealt this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
     }
 
     public Darkness(final Darkness card) {

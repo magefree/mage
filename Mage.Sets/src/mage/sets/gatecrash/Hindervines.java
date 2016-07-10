@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,7 +56,7 @@ public class Hindervines extends CardImpl {
 
 
         // Prevent all combat damage that would be dealt this turn by creatures with no +1/+1 counters on them.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(filter, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
     }
 
     public Hindervines(final Hindervines card) {

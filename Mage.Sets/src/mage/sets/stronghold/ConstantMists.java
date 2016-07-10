@@ -29,7 +29,7 @@ package mage.sets.stronghold;
 
 import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -52,7 +52,7 @@ public class ConstantMists extends CardImpl {
         this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
         
         // Prevent all combat damage that would be dealt this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
     }
 
     public ConstantMists(final ConstantMists card) {
