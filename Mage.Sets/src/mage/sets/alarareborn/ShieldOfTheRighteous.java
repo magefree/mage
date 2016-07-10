@@ -55,9 +55,6 @@ public class ShieldOfTheRighteous extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Equipment");
 
-
-
-
         // Equipped creature gets +0/+2 and has vigilance.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));

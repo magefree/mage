@@ -27,10 +27,10 @@
  */
 package mage.abilities.common.delayed;
 
-import mage.constants.TargetController;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -44,9 +44,10 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
 
     public enum PhaseSelection {
 
-        NEXT_PRECOMBAT_MAIN("next precombat"),
-        NEXT_POSTCOMAT_MAIN("next postcombat"),
-        NEXT_MAIN("next");
+        NEXT_PRECOMBAT_MAIN("next precombat main phase"),
+        NEXT_POSTCOMAT_MAIN("next postcombat main phase"),
+        NEXT_MAIN("next main phase"),
+        NEXT_MAIN_THIS_TURN("next main phase this turn");
 
         private final String text;
 
@@ -62,7 +63,6 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
 
     private final TargetController targetController;
     private final PhaseSelection phaseSelection;
-
 
     public AtTheBeginOfMainPhaseDelayedTriggeredAbility(Effect effect, boolean optional, TargetController targetController, PhaseSelection phaseSelection) {
         super(effect, Duration.EndOfGame, true, optional);
@@ -116,6 +116,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
     private boolean checkPhase(EventType eventType) {
         switch (phaseSelection) {
             case NEXT_MAIN:
+            case NEXT_MAIN_THIS_TURN:
                 return EventType.PRECOMBAT_MAIN_PHASE_PRE.equals(eventType) || EventType.POSTCOMBAT_MAIN_PHASE_PRE.equals(eventType);
             case NEXT_POSTCOMAT_MAIN:
                 return EventType.POSTCOMBAT_MAIN_PHASE_PRE.equals(eventType);
@@ -131,16 +132,16 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
         StringBuilder sb = new StringBuilder();
         switch (targetController) {
             case YOU:
-                sb.append("At the beginning of your ").append(phaseSelection.toString()).append(" main phase, ");
+                sb.append("At the beginning of your ").append(phaseSelection.toString()).append(", ");
                 break;
             case OPPONENT:
-                sb.append("At the beginning of an opponent's ").append(phaseSelection.toString()).append(" main phase, ");
+                sb.append("At the beginning of an opponent's ").append(phaseSelection.toString()).append(", ");
                 break;
             case ANY:
-                sb.append("At the beginning of the ").append(phaseSelection.toString()).append(" main phase, ");
+                sb.append("At the beginning of the ").append(phaseSelection.toString()).append(", ");
                 break;
             case CONTROLLER_ATTACHED_TO:
-                sb.append("At the beginning of the ").append(phaseSelection.toString()).append(" main phase of enchanted creature's controller, ");
+                sb.append("At the beginning of the ").append(phaseSelection.toString()).append(" of enchanted creature's controller, ");
                 break;
         }
         sb.append(getEffects().getText(modes.getMode()));

@@ -63,6 +63,8 @@ public class BriselaVoiceOfNightmares extends CardImpl {
         this.power = new MageInt(9);
         this.toughness = new MageInt(10);
 
+        this.nightCard = true;// Meld card
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // First strike

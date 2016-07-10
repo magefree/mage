@@ -78,7 +78,7 @@ public class NoyanDarRoilShaper extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell, you may put three +1/+1 counters on target land you control. 
         // If you do, that land becomes a 0/0 Elemental creature with haste that's still a land.
-        Ability ability = new SpellCastControllerTriggeredAbility(new NoyanDarEffect(), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new NoyanDarEffect(), filter, true);
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
     }

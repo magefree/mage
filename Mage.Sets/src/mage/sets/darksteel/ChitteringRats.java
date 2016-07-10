@@ -78,7 +78,7 @@ class ChitteringRatsEffect extends OneShotEffect {
 
     public ChitteringRatsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "target opponent puts a card from his or her hand on top of his or her library.";
+        this.staticText = "target opponent puts a card from his or her hand on top of his or her library";
     }
 
     public ChitteringRatsEffect(final ChitteringRatsEffect effect) {

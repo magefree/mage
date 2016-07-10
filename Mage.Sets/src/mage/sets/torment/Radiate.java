@@ -44,10 +44,10 @@ import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetSpell;
 import mage.util.TargetAddress;
-
 
 /**
  * @author duncant
@@ -61,7 +61,7 @@ public class Radiate extends CardImpl {
         filter.add(new SpellWithOnlyPermanentOrPlayerTargetsPredicate());
         filter.setMessage("instant or sorcery spell that targets only a single permanent or player");
     }
-    
+
     public Radiate(UUID ownerId) {
         super(ownerId, 113, "Radiate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
         this.expansionSetCode = "TOR";
@@ -82,6 +82,7 @@ public class Radiate extends CardImpl {
 }
 
 class SpellWithOnlySingleTargetPredicate implements ObjectPlayerPredicate<ObjectPlayer<Spell>> {
+
     @Override
     public boolean apply(ObjectPlayer<Spell> input, Game game) {
         Spell spell = input.getObject();
@@ -104,6 +105,7 @@ class SpellWithOnlySingleTargetPredicate implements ObjectPlayerPredicate<Object
 }
 
 class SpellWithOnlyPermanentOrPlayerTargetsPredicate implements ObjectPlayerPredicate<ObjectPlayer<Spell>> {
+
     @Override
     public boolean apply(ObjectPlayer<Spell> input, Game game) {
         Spell spell = input.getObject();
@@ -114,7 +116,7 @@ class SpellWithOnlyPermanentOrPlayerTargetsPredicate implements ObjectPlayerPred
             Target targetInstance = addr.getTarget(spell);
             for (UUID targetId : targetInstance.getTargets()) {
                 if (game.getPermanent(targetId) == null
-                    && game.getPlayer(targetId) == null) {
+                        && game.getPlayer(targetId) == null) {
                     return false;
                 }
             }
@@ -122,15 +124,13 @@ class SpellWithOnlyPermanentOrPlayerTargetsPredicate implements ObjectPlayerPred
         return true;
     }
 }
-                    
-
 
 class RadiateEffect extends CopySpellForEachItCouldTargetEffect<MageItem> {
 
     public RadiateEffect() {
         this(new FilterPermanentOrPlayer());
     }
-    
+
     public RadiateEffect(RadiateEffect effect) {
         super(effect);
     }
@@ -143,7 +143,12 @@ class RadiateEffect extends CopySpellForEachItCouldTargetEffect<MageItem> {
     public String getText(Mode mode) {
         return "Choose target instant or sorcery spell that targets only a single permanent or player. Copy that spell for each other permanent or player the spell could target. Each copy targets a different one of those permanents and players.";
     }
-    
+
+    @Override
+    protected Player getPlayer(Game game, Ability source) {
+        return game.getPlayer(source.getControllerId());
+    }
+
     @Override
     protected Spell getSpell(Game game, Ability source) {
         StackObject ret = game.getStack().getStackObject(targetPointer.getFirst(game, source));

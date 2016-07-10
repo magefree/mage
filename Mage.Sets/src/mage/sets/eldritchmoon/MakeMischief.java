@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.game.permanent.token.DevilToken;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -49,7 +49,7 @@ public class MakeMischief extends CardImpl {
         // Make Mischief deals 1 damage to target creature or player. Put a 1/1 red Devil creature token onto the battlefield.
         // It has "When this creature dies, it deals 1 damage to target creature or player."
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new DevilToken()));
     }
 

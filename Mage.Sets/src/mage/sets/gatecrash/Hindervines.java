@@ -28,11 +28,16 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+<<<<<<< HEAD
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
+=======
+>>>>>>> origin/master
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
