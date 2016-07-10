@@ -1,0 +1,798 @@
+From f9b0befac3548f209a73d4b658d60081f54458c3 Mon Sep 17 00:00:00 2001
+From: dilnu
+Date: Jul 10, 2016 6:39:42 PM
+
+Implement several cards and tests for some of the more complex cards.
+
+This also makes a small change to AbilityImpl's handling of variable 
+costs which may not be needed.
+
+diff --git a/Mage.Sets/src/mage/sets/odyssey/LiquidFire.java b/Mage.Sets/src/mage/sets/odyssey/LiquidFire.java
+new file mode 100644
+index 0000000..34e3893
+--- /dev/null
++++ b/Mage.Sets/src/mage/sets/odyssey/LiquidFire.java
+@@ -0,0 +1,137 @@
++/*
++ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
++ *
++ *  Redistribution and use in source and binary forms, with or without modification, are
++ *  permitted provided that the following conditions are met:
++ *
++ *     1. Redistributions of source code must retain the above copyright notice, this list of
++ *        conditions and the following disclaimer.
++ *
++ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
++ *        of conditions and the following disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
++ *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
++ *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
++ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
++ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
++ *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *
++ *  The views and conclusions contained in the software and documentation are those of the
++ *  authors and should not be interpreted as representing official policies, either expressed
++ *  or implied, of BetaSteward_at_googlemail.com.
++ */
++package mage.sets.odyssey;
++
++import java.util.UUID;
++import mage.abilities.Ability;
++import mage.abilities.costs.Cost;
++import mage.abilities.costs.CostImpl;
++import mage.abilities.costs.VariableCostImpl;
++import mage.abilities.dynamicvalue.DynamicValue;
++import mage.abilities.dynamicvalue.common.GetXValue;
++import mage.abilities.effects.Effect;
++import mage.abilities.effects.OneShotEffect;
++import mage.cards.CardImpl;
++import mage.constants.CardType;
++import mage.constants.Outcome;
++import mage.constants.Rarity;
++import mage.game.Game;
++import mage.game.permanent.Permanent;
++import mage.players.Player;
++import mage.target.common.TargetCreaturePermanent;
++
++/**
++ *
++ * @author Dilnu
++ */
++public class LiquidFire extends CardImpl {
++
++    public LiquidFire(UUID ownerId) {
++        super(ownerId, 201, "Liquid Fire", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
++        this.expansionSetCode = "ODY";
++
++        // As an additional cost to cast Liquid Fire, choose a number between 0 and 5.
++        this.getSpellAbility().addCost(new LiquidFireCost());
++        // Liquid Fire deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.
++        DynamicValue choiceValue = new GetXValue();
++        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
++        this.getSpellAbility().addEffect(new LiquidFireEffect(choiceValue));
++        
++    }
++
++    public LiquidFire(final LiquidFire card) {
++        super(card);
++    }
++
++    @Override
++    public LiquidFire copy() {
++        return new LiquidFire(this);
++    }
++
++    private static class LiquidFireEffect extends OneShotEffect {
++        protected DynamicValue choiceValue;
++
++        public LiquidFireEffect(DynamicValue choiceValue) {
++            super(Outcome.Damage);
++            this.staticText = "{this} deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.";
++            this.choiceValue = choiceValue;
++        }
++        
++        public LiquidFireEffect(LiquidFireEffect effect) {
++            super(effect);
++            this.choiceValue = effect.choiceValue;
++        }
++
++        @Override
++        public boolean apply(Game game, Ability source) {
++            Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
++            int creatureDamage = choiceValue.calculate(game, source, this);
++            int playerDamage = 5 - creatureDamage;
++            if (target != null) {
++                target.damage(creatureDamage, source.getSourceId(), game, false, true);
++                Player controller = game.getPlayer(target.getControllerId());
++                if (controller != null) {
++                    controller.damage(playerDamage, source.getSourceId(), game, false, true);
++                }
++                return true;
++            }
++            return false;
++        }
++
++        @Override
++        public Effect copy() {
++            return new LiquidFireEffect(this);
++        }
++    }
++    
++    class LiquidFireCost extends VariableCostImpl {
++        public LiquidFireCost() {
++            super("Choose a Number");
++            this.text = "As an additional cost to cast {source}, choose a number between 0 and 5";
++        }
++        
++        public LiquidFireCost(final LiquidFireCost cost) {
++            super(cost);
++        }
++
++        @Override
++        public Cost copy() {
++            return new LiquidFireCost(this);
++        }
++
++        @Override
++        public Cost getFixedCostsFromAnnouncedValue(int xValue) {
++            return null;
++        }
++        
++        @Override
++        public int getMaxValue(Ability source, Game game) {
++            return 5;
++        }
++    }
++}
+diff --git a/Mage.Sets/src/mage/sets/ravnica/BorosFuryShield.java b/Mage.Sets/src/mage/sets/ravnica/BorosFuryShield.java
+new file mode 100644
+index 0000000..cd3867d
+--- /dev/null
++++ b/Mage.Sets/src/mage/sets/ravnica/BorosFuryShield.java
+@@ -0,0 +1,111 @@
++/*
++ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
++ *
++ *  Redistribution and use in source and binary forms, with or without modification, are
++ *  permitted provided that the following conditions are met:
++ *
++ *     1. Redistributions of source code must retain the above copyright notice, this list of
++ *        conditions and the following disclaimer.
++ *
++ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
++ *        of conditions and the following disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
++ *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
++ *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
++ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
++ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
++ *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *
++ *  The views and conclusions contained in the software and documentation are those of the
++ *  authors and should not be interpreted as representing official policies, either expressed
++ *  or implied, of BetaSteward_at_googlemail.com.
++ */
++package mage.sets.ravnica;
++
++import java.util.UUID;
++import mage.abilities.Ability;
++import mage.abilities.condition.common.ManaWasSpentCondition;
++import mage.abilities.decorator.ConditionalOneShotEffect;
++import mage.abilities.effects.Effect;
++import mage.abilities.effects.OneShotEffect;
++import mage.abilities.effects.common.PreventDamageByTargetEffect;
++import mage.abilities.effects.common.UntapAllControllerEffect;
++import mage.cards.CardImpl;
++import mage.constants.CardType;
++import mage.constants.ColoredManaSymbol;
++import mage.constants.Duration;
++import mage.constants.Outcome;
++import mage.constants.Rarity;
++import mage.filter.common.FilterAttackingOrBlockingCreature;
++import mage.filter.common.FilterControlledCreaturePermanent;
++import mage.game.Game;
++import mage.game.permanent.Permanent;
++import mage.players.Player;
++import mage.target.common.TargetCreaturePermanent;
++
++/**
++ *
++ * @author Dilnu
++ */
++public class BorosFuryShield extends CardImpl {
++    private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature();
++
++    public BorosFuryShield(UUID ownerId) {
++        super(ownerId, 5, "Boros Fury-Shield", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
++        this.expansionSetCode = "RAV";
++
++        // Prevent all combat damage that would be dealt by target attacking or blocking creature this turn.
++        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true));
++        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
++        
++        // If {R} was spent to cast Boros Fury-Shield, it deals damage to that creature's controller equal to the creature's power.
++        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
++                new BorosFuryShieldDamageEffect(),
++                new ManaWasSpentCondition(ColoredManaSymbol.R), "If {R} was spent to cast {this}, it deals damage to that creature's controller equal to the creature's power"));
++    }
++
++    public BorosFuryShield(final BorosFuryShield card) {
++        super(card);
++    }
++
++    @Override
++    public BorosFuryShield copy() {
++        return new BorosFuryShield(this);
++    }
++    
++    class BorosFuryShieldDamageEffect extends OneShotEffect {
++        BorosFuryShieldDamageEffect() {
++            super(Outcome.Damage);
++            staticText = "{this} deals damage to that creature's controller equal to the creature's power";
++        }
++
++        BorosFuryShieldDamageEffect(final BorosFuryShieldDamageEffect effect) {
++            super(effect);
++        }
++
++        @Override
++        public boolean apply(Game game, Ability source) {
++            Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
++            if (target != null) {
++              Player player = game.getPlayer(target.getControllerId());
++              if (player != null) {
++                int power = target.getPower().getValue();
++                player.damage(power, source.getId(), game, false, true);
++              }
++              
++            }
++            return false;
++        }
++
++        @Override
++        public Effect copy() {
++            return new BorosFuryShieldDamageEffect(this);
++        }
++    
++    }
++}
+diff --git a/Mage.Sets/src/mage/sets/ravnica/Brightflame.java b/Mage.Sets/src/mage/sets/ravnica/Brightflame.java
+new file mode 100644
+index 0000000..6c600a0
+--- /dev/null
++++ b/Mage.Sets/src/mage/sets/ravnica/Brightflame.java
+@@ -0,0 +1,120 @@
++/*
++ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
++ *
++ *  Redistribution and use in source and binary forms, with or without modification, are
++ *  permitted provided that the following conditions are met:
++ *
++ *     1. Redistributions of source code must retain the above copyright notice, this list of
++ *        conditions and the following disclaimer.
++ *
++ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
++ *        of conditions and the following disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
++ *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
++ *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
++ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
++ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
++ *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *
++ *  The views and conclusions contained in the software and documentation are those of the
++ *  authors and should not be interpreted as representing official policies, either expressed
++ *  or implied, of BetaSteward_at_googlemail.com.
++ */
++package mage.sets.ravnica;
++
++import java.util.UUID;
++import mage.ObjectColor;
++import mage.abilities.Ability;
++import mage.abilities.dynamicvalue.DynamicValue;
++import mage.abilities.dynamicvalue.common.ManacostVariableValue;
++import mage.abilities.effects.OneShotEffect;
++import mage.cards.CardImpl;
++import mage.constants.AbilityWord;
++import mage.constants.CardType;
++import mage.constants.Outcome;
++import mage.constants.Rarity;
++import mage.filter.FilterPermanent;
++import mage.filter.predicate.mageobject.CardTypePredicate;
++import mage.game.Game;
++import mage.game.permanent.Permanent;
++import mage.players.Player;
++import mage.target.common.TargetCreaturePermanent;
++
++/**
++ *
++ * @author Dilnu
++ */
++public class Brightflame extends CardImpl {
++
++    public Brightflame(UUID ownerId) {
++        super(ownerId, 194, "Brightflame", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{W}{W}");
++        this.expansionSetCode = "RAV";
++
++        // Radiance - Brightflame deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.
++        this.getSpellAbility().addEffect(new BrightflameEffect(new ManacostVariableValue()));
++        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
++        this.getSpellAbility().setAbilityWord(AbilityWord.RADIANCE);
++    }
++
++    public Brightflame(final Brightflame card) {
++        super(card);
++    }
++
++    @Override
++    public Brightflame copy() {
++        return new Brightflame(this);
++    }
++}
++
++class BrightflameEffect extends OneShotEffect {
++
++    static final FilterPermanent filter = new FilterPermanent("creature");
++    protected DynamicValue amount;
++
++    static {
++        filter.add(new CardTypePredicate(CardType.CREATURE));
++    }
++
++    BrightflameEffect(DynamicValue amount) {
++        super(Outcome.Damage);
++        this.amount = amount;
++        staticText = "{this} deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.";
++    }
++
++    BrightflameEffect(final BrightflameEffect effect) {
++        super(effect);
++        this.amount = effect.amount;
++    }
++
++    @Override
++    public boolean apply(Game game, Ability source) {
++        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
++        int damageDealt = 0;
++        if (target != null) {
++            ObjectColor color = target.getColor(game);
++            damageDealt += target.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
++            for (Permanent p : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
++                if (!target.getId().equals(p.getId()) && p.getColor(game).shares(color)) {
++                    damageDealt += p.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
++                }
++            }
++            
++            Player you = game.getPlayer(source.getControllerId());
++            if (you != null && damageDealt > 0) {
++                you.gainLife(damageDealt, game);
++            }
++            return true;
++        }
++        return false;
++    }
++
++    @Override
++    public BrightflameEffect copy() {
++        return new BrightflameEffect(this);
++    }
++}
+\ No newline at end of file
+diff --git a/Mage.Sets/src/mage/sets/ravnica/LightOfSanction.java b/Mage.Sets/src/mage/sets/ravnica/LightOfSanction.java
+new file mode 100644
+index 0000000..a416e99
+--- /dev/null
++++ b/Mage.Sets/src/mage/sets/ravnica/LightOfSanction.java
+@@ -0,0 +1,103 @@
++/*
++ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
++ *
++ *  Redistribution and use in source and binary forms, with or without modification, are
++ *  permitted provided that the following conditions are met:
++ *
++ *     1. Redistributions of source code must retain the above copyright notice, this list of
++ *        conditions and the following disclaimer.
++ *
++ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
++ *        of conditions and the following disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
++ *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
++ *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
++ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
++ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
++ *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *
++ *  The views and conclusions contained in the software and documentation are those of the
++ *  authors and should not be interpreted as representing official policies, either expressed
++ *  or implied, of BetaSteward_at_googlemail.com.
++ */
++package mage.sets.ravnica;
++
++import java.util.UUID;
++import mage.MageObject;
++import mage.abilities.Ability;
++import mage.abilities.common.SimpleStaticAbility;
++import mage.abilities.effects.PreventionEffectImpl;
++import mage.cards.Card;
++import mage.cards.CardImpl;
++import mage.constants.CardType;
++import mage.constants.Duration;
++import mage.constants.Rarity;
++import mage.constants.Zone;
++import mage.game.Controllable;
++import mage.game.Game;
++import mage.game.events.GameEvent;
++import mage.game.permanent.Permanent;
++
++/**
++ *
++ * @author Dilnu
++ */
++public class LightOfSanction extends CardImpl {
++
++    public LightOfSanction(UUID ownerId) {
++        super(ownerId, 24, "Light of Sanction", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
++        this.expansionSetCode = "RAV";
++
++        // Prevent all damage that would be dealt to creatures you control by sources you control.
++        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LightOfSanctionEffect()));
++    }
++
++    public LightOfSanction(final LightOfSanction card) {
++        super(card);
++    }
++
++    @Override
++    public LightOfSanction copy() {
++        return new LightOfSanction(this);
++    }
++}
++
++class LightOfSanctionEffect extends PreventionEffectImpl {
++
++    public LightOfSanctionEffect() {
++        super(Duration.EndOfGame);
++        this.staticText = "Prevent all damage that would be dealt to creatures you control by sources you control.";
++        consumable = false;
++    }
++
++    public LightOfSanctionEffect(LightOfSanctionEffect effect) {
++        super(effect);
++    }
++
++    @Override
++    public boolean applies(GameEvent event, Ability source, Game game) {
++        if (event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)) {
++            Permanent permanent = game.getPermanent(event.getTargetId());
++            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
++                MageObject damageSource = game.getObject(event.getSourceId());
++                if (damageSource instanceof Controllable) {
++                    return ((Controllable) damageSource).getControllerId().equals(source.getControllerId());
++                }
++                else if (damageSource instanceof Card) {
++                    return ((Card) damageSource).getOwnerId().equals(source.getControllerId());
++                }
++            }
++        }
++        return false;
++    }
++
++    @Override
++    public LightOfSanctionEffect copy() {
++        return new LightOfSanctionEffect(this);
++    }
++}
+\ No newline at end of file
+diff --git a/Mage.Sets/src/mage/sets/weatherlight/DebtOfLoyalty.java b/Mage.Sets/src/mage/sets/weatherlight/DebtOfLoyalty.java
+new file mode 100644
+index 0000000..d86d1d5
+--- /dev/null
++++ b/Mage.Sets/src/mage/sets/weatherlight/DebtOfLoyalty.java
+@@ -0,0 +1,93 @@
++/*
++ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
++ *
++ *  Redistribution and use in source and binary forms, with or without modification, are
++ *  permitted provided that the following conditions are met:
++ *
++ *     1. Redistributions of source code must retain the above copyright notice, this list of
++ *        conditions and the following disclaimer.
++ *
++ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
++ *        of conditions and the following disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
++ *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
++ *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
++ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
++ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
++ *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *
++ *  The views and conclusions contained in the software and documentation are those of the
++ *  authors and should not be interpreted as representing official policies, either expressed
++ *  or implied, of BetaSteward_at_googlemail.com.
++ */
++package mage.sets.weatherlight;
++
++import java.util.UUID;
++import mage.abilities.Ability;
++import mage.abilities.effects.common.RegenerateTargetEffect;
++import mage.abilities.effects.common.continuous.GainControlTargetEffect;
++import mage.cards.CardImpl;
++import mage.constants.CardType;
++import mage.constants.Duration;
++import mage.constants.Rarity;
++import mage.game.Game;
++import mage.game.permanent.Permanent;
++import mage.target.common.TargetCreaturePermanent;
++
++/**
++ *
++ * @author Dilnu
++ */
++public class DebtOfLoyalty extends CardImpl {
++
++    public DebtOfLoyalty(UUID ownerId) {
++        super(ownerId, 127, "Debt of Loyalty", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
++        this.expansionSetCode = "WTH";
++
++        // Regenerate target creature. You gain control of that creature if it regenerates this way.
++        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
++        this.getSpellAbility().addEffect(new DebtOfLoyaltyEffect());
++    }
++
++    public DebtOfLoyalty(final DebtOfLoyalty card) {
++        super(card);
++    }
++
++    @Override
++    public DebtOfLoyalty copy() {
++        return new DebtOfLoyalty(this);
++    }
++    
++    class DebtOfLoyaltyEffect extends RegenerateTargetEffect {
++        public DebtOfLoyaltyEffect ( ) {
++            super();
++            this.staticText = "Regenerate target creature. You gain control of that creature if it regenerates this way.";
++        }
++
++        public DebtOfLoyaltyEffect(final DebtOfLoyaltyEffect effect) {
++            super(effect);
++        }
++        
++        @Override
++        public DebtOfLoyaltyEffect copy() {
++            return new DebtOfLoyaltyEffect(this);
++        }
++        
++        @Override
++        public boolean apply(Game game, Ability source) {
++            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
++            if (super.apply(game, source) && permanent != null) {
++                GainControlTargetEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
++                effect.setTargetPointer(targetPointer);
++                game.addEffect(effect, source);
++                return true;
++            }
++            return false;
++        }
++    }
++}
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/control/DebtOfLoyaltyTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/control/DebtOfLoyaltyTest.java
+new file mode 100644
+index 0000000..9e1072e
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/control/DebtOfLoyaltyTest.java
+@@ -0,0 +1,98 @@
++/*
++ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
++ *
++ *  Redistribution and use in source and binary forms, with or without modification, are
++ *  permitted provided that the following conditions are met:
++ *
++ *     1. Redistributions of source code must retain the above copyright notice, this list of
++ *        conditions and the following disclaimer.
++ *
++ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
++ *        of conditions and the following disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
++ *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
++ *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
++ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
++ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
++ *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *
++ *  The views and conclusions contained in the software and documentation are those of the
++ *  authors and should not be interpreted as representing official policies, either expressed
++ *  or implied, of BetaSteward_at_googlemail.com.
++ */
++package org.mage.test.cards.control;
++
++import org.mage.test.cards.prevention.*;
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import mage.game.permanent.Permanent;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ *
++ * @author LevelX2
++ */
++public class DebtOfLoyaltyTest extends CardTestPlayerBase {
++
++    @Test
++    public void testDebtOfLoyaltyEffect_regen() {
++        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
++        // Tremor deals 1 damage to each creature without flying.
++        addCard(Zone.HAND, playerA, "Tremor"); // Sorcery {R}
++        // Regenerate target creature. You gain control of that creature if it regenerates this way.
++        addCard(Zone.HAND, playerA, "Debt of Loyalty"); // Instant {1WW}
++
++        addCard(Zone.BATTLEFIELD, playerB, "Metallic Sliver"); // 1/1
++        
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Debt of Loyalty", "Metallic Sliver");
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tremor");
++
++        setStopAt(1, PhaseStep.BEGIN_COMBAT);
++        execute();
++
++        assertGraveyardCount(playerA, "Tremor", 1);
++
++        assertPermanentCount(playerB, "Metallic Sliver", 0);
++        assertGraveyardCount(playerB, "Metallic Sliver", 0);
++        assertPermanentCount(playerA, "Metallic Sliver", 1);
++        
++        Permanent sliver = getPermanent("Metallic Sliver", playerA.getId());
++        Assert.assertNotNull(sliver);
++
++        // regenerate causes to tap
++        Assert.assertTrue(sliver.isTapped());
++    }
++
++    @Test
++    public void testDebtOfLoyaltyEffect_noRegen() {
++        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
++        // Tremor deals 1 damage to each creature without flying.
++        addCard(Zone.HAND, playerA, "Tremor"); // Sorcery {R}
++        // Regenerate target creature. You gain control of that creature if it regenerates this way.
++        addCard(Zone.HAND, playerA, "Debt of Loyalty"); // Instant {1WW}
++
++        addCard(Zone.BATTLEFIELD, playerB, "Metallic Sliver"); // 1/1
++        
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Debt of Loyalty", "Metallic Sliver");
++
++        setStopAt(1, PhaseStep.BEGIN_COMBAT);
++        execute();
++
++        assertPermanentCount(playerB, "Metallic Sliver", 1);
++        
++        Permanent sliver = getPermanent("Metallic Sliver", playerB.getId());
++        Assert.assertNotNull(sliver);
++
++        // No regeneration occured.
++        Assert.assertFalse(sliver.isTapped());
++    }
++}
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/prevention/LightOfSanctionTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/prevention/LightOfSanctionTest.java
+new file mode 100644
+index 0000000..ed4d44b
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/prevention/LightOfSanctionTest.java
+@@ -0,0 +1,67 @@
++/*
++ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
++ *
++ *  Redistribution and use in source and binary forms, with or without modification, are
++ *  permitted provided that the following conditions are met:
++ *
++ *     1. Redistributions of source code must retain the above copyright notice, this list of
++ *        conditions and the following disclaimer.
++ *
++ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
++ *        of conditions and the following disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
++ *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
++ *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
++ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
++ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
++ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
++ *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ *
++ *  The views and conclusions contained in the software and documentation are those of the
++ *  authors and should not be interpreted as representing official policies, either expressed
++ *  or implied, of BetaSteward_at_googlemail.com.
++ */
++package org.mage.test.cards.prevention;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ *
++ * @author LevelX2
++ */
++public class LightOfSanctionTest extends CardTestPlayerBase {
++
++    @Test
++    public void testLightOfSanctionEffect() {
++        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
++        // Tremor deals 1 damage to each creature without flying.
++        addCard(Zone.HAND, playerA, "Tremor"); // Sorcery {R}
++        // Prevent all damage that would be dealt to creatures you control by sources you control.
++        addCard(Zone.BATTLEFIELD, playerA, "Light of Sanction");
++        addCard(Zone.BATTLEFIELD, playerA, "Metallic Sliver"); // 1/1
++        addCard(Zone.BATTLEFIELD, playerA, "Dross Crocodile"); // 5/1
++
++        addCard(Zone.BATTLEFIELD, playerB, "Metallic Sliver"); // 1/1
++        addCard(Zone.BATTLEFIELD, playerB, "Dross Crocodile"); // 5/1
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tremor");
++
++        setStopAt(1, PhaseStep.BEGIN_COMBAT);
++        execute();
++
++        assertGraveyardCount(playerA, "Tremor", 1);
++
++        assertPermanentCount(playerA, "Metallic Sliver", 1);
++        assertPermanentCount(playerA, "Dross Crocodile", 1);
++        assertGraveyardCount(playerB, "Metallic Sliver", 1);
++        assertGraveyardCount(playerB, "Dross Crocodile", 1);
++
++    }
++}
+diff --git a/Mage/src/main/java/mage/abilities/AbilityImpl.java b/Mage/src/main/java/mage/abilities/AbilityImpl.java
+index b03bf8b..29b94e9 100644
+--- a/Mage/src/main/java/mage/abilities/AbilityImpl.java
++++ b/Mage/src/main/java/mage/abilities/AbilityImpl.java
+@@ -493,7 +493,10 @@
+         for (VariableCost variableCost : this.costs.getVariableCosts()) {
+             if (!(variableCost instanceof VariableManaCost)) {
+                 int xValue = variableCost.announceXValue(this, game);
+-                costs.add(variableCost.getFixedCostsFromAnnouncedValue(xValue));
++                Cost fixedCost = variableCost.getFixedCostsFromAnnouncedValue(xValue);
++                if (fixedCost != null) {
++                    costs.add(fixedCost);
++                }
+                 // set the xcosts to paid
+                 variableCost.setAmount(xValue);
+                 ((Cost) variableCost).setPaid();
