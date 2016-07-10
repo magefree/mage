@@ -28,7 +28,6 @@
 package mage.sets.timeshifted;
 
 import java.util.UUID;
-
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
