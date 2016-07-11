@@ -33,7 +33,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
+import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 
@@ -41,7 +41,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class HanweirTheWrithingTownship extends CardImpl {
+public class HanweirTheWrithingTownship extends MeldCard {
 
     public HanweirTheWrithingTownship(UUID ownerId) {
         super(ownerId, 130, "Hanweir, the Writhing Township", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
@@ -56,8 +56,10 @@ public class HanweirTheWrithingTownship extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
+        
         // Whenever Hanweir, the Writhing Township attacks, put two 3/2 colorless Eldrazi Horror creature tokens onto the battlefield tapped and attacking.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken(), 2, true, true), false));
     }

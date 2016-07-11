@@ -52,6 +52,7 @@ public class GrafRats extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of combat on your turn, if you both own and control Graf Rats and a creature named Midnight Scavengers, exile them, then meld them into Chittering Host.
+
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(new MeldEffect("Midnight Scavengers", new ChitteringHost(ownerId)), TargetController.YOU, false),
                 new MeldCondition("Midnight Scavengers"),

@@ -70,6 +70,7 @@ public class ChitteringHost extends MeldCard {
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("other creatures"), true);
         effect.setText("and gain menace until end of turn");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
