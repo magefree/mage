@@ -36,6 +36,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -93,7 +94,7 @@ class LongRoadHomeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Otherworldly Journey", source.getSourceId(), game)) {
+            if (permanent.moveToExile(source.getSourceId(), "Long Road Home", source.getSourceId(), game)) {
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                 // only if permanent is in exile (tokens would be stop to exist)
                 if (exile != null && !exile.isEmpty()) {
@@ -147,7 +148,14 @@ class LongRoadHomeReturnFromExileEffect extends OneShotEffect {
         if (card != null && objectToReturn.refersTo(card, game)) {
             Player owner = game.getPlayer(card.getOwnerId());
             if (owner != null) {
-                game.addEffect(new LongRoadHomeEntersBattlefieldEffect(objectToReturn), source);
+                if (card instanceof MeldCard) {
+                    MeldCard meldCard = (MeldCard) card;
+                    game.addEffect(new LongRoadHomeEntersBattlefieldEffect(new MageObjectReference(meldCard.getTopHalfCard(), game)), source);
+                    game.addEffect(new LongRoadHomeEntersBattlefieldEffect(new MageObjectReference(meldCard.getBottomHalfCard(), game)), source);
+                }
+                else {
+                    game.addEffect(new LongRoadHomeEntersBattlefieldEffect(objectToReturn), source);
+                }
                 owner.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
             }
         }

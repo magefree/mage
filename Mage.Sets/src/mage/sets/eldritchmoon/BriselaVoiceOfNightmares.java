@@ -37,7 +37,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.CardImpl;
+import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -52,7 +52,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class BriselaVoiceOfNightmares extends CardImpl {
+public class BriselaVoiceOfNightmares extends MeldCard {
 
     public BriselaVoiceOfNightmares(UUID ownerId) {
         super(ownerId, 15, "Brisela, Voice of Nightmares", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "");
@@ -67,12 +67,16 @@ public class BriselaVoiceOfNightmares extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
+
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
+
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
+        
         // Your opponents can't cast spells with converted mana cost 3 or less.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BriselaVoiceOfNightmaresCantCastEffect()));
     }

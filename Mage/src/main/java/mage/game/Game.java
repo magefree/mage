@@ -47,6 +47,7 @@ import mage.abilities.effects.PreventionEffectData;
 import mage.actions.impl.MageAction;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.MeldCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.Duration;
@@ -92,6 +93,10 @@ public interface Game extends MageItem, Serializable {
     void loadCards(Set<Card> cards, UUID ownerId);
 
     Collection<Card> getCards();
+
+    MeldCard getMeldCard(UUID meldId);
+
+    void addMeldCard(UUID meldId, MeldCard meldCard);
 
     Object getCustomData();
 
@@ -348,7 +353,7 @@ public interface Game extends MageItem, Serializable {
     void setManaPaymentMode(UUID playerId, boolean autoPayment);
 
     void setManaPaymentModeRestricted(UUID playerId, boolean autoPaymentRestricted);
-    
+
     void setUseFirstManaAbility(UUID playerId, boolean useFirstManaAbility);
 
     void undo(UUID playerId);
