@@ -33,6 +33,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.MeldCard;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.ExileZone;
@@ -79,13 +80,27 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
         if (controller != null) {
             Cards cardsToBattlefield = new CardsImpl();
             if (fromExileZone) {
-                UUID exilZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                if (exilZoneId != null) {
-                    ExileZone exileZone = game.getExile().getExileZone(exilZoneId);
+                UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                if (exileZoneId != null) {
+                    ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
                     if (exileZone != null) {
-                        for (Card card : exileZone.getCards(game)) {
-                            if (getTargetPointer().getTargets(game, source).contains(card.getId())) {
-                                cardsToBattlefield.add(card);
+                        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
+                            if (exileZone.contains(targetId)) {
+                                cardsToBattlefield.add(targetId);
+                            }
+                            else {
+                                Card card = game.getCard(targetId);
+                                if (card != null && card instanceof MeldCard) {
+                                    MeldCard meldCard = (MeldCard) card;
+                                    Card topCard = meldCard.getTopHalfCard();
+                                    Card bottomCard = meldCard.getBottomHalfCard();
+                                    if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter() && exileZone.contains(topCard.getId())) {
+                                        cardsToBattlefield.add(topCard);
+                                    }
+                                    if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter() && exileZone.contains(bottomCard.getId())) {
+                                        cardsToBattlefield.add(bottomCard);
+                                    }
+                                }
                             }
                         }
                     }
