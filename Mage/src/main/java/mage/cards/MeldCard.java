@@ -129,8 +129,7 @@ public abstract class MeldCard extends CardImpl {
             // Initial move to battlefield
             if (toZone == Zone.BATTLEFIELD) {
                 return this.putOntoBattlefield(game, Zone.EXILED, sourceId, this.getOwnerId(), false, false, appliedEffects);
-            }
-            // Move when melded from the battlefield to elsewhere
+            } // Move when melded from the battlefield to elsewhere
             else {
                 ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.BATTLEFIELD, toZone, appliedEffects);
                 if (!game.replaceEvent(event)) {
@@ -156,8 +155,7 @@ public abstract class MeldCard extends CardImpl {
                                 cardsToMove.add(bottomHalfCard);
                                 if (flag) {
                                     controller.putCardsOnTopOfLibrary(cardsToMove, game, null, true);
-                                }
-                                else {
+                                } else {
                                     controller.putCardsOnBottomOfLibrary(cardsToMove, game, null, true);
                                 }
                             }
@@ -172,13 +170,11 @@ public abstract class MeldCard extends CardImpl {
                     this.bottomLastZoneChangeCounter = bottomHalfCard.getZoneChangeCounter(game);
                     game.addSimultaneousEvent(event);
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             }
-        }
-        else {
+        } else {
             // Try to move the former meld cards after it has already left the battlefield.
             // If the meld parts didn't move from that zone, move them instead of the meld card.
             // Reset the local zcc so the meld card lose track of them.
@@ -217,8 +213,7 @@ public abstract class MeldCard extends CardImpl {
                         if (exileId == null) {
                             game.getExile().getPermanentExile().add(topHalfCard);
                             game.getExile().getPermanentExile().add(bottomHalfCard);
-                        }
-                        else {
+                        } else {
                             game.getExile().createZone(exileId, name).add(topHalfCard);
                             game.getExile().getExileZone(exileId).add(bottomHalfCard);
                         }
@@ -231,8 +226,7 @@ public abstract class MeldCard extends CardImpl {
                             cardsToMove.add(bottomHalfCard);
                             if (event.getFlag()) {
                                 controller.putCardsOnTopOfLibrary(cardsToMove, game, null, true);
-                            }
-                            else {
+                            } else {
                                 controller.putCardsOnBottomOfLibrary(cardsToMove, game, null, true);
                             }
                         }
@@ -247,12 +241,10 @@ public abstract class MeldCard extends CardImpl {
                 this.bottomLastZoneChangeCounter = bottomHalfCard.getZoneChangeCounter(game);
                 game.addSimultaneousEvent(event);
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
-        }
-        else {
+        } else {
             // Try to move the former meld cards after it has already left the battlefield.
             // If the meld parts didn't move from that zone, move them instead of the meld card.
             // Reset the local zcc so the meld card lose track of them.
@@ -291,8 +283,7 @@ public abstract class MeldCard extends CardImpl {
                         permanent.setTapped(true);
                     }
                     event.setTarget(permanent);
-                }
-                else {
+                } else {
                     return false;
                 }
                 game.setZone(objectId, event.getToZone());
@@ -300,13 +291,11 @@ public abstract class MeldCard extends CardImpl {
                 game.getExile().removeCard(this.topHalfCard, game);
                 game.getExile().removeCard(this.bottomHalfCard, game);
                 return true;
-            }
-            else {
+            } else {
                 this.setMelded(false);
                 return false;
             }
-        }
-        else {
+        } else {
             // Try to move the former meld cards after it has already left the battlefield.
             // If the meld parts didn't move from that zone, move them instead of the meld card.
             // Reset the local zcc so the meld card lose track of them.
@@ -335,9 +324,9 @@ public abstract class MeldCard extends CardImpl {
     public int getConvertedManaCost() {
         if (this.isCopy()) {
             return 0;
-        }
-        else {
-            return this.topHalfCard.getConvertedManaCost() + this.bottomHalfCard.getConvertedManaCost();
+        } else {
+            return (this.topHalfCard != null ? this.topHalfCard.getConvertedManaCost() : 0)
+                    + (this.bottomHalfCard != null ? this.bottomHalfCard.getConvertedManaCost() : 0);
         }
     }
 
@@ -345,8 +334,7 @@ public abstract class MeldCard extends CardImpl {
     public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
         if (this.isMelded()) {
             super.addCounters(counter, game, appliedEffects);
-        }
-        else {
+        } else {
             if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)) {
                 topHalfCard.addCounters(counter, game, appliedEffects);
             }
@@ -360,8 +348,7 @@ public abstract class MeldCard extends CardImpl {
     public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
         if (this.isMelded()) {
             super.addCounters(name, amount, game, appliedEffects);
-        }
-        else {
+        } else {
             if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)) {
                 topHalfCard.addCounters(name, amount, game, appliedEffects);
             }
