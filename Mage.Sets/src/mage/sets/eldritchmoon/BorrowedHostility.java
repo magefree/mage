@@ -30,7 +30,7 @@ package mage.sets.eldritchmoon;
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.EscalateAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -58,7 +58,7 @@ public class BorrowedHostility extends CardImpl {
 
         // Target creature gets +3/+0 until end of turn.;
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostControlledEffect(3, 0, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn));
 
         // Target creature gains first strike until end of turn.
         Mode mode = new Mode();
