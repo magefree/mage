@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class SubjugatorAngel extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents controller");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

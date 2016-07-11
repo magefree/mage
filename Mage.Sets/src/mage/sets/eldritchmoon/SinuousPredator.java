@@ -40,10 +40,10 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SinousPredator extends CardImpl {
+public class SinuousPredator extends CardImpl {
 
-    public SinousPredator(UUID ownerId) {
-        super(ownerId, 163, "Sinous Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
+    public SinuousPredator(UUID ownerId) {
+        super(ownerId, 163, "Sinuous Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
         this.expansionSetCode = "EMN";
         this.subtype.add("Eldrazi");
         this.subtype.add("Werewolf");
@@ -53,16 +53,16 @@ public class SinousPredator extends CardImpl {
         // this card is the second face of double-faced card
         this.nightCard = true;
 
-        // Sinous Predator can't be blocked by more than one creature.
+        // Sinuous Predator can't be blocked by more than one creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public SinousPredator(final SinousPredator card) {
+    public SinuousPredator(final SinuousPredator card) {
         super(card);
     }
 
     @Override
-    public SinousPredator copy() {
-        return new SinousPredator(this);
+    public SinuousPredator copy() {
+        return new SinuousPredator(this);
     }
 }

@@ -45,13 +45,13 @@ import mage.game.events.GameEvent.EventType;
  */
 public class Providence extends CardImpl {
 
-    private static String abilityText = "at the beginning of your first upkeep, your life total becomes 26";
+    private static String abilityText = "at the beginning of the first upkeep, your life total becomes 26";
 
     public Providence(UUID ownerId) {
         super(ownerId, 37, "Providence", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
         this.expansionSetCode = "EMN";
 
-        // You may reveal this card from your opening hand. If you do, at the beginning of your first upkeep, your life total becomes 26.
+        // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.
         Ability ability = new ChancellorAbility(new ProvidenceDelayedTriggeredAbility(), abilityText);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
@@ -87,7 +87,7 @@ class ProvidenceDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getActivePlayerId().equals(controllerId);
+        return true;
     }
 
     @Override

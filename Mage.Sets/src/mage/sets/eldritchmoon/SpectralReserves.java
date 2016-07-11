@@ -28,6 +28,7 @@
 package mage.sets.eldritchmoon;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -46,7 +47,9 @@ public class SpectralReserves extends CardImpl {
         this.expansionSetCode = "EMN";
 
         // Put two 1/1 white Spirit creature tokens with flying onto the battlefield. You gain 2 life.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken("EMN"), 2));
+        Effect effect = new CreateTokenEffect(new SpiritWhiteToken("EMN"), 2);
+        effect.setText("Put two 1/1 white Spirit creature tokens with flying onto the battlefield");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
