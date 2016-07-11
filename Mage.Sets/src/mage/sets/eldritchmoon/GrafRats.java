@@ -50,7 +50,7 @@ public class GrafRats extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of combat on your turn, if you both own and control Graf Rats and a creature named Midnight Scavengers, exile them, then meld them into Chittering Host.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Meld ability not implemeted yet.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Meld ability not implemented yet.")));
     }
 
     public GrafRats(final GrafRats card) {
