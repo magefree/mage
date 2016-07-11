@@ -29,21 +29,23 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.counters.CounterType;
 
 /**
  *
@@ -57,7 +59,7 @@ public class SerumTank extends CardImpl {
 
         // Whenever {this} or another artifact comes into play, put a charge counter on {this}.
         Effect effect = new AddCountersSourceEffect(CounterType.CHARGE.createInstance());
-        etbEffect.setText("put a charge counter on {this}")
+        effect.setText("put a charge counter on {this}");
         this.addAbility(new SerumTankTriggeredAbility(effect));
 
         // {3}, {tap}, Remove a charge counter from {this}: Draw a card.
@@ -87,30 +89,30 @@ class SerumTankTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @Override
+    @java.lang.Override
     public SerumTankTriggeredAbility copy() {
         return new SerumTankTriggeredAbility(this);
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
-    @Override
+    @java.lang.Override
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
         if (permanent.getCardType().contains(CardType.ARTIFACT)) {
             for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(this));
+                effect.setTargetPointer(new FixedTarget(permanent, game));
             }
             return true;
         }
         return false;
     }
 
-    @Override
+    @java.lang.Override
     public String getRule() {
         return "Whenever {this} or another artifact enters the battlefield, put a charge counter on {this}.";
     }
