@@ -31,6 +31,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -54,7 +55,8 @@ public class MeldCondition implements Condition {
             Permanent sourcePermanent = (Permanent) sourceMageObject;
             if (sourcePermanent.getControllerId().equals(source.getControllerId())
                     && sourcePermanent.getOwnerId().equals(source.getControllerId())) {
-                FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(this.meldWithName);
+                FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+                filter.add(new NamePredicate(this.meldWithName));
                 for (Permanent meldWithPermanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                     if (meldWithPermanent.getOwnerId().equals(source.getControllerId())) {
                         return true;
