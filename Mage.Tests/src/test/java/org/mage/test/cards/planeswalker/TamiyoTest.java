@@ -42,12 +42,9 @@ public class TamiyoTest extends CardTestPlayerBase {
     /*
      * Reported bug: I activated Tamiyo's +1 ability on a 5/5 Gideon and his 2/2 Knight Ally, but when they both attacked 
      *  and dealt damage I only drew one card when I'm pretty sure I was supposed to draw for each of the two.
-    
-     * NOTE: cannot determine how to have the test recognize the 2/2 knight ally token from Gideon
-     * added ignore flag until then
      */
     @Test
-    public void testFieldResearcherFirstEffect() {
+    public void testFieldResearcherFirstEffectOnGideon() {
         
         // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
         // +1: Choose up to two target creatures. Until your next turn, 
@@ -82,5 +79,82 @@ public class TamiyoTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Gideon, Ally of Zendikar", 1);
         assertPermanentCount(playerA, "Knight Ally", 1);
         assertHandCount(playerA, 3); // two cards drawn from each creature dealing damage + 1 card drawn on turn
+    }
+    
+    /*
+     * Testing more basic scenario with Tamiyo, Field of Researcher +1 effect
+     */
+    @Test
+    public void testFieldResearcherFirstEffectSimpleCreatureAttacks() {
+        
+        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
+        // +1: Choose up to two target creatures. Until your next turn, 
+        // whenever either of those creatures deals combat damage, you draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Tamiyo, Field Researcher", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Bronze Sable", 1); // 2/1
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
+        addTarget(playerA, "Bronze Sable");
+        
+        attack(1, playerA, "Bronze Sable");
+        
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+        
+        assertLife(playerB, 18);
+        assertHandCount(playerA, 1);
+    }
+    
+    /*
+     * Testing more basic scenario with Tamiyo, Field of Researcher +1 effect
+     */
+    @Test
+    public void testFieldResearcherFirstEffectSimpleCreaturesAttacks() {
+        
+        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
+        // +1: Choose up to two target creatures. Until your next turn, 
+        // whenever either of those creatures deals combat damage, you draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Tamiyo, Field Researcher", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Bronze Sable", 1); // 2/1
+        addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // 2/3
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
+        addTarget(playerA, "Bronze Sable^Sylvan Advocate");
+        
+        attack(1, playerA, "Bronze Sable");
+        attack(1, playerA, "Sylvan Advocate");
+        
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+        
+        assertLife(playerB, 16);
+        assertHandCount(playerA, 2);
+    }
+    
+    /*
+     * Testing more basic scenarios with Tamiyo, Field of Researcher +1 effect
+     */
+    @Test
+    public void testFieldResearcherFirstEffectAttackAndBlock() {
+        
+        // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
+        // +1: Choose up to two target creatures. Until your next turn, 
+        // whenever either of those creatures deals combat damage, you draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Tamiyo, Field Researcher", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // 2/3
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
+        addTarget(playerA, "Sylvan Advocate");
+        
+        attack(1, playerA, "Sylvan Advocate");
+        attack(2, playerB, "Memnite");
+        block(2, playerA, "Sylvan Advocate", "Memnite");
+        
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+        
+        assertLife(playerB, 18);
+        assertHandCount(playerA, 2); // Sylvan Advocate dealt combat damage twice
     }
 }
