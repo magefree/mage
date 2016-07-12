@@ -53,7 +53,7 @@ public class StromkirkCondemned extends CardImpl {
     }
 
     public StromkirkCondemned(UUID ownerId) {
-        super(ownerId, 105, "Stromkirk Condemned", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
+        super(ownerId, 106, "Stromkirk Condemned", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
         this.expansionSetCode = "EMN";
         this.subtype.add("Vampire");
         this.subtype.add("Horror");

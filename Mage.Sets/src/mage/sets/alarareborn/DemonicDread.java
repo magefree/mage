@@ -28,13 +28,12 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,9 +46,6 @@ public class DemonicDread extends CardImpl {
     public DemonicDread(UUID ownerId) {
         super(ownerId, 38, "Demonic Dread", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
         this.expansionSetCode = "ARB";
-
-
-        
 
         // Cascade
         this.addAbility(new CascadeAbility());

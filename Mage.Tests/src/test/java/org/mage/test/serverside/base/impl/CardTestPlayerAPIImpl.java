@@ -987,9 +987,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, StackClause clause) {
         if (StackClause.WHILE_ON_STACK.equals(clause)) {
-            player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName + "$spellOnStack=" + spellOnStack);
+            player.addAction(turnNum, step, "activate:Cast " + cardName
+                    + "$" + (targetName.startsWith("target") ? targetName : "target=" + targetName)
+                    + "$spellOnStack=" + spellOnStack);
         } else {
-            player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName + "$!spellOnStack=" + spellOnStack);
+            player.addAction(turnNum, step, "activate:Cast " + cardName
+                    + "$" + (targetName.startsWith("target") ? targetName : "target=" + targetName)
+                    + "$!spellOnStack=" + spellOnStack);
         }
     }
 

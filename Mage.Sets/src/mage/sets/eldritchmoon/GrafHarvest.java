@@ -33,6 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -52,7 +53,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class GrafHarvest extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
 
     static {
@@ -64,8 +65,10 @@ public class GrafHarvest extends CardImpl {
         this.expansionSetCode = "EMN";
 
         // Zombies you control have menace.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)));
-        
+        Effect effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter);
+        effect.setText("Zombies you control have menace. <i>(They can't be blocked except by two or more creatures.)</i>");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+
         // {3}{B}, Exile a creature card from your graveyard: Put a 2/2 black Zombie creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), new ManaCostsImpl("{3}{B}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card from your graveyard"))));
