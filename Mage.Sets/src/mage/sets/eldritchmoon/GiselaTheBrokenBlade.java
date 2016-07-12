@@ -69,7 +69,7 @@ public class GiselaTheBrokenBlade extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new MeldEffect("Bruna, the Fading Light", new BriselaVoiceOfNightmares(ownerId)), TargetController.YOU, false),
                 new MeldCondition("Bruna, the Fading Light"),
-                "At the beginning of combat on your turn, if you both own and control {this} and a creature named Bruna, the Fading Light, exile them, "
+                "At the beginning of your end step, if you both own and control {this} and a creature named Bruna, the Fading Light, exile them, "
                         + "then meld them into Brisela, Voice of Nightmares."));
     }
 
