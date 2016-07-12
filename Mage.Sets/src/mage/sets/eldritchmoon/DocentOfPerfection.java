@@ -58,7 +58,7 @@ import mage.players.Player;
  */
 public class DocentOfPerfection extends CardImpl {
 
-    private static final FilterSpell filterSpell = new FilterSpell("instant or sorcery spell");
+    private static final FilterSpell filterSpell = new FilterSpell("an instant or sorcery spell");
 
     static {
         filterSpell.add(Predicates.or(
