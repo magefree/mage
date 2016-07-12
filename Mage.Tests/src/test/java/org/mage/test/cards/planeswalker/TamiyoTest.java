@@ -46,7 +46,6 @@ public class TamiyoTest extends CardTestPlayerBase {
      * NOTE: cannot determine how to have the test recognize the 2/2 knight ally token from Gideon
      * added ignore flag until then
      */
-    @Ignore
     @Test
     public void testFieldResearcherFirstEffect() {
         
@@ -63,14 +62,13 @@ public class TamiyoTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Gideon, Ally of Zendikar", 1);
         
         // put 2/2 knight ally token on battlefield
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0: Put a");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+0: Put a");
         
         // next, activate Gideon to make him a 5/5 human soldier ally creature
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until end of turn");
         // finally, use Tamiyo +1 on both creatures
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
-        addTarget(playerA, "Knight Ally"); // 2/2 token
-        addTarget(playerA, "Gideon, Ally of Zendikar"); // 5/5 human soldier ally
+        addTarget(playerA, "Knight Ally^Gideon, Ally of Zendikar"); // both token and Gideon as creature
         
         // attack with both unblocked
         attack(3, playerA, "Knight Ally"); 
