@@ -42,9 +42,8 @@ import mage.constants.Rarity;
 public class SuccumbToTemptation extends CardImpl {
 
     public SuccumbToTemptation(UUID ownerId) {
-        super(ownerId, 107, "Succumb to Temptation", Rarity.COMMON, new CardType[]{}, "{1}{B}{B}");
+        super(ownerId, 107, "Succumb to Temptation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
         this.expansionSetCode = "EMN";
-        this.supertype.add("Insant");
 
         // You draw two cards and you lose 2 life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

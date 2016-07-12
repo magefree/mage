@@ -34,7 +34,7 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -48,7 +48,8 @@ public class AlchemistsGreeting extends CardImpl {
 
         // Alchemist's Greeting deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        
         // Madness {1}{R}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}")));
     }
