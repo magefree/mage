@@ -43,7 +43,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -69,7 +68,7 @@ public class SpontaneousMutation extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets -X/-0, where X is the number of cards in your graveyard.
-        DynamicValue value = new SignInversionDynamicValue(new CardsInControllerGraveyardCount(new FilterCreatureCard()));
+        DynamicValue value = new SignInversionDynamicValue(new CardsInControllerGraveyardCount());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(value, new StaticValue(-0))));
     }
 

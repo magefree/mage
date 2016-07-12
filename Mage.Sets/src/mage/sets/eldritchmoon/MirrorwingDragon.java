@@ -126,7 +126,7 @@ class MirrorwingDragonCopyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a player casts an instant or sorcery spell that targets only {this}, "
-                + "that player copies that spell for each creature he or she controls that the spell could target. "
+                + "that player copies that spell for each other creature he or she controls that the spell could target. "
                 + "Each copy targets a different one of those creatures.";
     }
 }
@@ -135,7 +135,7 @@ class MirrorwingDragonCopySpellEffect extends CopySpellForEachItCouldTargetEffec
 
     public MirrorwingDragonCopySpellEffect() {
         this(new FilterControlledCreaturePermanent());
-        this.staticText = "that player copies that spell for each creature he or she controls that the spell could target. Each copy targets a different one of those creatures.";
+        this.staticText = "that player copies that spell for each other creature he or she controls that the spell could target. Each copy targets a different one of those creatures.";
     }
 
     public MirrorwingDragonCopySpellEffect(MirrorwingDragonCopySpellEffect effect) {

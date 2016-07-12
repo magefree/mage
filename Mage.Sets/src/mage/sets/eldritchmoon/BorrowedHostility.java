@@ -30,7 +30,8 @@ package mage.sets.eldritchmoon;
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.EscalateAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -38,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,24 +48,32 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BorrowedHostility extends CardImpl {
 
+    private static final FilterCreaturePermanent filterBoost = new FilterCreaturePermanent("creature to get +3/+0");
+    private static final FilterCreaturePermanent filterFirstStrike = new FilterCreaturePermanent("creature to gain first strike");
+
     public BorrowedHostility(UUID ownerId) {
         super(ownerId, 121, "Borrowed Hostility", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "EMN";
 
         // Escalate {3}
         this.addAbility(new EscalateAbility(new ManaCostsImpl<>("{3}")));
+
         // Choose one or both &mdash;
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // Target creature gets +3/+0 until end of turn.;
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostControlledEffect(3, 0, Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(3, 0, Duration.EndOfTurn);
+        effect.setText("Target creature gets +3/+0 until end of turn");
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterBoost));
+        this.getSpellAbility().addEffect(effect);
 
         // Target creature gains first strike until end of turn.
         Mode mode = new Mode();
-        mode.getEffects().add(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("Target creature gains first strike until end of turn");
+        mode.getEffects().add(effect);
+        mode.getTargets().add(new TargetCreaturePermanent(filterFirstStrike));
         this.getSpellAbility().addMode(mode);
     }
 

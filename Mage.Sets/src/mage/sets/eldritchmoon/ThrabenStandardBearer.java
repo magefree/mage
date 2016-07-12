@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.SoldierToken;
+import mage.game.permanent.token.Token;
 
 /**
  *
@@ -56,7 +56,7 @@ public class ThrabenStandardBearer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, {T}, Discard a card: Put a 1/1 white Human Soldier creature token onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl<>("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanSoldierToken()), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
@@ -69,5 +69,18 @@ public class ThrabenStandardBearer extends CardImpl {
     @Override
     public ThrabenStandardBearer copy() {
         return new ThrabenStandardBearer(this);
+    }
+}
+
+class HumanSoldierToken extends Token {
+
+    public HumanSoldierToken() {
+        super("Human Soldier", "1/1 white Human Soldier creature token");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Human");
+        subtype.add("Soldier");
+        color.setWhite(true);
+        power = new MageInt(1);
+        toughness = new MageInt(1);
     }
 }

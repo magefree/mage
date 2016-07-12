@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
@@ -66,7 +67,9 @@ public class StitchedMangler extends CardImpl {
 
         // When Stitched Mangler enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
-        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
+        Effect effect = new DontUntapInControllersNextUntapStepTargetEffect();
+        effect.setText("That creature doesn't untap during its controller's next untap step");
+        ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

@@ -30,10 +30,11 @@ package mage.sets.eldritchmoon;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.MeldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.effects.common.MeldEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -63,7 +64,11 @@ public class HanweirBattlements extends CardImpl {
         this.addAbility(ability);
 
         // {3}{R}{R},{T}: If you both own and control Hanweir Battlements and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Meld ability not implemeted yet.")));
+        ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new MeldEffect("Hanweir Garrison", new HanweirTheWrithingTownship(ownerId)),
+                new ManaCostsImpl("{3}{R}{R}"), new MeldCondition("Hanweir Garrison"),
+                "{3}{R}{R}, {T}: If you both own and control {this} and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.");
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
     public HanweirBattlements(final HanweirBattlements card) {

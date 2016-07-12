@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -46,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class IroncladSlayer extends CardImpl {
 
-    private final static FilterCard filter = new FilterCard("Aura or Equipment card");
+    private final static FilterCard filter = new FilterCard("Aura or Equipment card from your graveyard");
 
     static {
         filter.add(Predicates.or(new SubtypePredicate("Aura"), new SubtypePredicate("Equipment")));
@@ -61,7 +62,9 @@ public class IroncladSlayer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Ironclad Slayer enters the battlefield, you may return target Aura or Equipment card from your graveyard to your hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("you may return target Aura or Equipment card from your graveyard to your hand");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

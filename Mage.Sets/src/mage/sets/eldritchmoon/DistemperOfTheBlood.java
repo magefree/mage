@@ -59,7 +59,6 @@ public class DistemperOfTheBlood extends CardImpl {
         effect.setText("and gains trample until end of turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
 
         // Madness {R}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{R}")));

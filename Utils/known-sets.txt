@@ -51,6 +51,7 @@ Duel Decks: Sorin vs. Tibalt|sorinvstibalt|
 Duel Decks: Speed vs. Cunning|speedvscunning|
 Duel Decks: Venser vs. Koth|venservskoth|
 Duel Decks: Zendikar vs. Eldrazi|zendikarvseldrazi|
+Duels of the Planeswalkers|duelsoftheplaneswalkers|
 Eighth Edition|eighthedition|
 Eldritch Moon|eldritchmoon|
 Eternal Masters|eternalmasters|

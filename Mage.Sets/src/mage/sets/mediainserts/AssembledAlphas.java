@@ -25,44 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.sets.mediainserts;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
  * @author fireshoes
  */
-public class SinousPredator extends CardImpl {
+public class AssembledAlphas extends mage.sets.eldritchmoon.AssembledAlphas {
 
-    public SinousPredator(UUID ownerId) {
-        super(ownerId, 163, "Sinous Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "EMN";
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Werewolf");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // this card is the second face of double-faced card
-        this.nightCard = true;
-
-        // Sinous Predator can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+    public AssembledAlphas(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 160;
+        this.expansionSetCode = "MBP";
     }
 
-    public SinousPredator(final SinousPredator card) {
+    public AssembledAlphas(final AssembledAlphas card) {
         super(card);
     }
 
     @Override
-    public SinousPredator copy() {
-        return new SinousPredator(this);
+    public AssembledAlphas copy() {
+        return new AssembledAlphas(this);
     }
 }

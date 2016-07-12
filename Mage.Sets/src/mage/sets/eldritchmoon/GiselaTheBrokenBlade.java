@@ -29,15 +29,17 @@ package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.condition.common.MeldCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.MeldEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 
 /**
  *
@@ -56,12 +58,19 @@ public class GiselaTheBrokenBlade extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
+
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
+        
         // At the beginning of your end step, if you both own and control Gisela, the Broken Blade and a creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Meld ability not implemeted yet.")));
+        this.addAbility(new ConditionalTriggeredAbility(
+                new BeginningOfEndStepTriggeredAbility(new MeldEffect("Bruna, the Fading Light", new BriselaVoiceOfNightmares(ownerId)), TargetController.YOU, false),
+                new MeldCondition("Bruna, the Fading Light"),
+                "At the beginning of your end step, if you both own and control {this} and a creature named Bruna, the Fading Light, exile them, "
+                        + "then meld them into Brisela, Voice of Nightmares."));
     }
 
     public GiselaTheBrokenBlade(final GiselaTheBrokenBlade card) {
