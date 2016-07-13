@@ -25,7 +25,7 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
     private final TargetController sacrificingPlayer;
 
     public SacrificeAllTriggeredAbility(Effect effect, FilterPermanent filter, TargetController sacrificingPlayer, boolean optional) {
-        super(Zone.ALL, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.sacrificingPlayer = sacrificingPlayer;
     }
