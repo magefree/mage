@@ -77,8 +77,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         this.token = effect.token.copy();
         this.type = effect.type;
         this.losePreviousTypes = effect.losePreviousTypes;
-        this.power = effect.power;
-        this.toughness = effect.toughness;
+        this.power = effect.power.copy();
+        this.toughness = effect.toughness.copy();
     }
 
     @Override

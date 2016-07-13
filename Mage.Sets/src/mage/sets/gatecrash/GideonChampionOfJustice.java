@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.dynamicvalue.LockedInDynamicValue;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
 import mage.abilities.effects.OneShotEffect;
@@ -71,7 +72,7 @@ public class GideonChampionOfJustice extends CardImpl {
         this.addAbility(ability1);
 
         // 0: Until end of turn, Gideon becomes an indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-        CountersCount loyaltyCount = new CountersCount(CounterType.LOYALTY);
+        LockedInDynamicValue loyaltyCount = new LockedInDynamicValue(new CountersCount(CounterType.LOYALTY));
         LoyaltyAbility ability2 = new LoyaltyAbility(new BecomesCreatureSourceEffect(
                 new GideonChampionOfJusticeToken(), "planeswalker", Duration.EndOfTurn, false, false, loyaltyCount, loyaltyCount), 0);
         ability2.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn));
