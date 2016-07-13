@@ -32,13 +32,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -46,7 +44,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -74,7 +71,9 @@ public class GideonChampionOfJustice extends CardImpl {
         this.addAbility(ability1);
 
         // 0: Until end of turn, Gideon becomes an indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonChampionOfJusticeToken(), "planeswalker", Duration.EndOfTurn, false, false), 0);
+        CountersCount loyaltyCount = new CountersCount(CounterType.LOYALTY);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new BecomesCreatureSourceEffect(
+                new GideonChampionOfJusticeToken(), "planeswalker", Duration.EndOfTurn, false, false, loyaltyCount, loyaltyCount), 0);
         ability2.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn));
         this.addAbility(ability2);
 
@@ -129,11 +128,9 @@ class GideonChampionOfJusticeToken extends Token {
         subtype.add("Soldier");
         power = new MageInt(0);
         toughness = new MageInt(0);
-        
+
         this.addAbility(IndestructibleAbility.getInstance());
-        
-        CountersCount loyaltyCount = new CountersCount(CounterType.LOYALTY);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(loyaltyCount, Duration.WhileOnBattlefield)));
+
     }
 
 }

@@ -75,31 +75,36 @@ public class GideonTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertAbility(playerB, "Silvercoat Lion", IndestructibleAbility.getInstance(), false);
     }
-    
+
     /*
      * Reported bug: When Gideon, Champion of Justice uses his +0 ability to become a creature,
      * he is immediately sent to the grave instead.
-    */
+     */
     @Test
     public void testGideonChampionOfJusticeSecondAbility() {
-        
+
         /*
         Gideon, Champion of Justice {2}{W}{W} - 4 Loyalty
-        0: Until end of turn, Gideon, Champion of Justice becomes a Human Soldier creature with power and toughness 
-        each equal to the number of loyalty counters on him and gains indestructible. He's still a planeswalker. 
+        +1: Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.
+
+        0: Until end of turn, Gideon, Champion of Justice becomes a Human Soldier creature with power and toughness
+        each equal to the number of loyalty counters on him and gains indestructible. He's still a planeswalker.
         Prevent all damage that would be dealt to him this turn.
-        */
+        LoyaltyAbility ability1 = new LoyaltyAbility(
+
+        -15: Exile all other permanents.
+         */
         addCard(Zone.BATTLEFIELD, playerA, "Gideon, Champion of Justice", 1);
-        
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+0: Until end of turn");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertGraveyardCount(playerA, "Gideon, Champion of Justice", 0);
         assertPermanentCount(playerA, "Gideon, Champion of Justice", 1);
         assertPowerToughness(playerA, "Gideon, Champion of Justice", 4, 4);
         assertCounterCount(playerA, "Gideon, Champion of Justice", CounterType.LOYALTY, 4);
-        
+
     }
 
 }

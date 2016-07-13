@@ -27,9 +27,9 @@
  */
 package mage.abilities.effects.common.continuous;
 
-import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
@@ -50,17 +50,25 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected Token token;
     protected String type;
     protected boolean losePreviousTypes;
+    protected DynamicValue power;
+    protected DynamicValue toughness;
 
     public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
         this(token, type, duration, false, false);
     }
 
     public BecomesCreatureSourceEffect(Token token, String type, Duration duration, boolean losePreviousTypes, boolean characterDefining) {
+        this(token, type, duration, losePreviousTypes, characterDefining, null, null);
+    }
+
+    public BecomesCreatureSourceEffect(Token token, String type, Duration duration, boolean losePreviousTypes, boolean characterDefining, DynamicValue power, DynamicValue toughness) {
         super(duration, Outcome.BecomeCreature);
         this.characterDefining = characterDefining;
         this.token = token;
         this.type = type;
         this.losePreviousTypes = losePreviousTypes;
+        this.power = power;
+        this.toughness = toughness;
         setText();
     }
 
@@ -69,6 +77,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         this.token = effect.token.copy();
         this.type = effect.type;
         this.losePreviousTypes = effect.losePreviousTypes;
+        this.power = effect.power;
+        this.toughness = effect.toughness;
     }
 
     @Override
@@ -133,19 +143,21 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                 case PTChangingEffects_7:
                     if ((sublayer == SubLayer.CharacteristicDefining_7a && isCharacterDefining())
                             || (sublayer == SubLayer.SetPT_7b && !isCharacterDefining())) {
-                        MageInt power = token.getPower();
-                        MageInt toughness = token.getToughness();
-                        if (power != null && toughness != null) {
-                            permanent.getPower().setValue(power.getValue());
-                            permanent.getToughness().setValue(toughness.getValue());
+                        if (power != null) {
+                            permanent.getPower().setValue(power.calculate(game, source, this));
+                        } else if (token.getPower() != null) {
+                            permanent.getPower().setValue(token.getPower().getValue());
+                        }
+                        if (toughness != null) {
+                            permanent.getToughness().setValue(toughness.calculate(game, source, this));
+                        } else if (token.getToughness() != null) {
+                            permanent.getToughness().setValue(token.getToughness().getValue());
                         }
                     }
             }
             return true;
-        } else {
-            if (duration.equals(Duration.Custom)) {
-                this.discard();
-            }
+        } else if (duration.equals(Duration.Custom)) {
+            this.discard();
         }
         return false;
     }
