@@ -74,7 +74,7 @@ public class GideonChampionOfJustice extends CardImpl {
         this.addAbility(ability1);
 
         // 0: Until end of turn, Gideon becomes an indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonChampionOfJusticeToken(), "planeswalker", Duration.EndOfTurn, false, true), 0);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonChampionOfJusticeToken(), "planeswalker", Duration.EndOfTurn, false, false), 0);
         ability2.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn));
         this.addAbility(ability2);
 
