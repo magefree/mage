@@ -157,7 +157,7 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
     private List<MageObjectReference> creatures;
 
     public TamiyoFieldResearcherDelayedTriggeredAbility(List<MageObjectReference> creatures) {
-        super(new DrawCardSourceControllerEffect(1), Duration.UntilYourNextTurn);
+        super(new DrawCardSourceControllerEffect(1), Duration.UntilYourNextTurn, false);
         this.creatures = creatures;
     }
 
