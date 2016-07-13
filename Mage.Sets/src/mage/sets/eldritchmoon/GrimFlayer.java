@@ -66,7 +66,7 @@ public class GrimFlayer extends CardImpl {
         // and the rest back on top of your library in any order.
         Effect effect = new LookLibraryAndPickControllerEffect(
                 new StaticValue(3), false, new StaticValue(3), new FilterCard(), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false);
-        effect.setText("look at the top three cards of your library. Put any number of them into your graveyard and the rest on top of your library in any order");
+        effect.setText("look at the top three cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order");
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(effect, false));
 
         // <i>Delirium</i> &mdash; Grim Flayer gets +2/+2 as long as there are four or more card types among cards in your graveyard.
