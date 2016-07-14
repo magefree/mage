@@ -50,8 +50,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected Token token;
     protected String type;
     protected boolean losePreviousTypes;
-    protected DynamicValue power;
-    protected DynamicValue toughness;
+    protected DynamicValue power = null;
+    protected DynamicValue toughness = null;
 
     public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
         this(token, type, duration, false, false);
@@ -77,8 +77,12 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         this.token = effect.token.copy();
         this.type = effect.type;
         this.losePreviousTypes = effect.losePreviousTypes;
-        this.power = effect.power.copy();
-        this.toughness = effect.toughness.copy();
+        if (effect.power != null) {
+            this.power = effect.power.copy();
+        }
+        if (effect.toughness != null) {
+            this.toughness = effect.toughness.copy();
+        }
     }
 
     @Override
