@@ -574,6 +574,9 @@ public class TestPlayer implements Player {
                 i++;
             }
         }
+        if (modes.getMinModes() <= modes.getSelectedModes().size()) {
+            return null;
+        }
         return computerPlayer.chooseMode(modes, source, game); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1734,7 +1737,7 @@ public class TestPlayer implements Player {
     public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game) {
         return computerPlayer.canPaySacrificeCost(permanent, sourceId, controllerId, game);
     }
-    
+
     @Override
     public FilterPermanent getSacrificeCostFilter() {
         return computerPlayer.getSacrificeCostFilter();
