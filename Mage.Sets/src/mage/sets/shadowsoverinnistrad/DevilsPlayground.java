@@ -42,7 +42,7 @@ import mage.game.permanent.token.DevilToken;
 public class DevilsPlayground extends CardImpl {
 
     public DevilsPlayground(UUID ownerId) {
-        super(ownerId, 151, "Devil's Playground", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
+        super(ownerId, 151, "Devils' Playground", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "SOI";
 
         // Put four 1/1 red Devil creature tokens onto the battlefield. They have "When this creature dies, it deals 1 damage to target creature or player."
