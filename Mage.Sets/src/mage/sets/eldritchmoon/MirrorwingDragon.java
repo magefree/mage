@@ -106,19 +106,24 @@ class MirrorwingDragonCopyTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private boolean checkSpell(Spell spell, Game game) {
+        boolean hasTarget = false;
         if (spell != null
                 && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
             for (TargetAddress addr : TargetAddress.walk(spell)) {
                 Target targetInstance = addr.getTarget(spell);
                 for (UUID target : targetInstance.getTargets()) {
+                    hasTarget = true;
                     Permanent permanent = game.getPermanent(target);
                     if (permanent == null || !permanent.getId().equals(getSourceId())) {
                         return false;
                     }
                 }
             }
-            getEffects().get(0).setValue("triggeringSpell", spell);
-            return true;
+
+            if (hasTarget) {
+                getEffects().get(0).setValue("triggeringSpell", spell);
+                return true;
+            }
         }
         return false;
     }
@@ -167,6 +172,17 @@ class MirrorwingDragonCopySpellEffect extends CopySpellForEachItCouldTargetEffec
 
     @Override
     protected void modifyCopy(Spell copy, Game game, Ability source) {
+        Spell spell = getSpell(game, source);
+        copy.setControllerId(spell.getControllerId());
+    }
+
+    @Override
+    protected boolean okUUIDToCopyFor(UUID potentialTarget, Game game, Ability source, Spell spell) {
+        Permanent permanent = game.getPermanent(potentialTarget);
+        if (permanent == null || !permanent.getControllerId().equals(spell.getControllerId())) {
+            return false;
+        }
+        return true;
     }
 
     @Override
