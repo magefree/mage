@@ -50,7 +50,6 @@ public class AuraSwapAbility extends ActivatedAbilityImpl {
 
     public AuraSwapAbility(ManaCost manaCost) {
         super(Zone.BATTLEFIELD, new AuraSwapEffect(), manaCost);
-
     }
 
     public AuraSwapAbility(final AuraSwapAbility ability) {
@@ -72,12 +71,6 @@ public class AuraSwapAbility extends ActivatedAbilityImpl {
 
 class AuraSwapEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard();
-
-    static {
-        filter.add(new SubtypePredicate("Aura"));
-    }
-
     AuraSwapEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Exchange this Aura with an Aura card in your hand.";
@@ -94,20 +87,26 @@ class AuraSwapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        FilterCard filterCardToCheck = new FilterCard();
+        filterCardToCheck.add(new SubtypePredicate("Aura"));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent auraPermanent = game.getPermanent(source.getSourceId());
-            if (auraPermanent != null && auraPermanent.getSubtype().contains("Aura") && auraPermanent.getOwnerId().equals(source.getControllerId())) {
-                Permanent enchantedPermanent = game.getPermanent(auraPermanent.getAttachedTo());
-                filter.add(new AuraCardCanAttachToPermanentId(enchantedPermanent.getId()));
-                TargetCardInHand target = new TargetCardInHand(0, 1, filter);
+            Permanent auraSourcePermanent = game.getPermanent(source.getSourceId());
+            if (auraSourcePermanent != null
+                    && auraSourcePermanent.getSubtype().contains("Aura")
+                    && auraSourcePermanent.getOwnerId().equals(source.getControllerId())) {
+                Permanent enchantedPermanent = game.getPermanent(auraSourcePermanent.getAttachedTo());
+                filterCardToCheck.add(new AuraCardCanAttachToPermanentId(enchantedPermanent.getId()));
+                TargetCardInHand target = new TargetCardInHand(filterCardToCheck);
                 if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                     Card auraInHand = game.getCard(target.getFirstTarget());
                     if (auraInHand != null) {
-                        controller.moveCards(auraInHand, Zone.BATTLEFIELD, source, game);
+                        game.getState().setValue("attachTo:" + auraInHand.getId(), enchantedPermanent);
+                        auraInHand.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), controller.getId());
                         enchantedPermanent.addAttachment(auraInHand.getId(), game);
-                        controller.moveCards(auraPermanent, Zone.HAND, source, game);
-                        return true;
+                        game.informPlayers(controller.getLogName() + " put " + auraInHand.getLogName() + " on the battlefield attached to " + enchantedPermanent.getLogName() + ".");
+                        enchantedPermanent.removeAttachment(auraSourcePermanent.getId(), game);
+                        return controller.moveCardToHandWithInfo(auraSourcePermanent, source.getSourceId(), game);
                     }
                 }
             }
