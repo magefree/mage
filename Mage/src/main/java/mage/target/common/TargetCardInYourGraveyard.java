@@ -30,10 +30,10 @@ package mage.target.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -122,10 +122,7 @@ public class TargetCardInYourGraveyard extends TargetCard {
      */
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        if (game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets) {
-            return true;
-        }
-        return false;
+        return game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets;
     }
 
     @Override

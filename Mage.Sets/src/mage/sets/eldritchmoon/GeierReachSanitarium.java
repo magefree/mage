@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -56,7 +57,9 @@ public class GeierReachSanitarium extends CardImpl {
 
         // {2}, {T}: Each player draws a card, then discards a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardAllEffect(1), new GenericManaCost(2));
-        ability.addEffect(new DiscardEachPlayerEffect());
+        Effect effect = new DiscardEachPlayerEffect();
+        effect.setText(", then discards a card");
+        ability.addEffect(effect);
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -159,7 +159,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
             return staticText;
         }
         if (targetName != null && targetName.length() > 0) {
-            if (targetName.equals("Those creatures")) {
+            if (targetName.equals("Those creatures") || targetName.equals("They")) {
                 return targetName + " don't untap during their controller's next untap step";
             } else
                 return targetName + " doesn't untap during its controller's next untap step";
