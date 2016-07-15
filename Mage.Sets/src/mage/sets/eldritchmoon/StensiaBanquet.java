@@ -35,10 +35,8 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -47,11 +45,10 @@ import mage.target.common.TargetOpponent;
  */
 public class StensiaBanquet extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Vampires you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Vampires you control");
 
     static {
         filter.add(new SubtypePredicate("Vampire"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public StensiaBanquet(UUID ownerId) {
