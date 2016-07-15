@@ -172,6 +172,17 @@ class MirrorwingDragonCopySpellEffect extends CopySpellForEachItCouldTargetEffec
 
     @Override
     protected void modifyCopy(Spell copy, Game game, Ability source) {
+        Spell spell = getSpell(game, source);
+        copy.setControllerId(spell.getControllerId());
+    }
+
+    @Override
+    protected boolean okUUIDToCopyFor(UUID potentialTarget, Game game, Ability source, Spell spell) {
+        Permanent permanent = game.getPermanent(potentialTarget);
+        if (permanent == null || !permanent.getControllerId().equals(spell.getControllerId())) {
+            return false;
+        }
+        return true;
     }
 
     @Override
