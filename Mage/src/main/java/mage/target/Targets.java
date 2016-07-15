@@ -121,7 +121,7 @@ public class Targets extends ArrayList<Target> {
             }
         }
         // it is legal when either there is no target or not all targets are illegal
-        return this.size() == 0 || this.size() != illegalCount;
+        return this.isEmpty() || this.size() != illegalCount;
     }
 
     /**
