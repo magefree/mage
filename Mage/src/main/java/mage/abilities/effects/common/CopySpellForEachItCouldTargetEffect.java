@@ -82,6 +82,10 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
         modifyCopy(copy, game, source);
     }
 
+    protected boolean okUUIDToCopyFor(UUID potentialTarget, Game game, Ability source, Spell spell) {
+        return true;
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player actingPlayer = getPlayer(game, source);
@@ -122,7 +126,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                     copy = spell.copySpell(source.getControllerId());
                     try {
                         modifyCopy(copy, (T) obj, game, source);
-                        if (!filter.match((T) obj, game)) {
+                        if (!filter.match((T) obj, source.getSourceId(), actingPlayer.getId(), game)) {
                             continue;
                         }
                     } catch (ClassCastException e) {
@@ -146,6 +150,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                         }
                     }
 
+                    legal &= okUUIDToCopyFor(objId, game, source, spell);
                     if (legal) {
                         for (TargetAddress addr : targetsToBeChanged) {
                             Target targetInstance = addr.getTarget(copy);
