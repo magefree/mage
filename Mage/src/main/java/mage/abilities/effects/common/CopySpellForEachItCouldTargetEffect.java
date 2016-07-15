@@ -122,7 +122,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                     copy = spell.copySpell(source.getControllerId());
                     try {
                         modifyCopy(copy, (T) obj, game, source);
-                        if (!filter.match((T) obj, game)) {
+                        if (!filter.match((T) obj, source.getSourceId(), actingPlayer.getId(), game)) {
                             continue;
                         }
                     } catch (ClassCastException e) {
