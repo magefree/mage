@@ -29,22 +29,16 @@ package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ReturnToHandFromGraveyardAllEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterBySubtypeCard;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -52,6 +46,8 @@ import mage.players.Player;
  */
 public class InfernalCaretaker extends CardImpl {
 
+    private static FilterCard zombieCard = new FilterBySubtypeCard("Zombie");
+    
     public InfernalCaretaker(UUID ownerId) {
         super(ownerId, 76, "Infernal Caretaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "LGN";
@@ -64,7 +60,9 @@ public class InfernalCaretaker extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}")));
         
         // When Infernal Caretaker is turned face up, return all Zombie cards from all graveyards to their owners' hands.
-        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new InfernalCaretakerEffect()));
+        Effect effect = new ReturnToHandFromGraveyardAllEffect(zombieCard);
+        effect.setText("return all Zombie cards from all graveyards to their owners' hands");
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(effect));
     }
 
     public InfernalCaretaker(final InfernalCaretaker card) {
@@ -74,41 +72,5 @@ public class InfernalCaretaker extends CardImpl {
     @Override
     public InfernalCaretaker copy() {
         return new InfernalCaretaker(this);
-    }
-}
-
-class InfernalCaretakerEffect extends OneShotEffect {
-    
-    private static FilterCard zombieCard = new FilterBySubtypeCard("Zombie");
-    
-    public InfernalCaretakerEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "return all Zombie cards from all graveyards to their owners' hands";
-    }
-    
-    public InfernalCaretakerEffect(final InfernalCaretakerEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public InfernalCaretakerEffect copy() {
-        return new InfernalCaretakerEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Cards toHands = new CardsImpl();
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    toHands.addAll(player.getGraveyard().getCards(zombieCard, source.getSourceId(), controller.getId(), game));
-                }
-            }
-            controller.moveCards(toHands.getCards(game), Zone.HAND, source, game);
-            return true;
-        }
-        return false;
     }
 }
