@@ -42,7 +42,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public BecomesBlockedByCreatureTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
