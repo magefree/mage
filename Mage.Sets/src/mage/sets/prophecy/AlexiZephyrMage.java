@@ -61,7 +61,7 @@ public class AlexiZephyrMage extends CardImpl {
     }
 
     public AlexiZephyrMage(UUID ownerId) {
-        super(ownerId, 28, "Alexi, Zephyr Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, 28, "Alexi, Zephyr Mage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "PCY";
         this.supertype.add("Legendary");
         this.subtype.add("Human");

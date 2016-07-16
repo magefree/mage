@@ -51,6 +51,7 @@ public class SelflessSpirit extends CardImpl {
         super(ownerId, 40, "Selfless Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "EMN";
         this.subtype.add("Spirit");
+        this.subtype.add("Cleric");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

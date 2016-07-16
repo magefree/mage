@@ -57,7 +57,7 @@ public class FalkenrathGorger extends CardImpl {
         super(ownerId, 155, "Falkenrath Gorger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "SOI";
         this.subtype.add("Vampire");
-        this.subtype.add("Warrior");
+        this.subtype.add("Berserker");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
