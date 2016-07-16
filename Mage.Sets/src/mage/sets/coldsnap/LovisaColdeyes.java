@@ -32,8 +32,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class LovisaColdeyes extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control that's a Barbarian, a Warrior, or a Berserker");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that's a Barbarian, a Warrior, or a Berserker");
 
     static {
         filter.add(Predicates.or(new SubtypePredicate("Barbarian"), new SubtypePredicate("Warrior"), new SubtypePredicate("Berserker")));
@@ -65,10 +65,10 @@ public class LovisaColdeyes extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Each creature you control that's a Barbarian, a Warrior, or a Berserker gets +2/+2 and has haste.
-        Effect effect = new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false);
+        Effect effect = new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false);
         effect.setText("Each creature you control that's a Barbarian, a Warrior, or a Berserker gets +2/+2");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
+        effect = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
         effect.setText("and has haste");
         ability.addEffect(effect);
         this.addAbility(ability);
