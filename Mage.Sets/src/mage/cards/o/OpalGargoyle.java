@@ -73,7 +73,7 @@ public class OpalGargoyle extends CardImpl {
 class OpalGargoyleToken extends Token {
 
     public OpalGargoyleToken() {
-        super("Gargoyle", "a 2/2 Gargoyle creature with flying");
+        super("Gargoyle", "2/2 Gargoyle creature with flying");
         cardType.add(CardType.CREATURE);
         subtype.add("Gargoyle");
         power = new MageInt(2);

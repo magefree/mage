@@ -73,7 +73,7 @@ public class HuntedLammasu extends CardImpl {
 
 class HorrorToken extends Token {
     HorrorToken() {
-        super("Horror", "a 4/4 black Horror creature token");
+        super("Horror", "4/4 black Horror creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Horror");

@@ -1,17 +1,11 @@
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GermToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {

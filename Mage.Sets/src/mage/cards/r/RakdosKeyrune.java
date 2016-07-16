@@ -70,7 +70,7 @@ public class RakdosKeyrune extends CardImpl {
 
     private class RakdosKeyruneToken extends Token {
         RakdosKeyruneToken() {
-            super("", "a 3/1 black and red Devil artifact creature with first strike");
+            super("", "3/1 black and red Devil artifact creature with first strike");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setBlack(true);

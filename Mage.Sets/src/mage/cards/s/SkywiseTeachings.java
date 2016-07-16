@@ -75,7 +75,7 @@ public class SkywiseTeachings extends CardImpl {
 class SkywiseTeachingsToken extends Token {
 
     SkywiseTeachingsToken() {
-        super("Djinn Monk", "a 2/2 blue Djinn Monk creature token with flying");
+        super("Djinn Monk", "2/2 blue Djinn Monk creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         this.subtype.add("Djinn");

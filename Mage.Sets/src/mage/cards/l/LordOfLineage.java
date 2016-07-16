@@ -83,16 +83,16 @@ public class LordOfLineage extends CardImpl {
     public LordOfLineage copy() {
         return new LordOfLineage(this);
     }
+}
 
-    class VampireToken extends Token {
-        VampireToken() {
-            super("Vampire", "a 2/2 black Vampire creature token with flying");
-            cardType.add(CardType.CREATURE);
-            color.setBlack(true);
-            subtype.add("Vampire");
-            power = new MageInt(2);
-            toughness = new MageInt(2);
-            addAbility(FlyingAbility.getInstance());
-        }
+class VampireToken extends Token {
+    VampireToken() {
+        super("Vampire", "2/2 black Vampire creature token with flying");
+        cardType.add(CardType.CREATURE);
+        color.setBlack(true);
+        subtype.add("Vampire");
+        power = new MageInt(2);
+        toughness = new MageInt(2);
+        addAbility(FlyingAbility.getInstance());
     }
 }

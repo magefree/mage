@@ -74,7 +74,7 @@ public class InkmothNexus extends CardImpl {
 
 class InkmothNexusToken extends Token {
     public InkmothNexusToken() {
-        super("Blinkmoth", "a 1/1 Blinkmoth artifact creature with flying and infect");
+        super("Blinkmoth", "1/1 Blinkmoth artifact creature with flying and infect");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         this.subtype.add("Blinkmoth");

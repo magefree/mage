@@ -19,7 +19,7 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
     public void testCard() {
         addCard(Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Create a a 1/1 black Vampire creature token with lifelink.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Create a 1/1 black Vampire creature token with lifelink.");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

@@ -89,7 +89,7 @@ public class TitaniaProtectorOfArgoth extends CardImpl {
 class TitaniaProtectorOfArgothElementalToken extends Token {
 
     TitaniaProtectorOfArgothElementalToken() {
-        super("Elemental", "a 5/3 green Elemental creature token");
+        super("Elemental", "5/3 green Elemental creature token");
         this.setOriginalExpansionSetCode("C14");
         this.cardType.add(CardType.CREATURE);
         this.color = ObjectColor.GREEN;

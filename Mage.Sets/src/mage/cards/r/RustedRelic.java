@@ -70,7 +70,7 @@ public class RustedRelic extends CardImpl {
 class RustedRelicToken extends Token {
 
     public RustedRelicToken() {
-        super("Rusted Relic", "a 5/5 Golem artifact creature");
+        super("Rusted Relic", "5/5 Golem artifact creature");
         cardType.add(CardType.CREATURE);
         subtype.add("Golem");
         power = new MageInt(5);

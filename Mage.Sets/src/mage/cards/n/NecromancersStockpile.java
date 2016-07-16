@@ -42,7 +42,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
@@ -54,15 +53,13 @@ import mage.target.common.TargetCardInHand;
  */
 public class NecromancersStockpile extends CardImpl {
 
-    private final FilterCard filter = new FilterCreatureCard();
-
     public NecromancersStockpile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // {1}{B}, Discard a creature card: Draw a card.
-        // If the discarded card was a Zombie card, create a 2/2 black Zombie creature token tapped.
+        // If the discarded card was a Zombie card, create a tapped 2/2 black Zombie creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}"));
-        ability.addCost(new NecromancersStockpileDiscardTargetCost(new TargetCardInHand(filter)));
+        ability.addCost(new NecromancersStockpileDiscardTargetCost(new TargetCardInHand(new FilterCreatureCard())));
         ability.addEffect(new NecromancersStockpilePutTokenEffect());
         this.addAbility(ability);
     }
@@ -128,7 +125,7 @@ class NecromancersStockpilePutTokenEffect extends OneShotEffect {
 
     NecromancersStockpilePutTokenEffect() {
         super(Outcome.Neutral);
-        staticText = "If the discarded card was a Zombie card, create a 2/2 black Zombie creature token tapped";
+        staticText = "If the discarded card was a Zombie card, create a tapped 2/2 black Zombie creature token";
     }
 
     NecromancersStockpilePutTokenEffect(final NecromancersStockpilePutTokenEffect effect) {

@@ -106,7 +106,7 @@ class SorinSolemnVisitorEmblem extends Emblem {
 class SorinSolemnVisitorVampireToken extends Token {
 
     SorinSolemnVisitorVampireToken() {
-        super("Vampire", "a 2/2 black Vampire creature token with flying");
+        super("Vampire", "2/2 black Vampire creature token with flying");
         setOriginalExpansionSetCode("KTK");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);

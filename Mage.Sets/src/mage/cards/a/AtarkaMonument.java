@@ -71,7 +71,7 @@ public class AtarkaMonument extends CardImpl {
 
     private class AtarkaMonumentToken extends Token {
         AtarkaMonumentToken() {
-            super("", "a 4/4 red and green Dragon artifact creature with flying");
+            super("", "4/4 red and green Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setRed(true);

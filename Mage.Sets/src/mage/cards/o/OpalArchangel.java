@@ -74,7 +74,7 @@ public class OpalArchangel extends CardImpl {
 class OpalArchangelToken extends Token {
 
     public OpalArchangelToken() {
-        super("Angel", "a 5/5 Angel creature with flying and vigilance");
+        super("Angel", "5/5 Angel creature with flying and vigilance");
         cardType.add(CardType.CREATURE);
         subtype.add("Angel");
         power = new MageInt(5);

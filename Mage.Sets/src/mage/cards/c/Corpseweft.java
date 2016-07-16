@@ -56,7 +56,7 @@ public class Corpseweft extends CardImpl {
     public Corpseweft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
-        // {1}{B}, Exile one or more creature cards from your graveyard: Create an X/X black Zombie Horror creature token tapped, where X is twice the number of cards exiled this way.
+        // {1}{B}, Exile one or more creature cards from your graveyard: Create a tapped X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CorpseweftEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(1, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard"))));
         this.addAbility(ability);
@@ -76,7 +76,7 @@ class CorpseweftEffect extends OneShotEffect {
 
     public CorpseweftEffect() {
         super(Outcome.Benefit);
-        this.staticText = "create an X/X black Zombie Horror creature token tapped, where X is twice the number of cards exiled this way";
+        this.staticText = "create a tapped X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way";
     }
 
     public CorpseweftEffect(final CorpseweftEffect effect) {
@@ -110,7 +110,7 @@ class CorpseweftEffect extends OneShotEffect {
 class CorpseweftZombieToken extends Token {
 
     public CorpseweftZombieToken(int power, int toughness) {
-        super("Zombie Horror", "an X/X black Zombie Horror creature token tapped, where X is twice the number of cards exiled this way");
+        super("Zombie Horror", "X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way");
         cardType.add(CardType.CREATURE);
         subtype.add("Zombie");
         subtype.add("Horror");

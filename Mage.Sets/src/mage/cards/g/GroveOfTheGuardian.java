@@ -86,7 +86,7 @@ public class GroveOfTheGuardian extends CardImpl {
     private class ElementalToken extends Token {
 
         ElementalToken() {
-            super("Elemental", "an 8/8 green and white Elemental creature token with vigilance");
+            super("Elemental", "8/8 green and white Elemental creature token with vigilance");
 
             cardType.add(CardType.CREATURE);
             color.setGreen(true);

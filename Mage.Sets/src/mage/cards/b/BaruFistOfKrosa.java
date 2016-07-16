@@ -126,7 +126,7 @@ class BaruFistOfKrosaEffect extends OneShotEffect {
 class BaruFistOfKrosaToken extends Token {
 
     BaruFistOfKrosaToken(int xValue) {
-        super("Wurm", "a X/X green Wurm creature token, where X is the number of lands you control");
+        super("Wurm", "X/X green Wurm creature token, where X is the number of lands you control");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Wurm");

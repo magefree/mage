@@ -70,7 +70,7 @@ public class AzoriusKeyrune extends CardImpl {
 
     private class AzoriusKeyruneToken extends Token {
         AzoriusKeyruneToken() {
-            super("", "a 2/2 white and blue Bird artifact creature with flying");
+            super("", "2/2 white and blue Bird artifact creature with flying");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setWhite(true);

@@ -36,7 +36,7 @@ import mage.constants.CardType;
 public class WurmToken extends Token {
 
     public WurmToken() {
-        super("Wurm", "a 6/6 green Wurm creature token");
+        super("Wurm", "6/6 green Wurm creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Wurm");

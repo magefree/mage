@@ -79,7 +79,7 @@ public class HiddenGibbons extends CardImpl {
 class HiddenGibbonsApe extends Token {
 
     public HiddenGibbonsApe() {
-        super("Ape", "a 4/4 Ape creature");
+        super("Ape", "4/4 Ape creature");
         cardType.add(CardType.CREATURE);
         subtype.add("Ape");
         power = new MageInt(4);

@@ -72,7 +72,7 @@ public class OpalCaryatid extends CardImpl {
 class OpalCaryatidSoldier extends Token {
 
     public OpalCaryatidSoldier() {
-        super("Soldier", "a 2/2 Soldier creature");
+        super("Soldier", "2/2 Soldier creature");
         cardType.add(CardType.CREATURE);
         subtype.add("Soldier");
         power = new MageInt(2);

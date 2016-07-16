@@ -73,7 +73,7 @@ public class HiddenGuerrillas extends CardImpl {
 class HiddenGuerrillasSoldier extends Token {
 
     public HiddenGuerrillasSoldier() {
-        super("Soldier", "a 5/3 Soldier creature with trample");
+        super("Soldier", "5/3 Soldier creature with trample");
         cardType.add(CardType.CREATURE);
         subtype.add("Soldier");
         power = new MageInt(5);

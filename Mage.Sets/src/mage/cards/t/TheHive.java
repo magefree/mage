@@ -67,7 +67,7 @@ public class TheHive extends CardImpl {
 
 class WaspToken extends Token {
     WaspToken() {
-        super("Wasp", "a 1/1 colorless Insect artifact creature token with flying");
+        super("Wasp", "1/1 colorless Insect artifact creature token with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         this.subtype.add("Insect");

@@ -72,7 +72,7 @@ public class ForbiddingWatchtower extends CardImpl {
 
 class ForbiddingWatchtowerToken extends Token {
     ForbiddingWatchtowerToken() {
-        super("Soldier", "a 1/5 white Soldier creature");
+        super("Soldier", "1/5 white Soldier creature");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Soldier");
         color.setWhite(true);

@@ -192,7 +192,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
 class AwakeningLandToken extends Token {
 
     public AwakeningLandToken() {
-        super("", "an 8/8 green Elemental creature");
+        super("", "8/8 green Elemental creature");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Elemental");

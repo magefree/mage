@@ -82,7 +82,7 @@ public class JabbaTheHutt extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // {R},{T}: Create a 4/4 red Hunter creature token tapped. It fights another target creature an opponent control with a bounty counter on it. Activate this ability only any time you could cast a sorcery.
+        // {R},{T}: Create a tapped 4/4 red Hunter creature token. It fights another target creature an opponent control with a bounty counter on it. Activate this ability only any time you could cast a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new JabbaTheHuttEffect(), new ManaCostsImpl("R"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponentsCreaturePermanent(filter));
@@ -114,7 +114,7 @@ class JabbaTheHuttEffect extends OneShotEffect {
 
     public JabbaTheHuttEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Create a 4/4 red Hunter creature token tapped. It fights another target creature an opponent control with a bounty counter on it";
+        this.staticText = "Create a tapped 4/4 red Hunter creature token. It fights another target creature an opponent control with a bounty counter on it";
     }
 
     public JabbaTheHuttEffect(final JabbaTheHuttEffect effect) {

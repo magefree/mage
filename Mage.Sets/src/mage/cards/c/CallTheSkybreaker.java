@@ -40,12 +40,11 @@ import mage.game.permanent.token.Token;
 /**
  *
  * @author jeffwadsworth
-
  */
 public class CallTheSkybreaker extends CardImpl {
 
     public CallTheSkybreaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U/R}{U/R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U/R}{U/R}");
 
         // Create a 5/5 blue and red Elemental creature token with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElementalToken()));
@@ -64,20 +63,20 @@ public class CallTheSkybreaker extends CardImpl {
         return new CallTheSkybreaker(this);
     }
 
-    class ElementalToken extends Token {
+}
 
-        public ElementalToken() {
-            super("Elemental", "a 5/5 blue and red Elemental creature token with flying");
-            cardType.add(CardType.CREATURE);
-            color.setBlue(true);
-            color.setRed(true);
-            subtype.add("Elemental");
-            if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
-                setTokenType(2);
-            }
-            power = new MageInt(5);
-            toughness = new MageInt(5);
-            this.addAbility(FlyingAbility.getInstance());
+class ElementalToken extends Token {
+    public ElementalToken() {
+        super("Elemental", "5/5 blue and red Elemental creature token with flying");
+        cardType.add(CardType.CREATURE);
+        color.setBlue(true);
+        color.setRed(true);
+        subtype.add("Elemental");
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
+            setTokenType(2);
         }
+        power = new MageInt(5);
+        toughness = new MageInt(5);
+        this.addAbility(FlyingAbility.getInstance());
     }
 }

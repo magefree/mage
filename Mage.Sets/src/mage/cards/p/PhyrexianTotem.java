@@ -78,7 +78,7 @@ public class PhyrexianTotem extends CardImpl {
     
     private class PhyrexianTotemToken extends Token {
         PhyrexianTotemToken() {
-            super("Horror", "a 5/5 black Horror artifact creature with trample");
+            super("Horror", "5/5 black Horror artifact creature with trample");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setBlack(true);

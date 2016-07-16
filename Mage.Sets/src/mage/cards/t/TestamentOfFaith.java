@@ -176,7 +176,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
 
 class TestamentOfFaithToken extends Token {
     TestamentOfFaithToken() {
-        super("Wall", "an X/X Wall creature with defender");
+        super("Wall", "X/X Wall creature with defender");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Wall");
         color.setWhite(true);

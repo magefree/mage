@@ -76,7 +76,7 @@ public class TitanForge extends CardImpl {
 
 class TitanForgeGolemToken extends Token {
     TitanForgeGolemToken() {
-        super("Golem", "a 9/9 colorless Golem artifact creature token");
+        super("Golem", "9/9 colorless Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Golem");

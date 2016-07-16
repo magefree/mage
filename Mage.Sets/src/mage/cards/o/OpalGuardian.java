@@ -83,7 +83,7 @@ class OpalGuardianGargoyle extends Token {
     }
 
     public OpalGuardianGargoyle() {
-        super("Gargoyle", "a 3/4 Gargoyle creature with flying and protection from red");
+        super("Gargoyle", "3/4 Gargoyle creature with flying and protection from red");
         cardType.add(CardType.CREATURE);
         subtype.add("Gargoyle");
         power = new MageInt(3);

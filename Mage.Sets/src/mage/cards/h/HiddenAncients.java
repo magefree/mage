@@ -79,7 +79,7 @@ public class HiddenAncients extends CardImpl {
 class HiddenAncientsTreefolk extends Token {
 
     public HiddenAncientsTreefolk() {
-        super("Treefolk", "a 5/5 Treefolk creature");
+        super("Treefolk", "5/5 Treefolk creature");
         cardType.add(CardType.CREATURE);
         subtype.add("Treefolk");
         power = new MageInt(5);

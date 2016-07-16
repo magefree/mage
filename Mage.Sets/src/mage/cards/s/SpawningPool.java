@@ -61,4 +61,3 @@ public class SpawningPool extends CardImpl {
         return new SpawningPool(this);
     }
 }
-

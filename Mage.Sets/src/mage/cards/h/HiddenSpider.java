@@ -81,7 +81,7 @@ public class HiddenSpider extends CardImpl {
 class HiddenSpiderToken extends Token {
 
     public HiddenSpiderToken() {
-        super("Spider", "a 3/5 Spider creature with reach");
+        super("Spider", "3/5 Spider creature with reach");
         cardType.add(CardType.CREATURE);
         subtype.add("Spider");
         power = new MageInt(3);

@@ -75,7 +75,7 @@ public class WurmcoilEngine extends CardImpl {
 class Wurm1Token extends Token {
 
     public Wurm1Token(String setCode) {
-        super("Wurm", "a 3/3 colorless Wurm artifact creature token with deathtouch");
+        super("Wurm", "3/3 colorless Wurm artifact creature token with deathtouch");
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
@@ -89,7 +89,7 @@ class Wurm1Token extends Token {
 class Wurm2Token extends Token {
 
     public Wurm2Token(String setCode) {
-        super("Wurm", "a 3/3 colorless Wurm artifact creature token with lifelink");
+        super("Wurm", "3/3 colorless Wurm artifact creature token with lifelink");
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

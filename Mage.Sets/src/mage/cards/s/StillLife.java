@@ -66,7 +66,7 @@ public class StillLife extends CardImpl {
 class StillLifeCentaur extends Token {
 
     public StillLifeCentaur() {
-        super("Centaur", "a 4/3 Centaur creature token");
+        super("Centaur", "4/3 Centaur creature token");
         cardType.add(CardType.CREATURE);
         subtype.add("Centaur");
         power = new MageInt(4);

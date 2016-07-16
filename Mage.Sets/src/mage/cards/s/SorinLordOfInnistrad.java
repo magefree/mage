@@ -95,18 +95,17 @@ public class SorinLordOfInnistrad extends CardImpl {
     public SorinLordOfInnistrad copy() {
         return new SorinLordOfInnistrad(this);
     }
+}
 
-    class VampireToken extends Token {
-
-        VampireToken() {
-            super("Vampire", "a 1/1 black Vampire creature token with lifelink");
-            cardType.add(CardType.CREATURE);
-            color.setBlack(true);
-            subtype.add("Vampire");
-            power = new MageInt(1);
-            toughness = new MageInt(1);
-            addAbility(LifelinkAbility.getInstance());
-        }
+class VampireToken extends Token {
+    VampireToken() {
+        super("Vampire", "1/1 black Vampire creature token with lifelink");
+        cardType.add(CardType.CREATURE);
+        color.setBlack(true);
+        subtype.add("Vampire");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        addAbility(LifelinkAbility.getInstance());
     }
 }
 

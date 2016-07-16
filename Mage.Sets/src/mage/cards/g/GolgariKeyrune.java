@@ -70,7 +70,7 @@ public class GolgariKeyrune extends CardImpl {
 
     private class GolgariKeyruneToken extends Token {
         GolgariKeyruneToken() {
-            super("", "a 2/2 black and green Insect artifact creature with deathtouch");
+            super("", "2/2 black and green Insect artifact creature with deathtouch");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setGreen(true);

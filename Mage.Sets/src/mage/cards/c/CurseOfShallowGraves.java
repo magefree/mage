@@ -67,7 +67,7 @@ public class CurseOfShallowGraves extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // Whenever a player attacks enchanted player with one or more creatures, that attacking player may create a 2/2 black Zombie creature token tapped.
+        // Whenever a player attacks enchanted player with one or more creatures, that attacking player may create a tapped 2/2 black Zombie creature token.
         this.addAbility(new CurseOfShallowTriggeredAbility());
     }
 
@@ -116,7 +116,7 @@ class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player attacks enchanted player with one or more creatures, that attacking player may create a 2/2 black Zombie creature token tapped.";
+        return "Whenever a player attacks enchanted player with one or more creatures, that attacking player may create a tapped 2/2 black Zombie creature token.";
     }
 
     @Override
@@ -130,7 +130,7 @@ class CurseOfShallowEffect extends OneShotEffect {
 
     public CurseOfShallowEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that attacking player may create a 2/2 black Zombie creature token tapped";
+        this.staticText = "that attacking player may create a tapped 2/2 black Zombie creature token";
     }
 
     public CurseOfShallowEffect(final CurseOfShallowEffect effect) {
@@ -145,7 +145,7 @@ class CurseOfShallowEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player attacker = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (attacker != null && attacker.chooseUse(outcome, "create a 2/2 black Zombie creature token tapped?", source, game)) {
+        if (attacker != null && attacker.chooseUse(outcome, "create a tapped 2/2 black Zombie creature token?", source, game)) {
             Effect effect = new CreateTokenTargetEffect(new ZombieToken(), new StaticValue(1), true, false);
             effect.setTargetPointer(targetPointer);
             return effect.apply(game, source);

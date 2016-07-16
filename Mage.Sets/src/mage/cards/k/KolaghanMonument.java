@@ -71,7 +71,7 @@ public class KolaghanMonument extends CardImpl {
     
     private class KolaghanMonumentToken extends Token {
         KolaghanMonumentToken() {
-            super("", "a 4/4 black and red Dragon artifact creature with flying");
+            super("", "4/4 black and red Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setBlack(true);
