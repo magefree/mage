@@ -52,12 +52,12 @@ public class AbuJafar extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures blocking or blocked by it");
         filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
                                  new BlockingAttackerIdPredicate(this.getId())));
         
         // When Abu Ja'far dies, destroy all creatures blocking or blocked by it. They can't be regenerated.        
-        this.addAbility(new DiesTriggeredAbility(new DestroyAllEffect(filter), true));              
+        this.addAbility(new DiesTriggeredAbility(new DestroyAllEffect(filter, true), false));
     }
 
     public AbuJafar(final AbuJafar card) {
