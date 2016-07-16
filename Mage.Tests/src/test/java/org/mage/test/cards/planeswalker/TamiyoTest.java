@@ -89,9 +89,14 @@ public class TamiyoTest extends CardTestPlayerBase {
         // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
         // +1: Choose up to two target creatures. Until your next turn,
         // whenever either of those creatures deals combat damage, you draw a card.
-        addCard(Zone.BATTLEFIELD, playerA, "Tamiyo, Field Researcher", 1);
-
+        addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);        
         addCard(Zone.BATTLEFIELD, playerA, "Bronze Sable", 1); // 2/1
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher");
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Bronze Sable");
 
@@ -113,10 +118,15 @@ public class TamiyoTest extends CardTestPlayerBase {
         // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
         // +1: Choose up to two target creatures. Until your next turn,
         // whenever either of those creatures deals combat damage, you draw a card.
-        addCard(Zone.BATTLEFIELD, playerA, "Tamiyo, Field Researcher", 1);
-
+        addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);        
         addCard(Zone.BATTLEFIELD, playerA, "Bronze Sable", 1); // 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // 2/3
+                
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher");
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Bronze Sable^Sylvan Advocate");
 
@@ -139,10 +149,15 @@ public class TamiyoTest extends CardTestPlayerBase {
         // Tamiyo, Field Researcher {1}{G}{W}{U} - 4 loyalty
         // +1: Choose up to two target creatures. Until your next turn,
         // whenever either of those creatures deals combat damage, you draw a card.
-        addCard(Zone.BATTLEFIELD, playerA, "Tamiyo, Field Researcher", 1);
-
+        addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);        
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // 2/3
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
+                
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo, Field Researcher");
+
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Choose up to two");
         addTarget(playerA, "Sylvan Advocate");
 
@@ -172,7 +187,7 @@ public class TamiyoTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);        
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // 2/3
                 
         addCard(Zone.HAND, playerB, "Hero's Downfall", 1);
