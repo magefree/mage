@@ -58,7 +58,7 @@ public class LostInTheWoods extends CardImpl {
 
 
         // Whenever a creature attacks you or a planeswalker you control, reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library.
-        this.addAbility(new AttacksAllTriggeredAbility(new LostInTheWoodsEffect(), true, new FilterCreaturePermanent(), SetTargetPointer.PERMANENT, true));
+        this.addAbility(new AttacksAllTriggeredAbility(new LostInTheWoodsEffect(), false, new FilterCreaturePermanent(), SetTargetPointer.PERMANENT, true));
     }
 
     public LostInTheWoods(final LostInTheWoods card) {
