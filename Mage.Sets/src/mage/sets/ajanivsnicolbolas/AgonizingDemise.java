@@ -66,7 +66,7 @@ public class AgonizingDemise extends CardImpl {
         this.addAbility(new KickerAbility("{1}{R}"));
         
         // Destroy target nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterNonBlackCreature));
         
         //If Agonizing Demise was kicked, it deals damage equal to that creature's power to the creature's controller.
