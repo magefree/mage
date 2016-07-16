@@ -95,7 +95,7 @@ class IchorExplosionDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return ", where X is the sacrificed creature's power";
+        return "the sacrificed creature's power";
     }
 
     @Override

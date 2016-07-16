@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class AurochsHerd extends CardImpl {
 
-    private static final FilterCard filter1 = new FilterCard("Aurocs card");
+    private static final FilterCard filter1 = new FilterCard("Aurochs card");
     private static final FilterAttackingCreature filter2 = new FilterAttackingCreature("other attacking Aurochs");
 
     static {

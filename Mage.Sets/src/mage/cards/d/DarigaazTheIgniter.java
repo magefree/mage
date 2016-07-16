@@ -81,7 +81,7 @@ class DarigaazTheIgniterEffect extends OneShotEffect {
     public DarigaazTheIgniterEffect() {
         super(Outcome.Damage);
         staticText = "choose a color, then that player reveals his or her hand and {this} deals damage"
-                + "to the player equal to the number of cards of that color revealed this way";
+                + " to the player equal to the number of cards of that color revealed this way";
     }
 
     public DarigaazTheIgniterEffect(final DarigaazTheIgniterEffect effect) {

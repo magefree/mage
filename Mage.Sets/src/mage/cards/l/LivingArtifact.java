@@ -118,7 +118,7 @@ class LivingArtifactTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you're dealt damage, put that many charge counters on {this}.";
+        return "Whenever you're dealt damage, put that many vitality counters on {this}.";
     }
 }
 

@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.CommanderPredicate;
  */
 public class BastionProtector extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Commander creatures you control");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Commander creatures");
 
     static {
         filter.add(new CommanderPredicate());

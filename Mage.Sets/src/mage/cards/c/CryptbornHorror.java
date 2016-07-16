@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  */
 public class CryptbornHorror extends CardImpl {
 
-    private static final String rule = "{this} enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn";
+    private static final String rule = "with X +1/+1 counters on it, where X is the total life lost by your opponents this turn";
 
     public CryptbornHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/R}{B/R}");
