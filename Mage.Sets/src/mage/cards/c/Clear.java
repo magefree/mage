@@ -35,8 +35,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -48,7 +47,7 @@ public class Clear extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 

@@ -33,8 +33,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 import java.util.UUID;
 
@@ -50,7 +49,7 @@ public class FranticPurification extends CardImpl {
 
         // Destroy target enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
 
         // Madness {W}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{W}")));

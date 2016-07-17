@@ -37,8 +37,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  * @author LevelX2
@@ -54,7 +53,7 @@ public class KeeningApparition extends CardImpl {
 
         // Sacrifice Keening Apparition: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }
 

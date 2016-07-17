@@ -38,11 +38,10 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -75,7 +74,7 @@ public class DuergarHedgeMage extends CardImpl {
 
         // When Duergar Hedge-Mage enters the battlefield, if you control two or more Plains, you may destroy target enchantment.
         Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2);
-        ability2.addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
+        ability2.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability2);
 
     }

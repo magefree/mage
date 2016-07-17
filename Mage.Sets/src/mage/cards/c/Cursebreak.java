@@ -32,8 +32,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 import java.util.UUID;
 
@@ -47,7 +46,7 @@ public class Cursebreak extends CardImpl {
 
 
         // Destroy target enchantment. You gain 2 life.
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }

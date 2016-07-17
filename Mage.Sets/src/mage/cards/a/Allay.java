@@ -33,8 +33,7 @@ import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -49,7 +48,7 @@ public class Allay extends CardImpl {
         this.addAbility(new BuybackAbility("{3}"));
         
         // Destroy target enchantment.
-        this.getSpellAbility().addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

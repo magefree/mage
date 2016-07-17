@@ -35,10 +35,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -64,7 +63,7 @@ public class DawnToDusk extends CardImpl {
         // and/or destroy target enchantment.
         Mode mode = new Mode();
         mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(new FilterEnchantmentPermanent()));
+        mode.getTargets().add(new TargetEnchantmentPermanent());
         this.getSpellAbility().addMode(mode);
     }
 

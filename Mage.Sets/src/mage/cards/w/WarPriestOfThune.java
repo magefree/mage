@@ -36,9 +36,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -56,8 +54,7 @@ public class WarPriestOfThune extends CardImpl {
 
         // When War Priest of Thune enters the battlefield, you may destroy target enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        Target target = new TargetPermanent(new FilterEnchantmentPermanent());
-        ability.addTarget(target);
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }
 

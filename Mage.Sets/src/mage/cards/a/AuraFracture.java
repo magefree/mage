@@ -37,9 +37,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -55,7 +54,7 @@ public class AuraFracture extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new DestroyTargetEffect(), 
                 new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
-        ability.addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }
 

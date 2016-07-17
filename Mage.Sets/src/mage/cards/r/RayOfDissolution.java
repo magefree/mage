@@ -33,9 +33,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -49,8 +47,7 @@ public class RayOfDissolution extends CardImpl {
 
         // Destroy target enchantment. You gain 3 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Target target = new TargetPermanent(new FilterEnchantmentPermanent());
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }
 

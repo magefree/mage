@@ -37,9 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
@@ -58,8 +56,7 @@ public class Wispmare extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Wispmare enters the battlefield, destroy target enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        Target target = new TargetPermanent(new FilterEnchantmentPermanent());
-        ability.addTarget(target);
+        ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
         // Evoke {W}
         this.addAbility(new EvokeAbility(this, "{W}"));
