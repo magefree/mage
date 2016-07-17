@@ -45,7 +45,6 @@ public class ContingencyPlan extends CardImpl {
     public ContingencyPlan(UUID ownerId) {
         super(ownerId, 52, "Contingency Plan", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "EMN";
-        this.supertype.add("Sorcery");
 
         // Look at the top five cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(5),
