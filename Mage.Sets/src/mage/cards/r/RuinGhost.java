@@ -40,21 +40,14 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEf
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class RuinGhost extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
 
     public RuinGhost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -67,7 +60,7 @@ public class RuinGhost extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new ManaCostsImpl("{W"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
-        ability.addTarget(new TargetControlledPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
     }
 

@@ -28,15 +28,13 @@
 
 package mage.abilities.keyword;
 
-import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AttachEffect;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -45,16 +43,9 @@ import mage.target.common.TargetLandPermanent;
 
 //20091005 - 702.64
 public class FortifyAbility extends ActivatedAbilityImpl {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
     public FortifyAbility(Zone zone, AttachEffect effect, Cost cost) {
         super(zone, effect, cost);
-        this.addTarget(new TargetLandPermanent(filter));
+        this.addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
         timing = TimingRule.SORCERY;
     }
 
@@ -66,6 +57,4 @@ public class FortifyAbility extends ActivatedAbilityImpl {
     public FortifyAbility copy() {
         return new FortifyAbility(this);
     }
-
-
 }

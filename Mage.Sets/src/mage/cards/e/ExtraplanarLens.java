@@ -40,8 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
@@ -80,11 +79,7 @@ public class ExtraplanarLens extends CardImpl {
 
 class ExtraplanarLensImprintEffect extends OneShotEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     public ExtraplanarLensImprintEffect() {
         super(Outcome.Neutral);
