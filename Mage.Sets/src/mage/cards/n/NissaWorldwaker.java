@@ -48,7 +48,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -66,11 +65,10 @@ import mage.target.targetpointer.FixedTarget;
 public class NissaWorldwaker extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
-    private static final FilterPermanent filterForest = new FilterPermanent("Forest");
+    private static final FilterPermanent filterForest = new FilterPermanent("Forest", "Forest");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filterForest.add(new SubtypePredicate("Forest"));
     }
 
     public NissaWorldwaker(UUID ownerId, CardSetInfo setInfo) {

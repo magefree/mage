@@ -39,7 +39,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,11 +50,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class VolcanicEruption extends CardImpl {
     
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
-
-    static{
-        filter.add(new SubtypePredicate(("Mountain")));
-    }
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain", "Mountain");
 
     public VolcanicEruption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}{U}");
