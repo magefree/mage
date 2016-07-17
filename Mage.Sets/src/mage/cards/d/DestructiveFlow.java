@@ -35,8 +35,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -44,17 +42,11 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public class DestructiveFlow extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-
-    static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
-
     public DestructiveFlow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{R}{G}");
 
         // At the beginning of each player's upkeep, that player sacrifices a nonbasic land.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player"),
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(FilterLandPermanent.nonbasicLand(), 1, "that player"),
             TargetController.ANY, false));
 
     }

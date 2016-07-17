@@ -40,9 +40,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -74,11 +71,7 @@ public class FromTheAshes extends CardImpl {
 
 class FromTheAshesEffect extends OneShotEffect {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic lands");
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
+    private static final FilterLandPermanent filter = FilterLandPermanent.nonbasicLands();
 
     public FromTheAshesEffect() {
         super(Outcome.Benefit);
