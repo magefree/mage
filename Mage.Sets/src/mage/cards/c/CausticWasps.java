@@ -37,7 +37,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -102,8 +101,7 @@ class CausticWaspsTriggeredAbility extends TriggeredAbilityImpl {
             Player player = game.getPlayer(event.getTargetId());
             if (player != null) {
                 FilterPermanent filter = new FilterPermanent("an artifact controlled by " + player.getLogName());
-                filter.add(Predicates.or(
-                    new CardTypePredicate(CardType.ARTIFACT)));
+                filter.add(new CardTypePredicate(CardType.ARTIFACT));
                 filter.add(new ControllerIdPredicate(event.getTargetId()));
 
                 this.getTargets().clear();
