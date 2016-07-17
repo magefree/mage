@@ -56,4 +56,3 @@ public class TempestOfLight extends CardImpl {
         return new TempestOfLight(this);
     }
 }
-

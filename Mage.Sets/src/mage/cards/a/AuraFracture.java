@@ -36,9 +36,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -47,12 +46,6 @@ import mage.target.common.TargetControlledPermanent;
  * @author fireshoes
  */
 public class AuraFracture extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
 
     public AuraFracture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
@@ -62,7 +55,7 @@ public class AuraFracture extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new DestroyTargetEffect(), 
                 new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
         this.addAbility(ability);
     }
 

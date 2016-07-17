@@ -41,8 +41,7 @@ import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -50,11 +49,6 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class KithkinSpellduster extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
 
     public KithkinSpellduster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
@@ -68,7 +62,7 @@ public class KithkinSpellduster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {1}{W}, Sacrifice Kithkin Spellduster: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         // Persist

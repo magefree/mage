@@ -38,28 +38,20 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterEnchantmentPermanent;
 
 /**
  *
  * @author Plopman
  */
 public class AuraFlux extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("enchantments");
 
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-    
     public AuraFlux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
-
         // Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(2)), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter, true)));
- 
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, new FilterEnchantmentPermanent("enchantments"), true)));
     }
 
     public AuraFlux(final AuraFlux card) {

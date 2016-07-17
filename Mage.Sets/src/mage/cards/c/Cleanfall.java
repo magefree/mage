@@ -34,25 +34,18 @@ import mage.constants.CardType;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterEnchantmentPermanent;
 
 /**
  * @author Loki
  */
 public class Cleanfall extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("enchantments");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
     public Cleanfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
         this.subtype.add("Arcane");
 
-        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
     }
 
     public Cleanfall(final Cleanfall card) {

@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -47,10 +47,8 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class DawnToDusk extends CardImpl {
 
     private static final FilterCard filterCard = new FilterCard("enchantment card from your graveyard");
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
     static {
         filterCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
     public DawnToDusk(UUID ownerId, CardSetInfo setInfo) {
@@ -66,7 +64,7 @@ public class DawnToDusk extends CardImpl {
         // and/or destroy target enchantment.
         Mode mode = new Mode();
         mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(filter));
+        mode.getTargets().add(new TargetPermanent(new FilterEnchantmentPermanent()));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -35,8 +35,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -46,12 +45,6 @@ import mage.target.TargetPermanent;
  */
 public class EnlightenedAscetic extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-    
     public EnlightenedAscetic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add("Cat");
@@ -61,7 +54,7 @@ public class EnlightenedAscetic extends CardImpl {
 
         // When Enlightened Ascetic enters the battlefield, you may destroy target enchantment. 
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(new FilterEnchantmentPermanent());
         ability.addTarget(target);
         this.addAbility(ability);
     }

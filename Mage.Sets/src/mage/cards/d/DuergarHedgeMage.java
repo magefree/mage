@@ -38,9 +38,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
@@ -53,15 +52,13 @@ public class DuergarHedgeMage extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("a Plains");
-    private static final FilterPermanent filter3 = new FilterPermanent("enchantment");
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
         filter2.add(new SubtypePredicate("Plains"));
-        filter3.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
-    private final String rule1 = "When {this} enters the battlefield, if you control two or more Mountains, you may destroy target artifact.";
-    private final String rule2 = "When {this} enters the battlefield, if you control two or more Plains, you may destroy target enchantment.";
+    private static final String rule1 = "When {this} enters the battlefield, if you control two or more Mountains, you may destroy target artifact.";
+    private static final String rule2 = "When {this} enters the battlefield, if you control two or more Plains, you may destroy target enchantment.";
 
     public DuergarHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}");
@@ -78,7 +75,7 @@ public class DuergarHedgeMage extends CardImpl {
 
         // When Duergar Hedge-Mage enters the battlefield, if you control two or more Plains, you may destroy target enchantment.
         Ability ability2 = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true), new PermanentsOnTheBattlefieldCondition(filter2, CountType.MORE_THAN, 1), rule2);
-        ability2.addTarget(new TargetPermanent(filter3));
+        ability2.addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
         this.addAbility(ability2);
 
     }

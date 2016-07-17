@@ -34,8 +34,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -43,16 +42,12 @@ import mage.target.TargetPermanent;
  * @author markedagain
  */
 public class WipeClean extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
     public WipeClean(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // Exile target enchantment.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter)); 
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterEnchantmentPermanent()));
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         // Cycling {3}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
