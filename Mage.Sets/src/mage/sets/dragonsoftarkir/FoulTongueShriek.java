@@ -29,12 +29,15 @@ package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
+import mage.abilities.dynamicvalue.common.AttackingFilterCreatureCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -66,7 +69,12 @@ public class FoulTongueShriek extends CardImpl {
 }
 
 class FoulTongueShriekEffect extends OneShotEffect {
-
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
+    
     public FoulTongueShriekEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent loses 1 life for each attacking creature you control. You gain that much life";
@@ -86,7 +94,7 @@ class FoulTongueShriekEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && targetOpponent != null) {
-            int amount = new AttackingCreatureCount().calculate(game, source, this);
+            int amount = new AttackingFilterCreatureCount(filter).calculate(game, source, this);
             if (amount > 0) {
                 targetOpponent.loseLife(amount, game);
                 controller.gainLife(amount, game);
