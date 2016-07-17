@@ -35,8 +35,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
@@ -54,7 +53,7 @@ public class VithianRenegades extends CardImpl {
         
         // When Vithian Renegades enters the battlefield, destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent(new FilterArtifactPermanent()));
+        ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
 

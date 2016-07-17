@@ -36,9 +36,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
@@ -57,8 +55,7 @@ public class ViridianCorrupter extends CardImpl {
 
         // When Viridian Corrupter enters the battlefield, destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        Target target = new TargetPermanent(new FilterArtifactPermanent());
-        ability.addTarget(target);
+        ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
 
