@@ -56,7 +56,10 @@ public class Worldslayer extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Equipment");
 
+        // Whenever equipped creature deals combat damage to a player, destroy all permanents other than Worldslayer.
         this.addAbility(new WorldslayerTriggeredAbility());
+        
+        // Equip {5}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(5)));
     }
 
