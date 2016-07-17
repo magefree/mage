@@ -73,7 +73,7 @@ public class KiraGreatGlassSpinner extends CardImpl {
         // Creatures you control have "Whenever this creature becomes the target of a spell or ability for the first time in a turn, counter that spell or ability."
         Effect effect = new CounterTargetEffect();
         effect.setText("counter that spell or ability");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new KiraGreatGlassSpinnerAbility(effect), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures you control"))),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new KiraGreatGlassSpinnerAbility(effect), Duration.WhileOnBattlefield, new FilterCreaturePermanent("creatures"))),
                 new CreatureWasTargetedThisTurnWatcher());
 
     }

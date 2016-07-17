@@ -44,7 +44,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -53,11 +52,10 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SterlingGrove extends CardImpl {
     
-    private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("Other enchantments you control");
+    private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("enchantments");
     private static final FilterCard filterCard = new FilterCard("enchantment card");
     static {
         filterPermanent.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterPermanent.add(new AnotherPredicate());
         filterCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 

@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class MadAuntie extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("another Goblin");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Goblins you control");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Goblin creatures");
 
     static {
         filter1.add(new SubtypePredicate("Goblin"));

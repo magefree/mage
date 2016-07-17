@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -55,7 +55,7 @@ public class OnduChampion extends CardImpl {
 
         // <i>Rally</i> — Whenever Ondu Champion or another Ally enters the battlefield under your control, creatures you control gain trample until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures you control")), false));
+                new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures")), false));
     }
 
     public OnduChampion(final OnduChampion card) {
