@@ -29,24 +29,16 @@ package mage.sets.bornofthegods;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.combat.CantAttackBlockUnlessPaysSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -83,54 +75,4 @@ public class FloodtideSerpent extends CardImpl {
     public FloodtideSerpent copy() {
         return new FloodtideSerpent(this);
     }
-}
-
-class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment you control");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
-    FloodtideSerpentReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "{this} can't attack unless you return an enchantment you control to its owner's hand <i>(This cost is paid as attackers are declared.)</i>";
-    }
-
-    FloodtideSerpentReplacementEffect(FloodtideSerpentReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            ReturnToHandChosenControlledPermanentCost attackCost = new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter));
-            if (attackCost.canPay(source, source.getSourceId(), event.getPlayerId(), game)
-                    && player.chooseUse(Outcome.Neutral, "Return an enchantment you control to hand to attack?", source, game)) {
-                if (attackCost.pay(source, game, source.getSourceId(), event.getPlayerId(), true, null)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARE_ATTACKER;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getSourceId().equals(source.getSourceId());
-    }
-
-    @Override
-    public FloodtideSerpentReplacementEffect copy() {
-        return new FloodtideSerpentReplacementEffect(this);
-    }
-
 }
