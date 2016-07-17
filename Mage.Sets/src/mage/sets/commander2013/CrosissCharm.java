@@ -69,7 +69,7 @@ public class CrosissCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
         // or destroy target artifact.
         mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect(true));
+        mode.getEffects().add(new DestroyTargetEffect());
         Target target = new TargetArtifactPermanent();
         mode.getTargets().add(target);
         this.getSpellAbility().addMode(mode);
