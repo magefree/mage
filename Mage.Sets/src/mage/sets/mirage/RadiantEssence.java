@@ -31,19 +31,16 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -55,7 +52,6 @@ public class RadiantEssence extends CardImpl {
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public RadiantEssence(UUID ownerId) {
@@ -68,7 +64,7 @@ public class RadiantEssence extends CardImpl {
         // Radiant Essence gets +1/+2 as long as an opponent controls a black permanent.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
             new ConditionalContinuousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
-            new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0, false),
+            new OpponentControlsPermanentCondition(filter),
             "{this} gets +1/+2 as long as an opponent controls a black permanent")));
     }
 

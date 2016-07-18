@@ -25,49 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.legends;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.OpponentControlsPermanentCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author nigelzor
  */
-public class WaterWurm extends CardImpl {
+public class BeastsOfBogardan extends mage.sets.chronicles.BeastsOfBogardan {
 
-    private static final FilterPermanent filter = new FilterPermanent("Island", "Island");
-
-    public WaterWurm(UUID ownerId) {
-        super(ownerId, 37, "Water Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "DRK";
-        this.subtype.add("Wurm");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Water Wurm gets +0/+1 as long as an opponent controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostSourceEffect(0, 1, Duration.WhileOnBattlefield),
-            new OpponentControlsPermanentCondition(filter),
-            "{this} gets +0/+1 as long as an opponent controls an Island")));
+    public BeastsOfBogardan(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 133;
+        this.expansionSetCode = "LEG";
     }
 
-    public WaterWurm(final WaterWurm card) {
+    public BeastsOfBogardan(final BeastsOfBogardan card) {
         super(card);
     }
 
     @Override
-    public WaterWurm copy() {
-        return new WaterWurm(this);
+    public BeastsOfBogardan copy() {
+        return new BeastsOfBogardan(this);
     }
 }

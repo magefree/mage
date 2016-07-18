@@ -25,49 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.thedark;
+package mage.sets.chronicles;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author nigelzor
  */
-public class WaterWurm extends CardImpl {
+public class BeastsOfBogardan extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Island", "Island");
+    private static final FilterCard protectionFilter = new FilterCard("red");
+    private static final FilterPermanent controlFilter = new FilterPermanent("nontoken white permanent");
 
-    public WaterWurm(UUID ownerId) {
-        super(ownerId, 37, "Water Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-        this.expansionSetCode = "DRK";
-        this.subtype.add("Wurm");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Water Wurm gets +0/+1 as long as an opponent controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostSourceEffect(0, 1, Duration.WhileOnBattlefield),
-            new OpponentControlsPermanentCondition(filter),
-            "{this} gets +0/+1 as long as an opponent controls an Island")));
+    static {
+        protectionFilter.add(new ColorPredicate(ObjectColor.RED));
+        controlFilter.add(new ColorPredicate(ObjectColor.WHITE));
+        controlFilter.add(Predicates.not(new TokenPredicate()));
     }
 
-    public WaterWurm(final WaterWurm card) {
+    public BeastsOfBogardan(UUID ownerId) {
+        super(ownerId, 45, "Beasts of Bogardan", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        this.expansionSetCode = "CHR";
+        this.subtype.add("Beast");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Protection from red
+        this.addAbility(new ProtectionAbility(protectionFilter));
+        // Beasts of Bogardan gets +1/+1 as long as an opponent controls a nontoken white permanent.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
+                new OpponentControlsPermanentCondition(controlFilter),
+                "{this} gets +1/+1 as long as an opponent controls a nontoken white permanent")));
+    }
+
+    public BeastsOfBogardan(final BeastsOfBogardan card) {
         super(card);
     }
 
     @Override
-    public WaterWurm copy() {
-        return new WaterWurm(this);
+    public BeastsOfBogardan copy() {
+        return new BeastsOfBogardan(this);
     }
 }
