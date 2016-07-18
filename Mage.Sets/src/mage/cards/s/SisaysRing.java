@@ -46,7 +46,7 @@ public class SisaysRing extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {tap}: Add {C}{C} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 0, 0, 0, 2), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
     public SisaysRing(final SisaysRing card) {

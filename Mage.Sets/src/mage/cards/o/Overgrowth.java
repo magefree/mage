@@ -82,7 +82,7 @@ class OvergrowthTriggeredAbility extends TriggeredManaAbility {
 
 
     public OvergrowthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(new Mana(0,2,0,0,0,0,0, 0), "his or her"));
+        super(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(2), "his or her"));
     }
 
     public OvergrowthTriggeredAbility(final OvergrowthTriggeredAbility ability) {

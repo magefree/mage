@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -55,7 +54,7 @@ public class EbonStronghold extends CardImpl {
         // {tap}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());
         // {tap}, Sacrifice Ebon Stronghold: Add {B}{B} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(2)), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

@@ -51,7 +51,7 @@ public class HuttPalace extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // When Hutt Palace enters the battlefield , add {R} to your mana pool.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(new Mana(1, 0, 0, 0, 0, 0, 0, 0))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(Mana.RedMana(1))));
 
         // {T}: Add {B} or {G} to you mana pool.
         this.addAbility(new BlackManaAbility());

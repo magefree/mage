@@ -56,8 +56,7 @@ public class Workhorse extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), "with four +1/+1 counters on it"));
 
         // Remove a +1/+1 counter from Workhorse: Add {C} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD,
-                new Mana(new Mana(0, 0, 0, 0, 0, 0, 0, 1)),
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1),
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance())));
     }
 

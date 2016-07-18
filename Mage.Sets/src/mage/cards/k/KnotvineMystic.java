@@ -32,12 +32,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *
@@ -55,7 +56,7 @@ public class KnotvineMystic extends CardImpl {
         this.toughness = new MageInt(2);
         
         // {1}, {T}: Add {R}{G}{W} to your mana pool.
-        Ability ability = new KnotvineMysticManaAbility();
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 1, 0, 0, 0, 0), new TapSourceCost());
         ability.addManaCost(new GenericManaCost(1));
         this.addAbility(ability);
     }
@@ -69,21 +70,4 @@ public class KnotvineMystic extends CardImpl {
         return new KnotvineMystic(this);
     }
 
-}
-
-class KnotvineMysticManaAbility extends BasicManaAbility {
-
-    public KnotvineMysticManaAbility() {
-        super(new BasicManaEffect(new Mana(1, 1, 0, 1, 0, 0, 0, 0)));
-        this.netMana.add(new Mana(1, 1, 0, 1, 0, 0, 0, 0));
-    }
-
-    public KnotvineMysticManaAbility(final KnotvineMysticManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public KnotvineMysticManaAbility copy() {
-        return new KnotvineMysticManaAbility(this);
-    }
 }

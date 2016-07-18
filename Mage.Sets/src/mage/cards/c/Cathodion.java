@@ -47,7 +47,7 @@ public class Cathodion extends CardImpl {
         this.subtype.add("Construct");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 0, 0, 3)), false));
+        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(Mana.ColorlessMana(3)), false));
     }
 
     public Cathodion(final Cathodion card) {

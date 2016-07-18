@@ -55,7 +55,7 @@ public class TurnToDust extends CardImpl {
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 1, 0, 0, 0, 0, 0, 0)));
+        this.getSpellAbility().addEffect(new BasicManaEffect(Mana.GreenMana(1)));
     }
 
     public TurnToDust(final TurnToDust card) {

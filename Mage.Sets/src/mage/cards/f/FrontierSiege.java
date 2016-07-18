@@ -107,7 +107,7 @@ public class FrontierSiege extends CardImpl {
 class FrontierSiegeKhansTriggeredAbility extends TriggeredAbilityImpl {
 
     public FrontierSiegeKhansTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaToManaPoolSourceControllerEffect(new Mana(0, 2, 0, 0, 0, 0, 0, 0)), false);
+        super(Zone.BATTLEFIELD, new AddManaToManaPoolSourceControllerEffect(Mana.GreenMana(2)), false);
 
     }
 

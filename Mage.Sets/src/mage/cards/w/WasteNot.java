@@ -112,7 +112,7 @@ class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
 class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
 
     WasteNotLandTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0, 0)), false);
+        super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(2)), false);
     }
 
     WasteNotLandTriggeredAbility(final WasteNotLandTriggeredAbility ability) {

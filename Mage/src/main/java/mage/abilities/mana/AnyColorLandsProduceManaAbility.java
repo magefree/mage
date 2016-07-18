@@ -188,7 +188,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             netManas.add(new Mana(ColoredManaSymbol.W));
         }
         if (types.getColorless() > 0) {
-            netManas.add(new Mana(0, 0, 0, 0, 0, 0, 0, 1));
+            netManas.add(Mana.ColorlessMana(1));
         }
         return netManas;
     }

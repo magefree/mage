@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -55,7 +54,7 @@ public class SvyeluniteTemple extends CardImpl {
         // {tap}: Add {U} to your mana pool.
         this.addAbility(new BlueManaAbility());
         // {tap}, Sacrifice Svyelunite Temple: Add {U}{U} to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlueMana(2)), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

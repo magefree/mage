@@ -30,11 +30,12 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *
@@ -47,7 +48,7 @@ public class PalladiumMyr extends CardImpl {
         this.subtype.add("Myr");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new PalladiumMyrAbility());
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
     public PalladiumMyr(final PalladiumMyr card) {
@@ -57,22 +58,5 @@ public class PalladiumMyr extends CardImpl {
     @Override
     public PalladiumMyr copy() {
         return new PalladiumMyr(this);
-    }
-}
-
-class PalladiumMyrAbility extends BasicManaAbility {
-
-    public PalladiumMyrAbility() {
-        super(new BasicManaEffect(Mana.ColorlessMana(2)));
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 2));
-    }
-
-    public PalladiumMyrAbility(final PalladiumMyrAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PalladiumMyrAbility copy() {
-        return new PalladiumMyrAbility(this);
     }
 }

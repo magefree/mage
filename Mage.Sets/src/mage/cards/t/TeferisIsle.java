@@ -53,7 +53,7 @@ public class TeferisIsle extends CardImpl {
         // Teferi's Isle enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}: Add {U}{U} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 2, 0, 0, 0, 0, 0), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(2), new TapSourceCost()));
 
     }
 
