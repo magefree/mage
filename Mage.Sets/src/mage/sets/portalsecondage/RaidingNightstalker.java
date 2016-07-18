@@ -42,7 +42,7 @@ public class RaidingNightstalker extends CardImpl {
 
     public RaidingNightstalker(UUID ownerId) {
         super(ownerId, 24, "Raiding Nightstalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Nightstalker");
 
         this.power = new MageInt(2);

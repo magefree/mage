@@ -39,7 +39,7 @@ public class NaturesLore extends mage.sets.iceage.NaturesLore {
     public NaturesLore(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 75;
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.rarity = Rarity.COMMON;
     }
 

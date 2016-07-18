@@ -41,7 +41,7 @@ public class TalasMerchant extends CardImpl {
 
     public TalasMerchant(UUID ownerId) {
         super(ownerId, 50, "Talas Merchant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Pirate");
 

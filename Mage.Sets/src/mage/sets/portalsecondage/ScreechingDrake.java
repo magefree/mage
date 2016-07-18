@@ -38,7 +38,7 @@ public class ScreechingDrake extends mage.sets.masterseditionii.ScreechingDrake 
     public ScreechingDrake(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 44;
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
     }
 
     public ScreechingDrake(final ScreechingDrake card) {

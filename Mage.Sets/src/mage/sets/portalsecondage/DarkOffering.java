@@ -53,7 +53,7 @@ public class DarkOffering extends CardImpl {
 
     public DarkOffering(UUID ownerId) {
         super(ownerId, 12, "Dark Offering", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
 
         // Destroy target nonblack creature. You gain 3 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

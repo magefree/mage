@@ -39,7 +39,7 @@ public class Mountain3 extends mage.cards.basiclands.Mountain {
 
     public Mountain3(UUID ownerId) {
         super(ownerId, 159);
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
     }
 
     public Mountain3(final Mountain3 card) {

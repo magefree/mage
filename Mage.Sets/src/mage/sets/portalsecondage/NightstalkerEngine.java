@@ -47,7 +47,7 @@ public class NightstalkerEngine extends CardImpl {
 
     public NightstalkerEngine(UUID ownerId) {
         super(ownerId, 21, "Nightstalker Engine", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Nightstalker");
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);

@@ -28,9 +28,11 @@
 
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import mage.constants.CardType;
+import java.util.List;
 import mage.MageInt;
+import mage.constants.CardType;
 
 /**
  *
@@ -38,13 +40,28 @@ import mage.MageInt;
  */
 public class CatToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("SOM", "M13", "M14", "C14", "C15"));
+    }
+
     public CatToken() {
+        this(null, 0);
+    }
+
+    public CatToken(String setCode) {
+        this(setCode, 0);
+    }
+
+    public CatToken(String setCode, int tokenType) {
         super("Cat", "2/2 white Cat creature token");
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Cat");
         power = new MageInt(2);
         toughness = new MageInt(2);
-        availableImageSetCodes.addAll(Arrays.asList("SOM", "M13", "M14", "C14"));
     }
 }

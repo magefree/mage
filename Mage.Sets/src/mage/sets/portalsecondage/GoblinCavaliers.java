@@ -41,7 +41,7 @@ public class GoblinCavaliers extends CardImpl {
 
     public GoblinCavaliers(UUID ownerId) {
         super(ownerId, 95, "Goblin Cavaliers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Goblin");
 
         this.power = new MageInt(3);

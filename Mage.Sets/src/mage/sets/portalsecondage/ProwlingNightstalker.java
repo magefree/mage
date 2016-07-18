@@ -38,7 +38,7 @@ public class ProwlingNightstalker extends mage.sets.masterseditioniv.ProwlingNig
     public ProwlingNightstalker(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 23;
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
     }
 
     public ProwlingNightstalker(final ProwlingNightstalker card) {

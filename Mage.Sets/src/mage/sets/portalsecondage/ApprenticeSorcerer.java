@@ -48,7 +48,7 @@ public class ApprenticeSorcerer extends CardImpl {
 
     public ApprenticeSorcerer(UUID ownerId) {
         super(ownerId, 32, "Apprentice Sorcerer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

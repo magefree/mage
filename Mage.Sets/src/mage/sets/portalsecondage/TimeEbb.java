@@ -38,7 +38,7 @@ public class TimeEbb extends mage.sets.tempest.TimeEbb {
     public TimeEbb(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 57;
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
     }
 
     public TimeEbb(final TimeEbb card) {

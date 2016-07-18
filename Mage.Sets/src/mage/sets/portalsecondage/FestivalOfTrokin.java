@@ -44,7 +44,7 @@ public class FestivalOfTrokin extends CardImpl {
 
     public FestivalOfTrokin(UUID ownerId) {
         super(ownerId, 136, "Festival of Trokin", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
 
         // You gain 2 life for each creature you control.
         DynamicValue amount = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent(), 2);

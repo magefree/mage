@@ -39,7 +39,7 @@ public class PredatoryNightstalker extends mage.sets.vintagemasters.PredatoryNig
     public PredatoryNightstalker(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 22;
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.rarity = Rarity.UNCOMMON;
     }
 

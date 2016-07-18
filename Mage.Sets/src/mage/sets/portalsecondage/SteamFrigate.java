@@ -45,7 +45,7 @@ public class SteamFrigate extends CardImpl {
 
     public SteamFrigate(UUID ownerId) {
         super(ownerId, 47, "Steam Frigate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Pirate");
         this.power = new MageInt(3);

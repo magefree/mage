@@ -44,7 +44,7 @@ public class AbyssalNightstalker extends CardImpl {
 
     public AbyssalNightstalker(UUID ownerId) {
         super(ownerId, 1, "Abyssal Nightstalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Nightstalker");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

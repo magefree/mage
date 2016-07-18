@@ -48,7 +48,7 @@ public class GoblinFirestarter extends CardImpl {
 
     public GoblinFirestarter(UUID ownerId) {
         super(ownerId, 96, "Goblin Firestarter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Goblin");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

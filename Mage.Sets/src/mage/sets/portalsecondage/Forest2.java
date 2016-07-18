@@ -39,7 +39,7 @@ public class Forest2 extends mage.cards.basiclands.Forest {
 
     public Forest2(UUID ownerId) {
         super(ownerId, 152);
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
     }
 
     public Forest2(final Forest2 card) {

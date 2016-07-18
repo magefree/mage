@@ -45,7 +45,7 @@ public class AlabornCavalier extends CardImpl {
 
     public AlabornCavalier(UUID ownerId) {
         super(ownerId, 121, "Alaborn Cavalier", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Knight");
         this.power = new MageInt(2);

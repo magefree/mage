@@ -42,7 +42,7 @@ public class DeathcoilWurm extends CardImpl {
 
     public DeathcoilWurm(UUID ownerId) {
         super(ownerId, 65, "Deathcoil Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Wurm");
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

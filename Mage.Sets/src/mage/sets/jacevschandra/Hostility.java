@@ -41,10 +41,10 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.permanent.token.ElementalShamanToken;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.ElementalShamanToken;
 import mage.game.stack.Spell;
 
 /**
@@ -133,7 +133,7 @@ class HostilityEffect extends PreventionEffectImpl {
 class HostilityElementalToken extends ElementalShamanToken {
 
     public HostilityElementalToken() {
-        super();
+        super("DD2", 1);
         description = description + " with haste";
         addAbility(HasteAbility.getInstance());
     }
