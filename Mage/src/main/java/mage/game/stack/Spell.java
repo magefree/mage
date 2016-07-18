@@ -841,10 +841,6 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public void build() {
-    }
-
-    @Override
     public Counters getCounters(Game game) {
         return card.getCounters(game);
     }

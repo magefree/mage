@@ -53,10 +53,7 @@ public class BattleflightEagle extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-    }
 
-    @Override
-    public void build() {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Battleflight Eagle enters the battlefield, target creature gets +2/+2 and gains flying until end of turn.
