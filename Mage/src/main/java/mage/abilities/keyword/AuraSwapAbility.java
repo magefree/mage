@@ -106,7 +106,7 @@ class AuraSwapEffect extends OneShotEffect {
                         enchantedPermanent.addAttachment(auraInHand.getId(), game);
                         game.informPlayers(controller.getLogName() + " put " + auraInHand.getLogName() + " on the battlefield attached to " + enchantedPermanent.getLogName() + ".");
                         enchantedPermanent.removeAttachment(auraSourcePermanent.getId(), game);
-                        return controller.moveCards(auraInHand, Zone.HAND, source, game);
+                        return controller.moveCards(game.getCard(source.getSourceId()), Zone.HAND, source, game);
                     }
                 }
             }
