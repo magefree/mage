@@ -135,11 +135,11 @@ class MarketFestivalManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if(controller != null && sourceObject != null){
-                int x = 2;
+        if (controller != null && sourceObject != null) {
+            int x = 2;
 
             Mana mana = new Mana();
-            for(int i = 0; i < x; i++){
+            for (int i = 0; i < x; i++) {
                 ChoiceColor choiceColor = new ChoiceColor();
                 if (i == 0) {
                     choiceColor.setMessage("First mana color for " + sourceObject.getLogName());
@@ -152,22 +152,11 @@ class MarketFestivalManaEffect extends ManaEffect {
                     }
                 }
 
-                if (choiceColor.getColor().isBlack()) {
-                    mana.increaseBlack();
-                } else if (choiceColor.getColor().isBlue()) {
-                    mana.increaseBlue();
-                } else if (choiceColor.getColor().isRed()) {
-                    mana.increaseRed();
-                } else if (choiceColor.getColor().isGreen()) {
-                    mana.increaseGreen();
-                } else if (choiceColor.getColor().isWhite()) {
-                    mana.increaseWhite();
-                }
+                choiceColor.increaseMana(mana);
             }
             checkToFirePossibleEvents(mana, game, source);
             controller.getManaPool().addMana(mana, game, source);
             return true;
-
         }
         return false;
     }

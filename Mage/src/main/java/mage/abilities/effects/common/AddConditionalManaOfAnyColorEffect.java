@@ -94,19 +94,10 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
                     return false;
                 }
             }
-            Mana mana = null;
-            if (choice.getColor().isBlack()) {
-                mana = manaBuilder.setMana(Mana.BlackMana(1), source, game).build();
-            } else if (choice.getColor().isBlue()) {
-                mana = manaBuilder.setMana(Mana.BlueMana(1), source, game).build();
-            } else if (choice.getColor().isRed()) {
-                mana = manaBuilder.setMana(Mana.RedMana(1), source, game).build();
-            } else if (choice.getColor().isGreen()) {
-                mana = manaBuilder.setMana(Mana.GreenMana(1), source, game).build();
-            } else if (choice.getColor().isWhite()) {
-                mana = manaBuilder.setMana(Mana.WhiteMana(1), source, game).build();
+            Mana mana = choice.getMana(1);
+            if (mana != null) {
+                mana = manaBuilder.setMana(mana, source, game).build();
             }
-
             if (mana != null) {
                 checkToFirePossibleEvents(mana, game, source);
                 controller.getManaPool().addMana(mana, game, source);

@@ -46,7 +46,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
     }
 
     public AddManaOfAnyColorEffect(final int amount) {
-        super(new Mana(0,0,0,0,0,0, amount, 0));
+        super(new Mana(0, 0, 0, 0, 0, 0, amount, 0));
         this.amount = amount;
         this.staticText = new StringBuilder("add ")
                 .append(CardUtil.numberToText(amount))
@@ -75,18 +75,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
                 if (choice.getColor() == null) {
                     return false; // it happens, don't know how
                 }
-                Mana createdMana = null;
-                if (choice.getColor().isBlack()) {
-                    createdMana = Mana.BlackMana(amount);
-                } else if (choice.getColor().isBlue()) {
-                    createdMana = Mana.BlueMana(amount);
-                } else if (choice.getColor().isRed()) {
-                    createdMana = Mana.RedMana(amount);
-                } else if (choice.getColor().isGreen()) {
-                    createdMana = Mana.GreenMana(amount);
-                } else if (choice.getColor().isWhite()) {
-                    createdMana = Mana.WhiteMana(amount);
-                }
+                Mana createdMana = choice.getMana(amount);
                 if (createdMana != null) {
                     checkToFirePossibleEvents(createdMana, game, source);
                     controller.getManaPool().addMana(createdMana, game, source);                    
@@ -103,7 +92,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
 
     @Override
     public Mana getMana() {
-        return (new Mana(0,0,0,0,0,0,amount, 0));
+        return new Mana(0, 0, 0, 0, 0, 0, amount, 0);
     }
     
 }
