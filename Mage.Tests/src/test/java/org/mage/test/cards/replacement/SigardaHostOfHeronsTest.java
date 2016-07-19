@@ -80,7 +80,7 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
     }
     
     @Test
-    public void testUseWithMercilessExcutioner() {
+    public void testUseWithMercilessExecutioner() {
         /** I put a merciless executioner in play as part 
             of the resolution of Tempt With Immortality. An opponent who put 
             Sigarda, Host of Herons into play from Tempt With Immortality, 
@@ -91,9 +91,9 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerB, "Merciless Executioner");
         addCard(Zone.HAND, playerB, "Tempt with Immortality");
         
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Temp With Immortality");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Tempt With Immortality");
         setChoice(playerA, "Sigarda, Host of Herons");
-        setChoice(playerB, "Merciless Excutioner");
+        setChoice(playerB, "Merciless Executioner");
         
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
