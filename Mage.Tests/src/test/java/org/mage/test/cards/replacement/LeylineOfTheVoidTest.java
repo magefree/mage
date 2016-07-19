@@ -101,5 +101,25 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         assertExileCount(playerA, 1);
         assertHandCount(playerA, 3);
     }
+    
+    @Test
+    public void testMorbidAbility() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Leyline of the Void");
+        addCard(Zone.HAND, playerA, "Murder");
+        addCard(Zone.BATTLEFIELD, playerB, "Deathreap Ritual");
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite");
+        
+        
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Murder");
+        setChoice(playerA, "Memnite");
+        
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+        
+        assertHandCount(playerB, 0);
+        assertExileCount(playerB, 1);
+        
+    }
 
 }
