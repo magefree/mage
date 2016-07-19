@@ -78,5 +78,29 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Devout Chaplain", 0);
         assertPermanentCount(playerA, "Corpse Traders", 1);
     }
+    
+    @Test
+    public void testUseWithMercilessExcutioner() {
+        /** I put a merciless executioner in play as part 
+            of the resolution of Tempt With Immortality. An opponent who put 
+            Sigarda, Host of Herons into play from Tempt With Immortality, 
+            was forced to sacrifice her, even though her text says that that shouldn't happen.
+        */
+        addCard(Zone.GRAVEYARD, playerA, "Sigarda, Host of Herons");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 5);
+        addCard(Zone.GRAVEYARD, playerB, "Merciless Executioner");
+        addCard(Zone.HAND, playerB, "Tempt with Immortality");
+        
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Temp With Immortality");
+        setChoice(playerA, "Sigarda, Host of Herons");
+        setChoice(playerB, "Merciless Excutioner");
+        
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        assertGraveyardCount(playerA, 0);
+        assertGraveyardCount(playerB, 0);
+       
+    }
 
 }
