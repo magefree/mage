@@ -114,7 +114,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int handCards = player.getHand().size();
-                    player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
+                    player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
                     List<Permanent> list = permanentsOwned.remove(player.getId());
                     permanentsCount.put(playerId, handCards + (list != null ? list.size() : 0));
                     for (Permanent permanent : list) {
