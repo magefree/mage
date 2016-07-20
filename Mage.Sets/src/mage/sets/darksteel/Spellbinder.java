@@ -186,9 +186,9 @@ class SpellbinderCopyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent scepter = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (scepter != null && scepter.getImprinted() != null && !scepter.getImprinted().isEmpty()) {
-                Card imprintedInstant = game.getCard(scepter.getImprinted().get(0));
+            Permanent spellbinder = game.getPermanentOrLKIBattlefield(source.getSourceId());
+            if (spellbinder != null && spellbinder.getImprinted() != null && !spellbinder.getImprinted().isEmpty()) {
+                Card imprintedInstant = game.getCard(spellbinder.getImprinted().get(0));
                 if (imprintedInstant != null && game.getState().getZone(imprintedInstant.getId()).equals(Zone.EXILED)) {
                     if (controller.chooseUse(outcome, new StringBuilder("Create a copy of ").append(imprintedInstant.getName()).append("?").toString(), source, game)) {
                         Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
