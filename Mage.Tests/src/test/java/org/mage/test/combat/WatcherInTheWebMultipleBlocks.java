@@ -29,6 +29,7 @@ package org.mage.test.combat;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -38,6 +39,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class WatcherInTheWebMultipleBlocks extends CardTestPlayerBase {
 
+    // test must be ignored until creature blocking multiple supported by test framework
+    @Ignore
     @Test
     public void testCombat() {
         addCard(Zone.BATTLEFIELD, playerA, "Watcher in the Web", 1);
