@@ -28,27 +28,24 @@
 package mage.sets.chronicles;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
+ * @author fwannmacher
  */
-public class UrzasMine extends mage.sets.fifthedition.UrzasMine {
+public class UrzasMine2 extends UrzasMine1 {
 
-    public UrzasMine(UUID ownerId) {
+    public UrzasMine2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
-        this.expansionSetCode = "CHR";
-        this.rarity = Rarity.UNCOMMON;
+        this.cardNumber = 95;
     }
 
-    public UrzasMine(final UrzasMine card) {
+    public UrzasMine2(final UrzasMine2 card) {
         super(card);
     }
 
     @Override
-    public UrzasMine copy() {
-        return new UrzasMine(this);
+    public UrzasMine2 copy() {
+        return new UrzasMine2(this);
     }
 }
