@@ -42,10 +42,10 @@ public class WatcherInTheWebMultipleBlocks extends CardTestPlayerBase {
     public void testCombat() {
         addCard(Zone.BATTLEFIELD, playerA, "Watcher in the Web", 1);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Ulrich, Uncontested Alpha", 1);
-        addCard(Zone.BATTLEFIELD, playerB, "Kessig Dire Swine", 1);
-        addCard(Zone.BATTLEFIELD, playerB, "Howlpack Wolf", 1);
-        addCard(Zone.BATTLEFIELD, playerB, "Incorrigible Youths", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Ulrich, Uncontested Alpha", 1); // 6/6
+        addCard(Zone.BATTLEFIELD, playerB, "Kessig Dire Swine", 1); // 6/6 (trample if delirium)
+        addCard(Zone.BATTLEFIELD, playerB, "Howlpack Wolf", 1); // 3/3
+        addCard(Zone.BATTLEFIELD, playerB, "Incorrigible Youths", 1); // 4/3
 
         // Trample requirement for Kessig Dire Swine
         addCard(Zone.GRAVEYARD, playerB, "Forest", 1);
