@@ -117,7 +117,7 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
         
-        assertHandCount(playerB, 0);
+        assertHandCount(playerB, 1); // card drawn for turn
         assertExileCount(playerB, 1);
         
     }
