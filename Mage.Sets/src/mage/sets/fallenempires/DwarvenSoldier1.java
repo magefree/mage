@@ -41,11 +41,11 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class DwarvenSoldier extends CardImpl {
+public class DwarvenSoldier1 extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Orc", "Orc creature");
 
-    public DwarvenSoldier(UUID ownerId) {
+    public DwarvenSoldier1(UUID ownerId) {
         super(ownerId, 107, "Dwarven Soldier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "FEM";
         this.subtype.add("Dwarf");
@@ -57,12 +57,12 @@ public class DwarvenSoldier extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), filter, false));
     }
 
-    public DwarvenSoldier(final DwarvenSoldier card) {
+    public DwarvenSoldier1(final DwarvenSoldier1 card) {
         super(card);
     }
 
     @Override
-    public DwarvenSoldier copy() {
-        return new DwarvenSoldier(this);
+    public DwarvenSoldier1 copy() {
+        return new DwarvenSoldier1(this);
     }
 }

@@ -25,28 +25,27 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
 
 /**
  *
- * @author MarcoMarin
+ * @author fwannmacher
  */
-public class DwarvenSoldier extends mage.sets.fallenempires.DwarvenSoldier1 {
+public class DwarvenSoldier3 extends DwarvenSoldier1 {
 
-    public DwarvenSoldier(UUID ownerId) {
+    public DwarvenSoldier3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
-        this.expansionSetCode = "MED";
+        this.cardNumber = 109;
     }
 
-    public DwarvenSoldier(final DwarvenSoldier card) {
+    public DwarvenSoldier3(final DwarvenSoldier3 card) {
         super(card);
     }
 
     @Override
-    public DwarvenSoldier copy() {
-        return new DwarvenSoldier(this);
+    public DwarvenSoldier3 copy() {
+        return new DwarvenSoldier3(this);
     }
 }
