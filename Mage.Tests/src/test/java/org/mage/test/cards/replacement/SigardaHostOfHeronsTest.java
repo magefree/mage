@@ -86,21 +86,28 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
             Sigarda, Host of Herons into play from Tempt With Immortality, 
             was forced to sacrifice her, even though her text says that that shouldn't happen.
         */
+        
+        // Spells and abilities your opponents control can't cause you to sacrifice permanents.
         addCard(Zone.GRAVEYARD, playerA, "Sigarda, Host of Herons");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 5);
+        // When Merciless Executioner enters the battlefield, each player sacrifices a creature.
         addCard(Zone.GRAVEYARD, playerB, "Merciless Executioner");
-        addCard(Zone.HAND, playerB, "Tempt with Immortality");
         
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Tempt With Immortality");
+        // Tempting offer — Return a creature card from your graveyard to the battlefield. 
+        // Each opponent may return a creature card from his or her graveyard to the battlefield. 
+        // For each player who does, return a creature card from your graveyard to the battlefield.
+        addCard(Zone.HAND, playerB, "Tempt with Immortality"); // sorcery {4}{B}
+        
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Tempt with Immortality");
+        setChoice(playerB, "Merciless Executioner");        
         setChoice(playerA, "Sigarda, Host of Herons");
-        setChoice(playerB, "Merciless Executioner");
         
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         
-        assertGraveyardCount(playerA, 0);
-        assertGraveyardCount(playerB, 0);
-       
+        assertGraveyardCount(playerB, "Tempt with Immortality", 1);
+        assertGraveyardCount(playerA, "Sigarda, Host of Herons", 0);
+        assertGraveyardCount(playerB, "Merciless Executioner", 0);    
     }
 
 }
