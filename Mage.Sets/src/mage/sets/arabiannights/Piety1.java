@@ -25,28 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterBlockingCreature;
 
 /**
  *
  * @author MarcoMarin
  */
-public class Oubliette extends mage.sets.arabiannights.Oubliette1 {
+public class Piety1 extends CardImpl {
 
-    public Oubliette(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 79;
-        this.expansionSetCode = "MED";
+    public static final FilterBlockingCreature filter = new FilterBlockingCreature();
+    
+    public Piety1(UUID ownerId) {
+        super(ownerId, 64, "Piety", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "ARN";
+
+        // Blocking creatures get +0/+3 until end of turn.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false)));
+        //this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_POST, "end Piety", true, new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false)));
     }
 
-    public Oubliette(final Oubliette card) {
+    public Piety1(final Piety1 card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public Piety1 copy() {
+        return new Piety1(this);
     }
 }

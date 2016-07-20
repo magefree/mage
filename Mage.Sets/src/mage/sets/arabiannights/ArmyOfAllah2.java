@@ -25,28 +25,27 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
 
 /**
  *
- * @author MarcoMarin
+ * @author fwannmacher
  */
-public class Oubliette extends mage.sets.arabiannights.Oubliette1 {
-
-    public Oubliette(UUID ownerId) {
+public class ArmyOfAllah2 extends ArmyOfAllah1 {
+    
+    public ArmyOfAllah2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
-        this.expansionSetCode = "MED";
+        this.cardNumber = 57;
     }
 
-    public Oubliette(final Oubliette card) {
+    public ArmyOfAllah2(final ArmyOfAllah2 card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public ArmyOfAllah2 copy() {
+        return new ArmyOfAllah2(this);
     }
 }

@@ -56,13 +56,13 @@ import mage.target.TargetPermanent;
  *
  * @author MarcoMarin
  */
-public class Oubliette extends CardImpl {
+public class Oubliette1 extends CardImpl {
 
     public Counters godHelpMe = null;
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature");
 
-    public Oubliette(UUID ownerId) {
+    public Oubliette1(UUID ownerId) {
         super(ownerId, 11, "Oubliette", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "ARN";
 
@@ -77,13 +77,13 @@ public class Oubliette extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public Oubliette(final Oubliette card) {
+    public Oubliette1(final Oubliette1 card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public Oubliette1 copy() {
+        return new Oubliette1(this);
     }
 }
 
@@ -134,7 +134,7 @@ class OublietteEffect extends OneShotEffect {
                 }
 
                 //((Oubliette)enchantment.getMainCard()).godHelpMe = enchantedCreature.getCounters(game); //why doesn't work? should return the same card, no?
-                ((Oubliette) game.getCard(source.getSourceId())).godHelpMe = enchantedCreature.getCounters(game).copy();
+                ((Oubliette1) game.getCard(source.getSourceId())).godHelpMe = enchantedCreature.getCounters(game).copy();
                 /*
                 if (!(enchantedCreature instanceof Token)) {
 
@@ -220,7 +220,7 @@ class OublietteReturnEffect extends OneShotEffect {
                 if (oubliette == null) {
                     return false;//1st stab at getting those counters back
                 }
-                for (Counter c : ((Oubliette) oubliette).godHelpMe.values()) { //would be nice if could just use that copy function to set the whole field
+                for (Counter c : ((Oubliette1) oubliette).godHelpMe.values()) { //would be nice if could just use that copy function to set the whole field
                     if (c != null) {
                         newPermanent.getCounters(game).addCounter(c);
                     }

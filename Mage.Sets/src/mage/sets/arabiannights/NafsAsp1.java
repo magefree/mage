@@ -42,9 +42,9 @@ import mage.constants.Rarity;
  *
  * @author LoneFox
  */
-public class NafsAsp extends CardImpl {
+public class NafsAsp1 extends CardImpl {
 
-    public NafsAsp(UUID ownerId) {
+    public NafsAsp1(UUID ownerId) {
         super(ownerId, 36, "Nafs Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "ARN";
         this.subtype.add("Snake");
@@ -58,12 +58,12 @@ public class NafsAsp extends CardImpl {
             false, true));
     }
 
-    public NafsAsp(final NafsAsp card) {
+    public NafsAsp1(final NafsAsp1 card) {
         super(card);
     }
 
     @Override
-    public NafsAsp copy() {
-        return new NafsAsp(this);
+    public NafsAsp1 copy() {
+        return new NafsAsp1(this);
     }
 }
