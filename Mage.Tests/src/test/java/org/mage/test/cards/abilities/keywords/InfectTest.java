@@ -126,6 +126,32 @@ public class InfectTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
+    
+    @Test
+    public void testInkmothPumpedByBecomeImmense() {
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+        // {1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land.
+        // (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+        addCard(Zone.BATTLEFIELD, playerA, "Inkmoth Nexus");
+        
+        // Become Immense - {5}{G} - Instant
+        // Delve (Each card you exile from your graveyard while casting this spell pays for 1.)
+        // Target creature gets +6/+6 until end of turn.
+        addCard(Zone.HAND, playerA, "Become Immense", 1);
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: {this} becomes");
+        attack(1, playerA, "Inkmoth Nexus");
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Become Immense");
+        addTarget(playerA, "Inkmoth Nexus");
+        
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+        
+        assertTapped("Inkmoth Nexus", true);
+        assertGraveyardCount(playerA, "Become Immense", 1);
+        assertCounterCount(playerB, CounterType.POISON, 7);
+    }
 
     /**
      * Phyrexian Obliterator is enchanted with Corrupted Conscience and Enslave
