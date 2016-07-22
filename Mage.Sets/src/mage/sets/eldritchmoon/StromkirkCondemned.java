@@ -36,9 +36,11 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -50,6 +52,7 @@ public class StromkirkCondemned extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate("Vampire"));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public StromkirkCondemned(UUID ownerId) {
