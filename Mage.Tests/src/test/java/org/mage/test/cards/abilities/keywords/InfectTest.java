@@ -128,7 +128,7 @@ public class InfectTest extends CardTestPlayerBase {
     }
     
     @Test
-    public void testInkmothPumpedByBecomeImmense() {
+    public void testInkmothPumpedByBecomeImmense1() {
         
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
         // {1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land.
@@ -151,6 +151,45 @@ public class InfectTest extends CardTestPlayerBase {
         assertTapped("Inkmoth Nexus", true);
         assertGraveyardCount(playerA, "Become Immense", 1);
         assertCounterCount(playerB, CounterType.POISON, 7);
+    }
+    
+        @Test
+    public void testInkmothPumpedByBecomeImmense2() {
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+        // {1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land.
+        // (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+        addCard(Zone.BATTLEFIELD, playerA, "Inkmoth Nexus");
+        
+        // Become Immense - {5}{G} - Instant
+        // Delve (Each card you exile from your graveyard while casting this spell pays for 1.)
+        // Target creature gets +6/+6 until end of turn.
+        addCard(Zone.HAND, playerA, "Become Immense", 1);        
+        addCard(Zone.HAND, playerA, "Mutagenic Growth", 1); // {G} instant +2+2
+        addCard(Zone.HAND, playerA, "Might of Old Krosa", 1); // {G} instant +2+2
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: {this} becomes");
+        attack(1, playerA, "Inkmoth Nexus");
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Mutagenic Growth");
+        addTarget(playerA, "Inkmoth Nexus");
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Might of Old Krosa");
+        addTarget(playerA, "Inkmoth Nexus");
+        // +5 poison
+        
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: {this} becomes");
+        attack(3, playerA, "Inkmoth Nexus");
+        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerA, "Become Immense");
+        addTarget(playerA, "Inkmoth Nexus");
+        // +7 poison
+        
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+        
+        assertTapped("Inkmoth Nexus", true);
+        assertGraveyardCount(playerA, "Become Immense", 1);
+        assertGraveyardCount(playerA, "Mutagenic Growth", 1);
+        assertGraveyardCount(playerA, "Might of Old Krosa", 1);
+        assertCounterCount(playerB, CounterType.POISON, 12);
     }
 
     /**
