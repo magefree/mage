@@ -872,9 +872,22 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertEquals("(Graveyard " + player.getName() + ") Card counts are not equal (" + cardName + ")", count, actualCount);
     }
+    
+    /**
+     * Assert library card count.
+     *
+     * @param player {@link Player} who's library should be counted.
+     * @param count Expected count.
+     */
+    public void assertLibraryCount(Player player, int count) throws AssertionError {
+        
+        List<Card> libraryList = player.getLibrary().getCards(currentGame);
+        int actualCount = libraryList != null && !libraryList.isEmpty() ? libraryList.size() : 0;
+        Assert.assertEquals("(Library " + player.getName() + ") counts are not equal", count, actualCount);
+    }
 
     /**
-     * Assert card count in player's library.
+     * Assert specific card count in player's library.
      *
      * @param player {@link Player} who's library should be counted.
      * @param cardName Name of the cards that should be counted.
