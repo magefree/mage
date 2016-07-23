@@ -41,7 +41,7 @@ public class MuckRats extends CardImpl {
 
     public MuckRats(UUID ownerId) {
         super(ownerId, 20, "Muck Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Rat");
 
         this.power = new MageInt(1);

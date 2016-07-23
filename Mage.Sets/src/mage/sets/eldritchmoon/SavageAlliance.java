@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -43,20 +44,30 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.other.PlayerPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author LevelX2
  */
 public class SavageAlliance extends CardImpl {
+
+    private static final FilterPlayer filterPlayer = new FilterPlayer("player whose creatures gain trample");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature to deal 2 damage to");
+    private static final FilterPlayer filterOpponent = new FilterPlayer("opponent whose creatures get dealt damage");
+
+    static {
+        filterOpponent.add(new PlayerPredicate(TargetController.OPPONENT));
+    }
 
     public SavageAlliance(UUID ownerId) {
         super(ownerId, 140, "Savage Alliance", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
@@ -71,18 +82,20 @@ public class SavageAlliance extends CardImpl {
 
         // Creatures target player controls gain trample until end of turn.
         this.getSpellAbility().addEffect(new SavageAllianceGainTrampleEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterPlayer));
 
         // Savage Alliance deals 2 damage to target creature.;
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(2));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        Effect effect = new DamageTargetEffect(2);
+        effect.setText("{this} deals 2 damage to target creature");
+        mode.getEffects().add(effect);
+        mode.getTargets().add(new TargetCreaturePermanent(filterCreature));
         this.getSpellAbility().addMode(mode);
 
         // Savage Alliance deals 1 damage to each creature target opponent controls.
         mode = new Mode();
         mode.getEffects().add(new SavageAllianceDamageEffect());
-        mode.getTargets().add(new TargetOpponent());
+        mode.getTargets().add(new TargetPlayer(1, 1, false, filterOpponent));
         this.getSpellAbility().addMode(mode);
     }
 

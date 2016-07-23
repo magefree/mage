@@ -25,44 +25,27 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eldritchmoon;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author fwannmacher
  */
-public class SinousPredator extends CardImpl {
+public class NafsAsp2 extends NafsAsp1 {
 
-    public SinousPredator(UUID ownerId) {
-        super(ownerId, 163, "Sinous Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "EMN";
-        this.subtype.add("Eldrazi");
-        this.subtype.add("Werewolf");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // this card is the second face of double-faced card
-        this.nightCard = true;
-
-        // Sinous Predator can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+    public NafsAsp2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 37;
     }
 
-    public SinousPredator(final SinousPredator card) {
+    public NafsAsp2(final NafsAsp2 card) {
         super(card);
     }
 
     @Override
-    public SinousPredator copy() {
-        return new SinousPredator(this);
+    public NafsAsp2 copy() {
+        return new NafsAsp2(this);
     }
 }

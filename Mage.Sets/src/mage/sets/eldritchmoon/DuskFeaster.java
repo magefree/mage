@@ -62,6 +62,7 @@ public class DuskFeaster extends CardImpl {
 
         // <i>Delirium</i> &mdash; Dusk Feaster costs {2} less to cast if there are four or more card types among cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new DuskFeasterCostReductionEffect()));
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
     }
@@ -80,7 +81,7 @@ class DuskFeasterCostReductionEffect extends CostModificationEffectImpl {
 
     DuskFeasterCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "{this} costs {2} less to cast if there are four or more card types among cards in your graveyard";
+        staticText = "<i>Delirium</i> &mdash; {this} costs {2} less to cast if there are four or more card types among cards in your graveyard";
     }
 
     DuskFeasterCostReductionEffect(final DuskFeasterCostReductionEffect effect) {
@@ -105,7 +106,7 @@ class DuskFeasterCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        
+
         boolean hasDelirium = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
@@ -116,9 +117,9 @@ class DuskFeasterCostReductionEffect extends CostModificationEffectImpl {
             int number = foundCardTypes.size();
             hasDelirium = number > 3;
         }
-        
-        return abilityToModify.getSourceId().equals(source.getSourceId()) 
-                && (abilityToModify instanceof SpellAbility) 
+
+        return abilityToModify.getSourceId().equals(source.getSourceId())
+                && (abilityToModify instanceof SpellAbility)
                 && hasDelirium;
     }
 

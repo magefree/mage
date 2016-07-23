@@ -44,7 +44,7 @@ public class FTVLegends extends ExpansionSet {
     }
 
     private FTVLegends() {
-        super("From the Vault: Legends", "FVL", "mage.sets.ftvlegends", new GregorianCalendar(2011, 8, 26).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Legends", "V11", "mage.sets.ftvlegends", new GregorianCalendar(2011, 8, 26).getTime(), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
     }
 }

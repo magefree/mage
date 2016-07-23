@@ -57,7 +57,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 public class FinalIteration extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizards");
-    private static final FilterSpell filterSpell = new FilterSpell("instant or sorcery spell");
+    private static final FilterSpell filterSpell = new FilterSpell("an instant or sorcery spell");
 
     static {
         filter.add(new SubtypePredicate("Wizard"));
@@ -82,7 +82,7 @@ public class FinalIteration extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Wizards you control get +2/+1 and have flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filter, true));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filter, false));
         Effect effect = new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
         effect.setText("and have flying");
         ability.addEffect(effect);

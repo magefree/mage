@@ -38,7 +38,7 @@ public class DejaVu extends mage.sets.portal.DejaVu {
     public DejaVu(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 35;
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
     }
 
     public DejaVu(final DejaVu card) {

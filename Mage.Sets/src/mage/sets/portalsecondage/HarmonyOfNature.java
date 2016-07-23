@@ -54,7 +54,7 @@ public class HarmonyOfNature extends CardImpl {
 
     public HarmonyOfNature(UUID ownerId) {
         super(ownerId, 68, "Harmony of Nature", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
 
         // Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.
         this.getSpellAbility().addEffect(new HarmonyOfNatureEffect());

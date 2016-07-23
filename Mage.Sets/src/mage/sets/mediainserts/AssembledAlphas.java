@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.chronicles;
+package mage.sets.mediainserts;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class UrzasMine extends mage.sets.fifthedition.UrzasMine {
+public class AssembledAlphas extends mage.sets.eldritchmoon.AssembledAlphas {
 
-    public UrzasMine(UUID ownerId) {
+    public AssembledAlphas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
-        this.expansionSetCode = "CHR";
-        this.rarity = Rarity.UNCOMMON;
+        this.cardNumber = 160;
+        this.expansionSetCode = "MBP";
     }
 
-    public UrzasMine(final UrzasMine card) {
+    public AssembledAlphas(final AssembledAlphas card) {
         super(card);
     }
 
     @Override
-    public UrzasMine copy() {
-        return new UrzasMine(this);
+    public AssembledAlphas copy() {
+        return new AssembledAlphas(this);
     }
 }

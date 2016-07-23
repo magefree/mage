@@ -29,16 +29,11 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -52,7 +47,7 @@ public class PlanarCleansing extends CardImpl {
 
 
         // Destroy all nonland permanents.
-        this.getSpellAbility().addEffect(new PlanarCleansingEffect());
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterNonlandPermanent("nonland permanents")));
     }
 
     public PlanarCleansing(final PlanarCleansing card) {
@@ -63,32 +58,4 @@ public class PlanarCleansing extends CardImpl {
     public PlanarCleansing copy() {
         return new PlanarCleansing(this);
     }
-}
-
-class PlanarCleansingEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterNonlandPermanent();
-
-    public PlanarCleansingEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "Destroy all nonland permanents";
-    }
-
-    public PlanarCleansingEffect(final PlanarCleansingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.destroy(source.getSourceId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public PlanarCleansingEffect copy() {
-        return new PlanarCleansingEffect(this);
-    }
-
 }

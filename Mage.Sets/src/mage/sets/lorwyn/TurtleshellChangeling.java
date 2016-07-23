@@ -48,7 +48,7 @@ public class TurtleshellChangeling extends CardImpl {
     public TurtleshellChangeling(UUID ownerId) {
         super(ownerId, 94, "Turtleshell Changeling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Shapesifter");
+        this.subtype.add("Shapeshifter");
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);

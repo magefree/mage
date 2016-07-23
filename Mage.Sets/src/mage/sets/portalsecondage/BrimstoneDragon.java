@@ -43,7 +43,7 @@ public class BrimstoneDragon extends CardImpl {
 
     public BrimstoneDragon(UUID ownerId) {
         super(ownerId, 92, "Brimstone Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Dragon");
 
         this.power = new MageInt(6);

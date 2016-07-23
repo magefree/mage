@@ -67,7 +67,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
     /**
      *
      * @param duration
-     * @param controllingPlayerId Player that controlls the target creature
+     * @param controllingPlayerId Player that controls the target creature
      */
     public GainControlTargetEffect(Duration duration, UUID controllingPlayerId) {
         this(duration, true, controllingPlayerId);

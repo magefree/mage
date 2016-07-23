@@ -38,7 +38,7 @@ public class Vengeance extends mage.sets.seventhedition.Vengeance {
     public Vengeance(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 147;
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
     }
 
     public Vengeance(final Vengeance card) {

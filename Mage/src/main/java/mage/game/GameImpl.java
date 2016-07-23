@@ -67,6 +67,7 @@ import mage.actions.impl.MageAction;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.MeldCard;
 import mage.cards.SplitCard;
 import mage.cards.SplitCardHalf;
 import mage.cards.decks.Deck;
@@ -169,6 +170,7 @@ public abstract class GameImpl implements Game, Serializable {
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
     protected Map<UUID, Card> gameCards = new HashMap<>();
+    protected Map<UUID, MeldCard> meldCards = new HashMap<>(0);
 
     protected Map<Zone, HashMap<UUID, MageObject>> lki = new EnumMap<>(Zone.class);
     protected Map<UUID, Map<Integer, MageObject>> lkiExtended = new HashMap<>();
@@ -318,6 +320,16 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public Collection<Card> getCards() {
         return gameCards.values();
+    }
+
+    @Override
+    public void addMeldCard(UUID meldId, MeldCard meldCard) {
+        meldCards.put(meldId, meldCard);
+    }
+
+    @Override
+    public MeldCard getMeldCard(UUID meldId) {
+        return meldCards.get(meldId);
     }
 
     @Override
@@ -521,7 +533,10 @@ public abstract class GameImpl implements Game, Serializable {
         }
         Card card = gameCards.get(cardId);
         if (card == null) {
-            return state.getCopiedCard(cardId);
+            card = state.getCopiedCard(cardId);
+        }
+        if (card == null) {
+            card = this.getMeldCard(cardId);
         }
         return card;
     }
@@ -706,6 +721,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void cleanUp() {
         gameCards.clear();
+        meldCards.clear();
     }
 
     @Override

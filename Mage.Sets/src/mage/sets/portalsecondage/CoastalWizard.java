@@ -57,7 +57,7 @@ public class CoastalWizard extends CardImpl {
 
     public CoastalWizard(UUID ownerId) {
         super(ownerId, 34, "Coastal Wizard", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

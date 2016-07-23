@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author MarcoMarin
  */
-public class InitiatesOfTheEbonHand extends mage.sets.fallenempires.InitiatesOfTheEbonHand {
+public class InitiatesOfTheEbonHand extends mage.sets.fallenempires.InitiatesOfTheEbonHand1 {
 
     public InitiatesOfTheEbonHand(UUID ownerId) {
         super(ownerId);

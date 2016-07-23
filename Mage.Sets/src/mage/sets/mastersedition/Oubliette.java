@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author MarcoMarin
  */
-public class Oubliette extends mage.sets.arabiannights.Oubliette {
+public class Oubliette extends mage.sets.arabiannights.Oubliette1 {
 
     public Oubliette(UUID ownerId) {
         super(ownerId);

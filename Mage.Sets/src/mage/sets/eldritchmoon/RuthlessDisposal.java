@@ -28,8 +28,10 @@
 package mage.sets.eldritchmoon;
 
 import java.util.UUID;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -51,11 +53,16 @@ public class RuthlessDisposal extends CardImpl {
         this.expansionSetCode = "EMN";
 
         // As an additional cost to cast Ruthless Disposal, discard a card and sacrifice a creature.
-        this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCard("card to discard"))));
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCard("a card"))));
+        Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+        cost.setText("As an additional cost to cast {this}, sacrifice a creature");
+        this.getSpellAbility().addCost(cost);
+
         // Two target creatures each get -13/-13 until end of turn.
+        Effect effect = new BoostTargetEffect(-13, -13, Duration.EndOfTurn);
+        effect.setText("Two target creatures each get -13/-13 until end of turn");
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(-13, -13, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(effect);
 
     }
 

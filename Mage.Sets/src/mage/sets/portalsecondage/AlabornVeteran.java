@@ -49,7 +49,7 @@ public class AlabornVeteran extends CardImpl {
 
     public AlabornVeteran(UUID ownerId) {
         super(ownerId, 125, "Alaborn Veteran", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Knight");
         this.power = new MageInt(2);

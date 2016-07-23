@@ -68,7 +68,7 @@ class CertainDeathEffect extends OneShotEffect {
 
     public CertainDeathEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target creature. Its controler loses 2 life and you gain 2 life";
+        this.staticText = "Destroy target creature. Its controller loses 2 life and you gain 2 life";
     }
 
     public CertainDeathEffect(final CertainDeathEffect effect) {

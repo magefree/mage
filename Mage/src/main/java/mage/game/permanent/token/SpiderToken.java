@@ -21,11 +21,21 @@ public class SpiderToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("INN", "EMN"));
+        tokenImageSets.addAll(Arrays.asList("ISD", "EMN", "C15", "SHM"));
     }
 
     public SpiderToken() {
+        this(null, 0);
+    }
+
+    public SpiderToken(String setCode) {
+        this(setCode, 0);
+    }
+
+    public SpiderToken(String setCode, int tokenType) {
         super("Spider", "1/2 green Spider creature token with reach");
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Spider");

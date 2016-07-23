@@ -39,7 +39,7 @@ public class GoblinMatron extends mage.sets.urzassaga.GoblinMatron {
     public GoblinMatron(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 100;
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.rarity = Rarity.UNCOMMON;
     }
 

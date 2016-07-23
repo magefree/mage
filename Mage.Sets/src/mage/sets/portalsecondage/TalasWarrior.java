@@ -42,7 +42,7 @@ public class TalasWarrior extends CardImpl {
 
     public TalasWarrior(UUID ownerId) {
         super(ownerId, 53, "Talas Warrior", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Pirate");
         this.subtype.add("Warrior");

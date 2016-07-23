@@ -44,7 +44,7 @@ public class AngelOfFury extends CardImpl {
 
     public AngelOfFury(UUID ownerId) {
         super(ownerId, 127, "Angel of Fury", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Angel");
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

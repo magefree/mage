@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SigardianPriest extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human sources");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human creature");
 
     static {
         filter.add(Predicates.not(new SubtypePredicate("Human")));

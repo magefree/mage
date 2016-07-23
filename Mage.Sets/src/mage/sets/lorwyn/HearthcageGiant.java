@@ -27,8 +27,7 @@
  */
 package mage.sets.lorwyn;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,7 +36,9 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -45,8 +46,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.ElementalShamanToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -70,10 +69,10 @@ public class HearthcageGiant extends CardImpl {
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-        
+
         //When Hearthcage Giant enters the battlefield, put two 3/1 red Elemental Shaman creature tokens onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElementalShamanToken(), 2), false));
-        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElementalShamanToken("LRW", 2)), false));
+
         //Sacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 1, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filterElemental)));
         ability.addTarget(new TargetCreaturePermanent(filterGiant));

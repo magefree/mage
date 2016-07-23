@@ -28,6 +28,7 @@
 package mage.sets.eldritchmoon;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TransformTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -60,8 +61,11 @@ public class WaxingMoon extends CardImpl {
         this.expansionSetCode = "EMN";
 
         // Transform up to one target Werewolf you control.
-        this.getSpellAbility().addEffect(new TransformTargetEffect(false));
+        Effect effect = new TransformTargetEffect(false);
+        effect.setText("Transform up to one target Werewolf you control");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+
         // Creatures you control gain trample until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), "Creatures you control gain trample until end of turn"));
     }

@@ -38,7 +38,7 @@ public class TreeMonkey extends mage.sets.ninthedition.TreeMonkey {
     public TreeMonkey(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 88;
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
     }
 
     public TreeMonkey(final TreeMonkey card) {

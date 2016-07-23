@@ -47,7 +47,7 @@ import mage.filter.predicate.other.FaceDownPredicate;
  */
 public class SecretPlans extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Face-down creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Face-down creatures");
 
     static {
         filter.add(new FaceDownPredicate());

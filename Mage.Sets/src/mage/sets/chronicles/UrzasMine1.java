@@ -25,38 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.arabiannights;
+package mage.sets.chronicles;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author fireshoes
+ * @author LevelX2
  */
-public class ArmyOfAllah extends CardImpl {
-    
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
+public class UrzasMine1 extends mage.sets.fifthedition.UrzasMine {
 
-    public ArmyOfAllah(UUID ownerId) {
-        super(ownerId, 56, "Army of Allah", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "ARN";
-
-        // Attacking creatures get +2/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
+    public UrzasMine1(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 94;
+        this.expansionSetCode = "CHR";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public ArmyOfAllah(final ArmyOfAllah card) {
+    public UrzasMine1(final UrzasMine1 card) {
         super(card);
     }
 
     @Override
-    public ArmyOfAllah copy() {
-        return new ArmyOfAllah(this);
+    public UrzasMine1 copy() {
+        return new UrzasMine1(this);
     }
 }

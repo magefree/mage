@@ -106,6 +106,7 @@ public class ChatManager {
         this.broadcast(chatId, userName, message, color, withTime, messageType, null);
     }
 
+    static String lastMessage = "";
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
@@ -118,24 +119,37 @@ public class ChatManager {
                     return;
                 }
             }
+            
+            if (message.equals(lastMessage)) {
+                return;
+            }
+            lastMessage = message;
             chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
         }
     }
 
+    private static final String COMMANDS_LIST =
+            "<br/>List of commands:" +
+            "<br/>\\history or \\h [username] - shows the history of a player" +
+            "<br/>\\me - shows the history of the current player" +
+            "<br/>\\list or \\l - Show a list of commands" +
+            "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name";
+
     private boolean performUserCommand(User user, String message, UUID chatId, boolean doError) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
         if (doError) {
-            message += new StringBuilder("<br/>Invalid User Command '" + message + "'.")
-                    .append("<br/>List of commands:")
-                    .append("<br/>\\history or \\h [username] - shows the history of a player")
-                    .append("<br/>\\list or \\l - Show a list of commands")
-                    .append("<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name").toString();
+            message += new StringBuilder("<br/>Invalid User Command '" + message + "'.").append(COMMANDS_LIST).toString();
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
 
         if (command.startsWith("H ") || command.startsWith("HISTORY ")) {
-            message = UserManager.getInstance().getUserHistory(message.substring(command.startsWith("H ") ? 3 : 9));
+            message += "<br/>" + UserManager.getInstance().getUserHistory(message.substring(command.startsWith("H ") ? 3 : 9));
+            chatSessions.get(chatId).broadcastInfoToUser(user, message);
+            return true;
+        }
+        if (command.equals("ME")) {
+            message += "<br/>" + UserManager.getInstance().getUserHistory(user.getName());
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }
@@ -159,10 +173,7 @@ public class ChatManager {
             }
         }
         if (command.equals("L") || command.equals("LIST")) {
-            message += new StringBuilder("<br/>List of commands:")
-                    .append("<br/>\\history or \\h [username] - shows the history of a player")
-                    .append("<br/>\\list or \\l - Show a list of commands")
-                    .append("<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name").toString();
+            message += COMMANDS_LIST;
             chatSessions.get(chatId).broadcastInfoToUser(user, message);
             return true;
         }

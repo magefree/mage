@@ -30,6 +30,7 @@ package mage.sets.eldritchmoon;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -77,7 +78,9 @@ public class CollectiveEffort extends CardImpl {
         this.expansionSetCode = "EMN";
 
         // Escalate &mdash; Tap an untapped creature you control.
-        this.addAbility(new EscalateAbility(new TapTargetCost(new TargetControlledCreaturePermanent(filterUntapped))));
+        Cost cost = new TapTargetCost(new TargetControlledCreaturePermanent(filterUntapped));
+        cost.setText("&mdash; Tap an untapped creature you control");
+        this.addAbility(new EscalateAbility(cost));
 
         // Choose one or more &mdash;
         this.getSpellAbility().getModes().setMinModes(1);

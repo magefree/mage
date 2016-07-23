@@ -93,7 +93,7 @@ class FortunesFavorEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && targetOpponent != null && sourceObject != null) {
             Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 1));
+            cards.addAll(controller.getLibrary().getTopCards(game, 4));
 
             TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, new FilterCard("cards for the face-down pile"));
             targetOpponent.choose(outcome, cards, target, game);
@@ -101,7 +101,7 @@ class FortunesFavorEffect extends OneShotEffect {
             faceDownPile.addAll(target.getTargets());
             cards.removeAll(target.getTargets());
             controller.revealCards(sourceObject.getIdName() + " - cards in face-up pile", cards, game);
-            game.informPlayers(targetOpponent.getLogName() + " puts " + faceDownPile.size() + "card(s) into the face-down pile");
+            game.informPlayers(targetOpponent.getLogName() + " puts " + faceDownPile.size() + " card(s) into the face-down pile");
             MessageToClient message = new MessageToClient("Put the face-down pile into your hand?", "(If you say yes, the face-up pile goes to the graveyard.)");
             if (controller.chooseUse(outcome, message, source, game)) {
                 controller.moveCards(faceDownPile, Zone.HAND, source, game);

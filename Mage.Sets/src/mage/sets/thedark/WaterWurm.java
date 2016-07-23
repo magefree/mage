@@ -30,18 +30,15 @@ package mage.sets.thedark;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -49,12 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class WaterWurm extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(new SubtypePredicate("Island"));
-    }
+    private static final FilterPermanent filter = new FilterPermanent("Island", "Island");
 
     public WaterWurm(UUID ownerId) {
         super(ownerId, 37, "Water Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
@@ -66,7 +58,7 @@ public class WaterWurm extends CardImpl {
         // Water Wurm gets +0/+1 as long as an opponent controls an Island.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(0, 1, Duration.WhileOnBattlefield),
-            new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0, false),
+            new OpponentControlsPermanentCondition(filter),
             "{this} gets +0/+1 as long as an opponent controls an Island")));
     }
 

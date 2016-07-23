@@ -24,21 +24,19 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.target;
-
-import mage.constants.Zone;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.cards.Card;
+import mage.cards.Cards;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 
 /**
  *
@@ -87,9 +85,12 @@ public class TargetCard extends TargetObject {
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int possibleTargets = 0;
-        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
+                if (this.minNumberOfTargets == 0) {
+                    return true;
+                }
                 switch (zone) {
                     case HAND:
                         for (Card card : player.getHand().getCards(filter, sourceId, sourceControllerId, game)) {
@@ -200,7 +201,7 @@ public class TargetCard extends TargetObject {
 
     public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        for (Card card: cards.getCards(filter, game)) {
+        for (Card card : cards.getCards(filter, game)) {
             possibleTargets.add(card.getId());
         }
         return possibleTargets;

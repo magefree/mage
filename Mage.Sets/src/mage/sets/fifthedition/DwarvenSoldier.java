@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author MarcoMarin
  */
-public class DwarvenSoldier extends mage.sets.fallenempires.DwarvenSoldier {
+public class DwarvenSoldier extends mage.sets.fallenempires.DwarvenSoldier1 {
 
     public DwarvenSoldier(UUID ownerId) {
         super(ownerId);

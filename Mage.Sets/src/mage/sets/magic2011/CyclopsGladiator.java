@@ -59,6 +59,8 @@ public class CyclopsGladiator extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        // Whenever Cyclops Gladiator attacks, you may have it deal damage equal to its power to target creature defending player controls. 
+        // If you do, that creature deals damage equal to its power to Cyclops Gladiator.
         Ability ability = new AttacksTriggeredAbility(new CyclopsGladiatorEffect(), true);
         this.addAbility(ability);
     }

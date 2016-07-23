@@ -51,6 +51,9 @@ public class GainControlAllEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        return "Gain control of " + filter;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Gain control of ").append(filter.getMessage());
+        return sb.toString();
+        //return "Gain control of " + filter;
     }
 }

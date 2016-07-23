@@ -64,6 +64,7 @@ public class InfectiousCurse extends CardImpl {
         this.expansionSetCode = "SOI";
         this.subtype.add("Aura");
         this.subtype.add("Curse");
+        this.color.setBlack(true);
 
         this.nightCard = true;
         this.canTransform = true;

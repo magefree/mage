@@ -30,20 +30,17 @@ package mage.sets.exodus;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -55,7 +52,6 @@ public class SkyshroudElite extends CardImpl {
 
     static {
         filter.add(Predicates.not(new SupertypePredicate("Basic")));
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public SkyshroudElite(UUID ownerId) {
@@ -66,10 +62,10 @@ public class SkyshroudElite extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Skyshroud Elite gets +1/+2 as long as an opponent controls a nonbasic land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-            new ConditionalContinuousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
-            new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0, false),
-            "{this} gets +1/+2 as long as an opponent controls a nonbasic land")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
+                new OpponentControlsPermanentCondition(filter),
+                "{this} gets +1/+2 as long as an opponent controls a nonbasic land")));
     }
 
     public SkyshroudElite(final SkyshroudElite card) {

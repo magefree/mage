@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author MarcoMarin
  */
-public class Necrite extends mage.sets.fallenempires.Necrite {
+public class Necrite extends mage.sets.fallenempires.Necrite1 {
 
     public Necrite(UUID ownerId) {
         super(ownerId);

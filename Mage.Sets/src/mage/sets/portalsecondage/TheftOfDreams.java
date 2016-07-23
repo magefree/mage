@@ -39,7 +39,7 @@ public class TheftOfDreams extends mage.sets.exodus.TheftOfDreams {
     public TheftOfDreams(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 55;
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.rarity = Rarity.UNCOMMON;
     }
 

@@ -44,7 +44,7 @@ public class NorwoodRiders extends CardImpl {
 
     public NorwoodRiders(UUID ownerId) {
         super(ownerId, 79, "Norwood Riders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Elf");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

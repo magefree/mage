@@ -30,6 +30,7 @@ package mage.sets.eldritchmoon;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -65,7 +66,9 @@ public class SpiritOfTheHunt extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Spirit of the Hunt enters the battlefield, each other creature you control that's a Wolf or a Werewolf gets +0/+3 until end of turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(0, 3, Duration.EndOfTurn, filter, true), false));
+        Effect effect = new BoostControlledEffect(0, 3, Duration.EndOfTurn, filter, true);
+        effect.setText("each other creature you control that's a Wolf or a Werewolf gets +0/+3 until end of turn");
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
     public SpiritOfTheHunt(final SpiritOfTheHunt card) {

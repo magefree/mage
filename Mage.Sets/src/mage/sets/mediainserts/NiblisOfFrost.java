@@ -25,44 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.sets.mediainserts;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author MarcoMarin
+ * @author fireshoes
  */
-public class DwarvenSoldier extends CardImpl {
+public class NiblisOfFrost extends mage.sets.eldritchmoon.NiblisOfFrost {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Orc", "Orc creature");
-
-    public DwarvenSoldier(UUID ownerId) {
-        super(ownerId, 107, "Dwarven Soldier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "FEM";
-        this.subtype.add("Dwarf");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // Whenever Dwarven Soldier blocks or becomes blocked by one or more Orcs, Dwarven Soldier gets +0/+2 until end of turn.
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), filter, false));
+    public NiblisOfFrost(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 158;
+        this.expansionSetCode = "MBP";
     }
 
-    public DwarvenSoldier(final DwarvenSoldier card) {
+    public NiblisOfFrost(final NiblisOfFrost card) {
         super(card);
     }
 
     @Override
-    public DwarvenSoldier copy() {
-        return new DwarvenSoldier(this);
+    public NiblisOfFrost copy() {
+        return new NiblisOfFrost(this);
     }
 }

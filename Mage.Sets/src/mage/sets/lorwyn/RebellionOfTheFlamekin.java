@@ -29,9 +29,6 @@ package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -41,13 +38,16 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.ElementalShamanToken;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.ElementalShamanToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -136,7 +136,7 @@ class RebellionOfTheFlamekinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreateTokenEffect createTokenEffect = new CreateTokenEffect(new ElementalShamanToken(), 1);
+            CreateTokenEffect createTokenEffect = new CreateTokenEffect(new ElementalShamanToken("LRW", 1));
             DoIfCostPaid doIfCostPaid = new DoIfCostPaid(createTokenEffect, new ManaCostsImpl("{1}"));
             doIfCostPaid.apply(game, source);
             Permanent token = game.getPermanent(createTokenEffect.getLastAddedTokenId());

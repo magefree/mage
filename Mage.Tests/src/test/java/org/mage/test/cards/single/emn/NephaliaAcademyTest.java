@@ -60,6 +60,32 @@ public class NephaliaAcademyTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Giant Growth", 1); // discarded to grave
     }
     
+    @Test
+    public void testShouldNotApplyToOwnDiscardSpell() {
+        
+        // Nephalia Academy - Land <>
+        // If a spell or ability an opponent controls causes you to discard a card, 
+        // you may reveal that card and put it on top of your library instead of putting it anywhere else.
+        addCard(Zone.BATTLEFIELD, playerA, "Nephalia Academy", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.HAND, playerA, "Memnite", 1); // discard fodder
+        
+        // Sift - Sorcery <3><U>
+        // Draw three cards. Then discard a card.
+        addCard(Zone.HAND, playerA, "Sift", 1);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sift");
+        setChoice(playerA, "Yes"); // should not be given the option to use Nephalia Academy replacement effect
+        setChoice(playerA, "Memnite");
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertGraveyardCount(playerA, "Sift", 1);
+        assertHandCount(playerA, "Memnite", 0);
+        assertGraveyardCount(playerA, "Memnite", 1); // discarded to grave        
+    }
+    
     //TODO: Add tests for replacement effect by ability
     
 }

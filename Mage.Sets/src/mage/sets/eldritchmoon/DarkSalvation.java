@@ -41,8 +41,8 @@ import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -62,9 +62,9 @@ public class DarkSalvation extends CardImpl {
         Effect effect = new CreateTokenTargetEffect(new ZombieToken(), new ManacostVariableValue());
         effect.setText("Target player puts X 2/2 black Zombie creature tokens onto the battlefield");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(), false));
+        DynamicValue value = new ZombiesControlledByTargetPlayerCount();
 
-        DynamicValue value = new ZombiesControlledByTargetCreaturesControllerCount();
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent(), false));
         effect = new BoostTargetEffect(value, value, Duration.EndOfTurn, true);
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText(", then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls");
@@ -81,7 +81,7 @@ public class DarkSalvation extends CardImpl {
     }
 }
 
-class ZombiesControlledByTargetCreaturesControllerCount implements DynamicValue {
+class ZombiesControlledByTargetPlayerCount implements DynamicValue {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombies");
 
@@ -90,15 +90,15 @@ class ZombiesControlledByTargetCreaturesControllerCount implements DynamicValue 
     }
 
     @Override
-    public ZombiesControlledByTargetCreaturesControllerCount copy() {
-        return new ZombiesControlledByTargetCreaturesControllerCount();
+    public ZombiesControlledByTargetPlayerCount copy() {
+        return new ZombiesControlledByTargetPlayerCount();
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent targetCreature = game.getPermanent(effect.getTargetPointer().getFirst(game, sourceAbility));
-        if (targetCreature != null) {
-            int value = game.getBattlefield().countAll(filter, targetCreature.getControllerId(), game);
+        Player player = game.getPlayer(sourceAbility.getTargets().get(0).getFirstTarget());
+        if (player != null) {
+            int value = game.getBattlefield().countAll(filter, player.getId(), game);
             return -1 * value;
         } else {
             return 0;

@@ -25,7 +25,7 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
     private final TargetController sacrificingPlayer;
 
     public SacrificeAllTriggeredAbility(Effect effect, FilterPermanent filter, TargetController sacrificingPlayer, boolean optional) {
-        super(Zone.ALL, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.sacrificingPlayer = sacrificingPlayer;
     }
@@ -48,21 +48,22 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        boolean sacrificed = false;
         switch (sacrificingPlayer) {
             case YOU:
                 if (event.getPlayerId().equals(getControllerId())) {
-                    return false;
+                    sacrificed = true;
                 }
                 break;
             case OPPONENT:
                 Player controller = game.getPlayer(getControllerId());
                 if (controller == null || !controller.hasOpponent(event.getPlayerId(), game)) {
-                    return false;
+                    sacrificed = true;
                 }
                 break;
         }
         Permanent sacrificedPermanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return sacrificedPermanent != null && filter.match(sacrificedPermanent, getSourceId(), getControllerId(), game);
+        return sacrificed && sacrificedPermanent != null && filter.match(sacrificedPermanent, getSourceId(), getControllerId(), game);
     }
 
     @Override

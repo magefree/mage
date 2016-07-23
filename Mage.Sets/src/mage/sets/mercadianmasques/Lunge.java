@@ -49,10 +49,10 @@ public class Lunge extends CardImpl {
 
 
         // Lunge deals 2 damage to target creature and 2 damage to target player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        Effect effect = new DamageTargetEffect(1);
+        Effect effect = new DamageTargetEffect(2);
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("and 2 damage to target player");
         this.getSpellAbility().addEffect(effect);
