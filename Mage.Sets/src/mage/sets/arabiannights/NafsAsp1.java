@@ -25,28 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.UnlessPaysDelayedEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.PhaseStep;
+import mage.constants.Rarity;
 
 /**
  *
- * @author MarcoMarin
+ * @author LoneFox
  */
-public class Oubliette extends mage.sets.arabiannights.Oubliette1 {
+public class NafsAsp1 extends CardImpl {
 
-    public Oubliette(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 79;
-        this.expansionSetCode = "MED";
+    public NafsAsp1(UUID ownerId) {
+        super(ownerId, 36, "Nafs Asp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "ARN";
+        this.subtype.add("Snake");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Whenever Nafs Asp deals damage to a player, that player loses 1 life at the beginning of his or her next draw step unless he or she pays {1} before that draw step.
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new UnlessPaysDelayedEffect(
+            new ManaCostsImpl("{1}"), new LoseLifeTargetEffect(1), PhaseStep.DRAW, true,
+            "that player loses 1 life at the beginning of his or her next draw step unless he or she pays {1} before that draw step."),
+            false, true));
     }
 
-    public Oubliette(final Oubliette card) {
+    public NafsAsp1(final NafsAsp1 card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public NafsAsp1 copy() {
+        return new NafsAsp1(this);
     }
 }

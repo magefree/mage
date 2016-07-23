@@ -52,9 +52,9 @@ import mage.target.TargetPermanent;
  *
  * @author MarcoMarin
  */
-public class Necrite extends CardImpl {
+public class Necrite1 extends CardImpl {
 
-    public Necrite(UUID ownerId) {
+    public Necrite1(UUID ownerId) {
         super(ownerId, 22, "Necrite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.expansionSetCode = "FEM";
         this.subtype.add("Thrull");
@@ -69,13 +69,13 @@ public class Necrite extends CardImpl {
         
     }
 
-    public Necrite(final Necrite card) {
+    public Necrite1(final Necrite1 card) {
         super(card);
     }
 
     @Override
-    public Necrite copy() {
-        return new Necrite(this);
+    public Necrite1 copy() {
+        return new Necrite1(this);
     }
 }
 

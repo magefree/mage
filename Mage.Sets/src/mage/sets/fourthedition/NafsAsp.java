@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LoneFox
  */
-public class NafsAsp extends mage.sets.arabiannights.NafsAsp {
+public class NafsAsp extends mage.sets.arabiannights.NafsAsp1 {
 
     public NafsAsp(UUID ownerId) {
         super(ownerId);

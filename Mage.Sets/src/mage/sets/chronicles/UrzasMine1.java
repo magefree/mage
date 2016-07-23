@@ -34,21 +34,21 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class UrzasPowerPlant extends mage.sets.fifthedition.UrzasPowerPlant {
+public class UrzasMine1 extends mage.sets.fifthedition.UrzasMine {
 
-    public UrzasPowerPlant(UUID ownerId) {
+    public UrzasMine1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = 94;
         this.expansionSetCode = "CHR";
         this.rarity = Rarity.UNCOMMON;
     }
 
-    public UrzasPowerPlant(final UrzasPowerPlant card) {
+    public UrzasMine1(final UrzasMine1 card) {
         super(card);
     }
 
     @Override
-    public UrzasPowerPlant copy() {
-        return new UrzasPowerPlant(this);
+    public UrzasMine1 copy() {
+        return new UrzasMine1(this);
     }
 }

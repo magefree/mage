@@ -20,6 +20,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("AER", "aether-revolt");
             put("ALA", "shards-of-alara");
             put("APAC", "asia-pacific-land-program");
+            put("APC", "player-rewards-2001");
             put("ARB", "alara-reborn");
             put("ARC", "archenemy");
             put("ARENA", "arena-league");
@@ -75,6 +76,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("GRC", "wpngateway");
             put("GTC", "gatecrash");
             put("HOP", "planechase");
+            put("INV", "player-rewards-2001");
             put("ISD", "innistrad");
             put("JOU", "journey-into-nyx");
             put("JR", "judge-gift-program");
@@ -96,11 +98,13 @@ public class MagicCardsImageSource implements CardImageSource {
             put("MOR", "morningtide");
             put("MPRP", "magic-player-rewards");
             put("NPH", "new-phyrexia");
+            put("ODY", "player-rewards-2002");
             put("OGW", "oath-of-the-gatewatch");
             put("ORG", "oath-of-the-gatewatch");
             put("ORI", "magic-origins");
             put("PC2", "planechase-2012-edition");
             put("PO2", "portal-second-age");
+            put("PLS", "player-rewards-2001");
             put("POR", "portal");
             put("PTC", "prerelease-events");
             put("PTK", "portal-three-kingdoms");

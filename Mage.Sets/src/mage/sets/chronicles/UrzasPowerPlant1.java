@@ -25,28 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.chronicles;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author MarcoMarin
+ * @author LevelX2
  */
-public class Oubliette extends mage.sets.arabiannights.Oubliette1 {
+public class UrzasPowerPlant1 extends mage.sets.fifthedition.UrzasPowerPlant {
 
-    public Oubliette(UUID ownerId) {
+    public UrzasPowerPlant1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
-        this.expansionSetCode = "MED";
+        this.cardNumber = 98;
+        this.expansionSetCode = "CHR";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public Oubliette(final Oubliette card) {
+    public UrzasPowerPlant1(final UrzasPowerPlant1 card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public UrzasPowerPlant1 copy() {
+        return new UrzasPowerPlant1(this);
     }
 }

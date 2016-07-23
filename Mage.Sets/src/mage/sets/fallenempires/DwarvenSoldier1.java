@@ -25,28 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author MarcoMarin
  */
-public class Oubliette extends mage.sets.arabiannights.Oubliette1 {
+public class DwarvenSoldier1 extends CardImpl {
 
-    public Oubliette(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 79;
-        this.expansionSetCode = "MED";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Orc", "Orc creature");
+
+    public DwarvenSoldier1(UUID ownerId) {
+        super(ownerId, 107, "Dwarven Soldier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Dwarf");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Whenever Dwarven Soldier blocks or becomes blocked by one or more Orcs, Dwarven Soldier gets +0/+2 until end of turn.
+        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), filter, false));
     }
 
-    public Oubliette(final Oubliette card) {
+    public DwarvenSoldier1(final DwarvenSoldier1 card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public DwarvenSoldier1 copy() {
+        return new DwarvenSoldier1(this);
     }
 }

@@ -472,7 +472,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
             update(0, cardsToDownload.size());
 
-            ExecutorService executor = Executors.newFixedThreadPool(10);
+            int numberOfThreads = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_THREADS, "10"));
+            ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
             for (int i = 0; i < cardsToDownload.size() && !cancel; i++) {
                 try {
 

@@ -28,35 +28,24 @@
 package mage.sets.arabiannights;
 
 import java.util.UUID;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author fireshoes
+ * @author fwannmacher
  */
-public class ArmyOfAllah extends CardImpl {
-    
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
+public class Piety2 extends Piety1 {
 
-    public ArmyOfAllah(UUID ownerId) {
-        super(ownerId, 56, "Army of Allah", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
-        this.expansionSetCode = "ARN";
-
-        // Attacking creatures get +2/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
+    public Piety2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 65;
     }
 
-    public ArmyOfAllah(final ArmyOfAllah card) {
+    public Piety2(final Piety2 card) {
         super(card);
     }
 
     @Override
-    public ArmyOfAllah copy() {
-        return new ArmyOfAllah(this);
+    public Piety2 copy() {
+        return new Piety2(this);
     }
 }

@@ -50,9 +50,9 @@ import mage.game.Game;
  *
  * @author MarcoMarin
  */
-public class InitiatesOfTheEbonHand extends CardImpl {
+public class InitiatesOfTheEbonHand1 extends CardImpl {
 
-    public InitiatesOfTheEbonHand(UUID ownerId) {
+    public InitiatesOfTheEbonHand1(UUID ownerId) {
         super(ownerId, 16, "Initiates of the Ebon Hand", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "FEM";
         this.subtype.add("Cleric");
@@ -67,13 +67,13 @@ public class InitiatesOfTheEbonHand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InitiatesOfTheEbonHand(final InitiatesOfTheEbonHand card) {
+    public InitiatesOfTheEbonHand1(final InitiatesOfTheEbonHand1 card) {
         super(card);
     }
 
     @Override
-    public InitiatesOfTheEbonHand copy() {
-        return new InitiatesOfTheEbonHand(this);
+    public InitiatesOfTheEbonHand1 copy() {
+        return new InitiatesOfTheEbonHand1(this);
     }
 }
 

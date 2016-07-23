@@ -25,28 +25,27 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.chronicles;
 
 import java.util.UUID;
 
 /**
  *
- * @author MarcoMarin
+ * @author fwannmacher
  */
-public class Oubliette extends mage.sets.arabiannights.Oubliette1 {
+public class UrzasTower2 extends UrzasTower1 {
 
-    public Oubliette(UUID ownerId) {
+    public UrzasTower2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
-        this.expansionSetCode = "MED";
+        this.cardNumber = 103;
     }
 
-    public Oubliette(final Oubliette card) {
+    public UrzasTower2(final UrzasTower2 card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public UrzasTower2 copy() {
+        return new UrzasTower2(this);
     }
 }

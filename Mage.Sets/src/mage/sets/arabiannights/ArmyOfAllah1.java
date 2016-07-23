@@ -25,28 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.arabiannights;
 
 import java.util.UUID;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author MarcoMarin
+ * @author fireshoes
  */
-public class Oubliette extends mage.sets.arabiannights.Oubliette1 {
+public class ArmyOfAllah1 extends CardImpl {
+    
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 
-    public Oubliette(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 79;
-        this.expansionSetCode = "MED";
+    public ArmyOfAllah1(UUID ownerId) {
+        super(ownerId, 56, "Army of Allah", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
+        this.expansionSetCode = "ARN";
+
+        // Attacking creatures get +2/+0 until end of turn.
+        this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
     }
 
-    public Oubliette(final Oubliette card) {
+    public ArmyOfAllah1(final ArmyOfAllah1 card) {
         super(card);
     }
 
     @Override
-    public Oubliette copy() {
-        return new Oubliette(this);
+    public ArmyOfAllah1 copy() {
+        return new ArmyOfAllah1(this);
     }
 }
