@@ -106,6 +106,7 @@ public class ChatManager {
         this.broadcast(chatId, userName, message, color, withTime, messageType, null);
     }
 
+    static String lastMessage = "";
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
@@ -118,6 +119,11 @@ public class ChatManager {
                     return;
                 }
             }
+            
+            if (message.equals(lastMessage)) {
+                return;
+            }
+            lastMessage = message;
             chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
         }
     }
