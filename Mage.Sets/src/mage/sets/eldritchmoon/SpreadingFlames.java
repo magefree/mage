@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
@@ -46,7 +46,7 @@ public class SpreadingFlames extends CardImpl {
 
         // Spreading Flames deals 6 damage divided as you choose among any number of target creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(6));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,Integer.MAX_VALUE));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(6));
     }
 
     public SpreadingFlames(final SpreadingFlames card) {
