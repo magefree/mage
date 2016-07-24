@@ -16,15 +16,12 @@ import mage.game.Game;
  */
 public class SpellsCostReductionAllOfChosenSubtypeEffect extends SpellsCostReductionAllEffect {
 
-    String subtype = null;
-
     public SpellsCostReductionAllOfChosenSubtypeEffect(FilterCard filter, int amount) {
         super(filter, amount);
     }
 
     public SpellsCostReductionAllOfChosenSubtypeEffect(final SpellsCostReductionAllOfChosenSubtypeEffect effect) {
         super(effect);
-        this.subtype = effect.subtype;
     }
 
     @Override
@@ -34,15 +31,11 @@ public class SpellsCostReductionAllOfChosenSubtypeEffect extends SpellsCostReduc
 
     @Override
     protected boolean selectedByRuntimeData(Card card, Ability source, Game game) {
+        String subtype = (String) game.getState().getValue(source.getSourceId() + "_type");
         if (subtype != null) {
             return card.hasSubtype(subtype);
         }
         return false;
-    }
-
-    @Override
-    protected void setRuntimeData(Ability source, Game game) {
-        subtype = (String) game.getState().getValue(source.getSourceId() + "_type");
     }
 
 }
