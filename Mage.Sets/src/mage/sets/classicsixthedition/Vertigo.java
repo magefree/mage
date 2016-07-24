@@ -37,7 +37,7 @@ public class Vertigo extends mage.sets.iceage.Vertigo {
 
     public Vertigo(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class BlueElementalBlast extends mage.sets.limitedalpha.BlueElementalBlas
 
     public BlueElementalBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "3ED";
     }
 

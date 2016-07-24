@@ -38,7 +38,7 @@ public class GoldMyr extends mage.sets.mirrodin.GoldMyr {
 
     public GoldMyr (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "HOP";
     }
 

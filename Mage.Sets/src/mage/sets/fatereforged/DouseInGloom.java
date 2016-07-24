@@ -37,7 +37,7 @@ public class DouseInGloom extends mage.sets.guildpact.DouseInGloom {
 
     public DouseInGloom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "FRF";
     }
 

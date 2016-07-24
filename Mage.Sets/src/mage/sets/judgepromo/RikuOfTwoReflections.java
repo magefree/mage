@@ -37,7 +37,7 @@ public class RikuOfTwoReflections extends mage.sets.commander.RikuOfTwoReflectio
 
     public RikuOfTwoReflections(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "JR";
     }
 

@@ -38,7 +38,7 @@ public class Scrivener extends mage.sets.exodus.Scrivener {
 
     public Scrivener(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.COMMON;
     }

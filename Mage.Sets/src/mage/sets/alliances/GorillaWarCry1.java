@@ -37,7 +37,7 @@ public class GorillaWarCry1 extends mage.sets.masterseditioniv.GorillaWarCry {
 
     public GorillaWarCry1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "ALL";
     }
 

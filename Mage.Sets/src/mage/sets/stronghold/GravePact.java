@@ -37,7 +37,7 @@ public class GravePact extends mage.sets.ninthedition.GravePact {
 
     public GravePact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "STH";
     }
 

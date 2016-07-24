@@ -37,7 +37,7 @@ public class KongmingSleepingDragon extends mage.sets.commander2013.KongmingSlee
 
     public KongmingSleepingDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "VMA";
     }
 

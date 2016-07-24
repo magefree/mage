@@ -38,7 +38,7 @@ public class ErgRaiders extends mage.sets.fourthedition.ErgRaiders {
 
     public ErgRaiders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "MED";
     }
 

@@ -38,7 +38,7 @@ public class TranquilCove extends mage.sets.khansoftarkir.TranquilCove {
 
     public TranquilCove(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 247;
+        this.cardNumber = "247";
         this.expansionSetCode = "EMA";
     }
 

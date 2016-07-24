@@ -37,7 +37,7 @@ public class Tundra extends mage.sets.limitedalpha.Tundra {
 
     public Tundra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 322;
+        this.cardNumber = "322";
         this.expansionSetCode = "VMA";
     }
 

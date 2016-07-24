@@ -37,7 +37,7 @@ public class ObeliskOfEsper extends mage.sets.shardsofalara.ObeliskOfEsper {
 
     public ObeliskOfEsper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "ARC";
     }
 

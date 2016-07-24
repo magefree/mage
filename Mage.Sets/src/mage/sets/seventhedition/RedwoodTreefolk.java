@@ -37,7 +37,7 @@ public class RedwoodTreefolk extends mage.sets.weatherlight.RedwoodTreefolk {
 
     public RedwoodTreefolk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 264;
+        this.cardNumber = "264";
         this.expansionSetCode = "7ED";
     }
 

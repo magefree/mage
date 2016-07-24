@@ -38,7 +38,7 @@ public class NaturesRuin extends mage.sets.vintagemasters.NaturesRuin {
 
     public NaturesRuin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "POR";
         this.rarity = Rarity.UNCOMMON;
     }

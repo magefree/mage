@@ -37,7 +37,7 @@ public class HigureTheStillWind extends mage.sets.betrayersofkamigawa.HigureTheS
 
     public HigureTheStillWind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "PC2";
     }
 

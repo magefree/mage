@@ -37,7 +37,7 @@ public class DrogskolCavalry extends mage.sets.shadowsoverinnistrad.DrogskolCava
 
     public DrogskolCavalry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "MBP";
     }
 

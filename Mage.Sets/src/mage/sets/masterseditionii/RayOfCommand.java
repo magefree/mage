@@ -38,7 +38,7 @@ public class RayOfCommand extends mage.sets.iceage.RayOfCommand {
 
     public RayOfCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class IceStorm extends mage.sets.limitedalpha.IceStorm {
 
     public IceStorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "2ED";
     }
 

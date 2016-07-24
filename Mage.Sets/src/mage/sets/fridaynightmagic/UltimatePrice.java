@@ -37,7 +37,7 @@ public class UltimatePrice extends mage.sets.returntoravnica.UltimatePrice {
 
     public UltimatePrice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = "185";
         this.expansionSetCode = "FNMP";
     }
 

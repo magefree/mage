@@ -38,7 +38,7 @@ public class FlowstoneWyvern extends mage.sets.tempest.FlowstoneWyvern {
 
     public FlowstoneWyvern(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

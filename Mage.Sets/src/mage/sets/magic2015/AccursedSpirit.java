@@ -37,7 +37,7 @@ public class AccursedSpirit extends mage.sets.magic2014.AccursedSpirit {
 
     public AccursedSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "M15";
     }
 

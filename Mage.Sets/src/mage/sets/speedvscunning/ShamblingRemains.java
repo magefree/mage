@@ -37,7 +37,7 @@ public class ShamblingRemains extends mage.sets.conflux.ShamblingRemains {
 
     public ShamblingRemains(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "DDN";
     }
 

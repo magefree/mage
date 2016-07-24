@@ -37,7 +37,7 @@ public class PitScorpion extends mage.sets.fifthedition.PitScorpion {
 
     public PitScorpion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "LEG";
     }
 

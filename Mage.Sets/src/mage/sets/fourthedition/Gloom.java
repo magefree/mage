@@ -37,7 +37,7 @@ public class Gloom extends mage.sets.limitedalpha.Gloom {
 
     public Gloom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "4ED";
     }
 

@@ -37,7 +37,7 @@ public class ThopterAssembly extends mage.sets.mirrodinbesieged.ThopterAssembly 
 
     public ThopterAssembly(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "MLP";
     }
 

@@ -37,7 +37,7 @@ public class PlaguedRusalka extends mage.sets.guildpact.PlaguedRusalka {
 
     public PlaguedRusalka(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "DDJ";
     }
 

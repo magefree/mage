@@ -37,7 +37,7 @@ public class PollenbrightWings extends mage.sets.planechase2012.PollenbrightWing
 
     public PollenbrightWings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "RAV";
     }
 

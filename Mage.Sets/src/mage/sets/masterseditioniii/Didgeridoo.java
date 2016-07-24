@@ -38,7 +38,7 @@ public class Didgeridoo extends mage.sets.homelands.Didgeridoo {
 
     public Didgeridoo(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 194;
+        this.cardNumber = "194";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

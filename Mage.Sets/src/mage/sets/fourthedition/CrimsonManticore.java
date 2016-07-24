@@ -37,7 +37,7 @@ public class CrimsonManticore extends mage.sets.legends.CrimsonManticore {
 
     public CrimsonManticore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "4ED";
     }
 

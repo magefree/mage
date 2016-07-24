@@ -37,7 +37,7 @@ public class VulshokBerserker extends mage.sets.magic2011.VulshokBerserker {
 
     public VulshokBerserker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "DDI";
     }
 

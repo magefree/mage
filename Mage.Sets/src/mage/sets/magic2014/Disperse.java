@@ -37,7 +37,7 @@ public class Disperse extends mage.sets.scarsofmirrodin.Disperse {
 
     public Disperse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "M14";
     }
 

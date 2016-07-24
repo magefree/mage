@@ -37,7 +37,7 @@ public class RapidHybridization extends mage.sets.gatecrash.RapidHybridization {
 
     public RapidHybridization(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "C15";
     }
 

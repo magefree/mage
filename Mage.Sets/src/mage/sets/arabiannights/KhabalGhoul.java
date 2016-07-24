@@ -38,7 +38,7 @@ public class KhabalGhoul extends mage.sets.mastersedition.KhabalGhoul {
 
     public KhabalGhoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "ARN";
         this.rarity = Rarity.UNCOMMON;
     }

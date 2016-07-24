@@ -38,7 +38,7 @@ public class Tarpan extends mage.sets.iceage.Tarpan {
 
     public Tarpan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 192;
+        this.cardNumber = "192";
         this.expansionSetCode = "5ED";
     }
 

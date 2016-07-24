@@ -37,7 +37,7 @@ public class ShadowRift extends mage.sets.tempest.ShadowRift {
 
     public ShadowRift(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "TPR";
     }
 

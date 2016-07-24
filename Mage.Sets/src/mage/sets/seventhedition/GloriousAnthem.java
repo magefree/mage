@@ -37,7 +37,7 @@ public class GloriousAnthem extends mage.sets.tenthedition.GloriousAnthem {
 
     public GloriousAnthem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "7ED";
     }
 

@@ -38,7 +38,7 @@ public class SliverQueen extends mage.sets.stronghold.SliverQueen {
 
     public SliverQueen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 211;
+        this.cardNumber = "211";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.MYTHIC;
     }

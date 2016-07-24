@@ -38,7 +38,7 @@ public class SandsteppeCitadel extends mage.sets.khansoftarkir.SandsteppeCitadel
 
     public SandsteppeCitadel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

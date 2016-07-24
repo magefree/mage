@@ -37,7 +37,7 @@ public class TowerDrake extends mage.sets.returntoravnica.TowerDrake {
 
     public TowerDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "INV";
     }
 

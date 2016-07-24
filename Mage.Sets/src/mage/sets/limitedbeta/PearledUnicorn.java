@@ -37,7 +37,7 @@ public class PearledUnicorn extends mage.sets.fifthedition.PearledUnicorn {
 
     public PearledUnicorn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "LEB";
     }
 

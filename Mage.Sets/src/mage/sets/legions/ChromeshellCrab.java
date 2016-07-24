@@ -37,7 +37,7 @@ public class ChromeshellCrab extends mage.sets.commander.ChromeshellCrab {
 
     public ChromeshellCrab(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "LGN";
     }
 

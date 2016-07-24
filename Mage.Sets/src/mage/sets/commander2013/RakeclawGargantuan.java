@@ -37,7 +37,7 @@ public class RakeclawGargantuan extends mage.sets.shardsofalara.RakeclawGargantu
 
     public RakeclawGargantuan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 205;
+        this.cardNumber = "205";
         this.expansionSetCode = "C13";
     }
 

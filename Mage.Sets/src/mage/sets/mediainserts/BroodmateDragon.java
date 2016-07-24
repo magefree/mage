@@ -6,7 +6,7 @@ public class BroodmateDragon extends mage.sets.shardsofalara.BroodmateDragon {
     
     public BroodmateDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "MBP";
     }
     

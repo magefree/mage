@@ -38,7 +38,7 @@ public class NocturnalRaid extends mage.sets.mirage.NocturnalRaid {
 
     public NocturnalRaid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "7ED";
     }
 

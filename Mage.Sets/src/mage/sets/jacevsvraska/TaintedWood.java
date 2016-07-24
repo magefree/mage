@@ -37,7 +37,7 @@ public class TaintedWood extends mage.sets.torment.TaintedWood {
 
     public TaintedWood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "DDM";
     }
 

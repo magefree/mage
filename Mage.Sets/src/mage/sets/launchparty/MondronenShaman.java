@@ -37,7 +37,7 @@ public class MondronenShaman extends mage.sets.darkascension.MondronenShaman {
 
     public MondronenShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "MLP";
     }
 

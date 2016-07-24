@@ -37,7 +37,7 @@ public class ForceOfNature extends mage.sets.fourthedition.ForceOfNature {
 
     public ForceOfNature(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "ME4";
     }
 

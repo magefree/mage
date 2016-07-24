@@ -37,7 +37,7 @@ public class AvengerOfZendikar extends mage.sets.worldwake.AvengerOfZendikar {
 
     public AvengerOfZendikar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DDP";
     }
 

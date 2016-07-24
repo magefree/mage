@@ -37,7 +37,7 @@ public class ThrabenHeretic extends mage.sets.darkascension.ThrabenHeretic {
 
     public ThrabenHeretic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "DDQ";
     }
 

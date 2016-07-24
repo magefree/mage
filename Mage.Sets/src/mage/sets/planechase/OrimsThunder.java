@@ -37,7 +37,7 @@ public class OrimsThunder extends mage.sets.apocalypse.OrimsThunder {
 
     public OrimsThunder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "HOP";
     }
 

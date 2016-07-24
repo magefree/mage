@@ -37,7 +37,7 @@ public class LlanowarReborn extends mage.sets.heroesvsmonsters.LlanowarReborn {
 
     public LlanowarReborn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 293;
+        this.cardNumber = "293";
         this.expansionSetCode = "C15";
     }
 

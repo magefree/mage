@@ -37,7 +37,7 @@ public class ThunderscapeBattlemage extends mage.sets.phyrexiavsthecoalition.Thu
 
     public ThunderscapeBattlemage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "PLS";
     }
 

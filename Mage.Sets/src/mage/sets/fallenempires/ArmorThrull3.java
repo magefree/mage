@@ -37,7 +37,7 @@ public class ArmorThrull3 extends mage.sets.masterseditionii.ArmorThrull {
 
     public ArmorThrull3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "FEM";
     }
 

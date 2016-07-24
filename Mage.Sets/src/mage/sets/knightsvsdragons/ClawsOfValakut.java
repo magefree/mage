@@ -37,7 +37,7 @@ public class ClawsOfValakut extends mage.sets.worldwake.ClawsOfValakut {
 
     public ClawsOfValakut(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "DDG";
     }
 

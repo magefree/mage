@@ -38,7 +38,7 @@ public class TheLadyOfTheMountain extends mage.sets.legends.TheLadyOfTheMountain
 
     public TheLadyOfTheMountain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 180;
+        this.cardNumber = "180";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

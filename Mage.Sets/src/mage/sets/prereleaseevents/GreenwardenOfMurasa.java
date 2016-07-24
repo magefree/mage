@@ -37,7 +37,7 @@ public class GreenwardenOfMurasa extends mage.sets.battleforzendikar.Greenwarden
 
     public GreenwardenOfMurasa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 265;
+        this.cardNumber = "265";
         this.expansionSetCode = "PTC";
     }
 

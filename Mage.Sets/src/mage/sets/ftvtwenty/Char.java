@@ -38,7 +38,7 @@ public class Char extends mage.sets.ravnica.Char {
 
     public Char(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "V13";
         this.rarity = Rarity.MYTHIC;
     }

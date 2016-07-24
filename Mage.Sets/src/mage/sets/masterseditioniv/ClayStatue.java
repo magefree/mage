@@ -38,7 +38,7 @@ public class ClayStatue extends mage.sets.fourthedition.ClayStatue {
 
     public ClayStatue(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 189;
+        this.cardNumber = "189";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

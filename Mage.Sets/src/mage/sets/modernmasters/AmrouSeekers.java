@@ -37,7 +37,7 @@ public class AmrouSeekers extends mage.sets.timespiral.AmrouSeekers {
 
     public AmrouSeekers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "MMA";
     }
 

@@ -37,7 +37,7 @@ public class ScatheZombies extends mage.sets.tenthedition.ScatheZombies {
 
     public ScatheZombies(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "S99";
     }
 

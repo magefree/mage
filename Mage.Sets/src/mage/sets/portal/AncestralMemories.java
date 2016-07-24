@@ -37,7 +37,7 @@ public class AncestralMemories extends mage.sets.seventhedition.AncestralMemorie
 
     public AncestralMemories(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "POR";
     }
 

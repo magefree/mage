@@ -38,7 +38,7 @@ public class IzzetBoilerworks extends mage.sets.guildpact.IzzetBoilerworks {
 
     public IzzetBoilerworks(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 245;
+        this.cardNumber = "245";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class RavenousBloodseeker extends mage.sets.shadowsoverinnistrad.Ravenous
 
     public RavenousBloodseeker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "MBP";
     }
 

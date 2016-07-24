@@ -38,7 +38,7 @@ public class ArmageddonClock extends mage.sets.masterseditioniv.ArmageddonClock 
 
     public ArmageddonClock(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.UNCOMMON;
     }

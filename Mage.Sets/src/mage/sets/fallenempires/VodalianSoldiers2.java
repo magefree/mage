@@ -37,7 +37,7 @@ public class VodalianSoldiers2 extends mage.sets.fifthedition.VodalianSoldiers {
 
     public VodalianSoldiers2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "FEM";
     }
 

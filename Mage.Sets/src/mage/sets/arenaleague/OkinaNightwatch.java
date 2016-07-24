@@ -37,7 +37,7 @@ public class OkinaNightwatch extends mage.sets.saviorsofkamigawa.OkinaNightwatch
 
     public OkinaNightwatch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "ARENA";
     }
 

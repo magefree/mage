@@ -37,7 +37,7 @@ public class HolyLight extends mage.sets.thedark.HolyLight {
 
     public HolyLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "MED";
     }
 

@@ -37,7 +37,7 @@ public class GuanYus1000LiMarch extends mage.sets.masterseditioniii.GuanYus1000L
 
     public GuanYus1000LiMarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "PTK";
     }
 

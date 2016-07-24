@@ -38,7 +38,7 @@ public class LaquatussChampion extends mage.sets.torment.LaquatussChampion {
 
     public LaquatussChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

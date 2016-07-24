@@ -37,7 +37,7 @@ public class ArborColossus extends mage.sets.theros.ArborColossus {
 
     public ArborColossus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "C15";
     }
 

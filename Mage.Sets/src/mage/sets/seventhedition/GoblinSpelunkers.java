@@ -37,7 +37,7 @@ public class GoblinSpelunkers extends mage.sets.ravnica.GoblinSpelunkers {
 
     public GoblinSpelunkers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "7ED";
     }
 

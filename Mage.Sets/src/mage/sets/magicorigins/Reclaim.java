@@ -37,7 +37,7 @@ public class Reclaim extends mage.sets.magic2012.Reclaim {
 
     public Reclaim(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "ORI";
     }
 

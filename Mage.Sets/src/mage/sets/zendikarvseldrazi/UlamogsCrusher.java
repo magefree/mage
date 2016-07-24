@@ -37,7 +37,7 @@ public class UlamogsCrusher extends mage.sets.riseoftheeldrazi.UlamogsCrusher {
 
     public UlamogsCrusher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "DDP";
     }
 

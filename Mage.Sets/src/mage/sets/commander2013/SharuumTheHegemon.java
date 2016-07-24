@@ -37,7 +37,7 @@ public class SharuumTheHegemon extends mage.sets.shardsofalara.SharuumTheHegemon
 
     public SharuumTheHegemon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "C13";
     }
 

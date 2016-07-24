@@ -37,7 +37,7 @@ public class BatwingBrume extends mage.sets.eventide.BatwingBrume {
 
     public BatwingBrume(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "ARC";
     }
 

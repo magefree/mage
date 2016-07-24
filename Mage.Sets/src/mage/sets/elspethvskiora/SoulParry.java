@@ -37,7 +37,7 @@ public class SoulParry extends mage.sets.scarsofmirrodin.SoulParry {
 
     public SoulParry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "DDO";
     }
 

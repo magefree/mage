@@ -37,7 +37,7 @@ public class ScrollThief extends mage.sets.magic2011.ScrollThief {
 
     public ScrollThief(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "M13";
     }
 

@@ -37,7 +37,7 @@ public class GustcloakHarrier extends mage.sets.vintagemasters.GustcloakHarrier 
 
     public GustcloakHarrier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "ONS";
     }
 

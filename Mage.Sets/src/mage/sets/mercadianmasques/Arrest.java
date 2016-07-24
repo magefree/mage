@@ -38,7 +38,7 @@ public class Arrest extends mage.sets.mirrodin.Arrest {
 
     public Arrest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "MMQ";
         this.rarity = Rarity.UNCOMMON;
     }

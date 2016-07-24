@@ -38,7 +38,7 @@ public class Undertaker extends mage.sets.timeshifted.Undertaker {
 
     public Undertaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "MMQ";
         this.rarity = Rarity.COMMON;
     }

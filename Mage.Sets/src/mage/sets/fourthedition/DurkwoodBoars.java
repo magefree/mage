@@ -37,7 +37,7 @@ public class DurkwoodBoars extends mage.sets.fifthedition.DurkwoodBoars {
 
     public DurkwoodBoars(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "4ED";
     }
 

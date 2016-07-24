@@ -21,7 +21,7 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
 
     SplitCard splitCardParent;
 
-    public SplitCardHalfImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SplitCard splitCardParent, SpellAbilityType spellAbilityType) {
+    public SplitCardHalfImpl(UUID ownerId, String cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SplitCard splitCardParent, SpellAbilityType spellAbilityType) {
         super(ownerId, cardNumber, name, rarity, cardTypes, costs, spellAbilityType);
         this.splitCardParent = splitCardParent;
     }
@@ -47,7 +47,7 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
     }
 
     @Override
-    public int getCardNumber() {
+    public String getCardNumber() {
         return splitCardParent.getCardNumber();
     }
 

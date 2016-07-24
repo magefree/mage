@@ -37,7 +37,7 @@ public class NantukoDisciple extends mage.sets.odyssey.NantukoDisciple {
 
     public NantukoDisciple(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 268;
+        this.cardNumber = "268";
         this.expansionSetCode = "8ED";
     }
 

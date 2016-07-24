@@ -37,7 +37,7 @@ public class TendrilsOfCorruption extends mage.sets.magic2010.TendrilsOfCorrupti
 
     public TendrilsOfCorruption(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "DDE";
     }
 

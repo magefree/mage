@@ -37,7 +37,7 @@ public class TemperedSteel extends mage.sets.scarsofmirrodin.TemperedSteel {
 
     public TemperedSteel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "MGDC";
     }
 

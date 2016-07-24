@@ -37,7 +37,7 @@ public class RagingMinotaur extends mage.sets.portal.RagingMinotaur {
 
     public RagingMinotaur(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "ME3";
     }
 

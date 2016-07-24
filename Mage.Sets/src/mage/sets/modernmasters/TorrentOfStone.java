@@ -37,7 +37,7 @@ public class TorrentOfStone extends mage.sets.betrayersofkamigawa.TorrentOfStone
 
     public TorrentOfStone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "MMA";
     }
 

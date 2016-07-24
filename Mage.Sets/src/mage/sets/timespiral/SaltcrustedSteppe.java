@@ -37,7 +37,7 @@ public class SaltcrustedSteppe extends mage.sets.commander2013.SaltcrustedSteppe
 
     public SaltcrustedSteppe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 277;
+        this.cardNumber = "277";
         this.expansionSetCode = "TSP";
     }
 

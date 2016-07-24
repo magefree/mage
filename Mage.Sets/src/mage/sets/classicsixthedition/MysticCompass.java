@@ -37,7 +37,7 @@ public class MysticCompass extends mage.sets.alliances.MysticCompass {
 
     public MysticCompass(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 302;
+        this.cardNumber = "302";
         this.expansionSetCode = "6ED";
     }
 

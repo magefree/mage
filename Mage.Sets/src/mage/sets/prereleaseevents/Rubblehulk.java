@@ -38,7 +38,7 @@ public class Rubblehulk extends mage.sets.gatecrash.Rubblehulk {
 
     public Rubblehulk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

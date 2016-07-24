@@ -38,7 +38,7 @@ public class DecreeOfPain extends mage.sets.commander2013.DecreeOfPain {
 
     public DecreeOfPain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

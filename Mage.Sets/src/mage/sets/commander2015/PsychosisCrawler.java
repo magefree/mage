@@ -37,7 +37,7 @@ public class PsychosisCrawler extends mage.sets.mirrodinbesieged.PsychosisCrawle
 
     public PsychosisCrawler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 263;
+        this.cardNumber = "263";
         this.expansionSetCode = "C15";
     }
 

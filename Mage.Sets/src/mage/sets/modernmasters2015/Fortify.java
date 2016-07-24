@@ -37,7 +37,7 @@ public class Fortify extends mage.sets.timespiral.Fortify {
 
     public Fortify(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "MM2";
     }
 

@@ -37,7 +37,7 @@ public class IncorrigibleYouths extends mage.sets.shadowsoverinnistrad.Incorrigi
 
     public IncorrigibleYouths(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "MGDC";
     }
 

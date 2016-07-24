@@ -38,7 +38,7 @@ public class AncientTomb extends mage.sets.tempest.AncientTomb {
 
     public AncientTomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 289;
+        this.cardNumber = "289";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.RARE;
     }

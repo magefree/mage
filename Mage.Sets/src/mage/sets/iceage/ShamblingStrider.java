@@ -37,7 +37,7 @@ public class ShamblingStrider extends mage.sets.mastersedition.ShamblingStrider 
 
     public ShamblingStrider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "ICE";
     }
 

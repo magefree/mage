@@ -38,7 +38,7 @@ public class SphereOfTheSuns extends mage.sets.mirrodinbesieged.SphereOfTheSuns 
 
     public SphereOfTheSuns(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 231;
+        this.cardNumber = "231";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }

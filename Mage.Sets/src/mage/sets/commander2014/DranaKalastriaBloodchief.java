@@ -37,7 +37,7 @@ public class DranaKalastriaBloodchief extends mage.sets.riseoftheeldrazi.DranaKa
 
     public DranaKalastriaBloodchief(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class Ephemeron extends mage.sets.exodus.Ephemeron {
 
     public Ephemeron(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "TPR";
     }
 

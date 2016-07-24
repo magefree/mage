@@ -37,7 +37,7 @@ public class JundPanorama extends mage.sets.shardsofalara.JundPanorama {
 
     public JundPanorama(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 298;
+        this.cardNumber = "298";
         this.expansionSetCode = "C13";
     }
 

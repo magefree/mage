@@ -37,7 +37,7 @@ public class BloodbraidElf extends mage.sets.alarareborn.BloodbraidElf {
 
     public BloodbraidElf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 197;
+        this.cardNumber = "197";
         this.expansionSetCode = "EMA";
     }
 

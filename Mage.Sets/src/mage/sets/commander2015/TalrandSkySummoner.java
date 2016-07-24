@@ -37,7 +37,7 @@ public class TalrandSkySummoner extends mage.sets.magic2013.TalrandSkySummoner {
 
     public TalrandSkySummoner(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "C15";
     }
 

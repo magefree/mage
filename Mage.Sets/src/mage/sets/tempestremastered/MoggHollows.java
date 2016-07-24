@@ -37,7 +37,7 @@ public class MoggHollows extends mage.sets.tempest.MoggHollows {
 
     public MoggHollows(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class CrucibleOfWorlds extends mage.sets.tenthedition.CrucibleOfWorlds {
 
     public CrucibleOfWorlds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "JR";
     }
 

@@ -37,7 +37,7 @@ public class AysenBureaucrats extends mage.sets.masterseditionii.AysenBureaucrat
 
     public AysenBureaucrats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 285;
+        this.cardNumber = "285";
         this.expansionSetCode = "5ED";
     }
 

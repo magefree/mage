@@ -38,7 +38,7 @@ public class AbzanAscendancy extends mage.sets.khansoftarkir.AbzanAscendancy {
 
     public AbzanAscendancy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

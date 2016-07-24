@@ -37,7 +37,7 @@ public class SearingMeditation extends mage.sets.ravnica.SearingMeditation {
 
     public SearingMeditation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "DDH";
     }
 

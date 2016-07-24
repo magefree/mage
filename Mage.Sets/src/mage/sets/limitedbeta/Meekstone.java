@@ -37,7 +37,7 @@ public class Meekstone extends mage.sets.limitedalpha.Meekstone {
 
     public Meekstone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 262;
+        this.cardNumber = "262";
         this.expansionSetCode = "LEB";
     }
 

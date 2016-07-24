@@ -38,7 +38,7 @@ public class ForbiddenAlchemy extends mage.sets.innistrad.ForbiddenAlchemy {
 
     public ForbiddenAlchemy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

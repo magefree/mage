@@ -38,7 +38,7 @@ public class CratersClaws extends mage.sets.khansoftarkir.CratersClaws {
 
     public CratersClaws(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

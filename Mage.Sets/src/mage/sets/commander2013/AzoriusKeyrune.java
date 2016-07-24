@@ -37,7 +37,7 @@ public class AzoriusKeyrune extends mage.sets.returntoravnica.AzoriusKeyrune {
 
     public AzoriusKeyrune(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 236;
+        this.cardNumber = "236";
         this.expansionSetCode = "C13";
     }
 

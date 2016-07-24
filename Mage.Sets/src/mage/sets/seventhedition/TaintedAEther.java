@@ -38,7 +38,7 @@ public class TaintedAEther extends mage.sets.urzassaga.TaintedAEther {
 
     public TaintedAEther(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "7ED";
     }
 

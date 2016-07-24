@@ -37,7 +37,7 @@ public class HellkiteCharger extends mage.sets.zendikar.HellkiteCharger {
 
     public HellkiteCharger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "ARC";
     }
 

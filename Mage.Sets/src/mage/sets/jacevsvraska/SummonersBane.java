@@ -37,7 +37,7 @@ public class SummonersBane extends mage.sets.zendikar.SummonersBane {
 
     public SummonersBane(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "DDM";
     }
 

@@ -38,7 +38,7 @@ public class PiannaNomadCaptain extends mage.sets.odyssey.PiannaNomadCaptain {
 
     public PiannaNomadCaptain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

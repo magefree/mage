@@ -37,7 +37,7 @@ public class AquamorphEntity extends mage.sets.speedvscunning.AquamorphEntity {
 
     public AquamorphEntity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "PLC";
     }
 

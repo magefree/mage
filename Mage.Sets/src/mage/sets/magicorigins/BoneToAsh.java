@@ -37,7 +37,7 @@ public class BoneToAsh extends mage.sets.darkascension.BoneToAsh {
 
     public BoneToAsh(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "ORI";
     }
 

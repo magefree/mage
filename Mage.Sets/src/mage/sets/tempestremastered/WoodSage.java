@@ -37,7 +37,7 @@ public class WoodSage extends mage.sets.tempest.WoodSage {
 
     public WoodSage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "TPR";
     }
 

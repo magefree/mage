@@ -37,7 +37,7 @@ public class DwarvenSoldier2 extends DwarvenSoldier1 {
 
     public DwarvenSoldier2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
     }
 
     public DwarvenSoldier2(final DwarvenSoldier2 card) {

@@ -37,7 +37,7 @@ public class MidnightGuard extends mage.sets.darkascension.MidnightGuard {
 
     public MidnightGuard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "M15";
     }
 

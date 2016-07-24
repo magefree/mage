@@ -37,7 +37,7 @@ public class ThoughtLash extends mage.sets.masterseditionii.ThoughtLash {
 
     public ThoughtLash(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "ALL";
     }
 

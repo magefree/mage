@@ -37,7 +37,7 @@ public class TreasureMage extends mage.sets.mirrodinbesieged.TreasureMage {
 
     public TreasureMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "MGDC";
     }
 

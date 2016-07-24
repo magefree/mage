@@ -37,7 +37,7 @@ public class Browse extends mage.sets.alliances.Browse {
 
     public Browse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "ME2";
     }
 

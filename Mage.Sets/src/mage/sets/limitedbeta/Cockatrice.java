@@ -37,7 +37,7 @@ public class Cockatrice extends mage.sets.limitedalpha.Cockatrice {
 
     public Cockatrice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = "98";
         this.expansionSetCode = "LEB";
     }
 

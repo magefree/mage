@@ -37,7 +37,7 @@ public class TrainedOrgg extends mage.sets.seventhedition.TrainedOrgg {
 
     public TrainedOrgg(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "S00";
     }
 

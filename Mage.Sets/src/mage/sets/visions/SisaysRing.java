@@ -38,7 +38,7 @@ public class SisaysRing extends mage.sets.seventhedition.SisaysRing {
 
     public SisaysRing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "VIS";
         this.rarity = Rarity.COMMON;
     }

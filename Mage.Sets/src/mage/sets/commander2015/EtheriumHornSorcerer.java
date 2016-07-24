@@ -37,7 +37,7 @@ public class EtheriumHornSorcerer extends mage.sets.planechase2012.EtheriumHornS
 
     public EtheriumHornSorcerer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 217;
+        this.cardNumber = "217";
         this.expansionSetCode = "C15";
     }
 

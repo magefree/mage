@@ -37,7 +37,7 @@ public class KarplusanStrider extends mage.sets.modernmasters2015.KarplusanStrid
 
     public KarplusanStrider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 272;
+        this.cardNumber = "272";
         this.expansionSetCode = "10E";
     }
 

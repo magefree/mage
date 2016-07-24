@@ -38,7 +38,7 @@ public class Befoul extends mage.sets.championsofkamigawa.Befoul {
 
     public Befoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "7ED";
         this.rarity = Rarity.UNCOMMON;
     }

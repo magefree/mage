@@ -37,7 +37,7 @@ public class StirringWildwood extends mage.sets.worldwake.StirringWildwood {
 
     public StirringWildwood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "DDP";
     }
 

@@ -37,7 +37,7 @@ public class WarleadersHelix extends mage.sets.dragonsmaze.WarleadersHelix {
 
     public WarleadersHelix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "FNMP";
     }
 

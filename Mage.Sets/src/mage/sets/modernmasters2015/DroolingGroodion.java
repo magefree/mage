@@ -37,7 +37,7 @@ public class DroolingGroodion extends mage.sets.jacevsvraska.DroolingGroodion {
 
     public DroolingGroodion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "MM2";
     }
 

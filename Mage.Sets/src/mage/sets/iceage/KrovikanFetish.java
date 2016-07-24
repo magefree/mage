@@ -37,7 +37,7 @@ public class KrovikanFetish extends mage.sets.fifthedition.KrovikanFetish {
 
     public KrovikanFetish(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "ICE";
     }
 

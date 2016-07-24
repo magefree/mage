@@ -37,7 +37,7 @@ public class DrownerOfHope extends mage.sets.battleforzendikar.DrownerOfHope {
 
     public DrownerOfHope(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 256;
+        this.cardNumber = "256";
         this.expansionSetCode = "PTC";
     }
 

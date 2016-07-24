@@ -37,7 +37,7 @@ public class DeadlyInsect2 extends mage.sets.mercadianmasques.DeadlyInsect {
 
     public DeadlyInsect2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "ALL";
     }
 

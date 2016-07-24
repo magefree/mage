@@ -37,7 +37,7 @@ public class MuzzioVisionaryArchitect extends mage.sets.conspiracy.MuzzioVisiona
 
     public MuzzioVisionaryArchitect(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "VMA";
     }
 

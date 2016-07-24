@@ -37,7 +37,7 @@ public class FireSprites extends mage.sets.masterseditioniii.FireSprites {
 
     public FireSprites(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "LEG";
     }
 

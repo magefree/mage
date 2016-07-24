@@ -37,7 +37,7 @@ public class InfectiousHorror extends mage.sets.conflux.InfectiousHorror {
 
     public InfectiousHorror(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "ARC";
     }
 

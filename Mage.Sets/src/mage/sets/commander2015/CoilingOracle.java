@@ -37,7 +37,7 @@ public class CoilingOracle extends mage.sets.dissension.CoilingOracle {
 
     public CoilingOracle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 213;
+        this.cardNumber = "213";
         this.expansionSetCode = "C15";
     }
 

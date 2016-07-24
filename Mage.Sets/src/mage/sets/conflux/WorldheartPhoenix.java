@@ -38,7 +38,7 @@ public class WorldheartPhoenix extends mage.sets.modernmasters2015.WorldheartPho
 
     public WorldheartPhoenix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "CON";
         this.rarity = Rarity.RARE;
     }

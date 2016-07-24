@@ -37,7 +37,7 @@ public class KarmicGuide extends mage.sets.urzaslegacy.KarmicGuide {
 
     public KarmicGuide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "JR";
     }
 

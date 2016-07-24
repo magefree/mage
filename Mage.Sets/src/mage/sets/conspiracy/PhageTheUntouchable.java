@@ -38,7 +38,7 @@ public class PhageTheUntouchable extends mage.sets.tenthedition.PhageTheUntoucha
 
     public PhageTheUntouchable(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "CNS";
         this.rarity = Rarity.MYTHIC;
     }

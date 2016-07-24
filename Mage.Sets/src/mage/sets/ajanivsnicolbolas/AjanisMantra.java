@@ -37,7 +37,7 @@ public class AjanisMantra extends mage.sets.magic2011.AjanisMantra {
 
     public AjanisMantra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "DDH";
     }
 

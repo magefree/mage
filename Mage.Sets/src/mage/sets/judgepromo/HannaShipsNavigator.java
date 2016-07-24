@@ -37,7 +37,7 @@ public class HannaShipsNavigator extends mage.sets.invasion.HannaShipsNavigator 
 
     public HannaShipsNavigator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "JR";
     }
 

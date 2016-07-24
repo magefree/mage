@@ -38,7 +38,7 @@ public class BloodcrazedNeonate extends mage.sets.innistrad.BloodcrazedNeonate {
 
     public BloodcrazedNeonate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

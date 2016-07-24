@@ -37,7 +37,7 @@ public class WallOfFire extends mage.sets.tenthedition.WallOfFire {
 
     public WallOfFire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 182;
+        this.cardNumber = "182";
         this.expansionSetCode = "3ED";
     }
 

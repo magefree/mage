@@ -37,7 +37,7 @@ public class AngelicProtector extends mage.sets.tempest.AngelicProtector {
 
     public AngelicProtector(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "TPR";
     }
 

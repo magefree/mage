@@ -37,7 +37,7 @@ public class ExquisiteFirecraft extends mage.sets.magicorigins.ExquisiteFirecraf
 
     public ExquisiteFirecraft(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 207;
+        this.cardNumber = "207";
         this.expansionSetCode = "PTC";
     }
 

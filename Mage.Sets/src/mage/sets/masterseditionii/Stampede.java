@@ -38,7 +38,7 @@ public class Stampede extends mage.sets.iceage.Stampede {
 
     public Stampede(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.UNCOMMON;
     }

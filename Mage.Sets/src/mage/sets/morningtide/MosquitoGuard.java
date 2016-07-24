@@ -37,7 +37,7 @@ public class MosquitoGuard extends mage.sets.elspethvstezzeret.MosquitoGuard {
 
     public MosquitoGuard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "MOR";
     }
 

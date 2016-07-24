@@ -37,7 +37,7 @@ public class GolgariSignet extends mage.sets.ravnica.GolgariSignet {
 
     public GolgariSignet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "DDJ";
     }
 

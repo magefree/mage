@@ -37,7 +37,7 @@ public class GerrardCapashen extends mage.sets.apocalypse.GerrardCapashen {
 
     public GerrardCapashen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "DDE";
     }
 

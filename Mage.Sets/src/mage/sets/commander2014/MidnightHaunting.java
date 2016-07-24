@@ -37,7 +37,7 @@ public class MidnightHaunting extends mage.sets.innistrad.MidnightHaunting {
 
     public MidnightHaunting(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class Confiscate extends mage.sets.urzassaga.Confiscate {
 
     public Confiscate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "9ED";
     }
 

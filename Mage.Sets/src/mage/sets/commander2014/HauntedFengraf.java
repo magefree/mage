@@ -37,7 +37,7 @@ public class HauntedFengraf extends mage.sets.darkascension.HauntedFengraf {
 
     public HauntedFengraf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 300;
+        this.cardNumber = "300";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class GoblinBully extends mage.sets.portal.GoblinBully {
 
     public GoblinBully(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "ME4";
     }
 

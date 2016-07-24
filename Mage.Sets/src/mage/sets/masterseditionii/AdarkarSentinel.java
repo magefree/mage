@@ -38,7 +38,7 @@ public class AdarkarSentinel extends mage.sets.iceage.AdarkarSentinel {
 
     public AdarkarSentinel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.COMMON;
     }

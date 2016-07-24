@@ -37,7 +37,7 @@ public class WrapInFlames extends mage.sets.riseoftheeldrazi.WrapInFlames {
 
     public WrapInFlames(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "CNS";
     }
 

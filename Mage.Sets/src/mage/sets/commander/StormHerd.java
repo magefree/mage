@@ -37,7 +37,7 @@ public class StormHerd extends mage.sets.guildpact.StormHerd {
 
     public StormHerd(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "CMD";
     }
 

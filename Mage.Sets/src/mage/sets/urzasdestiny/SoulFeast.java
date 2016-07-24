@@ -37,7 +37,7 @@ public class SoulFeast extends mage.sets.tenthedition.SoulFeast {
 
     public SoulFeast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "UDS";
     }
 

@@ -38,7 +38,7 @@ public class NissaSageAnimist extends mage.sets.magicorigins.NissaSageAnimist {
 
     public NissaSageAnimist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 998;
+        this.cardNumber = "998";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

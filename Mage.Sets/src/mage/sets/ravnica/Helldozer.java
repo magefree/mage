@@ -37,7 +37,7 @@ public class Helldozer extends mage.sets.planechase.Helldozer {
 
     public Helldozer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "RAV";
     }
 

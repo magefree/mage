@@ -37,7 +37,7 @@ public class CelestialArchon extends mage.sets.theros.CelestialArchon {
 
     public CelestialArchon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class PalladiaMors extends mage.sets.masterseditioniii.PalladiaMors {
 
     public PalladiaMors(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 287;
+        this.cardNumber = "287";
         this.expansionSetCode = "LEG";
     }
 

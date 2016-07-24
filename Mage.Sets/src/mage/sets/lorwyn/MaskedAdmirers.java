@@ -38,7 +38,7 @@ public class MaskedAdmirers extends mage.sets.modernmasters.MaskedAdmirers {
 
     public MaskedAdmirers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 230;
+        this.cardNumber = "230";
         this.expansionSetCode = "LRW";
         this.rarity = Rarity.RARE;
     }

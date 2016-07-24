@@ -37,7 +37,7 @@ public class SustainerOfTheRealm extends mage.sets.urzaslegacy.SustainerOfTheRea
 
     public SustainerOfTheRealm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "7ED";
     }
 

@@ -37,7 +37,7 @@ public class Purify extends mage.sets.urzaslegacy.Purify {
 
     public Purify(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "7ED";
     }
 

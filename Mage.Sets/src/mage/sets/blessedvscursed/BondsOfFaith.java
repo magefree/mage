@@ -37,7 +37,7 @@ public class BondsOfFaith extends mage.sets.innistrad.BondsOfFaith {
 
     public BondsOfFaith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "DDQ";
     }
 

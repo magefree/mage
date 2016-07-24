@@ -38,7 +38,7 @@ public class SpinalVillain extends mage.sets.legends.SpinalVillain {
 
     public SpinalVillain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.UNCOMMON;
     }

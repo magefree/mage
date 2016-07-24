@@ -732,7 +732,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public int getCardNumber() {
+    public String getCardNumber() {
         return card.getCardNumber();
     }
 

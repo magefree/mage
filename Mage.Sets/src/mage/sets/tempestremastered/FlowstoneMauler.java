@@ -38,7 +38,7 @@ public class FlowstoneMauler extends mage.sets.stronghold.FlowstoneMauler {
 
     public FlowstoneMauler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

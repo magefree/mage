@@ -37,7 +37,7 @@ public class DoublingCube extends mage.sets.tenthedition.DoublingCube {
 
     public DoublingCube(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "5DN";
     }
 

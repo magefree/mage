@@ -163,10 +163,10 @@ public class Sets extends HashMap<String, ExpansionSet> {
             }
 
             for (Map.Entry<String, DeckCardInfo> entry: deckCards.entrySet()) {
-                out.printf("%d [%s:%d] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
+                out.printf("%d [%s:%s] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
             }
             for (Map.Entry<String, DeckCardInfo> entry: sideboard.entrySet()) {
-                out.printf("SB: %d [%s:%d] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
+                out.printf("SB: %d [%s:%s] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
             }
         }
         finally {

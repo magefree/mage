@@ -38,7 +38,7 @@ public class WolverinePack extends mage.sets.legends.WolverinePack {
 
     public WolverinePack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 206;
+        this.cardNumber = "206";
         this.expansionSetCode = "5ED";
         this.rarity = Rarity.UNCOMMON;
     }

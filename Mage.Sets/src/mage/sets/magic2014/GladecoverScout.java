@@ -37,7 +37,7 @@ public class GladecoverScout extends mage.sets.magic2012.GladecoverScout {
 
     public GladecoverScout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 176;
+        this.cardNumber = "176";
         this.expansionSetCode = "M14";
     }
 

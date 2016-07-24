@@ -37,7 +37,7 @@ public class BalduvianHorde extends mage.sets.alliances.BalduvianHorde {
 
     public BalduvianHorde(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "6ED";
     }
 

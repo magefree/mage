@@ -37,7 +37,7 @@ public class BarbedSextant extends mage.sets.iceage.BarbedSextant {
 
     public BarbedSextant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "ME2";
     }
 

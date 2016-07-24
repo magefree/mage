@@ -37,7 +37,7 @@ public class DragonBlood extends mage.sets.mirrodin.DragonBlood {
 
     public DragonBlood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "DDL";
     }
 

@@ -37,7 +37,7 @@ public class IntangibleVirtue extends mage.sets.innistrad.IntangibleVirtue {
 
     public IntangibleVirtue(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "CNS";
     }
 

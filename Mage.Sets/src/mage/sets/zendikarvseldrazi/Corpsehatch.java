@@ -37,7 +37,7 @@ public class Corpsehatch extends mage.sets.riseoftheeldrazi.Corpsehatch {
 
     public Corpsehatch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDP";
     }
 

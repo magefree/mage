@@ -37,7 +37,7 @@ public class GraniteGrip extends mage.sets.urzaslegacy.GraniteGrip {
 
     public GraniteGrip(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "7ED";
     }
 

@@ -6,7 +6,7 @@ public class FeastOfBlood extends mage.sets.zendikar.FeastOfBlood {
     
     public FeastOfBlood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "MBP";
     }
     

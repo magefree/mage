@@ -37,7 +37,7 @@ public class Rakalite extends mage.sets.masterseditioniv.Rakalite {
 
     public Rakalite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "CHR";
     }
 

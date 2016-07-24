@@ -37,7 +37,7 @@ public class EzuriRenegadeLeader extends mage.sets.scarsofmirrodin.EzuriRenegade
 
     public EzuriRenegadeLeader(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "C14";
     }
 

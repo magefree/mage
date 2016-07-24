@@ -38,7 +38,7 @@ public class PerniciousDeed extends mage.sets.apocalypse.PerniciousDeed {
 
     public PerniciousDeed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 191;
+        this.cardNumber = "191";
         this.expansionSetCode = "CNS";
         this.rarity = Rarity.MYTHIC;
     }

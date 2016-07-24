@@ -37,7 +37,7 @@ public class SelesnyaCharm extends mage.sets.returntoravnica.SelesnyaCharm {
 
     public SelesnyaCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 211;
+        this.cardNumber = "211";
         this.expansionSetCode = "C13";
     }
 

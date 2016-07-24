@@ -38,7 +38,7 @@ public class BarktoothWarbeard extends mage.sets.legends.BarktoothWarbeard {
 
     public BarktoothWarbeard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

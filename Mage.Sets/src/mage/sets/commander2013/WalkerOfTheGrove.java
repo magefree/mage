@@ -37,7 +37,7 @@ public class WalkerOfTheGrove extends mage.sets.morningtide.WalkerOfTheGrove {
 
     public WalkerOfTheGrove(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "C13";
     }
 

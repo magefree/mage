@@ -38,7 +38,7 @@ public class DevoutWitness extends mage.sets.vintagemasters.DevoutWitness {
 
     public DevoutWitness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "MMQ";
         this.rarity = Rarity.COMMON;
     }

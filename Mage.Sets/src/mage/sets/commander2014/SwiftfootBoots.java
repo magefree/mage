@@ -37,7 +37,7 @@ public class SwiftfootBoots extends mage.sets.magic2012.SwiftfootBoots {
 
     public SwiftfootBoots(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 275;
+        this.cardNumber = "275";
         this.expansionSetCode = "C14";
     }
 

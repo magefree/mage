@@ -37,7 +37,7 @@ public class FlametongueKavu extends mage.sets.planechase.FlametongueKavu {
 
     public FlametongueKavu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "FNMP";
     }
 

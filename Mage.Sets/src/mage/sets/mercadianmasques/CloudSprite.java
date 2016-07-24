@@ -37,7 +37,7 @@ public class CloudSprite extends mage.sets.tenthedition.CloudSprite {
 
     public CloudSprite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "MMQ";
     }
 

@@ -37,7 +37,7 @@ public class Revelation extends mage.sets.legends.Revelation {
 
     public Revelation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "CHR";
     }
 

@@ -37,7 +37,7 @@ public class SilverbladePaladin extends mage.sets.avacynrestored.SilverbladePala
 
     public SilverbladePaladin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "C14";
     }
 

@@ -38,7 +38,7 @@ public class MnemonicSliver extends mage.sets.tempest.MnemonicSliver {
 
     public MnemonicSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.COMMON;
     }

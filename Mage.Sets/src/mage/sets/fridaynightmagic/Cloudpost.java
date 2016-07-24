@@ -38,7 +38,7 @@ public class Cloudpost extends mage.sets.mirrodin.Cloudpost {
 
     public Cloudpost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

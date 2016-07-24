@@ -37,7 +37,7 @@ public class IncrementalBlight extends mage.sets.shadowmoor.IncrementalBlight {
 
     public IncrementalBlight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "HOP";
     }
 

@@ -38,7 +38,7 @@ public class AridMesa extends mage.sets.zendikar.AridMesa {
 
     public AridMesa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

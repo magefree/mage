@@ -37,7 +37,7 @@ public class FlamewakePhoenix extends mage.sets.fatereforged.FlamewakePhoenix {
 
     public FlamewakePhoenix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "PTC";
     }
 

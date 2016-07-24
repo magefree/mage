@@ -37,7 +37,7 @@ public class NaturesCloak extends mage.sets.starter1999.NaturesCloak {
 
     public NaturesCloak(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "POR";
     }
 

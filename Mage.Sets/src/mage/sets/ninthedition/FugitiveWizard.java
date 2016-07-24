@@ -37,7 +37,7 @@ public class FugitiveWizard extends mage.sets.tenthedition.FugitiveWizard {
 
     public FugitiveWizard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "9ED";
     }
 

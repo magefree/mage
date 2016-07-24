@@ -37,7 +37,7 @@ public class Indestructibility extends mage.sets.magic2010.Indestructibility {
 
     public Indestructibility(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "M14";
     }
 

@@ -37,7 +37,7 @@ public class JaceVrynsProdigy extends mage.sets.magicorigins.JaceVrynsProdigy {
 
     public JaceVrynsProdigy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "PTC";
     }
 

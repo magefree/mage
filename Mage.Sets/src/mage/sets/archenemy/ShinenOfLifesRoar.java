@@ -37,7 +37,7 @@ public class ShinenOfLifesRoar extends mage.sets.saviorsofkamigawa.ShinenOfLifes
 
     public ShinenOfLifesRoar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "ARC";
     }
 

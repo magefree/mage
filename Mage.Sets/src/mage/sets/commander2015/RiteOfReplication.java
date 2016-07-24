@@ -37,7 +37,7 @@ public class RiteOfReplication extends mage.sets.zendikar.RiteOfReplication {
 
     public RiteOfReplication(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "C15";
     }
 

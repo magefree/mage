@@ -38,7 +38,7 @@ public class ChargingPaladin extends mage.sets.divinevsdemonic.ChargingPaladin {
 
     public ChargingPaladin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "S99";
         this.rarity = Rarity.UNCOMMON;
     }

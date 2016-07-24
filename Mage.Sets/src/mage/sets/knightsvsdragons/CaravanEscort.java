@@ -37,7 +37,7 @@ public class CaravanEscort extends mage.sets.riseoftheeldrazi.CaravanEscort {
 
     public CaravanEscort(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "DDG";
     }
 

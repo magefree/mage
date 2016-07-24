@@ -37,7 +37,7 @@ public class Thundermare extends mage.sets.portal.Thundermare {
 
     public Thundermare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "WTH";
     }
 

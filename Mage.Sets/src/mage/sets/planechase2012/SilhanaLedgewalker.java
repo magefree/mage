@@ -37,7 +37,7 @@ public class SilhanaLedgewalker extends mage.sets.guildpact.SilhanaLedgewalker {
 
     public SilhanaLedgewalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "PC2";
     }
 

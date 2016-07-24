@@ -37,7 +37,7 @@ public class PitilessHorde extends mage.sets.dragonsoftarkir.PitilessHorde {
 
     public PitilessHorde(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = "186";
         this.expansionSetCode = "PTC";
     }
 

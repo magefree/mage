@@ -38,7 +38,7 @@ public class SunCeYoungConquerer extends mage.sets.masterseditioniii.SunCeYoungC
 
     public SunCeYoungConquerer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "PTK";
         this.rarity = Rarity.RARE;
     }

@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class BrothersYamazaki extends CardImpl {
+public class BrothersYamazaki1 extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -62,8 +62,8 @@ public class BrothersYamazaki extends CardImpl {
         filter.add(new NamePredicate("Brothers Yamazaki"));
     }
 
-    public BrothersYamazaki(UUID ownerId) {
-        super(ownerId, 160, "Brothers Yamazaki", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+    public BrothersYamazaki1(UUID ownerId) {
+        super(ownerId, "160a", "Brothers Yamazaki", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Human");
@@ -87,13 +87,13 @@ public class BrothersYamazaki extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrothersYamazaki(final BrothersYamazaki card) {
+    public BrothersYamazaki1(final BrothersYamazaki1 card) {
         super(card);
     }
 
     @Override
-    public BrothersYamazaki copy() {
-        return new BrothersYamazaki(this);
+    public BrothersYamazaki1 copy() {
+        return new BrothersYamazaki1(this);
     }
 }
 

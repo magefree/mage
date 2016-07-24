@@ -37,7 +37,7 @@ public class Everglades extends mage.sets.commander2014.Everglades {
 
     public Everglades(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "VIS";
     }
 

@@ -37,7 +37,7 @@ public class DistortingWake extends mage.sets.commander2014.DistortingWake {
 
     public DistortingWake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "INV";
     }
 

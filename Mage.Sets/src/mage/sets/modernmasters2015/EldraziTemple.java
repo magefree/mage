@@ -38,7 +38,7 @@ public class EldraziTemple extends mage.sets.riseoftheeldrazi.EldraziTemple {
 
     public EldraziTemple(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 240;
+        this.cardNumber = "240";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

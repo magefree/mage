@@ -37,7 +37,7 @@ public class VerdantHaven extends mage.sets.gatecrash.VerdantHaven {
 
     public VerdantHaven(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 206;
+        this.cardNumber = "206";
         this.expansionSetCode = "M15";
     }
 

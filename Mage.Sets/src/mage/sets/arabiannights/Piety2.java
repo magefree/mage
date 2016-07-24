@@ -37,7 +37,7 @@ public class Piety2 extends Piety1 {
 
     public Piety2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
     }
 
     public Piety2(final Piety2 card) {

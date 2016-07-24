@@ -37,7 +37,7 @@ public class ElfhamePalace extends mage.sets.invasion.ElfhamePalace {
 
     public ElfhamePalace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "DDE";
     }
 

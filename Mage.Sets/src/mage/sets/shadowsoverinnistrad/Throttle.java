@@ -37,7 +37,7 @@ public class Throttle extends mage.sets.khansoftarkir.Throttle {
 
     public Throttle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "SOI";
     }
 

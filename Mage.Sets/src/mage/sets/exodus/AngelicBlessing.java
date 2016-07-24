@@ -37,7 +37,7 @@ public class AngelicBlessing extends mage.sets.tenthedition.AngelicBlessing {
 
     public AngelicBlessing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "EXO";
     }
 

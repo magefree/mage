@@ -37,7 +37,7 @@ public class HighGround extends mage.sets.exodus.HighGround {
 
     public HighGround(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "10E";
     }
 

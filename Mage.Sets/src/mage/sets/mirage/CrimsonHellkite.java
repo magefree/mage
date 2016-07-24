@@ -37,7 +37,7 @@ public class CrimsonHellkite extends mage.sets.seventhedition.CrimsonHellkite {
 
     public CrimsonHellkite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "MIR";
     }
 

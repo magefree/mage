@@ -37,7 +37,7 @@ public class PrincessLucrezia extends mage.sets.masterseditioniii.PrincessLucrez
 
     public PrincessLucrezia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 289;
+        this.cardNumber = "289";
         this.expansionSetCode = "LEG";
     }
 

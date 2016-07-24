@@ -37,7 +37,7 @@ public class LudevicsTestSubject extends mage.sets.innistrad.LudevicsTestSubject
 
     public LudevicsTestSubject(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "MLP";
     }
 

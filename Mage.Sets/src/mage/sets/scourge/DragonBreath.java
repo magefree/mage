@@ -37,7 +37,7 @@ public class DragonBreath extends mage.sets.archenemy.DragonBreath {
 
     public DragonBreath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "SCG";
     }
 

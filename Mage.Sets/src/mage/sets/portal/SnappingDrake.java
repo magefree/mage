@@ -37,7 +37,7 @@ public class SnappingDrake extends mage.sets.magic2010.SnappingDrake {
 
     public SnappingDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "POR";
     }
 

@@ -37,7 +37,7 @@ public class SwellOfCourage extends mage.sets.elspethvstezzeret.SwellOfCourage {
 
     public SwellOfCourage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "MOR";
     }
 

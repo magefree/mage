@@ -38,7 +38,7 @@ public class BlazingTorch extends mage.sets.zendikar.BlazingTorch {
 
     public BlazingTorch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "ISD";
         this.rarity = Rarity.COMMON;
     }

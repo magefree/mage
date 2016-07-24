@@ -37,7 +37,7 @@ public class MossMonster extends mage.sets.eighthedition.MossMonster {
 
     public MossMonster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "LEG";
     }
 

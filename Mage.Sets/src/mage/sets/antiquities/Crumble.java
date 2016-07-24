@@ -37,7 +37,7 @@ public class Crumble extends mage.sets.masterseditioniv.Crumble {
 
     public Crumble(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "ATQ";
     }
 

@@ -37,7 +37,7 @@ public class OrderOfTheSacredTorch extends mage.sets.iceage.OrderOfTheSacredTorc
 
     public OrderOfTheSacredTorch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 324;
+        this.cardNumber = "324";
         this.expansionSetCode = "5ED";
     }
 

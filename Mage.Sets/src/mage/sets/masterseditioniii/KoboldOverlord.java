@@ -38,7 +38,7 @@ public class KoboldOverlord extends mage.sets.legends.KoboldOverlord {
 
     public KoboldOverlord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

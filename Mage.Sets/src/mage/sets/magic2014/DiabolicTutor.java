@@ -37,7 +37,7 @@ public class DiabolicTutor extends mage.sets.tenthedition.DiabolicTutor {
 
     public DiabolicTutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "M14";
     }
 

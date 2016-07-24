@@ -38,7 +38,7 @@ public class EssenceSliver extends mage.sets.timeshifted.EssenceSliver {
 
     public EssenceSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "LGN";
         this.rarity = Rarity.RARE;
     }

@@ -37,7 +37,7 @@ public class DwarvenHold extends mage.sets.fifthedition.DwarvenHold {
 
     public DwarvenHold(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "FEM";
     }
 

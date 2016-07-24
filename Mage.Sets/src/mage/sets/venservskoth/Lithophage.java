@@ -37,7 +37,7 @@ public class Lithophage extends mage.sets.mercadianmasques.Lithophage {
 
     public Lithophage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "DDI";
     }
 

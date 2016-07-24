@@ -37,7 +37,7 @@ public class VeteranArmorsmith extends mage.sets.magic2010.VeteranArmorsmith {
 
     public VeteranArmorsmith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "DDO";
     }
 

@@ -38,7 +38,7 @@ public class IronStar extends mage.sets.limitedalpha.IronStar {
 
     public IronStar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 304;
+        this.cardNumber = "304";
         this.expansionSetCode = "8ED";
     }
 

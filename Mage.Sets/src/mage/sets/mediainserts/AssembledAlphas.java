@@ -37,7 +37,7 @@ public class AssembledAlphas extends mage.sets.eldritchmoon.AssembledAlphas {
 
     public AssembledAlphas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "MBP";
     }
 

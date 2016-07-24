@@ -37,7 +37,7 @@ public class EpicExperiment extends mage.sets.returntoravnica.EpicExperiment {
 
     public EpicExperiment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "C15";
     }
 

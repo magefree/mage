@@ -38,7 +38,7 @@ public class VoiceOfAll extends mage.sets.planeshift.VoiceOfAll {
 
     public VoiceOfAll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "10E";
         this.rarity = Rarity.RARE;
     }

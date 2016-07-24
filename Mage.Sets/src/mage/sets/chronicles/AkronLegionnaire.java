@@ -37,7 +37,7 @@ public class AkronLegionnaire extends mage.sets.legends.AkronLegionnaire {
 
     public AkronLegionnaire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "CHR";
     }
 

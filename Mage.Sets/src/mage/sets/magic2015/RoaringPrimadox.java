@@ -39,7 +39,7 @@ public class RoaringPrimadox extends mage.sets.magic2013.RoaringPrimadox {
     public RoaringPrimadox(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 196;
+        this.cardNumber = "196";
         this.expansionSetCode = "M15";
     }
 

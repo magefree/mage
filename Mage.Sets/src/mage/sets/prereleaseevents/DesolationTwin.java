@@ -37,7 +37,7 @@ public class DesolationTwin extends mage.sets.battleforzendikar.DesolationTwin {
 
     public DesolationTwin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 253;
+        this.cardNumber = "253";
         this.expansionSetCode = "PTC";
     }
 

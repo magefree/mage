@@ -37,7 +37,7 @@ public class WallOfIce extends mage.sets.fourthedition.WallOfIce {
 
     public WallOfIce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "LEA";
     }
 

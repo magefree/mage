@@ -37,7 +37,7 @@ public class RelentlessAssault extends mage.sets.seventhedition.RelentlessAssaul
 
     public RelentlessAssault(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 202;
+        this.cardNumber = "202";
         this.expansionSetCode = "6ED";
     }
 

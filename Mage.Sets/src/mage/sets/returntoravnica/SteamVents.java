@@ -37,7 +37,7 @@ public class SteamVents extends mage.sets.guildpact.SteamVents {
 
     public SteamVents(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 247;
+        this.cardNumber = "247";
         this.expansionSetCode = "RTR";
     }
 

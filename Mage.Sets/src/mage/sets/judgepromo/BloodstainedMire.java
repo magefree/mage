@@ -37,7 +37,7 @@ public class BloodstainedMire extends mage.sets.onslaught.BloodstainedMire {
 
     public BloodstainedMire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "JR";
     }
 

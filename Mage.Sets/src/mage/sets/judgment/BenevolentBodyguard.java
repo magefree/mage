@@ -37,7 +37,7 @@ public class BenevolentBodyguard extends mage.sets.vintagemasters.BenevolentBody
 
     public BenevolentBodyguard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "JUD";
     }
 

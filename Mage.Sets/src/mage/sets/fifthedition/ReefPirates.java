@@ -37,7 +37,7 @@ public class ReefPirates extends mage.sets.homelands.ReefPirates1 {
 
     public ReefPirates(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "5ED";
     }
 

@@ -37,7 +37,7 @@ public class ArmyOfAllah2 extends ArmyOfAllah1 {
     
     public ArmyOfAllah2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
     }
 
     public ArmyOfAllah2(final ArmyOfAllah2 card) {

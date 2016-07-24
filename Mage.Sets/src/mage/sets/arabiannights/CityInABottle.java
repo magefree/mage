@@ -38,7 +38,7 @@ public class CityInABottle extends mage.sets.vintagemasters.CityInABottle {
 
     public CityInABottle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "ARN";
         this.rarity = Rarity.RARE;
     }

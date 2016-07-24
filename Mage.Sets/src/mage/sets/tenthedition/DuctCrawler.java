@@ -37,7 +37,7 @@ public class DuctCrawler extends mage.sets.stronghold.DuctCrawler {
 
     public DuctCrawler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "10E";
     }
 

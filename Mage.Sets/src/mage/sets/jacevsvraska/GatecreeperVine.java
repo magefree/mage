@@ -37,7 +37,7 @@ public class GatecreeperVine extends mage.sets.returntoravnica.GatecreeperVine {
 
     public GatecreeperVine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "DDM";
     }
 

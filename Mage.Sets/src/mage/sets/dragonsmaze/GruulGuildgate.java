@@ -37,7 +37,7 @@ public class GruulGuildgate extends mage.sets.gatecrash.GruulGuildgate {
 
     public GruulGuildgate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "DGM";
     }
 

@@ -37,7 +37,7 @@ public class SpitefulVisions extends mage.sets.shadowmoor.SpitefulVisions {
 
     public SpitefulVisions(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = "233";
         this.expansionSetCode = "C13";
     }
 

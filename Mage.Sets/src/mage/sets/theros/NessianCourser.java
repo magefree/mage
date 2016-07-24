@@ -37,7 +37,7 @@ public class NessianCourser extends mage.sets.futuresight.NessianCourser {
 
     public NessianCourser(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "THS";
     }
 

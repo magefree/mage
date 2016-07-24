@@ -38,7 +38,7 @@ public class SoltariEmissary extends mage.sets.tempest.SoltariEmissary {
 
     public SoltariEmissary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

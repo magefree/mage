@@ -37,7 +37,7 @@ public class Wastes2 extends mage.sets.oathofthegatewatch.Wastes1 {
 
     public Wastes2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
     }
 
     public Wastes2(final Wastes2 card) {

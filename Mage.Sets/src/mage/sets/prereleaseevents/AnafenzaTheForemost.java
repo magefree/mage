@@ -38,7 +38,7 @@ public class AnafenzaTheForemost extends mage.sets.khansoftarkir.AnafenzaTheFore
 
     public AnafenzaTheForemost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

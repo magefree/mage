@@ -37,7 +37,7 @@ public class Deathrender extends mage.sets.lorwyn.Deathrender {
 
     public Deathrender(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 197;
+        this.cardNumber = "197";
         this.expansionSetCode = "CNS";
     }
 

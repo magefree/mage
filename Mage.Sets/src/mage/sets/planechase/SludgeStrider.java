@@ -37,7 +37,7 @@ public class SludgeStrider extends mage.sets.conflux.SludgeStrider {
 
     public SludgeStrider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "HOP";
     }
 

@@ -37,7 +37,7 @@ public class GoblinRaider extends mage.sets.urzassaga.GoblinRaider {
 
     public GoblinRaider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 191;
+        this.cardNumber = "191";
         this.expansionSetCode = "8ED";
     }
 

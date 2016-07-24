@@ -37,7 +37,7 @@ public class MagusOfTheUnseen extends mage.sets.iceage.MagusOfTheUnseen {
 
     public MagusOfTheUnseen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "5ED";
     }
 

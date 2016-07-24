@@ -39,7 +39,7 @@ public class MistralCharger extends mage.sets.dissension.MistralCharger {
 
     public MistralCharger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class VampireNighthawk extends mage.sets.zendikar.VampireNighthawk {
 
     public VampireNighthawk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "C13";
     }
 

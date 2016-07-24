@@ -37,7 +37,7 @@ public class LivingArtifact extends mage.sets.fifthedition.LivingArtifact {
 
     public LivingArtifact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "3ED";
     }
 

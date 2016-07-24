@@ -38,7 +38,7 @@ public class ThroatSlitter extends mage.sets.betrayersofkamigawa.ThroatSlitter {
 
     public ThroatSlitter (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "PC2";
     }
 

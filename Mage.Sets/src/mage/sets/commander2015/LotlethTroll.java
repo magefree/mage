@@ -37,7 +37,7 @@ public class LotlethTroll extends mage.sets.returntoravnica.LotlethTroll {
 
     public LotlethTroll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 226;
+        this.cardNumber = "226";
         this.expansionSetCode = "C15";
     }
 

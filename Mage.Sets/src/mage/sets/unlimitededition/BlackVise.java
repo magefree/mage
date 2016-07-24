@@ -37,7 +37,7 @@ public class BlackVise extends mage.sets.limitedalpha.BlackVise {
 
     public BlackVise(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 234;
+        this.cardNumber = "234";
         this.expansionSetCode = "2ED";
     }
 

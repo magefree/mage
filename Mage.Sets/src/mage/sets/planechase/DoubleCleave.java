@@ -37,7 +37,7 @@ public class DoubleCleave extends mage.sets.eventide.DoubleCleave {
 
     public DoubleCleave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "HOP";
     }
 

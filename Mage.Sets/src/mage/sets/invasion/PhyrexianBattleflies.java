@@ -37,7 +37,7 @@ public class PhyrexianBattleflies extends mage.sets.phyrexiavsthecoalition.Phyre
 
     public PhyrexianBattleflies(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "INV";
     }
 

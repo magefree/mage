@@ -37,7 +37,7 @@ public class SlaughterCry extends mage.sets.zendikar.SlaughterCry {
 
     public SlaughterCry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "M12";
     }
 

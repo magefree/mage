@@ -37,7 +37,7 @@ public class DawnglareInvoker extends mage.sets.riseoftheeldrazi.DawnglareInvoke
 
     public DawnglareInvoker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "C15";
     }
 

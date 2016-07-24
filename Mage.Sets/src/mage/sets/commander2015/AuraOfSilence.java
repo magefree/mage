@@ -37,7 +37,7 @@ public class AuraOfSilence extends mage.sets.weatherlight.AuraOfSilence {
 
     public AuraOfSilence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "C15";
     }
 

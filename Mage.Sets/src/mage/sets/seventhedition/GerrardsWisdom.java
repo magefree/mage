@@ -39,7 +39,7 @@ public class GerrardsWisdom extends mage.sets.starter1999.GerrardsWisdom {
 
     public GerrardsWisdom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "7ED";
         this.rarity = Rarity.UNCOMMON;
     }

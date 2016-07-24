@@ -37,7 +37,7 @@ public class LayOfTheLand extends mage.sets.apocalypse.LayOfTheLand {
 
     public LayOfTheLand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "M14";
     }
 

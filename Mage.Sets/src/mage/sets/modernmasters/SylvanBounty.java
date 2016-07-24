@@ -37,7 +37,7 @@ public class SylvanBounty extends mage.sets.conflux.SylvanBounty {
 
     public SylvanBounty(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "MMA";
     }
 

@@ -37,7 +37,7 @@ public class TreasureHunter extends mage.sets.tenthedition.TreasureHunter {
 
     public TreasureHunter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "EXO";
     }
 

@@ -37,7 +37,7 @@ public class DeathreapRitual extends mage.sets.conspiracy.DeathreapRitual {
 
     public DeathreapRitual(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 250;
+        this.cardNumber = "250";
         this.expansionSetCode = "VMA";
     }
 

@@ -37,7 +37,7 @@ public class WateryGrave extends mage.sets.ravnica.WateryGrave {
 
     public WateryGrave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 249;
+        this.cardNumber = "249";
         this.expansionSetCode = "GTC";
     }
 

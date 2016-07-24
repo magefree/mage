@@ -37,7 +37,7 @@ public class ChainReaction extends mage.sets.worldwake.ChainReaction {
 
     public ChainReaction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class HeroesReunion extends mage.sets.invasion.HeroesReunion {
 
     public HeroesReunion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "ARC";
     }
 

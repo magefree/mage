@@ -37,7 +37,7 @@ public class HermitDruid extends mage.sets.stronghold.HermitDruid {
 
     public HermitDruid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "VMA";
     }
 

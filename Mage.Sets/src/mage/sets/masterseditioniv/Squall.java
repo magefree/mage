@@ -39,7 +39,7 @@ public class Squall extends mage.sets.starter1999.Squall {
 
     public Squall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

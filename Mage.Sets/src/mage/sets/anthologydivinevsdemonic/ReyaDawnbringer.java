@@ -37,7 +37,7 @@ public class ReyaDawnbringer extends mage.sets.tenthedition.ReyaDawnbringer {
 
     public ReyaDawnbringer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "DD3DVD";
     }
 

@@ -37,7 +37,7 @@ public class BorosGuildgate extends mage.sets.gatecrash.BorosGuildgate {
 
     public BorosGuildgate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 280;
+        this.cardNumber = "280";
         this.expansionSetCode = "C13";
     }
 

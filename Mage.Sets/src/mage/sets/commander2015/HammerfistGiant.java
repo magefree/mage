@@ -37,7 +37,7 @@ public class HammerfistGiant extends mage.sets.ravnica.HammerfistGiant {
 
     public HammerfistGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "C15";
     }
 

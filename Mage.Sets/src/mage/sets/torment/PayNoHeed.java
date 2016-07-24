@@ -37,7 +37,7 @@ public class PayNoHeed extends mage.sets.magic2014.PayNoHeed {
 
     public PayNoHeed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "TOR";
     }
 

@@ -37,7 +37,7 @@ public class SegovianLeviathan extends mage.sets.fifthedition.SegovianLeviathan 
 
     public SegovianLeviathan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "4ED";
     }
 

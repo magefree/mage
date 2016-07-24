@@ -37,7 +37,7 @@ public class StealArtifact extends mage.sets.seventhedition.StealArtifact {
 
     public StealArtifact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "8ED";
     }
 

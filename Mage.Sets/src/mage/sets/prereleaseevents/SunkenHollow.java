@@ -37,7 +37,7 @@ public class SunkenHollow extends mage.sets.battleforzendikar.SunkenHollow {
 
     public SunkenHollow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 297;
+        this.cardNumber = "297";
         this.expansionSetCode = "PTC";
     }
 

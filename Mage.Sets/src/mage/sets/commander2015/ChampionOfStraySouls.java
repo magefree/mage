@@ -37,7 +37,7 @@ public class ChampionOfStraySouls extends mage.sets.bornofthegods.ChampionOfStra
 
     public ChampionOfStraySouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "C15";
     }
 

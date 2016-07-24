@@ -37,7 +37,7 @@ public class SoulOfTheHarvest extends mage.sets.avacynrestored.SoulOfTheHarvest 
 
     public SoulOfTheHarvest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "W16";
     }
 

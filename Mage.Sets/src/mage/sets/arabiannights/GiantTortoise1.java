@@ -37,7 +37,7 @@ public class GiantTortoise1 extends mage.sets.fourthedition.GiantTortoise {
 
     public GiantTortoise1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "ARN";
     }
 

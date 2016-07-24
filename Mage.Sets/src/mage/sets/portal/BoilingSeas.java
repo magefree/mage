@@ -37,7 +37,7 @@ public class BoilingSeas extends mage.sets.ninthedition.BoilingSeas {
 
     public BoilingSeas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "POR";
     }
 

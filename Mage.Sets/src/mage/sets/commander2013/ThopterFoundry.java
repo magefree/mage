@@ -37,7 +37,7 @@ public class ThopterFoundry extends mage.sets.alarareborn.ThopterFoundry {
 
     public ThopterFoundry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 234;
+        this.cardNumber = "234";
         this.expansionSetCode = "C13";
     }
 

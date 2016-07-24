@@ -37,7 +37,7 @@ public class BrassclawOrcs extends mage.sets.fallenempires.BrassclawOrcs1 {
 
     public BrassclawOrcs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "ME2";
     }
 

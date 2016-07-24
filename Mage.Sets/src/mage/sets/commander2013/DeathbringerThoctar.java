@@ -37,7 +37,7 @@ public class DeathbringerThoctar extends mage.sets.alarareborn.DeathbringerThoct
 
     public DeathbringerThoctar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "C13";
     }
 

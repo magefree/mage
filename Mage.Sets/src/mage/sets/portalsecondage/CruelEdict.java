@@ -38,7 +38,7 @@ public class CruelEdict extends mage.sets.tenthedition.CruelEdict {
 
     public CruelEdict(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "PO2";
         this.rarity = Rarity.COMMON;
     }

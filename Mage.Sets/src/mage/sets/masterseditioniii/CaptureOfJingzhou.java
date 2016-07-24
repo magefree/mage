@@ -37,7 +37,7 @@ public class CaptureOfJingzhou extends mage.sets.portalthreekingdoms.CaptureOfJi
 
     public CaptureOfJingzhou(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "ME3";
     }
 

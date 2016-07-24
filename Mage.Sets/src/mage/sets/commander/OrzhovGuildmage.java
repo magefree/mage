@@ -37,7 +37,7 @@ public class OrzhovGuildmage extends mage.sets.guildpact.OrzhovGuildmage {
 
     public OrzhovGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 217;
+        this.cardNumber = "217";
         this.expansionSetCode = "CMD";
     }
 

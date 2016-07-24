@@ -38,7 +38,7 @@ public class ElvishMystic extends mage.sets.magic2014.ElvishMystic {
 
     public ElvishMystic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class BridgeFromBelow extends mage.sets.futuresight.BridgeFromBelow {
 
     public BridgeFromBelow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "MMA";
     }
 

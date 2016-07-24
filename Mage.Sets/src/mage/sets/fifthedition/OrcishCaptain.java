@@ -37,7 +37,7 @@ public class OrcishCaptain extends mage.sets.masterseditionii.OrcishCaptain {
 
     public OrcishCaptain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 254;
+        this.cardNumber = "254";
         this.expansionSetCode = "5ED";
     }
 

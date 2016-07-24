@@ -37,7 +37,7 @@ public class DeathsHeadBuzzard extends mage.sets.scourge.DeathsHeadBuzzard {
 
     public DeathsHeadBuzzard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "VMA";
     }
 

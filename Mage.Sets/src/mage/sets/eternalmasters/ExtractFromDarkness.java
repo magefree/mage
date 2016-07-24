@@ -38,7 +38,7 @@ public class ExtractFromDarkness extends mage.sets.conspiracy.ExtractFromDarknes
 
     public ExtractFromDarkness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 200;
+        this.cardNumber = "200";
         this.expansionSetCode = "EMA";
     }
 

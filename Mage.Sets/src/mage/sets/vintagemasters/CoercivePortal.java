@@ -37,7 +37,7 @@ public class CoercivePortal extends mage.sets.conspiracy.CoercivePortal {
 
     public CoercivePortal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 266;
+        this.cardNumber = "266";
         this.expansionSetCode = "VMA";
     }
 

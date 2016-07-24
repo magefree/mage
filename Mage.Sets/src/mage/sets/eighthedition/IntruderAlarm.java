@@ -37,7 +37,7 @@ public class IntruderAlarm extends mage.sets.stronghold.IntruderAlarm {
 
     public IntruderAlarm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "8ED";
     }
 

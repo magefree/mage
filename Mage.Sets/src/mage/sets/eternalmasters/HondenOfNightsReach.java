@@ -38,7 +38,7 @@ public class HondenOfNightsReach extends mage.sets.championsofkamigawa.HondenOfN
 
     public HondenOfNightsReach(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "EMA";
     }
 

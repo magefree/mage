@@ -38,7 +38,7 @@ public class HypersonicDragon extends mage.sets.returntoravnica.HypersonicDragon
 
     public HypersonicDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

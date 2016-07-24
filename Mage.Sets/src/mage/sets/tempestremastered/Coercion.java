@@ -37,7 +37,7 @@ public class Coercion extends mage.sets.visions.Coercion {
 
     public Coercion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "TPR";
     }
 

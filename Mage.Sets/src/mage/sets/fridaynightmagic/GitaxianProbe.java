@@ -38,7 +38,7 @@ public class GitaxianProbe extends mage.sets.newphyrexia.GitaxianProbe {
 
     public GitaxianProbe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

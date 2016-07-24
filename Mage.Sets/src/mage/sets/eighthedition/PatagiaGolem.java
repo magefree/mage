@@ -37,7 +37,7 @@ public class PatagiaGolem extends mage.sets.seventhedition.PatagiaGolem {
 
     public PatagiaGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
+        this.cardNumber = "308";
         this.expansionSetCode = "8ED";
     }
 

@@ -37,7 +37,7 @@ public class BalefulStrix extends mage.sets.planechase2012.BalefulStrix {
 
     public BalefulStrix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "C13";
     }
 

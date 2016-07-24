@@ -37,7 +37,7 @@ public class Stifle extends mage.sets.scourge.Stifle {
 
     public Stifle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "JR";
     }
 

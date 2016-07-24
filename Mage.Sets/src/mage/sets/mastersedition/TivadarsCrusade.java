@@ -37,7 +37,7 @@ public class TivadarsCrusade extends mage.sets.thedark.TivadarsCrusade {
 
     public TivadarsCrusade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "MED";
     }
 

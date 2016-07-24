@@ -38,7 +38,7 @@ public class WindsweptHeath extends mage.sets.onslaught.WindsweptHeath {
 
     public WindsweptHeath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

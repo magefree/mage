@@ -37,7 +37,7 @@ public class SkyshroudRanger extends mage.sets.tempest.SkyshroudRanger {
 
     public SkyshroudRanger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 297;
+        this.cardNumber = "297";
         this.expansionSetCode = "10E";
     }
 

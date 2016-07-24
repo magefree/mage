@@ -37,7 +37,7 @@ public class MelokuTheCloudedMirror extends mage.sets.championsofkamigawa.Meloku
 
     public MelokuTheCloudedMirror(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "MMA";
     }
 

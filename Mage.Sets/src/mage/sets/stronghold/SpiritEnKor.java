@@ -37,7 +37,7 @@ public class SpiritEnKor extends mage.sets.tempestremastered.SpiritEnKor {
 
     public SpiritEnKor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "STH";
     }
 

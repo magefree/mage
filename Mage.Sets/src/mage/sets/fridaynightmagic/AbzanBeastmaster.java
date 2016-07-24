@@ -37,7 +37,7 @@ public class AbzanBeastmaster extends mage.sets.fatereforged.AbzanBeastmaster {
 
     public AbzanBeastmaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 180;
+        this.cardNumber = "180";
         this.expansionSetCode = "FNMP";
     }
 

@@ -38,7 +38,7 @@ public class UrzasTower1 extends mage.sets.fifthedition.UrzasTower {
 
     public UrzasTower1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "CHR";
         this.rarity = Rarity.UNCOMMON;
     }

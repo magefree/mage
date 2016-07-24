@@ -37,7 +37,7 @@ public class Slay extends mage.sets.ninthedition.Slay {
 
     public Slay(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "PLS";
     }
 

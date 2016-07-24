@@ -37,7 +37,7 @@ public class FireFieldOgre extends mage.sets.shardsofalara.FireFieldOgre {
 
     public FireFieldOgre(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "DDH";
     }
 

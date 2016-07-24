@@ -37,7 +37,7 @@ public class FieryFall extends mage.sets.conflux.FieryFall {
 
     public FieryFall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "MMA";
     }
 

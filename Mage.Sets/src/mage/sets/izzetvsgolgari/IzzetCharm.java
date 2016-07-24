@@ -37,7 +37,7 @@ public class IzzetCharm extends mage.sets.returntoravnica.IzzetCharm {
 
     public IzzetCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "DDJ";
     }
 

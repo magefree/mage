@@ -38,7 +38,7 @@ public class AvenRiftwatcher extends mage.sets.planarchaos.AvenRiftwatcher {
 
     public AvenRiftwatcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "EMA";
     }
 

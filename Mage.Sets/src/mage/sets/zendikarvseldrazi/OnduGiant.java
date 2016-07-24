@@ -37,7 +37,7 @@ public class OnduGiant extends mage.sets.riseoftheeldrazi.OnduGiant {
 
     public OnduGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "DDP";
     }
 

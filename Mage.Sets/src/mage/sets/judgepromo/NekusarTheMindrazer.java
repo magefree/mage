@@ -37,7 +37,7 @@ public class NekusarTheMindrazer extends mage.sets.commander2013.NekusarTheMindr
 
     public NekusarTheMindrazer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "JR";
     }
 

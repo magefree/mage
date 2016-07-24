@@ -37,7 +37,7 @@ public class LibraryOfLatNam extends mage.sets.alliances.LibraryOfLatNam {
 
     public LibraryOfLatNam(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "6ED";
     }
 

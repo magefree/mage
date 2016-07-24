@@ -37,7 +37,7 @@ public class Propaganda extends mage.sets.tempest.Propaganda {
 
     public Propaganda(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "C13";
     }
 

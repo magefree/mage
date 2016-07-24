@@ -37,7 +37,7 @@ public class UndergroundRiver extends mage.sets.tenthedition.UndergroundRiver {
 
     public UndergroundRiver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 446;
+        this.cardNumber = "446";
         this.expansionSetCode = "5ED";
     }
 

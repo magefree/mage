@@ -38,7 +38,7 @@ public class Manamorphose extends mage.sets.shadowmoor.Manamorphose {
 
     public Manamorphose(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 191;
+        this.cardNumber = "191";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.UNCOMMON;
     }

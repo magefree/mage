@@ -37,7 +37,7 @@ public class SerumVisions extends mage.sets.fifthdawn.SerumVisions {
 
     public SerumVisions(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "FNMP";
     }
 

@@ -37,7 +37,7 @@ public class MarduShadowspear extends mage.sets.fatereforged.MarduShadowspear {
 
     public MarduShadowspear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "MGDC";
     }
 

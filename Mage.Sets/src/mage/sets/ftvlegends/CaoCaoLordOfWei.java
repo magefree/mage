@@ -38,7 +38,7 @@ public class CaoCaoLordOfWei extends mage.sets.portalthreekingdoms.CaoCaoLordOfW
 
     public CaoCaoLordOfWei(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "V11";
         this.rarity = Rarity.MYTHIC;
     }

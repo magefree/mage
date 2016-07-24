@@ -38,7 +38,7 @@ public class ControlMagic extends mage.sets.limitedalpha.ControlMagic {
 
     public ControlMagic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "4ED";
     }
 

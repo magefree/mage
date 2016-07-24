@@ -37,7 +37,7 @@ public class DeathPitOffering extends mage.sets.nemesis.DeathPitOffering {
 
     public DeathPitOffering(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "8ED";
     }
 

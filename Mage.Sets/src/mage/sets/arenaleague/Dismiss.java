@@ -38,7 +38,7 @@ public class Dismiss extends mage.sets.tempest.Dismiss {
 
     public Dismiss(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "ARENA";
         this.rarity = Rarity.SPECIAL;
     }

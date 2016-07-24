@@ -37,7 +37,7 @@ public class OjutaiSoulOfWinter extends mage.sets.fatereforged.OjutaiSoulOfWinte
 
     public OjutaiSoulOfWinter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "PTC";
     }
 

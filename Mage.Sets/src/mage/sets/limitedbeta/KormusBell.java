@@ -38,7 +38,7 @@ public class KormusBell extends mage.sets.limitedalpha.KormusBell {
 
     public KormusBell(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 258;
+        this.cardNumber = "258";
         this.expansionSetCode = "LEB";
     }
 

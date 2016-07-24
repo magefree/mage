@@ -36,7 +36,7 @@ public class CemeteryReaper extends mage.sets.magic2012.CemeteryReaper {
 
     public CemeteryReaper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "M10";
     }
 

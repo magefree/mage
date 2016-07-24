@@ -38,7 +38,7 @@ public class Reciprocate extends mage.sets.championsofkamigawa.Reciprocate {
 
     public Reciprocate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -38,7 +38,7 @@ public class BorosGarrison extends mage.sets.planechase.BorosGarrison {
 
     public BorosGarrison(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

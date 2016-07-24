@@ -38,7 +38,7 @@ public class LysAlanaScarblade extends mage.sets.lorwyn.LysAlanaScarblade {
 
     public LysAlanaScarblade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "EMA";
     }
 

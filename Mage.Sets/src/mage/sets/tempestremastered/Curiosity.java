@@ -37,7 +37,7 @@ public class Curiosity extends mage.sets.innistrad.Curiosity {
 
     public Curiosity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "TPR";
     }
 

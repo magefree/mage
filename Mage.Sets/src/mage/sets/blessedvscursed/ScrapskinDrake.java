@@ -37,7 +37,7 @@ public class ScrapskinDrake extends mage.sets.avacynrestored.ScrapskinDrake {
 
     public ScrapskinDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "DDQ";
     }
 

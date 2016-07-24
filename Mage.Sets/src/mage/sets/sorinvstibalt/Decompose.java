@@ -37,7 +37,7 @@ public class Decompose extends mage.sets.odyssey.Decompose {
 
     public Decompose(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "DDK";
     }
 

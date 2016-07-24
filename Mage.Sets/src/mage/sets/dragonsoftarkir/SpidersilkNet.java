@@ -37,7 +37,7 @@ public class SpidersilkNet extends mage.sets.zendikar.SpidersilkNet {
 
     public SpidersilkNet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 244;
+        this.cardNumber = "244";
         this.expansionSetCode = "DTK";
     }
 

@@ -37,7 +37,7 @@ public class FlameKinZealot extends mage.sets.ravnica.FlameKinZealot {
 
     public FlameKinZealot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "DDN";
     }
 

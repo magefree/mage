@@ -38,7 +38,7 @@ public class ElixirOfImmortality extends mage.sets.magic2011.ElixirOfImmortality
 
     public ElixirOfImmortality (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "DDF";
     }
 

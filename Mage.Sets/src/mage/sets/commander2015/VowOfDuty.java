@@ -37,7 +37,7 @@ public class VowOfDuty extends mage.sets.commander.VowOfDuty {
 
     public VowOfDuty(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "C15";
     }
 

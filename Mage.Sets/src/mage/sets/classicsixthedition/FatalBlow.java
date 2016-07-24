@@ -37,7 +37,7 @@ public class FatalBlow extends mage.sets.weatherlight.FatalBlow {
 
     public FatalBlow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "6ED";
     }
 

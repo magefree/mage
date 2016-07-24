@@ -37,7 +37,7 @@ public class BlastedLandscape extends mage.sets.urzassaga.BlastedLandscape {
 
     public BlastedLandscape(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 278;
+        this.cardNumber = "278";
         this.expansionSetCode = "C15";
     }
 

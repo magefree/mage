@@ -37,7 +37,7 @@ public class GarruksCompanion extends mage.sets.magic2011.GarruksCompanion {
 
     public GarruksCompanion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "M12";
     }
 

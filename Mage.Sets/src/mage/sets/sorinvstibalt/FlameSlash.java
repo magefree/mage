@@ -37,7 +37,7 @@ public class FlameSlash extends mage.sets.riseoftheeldrazi.FlameSlash {
 
     public FlameSlash(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "DDK";
     }
 

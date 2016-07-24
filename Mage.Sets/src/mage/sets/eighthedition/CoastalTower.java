@@ -37,7 +37,7 @@ public class CoastalTower extends mage.sets.invasion.CoastalTower {
 
     public CoastalTower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 323;
+        this.cardNumber = "323";
         this.expansionSetCode = "8ED";
     }
 

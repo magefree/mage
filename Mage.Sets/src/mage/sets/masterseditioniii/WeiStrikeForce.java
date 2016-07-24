@@ -37,7 +37,7 @@ public class WeiStrikeForce extends mage.sets.portalthreekingdoms.WeiStrikeForce
 
     public WeiStrikeForce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "ME3";
     }
 

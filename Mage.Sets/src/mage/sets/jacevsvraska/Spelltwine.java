@@ -37,7 +37,7 @@ public class Spelltwine extends mage.sets.magic2013.Spelltwine {
 
     public Spelltwine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "DDM";
     }
 

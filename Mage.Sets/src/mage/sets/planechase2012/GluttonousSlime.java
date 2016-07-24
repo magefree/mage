@@ -37,7 +37,7 @@ public class GluttonousSlime extends mage.sets.conflux.GluttonousSlime {
 
     public GluttonousSlime(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "PC2";
     }
 

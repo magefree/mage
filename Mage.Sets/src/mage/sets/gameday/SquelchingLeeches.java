@@ -37,7 +37,7 @@ public class SquelchingLeeches extends mage.sets.journeyintonyx.SquelchingLeeche
 
     public SquelchingLeeches(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "MGDC";
     }
 

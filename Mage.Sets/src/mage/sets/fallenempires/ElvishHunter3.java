@@ -38,7 +38,7 @@ public class ElvishHunter3 extends mage.sets.masterseditionii.ElvishHunter {
 
     public ElvishHunter3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "FEM";
     }
 

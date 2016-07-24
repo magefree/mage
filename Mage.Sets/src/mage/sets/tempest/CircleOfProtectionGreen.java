@@ -37,7 +37,7 @@ public class CircleOfProtectionGreen extends mage.sets.iceage.CircleOfProtection
 
     public CircleOfProtectionGreen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 222;
+        this.cardNumber = "222";
         this.expansionSetCode = "TMP";
     }
 

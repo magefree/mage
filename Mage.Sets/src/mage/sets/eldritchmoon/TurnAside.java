@@ -37,7 +37,7 @@ public class TurnAside extends mage.sets.scarsofmirrodin.TurnAside {
 
     public TurnAside(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "EMN";
     }
 

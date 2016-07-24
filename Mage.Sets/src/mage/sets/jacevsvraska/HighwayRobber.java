@@ -37,7 +37,7 @@ public class HighwayRobber extends mage.sets.tenthedition.HighwayRobber {
 
     public HighwayRobber(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "DDM";
     }
 

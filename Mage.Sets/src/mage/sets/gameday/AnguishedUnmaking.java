@@ -37,7 +37,7 @@ public class AnguishedUnmaking extends mage.sets.shadowsoverinnistrad.AnguishedU
 
     public AnguishedUnmaking(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "MGDC";
     }
 

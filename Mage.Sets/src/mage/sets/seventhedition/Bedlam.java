@@ -37,7 +37,7 @@ public class Bedlam extends mage.sets.urzassaga.Bedlam {
 
     public Bedlam(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "7ED";
     }
 

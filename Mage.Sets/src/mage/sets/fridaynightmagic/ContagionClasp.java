@@ -37,7 +37,7 @@ public class ContagionClasp extends mage.sets.scarsofmirrodin.ContagionClasp {
 
     public ContagionClasp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "FNMP";
     }
 

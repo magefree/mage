@@ -37,7 +37,7 @@ public class KothOfTheHammer extends mage.sets.scarsofmirrodin.KothOfTheHammer {
 
     public KothOfTheHammer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "DDI";
     }
 

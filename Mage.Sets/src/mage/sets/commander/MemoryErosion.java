@@ -37,7 +37,7 @@ public class MemoryErosion extends mage.sets.shardsofalara.MemoryErosion {
 
     public MemoryErosion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "CMD";
     }
 

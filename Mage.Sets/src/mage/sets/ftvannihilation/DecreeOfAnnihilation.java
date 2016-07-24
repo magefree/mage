@@ -38,7 +38,7 @@ public class DecreeOfAnnihilation extends mage.sets.scourge.DecreeOfAnnihilation
 
     public DecreeOfAnnihilation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "V14";
         this.rarity = Rarity.MYTHIC;
     }

@@ -37,7 +37,7 @@ public class MuckRats extends mage.sets.portalsecondage.MuckRats {
 
     public MuckRats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "S99";
     }
 

@@ -37,7 +37,7 @@ public class WaxWane extends mage.sets.archenemy.WaxWane {
 
     public WaxWane(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 296;
+        this.cardNumber = "296";
         this.expansionSetCode = "INV";
     }
 

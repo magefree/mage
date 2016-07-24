@@ -37,7 +37,7 @@ public class SeaEagle extends mage.sets.eighthedition.SeaEagle {
 
     public SeaEagle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "S00";
     }
 

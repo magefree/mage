@@ -37,7 +37,7 @@ public class ThicketBasilisk extends mage.sets.limitedalpha.ThicketBasilisk {
 
     public ThicketBasilisk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "5ED";
     }
 

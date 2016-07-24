@@ -37,7 +37,7 @@ public class BottomlessVault extends mage.sets.fallenempires.BottomlessVault {
 
     public BottomlessVault(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 411;
+        this.cardNumber = "411";
         this.expansionSetCode = "5ED";
     }
 

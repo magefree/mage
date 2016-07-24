@@ -39,7 +39,7 @@ public class SeaDrake extends mage.sets.masterseditionii.SeaDrake {
 
     public SeaDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "PO2";
         this.rarity = Rarity.UNCOMMON;
     }

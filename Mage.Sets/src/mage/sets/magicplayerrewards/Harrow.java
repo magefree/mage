@@ -38,7 +38,7 @@ public class Harrow extends mage.sets.zendikar.Harrow {
 
     public Harrow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

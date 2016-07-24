@@ -38,7 +38,7 @@ public class GoblinMutant extends mage.sets.iceage.GoblinMutant {
     public GoblinMutant(UUID ownerId) {
         super(ownerId);
         this.expansionSetCode = "MED";
-        this.cardNumber = 96;
+        this.cardNumber = "96";
     }
 
     public GoblinMutant(final GoblinMutant card) {

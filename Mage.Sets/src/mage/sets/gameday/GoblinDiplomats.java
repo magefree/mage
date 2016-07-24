@@ -37,7 +37,7 @@ public class GoblinDiplomats extends mage.sets.magic2014.GoblinDiplomats {
 
     public GoblinDiplomats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "MGDC";
     }
 

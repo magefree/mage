@@ -37,7 +37,7 @@ public class HuntTheWeak extends mage.sets.magic2014.HuntTheWeak {
 
     public HuntTheWeak(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "FRF";
     }
 

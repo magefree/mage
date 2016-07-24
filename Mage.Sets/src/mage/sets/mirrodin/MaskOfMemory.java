@@ -37,7 +37,7 @@ public class MaskOfMemory extends mage.sets.planechase.MaskOfMemory {
 
     public MaskOfMemory(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 203;
+        this.cardNumber = "203";
         this.expansionSetCode = "MRD";
     }
 

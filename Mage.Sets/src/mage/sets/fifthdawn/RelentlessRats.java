@@ -37,7 +37,7 @@ public class RelentlessRats extends mage.sets.tenthedition.RelentlessRats {
 
     public RelentlessRats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "5DN";
     }
 

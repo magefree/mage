@@ -37,7 +37,7 @@ public class GuardiansOfAkrasa extends mage.sets.shardsofalara.GuardiansOfAkrasa
 
     public GuardiansOfAkrasa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "M13";
     }
 

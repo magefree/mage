@@ -37,7 +37,7 @@ public class RegalForce extends mage.sets.eventide.RegalForce {
 
     public RegalForce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "EMA";
     }
 

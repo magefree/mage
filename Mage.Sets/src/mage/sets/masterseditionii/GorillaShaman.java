@@ -38,7 +38,7 @@ public class GorillaShaman extends mage.sets.alliances.GorillaShaman1 {
 
     public GorillaShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.UNCOMMON;
     }

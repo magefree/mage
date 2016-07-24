@@ -37,7 +37,7 @@ public class UnderworldCoinsmith extends mage.sets.journeyintonyx.UnderworldCoin
 
     public UnderworldCoinsmith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "C15";
     }
 

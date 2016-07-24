@@ -38,7 +38,7 @@ public class SiegeRhino extends mage.sets.khansoftarkir.SiegeRhino {
 
     public SiegeRhino(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

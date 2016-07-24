@@ -37,7 +37,7 @@ public class LightningRift extends mage.sets.onslaught.LightningRift {
 
     public LightningRift(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "FNMP";
     }
 

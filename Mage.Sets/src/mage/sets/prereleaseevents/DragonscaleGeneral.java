@@ -37,7 +37,7 @@ public class DragonscaleGeneral extends mage.sets.fatereforged.DragonscaleGenera
 
     public DragonscaleGeneral(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "PTC";
     }
 

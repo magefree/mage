@@ -37,7 +37,7 @@ public class PiaAndKiranNalaar extends mage.sets.magicorigins.PiaAndKiranNalaar 
 
     public PiaAndKiranNalaar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "PTC";
     }
 

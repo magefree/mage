@@ -37,7 +37,7 @@ public class DragonFodder extends mage.sets.shardsofalara.DragonFodder {
 
     public DragonFodder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "ARC";
     }
 

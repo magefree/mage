@@ -37,7 +37,7 @@ public class Kaysa extends mage.sets.alliances.Kaysa {
 
     public Kaysa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "ME2";
     }
 

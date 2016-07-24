@@ -38,7 +38,7 @@ public class HowlFromBeyond extends mage.sets.limitedalpha.HowlFromBeyond {
 
     public HowlFromBeyond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "4ED";
     }
 

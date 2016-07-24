@@ -37,7 +37,7 @@ public class Fling extends mage.sets.magic2011.Fling {
 
     public Fling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "PC2";
     }
 

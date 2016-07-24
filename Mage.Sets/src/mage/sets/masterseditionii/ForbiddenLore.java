@@ -38,7 +38,7 @@ public class ForbiddenLore extends mage.sets.iceage.ForbiddenLore {
 
     public ForbiddenLore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -38,7 +38,7 @@ public class RyuseiTheFallingStar extends mage.sets.championsofkamigawa.RyuseiTh
 
     public RyuseiTheFallingStar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

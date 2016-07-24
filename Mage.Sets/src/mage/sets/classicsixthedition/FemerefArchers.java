@@ -37,7 +37,7 @@ public class FemerefArchers extends mage.sets.tenthedition.FemerefArchers {
 
     public FemerefArchers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 229;
+        this.cardNumber = "229";
         this.expansionSetCode = "6ED";
     }
 

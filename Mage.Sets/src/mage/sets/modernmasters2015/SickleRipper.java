@@ -37,7 +37,7 @@ public class SickleRipper extends mage.sets.shadowmoor.SickleRipper {
 
     public SickleRipper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "MM2";
     }
 

@@ -37,7 +37,7 @@ public class OgreShaman extends mage.sets.exodus.OgreShaman {
 
     public OgreShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
         this.expansionSetCode = "TPR";
     }
 

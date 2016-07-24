@@ -37,7 +37,7 @@ public class MasteryOfTheUnseen extends mage.sets.fatereforged.MasteryOfTheUnsee
 
     public MasteryOfTheUnseen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "PTC";
     }
 

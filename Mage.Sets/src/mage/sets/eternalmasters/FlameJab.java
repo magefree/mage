@@ -39,7 +39,7 @@ public class FlameJab extends mage.sets.eventide.FlameJab {
 
     public FlameJab(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

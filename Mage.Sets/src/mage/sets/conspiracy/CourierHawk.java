@@ -37,7 +37,7 @@ public class CourierHawk extends mage.sets.ravnica.CourierHawk {
 
     public CourierHawk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "CNS";
     }
 

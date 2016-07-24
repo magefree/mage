@@ -37,7 +37,7 @@ public class LoneMissionary extends mage.sets.riseoftheeldrazi.LoneMissionary {
 
     public LoneMissionary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "DDN";
     }
 

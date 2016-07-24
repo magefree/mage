@@ -38,7 +38,7 @@ public class PollutedDelta extends mage.sets.onslaught.PollutedDelta {
 
     public PollutedDelta(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

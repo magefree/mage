@@ -37,7 +37,7 @@ public class Plaxmanta extends mage.sets.dissension.Plaxmanta {
 
     public Plaxmanta(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "C15";
     }
 

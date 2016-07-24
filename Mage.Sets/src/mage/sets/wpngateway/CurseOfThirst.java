@@ -38,7 +38,7 @@ public class CurseOfThirst extends mage.sets.darkascension.CurseOfThirst {
 
     public CurseOfThirst(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

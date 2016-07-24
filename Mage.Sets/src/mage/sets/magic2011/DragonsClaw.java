@@ -38,7 +38,7 @@ public class DragonsClaw extends mage.sets.tenthedition.DragonsClaw {
 
     public DragonsClaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 205;
+        this.cardNumber = "205";
         this.expansionSetCode = "M11";
     }
 

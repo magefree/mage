@@ -38,7 +38,7 @@ public class BalefulStare extends mage.sets.ninthedition.BalefulStare {
 
     public BalefulStare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "POR";
     }
 

@@ -37,7 +37,7 @@ public class SilverchaseFox extends mage.sets.innistrad.SilverchaseFox {
 
     public SilverchaseFox(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "CNS";
     }
 

@@ -37,7 +37,7 @@ public class NeedleStorm extends mage.sets.tempest.NeedleStorm {
 
     public NeedleStorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 259;
+        this.cardNumber = "259";
         this.expansionSetCode = "9ED";
     }
 

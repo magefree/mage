@@ -37,7 +37,7 @@ public class HadaSpyPatrol extends mage.sets.riseoftheeldrazi.HadaSpyPatrol {
 
     public HadaSpyPatrol(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "C13";
     }
 

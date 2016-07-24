@@ -37,7 +37,7 @@ public class Incinerate extends mage.sets.tenthedition.Incinerate {
 
     public Incinerate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 194;
+        this.cardNumber = "194";
         this.expansionSetCode = "ICE";
     }
 

@@ -38,7 +38,7 @@ public class OtherworldlyJourney extends mage.sets.championsofkamigawa.Otherworl
 
     public OtherworldlyJourney(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.COMMON;
     }

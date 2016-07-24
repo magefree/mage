@@ -38,7 +38,7 @@ public class ArchfiendOfDepravity extends mage.sets.fatereforged.ArchfiendOfDepr
 
     public ArchfiendOfDepravity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

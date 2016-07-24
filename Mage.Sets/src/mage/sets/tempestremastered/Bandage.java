@@ -37,7 +37,7 @@ public class Bandage extends mage.sets.tenthedition.Bandage {
 
     public Bandage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "TPR";
     }
 

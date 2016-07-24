@@ -38,7 +38,7 @@ public class WormwoodTreefolk extends mage.sets.thedark.WormwoodTreefolk {
 
     public WormwoodTreefolk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

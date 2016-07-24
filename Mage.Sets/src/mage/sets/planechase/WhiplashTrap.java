@@ -37,7 +37,7 @@ public class WhiplashTrap extends mage.sets.zendikar.WhiplashTrap {
 
     public WhiplashTrap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "HOP";
     }
 

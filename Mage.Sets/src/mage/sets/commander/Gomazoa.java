@@ -37,7 +37,7 @@ public class Gomazoa extends mage.sets.zendikar.Gomazoa {
 
     public Gomazoa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "CMD";
     }
 

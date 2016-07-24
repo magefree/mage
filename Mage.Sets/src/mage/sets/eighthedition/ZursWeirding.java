@@ -37,7 +37,7 @@ public class ZursWeirding extends mage.sets.iceage.ZursWeirding {
 
     public ZursWeirding(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "8ED";
     }
 

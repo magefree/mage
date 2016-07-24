@@ -37,7 +37,7 @@ public class AEtherFigment extends mage.sets.zendikar.AetherFigment {
 
     public AEtherFigment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "DDM";
     }
 

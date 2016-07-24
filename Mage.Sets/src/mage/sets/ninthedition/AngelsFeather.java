@@ -37,7 +37,7 @@ public class AngelsFeather extends mage.sets.tenthedition.AngelsFeather {
 
     public AngelsFeather(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 287;
+        this.cardNumber = "287";
         this.expansionSetCode = "9ED";
     }
 

@@ -37,7 +37,7 @@ public class Convolute extends mage.sets.ravnica.Convolute {
 
     public Convolute(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "EMN";
     }
 

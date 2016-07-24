@@ -38,7 +38,7 @@ public class GoblinGrenade2 extends mage.sets.magic2012.GoblinGrenade {
 
     public GoblinGrenade2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "FEM";
         this.rarity = Rarity.COMMON;
     }

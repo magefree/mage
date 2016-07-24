@@ -37,7 +37,7 @@ public class Lifelace extends mage.sets.limitedalpha.Lifelace {
 
     public Lifelace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "4ED";
     }
 

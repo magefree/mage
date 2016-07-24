@@ -38,7 +38,7 @@ public class RuleOfLaw extends mage.sets.tenthedition.RuleOfLaw {
 
     public RuleOfLaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "MRD";
         this.rarity = Rarity.RARE;
     }

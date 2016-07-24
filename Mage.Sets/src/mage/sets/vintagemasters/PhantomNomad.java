@@ -37,7 +37,7 @@ public class PhantomNomad extends mage.sets.judgment.PhantomNomad {
 
     public PhantomNomad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "VMA";
     }
 

@@ -39,7 +39,7 @@ public class DakmorLancer extends mage.sets.starter1999.DakmorLancer {
 
     public DakmorLancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "7ED";
         this.rarity = Rarity.UNCOMMON;
     }

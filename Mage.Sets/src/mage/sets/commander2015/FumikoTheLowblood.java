@@ -37,7 +37,7 @@ public class FumikoTheLowblood extends mage.sets.betrayersofkamigawa.FumikoTheLo
 
     public FumikoTheLowblood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "C15";
     }
 

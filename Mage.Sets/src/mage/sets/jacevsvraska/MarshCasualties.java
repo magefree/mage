@@ -37,7 +37,7 @@ public class MarshCasualties extends mage.sets.zendikar.MarshCasualties {
 
     public MarshCasualties(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "DDM";
     }
 

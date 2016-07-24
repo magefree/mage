@@ -37,7 +37,7 @@ public class ChampionOfTheParish extends mage.sets.innistrad.ChampionOfTheParish
 
     public ChampionOfTheParish(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "DDQ";
     }
 

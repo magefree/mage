@@ -37,7 +37,7 @@ public class ChapelGeist extends mage.sets.innistrad.ChapelGeist {
 
     public ChapelGeist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "DDQ";
     }
 

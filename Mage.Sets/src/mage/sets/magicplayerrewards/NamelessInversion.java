@@ -38,7 +38,7 @@ public class NamelessInversion extends mage.sets.lorwyn.NamelessInversion {
 
     public NamelessInversion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

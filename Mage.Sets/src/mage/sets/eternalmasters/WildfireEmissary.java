@@ -38,7 +38,7 @@ public class WildfireEmissary extends mage.sets.mirage.WildfireEmissary {
 
     public WildfireEmissary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

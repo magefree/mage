@@ -38,7 +38,7 @@ public class WalkerOfSecretWays extends mage.sets.betrayersofkamigawa.WalkerOfSe
 
     public WalkerOfSecretWays (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "PC2";
     }
 

@@ -37,7 +37,7 @@ public class BrutalExpulsion extends mage.sets.battleforzendikar.BrutalExpulsion
 
     public BrutalExpulsion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 248;
+        this.cardNumber = "248";
         this.expansionSetCode = "PTC";
     }
 

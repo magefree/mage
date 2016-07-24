@@ -37,7 +37,7 @@ public class GalepowderMage extends mage.sets.venservskoth.GalepowderMage {
 
     public GalepowderMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "LRW";
     }
 

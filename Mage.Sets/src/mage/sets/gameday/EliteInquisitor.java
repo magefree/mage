@@ -37,7 +37,7 @@ public class EliteInquisitor extends mage.sets.innistrad.EliteInquisitor {
 
     public EliteInquisitor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "MGDC";
     }
 

@@ -37,7 +37,7 @@ public class CelestialPrism extends mage.sets.limitedalpha.CelestialPrism {
 
     public CelestialPrism(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 236;
+        this.cardNumber = "236";
         this.expansionSetCode = "LEB";
     }
 

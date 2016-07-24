@@ -37,7 +37,7 @@ public class HeronsGraceChampion extends mage.sets.eldritchmoon.HeronsGraceChamp
 
     public HeronsGraceChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "MGDC";
     }
 

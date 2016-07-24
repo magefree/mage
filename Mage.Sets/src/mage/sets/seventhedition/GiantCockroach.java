@@ -37,7 +37,7 @@ public class GiantCockroach extends mage.sets.ninthedition.GiantCockroach {
 
     public GiantCockroach(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "7ED";
     }
 

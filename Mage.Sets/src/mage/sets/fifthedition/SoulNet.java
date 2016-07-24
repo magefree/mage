@@ -37,7 +37,7 @@ public class SoulNet extends mage.sets.limitedalpha.SoulNet {
 
     public SoulNet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 400;
+        this.cardNumber = "400";
         this.expansionSetCode = "5ED";
     }
 

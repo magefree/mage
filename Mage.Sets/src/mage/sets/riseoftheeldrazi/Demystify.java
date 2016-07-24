@@ -38,7 +38,7 @@ public class Demystify extends mage.sets.tenthedition.Demystify {
 
     public Demystify (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "ROE";
     }
 

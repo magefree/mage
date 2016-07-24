@@ -38,7 +38,7 @@ public class CoalitionVictory extends mage.sets.timeshifted.CoalitionVictory {
 
     public CoalitionVictory(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 241;
+        this.cardNumber = "241";
         this.expansionSetCode = "INV";
         this.rarity = Rarity.RARE;
     }

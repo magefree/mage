@@ -37,7 +37,7 @@ public class AllyEncampment extends mage.sets.battleforzendikar.AllyEncampment {
 
     public AllyEncampment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 241;
+        this.cardNumber = "241";
         this.expansionSetCode = "PTC";
     }
 

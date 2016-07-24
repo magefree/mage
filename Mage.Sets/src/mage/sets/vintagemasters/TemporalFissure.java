@@ -37,7 +37,7 @@ public class TemporalFissure extends mage.sets.scourge.TemporalFissure {
 
     public TemporalFissure(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "VMA";
     }
 

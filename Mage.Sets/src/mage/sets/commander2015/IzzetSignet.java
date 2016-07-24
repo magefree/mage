@@ -37,7 +37,7 @@ public class IzzetSignet extends mage.sets.guildpact.IzzetSignet {
 
     public IzzetSignet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 256;
+        this.cardNumber = "256";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class CityOfShadows extends mage.sets.thedark.CityOfShadows {
 
     public CityOfShadows(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 206;
+        this.cardNumber = "206";
         this.expansionSetCode = "ME3";
     }
 

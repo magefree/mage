@@ -37,7 +37,7 @@ public class UrzasBauble extends mage.sets.mastersedition.UrzasBauble {
 
     public UrzasBauble(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 318;
+        this.cardNumber = "318";
         this.expansionSetCode = "ICE";
     }
 

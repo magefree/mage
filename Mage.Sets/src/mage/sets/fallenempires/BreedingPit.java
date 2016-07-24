@@ -37,7 +37,7 @@ public class BreedingPit extends mage.sets.fifthedition.BreedingPit {
 
     public BreedingPit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "FEM";
     }
 

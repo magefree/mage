@@ -37,7 +37,7 @@ public class Execute extends mage.sets.ninthedition.Execute {
 
     public Execute(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "ODY";
     }
 

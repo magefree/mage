@@ -37,7 +37,7 @@ public class WindbornMuse extends mage.sets.tenthedition.WindbornMuse {
 
     public WindbornMuse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "CMD";
     }
 

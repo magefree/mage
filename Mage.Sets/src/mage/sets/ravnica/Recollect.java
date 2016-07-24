@@ -37,7 +37,7 @@ public class Recollect extends mage.sets.tenthedition.Recollect {
 
     public Recollect(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "RAV";
     }
 

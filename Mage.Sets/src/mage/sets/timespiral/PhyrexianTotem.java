@@ -37,7 +37,7 @@ public class PhyrexianTotem extends mage.sets.phyrexiavsthecoalition.PhyrexianTo
 
     public PhyrexianTotem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 261;
+        this.cardNumber = "261";
         this.expansionSetCode = "TSP";
     }
 

@@ -37,7 +37,7 @@ public class EmrakulsHatcher extends mage.sets.riseoftheeldrazi.EmrakulsHatcher 
 
     public EmrakulsHatcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "DDP";
     }
 

@@ -38,7 +38,7 @@ public class DragonBroodmother extends mage.sets.alarareborn.DragonBroodmother {
 
     public DragonBroodmother(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

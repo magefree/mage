@@ -37,7 +37,7 @@ public class AnHavvaConstable extends mage.sets.fifthedition.AnHavvaConstable {
 
     public AnHavvaConstable(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "HML";
     }
 

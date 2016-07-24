@@ -37,7 +37,7 @@ public class CatharsCrusade extends mage.sets.avacynrestored.CatharsCrusade {
 
     public CatharsCrusade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "C14";
     }
 

@@ -38,7 +38,7 @@ public class HornedSliver extends mage.sets.tempest.HornedSliver {
 
     public HornedSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 176;
+        this.cardNumber = "176";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class NakedSingularity extends mage.sets.iceage.NakedSingularity {
 
     public NakedSingularity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "ME4";
     }
 

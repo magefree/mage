@@ -37,7 +37,7 @@ public class CallOfTheWild extends mage.sets.weatherlight.CallOfTheWild {
 
     public CallOfTheWild(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 235;
+        this.cardNumber = "235";
         this.expansionSetCode = "8ED";
     }
 

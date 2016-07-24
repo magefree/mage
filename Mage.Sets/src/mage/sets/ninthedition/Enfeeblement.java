@@ -37,7 +37,7 @@ public class Enfeeblement extends mage.sets.tempest.Enfeeblement {
 
     public Enfeeblement(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "9ED";
     }
 

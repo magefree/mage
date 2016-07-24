@@ -37,7 +37,7 @@ public class BogRats extends mage.sets.thedark.BogRats {
 
     public BogRats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "CHR";
     }
 

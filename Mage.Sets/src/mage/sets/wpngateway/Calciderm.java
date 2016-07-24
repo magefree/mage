@@ -38,7 +38,7 @@ public class Calciderm extends mage.sets.planarchaos.Calciderm {
 
     public Calciderm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

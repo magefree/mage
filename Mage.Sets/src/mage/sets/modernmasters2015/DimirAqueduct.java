@@ -38,7 +38,7 @@ public class DimirAqueduct extends mage.sets.ravnica.DimirAqueduct {
 
     public DimirAqueduct(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

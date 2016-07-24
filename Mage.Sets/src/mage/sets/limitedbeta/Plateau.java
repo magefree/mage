@@ -37,7 +37,7 @@ public class Plateau extends mage.sets.limitedalpha.Plateau {
 
     public Plateau(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 292;
+        this.cardNumber = "292";
         this.expansionSetCode = "LEB";
     }
 

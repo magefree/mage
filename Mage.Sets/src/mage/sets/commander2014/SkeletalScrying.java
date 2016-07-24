@@ -37,7 +37,7 @@ public class SkeletalScrying extends mage.sets.odyssey.SkeletalScrying {
 
     public SkeletalScrying(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "C14";
     }
 

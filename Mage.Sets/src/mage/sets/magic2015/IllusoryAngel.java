@@ -39,7 +39,7 @@ public class IllusoryAngel extends mage.sets.planechase2012.IllusoryAngel {
     public IllusoryAngel(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "M15";
     }
 

@@ -38,7 +38,7 @@ public class SolkanarTheSwampKing extends mage.sets.timeshifted.SolkanarTheSwamp
 
     public SolkanarTheSwampKing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 299;
+        this.cardNumber = "299";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.RARE;
     }

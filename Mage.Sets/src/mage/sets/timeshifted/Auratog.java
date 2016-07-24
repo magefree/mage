@@ -38,7 +38,7 @@ public class Auratog extends mage.sets.tempest.Auratog {
 
     public Auratog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.COMMON;
     }

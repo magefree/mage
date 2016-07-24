@@ -37,7 +37,7 @@ public class LeoninSnarecaster extends mage.sets.theros.LeoninSnarecaster {
 
     public LeoninSnarecaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "DDN";
     }
 

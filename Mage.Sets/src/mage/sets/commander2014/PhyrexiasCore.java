@@ -37,7 +37,7 @@ public class PhyrexiasCore extends mage.sets.newphyrexia.PhyrexiasCore {
 
     public PhyrexiasCore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 306;
+        this.cardNumber = "306";
         this.expansionSetCode = "C14";
     }
 

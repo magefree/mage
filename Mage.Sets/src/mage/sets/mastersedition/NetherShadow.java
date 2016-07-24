@@ -38,7 +38,7 @@ public class NetherShadow extends mage.sets.limitedalpha.NetherShadow {
 
     public NetherShadow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.UNCOMMON;
     }

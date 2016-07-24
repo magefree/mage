@@ -37,7 +37,7 @@ public class SpiritWeaver extends mage.sets.tenthedition.SpiritWeaver {
 
     public SpiritWeaver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "INV";
     }
 

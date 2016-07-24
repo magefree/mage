@@ -37,7 +37,7 @@ public class FistsOfIronwood extends mage.sets.ravnica.FistsOfIronwood {
 
     public FistsOfIronwood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "CMD";
     }
 

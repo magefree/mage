@@ -6,7 +6,7 @@ public class ScavengingOoze extends mage.sets.commander.ScavengingOoze {
     
     public ScavengingOoze(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "MBP";
     }
     

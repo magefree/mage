@@ -37,7 +37,7 @@ public class TolarianWinds extends mage.sets.urzassaga.TolarianWinds {
 
     public TolarianWinds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "7ED";
     }
 

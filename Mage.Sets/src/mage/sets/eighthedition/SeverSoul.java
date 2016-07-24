@@ -38,7 +38,7 @@ public class SeverSoul extends mage.sets.mercadianmasques.SeverSoul {
 
     public SeverSoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.UNCOMMON;
     }

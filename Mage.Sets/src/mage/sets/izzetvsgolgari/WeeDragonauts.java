@@ -37,7 +37,7 @@ public class WeeDragonauts extends mage.sets.guildpact.WeeDragonauts {
 
     public WeeDragonauts(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "DDJ";
     }
 

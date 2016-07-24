@@ -37,7 +37,7 @@ public class JoragaWarcaller extends mage.sets.worldwake.JoragaWarcaller {
 
     public JoragaWarcaller(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "MLP";
     }
 

@@ -37,7 +37,7 @@ public class Smallpox extends mage.sets.magic2012.Smallpox {
 
     public Smallpox(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "CNS";
     }
 

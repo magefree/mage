@@ -37,7 +37,7 @@ public class VampireNocturnus extends mage.sets.magic2010.VampireNocturnus {
 
     public VampireNocturnus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "M13";
     }
 

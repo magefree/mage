@@ -37,7 +37,7 @@ public class UnhallowedPact extends mage.sets.avacynrestored.UnhallowedPact {
 
     public UnhallowedPact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "CNS";
     }
 

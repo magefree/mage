@@ -38,7 +38,7 @@ public class GoblinTunneler extends mage.sets.riseoftheeldrazi.GoblinTunneler {
 
     public GoblinTunneler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "M11";
     }
 

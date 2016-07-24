@@ -37,7 +37,7 @@ public class PatronOfTheNezumi extends mage.sets.betrayersofkamigawa.PatronOfThe
 
     public PatronOfTheNezumi(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "CMD";
     }
 

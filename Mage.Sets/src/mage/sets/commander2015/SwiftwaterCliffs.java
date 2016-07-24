@@ -37,7 +37,7 @@ public class SwiftwaterCliffs extends mage.sets.khansoftarkir.SwiftwaterCliffs {
 
     public SwiftwaterCliffs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 310;
+        this.cardNumber = "310";
         this.expansionSetCode = "C15";
     }
 

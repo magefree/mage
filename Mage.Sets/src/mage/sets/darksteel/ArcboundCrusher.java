@@ -37,7 +37,7 @@ public class ArcboundCrusher extends mage.sets.planechase.ArcboundCrusher {
 
     public ArcboundCrusher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "DST";
     }
 

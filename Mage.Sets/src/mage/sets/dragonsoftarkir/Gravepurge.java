@@ -37,7 +37,7 @@ public class Gravepurge extends mage.sets.darkascension.Gravepurge {
 
     public Gravepurge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "DTK";
     }
 

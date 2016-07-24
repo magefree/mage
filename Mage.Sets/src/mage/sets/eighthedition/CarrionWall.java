@@ -37,7 +37,7 @@ public class CarrionWall extends mage.sets.nemesis.CarrionWall {
 
     public CarrionWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "8ED";
     }
 

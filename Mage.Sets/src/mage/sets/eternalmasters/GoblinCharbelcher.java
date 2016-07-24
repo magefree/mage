@@ -37,7 +37,7 @@ public class GoblinCharbelcher extends mage.sets.mirrodin.GoblinCharbelcher {
 
     public GoblinCharbelcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 222;
+        this.cardNumber = "222";
         this.expansionSetCode = "EMA";
     }
 

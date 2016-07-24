@@ -37,7 +37,7 @@ public class Brushland extends mage.sets.tenthedition.Brushland {
 
     public Brushland(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 319;
+        this.cardNumber = "319";
         this.expansionSetCode = "9ED";
     }
 

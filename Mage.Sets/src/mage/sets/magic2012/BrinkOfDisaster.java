@@ -37,7 +37,7 @@ public class BrinkOfDisaster extends mage.sets.worldwake.BrinkOfDisaster {
 
     public BrinkOfDisaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "M12";
     }
 

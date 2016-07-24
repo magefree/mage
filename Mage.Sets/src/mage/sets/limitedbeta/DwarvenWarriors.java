@@ -37,7 +37,7 @@ public class DwarvenWarriors extends mage.sets.revisededition.DwarvenWarriors {
 
     public DwarvenWarriors(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "LEB";
     }
 

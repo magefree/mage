@@ -37,7 +37,7 @@ public class Aftershock extends mage.sets.tempest.Aftershock {
 
     public Aftershock(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "VMA";
     }
 

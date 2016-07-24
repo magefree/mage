@@ -37,7 +37,7 @@ public class StasisSnare extends mage.sets.battleforzendikar.StasisSnare {
 
     public StasisSnare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "MGDC";
     }
 

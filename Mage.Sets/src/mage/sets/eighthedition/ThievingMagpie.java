@@ -37,7 +37,7 @@ public class ThievingMagpie extends mage.sets.ninthedition.ThievingMagpie {
 
     public ThievingMagpie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "8ED";
     }
 

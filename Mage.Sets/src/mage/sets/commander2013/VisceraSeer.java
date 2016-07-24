@@ -37,7 +37,7 @@ public class VisceraSeer extends mage.sets.magic2011.VisceraSeer {
 
     public VisceraSeer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "C13";
     }
 

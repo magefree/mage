@@ -37,7 +37,7 @@ public class VoraciousDragon extends mage.sets.conflux.VoraciousDragon {
 
     public VoraciousDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "DDG";
     }
 

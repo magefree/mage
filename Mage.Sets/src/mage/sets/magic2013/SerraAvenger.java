@@ -36,7 +36,7 @@ public class SerraAvenger extends mage.sets.timespiral.SerraAvenger {
 
     public SerraAvenger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "M13";
     }
 

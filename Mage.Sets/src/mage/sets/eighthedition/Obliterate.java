@@ -37,7 +37,7 @@ public class Obliterate extends mage.sets.invasion.Obliterate {
 
     public Obliterate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "8ED";
     }
 

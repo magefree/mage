@@ -37,7 +37,7 @@ public class DrySpell2 extends mage.sets.homelands.DrySpell1 {
 
     public DrySpell2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "HML";
     }
 

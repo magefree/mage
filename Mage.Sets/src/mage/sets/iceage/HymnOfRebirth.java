@@ -37,7 +37,7 @@ public class HymnOfRebirth extends mage.sets.mastersedition.HymnOfRebirth {
 
     public HymnOfRebirth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 373;
+        this.cardNumber = "373";
         this.expansionSetCode = "ICE";
     }
 

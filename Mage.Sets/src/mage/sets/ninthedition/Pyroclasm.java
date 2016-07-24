@@ -37,7 +37,7 @@ public class Pyroclasm extends mage.sets.tenthedition.Pyroclasm {
 
     public Pyroclasm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "9ED";
     }
 

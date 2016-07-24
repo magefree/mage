@@ -37,7 +37,7 @@ public class ExtractorDemon extends mage.sets.conflux.ExtractorDemon {
 
     public ExtractorDemon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "CMD";
     }
 

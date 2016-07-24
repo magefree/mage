@@ -37,7 +37,7 @@ public class AvenCloudchaser extends mage.sets.tenthedition.AvenCloudchaser {
 
     public AvenCloudchaser(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "ODY";
     }
 

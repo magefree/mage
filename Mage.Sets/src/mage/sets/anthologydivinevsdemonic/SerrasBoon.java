@@ -37,7 +37,7 @@ public class SerrasBoon extends mage.sets.divinevsdemonic.SerrasBoon {
 
     public SerrasBoon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "DD3DVD";
     }
 

@@ -37,7 +37,7 @@ public class PrismArray extends mage.sets.battleforzendikar.PrismArray {
 
     public PrismArray(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 285;
+        this.cardNumber = "285";
         this.expansionSetCode = "PTC";
     }
 

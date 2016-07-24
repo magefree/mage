@@ -37,7 +37,7 @@ public class ErraticExplosion extends mage.sets.planechase2012.ErraticExplosion 
 
     public ErraticExplosion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "ONS";
     }
 

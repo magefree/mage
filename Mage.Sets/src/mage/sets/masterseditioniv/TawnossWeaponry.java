@@ -37,7 +37,7 @@ public class TawnossWeaponry extends mage.sets.fifthedition.TawnossWeaponry {
 
     public TawnossWeaponry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "ME4";
     }
 

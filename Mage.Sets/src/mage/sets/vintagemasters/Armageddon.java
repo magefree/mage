@@ -38,7 +38,7 @@ public class Armageddon extends mage.sets.fifthedition.Armageddon {
 
     public Armageddon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.MYTHIC;
     }

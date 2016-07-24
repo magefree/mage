@@ -37,7 +37,7 @@ public class SeedbornMuse extends mage.sets.ninthedition.SeedbornMuse {
 
     public SeedbornMuse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 296;
+        this.cardNumber = "296";
         this.expansionSetCode = "10E";
     }
 

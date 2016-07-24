@@ -38,7 +38,7 @@ public class Anarchist extends mage.sets.ninthedition.Anarchist {
 
     public Anarchist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "ODY";
         this.rarity = Rarity.COMMON;
     }

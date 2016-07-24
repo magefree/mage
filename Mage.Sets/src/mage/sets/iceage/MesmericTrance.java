@@ -37,7 +37,7 @@ public class MesmericTrance extends mage.sets.masterseditionii.MesmericTrance {
 
     public MesmericTrance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "ICE";
     }
 

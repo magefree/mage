@@ -37,7 +37,7 @@ public class MoggFlunkies extends mage.sets.magic2013.MoggFlunkies {
 
     public MoggFlunkies(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "TPR";
     }
 

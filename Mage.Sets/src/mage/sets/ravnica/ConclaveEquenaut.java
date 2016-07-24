@@ -37,7 +37,7 @@ public class ConclaveEquenaut extends mage.sets.elspethvstezzeret.ConclaveEquena
 
     public ConclaveEquenaut(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "RAV";
     }
 

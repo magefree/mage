@@ -33,7 +33,7 @@ public class Arena extends mage.sets.timeshifted.Arena {
     
     public Arena(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "MBP";
     }
     

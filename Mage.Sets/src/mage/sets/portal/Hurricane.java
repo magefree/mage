@@ -38,7 +38,7 @@ public class Hurricane extends mage.sets.limitedalpha.Hurricane {
 
     public Hurricane(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "POR";
         this.rarity = Rarity.RARE;
     }

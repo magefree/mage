@@ -37,7 +37,7 @@ public class GoblinSnowman extends mage.sets.iceage.GoblinSnowman {
 
     public GoblinSnowman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "TSB";
     }
 

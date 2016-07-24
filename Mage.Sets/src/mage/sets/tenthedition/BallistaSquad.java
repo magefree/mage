@@ -37,7 +37,7 @@ public class BallistaSquad extends mage.sets.mercadianmasques.BallistaSquad {
 
     public BallistaSquad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "10E";
     }
 

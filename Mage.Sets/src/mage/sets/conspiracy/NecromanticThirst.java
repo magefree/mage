@@ -37,7 +37,7 @@ public class NecromanticThirst extends mage.sets.ravnica.NecromanticThirst {
 
     public NecromanticThirst(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "CNS";
     }
 

@@ -37,7 +37,7 @@ public class ArgivianArchaeologist extends mage.sets.antiquities.ArgivianArchaeo
 
     public ArgivianArchaeologist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "MED";
     }
 

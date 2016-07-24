@@ -38,7 +38,7 @@ public class BogardanHellkite extends mage.sets.magic2010.BogardanHellkite {
 
     public BogardanHellkite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "TSP";
         this.rarity = Rarity.RARE;
     }

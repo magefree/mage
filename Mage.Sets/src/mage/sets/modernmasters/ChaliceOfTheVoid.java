@@ -37,7 +37,7 @@ public class ChaliceOfTheVoid extends mage.sets.mirrodin.ChaliceOfTheVoid {
 
     public ChaliceOfTheVoid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 203;
+        this.cardNumber = "203";
         this.expansionSetCode = "MMA";
     }
 

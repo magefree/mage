@@ -37,7 +37,7 @@ public class RecklessSpite extends mage.sets.tempest.RecklessSpite {
 
     public RecklessSpite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class VolunteerMilitia extends mage.sets.portalthreekingdoms.VolunteerMil
 
     public VolunteerMilitia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
         this.expansionSetCode = "PO2";
     }
 

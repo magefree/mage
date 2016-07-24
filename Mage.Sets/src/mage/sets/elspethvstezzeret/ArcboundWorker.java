@@ -37,7 +37,7 @@ public class ArcboundWorker extends mage.sets.darksteel.ArcboundWorker {
 
     public ArcboundWorker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "DDF";
     }
 

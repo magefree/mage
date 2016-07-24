@@ -37,7 +37,7 @@ public class InvokeTheFiremind extends mage.sets.guildpact.InvokeTheFiremind {
 
     public InvokeTheFiremind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "DDJ";
     }
 

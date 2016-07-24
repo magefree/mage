@@ -38,7 +38,7 @@ public class GoblinFirestarter extends mage.sets.portalsecondage.GoblinFirestart
 
     public GoblinFirestarter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.COMMON;
     }

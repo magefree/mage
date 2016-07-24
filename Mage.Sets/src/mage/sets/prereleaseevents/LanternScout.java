@@ -37,7 +37,7 @@ public class LanternScout extends mage.sets.battleforzendikar.LanternScout {
 
     public LanternScout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 271;
+        this.cardNumber = "271";
         this.expansionSetCode = "PTC";
     }
 

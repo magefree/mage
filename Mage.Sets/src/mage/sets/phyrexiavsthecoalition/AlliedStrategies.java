@@ -37,7 +37,7 @@ public class AlliedStrategies extends mage.sets.planeshift.AlliedStrategies {
 
     public AlliedStrategies(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "DDE";
     }
 

@@ -37,7 +37,7 @@ public class MendingHands extends mage.sets.betrayersofkamigawa.MendingHands {
 
     public MendingHands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "9ED";
     }
 

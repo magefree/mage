@@ -37,7 +37,7 @@ public class UyoSilentProphet extends mage.sets.championsofkamigawa.UyoSilentPro
 
     public UyoSilentProphet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class AbuJafar extends mage.sets.arabiannights.AbuJafar {
 
     public AbuJafar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "CHR";
     }
 

@@ -37,7 +37,7 @@ public class Exhume extends mage.sets.urzassaga.Exhume {
 
     public Exhume(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "PD3";
     }
 

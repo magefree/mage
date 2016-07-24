@@ -38,7 +38,7 @@ public class HondenOfSeeingWinds extends mage.sets.championsofkamigawa.HondenOfS
 
     public HondenOfSeeingWinds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "EMA";
     }
 

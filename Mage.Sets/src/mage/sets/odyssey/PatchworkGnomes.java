@@ -37,7 +37,7 @@ public class PatchworkGnomes extends mage.sets.tempest.PatchworkGnomes {
 
     public PatchworkGnomes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 306;
+        this.cardNumber = "306";
         this.expansionSetCode = "ODY";
     }
 

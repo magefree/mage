@@ -38,7 +38,7 @@ public class NaturalOrder extends mage.sets.visions.NaturalOrder {
 
     public NaturalOrder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.MYTHIC;
     }

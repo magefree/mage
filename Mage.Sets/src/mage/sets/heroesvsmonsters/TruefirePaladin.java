@@ -37,7 +37,7 @@ public class TruefirePaladin extends mage.sets.gatecrash.TruefirePaladin {
 
     public TruefirePaladin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "DDL";
     }
 

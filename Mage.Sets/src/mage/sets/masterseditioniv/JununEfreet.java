@@ -37,7 +37,7 @@ public class JununEfreet extends mage.sets.fourthedition.JununEfreet {
 
     public JununEfreet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "ME4";
     }
 

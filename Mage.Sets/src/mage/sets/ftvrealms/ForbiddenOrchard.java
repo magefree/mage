@@ -38,7 +38,7 @@ public class ForbiddenOrchard extends mage.sets.championsofkamigawa.ForbiddenOrc
 
     public ForbiddenOrchard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

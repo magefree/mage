@@ -38,7 +38,7 @@ public class RevekaWizardSavant extends mage.sets.masterseditioniii.RevekaWizard
 
     public RevekaWizardSavant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "HML";
         this.rarity = Rarity.RARE;
     }

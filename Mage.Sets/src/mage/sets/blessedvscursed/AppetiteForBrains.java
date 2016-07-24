@@ -37,7 +37,7 @@ public class AppetiteForBrains extends mage.sets.avacynrestored.AppetiteForBrain
 
     public AppetiteForBrains(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "DDQ";
     }
 

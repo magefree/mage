@@ -37,7 +37,7 @@ public class ThrullChampion extends mage.sets.mastersedition.ThrullChampion {
 
     public ThrullChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "FEM";
     }
 

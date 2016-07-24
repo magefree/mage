@@ -37,7 +37,7 @@ public class BlazingSalvo extends mage.sets.odyssey.BlazingSalvo {
 
     public BlazingSalvo(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "DDK";
     }
 

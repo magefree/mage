@@ -37,7 +37,7 @@ public class SeersSundial extends mage.sets.worldwake.SeersSundial {
 
     public SeersSundial(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 264;
+        this.cardNumber = "264";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class SejiriRefuge extends mage.sets.zendikar.SejiriRefuge {
 
     public SejiriRefuge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "DDI";
     }
 

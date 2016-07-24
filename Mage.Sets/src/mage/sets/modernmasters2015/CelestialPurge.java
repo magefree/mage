@@ -37,7 +37,7 @@ public class CelestialPurge extends mage.sets.conflux.CelestialPurge {
 
     public CelestialPurge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "MM2";
     }
 

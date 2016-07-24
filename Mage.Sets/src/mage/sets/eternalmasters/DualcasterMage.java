@@ -37,7 +37,7 @@ public class DualcasterMage extends mage.sets.commander2014.DualcasterMage {
 
     public DualcasterMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "EMA";
     }
 

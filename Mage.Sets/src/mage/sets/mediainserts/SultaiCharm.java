@@ -38,7 +38,7 @@ public class SultaiCharm extends mage.sets.khansoftarkir.SultaiCharm {
 
     public SultaiCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

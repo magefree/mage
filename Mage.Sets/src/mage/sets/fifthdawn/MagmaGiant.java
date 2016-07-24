@@ -37,7 +37,7 @@ public class MagmaGiant extends mage.sets.portalsecondage.MagmaGiant {
 
     public MagmaGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "5DN";
     }
 

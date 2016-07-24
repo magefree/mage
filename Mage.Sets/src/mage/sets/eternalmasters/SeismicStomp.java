@@ -38,7 +38,7 @@ public class SeismicStomp extends mage.sets.magic2014.SeismicStomp {
 
     public SeismicStomp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "EMA";
     }
 

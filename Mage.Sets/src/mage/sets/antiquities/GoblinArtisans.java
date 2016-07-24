@@ -37,7 +37,7 @@ public class GoblinArtisans extends mage.sets.chronicles.GoblinArtisans {
 
     public GoblinArtisans(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "ATQ";
     }
 

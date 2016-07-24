@@ -38,7 +38,7 @@ public class MeriekeRiBerit extends mage.sets.iceage.MeriekeRiBerit {
 
     public MeriekeRiBerit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

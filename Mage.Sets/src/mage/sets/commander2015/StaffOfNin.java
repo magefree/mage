@@ -37,7 +37,7 @@ public class StaffOfNin extends mage.sets.magic2013.StaffOfNin {
 
     public StaffOfNin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 270;
+        this.cardNumber = "270";
         this.expansionSetCode = "C15";
     }
 

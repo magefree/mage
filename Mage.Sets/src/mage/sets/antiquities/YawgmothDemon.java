@@ -37,7 +37,7 @@ public class YawgmothDemon extends mage.sets.ninthedition.YawgmothDemon {
 
     public YawgmothDemon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "ATQ";
     }
 

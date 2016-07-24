@@ -38,7 +38,7 @@ public class BoseijuWhoSheltersAll extends mage.sets.championsofkamigawa.Boseiju
 
     public BoseijuWhoSheltersAll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

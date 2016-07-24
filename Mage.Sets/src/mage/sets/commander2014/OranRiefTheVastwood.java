@@ -37,7 +37,7 @@ public class OranRiefTheVastwood extends mage.sets.zendikar.OranRiefTheVastwood 
 
     public OranRiefTheVastwood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 305;
+        this.cardNumber = "305";
         this.expansionSetCode = "C14";
     }
 

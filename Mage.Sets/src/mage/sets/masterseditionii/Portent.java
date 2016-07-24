@@ -37,7 +37,7 @@ public class Portent extends mage.sets.fifthedition.Portent {
 
     public Portent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "ME2";
     }
 

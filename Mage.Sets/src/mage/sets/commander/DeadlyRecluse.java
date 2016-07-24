@@ -37,7 +37,7 @@ public class DeadlyRecluse extends mage.sets.magic2010.DeadlyRecluse {
 
     public DeadlyRecluse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "CMD";
     }
 

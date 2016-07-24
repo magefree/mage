@@ -37,7 +37,7 @@ public class DeathStroke extends mage.sets.stronghold.DeathStroke {
 
     public DeathStroke(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "TPR";
     }
 

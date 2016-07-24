@@ -37,7 +37,7 @@ public class SawtoothLoon extends mage.sets.venservskoth.SawtoothLoon {
 
     public SawtoothLoon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "PLS";
     }
 

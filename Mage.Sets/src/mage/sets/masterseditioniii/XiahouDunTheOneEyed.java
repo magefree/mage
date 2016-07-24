@@ -38,7 +38,7 @@ public class XiahouDunTheOneEyed extends mage.sets.portalthreekingdoms.XiahouDun
 
     public XiahouDunTheOneEyed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

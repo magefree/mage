@@ -37,7 +37,7 @@ public class Meadowboon extends mage.sets.morningtide.Meadowboon {
 
     public Meadowboon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "MMA";
     }
 

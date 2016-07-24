@@ -38,7 +38,7 @@ public class Tracker extends mage.sets.masterseditioniii.Tracker {
 
     public Tracker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.RARE;
     }

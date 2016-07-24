@@ -37,7 +37,7 @@ public class Fork extends mage.sets.limitedbeta.Fork {
 
     public Fork(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "LEA";
     }
 

@@ -37,7 +37,7 @@ public class AuraGraft extends mage.sets.tenthedition.AuraGraft {
 
     public AuraGraft(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "ODY";
     }
 

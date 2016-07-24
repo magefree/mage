@@ -37,7 +37,7 @@ public class EdgeOfAutumn extends mage.sets.knightsvsdragons.EdgeOfAutumn {
 
     public EdgeOfAutumn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "FUT";
     }
 

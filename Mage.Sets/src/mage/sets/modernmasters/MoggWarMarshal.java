@@ -37,7 +37,7 @@ public class MoggWarMarshal extends mage.sets.timespiral.MoggWarMarshal {
 
     public MoggWarMarshal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "MMA";
     }
 

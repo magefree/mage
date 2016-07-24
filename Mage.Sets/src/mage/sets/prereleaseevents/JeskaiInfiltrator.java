@@ -37,7 +37,7 @@ public class JeskaiInfiltrator extends mage.sets.fatereforged.JeskaiInfiltrator 
 
     public JeskaiInfiltrator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "PTC";
     }
 

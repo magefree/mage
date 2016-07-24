@@ -37,7 +37,7 @@ public class FlyingCarpet extends mage.sets.seventhedition.FlyingCarpet {
 
     public FlyingCarpet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 371;
+        this.cardNumber = "371";
         this.expansionSetCode = "5ED";
     }
 

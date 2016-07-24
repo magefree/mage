@@ -37,7 +37,7 @@ public class ScabClanBerserker extends mage.sets.magicorigins.ScabClanBerserker 
 
     public ScabClanBerserker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 231;
+        this.cardNumber = "231";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class SultaiEmissary extends mage.sets.fatereforged.SultaiEmissary {
 
     public SultaiEmissary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "UGIN";
     }
 

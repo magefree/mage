@@ -37,7 +37,7 @@ public class Mindslicer extends mage.sets.ninthedition.Mindslicer {
 
     public Mindslicer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "ODY";
     }
 

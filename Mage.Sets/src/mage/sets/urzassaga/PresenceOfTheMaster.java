@@ -37,7 +37,7 @@ public class PresenceOfTheMaster extends mage.sets.legends.PresenceOfTheMaster {
 
     public PresenceOfTheMaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "USG";
     }
 

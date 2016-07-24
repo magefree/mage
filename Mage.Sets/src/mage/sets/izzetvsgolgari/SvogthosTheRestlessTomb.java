@@ -37,7 +37,7 @@ public class SvogthosTheRestlessTomb extends mage.sets.commander.SvogthosTheRest
 
     public SvogthosTheRestlessTomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "DDJ";
     }
 

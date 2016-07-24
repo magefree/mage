@@ -37,7 +37,7 @@ public class Reanimate extends mage.sets.tempest.Reanimate {
 
     public Reanimate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "PD3";
     }
 

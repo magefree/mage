@@ -37,7 +37,7 @@ public class GempalmAvenger extends mage.sets.legions.GempalmAvenger {
 
     public GempalmAvenger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "DDO";
     }
 

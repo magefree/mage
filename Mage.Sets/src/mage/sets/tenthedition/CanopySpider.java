@@ -37,7 +37,7 @@ public class CanopySpider extends mage.sets.tempest.CanopySpider {
 
     public CanopySpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 254;
+        this.cardNumber = "254";
         this.expansionSetCode = "10E";
     }
 

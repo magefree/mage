@@ -37,7 +37,7 @@ public class ScreamingSeahawk extends mage.sets.conspiracy.ScreamingSeahawk {
 
     public ScreamingSeahawk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "ONS";
     }
 

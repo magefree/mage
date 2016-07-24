@@ -37,7 +37,7 @@ public class WindSpirit extends mage.sets.iceage.WindSpirit {
 
     public WindSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "6ED";
     }
 

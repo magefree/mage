@@ -37,7 +37,7 @@ public class DreadshipReef extends mage.sets.commander.DreadshipReef {
 
     public DreadshipReef(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 271;
+        this.cardNumber = "271";
         this.expansionSetCode = "TSP";
     }
 

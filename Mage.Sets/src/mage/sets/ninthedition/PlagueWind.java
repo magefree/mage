@@ -37,7 +37,7 @@ public class PlagueWind extends mage.sets.prophecy.PlagueWind {
 
     public PlagueWind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "9ED";
     }
 

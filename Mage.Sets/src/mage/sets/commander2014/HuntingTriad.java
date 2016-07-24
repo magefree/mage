@@ -37,7 +37,7 @@ public class HuntingTriad extends mage.sets.morningtide.HuntingTriad {
 
     public HuntingTriad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 200;
+        this.cardNumber = "200";
         this.expansionSetCode = "C14";
     }
 

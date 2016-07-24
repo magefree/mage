@@ -37,7 +37,7 @@ public class BogImp extends mage.sets.fifthedition.BogImp {
 
     public BogImp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "7ED";
     }
 

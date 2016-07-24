@@ -37,7 +37,7 @@ public class SelvalaExplorerReturned extends mage.sets.vintagemasters.SelvalaExp
 
     public SelvalaExplorerReturned(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "CNS";
     }
 

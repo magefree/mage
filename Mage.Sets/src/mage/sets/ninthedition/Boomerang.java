@@ -37,7 +37,7 @@ public class Boomerang extends mage.sets.tenthedition.Boomerang {
 
     public Boomerang(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "9ED";
     }
 

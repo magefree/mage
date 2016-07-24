@@ -37,7 +37,7 @@ public class WillOTheWisp extends mage.sets.limitedalpha.WillOTheWisp {
 
     public WillOTheWisp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "9ED";
     }
 

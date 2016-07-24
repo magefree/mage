@@ -60,7 +60,7 @@ public class CardInfo {
     @DatabaseField(indexName = "name_index")
     protected String name;
     @DatabaseField(indexName = "setCode_cardNumber_index")
-    protected int cardNumber;
+    protected String cardNumber;
     @DatabaseField(indexName = "setCode_cardNumber_index")
     protected String setCode;
     @DatabaseField(unique = true, indexName = "className_index")
@@ -295,7 +295,7 @@ public class CardInfo {
         return className;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 

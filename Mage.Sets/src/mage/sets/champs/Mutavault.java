@@ -38,7 +38,7 @@ public class Mutavault extends mage.sets.morningtide.Mutavault {
 
     public Mutavault(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "CP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -38,7 +38,7 @@ public class StrategicPlanning extends mage.sets.commander2013.StrategicPlanning
 
     public StrategicPlanning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class ChimericMass extends mage.sets.scarsofmirrodin.ChimericMass {
 
     public ChimericMass(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "MM2";
     }
 

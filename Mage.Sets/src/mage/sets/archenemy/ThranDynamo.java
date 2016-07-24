@@ -37,7 +37,7 @@ public class ThranDynamo extends mage.sets.urzasdestiny.ThranDynamo {
 
     public ThranDynamo(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "ARC";
     }
 

@@ -37,7 +37,7 @@ public class BasandraBattleSeraph extends mage.sets.commander.BasandraBattleSera
 
     public BasandraBattleSeraph(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 244;
+        this.cardNumber = "244";
         this.expansionSetCode = "VMA";
     }
 

@@ -38,7 +38,7 @@ public class WarrenWeirding extends mage.sets.modernmasters.WarrenWeirding {
 
     public WarrenWeirding(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "MOR";
         this.rarity = Rarity.UNCOMMON;
     }

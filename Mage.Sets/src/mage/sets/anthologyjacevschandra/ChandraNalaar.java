@@ -37,7 +37,7 @@ public class ChandraNalaar extends mage.sets.magic2010.ChandraNalaar {
 
     public ChandraNalaar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "DD3JVC";
     }
 

@@ -38,7 +38,7 @@ public class PsionicBlast extends mage.sets.timeshifted.PsionicBlast {
 
     public PsionicBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "LEB";
         this.rarity = Rarity.UNCOMMON;
     }

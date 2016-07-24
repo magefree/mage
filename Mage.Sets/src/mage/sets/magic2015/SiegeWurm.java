@@ -37,7 +37,7 @@ public class SiegeWurm extends mage.sets.ravnica.SiegeWurm {
 
     public SiegeWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 200;
+        this.cardNumber = "200";
         this.expansionSetCode = "M15";
     }
 

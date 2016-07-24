@@ -37,7 +37,7 @@ public class ThreeVisits extends mage.sets.portalthreekingdoms.ThreeVisits {
 
     public ThreeVisits(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "ME3";
     }
 

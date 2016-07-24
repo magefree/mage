@@ -38,7 +38,7 @@ public class Carnassid extends mage.sets.stronghold.Carnassid {
 
     public Carnassid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

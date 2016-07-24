@@ -37,7 +37,7 @@ public class DaringApprentice extends mage.sets.ninthedition.DaringApprentice {
 
     public DaringApprentice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "7ED";
     }
 

@@ -37,7 +37,7 @@ public class Immolation extends mage.sets.fourthedition.Immolation {
 
     public Immolation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "ME3";
     }
 

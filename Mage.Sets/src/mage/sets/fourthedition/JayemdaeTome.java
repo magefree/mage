@@ -37,7 +37,7 @@ public class JayemdaeTome extends mage.sets.tenthedition.JayemdaeTome {
 
     public JayemdaeTome(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 349;
+        this.cardNumber = "349";
         this.expansionSetCode = "4ED";
     }
 

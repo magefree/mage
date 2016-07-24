@@ -37,7 +37,7 @@ public class TrainOfThought extends mage.sets.guildpact.TrainOfThought {
 
     public TrainOfThought(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "DDJ";
     }
 

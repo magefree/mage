@@ -37,7 +37,7 @@ public class RainOfThorns extends mage.sets.avacynrestored.RainOfThorns {
 
     public RainOfThorns(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "C13";
     }
 

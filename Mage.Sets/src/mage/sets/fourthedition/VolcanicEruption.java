@@ -37,7 +37,7 @@ public class VolcanicEruption extends mage.sets.unlimitededition.VolcanicEruptio
 
     public VolcanicEruption(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "4ED";
     }
 

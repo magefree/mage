@@ -38,7 +38,7 @@ public class SearingSpear extends mage.sets.magic2013.SearingSpear {
 
     public SearingSpear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

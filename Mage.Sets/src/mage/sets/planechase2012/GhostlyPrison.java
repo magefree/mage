@@ -37,7 +37,7 @@ public class GhostlyPrison extends mage.sets.championsofkamigawa.GhostlyPrison {
 
     public GhostlyPrison(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "PC2";
     }
 

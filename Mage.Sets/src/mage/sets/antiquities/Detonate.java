@@ -37,7 +37,7 @@ public class Detonate extends mage.sets.fifthedition.Detonate {
 
     public Detonate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "ATQ";
     }
 

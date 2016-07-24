@@ -37,7 +37,7 @@ public class Megrim extends mage.sets.tenthedition.Megrim {
 
     public Megrim(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "9ED";
     }
 

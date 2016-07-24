@@ -38,7 +38,7 @@ public class HammerheimDeadeye extends mage.sets.planarchaos.HammerheimDeadeye {
 
     public HammerheimDeadeye(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.COMMON;
     }

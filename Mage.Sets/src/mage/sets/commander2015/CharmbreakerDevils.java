@@ -37,7 +37,7 @@ public class CharmbreakerDevils extends mage.sets.innistrad.CharmbreakerDevils {
 
     public CharmbreakerDevils(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class SouthernElephant extends mage.sets.portalthreekingdoms.SouthernElep
 
     public SouthernElephant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "ME4";
     }
 

@@ -37,7 +37,7 @@ public class Tombstalker extends mage.sets.modernmasters.Tombstalker {
 
     public Tombstalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "FUT";
     }
 

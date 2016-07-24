@@ -37,7 +37,7 @@ public class KorHookmaster extends mage.sets.zendikar.KorHookmaster {
 
     public KorHookmaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "DDF";
     }
 

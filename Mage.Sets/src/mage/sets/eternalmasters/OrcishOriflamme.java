@@ -39,7 +39,7 @@ public class OrcishOriflamme extends mage.sets.limitedalpha.OrcishOriflamme {
 
     public OrcishOriflamme(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

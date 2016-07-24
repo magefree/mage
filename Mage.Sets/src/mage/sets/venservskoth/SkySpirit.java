@@ -37,7 +37,7 @@ public class SkySpirit extends mage.sets.tempest.SkySpirit {
 
     public SkySpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDI";
     }
 

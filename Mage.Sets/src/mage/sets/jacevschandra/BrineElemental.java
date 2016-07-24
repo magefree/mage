@@ -37,7 +37,7 @@ public class BrineElemental extends mage.sets.commander2014.BrineElemental {
 
     public BrineElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "DD2";
     }
 

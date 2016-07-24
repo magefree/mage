@@ -37,7 +37,7 @@ public class AngelsMercy extends mage.sets.magic2010.AngelsMercy {
 
     public AngelsMercy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "M12";
     }
 

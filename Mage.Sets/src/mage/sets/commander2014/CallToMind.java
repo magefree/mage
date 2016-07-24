@@ -37,7 +37,7 @@ public class CallToMind extends mage.sets.magic2011.CallToMind {
 
     public CallToMind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "C14";
     }
 

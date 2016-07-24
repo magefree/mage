@@ -37,7 +37,7 @@ public class ElvishVisionary extends mage.sets.shardsofalara.ElvishVisionary {
 
     public ElvishVisionary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "M13";
     }
 

@@ -37,7 +37,7 @@ public class DromarsCharm extends mage.sets.commander2013.DromarsCharm {
 
     public DromarsCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "PLS";
     }
 

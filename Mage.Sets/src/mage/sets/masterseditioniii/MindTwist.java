@@ -37,7 +37,7 @@ public class MindTwist extends mage.sets.limitedalpha.MindTwist {
 
     public MindTwist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "ME3";
     }
 

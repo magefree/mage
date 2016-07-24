@@ -38,7 +38,7 @@ public class Unmake extends mage.sets.eventide.Unmake {
 
     public Unmake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

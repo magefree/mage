@@ -37,7 +37,7 @@ public class WalkingCorpse extends mage.sets.innistrad.WalkingCorpse {
 
     public WalkingCorpse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 278;
+        this.cardNumber = "278";
         this.expansionSetCode = "M15";
     }
 

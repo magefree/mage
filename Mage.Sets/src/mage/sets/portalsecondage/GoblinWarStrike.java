@@ -37,7 +37,7 @@ public class GoblinWarStrike extends mage.sets.scourge.GoblinWarStrike {
 
     public GoblinWarStrike(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "PO2";
     }
 

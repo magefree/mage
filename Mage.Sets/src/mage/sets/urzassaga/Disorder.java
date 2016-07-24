@@ -38,7 +38,7 @@ public class Disorder extends mage.sets.seventhedition.Disorder {
 
     public Disorder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "USG";
     }
 

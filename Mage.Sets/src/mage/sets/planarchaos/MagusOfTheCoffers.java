@@ -37,7 +37,7 @@ public class MagusOfTheCoffers extends mage.sets.commander2014.MagusOfTheCoffers
 
     public MagusOfTheCoffers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "PLC";
     }
 

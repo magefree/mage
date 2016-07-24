@@ -37,7 +37,7 @@ public class FertileGround extends mage.sets.urzassaga.FertileGround {
 
     public FertileGround(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 248;
+        this.cardNumber = "248";
         this.expansionSetCode = "8ED";
     }
 

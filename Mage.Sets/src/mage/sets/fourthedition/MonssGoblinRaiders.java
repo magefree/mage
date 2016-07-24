@@ -37,7 +37,7 @@ public class MonssGoblinRaiders extends mage.sets.fifthedition.MonssGoblinRaider
 
     public MonssGoblinRaiders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 231;
+        this.cardNumber = "231";
         this.expansionSetCode = "4ED";
     }
 

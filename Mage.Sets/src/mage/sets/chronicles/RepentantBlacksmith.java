@@ -37,7 +37,7 @@ public class RepentantBlacksmith extends mage.sets.fifthedition.RepentantBlacksm
 
     public RepentantBlacksmith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "CHR";
     }
 

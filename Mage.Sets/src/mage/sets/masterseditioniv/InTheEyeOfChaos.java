@@ -37,7 +37,7 @@ public class InTheEyeOfChaos extends mage.sets.legends.InTheEyeOfChaos {
 
     public InTheEyeOfChaos(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "ME4";
     }
 

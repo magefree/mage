@@ -37,7 +37,7 @@ public class Falter extends mage.sets.urzassaga.Falter {
 
     public Falter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "VMA";
     }
 

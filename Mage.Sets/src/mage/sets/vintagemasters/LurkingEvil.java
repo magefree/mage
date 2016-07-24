@@ -38,7 +38,7 @@ public class LurkingEvil extends mage.sets.urzassaga.LurkingEvil {
 
     public LurkingEvil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

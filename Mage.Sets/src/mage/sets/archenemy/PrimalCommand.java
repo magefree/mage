@@ -37,7 +37,7 @@ public class PrimalCommand extends mage.sets.lorwyn.PrimalCommand {
 
     public PrimalCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "ARC";
     }
 

@@ -37,7 +37,7 @@ public class SeasideCitadel extends mage.sets.shardsofalara.SeasideCitadel {
 
     public SeasideCitadel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 318;
+        this.cardNumber = "318";
         this.expansionSetCode = "C13";
     }
 

@@ -38,7 +38,7 @@ public class GolemsHeart extends mage.sets.scarsofmirrodin.GolemsHeart {
 
     public GolemsHeart(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

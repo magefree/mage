@@ -37,7 +37,7 @@ public class InsidiousBookworms2 extends InsidiousBookworms1 {
 
     public InsidiousBookworms2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
     }
 
     public InsidiousBookworms2(final InsidiousBookworms2 card) {

@@ -37,7 +37,7 @@ public class Oppression extends mage.sets.urzassaga.Oppression {
 
     public Oppression(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "7ED";
     }
 

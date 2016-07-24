@@ -37,7 +37,7 @@ public class SkeletonShard extends mage.sets.planechase.SkeletonShard {
 
     public SkeletonShard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "MRD";
     }
 

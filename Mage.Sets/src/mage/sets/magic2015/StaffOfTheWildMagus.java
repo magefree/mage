@@ -39,7 +39,7 @@ public class StaffOfTheWildMagus extends mage.sets.magic2014.StaffOfTheWildMagus
     public StaffOfTheWildMagus(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 236;
+        this.cardNumber = "236";
         this.expansionSetCode = "M15";
     }
 

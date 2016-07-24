@@ -38,7 +38,7 @@ public class SheoldredWhisperingOne extends mage.sets.newphyrexia.SheoldredWhisp
 
     public SheoldredWhisperingOne(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

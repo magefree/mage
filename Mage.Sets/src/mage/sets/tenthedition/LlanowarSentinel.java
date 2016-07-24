@@ -38,7 +38,7 @@ public class LlanowarSentinel extends mage.sets.weatherlight.LlanowarSentinel {
 
     public LlanowarSentinel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 275;
+        this.cardNumber = "275";
         this.expansionSetCode = "10E";
     }
 

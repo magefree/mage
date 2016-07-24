@@ -37,7 +37,7 @@ public class ScreechingHarpy extends mage.sets.tempest.ScreechingHarpy {
 
     public ScreechingHarpy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class KoboldDrillSergeant extends mage.sets.masterseditioniii.KoboldDrill
 
     public KoboldDrillSergeant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "LEG";
     }
 

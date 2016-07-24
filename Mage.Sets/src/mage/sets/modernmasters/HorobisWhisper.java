@@ -38,7 +38,7 @@ public class HorobisWhisper extends mage.sets.betrayersofkamigawa.HorobisWhisper
 
     public HorobisWhisper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.UNCOMMON;
     }

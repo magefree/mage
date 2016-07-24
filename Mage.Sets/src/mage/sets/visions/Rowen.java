@@ -37,7 +37,7 @@ public class Rowen extends mage.sets.seventhedition.Rowen {
 
     public Rowen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "VIS";
     }
 

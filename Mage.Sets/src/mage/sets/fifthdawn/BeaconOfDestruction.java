@@ -37,7 +37,7 @@ public class BeaconOfDestruction extends mage.sets.tenthedition.BeaconOfDestruct
 
     public BeaconOfDestruction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "5DN";
     }
 

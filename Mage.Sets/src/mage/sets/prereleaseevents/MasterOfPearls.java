@@ -38,7 +38,7 @@ public class MasterOfPearls extends mage.sets.khansoftarkir.MasterOfPearls {
 
     public MasterOfPearls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

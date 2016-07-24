@@ -37,7 +37,7 @@ public class StonefareCrocodile extends mage.sets.returntoravnica.StonefareCroco
 
     public StonefareCrocodile(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "DDM";
     }
 

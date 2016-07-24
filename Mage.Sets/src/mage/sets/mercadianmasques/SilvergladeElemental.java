@@ -37,7 +37,7 @@ public class SilvergladeElemental extends mage.sets.planechase.SilvergladeElemen
 
     public SilvergladeElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
+        this.cardNumber = "269";
         this.expansionSetCode = "MMQ";
     }
 

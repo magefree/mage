@@ -37,7 +37,7 @@ public class TandemLookout extends mage.sets.avacynrestored.TandemLookout {
 
     public TandemLookout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "DDQ";
     }
 

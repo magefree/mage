@@ -38,7 +38,7 @@ public class WallOfSpears extends mage.sets.fifthedition.WallOfSpears {
 
     public WallOfSpears(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 323;
+        this.cardNumber = "323";
         this.expansionSetCode = "7ED";
         this.rarity = Rarity.UNCOMMON;
     }

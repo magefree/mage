@@ -38,7 +38,7 @@ public class GenesisHydra extends mage.sets.magic2015.GenesisHydra {
 
     public GenesisHydra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

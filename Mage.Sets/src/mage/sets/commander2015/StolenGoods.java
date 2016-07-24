@@ -37,7 +37,7 @@ public class StolenGoods extends mage.sets.avacynrestored.StolenGoods {
 
     public StolenGoods(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "C15";
     }
 

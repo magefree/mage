@@ -37,7 +37,7 @@ public class ScoriaWurm extends mage.sets.tenthedition.ScoriaWurm {
 
     public ScoriaWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "USG";
     }
 

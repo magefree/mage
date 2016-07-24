@@ -38,7 +38,7 @@ public class Fog extends mage.sets.magic2010.Fog {
 
     public Fog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "M11";
     }
 

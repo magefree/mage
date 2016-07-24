@@ -37,7 +37,7 @@ public class MarkedByHonor extends mage.sets.magic2015.MarkedByHonor {
 
     public MarkedByHonor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "W16";
     }
 

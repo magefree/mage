@@ -37,7 +37,7 @@ public class HeartOfLight extends mage.sets.betrayersofkamigawa.HeartOfLight {
 
     public HeartOfLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "10E";
     }
 

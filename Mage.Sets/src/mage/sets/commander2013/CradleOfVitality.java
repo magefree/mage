@@ -37,7 +37,7 @@ public class CradleOfVitality extends mage.sets.shardsofalara.CradleOfVitality {
 
     public CradleOfVitality(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "C13";
     }
 

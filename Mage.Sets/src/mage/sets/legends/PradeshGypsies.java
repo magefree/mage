@@ -38,7 +38,7 @@ public class PradeshGypsies extends mage.sets.fifthedition.PradeshGypsies {
 
     public PradeshGypsies(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class SekKuarDeathkeeper extends mage.sets.commander2013.SekKuarDeathkeep
 
     public SekKuarDeathkeeper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "CSP";
     }
 

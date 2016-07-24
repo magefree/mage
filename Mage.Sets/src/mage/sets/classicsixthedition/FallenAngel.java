@@ -37,7 +37,7 @@ public class FallenAngel extends mage.sets.seventhedition.FallenAngel {
 
     public FallenAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "6ED";
     }
 

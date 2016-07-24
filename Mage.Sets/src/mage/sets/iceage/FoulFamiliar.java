@@ -37,7 +37,7 @@ public class FoulFamiliar extends mage.sets.masterseditionii.FoulFamiliar {
 
     public FoulFamiliar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "ICE";
     }
 

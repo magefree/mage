@@ -37,7 +37,7 @@ public class PloverKnights extends mage.sets.lorwyn.PloverKnights {
 
     public PloverKnights(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "DDG";
     }
 

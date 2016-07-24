@@ -37,7 +37,7 @@ public class TorrentOfSouls extends mage.sets.sorinvstibalt.TorrentOfSouls {
 
     public TorrentOfSouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "SHM";
     }
 

@@ -37,7 +37,7 @@ public class SolemnSimulacrum extends mage.sets.magic2012.SolemnSimulacrum {
 
     public SolemnSimulacrum(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 245;
+        this.cardNumber = "245";
         this.expansionSetCode = "MRD";
     }
 

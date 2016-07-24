@@ -37,7 +37,7 @@ public class EsperPanorama extends mage.sets.shardsofalara.EsperPanorama {
 
     public EsperPanorama(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 286;
+        this.cardNumber = "286";
         this.expansionSetCode = "C13";
     }
 

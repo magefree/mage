@@ -38,7 +38,7 @@ public class AkromaAngelOfFury extends mage.sets.commander.AkromaAngelOfFury {
 
     public AkromaAngelOfFury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "V15";
         this.rarity = Rarity.MYTHIC;
     }

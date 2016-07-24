@@ -38,7 +38,7 @@ public class NaturesRevolt extends mage.sets.seventhedition.NaturesRevolt {
 
     public NaturesRevolt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "TMP";
     }
 

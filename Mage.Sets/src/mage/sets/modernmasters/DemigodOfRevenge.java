@@ -37,7 +37,7 @@ public class DemigodOfRevenge extends mage.sets.shadowmoor.DemigodOfRevenge {
 
     public DemigodOfRevenge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 187;
+        this.cardNumber = "187";
         this.expansionSetCode = "MMA";
     }
 

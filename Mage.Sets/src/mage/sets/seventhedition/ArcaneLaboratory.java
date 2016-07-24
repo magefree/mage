@@ -37,7 +37,7 @@ public class ArcaneLaboratory extends mage.sets.urzassaga.ArcaneLaboratory {
 
     public ArcaneLaboratory(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "7ED";
     }
 

@@ -37,7 +37,7 @@ public class ArborElf extends mage.sets.worldwake.ArborElf {
 
     public ArborElf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "M13";
     }
 

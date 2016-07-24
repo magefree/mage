@@ -37,7 +37,7 @@ public class RollingStones extends mage.sets.stronghold.RollingStones {
 
     public RollingStones(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "7ED";
     }
 

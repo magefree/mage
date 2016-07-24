@@ -38,7 +38,7 @@ public class ShardPhoenix2 extends mage.sets.tempestremastered.ShardPhoenix {
 
     public ShardPhoenix2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "SUS";
         this.rarity = Rarity.SPECIAL;
     }

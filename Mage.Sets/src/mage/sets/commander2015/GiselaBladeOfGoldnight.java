@@ -37,7 +37,7 @@ public class GiselaBladeOfGoldnight extends mage.sets.avacynrestored.GiselaBlade
 
     public GiselaBladeOfGoldnight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "C15";
     }
 

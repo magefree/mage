@@ -37,7 +37,7 @@ public class KhalniHeartExpedition extends mage.sets.zendikar.KhalniHeartExpedit
 
     public KhalniHeartExpedition(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "DDP";
     }
 

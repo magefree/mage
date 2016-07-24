@@ -37,7 +37,7 @@ public class PainfulTruths extends mage.sets.battleforzendikar.PainfulTruths {
 
     public PainfulTruths(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 281;
+        this.cardNumber = "281";
         this.expansionSetCode = "PTC";
     }
 

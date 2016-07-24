@@ -39,7 +39,7 @@ public class RottingRats extends mage.sets.conflux.RottingRats {
     public RottingRats (UUID ownerId) {
         super(ownerId);
         this.expansionSetCode = "HOP";
-        this.cardNumber = 39;
+        this.cardNumber = "39";
     }
 
     public RottingRats (final RottingRats card) {

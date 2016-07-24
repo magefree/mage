@@ -37,7 +37,7 @@ public class SkirkDrillSergeant extends mage.sets.elvesvsgoblins.SkirkDrillSerge
 
     public SkirkDrillSergeant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "DD3EVG";
     }
 

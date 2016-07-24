@@ -37,7 +37,7 @@ public class PincherBeetles extends mage.sets.tempest.PincherBeetles {
 
     public PincherBeetles(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 285;
+        this.cardNumber = "285";
         this.expansionSetCode = "10E";
     }
 

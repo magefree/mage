@@ -37,7 +37,7 @@ public class JungleWurm extends mage.sets.mirage.JungleWurm {
 
     public JungleWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 217;
+        this.cardNumber = "217";
         this.expansionSetCode = "VMA";
     }
 

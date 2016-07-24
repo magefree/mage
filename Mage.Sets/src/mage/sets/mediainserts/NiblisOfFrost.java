@@ -37,7 +37,7 @@ public class NiblisOfFrost extends mage.sets.eldritchmoon.NiblisOfFrost {
 
     public NiblisOfFrost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "MBP";
     }
 

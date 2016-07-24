@@ -37,7 +37,7 @@ public class FormlessNurturing extends mage.sets.fatereforged.FormlessNurturing 
 
     public FormlessNurturing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "UGIN";
     }
 

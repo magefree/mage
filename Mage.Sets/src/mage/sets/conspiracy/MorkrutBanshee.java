@@ -37,7 +37,7 @@ public class MorkrutBanshee extends mage.sets.innistrad.MorkrutBanshee {
 
     public MorkrutBanshee(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "CNS";
     }
 

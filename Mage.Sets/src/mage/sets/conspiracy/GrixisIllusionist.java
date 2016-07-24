@@ -37,7 +37,7 @@ public class GrixisIllusionist extends mage.sets.conflux.GrixisIllusionist {
 
     public GrixisIllusionist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "CNS";
     }
 

@@ -38,7 +38,7 @@ public class Pacifism extends mage.sets.tenthedition.Pacifism {
 
     public Pacifism(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "M11";
     }
 

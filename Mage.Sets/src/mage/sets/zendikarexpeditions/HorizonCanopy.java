@@ -38,7 +38,7 @@ public class HorizonCanopy extends mage.sets.futuresight.HorizonCanopy {
 
     public HorizonCanopy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

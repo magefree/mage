@@ -37,7 +37,7 @@ public class FountainOfYouth extends mage.sets.tenthedition.FountainOfYouth {
 
     public FountainOfYouth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 286;
+        this.cardNumber = "286";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class AvatarOfWoe extends mage.sets.archenemy.AvatarOfWoe {
 
     public AvatarOfWoe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "PCY";
     }
 

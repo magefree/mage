@@ -37,7 +37,7 @@ public class Polymorph extends mage.sets.magic2010.Polymorph {
 
     public Polymorph(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "9ED";
     }
 

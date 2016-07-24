@@ -37,7 +37,7 @@ public class Wildcall extends mage.sets.fatereforged.Wildcall {
 
     public Wildcall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "UGIN";
     }
 

@@ -37,7 +37,7 @@ public class BlossomingSands extends mage.sets.khansoftarkir.BlossomingSands {
 
     public BlossomingSands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "FRF";
     }
 

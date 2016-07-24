@@ -37,7 +37,7 @@ public class NafsAsp2 extends NafsAsp1 {
 
     public NafsAsp2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
     }
 
     public NafsAsp2(final NafsAsp2 card) {

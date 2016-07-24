@@ -38,7 +38,7 @@ public class ArashinSovereign extends mage.sets.dragonsoftarkir.ArashinSovereign
 
     public ArashinSovereign(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

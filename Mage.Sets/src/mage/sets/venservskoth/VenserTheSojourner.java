@@ -37,7 +37,7 @@ public class VenserTheSojourner extends mage.sets.scarsofmirrodin.VenserTheSojou
 
     public VenserTheSojourner(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DDI";
     }
 

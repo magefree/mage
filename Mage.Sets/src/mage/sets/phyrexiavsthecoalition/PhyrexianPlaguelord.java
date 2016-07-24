@@ -37,7 +37,7 @@ public class PhyrexianPlaguelord extends mage.sets.urzaslegacy.PhyrexianPlaguelo
 
     public PhyrexianPlaguelord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "DDE";
     }
 

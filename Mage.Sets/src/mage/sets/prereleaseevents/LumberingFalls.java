@@ -37,7 +37,7 @@ public class LumberingFalls extends mage.sets.battleforzendikar.LumberingFalls {
 
     public LumberingFalls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 272;
+        this.cardNumber = "272";
         this.expansionSetCode = "PTC";
     }
 

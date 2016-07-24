@@ -37,7 +37,7 @@ public class BarbarianRing extends mage.sets.odyssey.BarbarianRing {
 
     public BarbarianRing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "PD2";
     }
 

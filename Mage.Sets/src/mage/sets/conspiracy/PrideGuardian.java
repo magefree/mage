@@ -37,7 +37,7 @@ public class PrideGuardian extends mage.sets.magic2012.PrideGuardian {
 
     public PrideGuardian(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "CNS";
     }
 

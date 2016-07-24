@@ -38,7 +38,7 @@ public class CircleOfFlame extends mage.sets.magic2012.CircleOfFlame {
 
     public CircleOfFlame(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

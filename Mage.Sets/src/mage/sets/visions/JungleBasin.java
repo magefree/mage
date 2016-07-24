@@ -37,7 +37,7 @@ public class JungleBasin extends mage.sets.commander2014.JungleBasin {
 
     public JungleBasin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "VIS";
     }
 

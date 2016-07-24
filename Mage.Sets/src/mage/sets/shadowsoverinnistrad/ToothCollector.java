@@ -37,7 +37,7 @@ public class ToothCollector extends mage.sets.blessedvscursed.ToothCollector {
 
     public ToothCollector(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "SOI";
     }
 

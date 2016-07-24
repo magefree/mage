@@ -37,7 +37,7 @@ public class BeastHunt extends mage.sets.zendikar.BeastHunt {
 
     public BeastHunt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "HOP";
     }
 

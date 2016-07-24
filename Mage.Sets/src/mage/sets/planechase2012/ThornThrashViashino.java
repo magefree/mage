@@ -37,7 +37,7 @@ public class ThornThrashViashino extends mage.sets.shardsofalara.ThornThrashVias
 
     public ThornThrashViashino(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "PC2";
     }
 

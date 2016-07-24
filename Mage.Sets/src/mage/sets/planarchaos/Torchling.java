@@ -37,7 +37,7 @@ public class Torchling extends mage.sets.venservskoth.Torchling {
 
     public Torchling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "PLC";
     }
 

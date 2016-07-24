@@ -38,7 +38,7 @@ public class OonaQueenOfTheFae extends mage.sets.shadowmoor.OonaQueenOfTheFae {
 
     public OonaQueenOfTheFae(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "V11";
         this.rarity = Rarity.MYTHIC;
     }

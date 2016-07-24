@@ -38,7 +38,7 @@ public class BartelRuneaxe extends mage.sets.legends.BartelRuneaxe {
 
     public BartelRuneaxe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -38,7 +38,7 @@ public class WaterfrontBouncer extends mage.sets.mercadianmasques.WaterfrontBoun
 
     public WaterfrontBouncer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

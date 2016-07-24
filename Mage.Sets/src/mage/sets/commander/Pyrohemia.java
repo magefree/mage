@@ -37,7 +37,7 @@ public class Pyrohemia extends mage.sets.planarchaos.Pyrohemia {
 
     public Pyrohemia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "CMD";
     }
 

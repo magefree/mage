@@ -38,7 +38,7 @@ public class GlistenerElf extends mage.sets.newphyrexia.GlistenerElf {
 
     public GlistenerElf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

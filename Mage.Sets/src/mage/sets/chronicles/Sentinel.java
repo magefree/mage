@@ -37,7 +37,7 @@ public class Sentinel extends mage.sets.legends.Sentinel {
 
     public Sentinel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 281;
+        this.cardNumber = "281";
         this.expansionSetCode = "CHR";
     }
 

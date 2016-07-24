@@ -37,7 +37,7 @@ public class SabretoothTiger extends mage.sets.fifthedition.SabretoothTiger {
 
     public SabretoothTiger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 203;
+        this.cardNumber = "203";
         this.expansionSetCode = "6ED";
     }
 

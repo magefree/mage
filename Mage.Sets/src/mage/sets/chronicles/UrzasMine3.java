@@ -37,7 +37,7 @@ public class UrzasMine3 extends UrzasMine1 {
 
     public UrzasMine3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
     }
 
     public UrzasMine3(final UrzasMine3 card) {

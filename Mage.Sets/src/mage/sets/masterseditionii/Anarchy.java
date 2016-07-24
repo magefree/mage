@@ -38,7 +38,7 @@ public class Anarchy extends mage.sets.iceage.Anarchy {
 
     public Anarchy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.RARE;
     }

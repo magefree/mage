@@ -39,7 +39,7 @@ public class BattleSquadron extends mage.sets.mercadianmasques.BattleSquadron {
 
     public BattleSquadron(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

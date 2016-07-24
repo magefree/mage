@@ -37,7 +37,7 @@ public class SpurnmageAdvocate extends mage.sets.commander.SpurnmageAdvocate {
 
     public SpurnmageAdvocate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "JUD";
     }
 

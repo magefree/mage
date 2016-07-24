@@ -37,7 +37,7 @@ public class ThaliaGuardianOfThraben extends mage.sets.darkascension.ThaliaGuard
 
     public ThaliaGuardianOfThraben(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "WMCQ";
     }
 

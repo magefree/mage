@@ -37,7 +37,7 @@ public class KiraGreatGlassSpinner extends mage.sets.betrayersofkamigawa.KiraGre
 
     public KiraGreatGlassSpinner(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "MMA";
     }
 

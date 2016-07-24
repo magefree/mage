@@ -38,7 +38,7 @@ public class DrainLife extends mage.sets.limitedalpha.DrainLife {
 
     public DrainLife(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

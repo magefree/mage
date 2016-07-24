@@ -38,7 +38,7 @@ public class StreetWraith extends mage.sets.futuresight.StreetWraith {
 
     public StreetWraith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.COMMON;
     }

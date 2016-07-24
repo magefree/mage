@@ -37,7 +37,7 @@ public class Languish extends mage.sets.magicorigins.Languish {
 
     public Languish(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "MGDC";
     }
 

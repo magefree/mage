@@ -38,7 +38,7 @@ public class RiverMerfolk extends mage.sets.mastersedition.RiverMerfolk {
 
     public RiverMerfolk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "FEM";
         this.rarity = Rarity.RARE;
     }

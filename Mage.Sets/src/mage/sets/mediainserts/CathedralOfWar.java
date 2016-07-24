@@ -6,7 +6,7 @@ public class CathedralOfWar extends mage.sets.magic2013.CathedralOfWar {
     
     public CathedralOfWar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "MBP";
     }
     

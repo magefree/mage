@@ -37,7 +37,7 @@ public class EvilEyeOfOrmsByGore extends mage.sets.fifthedition.EvilEyeOfOrmsByG
 
     public EvilEyeOfOrmsByGore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "LEG";
     }
 

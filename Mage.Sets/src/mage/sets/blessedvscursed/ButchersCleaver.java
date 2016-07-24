@@ -37,7 +37,7 @@ public class ButchersCleaver extends mage.sets.innistrad.ButchersCleaver {
 
     public ButchersCleaver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "DDQ";
     }
 

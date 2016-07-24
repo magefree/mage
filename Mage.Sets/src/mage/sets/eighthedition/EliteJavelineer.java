@@ -38,7 +38,7 @@ public class EliteJavelineer extends mage.sets.tempest.EliteJavelineer {
 
     public EliteJavelineer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class DragonMage extends mage.sets.scourge.DragonMage {
 
     public DragonMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "C15";
     }
 

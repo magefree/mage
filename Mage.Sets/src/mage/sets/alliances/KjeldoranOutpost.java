@@ -37,7 +37,7 @@ public class KjeldoranOutpost extends mage.sets.vintagemasters.KjeldoranOutpost 
 
     public KjeldoranOutpost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "ALL";
     }
 

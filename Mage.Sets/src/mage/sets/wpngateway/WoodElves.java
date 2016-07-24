@@ -38,7 +38,7 @@ public class WoodElves extends mage.sets.ninthedition.WoodElves {
 
     public WoodElves(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

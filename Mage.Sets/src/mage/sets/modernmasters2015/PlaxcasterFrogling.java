@@ -37,7 +37,7 @@ public class PlaxcasterFrogling extends mage.sets.dissension.PlaxcasterFrogling 
 
     public PlaxcasterFrogling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "MM2";
     }
 

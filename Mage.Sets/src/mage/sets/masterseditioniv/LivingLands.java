@@ -37,7 +37,7 @@ public class LivingLands extends mage.sets.limitedalpha.LivingLands {
 
     public LivingLands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "ME4";
     }
 

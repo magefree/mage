@@ -37,7 +37,7 @@ public class PuppeteerClique extends mage.sets.shadowmoor.PuppeteerClique {
 
     public PuppeteerClique(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "MM2";
     }
 

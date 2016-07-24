@@ -37,7 +37,7 @@ public class Gelectrode extends mage.sets.guildpact.Gelectrode {
 
     public Gelectrode(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "DDJ";
     }
 

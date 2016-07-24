@@ -37,7 +37,7 @@ public class HallOfTriumph extends mage.sets.journeyintonyx.HallOfTriumph {
 
     public HallOfTriumph(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "MGDC";
     }
 

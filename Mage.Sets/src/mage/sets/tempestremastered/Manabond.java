@@ -37,7 +37,7 @@ public class Manabond extends mage.sets.exodus.Manabond {
 
     public Manabond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "TPR";
     }
 

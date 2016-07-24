@@ -37,7 +37,7 @@ public class PhyrexianRevoker extends mage.sets.mirrodinbesieged.PhyrexianRevoke
 
     public PhyrexianRevoker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 225;
+        this.cardNumber = "225";
         this.expansionSetCode = "M15";
     }
 

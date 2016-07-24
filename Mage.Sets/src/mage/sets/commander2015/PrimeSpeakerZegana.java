@@ -37,7 +37,7 @@ public class PrimeSpeakerZegana extends mage.sets.gatecrash.PrimeSpeakerZegana {
 
     public PrimeSpeakerZegana(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 230;
+        this.cardNumber = "230";
         this.expansionSetCode = "C15";
     }
 

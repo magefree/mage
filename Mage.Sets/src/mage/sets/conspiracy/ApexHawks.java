@@ -37,7 +37,7 @@ public class ApexHawks extends mage.sets.worldwake.ApexHawks {
 
     public ApexHawks(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "CNS";
     }
 

@@ -38,7 +38,7 @@ public class ResoluteArchangel extends mage.sets.magic2015.ResoluteArchangel {
 
     public ResoluteArchangel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

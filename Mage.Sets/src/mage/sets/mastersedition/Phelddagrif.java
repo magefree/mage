@@ -37,7 +37,7 @@ public class Phelddagrif extends mage.sets.alliances.Phelddagrif {
 
     public Phelddagrif(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "MED";
     }
 

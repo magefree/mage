@@ -38,7 +38,7 @@ public class DryadArbor extends mage.sets.futuresight.DryadArbor {
 
     public DryadArbor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

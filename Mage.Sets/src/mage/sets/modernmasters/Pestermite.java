@@ -37,7 +37,7 @@ public class Pestermite extends mage.sets.lorwyn.Pestermite {
 
     public Pestermite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "MMA";
     }
 

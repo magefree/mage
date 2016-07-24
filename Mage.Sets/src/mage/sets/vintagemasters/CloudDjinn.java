@@ -37,7 +37,7 @@ public class CloudDjinn extends mage.sets.weatherlight.CloudDjinn {
 
     public CloudDjinn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "VMA";
     }
 

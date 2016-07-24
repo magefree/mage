@@ -37,7 +37,7 @@ public class Gloomwidow extends mage.sets.avacynrestored.Gloomwidow {
 
     public Gloomwidow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "SHM";
     }
 

@@ -38,7 +38,7 @@ public class TwoHeadedGiantOfForiys extends mage.sets.masterseditioniv.TwoHeaded
 
     public TwoHeadedGiantOfForiys(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 180;
+        this.cardNumber = "180";
         this.expansionSetCode = "LEA";
         this.rarity = Rarity.RARE;
     }

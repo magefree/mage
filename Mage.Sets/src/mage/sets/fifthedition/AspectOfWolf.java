@@ -38,7 +38,7 @@ public class AspectOfWolf extends mage.sets.limitedalpha.AspectOfWolf {
 
     public AspectOfWolf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "5ED";
     }
 

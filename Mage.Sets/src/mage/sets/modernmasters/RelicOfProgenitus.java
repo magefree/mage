@@ -38,7 +38,7 @@ public class RelicOfProgenitus extends mage.sets.shardsofalara.RelicOfProgenitus
 
     public RelicOfProgenitus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 213;
+        this.cardNumber = "213";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.UNCOMMON;
     }

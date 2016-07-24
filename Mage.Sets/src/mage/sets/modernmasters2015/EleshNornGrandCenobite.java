@@ -37,7 +37,7 @@ public class EleshNornGrandCenobite extends mage.sets.newphyrexia.EleshNornGrand
 
     public EleshNornGrandCenobite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "MM2";
     }
 

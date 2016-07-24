@@ -37,7 +37,7 @@ public class ZuranSpellcaster extends mage.sets.iceage.ZuranSpellcaster {
 
     public ZuranSpellcaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "ME2";
     }
 

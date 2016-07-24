@@ -38,7 +38,7 @@ public class Nekrataal extends mage.sets.ninthedition.Nekrataal {
 
     public Nekrataal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "VIS";
     }
 

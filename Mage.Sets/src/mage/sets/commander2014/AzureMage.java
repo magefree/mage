@@ -37,7 +37,7 @@ public class AzureMage extends mage.sets.magic2012.AzureMage {
 
     public AzureMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = "98";
         this.expansionSetCode = "C14";
     }
 

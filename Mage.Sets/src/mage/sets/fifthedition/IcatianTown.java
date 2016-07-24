@@ -37,7 +37,7 @@ public class IcatianTown extends mage.sets.fallenempires.IcatianTown {
 
     public IcatianTown(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 314;
+        this.cardNumber = "314";
         this.expansionSetCode = "5ED";
     }
 

@@ -38,7 +38,7 @@ public class GrapeshotCatapult extends mage.sets.seventhedition.GrapeshotCatapul
 
     public GrapeshotCatapult(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.COMMON;
     }

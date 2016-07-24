@@ -37,7 +37,7 @@ public class DreadReaper extends mage.sets.starter1999.DreadReaper {
 
     public DreadReaper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "POR";
     }
 

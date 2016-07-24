@@ -37,7 +37,7 @@ public class SilklashSpider extends mage.sets.onslaught.SilklashSpider {
 
     public SilklashSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "C14";
     }
 

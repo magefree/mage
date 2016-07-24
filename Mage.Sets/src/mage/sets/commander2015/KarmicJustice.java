@@ -37,7 +37,7 @@ public class KarmicJustice extends mage.sets.odyssey.KarmicJustice {
 
     public KarmicJustice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "C15";
     }
 

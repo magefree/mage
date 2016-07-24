@@ -37,7 +37,7 @@ public class AbbeyGargoyles extends mage.sets.fifthedition.AbbeyGargoyles {
 
     public AbbeyGargoyles(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "HML";
     }
 

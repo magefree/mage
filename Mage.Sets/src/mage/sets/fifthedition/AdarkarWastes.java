@@ -37,7 +37,7 @@ public class AdarkarWastes extends mage.sets.tenthedition.AdarkarWastes {
 
     public AdarkarWastes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 410;
+        this.cardNumber = "410";
         this.expansionSetCode = "5ED";
     }
 

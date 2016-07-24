@@ -37,7 +37,7 @@ public class LightkeeperOfEmeria extends mage.sets.worldwake.LightkeeperOfEmeria
 
     public LightkeeperOfEmeria(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "CMD";
     }
 

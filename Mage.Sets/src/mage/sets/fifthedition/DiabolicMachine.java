@@ -37,7 +37,7 @@ public class DiabolicMachine extends mage.sets.fourthedition.DiabolicMachine {
 
     public DiabolicMachine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 363;
+        this.cardNumber = "363";
         this.expansionSetCode = "5ED";
     }
 

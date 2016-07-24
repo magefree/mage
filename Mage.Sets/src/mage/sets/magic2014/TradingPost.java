@@ -37,7 +37,7 @@ public class TradingPost extends mage.sets.magic2013.TradingPost {
 
     public TradingPost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 225;
+        this.cardNumber = "225";
         this.expansionSetCode = "M14";
     }
 

@@ -37,7 +37,7 @@ public class VithianStinger extends mage.sets.shardsofalara.VithianStinger {
 
     public VithianStinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "DDK";
     }
 

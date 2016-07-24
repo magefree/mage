@@ -37,7 +37,7 @@ public class TerraStomper extends mage.sets.zendikar.TerraStomper {
 
     public TerraStomper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 288;
+        this.cardNumber = "288";
         this.expansionSetCode = "ORI";
     }
 

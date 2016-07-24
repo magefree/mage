@@ -37,7 +37,7 @@ public class TalruumMinotaur extends mage.sets.mirage.TalruumMinotaur {
 
     public TalruumMinotaur(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 210;
+        this.cardNumber = "210";
         this.expansionSetCode = "6ED";
     }
 

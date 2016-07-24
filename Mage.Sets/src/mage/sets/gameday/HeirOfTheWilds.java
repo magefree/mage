@@ -37,7 +37,7 @@ public class HeirOfTheWilds extends mage.sets.khansoftarkir.HeirOfTheWilds {
 
     public HeirOfTheWilds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "MGDC";
     }
 

@@ -37,7 +37,7 @@ public class VentSentinel extends mage.sets.riseoftheeldrazi.VentSentinel {
 
     public VentSentinel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "CNS";
     }
 

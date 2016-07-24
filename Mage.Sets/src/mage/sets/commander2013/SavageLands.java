@@ -37,7 +37,7 @@ public class SavageLands extends mage.sets.shardsofalara.SavageLands {
 
     public SavageLands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 317;
+        this.cardNumber = "317";
         this.expansionSetCode = "C13";
     }
 

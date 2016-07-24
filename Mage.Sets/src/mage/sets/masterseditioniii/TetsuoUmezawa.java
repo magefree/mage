@@ -37,7 +37,7 @@ public class TetsuoUmezawa extends mage.sets.legends.TetsuoUmezawa {
 
     public TetsuoUmezawa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "ME3";
     }
 

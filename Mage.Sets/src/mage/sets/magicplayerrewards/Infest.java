@@ -38,7 +38,7 @@ public class Infest extends mage.sets.shardsofalara.Infest {
 
     public Infest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -38,7 +38,7 @@ public class TangleWire extends mage.sets.nemesis.TangleWire {
 
     public TangleWire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "V13";
         this.rarity = Rarity.MYTHIC;
     }

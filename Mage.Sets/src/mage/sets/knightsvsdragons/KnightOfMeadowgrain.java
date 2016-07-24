@@ -37,7 +37,7 @@ public class KnightOfMeadowgrain extends mage.sets.lorwyn.KnightOfMeadowgrain {
 
     public KnightOfMeadowgrain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "DDG";
     }
 

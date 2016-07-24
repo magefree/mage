@@ -37,7 +37,7 @@ public class SilverWyvern extends mage.sets.tempestremastered.SilverWyvern {
 
     public SilverWyvern(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "STH";
     }
 

@@ -38,7 +38,7 @@ public class DauthiMercenary extends mage.sets.tempest.DauthiMercenary {
 
     public DauthiMercenary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

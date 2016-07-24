@@ -37,7 +37,7 @@ public class KilnFiend extends mage.sets.riseoftheeldrazi.KilnFiend {
 
     public KilnFiend(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "DDJ";
     }
 

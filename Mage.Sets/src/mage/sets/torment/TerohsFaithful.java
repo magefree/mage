@@ -37,7 +37,7 @@ public class TerohsFaithful extends mage.sets.vintagemasters.TerohsFaithful {
 
     public TerohsFaithful(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "TOR";
     }
 

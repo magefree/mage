@@ -37,7 +37,7 @@ public class MassCalcify extends mage.sets.shadowmoor.MassCalcify {
 
     public MassCalcify(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "M15";
     }
 

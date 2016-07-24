@@ -37,7 +37,7 @@ public class PhantasmalBear extends mage.sets.magic2012.PhantasmalBear {
 
     public PhantasmalBear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "DDM";
     }
 

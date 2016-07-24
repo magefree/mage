@@ -38,7 +38,7 @@ public class KeldonChampion extends mage.sets.planechase.KeldonChampion {
 
     public KeldonChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "EMA";
     }
 

@@ -37,7 +37,7 @@ public class PyreCharger extends mage.sets.shadowmoor.PyreCharger {
 
     public PyreCharger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "DD2";
     }
 

@@ -37,7 +37,7 @@ public class TempleGarden extends mage.sets.ravnica.TempleGarden {
 
     public TempleGarden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 248;
+        this.cardNumber = "248";
         this.expansionSetCode = "RTR";
     }
 

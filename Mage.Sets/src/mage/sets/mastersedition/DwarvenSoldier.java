@@ -37,7 +37,7 @@ public class DwarvenSoldier extends mage.sets.fallenempires.DwarvenSoldier1 {
 
     public DwarvenSoldier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "MED";
     }
 

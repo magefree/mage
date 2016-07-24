@@ -37,7 +37,7 @@ public class MindSpring extends mage.sets.magic2010.MindSpring {
 
     public MindSpring(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "MOR";
     }
 

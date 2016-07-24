@@ -37,7 +37,7 @@ public class PhantomNantuko extends mage.sets.commander2013.PhantomNantuko {
 
     public PhantomNantuko(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "JUD";
     }
 

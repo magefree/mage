@@ -37,7 +37,7 @@ public class HornetQueen extends mage.sets.commander.HornetQueen {
 
     public HornetQueen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "M15";
     }
 

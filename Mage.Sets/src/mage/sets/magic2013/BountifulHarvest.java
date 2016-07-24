@@ -37,7 +37,7 @@ public class BountifulHarvest extends mage.sets.magic2012.BountifulHarvest {
 
     public BountifulHarvest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "M13";
     }
 

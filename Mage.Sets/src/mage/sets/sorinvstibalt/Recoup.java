@@ -37,7 +37,7 @@ public class Recoup extends mage.sets.odyssey.Recoup {
 
     public Recoup(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "DDK";
     }
 

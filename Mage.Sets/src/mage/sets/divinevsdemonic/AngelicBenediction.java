@@ -37,7 +37,7 @@ public class AngelicBenediction extends mage.sets.shardsofalara.AngelicBenedicti
 
     public AngelicBenediction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "DDC";
     }
 

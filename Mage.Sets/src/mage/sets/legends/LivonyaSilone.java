@@ -38,7 +38,7 @@ public class LivonyaSilone extends mage.sets.masterseditioniii.LivonyaSilone {
 
     public LivonyaSilone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 282;
+        this.cardNumber = "282";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.RARE;
     }

@@ -38,7 +38,7 @@ public class ShieldSphere extends mage.sets.alliances.ShieldSphere {
 
     public ShieldSphere(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.COMMON;
     }

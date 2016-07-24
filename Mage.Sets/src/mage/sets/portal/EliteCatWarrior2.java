@@ -37,7 +37,7 @@ public class EliteCatWarrior2 extends mage.sets.portal.EliteCatWarrior1 {
 
     public EliteCatWarrior2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
     }
 
     public EliteCatWarrior2(final EliteCatWarrior2 card) {

@@ -37,7 +37,7 @@ public class ThievingSprite extends mage.sets.modernmasters.ThievingSprite {
 
     public ThievingSprite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "LRW";
     }
 

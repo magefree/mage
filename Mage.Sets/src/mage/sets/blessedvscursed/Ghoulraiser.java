@@ -37,7 +37,7 @@ public class Ghoulraiser extends mage.sets.innistrad.Ghoulraiser {
 
     public Ghoulraiser(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "DDQ";
     }
 

@@ -25,52 +25,27 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planeshift;
+package mage.sets.battleforzendikar;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageEachOtherEffect;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LoneFox
+ * @author fwannmacher
  */
-public class TahngarthTalruumHero extends CardImpl {
+public class Island10 extends mage.cards.basiclands.Island {
 
-    public TahngarthTalruumHero(UUID ownerId) {
-        super(ownerId, 74, "Tahngarth, Talruum Hero", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "PLS";
-        this.supertype.add("Legendary");
-        this.subtype.add("Minotaur");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-        // {1}{R}, {tap}: Tahngarth, Talruum Hero deals damage equal to its power to target creature. That creature deals damage equal to its power to Tahngarth.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEachOtherEffect(), new ManaCostsImpl("{1}{R}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    public Island10(UUID ownerId) {
+        super(ownerId, "259b");
+        this.expansionSetCode = "BFZ";
     }
 
-    public TahngarthTalruumHero(final TahngarthTalruumHero card) {
+    public Island10(final Island10 card) {
         super(card);
     }
 
     @Override
-    public TahngarthTalruumHero copy() {
-        return new TahngarthTalruumHero(this);
+    public Island10 copy() {
+        return new Island10(this);
     }
 }

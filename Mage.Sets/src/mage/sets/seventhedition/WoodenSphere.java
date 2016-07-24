@@ -38,7 +38,7 @@ public class WoodenSphere extends mage.sets.limitedalpha.WoodenSphere {
 
     public WoodenSphere(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 324;
+        this.cardNumber = "324";
         this.expansionSetCode = "7ED";
     }
 

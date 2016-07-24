@@ -37,7 +37,7 @@ public class FireDiamond extends mage.sets.seventhedition.FireDiamond {
 
     public FireDiamond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 284;
+        this.cardNumber = "284";
         this.expansionSetCode = "6ED";
     }
 

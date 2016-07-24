@@ -37,7 +37,7 @@ public class UrbanEvolution extends mage.sets.gatecrash.UrbanEvolution {
 
     public UrbanEvolution(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "DDO";
     }
 

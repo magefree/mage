@@ -37,7 +37,7 @@ public class EndlessCockroaches extends mage.sets.commander2013.EndlessCockroach
 
     public EndlessCockroaches(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "POR";
     }
 

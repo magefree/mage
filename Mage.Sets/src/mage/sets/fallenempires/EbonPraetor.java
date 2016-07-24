@@ -37,7 +37,7 @@ public class EbonPraetor extends mage.sets.masterseditionii.EbonPraetor {
 
     public EbonPraetor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "FEM";
     }
 

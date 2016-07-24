@@ -39,7 +39,7 @@ public class DesperateRavings extends mage.sets.innistrad.DesperateRavings {
 
     public DesperateRavings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

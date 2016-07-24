@@ -38,7 +38,7 @@ public class SoldeviDigger extends mage.sets.alliances.SoldeviDigger {
 
     public SoldeviDigger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class GoblinGlider extends mage.sets.seventhedition.GoblinGlider {
 
     public GoblinGlider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 189;
+        this.cardNumber = "189";
         this.expansionSetCode = "8ED";
     }
 

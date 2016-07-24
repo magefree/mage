@@ -38,7 +38,7 @@ public class BreathOfLife extends mage.sets.starter2000.BreathOfLife {
 
     public BreathOfLife(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "PO2";
         this.rarity = Rarity.COMMON;
     }

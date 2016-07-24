@@ -37,7 +37,7 @@ public class ThoughtScour extends mage.sets.darkascension.ThoughtScour {
 
     public ThoughtScour(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "DDM";
     }
 

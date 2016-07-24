@@ -38,7 +38,7 @@ public class BloodfellCaves extends mage.sets.khansoftarkir.BloodfellCaves {
 
     public BloodfellCaves(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 236;
+        this.cardNumber = "236";
         this.expansionSetCode = "EMA";
     }
 

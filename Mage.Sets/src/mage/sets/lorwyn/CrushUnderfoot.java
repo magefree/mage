@@ -38,7 +38,7 @@ public class CrushUnderfoot extends mage.sets.modernmasters.CrushUnderfoot {
 
     public CrushUnderfoot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "LRW";
         this.rarity = Rarity.UNCOMMON;
     }

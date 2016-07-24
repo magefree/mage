@@ -37,7 +37,7 @@ public class SaprolingBurst extends mage.sets.vintagemasters.SaprolingBurst {
 
     public SaprolingBurst(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "NEM";
     }
 

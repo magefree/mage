@@ -37,7 +37,7 @@ public class ContaminatedBond extends mage.sets.ninthedition.ContaminatedBond {
 
     public ContaminatedBond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "10E";
     }
 

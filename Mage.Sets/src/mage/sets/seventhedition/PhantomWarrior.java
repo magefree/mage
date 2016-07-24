@@ -37,7 +37,7 @@ public class PhantomWarrior extends mage.sets.magic2010.PhantomWarrior {
 
     public PhantomWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "7ED";
     }
 

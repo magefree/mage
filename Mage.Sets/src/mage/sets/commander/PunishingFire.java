@@ -37,7 +37,7 @@ public class PunishingFire extends mage.sets.zendikar.PunishingFire {
 
     public PunishingFire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "CMD";
     }
 

@@ -37,7 +37,7 @@ public class Abundance extends mage.sets.tenthedition.Abundance {
 
     public Abundance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 229;
+        this.cardNumber = "229";
         this.expansionSetCode = "USG";
     }
 

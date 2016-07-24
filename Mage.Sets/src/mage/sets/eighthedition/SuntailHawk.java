@@ -37,7 +37,7 @@ public class SuntailHawk extends mage.sets.tenthedition.SuntailHawk {
 
     public SuntailHawk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "8ED";
     }
 

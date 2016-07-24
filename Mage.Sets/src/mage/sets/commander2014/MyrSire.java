@@ -37,7 +37,7 @@ public class MyrSire extends mage.sets.mirrodinbesieged.MyrSire {
 
     public MyrSire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 256;
+        this.cardNumber = "256";
         this.expansionSetCode = "C14";
     }
 

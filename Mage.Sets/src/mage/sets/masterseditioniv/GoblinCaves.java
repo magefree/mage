@@ -37,7 +37,7 @@ public class GoblinCaves extends mage.sets.thedark.GoblinCaves {
 
     public GoblinCaves(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "ME4";
     }
 

@@ -38,7 +38,7 @@ public class RukhEgg extends mage.sets.arabiannights.RukhEgg1 {
 
     public RukhEgg(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "9ED";
         this.rarity = Rarity.RARE;
     }

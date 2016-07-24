@@ -37,7 +37,7 @@ public class TranquilGrove extends mage.sets.weatherlight.TranquilGrove {
 
     public TranquilGrove(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 258;
+        this.cardNumber = "258";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class SpiteMalice extends mage.sets.invasion.SpiteMalice {
 
     public SpiteMalice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "DDH";
     }
 

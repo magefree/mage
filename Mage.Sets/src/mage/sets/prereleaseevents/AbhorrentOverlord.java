@@ -38,7 +38,7 @@ public class AbhorrentOverlord extends mage.sets.theros.AbhorrentOverlord {
 
     public AbhorrentOverlord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

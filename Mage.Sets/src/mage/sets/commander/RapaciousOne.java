@@ -37,7 +37,7 @@ public class RapaciousOne extends mage.sets.riseoftheeldrazi.RapaciousOne {
 
     public RapaciousOne(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "CMD";
     }
 

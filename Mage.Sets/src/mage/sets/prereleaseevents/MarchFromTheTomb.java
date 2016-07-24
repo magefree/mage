@@ -37,7 +37,7 @@ public class MarchFromTheTomb extends mage.sets.battleforzendikar.MarchFromTheTo
 
     public MarchFromTheTomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 273;
+        this.cardNumber = "273";
         this.expansionSetCode = "PTC";
     }
 

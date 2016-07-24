@@ -6,7 +6,7 @@ public class SilverbladePaladin extends mage.sets.commander2014.SilverbladePalad
     
     public SilverbladePaladin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "MBP";
     }
     

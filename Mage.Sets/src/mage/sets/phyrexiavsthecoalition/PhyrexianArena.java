@@ -37,7 +37,7 @@ public class PhyrexianArena extends mage.sets.apocalypse.PhyrexianArena {
 
     public PhyrexianArena(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "DDE";
     }
 

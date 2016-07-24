@@ -37,7 +37,7 @@ public class SurgicalExtraction extends mage.sets.newphyrexia.SurgicalExtraction
 
     public SurgicalExtraction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "MM2";
     }
 

@@ -38,7 +38,7 @@ public class StormscapeFamiliar extends mage.sets.timeshifted.StormscapeFamiliar
 
     public StormscapeFamiliar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "PLS";
         this.rarity = Rarity.COMMON;
     }

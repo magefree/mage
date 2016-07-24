@@ -37,7 +37,7 @@ public class LilianaOfTheVeil extends mage.sets.innistrad.LilianaOfTheVeil {
 
     public LilianaOfTheVeil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "WMCQ";
     }
 

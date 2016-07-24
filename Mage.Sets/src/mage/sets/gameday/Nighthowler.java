@@ -37,7 +37,7 @@ public class Nighthowler extends mage.sets.theros.Nighthowler {
 
     public Nighthowler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "MGDC";
     }
 

@@ -38,7 +38,7 @@ public class DauthiSlayer extends mage.sets.tempest.DauthiSlayer {
 
     public DauthiSlayer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "ARENA";
         this.rarity = Rarity.SPECIAL;
     }

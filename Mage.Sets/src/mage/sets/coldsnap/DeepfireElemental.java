@@ -37,7 +37,7 @@ public class DeepfireElemental extends mage.sets.commander2013.DeepfireElemental
 
     public DeepfireElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "CSP";
     }
 

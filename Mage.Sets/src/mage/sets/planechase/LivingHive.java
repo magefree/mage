@@ -37,7 +37,7 @@ public class LivingHive extends mage.sets.mirrodin.LivingHive {
 
     public LivingHive(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "HOP";
     }
 

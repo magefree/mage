@@ -37,7 +37,7 @@ public class ShockTroops extends mage.sets.mercadianmasques.ShockTroops {
 
     public ShockTroops(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = "223";
         this.expansionSetCode = "8ED";
     }
 

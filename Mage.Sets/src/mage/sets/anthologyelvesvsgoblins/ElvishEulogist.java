@@ -37,7 +37,7 @@ public class ElvishEulogist extends mage.sets.lorwyn.ElvishEulogist {
 
     public ElvishEulogist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "DD3EVG";
     }
 

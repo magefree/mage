@@ -37,7 +37,7 @@ public class Rebuke extends mage.sets.innistrad.Rebuke {
 
     public Rebuke(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "DDQ";
     }
 

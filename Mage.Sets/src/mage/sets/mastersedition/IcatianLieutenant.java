@@ -38,7 +38,7 @@ public class IcatianLieutenant extends mage.sets.fallenempires.IcatianLieutenant
 
     public IcatianLieutenant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.COMMON;
     }

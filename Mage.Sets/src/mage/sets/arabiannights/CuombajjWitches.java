@@ -38,7 +38,7 @@ public class CuombajjWitches extends mage.sets.mastersedition.CuombajjWitches {
 
     public CuombajjWitches(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "ARN";
     }
 

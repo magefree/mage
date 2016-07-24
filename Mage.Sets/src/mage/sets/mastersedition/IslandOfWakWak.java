@@ -37,7 +37,7 @@ public class IslandOfWakWak extends mage.sets.arabiannights.IslandOfWakWak {
 
     public IslandOfWakWak(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 176;
+        this.cardNumber = "176";
         this.expansionSetCode = "MED";
     }
 

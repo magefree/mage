@@ -37,7 +37,7 @@ public class PanicSpellbomb extends mage.sets.scarsofmirrodin.PanicSpellbomb {
 
     public PanicSpellbomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 259;
+        this.cardNumber = "259";
         this.expansionSetCode = "C14";
     }
 

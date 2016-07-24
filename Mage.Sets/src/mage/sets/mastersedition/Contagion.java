@@ -38,7 +38,7 @@ public class Contagion extends mage.sets.alliances.Contagion {
 
     public Contagion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.RARE;
     }

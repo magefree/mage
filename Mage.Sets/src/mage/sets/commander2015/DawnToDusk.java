@@ -37,7 +37,7 @@ public class DawnToDusk extends mage.sets.bornofthegods.DawnToDusk {
 
     public DawnToDusk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "C15";
     }
 

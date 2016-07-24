@@ -37,7 +37,7 @@ public class DustStalker extends mage.sets.battleforzendikar.DustStalker {
 
     public DustStalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 257;
+        this.cardNumber = "257";
         this.expansionSetCode = "PTC";
     }
 

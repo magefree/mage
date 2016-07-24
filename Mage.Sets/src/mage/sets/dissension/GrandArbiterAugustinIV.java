@@ -37,7 +37,7 @@ public class GrandArbiterAugustinIV extends mage.sets.modernmasters.GrandArbiter
 
     public GrandArbiterAugustinIV(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "DIS";
     }
 

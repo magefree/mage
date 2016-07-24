@@ -37,7 +37,7 @@ public class PresenceOfGond extends mage.sets.commander2013.PresenceOfGond {
 
     public PresenceOfGond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "SHM";
     }
 

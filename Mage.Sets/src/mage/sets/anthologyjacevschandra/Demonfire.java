@@ -37,7 +37,7 @@ public class Demonfire extends mage.sets.dissension.Demonfire {
 
     public Demonfire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "DD3JVC";
     }
 

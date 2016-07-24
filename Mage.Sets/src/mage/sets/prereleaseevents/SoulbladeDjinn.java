@@ -37,7 +37,7 @@ public class SoulbladeDjinn extends mage.sets.magicorigins.SoulbladeDjinn {
 
     public SoulbladeDjinn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class Ophidian extends mage.sets.vintagemasters.Ophidian {
 
     public Ophidian(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "WTH";
     }
 

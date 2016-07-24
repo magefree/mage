@@ -38,7 +38,7 @@ public class Blessing extends mage.sets.fourthedition.Blessing {
 
     public Blessing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "M14";
         this.rarity = Rarity.UNCOMMON;
     }

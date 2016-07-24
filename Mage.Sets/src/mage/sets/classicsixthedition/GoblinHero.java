@@ -37,7 +37,7 @@ public class GoblinHero extends mage.sets.fifthedition.GoblinHero {
 
     public GoblinHero(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "6ED";
     }
 

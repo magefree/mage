@@ -37,7 +37,7 @@ public class Lobotomy extends mage.sets.tempest.Lobotomy {
 
     public Lobotomy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 255;
+        this.cardNumber = "255";
         this.expansionSetCode = "INV";
     }
 

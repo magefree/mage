@@ -37,7 +37,7 @@ public class CobbledWings extends mage.sets.innistrad.CobbledWings {
 
     public CobbledWings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "DDQ";
     }
 

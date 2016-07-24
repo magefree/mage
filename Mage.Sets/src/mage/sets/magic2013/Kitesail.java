@@ -38,7 +38,7 @@ public class Kitesail extends mage.sets.worldwake.Kitesail {
 
     public Kitesail(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "M13";
         this.rarity = Rarity.UNCOMMON;
     }

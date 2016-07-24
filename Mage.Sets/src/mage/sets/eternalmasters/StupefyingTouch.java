@@ -39,7 +39,7 @@ public class StupefyingTouch extends mage.sets.torment.StupefyingTouch {
 
     public StupefyingTouch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

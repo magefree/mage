@@ -38,7 +38,7 @@ public class ElvenRiders extends mage.sets.onslaught.ElvenRiders {
 
     public ElvenRiders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.RARE;
     }

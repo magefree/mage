@@ -37,7 +37,7 @@ public class ConqueringManticore extends mage.sets.riseoftheeldrazi.ConqueringMa
 
     public ConqueringManticore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "DDL";
     }
 

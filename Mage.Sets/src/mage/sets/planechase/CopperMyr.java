@@ -38,7 +38,7 @@ public class CopperMyr extends mage.sets.mirrodin.CopperMyr {
 
     public CopperMyr (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "HOP";
     }
 

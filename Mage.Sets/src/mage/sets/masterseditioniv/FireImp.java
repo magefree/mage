@@ -38,7 +38,7 @@ public class FireImp extends mage.sets.portal.FireImp {
 
     public FireImp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "ME4";
     }
 

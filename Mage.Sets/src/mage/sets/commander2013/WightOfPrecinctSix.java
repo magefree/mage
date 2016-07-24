@@ -37,7 +37,7 @@ public class WightOfPrecinctSix extends mage.sets.gatecrash.WightOfPrecinctSix {
 
     public WightOfPrecinctSix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "C13";
     }
 

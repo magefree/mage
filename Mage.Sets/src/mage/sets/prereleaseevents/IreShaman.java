@@ -37,7 +37,7 @@ public class IreShaman extends mage.sets.dragonsoftarkir.IreShaman {
 
     public IreShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 180;
+        this.cardNumber = "180";
         this.expansionSetCode = "PTC";
     }
 

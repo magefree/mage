@@ -37,7 +37,7 @@ public class WhirlpoolWhelm extends mage.sets.commander.WhirlpoolWhelm {
 
     public WhirlpoolWhelm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "LRW";
     }
 

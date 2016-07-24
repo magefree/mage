@@ -37,7 +37,7 @@ public class FesterhideBoar extends mage.sets.innistrad.FesterhideBoar {
 
     public FesterhideBoar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "DDM";
     }
 

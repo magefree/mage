@@ -37,7 +37,7 @@ public class Whirlwind extends mage.sets.commander2014.Whirlwind {
 
     public Whirlwind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 283;
+        this.cardNumber = "283";
         this.expansionSetCode = "USG";
     }
 

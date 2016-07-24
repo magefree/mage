@@ -37,7 +37,7 @@ public class PreeminentCaptain extends mage.sets.morningtide.PreeminentCaptain {
 
     public PreeminentCaptain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "M15";
     }
 

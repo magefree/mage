@@ -38,7 +38,7 @@ public class OrderOfTheWhiteShield extends mage.sets.iceage.OrderOfTheWhiteShiel
 
     public OrderOfTheWhiteShield(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "ME2";
     }
 

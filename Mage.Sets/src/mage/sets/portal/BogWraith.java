@@ -37,7 +37,7 @@ public class BogWraith extends mage.sets.magic2010.BogWraith {
 
     public BogWraith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "POR";
     }
 

@@ -37,7 +37,7 @@ public class AkoumFirebird extends mage.sets.battleforzendikar.AkoumFirebird {
 
     public AkoumFirebird(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 238;
+        this.cardNumber = "238";
         this.expansionSetCode = "PTC";
     }
 

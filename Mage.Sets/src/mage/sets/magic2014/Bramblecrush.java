@@ -37,7 +37,7 @@ public class Bramblecrush extends mage.sets.innistrad.Bramblecrush {
 
     public Bramblecrush(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "M14";
     }
 

@@ -37,7 +37,7 @@ public class WornPowerstone extends mage.sets.urzassaga.WornPowerstone {
 
     public WornPowerstone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 275;
+        this.cardNumber = "275";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class Griptide extends mage.sets.darkascension.Griptide {
 
     public Griptide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "DDM";
     }
 

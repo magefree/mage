@@ -39,7 +39,7 @@ public class StaffOfTheSunMagus extends mage.sets.magic2014.StaffOfTheSunMagus {
     public StaffOfTheSunMagus(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 235;
+        this.cardNumber = "235";
         this.expansionSetCode = "M15";
     }
 

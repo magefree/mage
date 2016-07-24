@@ -37,7 +37,7 @@ public class MagmaJet extends mage.sets.fifthdawn.MagmaJet {
 
     public MagmaJet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "FNMP";
     }
 

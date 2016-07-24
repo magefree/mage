@@ -37,7 +37,7 @@ public class CrystalChimes extends mage.sets.commander2015.CrystalChimes {
 
     public CrystalChimes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 292;
+        this.cardNumber = "292";
         this.expansionSetCode = "USG";
     }
 

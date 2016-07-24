@@ -37,7 +37,7 @@ public class Hecatomb extends mage.sets.iceage.Hecatomb {
 
     public Hecatomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "6ED";
     }
 

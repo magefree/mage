@@ -37,7 +37,7 @@ public class DoorToNothingness extends mage.sets.planechase.DoorToNothingness {
 
     public DoorToNothingness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "5DN";
     }
 

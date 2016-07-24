@@ -37,7 +37,7 @@ public class ElusiveTormentor extends mage.sets.shadowsoverinnistrad.ElusiveTorm
 
     public ElusiveTormentor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "MBP";
     }
 

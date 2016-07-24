@@ -37,7 +37,7 @@ public class SandsteppeMastodon extends mage.sets.fatereforged.SandsteppeMastodo
 
     public SandsteppeMastodon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "MLP";
     }
 

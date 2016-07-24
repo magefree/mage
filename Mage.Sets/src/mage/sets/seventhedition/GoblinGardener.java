@@ -38,7 +38,7 @@ public class GoblinGardener extends mage.sets.urzasdestiny.GoblinGardener {
 
     public GoblinGardener(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "7ED";
     }
 

@@ -37,7 +37,7 @@ public class GrimBackwoods extends mage.sets.darkascension.GrimBackwoods {
 
     public GrimBackwoods(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 288;
+        this.cardNumber = "288";
         this.expansionSetCode = "C15";
     }
 

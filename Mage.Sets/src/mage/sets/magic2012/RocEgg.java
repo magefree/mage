@@ -37,7 +37,7 @@ public class RocEgg extends mage.sets.magic2011.RocEgg {
 
     public RocEgg(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "M12";
     }
 

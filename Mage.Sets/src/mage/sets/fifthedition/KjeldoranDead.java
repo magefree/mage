@@ -37,7 +37,7 @@ public class KjeldoranDead extends mage.sets.iceage.KjeldoranDead {
 
     public KjeldoranDead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "5ED";
     }
 

@@ -38,7 +38,7 @@ public class FlyingCraneTechnique extends mage.sets.khansoftarkir.FlyingCraneTec
 
     public FlyingCraneTechnique(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class NoyanDarRoilShaper extends mage.sets.battleforzendikar.NoyanDarRoil
 
     public NoyanDarRoilShaper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
+        this.cardNumber = "276";
         this.expansionSetCode = "PTC";
     }
 

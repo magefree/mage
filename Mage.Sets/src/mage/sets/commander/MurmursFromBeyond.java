@@ -37,7 +37,7 @@ public class MurmursFromBeyond extends mage.sets.saviorsofkamigawa.MurmursFromBe
 
     public MurmursFromBeyond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "CMD";
     }
 

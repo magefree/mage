@@ -38,7 +38,7 @@ public class GrimHaruspex extends mage.sets.khansoftarkir.GrimHaruspex {
 
     public GrimHaruspex(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

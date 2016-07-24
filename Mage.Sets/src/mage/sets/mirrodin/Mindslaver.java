@@ -38,7 +38,7 @@ public class Mindslaver extends mage.sets.scarsofmirrodin.Mindslaver {
 
     public Mindslaver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 206;
+        this.cardNumber = "206";
         this.expansionSetCode = "MRD";
         this.rarity = Rarity.RARE;
     }

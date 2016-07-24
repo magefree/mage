@@ -38,7 +38,7 @@ public class DromokaTheEternal extends mage.sets.fatereforged.DromokaTheEternal 
 
     public DromokaTheEternal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

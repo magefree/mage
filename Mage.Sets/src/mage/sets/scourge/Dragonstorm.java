@@ -38,7 +38,7 @@ public class Dragonstorm extends mage.sets.timeshifted.Dragonstorm {
 
     public Dragonstorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "SCG";
         this.rarity = Rarity.RARE;
     }

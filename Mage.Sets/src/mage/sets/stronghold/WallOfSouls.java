@@ -37,7 +37,7 @@ public class WallOfSouls extends mage.sets.tempestremastered.WallOfSouls {
 
     public WallOfSouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "STH";
     }
 

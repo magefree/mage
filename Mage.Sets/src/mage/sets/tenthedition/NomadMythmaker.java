@@ -37,7 +37,7 @@ public class NomadMythmaker extends mage.sets.judgment.NomadMythmaker {
 
     public NomadMythmaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "10E";
     }
 

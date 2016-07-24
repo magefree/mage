@@ -37,7 +37,7 @@ public class Deluge extends mage.sets.tenthedition.Deluge {
 
     public Deluge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "ODY";
     }
 

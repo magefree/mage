@@ -37,7 +37,7 @@ public class CemeteryGate2 extends mage.sets.homelands.CemeteryGate1 {
 
     public CemeteryGate2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "HML";
     }
 

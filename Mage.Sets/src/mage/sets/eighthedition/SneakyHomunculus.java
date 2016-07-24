@@ -37,7 +37,7 @@ public class SneakyHomunculus extends mage.sets.nemesis.SneakyHomunculus {
 
     public SneakyHomunculus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "8ED";
     }
 

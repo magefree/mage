@@ -38,7 +38,7 @@ public class WindSail extends mage.sets.starter1999.WindSail {
 
     public WindSail(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "PO2";
         this.rarity = Rarity.COMMON;
     }

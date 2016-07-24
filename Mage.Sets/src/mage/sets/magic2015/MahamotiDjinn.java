@@ -37,7 +37,7 @@ public class MahamotiDjinn extends mage.sets.tenthedition.MahamotiDjinn {
 
     public MahamotiDjinn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 275;
+        this.cardNumber = "275";
         this.expansionSetCode = "M15";
     }
 

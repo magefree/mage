@@ -37,7 +37,7 @@ public class ChandrasOutrage extends mage.sets.magic2011.ChandrasOutrage {
 
     public ChandrasOutrage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "M14";
     }
 

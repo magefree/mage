@@ -38,7 +38,7 @@ public class MycoidShepherd extends mage.sets.alarareborn.MycoidShepherd {
 
     public MycoidShepherd(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

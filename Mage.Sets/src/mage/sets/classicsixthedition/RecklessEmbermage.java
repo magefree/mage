@@ -37,7 +37,7 @@ public class RecklessEmbermage extends mage.sets.seventhedition.RecklessEmbermag
 
     public RecklessEmbermage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "6ED";
     }
 

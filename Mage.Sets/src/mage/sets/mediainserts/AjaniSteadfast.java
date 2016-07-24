@@ -6,7 +6,7 @@ public class AjaniSteadfast extends mage.sets.magic2015.AjaniSteadfast {
     
     public AjaniSteadfast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "MBP";
     }
     

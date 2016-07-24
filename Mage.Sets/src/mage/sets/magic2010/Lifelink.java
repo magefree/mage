@@ -38,7 +38,7 @@ public class Lifelink extends mage.sets.magic2012.Lifelink {
 
     public Lifelink (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "M10";
     }
 

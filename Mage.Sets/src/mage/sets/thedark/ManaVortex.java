@@ -37,7 +37,7 @@ public class ManaVortex extends mage.sets.masterseditioniii.ManaVortex {
 
     public ManaVortex(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "DRK";
     }
 

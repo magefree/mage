@@ -37,7 +37,7 @@ public class UtopiaTree extends mage.sets.invasion.UtopiaTree {
 
     public UtopiaTree(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 277;
+        this.cardNumber = "277";
         this.expansionSetCode = "9ED";
     }
 

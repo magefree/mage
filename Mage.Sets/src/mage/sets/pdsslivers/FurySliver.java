@@ -37,7 +37,7 @@ public class FurySliver extends mage.sets.timespiral.FurySliver {
 
     public FurySliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "H09";
     }
 

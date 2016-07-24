@@ -38,7 +38,7 @@ public class SafeHaven extends mage.sets.thedark.SafeHaven {
 
     public SafeHaven(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

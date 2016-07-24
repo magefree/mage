@@ -36,7 +36,7 @@ public class SpawningPool extends mage.sets.tenthedition.SpawningPool {
 
     public SpawningPool(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "ULG";
     }
 

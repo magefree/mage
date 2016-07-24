@@ -38,7 +38,7 @@ public class AvatarOfHope extends mage.sets.prophecy.AvatarOfHope {
 
     public AvatarOfHope(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class DroveOfElves extends mage.sets.shadowmoor.DroveOfElves {
 
     public DroveOfElves(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 189;
+        this.cardNumber = "189";
         this.expansionSetCode = "C14";
     }
 

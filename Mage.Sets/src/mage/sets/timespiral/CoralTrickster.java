@@ -37,7 +37,7 @@ public class CoralTrickster extends mage.sets.speedvscunning.CoralTrickster {
 
     public CoralTrickster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "TSP";
     }
 

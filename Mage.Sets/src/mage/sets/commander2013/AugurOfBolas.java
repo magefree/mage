@@ -37,7 +37,7 @@ public class AugurOfBolas extends mage.sets.magic2013.AugurOfBolas {
 
     public AugurOfBolas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class MasterTransmuter extends mage.sets.conflux.MasterTransmuter {
 
     public MasterTransmuter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "ARC";
     }
 

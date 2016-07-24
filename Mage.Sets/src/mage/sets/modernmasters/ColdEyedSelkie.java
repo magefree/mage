@@ -37,7 +37,7 @@ public class ColdEyedSelkie extends mage.sets.eventide.ColdEyedSelkie {
 
     public ColdEyedSelkie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = "186";
         this.expansionSetCode = "MMA";
     }
 

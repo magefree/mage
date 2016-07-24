@@ -37,7 +37,7 @@ public class Assassinate extends mage.sets.tenthedition.Assassinate {
 
     public Assassinate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "TSP";
     }
 

@@ -37,7 +37,7 @@ public class UndyingRage extends mage.sets.heroesvsmonsters.UndyingRage {
 
     public UndyingRage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "TSP";
     }
 

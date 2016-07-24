@@ -37,7 +37,7 @@ public class TendrilsOfAgony extends mage.sets.scourge.TendrilsOfAgony {
 
     public TendrilsOfAgony(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "VMA";
     }
 

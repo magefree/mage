@@ -37,7 +37,7 @@ public class Transmutation extends mage.sets.legends.Transmutation {
 
     public Transmutation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "CHR";
     }
 

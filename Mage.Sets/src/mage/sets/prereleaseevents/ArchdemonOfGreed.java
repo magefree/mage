@@ -38,7 +38,7 @@ public class ArchdemonOfGreed extends mage.sets.darkascension.ArchdemonOfGreed {
 
     public ArchdemonOfGreed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

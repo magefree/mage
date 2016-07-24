@@ -37,7 +37,7 @@ public class BalduvianWarMakers2 extends BalduvianWarMakers1 {
 
     public BalduvianWarMakers2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = "98";
     }
 
     public BalduvianWarMakers2(final BalduvianWarMakers2 card) {

@@ -37,7 +37,7 @@ public class FleetingDistraction extends mage.sets.riseoftheeldrazi.FleetingDist
 
     public FleetingDistraction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "DDN";
     }
 

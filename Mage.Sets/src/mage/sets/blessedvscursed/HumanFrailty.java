@@ -37,7 +37,7 @@ public class HumanFrailty extends mage.sets.avacynrestored.HumanFrailty {
 
     public HumanFrailty(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "DDQ";
     }
 

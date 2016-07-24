@@ -37,7 +37,7 @@ public class PeaceOfMind extends mage.sets.ninthedition.PeaceOfMind {
 
     public PeaceOfMind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "EMN";
     }
 

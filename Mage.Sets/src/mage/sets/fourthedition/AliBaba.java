@@ -37,7 +37,7 @@ public class AliBaba extends mage.sets.arabiannights.AliBaba {
 
     public AliBaba(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "4ED";
     }
 

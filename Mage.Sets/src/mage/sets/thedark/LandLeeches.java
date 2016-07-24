@@ -37,7 +37,7 @@ public class LandLeeches extends mage.sets.fourthedition.LandLeeches {
 
     public LandLeeches(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "DRK";
     }
 

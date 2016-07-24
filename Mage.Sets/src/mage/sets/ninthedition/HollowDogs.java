@@ -37,7 +37,7 @@ public class HollowDogs extends mage.sets.urzassaga.HollowDogs {
 
     public HollowDogs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "9ED";
     }
 

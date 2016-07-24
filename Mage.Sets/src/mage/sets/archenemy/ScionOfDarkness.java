@@ -37,7 +37,7 @@ public class ScionOfDarkness extends mage.sets.legions.ScionOfDarkness {
 
     public ScionOfDarkness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "ARC";
     }
 

@@ -37,7 +37,7 @@ public class LeafGilder extends mage.sets.lorwyn.LeafGilder {
 
     public LeafGilder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "ARC";
     }
 

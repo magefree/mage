@@ -38,7 +38,7 @@ public class LotusPetal extends mage.sets.tempest.LotusPetal {
 
     public LotusPetal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 225;
+        this.cardNumber = "225";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class DeathMutation extends mage.sets.apocalypse.DeathMutation {
 
     public DeathMutation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 192;
+        this.cardNumber = "192";
         this.expansionSetCode = "CMD";
     }
 

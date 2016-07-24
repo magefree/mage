@@ -37,7 +37,7 @@ public class Necrite3 extends Necrite1 {
 
     public Necrite3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
     }
 
     public Necrite3(final Necrite3 card) {

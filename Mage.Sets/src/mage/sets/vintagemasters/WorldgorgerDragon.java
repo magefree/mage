@@ -37,7 +37,7 @@ public class WorldgorgerDragon extends mage.sets.judgment.WorldgorgerDragon {
 
     public WorldgorgerDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "VMA";
     }
 

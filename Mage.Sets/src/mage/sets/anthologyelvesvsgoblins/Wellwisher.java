@@ -37,7 +37,7 @@ public class Wellwisher extends mage.sets.onslaught.Wellwisher {
 
     public Wellwisher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "DD3EVG";
     }
 

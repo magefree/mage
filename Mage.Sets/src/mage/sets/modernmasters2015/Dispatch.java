@@ -37,7 +37,7 @@ public class Dispatch extends mage.sets.newphyrexia.Dispatch {
 
     public Dispatch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "MM2";
     }
 

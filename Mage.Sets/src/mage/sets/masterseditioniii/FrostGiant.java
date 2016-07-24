@@ -37,7 +37,7 @@ public class FrostGiant extends mage.sets.legends.FrostGiant {
 
     public FrostGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "ME3";
     }
 

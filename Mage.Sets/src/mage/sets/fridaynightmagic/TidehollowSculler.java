@@ -37,7 +37,7 @@ public class TidehollowSculler extends mage.sets.shardsofalara.TidehollowSculler
 
     public TidehollowSculler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "FNMP";
     }
 

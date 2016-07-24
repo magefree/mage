@@ -38,7 +38,7 @@ public class BoggartRamGang extends mage.sets.shadowmoor.BoggartRamGang {
 
     public BoggartRamGang(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class SplinterTwin extends mage.sets.riseoftheeldrazi.SplinterTwin {
 
     public SplinterTwin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "MM2";
     }
 

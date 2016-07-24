@@ -37,7 +37,7 @@ public class EnergyTap extends mage.sets.legends.EnergyTap {
 
     public EnergyTap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "4ED";
     }
 

@@ -37,7 +37,7 @@ public class Omenspeaker extends mage.sets.theros.Omenspeaker {
 
     public Omenspeaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "DDO";
     }
 

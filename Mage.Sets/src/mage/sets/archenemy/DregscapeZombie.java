@@ -37,7 +37,7 @@ public class DregscapeZombie extends mage.sets.shardsofalara.DregscapeZombie {
 
     public DregscapeZombie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "ARC";
     }
 

@@ -37,7 +37,7 @@ public class CrescendoOfWar extends mage.sets.vintagemasters.CrescendoOfWar {
 
     public CrescendoOfWar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "CMD";
     }
 

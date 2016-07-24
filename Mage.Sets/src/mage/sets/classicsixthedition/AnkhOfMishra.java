@@ -38,7 +38,7 @@ public class AnkhOfMishra extends mage.sets.limitedalpha.AnkhOfMishra {
 
     public AnkhOfMishra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 273;
+        this.cardNumber = "273";
         this.expansionSetCode = "6ED";
     }
 

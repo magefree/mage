@@ -37,7 +37,7 @@ public class TributeToHunger extends mage.sets.innistrad.TributeToHunger {
 
     public TributeToHunger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "DDQ";
     }
 

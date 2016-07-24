@@ -37,7 +37,7 @@ public class SolemnOffering extends mage.sets.magic2010.SolemnOffering {
 
     public SolemnOffering(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "M14";
     }
 

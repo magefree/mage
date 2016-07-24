@@ -38,7 +38,7 @@ public class RakshasaVizier extends mage.sets.khansoftarkir.RakshasaVizier {
 
     public RakshasaVizier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

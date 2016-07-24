@@ -37,7 +37,7 @@ public class AbyssalHorror extends mage.sets.urzassaga.AbyssalHorror {
 
     public AbyssalHorror(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "7ED";
     }
 

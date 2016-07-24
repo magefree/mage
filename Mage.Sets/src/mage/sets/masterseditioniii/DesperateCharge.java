@@ -38,7 +38,7 @@ public class DesperateCharge extends mage.sets.portalthreekingdoms.DesperateChar
 
     public DesperateCharge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

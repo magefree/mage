@@ -6,7 +6,7 @@ public class KorSkyfisher extends mage.sets.zendikar.KorSkyfisher {
     
     public KorSkyfisher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "MBP";
     }
     

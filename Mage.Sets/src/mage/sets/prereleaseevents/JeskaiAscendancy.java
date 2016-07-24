@@ -38,7 +38,7 @@ public class JeskaiAscendancy extends mage.sets.khansoftarkir.JeskaiAscendancy {
 
     public JeskaiAscendancy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

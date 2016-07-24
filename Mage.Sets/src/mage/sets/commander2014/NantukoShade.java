@@ -37,7 +37,7 @@ public class NantukoShade extends mage.sets.magic2011.NantukoShade {
 
     public NantukoShade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "C14";
     }
 

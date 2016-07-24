@@ -38,7 +38,7 @@ public class ProdigalSorcerer extends mage.sets.timeshifted.ProdigalSorcerer {
 
     public ProdigalSorcerer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "3ED";
         this.rarity = Rarity.COMMON;
     }

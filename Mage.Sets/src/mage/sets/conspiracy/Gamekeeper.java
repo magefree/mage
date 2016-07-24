@@ -37,7 +37,7 @@ public class Gamekeeper extends mage.sets.urzasdestiny.Gamekeeper {
 
     public Gamekeeper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "CNS";
     }
 

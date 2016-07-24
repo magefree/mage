@@ -37,7 +37,7 @@ public class VernalBloom extends mage.sets.urzassaga.VernalBloom {
 
     public VernalBloom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 286;
+        this.cardNumber = "286";
         this.expansionSetCode = "8ED";
     }
 

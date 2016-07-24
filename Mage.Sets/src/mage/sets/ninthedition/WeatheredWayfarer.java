@@ -37,7 +37,7 @@ public class WeatheredWayfarer extends mage.sets.onslaught.WeatheredWayfarer {
 
     public WeatheredWayfarer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "9ED";
     }
 

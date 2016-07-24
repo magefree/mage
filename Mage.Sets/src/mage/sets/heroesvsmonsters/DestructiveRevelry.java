@@ -37,7 +37,7 @@ public class DestructiveRevelry extends mage.sets.theros.DestructiveRevelry {
 
     public DestructiveRevelry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "DDL";
     }
 

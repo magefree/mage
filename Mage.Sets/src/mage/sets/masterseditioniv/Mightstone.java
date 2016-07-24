@@ -38,7 +38,7 @@ public class Mightstone extends mage.sets.antiquities.Mightstone {
 
     public Mightstone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 215;
+        this.cardNumber = "215";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.COMMON;
     }

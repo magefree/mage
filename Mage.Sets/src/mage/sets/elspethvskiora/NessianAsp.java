@@ -37,7 +37,7 @@ public class NessianAsp extends mage.sets.theros.NessianAsp {
 
     public NessianAsp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "DDO";
     }
 

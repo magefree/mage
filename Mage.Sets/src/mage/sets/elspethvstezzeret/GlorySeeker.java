@@ -38,7 +38,7 @@ public class GlorySeeker extends mage.sets.riseoftheeldrazi.GlorySeeker {
 
     public GlorySeeker (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "DDF";
     }
 

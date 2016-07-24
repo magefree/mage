@@ -37,7 +37,7 @@ public class UktabiWildcats extends mage.sets.seventhedition.UktabiWildcats {
 
     public UktabiWildcats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "MIR";
     }
 

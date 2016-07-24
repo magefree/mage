@@ -37,7 +37,7 @@ public class VigilantDrake extends mage.sets.urzaslegacy.VigilantDrake {
 
     public VigilantDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "7ED";
     }
 

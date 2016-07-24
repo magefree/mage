@@ -37,7 +37,7 @@ public class KinsbaileSkirmisher extends mage.sets.lorwyn.KinsbaileSkirmisher {
 
     public KinsbaileSkirmisher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "DDO";
     }
 

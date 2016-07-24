@@ -37,7 +37,7 @@ public class AvatarOfFury extends mage.sets.prophecy.AvatarOfFury {
 
     public AvatarOfFury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "CMD";
     }
 

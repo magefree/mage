@@ -37,7 +37,7 @@ public class CelestialAncient extends mage.sets.dissension.CelestialAncient {
 
     public CelestialAncient(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "PC2";
     }
 

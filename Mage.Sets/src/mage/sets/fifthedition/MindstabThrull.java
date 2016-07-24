@@ -37,7 +37,7 @@ public class MindstabThrull extends mage.sets.mastersedition.MindstabThrull {
 
     public MindstabThrull(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "5ED";
     }
 

@@ -38,7 +38,7 @@ public class Braingeyser extends mage.sets.limitedalpha.Braingeyser {
 
     public Braingeyser(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "3ED";
     }
 

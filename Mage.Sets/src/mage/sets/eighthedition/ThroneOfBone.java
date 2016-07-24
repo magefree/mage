@@ -38,7 +38,7 @@ public class ThroneOfBone extends mage.sets.limitedalpha.ThroneOfBone {
 
     public ThroneOfBone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 317;
+        this.cardNumber = "317";
         this.expansionSetCode = "8ED";
     }
 

@@ -37,7 +37,7 @@ public class NaturalSpring extends mage.sets.tempest.NaturalSpring {
 
     public NaturalSpring(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 257;
+        this.cardNumber = "257";
         this.expansionSetCode = "9ED";
     }
 

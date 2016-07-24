@@ -38,7 +38,7 @@ public class JuganTheRisingStar extends mage.sets.championsofkamigawa.JuganTheRi
 
     public JuganTheRisingStar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.MYTHIC;
     }

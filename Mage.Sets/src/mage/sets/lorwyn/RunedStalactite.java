@@ -37,7 +37,7 @@ public class RunedStalactite extends mage.sets.modernmasters.RunedStalactite {
 
     public RunedStalactite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 260;
+        this.cardNumber = "260";
         this.expansionSetCode = "LRW";
     }
 

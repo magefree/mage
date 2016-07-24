@@ -37,7 +37,7 @@ public class ElHajjaj extends mage.sets.arabiannights.ElHajjaj {
 
     public ElHajjaj(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "3ED";
     }
 

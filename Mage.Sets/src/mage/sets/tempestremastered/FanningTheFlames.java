@@ -38,7 +38,7 @@ public class FanningTheFlames extends mage.sets.stronghold.FanningTheFlames {
 
     public FanningTheFlames(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.RARE;
     }

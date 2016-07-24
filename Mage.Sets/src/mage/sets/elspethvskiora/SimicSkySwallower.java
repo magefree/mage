@@ -37,7 +37,7 @@ public class SimicSkySwallower extends mage.sets.dissension.SimicSkySwallower {
 
     public SimicSkySwallower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "DDO";
     }
 

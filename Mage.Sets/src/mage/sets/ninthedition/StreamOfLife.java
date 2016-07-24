@@ -38,7 +38,7 @@ public class StreamOfLife extends mage.sets.seventhedition.StreamOfLife {
 
     public StreamOfLife(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 272;
+        this.cardNumber = "272";
         this.expansionSetCode = "9ED";
         this.rarity = Rarity.UNCOMMON;
     }

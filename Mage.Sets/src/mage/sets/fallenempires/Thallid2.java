@@ -38,7 +38,7 @@ public class Thallid2 extends mage.sets.timeshifted.Thallid {
 
     public Thallid2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "FEM";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class VisceridArmor2 extends mage.sets.masterseditionii.VisceridArmor {
 
     public VisceridArmor2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "ALL";
     }
 

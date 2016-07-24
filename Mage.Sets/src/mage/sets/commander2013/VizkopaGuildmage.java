@@ -37,7 +37,7 @@ public class VizkopaGuildmage extends mage.sets.gatecrash.VizkopaGuildmage {
 
     public VizkopaGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 225;
+        this.cardNumber = "225";
         this.expansionSetCode = "C13";
     }
 

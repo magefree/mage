@@ -37,7 +37,7 @@ public class ArcaneMelee extends mage.sets.avacynrestored.ArcaneMelee {
 
     public ArcaneMelee(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "C13";
     }
 

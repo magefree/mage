@@ -6,7 +6,7 @@ public class SoulOfZendikar extends mage.sets.magic2015.SoulOfZendikar {
     
     public SoulOfZendikar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "MBP";
     }
     

@@ -37,7 +37,7 @@ public class NimbusSwimmer extends mage.sets.gatecrash.NimbusSwimmer {
 
     public NimbusSwimmer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "DDO";
     }
 

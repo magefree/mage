@@ -37,7 +37,7 @@ public class HandOfDeath2 extends mage.sets.starter2000.HandOfDeath {
 
     public HandOfDeath2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "POR";
     }
 

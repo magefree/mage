@@ -37,7 +37,7 @@ public class DeepwoodGhoul extends mage.sets.mercadianmasques.DeepwoodGhoul {
 
     public DeepwoodGhoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "8ED";
     }
 

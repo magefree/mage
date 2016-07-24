@@ -38,7 +38,7 @@ public class WallOfWonder extends mage.sets.seventhedition.WallOfWonder {
 
     public WallOfWonder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "CHR";
         this.rarity = Rarity.UNCOMMON;
     }

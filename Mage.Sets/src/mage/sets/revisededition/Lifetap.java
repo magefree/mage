@@ -37,7 +37,7 @@ public class Lifetap extends mage.sets.fifthedition.Lifetap {
 
     public Lifetap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "3ED";
     }
 

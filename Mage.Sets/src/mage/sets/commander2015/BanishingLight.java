@@ -37,7 +37,7 @@ public class BanishingLight extends mage.sets.journeyintonyx.BanishingLight {
 
     public BanishingLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "C15";
     }
 

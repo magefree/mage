@@ -37,7 +37,7 @@ public class RealmSeekers extends mage.sets.conspiracy.RealmSeekers {
 
     public RealmSeekers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 226;
+        this.cardNumber = "226";
         this.expansionSetCode = "VMA";
     }
 

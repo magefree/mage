@@ -37,7 +37,7 @@ public class ClockworkBeast extends mage.sets.limitedalpha.ClockworkBeast {
 
     public ClockworkBeast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 325;
+        this.cardNumber = "325";
         this.expansionSetCode = "4ED";
     }
 

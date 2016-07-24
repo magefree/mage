@@ -37,7 +37,7 @@ public class GoblinWarPaint extends mage.sets.zendikar.GoblinWarPaint {
 
     public GoblinWarPaint(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "M12";
     }
 

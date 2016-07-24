@@ -38,7 +38,7 @@ public class DreamFracture extends mage.sets.eventide.DreamFracture {
 
     public DreamFracture(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "CNS";
         this.rarity = Rarity.COMMON;
     }

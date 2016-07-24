@@ -38,7 +38,7 @@ public class SoltariPriest3 extends mage.sets.tempest.SoltariPriest {
 
     public SoltariPriest3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "SUS";
         this.rarity = Rarity.SPECIAL;
     }

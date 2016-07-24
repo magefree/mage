@@ -37,7 +37,7 @@ public class CrawWurm extends mage.sets.tenthedition.CrawWurm {
 
     public CrawWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = "233";
         this.expansionSetCode = "9ED";
     }
 

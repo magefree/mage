@@ -38,7 +38,7 @@ public class AvengingAngel extends mage.sets.tempestremastered.AvengingAngel {
 
     public AvengingAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "TMP";
         this.rarity = Rarity.RARE;
     }

@@ -38,7 +38,7 @@ public class MindControl extends mage.sets.magic2010.MindControl {
 
     public MindControl(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

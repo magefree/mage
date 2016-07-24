@@ -37,7 +37,7 @@ public class Chaoslace extends mage.sets.fourthedition.Chaoslace {
 
     public Chaoslace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "LEB";
     }
 

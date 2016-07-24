@@ -38,7 +38,7 @@ public class FeralThallid extends mage.sets.fallenempires.FeralThallid {
 
     public FeralThallid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.COMMON;
     }

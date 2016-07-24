@@ -37,7 +37,7 @@ public class Extinguish extends mage.sets.portalsecondage.Extinguish {
 
     public Extinguish(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "PTK";
     }
 

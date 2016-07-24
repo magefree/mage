@@ -37,7 +37,7 @@ public class ThaliaHereticCathar extends mage.sets.mediainserts.ThaliaHereticCat
 
     public ThaliaHereticCathar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "EMN";
     }
 

@@ -37,7 +37,7 @@ public class TempestOfLight extends mage.sets.magic2010.TempestOfLight {
 
     public TempestOfLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "10E";
     }
 

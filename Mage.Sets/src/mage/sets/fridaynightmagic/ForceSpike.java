@@ -38,7 +38,7 @@ public class ForceSpike extends mage.sets.seventhedition.ForceSpike {
 
     public ForceSpike(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

@@ -38,7 +38,7 @@ public class SealOfStrength extends mage.sets.nemesis.SealOfStrength {
 
     public SealOfStrength(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "EMA";
     }
 

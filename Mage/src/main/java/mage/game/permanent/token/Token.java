@@ -53,7 +53,7 @@ public class Token extends MageObjectImpl {
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
     private UUID lastAddedTokenId;
     private int tokenType;
-    private int originalCardNumber;
+    private String originalCardNumber;
     private String originalExpansionSetCode;
     private boolean expansionSetCodeChecked;
     private Card copySourceCard; // the card the Token is a copy from
@@ -235,11 +235,11 @@ public class Token extends MageObjectImpl {
         this.tokenType = tokenType;
     }
 
-    public int getOriginalCardNumber() {
+    public String getOriginalCardNumber() {
         return originalCardNumber;
     }
 
-    public void setOriginalCardNumber(int originalCardNumber) {
+    public void setOriginalCardNumber(String originalCardNumber) {
         this.originalCardNumber = originalCardNumber;
     }
 

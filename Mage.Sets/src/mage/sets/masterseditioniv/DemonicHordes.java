@@ -37,7 +37,7 @@ public class DemonicHordes extends mage.sets.limitedalpha.DemonicHordes {
 
     public DemonicHordes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "ME4";
     }
 

@@ -37,7 +37,7 @@ public class BogRaiders extends mage.sets.magic2011.BogRaiders {
 
     public BogRaiders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "S99";
     }
 

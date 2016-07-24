@@ -37,7 +37,7 @@ public class PuncturingLight extends mage.sets.riseoftheeldrazi.PuncturingLight 
 
     public PuncturingLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "SOI";
     }
 

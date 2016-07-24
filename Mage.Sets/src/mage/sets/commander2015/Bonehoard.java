@@ -37,7 +37,7 @@ public class Bonehoard extends mage.sets.mirrodinbesieged.Bonehoard {
 
     public Bonehoard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 245;
+        this.cardNumber = "245";
         this.expansionSetCode = "C15";
     }
 

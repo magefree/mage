@@ -38,7 +38,7 @@ public class ExaltedAngel extends mage.sets.onslaught.ExaltedAngel {
 
     public ExaltedAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "V15";
         this.rarity = Rarity.MYTHIC;
     }
