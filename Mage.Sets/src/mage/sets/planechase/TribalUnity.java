@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
@@ -45,7 +45,6 @@ import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -107,7 +106,7 @@ class TribalUnityEffect extends OneShotEffect {
             }
             FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
             filterCreaturePermanent.add(new SubtypePredicate(typeChoice.getChoice()));
-            game.addEffect(new BoostAllOfChosenSubtypeEffect(
+            game.addEffect(new BoostAllEffect(
                     boost, boost, Duration.EndOfTurn, filterCreaturePermanent, false), source);
             return true;
         }
