@@ -78,6 +78,11 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+    }
+
+    @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         if (upTo) {
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
@@ -107,16 +112,6 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
             CardUtil.reduceCost(abilityToModify, this.amount);
         }
         return true;
-    }
-
-    /**
-     * Overwrite this in effect that inherits from this
-     *
-     * @param source
-     * @param game
-     */
-    protected void setRuntimeData(Ability source, Game game) {
-
     }
 
     /**
