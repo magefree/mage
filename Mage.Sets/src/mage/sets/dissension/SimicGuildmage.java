@@ -29,6 +29,7 @@ package mage.sets.dissension;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,12 +44,16 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -76,8 +81,18 @@ public class SimicGuildmage extends CardImpl {
 
         // {1}{G}: Move a +1/+1 counter from target creature onto another target creature with the same controller.
         Ability countersAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveCounterFromTargetToTargetEffect(), new ManaCostsImpl("{1}{G}"));
-        countersAbility.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (you take counters from)")));
-        countersAbility.addTarget(new SimicGuildmageSecondTargetCreaturePermanent());
+        TargetCreaturePermanent target = new TargetCreaturePermanent(
+                new FilterCreaturePermanent("creature (you take counter from)"));
+        target.setTargetTag(1);
+        countersAbility.addTarget(target);
+        
+        FilterCreaturePermanent filter = new FilterCreaturePermanent(
+                "another target creature with the same controller (counter goes to)");
+        filter.add(new AnotherTargetPredicate(2));
+        filter.add(new SameControllerPredicate());
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        target2.setTargetTag(2);
+        countersAbility.addTarget(target2);
         this.addAbility(countersAbility);
         // {1}{U}: Attach target Aura enchanting a permanent to another permanent with the same controller.
         Ability auraAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveAuraEffect(), new ManaCostsImpl("{1}{U}"));
@@ -134,34 +149,31 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
     }
 }
 
-class SimicGuildmageSecondTargetCreaturePermanent extends TargetCreaturePermanent {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature with the same controller (counters go to)");
-    
-    SimicGuildmageSecondTargetCreaturePermanent() {
-        super(filter);
-    }
-
-    SimicGuildmageSecondTargetCreaturePermanent(final SimicGuildmageSecondTargetCreaturePermanent target) {
-        super(target);
-    }
+class SameControllerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageItem>> {
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        Permanent firstPermanent = game.getPermanent(source.getTargets().getFirstTarget());
-        Permanent secondPermanent = game.getPermanent(id);
-        if (firstPermanent != null && secondPermanent != null) {
-            if (!firstPermanent.getId().equals(id) && firstPermanent.getControllerId().equals(secondPermanent.getControllerId())) {
-                return super.canTarget(controllerId, id, source, game);
+    public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {
+        StackObject source = game.getStack().getStackObject(input.getSourceId());
+        if (source != null) {
+            if (source.getStackAbility().getTargets().isEmpty()
+                || source.getStackAbility().getTargets().get(0).getTargets().isEmpty()) {
+                return true;
+            }
+            Permanent firstTarget = game.getPermanent(
+                    source.getStackAbility().getTargets().get(0).getTargets().get(0));
+            Permanent inputPermanent = game.getPermanent(input.getObject().getId());
+            if (firstTarget != null && inputPermanent != null) {
+                return firstTarget.getControllerId().equals(inputPermanent.getControllerId());
             }
         }
-        return false;
+        return true;
     }
 
     @Override
-    public SimicGuildmageSecondTargetCreaturePermanent copy() {
-        return new SimicGuildmageSecondTargetCreaturePermanent(this);
+    public String toString() {
+        return "Target with the same controller";
     }
+    
 }
 
 class MoveAuraEffect extends OneShotEffect {
