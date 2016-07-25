@@ -28,7 +28,8 @@ public class BroodSliverTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Venom Sliver"); // 1/1 deathtouch granting sliver
         
         attack(1, playerA, "Venom Sliver");
-        setChoice(playerA, "Yes"); // controller of venom sliver dealing damage should get the choice to create token
+        setChoice(playerA, "Yes"); // controller of Venom Sliver dealing damage should get the choice to create token
+        setChoice(playerB, "No"); // Brood Sliver controller should not be given choice in the first place
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
         
