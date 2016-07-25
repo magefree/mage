@@ -37,7 +37,7 @@ public class WhiteKnight extends mage.sets.magic2010.WhiteKnight {
 
     public WhiteKnight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "LEA";
     }
 

@@ -37,7 +37,7 @@ public class CoalitionRelic extends mage.sets.futuresight.CoalitionRelic {
 
     public CoalitionRelic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "DDE";
     }
 

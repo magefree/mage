@@ -37,7 +37,7 @@ public class Chronomaton extends mage.sets.magic2013.Chronomaton {
 
     public Chronomaton(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "DDM";
     }
 

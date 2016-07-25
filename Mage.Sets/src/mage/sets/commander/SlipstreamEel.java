@@ -37,7 +37,7 @@ public class SlipstreamEel extends mage.sets.onslaught.SlipstreamEel {
 
     public SlipstreamEel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "CMD";
     }
 

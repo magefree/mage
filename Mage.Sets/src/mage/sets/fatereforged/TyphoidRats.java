@@ -37,7 +37,7 @@ public class TyphoidRats extends mage.sets.innistrad.TyphoidRats {
 
     public TyphoidRats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "FRF";
     }
 

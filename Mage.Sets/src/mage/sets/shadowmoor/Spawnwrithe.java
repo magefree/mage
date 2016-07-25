@@ -37,7 +37,7 @@ public class Spawnwrithe extends mage.sets.commander.Spawnwrithe {
 
     public Spawnwrithe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "SHM";
     }
 

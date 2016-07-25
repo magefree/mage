@@ -38,7 +38,7 @@ public class FlinthoofBoar extends mage.sets.magic2013.FlinthoofBoar {
 
     public FlinthoofBoar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "EMA";
     }
 

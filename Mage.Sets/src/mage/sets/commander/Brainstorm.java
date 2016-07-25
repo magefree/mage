@@ -37,7 +37,7 @@ public class Brainstorm extends mage.sets.fifthedition.Brainstorm {
 
     public Brainstorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "CMD";
     }
 

@@ -37,7 +37,7 @@ public class DjinnOfWishes extends mage.sets.magic2010.DjinnOfWishes {
 
     public DjinnOfWishes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "M12";
     }
 

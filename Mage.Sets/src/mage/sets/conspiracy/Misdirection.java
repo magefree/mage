@@ -37,7 +37,7 @@ public class Misdirection extends mage.sets.mercadianmasques.Misdirection {
 
     public Misdirection(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "CNS";
     }
 

@@ -38,7 +38,7 @@ public class TrapEssence extends mage.sets.khansoftarkir.TrapEssence {
 
     public TrapEssence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

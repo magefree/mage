@@ -37,7 +37,7 @@ public class GrazingGladehart extends mage.sets.zendikar.GrazingGladehart {
 
     public GrazingGladehart(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "DDO";
     }
 

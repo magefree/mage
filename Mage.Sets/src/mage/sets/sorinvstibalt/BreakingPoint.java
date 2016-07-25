@@ -37,7 +37,7 @@ public class BreakingPoint extends mage.sets.judgment.BreakingPoint {
 
     public BreakingPoint(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "DDK";
     }
 

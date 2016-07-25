@@ -38,7 +38,7 @@ public class GiantBadger extends mage.sets.eighthedition.GiantBadger {
 
     public GiantBadger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

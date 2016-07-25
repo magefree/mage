@@ -37,7 +37,7 @@ public class SculptingSteel extends mage.sets.tenthedition.SculptingSteel {
 
     public SculptingSteel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 238;
+        this.cardNumber = "238";
         this.expansionSetCode = "MRD";
     }
 

@@ -38,7 +38,7 @@ public class Orgg extends mage.sets.timeshifted.Orgg {
 
     public Orgg(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "FEM";
         this.rarity = Rarity.RARE;
     }

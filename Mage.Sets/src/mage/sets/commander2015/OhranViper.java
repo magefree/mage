@@ -37,7 +37,7 @@ public class OhranViper extends mage.sets.jacevsvraska.OhranViper {
 
     public OhranViper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 194;
+        this.cardNumber = "194";
         this.expansionSetCode = "C15";
     }
 

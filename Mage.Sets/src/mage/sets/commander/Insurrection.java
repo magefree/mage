@@ -37,7 +37,7 @@ public class Insurrection extends mage.sets.onslaught.Insurrection {
 
     public Insurrection(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "CMD";
     }
 

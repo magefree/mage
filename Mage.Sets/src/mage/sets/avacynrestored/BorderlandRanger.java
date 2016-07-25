@@ -37,7 +37,7 @@ public class BorderlandRanger extends mage.sets.magic2010.BorderlandRanger {
 
     public BorderlandRanger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "AVR";
     }
 

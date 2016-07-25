@@ -37,7 +37,7 @@ public class CompositeGolem extends mage.sets.tenthedition.CompositeGolem {
 
     public CompositeGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "5DN";
     }
 

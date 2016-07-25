@@ -37,7 +37,7 @@ public class CallToHeel extends mage.sets.shardsofalara.CallToHeel {
 
     public CallToHeel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "DDJ";
     }
 

@@ -38,7 +38,7 @@ public class ZhalfirinCommander extends mage.sets.timeshifted.ZhalfirinCommander
 
     public ZhalfirinCommander(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 253;
+        this.cardNumber = "253";
         this.expansionSetCode = "MIR";
         this.rarity = Rarity.UNCOMMON;
     }

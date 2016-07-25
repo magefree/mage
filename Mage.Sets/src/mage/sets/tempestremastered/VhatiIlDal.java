@@ -37,7 +37,7 @@ public class VhatiIlDal extends mage.sets.tempest.VhatiIlDal {
 
     public VhatiIlDal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "TPR";
     }
 

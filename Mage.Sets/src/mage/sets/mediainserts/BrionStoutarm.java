@@ -6,7 +6,7 @@ public class BrionStoutarm extends mage.sets.lorwyn.BrionStoutarm {
     
     public BrionStoutarm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "MBP";
     }
     

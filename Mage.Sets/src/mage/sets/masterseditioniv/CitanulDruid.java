@@ -38,7 +38,7 @@ public class CitanulDruid extends mage.sets.antiquities.CitanulDruid {
 
     public CitanulDruid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.COMMON;
     }

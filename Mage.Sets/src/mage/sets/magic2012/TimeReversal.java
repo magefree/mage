@@ -37,7 +37,7 @@ public class TimeReversal extends mage.sets.magic2011.TimeReversal {
 
     public TimeReversal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "M12";
     }
 

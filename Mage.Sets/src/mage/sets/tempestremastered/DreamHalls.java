@@ -38,7 +38,7 @@ public class DreamHalls extends mage.sets.stronghold.DreamHalls {
 
     public DreamHalls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.MYTHIC;
     }

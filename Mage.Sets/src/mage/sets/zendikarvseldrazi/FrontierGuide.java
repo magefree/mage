@@ -37,7 +37,7 @@ public class FrontierGuide extends mage.sets.zendikar.FrontierGuide {
 
     public FrontierGuide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "DDP";
     }
 

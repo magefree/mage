@@ -38,7 +38,7 @@ public class GloriousAnthem1 extends mage.sets.tenthedition.GloriousAnthem {
 
     public GloriousAnthem1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "SUS";
         this.rarity = Rarity.SPECIAL;
     }

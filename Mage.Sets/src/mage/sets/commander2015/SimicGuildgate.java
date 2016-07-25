@@ -37,7 +37,7 @@ public class SimicGuildgate extends mage.sets.gatecrash.SimicGuildgate {
 
     public SimicGuildgate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 306;
+        this.cardNumber = "306";
         this.expansionSetCode = "C15";
     }
 

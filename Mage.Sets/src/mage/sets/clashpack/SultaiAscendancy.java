@@ -38,7 +38,7 @@ public class SultaiAscendancy extends mage.sets.khansoftarkir.SultaiAscendancy {
 
     public SultaiAscendancy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

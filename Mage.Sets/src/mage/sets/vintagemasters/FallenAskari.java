@@ -37,7 +37,7 @@ public class FallenAskari extends mage.sets.visions.FallenAskari {
 
     public FallenAskari(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "VMA";
     }
 

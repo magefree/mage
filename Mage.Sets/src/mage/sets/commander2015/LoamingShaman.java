@@ -37,7 +37,7 @@ public class LoamingShaman extends mage.sets.dissension.LoamingShaman {
 
     public LoamingShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "C15";
     }
 

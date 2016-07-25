@@ -37,7 +37,7 @@ public class NemesisTrap extends mage.sets.worldwake.NemesisTrap {
 
     public NemesisTrap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "CMD";
     }
 

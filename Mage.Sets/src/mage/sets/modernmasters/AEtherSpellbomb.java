@@ -37,7 +37,7 @@ public class AEtherSpellbomb extends mage.sets.elspethvstezzeret.AEtherSpellbomb
 
     public AEtherSpellbomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 196;
+        this.cardNumber = "196";
         this.expansionSetCode = "MMA";
     }
 

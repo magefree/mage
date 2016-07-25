@@ -37,7 +37,7 @@ public class BeeSting extends mage.sets.portal.BeeSting {
 
     public BeeSting(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "PO2";
     }
 

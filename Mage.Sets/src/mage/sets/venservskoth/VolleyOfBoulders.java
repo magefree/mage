@@ -37,7 +37,7 @@ public class VolleyOfBoulders extends mage.sets.odyssey.VolleyOfBoulders {
 
     public VolleyOfBoulders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "DDI";
     }
 

@@ -37,7 +37,7 @@ public class MistRaven extends mage.sets.avacynrestored.MistRaven {
 
     public MistRaven(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "DDQ";
     }
 

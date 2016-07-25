@@ -37,7 +37,7 @@ public class CinderPyromancer extends mage.sets.eventide.CinderPyromancer {
 
     public CinderPyromancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "PD2";
     }
 

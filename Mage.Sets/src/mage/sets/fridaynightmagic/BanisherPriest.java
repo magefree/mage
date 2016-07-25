@@ -37,7 +37,7 @@ public class BanisherPriest extends mage.sets.magic2014.BanisherPriest {
 
     public BanisherPriest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "FNMP";
     }
 

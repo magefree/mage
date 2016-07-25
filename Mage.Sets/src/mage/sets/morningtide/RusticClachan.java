@@ -37,7 +37,7 @@ public class RusticClachan extends mage.sets.elspethvstezzeret.RusticClachan {
 
     public RusticClachan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "MOR";
     }
 

@@ -38,7 +38,7 @@ public class StrongholdDiscipline extends mage.sets.conspiracy.StrongholdDiscipl
 
     public StrongholdDiscipline(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "10E";
         this.rarity = Rarity.UNCOMMON;
     }

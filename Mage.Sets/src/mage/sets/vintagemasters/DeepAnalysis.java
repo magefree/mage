@@ -37,7 +37,7 @@ public class DeepAnalysis extends mage.sets.torment.DeepAnalysis {
 
     public DeepAnalysis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "VMA";
     }
 

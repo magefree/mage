@@ -37,7 +37,7 @@ public class ElspethKnightErrant extends mage.sets.shardsofalara.ElspethKnightEr
 
     public ElspethKnightErrant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "MMA";
     }
 

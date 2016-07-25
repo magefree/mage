@@ -38,7 +38,7 @@ public class RitesOfInitiation extends mage.sets.odyssey.RitesOfInitiation {
 
     public RitesOfInitiation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 182;
+        this.cardNumber = "182";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

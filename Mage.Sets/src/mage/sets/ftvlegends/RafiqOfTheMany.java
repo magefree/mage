@@ -37,7 +37,7 @@ public class RafiqOfTheMany extends mage.sets.shardsofalara.RafiqOfTheMany {
 
     public RafiqOfTheMany(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "V11";
     }
 

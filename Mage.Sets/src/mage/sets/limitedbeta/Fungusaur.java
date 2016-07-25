@@ -37,7 +37,7 @@ public class Fungusaur extends mage.sets.limitedalpha.Fungusaur {
 
     public Fungusaur(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "LEB";
     }
 

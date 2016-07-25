@@ -37,7 +37,7 @@ public class ManaLeak extends mage.sets.magic2011.ManaLeak {
 
     public ManaLeak(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "8ED";
     }
 

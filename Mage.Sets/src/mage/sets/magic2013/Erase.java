@@ -37,7 +37,7 @@ public class Erase extends mage.sets.urzaslegacy.Erase {
 
     public Erase(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "M13";
     }
 

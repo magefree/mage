@@ -37,7 +37,7 @@ public class GladehartCavalry extends mage.sets.oathofthegatewatch.GladehartCava
 
     public GladehartCavalry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "MBP";
     }
 

@@ -38,7 +38,7 @@ public class KirdApe extends mage.sets.ninthedition.KirdApe {
 
     public KirdApe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "3ED";
         this.rarity = Rarity.COMMON;
     }

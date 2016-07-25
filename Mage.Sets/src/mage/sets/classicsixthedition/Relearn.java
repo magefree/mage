@@ -37,7 +37,7 @@ public class Relearn extends mage.sets.weatherlight.Relearn {
 
     public Relearn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "6ED";
     }
 

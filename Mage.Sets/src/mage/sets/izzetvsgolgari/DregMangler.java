@@ -37,7 +37,7 @@ public class DregMangler extends mage.sets.returntoravnica.DregMangler {
 
     public DregMangler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "DDJ";
     }
 

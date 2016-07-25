@@ -37,7 +37,7 @@ public class HissingIguanar extends mage.sets.shardsofalara.HissingIguanar {
 
     public HissingIguanar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "PC2";
     }
 

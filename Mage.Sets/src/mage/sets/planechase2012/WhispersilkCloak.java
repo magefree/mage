@@ -37,7 +37,7 @@ public class WhispersilkCloak extends mage.sets.tenthedition.WhispersilkCloak {
 
     public WhispersilkCloak(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "PC2";
     }
 

@@ -37,7 +37,7 @@ public class Malfegor extends mage.sets.conflux.Malfegor {
 
     public Malfegor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "CMD";
     }
 

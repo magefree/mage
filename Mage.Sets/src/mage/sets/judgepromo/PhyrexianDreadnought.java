@@ -37,7 +37,7 @@ public class PhyrexianDreadnought extends mage.sets.mirage.PhyrexianDreadnought 
 
     public PhyrexianDreadnought(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "JR";
     }
 

@@ -37,7 +37,7 @@ public class KamahlFistOfKrosa extends mage.sets.onslaught.KamahlFistOfKrosa {
 
     public KamahlFistOfKrosa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "ARC";
     }
 

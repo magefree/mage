@@ -37,7 +37,7 @@ public class KithkinGreatheart extends mage.sets.modernmasters.KithkinGreatheart
 
     public KithkinGreatheart(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "LRW";
     }
 

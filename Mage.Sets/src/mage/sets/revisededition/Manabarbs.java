@@ -37,7 +37,7 @@ public class Manabarbs extends mage.sets.tenthedition.Manabarbs {
 
     public Manabarbs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "3ED";
     }
 

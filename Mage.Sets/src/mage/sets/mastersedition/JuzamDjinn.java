@@ -37,7 +37,7 @@ public class JuzamDjinn extends mage.sets.arabiannights.JuzamDjinn {
 
     public JuzamDjinn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "MED";
     }
 

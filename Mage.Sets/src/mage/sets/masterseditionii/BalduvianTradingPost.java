@@ -37,7 +37,7 @@ public class BalduvianTradingPost extends mage.sets.alliances.BalduvianTradingPo
 
     public BalduvianTradingPost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 226;
+        this.cardNumber = "226";
         this.expansionSetCode = "ME2";
     }
 

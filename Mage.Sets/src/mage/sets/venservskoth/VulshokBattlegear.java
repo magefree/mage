@@ -37,7 +37,7 @@ public class VulshokBattlegear extends mage.sets.mirrodin.VulshokBattlegear {
 
     public VulshokBattlegear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "DDI";
     }
 

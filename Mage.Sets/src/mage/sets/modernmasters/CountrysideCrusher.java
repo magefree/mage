@@ -37,7 +37,7 @@ public class CountrysideCrusher extends mage.sets.morningtide.CountrysideCrusher
 
     public CountrysideCrusher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "MMA";
     }
 

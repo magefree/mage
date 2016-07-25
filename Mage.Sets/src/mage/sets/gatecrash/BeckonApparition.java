@@ -37,7 +37,7 @@ public class BeckonApparition extends mage.sets.eventide.BeckonApparition {
 
     public BeckonApparition(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "GTC";
     }
 

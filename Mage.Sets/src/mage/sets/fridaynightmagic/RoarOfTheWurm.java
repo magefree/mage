@@ -37,7 +37,7 @@ public class RoarOfTheWurm extends mage.sets.odyssey.RoarOfTheWurm {
 
     public RoarOfTheWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "FNMP";
     }
 

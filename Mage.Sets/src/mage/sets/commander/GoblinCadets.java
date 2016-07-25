@@ -37,7 +37,7 @@ public class GoblinCadets extends mage.sets.urzassaga.GoblinCadets {
 
     public GoblinCadets(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "CMD";
     }
 

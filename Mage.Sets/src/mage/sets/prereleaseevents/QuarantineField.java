@@ -37,7 +37,7 @@ public class QuarantineField extends mage.sets.battleforzendikar.QuarantineField
 
     public QuarantineField(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 286;
+        this.cardNumber = "286";
         this.expansionSetCode = "PTC";
     }
 

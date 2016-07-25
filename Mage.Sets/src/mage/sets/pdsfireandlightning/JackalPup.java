@@ -37,7 +37,7 @@ public class JackalPup extends mage.sets.tempest.JackalPup {
 
     public JackalPup(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "PD2";
     }
 

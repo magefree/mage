@@ -37,7 +37,7 @@ public class Rootwalla extends mage.sets.tempest.Rootwalla {
 
     public Rootwalla(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 192;
+        this.cardNumber = "192";
         this.expansionSetCode = "M14";
     }
 

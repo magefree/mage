@@ -37,7 +37,7 @@ public class AgentOfStromgald2 extends AgentOfStromgald1 {
 
     public AgentOfStromgald2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
     }
 
     public AgentOfStromgald2(final AgentOfStromgald2 card) {

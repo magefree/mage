@@ -37,7 +37,7 @@ public class HoverguardSweepers extends mage.sets.fifthdawn.HoverguardSweepers {
 
     public HoverguardSweepers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "C14";
     }
 

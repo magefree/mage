@@ -37,7 +37,7 @@ public class CrookclawTransmuter extends mage.sets.timespiral.CrookclawTransmute
 
     public CrookclawTransmuter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
+        this.cardNumber = "94";
         this.expansionSetCode = "CNS";
     }
 

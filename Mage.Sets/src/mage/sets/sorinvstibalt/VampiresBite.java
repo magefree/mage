@@ -37,7 +37,7 @@ public class VampiresBite extends mage.sets.zendikar.VampiresBite {
 
     public VampiresBite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "DDK";
     }
 

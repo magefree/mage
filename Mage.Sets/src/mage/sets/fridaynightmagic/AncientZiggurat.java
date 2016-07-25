@@ -37,7 +37,7 @@ public class AncientZiggurat extends mage.sets.conflux.AncientZiggurat {
 
     public AncientZiggurat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "FNMP";
     }
 

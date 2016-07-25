@@ -38,7 +38,7 @@ public class DiamondValley extends mage.sets.arabiannights.DiamondValley {
 
     public DiamondValley(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.RARE;
     }

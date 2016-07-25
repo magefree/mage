@@ -38,7 +38,7 @@ public class WoollyThoctar extends mage.sets.shardsofalara.WoollyThoctar {
 
     public WoollyThoctar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class SacredGround extends mage.sets.stronghold.SacredGround {
 
     public SacredGround(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "7ED";
     }
 

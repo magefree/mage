@@ -38,7 +38,7 @@ public class TorstenVonUrsus extends mage.sets.legends.TorstenVonUrsus {
 
     public TorstenVonUrsus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

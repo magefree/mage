@@ -37,7 +37,7 @@ public class GuardGomazoa extends mage.sets.riseoftheeldrazi.GuardGomazoa {
 
     public GuardGomazoa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "PC2";
     }
 

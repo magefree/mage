@@ -37,7 +37,7 @@ public class EnergyChamber extends mage.sets.elspethvstezzeret.EnergyChamber {
 
     public EnergyChamber(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "5DN";
     }
 

@@ -38,7 +38,7 @@ public class HurrJackal extends mage.sets.arabiannights.HurrJackal {
 
     public HurrJackal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "4ED";
         this.rarity = Rarity.RARE;
     }

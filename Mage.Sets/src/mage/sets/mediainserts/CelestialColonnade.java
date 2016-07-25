@@ -38,7 +38,7 @@ public class CelestialColonnade extends mage.sets.worldwake.CelestialColonnade {
 
     public CelestialColonnade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

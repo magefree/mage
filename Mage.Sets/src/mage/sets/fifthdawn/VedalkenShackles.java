@@ -38,7 +38,7 @@ public class VedalkenShackles extends mage.sets.modernmasters.VedalkenShackles {
 
     public VedalkenShackles(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "5DN";
         this.rarity = Rarity.RARE;
     }

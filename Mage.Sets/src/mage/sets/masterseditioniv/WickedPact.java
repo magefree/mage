@@ -38,7 +38,7 @@ public class WickedPact extends mage.sets.portal.WickedPact {
 
     public WickedPact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

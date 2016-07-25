@@ -38,7 +38,7 @@ public class UnstableMutation extends mage.sets.arabiannights.UnstableMutation {
 
     public UnstableMutation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "3ED";
     }
 

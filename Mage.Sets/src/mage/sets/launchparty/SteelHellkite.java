@@ -37,7 +37,7 @@ public class SteelHellkite extends mage.sets.scarsofmirrodin.SteelHellkite {
 
     public SteelHellkite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "MLP";
     }
 

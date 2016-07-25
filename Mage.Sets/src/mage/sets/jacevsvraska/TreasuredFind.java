@@ -37,7 +37,7 @@ public class TreasuredFind extends mage.sets.returntoravnica.TreasuredFind {
 
     public TreasuredFind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "DDM";
     }
 

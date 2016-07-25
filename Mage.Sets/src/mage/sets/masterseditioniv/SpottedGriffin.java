@@ -37,7 +37,7 @@ public class SpottedGriffin extends mage.sets.portal.SpottedGriffin {
 
     public SpottedGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "ME4";
     }
 

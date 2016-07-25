@@ -37,7 +37,7 @@ public class AmbassadorLaquatus extends mage.sets.tenthedition.AmbassadorLaquatu
 
     public AmbassadorLaquatus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "TOR";
     }
 

@@ -37,7 +37,7 @@ public class JandorsRing extends mage.sets.revisededition.JandorsRing {
 
     public JandorsRing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "ARN";
     }
 

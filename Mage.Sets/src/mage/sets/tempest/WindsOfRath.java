@@ -37,7 +37,7 @@ public class WindsOfRath extends mage.sets.heroesvsmonsters.WindsOfRath {
 
     public WindsOfRath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 264;
+        this.cardNumber = "264";
         this.expansionSetCode = "TMP";
     }
 

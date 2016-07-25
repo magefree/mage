@@ -37,7 +37,7 @@ public class OgreBattledriver extends mage.sets.magic2014.OgreBattledriver {
 
     public OgreBattledriver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "DDN";
     }
 

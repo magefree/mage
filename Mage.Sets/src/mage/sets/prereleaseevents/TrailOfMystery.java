@@ -38,7 +38,7 @@ public class TrailOfMystery extends mage.sets.khansoftarkir.TrailOfMystery {
 
     public TrailOfMystery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

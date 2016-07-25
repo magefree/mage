@@ -37,7 +37,7 @@ public class DoorOfDestinies extends mage.sets.magic2014.DoorOfDestinies {
 
     public DoorOfDestinies(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "MOR";
     }
 

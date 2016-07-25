@@ -37,7 +37,7 @@ public class OrderOfYawgmoth extends mage.sets.urzassaga.OrderOfYawgmoth {
 
     public OrderOfYawgmoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DDE";
     }
 

@@ -37,7 +37,7 @@ public class AscendantEvincar extends mage.sets.planechase.AscendantEvincar {
 
     public AscendantEvincar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "10E";
     }
 

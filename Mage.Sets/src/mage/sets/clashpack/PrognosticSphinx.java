@@ -38,7 +38,7 @@ public class PrognosticSphinx extends mage.sets.theros.PrognosticSphinx {
 
     public PrognosticSphinx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

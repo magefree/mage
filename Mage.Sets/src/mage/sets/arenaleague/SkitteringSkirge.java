@@ -37,7 +37,7 @@ public class SkitteringSkirge extends mage.sets.urzassaga.SkitteringSkirge {
 
     public SkitteringSkirge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "ARENA";
     }
 

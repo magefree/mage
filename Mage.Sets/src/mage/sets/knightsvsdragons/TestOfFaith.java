@@ -38,7 +38,7 @@ public class TestOfFaith extends mage.sets.modernmasters.TestOfFaith {
 
     public TestOfFaith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "DDG";
         this.rarity = Rarity.UNCOMMON;
     }

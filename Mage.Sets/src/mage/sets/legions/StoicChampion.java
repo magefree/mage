@@ -37,7 +37,7 @@ public class StoicChampion extends mage.sets.vintagemasters.StoicChampion {
 
     public StoicChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "LGN";
     }
 

@@ -39,7 +39,7 @@ public class TidalWave extends mage.sets.mirage.TidalWave {
 
     public TidalWave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

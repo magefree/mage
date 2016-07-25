@@ -37,7 +37,7 @@ public class NivixGuildmage extends mage.sets.returntoravnica.NivixGuildmage {
 
     public NivixGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 202;
+        this.cardNumber = "202";
         this.expansionSetCode = "C13";
     }
 

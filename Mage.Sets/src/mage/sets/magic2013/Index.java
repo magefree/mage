@@ -37,7 +37,7 @@ public class Index extends mage.sets.apocalypse.Index {
 
     public Index(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "M13";
     }
 

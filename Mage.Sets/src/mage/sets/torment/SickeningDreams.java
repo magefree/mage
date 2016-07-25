@@ -37,7 +37,7 @@ public class SickeningDreams extends mage.sets.pdsgraveborn.SickeningDreams {
 
     public SickeningDreams(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "TOR";
     }
 

@@ -37,7 +37,7 @@ public class TormentedSoul extends mage.sets.magic2012.TormentedSoul {
 
     public TormentedSoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "M13";
     }
 

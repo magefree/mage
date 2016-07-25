@@ -37,7 +37,7 @@ public class BalanceOfPower extends mage.sets.eighthedition.BalanceOfPower {
 
     public BalanceOfPower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "PTK";
     }
 

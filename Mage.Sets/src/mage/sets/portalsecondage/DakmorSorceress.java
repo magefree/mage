@@ -37,7 +37,7 @@ public class DakmorSorceress extends mage.sets.starter1999.DakmorSorceress {
 
     public DakmorSorceress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "PO2";
     }
 

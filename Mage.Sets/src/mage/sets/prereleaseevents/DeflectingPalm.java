@@ -38,7 +38,7 @@ public class DeflectingPalm extends mage.sets.khansoftarkir.DeflectingPalm {
 
     public DeflectingPalm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

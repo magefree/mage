@@ -38,7 +38,7 @@ public class FuneralCharm extends mage.sets.timeshifted.FuneralCharm {
 
     public FuneralCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "VIS";
         this.rarity = Rarity.COMMON;
     }

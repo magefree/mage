@@ -37,7 +37,7 @@ public class UrzasPowerPlant3 extends UrzasPowerPlant1 {
 
     public UrzasPowerPlant3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
     }
 
     public UrzasPowerPlant3(final UrzasPowerPlant3 card) {

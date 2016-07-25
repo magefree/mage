@@ -38,7 +38,7 @@ public class MaliciousAffliction extends mage.sets.commander2014.MaliciousAfflic
 
     public MaliciousAffliction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "EMA";
     }
 

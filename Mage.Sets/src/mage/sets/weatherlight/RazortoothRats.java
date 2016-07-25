@@ -37,7 +37,7 @@ public class RazortoothRats extends mage.sets.ninthedition.RazortoothRats {
 
     public RazortoothRats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "WTH";
     }
 

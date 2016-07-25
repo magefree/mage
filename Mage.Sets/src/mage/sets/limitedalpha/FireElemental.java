@@ -38,7 +38,7 @@ public class FireElemental extends mage.sets.magic2013.FireElemental {
 
     public FireElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "LEA";
         this.rarity = Rarity.UNCOMMON;
     }

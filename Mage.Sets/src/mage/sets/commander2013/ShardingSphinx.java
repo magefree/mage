@@ -37,7 +37,7 @@ public class ShardingSphinx extends mage.sets.shardsofalara.ShardingSphinx {
 
     public ShardingSphinx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "C13";
     }
 

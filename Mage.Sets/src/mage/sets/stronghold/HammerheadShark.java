@@ -37,7 +37,7 @@ public class HammerheadShark extends mage.sets.tempestremastered.HammerheadShark
 
     public HammerheadShark(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "STH";
     }
 

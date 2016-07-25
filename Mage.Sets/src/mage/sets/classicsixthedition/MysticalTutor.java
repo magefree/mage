@@ -37,7 +37,7 @@ public class MysticalTutor extends mage.sets.mirage.MysticalTutor {
 
     public MysticalTutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "6ED";
     }
 

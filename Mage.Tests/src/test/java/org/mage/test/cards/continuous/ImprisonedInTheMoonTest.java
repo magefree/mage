@@ -35,20 +35,20 @@ public class ImprisonedInTheMoonTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Urza's Tower", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Urza's Power Plant", 1);
         addCard(Zone.HAND, playerB, "Wurmcoil Engine", 1); // {6} Wurm - 6/6 Deathtouch and Lifelink
-        addCard(Zone.HAND, playerB, "Bottle Gnomes", 1); // {3} Gnome - 1/3
+        addCard(Zone.HAND, playerB, "Bonesplitter", 1); // {1} Equipament
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Imprisoned in the Moon");
         addTarget(playerA, "Urza's Mine");
         // 6 total mana available - 3 from Tower, 2 from Powerplant, 1 from enchanted Mine
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Wurmcoil Engine");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Bottle Gnomes");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Bonesplitter");
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
                 
         assertPermanentCount(playerA, "Imprisoned in the Moon", 1);
         assertPermanentCount(playerB, "Wurmcoil Engine", 1); 
         assertHandCount(playerB,"Wurmcoil Engine", 0);        
-        assertHandCount(playerB, "Bottle Gnomes", 1); // should never be cast - wurmcoil uses up all mana
-        assertPermanentCount(playerB, "Bottle Gnomes", 0);
+        assertHandCount(playerB, "Bonesplitter", 1); // should never be cast - wurmcoil uses up all mana
+        assertPermanentCount(playerB, "Bonesplitter", 0);
     }
 }

@@ -39,7 +39,7 @@ public class GlacialWall extends mage.sets.fifthedition.GlacialWall {
 
     public GlacialWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

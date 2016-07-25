@@ -37,7 +37,7 @@ public class MagusOfTheMirror extends mage.sets.conspiracy.MagusOfTheMirror {
 
     public MagusOfTheMirror(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "TSP";
     }
 

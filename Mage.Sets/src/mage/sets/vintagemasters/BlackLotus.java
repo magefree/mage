@@ -38,7 +38,7 @@ public class BlackLotus extends mage.sets.limitedalpha.BlackLotus {
 
     public BlackLotus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.BONUS;
     }

@@ -37,7 +37,7 @@ public class ThalakosDrifters extends mage.sets.tempestremastered.ThalakosDrifte
 
     public ThalakosDrifters(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "VMA";
     }
 

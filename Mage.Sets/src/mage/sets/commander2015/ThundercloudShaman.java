@@ -37,7 +37,7 @@ public class ThundercloudShaman extends mage.sets.modernmasters.ThundercloudSham
 
     public ThundercloudShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "C15";
     }
 

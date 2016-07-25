@@ -37,7 +37,7 @@ public class LostSoul extends mage.sets.fifthedition.LostSoul {
 
     public LostSoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "6ED";
     }
 

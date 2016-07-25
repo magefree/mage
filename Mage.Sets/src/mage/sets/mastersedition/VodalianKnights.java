@@ -38,7 +38,7 @@ public class VodalianKnights extends mage.sets.fallenempires.VodalianKnights {
 
     public VodalianKnights(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.UNCOMMON;
     }

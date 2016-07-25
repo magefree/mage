@@ -37,7 +37,7 @@ public class ZealousPersecution extends mage.sets.alarareborn.ZealousPersecution
 
     public ZealousPersecution(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "DDK";
     }
 

@@ -37,7 +37,7 @@ public class CryptOfAgadeem extends mage.sets.zendikar.CryptOfAgadeem {
 
     public CryptOfAgadeem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 288;
+        this.cardNumber = "288";
         this.expansionSetCode = "C14";
     }
 

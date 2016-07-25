@@ -37,7 +37,7 @@ public class PredatoryUrge extends mage.sets.zendikar.PredatoryUrge {
 
     public PredatoryUrge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "PC2";
     }
 

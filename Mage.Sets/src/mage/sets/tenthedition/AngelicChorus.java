@@ -37,7 +37,7 @@ public class AngelicChorus extends mage.sets.urzassaga.AngelicChorus {
 
     public AngelicChorus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "10E";
     }
 

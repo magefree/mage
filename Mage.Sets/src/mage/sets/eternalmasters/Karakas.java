@@ -38,7 +38,7 @@ public class Karakas extends mage.sets.legends.Karakas {
 
     public Karakas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 240;
+        this.cardNumber = "240";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.MYTHIC;
     }

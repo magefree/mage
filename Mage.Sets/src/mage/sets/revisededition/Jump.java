@@ -37,7 +37,7 @@ public class Jump extends mage.sets.magic2010.Jump {
 
     public Jump(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "3ED";
     }
 

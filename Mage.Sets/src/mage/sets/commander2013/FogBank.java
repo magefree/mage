@@ -37,7 +37,7 @@ public class FogBank extends mage.sets.urzassaga.FogBank {
 
     public FogBank(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "C13";
     }
 

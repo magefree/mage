@@ -37,7 +37,7 @@ public class Grindclock extends mage.sets.scarsofmirrodin.Grindclock {
 
     public Grindclock(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 217;
+        this.cardNumber = "217";
         this.expansionSetCode = "M15";
     }
 

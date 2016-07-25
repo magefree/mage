@@ -38,7 +38,7 @@ public class RocketLauncher extends mage.sets.revisededition.RocketLauncher {
 
     public RocketLauncher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.UNCOMMON;
     }

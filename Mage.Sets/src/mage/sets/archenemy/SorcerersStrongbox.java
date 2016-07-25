@@ -37,7 +37,7 @@ public class SorcerersStrongbox extends mage.sets.magic2011.SorcerersStrongbox {
 
     public SorcerersStrongbox(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "ARC";
     }
 

@@ -37,7 +37,7 @@ public class LoomingShade extends mage.sets.magic2010.LoomingShade {
 
     public LoomingShade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "10E";
     }
 

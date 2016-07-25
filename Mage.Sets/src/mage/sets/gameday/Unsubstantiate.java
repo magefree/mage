@@ -37,7 +37,7 @@ public class Unsubstantiate extends mage.sets.eldritchmoon.Unsubstantiate {
 
     public Unsubstantiate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "MGDC";
     }
 

@@ -37,7 +37,7 @@ public class HolyStrength extends mage.sets.tenthedition.HolyStrength {
 
     public HolyStrength(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "8ED";
     }
 

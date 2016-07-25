@@ -38,7 +38,7 @@ public class FoulSpirit extends mage.sets.masterseditioniv.FoulSpirit {
 
     public FoulSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "PO2";
         this.rarity = Rarity.UNCOMMON;
     }

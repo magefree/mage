@@ -38,7 +38,7 @@ public class FrenziedTilling extends mage.sets.invasion.FrenziedTilling {
 
     public FrenziedTilling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "GTC";
         this.rarity = Rarity.UNCOMMON;
     }

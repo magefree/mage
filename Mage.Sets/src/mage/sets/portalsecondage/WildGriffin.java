@@ -37,7 +37,7 @@ public class WildGriffin extends mage.sets.tenthedition.WildGriffin {
 
     public WildGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "PO2";
     }
 

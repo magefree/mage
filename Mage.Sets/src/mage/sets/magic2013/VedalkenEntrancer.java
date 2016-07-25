@@ -37,7 +37,7 @@ public class VedalkenEntrancer extends mage.sets.ravnica.VedalkenEntrancer {
 
     public VedalkenEntrancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "M13";
     }
 

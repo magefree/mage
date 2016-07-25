@@ -37,7 +37,7 @@ public class AeronautTinkerer extends mage.sets.magic2015.AeronautTinkerer {
 
     public AeronautTinkerer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "MBP";
     }
 

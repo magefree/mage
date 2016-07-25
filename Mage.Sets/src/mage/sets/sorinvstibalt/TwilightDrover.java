@@ -37,7 +37,7 @@ public class TwilightDrover extends mage.sets.ravnica.TwilightDrover {
 
     public TwilightDrover(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "DDK";
     }
 

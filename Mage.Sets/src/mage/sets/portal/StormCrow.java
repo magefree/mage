@@ -37,7 +37,7 @@ public class StormCrow extends mage.sets.ninthedition.StormCrow {
 
     public StormCrow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "POR";
     }
 

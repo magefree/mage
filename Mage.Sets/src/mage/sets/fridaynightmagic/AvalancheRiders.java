@@ -37,7 +37,7 @@ public class AvalancheRiders extends mage.sets.urzaslegacy.AvalancheRiders {
 
     public AvalancheRiders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "FNMP";
     }
 

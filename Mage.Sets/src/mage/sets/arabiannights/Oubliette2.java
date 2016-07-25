@@ -37,7 +37,7 @@ public class Oubliette2 extends Oubliette1 {
 
     public Oubliette2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
     }
 
     public Oubliette2(final Oubliette2 card) {

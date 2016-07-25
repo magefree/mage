@@ -37,7 +37,7 @@ public class StrandsOfNight extends mage.sets.seventhedition.StrandsOfNight {
 
     public StrandsOfNight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "6ED";
     }
 

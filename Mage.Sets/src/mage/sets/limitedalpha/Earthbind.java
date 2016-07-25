@@ -37,7 +37,7 @@ public class Earthbind extends mage.sets.limitedbeta.Earthbind {
 
     public Earthbind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "LEA";
     }
 

@@ -38,7 +38,7 @@ public class MindsEye extends mage.sets.mirrodin.MindsEye {
 
     public MindsEye(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

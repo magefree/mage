@@ -37,7 +37,7 @@ public class FootbottomFeast extends mage.sets.commander.FootbottomFeast {
 
     public FootbottomFeast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "LRW";
     }
 

@@ -37,7 +37,7 @@ public class BurstLightning extends mage.sets.zendikar.BurstLightning {
 
     public BurstLightning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "MM2";
     }
 

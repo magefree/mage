@@ -37,7 +37,7 @@ public class SaltfieldRecluse extends mage.sets.planarchaos.SaltfieldRecluse {
 
     public SaltfieldRecluse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "MMA";
     }
 

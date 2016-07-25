@@ -37,7 +37,7 @@ public class Serenity extends mage.sets.weatherlight.Serenity {
 
     public Serenity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "6ED";
     }
 

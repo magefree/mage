@@ -37,7 +37,7 @@ public class IzzetGuildmage extends mage.sets.guildpact.IzzetGuildmage {
 
     public IzzetGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "DDJ";
     }
 

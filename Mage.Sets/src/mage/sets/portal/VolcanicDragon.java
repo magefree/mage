@@ -38,7 +38,7 @@ public class VolcanicDragon extends mage.sets.magic2012.VolcanicDragon {
 
     public VolcanicDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "POR";
         this.rarity = Rarity.RARE;
     }

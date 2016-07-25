@@ -37,7 +37,7 @@ public class RhysticStudy extends mage.sets.prophecy.RhysticStudy {
 
     public RhysticStudy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "CMA";
     }
 

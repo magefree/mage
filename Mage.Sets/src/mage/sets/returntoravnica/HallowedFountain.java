@@ -37,7 +37,7 @@ public class HallowedFountain extends mage.sets.dissension.HallowedFountain {
 
     public HallowedFountain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 241;
+        this.cardNumber = "241";
         this.expansionSetCode = "RTR";
     }
 

@@ -37,7 +37,7 @@ public class InduceDespair extends mage.sets.riseoftheeldrazi.InduceDespair {
 
     public InduceDespair(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "DDP";
     }
 

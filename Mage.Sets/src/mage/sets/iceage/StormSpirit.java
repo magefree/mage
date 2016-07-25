@@ -37,7 +37,7 @@ public class StormSpirit extends mage.sets.masterseditionii.StormSpirit {
 
     public StormSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 381;
+        this.cardNumber = "381";
         this.expansionSetCode = "ICE";
     }
 

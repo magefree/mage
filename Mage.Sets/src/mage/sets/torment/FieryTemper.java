@@ -39,7 +39,7 @@ public class FieryTemper extends mage.sets.timeshifted.FieryTemper {
 
     public FieryTemper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "TOR";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class SageAven extends mage.sets.ninthedition.SageAven {
 
     public SageAven(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "ONS";
     }
 

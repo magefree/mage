@@ -38,7 +38,7 @@ public class ShrineOfBurningRage extends mage.sets.newphyrexia.ShrineOfBurningRa
 
     public ShrineOfBurningRage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

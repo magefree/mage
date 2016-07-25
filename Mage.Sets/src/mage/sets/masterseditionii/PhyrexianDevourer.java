@@ -38,7 +38,7 @@ public class PhyrexianDevourer extends mage.sets.alliances.PhyrexianDevourer {
 
     public PhyrexianDevourer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.UNCOMMON;
     }

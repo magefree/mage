@@ -37,7 +37,7 @@ public class UnexpectedlyAbsent extends mage.sets.commander2013.UnexpectedlyAbse
 
     public UnexpectedlyAbsent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "EMA";
     }
 

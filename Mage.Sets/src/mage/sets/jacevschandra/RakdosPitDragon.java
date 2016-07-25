@@ -37,7 +37,7 @@ public class RakdosPitDragon extends mage.sets.dissension.RakdosPitDragon {
 
     public RakdosPitDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "DD2";
     }
 

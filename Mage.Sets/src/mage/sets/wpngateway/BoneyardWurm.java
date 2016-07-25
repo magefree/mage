@@ -38,7 +38,7 @@ public class BoneyardWurm extends mage.sets.innistrad.BoneyardWurm {
 
     public BoneyardWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

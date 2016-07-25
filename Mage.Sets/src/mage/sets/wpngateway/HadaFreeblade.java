@@ -38,7 +38,7 @@ public class HadaFreeblade extends mage.sets.worldwake.HadaFreeblade {
 
     public HadaFreeblade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

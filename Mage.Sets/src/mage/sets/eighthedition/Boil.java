@@ -37,7 +37,7 @@ public class Boil extends mage.sets.tempest.Boil {
 
     public Boil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 180;
+        this.cardNumber = "180";
         this.expansionSetCode = "8ED";
     }
 

@@ -38,7 +38,7 @@ public class GatherTheTownsfolk extends mage.sets.darkascension.GatherTheTownsfo
 
     public GatherTheTownsfolk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

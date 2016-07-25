@@ -37,7 +37,7 @@ public class Marjhan extends mage.sets.masterseditionii.Marjhan {
 
     public Marjhan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "HML";
     }
 

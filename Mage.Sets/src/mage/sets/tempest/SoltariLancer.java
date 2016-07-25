@@ -37,7 +37,7 @@ public class SoltariLancer extends mage.sets.tempestremastered.SoltariLancer {
 
     public SoltariLancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 256;
+        this.cardNumber = "256";
         this.expansionSetCode = "TMP";
     }
 

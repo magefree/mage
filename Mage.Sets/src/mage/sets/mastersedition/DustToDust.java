@@ -37,7 +37,7 @@ public class DustToDust extends mage.sets.thedark.DustToDust {
 
     public DustToDust(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "MED";
     }
 

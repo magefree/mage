@@ -37,7 +37,7 @@ public class BrimstoneVolley extends mage.sets.innistrad.BrimstoneVolley {
 
     public BrimstoneVolley(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "CNS";
     }
 

@@ -37,7 +37,7 @@ public class AliFromCairo extends mage.sets.arabiannights.AliFromCairo {
 
     public AliFromCairo(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "ME4";
     }
 

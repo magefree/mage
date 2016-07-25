@@ -37,7 +37,7 @@ public class KathariBomber extends mage.sets.alarareborn.KathariBomber {
 
     public KathariBomber(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DDN";
     }
 

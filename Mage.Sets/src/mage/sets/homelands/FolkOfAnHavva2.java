@@ -37,7 +37,7 @@ public class FolkOfAnHavva2 extends FolkOfAnHavva1 {
 
     public FolkOfAnHavva2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
     }
 
     public FolkOfAnHavva2(final FolkOfAnHavva2 card) {

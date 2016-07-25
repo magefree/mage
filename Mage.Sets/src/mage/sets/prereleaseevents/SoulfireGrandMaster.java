@@ -37,7 +37,7 @@ public class SoulfireGrandMaster extends mage.sets.fatereforged.SoulfireGrandMas
 
     public SoulfireGrandMaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "PTC";
     }
 

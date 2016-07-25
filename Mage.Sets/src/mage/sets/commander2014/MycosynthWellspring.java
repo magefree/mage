@@ -37,7 +37,7 @@ public class MycosynthWellspring extends mage.sets.newphyrexia.MycosynthWellspri
 
     public MycosynthWellspring(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 253;
+        this.cardNumber = "253";
         this.expansionSetCode = "C14";
     }
 

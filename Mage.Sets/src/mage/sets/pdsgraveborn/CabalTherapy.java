@@ -37,7 +37,7 @@ public class CabalTherapy extends mage.sets.judgment.CabalTherapy {
 
     public CabalTherapy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "PD3";
     }
 

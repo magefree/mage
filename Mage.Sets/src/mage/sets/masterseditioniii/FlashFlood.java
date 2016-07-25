@@ -38,7 +38,7 @@ public class FlashFlood extends mage.sets.legends.FlashFlood {
 
     public FlashFlood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class EmancipationAngel extends mage.sets.avacynrestored.EmancipationAnge
 
     public EmancipationAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDQ";
     }
 

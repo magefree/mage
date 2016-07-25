@@ -38,7 +38,7 @@ public class OrderChaos extends mage.sets.apocalypse.OrderChaos {
 
     public OrderChaos (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "HOP";
     }
 

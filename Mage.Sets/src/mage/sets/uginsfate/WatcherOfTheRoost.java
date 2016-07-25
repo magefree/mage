@@ -37,7 +37,7 @@ public class WatcherOfTheRoost extends mage.sets.khansoftarkir.WatcherOfTheRoost
 
     public WatcherOfTheRoost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "UGIN";
     }
 

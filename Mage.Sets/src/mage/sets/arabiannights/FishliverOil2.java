@@ -15,7 +15,7 @@ public class FishliverOil2 extends mage.sets.arabiannights.FishliverOil1 {
     
    public FishliverOil2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "ARN";
     }
 

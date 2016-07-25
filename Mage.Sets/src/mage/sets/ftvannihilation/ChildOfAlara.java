@@ -37,7 +37,7 @@ public class ChildOfAlara extends mage.sets.conflux.ChildOfAlara {
 
     public ChildOfAlara(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "V14";
     }
 

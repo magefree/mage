@@ -38,7 +38,7 @@ public class PardicDragon extends mage.sets.timespiral.PardicDragon {
 
     public PardicDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.UNCOMMON;
     }

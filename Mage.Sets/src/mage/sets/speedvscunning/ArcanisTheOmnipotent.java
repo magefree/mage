@@ -38,7 +38,7 @@ public class ArcanisTheOmnipotent extends mage.sets.tenthedition.ArcanisTheOmnip
 
     public ArcanisTheOmnipotent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "DDN";
         this.rarity = Rarity.MYTHIC;
     }

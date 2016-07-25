@@ -38,7 +38,7 @@ public class Impatience extends mage.sets.seventhedition.Impatience {
 
     public Impatience(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "UDS";
     }
 

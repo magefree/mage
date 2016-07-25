@@ -37,7 +37,7 @@ public class GoblinWarDrums4 extends mage.sets.fallenempires.GoblinWarDrums1 {
 
     public GoblinWarDrums4(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
     }
 
     public GoblinWarDrums4(final GoblinWarDrums4 card) {

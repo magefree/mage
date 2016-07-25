@@ -37,7 +37,7 @@ public class ParadiseMantle extends mage.sets.fifthdawn.ParadiseMantle {
 
     public ParadiseMantle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 211;
+        this.cardNumber = "211";
         this.expansionSetCode = "MMA";
     }
 

@@ -38,7 +38,7 @@ public class FacelessButcher extends mage.sets.timeshifted.FacelessButcher {
 
     public FacelessButcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "PD3";
         this.rarity = Rarity.COMMON;
     }

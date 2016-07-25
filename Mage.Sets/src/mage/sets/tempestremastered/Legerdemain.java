@@ -37,7 +37,7 @@ public class Legerdemain extends mage.sets.tempest.Legerdemain {
 
     public Legerdemain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "TPR";
     }
 

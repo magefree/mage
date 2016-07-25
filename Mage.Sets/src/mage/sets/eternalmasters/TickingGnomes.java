@@ -38,7 +38,7 @@ public class TickingGnomes extends mage.sets.urzaslegacy.TickingGnomes {
 
     public TickingGnomes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = "233";
         this.expansionSetCode = "EMA";
     }
 

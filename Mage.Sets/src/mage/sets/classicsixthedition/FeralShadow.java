@@ -37,7 +37,7 @@ public class FeralShadow extends mage.sets.mirage.FeralShadow {
 
     public FeralShadow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "6ED";
     }
 

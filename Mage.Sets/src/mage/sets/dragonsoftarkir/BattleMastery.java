@@ -37,7 +37,7 @@ public class BattleMastery extends mage.sets.lorwyn.BattleMastery {
 
     public BattleMastery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "DTK";
     }
 

@@ -37,7 +37,7 @@ public class ManaMatrix extends mage.sets.masterseditioniv.ManaMatrix {
 
     public ManaMatrix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 230;
+        this.cardNumber = "230";
         this.expansionSetCode = "LEG";
     }
 

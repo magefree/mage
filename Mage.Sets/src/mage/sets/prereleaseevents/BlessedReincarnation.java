@@ -37,7 +37,7 @@ public class BlessedReincarnation extends mage.sets.dragonsoftarkir.BlessedReinc
 
     public BlessedReincarnation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "PTC";
     }
 

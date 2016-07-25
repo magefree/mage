@@ -37,7 +37,7 @@ public class Compost extends mage.sets.seventhedition.Compost {
 
     public Compost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "UDS";
     }
 

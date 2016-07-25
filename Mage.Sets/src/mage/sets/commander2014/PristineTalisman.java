@@ -37,7 +37,7 @@ public class PristineTalisman extends mage.sets.newphyrexia.PristineTalisman {
 
     public PristineTalisman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 264;
+        this.cardNumber = "264";
         this.expansionSetCode = "C14";
     }
 

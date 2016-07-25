@@ -37,7 +37,7 @@ public class HeavyBallista extends mage.sets.seventhedition.HeavyBallista {
 
     public HeavyBallista(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "6ED";
     }
 

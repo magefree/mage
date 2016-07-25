@@ -37,7 +37,7 @@ public class ChokingTethers extends mage.sets.onslaught.ChokingTethers {
 
     public ChokingTethers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "VMA";
     }
 

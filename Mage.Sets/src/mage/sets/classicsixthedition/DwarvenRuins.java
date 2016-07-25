@@ -37,7 +37,7 @@ public class DwarvenRuins extends mage.sets.fallenempires.DwarvenRuins {
 
     public DwarvenRuins(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 323;
+        this.cardNumber = "323";
         this.expansionSetCode = "6ED";
     }
 

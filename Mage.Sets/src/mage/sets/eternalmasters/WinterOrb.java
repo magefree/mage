@@ -39,7 +39,7 @@ public class WinterOrb extends mage.sets.limitedalpha.WinterOrb {
 
     public WinterOrb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 234;
+        this.cardNumber = "234";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.RARE;
     }

@@ -37,7 +37,7 @@ public class TinderWall extends mage.sets.iceage.TinderWall {
 
     public TinderWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "ME2";
     }
 

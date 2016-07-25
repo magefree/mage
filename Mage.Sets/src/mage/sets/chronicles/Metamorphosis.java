@@ -37,7 +37,7 @@ public class Metamorphosis extends mage.sets.arabiannights.Metamorphosis {
 
     public Metamorphosis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "CHR";
     }
 

@@ -37,7 +37,7 @@ public class SedgeTroll extends mage.sets.masterseditioniv.SedgeTroll {
 
     public SedgeTroll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "LEB";
     }
 

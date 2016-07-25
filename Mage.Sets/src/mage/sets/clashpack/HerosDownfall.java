@@ -38,7 +38,7 @@ public class HerosDownfall extends mage.sets.theros.HerosDownfall {
 
     public HerosDownfall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

@@ -38,7 +38,7 @@ public class SunpetalGrove extends mage.sets.magic2010.SunpetalGrove {
 
     public SunpetalGrove(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "M11";
     }
 

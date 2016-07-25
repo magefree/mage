@@ -37,7 +37,7 @@ public class MindlessAutomaton extends mage.sets.exodus.MindlessAutomaton {
 
     public MindlessAutomaton(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "TPR";
     }
 

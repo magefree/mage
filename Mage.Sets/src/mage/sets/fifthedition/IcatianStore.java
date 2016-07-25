@@ -37,7 +37,7 @@ public class IcatianStore extends mage.sets.fallenempires.IcatianStore {
 
     public IcatianStore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 423;
+        this.cardNumber = "423";
         this.expansionSetCode = "5ED";
     }
 

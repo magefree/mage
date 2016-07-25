@@ -37,7 +37,7 @@ public class HoardingDragon extends mage.sets.magic2011.HoardingDragon {
 
     public HoardingDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "M15";
     }
 

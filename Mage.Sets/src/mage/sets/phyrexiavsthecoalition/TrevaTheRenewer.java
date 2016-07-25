@@ -37,7 +37,7 @@ public class TrevaTheRenewer extends mage.sets.invasion.TrevaTheRenewer {
 
     public TrevaTheRenewer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "DDE";
     }
 

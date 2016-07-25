@@ -37,7 +37,7 @@ public class EmeriaTheSkyRuin extends mage.sets.zendikar.EmeriaTheSkyRuin {
 
     public EmeriaTheSkyRuin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 293;
+        this.cardNumber = "293";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class TormentedHero extends mage.sets.theros.TormentedHero {
 
     public TormentedHero(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "FNMP";
     }
 

@@ -37,7 +37,7 @@ public class TirelessMissionaries extends mage.sets.magic2011.TirelessMissionari
 
     public TirelessMissionaries(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "M15";
     }
 

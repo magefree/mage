@@ -37,7 +37,7 @@ public class AggressiveUrge extends mage.sets.tenthedition.AggressiveUrge {
 
     public AggressiveUrge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "INV";
     }
 

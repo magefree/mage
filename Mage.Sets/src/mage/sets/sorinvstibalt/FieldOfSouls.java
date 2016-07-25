@@ -37,7 +37,7 @@ public class FieldOfSouls extends mage.sets.tempestremastered.FieldOfSouls {
 
     public FieldOfSouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "DDK";
     }
 

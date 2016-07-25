@@ -37,7 +37,7 @@ public class VerdantForce extends mage.sets.tempest.VerdantForce {
 
     public VerdantForce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 307;
+        this.cardNumber = "307";
         this.expansionSetCode = "10E";
     }
 

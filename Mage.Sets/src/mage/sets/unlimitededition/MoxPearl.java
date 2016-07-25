@@ -37,7 +37,7 @@ public class MoxPearl extends mage.sets.limitedalpha.MoxPearl {
 
     public MoxPearl(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 264;
+        this.cardNumber = "264";
         this.expansionSetCode = "2ED";
     }
 

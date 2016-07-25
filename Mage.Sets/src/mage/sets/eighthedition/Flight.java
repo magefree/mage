@@ -37,7 +37,7 @@ public class Flight extends mage.sets.magic2012.Flight {
 
     public Flight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "8ED";
     }
 

@@ -37,7 +37,7 @@ public class GiantOctopus extends mage.sets.seventhedition.GiantOctopus {
 
     public GiantOctopus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "S99";
     }
 

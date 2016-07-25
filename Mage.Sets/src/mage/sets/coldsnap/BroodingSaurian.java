@@ -37,7 +37,7 @@ public class BroodingSaurian extends mage.sets.commander2013.BroodingSaurian {
 
     public BroodingSaurian(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "CSP";
     }
 

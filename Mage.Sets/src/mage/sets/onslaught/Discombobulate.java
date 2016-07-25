@@ -37,7 +37,7 @@ public class Discombobulate extends mage.sets.tenthedition.Discombobulate {
 
     public Discombobulate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "ONS";
     }
 

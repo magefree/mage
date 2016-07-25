@@ -37,7 +37,7 @@ public class HourOfReckoning extends mage.sets.ravnica.HourOfReckoning {
 
     public HourOfReckoning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "CMD";
     }
 

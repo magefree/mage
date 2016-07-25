@@ -38,7 +38,7 @@ public class Corrupt extends mage.sets.magic2011.Corrupt {
 
     public Corrupt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "USG";
         this.rarity = Rarity.COMMON;
     }

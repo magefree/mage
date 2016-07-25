@@ -37,7 +37,7 @@ public class GameOfChaos extends mage.sets.iceage.GameOfChaos {
 
     public GameOfChaos(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "5ED";
     }
 

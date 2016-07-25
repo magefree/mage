@@ -37,7 +37,7 @@ public class IncendiaryCommand extends mage.sets.commander2013.IncendiaryCommand
 
     public IncendiaryCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "LRW";
     }
 

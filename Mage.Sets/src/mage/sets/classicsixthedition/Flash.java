@@ -37,7 +37,7 @@ public class Flash extends mage.sets.mirage.Flash {
 
     public Flash(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class KarplusanYeti extends mage.sets.iceage.KarplusanYeti {
 
     public KarplusanYeti(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "9ED";
     }
 

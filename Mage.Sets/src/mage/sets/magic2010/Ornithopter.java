@@ -38,7 +38,7 @@ public class Ornithopter extends mage.sets.tenthedition.Ornithopter {
 
     public Ornithopter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "M10";
     }
 

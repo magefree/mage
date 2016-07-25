@@ -37,7 +37,7 @@ public class Lignify extends mage.sets.lorwyn.Lignify {
 
     public Lignify(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "DDD";
     }
 

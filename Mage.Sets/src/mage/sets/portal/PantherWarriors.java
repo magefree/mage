@@ -37,7 +37,7 @@ public class PantherWarriors extends mage.sets.visions.PantherWarriors {
 
     public PantherWarriors(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "POR";
     }
 

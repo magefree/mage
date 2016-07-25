@@ -37,7 +37,7 @@ public class AbyssalPersecutor extends mage.sets.worldwake.AbyssalPersecutor {
 
     public AbyssalPersecutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "C14";
     }
 

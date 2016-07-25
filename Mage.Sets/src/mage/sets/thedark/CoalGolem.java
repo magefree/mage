@@ -38,7 +38,7 @@ public class CoalGolem extends mage.sets.masterseditioniii.CoalGolem {
 
     public CoalGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.UNCOMMON;
     }

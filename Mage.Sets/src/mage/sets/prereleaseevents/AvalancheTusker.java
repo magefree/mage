@@ -38,7 +38,7 @@ public class AvalancheTusker extends mage.sets.khansoftarkir.AvalancheTusker {
 
     public AvalancheTusker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

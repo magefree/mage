@@ -37,7 +37,7 @@ public class NevinyrralsDisk extends mage.sets.fifthedition.NevinyrralsDisk {
 
     public NevinyrralsDisk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "EMA";
     }
 

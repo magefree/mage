@@ -37,7 +37,7 @@ public class ChargingTroll extends mage.sets.invasion.ChargingTroll {
 
     public ChargingTroll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "DDE";
     }
 

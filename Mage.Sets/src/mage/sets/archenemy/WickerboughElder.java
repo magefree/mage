@@ -37,7 +37,7 @@ public class WickerboughElder extends mage.sets.eventide.WickerboughElder {
 
     public WickerboughElder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "ARC";
     }
 

@@ -38,7 +38,7 @@ public class GideonBattleForged extends mage.sets.magicorigins.GideonBattleForge
 
     public GideonBattleForged(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 994;
+        this.cardNumber = "994";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

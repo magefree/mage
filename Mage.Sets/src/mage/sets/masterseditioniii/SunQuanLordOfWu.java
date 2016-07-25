@@ -37,7 +37,7 @@ public class SunQuanLordOfWu extends mage.sets.portalthreekingdoms.SunQuanLordOf
 
     public SunQuanLordOfWu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "ME3";
     }
 

@@ -37,7 +37,7 @@ public class BlessedWine extends mage.sets.fifthedition.BlessedWine {
 
     public BlessedWine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 231;
+        this.cardNumber = "231";
         this.expansionSetCode = "ICE";
     }
 

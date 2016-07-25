@@ -37,7 +37,7 @@ public class TukatongueThallid extends mage.sets.conflux.TukatongueThallid {
 
     public TukatongueThallid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "MM2";
     }
 

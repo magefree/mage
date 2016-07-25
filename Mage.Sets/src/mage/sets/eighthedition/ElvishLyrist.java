@@ -38,7 +38,7 @@ public class ElvishLyrist extends mage.sets.urzassaga.ElvishLyrist {
 
     public ElvishLyrist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.UNCOMMON;
     }

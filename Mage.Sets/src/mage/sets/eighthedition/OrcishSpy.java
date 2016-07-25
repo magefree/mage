@@ -37,7 +37,7 @@ public class OrcishSpy extends mage.sets.fallenempires.OrcishSpy1 {
 
     public OrcishSpy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "8ED";
     }
 

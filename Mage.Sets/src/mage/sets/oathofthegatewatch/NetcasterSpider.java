@@ -37,7 +37,7 @@ public class NetcasterSpider extends mage.sets.magic2015.NetcasterSpider {
 
     public NetcasterSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "OGW";
     }
 

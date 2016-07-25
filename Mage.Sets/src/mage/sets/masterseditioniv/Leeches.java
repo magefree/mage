@@ -37,7 +37,7 @@ public class Leeches extends mage.sets.homelands.Leeches {
 
     public Leeches(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "ME4";
     }
 

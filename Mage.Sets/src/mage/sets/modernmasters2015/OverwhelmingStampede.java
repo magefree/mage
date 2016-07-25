@@ -37,7 +37,7 @@ public class OverwhelmingStampede extends mage.sets.magic2011.OverwhelmingStampe
 
     public OverwhelmingStampede(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "MM2";
     }
 

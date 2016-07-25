@@ -37,7 +37,7 @@ public class FlameSpirit extends mage.sets.iceage.FlameSpirit {
 
     public FlameSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 229;
+        this.cardNumber = "229";
         this.expansionSetCode = "5ED";
     }
 

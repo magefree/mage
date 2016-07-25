@@ -37,7 +37,7 @@ public class CrystallineSliver extends mage.sets.stronghold.CrystallineSliver {
 
     public CrystallineSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "FNMP";
     }
 

@@ -39,7 +39,7 @@ public class AshnodsTransmogrant extends mage.sets.fifthedition.AshnodsTransmogr
 
     public AshnodsTransmogrant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.UNCOMMON;
     }

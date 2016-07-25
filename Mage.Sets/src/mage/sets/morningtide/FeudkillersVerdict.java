@@ -38,7 +38,7 @@ public class FeudkillersVerdict extends mage.sets.modernmasters.FeudkillersVerdi
 
     public FeudkillersVerdict(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "MOR";
         this.rarity = Rarity.RARE;
     }

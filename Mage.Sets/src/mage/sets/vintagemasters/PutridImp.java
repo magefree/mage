@@ -37,7 +37,7 @@ public class PutridImp extends mage.sets.torment.PutridImp {
 
     public PutridImp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "VMA";
     }
 

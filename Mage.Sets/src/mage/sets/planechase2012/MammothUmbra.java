@@ -37,7 +37,7 @@ public class MammothUmbra extends mage.sets.riseoftheeldrazi.MammothUmbra {
 
     public MammothUmbra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "PC2";
     }
 

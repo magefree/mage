@@ -37,7 +37,7 @@ public class Souldrinker extends mage.sets.tempest.Souldrinker {
 
     public Souldrinker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "DD3DVD";
     }
 

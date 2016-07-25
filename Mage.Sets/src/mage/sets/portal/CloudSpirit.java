@@ -38,7 +38,7 @@ public class CloudSpirit extends mage.sets.stronghold.CloudSpirit {
 
     public CloudSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "POR";
         this.rarity = Rarity.UNCOMMON;
     }

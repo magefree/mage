@@ -37,7 +37,7 @@ public class Opportunity extends mage.sets.urzaslegacy.Opportunity {
 
     public Opportunity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "M14";
     }
 

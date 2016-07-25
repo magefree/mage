@@ -38,7 +38,7 @@ public class NecropolisFiend extends mage.sets.khansoftarkir.NecropolisFiend {
 
     public NecropolisFiend(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

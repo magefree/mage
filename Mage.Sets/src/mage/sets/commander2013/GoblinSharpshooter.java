@@ -37,7 +37,7 @@ public class GoblinSharpshooter extends mage.sets.onslaught.GoblinSharpshooter {
 
     public GoblinSharpshooter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "C13";
     }
 

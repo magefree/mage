@@ -37,7 +37,7 @@ public class BlueSunsZenith extends mage.sets.mirrodinbesieged.BlueSunsZenith {
 
     public BlueSunsZenith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "C13";
     }
 

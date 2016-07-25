@@ -37,7 +37,7 @@ public class BackToNature extends mage.sets.magic2011.BackToNature {
 
     public BackToNature(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "M15";
     }
 

@@ -37,7 +37,7 @@ public class LoamLion extends mage.sets.worldwake.LoamLion {
 
     public LoamLion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "DDH";
     }
 

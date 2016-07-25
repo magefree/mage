@@ -38,7 +38,7 @@ public class Prosperity extends mage.sets.commander2013.Prosperity {
 
     public Prosperity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "POR";
         this.rarity = Rarity.RARE;
     }

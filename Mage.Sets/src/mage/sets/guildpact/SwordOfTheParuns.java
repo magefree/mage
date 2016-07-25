@@ -37,7 +37,7 @@ public class SwordOfTheParuns extends mage.sets.commander2013.SwordOfTheParuns {
 
     public SwordOfTheParuns(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "GPT";
     }
 

@@ -37,7 +37,7 @@ public class RofellosLlanowarEmissary extends mage.sets.urzasdestiny.RofellosLla
 
     public RofellosLlanowarEmissary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 229;
+        this.cardNumber = "229";
         this.expansionSetCode = "VMA";
     }
 

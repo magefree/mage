@@ -38,7 +38,7 @@ public class PineBarrens extends mage.sets.tempest.PineBarrens {
 
     public PineBarrens(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 307;
+        this.cardNumber = "307";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

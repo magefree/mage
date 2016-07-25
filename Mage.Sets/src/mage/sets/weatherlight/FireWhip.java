@@ -38,7 +38,7 @@ public class FireWhip extends mage.sets.timeshifted.FireWhip {
 
     public FireWhip(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "WTH";
         this.rarity = Rarity.COMMON;
     }

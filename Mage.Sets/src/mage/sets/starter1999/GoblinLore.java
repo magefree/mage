@@ -37,7 +37,7 @@ public class GoblinLore extends mage.sets.tenthedition.GoblinLore {
 
     public GoblinLore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "S99";
     }
 

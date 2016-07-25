@@ -38,7 +38,7 @@ public class Channel extends mage.sets.revisededition.Channel {
 
     public Channel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.RARE;
     }

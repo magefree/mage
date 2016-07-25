@@ -37,7 +37,7 @@ public class SharpenedPitchfork extends mage.sets.innistrad.SharpenedPitchfork {
 
     public SharpenedPitchfork(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "DDQ";
     }
 

@@ -37,7 +37,7 @@ public class LatchkeyFaerie extends mage.sets.modernmasters.LatchkeyFaerie {
 
     public LatchkeyFaerie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "MOR";
     }
 

@@ -37,7 +37,7 @@ public class ThallidShellDweller extends mage.sets.timespiral.ThallidShellDwelle
 
     public ThallidShellDweller(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "MMA";
     }
 

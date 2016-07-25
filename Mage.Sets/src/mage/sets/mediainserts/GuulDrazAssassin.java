@@ -6,7 +6,7 @@ public class GuulDrazAssassin extends mage.sets.riseoftheeldrazi.GuulDrazAssassi
     
     public GuulDrazAssassin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "MBP";
     }
     

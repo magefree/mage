@@ -37,7 +37,7 @@ public class KnotvinePaladin extends mage.sets.alarareborn.KnotvinePaladin {
 
     public KnotvinePaladin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDG";
     }
 

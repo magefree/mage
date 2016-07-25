@@ -37,7 +37,7 @@ public class LeylineOfTheVoid extends mage.sets.magic2011.LeylineOfTheVoid {
 
     public LeylineOfTheVoid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "GPT";
     }
 

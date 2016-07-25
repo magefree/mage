@@ -37,7 +37,7 @@ public class PearlMedallion extends mage.sets.tempest.PearlMedallion {
 
     public PearlMedallion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 260;
+        this.cardNumber = "260";
         this.expansionSetCode = "C14";
     }
 

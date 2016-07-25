@@ -37,7 +37,7 @@ public class AkromasBlessing extends mage.sets.onslaught.AkromasBlessing {
 
     public AkromasBlessing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "VMA";
     }
 

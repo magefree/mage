@@ -38,7 +38,7 @@ public class LuMengWuGeneral extends mage.sets.portalthreekingdoms.LuMengWuGener
 
     public LuMengWuGeneral(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

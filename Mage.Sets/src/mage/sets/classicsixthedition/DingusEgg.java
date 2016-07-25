@@ -37,7 +37,7 @@ public class DingusEgg extends mage.sets.limitedalpha.DingusEgg {
 
     public DingusEgg(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 280;
+        this.cardNumber = "280";
         this.expansionSetCode = "6ED";
     }
 

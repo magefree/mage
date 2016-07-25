@@ -38,7 +38,7 @@ public class PlanarGate extends mage.sets.masterseditioniv.PlanarGate {
 
     public PlanarGate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 235;
+        this.cardNumber = "235";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.RARE;
     }

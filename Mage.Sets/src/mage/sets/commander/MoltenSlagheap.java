@@ -37,7 +37,7 @@ public class MoltenSlagheap extends mage.sets.commander2013.MoltenSlagheap {
 
     public MoltenSlagheap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 282;
+        this.cardNumber = "282";
         this.expansionSetCode = "CMD";
     }
 

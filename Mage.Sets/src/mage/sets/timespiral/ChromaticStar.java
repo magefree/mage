@@ -38,7 +38,7 @@ public class ChromaticStar extends mage.sets.tenthedition.ChromaticStar {
 
     public ChromaticStar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 251;
+        this.cardNumber = "251";
         this.expansionSetCode = "TSP";
         this.rarity = Rarity.COMMON;
     }

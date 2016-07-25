@@ -37,7 +37,7 @@ public class SpoilsOfVictory extends mage.sets.commander2013.SpoilsOfVictory {
 
     public SpoilsOfVictory(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "PTK";
     }
 

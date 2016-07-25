@@ -37,7 +37,7 @@ public class Browbeat extends mage.sets.judgment.Browbeat {
 
     public Browbeat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "FNMP";
     }
 

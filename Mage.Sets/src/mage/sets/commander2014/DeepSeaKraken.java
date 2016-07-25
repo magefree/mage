@@ -37,7 +37,7 @@ public class DeepSeaKraken extends mage.sets.timespiral.DeepSeaKraken {
 
     public DeepSeaKraken(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "C14";
     }
 

@@ -38,7 +38,7 @@ public class Silence extends mage.sets.magic2010.Silence {
 
     public Silence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "M11";
     }
 

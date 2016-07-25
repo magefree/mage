@@ -38,7 +38,7 @@ public class DemonsHorn extends mage.sets.tenthedition.DemonsHorn {
 
     public DemonsHorn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 205;
+        this.cardNumber = "205";
         this.expansionSetCode = "M12";
     }
 

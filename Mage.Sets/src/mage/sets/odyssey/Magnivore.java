@@ -37,7 +37,7 @@ public class Magnivore extends mage.sets.ninthedition.Magnivore {
 
     public Magnivore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "ODY";
     }
 

@@ -38,7 +38,7 @@ public class GaeasAvenger extends mage.sets.masterseditioniv.GaeasAvenger {
 
     public GaeasAvenger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.RARE;
     }

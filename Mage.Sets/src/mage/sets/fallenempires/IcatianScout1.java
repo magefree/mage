@@ -37,7 +37,7 @@ public class IcatianScout1 extends mage.sets.masterseditionii.IcatianScout {
 
     public IcatianScout1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "FEM";
     }
 

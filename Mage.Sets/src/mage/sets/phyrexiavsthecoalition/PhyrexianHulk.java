@@ -38,7 +38,7 @@ public class PhyrexianHulk extends mage.sets.newphyrexia.PhyrexianHulk {
 
     public PhyrexianHulk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "DDE";
         this.rarity = Rarity.UNCOMMON;
     }

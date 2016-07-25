@@ -37,7 +37,7 @@ public class PavelMaliki extends mage.sets.legends.PavelMaliki {
 
     public PavelMaliki(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "ME3";
     }
 

@@ -38,7 +38,7 @@ public class PetalsOfInsight extends mage.sets.modernmasters.PetalsOfInsight {
 
     public PetalsOfInsight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "CHK";
         this.rarity = Rarity.UNCOMMON;
     }

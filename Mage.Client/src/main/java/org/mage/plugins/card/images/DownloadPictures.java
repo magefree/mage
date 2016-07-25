@@ -238,7 +238,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     public static boolean checkForNewCards(List<CardInfo> allCards) {
         TFile file;
         for (CardInfo card : allCards) {
-            if (card.getCardNumber() > 0 && !card.getSetCode().isEmpty()) {
+            if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
                 CardDownloadData url = new CardDownloadData(card.getName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", false, card.isDoubleFaced(), card.isNightCard());
                 file = new TFile(CardImageUtils.generateImagePath(url));
                 if (!file.exists()) {
@@ -281,7 +281,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             offlineMode = true;
 
             for (CardInfo card : allCards) {
-                if (card.getCardNumber() > 0 && !card.getSetCode().isEmpty()
+                if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()
                         && !ignoreUrls.contains(card.getSetCode())) {
                     String cardName = card.getName();
                     boolean isType2 = type2SetsFilter.contains(card.getSetCode());
@@ -313,7 +313,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
-                } else if (card.getCardNumber() < 1) {
+                } else if (card.getCardNumber().isEmpty() || "0".equals(card.getCardNumber())) {
                     System.err.println("There was a critical error!");
                     logger.error("Card has no collector ID and won't be sent to client: " + card);
                 } else if (card.getSetCode().isEmpty()) {
@@ -385,19 +385,19 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         }
                         if (params[1].toLowerCase().equals("generate") && params[2].startsWith("TOK:")) {
                             String set = params[2].substring(4);
-                            CardDownloadData card = new CardDownloadData(params[3], set, 0, false, type, "", true);
+                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", true);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM:")) {
                             String set = params[2].substring(7);
-                            CardDownloadData card = new CardDownloadData("Emblem " + params[3], set, 0, false, type, "", true);
+                            CardDownloadData card = new CardDownloadData("Emblem " + params[3], set, "0", false, type, "", true);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM-:")) {
                             String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3] + " Emblem", set, 0, false, type, "", true);
+                            CardDownloadData card = new CardDownloadData(params[3] + " Emblem", set, "0", false, type, "", true);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM!:")) {
                             String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3], set, 0, false, type, "", true);
+                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", true);
                             list.add(card);
                         }
                     } else {
@@ -483,7 +483,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                     String url;
                     if (ignoreUrls.contains(card.getSet()) || card.isToken()) {
-                        if (card.getCollectorId() != 0) {
+                        if (!"0".equals(card.getCollectorId())) {
                             continue;
                         }
                         url = cardImageSource.generateTokenUrl(card);

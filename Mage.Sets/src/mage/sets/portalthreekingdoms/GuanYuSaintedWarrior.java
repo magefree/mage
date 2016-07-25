@@ -38,7 +38,7 @@ public class GuanYuSaintedWarrior extends mage.sets.masterseditioniii.GuanYuSain
 
     public GuanYuSaintedWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "PTK";
         this.rarity = Rarity.RARE;
     }

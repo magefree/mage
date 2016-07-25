@@ -37,7 +37,7 @@ public class KamiOfOldStone extends mage.sets.championsofkamigawa.KamiOfOldStone
 
     public KamiOfOldStone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "9ED";
     }
 

@@ -37,7 +37,7 @@ public class VaevictisAsmadi extends mage.sets.masterseditioniii.VaevictisAsmadi
 
     public VaevictisAsmadi(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "CHR";
     }
 

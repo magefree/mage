@@ -37,7 +37,7 @@ public class MuscleSliver extends mage.sets.tempest.MuscleSliver {
 
     public MuscleSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 182;
+        this.cardNumber = "182";
         this.expansionSetCode = "TPR";
     }
 

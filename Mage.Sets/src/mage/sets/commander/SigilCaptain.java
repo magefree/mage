@@ -37,7 +37,7 @@ public class SigilCaptain extends mage.sets.alarareborn.SigilCaptain {
 
     public SigilCaptain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 225;
+        this.cardNumber = "225";
         this.expansionSetCode = "CMD";
     }
 

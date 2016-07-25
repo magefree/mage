@@ -37,7 +37,7 @@ public class Skullsnatcher extends mage.sets.betrayersofkamigawa.Skullsnatcher {
 
     public Skullsnatcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "PC2";
     }
 

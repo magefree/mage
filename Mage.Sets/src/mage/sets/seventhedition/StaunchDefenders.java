@@ -37,7 +37,7 @@ public class StaunchDefenders extends mage.sets.tempest.StaunchDefenders {
 
     public StaunchDefenders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "7ED";
     }
 

@@ -38,7 +38,7 @@ public class SpellstutterSprite extends mage.sets.lorwyn.SpellstutterSprite {
 
     public SpellstutterSprite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

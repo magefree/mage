@@ -37,7 +37,7 @@ public class DakmorPlague extends mage.sets.starter1999.DakmorPlague {
 
     public DakmorPlague(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "ME4";
     }
 

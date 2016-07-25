@@ -37,7 +37,7 @@ public class PeelFromReality extends mage.sets.avacynrestored.PeelFromReality {
 
     public PeelFromReality(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "RAV";
     }
 

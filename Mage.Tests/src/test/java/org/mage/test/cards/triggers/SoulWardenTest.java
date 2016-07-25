@@ -21,19 +21,21 @@ public class SoulWardenTest extends CardTestPlayerBase {
     public void testDisabledEffectOnChangeZone() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.HAND, playerA, "Lightning Bolt");
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);        
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.HAND, playerA, "Elite Vanguard", 2);
+        addCard(Zone.HAND, playerA, "Raise the Alarm", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Soul Warden", 1);
 
         // Creature 2/1
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raise the Alarm");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Soul Warden");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Elite Vanguard");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertLife(playerA, 21);
+        assertLife(playerA, 23);
         assertLife(playerB, 20);
     }
 

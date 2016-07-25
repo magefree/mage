@@ -37,7 +37,7 @@ public class BaskingRootwalla extends mage.sets.torment.BaskingRootwalla {
 
     public BaskingRootwalla(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 196;
+        this.cardNumber = "196";
         this.expansionSetCode = "VMA";
     }
 

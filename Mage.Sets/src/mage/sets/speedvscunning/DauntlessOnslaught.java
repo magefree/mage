@@ -37,7 +37,7 @@ public class DauntlessOnslaught extends mage.sets.theros.DauntlessOnslaught {
 
     public DauntlessOnslaught(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "DDN";
     }
 

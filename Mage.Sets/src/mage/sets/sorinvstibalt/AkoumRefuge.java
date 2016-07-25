@@ -37,7 +37,7 @@ public class AkoumRefuge extends mage.sets.zendikar.AkoumRefuge {
 
     public AkoumRefuge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "DDK";
     }
 

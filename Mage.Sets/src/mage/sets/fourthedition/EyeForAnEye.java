@@ -38,7 +38,7 @@ public class EyeForAnEye extends mage.sets.arabiannights.EyeForAnEye {
 
     public EyeForAnEye(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 275;
+        this.cardNumber = "275";
         this.expansionSetCode = "4ED";
         this.rarity = Rarity.RARE;
     }

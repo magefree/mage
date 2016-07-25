@@ -37,7 +37,7 @@ public class AngelicWall extends mage.sets.tenthedition.AngelicWall {
 
     public AngelicWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "PO2";
     }
 

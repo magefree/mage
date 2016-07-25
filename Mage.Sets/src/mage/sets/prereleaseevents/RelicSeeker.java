@@ -37,7 +37,7 @@ public class RelicSeeker extends mage.sets.magicorigins.RelicSeeker {
 
     public RelicSeeker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 230;
+        this.cardNumber = "230";
         this.expansionSetCode = "PTC";
     }
 

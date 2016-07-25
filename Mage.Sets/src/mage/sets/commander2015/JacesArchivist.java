@@ -37,7 +37,7 @@ public class JacesArchivist extends mage.sets.magic2012.JacesArchivist {
 
     public JacesArchivist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "C15";
     }
 

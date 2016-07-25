@@ -37,7 +37,7 @@ public class NissasPilgrimage extends mage.sets.magicorigins.NissasPilgrimage {
 
     public NissasPilgrimage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "FNMP";
     }
 

@@ -38,7 +38,7 @@ public class FireAmbush extends mage.sets.portalthreekingdoms.FireAmbush {
 
     public FireAmbush(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "ME3";
     }
 

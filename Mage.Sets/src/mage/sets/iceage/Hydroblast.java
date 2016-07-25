@@ -38,7 +38,7 @@ public class Hydroblast extends mage.sets.fifthedition.Hydroblast {
 
     public Hydroblast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "ICE";
         this.rarity = Rarity.COMMON;
     }

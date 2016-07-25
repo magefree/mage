@@ -39,7 +39,7 @@ public class JacesIngenuity extends mage.sets.magic2011.JacesIngenuity {
     public JacesIngenuity(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "M15";
     }
 

@@ -37,7 +37,7 @@ public class OpenTheVaults extends mage.sets.magic2010.OpenTheVaults {
 
     public OpenTheVaults(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "C15";
     }
 

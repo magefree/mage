@@ -37,7 +37,7 @@ public class RatchetBomb extends mage.sets.scarsofmirrodin.RatchetBomb {
 
     public RatchetBomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 215;
+        this.cardNumber = "215";
         this.expansionSetCode = "M14";
     }
 

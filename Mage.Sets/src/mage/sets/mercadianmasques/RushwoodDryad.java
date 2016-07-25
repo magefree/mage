@@ -37,7 +37,7 @@ public class RushwoodDryad extends mage.sets.tenthedition.RushwoodDryad {
 
     public RushwoodDryad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 263;
+        this.cardNumber = "263";
         this.expansionSetCode = "MMQ";
     }
 

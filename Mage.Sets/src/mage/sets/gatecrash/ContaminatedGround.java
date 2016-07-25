@@ -37,7 +37,7 @@ public class ContaminatedGround extends mage.sets.riseoftheeldrazi.ContaminatedG
 
     public ContaminatedGround(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "GTC";
     }
 

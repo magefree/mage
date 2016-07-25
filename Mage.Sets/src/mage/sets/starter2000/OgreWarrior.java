@@ -37,7 +37,7 @@ public class OgreWarrior extends mage.sets.portalsecondage.OgreWarrior {
 
     public OgreWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "S00";
     }
 

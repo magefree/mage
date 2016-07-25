@@ -37,7 +37,7 @@ public class SivitriScarzam extends mage.sets.legends.SivitriScarzam {
 
     public SivitriScarzam(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "CHR";
     }
 

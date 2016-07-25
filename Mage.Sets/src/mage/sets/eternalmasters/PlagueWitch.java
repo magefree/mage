@@ -38,7 +38,7 @@ public class PlagueWitch extends mage.sets.nemesis.PlagueWitch {
 
     public PlagueWitch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "EMA";
     }
 

@@ -37,7 +37,7 @@ public class SpikeshotElder extends mage.sets.scarsofmirrodin.SpikeshotElder {
 
     public SpikeshotElder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "MM2";
     }
 

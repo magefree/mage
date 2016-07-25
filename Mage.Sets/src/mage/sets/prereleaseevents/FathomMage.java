@@ -38,7 +38,7 @@ public class FathomMage extends mage.sets.gatecrash.FathomMage {
 
     public FathomMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

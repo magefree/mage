@@ -37,7 +37,7 @@ public class IcyManipulator extends mage.sets.tenthedition.IcyManipulator {
 
     public IcyManipulator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "DDH";
     }
 

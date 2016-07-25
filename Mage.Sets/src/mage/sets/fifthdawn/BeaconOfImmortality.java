@@ -37,7 +37,7 @@ public class BeaconOfImmortality extends mage.sets.tenthedition.BeaconOfImmortal
 
     public BeaconOfImmortality(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "5DN";
     }
 

@@ -37,7 +37,7 @@ public class CatWarriors extends mage.sets.fifthedition.CatWarriors {
 
     public CatWarriors(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "6ED";
     }
 

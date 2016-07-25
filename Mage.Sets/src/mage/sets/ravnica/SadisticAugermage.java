@@ -37,7 +37,7 @@ public class SadisticAugermage extends mage.sets.jacevsvraska.SadisticAugermage 
 
     public SadisticAugermage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "RAV";
     }
 

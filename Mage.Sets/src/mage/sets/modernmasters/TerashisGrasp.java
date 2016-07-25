@@ -38,7 +38,7 @@ public class TerashisGrasp extends mage.sets.betrayersofkamigawa.TerashisGrasp {
 
     public TerashisGrasp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class ShaperParasite extends mage.sets.commander2014.ShaperParasite {
 
     public ShaperParasite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "PLC";
     }
 

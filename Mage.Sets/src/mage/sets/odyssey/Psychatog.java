@@ -37,7 +37,7 @@ public class Psychatog extends mage.sets.vintagemasters.Psychatog {
 
     public Psychatog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 292;
+        this.cardNumber = "292";
         this.expansionSetCode = "ODY";
     }
 

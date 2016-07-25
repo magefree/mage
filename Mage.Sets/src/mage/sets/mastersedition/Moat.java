@@ -37,7 +37,7 @@ public class Moat extends mage.sets.legends.Moat {
 
     public Moat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "MED";
     }
 

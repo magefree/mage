@@ -37,7 +37,7 @@ public class CosisRavager extends mage.sets.worldwake.CosisRavager {
 
     public CosisRavager(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "DDI";
     }
 

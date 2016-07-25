@@ -37,7 +37,7 @@ public class AssemblyWorker extends mage.sets.timespiral.AssemblyWorker {
 
     public AssemblyWorker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "DDF";
     }
 

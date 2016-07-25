@@ -37,7 +37,7 @@ public class AnabaBodyguard2 extends mage.sets.tenthedition.AnabaBodyguard {
 
     public AnabaBodyguard2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "HML";
     }
 

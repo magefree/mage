@@ -37,7 +37,7 @@ public class ManaGeyser extends mage.sets.conspiracy.ManaGeyser {
 
     public ManaGeyser(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "5DN";
     }
 

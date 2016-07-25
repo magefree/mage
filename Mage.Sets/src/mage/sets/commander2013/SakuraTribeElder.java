@@ -37,7 +37,7 @@ public class SakuraTribeElder extends mage.sets.championsofkamigawa.SakuraTribeE
 
     public SakuraTribeElder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "C13";
     }
 

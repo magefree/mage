@@ -37,7 +37,7 @@ public class SwordOfFireAndIce extends mage.sets.darksteel.SwordOfFireAndIce {
 
     public SwordOfFireAndIce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "JR";
     }
 

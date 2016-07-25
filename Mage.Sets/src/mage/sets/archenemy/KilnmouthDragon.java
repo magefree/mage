@@ -37,7 +37,7 @@ public class KilnmouthDragon extends mage.sets.knightsvsdragons.KilnmouthDragon 
 
     public KilnmouthDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "ARC";
     }
 

@@ -37,7 +37,7 @@ public class VampiricSpirit extends mage.sets.eighthedition.VampiricSpirit {
 
     public VampiricSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "PO2";
     }
 

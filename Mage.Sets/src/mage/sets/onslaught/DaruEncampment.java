@@ -37,7 +37,7 @@ public class DaruEncampment extends mage.sets.elspethvstezzeret.DaruEncampment {
 
     public DaruEncampment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 315;
+        this.cardNumber = "315";
         this.expansionSetCode = "ONS";
     }
 

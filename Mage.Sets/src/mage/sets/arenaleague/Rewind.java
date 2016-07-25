@@ -37,7 +37,7 @@ public class Rewind extends mage.sets.urzassaga.Rewind {
 
     public Rewind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "ARENA";
     }
 

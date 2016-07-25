@@ -37,7 +37,7 @@ public class PaladinEnVec extends mage.sets.ninthedition.PaladinEnVec {
 
     public PaladinEnVec(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "EXO";
     }
 

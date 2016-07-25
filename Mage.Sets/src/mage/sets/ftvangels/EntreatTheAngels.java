@@ -37,7 +37,7 @@ public class EntreatTheAngels extends mage.sets.avacynrestored.EntreatTheAngels 
 
     public EntreatTheAngels(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "V15";
     }
 

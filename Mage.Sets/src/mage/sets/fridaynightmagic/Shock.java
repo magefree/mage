@@ -38,7 +38,7 @@ public class Shock extends mage.sets.tenthedition.Shock {
 
     public Shock(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

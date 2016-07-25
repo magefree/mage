@@ -37,7 +37,7 @@ public class VigorMortis extends mage.sets.ravnica.VigorMortis {
 
     public VigorMortis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "DDJ";
     }
 

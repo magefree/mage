@@ -38,7 +38,7 @@ public class MercurialPretender extends mage.sets.magic2015.MercurialPretender {
 
     public MercurialPretender(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

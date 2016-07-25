@@ -37,7 +37,7 @@ public class TectonicEdge extends mage.sets.worldwake.TectonicEdge {
 
     public TectonicEdge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 313;
+        this.cardNumber = "313";
         this.expansionSetCode = "C14";
     }
 

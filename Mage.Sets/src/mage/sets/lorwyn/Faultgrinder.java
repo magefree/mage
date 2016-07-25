@@ -37,7 +37,7 @@ public class Faultgrinder extends mage.sets.commander.Faultgrinder {
 
     public Faultgrinder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "LRW";
     }
 

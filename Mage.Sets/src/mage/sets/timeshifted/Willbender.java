@@ -38,7 +38,7 @@ public class Willbender extends mage.sets.commander2014.Willbender {
 
     public Willbender(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

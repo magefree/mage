@@ -37,7 +37,7 @@ public class FigureOfDestiny extends mage.sets.eventide.FigureOfDestiny {
 
     public FigureOfDestiny(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "PD2";
     }
 

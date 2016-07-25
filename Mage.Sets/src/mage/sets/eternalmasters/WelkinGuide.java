@@ -38,7 +38,7 @@ public class WelkinGuide extends mage.sets.shardsofalara.WelkinGuide {
 
     public WelkinGuide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "EMA";
     }
 

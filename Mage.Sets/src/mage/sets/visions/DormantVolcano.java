@@ -37,7 +37,7 @@ public class DormantVolcano extends mage.sets.commander2014.DormantVolcano {
 
     public DormantVolcano(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "VIS";
     }
 

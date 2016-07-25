@@ -37,7 +37,7 @@ public class PrimalGrowth extends mage.sets.planeshift.PrimalGrowth {
 
     public PrimalGrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "C15";
     }
 

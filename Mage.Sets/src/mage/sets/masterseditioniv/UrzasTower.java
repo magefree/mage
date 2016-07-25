@@ -39,7 +39,7 @@ public class UrzasTower extends mage.sets.fifthedition.UrzasTower {
     // TODO: Support the four different images that exist for this set
     public UrzasTower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 259;
+        this.cardNumber = "259";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.LAND;
     }

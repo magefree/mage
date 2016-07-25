@@ -37,7 +37,7 @@ public class LibraryOfLeng extends mage.sets.limitedbeta.LibraryOfLeng {
 
     public LibraryOfLeng(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 261;
+        this.cardNumber = "261";
         this.expansionSetCode = "3ED";
     }
 

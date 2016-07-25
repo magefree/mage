@@ -37,7 +37,7 @@ public class NomadOutpost extends mage.sets.khansoftarkir.NomadOutpost {
 
     public NomadOutpost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "DDN";
     }
 

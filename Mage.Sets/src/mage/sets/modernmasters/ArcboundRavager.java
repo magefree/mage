@@ -37,7 +37,7 @@ public class ArcboundRavager extends mage.sets.darksteel.ArcboundRavager {
 
     public ArcboundRavager(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "MMA";
     }
 

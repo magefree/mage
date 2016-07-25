@@ -38,7 +38,7 @@ public class TawnossWand extends mage.sets.antiquities.TawnossWand {
 
     public TawnossWand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 231;
+        this.cardNumber = "231";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.COMMON;
     }

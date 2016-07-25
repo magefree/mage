@@ -37,7 +37,7 @@ public class Necrosavant extends mage.sets.visions.Necrosavant {
 
     public Necrosavant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "6ED";
     }
 

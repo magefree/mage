@@ -37,7 +37,7 @@ public class ShamanOfTheGreatHunt extends mage.sets.fatereforged.ShamanOfTheGrea
 
     public ShamanOfTheGreatHunt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "PTC";
     }
 

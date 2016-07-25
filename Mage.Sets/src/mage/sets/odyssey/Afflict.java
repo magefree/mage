@@ -37,7 +37,7 @@ public class Afflict extends mage.sets.tenthedition.Afflict {
 
     public Afflict(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "ODY";
     }
 

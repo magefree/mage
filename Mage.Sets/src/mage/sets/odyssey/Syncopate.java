@@ -38,7 +38,7 @@ public class Syncopate extends mage.sets.returntoravnica.Syncopate {
 
     public Syncopate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "ODY";
         this.rarity = Rarity.COMMON;
     }

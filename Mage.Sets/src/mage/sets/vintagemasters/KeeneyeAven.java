@@ -37,7 +37,7 @@ public class KeeneyeAven extends mage.sets.legions.KeeneyeAven {
 
     public KeeneyeAven(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "VMA";
     }
 

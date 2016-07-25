@@ -37,7 +37,7 @@ public class BladetuskBoar extends mage.sets.zendikar.BladetuskBoar {
 
     public BladetuskBoar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "JOU";
     }
 

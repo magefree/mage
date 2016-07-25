@@ -38,7 +38,7 @@ public class Duplicant extends mage.sets.mirrodin.Duplicant {
 
     public Duplicant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 220;
+        this.cardNumber = "220";
         this.expansionSetCode = "EMA";
     }
 

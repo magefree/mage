@@ -39,7 +39,7 @@ public class AjaniGoldmane extends mage.sets.magic2010.AjaniGoldmane {
 
     public AjaniGoldmane(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "LRW";
         this.rarity = Rarity.RARE;
     }

@@ -37,7 +37,7 @@ public class SpinedWurm extends mage.sets.tenthedition.SpinedWurm {
 
     public SpinedWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "9ED";
     }
 

@@ -37,7 +37,7 @@ public class BuriedAlive extends mage.sets.commander.BuriedAlive {
 
     public BuriedAlive(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "WTH";
     }
 

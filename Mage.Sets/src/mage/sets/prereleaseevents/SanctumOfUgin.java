@@ -37,7 +37,7 @@ public class SanctumOfUgin extends mage.sets.battleforzendikar.SanctumOfUgin {
 
     public SanctumOfUgin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 289;
+        this.cardNumber = "289";
         this.expansionSetCode = "PTC";
     }
 

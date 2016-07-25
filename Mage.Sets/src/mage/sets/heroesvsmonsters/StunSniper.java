@@ -37,7 +37,7 @@ public class StunSniper extends mage.sets.alarareborn.StunSniper {
 
     public StunSniper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "DDL";
     }
 

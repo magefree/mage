@@ -37,7 +37,7 @@ public class KarplusanForest extends mage.sets.tenthedition.KarplusanForest {
 
     public KarplusanForest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 321;
+        this.cardNumber = "321";
         this.expansionSetCode = "9ED";
     }
 

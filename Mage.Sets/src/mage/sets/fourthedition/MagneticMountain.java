@@ -38,7 +38,7 @@ public class MagneticMountain extends mage.sets.arabiannights.MagneticMountain {
 
     public MagneticMountain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "4ED";
         this.rarity = Rarity.RARE;
     }

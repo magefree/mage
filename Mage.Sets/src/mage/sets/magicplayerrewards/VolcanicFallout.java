@@ -38,7 +38,7 @@ public class VolcanicFallout extends mage.sets.conflux.VolcanicFallout {
 
     public VolcanicFallout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

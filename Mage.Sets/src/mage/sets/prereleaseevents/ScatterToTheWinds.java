@@ -37,7 +37,7 @@ public class ScatterToTheWinds extends mage.sets.battleforzendikar.ScatterToTheW
 
     public ScatterToTheWinds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 290;
+        this.cardNumber = "290";
         this.expansionSetCode = "PTC";
     }
 

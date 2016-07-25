@@ -38,7 +38,7 @@ public class SnappingDrake extends mage.sets.ravnica.SnappingDrake {
 
     public SnappingDrake (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "10E";
     }
 

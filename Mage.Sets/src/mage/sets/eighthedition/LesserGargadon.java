@@ -37,7 +37,7 @@ public class LesserGargadon extends mage.sets.prophecy.LesserGargadon {
 
     public LesserGargadon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "8ED";
     }
 

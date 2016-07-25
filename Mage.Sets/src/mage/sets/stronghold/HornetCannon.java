@@ -37,7 +37,7 @@ public class HornetCannon extends mage.sets.phyrexiavsthecoalition.HornetCannon 
 
     public HornetCannon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "STH";
     }
 

@@ -37,7 +37,7 @@ public class GaeasCradle extends mage.sets.urzassaga.GaeasCradle {
 
     public GaeasCradle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "JR";
     }
 

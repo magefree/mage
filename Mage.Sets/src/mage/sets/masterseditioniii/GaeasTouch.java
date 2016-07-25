@@ -38,7 +38,7 @@ public class GaeasTouch extends mage.sets.thedark.GaeasTouch {
 
     public GaeasTouch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

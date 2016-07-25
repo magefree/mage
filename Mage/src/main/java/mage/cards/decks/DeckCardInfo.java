@@ -38,14 +38,14 @@ public class DeckCardInfo implements Serializable {
 
     private String cardName;
     private String setCode;
-    private int cardNum;
+    private String cardNum;
     private int quantity;
 
-    public DeckCardInfo(String cardName, int cardNum, String setCode) {
+    public DeckCardInfo(String cardName, String cardNum, String setCode) {
         this(cardName, cardNum, setCode, 1);
     }
 
-    public DeckCardInfo(String cardName, int cardNum, String setCode, int quantity) {
+    public DeckCardInfo(String cardName, String cardNum, String setCode, int quantity) {
         this.cardName = cardName;
         this.cardNum = cardNum;
         this.setCode = setCode;
@@ -60,7 +60,7 @@ public class DeckCardInfo implements Serializable {
         return setCode;
     }
 
-    public int getCardNum() {
+    public String getCardNum() {
         return cardNum;
     }
 

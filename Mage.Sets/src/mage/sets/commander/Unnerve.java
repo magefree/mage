@@ -37,7 +37,7 @@ public class Unnerve extends mage.sets.urzassaga.Unnerve {
 
     public Unnerve(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "CMD";
     }
 

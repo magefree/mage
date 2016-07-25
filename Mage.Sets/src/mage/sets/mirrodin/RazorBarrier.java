@@ -37,7 +37,7 @@ public class RazorBarrier extends mage.sets.elspethvstezzeret.RazorBarrier {
 
     public RazorBarrier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "MRD";
     }
 

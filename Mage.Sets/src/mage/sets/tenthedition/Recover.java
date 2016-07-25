@@ -37,7 +37,7 @@ public class Recover extends mage.sets.invasion.Recover {
 
     public Recover(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = "172";
         this.expansionSetCode = "10E";
     }
 

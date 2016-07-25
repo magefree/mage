@@ -37,7 +37,7 @@ public class OutlandColossus extends mage.sets.magicorigins.OutlandColossus {
 
     public OutlandColossus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "PTC";
     }
 

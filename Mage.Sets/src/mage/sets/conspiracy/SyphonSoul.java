@@ -37,7 +37,7 @@ public class SyphonSoul extends mage.sets.planechase.SyphonSoul {
 
     public SyphonSoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "CNS";
     }
 

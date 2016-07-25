@@ -38,7 +38,7 @@ public class PrimalClay extends mage.sets.fifthedition.PrimalClay {
 
     public PrimalClay(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.UNCOMMON;
     }

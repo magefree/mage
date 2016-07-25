@@ -38,7 +38,7 @@ public class GrinningTotem extends mage.sets.timeshifted.GrinningTotem {
 
     public GrinningTotem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 288;
+        this.cardNumber = "288";
         this.expansionSetCode = "6ED";
         this.rarity = Rarity.RARE;
     }

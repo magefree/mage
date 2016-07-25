@@ -37,7 +37,7 @@ public class DragonMask extends mage.sets.visions.DragonMask {
 
     public DragonMask(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 283;
+        this.cardNumber = "283";
         this.expansionSetCode = "6ED";
     }
 

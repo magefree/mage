@@ -37,7 +37,7 @@ public class JarethLeonineTitan extends mage.sets.onslaught.JarethLeonineTitan {
 
     public JarethLeonineTitan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "VMA";
     }
 

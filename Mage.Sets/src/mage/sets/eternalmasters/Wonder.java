@@ -38,7 +38,7 @@ public class Wonder extends mage.sets.judgment.Wonder {
 
     public Wonder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "EMA";
     }
 

@@ -37,7 +37,7 @@ public class AjanisChosen extends mage.sets.magic2014.AjanisChosen {
 
     public AjanisChosen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "C15";
     }
 

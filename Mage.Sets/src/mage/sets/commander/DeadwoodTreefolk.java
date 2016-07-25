@@ -37,7 +37,7 @@ public class DeadwoodTreefolk extends mage.sets.commander2013.DeadwoodTreefolk {
 
     public DeadwoodTreefolk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "CMD";
     }
 

@@ -37,7 +37,7 @@ public class OranRiefHydra extends mage.sets.battleforzendikar.OranRiefHydra {
 
     public OranRiefHydra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 280;
+        this.cardNumber = "280";
         this.expansionSetCode = "PTC";
     }
 

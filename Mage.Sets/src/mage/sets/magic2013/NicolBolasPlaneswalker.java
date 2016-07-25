@@ -37,7 +37,7 @@ public class NicolBolasPlaneswalker extends mage.sets.conflux.NicolBolasPlaneswa
 
     public NicolBolasPlaneswalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "M13";
     }
 

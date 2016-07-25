@@ -37,7 +37,7 @@ public class KeiTakahashi extends mage.sets.masterseditioniii.KeiTakahashi {
 
     public KeiTakahashi(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "CHR";
     }
 

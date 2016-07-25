@@ -39,7 +39,7 @@ public class ShrapnelBlast extends mage.sets.mirrodin.ShrapnelBlast {
     public ShrapnelBlast(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "M15";
     }
 

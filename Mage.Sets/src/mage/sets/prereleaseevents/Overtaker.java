@@ -38,7 +38,7 @@ public class Overtaker extends mage.sets.mercadianmasques.Overtaker {
 
     public Overtaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

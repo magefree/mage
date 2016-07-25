@@ -37,7 +37,7 @@ public class ProfaneCommand extends mage.sets.commander2014.ProfaneCommand {
 
     public ProfaneCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "LRW";
     }
 

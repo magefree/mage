@@ -37,7 +37,7 @@ public class PowerOfFire extends mage.sets.conspiracy.PowerOfFire {
 
     public PowerOfFire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "SHM";
     }
 

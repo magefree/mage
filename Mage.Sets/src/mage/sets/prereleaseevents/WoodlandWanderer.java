@@ -37,7 +37,7 @@ public class WoodlandWanderer extends mage.sets.battleforzendikar.WoodlandWander
 
     public WoodlandWanderer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 304;
+        this.cardNumber = "304";
         this.expansionSetCode = "PTC";
     }
 

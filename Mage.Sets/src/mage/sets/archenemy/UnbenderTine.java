@@ -37,7 +37,7 @@ public class UnbenderTine extends mage.sets.alarareborn.UnbenderTine {
 
     public UnbenderTine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "ARC";
     }
 

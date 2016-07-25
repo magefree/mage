@@ -37,7 +37,7 @@ public class QuicksilverDragon extends mage.sets.jacevschandra.QuicksilverDragon
 
     public QuicksilverDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "DD3JVC";
     }
 

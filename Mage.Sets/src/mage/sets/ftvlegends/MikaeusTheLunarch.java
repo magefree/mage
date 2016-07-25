@@ -37,7 +37,7 @@ public class MikaeusTheLunarch extends mage.sets.innistrad.MikaeusTheLunarch {
 
     public MikaeusTheLunarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "V11";
     }
 

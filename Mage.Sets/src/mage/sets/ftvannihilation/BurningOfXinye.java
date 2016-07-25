@@ -38,7 +38,7 @@ public class BurningOfXinye extends mage.sets.portalthreekingdoms.BurningOfXinye
 
     public BurningOfXinye(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "V14";
         this.rarity = Rarity.MYTHIC;
     }

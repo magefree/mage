@@ -37,7 +37,7 @@ public class HypnoticCloud extends mage.sets.invasion.HypnoticCloud {
 
     public HypnoticCloud(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "DDM";
     }
 

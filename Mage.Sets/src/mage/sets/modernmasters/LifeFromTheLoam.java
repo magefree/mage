@@ -37,7 +37,7 @@ public class LifeFromTheLoam extends mage.sets.ravnica.LifeFromTheLoam {
 
     public LifeFromTheLoam(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "MMA";
     }
 

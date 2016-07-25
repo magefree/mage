@@ -37,7 +37,7 @@ public class SkeletonShip extends mage.sets.iceage.SkeletonShip {
 
     public SkeletonShip(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 197;
+        this.cardNumber = "197";
         this.expansionSetCode = "ME2";
     }
 

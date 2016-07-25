@@ -38,7 +38,7 @@ public class Gravebind extends mage.sets.masterseditioniv.Gravebind {
 
     public Gravebind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "ICE";
         this.rarity = Rarity.RARE;
     }

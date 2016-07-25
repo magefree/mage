@@ -38,7 +38,7 @@ public class RoyalAssassin extends mage.sets.tenthedition.RoyalAssassin {
 
     public RoyalAssassin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "SUS";
         this.rarity = Rarity.SPECIAL;
     }

@@ -38,7 +38,7 @@ public class AlloyMyr extends mage.sets.newphyrexia.AlloyMyr {
 
     public AlloyMyr(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }

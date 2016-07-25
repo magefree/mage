@@ -37,7 +37,7 @@ public class ThalakosSeer extends mage.sets.tempestremastered.ThalakosSeer {
 
     public ThalakosSeer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
+        this.cardNumber = "94";
         this.expansionSetCode = "TMP";
     }
 

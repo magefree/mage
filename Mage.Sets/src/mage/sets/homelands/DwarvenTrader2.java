@@ -37,7 +37,7 @@ public class DwarvenTrader2 extends mage.sets.homelands.DwarvenTrader1 {
 
     public DwarvenTrader2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "HML";
     }
 

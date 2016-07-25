@@ -37,7 +37,7 @@ public class TalentOfTheTelepath extends mage.sets.magicorigins.TalentOfTheTelep
 
     public TalentOfTheTelepath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = "233";
         this.expansionSetCode = "PTC";
     }
 

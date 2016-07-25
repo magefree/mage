@@ -37,7 +37,7 @@ public class OrcishVeteran3 extends mage.sets.masterseditionii.OrcishVeteran {
 
     public OrcishVeteran3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "FEM";
     }
 

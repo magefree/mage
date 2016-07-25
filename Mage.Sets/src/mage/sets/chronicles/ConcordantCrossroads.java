@@ -37,7 +37,7 @@ public class ConcordantCrossroads extends mage.sets.masterseditioniii.Concordant
 
     public ConcordantCrossroads(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "CHR";
     }
 

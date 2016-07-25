@@ -37,7 +37,7 @@ public class Groundswell extends mage.sets.worldwake.Groundswell {
 
     public Groundswell(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "DDP";
     }
 

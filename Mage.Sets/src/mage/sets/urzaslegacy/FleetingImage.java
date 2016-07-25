@@ -37,7 +37,7 @@ public class FleetingImage extends mage.sets.ninthedition.FleetingImage {
 
     public FleetingImage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "ULG";
     }
 

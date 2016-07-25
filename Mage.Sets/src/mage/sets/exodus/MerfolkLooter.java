@@ -37,7 +37,7 @@ public class MerfolkLooter extends mage.sets.magic2012.MerfolkLooter {
 
     public MerfolkLooter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "EXO";
     }
 

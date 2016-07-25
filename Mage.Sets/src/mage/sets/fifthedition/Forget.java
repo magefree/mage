@@ -37,7 +37,7 @@ public class Forget extends mage.sets.homelands.Forget {
 
     public Forget(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "5ED";
     }
 

@@ -37,7 +37,7 @@ public class ViridianEmissary extends mage.sets.mirrodinbesieged.ViridianEmissar
 
     public ViridianEmissary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "PC2";
     }
 

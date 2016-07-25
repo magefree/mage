@@ -38,7 +38,7 @@ public class WallOfLight extends mage.sets.masterseditioniii.WallOfLight {
 
     public WallOfLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.UNCOMMON;
     }

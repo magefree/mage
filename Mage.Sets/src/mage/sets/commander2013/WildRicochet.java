@@ -37,7 +37,7 @@ public class WildRicochet extends mage.sets.commander.WildRicochet {
 
     public WildRicochet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "C13";
     }
 

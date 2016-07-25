@@ -38,7 +38,7 @@ public class SpringleafDrum extends mage.sets.lorwyn.SpringleafDrum {
 
     public SpringleafDrum(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "BNG";
         this.rarity = Rarity.UNCOMMON;
     }

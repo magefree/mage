@@ -38,7 +38,7 @@ public class DjinnIlluminatus extends mage.sets.prereleaseevents.DjinnIlluminatu
 
     public DjinnIlluminatus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "GPT";
         this.rarity = Rarity.RARE;
     }

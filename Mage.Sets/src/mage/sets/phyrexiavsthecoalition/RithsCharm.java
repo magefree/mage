@@ -37,7 +37,7 @@ public class RithsCharm extends mage.sets.planeshift.RithsCharm {
 
     public RithsCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "DDE";
     }
 

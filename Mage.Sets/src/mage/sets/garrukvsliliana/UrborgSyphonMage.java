@@ -37,7 +37,7 @@ public class UrborgSyphonMage extends mage.sets.timespiral.UrborgSyphonMage {
 
     public UrborgSyphonMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "DDD";
     }
 

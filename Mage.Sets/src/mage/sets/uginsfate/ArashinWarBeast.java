@@ -37,7 +37,7 @@ public class ArashinWarBeast extends mage.sets.fatereforged.ArashinWarBeast {
 
     public ArashinWarBeast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "UGIN";
     }
 

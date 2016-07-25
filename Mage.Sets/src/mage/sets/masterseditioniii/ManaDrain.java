@@ -38,7 +38,7 @@ public class ManaDrain extends mage.sets.vintagemasters.ManaDrain {
 
     public ManaDrain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.RARE;
     }

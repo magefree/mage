@@ -37,7 +37,7 @@ public class SunhomeFortressOfTheLegion extends mage.sets.planechase.SunhomeFort
 
     public SunhomeFortressOfTheLegion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 282;
+        this.cardNumber = "282";
         this.expansionSetCode = "RAV";
     }
 

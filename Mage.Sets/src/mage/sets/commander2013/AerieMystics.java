@@ -37,7 +37,7 @@ public class AerieMystics extends mage.sets.conflux.AerieMystics {
 
     public AerieMystics(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "C13";
     }
 

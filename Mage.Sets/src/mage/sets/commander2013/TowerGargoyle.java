@@ -37,7 +37,7 @@ public class TowerGargoyle extends mage.sets.shardsofalara.TowerGargoyle {
 
     public TowerGargoyle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = "223";
         this.expansionSetCode = "C13";
     }
 

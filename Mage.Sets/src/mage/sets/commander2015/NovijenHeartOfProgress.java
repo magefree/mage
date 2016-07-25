@@ -37,7 +37,7 @@ public class NovijenHeartOfProgress extends mage.sets.dissension.NovijenHeartOfP
 
     public NovijenHeartOfProgress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 296;
+        this.cardNumber = "296";
         this.expansionSetCode = "C15";
     }
 

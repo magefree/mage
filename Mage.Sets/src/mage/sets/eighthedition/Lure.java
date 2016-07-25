@@ -37,7 +37,7 @@ public class Lure extends mage.sets.championsofkamigawa.Lure {
 
     public Lure(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 263;
+        this.cardNumber = "263";
         this.expansionSetCode = "8ED";
     }
 

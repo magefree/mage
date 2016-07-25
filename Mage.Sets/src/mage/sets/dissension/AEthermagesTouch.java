@@ -37,7 +37,7 @@ public class AEthermagesTouch extends mage.sets.commander2013.AEthermagesTouch {
 
     public AEthermagesTouch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "DIS";
     }
 

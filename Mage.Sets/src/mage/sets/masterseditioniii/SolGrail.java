@@ -38,7 +38,7 @@ public class SolGrail extends mage.sets.alliances.SolGrail {
 
     public SolGrail(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

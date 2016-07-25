@@ -37,7 +37,7 @@ public class Ixidron extends mage.sets.commander2014.Ixidron {
 
     public Ixidron(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "TSP";
     }
 

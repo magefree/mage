@@ -37,7 +37,7 @@ public class SlateStreetRuffian extends mage.sets.gatecrash.SlateStreetRuffian {
 
     public SlateStreetRuffian(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "DDM";
     }
 

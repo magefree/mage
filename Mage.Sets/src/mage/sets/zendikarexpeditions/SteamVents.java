@@ -38,7 +38,7 @@ public class SteamVents extends mage.sets.guildpact.SteamVents {
 
     public SteamVents(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

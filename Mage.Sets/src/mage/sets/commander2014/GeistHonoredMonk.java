@@ -37,7 +37,7 @@ public class GeistHonoredMonk extends mage.sets.innistrad.GeistHonoredMonk {
 
     public GeistHonoredMonk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "C14";
     }
 

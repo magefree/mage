@@ -37,7 +37,7 @@ public class JaceMemoryAdept extends mage.sets.magic2012.JaceMemoryAdept {
 
     public JaceMemoryAdept(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "M13";
     }
 

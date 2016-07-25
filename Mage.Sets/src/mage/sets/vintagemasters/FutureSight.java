@@ -37,7 +37,7 @@ public class FutureSight extends mage.sets.onslaught.FutureSight {
 
     public FutureSight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "VMA";
     }
 

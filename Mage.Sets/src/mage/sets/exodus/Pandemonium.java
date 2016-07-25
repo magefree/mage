@@ -38,7 +38,7 @@ public class Pandemonium extends mage.sets.timeshifted.Pandemonium {
 
     public Pandemonium(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "EXO";
         this.rarity = Rarity.RARE;
     }

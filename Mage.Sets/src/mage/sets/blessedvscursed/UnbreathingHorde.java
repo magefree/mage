@@ -37,7 +37,7 @@ public class UnbreathingHorde extends mage.sets.innistrad.UnbreathingHorde {
 
     public UnbreathingHorde(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "DDQ";
     }
 

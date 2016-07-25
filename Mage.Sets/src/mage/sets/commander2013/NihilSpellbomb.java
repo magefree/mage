@@ -37,7 +37,7 @@ public class NihilSpellbomb extends mage.sets.scarsofmirrodin.NihilSpellbomb {
 
     public NihilSpellbomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 249;
+        this.cardNumber = "249";
         this.expansionSetCode = "C13";
     }
 

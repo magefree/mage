@@ -37,7 +37,7 @@ public class CobraTrap extends mage.sets.zendikar.CobraTrap {
 
     public CobraTrap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "CMD";
     }
 

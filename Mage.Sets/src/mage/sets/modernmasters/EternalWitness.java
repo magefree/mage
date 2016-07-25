@@ -37,7 +37,7 @@ public class EternalWitness extends mage.sets.fifthdawn.EternalWitness {
 
     public EternalWitness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "MMA";
     }
 

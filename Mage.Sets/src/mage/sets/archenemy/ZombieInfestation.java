@@ -37,7 +37,7 @@ public class ZombieInfestation extends mage.sets.magic2012.ZombieInfestation {
 
     public ZombieInfestation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "ARC";
     }
 

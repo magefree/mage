@@ -37,7 +37,7 @@ public class SkyshroudTroll extends mage.sets.tempest.SkyshroudTroll {
 
     public SkyshroudTroll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "TPR";
     }
 

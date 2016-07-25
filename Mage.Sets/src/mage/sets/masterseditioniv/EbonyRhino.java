@@ -37,7 +37,7 @@ public class EbonyRhino extends mage.sets.homelands.EbonyRhino {
 
     public EbonyRhino(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "ME4";
     }
 

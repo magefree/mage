@@ -37,7 +37,7 @@ public class Crawlspace extends mage.sets.commander2013.Crawlspace {
 
     public Crawlspace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "ULG";
     }
 

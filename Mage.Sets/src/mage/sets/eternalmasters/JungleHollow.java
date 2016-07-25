@@ -38,7 +38,7 @@ public class JungleHollow extends mage.sets.khansoftarkir.JungleHollow {
 
     public JungleHollow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "EMA";
     }
 

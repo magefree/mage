@@ -37,7 +37,7 @@ public class CloudgoatRanger extends mage.sets.lorwyn.CloudgoatRanger {
 
     public CloudgoatRanger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "MMA";
     }
 

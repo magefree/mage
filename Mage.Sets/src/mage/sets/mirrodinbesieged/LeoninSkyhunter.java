@@ -39,7 +39,7 @@ public class LeoninSkyhunter extends mage.sets.mirrodin.LeoninSkyhunter {
 
     public LeoninSkyhunter (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "MBS";
         this.rarity = Rarity.COMMON;
     }

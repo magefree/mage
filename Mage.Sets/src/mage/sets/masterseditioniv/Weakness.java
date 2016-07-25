@@ -37,7 +37,7 @@ public class Weakness extends mage.sets.magic2010.Weakness {
 
     public Weakness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "ME4";
     }
 

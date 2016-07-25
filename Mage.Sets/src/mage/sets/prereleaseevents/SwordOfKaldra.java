@@ -38,7 +38,7 @@ public class SwordOfKaldra extends mage.sets.mirrodin.SwordOfKaldra {
 
     public SwordOfKaldra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

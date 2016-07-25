@@ -37,7 +37,7 @@ public class Kezzerdrix extends mage.sets.tempest.Kezzerdrix {
 
     public Kezzerdrix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "TPR";
     }
 

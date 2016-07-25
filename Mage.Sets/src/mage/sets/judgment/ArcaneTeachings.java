@@ -38,7 +38,7 @@ public class ArcaneTeachings extends mage.sets.tenthedition.ArcaneTeachings {
 
     public ArcaneTeachings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "JUD";
         this.rarity = Rarity.COMMON;
     }

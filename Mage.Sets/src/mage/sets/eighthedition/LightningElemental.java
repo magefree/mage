@@ -37,7 +37,7 @@ public class LightningElemental extends mage.sets.tenthedition.LightningElementa
 
     public LightningElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "8ED";
     }
 

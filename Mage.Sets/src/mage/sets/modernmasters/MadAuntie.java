@@ -38,7 +38,7 @@ public class MadAuntie extends mage.sets.lorwyn.MadAuntie {
 
     public MadAuntie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.UNCOMMON;
     }

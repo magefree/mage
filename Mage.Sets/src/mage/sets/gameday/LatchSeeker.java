@@ -37,7 +37,7 @@ public class LatchSeeker extends mage.sets.avacynrestored.LatchSeeker {
 
     public LatchSeeker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "MGDC";
     }
 

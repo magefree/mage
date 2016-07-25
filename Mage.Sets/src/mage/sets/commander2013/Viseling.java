@@ -37,7 +37,7 @@ public class Viseling extends mage.sets.nemesis.Viseling {
 
     public Viseling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
+        this.cardNumber = "269";
         this.expansionSetCode = "C13";
     }
 

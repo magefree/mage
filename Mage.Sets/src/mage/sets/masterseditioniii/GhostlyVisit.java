@@ -37,7 +37,7 @@ public class GhostlyVisit extends mage.sets.portalthreekingdoms.GhostlyVisit {
 
     public GhostlyVisit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "ME3";
     }
 

@@ -38,7 +38,7 @@ public class SylvanLibrary extends mage.sets.fifthedition.SylvanLibrary {
 
     public SylvanLibrary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

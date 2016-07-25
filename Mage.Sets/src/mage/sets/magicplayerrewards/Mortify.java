@@ -38,7 +38,7 @@ public class Mortify extends mage.sets.guildpact.Mortify {
 
     public Mortify(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class ConclavePhalanx extends mage.sets.elspethvstezzeret.ConclavePhalanx
 
     public ConclavePhalanx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "RAV";
     }
 

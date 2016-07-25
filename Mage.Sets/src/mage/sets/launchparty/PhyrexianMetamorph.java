@@ -37,7 +37,7 @@ public class PhyrexianMetamorph extends mage.sets.newphyrexia.PhyrexianMetamorph
 
     public PhyrexianMetamorph(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "MLP";
     }
 

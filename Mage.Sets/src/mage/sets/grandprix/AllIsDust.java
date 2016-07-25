@@ -37,7 +37,7 @@ public class AllIsDust extends mage.sets.riseoftheeldrazi.AllIsDust {
 
     public AllIsDust(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "GPX";
     }
 

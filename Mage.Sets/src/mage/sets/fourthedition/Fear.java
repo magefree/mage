@@ -37,7 +37,7 @@ public class Fear extends mage.sets.tenthedition.Fear {
 
     public Fear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "4ED";
     }
 

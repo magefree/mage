@@ -37,7 +37,7 @@ public class SustainingSpirit extends mage.sets.alliances.SustainingSpirit {
 
     public SustainingSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "ME2";
     }
 

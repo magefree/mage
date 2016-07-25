@@ -37,7 +37,7 @@ public class ImmolatingGlare extends mage.sets.oathofthegatewatch.ImmolatingGlar
 
     public ImmolatingGlare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "MGDC";
     }
 

@@ -38,7 +38,7 @@ public class SurrakDragonclaw extends mage.sets.khansoftarkir.SurrakDragonclaw {
 
     public SurrakDragonclaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

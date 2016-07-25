@@ -37,7 +37,7 @@ public class ZodiacDragon extends mage.sets.portalthreekingdoms.ZodiacDragon {
 
     public ZodiacDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "ME3";
     }
 

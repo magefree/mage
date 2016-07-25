@@ -37,7 +37,7 @@ public class Roast extends mage.sets.dragonsoftarkir.Roast {
 
     public Roast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = "186";
         this.expansionSetCode = "FNMP";
     }
 

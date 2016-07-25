@@ -37,7 +37,7 @@ public class RighteousFury extends mage.sets.starter1999.RighteousFury {
 
     public RighteousFury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "PO2";
     }
 

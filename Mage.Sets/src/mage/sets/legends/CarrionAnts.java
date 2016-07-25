@@ -38,7 +38,7 @@ public class CarrionAnts extends mage.sets.fifthedition.CarrionAnts {
 
     public CarrionAnts(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.RARE;
     }

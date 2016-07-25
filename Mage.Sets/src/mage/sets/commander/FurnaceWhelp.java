@@ -37,7 +37,7 @@ public class FurnaceWhelp extends mage.sets.tenthedition.FurnaceWhelp {
 
     public FurnaceWhelp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "CMD";
     }
 

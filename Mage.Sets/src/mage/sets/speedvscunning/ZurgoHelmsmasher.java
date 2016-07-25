@@ -37,7 +37,7 @@ public class ZurgoHelmsmasher extends mage.sets.khansoftarkir.ZurgoHelmsmasher {
 
     public ZurgoHelmsmasher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DDN";
     }
 

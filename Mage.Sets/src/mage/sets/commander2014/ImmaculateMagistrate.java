@@ -37,7 +37,7 @@ public class ImmaculateMagistrate extends mage.sets.lorwyn.ImmaculateMagistrate 
 
     public ImmaculateMagistrate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "C14";
     }
 

@@ -38,7 +38,7 @@ public class WhitemaneLion extends mage.sets.commander2014.WhitemaneLion {
 
     public WhitemaneLion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "EMA";
     }
 

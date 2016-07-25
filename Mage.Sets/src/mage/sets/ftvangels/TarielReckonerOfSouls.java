@@ -37,7 +37,7 @@ public class TarielReckonerOfSouls extends mage.sets.commander.TarielReckonerOfS
 
     public TarielReckonerOfSouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "V15";
     }
 

@@ -37,7 +37,7 @@ public class RecumbentBliss extends mage.sets.eventide.RecumbentBliss {
 
     public RecumbentBliss(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "DDH";
     }
 

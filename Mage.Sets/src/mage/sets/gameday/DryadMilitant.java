@@ -37,7 +37,7 @@ public class DryadMilitant extends mage.sets.returntoravnica.DryadMilitant {
 
     public DryadMilitant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "MGDC";
     }
 

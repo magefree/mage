@@ -38,7 +38,7 @@ public class Pillage extends mage.sets.seventhedition.Pillage {
 
     public Pillage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "ARENA";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class CaribouRange extends mage.sets.fifthedition.CaribouRange {
 
     public CaribouRange(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 235;
+        this.cardNumber = "235";
         this.expansionSetCode = "ICE";
     }
 

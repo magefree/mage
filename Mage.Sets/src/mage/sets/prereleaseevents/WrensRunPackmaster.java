@@ -38,7 +38,7 @@ public class WrensRunPackmaster extends mage.sets.lorwyn.WrensRunPackmaster {
 
     public WrensRunPackmaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class MordantDragon extends mage.sets.worldwake.MordantDragon {
 
     public MordantDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "DDG";
     }
 

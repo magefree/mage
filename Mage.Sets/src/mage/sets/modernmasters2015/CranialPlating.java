@@ -38,7 +38,7 @@ public class CranialPlating extends mage.sets.planechase.CranialPlating {
 
     public CranialPlating(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 206;
+        this.cardNumber = "206";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

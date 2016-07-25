@@ -37,7 +37,7 @@ public class SanctifierOfSouls extends mage.sets.eldritchmoon.SanctifierOfSouls 
 
     public SanctifierOfSouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "MBP";
     }
 

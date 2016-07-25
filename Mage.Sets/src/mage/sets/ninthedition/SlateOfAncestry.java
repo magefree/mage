@@ -37,7 +37,7 @@ public class SlateOfAncestry extends mage.sets.onslaught.SlateOfAncestry {
 
     public SlateOfAncestry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
+        this.cardNumber = "308";
         this.expansionSetCode = "9ED";
     }
 

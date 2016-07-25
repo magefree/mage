@@ -37,7 +37,7 @@ public class Gravecrawler extends mage.sets.darkascension.Gravecrawler {
 
     public Gravecrawler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "DDQ";
     }
 

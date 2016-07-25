@@ -38,7 +38,7 @@ public class GiftOfEstates extends mage.sets.commander2014.GiftOfEstates {
 
     public GiftOfEstates(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "POR";
         this.rarity = Rarity.RARE;
     }

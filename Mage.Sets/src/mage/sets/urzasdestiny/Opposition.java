@@ -37,7 +37,7 @@ public class Opposition extends mage.sets.seventhedition.Opposition {
 
     public Opposition(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "UDS";
     }
 

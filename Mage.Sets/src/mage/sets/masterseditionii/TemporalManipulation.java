@@ -37,7 +37,7 @@ public class TemporalManipulation extends mage.sets.portalsecondage.TemporalMani
 
     public TemporalManipulation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "ME2";
     }
 

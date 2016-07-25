@@ -38,7 +38,7 @@ public class ChargingRhino extends mage.sets.tempest.ChargingRhino {
 
     public ChargingRhino(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 171;
+        this.cardNumber = "171";
         this.expansionSetCode = "M15";
         this.rarity = Rarity.COMMON;
     }

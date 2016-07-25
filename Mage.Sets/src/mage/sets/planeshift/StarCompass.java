@@ -37,7 +37,7 @@ public class StarCompass extends mage.sets.eighthedition.StarCompass {
 
     public StarCompass(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "PLS";
     }
 

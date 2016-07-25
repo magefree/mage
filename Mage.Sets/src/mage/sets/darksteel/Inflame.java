@@ -37,7 +37,7 @@ public class Inflame extends mage.sets.prophecy.Inflame {
 
     public Inflame(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "DST";
     }
 

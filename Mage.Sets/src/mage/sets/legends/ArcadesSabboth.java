@@ -37,7 +37,7 @@ public class ArcadesSabboth extends mage.sets.masterseditioniii.ArcadesSabboth {
 
     public ArcadesSabboth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 258;
+        this.cardNumber = "258";
         this.expansionSetCode = "LEG";
     }
 

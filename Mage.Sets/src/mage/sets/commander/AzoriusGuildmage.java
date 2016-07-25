@@ -37,7 +37,7 @@ public class AzoriusGuildmage extends mage.sets.dissension.AzoriusGuildmage {
 
     public AzoriusGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "CMD";
     }
 

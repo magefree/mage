@@ -37,7 +37,7 @@ public class SparkSpray extends mage.sets.vintagemasters.SparkSpray {
 
     public SparkSpray(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "SCG";
     }
 

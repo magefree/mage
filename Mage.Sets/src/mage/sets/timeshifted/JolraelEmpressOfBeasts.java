@@ -38,7 +38,7 @@ public class JolraelEmpressOfBeasts extends mage.sets.prophecy.JolraelEmpressOfB
 
     public JolraelEmpressOfBeasts(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

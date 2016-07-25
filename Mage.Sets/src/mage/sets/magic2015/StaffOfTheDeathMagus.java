@@ -39,7 +39,7 @@ public class StaffOfTheDeathMagus extends mage.sets.magic2014.StaffOfTheDeathMag
     public StaffOfTheDeathMagus(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "M15";
     }
 

@@ -37,7 +37,7 @@ public class EaterOfTheDead extends mage.sets.mastersedition.EaterOfTheDead {
 
     public EaterOfTheDead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "DRK";
     }
 

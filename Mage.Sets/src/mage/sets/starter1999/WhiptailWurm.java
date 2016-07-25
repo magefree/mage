@@ -37,7 +37,7 @@ public class WhiptailWurm extends mage.sets.portal.WhiptailWurm {
 
     public WhiptailWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "S99";
     }
 

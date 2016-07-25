@@ -38,7 +38,7 @@ public class Redeem extends mage.sets.urzassaga.Redeem {
 
     public Redeem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.COMMON;
     }

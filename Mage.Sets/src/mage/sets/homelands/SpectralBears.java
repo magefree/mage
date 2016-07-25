@@ -37,7 +37,7 @@ public class SpectralBears extends mage.sets.mastersedition.SpectralBears {
 
     public SpectralBears(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "HML";
     }
 

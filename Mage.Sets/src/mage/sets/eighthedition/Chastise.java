@@ -37,7 +37,7 @@ public class Chastise extends mage.sets.ninthedition.Chastise {
 
     public Chastise(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "8ED";
     }
 

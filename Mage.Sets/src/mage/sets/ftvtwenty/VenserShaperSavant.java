@@ -38,7 +38,7 @@ public class VenserShaperSavant extends mage.sets.futuresight.VenserShaperSavant
 
     public VenserShaperSavant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "V13";
         this.rarity = Rarity.MYTHIC;
     }

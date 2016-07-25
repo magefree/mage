@@ -37,7 +37,7 @@ public class SanctumGuardian extends mage.sets.ninthedition.SanctumGuardian {
 
     public SanctumGuardian(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "USG";
     }
 

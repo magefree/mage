@@ -38,7 +38,7 @@ public class AccordersShield extends mage.sets.scarsofmirrodin.AccordersShield {
 
     public AccordersShield(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "M14";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class TravelersCloak extends mage.sets.conspiracy.TravelersCloak {
 
     public TravelersCloak(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "INV";
     }
 

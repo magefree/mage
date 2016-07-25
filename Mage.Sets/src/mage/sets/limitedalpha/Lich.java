@@ -37,7 +37,7 @@ public class Lich extends mage.sets.masterseditioniv.Lich {
 
     public Lich(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "LEA";
     }
 

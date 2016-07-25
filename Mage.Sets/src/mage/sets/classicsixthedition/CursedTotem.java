@@ -37,7 +37,7 @@ public class CursedTotem extends mage.sets.mirage.CursedTotem {
 
     public CursedTotem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 278;
+        this.cardNumber = "278";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class BasalThrull extends mage.sets.fallenempires.BasalThrull1 {
 
     public BasalThrull(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "MED";
     }
 

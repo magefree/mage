@@ -37,7 +37,7 @@ public class AlignedHedronNetwork extends mage.sets.battleforzendikar.AlignedHed
 
     public AlignedHedronNetwork(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 240;
+        this.cardNumber = "240";
         this.expansionSetCode = "PTC";
     }
 

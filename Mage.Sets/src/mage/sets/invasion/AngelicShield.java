@@ -38,7 +38,7 @@ public class AngelicShield extends mage.sets.venservskoth.AngelicShield {
 
     public AngelicShield(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "INV";
     }
 

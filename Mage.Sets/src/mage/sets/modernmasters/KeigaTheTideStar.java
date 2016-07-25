@@ -38,7 +38,7 @@ public class KeigaTheTideStar extends mage.sets.championsofkamigawa.KeigaTheTide
 
     public KeigaTheTideStar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.MYTHIC;
     }

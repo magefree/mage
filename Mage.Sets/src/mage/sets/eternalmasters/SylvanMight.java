@@ -39,7 +39,7 @@ public class SylvanMight extends mage.sets.odyssey.SylvanMight {
 
     public SylvanMight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

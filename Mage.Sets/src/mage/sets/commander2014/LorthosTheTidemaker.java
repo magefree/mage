@@ -37,7 +37,7 @@ public class LorthosTheTidemaker extends mage.sets.zendikar.LorthosTheTidemaker 
 
     public LorthosTheTidemaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "C14";
     }
 

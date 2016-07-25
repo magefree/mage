@@ -37,7 +37,7 @@ public class LilianasReaver extends mage.sets.magic2014.LilianasReaver {
 
     public LilianasReaver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "C14";
     }
 

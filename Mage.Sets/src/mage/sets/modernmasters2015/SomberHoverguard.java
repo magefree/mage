@@ -37,7 +37,7 @@ public class SomberHoverguard extends mage.sets.mirrodin.SomberHoverguard {
 
     public SomberHoverguard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "MM2";
     }
 

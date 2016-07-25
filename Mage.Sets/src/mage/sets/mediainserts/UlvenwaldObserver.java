@@ -37,7 +37,7 @@ public class UlvenwaldObserver extends mage.sets.eldritchmoon.UlvenwaldObserver 
 
     public UlvenwaldObserver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "MBP";
     }
 

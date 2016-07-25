@@ -37,7 +37,7 @@ public class GluttonousZombie extends mage.sets.onslaught.GluttonousZombie {
 
     public GluttonousZombie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "8ED";
     }
 

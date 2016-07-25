@@ -38,7 +38,7 @@ public class TakePossession extends mage.sets.modernmasters.TakePossession {
 
     public TakePossession(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "FUT";
         this.rarity = Rarity.RARE;
     }

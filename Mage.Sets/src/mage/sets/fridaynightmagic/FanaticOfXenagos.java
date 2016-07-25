@@ -37,7 +37,7 @@ public class FanaticOfXenagos extends mage.sets.bornofthegods.FanaticOfXenagos {
 
     public FanaticOfXenagos(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "FNMP";
     }
 

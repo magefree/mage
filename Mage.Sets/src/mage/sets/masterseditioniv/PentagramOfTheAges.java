@@ -38,7 +38,7 @@ public class PentagramOfTheAges extends mage.sets.iceage.PentagramOfTheAges {
 
     public PentagramOfTheAges(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 220;
+        this.cardNumber = "220";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

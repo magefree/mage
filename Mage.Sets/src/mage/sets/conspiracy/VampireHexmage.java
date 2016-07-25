@@ -37,7 +37,7 @@ public class VampireHexmage extends mage.sets.zendikar.VampireHexmage {
 
     public VampireHexmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "CNS";
     }
 

@@ -38,7 +38,7 @@ public class SphinxOfTheSteelWind extends mage.sets.alarareborn.SphinxOfTheSteel
 
     public SphinxOfTheSteelWind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 207;
+        this.cardNumber = "207";
         this.expansionSetCode = "EMA";
     }
 

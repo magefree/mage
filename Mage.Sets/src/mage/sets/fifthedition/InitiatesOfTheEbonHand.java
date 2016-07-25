@@ -37,7 +37,7 @@ public class InitiatesOfTheEbonHand extends mage.sets.fallenempires.InitiatesOfT
 
     public InitiatesOfTheEbonHand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "5ED";
     }
 

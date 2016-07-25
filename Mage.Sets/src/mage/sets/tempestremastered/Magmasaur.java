@@ -37,7 +37,7 @@ public class Magmasaur extends mage.sets.tempest.Magmasaur {
 
     public Magmasaur(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "TPR";
     }
 

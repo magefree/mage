@@ -37,7 +37,7 @@ public class EchoTracer extends mage.sets.speedvscunning.EchoTracer {
 
     public EchoTracer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "LGN";
     }
 

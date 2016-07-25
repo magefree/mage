@@ -37,7 +37,7 @@ public class GoblinPiledriver extends mage.sets.onslaught.GoblinPiledriver {
 
     public GoblinPiledriver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "VMA";
     }
 

@@ -38,7 +38,7 @@ public class ErhnamDjinn extends mage.sets.judgment.ErhnamDjinn {
 
     public ErhnamDjinn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 207;
+        this.cardNumber = "207";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

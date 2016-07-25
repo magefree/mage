@@ -37,7 +37,7 @@ public class SeismicStrike extends mage.sets.magic2010.SeismicStrike {
 
     public SeismicStrike(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 280;
+        this.cardNumber = "280";
         this.expansionSetCode = "M15";
     }
 

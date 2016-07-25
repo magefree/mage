@@ -38,7 +38,7 @@ public class MoldervineCloak extends mage.sets.ravnica.MoldervineCloak {
 
     public MoldervineCloak(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class ActiveVolcano extends mage.sets.legends.ActiveVolcano {
 
     public ActiveVolcano(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "CHR";
     }
 

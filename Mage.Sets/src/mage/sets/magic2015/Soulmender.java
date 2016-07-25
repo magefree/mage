@@ -37,7 +37,7 @@ public class Soulmender extends mage.sets.magic2014.Soulmender {
 
     public Soulmender(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "M15";
     }
 

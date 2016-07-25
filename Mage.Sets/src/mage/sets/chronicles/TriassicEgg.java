@@ -37,7 +37,7 @@ public class TriassicEgg extends mage.sets.legends.TriassicEgg {
 
     public TriassicEgg(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "CHR";
     }
 

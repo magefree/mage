@@ -37,7 +37,7 @@ public class GiantSolifuge extends mage.sets.guildpact.GiantSolifuge {
 
     public GiantSolifuge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "EMA";
     }
 

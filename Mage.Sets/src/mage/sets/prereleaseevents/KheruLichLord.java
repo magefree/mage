@@ -38,7 +38,7 @@ public class KheruLichLord extends mage.sets.khansoftarkir.KheruLichLord {
 
     public KheruLichLord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

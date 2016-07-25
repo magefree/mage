@@ -37,7 +37,7 @@ public class IcatianPriest extends mage.sets.tenthedition.IcatianPriest {
 
     public IcatianPriest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "FEM";
     }
 

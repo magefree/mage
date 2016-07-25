@@ -37,7 +37,7 @@ public class SliceInTwain extends mage.sets.scarsofmirrodin.SliceinTwain {
 
     public SliceInTwain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "C13";
     }
 

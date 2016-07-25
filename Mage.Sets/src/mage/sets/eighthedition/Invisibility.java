@@ -38,7 +38,7 @@ public class Invisibility extends mage.sets.limitedalpha.Invisibility {
 
     public Invisibility(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.UNCOMMON;
     }

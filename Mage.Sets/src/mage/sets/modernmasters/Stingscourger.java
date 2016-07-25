@@ -37,7 +37,7 @@ public class Stingscourger extends mage.sets.planarchaos.Stingscourger {
 
     public Stingscourger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "MMA";
     }
 

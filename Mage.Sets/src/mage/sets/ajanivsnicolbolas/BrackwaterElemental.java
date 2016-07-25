@@ -37,7 +37,7 @@ public class BrackwaterElemental extends mage.sets.conflux.BrackwaterElemental {
 
     public BrackwaterElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "DDH";
     }
 

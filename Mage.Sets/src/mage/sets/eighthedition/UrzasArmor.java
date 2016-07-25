@@ -38,7 +38,7 @@ public class UrzasArmor extends mage.sets.urzassaga.UrzasArmor {
 
     public UrzasArmor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 318;
+        this.cardNumber = "318";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.RARE;
     }

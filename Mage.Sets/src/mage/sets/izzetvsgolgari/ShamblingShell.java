@@ -37,7 +37,7 @@ public class ShamblingShell extends mage.sets.ravnica.ShamblingShell {
 
     public ShamblingShell(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "DDJ";
     }
 

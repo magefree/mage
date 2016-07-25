@@ -37,7 +37,7 @@ public class KherKeep extends mage.sets.commander2013.KherKeep {
 
     public KherKeep(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 275;
+        this.cardNumber = "275";
         this.expansionSetCode = "TSP";
     }
 

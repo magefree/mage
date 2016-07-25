@@ -37,7 +37,7 @@ public class BloodBairn extends mage.sets.magic2014.BloodBairn {
 
     public BloodBairn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "C15";
     }
 

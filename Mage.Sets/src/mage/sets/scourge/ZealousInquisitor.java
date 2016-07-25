@@ -38,7 +38,7 @@ public class ZealousInquisitor extends mage.sets.ninthedition.ZealousInquisitor 
 
     public ZealousInquisitor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "SCG";
         this.rarity = Rarity.COMMON;
     }

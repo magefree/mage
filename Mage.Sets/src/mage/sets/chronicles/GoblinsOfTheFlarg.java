@@ -37,7 +37,7 @@ public class GoblinsOfTheFlarg extends mage.sets.thedark.GoblinsOfTheFlarg {
 
     public GoblinsOfTheFlarg(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "CHR";
     }
 

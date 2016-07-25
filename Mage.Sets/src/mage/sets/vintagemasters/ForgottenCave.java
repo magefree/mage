@@ -37,7 +37,7 @@ public class ForgottenCave extends mage.sets.onslaught.ForgottenCave {
 
     public ForgottenCave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 297;
+        this.cardNumber = "297";
         this.expansionSetCode = "VMA";
     }
 

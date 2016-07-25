@@ -38,7 +38,7 @@ public class CopyArtifact extends mage.sets.limitedalpha.CopyArtifact {
 
     public CopyArtifact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "3ED";
     }
 

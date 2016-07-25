@@ -37,7 +37,7 @@ public class BloodfireKavu extends mage.sets.apocalypse.BloodfireKavu {
 
     public BloodfireKavu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "DDI";
     }
 

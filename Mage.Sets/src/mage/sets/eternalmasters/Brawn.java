@@ -38,7 +38,7 @@ public class Brawn extends mage.sets.judgment.Brawn {
 
     public Brawn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "EMA";
     }
 

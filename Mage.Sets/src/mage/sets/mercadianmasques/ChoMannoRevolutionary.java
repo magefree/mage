@@ -37,7 +37,7 @@ public class ChoMannoRevolutionary extends mage.sets.tenthedition.ChoMannoRevolu
 
     public ChoMannoRevolutionary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "MMQ";
     }
 

@@ -37,7 +37,7 @@ public class GoblinDiggingTeam extends mage.sets.thedark.GoblinDiggingTeam {
 
     public GoblinDiggingTeam(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 234;
+        this.cardNumber = "234";
         this.expansionSetCode = "5ED";
     }
 

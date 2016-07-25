@@ -37,7 +37,7 @@ public class MyrRetriever extends mage.sets.modernmasters.MyrRetriever {
 
     public MyrRetriever(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 255;
+        this.cardNumber = "255";
         this.expansionSetCode = "C14";
     }
 

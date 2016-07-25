@@ -37,7 +37,7 @@ public class Cowardice extends mage.sets.ninthedition.Cowardice {
 
     public Cowardice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "8ED";
     }
 

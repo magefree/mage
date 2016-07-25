@@ -37,7 +37,7 @@ public class StompingGround extends mage.sets.guildpact.StompingGround {
 
     public StompingGround(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 247;
+        this.cardNumber = "247";
         this.expansionSetCode = "GTC";
     }
 

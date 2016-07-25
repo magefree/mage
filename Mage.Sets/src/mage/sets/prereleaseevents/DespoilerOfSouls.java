@@ -37,7 +37,7 @@ public class DespoilerOfSouls extends mage.sets.magicorigins.DespoilerOfSouls {
 
     public DespoilerOfSouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 203;
+        this.cardNumber = "203";
         this.expansionSetCode = "PTC";
     }
 

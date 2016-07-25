@@ -37,7 +37,7 @@ public class VividCreek extends mage.sets.lorwyn.VividCreek {
 
     public VividCreek(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 334;
+        this.cardNumber = "334";
         this.expansionSetCode = "C13";
     }
 

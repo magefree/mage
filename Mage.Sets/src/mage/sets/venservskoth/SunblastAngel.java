@@ -37,7 +37,7 @@ public class SunblastAngel extends mage.sets.scarsofmirrodin.SunblastAngel {
 
     public SunblastAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "DDI";
     }
 

@@ -37,7 +37,7 @@ public class MoorlandInquisitor extends mage.sets.avacynrestored.MoorlandInquisi
 
     public MoorlandInquisitor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "DDQ";
     }
 

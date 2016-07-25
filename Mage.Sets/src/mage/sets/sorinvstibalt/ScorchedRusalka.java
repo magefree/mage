@@ -37,7 +37,7 @@ public class ScorchedRusalka extends mage.sets.guildpact.ScorchedRusalka {
 
     public ScorchedRusalka(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "DDK";
     }
 

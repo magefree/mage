@@ -48,6 +48,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -152,9 +153,10 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Object object = this.getValue("NayaSoulbeastCounters");
-        if (object instanceof Integer) {
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        if (permanent!= null && object instanceof Integer) {
             int amount = ((Integer) object);
-            new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount)).apply(game, source);
+            permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
         }
         return false;
     }

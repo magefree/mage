@@ -38,7 +38,7 @@ public class WrathOfMaritLage extends mage.sets.iceage.WrathOfMaritLage {
 
     public WrathOfMaritLage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.UNCOMMON;
     }

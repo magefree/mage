@@ -38,7 +38,7 @@ public class VaultSkirge extends mage.sets.newphyrexia.VaultSkirge {
 
     public VaultSkirge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

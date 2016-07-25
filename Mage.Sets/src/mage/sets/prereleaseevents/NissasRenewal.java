@@ -37,7 +37,7 @@ public class NissasRenewal extends mage.sets.battleforzendikar.NissasRenewal {
 
     public NissasRenewal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 275;
+        this.cardNumber = "275";
         this.expansionSetCode = "PTC";
     }
 

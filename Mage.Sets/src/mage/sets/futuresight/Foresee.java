@@ -37,7 +37,7 @@ public class Foresee extends mage.sets.magic2011.Foresee {
 
     public Foresee(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "FUT";
     }
 

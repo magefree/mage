@@ -37,7 +37,7 @@ public class IonaShieldOfEmeria extends mage.sets.zendikar.IonaShieldOfEmeria {
 
     public IonaShieldOfEmeria(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "V15";
     }
 

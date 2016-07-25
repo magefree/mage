@@ -37,7 +37,7 @@ public class CallToTheGrave extends mage.sets.magic2012.CallToTheGrave {
 
     public CallToTheGrave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "SCG";
     }
 

@@ -37,7 +37,7 @@ public class Chill extends mage.sets.tempest.Chill {
 
     public Chill(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class SylvanScrying extends mage.sets.tenthedition.SylvanScrying {
 
     public SylvanScrying(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "MRD";
     }
 

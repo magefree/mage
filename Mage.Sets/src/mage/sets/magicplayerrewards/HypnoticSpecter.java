@@ -38,7 +38,7 @@ public class HypnoticSpecter extends mage.sets.magic2010.HypnoticSpecter {
 
     public HypnoticSpecter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -38,7 +38,7 @@ public class WateryGrave extends mage.sets.ravnica.WateryGrave {
 
     public WateryGrave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

@@ -37,7 +37,7 @@ public class SilvosRogueElemental extends mage.sets.onslaught.SilvosRogueElement
 
     public SilvosRogueElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 231;
+        this.cardNumber = "231";
         this.expansionSetCode = "VMA";
     }
 

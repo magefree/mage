@@ -37,7 +37,7 @@ public class IgniteDisorder extends mage.sets.magic2010.IgniteDisorder {
 
     public IgniteDisorder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "CON";
     }
 

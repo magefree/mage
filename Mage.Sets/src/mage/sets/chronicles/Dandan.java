@@ -37,7 +37,7 @@ public class Dandan extends mage.sets.fifthedition.Dandan {
 
     public Dandan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "CHR";
     }
 

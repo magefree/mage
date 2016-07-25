@@ -38,7 +38,7 @@ public class Pendelhaven extends mage.sets.timeshifted.Pendelhaven {
 
     public Pendelhaven(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.UNCOMMON;
     }

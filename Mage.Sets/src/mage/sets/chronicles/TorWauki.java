@@ -37,7 +37,7 @@ public class TorWauki extends mage.sets.legends.TorWauki {
 
     public TorWauki(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "CHR";
     }
 

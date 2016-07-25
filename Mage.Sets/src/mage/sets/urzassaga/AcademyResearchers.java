@@ -37,7 +37,7 @@ public class AcademyResearchers extends mage.sets.tenthedition.AcademyResearcher
 
     public AcademyResearchers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "USG";
     }
 

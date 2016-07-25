@@ -37,7 +37,7 @@ public class DismalBackwater extends mage.sets.khansoftarkir.DismalBackwater {
 
     public DismalBackwater(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "DDQ";
     }
 

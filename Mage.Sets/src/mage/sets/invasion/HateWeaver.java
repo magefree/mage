@@ -37,7 +37,7 @@ public class HateWeaver extends mage.sets.tenthedition.HateWeaver {
 
     public HateWeaver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "INV";
     }
 

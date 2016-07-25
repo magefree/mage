@@ -37,7 +37,7 @@ public class CitanulFlute extends mage.sets.urzassaga.CitanulFlute {
 
     public CitanulFlute(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 315;
+        this.cardNumber = "315";
         this.expansionSetCode = "10E";
     }
 

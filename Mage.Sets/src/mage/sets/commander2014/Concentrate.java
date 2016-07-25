@@ -37,7 +37,7 @@ public class Concentrate extends mage.sets.odyssey.Concentrate {
 
     public Concentrate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "C14";
     }
 

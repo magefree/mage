@@ -37,7 +37,7 @@ public class ViashinoWarrior extends mage.sets.mirage.ViashinoWarrior {
 
     public ViashinoWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 213;
+        this.cardNumber = "213";
         this.expansionSetCode = "6ED";
     }
 

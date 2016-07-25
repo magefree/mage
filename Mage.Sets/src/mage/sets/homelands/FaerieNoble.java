@@ -38,7 +38,7 @@ public class FaerieNoble extends mage.sets.masterseditioniii.FaerieNoble {
 
     public FaerieNoble(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "HML";
         this.rarity = Rarity.RARE;
     }

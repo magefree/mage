@@ -38,7 +38,7 @@ public class SilentSentinel extends mage.sets.bornofthegods.SilentSentinel {
 
     public SilentSentinel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

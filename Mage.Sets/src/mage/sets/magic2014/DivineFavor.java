@@ -37,7 +37,7 @@ public class DivineFavor extends mage.sets.magic2012.DivineFavor {
 
     public DivineFavor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "M14";
     }
 

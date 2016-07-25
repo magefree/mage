@@ -37,7 +37,7 @@ public class PainSeer extends mage.sets.bornofthegods.PainSeer {
 
     public PainSeer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "MGDC";
     }
 

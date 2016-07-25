@@ -37,7 +37,7 @@ public class RevivingVapors extends mage.sets.invasion.RevivingVapors {
 
     public RevivingVapors(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 259;
+        this.cardNumber = "259";
         this.expansionSetCode = "VMA";
     }
 

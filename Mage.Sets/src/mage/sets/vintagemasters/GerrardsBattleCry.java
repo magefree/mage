@@ -37,7 +37,7 @@ public class GerrardsBattleCry extends mage.sets.tempest.GerrardsBattleCry {
 
     public GerrardsBattleCry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "VMA";
     }
 

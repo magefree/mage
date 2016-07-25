@@ -37,7 +37,7 @@ public class AzoriusHerald extends mage.sets.commander2013.AzoriusHerald {
 
     public AzoriusHerald(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "DIS";
     }
 

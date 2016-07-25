@@ -37,7 +37,7 @@ public class WoodedFoothills extends mage.sets.onslaught.WoodedFoothills {
 
     public WoodedFoothills(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "JR";
     }
 

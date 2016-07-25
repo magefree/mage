@@ -38,7 +38,7 @@ public class Demolish extends mage.sets.tenthedition.Demolish {
 
     public Demolish(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "ZEN";
     }
 

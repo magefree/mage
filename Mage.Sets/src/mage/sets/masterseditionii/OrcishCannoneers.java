@@ -38,7 +38,7 @@ public class OrcishCannoneers extends mage.sets.iceage.OrcishCannoneers {
 
     public OrcishCannoneers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "ME2";
     }
 

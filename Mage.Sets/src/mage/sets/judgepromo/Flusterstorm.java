@@ -37,7 +37,7 @@ public class Flusterstorm extends mage.sets.commander.Flusterstorm {
 
     public Flusterstorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "JR";
     }
 

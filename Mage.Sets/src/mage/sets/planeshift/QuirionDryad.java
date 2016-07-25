@@ -37,7 +37,7 @@ public class QuirionDryad extends mage.sets.tenthedition.QuirionDryad {
 
     public QuirionDryad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "PLS";
     }
 

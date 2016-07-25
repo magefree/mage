@@ -37,7 +37,7 @@ public class FlayerHusk extends mage.sets.mirrodinbesieged.FlayerHusk {
 
     public FlayerHusk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "PC2";
     }
 

@@ -6,7 +6,7 @@ public class Standstill extends mage.sets.odyssey.Standstill {
     
     public Standstill(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "MBP";
     }
     

@@ -37,7 +37,7 @@ public class BoltwingMarauder extends mage.sets.dragonsoftarkir.BoltwingMarauder
 
     public BoltwingMarauder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "PTC";
     }
 

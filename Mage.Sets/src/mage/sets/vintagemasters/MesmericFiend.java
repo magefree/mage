@@ -37,7 +37,7 @@ public class MesmericFiend extends mage.sets.torment.MesmericFiend {
 
     public MesmericFiend(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "VMA";
     }
 

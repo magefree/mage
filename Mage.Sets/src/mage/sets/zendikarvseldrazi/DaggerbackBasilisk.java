@@ -37,7 +37,7 @@ public class DaggerbackBasilisk extends mage.sets.riseoftheeldrazi.DaggerbackBas
 
     public DaggerbackBasilisk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DDP";
     }
 

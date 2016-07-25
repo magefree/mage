@@ -37,7 +37,7 @@ public class SeaSpirit extends mage.sets.masterseditionii.SeaSpirit {
 
     public SeaSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "5ED";
     }
 

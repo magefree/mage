@@ -38,7 +38,7 @@ public class Glory extends mage.sets.prereleaseevents.Glory {
 
     public Glory(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "JUD";
         this.rarity = Rarity.RARE;
     }

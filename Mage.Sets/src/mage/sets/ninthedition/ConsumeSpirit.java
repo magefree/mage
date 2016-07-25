@@ -37,7 +37,7 @@ public class ConsumeSpirit extends mage.sets.magic2010.ConsumeSpirit {
 
     public ConsumeSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "9ED";
     }
 

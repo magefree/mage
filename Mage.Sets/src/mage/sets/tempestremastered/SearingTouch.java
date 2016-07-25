@@ -37,7 +37,7 @@ public class SearingTouch extends mage.sets.tempest.SearingTouch {
 
     public SearingTouch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "TPR";
     }
 

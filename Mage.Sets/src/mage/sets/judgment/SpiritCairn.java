@@ -38,7 +38,7 @@ public class SpiritCairn extends mage.sets.vintagemasters.SpiritCairn {
 
     public SpiritCairn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "JUD";
         this.rarity = Rarity.UNCOMMON;
     }

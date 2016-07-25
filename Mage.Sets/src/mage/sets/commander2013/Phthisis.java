@@ -37,7 +37,7 @@ public class Phthisis extends mage.sets.timespiral.Phthisis {
 
     public Phthisis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "C13";
     }
 

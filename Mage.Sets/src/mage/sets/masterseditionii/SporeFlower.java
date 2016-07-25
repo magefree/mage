@@ -37,7 +37,7 @@ public class SporeFlower extends mage.sets.fallenempires.SporeFlower {
 
     public SporeFlower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "ME2";
     }
 

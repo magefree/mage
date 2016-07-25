@@ -37,7 +37,7 @@ public class CrumblingNecropolis extends mage.sets.shardsofalara.CrumblingNecrop
 
     public CrumblingNecropolis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "DDH";
     }
 

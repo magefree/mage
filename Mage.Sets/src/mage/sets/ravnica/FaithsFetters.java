@@ -37,7 +37,7 @@ public class FaithsFetters extends mage.sets.divinevsdemonic.FaithsFetters {
 
     public FaithsFetters(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "RAV";
     }
 

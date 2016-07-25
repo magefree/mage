@@ -37,7 +37,7 @@ public class HungryMist extends mage.sets.fifthedition.HungryMist {
 
     public HungryMist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "MED";
     }
 

@@ -37,7 +37,7 @@ public class EchoingTruth extends mage.sets.elspethvstezzeret.EchoingTruth {
 
     public EchoingTruth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "C15";
     }
 

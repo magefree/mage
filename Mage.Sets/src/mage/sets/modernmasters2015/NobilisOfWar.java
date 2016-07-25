@@ -37,7 +37,7 @@ public class NobilisOfWar extends mage.sets.eventide.NobilisOfWar {
 
     public NobilisOfWar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "MM2";
     }
 

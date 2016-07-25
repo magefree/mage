@@ -38,7 +38,7 @@ public class WindbriskHeights extends mage.sets.lorwyn.WindbriskHeights {
 
     public WindbriskHeights(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

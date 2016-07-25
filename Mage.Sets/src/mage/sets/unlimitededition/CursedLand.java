@@ -37,7 +37,7 @@ public class CursedLand extends mage.sets.fourthedition.CursedLand {
 
     public CursedLand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "2ED";
     }
 

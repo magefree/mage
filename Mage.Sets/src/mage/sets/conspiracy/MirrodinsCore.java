@@ -37,7 +37,7 @@ public class MirrodinsCore extends mage.sets.darksteel.MirrodinsCore {
 
     public MirrodinsCore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "CNS";
     }
 

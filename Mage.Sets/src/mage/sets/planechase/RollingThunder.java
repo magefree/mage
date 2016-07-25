@@ -38,7 +38,7 @@ public class RollingThunder extends mage.sets.tempestremastered.RollingThunder {
 
     public RollingThunder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "HOP";
         this.rarity = Rarity.COMMON;
     }

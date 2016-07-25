@@ -37,7 +37,7 @@ public class HordelingOutburst extends mage.sets.khansoftarkir.HordelingOutburst
 
     public HordelingOutburst(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "FNMP";
     }
 

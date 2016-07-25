@@ -37,7 +37,7 @@ public class StinkweedImp extends mage.sets.ravnica.StinkweedImp {
 
     public StinkweedImp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "DDJ";
     }
 

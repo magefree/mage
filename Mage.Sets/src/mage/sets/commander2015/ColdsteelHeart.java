@@ -37,7 +37,7 @@ public class ColdsteelHeart extends mage.sets.coldsnap.ColdsteelHeart {
 
     public ColdsteelHeart(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 249;
+        this.cardNumber = "249";
         this.expansionSetCode = "C15";
     }
 

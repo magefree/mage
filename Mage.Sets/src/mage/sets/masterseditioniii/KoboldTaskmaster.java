@@ -38,7 +38,7 @@ public class KoboldTaskmaster extends mage.sets.timeshifted.KoboldTaskmaster {
 
     public KoboldTaskmaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

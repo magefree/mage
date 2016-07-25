@@ -37,7 +37,7 @@ public class ForgeDevil extends mage.sets.darkascension.ForgeDevil {
 
     public ForgeDevil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "M15";
     }
 

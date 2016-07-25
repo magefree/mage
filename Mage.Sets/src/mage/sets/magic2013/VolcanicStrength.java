@@ -37,7 +37,7 @@ public class VolcanicStrength extends mage.sets.magic2011.VolcanicStrength {
 
     public VolcanicStrength(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "M13";
     }
 

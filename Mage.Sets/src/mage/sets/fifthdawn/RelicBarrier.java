@@ -37,7 +37,7 @@ public class RelicBarrier extends mage.sets.legends.RelicBarrier {
 
     public RelicBarrier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "5DN";
     }
 

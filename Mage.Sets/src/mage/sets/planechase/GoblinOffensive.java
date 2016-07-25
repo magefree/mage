@@ -37,7 +37,7 @@ public class GoblinOffensive extends mage.sets.urzassaga.GoblinOffensive {
 
     public GoblinOffensive(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "HOP";
     }
 

@@ -37,7 +37,7 @@ public class SireOfStagnation extends mage.sets.battleforzendikar.SireOfStagnati
 
     public SireOfStagnation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 294;
+        this.cardNumber = "294";
         this.expansionSetCode = "PTC";
     }
 

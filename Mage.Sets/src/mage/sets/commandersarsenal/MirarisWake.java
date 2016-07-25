@@ -38,7 +38,7 @@ public class MirarisWake extends mage.sets.judgment.MirarisWake {
 
     public MirarisWake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class NecromasterDragon extends mage.sets.dragonsoftarkir.NecromasterDrag
 
     public NecromasterDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "PTC";
     }
 

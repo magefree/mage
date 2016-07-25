@@ -37,7 +37,7 @@ public class Expunge extends mage.sets.urzassaga.Expunge {
 
     public Expunge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "VMA";
     }
 

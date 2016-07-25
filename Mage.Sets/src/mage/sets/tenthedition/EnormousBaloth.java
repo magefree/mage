@@ -37,7 +37,7 @@ public class EnormousBaloth extends mage.sets.magic2010.EnormousBaloth {
 
     public EnormousBaloth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 263;
+        this.cardNumber = "263";
         this.expansionSetCode = "10E";
     }
 

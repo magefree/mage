@@ -37,7 +37,7 @@ public class QasaliPridemage extends mage.sets.alarareborn.QasaliPridemage {
 
     public QasaliPridemage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDH";
     }
 

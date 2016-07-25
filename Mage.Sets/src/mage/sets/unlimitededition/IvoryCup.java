@@ -38,7 +38,7 @@ public class IvoryCup extends mage.sets.limitedalpha.IvoryCup {
 
     public IvoryCup(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 252;
+        this.cardNumber = "252";
         this.expansionSetCode = "2ED";
     }
 

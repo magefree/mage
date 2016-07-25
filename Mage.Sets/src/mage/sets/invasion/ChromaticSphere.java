@@ -38,7 +38,7 @@ public class ChromaticSphere extends mage.sets.mirrodin.ChromaticSphere {
 
     public ChromaticSphere(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 299;
+        this.cardNumber = "299";
         this.expansionSetCode = "INV";
         this.rarity = Rarity.UNCOMMON;
     }

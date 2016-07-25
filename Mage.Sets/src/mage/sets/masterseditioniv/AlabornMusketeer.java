@@ -37,7 +37,7 @@ public class AlabornMusketeer extends mage.sets.portalsecondage.AlabornMusketeer
 
     public AlabornMusketeer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "ME4";
     }
 

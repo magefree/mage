@@ -38,7 +38,7 @@ public class EthercasteKnight extends mage.sets.alarareborn.EthercasteKnight {
 
     public EthercasteKnight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

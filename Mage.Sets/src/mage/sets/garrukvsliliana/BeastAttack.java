@@ -37,7 +37,7 @@ public class BeastAttack extends mage.sets.odyssey.BeastAttack {
 
     public BeastAttack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "DDD";
     }
 

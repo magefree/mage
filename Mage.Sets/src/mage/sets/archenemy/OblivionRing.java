@@ -37,7 +37,7 @@ public class OblivionRing extends mage.sets.shardsofalara.OblivionRing {
 
     public OblivionRing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "ARC";
     }
 

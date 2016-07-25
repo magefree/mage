@@ -37,7 +37,7 @@ public class KrakenHatchling extends mage.sets.zendikar.KrakenHatchling {
 
     public KrakenHatchling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "M13";
     }
 

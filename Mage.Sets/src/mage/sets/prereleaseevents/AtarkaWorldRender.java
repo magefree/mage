@@ -37,7 +37,7 @@ public class AtarkaWorldRender extends mage.sets.fatereforged.AtarkaWorldRender 
 
     public AtarkaWorldRender(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class TrollAscetic extends mage.sets.mirrodin.TrollAscetic {
 
     public TrollAscetic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDL";
     }
 

@@ -37,7 +37,7 @@ public class StandFirm extends mage.sets.fifthdawn.StandFirm {
 
     public StandFirm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "DDL";
     }
 

@@ -38,7 +38,7 @@ public class AnabaSpiritCrafter extends mage.sets.homelands.AnabaSpiritCrafter {
 
     public AnabaSpiritCrafter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

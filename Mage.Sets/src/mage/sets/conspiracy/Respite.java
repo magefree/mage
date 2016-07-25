@@ -37,7 +37,7 @@ public class Respite extends mage.sets.tempest.Respite {
 
     public Respite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 176;
+        this.cardNumber = "176";
         this.expansionSetCode = "CNS";
     }
 

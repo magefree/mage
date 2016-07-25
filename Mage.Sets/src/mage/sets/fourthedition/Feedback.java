@@ -37,7 +37,7 @@ public class Feedback extends mage.sets.limitedalpha.Feedback {
 
     public Feedback(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "4ED";
     }
 

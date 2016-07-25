@@ -38,7 +38,7 @@ public class CabalRitual extends mage.sets.torment.CabalRitual {
 
     public CabalRitual(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

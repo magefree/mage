@@ -37,7 +37,7 @@ public class RainOfSalt extends mage.sets.urzassaga.RainOfSalt {
 
     public RainOfSalt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "POR";
     }
 

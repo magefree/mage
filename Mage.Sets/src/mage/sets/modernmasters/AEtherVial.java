@@ -38,7 +38,7 @@ public class AEtherVial extends mage.sets.darksteel.AEtherVial {
 
     public AEtherVial(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 197;
+        this.cardNumber = "197";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.RARE;
     }

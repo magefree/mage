@@ -37,7 +37,7 @@ public class LoxodonWarhammer extends mage.sets.planechase.LoxodonWarhammer {
 
     public LoxodonWarhammer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 247;
+        this.cardNumber = "247";
         this.expansionSetCode = "C14";
     }
 

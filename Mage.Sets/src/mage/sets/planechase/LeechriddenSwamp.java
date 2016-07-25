@@ -37,7 +37,7 @@ public class LeechriddenSwamp extends mage.sets.shadowmoor.LeechriddenSwamp {
 
     public LeechriddenSwamp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "HOP";
     }
 

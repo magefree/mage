@@ -37,7 +37,7 @@ public class KrakensEye extends mage.sets.tenthedition.KrakensEye {
 
     public KrakensEye(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 302;
+        this.cardNumber = "302";
         this.expansionSetCode = "9ED";
     }
 

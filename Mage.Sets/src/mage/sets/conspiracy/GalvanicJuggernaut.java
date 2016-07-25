@@ -37,7 +37,7 @@ public class GalvanicJuggernaut extends mage.sets.innistrad.GalvanicJuggernaut {
 
     public GalvanicJuggernaut(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 200;
+        this.cardNumber = "200";
         this.expansionSetCode = "CNS";
     }
 

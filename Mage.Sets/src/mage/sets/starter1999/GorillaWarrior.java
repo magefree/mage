@@ -37,7 +37,7 @@ public class GorillaWarrior extends mage.sets.urzassaga.GorillaWarrior {
 
     public GorillaWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "S99";
     }
 

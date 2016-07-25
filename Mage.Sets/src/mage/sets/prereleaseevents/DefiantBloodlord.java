@@ -37,7 +37,7 @@ public class DefiantBloodlord extends mage.sets.battleforzendikar.DefiantBloodlo
 
     public DefiantBloodlord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 252;
+        this.cardNumber = "252";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class HamletbackGoliath extends mage.sets.magic2013.HamletbackGoliath {
 
     public HamletbackGoliath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "LRW";
     }
 

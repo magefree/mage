@@ -38,7 +38,7 @@ public class HelmOfKaldra extends mage.sets.fifthdawn.HelmOfKaldra {
 
     public HelmOfKaldra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

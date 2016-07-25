@@ -37,7 +37,7 @@ public class BaneslayerAngel extends mage.sets.magic2010.BaneslayerAngel {
 
     public BaneslayerAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "V15";
     }
 

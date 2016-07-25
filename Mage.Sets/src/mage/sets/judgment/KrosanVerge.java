@@ -37,7 +37,7 @@ public class KrosanVerge extends mage.sets.planechase2012.KrosanVerge {
 
     public KrosanVerge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "JUD";
     }
 

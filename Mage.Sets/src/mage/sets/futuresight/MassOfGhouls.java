@@ -37,7 +37,7 @@ public class MassOfGhouls extends mage.sets.tenthedition.MassOfGhouls {
 
     public MassOfGhouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "FUT";
     }
 

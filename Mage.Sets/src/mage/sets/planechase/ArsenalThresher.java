@@ -37,7 +37,7 @@ public class ArsenalThresher extends mage.sets.alarareborn.ArsenalThresher {
 
     public ArsenalThresher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "HOP";
     }
 

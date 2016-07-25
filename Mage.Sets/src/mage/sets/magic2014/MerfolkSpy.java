@@ -37,7 +37,7 @@ public class MerfolkSpy extends mage.sets.magic2011.MerfolkSpy {
 
     public MerfolkSpy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "M14";
     }
 

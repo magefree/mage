@@ -37,7 +37,7 @@ public class TyrantsChoice extends mage.sets.conspiracy.TyrantsChoice {
 
     public TyrantsChoice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "VMA";
     }
 

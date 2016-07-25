@@ -37,7 +37,7 @@ public class BlanchwoodArmor extends mage.sets.tenthedition.BlanchwoodArmor {
 
     public BlanchwoodArmor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "USG";
     }
 

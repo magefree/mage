@@ -37,7 +37,7 @@ public class SigilOfTheEmptyThrone extends mage.sets.conflux.SigilOfTheEmptyThro
 
     public SigilOfTheEmptyThrone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "PC2";
     }
 

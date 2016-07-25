@@ -37,7 +37,7 @@ public class SeethingSong extends mage.sets.mirrodin.SeethingSong {
 
     public SeethingSong(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "DDG";
     }
 

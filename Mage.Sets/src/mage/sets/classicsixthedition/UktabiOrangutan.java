@@ -37,7 +37,7 @@ public class UktabiOrangutan extends mage.sets.visions.UktabiOrangutan {
 
     public UktabiOrangutan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 260;
+        this.cardNumber = "260";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class DeathPitsOfRath extends mage.sets.tempest.DeathPitsOfRath {
 
     public DeathPitsOfRath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "9ED";
     }
 

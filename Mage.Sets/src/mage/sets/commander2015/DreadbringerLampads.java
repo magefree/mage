@@ -37,7 +37,7 @@ public class DreadbringerLampads extends mage.sets.journeyintonyx.DreadbringerLa
 
     public DreadbringerLampads(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "C15";
     }
 

@@ -38,7 +38,7 @@ public class HuntingMoa extends mage.sets.urzasdestiny.HuntingMoa {
 
     public HuntingMoa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.COMMON;
     }

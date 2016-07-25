@@ -39,7 +39,7 @@ public class Roots extends mage.sets.homelands.Roots {
 
     public Roots(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

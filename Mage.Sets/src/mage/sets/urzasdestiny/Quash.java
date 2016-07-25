@@ -37,7 +37,7 @@ public class Quash extends mage.sets.betrayersofkamigawa.Quash {
 
     public Quash(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "UDS";
     }
 

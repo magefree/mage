@@ -37,7 +37,7 @@ public class FlayingTendrils extends mage.sets.oathofthegatewatch.FlayingTendril
 
     public FlayingTendrils(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 196;
+        this.cardNumber = "196";
         this.expansionSetCode = "FNMP";
     }
 

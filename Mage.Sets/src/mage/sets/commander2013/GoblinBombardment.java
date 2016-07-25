@@ -37,7 +37,7 @@ public class GoblinBombardment extends mage.sets.tempest.GoblinBombardment {
 
     public GoblinBombardment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "C13";
     }
 

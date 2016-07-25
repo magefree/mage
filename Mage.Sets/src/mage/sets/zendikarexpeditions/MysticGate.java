@@ -38,7 +38,7 @@ public class MysticGate extends mage.sets.shadowmoor.MysticGate {
 
     public MysticGate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

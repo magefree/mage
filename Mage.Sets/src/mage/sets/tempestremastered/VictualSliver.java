@@ -37,7 +37,7 @@ public class VictualSliver extends mage.sets.stronghold.VictualSliver {
 
     public VictualSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 215;
+        this.cardNumber = "215";
         this.expansionSetCode = "TPR";
     }
 

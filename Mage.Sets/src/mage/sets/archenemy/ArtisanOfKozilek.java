@@ -37,7 +37,7 @@ public class ArtisanOfKozilek extends mage.sets.riseoftheeldrazi.ArtisanOfKozile
 
     public ArtisanOfKozilek(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "ARC";
     }
 

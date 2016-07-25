@@ -37,7 +37,7 @@ public class WrensRunVanquisher extends mage.sets.lorwyn.WrensRunVanquisher {
 
     public WrensRunVanquisher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "FNMP";
     }
 

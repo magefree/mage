@@ -38,7 +38,7 @@ public class MageIlVec extends mage.sets.exodus.MageIlVec {
 
     public MageIlVec(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

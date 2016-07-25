@@ -38,7 +38,7 @@ public class HydraBroodmaster extends mage.sets.journeyintonyx.HydraBroodmaster 
 
     public HydraBroodmaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

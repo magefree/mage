@@ -38,7 +38,7 @@ public class SteelWall extends mage.sets.mirrodin.SteelWall {
 
     public SteelWall (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "DDF";
     }
 

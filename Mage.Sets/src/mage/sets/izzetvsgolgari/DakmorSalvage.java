@@ -37,7 +37,7 @@ public class DakmorSalvage extends mage.sets.futuresight.DakmorSalvage {
 
     public DakmorSalvage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "DDJ";
     }
 

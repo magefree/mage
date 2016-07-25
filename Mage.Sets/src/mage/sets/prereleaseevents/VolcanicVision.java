@@ -37,7 +37,7 @@ public class VolcanicVision extends mage.sets.dragonsoftarkir.VolcanicVision {
 
     public VolcanicVision(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 196;
+        this.cardNumber = "196";
         this.expansionSetCode = "PTC";
     }
 

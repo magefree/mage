@@ -37,7 +37,7 @@ public class ManaFlare extends mage.sets.fourthedition.ManaFlare {
 
     public ManaFlare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "3ED";
     }
 

@@ -37,7 +37,7 @@ public class Ghostfire extends mage.sets.knightsvsdragons.Ghostfire {
 
     public Ghostfire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "FUT";
     }
 

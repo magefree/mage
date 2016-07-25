@@ -38,7 +38,7 @@ public class CircleOfProtectionArtifacts extends mage.sets.fifthdawn.CircleOfPro
     
     public CircleOfProtectionArtifacts(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 292;
+        this.cardNumber = "292";
         this.expansionSetCode = "5ED";
     }
 

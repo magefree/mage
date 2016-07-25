@@ -37,7 +37,7 @@ public class HengeGuardian extends mage.sets.mercadianmasques.HengeGuardian {
 
     public HengeGuardian(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "DDG";
     }
 

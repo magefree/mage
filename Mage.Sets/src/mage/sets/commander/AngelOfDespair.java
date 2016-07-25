@@ -37,7 +37,7 @@ public class AngelOfDespair extends mage.sets.guildpact.AngelOfDespair {
 
     public AngelOfDespair(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 180;
+        this.cardNumber = "180";
         this.expansionSetCode = "CMD";
     }
 

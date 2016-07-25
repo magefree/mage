@@ -37,7 +37,7 @@ public class EternalDragon extends mage.sets.scourge.EternalDragon {
 
     public EternalDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "VMA";
     }
 

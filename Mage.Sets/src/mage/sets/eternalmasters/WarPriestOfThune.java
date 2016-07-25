@@ -38,7 +38,7 @@ public class WarPriestOfThune extends mage.sets.magic2011.WarPriestOfThune {
 
     public WarPriestOfThune(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "EMA";
     }
 

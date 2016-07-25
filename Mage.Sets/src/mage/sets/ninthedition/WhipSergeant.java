@@ -37,7 +37,7 @@ public class WhipSergeant extends mage.sets.prophecy.WhipSergeant {
 
     public WhipSergeant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "9ED";
     }
 

@@ -37,7 +37,7 @@ public class FieldmistBorderpost extends mage.sets.alarareborn.FieldmistBorderpo
 
     public FieldmistBorderpost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "ARC";
     }
 

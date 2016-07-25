@@ -37,7 +37,7 @@ public class SpiritMirror extends mage.sets.tempest.SpiritMirror {
 
     public SpiritMirror(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "TPR";
     }
 

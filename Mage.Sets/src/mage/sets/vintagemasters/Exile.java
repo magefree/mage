@@ -38,7 +38,7 @@ public class Exile extends mage.sets.alliances.Exile {
 
     public Exile(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class IcatianPriest extends mage.sets.tenthedition.IcatianPriest {
 
     public IcatianPriest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "DD3DVD";
     }
 

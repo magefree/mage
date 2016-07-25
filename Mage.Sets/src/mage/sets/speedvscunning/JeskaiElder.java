@@ -37,7 +37,7 @@ public class JeskaiElder extends mage.sets.khansoftarkir.JeskaiElder {
 
     public JeskaiElder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "DDN";
     }
 

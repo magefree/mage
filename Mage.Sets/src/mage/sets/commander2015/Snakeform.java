@@ -37,7 +37,7 @@ public class Snakeform extends mage.sets.eventide.Snakeform {
 
     public Snakeform(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "C15";
     }
 

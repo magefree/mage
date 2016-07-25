@@ -38,7 +38,7 @@ public class ProphetOfKruphix extends mage.sets.theros.ProphetOfKruphix {
 
     public ProphetOfKruphix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

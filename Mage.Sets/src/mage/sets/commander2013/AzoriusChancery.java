@@ -37,7 +37,7 @@ public class AzoriusChancery extends mage.sets.dissension.AzoriusChancery {
 
     public AzoriusChancery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 274;
+        this.cardNumber = "274";
         this.expansionSetCode = "C13";
     }
 

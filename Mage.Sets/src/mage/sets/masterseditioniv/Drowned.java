@@ -37,7 +37,7 @@ public class Drowned extends mage.sets.thedark.Drowned {
 
     public Drowned(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "ME4";
     }
 

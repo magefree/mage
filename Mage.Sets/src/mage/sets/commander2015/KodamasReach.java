@@ -37,7 +37,7 @@ public class KodamasReach extends mage.sets.commander.KodamasReach {
 
     public KodamasReach(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "C15";
     }
 

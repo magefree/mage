@@ -37,7 +37,7 @@ public class StorageMatrix extends mage.sets.ninthedition.StorageMatrix {
 
     public StorageMatrix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "UDS";
     }
 

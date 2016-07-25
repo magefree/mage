@@ -37,7 +37,7 @@ public class SunderingTitan extends mage.sets.darksteel.SunderingTitan {
 
     public SunderingTitan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "ARC";
     }
 

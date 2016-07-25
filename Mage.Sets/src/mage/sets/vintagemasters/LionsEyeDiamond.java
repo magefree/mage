@@ -38,7 +38,7 @@ public class LionsEyeDiamond extends mage.sets.mirage.LionsEyeDiamond {
 
     public LionsEyeDiamond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 271;
+        this.cardNumber = "271";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.MYTHIC;
     }

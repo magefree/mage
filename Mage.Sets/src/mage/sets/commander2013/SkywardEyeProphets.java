@@ -37,7 +37,7 @@ public class SkywardEyeProphets extends mage.sets.conflux.SkywardEyeProphets {
 
     public SkywardEyeProphets(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "C13";
     }
 

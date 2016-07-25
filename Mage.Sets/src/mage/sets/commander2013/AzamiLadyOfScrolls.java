@@ -37,7 +37,7 @@ public class AzamiLadyOfScrolls extends mage.sets.championsofkamigawa.AzamiLadyO
 
     public AzamiLadyOfScrolls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "C13";
     }
 

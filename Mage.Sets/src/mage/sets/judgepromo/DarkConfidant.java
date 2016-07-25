@@ -37,7 +37,7 @@ public class DarkConfidant extends mage.sets.ravnica.DarkConfidant {
 
     public DarkConfidant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "JR";
     }
 

@@ -37,7 +37,7 @@ public class RitesOfFlourishing extends mage.sets.magic2012.RitesOfFlourishing {
 
     public RitesOfFlourishing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "FUT";
     }
 

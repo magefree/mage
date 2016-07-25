@@ -37,7 +37,7 @@ public class ErraticPortal extends mage.sets.exodus.ErraticPortal {
 
     public ErraticPortal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 222;
+        this.cardNumber = "222";
         this.expansionSetCode = "TPR";
     }
 

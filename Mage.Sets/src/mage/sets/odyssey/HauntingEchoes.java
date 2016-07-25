@@ -37,7 +37,7 @@ public class HauntingEchoes extends mage.sets.magic2010.HauntingEchoes {
 
     public HauntingEchoes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "ODY";
     }
 

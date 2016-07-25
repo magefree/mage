@@ -37,7 +37,7 @@ public class TheHive extends mage.sets.tenthedition.TheHive {
 
     public TheHive(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 272;
+        this.cardNumber = "272";
         this.expansionSetCode = "LEA";
     }
 

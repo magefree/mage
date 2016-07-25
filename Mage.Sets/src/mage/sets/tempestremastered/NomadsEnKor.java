@@ -37,7 +37,7 @@ public class NomadsEnKor extends mage.sets.stronghold.NomadsEnKor {
 
     public NomadsEnKor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "TPR";
     }
 

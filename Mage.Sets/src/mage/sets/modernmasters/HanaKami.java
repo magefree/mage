@@ -38,7 +38,7 @@ public class HanaKami extends mage.sets.championsofkamigawa.HanaKami {
 
     public HanaKami(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.COMMON;
     }

@@ -38,7 +38,7 @@ public class RagingKavu extends mage.sets.invasion.RagingKavu {
 
     public RagingKavu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class HideousEnd extends mage.sets.zendikar.HideousEnd {
 
     public HideousEnd(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "DDE";
     }
 

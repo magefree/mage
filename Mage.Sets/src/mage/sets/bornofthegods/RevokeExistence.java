@@ -37,7 +37,7 @@ public class RevokeExistence extends mage.sets.scarsofmirrodin.RevokeExistence {
 
     public RevokeExistence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "BNG";
     }
 

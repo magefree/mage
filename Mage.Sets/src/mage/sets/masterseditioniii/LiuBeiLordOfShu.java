@@ -37,7 +37,7 @@ public class LiuBeiLordOfShu extends mage.sets.portalthreekingdoms.LiuBeiLordOfS
 
     public LiuBeiLordOfShu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "ME3";
     }
 

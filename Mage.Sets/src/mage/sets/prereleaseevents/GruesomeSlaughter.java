@@ -37,7 +37,7 @@ public class GruesomeSlaughter extends mage.sets.battleforzendikar.GruesomeSlaug
 
     public GruesomeSlaughter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 266;
+        this.cardNumber = "266";
         this.expansionSetCode = "PTC";
     }
 

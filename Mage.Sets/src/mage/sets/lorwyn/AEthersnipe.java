@@ -37,7 +37,7 @@ public class AEthersnipe extends mage.sets.commander.AEthersnipe {
 
     public AEthersnipe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "LRW";
     }
 

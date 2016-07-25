@@ -37,7 +37,7 @@ public class MarrowBats extends mage.sets.avacynrestored.MarrowBats {
 
     public MarrowBats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "C13";
     }
 

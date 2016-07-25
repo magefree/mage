@@ -37,7 +37,7 @@ public class CabalCoffers extends mage.sets.planechase.CabalCoffers {
 
     public CabalCoffers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "FNMP";
     }
 

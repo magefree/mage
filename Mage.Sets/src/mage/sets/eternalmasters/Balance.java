@@ -38,7 +38,7 @@ public class Balance extends mage.sets.limitedbeta.Balance {
 
     public Balance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.MYTHIC;
     }

@@ -37,7 +37,7 @@ public class LotusCobra extends mage.sets.zendikar.LotusCobra {
 
     public LotusCobra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "GPX";
     }
 

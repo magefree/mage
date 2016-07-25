@@ -37,7 +37,7 @@ public class IntoTheVoid extends mage.sets.avacynrestored.IntoTheVoid {
 
     public IntoTheVoid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 277;
+        this.cardNumber = "277";
         this.expansionSetCode = "ORI";
     }
 

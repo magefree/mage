@@ -37,7 +37,7 @@ public class KorSanctifiers extends mage.sets.zendikar.KorSanctifiers {
 
     public KorSanctifiers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "C14";
     }
 

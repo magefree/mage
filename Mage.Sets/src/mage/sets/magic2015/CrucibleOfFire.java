@@ -37,7 +37,7 @@ public class CrucibleOfFire extends mage.sets.shardsofalara.CrucibleOfFire {
 
     public CrucibleOfFire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "M15";
     }
 

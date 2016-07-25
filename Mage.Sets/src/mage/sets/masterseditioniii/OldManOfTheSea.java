@@ -37,7 +37,7 @@ public class OldManOfTheSea extends mage.sets.arabiannights.OldManOfTheSea {
 
     public OldManOfTheSea(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "ME3";
     }
 

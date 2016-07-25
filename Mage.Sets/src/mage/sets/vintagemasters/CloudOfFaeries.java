@@ -38,7 +38,7 @@ public class CloudOfFaeries extends mage.sets.urzaslegacy.CloudOfFaeries {
 
     public CloudOfFaeries(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

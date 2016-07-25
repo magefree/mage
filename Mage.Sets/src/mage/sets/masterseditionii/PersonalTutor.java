@@ -37,7 +37,7 @@ public class PersonalTutor extends mage.sets.portal.PersonalTutor {
 
     public PersonalTutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "ME2";
     }
 

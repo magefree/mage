@@ -37,7 +37,7 @@ public class HoldTheLine extends mage.sets.championsofkamigawa.HoldTheLine {
 
     public HoldTheLine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "DDN";
     }
 

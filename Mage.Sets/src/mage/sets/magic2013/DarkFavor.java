@@ -37,7 +37,7 @@ public class DarkFavor extends mage.sets.magic2012.DarkFavor {
 
     public DarkFavor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "M13";
     }
 

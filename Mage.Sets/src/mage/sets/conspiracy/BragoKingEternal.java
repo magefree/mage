@@ -37,7 +37,7 @@ public class BragoKingEternal extends mage.sets.vintagemasters.BragoKingEternal 
 
     public BragoKingEternal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "CNS";
     }
 

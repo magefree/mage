@@ -37,7 +37,7 @@ public class DragonlordOjutai extends mage.sets.dragonsoftarkir.DragonlordOjutai
 
     public DragonlordOjutai(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "PTC";
     }
 

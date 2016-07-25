@@ -38,7 +38,7 @@ public class FalseDefeat extends mage.sets.masterseditioniii.FalseDefeat {
 
     public FalseDefeat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "PTK";
         this.rarity = Rarity.COMMON;
     }

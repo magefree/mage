@@ -37,7 +37,7 @@ public class NicolBolas extends mage.sets.legends.NicolBolas {
 
     public NicolBolas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DRB";
     }
 

@@ -37,7 +37,7 @@ public class PrimevalForce extends mage.sets.eighthedition.PrimevalForce {
 
     public PrimevalForce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "POR";
     }
 

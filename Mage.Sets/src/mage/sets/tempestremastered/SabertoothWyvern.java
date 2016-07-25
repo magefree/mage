@@ -37,7 +37,7 @@ public class SabertoothWyvern extends mage.sets.exodus.SabertoothWyvern {
 
     public SabertoothWyvern(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "TPR";
     }
 

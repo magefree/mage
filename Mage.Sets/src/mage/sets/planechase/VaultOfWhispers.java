@@ -38,7 +38,7 @@ public class VaultOfWhispers extends mage.sets.mirrodin.VaultOfWhispers {
 
     public VaultOfWhispers (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "HOP";
     }
 

@@ -37,7 +37,7 @@ public class WellOfLostDreams extends mage.sets.commander2013.WellOfLostDreams {
 
     public WellOfLostDreams(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "DST";
     }
 

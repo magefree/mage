@@ -38,7 +38,7 @@ public class MoggFanatic extends mage.sets.tempest.MoggFanatic {
 
     public MoggFanatic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "PD2";
         this.rarity = Rarity.UNCOMMON;
     }

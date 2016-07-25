@@ -37,7 +37,7 @@ public class CudgelTroll extends mage.sets.magic2010.CudgelTroll {
 
     public CudgelTroll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "M12";
     }
 

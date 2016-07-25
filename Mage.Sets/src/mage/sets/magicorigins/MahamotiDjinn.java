@@ -37,7 +37,7 @@ public class MahamotiDjinn extends mage.sets.tenthedition.MahamotiDjinn {
 
     public MahamotiDjinn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 278;
+        this.cardNumber = "278";
         this.expansionSetCode = "ORI";
     }
 

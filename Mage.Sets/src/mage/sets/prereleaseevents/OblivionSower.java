@@ -37,7 +37,7 @@ public class OblivionSower extends mage.sets.battleforzendikar.OblivionSower {
 
     public OblivionSower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 278;
+        this.cardNumber = "278";
         this.expansionSetCode = "PTC";
     }
 

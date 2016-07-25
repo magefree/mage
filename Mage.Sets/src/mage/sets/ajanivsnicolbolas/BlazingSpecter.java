@@ -37,7 +37,7 @@ public class BlazingSpecter extends mage.sets.invasion.BlazingSpecter {
 
     public BlazingSpecter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "DDH";
     }
 

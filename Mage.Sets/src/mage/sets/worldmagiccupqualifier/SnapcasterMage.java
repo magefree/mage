@@ -37,7 +37,7 @@ public class SnapcasterMage extends mage.sets.innistrad.SnapcasterMage {
 
     public SnapcasterMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "WMCQ";
     }
 

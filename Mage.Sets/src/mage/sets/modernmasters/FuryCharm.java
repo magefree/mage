@@ -37,7 +37,7 @@ public class FuryCharm extends mage.sets.planarchaos.FuryCharm {
 
     public FuryCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "MMA";
     }
 

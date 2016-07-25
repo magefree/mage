@@ -38,7 +38,7 @@ public class MarisisTwinclaws extends mage.sets.alarareborn.MarisisTwinclaws {
 
     public MarisisTwinclaws(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

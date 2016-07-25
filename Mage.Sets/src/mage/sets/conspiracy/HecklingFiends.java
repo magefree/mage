@@ -37,7 +37,7 @@ public class HecklingFiends extends mage.sets.darkascension.HecklingFiends {
 
     public HecklingFiends(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "CNS";
     }
 

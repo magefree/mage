@@ -37,7 +37,7 @@ public class DungeonGeists extends mage.sets.darkascension.DungeonGeists {
 
     public DungeonGeists(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "C13";
     }
 

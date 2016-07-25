@@ -37,7 +37,7 @@ public class BalefulForce extends mage.sets.commander2013.BalefulForce {
 
     public BalefulForce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "VMA";
     }
 

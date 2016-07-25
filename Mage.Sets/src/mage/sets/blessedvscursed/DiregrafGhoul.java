@@ -37,7 +37,7 @@ public class DiregrafGhoul extends mage.sets.innistrad.DiregrafGhoul {
 
     public DiregrafGhoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "DDQ";
     }
 

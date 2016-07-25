@@ -37,7 +37,7 @@ public class WirewoodSavage extends mage.sets.onslaught.WirewoodSavage {
 
     public WirewoodSavage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "DDD";
     }
 

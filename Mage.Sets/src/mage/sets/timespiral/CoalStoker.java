@@ -37,7 +37,7 @@ public class CoalStoker extends mage.sets.sorinvstibalt.CoalStoker {
 
     public CoalStoker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "TSP";
     }
 

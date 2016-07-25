@@ -37,7 +37,7 @@ public class AladdinsLamp extends mage.sets.revisededition.AladdinsLamp {
 
     public AladdinsLamp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 309;
+        this.cardNumber = "309";
         this.expansionSetCode = "4ED";
     }
 

@@ -37,7 +37,7 @@ public class SkyhunterProwler extends mage.sets.tenthedition.SkyhunterProwler {
 
     public SkyhunterProwler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "5DN";
     }
 

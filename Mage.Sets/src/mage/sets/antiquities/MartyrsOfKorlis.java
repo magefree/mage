@@ -37,7 +37,7 @@ public class MartyrsOfKorlis extends mage.sets.masterseditioniv.MartyrsOfKorlis 
 
     public MartyrsOfKorlis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "ATQ";
     }
 

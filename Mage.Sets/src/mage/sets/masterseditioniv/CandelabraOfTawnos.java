@@ -37,7 +37,7 @@ public class CandelabraOfTawnos extends mage.sets.antiquities.CandelabraOfTawnos
 
     public CandelabraOfTawnos(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 187;
+        this.cardNumber = "187";
         this.expansionSetCode = "ME4";
     }
 

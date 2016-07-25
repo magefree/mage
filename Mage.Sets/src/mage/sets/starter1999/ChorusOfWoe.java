@@ -37,7 +37,7 @@ public class ChorusOfWoe extends mage.sets.portalsecondage.ChorusOfWoe {
 
     public ChorusOfWoe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "S99";
     }
 

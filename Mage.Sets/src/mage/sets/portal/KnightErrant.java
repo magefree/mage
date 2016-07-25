@@ -37,7 +37,7 @@ public class KnightErrant extends mage.sets.seventhedition.KnightErrant {
 
     public KnightErrant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 182;
+        this.cardNumber = "182";
         this.expansionSetCode = "POR";
     }
 

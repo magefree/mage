@@ -37,7 +37,7 @@ public class Smokestack extends mage.sets.urzassaga.Smokestack {
 
     public Smokestack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 282;
+        this.cardNumber = "282";
         this.expansionSetCode = "VMA";
     }
 

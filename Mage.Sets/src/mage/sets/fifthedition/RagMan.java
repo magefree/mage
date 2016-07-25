@@ -37,7 +37,7 @@ public class RagMan extends mage.sets.thedark.RagMan {
 
     public RagMan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "5ED";
     }
 

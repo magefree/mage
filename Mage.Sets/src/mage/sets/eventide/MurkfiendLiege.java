@@ -37,7 +37,7 @@ public class MurkfiendLiege extends mage.sets.commander2013.MurkfiendLiege {
 
     public MurkfiendLiege(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "EVE";
     }
 

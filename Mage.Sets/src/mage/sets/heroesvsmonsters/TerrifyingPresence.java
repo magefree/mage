@@ -37,7 +37,7 @@ public class TerrifyingPresence extends mage.sets.avacynrestored.TerrifyingPrese
 
     public TerrifyingPresence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "DDL";
     }
 

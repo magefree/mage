@@ -38,7 +38,7 @@ public class Tsunami extends mage.sets.fourthedition.Tsunami {
 
     public Tsunami(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 171;
+        this.cardNumber = "171";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.RARE;
     }

@@ -38,7 +38,7 @@ public class AccumulatedKnowledge extends mage.sets.nemesis.AccumulatedKnowledge
 
     public AccumulatedKnowledge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

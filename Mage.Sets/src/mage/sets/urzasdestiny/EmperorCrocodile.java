@@ -37,7 +37,7 @@ public class EmperorCrocodile extends mage.sets.ninthedition.EmperorCrocodile {
 
     public EmperorCrocodile(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "UDS";
     }
 

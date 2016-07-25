@@ -38,7 +38,7 @@ public class YavimayaAncients2 extends mage.sets.masterseditionii.YavimayaAncien
 
     public YavimayaAncients2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "ALL";
         this.rarity = Rarity.COMMON;
     }

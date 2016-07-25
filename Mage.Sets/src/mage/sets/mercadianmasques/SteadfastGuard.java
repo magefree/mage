@@ -37,7 +37,7 @@ public class SteadfastGuard extends mage.sets.tenthedition.SteadfastGuard {
 
     public SteadfastGuard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "MMQ";
     }
 

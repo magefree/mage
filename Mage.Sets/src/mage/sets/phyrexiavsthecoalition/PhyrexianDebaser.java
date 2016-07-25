@@ -37,7 +37,7 @@ public class PhyrexianDebaser extends mage.sets.urzaslegacy.PhyrexianDebaser {
 
     public PhyrexianDebaser(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDE";
     }
 

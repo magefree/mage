@@ -37,7 +37,7 @@ public class SummonersPact extends mage.sets.futuresight.SummonersPact {
 
     public SummonersPact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "MMA";
     }
 

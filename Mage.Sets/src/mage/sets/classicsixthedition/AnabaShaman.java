@@ -37,7 +37,7 @@ public class AnabaShaman extends mage.sets.ninthedition.AnabaShaman {
 
     public AnabaShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "6ED";
     }
 

@@ -38,7 +38,7 @@ public class TributeToTheWild extends mage.sets.commander.TributeToTheWild {
 
     public TributeToTheWild(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 238;
+        this.cardNumber = "238";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

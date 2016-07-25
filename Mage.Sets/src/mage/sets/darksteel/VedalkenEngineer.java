@@ -37,7 +37,7 @@ public class VedalkenEngineer extends mage.sets.planechase.VedalkenEngineer {
 
     public VedalkenEngineer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "DST";
     }
 

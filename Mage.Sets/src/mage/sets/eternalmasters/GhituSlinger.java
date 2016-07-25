@@ -39,7 +39,7 @@ public class GhituSlinger extends mage.sets.urzaslegacy.GhituSlinger {
 
     public GhituSlinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

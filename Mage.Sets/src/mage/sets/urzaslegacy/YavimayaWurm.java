@@ -36,7 +36,7 @@ public class YavimayaWurm extends mage.sets.magic2011.YavimayaWurm {
 
     public YavimayaWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "ULG";
     }
 

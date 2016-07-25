@@ -6,7 +6,7 @@ public class GarrukCallerOfBeasts extends mage.sets.magic2014.GarrukCallerOfBeas
     
     public GarrukCallerOfBeasts(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "MBP";
     }
     

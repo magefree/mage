@@ -37,7 +37,7 @@ public class PlasmCapture extends mage.sets.dragonsmaze.PlasmCapture {
 
     public PlasmCapture(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "DDO";
     }
 

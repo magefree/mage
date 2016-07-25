@@ -37,7 +37,7 @@ public class AmbushParty1 extends mage.sets.fifthedition.AmbushParty {
 
     public AmbushParty1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "HML";
     }
 

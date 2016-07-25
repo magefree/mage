@@ -37,7 +37,7 @@ public class ArenaOfTheAncients extends mage.sets.legends.ArenaOfTheAncients {
 
     public ArenaOfTheAncients(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "ME3";
     }
 

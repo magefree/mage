@@ -37,7 +37,7 @@ public class Urborg extends mage.sets.legends.Urborg {
 
     public Urborg(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "ME3";
     }
 

@@ -37,7 +37,7 @@ public class GangOfDevils extends mage.sets.avacynrestored.GangOfDevils {
 
     public GangOfDevils(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "DDK";
     }
 

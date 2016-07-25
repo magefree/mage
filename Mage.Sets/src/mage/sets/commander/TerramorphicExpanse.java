@@ -37,7 +37,7 @@ public class TerramorphicExpanse extends mage.sets.tenthedition.TerramorphicExpa
 
     public TerramorphicExpanse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 291;
+        this.cardNumber = "291";
         this.expansionSetCode = "CMD";
     }
 

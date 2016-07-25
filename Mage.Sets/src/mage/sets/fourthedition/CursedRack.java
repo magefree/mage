@@ -37,7 +37,7 @@ public class CursedRack extends mage.sets.antiquities.CursedRack {
 
     public CursedRack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 330;
+        this.cardNumber = "330";
         this.expansionSetCode = "4ED";
     }
 

@@ -37,7 +37,7 @@ public class ZombieApocalypse extends mage.sets.darkascension.ZombieApocalypse {
 
     public ZombieApocalypse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "MGDC";
     }
 

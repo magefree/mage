@@ -38,7 +38,7 @@ public class SiegeDragon extends mage.sets.magic2015.SiegeDragon {
 
     public SiegeDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

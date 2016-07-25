@@ -37,7 +37,7 @@ public class FallenIdeal extends mage.sets.timespiral.FallenIdeal {
 
     public FallenIdeal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class ArashinForemost extends mage.sets.dragonsoftarkir.ArashinForemost {
 
     public ArashinForemost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "PTC";
     }
 

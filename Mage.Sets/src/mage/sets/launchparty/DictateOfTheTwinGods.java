@@ -37,7 +37,7 @@ public class DictateOfTheTwinGods extends mage.sets.journeyintonyx.DictateOfTheT
 
     public DictateOfTheTwinGods(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "MLP";
     }
 

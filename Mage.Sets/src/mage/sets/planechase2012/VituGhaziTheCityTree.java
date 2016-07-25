@@ -37,7 +37,7 @@ public class VituGhaziTheCityTree extends mage.sets.ravnica.VituGhaziTheCityTree
 
     public VituGhaziTheCityTree(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "PC2";
     }
 

@@ -37,7 +37,7 @@ public class Vendetta extends mage.sets.riseoftheeldrazi.Vendetta {
 
     public Vendetta(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "MMQ";
     }
 

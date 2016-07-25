@@ -38,7 +38,7 @@ public class Terminate extends mage.sets.alarareborn.Terminate {
 
     public Terminate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

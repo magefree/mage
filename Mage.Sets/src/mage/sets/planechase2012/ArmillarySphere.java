@@ -37,7 +37,7 @@ public class ArmillarySphere extends mage.sets.conflux.ArmillarySphere {
 
     public ArmillarySphere(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "PC2";
     }
 

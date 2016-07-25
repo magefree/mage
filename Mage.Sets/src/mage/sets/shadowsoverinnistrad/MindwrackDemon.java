@@ -37,7 +37,7 @@ public class MindwrackDemon extends mage.sets.blessedvscursed.MindwrackDemon {
 
     public MindwrackDemon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "SOI";
     }
 

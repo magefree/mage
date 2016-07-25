@@ -37,7 +37,7 @@ public class Sunlance extends mage.sets.planarchaos.Sunlance {
 
     public Sunlance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "MM2";
     }
 

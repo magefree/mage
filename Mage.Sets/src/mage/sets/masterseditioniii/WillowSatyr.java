@@ -37,7 +37,7 @@ public class WillowSatyr extends mage.sets.legends.WillowSatyr {
 
     public WillowSatyr(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "ME3";
     }
 

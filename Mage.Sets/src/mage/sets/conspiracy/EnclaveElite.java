@@ -37,7 +37,7 @@ public class EnclaveElite extends mage.sets.worldwake.EnclaveElite {
 
     public EnclaveElite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "CNS";
     }
 

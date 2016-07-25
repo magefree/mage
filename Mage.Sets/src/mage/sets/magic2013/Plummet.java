@@ -37,7 +37,7 @@ public class Plummet extends mage.sets.magic2011.Plummet {
 
     public Plummet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "M13";
     }
 

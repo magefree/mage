@@ -37,7 +37,7 @@ public class Purelace extends mage.sets.unlimitededition.Purelace {
 
     public Purelace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "LEA";
     }
 

@@ -37,7 +37,7 @@ public class DuskhunterBat extends mage.sets.magic2012.DuskhunterBat {
 
     public DuskhunterBat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "MM2";
     }
 

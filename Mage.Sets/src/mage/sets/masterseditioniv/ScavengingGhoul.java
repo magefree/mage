@@ -37,7 +37,7 @@ public class ScavengingGhoul extends mage.sets.limitedalpha.ScavengingGhoul {
 
     public ScavengingGhoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "ME4";
     }
 

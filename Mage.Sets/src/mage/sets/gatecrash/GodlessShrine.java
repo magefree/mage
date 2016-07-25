@@ -37,7 +37,7 @@ public class GodlessShrine extends mage.sets.guildpact.GodlessShrine {
 
     public GodlessShrine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "GTC";
     }
 

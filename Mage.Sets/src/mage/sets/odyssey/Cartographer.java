@@ -38,7 +38,7 @@ public class Cartographer extends mage.sets.exodus.Cartographer {
 
     public Cartographer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "ODY";
         this.rarity = Rarity.COMMON;
     }

@@ -38,7 +38,7 @@ public class ChorusOfTheConclave extends mage.sets.commander.ChorusOfTheConclave
 
     public ChorusOfTheConclave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "RAV";
     }
 

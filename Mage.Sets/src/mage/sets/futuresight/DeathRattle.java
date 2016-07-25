@@ -38,7 +38,7 @@ public class DeathRattle extends mage.sets.modernmasters.DeathRattle {
 
     public DeathRattle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "FUT";
         this.rarity = Rarity.COMMON;
     }

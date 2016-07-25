@@ -37,7 +37,7 @@ public class StoneRain extends mage.sets.tempest.StoneRain {
 
     public StoneRain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 225;
+        this.cardNumber = "225";
         this.expansionSetCode = "8ED";
     }
 

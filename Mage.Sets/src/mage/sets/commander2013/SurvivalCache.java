@@ -37,7 +37,7 @@ public class SurvivalCache extends mage.sets.riseoftheeldrazi.SurvivalCache {
 
     public SurvivalCache(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "C13";
     }
 

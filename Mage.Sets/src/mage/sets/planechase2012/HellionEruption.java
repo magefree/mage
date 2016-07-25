@@ -37,7 +37,7 @@ public class HellionEruption extends mage.sets.riseoftheeldrazi.HellionEruption 
 
     public HellionEruption(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "PC2";
     }
 

@@ -37,7 +37,7 @@ public class CinderStorm extends mage.sets.starter1999.CinderStorm {
 
     public CinderStorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "ME3";
     }
 

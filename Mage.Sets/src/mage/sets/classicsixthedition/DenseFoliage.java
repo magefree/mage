@@ -37,7 +37,7 @@ public class DenseFoliage extends mage.sets.weatherlight.DenseFoliage {
 
     public DenseFoliage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "6ED";
     }
 

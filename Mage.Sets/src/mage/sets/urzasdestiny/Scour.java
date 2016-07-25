@@ -37,7 +37,7 @@ public class Scour extends mage.sets.betrayersofkamigawa.Scour {
 
     public Scour(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "UDS";
     }
 

@@ -37,7 +37,7 @@ public class UnderworldConnections extends mage.sets.returntoravnica.UnderworldC
 
     public UnderworldConnections(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "DDM";
     }
 

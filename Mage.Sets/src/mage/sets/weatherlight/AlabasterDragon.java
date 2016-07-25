@@ -37,7 +37,7 @@ public class AlabasterDragon extends mage.sets.portal.AlabasterDragon {
 
     public AlabasterDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "WTH";
     }
 

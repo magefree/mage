@@ -38,7 +38,7 @@ public class JaceTelepathUnbound extends mage.sets.magicorigins.JaceTelepathUnbo
 
     public JaceTelepathUnbound(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 995;
+        this.cardNumber = "995";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

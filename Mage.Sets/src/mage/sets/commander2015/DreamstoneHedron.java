@@ -37,7 +37,7 @@ public class DreamstoneHedron extends mage.sets.riseoftheeldrazi.DreamstoneHedro
 
     public DreamstoneHedron(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 252;
+        this.cardNumber = "252";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class SyphonMind extends mage.sets.onslaught.SyphonMind {
 
     public SyphonMind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "C14";
     }
 

@@ -38,7 +38,7 @@ public class GraftedSkullcap extends mage.sets.urzassaga.GraftedSkullcap {
 
     public GraftedSkullcap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 298;
+        this.cardNumber = "298";
         this.expansionSetCode = "7ED";
     }
 

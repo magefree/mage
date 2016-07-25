@@ -37,7 +37,7 @@ public class JadeMonolith extends mage.sets.limitedalpha.JadeMonolith {
 
     public JadeMonolith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "ME4";
     }
 

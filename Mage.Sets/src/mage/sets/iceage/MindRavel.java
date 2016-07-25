@@ -37,7 +37,7 @@ public class MindRavel extends mage.sets.fifthedition.MindRavel {
 
     public MindRavel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "ICE";
     }
 

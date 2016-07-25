@@ -37,7 +37,7 @@ public class DimirCharm extends mage.sets.gatecrash.DimirCharm {
 
     public DimirCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "FNMP";
     }
 

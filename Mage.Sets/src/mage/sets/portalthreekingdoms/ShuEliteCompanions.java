@@ -38,7 +38,7 @@ public class ShuEliteCompanions extends mage.sets.masterseditioniii.ShuEliteComp
 
     public ShuEliteCompanions(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "PTK";
         this.rarity = Rarity.UNCOMMON;
     }

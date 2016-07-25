@@ -37,7 +37,7 @@ public class MountedArchers extends mage.sets.tempestremastered.MountedArchers {
 
     public MountedArchers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "TMP";
     }
 

@@ -73,13 +73,13 @@ public class ImageCache {
                         String name = m.group(1);
                         String set = m.group(2);
                         Integer type = Integer.parseInt(m.group(3));
-                        Integer collectorId = Integer.parseInt(m.group(4));
+                        String collectorId = m.group(4);
                         String tokenSetCode = m.group(5);
 
                         CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode);
 
                         String path;
-                        if (collectorId == 0) {
+                        if (collectorId.isEmpty() || "0".equals(collectorId)) {
                             info.setToken(true);
                             path = CardImageUtils.generateTokenImagePath(info);
                             if (path == null) {
@@ -153,7 +153,7 @@ public class ImageCache {
     }
 
     public static BufferedImage getMorphImage() {
-        CardDownloadData info = new CardDownloadData("Morph", "KTK", 0, false, 0, "KTK");
+        CardDownloadData info = new CardDownloadData("Morph", "KTK", "0", false, 0, "KTK");
         info.setToken(true);
         String path = CardImageUtils.generateTokenImagePath(info);
         if (path == null) {
@@ -164,7 +164,7 @@ public class ImageCache {
     }
 
     public static BufferedImage getManifestImage() {
-        CardDownloadData info = new CardDownloadData("Manifest", "FRF", 0, false, 0, "FRF");
+        CardDownloadData info = new CardDownloadData("Manifest", "FRF", "0", false, 0, "FRF");
         info.setToken(true);
         String path = CardImageUtils.generateTokenImagePath(info);
         if (path == null) {

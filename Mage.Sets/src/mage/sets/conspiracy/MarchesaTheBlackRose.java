@@ -37,7 +37,7 @@ public class MarchesaTheBlackRose extends mage.sets.vintagemasters.MarchesaTheBl
 
     public MarchesaTheBlackRose(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "CNS";
     }
 

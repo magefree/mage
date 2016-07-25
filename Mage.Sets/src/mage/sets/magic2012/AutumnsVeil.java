@@ -37,7 +37,7 @@ public class AutumnsVeil extends mage.sets.magic2011.AutumnsVeil {
 
     public AutumnsVeil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "M12";
     }
 

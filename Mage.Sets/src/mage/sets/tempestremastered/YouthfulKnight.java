@@ -37,7 +37,7 @@ public class YouthfulKnight extends mage.sets.tenthedition.YouthfulKnight {
 
     public YouthfulKnight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "TPR";
     }
 

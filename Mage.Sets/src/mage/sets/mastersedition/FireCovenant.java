@@ -37,7 +37,7 @@ public class FireCovenant extends mage.sets.iceage.FireCovenant {
 
     public FireCovenant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "MED";
     }
 

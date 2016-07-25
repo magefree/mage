@@ -38,7 +38,7 @@ public class Terminus extends mage.sets.avacynrestored.Terminus {
 
     public Terminus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "V14";
         this.rarity = Rarity.MYTHIC;
     }

@@ -37,7 +37,7 @@ public class MindsDesire extends mage.sets.vintagemasters.MindsDesire {
 
     public MindsDesire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "SCG";
     }
 

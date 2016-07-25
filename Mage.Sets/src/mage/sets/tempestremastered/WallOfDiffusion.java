@@ -37,7 +37,7 @@ public class WallOfDiffusion extends mage.sets.tempest.WallOfDiffusion {
 
     public WallOfDiffusion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "TPR";
     }
 

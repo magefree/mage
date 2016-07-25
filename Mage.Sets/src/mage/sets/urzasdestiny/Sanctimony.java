@@ -37,7 +37,7 @@ public class Sanctimony extends mage.sets.seventhedition.Sanctimony {
 
     public Sanctimony(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "UDS";
     }
 

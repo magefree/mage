@@ -39,7 +39,7 @@ public class Carbonize extends mage.sets.scourge.Carbonize {
 
     public Carbonize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

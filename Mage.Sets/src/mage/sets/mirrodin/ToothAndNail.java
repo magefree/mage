@@ -37,7 +37,7 @@ public class ToothAndNail extends mage.sets.modernmasters.ToothAndNail {
 
     public ToothAndNail(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "MRD";
     }
 

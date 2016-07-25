@@ -37,7 +37,7 @@ public class TowerGeist extends mage.sets.darkascension.TowerGeist {
 
     public TowerGeist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "DDQ";
     }
 

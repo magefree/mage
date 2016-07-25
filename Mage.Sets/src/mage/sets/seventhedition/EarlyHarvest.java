@@ -37,7 +37,7 @@ public class EarlyHarvest extends mage.sets.ninthedition.EarlyHarvest {
 
     public EarlyHarvest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "7ED";
     }
 

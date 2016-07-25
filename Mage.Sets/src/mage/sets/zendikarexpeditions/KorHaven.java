@@ -38,7 +38,7 @@ public class KorHaven extends mage.sets.nemesis.KorHaven {
 
     public KorHaven(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

@@ -37,7 +37,7 @@ public class LogicKnot extends mage.sets.modernmasters.LogicKnot {
 
     public LogicKnot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "FUT";
     }
 

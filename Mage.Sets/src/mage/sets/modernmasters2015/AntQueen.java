@@ -37,7 +37,7 @@ public class AntQueen extends mage.sets.magic2010.AntQueen {
 
     public AntQueen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "MM2";
     }
 

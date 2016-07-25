@@ -38,7 +38,7 @@ public class Duneblast extends mage.sets.khansoftarkir.Duneblast {
 
     public Duneblast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

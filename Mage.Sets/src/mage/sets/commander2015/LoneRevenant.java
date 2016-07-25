@@ -37,7 +37,7 @@ public class LoneRevenant extends mage.sets.avacynrestored.LoneRevenant {
 
     public LoneRevenant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "C15";
     }
 

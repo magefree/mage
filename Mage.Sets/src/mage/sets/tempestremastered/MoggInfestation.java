@@ -37,7 +37,7 @@ public class MoggInfestation extends mage.sets.stronghold.MoggInfestation {
 
     public MoggInfestation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "TPR";
     }
 

@@ -38,7 +38,7 @@ public class Squire extends mage.sets.timeshifted.Squire {
 
     public Squire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.COMMON;
     }

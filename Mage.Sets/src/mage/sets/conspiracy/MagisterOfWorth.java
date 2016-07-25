@@ -38,7 +38,7 @@ public class MagisterOfWorth extends mage.sets.mediainserts.MagisterOfWorth {
 
     public MagisterOfWorth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "CNS";
         this.rarity = Rarity.RARE;
     }

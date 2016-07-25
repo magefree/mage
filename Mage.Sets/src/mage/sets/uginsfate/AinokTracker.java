@@ -37,7 +37,7 @@ public class AinokTracker extends mage.sets.khansoftarkir.AinokTracker {
 
     public AinokTracker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "UGIN";
     }
 

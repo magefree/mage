@@ -37,7 +37,7 @@ public class WriteIntoBeing extends mage.sets.fatereforged.WriteIntoBeing {
 
     public WriteIntoBeing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "UGIN";
     }
 

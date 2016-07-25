@@ -37,7 +37,7 @@ public class AngelicArbiter extends mage.sets.magic2011.AngelicArbiter {
 
     public AngelicArbiter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "CMD";
     }
 

@@ -37,7 +37,7 @@ public class HeartOfYavimaya extends mage.sets.alliances.HeartOfYavimaya {
 
     public HeartOfYavimaya(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 231;
+        this.cardNumber = "231";
         this.expansionSetCode = "ME2";
     }
 

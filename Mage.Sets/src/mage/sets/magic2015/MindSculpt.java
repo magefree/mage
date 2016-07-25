@@ -37,7 +37,7 @@ public class MindSculpt extends mage.sets.magic2013.MindSculpt {
 
     public MindSculpt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "M15";
     }
 

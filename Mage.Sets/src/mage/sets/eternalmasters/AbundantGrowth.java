@@ -38,7 +38,7 @@ public class AbundantGrowth extends mage.sets.avacynrestored.AbundantGrowth {
 
     public AbundantGrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "EMA";
     }
 

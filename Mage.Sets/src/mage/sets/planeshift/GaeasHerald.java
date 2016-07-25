@@ -37,7 +37,7 @@ public class GaeasHerald extends mage.sets.tenthedition.GaeasHerald {
 
     public GaeasHerald(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "PLS";
     }
 

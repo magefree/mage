@@ -37,7 +37,7 @@ public class DwarvenWeaponsmith extends mage.sets.revisededition.DwarvenWeaponsm
 
     public DwarvenWeaponsmith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "ATQ";
     }
 

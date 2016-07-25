@@ -37,7 +37,7 @@ public class WarMammoth extends mage.sets.fifthedition.WarMammoth {
 
     public WarMammoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "4ED";
     }
 

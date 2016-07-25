@@ -37,7 +37,7 @@ public class TradewindRider extends mage.sets.tempest.TradewindRider {
 
     public TradewindRider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "TPR";
     }
 

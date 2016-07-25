@@ -37,7 +37,7 @@ public class ClockworkHydra extends mage.sets.timespiral.ClockworkHydra {
 
     public ClockworkHydra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "DDF";
     }
 

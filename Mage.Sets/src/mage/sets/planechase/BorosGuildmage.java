@@ -38,7 +38,7 @@ public class BorosGuildmage extends mage.sets.ravnica.BorosGuildmage {
 
     public BorosGuildmage (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "HOP";
     }
 

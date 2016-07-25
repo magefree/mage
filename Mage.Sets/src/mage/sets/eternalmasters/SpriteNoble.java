@@ -39,7 +39,7 @@ public class SpriteNoble extends mage.sets.timespiral.SpriteNoble {
 
     public SpriteNoble(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class SkyshroudVampire extends mage.sets.tempestremastered.SkyshroudVampi
 
     public SkyshroudVampire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "TMP";
     }
 

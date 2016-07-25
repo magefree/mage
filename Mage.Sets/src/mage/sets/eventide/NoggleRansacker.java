@@ -37,7 +37,7 @@ public class NoggleRansacker extends mage.sets.planechase2012.NoggleRansacker {
 
     public NoggleRansacker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "EVE";
     }
 

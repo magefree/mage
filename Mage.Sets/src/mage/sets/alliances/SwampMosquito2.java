@@ -37,7 +37,7 @@ public class SwampMosquito2 extends SwampMosquito1 {
 
     public SwampMosquito2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
     }
 
     public SwampMosquito2(final SwampMosquito2 card) {

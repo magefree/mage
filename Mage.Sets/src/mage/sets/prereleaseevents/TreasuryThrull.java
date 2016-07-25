@@ -38,7 +38,7 @@ public class TreasuryThrull extends mage.sets.gatecrash.TreasuryThrull {
 
     public TreasuryThrull(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

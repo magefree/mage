@@ -37,7 +37,7 @@ public class DragDown extends mage.sets.conflux.DragDown {
 
     public DragDown(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "MMA";
     }
 

@@ -37,7 +37,7 @@ public class DragonlordSilumgar extends mage.sets.dragonsoftarkir.DragonlordSilu
 
     public DragonlordSilumgar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "PTC";
     }
 

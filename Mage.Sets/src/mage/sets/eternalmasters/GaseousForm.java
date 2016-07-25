@@ -38,7 +38,7 @@ public class GaseousForm extends mage.sets.tempest.GaseousForm {
 
     public GaseousForm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "EMA";
     }
 

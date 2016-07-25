@@ -38,7 +38,7 @@ public class WhipOfErebos extends mage.sets.theros.WhipOfErebos {
 
     public WhipOfErebos(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

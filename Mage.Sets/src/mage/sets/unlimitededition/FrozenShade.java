@@ -38,7 +38,7 @@ public class FrozenShade extends mage.sets.limitedalpha.FrozenShade {
 
     public FrozenShade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "2ED";
     }
 

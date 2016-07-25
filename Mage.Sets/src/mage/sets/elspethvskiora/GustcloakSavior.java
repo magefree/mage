@@ -37,7 +37,7 @@ public class GustcloakSavior extends mage.sets.onslaught.GustcloakSavior {
 
     public GustcloakSavior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DDO";
     }
 

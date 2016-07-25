@@ -37,7 +37,7 @@ public class TempleBell extends mage.sets.magic2011.TempleBell {
 
     public TempleBell(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 265;
+        this.cardNumber = "265";
         this.expansionSetCode = "C13";
     }
 

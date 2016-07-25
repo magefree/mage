@@ -38,7 +38,7 @@ public class HighSentinelsOfArashin extends mage.sets.khansoftarkir.HighSentinel
 
     public HighSentinelsOfArashin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

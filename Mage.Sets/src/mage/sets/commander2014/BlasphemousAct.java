@@ -37,7 +37,7 @@ public class BlasphemousAct extends mage.sets.innistrad.BlasphemousAct {
 
     public BlasphemousAct(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = "172";
         this.expansionSetCode = "C14";
     }
 

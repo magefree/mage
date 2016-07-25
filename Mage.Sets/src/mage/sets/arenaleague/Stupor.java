@@ -37,7 +37,7 @@ public class Stupor extends mage.sets.timeshifted.Stupor {
 
     public Stupor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "ARENA";
     }
 

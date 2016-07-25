@@ -37,7 +37,7 @@ public class DecreeOfJustice extends mage.sets.vintagemasters.DecreeOfJustice {
 
     public DecreeOfJustice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "SCG";
     }
 

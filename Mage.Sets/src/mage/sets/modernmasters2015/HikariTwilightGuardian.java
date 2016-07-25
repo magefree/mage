@@ -38,7 +38,7 @@ public class HikariTwilightGuardian extends mage.sets.championsofkamigawa.Hikari
 
     public HikariTwilightGuardian(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

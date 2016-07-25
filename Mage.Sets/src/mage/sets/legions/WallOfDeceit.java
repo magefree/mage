@@ -37,7 +37,7 @@ public class WallOfDeceit extends mage.sets.anthologyjacevschandra.WallOfDeceit 
 
     public WallOfDeceit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "LGN";
     }
 

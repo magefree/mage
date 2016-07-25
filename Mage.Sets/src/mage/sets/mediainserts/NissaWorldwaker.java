@@ -6,7 +6,7 @@ public class NissaWorldwaker extends mage.sets.magic2015.NissaWorldwaker {
     
     public NissaWorldwaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "MBP";
     }
     

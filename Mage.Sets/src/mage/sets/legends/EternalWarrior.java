@@ -38,7 +38,7 @@ public class EternalWarrior extends mage.sets.fifthedition.EternalWarrior {
 
     public EternalWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.UNCOMMON;
     }

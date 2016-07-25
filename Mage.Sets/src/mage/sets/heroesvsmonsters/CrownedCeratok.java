@@ -37,7 +37,7 @@ public class CrownedCeratok extends mage.sets.gatecrash.CrownedCeratok {
 
     public CrownedCeratok(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "DDL";
     }
 

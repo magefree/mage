@@ -38,7 +38,7 @@ public class Lifeforce extends mage.sets.masterseditioniv.Lifeforce {
 
     public Lifeforce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = "172";
         this.expansionSetCode = "5ED";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class Infuse extends mage.sets.iceage.Infuse {
 
     public Infuse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "ME3";
     }
 

@@ -37,7 +37,7 @@ public class AureliaTheWarleader extends mage.sets.gatecrash.AureliaTheWarleader
 
     public AureliaTheWarleader(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "V15";
     }
 

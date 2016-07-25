@@ -37,7 +37,7 @@ public class StaffOfZegon extends mage.sets.masterseditioniv.StaffOfZegon {
 
     public StaffOfZegon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "ATQ";
     }
 

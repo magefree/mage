@@ -37,7 +37,7 @@ public class CrashingBoars extends mage.sets.tempestremastered.CrashingBoars {
 
     public CrashingBoars(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "EXO";
     }
 

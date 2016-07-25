@@ -38,7 +38,7 @@ public class FungalShambler extends mage.sets.apocalypse.FungalShambler {
 
     public FungalShambler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class BidentOfThassa extends mage.sets.theros.BidentOfThassa {
 
     public BidentOfThassa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "C15";
     }
 

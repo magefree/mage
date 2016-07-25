@@ -37,7 +37,7 @@ public class Drumhunter extends mage.sets.shardsofalara.Drumhunter {
 
     public Drumhunter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "C13";
     }
 

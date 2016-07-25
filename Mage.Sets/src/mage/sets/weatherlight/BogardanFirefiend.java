@@ -37,7 +37,7 @@ public class BogardanFirefiend extends mage.sets.planechase.BogardanFirefiend {
 
     public BogardanFirefiend(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "WTH";
     }
 

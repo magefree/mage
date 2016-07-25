@@ -37,7 +37,7 @@ public class ScionOfTheWild extends mage.sets.tenthedition.ScionOfTheWild {
 
     public ScionOfTheWild(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 182;
+        this.cardNumber = "182";
         this.expansionSetCode = "RAV";
     }
 

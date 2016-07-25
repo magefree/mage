@@ -37,7 +37,7 @@ public class FaerieConclave extends mage.sets.tenthedition.FaerieConclave {
 
     public FaerieConclave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 288;
+        this.cardNumber = "288";
         this.expansionSetCode = "C13";
     }
 

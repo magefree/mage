@@ -37,7 +37,7 @@ public class TrompTheDomains extends mage.sets.timespiral.TrompTheDomains {
 
     public TrompTheDomains(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 171;
+        this.cardNumber = "171";
         this.expansionSetCode = "MMA";
     }
 

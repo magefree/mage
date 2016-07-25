@@ -37,7 +37,7 @@ public class MatcaRioters extends mage.sets.conflux.MatcaRioters {
 
     public MatcaRioters(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
         this.expansionSetCode = "MM2";
     }
 

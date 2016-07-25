@@ -37,7 +37,7 @@ public class SphinxOfMagosi extends mage.sets.riseoftheeldrazi.SphinxOfMagosi {
 
     public SphinxOfMagosi(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "W16";
     }
 

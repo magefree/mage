@@ -37,7 +37,7 @@ public class WalkingWall extends mage.sets.mastersedition.WalkingWall {
 
     public WalkingWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 321;
+        this.cardNumber = "321";
         this.expansionSetCode = "ICE";
     }
 

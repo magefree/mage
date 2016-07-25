@@ -37,7 +37,7 @@ public class SealockMonster extends mage.sets.theros.SealockMonster {
 
     public SealockMonster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "DDO";
     }
 

@@ -38,7 +38,7 @@ public class TuknirDeathlock extends mage.sets.masterseditioniii.TuknirDeathlock
 
     public TuknirDeathlock(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 307;
+        this.cardNumber = "307";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.RARE;
     }

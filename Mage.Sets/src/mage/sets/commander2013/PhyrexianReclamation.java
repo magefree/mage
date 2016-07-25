@@ -37,7 +37,7 @@ public class PhyrexianReclamation extends mage.sets.urzaslegacy.PhyrexianReclama
 
     public PhyrexianReclamation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "C13";
     }
 

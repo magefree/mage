@@ -37,7 +37,7 @@ public class Vindicate2 extends mage.sets.apocalypse.Vindicate {
 
     public Vindicate2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "JR";
     }
 

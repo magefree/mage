@@ -37,7 +37,7 @@ public class JoinerAdept extends mage.sets.tenthedition.JoinerAdept {
 
     public JoinerAdept(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "5DN";
     }
 

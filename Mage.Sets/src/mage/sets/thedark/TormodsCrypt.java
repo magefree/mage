@@ -38,7 +38,7 @@ public class TormodsCrypt extends mage.sets.timeshifted.TormodsCrypt {
 
     public TormodsCrypt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.UNCOMMON;
     }

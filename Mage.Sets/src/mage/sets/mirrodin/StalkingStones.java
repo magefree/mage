@@ -37,7 +37,7 @@ public class StalkingStones extends mage.sets.tempest.StalkingStones {
 
     public StalkingStones(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 284;
+        this.cardNumber = "284";
         this.expansionSetCode = "MRD";
     }
 

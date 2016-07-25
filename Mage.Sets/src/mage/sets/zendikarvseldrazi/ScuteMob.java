@@ -37,7 +37,7 @@ public class ScuteMob extends mage.sets.zendikar.ScuteMob {
 
     public ScuteMob(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "DDP";
     }
 

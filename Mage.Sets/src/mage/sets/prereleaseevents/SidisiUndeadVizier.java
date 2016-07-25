@@ -37,7 +37,7 @@ public class SidisiUndeadVizier extends mage.sets.dragonsoftarkir.SidisiUndeadVi
 
     public SidisiUndeadVizier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 189;
+        this.cardNumber = "189";
         this.expansionSetCode = "PTC";
     }
 

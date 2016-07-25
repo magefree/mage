@@ -37,7 +37,7 @@ public class NetherVoid extends mage.sets.legends.NetherVoid {
 
     public NetherVoid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "ME3";
     }
 

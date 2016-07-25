@@ -37,7 +37,7 @@ public class MengHuosHorde extends mage.sets.portalthreekingdoms.MengHuosHorde {
 
     public MengHuosHorde(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "ME3";
     }
 

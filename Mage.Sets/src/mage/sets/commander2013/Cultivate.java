@@ -37,7 +37,7 @@ public class Cultivate extends mage.sets.magic2011.Cultivate {
 
     public Cultivate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "C13";
     }
 

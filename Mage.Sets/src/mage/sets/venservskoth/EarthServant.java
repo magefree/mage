@@ -37,7 +37,7 @@ public class EarthServant extends mage.sets.magic2011.EarthServant {
 
     public EarthServant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "DDI";
     }
 

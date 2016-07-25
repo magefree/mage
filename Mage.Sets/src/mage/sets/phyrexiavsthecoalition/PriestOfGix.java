@@ -37,7 +37,7 @@ public class PriestOfGix extends mage.sets.urzassaga.PriestOfGix {
 
     public PriestOfGix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "DDE";
     }
 

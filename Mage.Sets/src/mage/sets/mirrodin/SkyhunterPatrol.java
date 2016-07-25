@@ -37,7 +37,7 @@ public class SkyhunterPatrol extends mage.sets.tenthedition.SkyhunterPatrol {
 
     public SkyhunterPatrol(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "MRD";
     }
 

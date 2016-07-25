@@ -37,7 +37,7 @@ public class SarkhanVol extends mage.sets.shardsofalara.SarkhanVol {
 
     public SarkhanVol(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "MMA";
     }
 

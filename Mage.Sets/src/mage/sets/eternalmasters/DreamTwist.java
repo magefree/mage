@@ -38,7 +38,7 @@ public class DreamTwist extends mage.sets.innistrad.DreamTwist {
 
     public DreamTwist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "EMA";
     }
 

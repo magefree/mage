@@ -37,7 +37,7 @@ public class HyenaUmbra extends mage.sets.riseoftheeldrazi.HyenaUmbra {
 
     public HyenaUmbra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "PC2";
     }
 

@@ -38,7 +38,7 @@ public class SpiketailHatchling extends mage.sets.tenthedition.SpiketailHatchlin
 
     public SpiketailHatchling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "PCY";
         this.rarity = Rarity.COMMON;
     }

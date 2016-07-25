@@ -38,7 +38,7 @@ public class Eureka extends mage.sets.vintagemasters.Eureka {
 
     public Eureka(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.RARE;
     }

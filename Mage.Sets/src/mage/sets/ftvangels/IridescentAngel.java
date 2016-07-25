@@ -38,7 +38,7 @@ public class IridescentAngel extends mage.sets.odyssey.IridescentAngel {
 
     public IridescentAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "V15";
         this.rarity = Rarity.MYTHIC;
     }

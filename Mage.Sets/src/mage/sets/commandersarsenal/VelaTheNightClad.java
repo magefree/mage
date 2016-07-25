@@ -38,7 +38,7 @@ public class VelaTheNightClad extends mage.sets.planechase2012.VelaTheNightClad 
 
     public VelaTheNightClad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

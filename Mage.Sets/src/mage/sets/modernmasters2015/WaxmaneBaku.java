@@ -37,7 +37,7 @@ public class WaxmaneBaku extends mage.sets.betrayersofkamigawa.WaxmaneBaku {
 
     public WaxmaneBaku(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "MM2";
     }
 

@@ -37,7 +37,7 @@ public class FarrelsMantle extends mage.sets.fallenempires.FarrelsMantle {
 
     public FarrelsMantle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "ME2";
     }
 

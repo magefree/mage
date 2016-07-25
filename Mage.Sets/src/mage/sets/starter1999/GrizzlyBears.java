@@ -37,7 +37,7 @@ public class GrizzlyBears extends mage.sets.tenthedition.GrizzlyBears {
 
     public GrizzlyBears(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "S99";
     }
 

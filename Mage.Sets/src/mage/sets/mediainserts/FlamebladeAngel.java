@@ -37,7 +37,7 @@ public class FlamebladeAngel extends mage.sets.shadowsoverinnistrad.FlamebladeAn
 
     public FlamebladeAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "MBP";
     }
 

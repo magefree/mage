@@ -37,7 +37,7 @@ public class DarkPetition extends mage.sets.magicorigins.DarkPetition {
 
     public DarkPetition(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 202;
+        this.cardNumber = "202";
         this.expansionSetCode = "PTC";
     }
 

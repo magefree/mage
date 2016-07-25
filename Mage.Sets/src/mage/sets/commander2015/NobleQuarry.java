@@ -37,7 +37,7 @@ public class NobleQuarry extends mage.sets.bornofthegods.NobleQuarry {
 
     public NobleQuarry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "C15";
     }
 

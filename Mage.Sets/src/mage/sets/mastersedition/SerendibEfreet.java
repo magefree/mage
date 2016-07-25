@@ -38,7 +38,7 @@ public class SerendibEfreet extends mage.sets.vintagemasters.SerendibEfreet {
 
     public SerendibEfreet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.RARE;
     }

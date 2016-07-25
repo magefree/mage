@@ -37,7 +37,7 @@ public class InexorableTide extends mage.sets.scarsofmirrodin.InexorableTide {
 
     public InexorableTide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "MM2";
     }
 

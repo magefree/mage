@@ -37,7 +37,7 @@ public class ManaVault extends mage.sets.limitedalpha.ManaVault {
 
     public ManaVault(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 388;
+        this.cardNumber = "388";
         this.expansionSetCode = "5ED";
     }
 

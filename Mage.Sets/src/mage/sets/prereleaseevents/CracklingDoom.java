@@ -38,7 +38,7 @@ public class CracklingDoom extends mage.sets.khansoftarkir.CracklingDoom {
 
     public CracklingDoom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
+        this.cardNumber = "94";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

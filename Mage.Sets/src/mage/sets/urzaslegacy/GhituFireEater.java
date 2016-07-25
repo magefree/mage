@@ -38,7 +38,7 @@ public class GhituFireEater extends mage.sets.seventhedition.GhituFireEater {
 
     public GhituFireEater(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "ULG";
     }
 

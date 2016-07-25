@@ -37,7 +37,7 @@ public class UrborgTombOfYawgmoth extends mage.sets.planarchaos.UrborgTombOfYawg
 
     public UrborgTombOfYawgmoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 248;
+        this.cardNumber = "248";
         this.expansionSetCode = "M15";
     }
 

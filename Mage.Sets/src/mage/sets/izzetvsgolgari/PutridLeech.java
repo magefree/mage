@@ -37,7 +37,7 @@ public class PutridLeech extends mage.sets.alarareborn.PutridLeech {
 
     public PutridLeech(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "DDJ";
     }
 

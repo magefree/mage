@@ -38,7 +38,7 @@ public class ThornThallid3 extends mage.sets.fallenempires.ThornThallid1 {
 
     public ThornThallid3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = "98";
     }
 
     public ThornThallid3(final ThornThallid3 card) {

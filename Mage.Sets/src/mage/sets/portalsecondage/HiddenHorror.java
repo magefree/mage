@@ -38,7 +38,7 @@ public class HiddenHorror extends mage.sets.tenthedition.HiddenHorror {
 
     public HiddenHorror(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "PO2";
         this.rarity = Rarity.RARE;
     }

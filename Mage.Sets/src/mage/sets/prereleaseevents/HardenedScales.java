@@ -38,7 +38,7 @@ public class HardenedScales extends mage.sets.khansoftarkir.HardenedScales {
 
     public HardenedScales(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

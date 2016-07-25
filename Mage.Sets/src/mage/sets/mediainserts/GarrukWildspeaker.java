@@ -6,7 +6,7 @@ public class GarrukWildspeaker extends mage.sets.lorwyn.GarrukWildspeaker {
     
     public GarrukWildspeaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "MBP";
     }
     

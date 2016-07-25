@@ -37,7 +37,7 @@ public class VoiceOfTheWoods extends mage.sets.onslaught.VoiceOfTheWoods {
 
     public VoiceOfTheWoods(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "DD3EVG";
     }
 

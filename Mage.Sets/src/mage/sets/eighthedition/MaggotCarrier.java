@@ -37,7 +37,7 @@ public class MaggotCarrier extends mage.sets.planeshift.MaggotCarrier {
 
     public MaggotCarrier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "8ED";
     }
 

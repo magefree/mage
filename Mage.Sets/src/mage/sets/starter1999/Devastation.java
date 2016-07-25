@@ -37,7 +37,7 @@ public class Devastation extends mage.sets.portal.Devastation {
 
     public Devastation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
+        this.cardNumber = "94";
         this.expansionSetCode = "S99";
     }
 

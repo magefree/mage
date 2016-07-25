@@ -37,7 +37,7 @@ public class OwlFamiliar extends mage.sets.portal.OwlFamiliar {
 
     public OwlFamiliar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "ME4";
     }
 

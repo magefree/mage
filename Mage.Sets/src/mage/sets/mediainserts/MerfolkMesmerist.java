@@ -6,7 +6,7 @@ public class MerfolkMesmerist extends mage.sets.magic2012.MerfolkMesmerist {
     
     public MerfolkMesmerist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "MBP";
     }
     

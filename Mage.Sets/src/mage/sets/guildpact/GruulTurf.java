@@ -36,7 +36,7 @@ public class GruulTurf extends mage.sets.planechase.GruulTurf {
 
     public GruulTurf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "GPT";
     }
 

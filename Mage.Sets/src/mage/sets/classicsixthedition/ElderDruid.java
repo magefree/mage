@@ -37,7 +37,7 @@ public class ElderDruid extends mage.sets.iceage.ElderDruid {
 
     public ElderDruid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = "223";
         this.expansionSetCode = "6ED";
     }
 

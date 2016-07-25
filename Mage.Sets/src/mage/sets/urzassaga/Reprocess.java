@@ -38,7 +38,7 @@ public class Reprocess extends mage.sets.seventhedition.Reprocess {
 
     public Reprocess(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "USG";
     }
 

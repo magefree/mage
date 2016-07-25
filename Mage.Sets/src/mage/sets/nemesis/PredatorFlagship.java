@@ -37,7 +37,7 @@ public class PredatorFlagship extends mage.sets.commander2014.PredatorFlagship {
 
     public PredatorFlagship(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "NEM";
     }
 

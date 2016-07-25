@@ -37,7 +37,7 @@ public class WindDancer extends mage.sets.tempest.WindDancer {
 
     public WindDancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class Cremate extends mage.sets.guildpact.Cremate {
 
     public Cremate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "RTR";
     }
 

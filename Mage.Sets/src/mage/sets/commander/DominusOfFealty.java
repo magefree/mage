@@ -37,7 +37,7 @@ public class DominusOfFealty extends mage.sets.eventide.DominusOfFealty {
 
     public DominusOfFealty(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 194;
+        this.cardNumber = "194";
         this.expansionSetCode = "CMD";
     }
 

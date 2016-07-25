@@ -37,7 +37,7 @@ public class PhyrexianProcessor extends mage.sets.urzassaga.PhyrexianProcessor {
 
     public PhyrexianProcessor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "DDE";
     }
 

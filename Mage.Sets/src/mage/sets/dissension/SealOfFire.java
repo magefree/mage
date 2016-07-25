@@ -37,7 +37,7 @@ public class SealOfFire extends mage.sets.nemesis.SealOfFire {
 
     public SealOfFire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "DIS";
     }
 

@@ -37,7 +37,7 @@ public class EnigmaSphinx extends mage.sets.alarareborn.EnigmaSphinx {
 
     public EnigmaSphinx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "PC2";
     }
 

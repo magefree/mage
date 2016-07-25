@@ -6,7 +6,7 @@ public class AngelOfGlorysRise extends mage.sets.avacynrestored.AngelOfGlorysRis
     
     public AngelOfGlorysRise(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "MBP";
     }
     

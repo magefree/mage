@@ -37,7 +37,7 @@ public class ThunderStrike extends mage.sets.magic2011.ThunderStrike {
 
     public ThunderStrike(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "M14";
     }
 

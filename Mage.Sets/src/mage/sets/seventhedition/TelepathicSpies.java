@@ -38,7 +38,7 @@ public class TelepathicSpies extends mage.sets.urzasdestiny.TelepathicSpies {
 
     public TelepathicSpies(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "7ED";
     }
 

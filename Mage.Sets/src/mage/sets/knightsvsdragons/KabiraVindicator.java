@@ -37,7 +37,7 @@ public class KabiraVindicator extends mage.sets.riseoftheeldrazi.KabiraVindicato
 
     public KabiraVindicator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "DDG";
     }
 

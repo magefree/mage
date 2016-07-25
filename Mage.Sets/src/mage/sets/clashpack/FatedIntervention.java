@@ -38,7 +38,7 @@ public class FatedIntervention extends mage.sets.bornofthegods.FatedIntervention
 
     public FatedIntervention(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

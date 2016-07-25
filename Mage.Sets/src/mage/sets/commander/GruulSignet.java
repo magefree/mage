@@ -37,7 +37,7 @@ public class GruulSignet extends mage.sets.guildpact.GruulSignet {
 
     public GruulSignet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 250;
+        this.cardNumber = "250";
         this.expansionSetCode = "CMD";
     }
 

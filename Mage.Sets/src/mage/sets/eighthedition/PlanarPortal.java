@@ -37,7 +37,7 @@ public class PlanarPortal extends mage.sets.invasion.PlanarPortal {
 
     public PlanarPortal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 311;
+        this.cardNumber = "311";
         this.expansionSetCode = "8ED";
     }
 

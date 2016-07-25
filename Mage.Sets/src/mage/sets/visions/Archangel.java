@@ -38,7 +38,7 @@ public class Archangel extends mage.sets.avacynrestored.Archangel {
 
     public Archangel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "VIS";
         this.rarity = Rarity.RARE;
     }

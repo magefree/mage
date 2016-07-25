@@ -38,7 +38,7 @@ public class DeathSpeakers extends mage.sets.homelands.DeathSpeakers {
 
     public DeathSpeakers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.COMMON;
     }

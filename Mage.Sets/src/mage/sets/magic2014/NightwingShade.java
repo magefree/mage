@@ -37,7 +37,7 @@ public class NightwingShade extends mage.sets.magic2011.NightwingShade {
 
     public NightwingShade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "M14";
     }
 

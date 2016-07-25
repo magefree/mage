@@ -38,7 +38,7 @@ public class BloodlordOfVaasgoth extends mage.sets.magic2012.BloodlordOfVaasgoth
 
     public BloodlordOfVaasgoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

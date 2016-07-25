@@ -38,7 +38,7 @@ public class Firebolt extends mage.sets.odyssey.Firebolt {
 
     public Firebolt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.UNCOMMON;
     }

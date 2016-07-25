@@ -37,7 +37,7 @@ public class FamiliarGround extends mage.sets.seventhedition.FamiliarGround {
 
     public FamiliarGround(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "WTH";
     }
 

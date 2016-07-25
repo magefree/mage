@@ -37,7 +37,7 @@ public class BatteringCraghorn extends mage.sets.archenemy.BatteringCraghorn {
 
     public BatteringCraghorn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "ONS";
     }
 

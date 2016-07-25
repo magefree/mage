@@ -37,7 +37,7 @@ public class PrimalOrder extends mage.sets.homelands.PrimalOrder {
 
     public PrimalOrder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "MED";
     }
 

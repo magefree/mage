@@ -37,7 +37,7 @@ public class SunDroplet extends mage.sets.commander2013.SunDroplet {
 
     public SunDroplet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 249;
+        this.cardNumber = "249";
         this.expansionSetCode = "MRD";
     }
 

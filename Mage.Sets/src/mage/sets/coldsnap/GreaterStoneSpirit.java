@@ -37,7 +37,7 @@ public class GreaterStoneSpirit extends mage.sets.venservskoth.GreaterStoneSpiri
 
     public GreaterStoneSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "CSP";
     }
 

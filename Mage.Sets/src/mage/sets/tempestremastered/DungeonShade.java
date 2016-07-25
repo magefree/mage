@@ -37,7 +37,7 @@ public class DungeonShade extends mage.sets.stronghold.DungeonShade {
 
     public DungeonShade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "TPR";
     }
 

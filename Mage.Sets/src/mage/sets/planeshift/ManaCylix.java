@@ -38,7 +38,7 @@ public class ManaCylix extends mage.sets.conflux.ManaCylix {
 
     public ManaCylix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "PLS";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -38,7 +38,7 @@ public class RiverBoa extends mage.sets.zendikar.RiverBoa {
 
     public RiverBoa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "VIS";
         this.rarity = Rarity.COMMON;
     }

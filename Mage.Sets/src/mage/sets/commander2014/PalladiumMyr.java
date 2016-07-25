@@ -37,7 +37,7 @@ public class PalladiumMyr extends mage.sets.scarsofmirrodin.PalladiumMyr {
 
     public PalladiumMyr(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 258;
+        this.cardNumber = "258";
         this.expansionSetCode = "C14";
     }
 

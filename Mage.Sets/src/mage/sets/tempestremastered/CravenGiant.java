@@ -37,7 +37,7 @@ public class CravenGiant extends mage.sets.stronghold.CravenGiant {
 
     public CravenGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class Thoughtlace extends mage.sets.limitedbeta.Thoughtlace {
 
     public Thoughtlace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "3ED";
     }
 

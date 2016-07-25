@@ -37,7 +37,7 @@ public class Fabricate extends mage.sets.magic2010.Fabricate {
 
     public Fabricate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "MRD";
     }
 

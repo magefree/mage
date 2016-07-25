@@ -37,7 +37,7 @@ public class LimDulsVault extends mage.sets.commander2013.LimDulsVault {
 
     public LimDulsVault(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
         this.expansionSetCode = "MED";
     }
 

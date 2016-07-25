@@ -37,7 +37,7 @@ public class Condemn extends mage.sets.tenthedition.Condemn {
 
     public Condemn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "DDL";
     }
 

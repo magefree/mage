@@ -37,7 +37,7 @@ public class SpittingSpider extends mage.sets.prophecy.SpittingSpider {
 
     public SpittingSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 280;
+        this.cardNumber = "280";
         this.expansionSetCode = "8ED";
     }
 

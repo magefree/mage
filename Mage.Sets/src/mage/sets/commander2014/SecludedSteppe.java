@@ -37,7 +37,7 @@ public class SecludedSteppe extends mage.sets.onslaught.SecludedSteppe {
 
     public SecludedSteppe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 310;
+        this.cardNumber = "310";
         this.expansionSetCode = "C14";
     }
 

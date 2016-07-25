@@ -38,7 +38,7 @@ public class ClawsOfWirewood extends mage.sets.vintagemasters.ClawsOfWirewood {
 
     public ClawsOfWirewood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "SCG";
         this.rarity = Rarity.UNCOMMON;
     }

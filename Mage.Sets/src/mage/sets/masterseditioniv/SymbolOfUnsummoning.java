@@ -37,7 +37,7 @@ public class SymbolOfUnsummoning extends mage.sets.portal.SymbolOfUnsummoning {
 
     public SymbolOfUnsummoning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "ME4";
     }
 

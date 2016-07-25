@@ -37,7 +37,7 @@ public class GaeasEmbrace extends mage.sets.urzassaga.GaeasEmbrace {
 
     public GaeasEmbrace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 211;
+        this.cardNumber = "211";
         this.expansionSetCode = "VMA";
     }
 

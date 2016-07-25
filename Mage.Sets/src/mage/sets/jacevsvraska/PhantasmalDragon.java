@@ -37,7 +37,7 @@ public class PhantasmalDragon extends mage.sets.magic2012.PhantasmalDragon {
 
     public PhantasmalDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "DDM";
     }
 

@@ -37,7 +37,7 @@ public class DiminishingReturns extends mage.sets.alliances.DiminishingReturns {
 
     public DiminishingReturns(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "6ED";
     }
 

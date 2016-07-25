@@ -37,7 +37,7 @@ public class SeverTheBloodline extends mage.sets.innistrad.SeverTheBloodline {
 
     public SeverTheBloodline(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "DDQ";
     }
 

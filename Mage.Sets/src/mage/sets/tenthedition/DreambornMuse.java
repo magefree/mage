@@ -37,7 +37,7 @@ public class DreambornMuse extends mage.sets.legions.DreambornMuse {
 
     public DreambornMuse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "10E";
     }
 

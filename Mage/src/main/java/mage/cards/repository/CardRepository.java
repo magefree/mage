@@ -61,9 +61,9 @@ public enum CardRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     // raise this if db structure was changed
-    private static final long CARD_DB_VERSION = 43;
+    private static final long CARD_DB_VERSION = 44;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 54;
+    private static final long CARD_CONTENT_VERSION = 55;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -273,7 +273,7 @@ public enum CardRepository {
         return landTypes;
     }
 
-    public CardInfo findCard(String setCode, int cardNumber) {
+    public CardInfo findCard(String setCode, String cardNumber) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             queryBuilder.where().eq("setCode", new SelectArg(setCode)).and().eq("cardNumber", cardNumber).and().eq("nightCard", false);

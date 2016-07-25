@@ -38,7 +38,7 @@ public class HarbingerOfTheHunt extends mage.sets.dragonsoftarkir.HarbingerOfThe
 
     public HarbingerOfTheHunt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

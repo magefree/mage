@@ -37,7 +37,7 @@ public class TrumpetBlast extends mage.sets.magic2010.TrumpetBlast {
 
     public TrumpetBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "KTK";
     }
 

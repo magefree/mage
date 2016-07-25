@@ -37,7 +37,7 @@ public class ThopterSpyNetwork extends mage.sets.magicorigins.ThopterSpyNetwork 
 
     public ThopterSpyNetwork(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 234;
+        this.cardNumber = "234";
         this.expansionSetCode = "PTC";
     }
 

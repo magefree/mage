@@ -37,7 +37,7 @@ public class PlatedGeopede extends mage.sets.zendikar.PlatedGeopede {
 
     public PlatedGeopede(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "DDI";
     }
 

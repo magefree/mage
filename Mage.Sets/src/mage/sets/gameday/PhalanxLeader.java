@@ -37,7 +37,7 @@ public class PhalanxLeader extends mage.sets.theros.PhalanxLeader {
 
     public PhalanxLeader(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "MGDC";
     }
 

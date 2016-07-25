@@ -38,7 +38,7 @@ public class IcyBlast extends mage.sets.khansoftarkir.IcyBlast {
 
     public IcyBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

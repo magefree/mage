@@ -38,7 +38,7 @@ public class ElvenLyre extends mage.sets.masterseditionii.ElvenLyre {
 
     public ElvenLyre(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = "172";
         this.expansionSetCode = "FEM";
         this.rarity = Rarity.RARE;
     }

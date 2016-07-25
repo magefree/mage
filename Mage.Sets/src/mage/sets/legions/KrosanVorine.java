@@ -37,7 +37,7 @@ public class KrosanVorine extends mage.sets.vintagemasters.KrosanVorine {
 
     public KrosanVorine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "LGN";
     }
 

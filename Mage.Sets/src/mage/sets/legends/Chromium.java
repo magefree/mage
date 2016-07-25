@@ -37,7 +37,7 @@ public class Chromium extends mage.sets.masterseditioniii.Chromium {
 
     public Chromium(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 264;
+        this.cardNumber = "264";
         this.expansionSetCode = "LEG";
     }
 
