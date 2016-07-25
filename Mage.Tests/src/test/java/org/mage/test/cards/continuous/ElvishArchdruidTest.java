@@ -42,7 +42,7 @@ public class ElvishArchdruidTest extends CardTestPlayerBase {
     /**
      * Elvish Archdruid gives +1/+1 to Nettle Sentinel
      * If Archdruid dies and Nettle Sentinel has got 2 damage
-     * Nettle Sentile must go to graveyard immedeately
+     * Nettle Sentinel must go to graveyard immediately
      */
     @Test
     public void testBoostWithUndying() {
