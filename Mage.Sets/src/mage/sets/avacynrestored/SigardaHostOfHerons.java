@@ -35,12 +35,14 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.PermanentCard;
@@ -109,6 +111,11 @@ class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
             }
             if (object instanceof Spell) {
                 if (game.getOpponents(source.getControllerId()).contains(((Spell) object).getControllerId())) {
+                    return true;
+                }
+            }
+            if (object instanceof Card) {
+                if (game.getOpponents(source.getControllerId()).contains(((Card) object).getOwnerId())) {
                     return true;
                 }
             }

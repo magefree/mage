@@ -28,6 +28,7 @@
 package mage.sets.eldritchmoon;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -44,6 +45,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.PermanentCard;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -118,11 +121,25 @@ class NephaliaAcademyEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (event.getType().equals(GameEvent.EventType.DISCARD_CARD)) {
-            // only save card info
+            // only save card info if it's an opponent effect
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                cardId = card.getId();
-                zoneChangeCounter = game.getState().getZoneChangeCounter(cardId);
+                boolean isAnOpponentEffect = false;
+                MageObject object = game.getObject(event.getSourceId());
+                if (object instanceof PermanentCard) {
+                    isAnOpponentEffect = game.getOpponents(source.getControllerId()).contains(((PermanentCard) object).getControllerId());
+                }
+                else if (object instanceof Spell) {
+                    isAnOpponentEffect = game.getOpponents(source.getControllerId()).contains(((Spell) object).getControllerId());
+                }
+                else if (object instanceof Card) {
+                    isAnOpponentEffect = game.getOpponents(source.getControllerId()).contains(((Card) object).getOwnerId());
+                }
+
+                if (isAnOpponentEffect) {
+                    cardId = card.getId();
+                    zoneChangeCounter = game.getState().getZoneChangeCounter(cardId);
+                }
             }
             return false;
         }
@@ -133,7 +150,7 @@ class NephaliaAcademyEffect extends ReplacementEffectImpl {
                 cardId = null;
                 zoneChangeCounter = 0;
                 if (controller.chooseUse(outcome, "Put " + card.getIdName() + " on top of your library instead?", source, game)) {
-                    
+
                     Cards cardsToLibrary = new CardsImpl(card);                 
                     // reveal the card then put it on top of your library
                     controller.revealCards(card.getName(), cardsToLibrary, game);

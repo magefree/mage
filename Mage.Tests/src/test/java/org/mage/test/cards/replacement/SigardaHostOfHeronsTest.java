@@ -107,7 +107,7 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
         
         assertGraveyardCount(playerB, "Tempt with Immortality", 1);
         assertGraveyardCount(playerA, "Sigarda, Host of Herons", 0);
-        assertGraveyardCount(playerB, "Merciless Executioner", 0);    
+        assertGraveyardCount(playerB, "Merciless Executioner", 1);    
     }
 
 }
