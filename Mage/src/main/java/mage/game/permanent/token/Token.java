@@ -213,7 +213,6 @@ public class Token extends MageObjectImpl {
                 }
 
             }
-            game.applyEffects();
             return true;
         }
         return false;
