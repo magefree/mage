@@ -56,8 +56,7 @@ public class DissensionInTheRanks extends CardImpl {
 
         // Target blocking creature fights another target blocking creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addTarget(new DissensionInTheRanksTarget(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, filter, false));
 
     }
 
@@ -69,29 +68,4 @@ public class DissensionInTheRanks extends CardImpl {
     public DissensionInTheRanks copy() {
         return new DissensionInTheRanks(this);
     }
-}
-
-class DissensionInTheRanksTarget extends TargetCreaturePermanent {
-
-    public DissensionInTheRanksTarget(FilterCreaturePermanent filter) {
-        super(1, 1, filter, false);
-    }
-
-    public DissensionInTheRanksTarget(final DissensionInTheRanksTarget target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (source.getTargets().get(0).getTargets().contains(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game);
-    }
-
-    @Override
-    public DissensionInTheRanksTarget copy() {
-        return new DissensionInTheRanksTarget(this);
-    }
-
 }

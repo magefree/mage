@@ -75,7 +75,8 @@ public class DwarvenLandslide extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
             if (KickedCondition.getInstance().apply(game, ability)) {
-                getSpellAbility().addTarget(new TargetLandPermanent(new FilterLandPermanent("land (Kicker)")));
+                ability.getTargets().clear();
+                getSpellAbility().addTarget(new TargetLandPermanent(2));
             }
         }
     }
