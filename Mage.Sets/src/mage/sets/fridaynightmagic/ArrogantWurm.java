@@ -37,7 +37,7 @@ public class ArrogantWurm extends mage.sets.torment.ArrogantWurm {
 
     public ArrogantWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "FNMP";
     }
 

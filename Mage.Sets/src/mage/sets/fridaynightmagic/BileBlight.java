@@ -37,7 +37,7 @@ public class BileBlight extends mage.sets.bornofthegods.BileBlight {
 
     public BileBlight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 171;
+        this.cardNumber = "171";
         this.expansionSetCode = "FNMP";
     }
 

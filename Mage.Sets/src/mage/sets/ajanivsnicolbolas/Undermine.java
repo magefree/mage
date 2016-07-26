@@ -37,7 +37,7 @@ public class Undermine extends mage.sets.invasion.Undermine {
 
     public Undermine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "DDH";
     }
 

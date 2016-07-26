@@ -37,7 +37,7 @@ public class MasterDecoy extends mage.sets.tempest.MasterDecoy {
 
     public MasterDecoy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDN";
     }
 

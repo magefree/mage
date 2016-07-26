@@ -37,7 +37,7 @@ public class ObsessiveSearch extends mage.sets.torment.ObsessiveSearch {
 
     public ObsessiveSearch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "VMA";
     }
 

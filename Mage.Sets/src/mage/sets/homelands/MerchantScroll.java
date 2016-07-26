@@ -38,7 +38,7 @@ public class MerchantScroll extends mage.sets.eighthedition.MerchantScroll {
 
     public MerchantScroll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "HML";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class SpinalGraft extends mage.sets.vintagemasters.SpinalGraft {
 
     public SpinalGraft(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "TPR";
     }
 

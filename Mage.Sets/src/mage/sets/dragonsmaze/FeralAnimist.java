@@ -37,7 +37,7 @@ public class FeralAnimist extends mage.sets.guildpact.FeralAnimist {
 
     public FeralAnimist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "DGM";
     }
 

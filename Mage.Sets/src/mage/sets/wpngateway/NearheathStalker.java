@@ -38,7 +38,7 @@ public class NearheathStalker extends mage.sets.darkascension.NearheathStalker {
 
     public NearheathStalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

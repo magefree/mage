@@ -6,7 +6,7 @@ public class GazeOfGranite extends mage.sets.dragonsmaze.GazeOfGranite {
     
     public GazeOfGranite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "MBP";
     }
     

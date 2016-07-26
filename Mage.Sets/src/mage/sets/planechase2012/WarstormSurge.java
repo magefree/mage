@@ -37,7 +37,7 @@ public class WarstormSurge extends mage.sets.magic2012.WarstormSurge {
 
     public WarstormSurge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "PC2";
     }
 

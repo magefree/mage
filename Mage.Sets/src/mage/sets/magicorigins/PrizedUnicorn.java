@@ -37,7 +37,7 @@ public class PrizedUnicorn extends mage.sets.magic2010.PrizedUnicorn {
 
     public PrizedUnicorn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 287;
+        this.cardNumber = "287";
         this.expansionSetCode = "ORI";
     }
 

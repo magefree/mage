@@ -38,7 +38,7 @@ public class SenseisDiviningTop extends mage.sets.championsofkamigawa.SenseisDiv
 
     public SenseisDiviningTop(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "V09";
         this.rarity = Rarity.MYTHIC;
     }

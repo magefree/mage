@@ -37,7 +37,7 @@ public class ElvishSpiritGuide extends mage.sets.alliances.ElvishSpiritGuide {
 
     public ElvishSpiritGuide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "ME2";
     }
 

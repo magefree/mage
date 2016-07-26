@@ -37,7 +37,7 @@ public class LavaSpike extends mage.sets.championsofkamigawa.LavaSpike {
 
     public LavaSpike(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "MMA";
     }
 

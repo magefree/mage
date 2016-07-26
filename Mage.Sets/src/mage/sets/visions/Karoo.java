@@ -37,7 +37,7 @@ public class Karoo extends mage.sets.commander2014.Karoo {
 
     public Karoo(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "VIS";
     }
 

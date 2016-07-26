@@ -39,7 +39,7 @@ public class IhsansShade extends mage.sets.homelands.IhsansShade {
 
     public IhsansShade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.RARE;
     }

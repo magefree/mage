@@ -37,7 +37,7 @@ public class AncientAmphitheater extends mage.sets.lorwyn.AncientAmphitheater {
 
     public AncientAmphitheater(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
+        this.cardNumber = "276";
         this.expansionSetCode = "C15";
     }
 

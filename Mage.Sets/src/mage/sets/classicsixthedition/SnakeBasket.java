@@ -37,7 +37,7 @@ public class SnakeBasket extends mage.sets.visions.SnakeBasket {
 
     public SnakeBasket(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 312;
+        this.cardNumber = "312";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class KozilekButcherOfTruth extends mage.sets.riseoftheeldrazi.KozilekBut
 
     public KozilekButcherOfTruth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "MM2";
     }
 

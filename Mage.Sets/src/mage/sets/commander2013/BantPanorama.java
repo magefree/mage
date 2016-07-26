@@ -37,7 +37,7 @@ public class BantPanorama extends mage.sets.shardsofalara.BantPanorama {
 
     public BantPanorama(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
+        this.cardNumber = "276";
         this.expansionSetCode = "C13";
     }
 

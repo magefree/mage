@@ -6,7 +6,7 @@ public class PhyrexianRager extends mage.sets.mirrodinbesieged.PhyrexianRager {
     
     public PhyrexianRager(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "MBP";
     }
     

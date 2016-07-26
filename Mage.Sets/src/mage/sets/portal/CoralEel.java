@@ -37,7 +37,7 @@ public class CoralEel extends mage.sets.eighthedition.CoralEel {
 
     public CoralEel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "POR";
     }
 

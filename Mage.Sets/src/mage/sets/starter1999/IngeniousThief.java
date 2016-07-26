@@ -38,7 +38,7 @@ public class IngeniousThief extends mage.sets.portal.IngeniousThief {
 
     public IngeniousThief(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "S99";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class LilianasSpecter extends mage.sets.magic2011.LilianasSpecter {
 
     public LilianasSpecter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "MGDC";
     }
 

@@ -37,7 +37,7 @@ public class IchorSlick extends mage.sets.futuresight.IchorSlick {
 
     public IchorSlick(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "DD3GVL";
     }
 

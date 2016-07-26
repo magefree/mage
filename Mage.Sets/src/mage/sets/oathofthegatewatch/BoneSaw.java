@@ -37,7 +37,7 @@ public class BoneSaw extends mage.sets.conflux.BoneSaw {
 
     public BoneSaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "OGW";
     }
 

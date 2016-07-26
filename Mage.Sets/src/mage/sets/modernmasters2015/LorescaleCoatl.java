@@ -37,7 +37,7 @@ public class LorescaleCoatl extends mage.sets.alarareborn.LorescaleCoatl {
 
     public LorescaleCoatl(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "MM2";
     }
 

@@ -38,7 +38,7 @@ public class ArgothianTreefolk extends mage.sets.antiquities.ArgothianTreefolk {
 
     public ArgothianTreefolk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

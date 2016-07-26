@@ -37,7 +37,7 @@ public class HomingSliver extends mage.sets.futuresight.HomingSliver {
 
     public HomingSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "H09";
     }
 

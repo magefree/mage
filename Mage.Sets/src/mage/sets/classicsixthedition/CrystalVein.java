@@ -37,7 +37,7 @@ public class CrystalVein extends mage.sets.mirage.CrystalVein {
 
     public CrystalVein(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 322;
+        this.cardNumber = "322";
         this.expansionSetCode = "6ED";
     }
 

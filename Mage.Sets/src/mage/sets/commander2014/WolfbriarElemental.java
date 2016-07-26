@@ -37,7 +37,7 @@ public class WolfbriarElemental extends mage.sets.worldwake.WolfbriarElemental {
 
     public WolfbriarElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 225;
+        this.cardNumber = "225";
         this.expansionSetCode = "C14";
     }
 

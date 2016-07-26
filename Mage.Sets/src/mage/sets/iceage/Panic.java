@@ -37,7 +37,7 @@ public class Panic extends mage.sets.masterseditionii.Panic {
 
     public Panic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "ICE";
     }
 

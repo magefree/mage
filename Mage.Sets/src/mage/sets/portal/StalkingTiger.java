@@ -37,7 +37,7 @@ public class StalkingTiger extends mage.sets.tenthedition.StalkingTiger {
 
     public StalkingTiger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "POR";
     }
 

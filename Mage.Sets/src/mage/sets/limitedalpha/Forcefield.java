@@ -37,7 +37,7 @@ public class Forcefield extends mage.sets.mastersedition.Forcefield {
 
     public Forcefield(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 243;
+        this.cardNumber = "243";
         this.expansionSetCode = "LEA";
     }
 

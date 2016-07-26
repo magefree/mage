@@ -37,7 +37,7 @@ public class DirgeOfDread extends mage.sets.onslaught.DirgeOfDread {
 
     public DirgeOfDread(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "C13";
     }
 

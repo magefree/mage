@@ -37,7 +37,7 @@ public class AcademyRuins extends mage.sets.timespiral.AcademyRuins {
 
     public AcademyRuins(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "MMA";
     }
 

@@ -37,7 +37,7 @@ public class TenebTheHarvester extends mage.sets.commander.TenebTheHarvester {
 
     public TenebTheHarvester(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "PLC";
     }
 

@@ -37,7 +37,7 @@ public class TheWretched extends mage.sets.fifthedition.TheWretched {
 
     public TheWretched(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "LEG";
     }
 

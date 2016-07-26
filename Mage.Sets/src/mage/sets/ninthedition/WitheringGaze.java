@@ -38,7 +38,7 @@ public class WitheringGaze extends mage.sets.portal.WitheringGaze {
 
     public WitheringGaze(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "9ED";
     }
 

@@ -1365,7 +1365,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public void setCardNumber(int cid) {
+    public void setCardNumber(String cid) {
         this.cardNumber = cid;
     }
 

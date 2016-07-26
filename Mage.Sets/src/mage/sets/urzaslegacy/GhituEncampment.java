@@ -36,7 +36,7 @@ public class GhituEncampment extends mage.sets.tenthedition.GhituEncampment {
 
     public GhituEncampment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "ULG";
     }
 

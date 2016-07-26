@@ -37,7 +37,7 @@ public class TeeteringPeaks extends mage.sets.zendikar.TeeteringPeaks {
 
     public TeeteringPeaks(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "PD2";
     }
 

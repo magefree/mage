@@ -6,7 +6,7 @@ public class Turnabout extends mage.sets.urzassaga.Turnabout {
     
     public Turnabout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "MBP";
     }
     

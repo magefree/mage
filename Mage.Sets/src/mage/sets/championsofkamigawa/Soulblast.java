@@ -37,7 +37,7 @@ public class Soulblast extends mage.sets.tenthedition.Soulblast {
 
     public Soulblast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "CHK";
     }
 

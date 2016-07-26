@@ -37,7 +37,7 @@ public class ReflectingPool extends mage.sets.tempest.ReflectingPool {
 
     public ReflectingPool(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 210;
+        this.cardNumber = "210";
         this.expansionSetCode = "CNS";
     }
 

@@ -37,7 +37,7 @@ public class StratusWalk extends mage.sets.bornofthegods.StratusWalk {
 
     public StratusWalk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "ORI";
     }
 

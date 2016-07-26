@@ -37,7 +37,7 @@ public class Vitalize extends mage.sets.weatherlight.Vitalize {
 
     public Vitalize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 265;
+        this.cardNumber = "265";
         this.expansionSetCode = "6ED";
     }
 

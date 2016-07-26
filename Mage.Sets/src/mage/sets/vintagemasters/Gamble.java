@@ -37,7 +37,7 @@ public class Gamble extends mage.sets.urzassaga.Gamble {
 
     public Gamble(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "VMA";
     }
 

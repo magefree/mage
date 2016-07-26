@@ -38,7 +38,7 @@ public class MoggSentry extends mage.sets.ninthedition.MoggSentry {
 
     public MoggSentry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 203;
+        this.cardNumber = "203";
         this.expansionSetCode = "8ED";
     }
 

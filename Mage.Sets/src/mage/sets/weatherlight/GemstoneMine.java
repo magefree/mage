@@ -38,7 +38,7 @@ public class GemstoneMine extends mage.sets.timeshifted.GemstoneMine {
 
     public GemstoneMine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "WTH";
         this.rarity = Rarity.UNCOMMON;
     }

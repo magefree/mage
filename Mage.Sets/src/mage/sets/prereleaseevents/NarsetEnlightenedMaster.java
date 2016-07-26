@@ -38,7 +38,7 @@ public class NarsetEnlightenedMaster extends mage.sets.khansoftarkir.NarsetEnlig
 
     public NarsetEnlightenedMaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class OmnathLocusOfMana extends mage.sets.worldwake.OmnathLocusOfMana {
 
     public OmnathLocusOfMana(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "V11";
     }
 

@@ -37,7 +37,7 @@ public class RiftBolt extends mage.sets.timespiral.RiftBolt {
 
     public RiftBolt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "MMA";
     }
 

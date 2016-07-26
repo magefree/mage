@@ -37,7 +37,7 @@ public class Smelt extends mage.sets.magic2013.Smelt {
 
     public Smelt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "M14";
     }
 

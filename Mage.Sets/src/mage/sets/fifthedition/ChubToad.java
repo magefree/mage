@@ -37,7 +37,7 @@ public class ChubToad extends mage.sets.iceage.ChubToad {
 
     public ChubToad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "5ED";
     }
 

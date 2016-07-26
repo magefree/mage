@@ -38,7 +38,7 @@ public class Atog extends mage.sets.mirrodin.Atog {
 
     public Atog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.COMMON;
     }

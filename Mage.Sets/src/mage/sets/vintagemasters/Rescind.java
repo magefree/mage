@@ -37,7 +37,7 @@ public class Rescind extends mage.sets.urzassaga.Rescind {
 
     public Rescind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "VMA";
     }
 

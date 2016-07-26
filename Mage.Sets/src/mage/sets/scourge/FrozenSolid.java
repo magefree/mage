@@ -37,7 +37,7 @@ public class FrozenSolid extends mage.sets.coldsnap.FrozenSolid {
 
     public FrozenSolid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "SCG";
     }
 

@@ -37,7 +37,7 @@ public class Worldslayer extends mage.sets.magic2012.Worldslayer {
 
     public Worldslayer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
+        this.cardNumber = "276";
         this.expansionSetCode = "MRD";
     }
 

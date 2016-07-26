@@ -37,7 +37,7 @@ public class SkullCatapult extends mage.sets.iceage.SkullCatapult {
 
     public SkullCatapult(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 310;
+        this.cardNumber = "310";
         this.expansionSetCode = "6ED";
     }
 

@@ -38,7 +38,7 @@ public class KorFirewalker extends mage.sets.worldwake.KorFirewalker {
 
     public KorFirewalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

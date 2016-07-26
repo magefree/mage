@@ -37,7 +37,7 @@ public class WallOfAir extends mage.sets.tenthedition.WallOfAir {
 
     public WallOfAir(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class FrostBreath extends mage.sets.magic2012.FrostBreath {
 
     public FrostBreath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "M14";
     }
 

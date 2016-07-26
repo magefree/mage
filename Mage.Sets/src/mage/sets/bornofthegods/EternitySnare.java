@@ -38,7 +38,7 @@ public class EternitySnare extends mage.sets.timespiral.EternitySnare {
 
     public EternitySnare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "BNG";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -38,7 +38,7 @@ public class Capsize extends mage.sets.tempest.Capsize {
 
     public Capsize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

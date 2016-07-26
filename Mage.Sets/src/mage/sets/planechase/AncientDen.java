@@ -38,7 +38,7 @@ public class AncientDen extends mage.sets.mirrodin.AncientDen {
 
     public AncientDen (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "HOP";
     }
 

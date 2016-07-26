@@ -38,7 +38,7 @@ public class ImperialRecruiter extends mage.sets.portalthreekingdoms.ImperialRec
 
     public ImperialRecruiter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.RARE;
     }

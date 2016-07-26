@@ -37,7 +37,7 @@ public class Abomination extends mage.sets.legends.Abomination {
 
     public Abomination(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "4ED";
     }
 

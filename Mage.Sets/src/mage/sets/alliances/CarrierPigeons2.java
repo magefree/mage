@@ -37,7 +37,7 @@ public class CarrierPigeons2 extends mage.sets.alliances.CarrierPigeons1 {
 
     public CarrierPigeons2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "ALL";
     }
 

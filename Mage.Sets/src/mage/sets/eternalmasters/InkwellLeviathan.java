@@ -38,7 +38,7 @@ public class InkwellLeviathan extends mage.sets.conflux.InkwellLeviathan {
 
     public InkwellLeviathan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "EMA";
     }
 

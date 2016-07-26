@@ -38,7 +38,7 @@ public class JasmineBoreal extends mage.sets.timeshifted.JasmineBoreal {
 
     public JasmineBoreal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 273;
+        this.cardNumber = "273";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.UNCOMMON;
     }

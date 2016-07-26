@@ -38,7 +38,7 @@ public class Millstone extends mage.sets.fifthedition.Millstone {
 
     public Millstone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.UNCOMMON;
     }

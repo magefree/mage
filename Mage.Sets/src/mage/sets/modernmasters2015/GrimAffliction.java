@@ -37,7 +37,7 @@ public class GrimAffliction extends mage.sets.newphyrexia.GrimAffliction {
 
     public GrimAffliction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "MM2";
     }
 

@@ -38,7 +38,7 @@ public class YoungPyromancer extends mage.sets.magic2014.YoungPyromancer {
 
     public YoungPyromancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "EMA";
     }
 

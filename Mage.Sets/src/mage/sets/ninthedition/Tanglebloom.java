@@ -38,7 +38,7 @@ public class Tanglebloom extends mage.sets.mirrodin.Tanglebloom {
 
     public Tanglebloom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 311;
+        this.cardNumber = "311";
         this.expansionSetCode = "9ED";
         this.rarity = Rarity.UNCOMMON;
     }

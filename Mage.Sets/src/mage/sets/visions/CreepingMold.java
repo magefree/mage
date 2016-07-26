@@ -37,7 +37,7 @@ public class CreepingMold extends mage.sets.tenthedition.CreepingMold {
 
     public CreepingMold(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "VIS";
     }
 

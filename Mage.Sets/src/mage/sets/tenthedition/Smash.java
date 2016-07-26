@@ -37,7 +37,7 @@ public class Smash extends mage.sets.apocalypse.Smash {
 
     public Smash(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 235;
+        this.cardNumber = "235";
         this.expansionSetCode = "10E";
     }
 

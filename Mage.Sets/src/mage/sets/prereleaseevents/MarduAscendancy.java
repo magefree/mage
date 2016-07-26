@@ -38,7 +38,7 @@ public class MarduAscendancy extends mage.sets.khansoftarkir.MarduAscendancy {
 
     public MarduAscendancy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

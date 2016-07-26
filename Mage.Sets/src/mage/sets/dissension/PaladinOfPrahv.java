@@ -37,7 +37,7 @@ public class PaladinOfPrahv extends mage.sets.knightsvsdragons.PaladinOfPrahv {
 
     public PaladinOfPrahv(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "DIS";
     }
 

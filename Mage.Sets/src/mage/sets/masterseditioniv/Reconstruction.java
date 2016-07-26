@@ -37,7 +37,7 @@ public class Reconstruction extends mage.sets.antiquities.Reconstruction {
 
     public Reconstruction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "ME4";
     }
 

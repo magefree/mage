@@ -37,7 +37,7 @@ public class EchoMage extends mage.sets.riseoftheeldrazi.EchoMage {
 
     public EchoMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class MistveinBorderpost extends mage.sets.alarareborn.MistveinBorderpost
 
     public MistveinBorderpost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "ARC";
     }
 

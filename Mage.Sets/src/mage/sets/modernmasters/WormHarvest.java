@@ -38,7 +38,7 @@ public class WormHarvest extends mage.sets.eventide.WormHarvest {
 
     public WormHarvest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.UNCOMMON;
     }

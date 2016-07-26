@@ -38,7 +38,7 @@ public class AuriokSalvagers extends mage.sets.modernmasters.AuriokSalvagers {
 
     public AuriokSalvagers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "5DN";
         this.rarity = Rarity.UNCOMMON;
     }

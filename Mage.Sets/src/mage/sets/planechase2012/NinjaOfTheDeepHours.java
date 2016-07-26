@@ -37,7 +37,7 @@ public class NinjaOfTheDeepHours extends mage.sets.betrayersofkamigawa.NinjaOfTh
 
     public NinjaOfTheDeepHours(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "PC2";
     }
 

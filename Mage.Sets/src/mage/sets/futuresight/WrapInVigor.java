@@ -37,7 +37,7 @@ public class WrapInVigor extends mage.sets.conspiracy.WrapInVigor {
 
     public WrapInVigor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "FUT";
     }
 

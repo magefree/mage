@@ -37,7 +37,7 @@ public class WallOfBone extends mage.sets.magic2010.WallOfBone {
 
     public WallOfBone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "7ED";
     }
 

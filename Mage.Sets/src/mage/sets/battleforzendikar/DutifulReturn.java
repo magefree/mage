@@ -37,7 +37,7 @@ public class DutifulReturn extends mage.sets.khansoftarkir.DutifulReturn {
 
     public DutifulReturn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "BFZ";
     }
 

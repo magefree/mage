@@ -38,7 +38,7 @@ public class EvilPresence extends mage.sets.newphyrexia.EvilPresence {
 
     public EvilPresence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "2ED";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class RatsOfRath extends mage.sets.tempest.RatsOfRath {
 
     public RatsOfRath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "TPR";
     }
 

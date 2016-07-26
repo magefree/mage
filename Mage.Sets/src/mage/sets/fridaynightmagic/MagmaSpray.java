@@ -38,7 +38,7 @@ public class MagmaSpray extends mage.sets.shardsofalara.MagmaSpray {
 
     public MagmaSpray(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

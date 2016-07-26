@@ -57,7 +57,7 @@ public class MtgImageSource implements CardImageSource {
 
     @Override
     public String generateURL(CardDownloadData card) throws Exception {
-        Integer collectorId = card.getCollectorId();
+        String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);

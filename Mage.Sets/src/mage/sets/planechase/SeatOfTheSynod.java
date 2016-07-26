@@ -38,7 +38,7 @@ public class SeatOfTheSynod extends mage.sets.mirrodin.SeatOfTheSynod {
 
     public SeatOfTheSynod (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "HOP";
     }
 

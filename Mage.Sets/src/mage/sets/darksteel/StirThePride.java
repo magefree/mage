@@ -37,7 +37,7 @@ public class StirThePride extends mage.sets.modernmasters.StirThePride {
 
     public StirThePride(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "DST";
     }
 

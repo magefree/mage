@@ -37,7 +37,7 @@ public class FolkOfThePines extends mage.sets.masterseditionii.FolkOfThePines {
 
     public FolkOfThePines(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "ICE";
     }
 

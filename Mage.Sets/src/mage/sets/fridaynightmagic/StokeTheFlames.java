@@ -37,7 +37,7 @@ public class StokeTheFlames extends mage.sets.magic2015.StokeTheFlames {
 
     public StokeTheFlames(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "FNMP";
     }
 

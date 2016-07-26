@@ -37,7 +37,7 @@ public class MightOfOaks extends mage.sets.magic2010.MightOfOaks {
 
     public MightOfOaks(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 265;
+        this.cardNumber = "265";
         this.expansionSetCode = "8ED";
     }
 

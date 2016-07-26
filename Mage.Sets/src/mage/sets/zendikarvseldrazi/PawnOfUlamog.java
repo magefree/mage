@@ -37,7 +37,7 @@ public class PawnOfUlamog extends mage.sets.riseoftheeldrazi.PawnOfUlamog {
 
     public PawnOfUlamog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "DDP";
     }
 

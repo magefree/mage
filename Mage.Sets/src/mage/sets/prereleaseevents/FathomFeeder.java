@@ -37,7 +37,7 @@ public class FathomFeeder extends mage.sets.battleforzendikar.FathomFeeder {
 
     public FathomFeeder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 261;
+        this.cardNumber = "261";
         this.expansionSetCode = "PTC";
     }
 

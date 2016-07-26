@@ -37,7 +37,7 @@ public class RootwaterDepths extends mage.sets.tempest.RootwaterDepths {
 
     public RootwaterDepths(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 241;
+        this.cardNumber = "241";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class VoltaicKey extends mage.sets.magic2011.VoltaicKey {
 
     public VoltaicKey(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 314;
+        this.cardNumber = "314";
         this.expansionSetCode = "USG";
     }
 

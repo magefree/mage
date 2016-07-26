@@ -37,7 +37,7 @@ public class KatakiWarsWage extends mage.sets.saviorsofkamigawa.KatakiWarsWage {
 
     public KatakiWarsWage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "MMA";
     }
 

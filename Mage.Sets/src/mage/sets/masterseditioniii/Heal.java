@@ -37,7 +37,7 @@ public class Heal extends mage.sets.iceage.Heal {
 
     public Heal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "ME3";
     }
 

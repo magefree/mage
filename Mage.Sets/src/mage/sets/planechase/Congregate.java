@@ -37,7 +37,7 @@ public class Congregate extends mage.sets.urzassaga.Congregate {
 
     public Congregate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "HOP";
     }
 

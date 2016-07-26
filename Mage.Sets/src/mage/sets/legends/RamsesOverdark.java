@@ -38,7 +38,7 @@ public class RamsesOverdark extends mage.sets.masterseditioniii.RamsesOverdark {
 
     public RamsesOverdark(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 292;
+        this.cardNumber = "292";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.RARE;
     }

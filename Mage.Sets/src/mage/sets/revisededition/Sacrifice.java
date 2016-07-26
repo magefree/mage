@@ -37,7 +37,7 @@ public class Sacrifice extends mage.sets.unlimitededition.Sacrifice {
 
     public Sacrifice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "3ED";
     }
 

@@ -37,7 +37,7 @@ public class DropOfHoney extends mage.sets.arabiannights.DropOfHoney {
 
     public DropOfHoney(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "ME4";
     }
 

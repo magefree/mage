@@ -6,7 +6,7 @@ public class HamletbackGoliath extends mage.sets.lorwyn.HamletbackGoliath {
     
     public HamletbackGoliath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "MBP";
     }
     

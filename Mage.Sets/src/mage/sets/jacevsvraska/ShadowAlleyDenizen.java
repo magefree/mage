@@ -37,7 +37,7 @@ public class ShadowAlleyDenizen extends mage.sets.gatecrash.ShadowAlleyDenizen {
 
     public ShadowAlleyDenizen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "DDM";
     }
 

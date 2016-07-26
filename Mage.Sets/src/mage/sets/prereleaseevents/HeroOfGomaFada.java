@@ -37,7 +37,7 @@ public class HeroOfGomaFada extends mage.sets.battleforzendikar.HeroOfGomaFada {
 
     public HeroOfGomaFada(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
+        this.cardNumber = "269";
         this.expansionSetCode = "PTC";
     }
 

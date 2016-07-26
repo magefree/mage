@@ -37,7 +37,7 @@ public class JadeMage extends mage.sets.magic2012.JadeMage {
 
     public JadeMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "C13";
     }
 

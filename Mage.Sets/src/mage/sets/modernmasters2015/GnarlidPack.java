@@ -37,7 +37,7 @@ public class GnarlidPack extends mage.sets.worldwake.GnarlidPack {
 
     public GnarlidPack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "MM2";
     }
 

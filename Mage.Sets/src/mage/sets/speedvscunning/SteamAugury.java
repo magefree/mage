@@ -37,7 +37,7 @@ public class SteamAugury extends mage.sets.theros.SteamAugury {
 
     public SteamAugury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "DDN";
     }
 

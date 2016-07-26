@@ -37,7 +37,7 @@ public class ChandrasIgnition extends mage.sets.magicorigins.ChandrasIgnition {
 
     public ChandrasIgnition(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 200;
+        this.cardNumber = "200";
         this.expansionSetCode = "PTC";
     }
 

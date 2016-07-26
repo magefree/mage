@@ -37,7 +37,7 @@ public class Anathemancer extends mage.sets.alarareborn.Anathemancer {
 
     public Anathemancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "FNMP";
     }
 

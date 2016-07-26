@@ -38,7 +38,7 @@ public class NightSoil extends mage.sets.fallenempires.NightSoil1 {
 
     public NightSoil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.UNCOMMON;
     }

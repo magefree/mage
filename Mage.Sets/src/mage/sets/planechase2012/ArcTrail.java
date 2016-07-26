@@ -38,7 +38,7 @@ public class ArcTrail extends mage.sets.scarsofmirrodin.ArcTrail {
 
     public ArcTrail (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "PC2";
     }
 

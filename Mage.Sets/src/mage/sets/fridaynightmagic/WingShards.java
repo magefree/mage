@@ -37,7 +37,7 @@ public class WingShards extends mage.sets.scourge.WingShards {
 
     public WingShards(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "FNMP";
     }
 

@@ -37,7 +37,7 @@ public class GiantSpider extends mage.sets.tenthedition.GiantSpider {
 
     public GiantSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "POR";
     }
 

@@ -37,7 +37,7 @@ public class IntoTheRoil extends mage.sets.zendikar.IntoTheRoil {
 
     public IntoTheRoil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "DDM";
     }
 

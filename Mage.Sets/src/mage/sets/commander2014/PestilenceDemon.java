@@ -37,7 +37,7 @@ public class PestilenceDemon extends mage.sets.riseoftheeldrazi.PestilenceDemon 
 
     public PestilenceDemon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "C14";
     }
 

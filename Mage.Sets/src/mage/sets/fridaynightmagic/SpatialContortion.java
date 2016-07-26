@@ -37,7 +37,7 @@ public class SpatialContortion extends mage.sets.oathofthegatewatch.SpatialConto
 
     public SpatialContortion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 194;
+        this.cardNumber = "194";
         this.expansionSetCode = "FNMP";
     }
 

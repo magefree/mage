@@ -37,7 +37,7 @@ public class SunriseSovereign extends mage.sets.lorwyn.SunriseSovereign {
 
     public SunriseSovereign(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "C15";
     }
 

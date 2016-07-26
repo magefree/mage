@@ -37,7 +37,7 @@ public class CoastalHornclaw extends mage.sets.prophecy.CoastalHornclaw {
 
     public CoastalHornclaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "8ED";
     }
 

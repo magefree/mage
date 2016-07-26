@@ -38,7 +38,7 @@ public class SunkenCity extends mage.sets.mastersedition.SunkenCity {
 
     public SunkenCity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.COMMON;
     }

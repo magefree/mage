@@ -38,7 +38,7 @@ public class Gleancrawler extends mage.sets.prereleaseevents.Gleancrawler {
 
     public Gleancrawler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "DDJ";
         this.rarity = Rarity.RARE;
     }

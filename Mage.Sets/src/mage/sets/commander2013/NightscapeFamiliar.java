@@ -37,7 +37,7 @@ public class NightscapeFamiliar extends mage.sets.planeshift.NightscapeFamiliar 
 
     public NightscapeFamiliar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "C13";
     }
 

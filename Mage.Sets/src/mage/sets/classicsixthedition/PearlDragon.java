@@ -37,7 +37,7 @@ public class PearlDragon extends mage.sets.mirage.PearlDragon {
 
     public PearlDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "6ED";
     }
 

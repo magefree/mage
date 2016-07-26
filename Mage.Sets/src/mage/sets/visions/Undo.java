@@ -38,7 +38,7 @@ public class Undo extends mage.sets.starter1999.Undo {
 
     public Undo(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "VIS";
         this.rarity = Rarity.COMMON;
     }

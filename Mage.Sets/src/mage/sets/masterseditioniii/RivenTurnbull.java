@@ -37,7 +37,7 @@ public class RivenTurnbull extends mage.sets.legends.RivenTurnbull {
 
     public RivenTurnbull(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 171;
+        this.cardNumber = "171";
         this.expansionSetCode = "ME3";
     }
 

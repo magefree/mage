@@ -37,7 +37,7 @@ public class StormbloodBerserker extends mage.sets.magic2012.StormbloodBerserker
 
     public StormbloodBerserker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "MM2";
     }
 

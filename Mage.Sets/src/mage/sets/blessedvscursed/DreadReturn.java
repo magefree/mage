@@ -37,7 +37,7 @@ public class DreadReturn extends mage.sets.timespiral.DreadReturn {
 
     public DreadReturn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "DDQ";
     }
 

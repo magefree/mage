@@ -38,7 +38,7 @@ public class LowlandBasilisk extends mage.sets.tempestremastered.LowlandBasilisk
 
     public LowlandBasilisk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "STH";
         this.rarity = Rarity.COMMON;
     }

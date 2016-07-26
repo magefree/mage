@@ -37,7 +37,7 @@ public class MageSlayer extends mage.sets.alarareborn.MageSlayer {
 
     public MageSlayer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "HOP";
     }
 

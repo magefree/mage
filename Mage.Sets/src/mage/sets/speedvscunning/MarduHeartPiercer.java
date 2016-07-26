@@ -37,7 +37,7 @@ public class MarduHeartPiercer extends mage.sets.khansoftarkir.MarduHeartPiercer
 
     public MarduHeartPiercer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "DDN";
     }
 

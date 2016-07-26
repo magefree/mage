@@ -38,7 +38,7 @@ public class SidarJabari extends mage.sets.mirage.SidarJabari {
 
     public SidarJabari(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

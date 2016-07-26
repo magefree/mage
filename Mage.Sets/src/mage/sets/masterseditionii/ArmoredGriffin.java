@@ -38,7 +38,7 @@ public class ArmoredGriffin extends mage.sets.planechase2012.ArmoredGriffin {
 
     public ArmoredGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class SoulShred extends mage.sets.masterseditioniv.SoulShred {
 
     public SoulShred(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "POR";
     }
 

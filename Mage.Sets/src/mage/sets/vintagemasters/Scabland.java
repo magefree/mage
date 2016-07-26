@@ -38,7 +38,7 @@ public class Scabland extends mage.sets.tempest.Scabland {
 
     public Scabland(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 312;
+        this.cardNumber = "312";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class SoltariGuerrillas extends mage.sets.tempest.SoltariGuerrillas {
 
     public SoltariGuerrillas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "TPR";
     }
 

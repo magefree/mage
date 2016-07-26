@@ -37,7 +37,7 @@ public class HuaTuoHonoredPhysician extends mage.sets.commander2013.HuaTuoHonore
 
     public HuaTuoHonoredPhysician(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "PTK";
     }
 

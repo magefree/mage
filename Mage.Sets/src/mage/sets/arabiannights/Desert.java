@@ -38,7 +38,7 @@ public class Desert extends mage.sets.timeshifted.Desert {
 
     public Desert(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "ARN";
         this.rarity = Rarity.COMMON;
     }

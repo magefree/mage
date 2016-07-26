@@ -38,7 +38,7 @@ public class Larceny extends mage.sets.mercadianmasques.Larceny {
 
     public Larceny(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.RARE;
     }

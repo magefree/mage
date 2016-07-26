@@ -38,7 +38,7 @@ public class WurmcoilEngine extends mage.sets.scarsofmirrodin.WurmcoilEngine {
 
     public WurmcoilEngine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class HonorGuard extends mage.sets.tenthedition.HonorGuard {
 
     public HonorGuard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "STH";
     }
 

@@ -37,7 +37,7 @@ public class TawnossCoffin extends mage.sets.antiquities.TawnossCoffin {
 
     public TawnossCoffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "MED";
     }
 

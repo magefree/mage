@@ -37,7 +37,7 @@ public class ThalakosLowlands extends mage.sets.tempest.ThalakosLowlands {
 
     public ThalakosLowlands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 246;
+        this.cardNumber = "246";
         this.expansionSetCode = "TPR";
     }
 

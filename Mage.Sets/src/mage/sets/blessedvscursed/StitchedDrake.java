@@ -37,7 +37,7 @@ public class StitchedDrake extends mage.sets.innistrad.StitchedDrake {
 
     public StitchedDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "DDQ";
     }
 

@@ -38,7 +38,7 @@ public class ManaTithe extends mage.sets.planarchaos.ManaTithe {
 
     public ManaTithe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

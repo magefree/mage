@@ -37,7 +37,7 @@ public class TaintedField extends mage.sets.torment.TaintedField {
 
     public TaintedField(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 311;
+        this.cardNumber = "311";
         this.expansionSetCode = "C15";
     }
 

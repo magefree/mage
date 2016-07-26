@@ -37,7 +37,7 @@ public class BruteForce extends mage.sets.planarchaos.BruteForce {
 
     public BruteForce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "MMA";
     }
 

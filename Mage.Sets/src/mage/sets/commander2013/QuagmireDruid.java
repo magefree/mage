@@ -37,7 +37,7 @@ public class QuagmireDruid extends mage.sets.apocalypse.QuagmireDruid {
 
     public QuagmireDruid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "C13";
     }
 

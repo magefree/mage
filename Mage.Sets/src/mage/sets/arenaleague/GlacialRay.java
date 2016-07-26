@@ -37,7 +37,7 @@ public class GlacialRay extends mage.sets.modernmasters.GlacialRay {
 
     public GlacialRay(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "ARENA";
     }
 

@@ -37,7 +37,7 @@ public class LotusBloom extends mage.sets.timespiral.LotusBloom {
 
     public LotusBloom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "MMA";
     }
 

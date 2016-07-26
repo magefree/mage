@@ -37,7 +37,7 @@ public class Dissolve extends mage.sets.theros.Dissolve {
 
     public Dissolve(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "FNMP";
     }
 

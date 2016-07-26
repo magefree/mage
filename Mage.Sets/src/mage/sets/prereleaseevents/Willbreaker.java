@@ -37,7 +37,7 @@ public class Willbreaker extends mage.sets.magicorigins.Willbreaker {
 
     public Willbreaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "PTC";
     }
 

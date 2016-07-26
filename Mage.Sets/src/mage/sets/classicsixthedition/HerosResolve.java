@@ -37,7 +37,7 @@ public class HerosResolve extends mage.sets.tempest.HerosResolve {
 
     public HerosResolve(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "6ED";
     }
 

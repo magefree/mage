@@ -37,7 +37,7 @@ public class BrilliantPlan extends mage.sets.commander2013.BrilliantPlan {
 
     public BrilliantPlan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "PTK";
     }
 

@@ -37,7 +37,7 @@ public class Cancel extends mage.sets.tenthedition.Cancel {
 
     public Cancel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "TSP";
     }
 

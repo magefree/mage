@@ -37,7 +37,7 @@ public class MischievousPoltergeist extends mage.sets.weatherlight.MischievousPo
 
     public MischievousPoltergeist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "6ED";
     }
 

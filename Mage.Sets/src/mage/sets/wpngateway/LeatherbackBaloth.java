@@ -38,7 +38,7 @@ public class LeatherbackBaloth extends mage.sets.worldwake.LeatherbackBaloth {
 
     public LeatherbackBaloth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

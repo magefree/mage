@@ -38,7 +38,7 @@ public class CennsTactician extends mage.sets.morningtide.CennsTactician {
 
     public CennsTactician(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -38,7 +38,7 @@ public class CurseOfWizardry extends mage.sets.riseoftheeldrazi.CurseOfWizardry 
 
     public CurseOfWizardry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

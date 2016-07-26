@@ -37,7 +37,7 @@ public class RelicCrush extends mage.sets.zendikar.RelicCrush {
 
     public RelicCrush(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "CMD";
     }
 

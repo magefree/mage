@@ -37,7 +37,7 @@ public class MyrSuperion extends mage.sets.newphyrexia.MyrSuperion {
 
     public MyrSuperion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "MGDC";
     }
 

@@ -37,7 +37,7 @@ public class RoguesPassage extends mage.sets.returntoravnica.RoguesPassage {
 
     public RoguesPassage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "DDM";
     }
 

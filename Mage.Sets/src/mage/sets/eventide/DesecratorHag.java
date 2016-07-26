@@ -38,7 +38,7 @@ public class DesecratorHag extends mage.sets.commander.DesecratorHag {
 
     public DesecratorHag(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "EVE";
     }
 

@@ -38,7 +38,7 @@ public class GroveOfTheBurnwillows extends mage.sets.futuresight.GroveOfTheBurnw
 
     public GroveOfTheBurnwillows(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

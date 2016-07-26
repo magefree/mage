@@ -37,7 +37,7 @@ public class GriffinSentinel extends mage.sets.magic2010.GriffinSentinel {
 
     public GriffinSentinel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "M12";
     }
 

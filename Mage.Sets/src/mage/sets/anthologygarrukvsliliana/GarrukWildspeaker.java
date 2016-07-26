@@ -37,7 +37,7 @@ public class GarrukWildspeaker extends mage.sets.magic2010.GarrukWildspeaker {
 
     public GarrukWildspeaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DD3GVL";
     }
 

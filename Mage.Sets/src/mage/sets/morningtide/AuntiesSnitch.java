@@ -38,7 +38,7 @@ public class AuntiesSnitch extends mage.sets.modernmasters.AuntiesSnitch {
 
     public AuntiesSnitch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "MOR";
         this.rarity = Rarity.RARE;
     }

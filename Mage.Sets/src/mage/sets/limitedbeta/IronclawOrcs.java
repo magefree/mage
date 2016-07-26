@@ -37,7 +37,7 @@ public class IronclawOrcs extends mage.sets.limitedalpha.IronclawOrcs {
 
     public IronclawOrcs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "LEB";
     }
 

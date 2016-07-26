@@ -37,7 +37,7 @@ public class VedalkenPlotter extends mage.sets.guildpact.VedalkenPlotter {
 
     public VedalkenPlotter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "CMD";
     }
 

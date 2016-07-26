@@ -37,7 +37,7 @@ public class Annihilate extends mage.sets.invasion.Annihilate {
 
     public Annihilate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "C14";
     }
 

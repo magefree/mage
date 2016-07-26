@@ -37,7 +37,7 @@ public class EarthElemental extends mage.sets.tenthedition.EarthElemental {
 
     public EarthElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "LEA";
     }
 

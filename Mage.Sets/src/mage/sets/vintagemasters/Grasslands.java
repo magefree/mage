@@ -37,7 +37,7 @@ public class Grasslands extends mage.sets.knightsvsdragons.Grasslands {
 
     public Grasslands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 299;
+        this.cardNumber = "299";
         this.expansionSetCode = "VMA";
     }
 

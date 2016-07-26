@@ -37,7 +37,7 @@ public class ElspethSunsChampion extends mage.sets.theros.ElspethSunsChampion {
 
     public ElspethSunsChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DDO";
     }
 

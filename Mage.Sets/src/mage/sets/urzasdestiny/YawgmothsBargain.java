@@ -38,7 +38,7 @@ public class YawgmothsBargain extends mage.sets.vintagemasters.YawgmothsBargain 
 
     public YawgmothsBargain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "UDS";
         this.rarity = Rarity.RARE;
     }

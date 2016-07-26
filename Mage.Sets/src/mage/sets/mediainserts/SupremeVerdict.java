@@ -6,7 +6,7 @@ public class SupremeVerdict extends mage.sets.returntoravnica.SupremeVerdict {
     
     public SupremeVerdict(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "MBP";
     }
     

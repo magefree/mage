@@ -38,7 +38,7 @@ public class XathridNecromancer extends mage.sets.magic2014.XathridNecromancer {
 
     public XathridNecromancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

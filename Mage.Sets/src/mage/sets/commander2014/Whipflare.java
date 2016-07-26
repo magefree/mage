@@ -37,7 +37,7 @@ public class Whipflare extends mage.sets.newphyrexia.Whipflare {
 
     public Whipflare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "C14";
     }
 

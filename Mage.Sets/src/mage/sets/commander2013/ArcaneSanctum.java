@@ -37,7 +37,7 @@ public class ArcaneSanctum extends mage.sets.shardsofalara.ArcaneSanctum {
 
     public ArcaneSanctum(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 273;
+        this.cardNumber = "273";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class ViciousHunger extends mage.sets.nemesis.ViciousHunger {
 
     public ViciousHunger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDD";
     }
 

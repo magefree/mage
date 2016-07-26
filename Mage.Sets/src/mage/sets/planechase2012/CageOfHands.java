@@ -37,7 +37,7 @@ public class CageOfHands extends mage.sets.championsofkamigawa.CageOfHands {
 
     public CageOfHands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "PC2";
     }
 

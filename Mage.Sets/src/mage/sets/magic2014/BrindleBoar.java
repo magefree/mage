@@ -37,7 +37,7 @@ public class BrindleBoar extends mage.sets.magic2011.BrindleBoar {
 
     public BrindleBoar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "M14";
     }
 

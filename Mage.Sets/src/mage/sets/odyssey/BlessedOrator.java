@@ -37,7 +37,7 @@ public class BlessedOrator extends mage.sets.ninthedition.BlessedOrator {
 
     public BlessedOrator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "ODY";
     }
 

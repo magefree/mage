@@ -38,7 +38,7 @@ public class LastBreath extends mage.sets.shadowmoor.LastBreath {
 
     public LastBreath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "MMQ";
         this.rarity = Rarity.UNCOMMON;
     }

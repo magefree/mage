@@ -38,7 +38,7 @@ public class GuerrillaTactics1 extends mage.sets.ninthedition.GuerrillaTactics {
 
     public GuerrillaTactics1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "ALL";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class Enslave extends mage.sets.newphyrexia.Enslave {
 
     public Enslave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "PLC";
     }
 

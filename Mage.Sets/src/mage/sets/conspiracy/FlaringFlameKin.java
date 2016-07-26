@@ -37,7 +37,7 @@ public class FlaringFlameKin extends mage.sets.dissension.FlaringFlameKin {
 
     public FlaringFlameKin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "CNS";
     }
 

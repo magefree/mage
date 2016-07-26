@@ -37,7 +37,7 @@ public class CorruptEunuchs extends mage.sets.masterseditioniii.CorruptEunuchs {
 
     public CorruptEunuchs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "PTK";
     }
 

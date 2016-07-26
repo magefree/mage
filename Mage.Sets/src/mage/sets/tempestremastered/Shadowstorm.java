@@ -37,7 +37,7 @@ public class Shadowstorm extends mage.sets.tempest.Shadowstorm {
 
     public Shadowstorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "TPR";
     }
 

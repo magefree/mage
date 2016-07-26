@@ -37,7 +37,7 @@ public class StingerflingSpider extends mage.sets.magic2012.StingerflingSpider {
 
     public StingerflingSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 203;
+        this.cardNumber = "203";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class BeastmasterAscension extends mage.sets.zendikar.BeastmasterAscensio
 
     public BeastmasterAscension(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 176;
+        this.cardNumber = "176";
         this.expansionSetCode = "C15";
     }
 

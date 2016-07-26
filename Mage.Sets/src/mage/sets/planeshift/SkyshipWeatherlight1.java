@@ -33,10 +33,10 @@ import mage.util.CardUtil;
  *
  * @author nick.myers
  */
-public class SkyshipWeatherlight extends CardImpl {
+public class SkyshipWeatherlight1 extends CardImpl {
 
-    public SkyshipWeatherlight(UUID ownerId) {
-        super(ownerId, 133, "Skyship Weatherlight", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
+    public SkyshipWeatherlight1(UUID ownerId) {
+        super(ownerId, "133a", "Skyship Weatherlight", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "PLS";
         this.supertype.add("Legendary");
 
@@ -49,13 +49,13 @@ public class SkyshipWeatherlight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkyshipWeatherlight(final SkyshipWeatherlight card) {
+    public SkyshipWeatherlight1(final SkyshipWeatherlight1 card) {
         super(card);
     }
 
     @Override
-    public SkyshipWeatherlight copy() {
-        return new SkyshipWeatherlight(this);
+    public SkyshipWeatherlight1 copy() {
+        return new SkyshipWeatherlight1(this);
     }
 
 }

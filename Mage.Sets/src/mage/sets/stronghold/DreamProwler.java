@@ -38,7 +38,7 @@ public class DreamProwler extends mage.sets.tempestremastered.DreamProwler {
 
     public DreamProwler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "STH";
         this.rarity = Rarity.COMMON;
     }

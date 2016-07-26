@@ -37,7 +37,7 @@ public class BattlegraceAngel extends mage.sets.shardsofalara.BattlegraceAngel {
 
     public BattlegraceAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "MM2";
     }
 

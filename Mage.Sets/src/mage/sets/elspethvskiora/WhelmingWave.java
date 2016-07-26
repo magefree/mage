@@ -37,7 +37,7 @@ public class WhelmingWave extends mage.sets.bornofthegods.WhelmingWave {
 
     public WhelmingWave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "DDO";
     }
 

@@ -37,7 +37,7 @@ public class RodOfRuin extends mage.sets.tenthedition.RodOfRuin {
 
     public RodOfRuin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 309;
+        this.cardNumber = "309";
         this.expansionSetCode = "6ED";
     }
 

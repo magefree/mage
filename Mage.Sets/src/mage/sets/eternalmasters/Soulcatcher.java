@@ -38,7 +38,7 @@ public class Soulcatcher extends mage.sets.odyssey.Soulcatcher {
 
     public Soulcatcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "EMA";
     }
 

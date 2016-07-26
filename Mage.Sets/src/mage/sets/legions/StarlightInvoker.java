@@ -38,7 +38,7 @@ public class StarlightInvoker extends mage.sets.tenthedition.StarlightInvoker {
 
     public StarlightInvoker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "LGN";
         this.rarity = Rarity.COMMON;
     }

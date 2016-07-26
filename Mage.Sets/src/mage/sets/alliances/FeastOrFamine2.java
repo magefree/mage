@@ -37,7 +37,7 @@ public class FeastOrFamine2 extends mage.sets.izzetvsgolgari.FeastOrFamine {
 
     public FeastOrFamine2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "ALL";
     }
 

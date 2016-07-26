@@ -37,7 +37,7 @@ public class SlithStrider extends mage.sets.mirrodin.SlithStrider {
 
     public SlithStrider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "DDI";
     }
 

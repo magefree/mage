@@ -37,7 +37,7 @@ public class BoneSplinters extends mage.sets.shardsofalara.BoneSplinters {
 
     public BoneSplinters(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "DDN";
     }
 

@@ -37,7 +37,7 @@ public class TormentedThoughts extends mage.sets.journeyintonyx.TormentedThought
 
     public TormentedThoughts(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "ORI";
     }
 

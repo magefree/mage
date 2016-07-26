@@ -37,7 +37,7 @@ public class ArmoredAscension extends mage.sets.magic2010.ArmoredAscension {
 
     public ArmoredAscension(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "SHM";
     }
 

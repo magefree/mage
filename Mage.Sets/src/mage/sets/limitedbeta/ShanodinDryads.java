@@ -37,7 +37,7 @@ public class ShanodinDryads extends mage.sets.fifthedition.ShanodinDryads {
 
     public ShanodinDryads(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "LEB";
     }
 

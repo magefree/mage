@@ -37,7 +37,7 @@ public class JungleShrine extends mage.sets.shardsofalara.JungleShrine {
 
     public JungleShrine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "DDH";
     }
 

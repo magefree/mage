@@ -38,7 +38,7 @@ public class BattleScreech extends mage.sets.judgment.BattleScreech {
 
     public BattleScreech(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

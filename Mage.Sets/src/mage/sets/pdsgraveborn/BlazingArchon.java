@@ -37,7 +37,7 @@ public class BlazingArchon extends mage.sets.ravnica.BlazingArchon {
 
     public BlazingArchon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "PD3";
     }
 

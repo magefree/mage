@@ -37,7 +37,7 @@ public class TradeRoutes extends mage.sets.ninthedition.TradeRoutes {
 
     public TradeRoutes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "MMQ";
     }
 

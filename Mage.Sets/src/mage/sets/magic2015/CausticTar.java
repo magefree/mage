@@ -37,7 +37,7 @@ public class CausticTar extends mage.sets.odyssey.CausticTar {
 
     public CausticTar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "M15";
     }
 

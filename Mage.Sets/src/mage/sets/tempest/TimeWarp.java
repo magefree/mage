@@ -38,7 +38,7 @@ public class TimeWarp extends mage.sets.magic2010.TimeWarp {
 
     public TimeWarp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "TMP";
         this.rarity = Rarity.RARE;
     }

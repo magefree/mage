@@ -37,7 +37,7 @@ public class SphereOfResistance extends mage.sets.exodus.SphereOfResistance {
 
     public SphereOfResistance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 284;
+        this.cardNumber = "284";
         this.expansionSetCode = "VMA";
     }
 

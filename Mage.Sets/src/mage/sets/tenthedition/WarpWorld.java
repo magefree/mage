@@ -37,7 +37,7 @@ public class WarpWorld extends mage.sets.magic2010.WarpWorld {
 
     public WarpWorld(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 248;
+        this.cardNumber = "248";
         this.expansionSetCode = "10E";
     }
 

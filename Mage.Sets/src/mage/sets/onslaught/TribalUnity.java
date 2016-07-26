@@ -37,7 +37,7 @@ public class TribalUnity extends mage.sets.planechase.TribalUnity {
 
     public TribalUnity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 294;
+        this.cardNumber = "294";
         this.expansionSetCode = "ONS";
     }
 

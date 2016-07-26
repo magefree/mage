@@ -37,7 +37,7 @@ public class FurnaceCelebration extends mage.sets.scarsofmirrodin.FurnaceCelebra
 
     public FurnaceCelebration(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "C13";
     }
 

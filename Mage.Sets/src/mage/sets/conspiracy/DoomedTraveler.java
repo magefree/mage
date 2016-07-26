@@ -37,7 +37,7 @@ public class DoomedTraveler extends mage.sets.innistrad.DoomedTraveler {
 
     public DoomedTraveler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "CNS";
     }
 

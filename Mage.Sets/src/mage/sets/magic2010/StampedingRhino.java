@@ -38,7 +38,7 @@ public class StampedingRhino extends mage.sets.magic2012.StampedingRhino {
 
     public StampedingRhino (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "M10";
     }
 

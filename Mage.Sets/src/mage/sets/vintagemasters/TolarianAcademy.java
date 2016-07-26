@@ -38,7 +38,7 @@ public class TolarianAcademy extends mage.sets.urzassaga.TolarianAcademy {
 
     public TolarianAcademy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 319;
+        this.cardNumber = "319";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.MYTHIC;
     }

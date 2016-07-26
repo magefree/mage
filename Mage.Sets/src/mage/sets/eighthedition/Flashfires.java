@@ -37,7 +37,7 @@ public class Flashfires extends mage.sets.fifthedition.Flashfires {
 
     public Flashfires(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = "186";
         this.expansionSetCode = "8ED";
     }
 

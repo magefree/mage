@@ -38,7 +38,7 @@ public class AzureDrake extends mage.sets.magic2011.AzureDrake {
 
     public AzureDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "CHR";
         this.rarity = Rarity.UNCOMMON;
     }

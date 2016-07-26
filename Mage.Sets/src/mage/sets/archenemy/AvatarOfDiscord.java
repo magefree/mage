@@ -37,7 +37,7 @@ public class AvatarOfDiscord extends mage.sets.dissension.AvatarOfDiscord {
 
     public AvatarOfDiscord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "ARC";
     }
 

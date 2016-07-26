@@ -37,7 +37,7 @@ public class ElderMastery extends mage.sets.conflux.ElderMastery {
 
     public ElderMastery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "DDH";
     }
 

@@ -6,7 +6,7 @@ public class KnightExemplar extends mage.sets.magic2011.KnightExemplar {
     
     public KnightExemplar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "MBP";
     }
     

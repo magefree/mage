@@ -37,7 +37,7 @@ public class Pariah extends mage.sets.urzassaga.Pariah {
 
     public Pariah(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "10E";
     }
 

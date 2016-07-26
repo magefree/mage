@@ -37,7 +37,7 @@ public class VinesOfVastwood extends mage.sets.zendikar.VinesOfVastwood {
 
     public VinesOfVastwood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "MM2";
     }
 

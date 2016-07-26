@@ -38,7 +38,7 @@ public class LandTax extends mage.sets.legends.LandTax {
 
     public LandTax(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 284;
+        this.cardNumber = "284";
         this.expansionSetCode = "4ED";
         this.rarity = Rarity.RARE;
     }

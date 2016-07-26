@@ -37,7 +37,7 @@ public class LoxodonHierarch extends mage.sets.ravnica.LoxodonHierarch {
 
     public LoxodonHierarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "DDH";
     }
 

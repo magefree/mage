@@ -37,7 +37,7 @@ public class AngusMackenzie extends mage.sets.legends.AngusMackenzie {
 
     public AngusMackenzie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "ME3";
     }
 

@@ -37,7 +37,7 @@ public class PallidMycoderm extends mage.sets.planarchaos.PallidMycoderm {
 
     public PallidMycoderm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "MMA";
     }
 

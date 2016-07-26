@@ -38,7 +38,7 @@ public class Morphling extends mage.sets.urzassaga.Morphling {
 
     public Morphling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.MYTHIC;
     }

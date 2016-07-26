@@ -37,7 +37,7 @@ public class ElvishPiper extends mage.sets.magic2010.ElvishPiper {
 
     public ElvishPiper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "9ED";
     }
 

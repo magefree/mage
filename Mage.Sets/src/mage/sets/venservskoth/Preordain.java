@@ -37,7 +37,7 @@ public class Preordain extends mage.sets.magic2011.Preordain {
 
     public Preordain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "DDI";
     }
 

@@ -37,7 +37,7 @@ public class FrostWalker extends mage.sets.fatereforged.FrostWalker {
 
     public FrostWalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "FNMP";
     }
 

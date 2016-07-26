@@ -37,7 +37,7 @@ public class MarbleDiamond extends mage.sets.seventhedition.MarbleDiamond {
 
     public MarbleDiamond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 275;
+        this.cardNumber = "275";
         this.expansionSetCode = "MIR";
     }
 

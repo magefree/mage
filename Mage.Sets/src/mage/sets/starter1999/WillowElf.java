@@ -37,7 +37,7 @@ public class WillowElf extends mage.sets.starter2000.WillowElf {
 
     public WillowElf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "S99";
     }
 

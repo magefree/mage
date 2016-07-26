@@ -37,7 +37,7 @@ public class OrcGeneral extends mage.sets.thedark.OrcGeneral {
 
     public OrcGeneral(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "ME2";
     }
 

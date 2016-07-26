@@ -37,7 +37,7 @@ public class GarrukPrimalHunter extends mage.sets.magic2012.GarrukPrimalHunter {
 
     public GarrukPrimalHunter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "M13";
     }
 

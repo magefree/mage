@@ -37,7 +37,7 @@ public class LongForgottenGohei extends mage.sets.championsofkamigawa.LongForgot
 
     public LongForgottenGohei(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "MM2";
     }
 

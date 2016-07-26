@@ -37,7 +37,7 @@ public class YasovaDragonclaw extends mage.sets.fatereforged.YasovaDragonclaw {
 
     public YasovaDragonclaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "PTC";
     }
 

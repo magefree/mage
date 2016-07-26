@@ -37,7 +37,7 @@ public class GoblinChariot extends mage.sets.ninthedition.GoblinChariot {
 
     public GoblinChariot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = "185";
         this.expansionSetCode = "7ED";
     }
 

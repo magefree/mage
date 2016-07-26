@@ -37,7 +37,7 @@ public class TimeBomb extends mage.sets.masterseditionii.TimeBomb {
 
     public TimeBomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 404;
+        this.cardNumber = "404";
         this.expansionSetCode = "5ED";
     }
 

@@ -37,7 +37,7 @@ public class RecurringNightmare extends mage.sets.exodus.RecurringNightmare {
 
     public RecurringNightmare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "VMA";
     }
 

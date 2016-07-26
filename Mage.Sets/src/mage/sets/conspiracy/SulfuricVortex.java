@@ -37,7 +37,7 @@ public class SulfuricVortex extends mage.sets.scourge.SulfuricVortex {
 
     public SulfuricVortex(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "CNS";
     }
 

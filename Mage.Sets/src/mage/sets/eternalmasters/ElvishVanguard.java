@@ -39,7 +39,7 @@ public class ElvishVanguard extends mage.sets.onslaught.ElvishVanguard {
 
     public ElvishVanguard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

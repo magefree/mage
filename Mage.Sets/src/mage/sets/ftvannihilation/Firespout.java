@@ -38,7 +38,7 @@ public class Firespout extends mage.sets.shadowmoor.Firespout {
 
     public Firespout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "V14";
         this.rarity = Rarity.MYTHIC;
     }

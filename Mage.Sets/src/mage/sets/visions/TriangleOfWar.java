@@ -38,7 +38,7 @@ public class TriangleOfWar extends mage.sets.vintagemasters.TriangleOfWar {
 
     public TriangleOfWar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "VIS";
         this.rarity = Rarity.RARE;
     }

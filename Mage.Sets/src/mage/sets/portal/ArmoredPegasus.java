@@ -37,7 +37,7 @@ public class ArmoredPegasus extends mage.sets.tempest.ArmoredPegasus {
 
     public ArmoredPegasus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "POR";
     }
 

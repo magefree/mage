@@ -37,7 +37,7 @@ public class SpittingDrake extends mage.sets.visions.SpittingDrake {
 
     public SpittingDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 207;
+        this.cardNumber = "207";
         this.expansionSetCode = "6ED";
     }
 

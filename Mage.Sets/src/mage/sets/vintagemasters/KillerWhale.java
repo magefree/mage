@@ -38,7 +38,7 @@ public class KillerWhale extends mage.sets.tempestremastered.KillerWhale {
 
     public KillerWhale(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

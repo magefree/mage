@@ -37,7 +37,7 @@ public class ManaClash extends mage.sets.fourthedition.ManaClash {
 
     public ManaClash(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 248;
+        this.cardNumber = "248";
         this.expansionSetCode = "5ED";
     }
 

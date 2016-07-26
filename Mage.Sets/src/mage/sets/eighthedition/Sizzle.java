@@ -37,7 +37,7 @@ public class Sizzle extends mage.sets.mercadianmasques.Sizzle {
 
     public Sizzle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = "224";
         this.expansionSetCode = "8ED";
     }
 

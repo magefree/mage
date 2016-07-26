@@ -38,7 +38,7 @@ public class OrderOfLeitbur2 extends mage.sets.mastersedition.OrderOfLeitbur {
 
     public OrderOfLeitbur2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "FEM";
     }
 

@@ -37,7 +37,7 @@ public class SanguineBond extends mage.sets.magic2010.SanguineBond {
 
     public SanguineBond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "C13";
     }
 

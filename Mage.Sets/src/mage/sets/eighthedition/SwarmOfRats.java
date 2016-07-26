@@ -37,7 +37,7 @@ public class SwarmOfRats extends mage.sets.ninthedition.SwarmOfRats {
 
     public SwarmOfRats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "8ED";
     }
 

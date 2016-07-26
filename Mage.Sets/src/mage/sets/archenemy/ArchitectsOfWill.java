@@ -37,7 +37,7 @@ public class ArchitectsOfWill extends mage.sets.alarareborn.ArchitectsOfWill {
 
     public ArchitectsOfWill(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "ARC";
     }
 

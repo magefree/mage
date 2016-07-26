@@ -37,7 +37,7 @@ public class DackFayden extends mage.sets.conspiracy.DackFayden {
 
     public DackFayden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 247;
+        this.cardNumber = "247";
         this.expansionSetCode = "VMA";
     }
 

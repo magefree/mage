@@ -37,7 +37,7 @@ public class StrongholdAssassin extends mage.sets.stronghold.StrongholdAssassin 
 
     public StrongholdAssassin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "TPR";
     }
 

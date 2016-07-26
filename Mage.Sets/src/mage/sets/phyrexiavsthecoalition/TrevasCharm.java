@@ -37,7 +37,7 @@ public class TrevasCharm extends mage.sets.planeshift.TrevasCharm {
 
     public TrevasCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "DDE";
     }
 

@@ -37,7 +37,7 @@ public class PyriteSpellbomb extends mage.sets.mirrodin.PyriteSpellbomb {
 
     public PyriteSpellbomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "MMA";
     }
 

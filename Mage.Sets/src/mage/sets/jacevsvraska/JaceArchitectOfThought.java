@@ -37,7 +37,7 @@ public class JaceArchitectOfThought extends mage.sets.returntoravnica.JaceArchit
 
     public JaceArchitectOfThought(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DDM";
     }
 

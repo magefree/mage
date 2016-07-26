@@ -37,7 +37,7 @@ public class AEtherAdept extends mage.sets.magic2011.AetherAdept {
 
     public AEtherAdept(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "DDM";
     }
 

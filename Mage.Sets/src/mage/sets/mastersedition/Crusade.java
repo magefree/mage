@@ -37,7 +37,7 @@ public class Crusade extends mage.sets.elspethvstezzeret.Crusade {
 
     public Crusade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "MED";
     }
 

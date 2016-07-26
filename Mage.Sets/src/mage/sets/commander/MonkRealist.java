@@ -37,7 +37,7 @@ public class MonkRealist extends mage.sets.urzassaga.MonkRealist {
 
     public MonkRealist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "CMD";
     }
 

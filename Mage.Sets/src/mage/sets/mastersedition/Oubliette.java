@@ -37,7 +37,7 @@ public class Oubliette extends mage.sets.arabiannights.Oubliette1 {
 
     public Oubliette(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "MED";
     }
 

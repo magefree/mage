@@ -38,7 +38,7 @@ public class Imperiosaur extends mage.sets.modernmasters.Imperiosaur {
 
     public Imperiosaur(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "FUT";
         this.rarity = Rarity.UNCOMMON;
     }

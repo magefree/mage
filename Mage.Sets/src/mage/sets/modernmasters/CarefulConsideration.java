@@ -37,7 +37,7 @@ public class CarefulConsideration extends mage.sets.timespiral.CarefulConsiderat
 
     public CarefulConsideration(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "MMA";
     }
 

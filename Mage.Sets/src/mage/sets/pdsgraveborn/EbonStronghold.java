@@ -37,7 +37,7 @@ public class EbonStronghold extends mage.sets.fallenempires.EbonStronghold {
 
     public EbonStronghold(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "PD3";
     }
 

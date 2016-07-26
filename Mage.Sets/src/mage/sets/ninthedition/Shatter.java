@@ -37,7 +37,7 @@ public class Shatter extends mage.sets.mirrodin.Shatter {
 
     public Shatter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "9ED";
     }
 

@@ -38,7 +38,7 @@ public class CurseOfTheBloodyTome extends mage.sets.innistrad.CurseOfTheBloodyTo
 
     public CurseOfTheBloodyTome(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

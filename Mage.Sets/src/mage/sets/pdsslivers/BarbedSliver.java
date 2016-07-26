@@ -37,7 +37,7 @@ public class BarbedSliver extends mage.sets.tempest.BarbedSliver {
 
     public BarbedSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "H09";
     }
 

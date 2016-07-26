@@ -38,7 +38,7 @@ public class ShadowmageInfiltrator extends mage.sets.timeshifted.ShadowmageInfil
 
     public ShadowmageInfiltrator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 294;
+        this.cardNumber = "294";
         this.expansionSetCode = "ODY";
         this.rarity = Rarity.RARE;
     }

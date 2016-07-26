@@ -37,7 +37,7 @@ public class GargoyleCastle extends mage.sets.magic2010.GargoyleCastle {
 
     public GargoyleCastle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 297;
+        this.cardNumber = "297";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class NezumiGraverobber extends mage.sets.championsofkamigawa.NezumiGrave
 
     public NezumiGraverobber(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "CMD";
     }
 

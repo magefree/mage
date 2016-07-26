@@ -6,7 +6,7 @@ public class JaceTheLivingGuildpact extends mage.sets.magic2015.JaceTheLivingGui
     
     public JaceTheLivingGuildpact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "MBP";
     }
     

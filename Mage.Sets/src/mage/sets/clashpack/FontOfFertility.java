@@ -38,7 +38,7 @@ public class FontOfFertility extends mage.sets.journeyintonyx.FontOfFertility {
 
     public FontOfFertility(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

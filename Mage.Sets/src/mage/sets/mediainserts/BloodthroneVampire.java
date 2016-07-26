@@ -6,7 +6,7 @@ public class BloodthroneVampire extends mage.sets.riseoftheeldrazi.BloodthroneVa
     
     public BloodthroneVampire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "MBP";
     }
     

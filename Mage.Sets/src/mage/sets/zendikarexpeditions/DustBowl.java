@@ -38,7 +38,7 @@ public class DustBowl extends mage.sets.mercadianmasques.DustBowl {
 
     public DustBowl(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

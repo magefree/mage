@@ -37,7 +37,7 @@ public class FinalPunishment extends mage.sets.scourge.FinalPunishment {
 
     public FinalPunishment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "9ED";
     }
 

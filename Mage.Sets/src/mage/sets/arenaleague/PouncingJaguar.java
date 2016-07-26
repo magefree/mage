@@ -37,7 +37,7 @@ public class PouncingJaguar extends mage.sets.urzassaga.PouncingJaguar {
 
     public PouncingJaguar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "ARENA";
     }
 

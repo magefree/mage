@@ -37,7 +37,7 @@ public class PollutedMire extends mage.sets.urzassaga.PollutedMire {
 
     public PollutedMire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 300;
+        this.cardNumber = "300";
         this.expansionSetCode = "C15";
     }
 

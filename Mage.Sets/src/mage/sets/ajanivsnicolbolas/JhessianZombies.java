@@ -37,7 +37,7 @@ public class JhessianZombies extends mage.sets.alarareborn.JhessianZombies {
 
     public JhessianZombies(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "DDH";
     }
 

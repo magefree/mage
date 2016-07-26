@@ -38,7 +38,7 @@ public class JungleLion extends mage.sets.portal.JungleLion {
 
     public JungleLion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "ME3";
     }
 

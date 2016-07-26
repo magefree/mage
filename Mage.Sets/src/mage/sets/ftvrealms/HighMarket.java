@@ -38,7 +38,7 @@ public class HighMarket extends mage.sets.mercadianmasques.HighMarket {
 
     public HighMarket(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

@@ -38,7 +38,7 @@ public class DirtcowlWurm extends mage.sets.prereleaseevents.DirtcowlWurm {
 
     public DirtcowlWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "TMP";
         this.rarity = Rarity.RARE;
     }

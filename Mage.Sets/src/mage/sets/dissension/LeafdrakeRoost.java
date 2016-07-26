@@ -37,7 +37,7 @@ public class LeafdrakeRoost extends mage.sets.commander2013.LeafdrakeRoost {
 
     public LeafdrakeRoost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "DIS";
     }
 

@@ -37,7 +37,7 @@ public class QuietSpeculation extends mage.sets.judgment.QuietSpeculation {
 
     public QuietSpeculation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "EMA";
     }
 

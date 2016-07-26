@@ -37,7 +37,7 @@ public class ReassemblingSkeleton extends mage.sets.magic2011.ReassemblingSkelet
 
     public ReassemblingSkeleton(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDJ";
     }
 

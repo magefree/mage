@@ -37,7 +37,7 @@ public class KembaKhaRegent extends mage.sets.scarsofmirrodin.KembaKhaRegent {
 
     public KembaKhaRegent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "C14";
     }
 

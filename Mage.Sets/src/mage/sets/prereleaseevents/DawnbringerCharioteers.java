@@ -38,7 +38,7 @@ public class DawnbringerCharioteers extends mage.sets.journeyintonyx.Dawnbringer
 
     public DawnbringerCharioteers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

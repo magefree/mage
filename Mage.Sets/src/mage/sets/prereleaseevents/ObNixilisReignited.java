@@ -37,7 +37,7 @@ public class ObNixilisReignited extends mage.sets.battleforzendikar.ObNixilisRei
 
     public ObNixilisReignited(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 277;
+        this.cardNumber = "277";
         this.expansionSetCode = "PTC";
     }
 

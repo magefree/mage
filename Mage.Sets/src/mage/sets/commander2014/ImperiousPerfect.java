@@ -37,7 +37,7 @@ public class ImperiousPerfect extends mage.sets.lorwyn.ImperiousPerfect {
 
     public ImperiousPerfect(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 202;
+        this.cardNumber = "202";
         this.expansionSetCode = "C14";
     }
 

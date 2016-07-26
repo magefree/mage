@@ -6,7 +6,7 @@ public class GraveTitan extends mage.sets.magic2011.GraveTitan {
     
     public GraveTitan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "MBP";
     }
     

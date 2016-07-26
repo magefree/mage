@@ -38,7 +38,7 @@ public class EmeriaAngel extends mage.sets.zendikar.EmeriaAngel {
 
     public EmeriaAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

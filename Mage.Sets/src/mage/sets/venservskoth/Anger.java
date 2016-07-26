@@ -37,7 +37,7 @@ public class Anger extends mage.sets.judgment.Anger {
 
     public Anger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "DDI";
     }
 

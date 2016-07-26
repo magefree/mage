@@ -37,7 +37,7 @@ public class Onulet extends mage.sets.mastersedition.Onulet {
 
     public Onulet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "ME4";
     }
 

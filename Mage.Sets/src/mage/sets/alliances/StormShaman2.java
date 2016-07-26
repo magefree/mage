@@ -39,7 +39,7 @@ public class StormShaman2 extends mage.sets.alliances.StormShaman1 {
 
     public StormShaman2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.rarity = Rarity.UNCOMMON;
     }
 

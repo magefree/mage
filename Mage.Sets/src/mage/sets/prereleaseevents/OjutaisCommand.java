@@ -37,7 +37,7 @@ public class OjutaisCommand extends mage.sets.dragonsoftarkir.OjutaisCommand {
 
     public OjutaisCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = "185";
         this.expansionSetCode = "PTC";
     }
 

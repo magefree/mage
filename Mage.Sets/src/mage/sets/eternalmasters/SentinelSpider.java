@@ -38,7 +38,7 @@ public class SentinelSpider extends mage.sets.magic2013.SentinelSpider {
 
     public SentinelSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = "185";
         this.expansionSetCode = "EMA";
     }
 

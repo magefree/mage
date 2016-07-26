@@ -37,7 +37,7 @@ public class BoarUmbra extends mage.sets.riseoftheeldrazi.BoarUmbra {
 
     public BoarUmbra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "PC2";
     }
 

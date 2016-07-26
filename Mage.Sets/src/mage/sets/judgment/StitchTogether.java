@@ -37,7 +37,7 @@ public class StitchTogether extends mage.sets.commander.StitchTogether {
 
     public StitchTogether(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "JUD";
     }
 

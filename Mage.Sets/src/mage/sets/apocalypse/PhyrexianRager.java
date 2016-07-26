@@ -37,7 +37,7 @@ public class PhyrexianRager extends mage.sets.tenthedition.PhyrexianRager {
 
     public PhyrexianRager(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "APC";
     }
 

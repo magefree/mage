@@ -37,7 +37,7 @@ public class GhostsOfTheDamned extends mage.sets.masterseditioniii.GhostsOfTheDa
 
     public GhostsOfTheDamned(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "LEG";
     }
 

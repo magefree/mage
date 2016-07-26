@@ -37,7 +37,7 @@ public class SkirkFireMarshal extends mage.sets.onslaught.SkirkFireMarshal {
 
     public SkirkFireMarshal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "EVG";
     }
 

@@ -37,7 +37,7 @@ public class WhipVine2 extends WhipVine1 {
 
     public WhipVine2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
     }
 
     public WhipVine2(final WhipVine2 card) {

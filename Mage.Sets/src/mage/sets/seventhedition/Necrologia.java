@@ -38,7 +38,7 @@ public class Necrologia extends mage.sets.tempestremastered.Necrologia {
 
     public Necrologia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "7ED";
         this.rarity = Rarity.UNCOMMON;
     }

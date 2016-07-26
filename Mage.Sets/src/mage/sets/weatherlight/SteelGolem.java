@@ -37,7 +37,7 @@ public class SteelGolem extends mage.sets.tenthedition.SteelGolem {
 
     public SteelGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "WTH";
     }
 

@@ -37,7 +37,7 @@ public class RepelTheDarkness extends mage.sets.riseoftheeldrazi.RepelTheDarknes
 
     public RepelTheDarkness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "DDP";
     }
 

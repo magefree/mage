@@ -38,7 +38,7 @@ public class Warthog extends mage.sets.visions.Warthog {
 
     public Warthog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 267;
+        this.cardNumber = "267";
         this.expansionSetCode = "6ED";
         this.rarity = Rarity.UNCOMMON;
     }

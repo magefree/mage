@@ -38,7 +38,7 @@ public class KorChant extends mage.sets.exodus.KorChant {
 
     public KorChant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

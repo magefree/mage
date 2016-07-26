@@ -38,7 +38,7 @@ public class Starlight extends mage.sets.seventhedition.Starlight {
 
     public Starlight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 191;
+        this.cardNumber = "191";
         this.expansionSetCode = "POR";
     }
 

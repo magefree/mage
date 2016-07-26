@@ -38,7 +38,7 @@ public class FerozsBan extends mage.sets.fifthedition.FerozsBan {
 
     public FerozsBan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 295;
+        this.cardNumber = "295";
         this.expansionSetCode = "7ED";
     }
 

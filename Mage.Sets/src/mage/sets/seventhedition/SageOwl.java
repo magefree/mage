@@ -37,7 +37,7 @@ public class SageOwl extends mage.sets.magic2010.SageOwl {
 
     public SageOwl(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "7ED";
     }
 

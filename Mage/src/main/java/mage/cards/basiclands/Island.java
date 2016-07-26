@@ -38,6 +38,10 @@ import mage.abilities.mana.BlueManaAbility;
 public abstract class Island extends BasicLand {
 
     public Island(UUID ownerId, int cardNumber) {
+        this(ownerId, String.valueOf(cardNumber));
+    }
+
+    public Island(UUID ownerId, String cardNumber) {
         super(ownerId, cardNumber, "Island", new BlueManaAbility());
     }
 

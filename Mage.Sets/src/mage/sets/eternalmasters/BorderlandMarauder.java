@@ -38,7 +38,7 @@ public class BorderlandMarauder extends mage.sets.magic2015.BorderlandMarauder {
 
     public BorderlandMarauder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "EMA";
     }
 

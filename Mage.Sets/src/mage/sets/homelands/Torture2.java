@@ -37,7 +37,7 @@ public class Torture2 extends mage.sets.homelands.Torture1 {
 
     public Torture2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "HML";
     }
 

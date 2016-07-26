@@ -37,7 +37,7 @@ public class ConsumeTheMeek extends mage.sets.riseoftheeldrazi.ConsumeTheMeek {
 
     public ConsumeTheMeek(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "DDP";
     }
 

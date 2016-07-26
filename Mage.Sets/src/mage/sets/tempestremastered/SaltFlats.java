@@ -38,7 +38,7 @@ public class SaltFlats extends mage.sets.tempest.SaltFlats {
 
     public SaltFlats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

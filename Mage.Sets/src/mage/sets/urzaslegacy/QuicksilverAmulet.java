@@ -36,7 +36,7 @@ public class QuicksilverAmulet extends mage.sets.magic2012.QuicksilverAmulet {
 
     public QuicksilverAmulet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "ULG";
     }
 

@@ -37,7 +37,7 @@ public class DaybreakCoronet extends mage.sets.futuresight.DaybreakCoronet {
 
     public DaybreakCoronet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "MM2";
     }
 

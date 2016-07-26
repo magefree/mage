@@ -39,7 +39,7 @@ public class StoryCircle extends mage.sets.mercadianmasques.StoryCircle {
 
     public StoryCircle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "9ED";
         this.rarity = Rarity.RARE;
     }

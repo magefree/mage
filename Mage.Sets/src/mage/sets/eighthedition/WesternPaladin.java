@@ -37,7 +37,7 @@ public class WesternPaladin extends mage.sets.urzassaga.WesternPaladin {
 
     public WesternPaladin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "8ED";
     }
 

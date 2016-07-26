@@ -37,7 +37,7 @@ public class Spiritmonger extends mage.sets.apocalypse.Spiritmonger {
 
     public Spiritmonger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "CNS";
     }
 

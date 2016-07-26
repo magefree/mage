@@ -37,7 +37,7 @@ public class DanceOfMany extends mage.sets.thedark.DanceOfMany {
 
     public DanceOfMany(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "CHR";
     }
 

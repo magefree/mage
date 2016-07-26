@@ -37,7 +37,7 @@ public class GhazbanOgre extends mage.sets.fifthedition.GhazbanOgre {
 
     public GhazbanOgre(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "CHR";
     }
 

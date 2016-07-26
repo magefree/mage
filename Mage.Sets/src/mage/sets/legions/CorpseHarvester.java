@@ -37,7 +37,7 @@ public class CorpseHarvester extends mage.sets.planechase.CorpseHarvester {
 
     public CorpseHarvester(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "LGN";
     }
 

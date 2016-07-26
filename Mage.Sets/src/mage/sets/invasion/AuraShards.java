@@ -37,7 +37,7 @@ public class AuraShards extends mage.sets.commander.AuraShards {
 
     public AuraShards(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = "233";
         this.expansionSetCode = "INV";
     }
 

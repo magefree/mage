@@ -37,7 +37,7 @@ public class PhyrexianBroodlings extends mage.sets.urzaslegacy.PhyrexianBroodlin
 
     public PhyrexianBroodlings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "DDE";
     }
 

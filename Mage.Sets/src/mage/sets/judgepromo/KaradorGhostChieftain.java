@@ -37,7 +37,7 @@ public class KaradorGhostChieftain extends mage.sets.commander.KaradorGhostChief
 
     public KaradorGhostChieftain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "JR";
     }
 

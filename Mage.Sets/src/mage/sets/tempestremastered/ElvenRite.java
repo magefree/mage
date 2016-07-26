@@ -38,7 +38,7 @@ public class ElvenRite extends mage.sets.stronghold.ElvenRite {
 
     public ElvenRite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.COMMON;
     }

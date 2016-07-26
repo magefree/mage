@@ -37,7 +37,7 @@ public class TerrainGenerator extends mage.sets.anthologyjacevschandra.TerrainGe
 
     public TerrainGenerator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "DD2";
     }
 

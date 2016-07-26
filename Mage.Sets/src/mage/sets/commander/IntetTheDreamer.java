@@ -37,7 +37,7 @@ public class IntetTheDreamer extends mage.sets.planarchaos.IntetTheDreamer {
 
     public IntetTheDreamer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "CMD";
     }
 

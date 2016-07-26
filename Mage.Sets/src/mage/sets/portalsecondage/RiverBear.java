@@ -37,7 +37,7 @@ public class RiverBear extends mage.sets.ninthedition.RiverBear {
 
     public RiverBear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "PO2";
     }
 

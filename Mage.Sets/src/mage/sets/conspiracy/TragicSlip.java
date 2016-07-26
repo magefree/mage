@@ -37,7 +37,7 @@ public class TragicSlip extends mage.sets.darkascension.TragicSlip {
 
     public TragicSlip(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "CNS";
     }
 

@@ -37,7 +37,7 @@ public class EnlistedWurm extends mage.sets.alarareborn.EnlistedWurm {
 
     public EnlistedWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "PC2";
     }
 

@@ -37,7 +37,7 @@ public class GreaterMossdog extends mage.sets.ravnica.GreaterMossdog {
 
     public GreaterMossdog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "DDJ";
     }
 

@@ -37,7 +37,7 @@ public class KamahlPitFighter extends mage.sets.tenthedition.KamahlPitFighter {
 
     public KamahlPitFighter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "ODY";
     }
 

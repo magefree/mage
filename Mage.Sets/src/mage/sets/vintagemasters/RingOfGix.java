@@ -37,7 +37,7 @@ public class RingOfGix extends mage.sets.urzaslegacy.RingOfGix {
 
     public RingOfGix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 280;
+        this.cardNumber = "280";
         this.expansionSetCode = "VMA";
     }
 

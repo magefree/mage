@@ -37,7 +37,7 @@ public class WorldlyCounsel extends mage.sets.conflux.WorldlyCounsel {
 
     public WorldlyCounsel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "INV";
     }
 

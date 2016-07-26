@@ -37,7 +37,7 @@ public class Smite extends mage.sets.riseoftheeldrazi.Smite {
 
     public Smite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "GTC";
     }
 

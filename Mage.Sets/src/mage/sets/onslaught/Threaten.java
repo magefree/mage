@@ -37,7 +37,7 @@ public class Threaten extends mage.sets.tenthedition.Threaten {
 
     public Threaten(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 241;
+        this.cardNumber = "241";
         this.expansionSetCode = "ONS";
     }
 

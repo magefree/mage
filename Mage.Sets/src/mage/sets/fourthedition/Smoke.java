@@ -38,7 +38,7 @@ public class Smoke extends mage.sets.limitedalpha.Smoke {
 
     public Smoke(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 240;
+        this.cardNumber = "240";
         this.expansionSetCode = "4ED";
     }
 

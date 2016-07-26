@@ -37,7 +37,7 @@ public class KeldonWarlord extends mage.sets.unlimitededition.KeldonWarlord {
 
     public KeldonWarlord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "LEB";
     }
 

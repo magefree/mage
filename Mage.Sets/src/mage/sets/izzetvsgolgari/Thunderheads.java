@@ -37,7 +37,7 @@ public class Thunderheads extends mage.sets.guildpact.Thunderheads {
 
     public Thunderheads(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "DDJ";
     }
 

@@ -38,7 +38,7 @@ public class Gush extends mage.sets.jacevschandra.Gush {
 
     public Gush(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

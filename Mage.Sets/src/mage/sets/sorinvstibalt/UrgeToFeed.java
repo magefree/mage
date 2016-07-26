@@ -37,7 +37,7 @@ public class UrgeToFeed extends mage.sets.worldwake.UrgeToFeed {
 
     public UrgeToFeed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "DDK";
     }
 

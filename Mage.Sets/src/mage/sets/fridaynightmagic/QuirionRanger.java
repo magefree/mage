@@ -38,7 +38,7 @@ public class QuirionRanger extends mage.sets.visions.QuirionRanger {
 
     public QuirionRanger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

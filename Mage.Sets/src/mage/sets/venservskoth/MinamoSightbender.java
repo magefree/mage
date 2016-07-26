@@ -37,7 +37,7 @@ public class MinamoSightbender extends mage.sets.betrayersofkamigawa.MinamoSight
 
     public MinamoSightbender(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "DDI";
     }
 

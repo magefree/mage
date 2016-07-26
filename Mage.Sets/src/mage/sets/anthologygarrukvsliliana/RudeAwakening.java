@@ -37,7 +37,7 @@ public class RudeAwakening extends mage.sets.modernmasters.RudeAwakening {
 
     public RudeAwakening(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "DD3GVL";
     }
 

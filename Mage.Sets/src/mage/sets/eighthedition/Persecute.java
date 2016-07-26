@@ -37,7 +37,7 @@ public class Persecute extends mage.sets.urzassaga.Persecute {
 
     public Persecute(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "8ED";
     }
 

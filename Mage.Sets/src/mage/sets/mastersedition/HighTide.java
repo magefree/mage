@@ -38,7 +38,7 @@ public class HighTide extends mage.sets.fallenempires.HighTide1 {
 
     public HighTide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.UNCOMMON;
     }

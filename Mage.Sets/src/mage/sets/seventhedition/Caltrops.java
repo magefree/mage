@@ -38,7 +38,7 @@ public class Caltrops extends mage.sets.urzasdestiny.Caltrops {
 
     public Caltrops(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 288;
+        this.cardNumber = "288";
         this.expansionSetCode = "7ED";
     }
 

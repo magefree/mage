@@ -37,7 +37,7 @@ public class Upwelling extends mage.sets.tenthedition.Upwelling {
 
     public Upwelling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "SCG";
     }
 

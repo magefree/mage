@@ -37,7 +37,7 @@ public class EnergyFlux extends mage.sets.antiquities.EnergyFlux {
 
     public EnergyFlux(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "4ED";
     }
 

@@ -413,7 +413,7 @@ public class WizardCardsImageSource implements CardImageSource {
 
     @Override
     public String generateURL(CardDownloadData card) throws Exception {
-        Integer collectorId = card.getCollectorId();
+        String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
@@ -430,12 +430,20 @@ public class WizardCardsImageSource implements CardImageSource {
             }
             String link = setLinks.get(card.getDownloadName().toLowerCase());
             if (link == null) {
-                if (setLinks.size() >= collectorId) {
-                    link = setLinks.get(Integer.toString(collectorId - 1));
+                int length = collectorId.length();
+
+                if (Character.isLetter(collectorId.charAt(length -1))) {
+                    length -= 1;
+                }
+
+                int number = Integer.parseInt(collectorId.substring(0, length));
+
+                if (setLinks.size() >= number) {
+                    link = setLinks.get(Integer.toString(number - 1));
                 } else {
-                    link = setLinks.get(Integer.toString(collectorId - 21));
+                    link = setLinks.get(Integer.toString(number - 21));
                     if (link != null) {
-                        link = link.replace(Integer.toString(collectorId - 20), (Integer.toString(collectorId - 20) + "a"));
+                        link = link.replace(Integer.toString(number - 20), (Integer.toString(number - 20) + "a"));
                     }
                 }
             }

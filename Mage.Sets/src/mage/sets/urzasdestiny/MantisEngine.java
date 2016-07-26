@@ -37,7 +37,7 @@ public class MantisEngine extends mage.sets.tenthedition.MantisEngine {
 
     public MantisEngine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "UDS";
     }
 

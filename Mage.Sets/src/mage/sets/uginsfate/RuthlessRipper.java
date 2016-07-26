@@ -37,7 +37,7 @@ public class RuthlessRipper extends mage.sets.khansoftarkir.RuthlessRipper {
 
     public RuthlessRipper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "UGIN";
     }
 

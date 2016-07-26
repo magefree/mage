@@ -38,7 +38,7 @@ public class Web extends mage.sets.limitedalpha.Web {
 
     public Web(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "3ED";
     }
 

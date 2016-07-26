@@ -37,7 +37,7 @@ public class PhyrexianNegator extends mage.sets.urzasdestiny.PhyrexianNegator {
 
     public PhyrexianNegator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "JR";
     }
 

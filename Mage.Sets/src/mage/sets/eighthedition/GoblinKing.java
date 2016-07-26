@@ -37,7 +37,7 @@ public class GoblinKing extends mage.sets.tenthedition.GoblinKing {
 
     public GoblinKing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "8ED";
     }
 

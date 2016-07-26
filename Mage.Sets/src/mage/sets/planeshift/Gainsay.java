@@ -37,7 +37,7 @@ public class Gainsay extends mage.sets.theros.Gainsay {
 
     public Gainsay(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "PLS";
     }
 

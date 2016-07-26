@@ -37,7 +37,7 @@ public class WallOfEssence extends mage.sets.stronghold.WallOfEssence {
 
     public WallOfEssence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "TPR";
     }
 

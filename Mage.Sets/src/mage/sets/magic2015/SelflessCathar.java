@@ -37,7 +37,7 @@ public class SelflessCathar extends mage.sets.innistrad.SelflessCathar {
 
     public SelflessCathar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "M15";
     }
 

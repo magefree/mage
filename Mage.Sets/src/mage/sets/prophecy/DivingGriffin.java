@@ -37,7 +37,7 @@ public class DivingGriffin extends mage.sets.eighthedition.DivingGriffin {
 
     public DivingGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "PCY";
     }
 

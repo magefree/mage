@@ -37,7 +37,7 @@ public class BloodgiftDemon extends mage.sets.innistrad.BloodgiftDemon {
 
     public BloodgiftDemon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "C14";
     }
 

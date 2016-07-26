@@ -38,7 +38,7 @@ public class OrderOfTheEbonHand2 extends mage.sets.mastersedition.OrderOfTheEbon
 
     public OrderOfTheEbonHand2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "FEM";
     }
 

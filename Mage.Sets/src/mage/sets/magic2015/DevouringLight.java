@@ -37,7 +37,7 @@ public class DevouringLight extends mage.sets.ravnica.DevouringLight {
 
     public DevouringLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "M15";
     }
 

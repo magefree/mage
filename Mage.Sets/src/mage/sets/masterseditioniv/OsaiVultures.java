@@ -37,7 +37,7 @@ public class OsaiVultures extends mage.sets.legends.OsaiVultures {
 
     public OsaiVultures(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "ME4";
     }
 

@@ -37,7 +37,7 @@ public class EverflowingChalice extends mage.sets.worldwake.EverflowingChalice {
 
     public EverflowingChalice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "MM2";
     }
 

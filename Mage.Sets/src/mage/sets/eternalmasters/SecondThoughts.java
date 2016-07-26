@@ -38,7 +38,7 @@ public class SecondThoughts extends mage.sets.odyssey.SecondThoughts {
 
     public SecondThoughts(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "EMA";
     }
 

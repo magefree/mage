@@ -37,7 +37,7 @@ public class ExoticOrchard extends mage.sets.conflux.ExoticOrchard {
 
     public ExoticOrchard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "PC2";
     }
 

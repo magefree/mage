@@ -37,7 +37,7 @@ public class Famine extends mage.sets.commander2013.Famine {
 
     public Famine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "PTK";
     }
 

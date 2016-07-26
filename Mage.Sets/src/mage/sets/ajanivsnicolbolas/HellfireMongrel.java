@@ -37,7 +37,7 @@ public class HellfireMongrel extends mage.sets.zendikar.HellfireMongrel {
 
     public HellfireMongrel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "DDH";
     }
 

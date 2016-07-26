@@ -38,7 +38,7 @@ public class KorlashHeirToBlackblade extends mage.sets.futuresight.KorlashHeirTo
 
     public KorlashHeirToBlackblade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

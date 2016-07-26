@@ -37,7 +37,7 @@ public class EvolvingWilds extends mage.sets.riseoftheeldrazi.EvolvingWilds {
 
     public EvolvingWilds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "DKA";
     }
 

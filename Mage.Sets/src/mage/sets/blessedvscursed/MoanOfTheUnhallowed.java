@@ -37,7 +37,7 @@ public class MoanOfTheUnhallowed extends mage.sets.innistrad.MoanOfTheUnhallowed
 
     public MoanOfTheUnhallowed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "DDQ";
     }
 

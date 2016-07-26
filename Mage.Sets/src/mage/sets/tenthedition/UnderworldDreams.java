@@ -37,7 +37,7 @@ public class UnderworldDreams extends mage.sets.magic2010.UnderworldDreams {
 
     public UnderworldDreams(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "10E";
     }
 

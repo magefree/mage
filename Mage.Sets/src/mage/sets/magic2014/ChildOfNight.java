@@ -37,7 +37,7 @@ public class ChildOfNight extends mage.sets.magic2010.ChildOfNight {
 
     public ChildOfNight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "M14";
     }
 

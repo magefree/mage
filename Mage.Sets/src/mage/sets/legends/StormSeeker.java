@@ -37,7 +37,7 @@ public class StormSeeker extends mage.sets.mastersedition.StormSeeker {
 
     public StormSeeker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "LEG";
     }
 

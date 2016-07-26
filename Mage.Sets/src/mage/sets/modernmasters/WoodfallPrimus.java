@@ -37,7 +37,7 @@ public class WoodfallPrimus extends mage.sets.shadowmoor.WoodfallPrimus {
 
     public WoodfallPrimus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "MMA";
     }
 

@@ -37,7 +37,7 @@ public class IngotChewer extends mage.sets.lorwyn.IngotChewer {
 
     public IngotChewer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "C14";
     }
 

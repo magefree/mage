@@ -37,7 +37,7 @@ public class ArmoredCancrix extends mage.sets.magic2011.ArmoredCancrix {
 
     public ArmoredCancrix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "M14";
     }
 

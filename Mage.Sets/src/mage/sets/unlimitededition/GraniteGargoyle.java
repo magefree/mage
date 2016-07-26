@@ -37,7 +37,7 @@ public class GraniteGargoyle extends mage.sets.revisededition.GraniteGargoyle {
 
     public GraniteGargoyle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "2ED";
     }
 

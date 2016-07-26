@@ -38,7 +38,7 @@ public class DragonEngine extends mage.sets.fifthedition.DragonEngine {
 
     public DragonEngine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.COMMON;
     }

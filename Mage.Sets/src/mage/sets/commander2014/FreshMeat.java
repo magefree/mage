@@ -37,7 +37,7 @@ public class FreshMeat extends mage.sets.newphyrexia.FreshMeat {
 
     public FreshMeat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 197;
+        this.cardNumber = "197";
         this.expansionSetCode = "C14";
     }
 

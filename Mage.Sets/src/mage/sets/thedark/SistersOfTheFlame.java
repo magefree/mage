@@ -38,7 +38,7 @@ public class SistersOfTheFlame extends mage.sets.fourthedition.SistersOfTheFlame
 
     public SistersOfTheFlame(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.UNCOMMON;
     }

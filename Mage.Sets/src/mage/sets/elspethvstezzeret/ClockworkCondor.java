@@ -38,7 +38,7 @@ public class ClockworkCondor extends mage.sets.mirrodin.ClockworkCondor {
 
     public ClockworkCondor (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDF";
     }
 

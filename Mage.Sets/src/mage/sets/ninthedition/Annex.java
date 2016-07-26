@@ -37,7 +37,7 @@ public class Annex extends mage.sets.onslaught.Annex {
 
     public Annex(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "9ED";
     }
 

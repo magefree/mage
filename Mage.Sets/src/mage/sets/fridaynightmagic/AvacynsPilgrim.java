@@ -38,7 +38,7 @@ public class AvacynsPilgrim extends mage.sets.innistrad.AvacynsPilgrim {
 
     public AvacynsPilgrim(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

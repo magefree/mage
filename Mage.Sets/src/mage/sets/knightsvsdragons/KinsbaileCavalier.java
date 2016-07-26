@@ -37,7 +37,7 @@ public class KinsbaileCavalier extends mage.sets.morningtide.KinsbaileCavalier {
 
     public KinsbaileCavalier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "DDG";
     }
 

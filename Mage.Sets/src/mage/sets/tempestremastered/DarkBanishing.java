@@ -37,7 +37,7 @@ public class DarkBanishing extends mage.sets.tempest.DarkBanishing {
 
     public DarkBanishing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class GatekeeperOfMalakir extends mage.sets.zendikar.GatekeeperOfMalakir 
 
     public GatekeeperOfMalakir(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "FNMP";
     }
 

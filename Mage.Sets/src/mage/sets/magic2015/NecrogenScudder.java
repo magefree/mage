@@ -37,7 +37,7 @@ public class NecrogenScudder extends mage.sets.scarsofmirrodin.NecrogenScudder {
 
     public NecrogenScudder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "M15";
     }
 

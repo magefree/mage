@@ -37,7 +37,7 @@ public class PrideOfLions extends mage.sets.starter1999.PrideOfLions {
 
     public PrideOfLions(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 261;
+        this.cardNumber = "261";
         this.expansionSetCode = "7ED";
     }
 

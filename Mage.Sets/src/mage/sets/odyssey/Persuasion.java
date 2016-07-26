@@ -38,7 +38,7 @@ public class Persuasion extends mage.sets.tenthedition.Persuasion {
 
     public Persuasion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "ODY";
         this.rarity = Rarity.RARE;
     }

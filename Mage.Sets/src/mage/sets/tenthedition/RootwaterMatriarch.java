@@ -37,7 +37,7 @@ public class RootwaterMatriarch extends mage.sets.tempest.RootwaterMatriarch {
 
     public RootwaterMatriarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "10E";
     }
 

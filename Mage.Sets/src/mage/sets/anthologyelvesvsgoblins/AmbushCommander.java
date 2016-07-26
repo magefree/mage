@@ -37,7 +37,7 @@ public class AmbushCommander extends mage.sets.elvesvsgoblins.AmbushCommander {
 
     public AmbushCommander(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DD3EVG";
     }
 

@@ -37,7 +37,7 @@ public class OblivionStone extends mage.sets.mirrodin.OblivionStone {
 
     public OblivionStone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 254;
+        this.cardNumber = "254";
         this.expansionSetCode = "CMD";
     }
 

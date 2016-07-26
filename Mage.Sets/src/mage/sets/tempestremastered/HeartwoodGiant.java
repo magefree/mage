@@ -37,7 +37,7 @@ public class HeartwoodGiant extends mage.sets.tempest.HeartwoodGiant {
 
     public HeartwoodGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "TPR";
     }
 

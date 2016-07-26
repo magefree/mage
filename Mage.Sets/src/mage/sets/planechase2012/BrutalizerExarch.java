@@ -37,7 +37,7 @@ public class BrutalizerExarch extends mage.sets.newphyrexia.BrutalizerExarch {
 
     public BrutalizerExarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "PC2";
     }
 

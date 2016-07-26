@@ -37,7 +37,7 @@ public class KindledFury extends mage.sets.magic2010.KindledFury {
 
     public KindledFury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "DTK";
     }
 

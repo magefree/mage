@@ -38,7 +38,7 @@ public class ScaldingTarn extends mage.sets.zendikar.ScaldingTarn {
 
     public ScaldingTarn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

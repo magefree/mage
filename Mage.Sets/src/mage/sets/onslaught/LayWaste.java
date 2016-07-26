@@ -37,7 +37,7 @@ public class LayWaste extends mage.sets.urzassaga.LayWaste {
 
     public LayWaste(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "ONS";
     }
 

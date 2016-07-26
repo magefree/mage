@@ -37,7 +37,7 @@ public class AmuletOfKroog extends mage.sets.fifthedition.AmuletOfKroog {
 
     public AmuletOfKroog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 311;
+        this.cardNumber = "311";
         this.expansionSetCode = "4ED";
     }
 

@@ -37,7 +37,7 @@ public class HeatRay extends mage.sets.riseoftheeldrazi.HeatRay {
 
     public HeatRay(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "USG";
     }
 

@@ -37,7 +37,7 @@ public class SynodSanctum extends mage.sets.archenemy.SynodSanctum {
 
     public SynodSanctum(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 252;
+        this.cardNumber = "252";
         this.expansionSetCode = "MRD";
     }
 

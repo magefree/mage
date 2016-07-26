@@ -37,7 +37,7 @@ public class Sindbad extends mage.sets.fourthedition.Sindbad {
 
     public Sindbad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "ARN";
     }
 

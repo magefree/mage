@@ -38,7 +38,7 @@ public class WillowPriestess extends mage.sets.homelands.WillowPriestess {
 
     public WillowPriestess(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

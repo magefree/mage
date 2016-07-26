@@ -37,7 +37,7 @@ public class Quicken extends mage.sets.guildpact.Quicken {
 
     public Quicken(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "M14";
     }
 

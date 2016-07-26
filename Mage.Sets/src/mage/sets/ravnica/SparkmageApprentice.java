@@ -37,7 +37,7 @@ public class SparkmageApprentice extends mage.sets.magic2010.SparkmageApprentice
 
     public SparkmageApprentice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "RAV";
     }
 

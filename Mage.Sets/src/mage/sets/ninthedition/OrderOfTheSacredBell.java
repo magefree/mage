@@ -37,7 +37,7 @@ public class OrderOfTheSacredBell extends mage.sets.championsofkamigawa.OrderOfT
 
     public OrderOfTheSacredBell(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 261;
+        this.cardNumber = "261";
         this.expansionSetCode = "9ED";
     }
 

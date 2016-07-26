@@ -37,7 +37,7 @@ public class NoosegrafMob extends mage.sets.eldritchmoon.NoosegrafMob {
 
     public NoosegrafMob(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "MBP";
     }
 

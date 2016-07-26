@@ -37,7 +37,7 @@ public class Watchwolf extends mage.sets.ravnica.Watchwolf {
 
     public Watchwolf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "ARC";
     }
 

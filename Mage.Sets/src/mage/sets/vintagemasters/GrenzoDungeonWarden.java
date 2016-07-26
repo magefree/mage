@@ -37,7 +37,7 @@ public class GrenzoDungeonWarden extends mage.sets.conspiracy.GrenzoDungeonWarde
 
     public GrenzoDungeonWarden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 254;
+        this.cardNumber = "254";
         this.expansionSetCode = "VMA";
     }
 

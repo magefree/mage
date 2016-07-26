@@ -37,7 +37,7 @@ public class ThornThallid extends mage.sets.fallenempires.ThornThallid1 {
 
     public ThornThallid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "MED";
     }
 

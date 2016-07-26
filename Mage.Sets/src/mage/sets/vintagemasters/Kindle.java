@@ -37,7 +37,7 @@ public class Kindle extends mage.sets.tempest.Kindle {
 
     public Kindle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 176;
+        this.cardNumber = "176";
         this.expansionSetCode = "VMA";
     }
 

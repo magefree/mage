@@ -37,7 +37,7 @@ public class ElvishFarmer extends mage.sets.masterseditionii.ElvishFarmer {
 
     public ElvishFarmer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "FEM";
     }
 

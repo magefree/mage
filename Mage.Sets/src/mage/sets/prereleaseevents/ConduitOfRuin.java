@@ -37,7 +37,7 @@ public class ConduitOfRuin extends mage.sets.battleforzendikar.ConduitOfRuin {
 
     public ConduitOfRuin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 251;
+        this.cardNumber = "251";
         this.expansionSetCode = "PTC";
     }
 

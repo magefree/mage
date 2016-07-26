@@ -38,7 +38,7 @@ public class FoundryChampion extends mage.sets.gatecrash.FoundryChampion {
 
     public FoundryChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

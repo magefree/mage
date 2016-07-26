@@ -38,7 +38,7 @@ public class Negate extends mage.sets.magic2010.Negate {
 
     public Negate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

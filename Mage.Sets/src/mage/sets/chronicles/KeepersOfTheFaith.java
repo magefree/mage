@@ -37,7 +37,7 @@ public class KeepersOfTheFaith extends mage.sets.legends.KeepersOfTheFaith {
 
     public KeepersOfTheFaith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "CHR";
     }
 

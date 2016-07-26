@@ -37,7 +37,7 @@ public class GhostlyWings extends mage.sets.shadowsoverinnistrad.GhostlyWings {
 
     public GhostlyWings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "TOR";
     }
 

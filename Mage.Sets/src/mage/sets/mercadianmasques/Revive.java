@@ -37,7 +37,7 @@ public class Revive extends mage.sets.magic2013.Revive {
 
     public Revive(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 262;
+        this.cardNumber = "262";
         this.expansionSetCode = "MMQ";
     }
 

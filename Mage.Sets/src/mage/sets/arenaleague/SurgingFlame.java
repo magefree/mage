@@ -37,7 +37,7 @@ public class SurgingFlame extends mage.sets.coldsnap.SurgingFlame {
 
     public SurgingFlame(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "ARENA";
     }
 

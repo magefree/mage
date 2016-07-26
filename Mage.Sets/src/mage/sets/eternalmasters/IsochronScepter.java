@@ -38,7 +38,7 @@ public class IsochronScepter extends mage.sets.mirrodin.IsochronScepter {
 
     public IsochronScepter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = "223";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.RARE;
     }

@@ -38,7 +38,7 @@ public class ExpeditionMap extends mage.sets.zendikar.ExpeditionMap {
 
     public ExpeditionMap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 213;
+        this.cardNumber = "213";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

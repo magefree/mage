@@ -37,7 +37,7 @@ public class SoldeviMachinist extends mage.sets.masterseditioniv.SoldeviMachinis
 
     public SoldeviMachinist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "ICE";
     }
 

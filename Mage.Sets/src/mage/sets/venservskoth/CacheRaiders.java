@@ -37,7 +37,7 @@ public class CacheRaiders extends mage.sets.eventide.CacheRaiders {
 
     public CacheRaiders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "DDI";
     }
 

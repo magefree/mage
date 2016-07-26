@@ -38,7 +38,7 @@ public class SilentDeparture extends mage.sets.innistrad.SilentDeparture {
 
     public SilentDeparture(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "EMA";
     }
 

@@ -38,7 +38,7 @@ public class SerraAviary extends mage.sets.homelands.SerraAviary {
 
     public SerraAviary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

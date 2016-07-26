@@ -38,7 +38,7 @@ public class PillagingHorde extends mage.sets.vintagemasters.PillagingHorde {
 
     public PillagingHorde(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "POR";
         this.rarity = Rarity.RARE;
     }

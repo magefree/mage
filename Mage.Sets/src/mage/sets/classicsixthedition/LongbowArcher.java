@@ -37,7 +37,7 @@ public class LongbowArcher extends mage.sets.seventhedition.LongbowArcher {
 
     public LongbowArcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "6ED";
     }
 

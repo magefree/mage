@@ -37,7 +37,7 @@ public class HussarPatrol extends mage.sets.returntoravnica.HussarPatrol {
 
     public HussarPatrol(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "DDN";
     }
 

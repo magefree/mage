@@ -37,7 +37,7 @@ public class CoiledTinviper extends mage.sets.tempest.CoiledTinviper {
 
     public CoiledTinviper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class AlabornCavalier extends mage.sets.portalsecondage.AlabornCavalier {
 
     public AlabornCavalier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "DDG";
     }
 

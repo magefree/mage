@@ -38,7 +38,7 @@ public class DiaochanArtfulBeauty extends mage.sets.portalthreekingdoms.Diaochan
 
     public DiaochanArtfulBeauty(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

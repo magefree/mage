@@ -37,7 +37,7 @@ public class WarpArtifact extends mage.sets.fifthedition.WarpArtifact {
 
     public WarpArtifact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "4ED";
     }
 

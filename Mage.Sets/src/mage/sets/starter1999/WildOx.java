@@ -37,7 +37,7 @@ public class WildOx extends mage.sets.portalsecondage.WildOx {
 
     public WildOx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "S99";
     }
 

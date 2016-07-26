@@ -37,7 +37,7 @@ public class HungerOfTheHowlpack extends mage.sets.darkascension.HungerOfTheHowl
 
     public HungerOfTheHowlpack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "CNS";
     }
 

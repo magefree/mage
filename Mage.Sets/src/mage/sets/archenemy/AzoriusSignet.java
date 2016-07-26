@@ -37,7 +37,7 @@ public class AzoriusSignet extends mage.sets.dissension.AzoriusSignet {
 
     public AzoriusSignet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "ARC";
     }
 

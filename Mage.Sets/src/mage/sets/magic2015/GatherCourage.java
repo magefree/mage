@@ -39,7 +39,7 @@ public class GatherCourage extends mage.sets.ravnica.GatherCourage {
     public GatherCourage(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "M15";
     }
 

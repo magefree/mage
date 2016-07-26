@@ -37,7 +37,7 @@ public class UntamedWilds extends mage.sets.seventhedition.UntamedWilds {
 
     public UntamedWilds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
         this.expansionSetCode = "S99";
     }
 

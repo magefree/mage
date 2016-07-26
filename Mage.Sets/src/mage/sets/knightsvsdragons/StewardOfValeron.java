@@ -37,7 +37,7 @@ public class StewardOfValeron extends mage.sets.shardsofalara.StewardOfValeron {
 
     public StewardOfValeron(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DDG";
     }
 

@@ -37,7 +37,7 @@ public class Kismet extends mage.sets.fifthedition.Kismet {
 
     public Kismet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 283;
+        this.cardNumber = "283";
         this.expansionSetCode = "4ED";
     }
 

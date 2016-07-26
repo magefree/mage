@@ -37,7 +37,7 @@ public class AvenFisher extends mage.sets.tenthedition.AvenFisher {
 
     public AvenFisher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "8ED";
     }
 

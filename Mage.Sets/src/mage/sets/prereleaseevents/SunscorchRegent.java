@@ -37,7 +37,7 @@ public class SunscorchRegent extends mage.sets.dragonsoftarkir.SunscorchRegent {
 
     public SunscorchRegent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "PTC";
     }
 

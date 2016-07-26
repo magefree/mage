@@ -38,7 +38,7 @@ public class NissasChosen extends mage.sets.zendikar.NissasChosen {
 
     public NissasChosen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

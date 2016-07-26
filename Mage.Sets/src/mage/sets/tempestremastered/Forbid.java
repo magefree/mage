@@ -38,7 +38,7 @@ public class Forbid extends mage.sets.exodus.Forbid {
 
     public Forbid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.RARE;
     }

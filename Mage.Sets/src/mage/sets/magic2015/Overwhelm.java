@@ -39,7 +39,7 @@ public class Overwhelm extends mage.sets.ravnica.Overwhelm {
     public Overwhelm(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 189;
+        this.cardNumber = "189";
         this.expansionSetCode = "M15";
     }
 

@@ -37,7 +37,7 @@ public class TasigurTheGoldenFang extends mage.sets.fatereforged.TasigurTheGolde
 
     public TasigurTheGoldenFang(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "PTC";
     }
 

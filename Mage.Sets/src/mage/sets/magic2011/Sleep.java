@@ -38,7 +38,7 @@ public class Sleep extends mage.sets.magic2010.Sleep {
 
     public Sleep(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "M11";
     }
 

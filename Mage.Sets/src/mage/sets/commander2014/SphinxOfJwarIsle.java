@@ -37,7 +37,7 @@ public class SphinxOfJwarIsle extends mage.sets.zendikar.SphinxOfJwarIsle {
 
     public SphinxOfJwarIsle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "C14";
     }
 

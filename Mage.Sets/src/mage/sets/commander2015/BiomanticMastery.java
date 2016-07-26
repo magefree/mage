@@ -37,7 +37,7 @@ public class BiomanticMastery extends mage.sets.dissension.BiomanticMastery {
 
     public BiomanticMastery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "C15";
     }
 

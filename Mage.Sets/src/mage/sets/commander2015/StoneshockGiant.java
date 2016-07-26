@@ -37,7 +37,7 @@ public class StoneshockGiant extends mage.sets.theros.StoneshockGiant {
 
     public StoneshockGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "C15";
     }
 

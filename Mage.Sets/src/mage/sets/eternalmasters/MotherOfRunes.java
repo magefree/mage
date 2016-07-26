@@ -38,7 +38,7 @@ public class MotherOfRunes extends mage.sets.urzaslegacy.MotherOfRunes {
 
     public MotherOfRunes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.RARE;
     }

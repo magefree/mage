@@ -38,7 +38,7 @@ public class OrcishLibrarian extends mage.sets.iceage.OrcishLibrarian {
 
     public OrcishLibrarian(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class HolyDay extends mage.sets.invasion.HolyDay {
 
     public HolyDay(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "10E";
     }
 

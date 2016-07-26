@@ -38,7 +38,7 @@ public class SkullOfOrm extends mage.sets.thedark.SkullOfOrm {
 
     public SkullOfOrm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 313;
+        this.cardNumber = "313";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.RARE;
     }

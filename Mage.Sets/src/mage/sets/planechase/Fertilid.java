@@ -37,7 +37,7 @@ public class Fertilid extends mage.sets.commander.Fertilid {
 
     public Fertilid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "HOP";
     }
 

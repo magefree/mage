@@ -38,7 +38,7 @@ public class SlashingTiger extends mage.sets.portalthreekingdoms.SlashingTiger {
 
     public SlashingTiger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

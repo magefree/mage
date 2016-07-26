@@ -37,7 +37,7 @@ public class Recycle extends mage.sets.tempest.Recycle {
 
     public Recycle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 189;
+        this.cardNumber = "189";
         this.expansionSetCode = "TPR";
     }
 

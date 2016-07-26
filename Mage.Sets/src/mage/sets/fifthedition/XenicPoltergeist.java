@@ -38,7 +38,7 @@ public class XenicPoltergeist extends mage.sets.masterseditioniv.XenicPoltergeis
 
     public XenicPoltergeist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "5ED";
         this.rarity = Rarity.RARE;
     }

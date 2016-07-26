@@ -37,7 +37,7 @@ public class SpikeHatcher extends mage.sets.tempestremastered.SpikeHatcher {
 
     public SpikeHatcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "EXO";
     }
 

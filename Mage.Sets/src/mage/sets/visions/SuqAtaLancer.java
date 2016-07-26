@@ -38,7 +38,7 @@ public class SuqAtaLancer extends mage.sets.timeshifted.SuqAtaLancer {
 
     public SuqAtaLancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "VIS";
         this.rarity = Rarity.COMMON;
     }

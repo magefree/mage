@@ -38,7 +38,7 @@ public class Thoughtleech extends mage.sets.seventhedition.Thoughtleech {
 
     public Thoughtleech(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "ICE";
     }
 

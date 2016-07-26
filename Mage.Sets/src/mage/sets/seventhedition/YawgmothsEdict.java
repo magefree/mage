@@ -38,7 +38,7 @@ public class YawgmothsEdict extends mage.sets.urzassaga.YawgmothsEdict {
 
     public YawgmothsEdict(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 171;
+        this.cardNumber = "171";
         this.expansionSetCode = "7ED";
     }
 

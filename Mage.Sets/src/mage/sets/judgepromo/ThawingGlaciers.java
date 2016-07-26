@@ -37,7 +37,7 @@ public class ThawingGlaciers extends mage.sets.vintagemasters.ThawingGlaciers {
 
     public ThawingGlaciers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "JR";
     }
 

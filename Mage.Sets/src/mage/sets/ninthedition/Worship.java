@@ -38,7 +38,7 @@ public class Worship extends mage.sets.urzassaga.Worship {
 
     public Worship(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "9ED";
     }
 

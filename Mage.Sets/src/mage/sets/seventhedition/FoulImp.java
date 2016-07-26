@@ -38,7 +38,7 @@ public class FoulImp extends mage.sets.stronghold.FoulImp {
 
     public FoulImp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "7ED";
         this.rarity = Rarity.UNCOMMON;
     }

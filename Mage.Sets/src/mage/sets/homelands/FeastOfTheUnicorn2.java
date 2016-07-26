@@ -37,7 +37,7 @@ public class FeastOfTheUnicorn2 extends mage.sets.homelands.FeastOfTheUnicorn1 {
 
     public FeastOfTheUnicorn2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "HML";
     }
 

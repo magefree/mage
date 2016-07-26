@@ -37,7 +37,7 @@ public class BenalishKnight extends mage.sets.tenthedition.BenalishKnight {
 
     public BenalishKnight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "WTH";
     }
 

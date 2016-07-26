@@ -37,7 +37,7 @@ public class OtherworldlyJourney extends mage.sets.championsofkamigawa.Otherworl
 
     public OtherworldlyJourney(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "DD3DVD";
     }
 

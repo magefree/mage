@@ -37,7 +37,7 @@ public class DaghatarTheAdamant extends mage.sets.fatereforged.DaghatarTheAdaman
 
     public DaghatarTheAdamant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "PTC";
     }
 

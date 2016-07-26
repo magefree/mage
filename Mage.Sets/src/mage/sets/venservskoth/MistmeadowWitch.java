@@ -37,7 +37,7 @@ public class MistmeadowWitch extends mage.sets.shadowmoor.MistmeadowWitch {
 
     public MistmeadowWitch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "DDI";
     }
 

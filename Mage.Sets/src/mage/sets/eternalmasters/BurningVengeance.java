@@ -37,7 +37,7 @@ public class BurningVengeance extends mage.sets.innistrad.BurningVengeance {
 
     public BurningVengeance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "EMA";
     }
 

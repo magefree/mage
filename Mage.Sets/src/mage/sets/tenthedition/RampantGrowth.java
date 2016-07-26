@@ -37,7 +37,7 @@ public class RampantGrowth extends mage.sets.magic2010.RampantGrowth {
 
     public RampantGrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 288;
+        this.cardNumber = "288";
         this.expansionSetCode = "10E";
     }
 

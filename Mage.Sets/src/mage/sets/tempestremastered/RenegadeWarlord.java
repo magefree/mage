@@ -37,7 +37,7 @@ public class RenegadeWarlord extends mage.sets.tempest.RenegadeWarlord {
 
     public RenegadeWarlord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "TPR";
     }
 

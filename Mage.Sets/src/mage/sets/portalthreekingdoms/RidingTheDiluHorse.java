@@ -38,7 +38,7 @@ public class RidingTheDiluHorse extends mage.sets.masterseditioniii.RidingTheDil
 
     public RidingTheDiluHorse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "PTK";
         this.rarity = Rarity.RARE;
     }

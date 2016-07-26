@@ -37,7 +37,7 @@ public class DrudgeSkeletons extends mage.sets.magic2010.DrudgeSkeletons {
 
     public DrudgeSkeletons(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "DD3GVL";
     }
 

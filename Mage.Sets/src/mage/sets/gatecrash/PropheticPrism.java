@@ -37,7 +37,7 @@ public class PropheticPrism extends mage.sets.riseoftheeldrazi.PropheticPrism {
 
     public PropheticPrism(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 234;
+        this.cardNumber = "234";
         this.expansionSetCode = "GTC";
     }
 

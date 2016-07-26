@@ -37,7 +37,7 @@ public class DamnablePact extends mage.sets.dragonsoftarkir.DamnablePact {
 
     public DamnablePact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class Dominate extends mage.sets.nemesis.Dominate {
 
     public Dominate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "C15";
     }
 

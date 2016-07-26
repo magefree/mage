@@ -38,7 +38,7 @@ public class PainfulMemories extends mage.sets.mirage.PainfulMemories {
 
     public PainfulMemories(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "6ED";
         this.rarity = Rarity.COMMON;
     }

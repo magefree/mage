@@ -37,7 +37,7 @@ public class Facevaulter extends mage.sets.lorwyn.Facevaulter {
 
     public Facevaulter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "MMA";
     }
 

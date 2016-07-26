@@ -37,7 +37,7 @@ public class WallOfWood extends mage.sets.tenthedition.WallOfWood {
 
     public WallOfWood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "4ED";
     }
 

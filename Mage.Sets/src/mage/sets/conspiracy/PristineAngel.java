@@ -38,7 +38,7 @@ public class PristineAngel extends mage.sets.darksteel.PristineAngel {
 
     public PristineAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "CNS";
         this.rarity = Rarity.MYTHIC;
     }

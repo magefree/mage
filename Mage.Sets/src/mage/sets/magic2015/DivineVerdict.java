@@ -37,7 +37,7 @@ public class DivineVerdict extends mage.sets.magic2010.DivineVerdict {
 
     public DivineVerdict(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 271;
+        this.cardNumber = "271";
         this.expansionSetCode = "M15";
     }
 

@@ -37,7 +37,7 @@ public class Revenant extends mage.sets.tempestremastered.Revenant {
 
     public Revenant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "ORI";
     }
 

@@ -6,7 +6,7 @@ public class RenderSilent extends mage.sets.dragonsmaze.RenderSilent {
     
     public RenderSilent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "MBP";
     }
     

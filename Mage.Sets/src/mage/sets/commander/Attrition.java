@@ -37,7 +37,7 @@ public class Attrition extends mage.sets.urzasdestiny.Attrition {
 
     public Attrition(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "CMD";
     }
 

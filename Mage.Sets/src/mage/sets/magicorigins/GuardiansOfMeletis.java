@@ -37,7 +37,7 @@ public class GuardiansOfMeletis extends mage.sets.theros.GuardiansOfMeletis {
 
     public GuardiansOfMeletis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "ORI";
     }
 

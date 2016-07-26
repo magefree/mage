@@ -38,7 +38,7 @@ public class TimberwatchElf extends mage.sets.elvesvsgoblins.TimberwatchElf {
 
     public TimberwatchElf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class MurkDwellers extends mage.sets.fifthedition.MurkDwellers {
 
     public MurkDwellers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DRK";
     }
 

@@ -37,7 +37,7 @@ public class Badlands extends mage.sets.limitedalpha.Badlands {
 
     public Badlands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 241;
+        this.cardNumber = "241";
         this.expansionSetCode = "ME4";
     }
 

@@ -37,7 +37,7 @@ public class OreskosSwiftclaw extends mage.sets.journeyintonyx.OreskosSwiftclaw 
 
     public OreskosSwiftclaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "M15";
     }
 

@@ -37,7 +37,7 @@ public class Catalog extends mage.sets.urzassaga.Catalog {
 
     public Catalog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "8ED";
     }
 

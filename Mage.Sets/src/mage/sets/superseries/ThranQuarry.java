@@ -38,7 +38,7 @@ public class ThranQuarry extends mage.sets.urzassaga.ThranQuarry {
 
     public ThranQuarry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "SUS";
         this.rarity = Rarity.SPECIAL;
     }

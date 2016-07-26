@@ -37,7 +37,7 @@ public class RiseFall extends mage.sets.dissension.RiseFall {
 
     public RiseFall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "DDH";
         
     }

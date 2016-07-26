@@ -37,7 +37,7 @@ public class MishrasFactory1 extends mage.sets.elspethvstezzeret.MishrasFactory 
 
     public MishrasFactory1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "ATQ";
     }
 

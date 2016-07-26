@@ -37,7 +37,7 @@ public class WallOfHeat extends mage.sets.legends.WallOfHeat {
 
     public WallOfHeat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "CHR";
     }
 

@@ -37,7 +37,7 @@ public class CityOfTraitors extends mage.sets.exodus.CityOfTraitors {
 
     public CityOfTraitors(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "TPR";
     }
 

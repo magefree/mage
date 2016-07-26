@@ -37,7 +37,7 @@ public class ReliquaryTower extends mage.sets.conflux.ReliquaryTower {
 
     public ReliquaryTower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "M13";
     }
 

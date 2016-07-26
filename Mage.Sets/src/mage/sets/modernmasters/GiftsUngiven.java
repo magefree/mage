@@ -37,7 +37,7 @@ public class GiftsUngiven extends mage.sets.championsofkamigawa.GiftsUngiven {
 
     public GiftsUngiven(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "MMA";
     }
 

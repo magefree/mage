@@ -37,7 +37,7 @@ public class VolcanicHammer extends mage.sets.ninthedition.VolcanicHammer {
 
     public VolcanicHammer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "SUS";
     }
 

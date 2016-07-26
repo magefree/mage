@@ -38,7 +38,7 @@ public class TeferiMageOfZhalfir extends mage.sets.timespiral.TeferiMageOfZhalfi
 
     public TeferiMageOfZhalfir(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "V11";
         this.rarity = Rarity.MYTHIC;
     }

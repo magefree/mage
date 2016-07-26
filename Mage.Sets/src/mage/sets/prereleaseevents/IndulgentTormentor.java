@@ -38,7 +38,7 @@ public class IndulgentTormentor extends mage.sets.magic2015.IndulgentTormentor {
 
     public IndulgentTormentor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class VerduranEnchantress extends mage.sets.seventhedition.VerduranEnchan
 
     public VerduranEnchantress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "2ED";
     }
 

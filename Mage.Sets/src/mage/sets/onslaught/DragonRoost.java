@@ -37,7 +37,7 @@ public class DragonRoost extends mage.sets.tenthedition.DragonRoost {
 
     public DragonRoost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "ONS";
     }
 

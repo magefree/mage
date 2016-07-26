@@ -37,7 +37,7 @@ public class CallTheSkybreaker extends mage.sets.commander.CallTheSkybreaker {
 
     public CallTheSkybreaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 240;
+        this.cardNumber = "240";
         this.expansionSetCode = "C15";
     }
 

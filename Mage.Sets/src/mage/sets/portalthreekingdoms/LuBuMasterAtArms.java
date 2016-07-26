@@ -37,7 +37,7 @@ public class LuBuMasterAtArms extends mage.sets.masterseditioniii.LuBuMasterAtAr
 
     public LuBuMasterAtArms(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "PTK";
     }
 

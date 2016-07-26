@@ -37,7 +37,7 @@ public class DeathriteShaman extends mage.sets.returntoravnica.DeathriteShaman {
 
     public DeathriteShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 215;
+        this.cardNumber = "215";
         this.expansionSetCode = "EMA";
     }
 

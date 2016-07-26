@@ -37,7 +37,7 @@ public class AkromasVengeance extends mage.sets.planechase.AkromasVengeance {
 
     public AkromasVengeance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "ONS";
     }
 

@@ -37,7 +37,7 @@ public class AgonizingMemories extends mage.sets.seventhedition.AgonizingMemorie
 
     public AgonizingMemories(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "6ED";
     }
 

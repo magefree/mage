@@ -37,7 +37,7 @@ public class MagusOfTheArena extends mage.sets.commander2013.MagusOfTheArena {
 
     public MagusOfTheArena(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "PLC";
     }
 

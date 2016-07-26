@@ -37,7 +37,7 @@ public class PrimalRage extends mage.sets.tenthedition.PrimalRage {
 
     public PrimalRage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "STH";
     }
 

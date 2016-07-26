@@ -37,7 +37,7 @@ public class AlluringScent extends mage.sets.portal.AlluringScent {
 
     public AlluringScent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "PO2";
     }
 

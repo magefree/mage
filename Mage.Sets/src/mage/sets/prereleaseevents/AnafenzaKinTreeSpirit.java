@@ -37,7 +37,7 @@ public class AnafenzaKinTreeSpirit extends mage.sets.dragonsoftarkir.AnafenzaKin
 
     public AnafenzaKinTreeSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "PTC";
     }
 

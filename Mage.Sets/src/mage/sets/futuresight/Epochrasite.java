@@ -38,7 +38,7 @@ public class Epochrasite extends mage.sets.modernmasters.Epochrasite {
 
     public Epochrasite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "FUT";
         this.rarity = Rarity.RARE;
     }

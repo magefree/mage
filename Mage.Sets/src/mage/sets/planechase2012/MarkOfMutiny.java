@@ -37,7 +37,7 @@ public class MarkOfMutiny extends mage.sets.zendikar.MarkOfMutiny {
 
     public MarkOfMutiny(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "PC2";
     }
 

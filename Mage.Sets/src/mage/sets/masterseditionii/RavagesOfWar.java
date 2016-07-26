@@ -37,7 +37,7 @@ public class RavagesOfWar extends mage.sets.portalthreekingdoms.RavagesOfWar {
 
     public RavagesOfWar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "ME2";
     }
 

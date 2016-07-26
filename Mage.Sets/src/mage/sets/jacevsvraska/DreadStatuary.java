@@ -37,7 +37,7 @@ public class DreadStatuary extends mage.sets.worldwake.DreadStatuary {
 
     public DreadStatuary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "DDM";
     }
 

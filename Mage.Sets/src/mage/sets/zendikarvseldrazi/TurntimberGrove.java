@@ -37,7 +37,7 @@ public class TurntimberGrove extends mage.sets.zendikar.TurntimberGrove {
 
     public TurntimberGrove(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "DDP";
     }
 

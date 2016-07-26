@@ -37,7 +37,7 @@ public class BalduvianBarbarians extends mage.sets.ninthedition.BalduvianBarbari
 
     public BalduvianBarbarians(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "7ED";
     }
 

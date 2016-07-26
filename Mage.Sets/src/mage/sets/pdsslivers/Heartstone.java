@@ -37,7 +37,7 @@ public class Heartstone extends mage.sets.stronghold.Heartstone {
 
     public Heartstone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "H09";
     }
 

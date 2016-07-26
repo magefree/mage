@@ -37,7 +37,7 @@ public class GoblinRecruiter extends mage.sets.visions.GoblinRecruiter {
 
     public GoblinRecruiter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = "186";
         this.expansionSetCode = "6ED";
     }
 

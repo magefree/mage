@@ -37,7 +37,7 @@ public class GolgariGuildgate extends mage.sets.returntoravnica.GolgariGuildgate
 
     public GolgariGuildgate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 286;
+        this.cardNumber = "286";
         this.expansionSetCode = "C15";
     }
 

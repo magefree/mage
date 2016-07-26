@@ -37,7 +37,7 @@ public class FrenziedGoblin extends mage.sets.magic2015.FrenziedGoblin {
     
     public FrenziedGoblin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 176;
+        this.cardNumber = "176";
         this.expansionSetCode = "FNMP";
     }
     

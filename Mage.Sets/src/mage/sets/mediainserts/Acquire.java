@@ -6,7 +6,7 @@ public class Acquire extends mage.sets.fifthdawn.Acquire {
     
     public Acquire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "MBP";
     }
     

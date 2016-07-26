@@ -38,7 +38,7 @@ public class WallOfBlossoms extends mage.sets.stronghold.WallOfBlossoms {
 
     public WallOfBlossoms(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "V13";
         this.rarity = Rarity.MYTHIC;
     }

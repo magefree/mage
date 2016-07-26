@@ -37,7 +37,7 @@ public class TauntingElf extends mage.sets.onslaught.TauntingElf {
 
     public TauntingElf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "UDS";
     }
 

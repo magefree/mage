@@ -37,7 +37,7 @@ public class Narcomoeba extends mage.sets.futuresight.Narcomoeba {
 
     public Narcomoeba(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "MMA";
     }
 

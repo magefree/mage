@@ -37,7 +37,7 @@ public class EndlessOne extends mage.sets.battleforzendikar.EndlessOne {
 
     public EndlessOne(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 259;
+        this.cardNumber = "259";
         this.expansionSetCode = "PTC";
     }
 

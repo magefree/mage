@@ -38,7 +38,7 @@ public class UrzasMine3 extends mage.sets.fifthedition.UrzasMine {
 
     public UrzasMine3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.UNCOMMON;
     }

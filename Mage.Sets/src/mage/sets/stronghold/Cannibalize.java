@@ -38,7 +38,7 @@ public class Cannibalize extends mage.sets.tempestremastered.Cannibalize {
 
     public Cannibalize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "STH";
         this.rarity = Rarity.COMMON;
     }

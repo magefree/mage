@@ -37,7 +37,7 @@ public class AllSunsDawn extends mage.sets.modernmasters2015.AllSunsDawn {
 
     public AllSunsDawn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "5DN";
     }
 

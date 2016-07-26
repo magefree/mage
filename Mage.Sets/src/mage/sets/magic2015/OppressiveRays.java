@@ -37,7 +37,7 @@ public class OppressiveRays extends mage.sets.journeyintonyx.OppressiveRays {
 
     public OppressiveRays(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "M15";
     }
 

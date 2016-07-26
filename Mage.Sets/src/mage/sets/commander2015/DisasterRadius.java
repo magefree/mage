@@ -37,7 +37,7 @@ public class DisasterRadius extends mage.sets.riseoftheeldrazi.DisasterRadius {
 
     public DisasterRadius(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "C15";
     }
 

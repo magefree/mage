@@ -37,7 +37,7 @@ public class Vandalblast extends mage.sets.returntoravnica.Vandalblast {
 
     public Vandalblast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "C15";
     }
 

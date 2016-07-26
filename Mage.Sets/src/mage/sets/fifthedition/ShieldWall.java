@@ -39,7 +39,7 @@ public class ShieldWall extends mage.sets.legends.ShieldWall {
 
     public ShieldWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 339;
+        this.cardNumber = "339";
         this.expansionSetCode = "5ED";
         this.rarity = Rarity.COMMON;
     }

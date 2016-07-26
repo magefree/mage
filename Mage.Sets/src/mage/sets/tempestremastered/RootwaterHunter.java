@@ -38,7 +38,7 @@ public class RootwaterHunter extends mage.sets.tempest.RootwaterHunter {
 
     public RootwaterHunter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

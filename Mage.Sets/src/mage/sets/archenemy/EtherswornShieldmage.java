@@ -37,7 +37,7 @@ public class EtherswornShieldmage extends mage.sets.alarareborn.EtherswornShield
 
     public EtherswornShieldmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "ARC";
     }
 

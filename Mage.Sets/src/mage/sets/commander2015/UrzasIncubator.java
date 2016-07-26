@@ -37,7 +37,7 @@ public class UrzasIncubator extends mage.sets.urzasdestiny.UrzasIncubator {
 
     public UrzasIncubator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 273;
+        this.cardNumber = "273";
         this.expansionSetCode = "C15";
     }
 

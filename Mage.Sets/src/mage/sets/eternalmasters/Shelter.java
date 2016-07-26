@@ -38,7 +38,7 @@ public class Shelter extends mage.sets.odyssey.Shelter {
 
     public Shelter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "EMA";
     }
 

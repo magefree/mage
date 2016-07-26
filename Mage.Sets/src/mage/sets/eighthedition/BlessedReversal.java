@@ -37,7 +37,7 @@ public class BlessedReversal extends mage.sets.urzaslegacy.BlessedReversal {
 
     public BlessedReversal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "8ED";
     }
 

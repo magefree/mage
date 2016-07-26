@@ -38,7 +38,7 @@ public class DeathGrasp extends mage.sets.apocalypse.DeathGrasp {
 
     public DeathGrasp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 249;
+        this.cardNumber = "249";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

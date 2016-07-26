@@ -37,7 +37,7 @@ public class GarruksHorde extends mage.sets.magic2012.GarruksHorde {
 
     public GarruksHorde(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "M14";
     }
 

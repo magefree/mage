@@ -38,7 +38,7 @@ public class GlacialChasm extends mage.sets.iceage.GlacialChasm {
 
     public GlacialChasm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

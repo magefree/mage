@@ -38,7 +38,7 @@ public class SylvanTutor extends mage.sets.portal.SylvanTutor {
 
     public SylvanTutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

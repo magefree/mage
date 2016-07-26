@@ -37,7 +37,7 @@ public class ElvishArchdruid extends mage.sets.magic2010.ElvishArchdruid {
 
     public ElvishArchdruid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "M13";
     }
 

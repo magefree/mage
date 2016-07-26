@@ -38,7 +38,7 @@ public class MistmoonGriffin extends mage.sets.vintagemasters.MistmoonGriffin {
 
     public MistmoonGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "WTH";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class ObeliskOfJund extends mage.sets.shardsofalara.ObeliskOfJund {
 
     public ObeliskOfJund(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 252;
+        this.cardNumber = "252";
         this.expansionSetCode = "C13";
     }
 

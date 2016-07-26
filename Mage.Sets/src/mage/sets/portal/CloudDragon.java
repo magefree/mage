@@ -37,7 +37,7 @@ public class CloudDragon extends mage.sets.masterseditioniv.CloudDragon {
 
     public CloudDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "POR";
     }
 

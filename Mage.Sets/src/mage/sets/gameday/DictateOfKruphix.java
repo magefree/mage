@@ -37,7 +37,7 @@ public class DictateOfKruphix extends mage.sets.journeyintonyx.DictateOfKruphix 
 
     public DictateOfKruphix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "MGDC";
     }
 

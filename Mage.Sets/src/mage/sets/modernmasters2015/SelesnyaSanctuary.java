@@ -38,7 +38,7 @@ public class SelesnyaSanctuary extends mage.sets.ravnica.SelesnyaSanctuary {
 
     public SelesnyaSanctuary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 248;
+        this.cardNumber = "248";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

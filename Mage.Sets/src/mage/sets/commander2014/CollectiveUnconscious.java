@@ -37,7 +37,7 @@ public class CollectiveUnconscious extends mage.sets.mercadianmasques.Collective
 
     public CollectiveUnconscious(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 187;
+        this.cardNumber = "187";
         this.expansionSetCode = "C14";
     }
 

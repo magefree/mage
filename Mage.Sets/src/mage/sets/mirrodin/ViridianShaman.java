@@ -37,7 +37,7 @@ public class ViridianShaman extends mage.sets.tenthedition.ViridianShaman {
 
     public ViridianShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "MRD";
     }
 

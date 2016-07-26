@@ -37,7 +37,7 @@ public class SimicSignet extends mage.sets.dissension.SimicSignet {
 
     public SimicSignet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 266;
+        this.cardNumber = "266";
         this.expansionSetCode = "C15";
     }
 

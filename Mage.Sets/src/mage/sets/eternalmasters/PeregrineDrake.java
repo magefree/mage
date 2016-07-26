@@ -39,7 +39,7 @@ public class PeregrineDrake extends mage.sets.urzassaga.PeregrineDrake {
 
     public PeregrineDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

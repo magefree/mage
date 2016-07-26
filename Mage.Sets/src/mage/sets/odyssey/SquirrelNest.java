@@ -37,7 +37,7 @@ public class SquirrelNest extends mage.sets.conspiracy.SquirrelNest {
 
     public SquirrelNest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 274;
+        this.cardNumber = "274";
         this.expansionSetCode = "ODY";
     }
 

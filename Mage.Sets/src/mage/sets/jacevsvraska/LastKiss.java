@@ -37,7 +37,7 @@ public class LastKiss extends mage.sets.riseoftheeldrazi.LastKiss {
 
     public LastKiss(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "DDM";
     }
 

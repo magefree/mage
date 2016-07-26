@@ -37,7 +37,7 @@ public class Putrefy extends mage.sets.ravnica.Putrefy {
 
     public Putrefy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "DGM";
     }
 

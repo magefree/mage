@@ -37,7 +37,7 @@ public class SaltMarsh extends mage.sets.invasion.SaltMarsh {
 
     public SaltMarsh(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 325;
+        this.cardNumber = "325";
         this.expansionSetCode = "8ED";
     }
 

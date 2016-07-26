@@ -37,7 +37,7 @@ public class DarkOffering extends mage.sets.portalsecondage.DarkOffering {
 
     public DarkOffering(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "S99";
     }
 

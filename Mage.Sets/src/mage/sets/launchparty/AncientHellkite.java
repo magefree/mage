@@ -37,7 +37,7 @@ public class AncientHellkite extends mage.sets.magic2011.AncientHellkite {
 
     public AncientHellkite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "MLP";
     }
 

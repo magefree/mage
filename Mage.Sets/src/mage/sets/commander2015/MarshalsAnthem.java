@@ -37,7 +37,7 @@ public class MarshalsAnthem extends mage.sets.worldwake.MarshalsAnthem {
 
     public MarshalsAnthem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "C15";
     }
 

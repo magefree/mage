@@ -38,7 +38,7 @@ public class SearingBlaze extends mage.sets.worldwake.SearingBlaze {
 
     public SearingBlaze(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

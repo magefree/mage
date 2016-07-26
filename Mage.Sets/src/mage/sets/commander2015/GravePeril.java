@@ -37,7 +37,7 @@ public class GravePeril extends mage.sets.futuresight.GravePeril {
 
     public GravePeril(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "C15";
     }
 

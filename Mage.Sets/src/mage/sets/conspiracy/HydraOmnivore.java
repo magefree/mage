@@ -38,7 +38,7 @@ public class HydraOmnivore extends mage.sets.commander.HydraOmnivore {
 
     public HydraOmnivore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "CNS";
         this.rarity = Rarity.MYTHIC;
     }

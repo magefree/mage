@@ -37,7 +37,7 @@ public class ConjurersCloset extends mage.sets.avacynrestored.ConjurersCloset {
 
     public ConjurersCloset(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "C13";
     }
 

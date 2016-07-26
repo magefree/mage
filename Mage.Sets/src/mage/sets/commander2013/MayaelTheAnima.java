@@ -37,7 +37,7 @@ public class MayaelTheAnima extends mage.sets.shardsofalara.MayaelTheAnima {
 
     public MayaelTheAnima(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "C13";
     }
 

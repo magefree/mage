@@ -37,7 +37,7 @@ public class JwarIsleRefuge extends mage.sets.zendikar.JwarIsleRefuge {
 
     public JwarIsleRefuge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 279;
+        this.cardNumber = "279";
         this.expansionSetCode = "CMD";
     }
 

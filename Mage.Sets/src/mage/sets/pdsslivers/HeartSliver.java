@@ -37,7 +37,7 @@ public class HeartSliver extends mage.sets.tempest.HeartSliver {
 
     public HeartSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "H09";
     }
 

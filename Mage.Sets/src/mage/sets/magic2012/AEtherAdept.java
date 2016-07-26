@@ -39,7 +39,7 @@ public class AEtherAdept extends AetherAdept {
 
     public AEtherAdept(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "M12";
     }
 

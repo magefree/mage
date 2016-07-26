@@ -38,7 +38,7 @@ public class TotemGuideHartebeest extends mage.sets.riseoftheeldrazi.TotemGuideH
 
     public TotemGuideHartebeest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "ORI";
         this.rarity = Rarity.UNCOMMON;
     }

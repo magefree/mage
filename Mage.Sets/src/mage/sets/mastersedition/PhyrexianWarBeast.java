@@ -38,7 +38,7 @@ public class PhyrexianWarBeast extends mage.sets.alliances.PhyrexianWarBeast1 {
 
     public PhyrexianWarBeast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.UNCOMMON;
     }

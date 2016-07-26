@@ -37,7 +37,7 @@ public class WashOut extends mage.sets.invasion.WashOut {
 
     public WashOut(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "C13";
     }
 

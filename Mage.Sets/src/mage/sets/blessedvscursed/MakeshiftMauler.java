@@ -37,7 +37,7 @@ public class MakeshiftMauler extends mage.sets.innistrad.MakeshiftMauler {
 
     public MakeshiftMauler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "DDQ";
     }
 

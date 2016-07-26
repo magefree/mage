@@ -37,7 +37,7 @@ public class PhantomWings extends mage.sets.betrayersofkamigawa.PhantomWings {
 
     public PhantomWings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "WTH";
     }
 

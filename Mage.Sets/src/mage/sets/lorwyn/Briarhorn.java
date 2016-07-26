@@ -37,7 +37,7 @@ public class Briarhorn extends mage.sets.planechase.Briarhorn {
 
     public Briarhorn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "LRW";
     }
 

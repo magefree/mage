@@ -37,7 +37,7 @@ public class Exploration extends mage.sets.urzassaga.Exploration {
 
     public Exploration(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "CNS";
     }
 

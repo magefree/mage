@@ -37,7 +37,7 @@ public class SproutingVines extends mage.sets.scourge.SproutingVines {
 
     public SproutingVines(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "C13";
     }
 

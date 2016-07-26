@@ -37,7 +37,7 @@ public class WuEliteCavalry extends mage.sets.portalthreekingdoms.WuEliteCavalry
 
     public WuEliteCavalry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "ME3";
     }
 

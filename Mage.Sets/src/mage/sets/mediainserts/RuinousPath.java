@@ -38,7 +38,7 @@ public class RuinousPath extends mage.sets.battleforzendikar.RuinousPath {
 
     public RuinousPath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

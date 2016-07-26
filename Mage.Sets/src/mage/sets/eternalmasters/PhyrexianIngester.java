@@ -39,7 +39,7 @@ public class PhyrexianIngester extends mage.sets.newphyrexia.PhyrexianIngester {
 
     public PhyrexianIngester(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

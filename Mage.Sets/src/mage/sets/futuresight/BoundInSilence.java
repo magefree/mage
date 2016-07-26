@@ -38,7 +38,7 @@ public class BoundInSilence extends mage.sets.modernmasters.BoundInSilence {
 
     public BoundInSilence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "FUT";
         this.rarity = Rarity.UNCOMMON;
     }

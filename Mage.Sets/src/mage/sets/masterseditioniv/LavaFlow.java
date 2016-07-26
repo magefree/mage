@@ -38,7 +38,7 @@ public class LavaFlow extends mage.sets.portal.LavaFlow {
 
     public LavaFlow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.COMMON;
     }

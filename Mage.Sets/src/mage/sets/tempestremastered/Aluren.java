@@ -37,7 +37,7 @@ public class Aluren extends mage.sets.tempest.Aluren {
 
     public Aluren(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "TPR";
     }
 

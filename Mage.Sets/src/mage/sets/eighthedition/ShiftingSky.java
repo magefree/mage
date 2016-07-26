@@ -38,7 +38,7 @@ public class ShiftingSky extends mage.sets.planeshift.ShiftingSky {
 
     public ShiftingSky(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.RARE;
     }

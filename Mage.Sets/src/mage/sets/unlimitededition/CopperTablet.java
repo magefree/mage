@@ -38,7 +38,7 @@ public class CopperTablet extends mage.sets.limitedalpha.CopperTablet {
 
     public CopperTablet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "2ED";
     }
 

@@ -37,7 +37,7 @@ public class SorinsThirst extends mage.sets.magic2012.SorinsThirst {
 
     public SorinsThirst(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "DDK";
     }
 

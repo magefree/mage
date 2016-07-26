@@ -37,7 +37,7 @@ public class BehemothSledge extends mage.sets.alarareborn.BehemothSledge {
 
     public BehemothSledge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "DDH";
     }
 

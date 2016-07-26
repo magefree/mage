@@ -38,7 +38,7 @@ public class Desertion extends mage.sets.visions.Desertion {
 
     public Desertion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

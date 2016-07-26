@@ -37,7 +37,7 @@ public class DiscipleOfGriselbrand extends mage.sets.innistrad.DiscipleOfGriselb
 
     public DiscipleOfGriselbrand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "C13";
     }
 

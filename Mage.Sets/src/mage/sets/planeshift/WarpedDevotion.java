@@ -38,7 +38,7 @@ public class WarpedDevotion extends mage.sets.eighthedition.WarpedDevotion {
 
     public WarpedDevotion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "PLS";
         this.rarity = Rarity.UNCOMMON;
     }

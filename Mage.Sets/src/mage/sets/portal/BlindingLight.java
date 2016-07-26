@@ -39,7 +39,7 @@ public class BlindingLight extends mage.sets.mirage.BlindingLight {
 
     public BlindingLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "POR";
         this.rarity = Rarity.RARE;
     }

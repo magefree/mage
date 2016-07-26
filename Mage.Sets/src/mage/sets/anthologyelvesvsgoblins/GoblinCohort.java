@@ -37,7 +37,7 @@ public class GoblinCohort extends mage.sets.betrayersofkamigawa.GoblinCohort {
 
     public GoblinCohort(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "DD3EVG";
     }
 

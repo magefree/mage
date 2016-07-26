@@ -37,7 +37,7 @@ public class PitTrap extends mage.sets.urzassaga.PitTrap {
 
     public PitTrap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 313;
+        this.cardNumber = "313";
         this.expansionSetCode = "7ED";
     }
 

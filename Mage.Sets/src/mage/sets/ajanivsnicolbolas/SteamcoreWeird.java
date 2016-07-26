@@ -37,7 +37,7 @@ public class SteamcoreWeird extends mage.sets.izzetvsgolgari.SteamcoreWeird {
 
     public SteamcoreWeird(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDH";
     }
 

@@ -37,7 +37,7 @@ public class VividMeadow extends mage.sets.lorwyn.VividMeadow {
 
     public VividMeadow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 297;
+        this.cardNumber = "297";
         this.expansionSetCode = "CMD";
     }
 

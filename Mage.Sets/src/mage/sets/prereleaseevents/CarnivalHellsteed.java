@@ -38,7 +38,7 @@ public class CarnivalHellsteed extends mage.sets.returntoravnica.CarnivalHellste
 
     public CarnivalHellsteed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

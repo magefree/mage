@@ -37,7 +37,7 @@ public class ForgottenAncient extends mage.sets.scourge.ForgottenAncient {
 
     public ForgottenAncient(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "ARC";
     }
 

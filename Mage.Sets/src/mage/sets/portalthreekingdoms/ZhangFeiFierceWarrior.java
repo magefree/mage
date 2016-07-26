@@ -38,7 +38,7 @@ public class ZhangFeiFierceWarrior extends mage.sets.masterseditioniii.ZhangFeiF
 
     public ZhangFeiFierceWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "PTK";
         this.rarity = Rarity.RARE;
     }

@@ -37,7 +37,7 @@ public class WanderingMage extends mage.sets.masterseditioniii.WanderingMage {
 
     public WanderingMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "ALL";
     }
 

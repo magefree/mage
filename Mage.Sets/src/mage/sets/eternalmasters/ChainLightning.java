@@ -38,7 +38,7 @@ public class ChainLightning extends mage.sets.legends.ChainLightning {
 
     public ChainLightning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

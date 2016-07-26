@@ -37,7 +37,7 @@ public class ManicVandal extends mage.sets.magic2011.ManicVandal {
 
     public ManicVandal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "M12";
     }
 

@@ -38,7 +38,7 @@ public class Counterspell extends mage.sets.tempest.Counterspell {
 
     public Counterspell(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

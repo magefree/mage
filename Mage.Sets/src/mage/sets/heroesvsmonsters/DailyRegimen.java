@@ -37,7 +37,7 @@ public class DailyRegimen extends mage.sets.morningtide.DailyRegimen {
 
     public DailyRegimen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "DDL";
     }
 

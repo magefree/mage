@@ -38,7 +38,7 @@ public class ClockworkAvian extends mage.sets.fourthedition.ClockworkAvian {
 
     public ClockworkAvian(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

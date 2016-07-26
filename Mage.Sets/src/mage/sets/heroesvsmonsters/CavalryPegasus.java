@@ -37,7 +37,7 @@ public class CavalryPegasus extends mage.sets.theros.CavalryPegasus {
 
     public CavalryPegasus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "DDL";
     }
 

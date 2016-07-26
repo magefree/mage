@@ -37,7 +37,7 @@ public class AvacynAngelOfHope extends mage.sets.avacynrestored.AvacynAngelOfHop
 
     public AvacynAngelOfHope(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "V15";
     }
 

@@ -37,7 +37,7 @@ public class WallOfReverence extends mage.sets.conflux.WallOfReverence {
 
     public WallOfReverence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "C13";
     }
 

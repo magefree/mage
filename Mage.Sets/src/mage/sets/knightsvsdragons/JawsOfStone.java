@@ -37,7 +37,7 @@ public class JawsOfStone extends mage.sets.shadowmoor.JawsOfStone {
 
     public JawsOfStone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "DDG";
     }
 

@@ -39,7 +39,7 @@ public class LeyDruid extends mage.sets.limitedalpha.LeyDruid {
 
     public LeyDruid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "5ED";
         this.rarity = Rarity.COMMON;
     }

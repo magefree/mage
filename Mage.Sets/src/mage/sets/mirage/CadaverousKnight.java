@@ -37,7 +37,7 @@ public class CadaverousKnight extends mage.sets.planechase.CadaverousKnight {
 
     public CadaverousKnight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "MIR";
     }
 

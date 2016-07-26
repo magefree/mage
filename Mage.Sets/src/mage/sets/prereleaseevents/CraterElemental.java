@@ -37,7 +37,7 @@ public class CraterElemental extends mage.sets.dragonsoftarkir.CraterElemental {
 
     public CraterElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "PTC";
     }
 

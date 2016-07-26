@@ -37,7 +37,7 @@ public class SphinxOfUthuun extends mage.sets.magic2012.SphinxOfUthuun {
 
     public SphinxOfUthuun(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "C14";
     }
 

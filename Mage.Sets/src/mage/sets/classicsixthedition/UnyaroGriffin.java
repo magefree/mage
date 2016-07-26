@@ -37,7 +37,7 @@ public class UnyaroGriffin extends mage.sets.mirage.UnyaroGriffin {
 
     public UnyaroGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class Scragnoth extends mage.sets.tempest.Scragnoth {
 
     public Scragnoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "FNMP";
     }
 

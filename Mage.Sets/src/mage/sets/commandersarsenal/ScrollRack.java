@@ -38,7 +38,7 @@ public class ScrollRack extends mage.sets.tempest.ScrollRack {
 
     public ScrollRack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

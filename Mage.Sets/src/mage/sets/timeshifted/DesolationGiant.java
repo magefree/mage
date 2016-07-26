@@ -38,7 +38,7 @@ public class DesolationGiant extends mage.sets.apocalypse.DesolationGiant {
 
     public DesolationGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

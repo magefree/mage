@@ -38,7 +38,7 @@ public class SilvercoatLion extends mage.sets.magic2010.SilvercoatLion {
 
     public SilvercoatLion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "M11";
     }
 

@@ -37,7 +37,7 @@ public class LionheartMaverick extends mage.sets.guildpact.LionheartMaverick {
 
     public LionheartMaverick(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "DDG";
     }
 

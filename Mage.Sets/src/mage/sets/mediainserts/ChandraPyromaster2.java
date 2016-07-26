@@ -6,7 +6,7 @@ public class ChandraPyromaster2 extends mage.sets.magic2015.ChandraPyromaster {
     
     public ChandraPyromaster2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "MBP";
     }
     

@@ -37,7 +37,7 @@ public class SunastianFalconer extends mage.sets.legends.SunastianFalconer {
 
     public SunastianFalconer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "ME3";
     }
 

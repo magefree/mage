@@ -38,7 +38,7 @@ public class HonoredHierarch extends mage.sets.magicorigins.HonoredHierarch {
 
     public HonoredHierarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

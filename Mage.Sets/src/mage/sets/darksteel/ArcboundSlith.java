@@ -37,7 +37,7 @@ public class ArcboundSlith extends mage.sets.planechase.ArcboundSlith {
 
     public ArcboundSlith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "DST";
     }
 

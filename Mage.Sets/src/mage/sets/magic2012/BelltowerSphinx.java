@@ -37,7 +37,7 @@ public class BelltowerSphinx extends mage.sets.ravnica.BelltowerSphinx {
 
     public BelltowerSphinx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "M12";
     }
 

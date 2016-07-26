@@ -37,7 +37,7 @@ public class KolaghansCommand extends mage.sets.dragonsoftarkir.KolaghansCommand
 
     public KolaghansCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "PTC";
     }
 

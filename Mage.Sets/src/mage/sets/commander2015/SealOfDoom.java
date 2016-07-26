@@ -37,7 +37,7 @@ public class SealOfDoom extends mage.sets.dissension.SealOfDoom {
 
     public SealOfDoom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "C15";
     }
 

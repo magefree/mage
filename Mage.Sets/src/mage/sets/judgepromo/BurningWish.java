@@ -37,7 +37,7 @@ public class BurningWish extends mage.sets.judgment.BurningWish {
 
     public BurningWish(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "JR";
     }
 

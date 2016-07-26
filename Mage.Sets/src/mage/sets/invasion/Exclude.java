@@ -37,7 +37,7 @@ public class Exclude extends mage.sets.commander2014.Exclude {
 
     public Exclude(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "INV";
     }
 

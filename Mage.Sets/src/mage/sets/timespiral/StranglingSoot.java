@@ -37,7 +37,7 @@ public class StranglingSoot extends mage.sets.sorinvstibalt.StranglingSoot {
 
     public StranglingSoot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "TSP";
     }
 

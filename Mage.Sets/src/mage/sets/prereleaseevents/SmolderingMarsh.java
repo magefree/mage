@@ -37,7 +37,7 @@ public class SmolderingMarsh extends mage.sets.battleforzendikar.SmolderingMarsh
 
     public SmolderingMarsh(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 295;
+        this.cardNumber = "295";
         this.expansionSetCode = "PTC";
     }
 

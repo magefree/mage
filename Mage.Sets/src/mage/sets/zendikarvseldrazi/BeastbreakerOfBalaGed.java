@@ -37,7 +37,7 @@ public class BeastbreakerOfBalaGed extends mage.sets.riseoftheeldrazi.Beastbreak
 
     public BeastbreakerOfBalaGed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDP";
     }
 

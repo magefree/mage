@@ -37,7 +37,7 @@ public class ThunderThrashElder extends mage.sets.shardsofalara.ThunderThrashEld
 
     public ThunderThrashElder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "PC2";
     }
 

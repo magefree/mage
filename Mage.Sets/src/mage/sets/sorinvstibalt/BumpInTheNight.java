@@ -37,7 +37,7 @@ public class BumpInTheNight extends mage.sets.innistrad.BumpInTheNight {
 
     public BumpInTheNight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "DDK";
     }
 

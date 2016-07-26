@@ -37,7 +37,7 @@ public class StandingTroops extends mage.sets.eighthedition.StandingTroops {
 
     public StandingTroops(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "7ED";
     }
 

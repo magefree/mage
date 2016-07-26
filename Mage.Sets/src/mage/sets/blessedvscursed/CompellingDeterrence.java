@@ -37,7 +37,7 @@ public class CompellingDeterrence extends mage.sets.shadowsoverinnistrad.Compell
 
     public CompellingDeterrence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "DDQ";
     }
 

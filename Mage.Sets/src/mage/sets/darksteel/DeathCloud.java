@@ -37,7 +37,7 @@ public class DeathCloud extends mage.sets.modernmasters.DeathCloud {
 
     public DeathCloud(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "DST";
     }
 

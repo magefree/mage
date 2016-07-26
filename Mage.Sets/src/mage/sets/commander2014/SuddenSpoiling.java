@@ -37,7 +37,7 @@ public class SuddenSpoiling extends mage.sets.timespiral.SuddenSpoiling {
 
     public SuddenSpoiling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "C14";
     }
 

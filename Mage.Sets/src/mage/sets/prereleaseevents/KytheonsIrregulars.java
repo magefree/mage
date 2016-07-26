@@ -37,7 +37,7 @@ public class KytheonsIrregulars extends mage.sets.magicorigins.KytheonsIrregular
 
     public KytheonsIrregulars(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "PTC";
     }
 

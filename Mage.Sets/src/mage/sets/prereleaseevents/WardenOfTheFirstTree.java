@@ -37,7 +37,7 @@ public class WardenOfTheFirstTree extends mage.sets.fatereforged.WardenOfTheFirs
 
     public WardenOfTheFirstTree(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "PTC";
     }
 

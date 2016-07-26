@@ -37,7 +37,7 @@ public class NantukoHusk extends mage.sets.tenthedition.NantukoHusk {
 
     public NantukoHusk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
         this.expansionSetCode = "9ED";
     }
 

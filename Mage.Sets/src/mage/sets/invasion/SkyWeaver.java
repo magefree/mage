@@ -37,7 +37,7 @@ public class SkyWeaver extends mage.sets.tenthedition.SkyWeaver {
 
     public SkyWeaver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "INV";
     }
 

@@ -37,7 +37,7 @@ public class IdentityThief extends mage.sets.eldritchmoon.IdentityThief {
 
     public IdentityThief(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "MLP";
     }
 

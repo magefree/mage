@@ -38,7 +38,7 @@ public class StoneCalendar extends mage.sets.mastersedition.StoneCalendar {
 
     public StoneCalendar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.RARE;
     }

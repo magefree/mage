@@ -38,7 +38,7 @@ public class LightningAxe extends mage.sets.timespiral.LightningAxe {
 
     public LightningAxe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "SOI";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -38,7 +38,7 @@ public class NaturalSelection extends mage.sets.limitedalpha.NaturalSelection {
 
     public NaturalSelection(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "LEB";
     }
 

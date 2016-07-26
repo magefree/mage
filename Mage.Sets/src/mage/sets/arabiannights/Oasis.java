@@ -37,7 +37,7 @@ public class Oasis extends mage.sets.fourthedition.Oasis {
 
     public Oasis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "ARN";
     }
 

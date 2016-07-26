@@ -37,7 +37,7 @@ public class DriverOfTheDead extends mage.sets.avacynrestored.DriverOfTheDead {
 
     public DriverOfTheDead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "DDQ";
     }
 

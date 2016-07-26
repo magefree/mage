@@ -37,7 +37,7 @@ public class HornOfDeafening extends mage.sets.legends.HornOfDeafening {
 
     public HornOfDeafening(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "CHR";
     }
 

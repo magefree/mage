@@ -37,7 +37,7 @@ public class SapseepForest extends mage.sets.shadowmoor.SapseepForest {
 
     public SapseepForest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "DDH";
     }
 

@@ -38,7 +38,7 @@ public class TemurAscendancy extends mage.sets.khansoftarkir.TemurAscendancy {
 
     public TemurAscendancy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

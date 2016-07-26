@@ -37,7 +37,7 @@ public class SeveredLegion extends mage.sets.tenthedition.SeveredLegion {
 
     public SeveredLegion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "ONS";
     }
 

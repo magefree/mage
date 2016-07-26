@@ -38,7 +38,7 @@ public class LadyEvangela extends mage.sets.legends.LadyEvangela {
 
     public LadyEvangela(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

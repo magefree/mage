@@ -37,7 +37,7 @@ public class SerpentineSpike extends mage.sets.battleforzendikar.SerpentineSpike
 
     public SerpentineSpike(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 291;
+        this.cardNumber = "291";
         this.expansionSetCode = "PTC";
     }
 

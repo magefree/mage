@@ -38,7 +38,7 @@ public class VeteranCavalier extends mage.sets.ninthedition.VeteranCavalier {
 
     public VeteranCavalier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "S99";
         this.rarity = Rarity.UNCOMMON;
     }

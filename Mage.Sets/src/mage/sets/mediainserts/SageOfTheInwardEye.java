@@ -6,7 +6,7 @@ public class SageOfTheInwardEye extends mage.sets.khansoftarkir.SageOfTheInwardE
     
     public SageOfTheInwardEye(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "MBP";
     }
     

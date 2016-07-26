@@ -37,7 +37,7 @@ public class AshmouthHound extends mage.sets.innistrad.AshmouthHound {
 
     public AshmouthHound(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "DDK";
     }
 

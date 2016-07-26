@@ -37,7 +37,7 @@ public class ItThatBetrays extends mage.sets.riseoftheeldrazi.ItThatBetrays {
 
     public ItThatBetrays(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "DDP";
     }
 

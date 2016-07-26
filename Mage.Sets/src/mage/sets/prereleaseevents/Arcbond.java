@@ -37,7 +37,7 @@ public class Arcbond extends mage.sets.fatereforged.Arcbond {
 
     public Arcbond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "PTC";
     }
 

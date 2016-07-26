@@ -38,7 +38,7 @@ public class BorisDevilboon extends mage.sets.legends.BorisDevilboon {
 
     public BorisDevilboon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

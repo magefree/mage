@@ -37,7 +37,7 @@ public class UginsInsight extends mage.sets.battleforzendikar.UginsInsight {
 
     public UginsInsight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 298;
+        this.cardNumber = "298";
         this.expansionSetCode = "PTC";
     }
 

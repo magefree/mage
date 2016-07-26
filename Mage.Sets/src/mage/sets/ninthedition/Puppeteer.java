@@ -37,7 +37,7 @@ public class Puppeteer extends mage.sets.tenthedition.Puppeteer {
 
     public Puppeteer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "9ED";
     }
 

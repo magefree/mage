@@ -37,7 +37,7 @@ public class AssaultGriffin extends mage.sets.magic2011.AssaultGriffin {
 
     public AssaultGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "GTC";
     }
 

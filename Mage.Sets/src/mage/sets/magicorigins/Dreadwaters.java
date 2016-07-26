@@ -37,7 +37,7 @@ public class Dreadwaters extends mage.sets.avacynrestored.Dreadwaters {
 
     public Dreadwaters(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "ORI";
     }
 

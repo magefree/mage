@@ -38,7 +38,7 @@ public class DisdainfulStroke extends mage.sets.khansoftarkir.DisdainfulStroke {
     
     public DisdainfulStroke(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

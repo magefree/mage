@@ -37,7 +37,7 @@ public class ElvishScout3 extends ElvishScout1 {
 
     public ElvishScout3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
     }
 
     public ElvishScout3(final ElvishScout3 card) {

@@ -37,7 +37,7 @@ public class TobiasAndrion extends mage.sets.legends.TobiasAndrion {
 
     public TobiasAndrion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "CHR";
     }
 

@@ -37,7 +37,7 @@ public class Tidings extends mage.sets.tenthedition.Tidings {
 
     public Tidings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "9ED";
     }
 

@@ -37,7 +37,7 @@ public class CrownOfFlames extends mage.sets.tempest.CrownOfFlames {
 
     public CrownOfFlames(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "INV";
     }
 

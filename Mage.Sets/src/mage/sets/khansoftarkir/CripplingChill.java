@@ -37,7 +37,7 @@ public class CripplingChill extends mage.sets.avacynrestored.CripplingChill {
 
     public CripplingChill(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "KTK";
     }
 

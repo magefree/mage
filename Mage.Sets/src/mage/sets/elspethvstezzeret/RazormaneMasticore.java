@@ -37,7 +37,7 @@ public class RazormaneMasticore extends mage.sets.tenthedition.RazormaneMasticor
 
     public RazormaneMasticore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "DDF";
     }
 

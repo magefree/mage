@@ -37,7 +37,7 @@ public class SealOfCleansing extends mage.sets.nemesis.SealOfCleansing {
 
     public SealOfCleansing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "C15";
     }
 

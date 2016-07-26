@@ -38,7 +38,7 @@ public class Cataclysm extends mage.sets.exodus.Cataclysm {
 
     public Cataclysm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.MYTHIC;
     }

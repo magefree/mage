@@ -38,7 +38,7 @@ public class LightningBolt extends mage.sets.magic2010.LightningBolt {
 
     public LightningBolt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

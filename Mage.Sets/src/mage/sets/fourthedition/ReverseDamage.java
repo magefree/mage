@@ -37,7 +37,7 @@ public class ReverseDamage extends mage.sets.limitedalpha.ReverseDamage {
 
     public ReverseDamage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 295;
+        this.cardNumber = "295";
         this.expansionSetCode = "4ED";
     }
 

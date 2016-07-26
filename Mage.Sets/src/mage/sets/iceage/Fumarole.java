@@ -37,7 +37,7 @@ public class Fumarole extends mage.sets.masterseditionii.Fumarole {
 
     public Fumarole(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 369;
+        this.cardNumber = "369";
         this.expansionSetCode = "ICE";
     }
 

@@ -37,7 +37,7 @@ public class RedWard extends mage.sets.revisededition.RedWard {
 
     public RedWard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "LEB";
     }
 

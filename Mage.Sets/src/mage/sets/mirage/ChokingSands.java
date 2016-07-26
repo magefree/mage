@@ -37,7 +37,7 @@ public class ChokingSands extends mage.sets.vintagemasters.ChokingSands {
 
     public ChokingSands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "MIR";
     }
 

@@ -38,7 +38,7 @@ public class RockBadger extends mage.sets.tenthedition.RockBadger {
 
     public RockBadger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 210;
+        this.cardNumber = "210";
         this.expansionSetCode = "MMQ";
         this.rarity = Rarity.UNCOMMON;
     }

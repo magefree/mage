@@ -37,7 +37,7 @@ public class VulshokSorcerer extends mage.sets.fifthdawn.VulshokSorcerer {
 
     public VulshokSorcerer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "PD2";
     }
 

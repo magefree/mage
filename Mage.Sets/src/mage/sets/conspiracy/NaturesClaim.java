@@ -37,7 +37,7 @@ public class NaturesClaim extends mage.sets.worldwake.NaturesClaim {
 
     public NaturesClaim(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 171;
+        this.cardNumber = "171";
         this.expansionSetCode = "CNS";
     }
 

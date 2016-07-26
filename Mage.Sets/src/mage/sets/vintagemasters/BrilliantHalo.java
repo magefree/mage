@@ -37,7 +37,7 @@ public class BrilliantHalo extends mage.sets.urzassaga.BrilliantHalo {
 
     public BrilliantHalo(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "VMA";
     }
 

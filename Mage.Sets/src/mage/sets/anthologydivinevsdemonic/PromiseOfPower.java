@@ -37,7 +37,7 @@ public class PromiseOfPower extends mage.sets.commander2014.PromiseOfPower {
 
     public PromiseOfPower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "DD3DVD";
     }
 

@@ -38,7 +38,7 @@ public class ChaosWarp extends mage.sets.vintagemasters.ChaosWarp {
 
     public ChaosWarp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

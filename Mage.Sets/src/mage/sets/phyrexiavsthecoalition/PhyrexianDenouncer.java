@@ -37,7 +37,7 @@ public class PhyrexianDenouncer extends mage.sets.urzaslegacy.PhyrexianDenouncer
 
     public PhyrexianDenouncer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "DDE";
     }
 

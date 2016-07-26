@@ -37,7 +37,7 @@ public class LabRats extends mage.sets.stronghold.LabRats {
 
     public LabRats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "TPR";
     }
 

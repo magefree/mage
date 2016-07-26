@@ -37,7 +37,7 @@ public class GrandAbolisher extends mage.sets.magic2012.GrandAbolisher {
 
     public GrandAbolisher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "C14";
     }
 

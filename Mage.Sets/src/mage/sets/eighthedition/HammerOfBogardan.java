@@ -37,7 +37,7 @@ public class HammerOfBogardan extends mage.sets.mirage.HammerOfBogardan {
 
     public HammerOfBogardan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "8ED";
     }
 

@@ -38,7 +38,7 @@ public class JestersCap extends mage.sets.fifthedition.JestersCap {
 
     public JestersCap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "V10";
         this.rarity = Rarity.MYTHIC;
     }

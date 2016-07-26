@@ -37,7 +37,7 @@ public class UthdenTroll extends mage.sets.limitedalpha.UthdenTroll {
 
     public UthdenTroll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 246;
+        this.cardNumber = "246";
         this.expansionSetCode = "4ED";
     }
 

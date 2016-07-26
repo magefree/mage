@@ -37,7 +37,7 @@ public class ShrineOfTheForsakenGods extends mage.sets.battleforzendikar.ShrineO
 
     public ShrineOfTheForsakenGods(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 293;
+        this.cardNumber = "293";
         this.expansionSetCode = "PTC";
     }
 

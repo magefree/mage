@@ -37,7 +37,7 @@ public class VedalkenDismisser extends mage.sets.ravnica.VedalkenDismisser {
 
     public VedalkenDismisser(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "MMA";
     }
 

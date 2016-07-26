@@ -38,7 +38,7 @@ public class BloodCrypt extends mage.sets.dissension.BloodCrypt {
 
     public BloodCrypt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

@@ -37,7 +37,7 @@ public class SkyDiamond extends mage.sets.seventhedition.SkyDiamond {
 
     public SkyDiamond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 311;
+        this.cardNumber = "311";
         this.expansionSetCode = "6ED";
     }
 

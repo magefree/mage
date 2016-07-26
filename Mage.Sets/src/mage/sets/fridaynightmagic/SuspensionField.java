@@ -37,7 +37,7 @@ public class SuspensionField extends mage.sets.khansoftarkir.SuspensionField {
 
     public SuspensionField(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "FNMP";
     }
 

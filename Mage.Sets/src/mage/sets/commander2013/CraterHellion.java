@@ -37,7 +37,7 @@ public class CraterHellion extends mage.sets.urzassaga.CraterHellion {
 
     public CraterHellion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "C13";
     }
 

@@ -38,7 +38,7 @@ public class Tangle extends mage.sets.invasion.Tangle {
 
     public Tangle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

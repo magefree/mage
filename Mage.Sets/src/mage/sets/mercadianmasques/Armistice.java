@@ -37,7 +37,7 @@ public class Armistice extends mage.sets.commander2014.Armistice {
 
     public Armistice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "MMQ";
     }
 

@@ -37,7 +37,7 @@ public class GravenCairns extends mage.sets.shadowmoor.GravenCairns {
 
     public GravenCairns(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "FUT";
     }
 

@@ -37,7 +37,7 @@ public class VampireBats extends mage.sets.fifthedition.VampireBats {
 
     public VampireBats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = "186";
         this.expansionSetCode = "10E";
     }
 

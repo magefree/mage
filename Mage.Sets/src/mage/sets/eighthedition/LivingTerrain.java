@@ -37,7 +37,7 @@ public class LivingTerrain extends mage.sets.prophecy.LivingTerrain {
 
     public LivingTerrain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 260;
+        this.cardNumber = "260";
         this.expansionSetCode = "8ED";
     }
 

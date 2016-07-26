@@ -37,7 +37,7 @@ public class BroodButcher extends mage.sets.battleforzendikar.BroodButcher {
 
     public BroodButcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 247;
+        this.cardNumber = "247";
         this.expansionSetCode = "PTC";
     }
 

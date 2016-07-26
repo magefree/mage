@@ -43,6 +43,7 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.Command;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
+import mage.client.util.NaturalOrderCardNumberComparator;
 import mage.client.util.sets.ConstructedFormats;
 import mage.components.ImagePanel;
 import mage.constants.Rarity;
@@ -267,13 +268,18 @@ public class MageBook extends JComponent {
 
     private List<CardInfo> getCards(int page, String set) {
         CardCriteria criteria = new CardCriteria();
-        criteria.setCodes(set).start((long) page * conf.CARDS_PER_PAGE).count((long) conf.CARDS_PER_PAGE + 1);
-        criteria.setOrderBy("cardNumber");
+        criteria.setCodes(set);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
-        if (cards.size() > conf.CARDS_PER_PAGE) {
+        cards.sort(new NaturalOrderCardNumberComparator());
+        int start = page * conf.CARDS_PER_PAGE;
+        int end = page * conf.CARDS_PER_PAGE + conf.CARDS_PER_PAGE;
+        if (end > cards.size()) {
+            end = cards.size();
+        }
+        if (cards.size() > end) {
             pageRight.setVisible(true);
         }
-        return cards;
+        return cards.subList(start, end);
     }
 
     private ImagePanel getImagePanel(String filename, int type) {

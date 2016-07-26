@@ -37,7 +37,7 @@ public class RaziaBorosArchangel extends mage.sets.planechase.RaziaBorosArchange
 
     public RaziaBorosArchangel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = "223";
         this.expansionSetCode = "RAV";
     }
 

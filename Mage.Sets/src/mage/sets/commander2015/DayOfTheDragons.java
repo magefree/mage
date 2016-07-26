@@ -37,7 +37,7 @@ public class DayOfTheDragons extends mage.sets.scourge.DayOfTheDragons {
 
     public DayOfTheDragons(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "C15";
     }
 

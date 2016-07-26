@@ -37,7 +37,7 @@ public class TrueConviction extends mage.sets.scarsofmirrodin.TrueConviction {
 
     public TrueConviction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "C14";
     }
 

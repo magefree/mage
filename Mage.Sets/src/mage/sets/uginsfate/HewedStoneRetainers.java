@@ -37,7 +37,7 @@ public class HewedStoneRetainers extends mage.sets.fatereforged.HewedStoneRetain
 
     public HewedStoneRetainers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "UGIN";
     }
 

@@ -37,7 +37,7 @@ public class ElvishWarrior extends mage.sets.morningtide.ElvishWarrior {
 
     public ElvishWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 260;
+        this.cardNumber = "260";
         this.expansionSetCode = "ONS";
     }
 

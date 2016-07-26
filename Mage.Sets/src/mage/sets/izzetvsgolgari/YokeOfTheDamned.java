@@ -37,7 +37,7 @@ public class YokeOfTheDamned extends mage.sets.conflux.YokeOfTheDamned {
 
     public YokeOfTheDamned(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "DDJ";
     }
 

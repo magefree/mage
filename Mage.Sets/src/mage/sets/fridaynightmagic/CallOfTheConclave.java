@@ -37,7 +37,7 @@ public class CallOfTheConclave extends mage.sets.returntoravnica.CallOfTheConcla
        
     public CallOfTheConclave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "FNMP";
     }
     

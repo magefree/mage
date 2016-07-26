@@ -37,7 +37,7 @@ public class FesteringGoblin extends mage.sets.planechase.FesteringGoblin {
 
     public FesteringGoblin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "MMA";
     }
 

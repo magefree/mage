@@ -37,7 +37,7 @@ public class RivalsDuel extends mage.sets.planechase2012.RivalsDuel {
 
     public RivalsDuel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "MOR";
     }
 

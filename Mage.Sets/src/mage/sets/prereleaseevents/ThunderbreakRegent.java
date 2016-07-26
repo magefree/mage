@@ -37,7 +37,7 @@ public class ThunderbreakRegent extends mage.sets.gameday.ThunderbreakRegent {
 
     public ThunderbreakRegent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class NacatlHuntPride extends mage.sets.conflux.NacatlHuntPride {
 
     public NacatlHuntPride(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "DDH";
     }
 

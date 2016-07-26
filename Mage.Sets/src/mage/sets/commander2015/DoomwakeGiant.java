@@ -37,7 +37,7 @@ public class DoomwakeGiant extends mage.sets.journeyintonyx.DoomwakeGiant {
 
     public DoomwakeGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "C15";
     }
 

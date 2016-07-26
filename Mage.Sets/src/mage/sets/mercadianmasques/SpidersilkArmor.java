@@ -37,7 +37,7 @@ public class SpidersilkArmor extends mage.sets.knightsvsdragons.SpidersilkArmor 
 
     public SpidersilkArmor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 273;
+        this.cardNumber = "273";
         this.expansionSetCode = "MMQ";
     }
 

@@ -38,7 +38,7 @@ public class ClawsOfGix extends mage.sets.urzassaga.ClawsOfGix {
 
     public ClawsOfGix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.COMMON;
     }

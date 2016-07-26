@@ -37,7 +37,7 @@ public class SilumgarAssassin extends mage.sets.dragonsoftarkir.SilumgarAssassin
 
     public SilumgarAssassin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "PTC";
     }
 

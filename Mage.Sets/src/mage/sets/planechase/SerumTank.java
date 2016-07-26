@@ -38,7 +38,7 @@ public class SerumTank extends mage.sets.mirrodin.SerumTank {
 
     public SerumTank (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "HOP";
     }
 

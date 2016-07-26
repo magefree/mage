@@ -38,7 +38,7 @@ public class WallOfKelp extends mage.sets.homelands.WallOfKelp {
 
     public WallOfKelp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.COMMON;
     }

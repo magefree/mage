@@ -37,7 +37,7 @@ public class TajNarSwordsmith extends mage.sets.mirrodin.TajNarSwordsmith {
 
     public TajNarSwordsmith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "MM2";
     }
 

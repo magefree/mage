@@ -37,7 +37,7 @@ public class CapashenKnight extends mage.sets.urzasdestiny.CapashenKnight {
 
     public CapashenKnight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "M14";
     }
 

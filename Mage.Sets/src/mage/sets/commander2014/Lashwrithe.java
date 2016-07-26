@@ -37,7 +37,7 @@ public class Lashwrithe extends mage.sets.newphyrexia.Lashwrithe {
 
     public Lashwrithe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 245;
+        this.cardNumber = "245";
         this.expansionSetCode = "C14";
     }
 

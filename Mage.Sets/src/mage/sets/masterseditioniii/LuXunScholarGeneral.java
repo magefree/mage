@@ -38,7 +38,7 @@ public class LuXunScholarGeneral extends mage.sets.commander2013.LuXunScholarGen
 
     public LuXunScholarGeneral(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

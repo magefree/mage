@@ -37,7 +37,7 @@ public class MirriCatWarrior extends mage.sets.tenthedition.MirriCatWarrior {
 
     public MirriCatWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "EXO";
     }
 

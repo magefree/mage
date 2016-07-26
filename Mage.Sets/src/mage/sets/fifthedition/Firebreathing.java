@@ -37,7 +37,7 @@ public class Firebreathing extends mage.sets.magic2012.Firebreathing {
 
     public Firebreathing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "5ED";
     }
 

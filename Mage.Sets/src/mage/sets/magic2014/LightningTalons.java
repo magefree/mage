@@ -37,7 +37,7 @@ public class LightningTalons extends mage.sets.shardsofalara.LightningTalons {
 
     public LightningTalons(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "M14";
     }
 

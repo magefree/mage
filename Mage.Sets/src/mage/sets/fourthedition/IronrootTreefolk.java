@@ -37,7 +37,7 @@ public class IronrootTreefolk extends mage.sets.fifthedition.IronrootTreefolk {
 
     public IronrootTreefolk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "4ED";
     }
 

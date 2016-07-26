@@ -37,7 +37,7 @@ public class Stasis extends mage.sets.fifthedition.Stasis {
 
     public Stasis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "2ED";
     }
 

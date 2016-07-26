@@ -38,7 +38,7 @@ public class WyluliWolf extends mage.sets.fifthedition.WyluliWolf {
 
     public WyluliWolf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.COMMON;
     }

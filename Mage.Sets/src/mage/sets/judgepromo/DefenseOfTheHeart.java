@@ -37,7 +37,7 @@ public class DefenseOfTheHeart extends mage.sets.urzaslegacy.DefenseOfTheHeart {
 
     public DefenseOfTheHeart(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "JR";
     }
 

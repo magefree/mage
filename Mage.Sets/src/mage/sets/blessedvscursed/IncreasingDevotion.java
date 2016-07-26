@@ -37,7 +37,7 @@ public class IncreasingDevotion extends mage.sets.darkascension.IncreasingDevoti
 
     public IncreasingDevotion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "DDQ";
     }
 

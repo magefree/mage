@@ -37,7 +37,7 @@ public class ElementalAugury extends mage.sets.masterseditionii.ElementalAugury 
 
     public ElementalAugury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 364;
+        this.cardNumber = "364";
         this.expansionSetCode = "ICE";
     }
 

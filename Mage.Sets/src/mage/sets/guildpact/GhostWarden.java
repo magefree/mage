@@ -37,7 +37,7 @@ public class GhostWarden extends mage.sets.tenthedition.GhostWarden {
 
     public GhostWarden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "GPT";
     }
 

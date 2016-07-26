@@ -37,7 +37,7 @@ public class CathedralSanctifier extends mage.sets.avacynrestored.CathedralSanct
 
     public CathedralSanctifier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "DDQ";
     }
 

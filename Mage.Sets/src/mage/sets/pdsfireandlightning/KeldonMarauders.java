@@ -37,7 +37,7 @@ public class KeldonMarauders extends mage.sets.planarchaos.KeldonMarauders {
 
     public KeldonMarauders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "PD2";
     }
 

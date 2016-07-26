@@ -37,7 +37,7 @@ public class LordOfShatterskullPass extends mage.sets.riseoftheeldrazi.LordOfSha
 
     public LordOfShatterskullPass(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "MLP";
     }
 

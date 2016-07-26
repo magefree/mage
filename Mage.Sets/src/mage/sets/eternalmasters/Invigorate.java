@@ -39,7 +39,7 @@ public class Invigorate extends mage.sets.commander.Invigorate {
 
     public Invigorate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class Bargain extends mage.sets.starter1999.Bargain {
 
     public Bargain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "PO2";
     }
 

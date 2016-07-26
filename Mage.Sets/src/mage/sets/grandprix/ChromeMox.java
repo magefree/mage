@@ -37,7 +37,7 @@ public class ChromeMox extends mage.sets.mirrodin.ChromeMox {
 
     public ChromeMox(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "GPX";
     }
 

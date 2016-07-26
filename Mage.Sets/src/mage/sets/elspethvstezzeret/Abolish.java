@@ -38,7 +38,7 @@ public class Abolish extends mage.sets.prophecy.Abolish {
 
     public Abolish (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "DDF";
     }
 

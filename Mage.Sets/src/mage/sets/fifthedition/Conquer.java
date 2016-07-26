@@ -37,7 +37,7 @@ public class Conquer extends mage.sets.iceage.Conquer {
 
     public Conquer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "5ED";
     }
 

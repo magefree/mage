@@ -152,7 +152,7 @@ public class CardView extends SimpleCardView {
      * @param controlled is the card view created for the card controller - used
      * for morph / face down cards to know which player may see information for
      * the card
-     * @param showFaceDownCard if true and the card is not on the battelfield,
+     * @param showFaceDownCard if true and the card is not on the battlefield,
      * also a face down card is shown in the view, face down cards will be shown
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard) {
@@ -275,7 +275,7 @@ public class CardView extends SimpleCardView {
             this.isToken = true;
             this.mageObjectType = MageObjectType.TOKEN;
             this.rarity = Rarity.COMMON;
-            if (((PermanentToken) card).getToken().getOriginalCardNumber() > 0) {
+            if (!((PermanentToken) card).getToken().getOriginalCardNumber().isEmpty() && !"0".equals(((PermanentToken) card).getToken().getOriginalCardNumber())) {
                 // a token copied from permanent
                 this.expansionSetCode = ((PermanentToken) card).getToken().getOriginalExpansionSetCode();
                 this.cardNumber = ((PermanentToken) card).getToken().getOriginalCardNumber();
@@ -323,7 +323,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(MageObject object) {
-        super(object.getId(), "", 0, false, "", true);
+        super(object.getId(), "", "0", false, "", true);
         this.name = object.getName();
         this.displayName = object.getName();
         if (object instanceof Permanent) {
@@ -367,7 +367,7 @@ public class CardView extends SimpleCardView {
     }
 
     protected CardView() {
-        super(null, "", 0, false, "", true);
+        super(null, "", "0", false, "", true);
     }
 
     public CardView(EmblemView emblem) {
@@ -384,7 +384,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(boolean empty) {
-        super(null, "", 0, false, "");
+        super(null, "", "0", false, "");
         if (!empty) {
             throw new IllegalArgumentException("Not supported.");
         }
@@ -409,7 +409,7 @@ public class CardView extends SimpleCardView {
         if (!controlled) {
             this.rarity = Rarity.COMMON;
             this.expansionSetCode = "";
-            this.cardNumber = 0;
+            this.cardNumber = "0";
         } else {
             this.rarity = card.getRarity();
         }
@@ -433,7 +433,7 @@ public class CardView extends SimpleCardView {
     }
 
     CardView(Token token) {
-        super(token.getId(), "", 0, false, "");
+        super(token.getId(), "", "0", false, "");
         this.isToken = true;
         this.id = token.getId();
         this.name = token.getName();
@@ -552,7 +552,7 @@ public class CardView extends SimpleCardView {
     }
 
     @Override
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 

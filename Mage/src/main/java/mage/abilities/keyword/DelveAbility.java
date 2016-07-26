@@ -52,26 +52,26 @@ import mage.util.CardUtil;
  * 702.65. Delve 702.65a Delve is a static ability that functions while the
  * spell with delve is on the stack. “Delve” means “For each generic mana in
  * this spell’s total cost, you may exile a card from your graveyard rather than
- * pay that mana.” The delve ability isn’t an additional or alternative cost and
+ * pay that mana.” The delve ability isn't an additional or alternative cost and
  * applies only after the total cost of the spell with delve is determined.
  * 702.65b Multiple instances of delve on the same spell are redundant.
  *
- * * The rules for delve have changed slightly since it was last in an
+ * The rules for delve have changed slightly since it was last in an
  * expansion. Previously, delve reduced the cost to cast a spell. Under the
  * current rules, you exile cards from your graveyard at the same time you pay
  * the spell’s cost. Exiling a card this way is simply another way to pay that
- * cost. * Delve doesn’t change a spell’s mana cost or converted mana cost. For
+ * cost. * Delve doesn't change a spell’s mana cost or converted mana cost. For
  * example, Dead Drop’s converted mana cost is 10 even if you exiled three cards
  * to cast it. * You can’t exile cards to pay for the colored mana requirements
  * of a spell with delve. * You can’t exile more cards than the generic mana
  * requirement of a spell with delve. For example, you can’t exile more than
- * nine cards from your graveyard to cast Dead Drop. * Because delve isn’t an
+ * nine cards from your graveyard to cast Dead Drop. * Because delve isn't an
  * alternative cost, it can be used in conjunction with alternative costs.
  *
  * @author LevelX2
  *
  * TODO: Change card exiling to a way to pay mana costs, now it's maybe not
- * passible to pay costs from effects that increase the mana costs.
+ * possible to pay costs from effects that increase the mana costs.
  */
 public class DelveAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
@@ -106,6 +106,7 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
                 if (!controller.getManaPool().isAutoPayment() && unpaidAmount > 1) {
                     unpaidAmount = 1;
                 }
+                // TODO: make delve not target cards in graveyard. setNotTarget?
                 specialAction.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
                         0, Math.min(controller.getGraveyard().size(), unpaidAmount), new FilterCard())));
                 if (specialAction.canActivate(source.getControllerId(), game)) {

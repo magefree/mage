@@ -38,7 +38,7 @@ public class Warmonger extends mage.sets.mediainserts.Warmonger {
 
     public Warmonger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 225;
+        this.cardNumber = "225";
         this.expansionSetCode = "MMQ";
         this.rarity = Rarity.UNCOMMON;
     }

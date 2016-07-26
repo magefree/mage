@@ -37,7 +37,7 @@ public class VileRequiem extends mage.sets.urzassaga.VileRequiem {
 
     public VileRequiem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = "98";
         this.expansionSetCode = "C13";
     }
 

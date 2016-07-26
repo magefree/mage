@@ -38,7 +38,7 @@ public class TreeOfTales extends mage.sets.mirrodin.TreeOfTales {
 
     public TreeOfTales (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "HOP";
     }
 

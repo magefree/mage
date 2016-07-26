@@ -38,7 +38,7 @@ public class ClockworkGnomes extends mage.sets.masterseditioniv.ClockworkGnomes 
 
     public ClockworkGnomes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "HML";
         this.rarity = Rarity.COMMON;
     }

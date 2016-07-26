@@ -37,7 +37,7 @@ public class BurrentonBombardier extends mage.sets.elspethvstezzeret.BurrentonBo
 
     public BurrentonBombardier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "MOR";
     }
 

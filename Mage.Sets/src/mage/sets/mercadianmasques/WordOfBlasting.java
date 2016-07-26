@@ -37,7 +37,7 @@ public class WordOfBlasting extends mage.sets.iceage.WordOfBlasting {
 
     public WordOfBlasting(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "MMQ";
     }
 

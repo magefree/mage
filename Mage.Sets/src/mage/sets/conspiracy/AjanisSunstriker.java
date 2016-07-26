@@ -37,7 +37,7 @@ public class AjanisSunstriker extends mage.sets.magic2013.AjanisSunstriker {
 
     public AjanisSunstriker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "CNS";
     }
 

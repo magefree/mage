@@ -31,55 +31,46 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.DamageEachOtherEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetSpell;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class ErtaiTheCorrupted extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or enchantment");
-    
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
+public class TahngarthTalruumHero1 extends CardImpl {
 
-    public ErtaiTheCorrupted(UUID ownerId) {
-        super(ownerId, 107, "Ertai, the Corrupted", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{B}");
+    public TahngarthTalruumHero1(UUID ownerId) {
+        super(ownerId, "74a", "Tahngarth, Talruum Hero", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "PLS";
         this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.power = new MageInt(3);
+        this.subtype.add("Minotaur");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {U}, {tap}, Sacrifice a creature or enchantment: Counter target spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}"));
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
+        // {1}{R}, {tap}: Tahngarth, Talruum Hero deals damage equal to its power to target creature. That creature deals damage equal to its power to Tahngarth.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEachOtherEffect(), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        ability.addTarget(new TargetSpell());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-}
+    }
 
-    public ErtaiTheCorrupted(final ErtaiTheCorrupted card) {
+    public TahngarthTalruumHero1(final TahngarthTalruumHero1 card) {
         super(card);
     }
 
     @Override
-    public ErtaiTheCorrupted copy() {
-        return new ErtaiTheCorrupted(this);
+    public TahngarthTalruumHero1 copy() {
+        return new TahngarthTalruumHero1(this);
     }
 }

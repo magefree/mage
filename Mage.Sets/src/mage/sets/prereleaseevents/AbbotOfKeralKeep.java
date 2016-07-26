@@ -37,7 +37,7 @@ public class AbbotOfKeralKeep extends mage.sets.magicorigins.AbbotOfKeralKeep {
 
     public AbbotOfKeralKeep(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "PTC";
     }
 

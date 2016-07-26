@@ -37,7 +37,7 @@ public class SpontaneousCombustion extends mage.sets.tempest.SpontaneousCombusti
 
     public SpontaneousCombustion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 194;
+        this.cardNumber = "194";
         this.expansionSetCode = "CNS";
     }
 

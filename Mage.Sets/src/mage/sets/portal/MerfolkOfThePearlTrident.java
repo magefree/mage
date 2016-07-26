@@ -37,7 +37,7 @@ public class MerfolkOfThePearlTrident extends mage.sets.fifthedition.MerfolkOfTh
 
     public MerfolkOfThePearlTrident(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "POR";
     }
 

@@ -37,7 +37,7 @@ public class BreakingEntering extends mage.sets.dragonsmaze.BreakingEntering {
 
     public BreakingEntering(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "MLP";
     }
 

@@ -38,7 +38,7 @@ public class GoblinTrenches extends mage.sets.apocalypse.GoblinTrenches {
 
     public GoblinTrenches(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 253;
+        this.cardNumber = "253";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

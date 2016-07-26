@@ -37,7 +37,7 @@ public class WhirlingDervish1 extends mage.sets.timeshifted.WhirlingDervish {
 
     public WhirlingDervish1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "SUS";
     }
 

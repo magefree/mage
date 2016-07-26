@@ -38,7 +38,7 @@ public class Righteousness extends mage.sets.tenthedition.Righteousness {
 
     public Righteousness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "M10";
         this.rarity = Rarity.UNCOMMON;
     }

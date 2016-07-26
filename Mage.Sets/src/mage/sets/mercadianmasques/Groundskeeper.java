@@ -37,7 +37,7 @@ public class Groundskeeper extends mage.sets.ninthedition.Groundskeeper {
 
     public Groundskeeper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 250;
+        this.cardNumber = "250";
         this.expansionSetCode = "MMQ";
     }
 

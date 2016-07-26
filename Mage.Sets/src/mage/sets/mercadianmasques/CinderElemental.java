@@ -37,7 +37,7 @@ public class CinderElemental extends mage.sets.gatecrash.CinderElemental {
 
     public CinderElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "MMQ";
     }
 

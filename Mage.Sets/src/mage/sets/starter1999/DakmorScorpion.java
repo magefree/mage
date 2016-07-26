@@ -37,7 +37,7 @@ public class DakmorScorpion extends mage.sets.portalsecondage.DakmorScorpion {
 
     public DakmorScorpion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "S99";
     }
 

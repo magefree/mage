@@ -37,7 +37,7 @@ public class TorrentOfSouls extends mage.sets.shadowmoor.TorrentOfSouls {
 
     public TorrentOfSouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "ARC";
     }
 

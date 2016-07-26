@@ -37,7 +37,7 @@ public class VodalianMage3 extends VodalianMage1 {
 
     public VodalianMage3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
     }
 
     public VodalianMage3(final VodalianMage3 card) {

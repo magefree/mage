@@ -37,7 +37,7 @@ public class ManaShort extends mage.sets.limitedalpha.ManaShort {
 
     public ManaShort(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "2ED";
     }
 

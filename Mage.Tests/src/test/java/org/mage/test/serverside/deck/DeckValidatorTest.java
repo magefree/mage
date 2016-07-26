@@ -49,14 +49,14 @@ public class DeckValidatorTest extends CardTestPlayerBase {
 
         String name;
         String setCode;
-        int cardNumber;
+        String cardNumber;
 
         int number;
 
         public CardNameAmount(String setCode, int cardNumber, int number) {
             this.name = "";
             this.setCode = setCode;
-            this.cardNumber = cardNumber;
+            this.cardNumber = String.valueOf(cardNumber);
             this.number = number;
         }
 
@@ -77,7 +77,7 @@ public class DeckValidatorTest extends CardTestPlayerBase {
             return setCode;
         }
 
-        public int getCardNumber() {
+        public String getCardNumber() {
             return cardNumber;
         }
 

@@ -37,7 +37,7 @@ public class GravebladeMarauder extends mage.sets.magicorigins.GravebladeMaraude
 
     public GravebladeMarauder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "PTC";
     }
 

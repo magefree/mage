@@ -37,7 +37,7 @@ public class EncroachingWastes extends mage.sets.magic2014.EncroachingWastes {
 
     public EncroachingWastes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "FNMP";
     }
 

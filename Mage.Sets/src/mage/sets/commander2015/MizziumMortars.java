@@ -37,7 +37,7 @@ public class MizziumMortars extends mage.sets.returntoravnica.MizziumMortars {
 
     public MizziumMortars(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "C15";
     }
 

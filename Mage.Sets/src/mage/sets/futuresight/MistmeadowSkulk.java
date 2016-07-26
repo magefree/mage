@@ -37,7 +37,7 @@ public class MistmeadowSkulk extends mage.sets.shadowmoor.MistmeadowSkulk {
 
     public MistmeadowSkulk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "FUT";
     }
 

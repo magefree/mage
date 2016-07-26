@@ -38,7 +38,7 @@ public class LibraryOfAlexandria extends mage.sets.vintagemasters.LibraryOfAlexa
 
     public LibraryOfAlexandria(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 245;
+        this.cardNumber = "245";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.RARE;
     }

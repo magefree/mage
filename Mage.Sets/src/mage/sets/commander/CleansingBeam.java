@@ -37,7 +37,7 @@ public class CleansingBeam extends mage.sets.ravnica.CleansingBeam {
 
     public CleansingBeam(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "CMD";
     }
 

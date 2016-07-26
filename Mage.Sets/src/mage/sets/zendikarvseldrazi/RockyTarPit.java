@@ -37,7 +37,7 @@ public class RockyTarPit extends mage.sets.mirage.RockyTarPit {
 
     public RockyTarPit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "DDP";
     }
 

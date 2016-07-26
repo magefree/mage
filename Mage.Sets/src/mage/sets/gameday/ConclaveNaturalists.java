@@ -37,7 +37,7 @@ public class ConclaveNaturalists extends mage.sets.magicorigins.ConclaveNaturali
 
     public ConclaveNaturalists(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "MGDC";
     }
 

@@ -37,7 +37,7 @@ public class SelesnyaGuildmage extends mage.sets.ravnica.SelesnyaGuildmage {
 
     public SelesnyaGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = "224";
         this.expansionSetCode = "CMD";
     }
 

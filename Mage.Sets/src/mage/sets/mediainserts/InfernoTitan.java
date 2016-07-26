@@ -6,7 +6,7 @@ public class InfernoTitan extends mage.sets.magic2011.InfernoTitan {
     
     public InfernoTitan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "MBP";
     }
     

@@ -37,7 +37,7 @@ public class BloodMoon extends mage.sets.ninthedition.BloodMoon {
 
     public BloodMoon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "CHR";
     }
 

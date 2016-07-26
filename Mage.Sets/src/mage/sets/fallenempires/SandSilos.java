@@ -37,7 +37,7 @@ public class SandSilos extends mage.sets.fifthedition.SandSilos {
 
     public SandSilos(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = "186";
         this.expansionSetCode = "FEM";
     }
 

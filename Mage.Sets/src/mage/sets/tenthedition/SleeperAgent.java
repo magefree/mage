@@ -37,7 +37,7 @@ public class SleeperAgent extends mage.sets.urzassaga.SleeperAgent {
 
     public SleeperAgent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "10E";
     }
 

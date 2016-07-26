@@ -37,7 +37,7 @@ public class ShowerOfSparks extends mage.sets.heroesvsmonsters.ShowerOfSparks {
 
     public ShowerOfSparks(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 217;
+        this.cardNumber = "217";
         this.expansionSetCode = "USG";
     }
 

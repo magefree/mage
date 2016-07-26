@@ -38,7 +38,7 @@ public class ShipbreakerKraken extends mage.sets.theros.ShipbreakerKraken {
 
     public ShipbreakerKraken(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

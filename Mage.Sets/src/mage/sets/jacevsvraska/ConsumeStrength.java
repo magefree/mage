@@ -37,7 +37,7 @@ public class ConsumeStrength extends mage.sets.apocalypse.ConsumeStrength {
 
     public ConsumeStrength(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "DDM";
     }
 

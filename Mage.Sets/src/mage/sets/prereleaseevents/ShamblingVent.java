@@ -37,7 +37,7 @@ public class ShamblingVent extends mage.sets.battleforzendikar.ShamblingVent {
 
     public ShamblingVent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 292;
+        this.cardNumber = "292";
         this.expansionSetCode = "PTC";
     }
 

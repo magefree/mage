@@ -37,7 +37,7 @@ public class NecromancersCovenant extends mage.sets.alarareborn.NecromancersCove
 
     public NecromancersCovenant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 229;
+        this.cardNumber = "229";
         this.expansionSetCode = "C15";
     }
 

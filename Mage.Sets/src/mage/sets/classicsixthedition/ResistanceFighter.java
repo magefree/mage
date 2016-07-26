@@ -37,7 +37,7 @@ public class ResistanceFighter extends mage.sets.visions.ResistanceFighter {
 
     public ResistanceFighter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "6ED";
     }
 

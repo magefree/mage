@@ -37,7 +37,7 @@ public class MaelstromPulse extends mage.sets.alarareborn.MaelstromPulse {
 
     public MaelstromPulse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 180;
+        this.cardNumber = "180";
         this.expansionSetCode = "MMA";
     }
 

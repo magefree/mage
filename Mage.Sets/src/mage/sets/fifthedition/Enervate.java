@@ -37,7 +37,7 @@ public class Enervate extends mage.sets.masterseditionii.Enervate {
 
     public Enervate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "5ED";
     }
 

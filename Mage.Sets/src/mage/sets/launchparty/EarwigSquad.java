@@ -37,7 +37,7 @@ public class EarwigSquad extends mage.sets.modernmasters.EarwigSquad {
 
     public EarwigSquad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "MLP";
     }
 

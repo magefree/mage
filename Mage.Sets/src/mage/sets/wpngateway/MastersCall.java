@@ -38,7 +38,7 @@ public class MastersCall extends mage.sets.mirrodinbesieged.MastersCall {
 
     public MastersCall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

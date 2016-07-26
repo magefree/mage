@@ -37,7 +37,7 @@ public class CrovaxTheCursed extends mage.sets.stronghold.CrovaxTheCursed {
 
     public CrovaxTheCursed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "VMA";
     }
 

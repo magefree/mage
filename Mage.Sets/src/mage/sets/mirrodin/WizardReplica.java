@@ -37,7 +37,7 @@ public class WizardReplica extends mage.sets.planechase.WizardReplica {
 
     public WizardReplica(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 275;
+        this.cardNumber = "275";
         this.expansionSetCode = "MRD";
     }
 

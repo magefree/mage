@@ -37,7 +37,7 @@ public class SulfurousBlast extends mage.sets.timespiral.SulfurousBlast {
 
     public SulfurousBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "CMD";
     }
 

@@ -6,7 +6,7 @@ public class LilianaVess extends mage.sets.lorwyn.LilianaVess {
     
     public LilianaVess(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "MBP";
     }
     

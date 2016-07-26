@@ -37,7 +37,7 @@ public class BlinkingSpirit extends mage.sets.ninthedition.BlinkingSpirit {
 
     public BlinkingSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 288;
+        this.cardNumber = "288";
         this.expansionSetCode = "5ED";
     }
 

@@ -37,7 +37,7 @@ public class Inspiration extends mage.sets.returntoravnica.Inspiration {
 
     public Inspiration(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "VIS";
     }
 

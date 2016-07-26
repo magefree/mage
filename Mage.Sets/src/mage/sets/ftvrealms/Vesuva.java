@@ -38,7 +38,7 @@ public class Vesuva extends mage.sets.timespiral.Vesuva {
 
     public Vesuva(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

@@ -37,7 +37,7 @@ public class BattlefieldForge extends mage.sets.apocalypse.BattlefieldForge {
 
     public BattlefieldForge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 240;
+        this.cardNumber = "240";
         this.expansionSetCode = "M15";
     }
 

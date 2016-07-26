@@ -37,7 +37,7 @@ public class IbHalfheartGoblinTactician extends mage.sets.elvesvsgoblins.IbHalfh
 
     public IbHalfheartGoblinTactician(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "DD3EVG";
     }
 

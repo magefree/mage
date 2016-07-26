@@ -37,7 +37,7 @@ public class BoneShredder extends mage.sets.urzaslegacy.BoneShredder {
 
     public BoneShredder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "DDE";
     }
 

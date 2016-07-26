@@ -37,7 +37,7 @@ public class DwarvenCatapult extends mage.sets.fifthedition.DwarvenCatapult {
 
     public DwarvenCatapult(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "MED";
     }
 

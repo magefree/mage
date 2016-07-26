@@ -37,7 +37,7 @@ public class EasternPaladin extends mage.sets.urzassaga.EasternPaladin {
 
     public EasternPaladin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "7ED";
     }
 

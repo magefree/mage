@@ -37,7 +37,7 @@ public class RagingGoblin extends mage.sets.tenthedition.RagingGoblin {
 
     public RagingGoblin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "EXO";
     }
 

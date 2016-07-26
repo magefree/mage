@@ -37,7 +37,7 @@ public class SwordDancer extends mage.sets.prophecy.SwordDancer {
 
     public SwordDancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "8ED";
     }
 

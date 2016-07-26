@@ -37,7 +37,7 @@ public class SimicKeyrune extends mage.sets.gatecrash.SimicKeyrune {
 
     public SimicKeyrune(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 265;
+        this.cardNumber = "265";
         this.expansionSetCode = "C15";
     }
 

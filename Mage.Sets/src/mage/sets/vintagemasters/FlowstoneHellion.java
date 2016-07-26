@@ -37,7 +37,7 @@ public class FlowstoneHellion extends mage.sets.stronghold.FlowstoneHellion {
 
     public FlowstoneHellion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "VMA";
     }
 

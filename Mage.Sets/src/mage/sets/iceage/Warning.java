@@ -37,7 +37,7 @@ public class Warning extends mage.sets.masterseditionii.Warning {
 
     public Warning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 279;
+        this.cardNumber = "279";
         this.expansionSetCode = "ICE";
     }
 

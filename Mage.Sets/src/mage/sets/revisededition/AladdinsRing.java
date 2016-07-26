@@ -37,7 +37,7 @@ public class AladdinsRing extends mage.sets.seventhedition.AladdinsRing {
 
     public AladdinsRing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "3ED";
     }
 

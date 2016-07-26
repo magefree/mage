@@ -37,7 +37,7 @@ public class Gild extends mage.sets.bornofthegods.Gild {
 
     public Gild(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "C15";
     }
 

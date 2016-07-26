@@ -37,7 +37,7 @@ public class FireTempest extends mage.sets.portal.FireTempest {
 
     public FireTempest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "S99";
     }
 

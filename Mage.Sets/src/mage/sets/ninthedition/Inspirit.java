@@ -37,7 +37,7 @@ public class Inspirit extends mage.sets.onslaught.Inspirit {
 
     public Inspirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "9ED";
     }
 

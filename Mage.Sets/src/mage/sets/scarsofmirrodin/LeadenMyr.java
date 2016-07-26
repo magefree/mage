@@ -38,7 +38,7 @@ public class LeadenMyr extends mage.sets.mirrodin.LeadenMyr {
 
     public LeadenMyr (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "SOM";
     }
 

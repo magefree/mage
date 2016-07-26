@@ -37,7 +37,7 @@ public class JoriEnRuinDiver extends mage.sets.oathofthegatewatch.JoriEnRuinDive
 
     public JoriEnRuinDiver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "MGDC";
     }
 

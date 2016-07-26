@@ -37,7 +37,7 @@ public class SirensCall extends mage.sets.fourthedition.SirensCall {
 
     public SirensCall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "3ED";
     }
 

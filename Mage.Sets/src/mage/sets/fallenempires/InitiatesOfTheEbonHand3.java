@@ -37,7 +37,7 @@ public class InitiatesOfTheEbonHand3 extends InitiatesOfTheEbonHand1 {
 
     public InitiatesOfTheEbonHand3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
     }
 
     public InitiatesOfTheEbonHand3(final InitiatesOfTheEbonHand3 card) {

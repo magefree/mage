@@ -37,7 +37,7 @@ public class LoyalSentry extends mage.sets.tenthedition.LoyalSentry {
 
     public LoyalSentry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "S99";
     }
 

@@ -6,7 +6,7 @@ public class GoblinRabblemaster extends mage.sets.magic2015.GoblinRabblemaster {
     
     public GoblinRabblemaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = "98";
         this.expansionSetCode = "MBP";
     }
     

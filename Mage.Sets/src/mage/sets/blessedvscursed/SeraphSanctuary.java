@@ -37,7 +37,7 @@ public class SeraphSanctuary extends mage.sets.avacynrestored.SeraphSanctuary {
 
     public SeraphSanctuary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "DDQ";
     }
 

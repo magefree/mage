@@ -37,7 +37,7 @@ public class FleshToDust extends mage.sets.magic2015.FleshToDust {
 
     public FleshToDust(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 280;
+        this.cardNumber = "280";
         this.expansionSetCode = "ORI";
     }
 

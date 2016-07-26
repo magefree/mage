@@ -37,7 +37,7 @@ public class TornadoElemental extends mage.sets.fifthdawn.TornadoElemental {
 
     public TornadoElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 222;
+        this.cardNumber = "222";
         this.expansionSetCode = "C14";
     }
 

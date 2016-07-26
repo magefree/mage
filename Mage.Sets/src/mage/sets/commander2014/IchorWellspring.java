@@ -37,7 +37,7 @@ public class IchorWellspring extends mage.sets.mirrodinbesieged.IchorWellspring 
 
     public IchorWellspring(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 241;
+        this.cardNumber = "241";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class ColossusOfSardia extends mage.sets.fifthedition.ColossusOfSardia {
 
     public ColossusOfSardia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "ME4";
     }
 

@@ -37,7 +37,7 @@ public class Choke extends mage.sets.tempest.Choke {
 
     public Choke(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "8ED";
     }
 

@@ -37,7 +37,7 @@ public class CyclonicRift extends mage.sets.returntoravnica.CyclonicRift {
 
     public CyclonicRift(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "C14";
     }
 

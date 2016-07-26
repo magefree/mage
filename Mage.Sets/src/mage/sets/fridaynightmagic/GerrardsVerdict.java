@@ -37,7 +37,7 @@ public class GerrardsVerdict extends mage.sets.apocalypse.GerrardsVerdict {
 
     public GerrardsVerdict(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "FNMP";
     }
 

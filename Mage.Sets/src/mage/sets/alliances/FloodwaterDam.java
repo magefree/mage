@@ -37,7 +37,7 @@ public class FloodwaterDam extends mage.sets.masterseditioniv.FloodwaterDam {
 
     public FloodwaterDam(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "ALL";
     }
 

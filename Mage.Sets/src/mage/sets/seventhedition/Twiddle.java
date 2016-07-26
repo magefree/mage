@@ -37,7 +37,7 @@ public class Twiddle extends mage.sets.unlimitededition.Twiddle {
 
     public Twiddle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "7ED";
     }
 

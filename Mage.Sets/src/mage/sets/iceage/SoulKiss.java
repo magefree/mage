@@ -38,7 +38,7 @@ public class SoulKiss extends mage.sets.masterseditionii.SoulKiss {
 
     public SoulKiss(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "ICE";
         this.rarity = Rarity.COMMON;
     }

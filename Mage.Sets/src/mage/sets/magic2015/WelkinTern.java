@@ -37,7 +37,7 @@ public class WelkinTern extends mage.sets.zendikar.WelkinTern {
 
     public WelkinTern(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "M15";
     }
 

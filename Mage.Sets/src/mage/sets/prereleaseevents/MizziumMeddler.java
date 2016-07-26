@@ -37,7 +37,7 @@ public class MizziumMeddler extends mage.sets.magicorigins.MizziumMeddler {
 
     public MizziumMeddler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = "224";
         this.expansionSetCode = "PTC";
     }
 

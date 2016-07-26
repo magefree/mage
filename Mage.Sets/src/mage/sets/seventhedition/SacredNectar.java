@@ -37,7 +37,7 @@ public class SacredNectar extends mage.sets.ninthedition.SacredNectar {
 
     public SacredNectar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "7ED";
     }
 

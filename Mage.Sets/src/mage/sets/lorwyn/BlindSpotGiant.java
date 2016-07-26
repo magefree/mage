@@ -37,7 +37,7 @@ public class BlindSpotGiant extends mage.sets.modernmasters.BlindSpotGiant {
 
     public BlindSpotGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "LRW";
     }
 

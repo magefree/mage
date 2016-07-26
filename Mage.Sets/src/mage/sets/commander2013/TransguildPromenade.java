@@ -37,7 +37,7 @@ public class TransguildPromenade extends mage.sets.returntoravnica.TransguildPro
 
     public TransguildPromenade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 330;
+        this.cardNumber = "330";
         this.expansionSetCode = "C13";
     }
 

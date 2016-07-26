@@ -37,7 +37,7 @@ public class ValakutTheMoltenPinnacle extends mage.sets.zendikar.ValakutTheMolte
 
     public ValakutTheMoltenPinnacle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "MLP";
     }
 

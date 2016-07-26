@@ -37,7 +37,7 @@ public class GhostLitStalker extends mage.sets.saviorsofkamigawa.GhostLitStalker
 
     public GhostLitStalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "DD3GVL";
     }
 

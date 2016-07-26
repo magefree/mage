@@ -37,7 +37,7 @@ public class WaterElemental extends mage.sets.fourthedition.WaterElemental {
 
     public WaterElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "ME4";
     }
 

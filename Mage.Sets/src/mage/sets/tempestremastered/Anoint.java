@@ -37,7 +37,7 @@ public class Anoint extends mage.sets.tempest.Anoint {
 
     public Anoint(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "TPR";
     }
 

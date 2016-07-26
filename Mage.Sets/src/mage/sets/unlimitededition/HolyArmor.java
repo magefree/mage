@@ -37,7 +37,7 @@ public class HolyArmor extends mage.sets.fourthedition.HolyArmor {
 
     public HolyArmor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "2ED";
     }
 

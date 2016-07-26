@@ -37,7 +37,7 @@ public class ReiverDemon extends mage.sets.divinevsdemonic.ReiverDemon {
 
     public ReiverDemon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "CMD";
     }
 

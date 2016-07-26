@@ -37,7 +37,7 @@ public class AesthirGlider2 extends mage.sets.alliances.AesthirGlider1 {
 
     public AesthirGlider2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "ALL";
     }
 

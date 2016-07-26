@@ -6,7 +6,7 @@ public class GarrukApexPredator extends mage.sets.magic2015.GarrukApexPredator {
     
     public GarrukApexPredator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "MBP";
     }
     

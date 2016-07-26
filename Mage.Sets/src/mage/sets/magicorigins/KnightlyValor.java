@@ -38,7 +38,7 @@ public class KnightlyValor extends mage.sets.returntoravnica.KnightlyValor {
 
     public KnightlyValor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "ORI";
         this.rarity = Rarity.UNCOMMON;
     }

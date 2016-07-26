@@ -37,7 +37,7 @@ public class VillageBellRinger extends mage.sets.innistrad.VillageBellRinger {
 
     public VillageBellRinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "DDQ";
     }
 

@@ -37,7 +37,7 @@ public class TouchOfDeath extends mage.sets.iceage.TouchOfDeath {
 
     public TouchOfDeath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "5ED";
     }
 

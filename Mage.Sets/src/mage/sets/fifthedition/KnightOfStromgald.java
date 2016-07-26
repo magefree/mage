@@ -38,7 +38,7 @@ public class KnightOfStromgald extends mage.sets.iceage.KnightOfStromgald {
 
     public KnightOfStromgald(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "5ED";
     }
 

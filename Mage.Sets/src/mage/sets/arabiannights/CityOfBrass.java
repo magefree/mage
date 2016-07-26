@@ -38,7 +38,7 @@ public class CityOfBrass extends mage.sets.seventhedition.CityOfBrass {
 
     public CityOfBrass(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "ARN";
         this.rarity = Rarity.UNCOMMON;
     }

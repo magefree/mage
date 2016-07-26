@@ -37,7 +37,7 @@ public class Broodstar extends mage.sets.planechase.Broodstar {
 
     public Broodstar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "MRD";
     }
 

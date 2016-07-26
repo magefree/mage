@@ -37,7 +37,7 @@ public class MassMutiny extends mage.sets.planechase2012.MassMutiny {
 
     public MassMutiny(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "C13";
     }
 

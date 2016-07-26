@@ -37,7 +37,7 @@ public class FireDragon extends mage.sets.portal.FireDragon {
 
     public FireDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "ME2";
     }
 

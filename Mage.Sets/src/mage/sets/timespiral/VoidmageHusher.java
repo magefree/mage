@@ -38,7 +38,7 @@ public class VoidmageHusher extends mage.sets.mediainserts.VoidmageHusher {
 
     public VoidmageHusher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "TSP";
         this.rarity = Rarity.UNCOMMON;
     }

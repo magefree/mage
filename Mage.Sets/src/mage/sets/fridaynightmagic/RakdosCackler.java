@@ -37,7 +37,7 @@ public class RakdosCackler extends mage.sets.returntoravnica.RakdosCackler {
 
     public RakdosCackler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "FNMP";
     }
 

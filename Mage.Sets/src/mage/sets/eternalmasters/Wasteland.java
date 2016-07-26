@@ -38,7 +38,7 @@ public class Wasteland extends mage.sets.tempest.Wasteland {
 
     public Wasteland(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 248;
+        this.cardNumber = "248";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.RARE;
     }

@@ -37,7 +37,7 @@ public class RaiseDead extends mage.sets.seventhedition.RaiseDead {
 
     public RaiseDead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "PO2";
     }
 

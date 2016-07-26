@@ -37,7 +37,7 @@ public class BrimstoneDragon extends mage.sets.portalsecondage.BrimstoneDragon {
 
     public BrimstoneDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "ME2";
     }
 

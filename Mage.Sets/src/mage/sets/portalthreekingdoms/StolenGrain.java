@@ -37,7 +37,7 @@ public class StolenGrain extends mage.sets.masterseditioniii.StolenGrain {
 
     public StolenGrain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "PTK";
     }
 

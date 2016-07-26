@@ -37,7 +37,7 @@ public class AwakeningZone extends mage.sets.riseoftheeldrazi.AwakeningZone {
 
     public AwakeningZone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "CMD";
     }
 

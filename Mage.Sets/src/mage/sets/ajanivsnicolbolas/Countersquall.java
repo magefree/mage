@@ -37,7 +37,7 @@ public class Countersquall extends mage.sets.conflux.Countersquall {
 
     public Countersquall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "DDH";
     }
 

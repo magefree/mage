@@ -37,7 +37,7 @@ public class PontiffOfBlight extends mage.sets.dragonsmaze.PontiffOfBlight {
 
     public PontiffOfBlight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "C14";
     }
 

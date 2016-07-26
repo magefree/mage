@@ -37,7 +37,7 @@ public class SoltariTrooper extends mage.sets.tempest.SoltariTrooper {
 
     public SoltariTrooper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "TPR";
     }
 

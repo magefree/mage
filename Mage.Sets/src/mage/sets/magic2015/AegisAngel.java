@@ -37,7 +37,7 @@ public class AegisAngel extends mage.sets.magic2012.AegisAngel {
 
     public AegisAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 270;
+        this.cardNumber = "270";
         this.expansionSetCode = "M15";
     }
 

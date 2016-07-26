@@ -37,7 +37,7 @@ public class WordOfBinding extends mage.sets.fourthedition.WordOfBinding {
 
     public WordOfBinding(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "DRK";
     }
 

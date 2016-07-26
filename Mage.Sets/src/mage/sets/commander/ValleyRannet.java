@@ -37,7 +37,7 @@ public class ValleyRannet extends mage.sets.alarareborn.ValleyRannet {
 
     public ValleyRannet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "CMD";
     }
 

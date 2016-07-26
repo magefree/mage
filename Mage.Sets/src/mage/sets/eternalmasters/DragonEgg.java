@@ -39,7 +39,7 @@ public class DragonEgg extends mage.sets.magic2014.DragonEgg {
 
     public DragonEgg(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

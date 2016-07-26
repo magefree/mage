@@ -37,7 +37,7 @@ public class SolarBlast extends mage.sets.onslaught.SolarBlast {
 
     public SolarBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 187;
+        this.cardNumber = "187";
         this.expansionSetCode = "VMA";
     }
 

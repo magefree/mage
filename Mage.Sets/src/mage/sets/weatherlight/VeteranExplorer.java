@@ -37,7 +37,7 @@ public class VeteranExplorer extends mage.sets.commander.VeteranExplorer {
 
     public VeteranExplorer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "WTH";
     }
 

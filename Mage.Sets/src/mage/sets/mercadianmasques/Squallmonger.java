@@ -37,7 +37,7 @@ public class Squallmonger extends mage.sets.commander.Squallmonger {
 
     public Squallmonger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
+        this.cardNumber = "276";
         this.expansionSetCode = "MMQ";
     }
 

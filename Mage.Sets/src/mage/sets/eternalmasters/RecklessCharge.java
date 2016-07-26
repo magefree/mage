@@ -38,7 +38,7 @@ public class RecklessCharge extends mage.sets.planechase.RecklessCharge {
 
     public RecklessCharge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "EMA";
     }
 

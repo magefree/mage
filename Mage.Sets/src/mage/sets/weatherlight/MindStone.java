@@ -38,7 +38,7 @@ public class MindStone extends mage.sets.tenthedition.MindStone {
 
     public MindStone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "WTH";
         this.rarity = Rarity.COMMON;
     }

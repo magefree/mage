@@ -37,7 +37,7 @@ public class NorthernPaladin extends mage.sets.limitedalpha.NorthernPaladin {
 
     public NorthernPaladin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 213;
+        this.cardNumber = "213";
         this.expansionSetCode = "3ED";
     }
 

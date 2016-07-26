@@ -37,7 +37,7 @@ public class SleightOfHand extends mage.sets.ninthedition.SleightOfHand {
 
     public SleightOfHand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "S99";
     }
 

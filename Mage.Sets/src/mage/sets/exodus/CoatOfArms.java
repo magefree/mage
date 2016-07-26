@@ -37,7 +37,7 @@ public class CoatOfArms extends mage.sets.magic2010.CoatOfArms {
 
     public CoatOfArms(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "EXO";
     }
 

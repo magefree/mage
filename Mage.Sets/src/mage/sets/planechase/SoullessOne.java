@@ -37,7 +37,7 @@ public class SoullessOne extends mage.sets.onslaught.SoullessOne {
 
     public SoullessOne(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "HOP";
     }
 

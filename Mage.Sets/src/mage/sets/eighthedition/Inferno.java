@@ -37,7 +37,7 @@ public class Inferno extends mage.sets.thedark.Inferno {
 
     public Inferno(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 196;
+        this.cardNumber = "196";
         this.expansionSetCode = "8ED";
     }
 

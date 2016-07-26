@@ -37,7 +37,7 @@ public class DistortingLens extends mage.sets.eighthedition.DistortingLens {
 
     public DistortingLens(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 293;
+        this.cardNumber = "293";
         this.expansionSetCode = "MMQ";
     }
 

@@ -37,7 +37,7 @@ public class HearthfireHobgoblin extends mage.sets.eventide.HearthfireHobgoblin 
 
     public HearthfireHobgoblin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "HOP";
     }
 

@@ -37,7 +37,7 @@ public class StormscapeBattlemage extends mage.sets.commander2013.StormscapeBatt
 
     public StormscapeBattlemage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "PLS";
     }
 

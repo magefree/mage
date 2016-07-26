@@ -37,7 +37,7 @@ public class DarksteelIngot extends mage.sets.darksteel.DarksteelIngot {
 
     public DarksteelIngot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 207;
+        this.cardNumber = "207";
         this.expansionSetCode = "M14";
     }
 

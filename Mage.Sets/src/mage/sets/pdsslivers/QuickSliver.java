@@ -37,7 +37,7 @@ public class QuickSliver extends mage.sets.legions.QuickSliver {
 
     public QuickSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "H09";
     }
 

@@ -37,7 +37,7 @@ public class CombatMedic4 extends mage.sets.masterseditionii.CombatMedic {
 
     public CombatMedic4(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "FEM";
     }
 

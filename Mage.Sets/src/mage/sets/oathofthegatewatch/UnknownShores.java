@@ -37,7 +37,7 @@ public class UnknownShores extends mage.sets.theros.UnknownShores {
 
     public UnknownShores(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "OGW";
     }
 

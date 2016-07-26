@@ -37,7 +37,7 @@ public class Dismember extends mage.sets.newphyrexia.Dismember {
 
     public Dismember(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "FNMP";
     }
 

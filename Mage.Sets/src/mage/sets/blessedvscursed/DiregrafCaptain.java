@@ -37,7 +37,7 @@ public class DiregrafCaptain extends mage.sets.darkascension.DiregrafCaptain {
 
     public DiregrafCaptain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "DDQ";
     }
 

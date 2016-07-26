@@ -37,7 +37,7 @@ public class SummitProwler extends mage.sets.khansoftarkir.SummitProwler {
 
     public SummitProwler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "DTK";
     }
 

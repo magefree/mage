@@ -38,7 +38,7 @@ public class ThiefOfHope extends mage.sets.championsofkamigawa.ThiefOfHope {
 
     public ThiefOfHope(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }

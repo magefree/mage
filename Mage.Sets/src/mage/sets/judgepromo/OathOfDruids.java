@@ -37,7 +37,7 @@ public class OathOfDruids extends mage.sets.exodus.OathOfDruids {
 
     public OathOfDruids(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "JR";
     }
 

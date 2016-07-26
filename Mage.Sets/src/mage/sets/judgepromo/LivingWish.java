@@ -37,7 +37,7 @@ public class LivingWish extends mage.sets.judgment.LivingWish {
 
     public LivingWish(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "JR";
     }
 

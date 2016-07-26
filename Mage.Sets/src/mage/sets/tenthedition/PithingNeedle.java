@@ -37,7 +37,7 @@ public class PithingNeedle extends mage.sets.saviorsofkamigawa.PithingNeedle {
 
     public PithingNeedle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 338;
+        this.cardNumber = "338";
         this.expansionSetCode = "10E";
     }
 

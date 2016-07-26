@@ -37,7 +37,7 @@ public class SurveillingSprite extends mage.sets.ravnica.SurveillingSprite {
 
     public SurveillingSprite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "DDH";
     }
 

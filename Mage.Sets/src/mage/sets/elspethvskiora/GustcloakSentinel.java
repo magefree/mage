@@ -37,7 +37,7 @@ public class GustcloakSentinel extends mage.sets.onslaught.GustcloakSentinel {
 
     public GustcloakSentinel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "DDO";
     }
 

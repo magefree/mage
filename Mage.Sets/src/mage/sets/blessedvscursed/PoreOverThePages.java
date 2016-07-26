@@ -37,7 +37,7 @@ public class PoreOverThePages extends mage.sets.shadowsoverinnistrad.PoreOverThe
 
     public PoreOverThePages(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "DDQ";
     }
 

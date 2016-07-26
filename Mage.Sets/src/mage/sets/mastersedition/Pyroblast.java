@@ -37,7 +37,7 @@ public class Pyroblast extends mage.sets.iceage.Pyroblast {
 
     public Pyroblast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "MED";
     }
 

@@ -38,7 +38,7 @@ public class RockslideAmbush extends mage.sets.portalthreekingdoms.RockslideAmbu
 
     public RockslideAmbush(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.COMMON;
     }

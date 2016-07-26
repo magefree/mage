@@ -37,7 +37,7 @@ public class LashOut extends mage.sets.commander.LashOut {
 
     public LashOut(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "LRW";
     }
 

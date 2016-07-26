@@ -15,7 +15,7 @@ public class StoneThrowingDevils2 extends mage.sets.arabiannights.StoneThrowingD
     
    public StoneThrowingDevils2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "ARN";
     }
 

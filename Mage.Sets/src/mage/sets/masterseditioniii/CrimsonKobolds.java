@@ -37,7 +37,7 @@ public class CrimsonKobolds extends mage.sets.legends.CrimsonKobolds {
 
     public CrimsonKobolds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "ME3";
     }
 

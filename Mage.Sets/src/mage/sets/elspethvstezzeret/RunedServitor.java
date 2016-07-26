@@ -37,7 +37,7 @@ public class RunedServitor extends mage.sets.riseoftheeldrazi.RunedServitor {
 
     public RunedServitor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "DDF";
     }
 

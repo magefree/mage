@@ -37,7 +37,7 @@ public class PreyUpon extends mage.sets.innistrad.PreyUpon {
 
     public PreyUpon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "M13";
     }
 

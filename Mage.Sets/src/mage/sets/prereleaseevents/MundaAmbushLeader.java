@@ -37,7 +37,7 @@ public class MundaAmbushLeader extends mage.sets.battleforzendikar.MundaAmbushLe
 
     public MundaAmbushLeader(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 274;
+        this.cardNumber = "274";
         this.expansionSetCode = "PTC";
     }
 

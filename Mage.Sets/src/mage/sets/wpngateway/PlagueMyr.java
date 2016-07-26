@@ -38,7 +38,7 @@ public class PlagueMyr extends mage.sets.mirrodinbesieged.PlagueMyr {
 
     public PlagueMyr(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

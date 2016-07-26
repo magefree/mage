@@ -37,7 +37,7 @@ public class GoblinSettler extends mage.sets.vintagemasters.GoblinSettler {
 
     public GoblinSettler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "S99";
     }
 

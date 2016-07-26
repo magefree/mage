@@ -37,7 +37,7 @@ public class WallOfDenial extends mage.sets.alarareborn.WallOfDenial {
 
     public WallOfDenial(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DDI";
     }
 

@@ -38,7 +38,7 @@ public class DeathlessAngel extends mage.sets.riseoftheeldrazi.DeathlessAngel {
 
     public DeathlessAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

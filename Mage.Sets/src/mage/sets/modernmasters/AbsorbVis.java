@@ -37,7 +37,7 @@ public class AbsorbVis extends mage.sets.conflux.AbsorbVis {
 
     public AbsorbVis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "MMA";
     }
 

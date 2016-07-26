@@ -37,7 +37,7 @@ public class PillarfieldOx extends mage.sets.zendikar.PillarfieldOx {
 
     public PillarfieldOx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "CNS";
     }
 

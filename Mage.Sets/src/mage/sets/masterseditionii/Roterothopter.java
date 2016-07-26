@@ -37,7 +37,7 @@ public class Roterothopter extends mage.sets.homelands.Roterothopter {
 
     public Roterothopter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "ME2";
     }
 

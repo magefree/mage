@@ -38,7 +38,7 @@ public class GreatFurnace extends mage.sets.mirrodin.GreatFurnace {
 
     public GreatFurnace (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "HOP";
     }
 

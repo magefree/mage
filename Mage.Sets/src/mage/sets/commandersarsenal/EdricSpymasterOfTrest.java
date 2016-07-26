@@ -38,7 +38,7 @@ public class EdricSpymasterOfTrest extends mage.sets.commander.EdricSpymasterOfT
 
     public EdricSpymasterOfTrest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

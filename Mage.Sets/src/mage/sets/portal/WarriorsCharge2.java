@@ -37,7 +37,7 @@ public class WarriorsCharge2 extends mage.sets.portal.WarriorsCharge1 {
 
     public WarriorsCharge2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
     }
 
     public WarriorsCharge2(final WarriorsCharge2 card) {

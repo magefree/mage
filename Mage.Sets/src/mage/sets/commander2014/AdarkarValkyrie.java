@@ -37,7 +37,7 @@ public class AdarkarValkyrie extends mage.sets.coldsnap.AdarkarValkyrie {
 
     public AdarkarValkyrie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "C14";
     }
 

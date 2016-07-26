@@ -37,7 +37,7 @@ public class DecreeOfPain extends mage.sets.commander2013.DecreeOfPain {
 
     public DecreeOfPain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "SCG";
     }
 

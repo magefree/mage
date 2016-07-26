@@ -25,7 +25,7 @@ public class PulmonicSliverTest extends CardTestPlayerBase {
         All Slivers have "If this permanent would be put into a graveyard, you may put it on top of its owner's library instead."
         */
         addCard(Zone.BATTLEFIELD, playerA, "Pulmonic Sliver");
-        addCard(Zone.BATTLEFIELD, playerA, "Venom Sliver"); // 2/2 slivers get deathtouch
+        addCard(Zone.BATTLEFIELD, playerA, "Venom Sliver"); // 1/1 slivers get deathtouch
         addCard(Zone.HAND, playerB, "Doom Blade");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
         
@@ -50,7 +50,7 @@ public class PulmonicSliverTest extends CardTestPlayerBase {
         All Slivers have "If this permanent would be put into a graveyard, you may put it on top of its owner's library instead."
         */
         addCard(Zone.BATTLEFIELD, playerA, "Pulmonic Sliver");
-        addCard(Zone.BATTLEFIELD, playerA, "Venom Sliver"); // 2/2 slivers get deathtouch
+        addCard(Zone.BATTLEFIELD, playerA, "Venom Sliver"); // 1/1 slivers get deathtouch
         addCard(Zone.HAND, playerB, "Damnation");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
         
@@ -78,7 +78,7 @@ public class PulmonicSliverTest extends CardTestPlayerBase {
         All Slivers have "If this permanent would be put into a graveyard, you may put it on top of its owner's library instead."
         */
         addCard(Zone.BATTLEFIELD, playerA, "Pulmonic Sliver");
-        addCard(Zone.BATTLEFIELD, playerA, "Venom Sliver"); // 2/2 slivers get deathtouch
+        addCard(Zone.BATTLEFIELD, playerA, "Venom Sliver"); // 1/1 slivers get deathtouch
         addCard(Zone.HAND, playerB, "Path to Exile");
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
         

@@ -37,7 +37,7 @@ public class Auramancer extends mage.sets.magic2012.Auramancer {
 
     public Auramancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "ODY";
     }
 

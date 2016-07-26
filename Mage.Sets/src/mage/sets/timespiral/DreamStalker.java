@@ -37,7 +37,7 @@ public class DreamStalker extends mage.sets.jacevsvraska.DreamStalker {
 
     public DreamStalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "TSP";
     }
 

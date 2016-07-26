@@ -37,7 +37,7 @@ public class AbruptDecay extends mage.sets.returntoravnica.AbruptDecay {
 
     public AbruptDecay(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "WMCQ";
     }
 

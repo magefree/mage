@@ -38,7 +38,7 @@ public class BrassHerald extends mage.sets.apocalypse.BrassHerald {
 
     public BrassHerald(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 293;
+        this.cardNumber = "293";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.RARE;
     }

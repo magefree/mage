@@ -37,7 +37,7 @@ public class DranaLiberatorOfMalakir extends mage.sets.battleforzendikar.DranaLi
 
     public DranaLiberatorOfMalakir(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 255;
+        this.cardNumber = "255";
         this.expansionSetCode = "PTC";
     }
 

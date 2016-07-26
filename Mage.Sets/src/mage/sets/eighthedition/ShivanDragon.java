@@ -37,7 +37,7 @@ public class ShivanDragon extends mage.sets.tenthedition.ShivanDragon {
 
     public ShivanDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "8ED";
     }
 

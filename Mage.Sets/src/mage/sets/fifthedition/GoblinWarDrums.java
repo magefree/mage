@@ -39,7 +39,7 @@ public class GoblinWarDrums extends mage.sets.fallenempires.GoblinWarDrums1 {
     public GoblinWarDrums(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.COMMON;
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "5ED";
     }
 

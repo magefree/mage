@@ -37,7 +37,7 @@ public class TimeToFeed extends mage.sets.theros.TimeToFeed {
 
     public TimeToFeed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDO";
     }
 

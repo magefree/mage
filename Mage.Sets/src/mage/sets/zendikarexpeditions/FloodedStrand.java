@@ -38,7 +38,7 @@ public class FloodedStrand extends mage.sets.onslaught.FloodedStrand {
 
     public FloodedStrand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

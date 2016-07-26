@@ -37,7 +37,7 @@ public class DeepfathomSkulker extends mage.sets.oathofthegatewatch.DeepfathomSk
 
     public DeepfathomSkulker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "MBP";
     }
 

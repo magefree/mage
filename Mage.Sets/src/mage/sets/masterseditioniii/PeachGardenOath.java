@@ -38,7 +38,7 @@ public class PeachGardenOath extends mage.sets.eighthedition.PeachGardenOath {
 
     public PeachGardenOath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

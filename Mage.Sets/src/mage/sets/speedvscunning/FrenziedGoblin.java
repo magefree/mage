@@ -37,7 +37,7 @@ public class FrenziedGoblin extends mage.sets.ravnica.FrenziedGoblin {
 
     public FrenziedGoblin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "DDN";
     }
 

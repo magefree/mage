@@ -37,7 +37,7 @@ public class Topplegeist extends mage.sets.shadowsoverinnistrad.Topplegeist {
 
     public Topplegeist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "DDQ";
     }
 

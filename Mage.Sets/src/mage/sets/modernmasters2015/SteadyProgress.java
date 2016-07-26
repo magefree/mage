@@ -37,7 +37,7 @@ public class SteadyProgress extends mage.sets.scarsofmirrodin.SteadyProgress {
 
     public SteadyProgress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "MM2";
     }
 

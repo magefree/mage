@@ -38,7 +38,7 @@ public class FogElemental extends mage.sets.tenthedition.FogElemental {
 
     public FogElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "WTH";
         this.rarity = Rarity.COMMON;
     }

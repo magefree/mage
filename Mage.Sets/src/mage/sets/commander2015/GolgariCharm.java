@@ -37,7 +37,7 @@ public class GolgariCharm extends mage.sets.returntoravnica.GolgariCharm {
 
     public GolgariCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class TyrantOfValakut extends mage.sets.oathofthegatewatch.TyrantOfValaku
 
     public TyrantOfValakut(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "MBP";
     }
 

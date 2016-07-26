@@ -37,7 +37,7 @@ public class BlindingAngel extends mage.sets.nemesis.BlindingAngel {
 
     public BlindingAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "8ED";
     }
 

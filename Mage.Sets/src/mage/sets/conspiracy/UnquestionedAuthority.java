@@ -37,7 +37,7 @@ public class UnquestionedAuthority extends mage.sets.judgment.UnquestionedAuthor
 
     public UnquestionedAuthority(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "CNS";
     }
 

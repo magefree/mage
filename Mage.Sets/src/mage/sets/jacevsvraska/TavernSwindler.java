@@ -37,7 +37,7 @@ public class TavernSwindler extends mage.sets.returntoravnica.TavernSwindler {
 
     public TavernSwindler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "DDM";
     }
 

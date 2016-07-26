@@ -37,7 +37,7 @@ public class LiquimetalCoating extends mage.sets.scarsofmirrodin.LiquimetalCoati
 
     public LiquimetalCoating(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 246;
+        this.cardNumber = "246";
         this.expansionSetCode = "C14";
     }
 

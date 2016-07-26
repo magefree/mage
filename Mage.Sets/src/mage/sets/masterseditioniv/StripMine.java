@@ -38,7 +38,7 @@ public class StripMine extends mage.sets.fourthedition.StripMine {
 
     public StripMine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 252;
+        this.cardNumber = "252";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.RARE;
     }

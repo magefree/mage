@@ -37,7 +37,7 @@ public class StuntedGrowth extends mage.sets.iceage.StuntedGrowth {
 
     public StuntedGrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "ME2";
     }
 

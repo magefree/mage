@@ -37,7 +37,7 @@ public class SkitterOfLizards extends mage.sets.worldwake.SkitterOfLizards {
 
     public SkitterOfLizards(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "CNS";
     }
 

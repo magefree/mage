@@ -37,7 +37,7 @@ public class PuppetStrings extends mage.sets.tempest.PuppetStrings {
 
     public PuppetStrings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "DDE";
     }
 

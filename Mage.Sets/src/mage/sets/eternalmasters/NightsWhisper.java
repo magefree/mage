@@ -39,7 +39,7 @@ public class NightsWhisper extends mage.sets.fifthdawn.NightsWhisper {
 
     public NightsWhisper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class LlanowarBehemoth extends mage.sets.ninthedition.LlanowarBehemoth {
 
     public LlanowarBehemoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 261;
+        this.cardNumber = "261";
         this.expansionSetCode = "8ED";
     }
 

@@ -37,7 +37,7 @@ public class LastChance extends mage.sets.masterseditioniv.LastChance {
 
     public LastChance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "S99";
     }
 

@@ -37,7 +37,7 @@ public class UginsConstruct extends mage.sets.fatereforged.UginsConstruct {
 
     public UginsConstruct(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "UGIN";
     }
 

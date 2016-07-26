@@ -37,7 +37,7 @@ public class IllicitAuction extends mage.sets.mirage.IllicitAuction {
 
     public IllicitAuction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "6ED";
     }
 

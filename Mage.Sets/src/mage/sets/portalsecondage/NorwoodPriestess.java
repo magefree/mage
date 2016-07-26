@@ -37,7 +37,7 @@ public class NorwoodPriestess extends mage.sets.vintagemasters.NorwoodPriestess 
 
     public NorwoodPriestess(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "PO2";
     }
 

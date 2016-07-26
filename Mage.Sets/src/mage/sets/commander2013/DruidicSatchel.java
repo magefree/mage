@@ -37,7 +37,7 @@ public class DruidicSatchel extends mage.sets.magic2012.DruidicSatchel {
 
     public DruidicSatchel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "C13";
     }
 

@@ -49,6 +49,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileFilter;
+import mage.cards.decks.Deck;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
@@ -58,6 +59,7 @@ import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
+import mage.game.GameException;
 import mage.game.draft.DraftOptions;
 import mage.game.draft.DraftOptions.TimingOption;
 import mage.game.tournament.LimitedOptions;
@@ -559,7 +561,15 @@ public class NewTournamentDialog extends MageDialog {
             if (tournamentType.isCubeBooster()) {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
                 if (!(cubeFromDeckFilename.equals(""))) {
-                    tOptions.getLimitedOptions().setCubeFromDeckFilename(cubeFromDeckFilename);
+                    Deck cubeFromDeck = new Deck();                   
+                    try {
+                        cubeFromDeck = Deck.load(DeckImporterUtil.importDeck(cubeFromDeckFilename), true, true);
+                    } catch (GameException e1) {
+                        JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE); 
+                    }
+                    if (cubeFromDeck != null) { 
+                        tOptions.getLimitedOptions().setCubeFromDeck(cubeFromDeck);
+		    }
                 }
             } else if (tournamentType.isRandom() || tournamentType.isRichMan()) {
                 this.isRandom = tournamentType.isRandom();

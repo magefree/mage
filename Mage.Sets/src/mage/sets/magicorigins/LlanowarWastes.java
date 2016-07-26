@@ -37,7 +37,7 @@ public class LlanowarWastes extends mage.sets.apocalypse.LlanowarWastes {
 
     public LlanowarWastes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 248;
+        this.cardNumber = "248";
         this.expansionSetCode = "ORI";
     }
 

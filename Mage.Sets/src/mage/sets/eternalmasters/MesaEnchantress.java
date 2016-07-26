@@ -38,7 +38,7 @@ public class MesaEnchantress extends mage.sets.magic2010.MesaEnchantress {
 
     public MesaEnchantress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

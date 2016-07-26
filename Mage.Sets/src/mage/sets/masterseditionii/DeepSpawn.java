@@ -38,7 +38,7 @@ public class DeepSpawn extends mage.sets.fallenempires.DeepSpawn {
 
     public DeepSpawn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.RARE;
     }

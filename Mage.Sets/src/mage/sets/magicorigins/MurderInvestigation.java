@@ -37,7 +37,7 @@ public class MurderInvestigation extends mage.sets.gatecrash.MurderInvestigation
 
     public MurderInvestigation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "ORI";
     }
 

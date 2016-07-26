@@ -38,7 +38,7 @@ public class ArgothianEnchantress extends mage.sets.urzassaga.ArgothianEnchantre
 
     public ArgothianEnchantress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.MYTHIC;
     }

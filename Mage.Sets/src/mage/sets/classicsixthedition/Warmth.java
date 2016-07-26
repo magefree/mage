@@ -37,7 +37,7 @@ public class Warmth extends mage.sets.tempest.Warmth {
 
     public Warmth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "6ED";
     }
 

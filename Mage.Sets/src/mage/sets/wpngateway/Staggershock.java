@@ -38,7 +38,7 @@ public class Staggershock extends mage.sets.riseoftheeldrazi.Staggershock {
 
     public Staggershock(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

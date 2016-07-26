@@ -37,7 +37,7 @@ public class AcidicSlime extends mage.sets.magic2010.AcidicSlime {
 
     public AcidicSlime(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "M13";
     }
 

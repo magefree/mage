@@ -37,7 +37,7 @@ public class CentaurCourser extends mage.sets.magic2010.CentaurCourser {
 
     public CentaurCourser(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 282;
+        this.cardNumber = "282";
         this.expansionSetCode = "M15";
     }
 

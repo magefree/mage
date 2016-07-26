@@ -37,7 +37,7 @@ public class CanyonMinotaur extends mage.sets.conflux.CanyonMinotaur {
 
     public CanyonMinotaur(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "M14";
     }
 

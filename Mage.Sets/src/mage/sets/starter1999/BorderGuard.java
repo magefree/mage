@@ -37,7 +37,7 @@ public class BorderGuard extends mage.sets.portal.BorderGuard {
 
     public BorderGuard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "S99";
     }
 

@@ -37,7 +37,7 @@ public class RorixBladewing extends mage.sets.planechase.RorixBladewing {
 
     public RorixBladewing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "VMA";
     }
 

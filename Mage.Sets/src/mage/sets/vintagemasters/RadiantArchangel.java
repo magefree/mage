@@ -38,7 +38,7 @@ public class RadiantArchangel extends mage.sets.urzaslegacy.RadiantArchangel {
 
     public RadiantArchangel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

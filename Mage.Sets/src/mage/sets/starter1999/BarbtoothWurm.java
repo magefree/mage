@@ -37,7 +37,7 @@ public class BarbtoothWurm extends mage.sets.portalsecondage.BarbtoothWurm {
 
     public BarbtoothWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "S99";
     }
 

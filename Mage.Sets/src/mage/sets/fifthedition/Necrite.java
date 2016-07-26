@@ -37,7 +37,7 @@ public class Necrite extends mage.sets.fallenempires.Necrite1 {
 
     public Necrite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "5ED";
     }
 

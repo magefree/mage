@@ -38,7 +38,7 @@ public class Cyclone extends mage.sets.masterseditioniv.Cyclone {
 
     public Cyclone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "ARN";
         this.rarity = Rarity.UNCOMMON;
     }

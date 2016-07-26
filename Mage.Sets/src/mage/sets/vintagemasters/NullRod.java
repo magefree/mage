@@ -37,7 +37,7 @@ public class NullRod extends mage.sets.weatherlight.NullRod {
 
     public NullRod(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 278;
+        this.cardNumber = "278";
         this.expansionSetCode = "VMA";
     }
 

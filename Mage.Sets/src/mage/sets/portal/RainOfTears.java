@@ -37,7 +37,7 @@ public class RainOfTears extends mage.sets.tempest.RainOfTears {
 
     public RainOfTears(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "POR";
     }
 

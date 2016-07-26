@@ -38,7 +38,7 @@ public class JerrardOfTheClosedFist extends mage.sets.legends.JerrardOfTheClosed
 
     public JerrardOfTheClosedFist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

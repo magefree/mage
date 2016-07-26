@@ -6,7 +6,7 @@ public class NightveilSpecter extends mage.sets.gatecrash.NightveilSpecter {
     
     public NightveilSpecter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "MBP";
     }
     

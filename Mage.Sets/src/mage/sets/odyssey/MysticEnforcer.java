@@ -38,7 +38,7 @@ public class MysticEnforcer extends mage.sets.timeshifted.MysticEnforcer {
 
     public MysticEnforcer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 290;
+        this.cardNumber = "290";
         this.expansionSetCode = "ODY";
         this.rarity = Rarity.RARE;
     }

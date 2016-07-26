@@ -38,7 +38,7 @@ public class ZoeticCavern extends mage.sets.commander2014.ZoeticCavern {
 
     public ZoeticCavern(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

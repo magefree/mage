@@ -38,7 +38,7 @@ public class KillerBees extends mage.sets.fifthedition.KillerBees {
 
     public KillerBees(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.RARE;
     }

@@ -37,7 +37,7 @@ public class NobleHierarch extends mage.sets.conflux.NobleHierarch {
 
     public NobleHierarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "JR";
     }
 

@@ -38,7 +38,7 @@ public class GorillaShaman2 extends GorillaShaman1 {
 
     public GorillaShaman2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.rarity = Rarity.UNCOMMON;
     }
 

@@ -37,7 +37,7 @@ public class AgelessEntity extends mage.sets.ajanivsnicolbolas.AgelessEntity {
 
     public AgelessEntity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "DST";
     }
 

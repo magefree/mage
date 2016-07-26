@@ -37,7 +37,7 @@ public class BeastsOfBogardan extends mage.sets.chronicles.BeastsOfBogardan {
 
     public BeastsOfBogardan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "LEG";
     }
 

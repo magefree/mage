@@ -37,7 +37,7 @@ public class Thoughtseize extends mage.sets.lorwyn.Thoughtseize {
 
     public Thoughtseize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "THS";
     }
 

@@ -37,7 +37,7 @@ public class RadiantFlames extends mage.sets.battleforzendikar.RadiantFlames {
 
     public RadiantFlames(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 287;
+        this.cardNumber = "287";
         this.expansionSetCode = "PTC";
     }
 

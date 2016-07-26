@@ -37,7 +37,7 @@ public class BreathOfDarigaaz extends mage.sets.commander.BreathOfDarigaaz {
 
     public BreathOfDarigaaz(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "ARC";
     }
 

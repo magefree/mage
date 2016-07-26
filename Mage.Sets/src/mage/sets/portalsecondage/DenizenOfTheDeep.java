@@ -37,7 +37,7 @@ public class DenizenOfTheDeep extends mage.sets.tenthedition.DenizenOfTheDeep {
 
     public DenizenOfTheDeep(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "PO2";
     }
 

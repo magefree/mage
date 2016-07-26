@@ -37,7 +37,7 @@ public class SneakAttack extends mage.sets.urzassaga.SneakAttack {
 
     public SneakAttack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "JR";
     }
 

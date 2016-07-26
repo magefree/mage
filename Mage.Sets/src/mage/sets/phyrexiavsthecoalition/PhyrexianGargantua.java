@@ -37,7 +37,7 @@ public class PhyrexianGargantua extends mage.sets.apocalypse.PhyrexianGargantua 
 
     public PhyrexianGargantua(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "DDE";
     }
 

@@ -37,7 +37,7 @@ public class ThousandYearElixir extends mage.sets.commander2013.ThousandYearElix
 
     public ThousandYearElixir(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 263;
+        this.cardNumber = "263";
         this.expansionSetCode = "LRW";
     }
 

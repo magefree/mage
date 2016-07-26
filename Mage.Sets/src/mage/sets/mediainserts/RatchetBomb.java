@@ -6,7 +6,7 @@ public class RatchetBomb extends mage.sets.magic2014.RatchetBomb {
     
     public RatchetBomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "MBP";
     }
     

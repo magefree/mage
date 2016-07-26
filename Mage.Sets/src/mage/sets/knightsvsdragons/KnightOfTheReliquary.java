@@ -38,7 +38,7 @@ public class KnightOfTheReliquary extends mage.sets.conflux.KnightOfTheReliquary
 
     public KnightOfTheReliquary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DDG";
         this.rarity = Rarity.MYTHIC;
     }

@@ -38,7 +38,7 @@ public class LightningBlow extends mage.sets.iceage.LightningBlow {
 
     public LightningBlow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

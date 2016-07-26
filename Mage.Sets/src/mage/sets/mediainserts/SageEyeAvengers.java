@@ -38,7 +38,7 @@ public class SageEyeAvengers extends mage.sets.fatereforged.SageEyeAvengers {
 
     public SageEyeAvengers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

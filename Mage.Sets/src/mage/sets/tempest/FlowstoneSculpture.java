@@ -37,7 +37,7 @@ public class FlowstoneSculpture extends mage.sets.vintagemasters.FlowstoneSculpt
 
     public FlowstoneSculpture(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 278;
+        this.cardNumber = "278";
         this.expansionSetCode = "TMP";
     }
 

@@ -37,7 +37,7 @@ public class Clone extends mage.sets.tenthedition.Clone {
 
     public Clone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "9ED";
     }
 

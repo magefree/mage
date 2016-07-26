@@ -37,7 +37,7 @@ public class DearlyDeparted extends mage.sets.innistrad.DearlyDeparted {
 
     public DearlyDeparted(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "DDQ";
     }
 

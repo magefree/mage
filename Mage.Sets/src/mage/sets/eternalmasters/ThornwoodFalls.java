@@ -38,7 +38,7 @@ public class ThornwoodFalls extends mage.sets.khansoftarkir.ThornwoodFalls {
 
     public ThornwoodFalls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 246;
+        this.cardNumber = "246";
         this.expansionSetCode = "EMA";
     }
 

@@ -38,7 +38,7 @@ public class SavageSurge extends mage.sets.returntoravnica.SavageSurge {
 
     public SavageSurge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 176;
+        this.cardNumber = "176";
         this.expansionSetCode = "THS";
         this.rarity = Rarity.COMMON;
     }

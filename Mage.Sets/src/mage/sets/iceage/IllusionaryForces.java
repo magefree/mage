@@ -38,7 +38,7 @@ public class IllusionaryForces extends mage.sets.mastersedition.IllusionaryForce
 
     public IllusionaryForces(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "ICE";
         this.rarity = Rarity.COMMON;
     }

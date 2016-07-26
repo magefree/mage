@@ -37,7 +37,7 @@ public class GlenElendraLiege extends mage.sets.shadowmoor.GlenElendraLiege {
 
     public GlenElendraLiege(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
+        this.cardNumber = "94";
         this.expansionSetCode = "PC2";
     }
 

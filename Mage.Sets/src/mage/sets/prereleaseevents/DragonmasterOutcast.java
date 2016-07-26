@@ -37,7 +37,7 @@ public class DragonmasterOutcast extends mage.sets.worldwake.DragonmasterOutcast
 
     public DragonmasterOutcast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 254;
+        this.cardNumber = "254";
         this.expansionSetCode = "PTC";
     }
 

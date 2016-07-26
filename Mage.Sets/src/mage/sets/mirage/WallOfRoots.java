@@ -38,7 +38,7 @@ public class WallOfRoots extends mage.sets.timeshifted.WallOfRoots {
 
     public WallOfRoots(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "MIR";
         this.rarity = Rarity.COMMON;
     }

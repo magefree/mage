@@ -37,7 +37,7 @@ public class Spellskite extends mage.sets.newphyrexia.Spellskite {
 
     public Spellskite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 230;
+        this.cardNumber = "230";
         this.expansionSetCode = "MM2";
     }
 

@@ -37,7 +37,7 @@ public class MirranCrusader extends mage.sets.mirrodinbesieged.MirranCrusader {
 
     public MirranCrusader(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "MM2";
     }
 

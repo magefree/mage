@@ -37,7 +37,7 @@ public class Sift extends mage.sets.tenthedition.Sift {
 
     public Sift(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "TPR";
     }
 

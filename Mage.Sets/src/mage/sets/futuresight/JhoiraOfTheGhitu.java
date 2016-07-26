@@ -37,7 +37,7 @@ public class JhoiraOfTheGhitu extends mage.sets.modernmasters.JhoiraOfTheGhitu {
 
     public JhoiraOfTheGhitu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "FUT";
     }
 

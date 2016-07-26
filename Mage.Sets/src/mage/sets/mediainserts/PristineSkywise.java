@@ -38,7 +38,7 @@ public class PristineSkywise extends mage.sets.dragonsoftarkir.PristineSkywise {
 
     public PristineSkywise(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

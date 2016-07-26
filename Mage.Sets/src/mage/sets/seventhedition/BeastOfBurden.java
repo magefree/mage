@@ -37,7 +37,7 @@ public class BeastOfBurden extends mage.sets.ninthedition.BeastOfBurden {
 
     public BeastOfBurden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 287;
+        this.cardNumber = "287";
         this.expansionSetCode = "7ED";
     }
 

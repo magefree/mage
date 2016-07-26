@@ -38,7 +38,7 @@ public class Ragnar extends mage.sets.legends.Ragnar {
 
     public Ragnar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

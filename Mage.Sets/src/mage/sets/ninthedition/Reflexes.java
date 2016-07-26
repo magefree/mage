@@ -37,7 +37,7 @@ public class Reflexes extends mage.sets.urzassaga.Reflexes {
 
     public Reflexes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 211;
+        this.cardNumber = "211";
         this.expansionSetCode = "9ED";
     }
 

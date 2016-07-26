@@ -38,7 +38,7 @@ public class FlamerushRider extends mage.sets.fatereforged.FlamerushRider {
 
     public FlamerushRider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

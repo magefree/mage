@@ -37,7 +37,7 @@ public class Scalpelexis extends mage.sets.tenthedition.Scalpelexis {
 
     public Scalpelexis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "JUD";
     }
 

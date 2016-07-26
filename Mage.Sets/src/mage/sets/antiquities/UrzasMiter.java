@@ -37,7 +37,7 @@ public class UrzasMiter extends mage.sets.masterseditioniv.UrzasMiter {
 
     public UrzasMiter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "ATQ";
     }
 

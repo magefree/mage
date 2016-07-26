@@ -37,7 +37,7 @@ public class Scrubland extends mage.sets.limitedalpha.Scrubland {
 
     public Scrubland(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 210;
+        this.cardNumber = "210";
         this.expansionSetCode = "ME3";
     }
 

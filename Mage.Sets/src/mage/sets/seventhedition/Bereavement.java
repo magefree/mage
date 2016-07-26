@@ -37,7 +37,7 @@ public class Bereavement extends mage.sets.urzassaga.Bereavement {
 
     public Bereavement(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "7ED";
     }
 

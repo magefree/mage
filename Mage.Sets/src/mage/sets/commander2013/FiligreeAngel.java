@@ -37,7 +37,7 @@ public class FiligreeAngel extends mage.sets.alarareborn.FiligreeAngel {
 
     public FiligreeAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 189;
+        this.cardNumber = "189";
         this.expansionSetCode = "C13";
     }
 

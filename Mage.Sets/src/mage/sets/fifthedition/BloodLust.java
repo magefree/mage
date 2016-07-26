@@ -37,7 +37,7 @@ public class BloodLust extends mage.sets.fourthedition.BloodLust {
 
     public BloodLust(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "5ED";
     }
 
