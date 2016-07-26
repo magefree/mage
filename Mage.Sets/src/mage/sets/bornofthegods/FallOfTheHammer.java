@@ -34,7 +34,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -55,8 +57,6 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FallOfTheHammer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-
     public FallOfTheHammer(UUID ownerId) {
         super(ownerId, 93, "Fall of the Hammer", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "BNG";
@@ -64,8 +64,16 @@ public class FallOfTheHammer extends CardImpl {
 
         // Target creature you control deals damage equal to its power to another target creature.
         this.getSpellAbility().addEffect(new FallOfTheHammerDamageEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new FallOfTheHammerTargetCreaturePermanent(filter));
+        TargetControlledCreaturePermanent target = 
+                new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("Target creature: deals damage"));
+        target.setTargetTag(1);
+        this.getSpellAbility().addTarget(target);
+        
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("Another creature: damage dealt to");
+        filter.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
     }
 
     public FallOfTheHammer(final FallOfTheHammer card) {
@@ -107,29 +115,4 @@ class FallOfTheHammerDamageEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-
-class FallOfTheHammerTargetCreaturePermanent extends TargetCreaturePermanent {
-
-    public FallOfTheHammerTargetCreaturePermanent(FilterCreaturePermanent filter) {
-        super(filter);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        if (source.getTargets().getFirstTarget().equals(id)) {
-            return false;
-        }
-        return super.canTarget(id, source, game);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (source.getTargets().getFirstTarget().equals(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game);
-    }
-
 }
