@@ -51,6 +51,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
@@ -75,8 +77,15 @@ public class DomriRade extends CardImpl {
 
         // -2: Target creature you control fights another target creature.
         LoyaltyAbility ability2 = new LoyaltyAbility(new FightTargetsEffect(), -2);
-        ability2.addTarget(new TargetControlledCreaturePermanent());
-        ability2.addTarget(new DomriRadeTargetOtherCreaturePermanent());
+        TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
+        target.setTargetTag(1);
+        ability2.addTarget(target);
+        
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature to fight");
+        filter.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        target2.setTargetTag(2);
+        ability2.addTarget(target2);
         this.addAbility(ability2);
 
         // -7: You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."
@@ -149,29 +158,4 @@ class DomriRadeEmblem extends Emblem {
         ability.addEffect(effect);
         this.getAbilities().add(ability);
     }
-}
-
-class DomriRadeTargetOtherCreaturePermanent extends TargetCreaturePermanent {
-
-    public DomriRadeTargetOtherCreaturePermanent() {
-        super();
-    }
-
-    public DomriRadeTargetOtherCreaturePermanent(final DomriRadeTargetOtherCreaturePermanent target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (source.getTargets().get(0).getTargets().contains(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game);
-    }
-
-    @Override
-    public DomriRadeTargetOtherCreaturePermanent copy() {
-        return new DomriRadeTargetOtherCreaturePermanent(this);
-    }
-
 }

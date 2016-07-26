@@ -40,7 +40,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
+import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
@@ -65,13 +67,19 @@ public class Jilt extends CardImpl {
                 "If {this} was kicked, it deals 2 damage to another target creature");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("Target Creature: returned to Hand"));
+        target.setTargetTag(1);
+        this.getSpellAbility().addTarget(target);
     }
     
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility && KickedCondition.getInstance().apply(game, ability)) {
-            ability.addTarget(new TargetOtherCreaturePermanent(new FilterCreaturePermanent("another target creature")));
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("Another creature: Damaged");
+            filter.add(new AnotherTargetPredicate(2));
+            Target target = new TargetCreaturePermanent(filter);
+            target.setTargetTag(2);
+            ability.addTarget(target);
         }
 
     }
@@ -83,29 +91,5 @@ public class Jilt extends CardImpl {
     @Override
     public Jilt copy() {
         return new Jilt(this);
-    }
-}
-
-class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
-
-    public TargetOtherCreaturePermanent(FilterCreaturePermanent filter) {
-        super(filter);
-    }
-
-    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (source.getTargets().get(0).getTargets().contains(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game);
-    }
-
-    @Override
-    public TargetOtherCreaturePermanent copy() {
-        return new TargetOtherCreaturePermanent(this);
     }
 }
