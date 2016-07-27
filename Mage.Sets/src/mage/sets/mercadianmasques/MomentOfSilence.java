@@ -25,46 +25,36 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.SkipNextCombatEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetOpponent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author nantuko
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class StonehornDignitary extends CardImpl {
+public class MomentOfSilence extends CardImpl {
 
-    public StonehornDignitary(UUID ownerId) {
-        super(ownerId, 37, "Stonehorn Dignitary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Rhino");
-        this.subtype.add("Soldier");
+    public MomentOfSilence(UUID ownerId) {
+        super(ownerId, 28, "Moment of Silence", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "MMQ";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(4);
-
-        // When Stonehorn Dignitary enters the battlefield, target opponent skips his or her next combat phase.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SkipNextCombatEffect());
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        // Target player skips his or her next combat phase this turn.
+        this.getSpellAbility().addEffect(new SkipNextCombatEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public StonehornDignitary(final StonehornDignitary card) {
+    public MomentOfSilence(final MomentOfSilence card) {
         super(card);
     }
 
     @Override
-    public StonehornDignitary copy() {
-        return new StonehornDignitary(this);
+    public MomentOfSilence copy() {
+        return new MomentOfSilence(this);
     }
 }

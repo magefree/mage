@@ -25,46 +25,36 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.SkipNextCombatEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author nantuko
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class StonehornDignitary extends CardImpl {
+public class EmptyCityRuse extends CardImpl {
 
-    public StonehornDignitary(UUID ownerId) {
-        super(ownerId, 37, "Stonehorn Dignitary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Rhino");
-        this.subtype.add("Soldier");
+    public EmptyCityRuse(UUID ownerId) {
+        super(ownerId, 3, "Empty City Ruse", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{W}");
+        this.expansionSetCode = "PTK";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(4);
-
-        // When Stonehorn Dignitary enters the battlefield, target opponent skips his or her next combat phase.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SkipNextCombatEffect());
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        // Target opponent skips all combat phases of his or her next turn.
+        this.getSpellAbility().addEffect(new SkipNextCombatEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public StonehornDignitary(final StonehornDignitary card) {
+    public EmptyCityRuse(final EmptyCityRuse card) {
         super(card);
     }
 
     @Override
-    public StonehornDignitary copy() {
-        return new StonehornDignitary(this);
+    public EmptyCityRuse copy() {
+        return new EmptyCityRuse(this);
     }
 }

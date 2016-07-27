@@ -25,46 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.thedark;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.SkipNextCombatEffect;
+import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
+import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetOpponent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.PhaseStep;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author nantuko
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class StonehornDignitary extends CardImpl {
+public class Festival extends CardImpl {
 
-    public StonehornDignitary(UUID ownerId) {
-        super(ownerId, 37, "Stonehorn Dignitary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Rhino");
-        this.subtype.add("Soldier");
+    public Festival(UUID ownerId) {
+        super(ownerId, 81, "Festival", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "DRK";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(4);
-
-        // When Stonehorn Dignitary enters the battlefield, target opponent skips his or her next combat phase.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SkipNextCombatEffect());
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        // Cast Festival only during an opponent's upkeep.
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.UPKEEP, OnOpponentsTurnCondition.getInstance(),
+                "Cast {this} only during an opponent's upkeep"));
+        
+        // Creatures can't attack this turn.
+        this.getSpellAbility().addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, new FilterCreaturePermanent("creatures")));
+        
     }
 
-    public StonehornDignitary(final StonehornDignitary card) {
+    public Festival(final Festival card) {
         super(card);
     }
 
     @Override
-    public StonehornDignitary copy() {
-        return new StonehornDignitary(this);
+    public Festival copy() {
+        return new Festival(this);
     }
 }
