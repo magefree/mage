@@ -125,6 +125,12 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         
     }
     
+    /*
+    "Leyline of the Void’s second ability doesn’t affect token permanents that would be put into an opponent’s graveyard from the battlefield. 
+    They’ll be put into that graveyard as normal (causing any applicable triggered abilities to trigger), then they’ll cease to exist."
+    http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=107682
+    
+    */
     @Test
     public void testMorbidAbilityWithAwakeningZoneTokens() {
         // At the beginning of your upkeep, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. 
@@ -145,7 +151,7 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         
         assertPermanentCount(playerA, "Eldrazi Spawn", 0);        
         assertExileCount(playerB, 0);
-        assertHandCount(playerB, 0); 
+        assertHandCount(playerB, 1); 
     }
 
 }
