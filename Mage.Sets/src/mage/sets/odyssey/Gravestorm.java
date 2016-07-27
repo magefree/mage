@@ -43,6 +43,7 @@ import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -55,7 +56,9 @@ public class Gravestorm extends CardImpl {
         this.expansionSetCode = "ODY";
 
         // At the beginning of your upkeep, target opponent may exile a card from his or her graveyard. If that player doesn't, you may draw a card.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GravestormEffect(), TargetController.YOU, false));
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GravestormEffect(), TargetController.YOU, false);
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
     public Gravestorm(final Gravestorm card) {
@@ -93,17 +96,20 @@ class GravestormEffect extends OneShotEffect {
             filter.add(new OwnerIdPredicate(targetPlayer.getId()));
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
             boolean opponentChoosesExile = targetPlayer.chooseUse(Outcome.Exile, "Exile a card from your graveyard?", source, game);
+            boolean opponentExilesACard = false;
             if (opponentChoosesExile && targetPlayer.chooseTarget(Outcome.Exile, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    if (targetPlayer.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true)) {
-                        if (you.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {
-                            you.drawCards(1, game);                            
-                        }
-                    }
-                } 
-                return true;
+                if (card != null) {                    
+                    opponentExilesACard = targetPlayer.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                }
             }
+            
+            if (!opponentExilesACard) {                
+                if (you.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {
+                    you.drawCards(1, game);                            
+                }
+            }
+            return true;
         }
         return false;
     }

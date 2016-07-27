@@ -275,7 +275,8 @@ public class CardView extends SimpleCardView {
             this.isToken = true;
             this.mageObjectType = MageObjectType.TOKEN;
             this.rarity = Rarity.COMMON;
-            if (!((PermanentToken) card).getToken().getOriginalCardNumber().isEmpty() && !"0".equals(((PermanentToken) card).getToken().getOriginalCardNumber())) {
+            boolean originalCardNumberIsNull = ((PermanentToken) card).getToken().getOriginalCardNumber() == null;
+            if (!originalCardNumberIsNull && !"0".equals(((PermanentToken) card).getToken().getOriginalCardNumber())) {
                 // a token copied from permanent
                 this.expansionSetCode = ((PermanentToken) card).getToken().getOriginalExpansionSetCode();
                 this.cardNumber = ((PermanentToken) card).getToken().getOriginalCardNumber();
