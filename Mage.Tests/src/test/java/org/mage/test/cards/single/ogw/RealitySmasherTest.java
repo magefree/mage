@@ -18,6 +18,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class RealitySmasherTest extends CardTestPlayerBase {
     
+    // Cannot figure out how to setup any of these tests to work with Reality Smashers triggered ability
     @Ignore
     @Test
     public void testSimpleKillSpellChooseToDiscard() {
@@ -42,6 +43,7 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Reality Smasher", 1);
     }
     
+    // Cannot figure out how to setup any of these tests to work with Reality Smashers triggered ability
     @Ignore
     @Test
     public void testSimpleKillSpellChooseNotToDiscard() {
@@ -60,5 +62,36 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         
         assertGraveyardCount(playerB, "Doom Blade", 1);
         assertPermanentCount(playerA, "Reality Smasher", 1);
+    }
+    
+    // Cannot figure out how to setup any of these tests to work with Reality Smashers triggered ability
+    @Ignore
+    @Test
+    public void testTargettedByPyromancerGoggleCopy() {
+        
+        // Reality Smasher {4}{<>} Trample, haste 5/5
+        // Whenever Reality Smasher becomes the target of a spell an opponent controls, counter that spell unless its controller discards a card. 
+        addCard(Zone.BATTLEFIELD, playerB, "Reality Smasher"); 
+        
+        // {T}: Add Red to your mana pool. When that mana is spent to cast a red instant or sorcery spell, copy that spell and you may choose new targets for the copy.
+        addCard(Zone.BATTLEFIELD, playerA, "Pyromancer's Goggles"); // {5} Legendary artifact
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.HAND, playerA, "Swamp", 2); // discard fodder
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        addTarget(playerA, "Reality Smasher");        
+        setChoice(playerA, "Yes"); // discard a card to prevent counter (bolt targetting)
+        setChoice(playerA, "Swamp");
+        setChoice(playerA, "No"); // do not choose new targets for copy (goggles)
+        setChoice(playerA, "Yes"); // discard a card to prevent counter (copy of bolt targetting)
+        setChoice(playerA, "Swamp");
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Swamp", 2);
+        assertGraveyardCount(playerB, "Reality Smasher", 1);
     }
 }
