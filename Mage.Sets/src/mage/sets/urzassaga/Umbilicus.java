@@ -25,85 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.sets.saviorsofkamigawa.BloodClockEffect;
 
 /**
  *
- * @author LevelX2
+ * @author Fenhl
  */
-public class BloodClock extends CardImpl {
+public class Umbilicus extends CardImpl {
 
-    public BloodClock(UUID ownerId) {
-        super(ownerId, 153, "Blood Clock", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "SOK";
+    public Umbilicus(UUID ownerId) {
+        super(ownerId, 312, "Umbilicus", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "USG";
 
         // At the beginning of each player's upkeep, that player returns a permanent he or she controls to its owner's hand unless he or she pays 2 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new BloodClockEffect(), TargetController.ANY, false, true);
         this.addAbility(ability);
     }
 
-    public BloodClock(final BloodClock card) {
+    public Umbilicus(final Umbilicus card) {
         super(card);
     }
 
     @Override
-    public BloodClock copy() {
-        return new BloodClock(this);
-    }
-}
-
-public class BloodClockEffect extends OneShotEffect {
-
-    public BloodClockEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "that player returns a permanent he or she controls to its owner's hand unless he or she pays 2 life";
-    }
-
-    public BloodClockEffect(final BloodClockEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BloodClockEffect copy() {
-        return new BloodClockEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player == null) {
-            return false;
-        }
-        if (player.getLife() > 2 && player.chooseUse(Outcome.Neutral, "Pay 2 life? If you don't, return a permanent you control to its owner's hand.", source, game)) {
-            player.loseLife(2, game);
-            game.informPlayers(player.getLogName() + " pays 2 life. He will not return a permanent he or she controls.");
-            return true;
-        } else {
-            Target target = new TargetControlledPermanent();
-            if (target.canChoose(source.getSourceId(), player.getId(), game) && player.chooseTarget(outcome, target, source, game)) {
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null) {
-                    game.informPlayers(player.getLogName() + " returns " + permanent.getName() + " to hand.");
-                    return permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                }
-            }
-        }
-        return false;
+    public Umbilicus copy() {
+        return new Umbilicus(this);
     }
 }
