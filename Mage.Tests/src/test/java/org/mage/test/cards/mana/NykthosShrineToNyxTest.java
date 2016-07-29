@@ -120,4 +120,37 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         Assert.assertEquals("amount of colorless mana", 10, playerA.getManaPool().getColorless()); // 6 - 2 (2.Activation) = 4 + 6  = 10 colorless mana 
         assertPowerToughness(playerA, "Kruphix, God of Horizons", 4,7);
     }
+
+    @Test
+    public void testNormalUseWithTokens() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+        // Green mana doesn't empty from your mana pool as steps and phases end.
+        // Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
+        addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Mana", 1);
+        // Simic Guildmage {G/U}{G/U}
+        // Creature - Elf Wizard
+        // {1}{G}: Move a +1/+1 counter from target creature onto another target creature with the same controller.
+        // {1}{U}: Attach target Aura enchanting a permanent to another permanent with the same controller.
+        addCard(Zone.BATTLEFIELD, playerA, "Simic Guildmage");
+        // Cackling Counterpart {1}{U}{U}
+        // Instant
+        // Put a token onto the battlefield that's a copy of target creature you control.
+        // Flashback {5}{U}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+        addCard(Zone.HAND, playerA, "Cackling Counterpart");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cackling Counterpart");
+        addTarget(playerA, "Simic Guildmage");
+
+        activateManaAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "{2},{T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.");
+        setChoice(playerA, "Green");
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Simic Guildmage", 2);
+        Assert.assertEquals("amount of green mana", 5, playerA.getManaPool().getGreen()); // 6 green mana
+        assertPowerToughness(playerA, "Omnath, Locus of Mana", 6, 6);
+    }
 }
