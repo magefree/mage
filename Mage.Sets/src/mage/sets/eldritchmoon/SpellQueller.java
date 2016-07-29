@@ -27,6 +27,7 @@
  */
 package mage.sets.eldritchmoon;
 
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -157,12 +158,16 @@ class SpellQuellerLeavesEffect extends OneShotEffect {
             }
             ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), permanentLeftBattlefield.getZoneChangeCounter(game)));
             if (exile != null) { // null is valid if source left battlefield before enters the battlefield effect resolved
-                Card card = exile.getCards(game).iterator().next();
-                if (card != null) {
-                    Player cardOwner = game.getPlayer(card.getOwnerId());
-                    if (cardOwner != null) {
-                        if (cardOwner.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
-                            cardOwner.cast(card.getSpellAbility(), game, true);
+                Card card = null;
+                Set<Card> exiledCards = exile.getCards(game);
+                if (exiledCards != null && !exiledCards.isEmpty()) {                    
+                    card = exiledCards.iterator().next();                    
+                    if (card != null) {
+                        Player cardOwner = game.getPlayer(card.getOwnerId());
+                        if (cardOwner != null) {
+                            if (cardOwner.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
+                                cardOwner.cast(card.getSpellAbility(), game, true);
+                            }
                         }
                     }
                 }
