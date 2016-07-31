@@ -237,6 +237,8 @@ public interface Game extends MageItem, Serializable {
 
     void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source);
 
+    void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source, Map<String, Serializable> options);
+
     void fireChooseChoiceEvent(UUID playerId, Choice choice);
 
     void fireSelectTargetEvent(UUID playerId, MessageToClient message, Set<UUID> targets, boolean required, Map<String, Serializable> options);

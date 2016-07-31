@@ -2018,10 +2018,15 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source) {
+        fireAskPlayerEvent(playerId, message, source, null);
+    }
+
+    @Override
+    public void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source, Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.ask(playerId, message.getMessage(), source, addMessageToOptions(message, null));
+        playerQueryEventSource.ask(playerId, message.getMessage(), source, addMessageToOptions(message, options));
     }
 
     @Override
