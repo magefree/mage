@@ -30,12 +30,10 @@ package mage.sets.gatecrash;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
-import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,13 +47,12 @@ public class PitFight extends CardImpl {
         super(ownerId, 223, "Pit Fight", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/G}");
         this.expansionSetCode = "GTC";
 
-
         // Target creature you control fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
-        
+
         FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature to fight");
         filter.add(new AnotherTargetPredicate(2));
         TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);

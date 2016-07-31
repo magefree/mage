@@ -28,14 +28,13 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -56,8 +55,16 @@ public class DissensionInTheRanks extends CardImpl {
 
         // Target blocking creature fights another target blocking creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, filter, false));
+        TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, false);
+        target.setTargetTag(1);
+        this.getSpellAbility().addTarget(target);
 
+        FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target blocking creature");
+        filter2.add(new AnotherTargetPredicate(2));
+        filter2.add(new BlockingPredicate());
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter2);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
     }
 
     public DissensionInTheRanks(final DissensionInTheRanks card) {
