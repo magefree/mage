@@ -28,12 +28,7 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -42,12 +37,18 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -78,11 +79,13 @@ public class PostmortemLunge extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue +  " or less from your graveyard");
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xValue + 1));
-        ability.getTargets().add(new TargetCardInYourGraveyard(filter));
+        if (ability.getAbilityType().equals(AbilityType.SPELL)) { // otherwise the target is also added to the delayed triggered ability
+            ability.getTargets().clear();
+            int xValue = ability.getManaCostsToPay().getX();
+            FilterCard filter = new FilterCreatureCard("creature card with converted mana cost " + xValue + " or less from your graveyard");
+            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xValue + 1));
+            ability.getTargets().add(new TargetCardInYourGraveyard(filter));
+        }
     }
 }
 
@@ -105,26 +108,24 @@ class PostmortemLungeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
-        
+
         if (card != null) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player == null) {
+            Player cardOwner = game.getPlayer(card.getOwnerId());
+            if (cardOwner == null) {
                 return false;
             }
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
 
-            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-            effect.setTargetPointer(new FixedTarget(card.getId()));
-            game.addEffect(effect, source);
-            
-            ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTarget(card.getId()));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
-
+            if (cardOwner.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                Permanent permanent = game.getPermanent(card.getId());
+                if (permanent != null) {
+                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                    game.addEffect(effect, source);
+                    ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
+                    exileEffect.setTargetPointer(new FixedTarget(permanent, game));
+                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
+                }
+            }
             return true;
         }
 
