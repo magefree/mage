@@ -74,6 +74,7 @@ public class GUISizeHelper {
 
     public static Dimension editorCardDimension;
     public static int editorCardOffsetSize;
+    public static int enlargedImageHeight;
 
     public static int getTableRowHeight() {
         int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
@@ -153,6 +154,8 @@ public class GUISizeHelper {
         int editorCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_EDITOR_SIZE, 14);
         editorCardDimension = new Dimension(CARD_IMAGE_WIDTH * editorCardSize / 42, CARD_IMAGE_HEIGHT * editorCardSize / 42);
         editorCardOffsetSize = 2 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OFFSET_SIZE, 14) - 10;
+
+        enlargedImageHeight = 25 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_ENLARGED_IMAGE_SIZE, 20);
     }
 
     public static void changePopupMenuFont(JPopupMenu popupMenu) {
