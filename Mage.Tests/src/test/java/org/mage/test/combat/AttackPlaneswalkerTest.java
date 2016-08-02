@@ -24,9 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
-
+ */
 package org.mage.test.combat;
 
 import mage.constants.PhaseStep;
@@ -36,7 +34,8 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * Check if attacking a planswalker and removing loyality counter from damage works
+ * Check if attacking a planswalker and removing loyality counter from damage
+ * works
  *
  * @author LevelX2
  */
@@ -61,7 +60,8 @@ public class AttackPlaneswalkerTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests that giving a planeswalker hexproof does not prevent opponent from attacking it
+     * Tests that giving a planeswalker hexproof does not prevent opponent from
+     * attacking it
      */
     @Test
     public void testAttackPlaneswalkerWithHexproof() {
@@ -71,7 +71,7 @@ public class AttackPlaneswalkerTest extends CardTestPlayerBase {
          Choose one — Target creature gets +3/+3 until end of turn;
                        or permanents you control gain hexproof until end of turn;
                        or return target creature to its owner's hand.
-        */
+         */
         addCard(Zone.HAND, playerA, "Simic Charm");
         addCard(Zone.BATTLEFIELD, playerA, "Island");
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
@@ -95,4 +95,28 @@ public class AttackPlaneswalkerTest extends CardTestPlayerBase {
         assertCounterCount("Kiora, the Crashing Wave", CounterType.LOYALTY, 1);
     }
 
+    /**
+     * Tests that attacking a planeswalker triggers and resolves Silent Skimmer
+     * correctly
+     */
+    @Test
+    public void testAttackPlaneswalkerTriggers() {
+        addCard(Zone.BATTLEFIELD, playerA, "Kiora, the Crashing Wave");
+
+        // Devoid, Flying
+        // Whenever Silent Skimmer attacks, defending player loses 2 life.
+        addCard(Zone.BATTLEFIELD, playerB, "Silent Skimmer");
+
+        attack(2, playerB, "Silent Skimmer", "Kiora, the Crashing Wave");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 18);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Kiora, the Crashing Wave", 1);
+        assertPermanentCount(playerB, "Silent Skimmer", 1);
+        assertCounterCount("Kiora, the Crashing Wave", CounterType.LOYALTY, 2);
+    }
 }
