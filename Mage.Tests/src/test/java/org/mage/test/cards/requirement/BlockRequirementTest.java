@@ -219,4 +219,32 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         // Player B was unable to block, so goes down to 10 life
         assertLife(playerB, 8);
     }
+    
+    /*
+    Reported bug: Slayer's Cleaver did not force Wretched Gryff (an eldrazi) to block 
+    */
+    @Test
+    public void testSlayersCleaver() {
+        // Equipped creature gets +3/+1 and must be blocked by an Eldrazi if able.
+        // Equip {4}
+        addCard(Zone.BATTLEFIELD, playerA, "Slayer's Cleaver");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite"); // {1} 1/1
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Wretched Gryff"); // {7} Flying 3/4 - Eldrazi Hippogriff
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant"); // {3}{R} 3/3
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Memnite"); // pumps to 4/2
+        attack(1, playerA, "Memnite"); // must be blocked by Wretched Gryff
+        block(1, playerB, "Hill Giant", "Memnite"); // should not be allowed as only blocker
+        
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+                
+        assertPermanentCount(playerA, "Slayer's Cleaver", 1);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Memnite", 1);
+        assertGraveyardCount(playerB, "Wretched Gryff", 1);
+        assertPermanentCount(playerB, "Hill Giant", 1);
+    }
 }
