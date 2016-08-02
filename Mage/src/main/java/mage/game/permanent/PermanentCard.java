@@ -241,12 +241,20 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        card.adjustTargets(ability, game);
+        if (this.isTransformed()) {
+            card.getSecondCardFace().adjustTargets(ability, game);
+        } else {
+            card.adjustTargets(ability, game);
+        }
     }
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        card.adjustCosts(ability, game);
+        if (this.isTransformed()) {
+            card.getSecondCardFace().adjustCosts(ability, game);
+        } else {
+            card.adjustCosts(ability, game);
+        }
     }
 
     @Override

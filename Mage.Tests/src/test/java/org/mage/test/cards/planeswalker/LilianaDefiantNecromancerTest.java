@@ -16,7 +16,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
-    
+
     // Reported bug: -X allowing returning creatures with higher CMC than counters removed
     @Test
     public void testMinusAbilityShouldNotReturnHigherCmcCreature() {
@@ -31,28 +31,25 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Liliana, Heretical Healer");
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt");
-        addTarget(playerB, "Hill Giant");
-        
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt", "Hill Giant");
+
         // Transformed into Liliana, Defiant Necromancer with (3) loyalty to start
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X:");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X:", "Hill Giant");
         setChoice(playerA, "X=1");
-        addTarget(playerA, "Hill Giant"); // dunno which to use for returning from grave, both target/choice seem to work
-        setChoice(playerA, "Hill Giant");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
-        assertGraveyardCount(playerB, "Lightning Bolt", 1);   
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Liliana, Heretical Healer", 0);
         assertPermanentCount(playerA, "Zombie", 1);
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
-        assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 2);
+        assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 3); // No balid target with X=1 so no counter is removed
         assertPermanentCount(playerA, "Hill Giant", 0);
         assertGraveyardCount(playerA, "Hill Giant", 1);
     }
-    
+
     @Test
     public void testMinusAbilityShouldNotReturnLegendaryCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Alesha, Who Smiles at Death", 1); // {2}{R} 3/2 Legendary first strike
@@ -68,7 +65,7 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Liliana, Heretical Healer");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt");
         addTarget(playerB, "Alesha, Who Smiles at Death");
-        
+
         // Transformed into Liliana, Defiant Necromancer with (3) loyalty to start
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X:");
@@ -78,8 +75,8 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
-        assertGraveyardCount(playerB, "Lightning Bolt", 1);   
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Liliana, Heretical Healer", 0);
         assertPermanentCount(playerA, "Zombie", 1);
         assertPermanentCount(playerA, "Alesha, Who Smiles at Death", 0);
@@ -88,10 +85,10 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
         assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 3);
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
     }
-    
+
     @Test
     public void testMinusAbilityShouldReturnNonLegendaryCreature() {
-        addCard(Zone.BATTLEFIELD, playerA, "Bronze Sable", 1); // {2} 2/1 
+        addCard(Zone.BATTLEFIELD, playerA, "Bronze Sable", 1); // {2} 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
 
         // Lifelink
@@ -104,7 +101,7 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Liliana, Heretical Healer");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt");
         addTarget(playerB, "Bronze Sable");
-        
+
         // Transformed into Liliana, Defiant Necromancer with (3) loyalty to start
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-X:");
@@ -114,8 +111,8 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
-        assertGraveyardCount(playerB, "Lightning Bolt", 1);   
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Liliana, Heretical Healer", 0);
         assertPermanentCount(playerA, "Zombie", 1);
         assertPermanentCount(playerA, "Bronze Sable", 1);
@@ -123,6 +120,5 @@ public class LilianaDefiantNecromancerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
         assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 1);
     }
-    
-    
+
 }
