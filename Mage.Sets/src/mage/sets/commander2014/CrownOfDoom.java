@@ -38,17 +38,18 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.PlayerPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -60,29 +61,40 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CrownOfDoom extends CardImpl {
 
-    private static final FilterPlayer filter = new FilterPlayer("player other than Crown of Doom's owner");
+    private UUID abilityId;
 
-    static {
-        filter.add(new PlayerPredicate(TargetController.OPPONENT));
-    }
-    
     public CrownOfDoom(UUID ownerId) {
         super(ownerId, 55, "Crown of Doom", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "C14";
 
         // Whenever a creature attacks you or a planeswalker you control, it gets +2/+0 until end of turn.
-        Effect effect = new BoostTargetEffect(2,0,Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
         effect.setText("it gets +2/+0 until end of turn");
         this.addAbility(new AttacksAllTriggeredAbility(effect, false, new FilterCreaturePermanent(), SetTargetPointer.PERMANENT, true));
 
         // {2}: Target player other than Crown of Doom's owner gains control of it. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new CrownOfDoomEffect(), new ManaCostsImpl("{2}"), MyTurnCondition.getInstance());
-        ability.addTarget(new TargetPlayer(1, 1, false, filter));
+        ability.addTarget(new TargetPlayer(1, 1, false, new FilterPlayer("player other than Crown of Doom's owner")));
+        abilityId = ability.getOriginalId();
         this.addAbility(ability);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability.getOriginalId().equals(abilityId)) {
+            Card sourceCard = game.getCard(ability.getSourceId());
+            if (sourceCard != null) {
+                ability.getTargets().clear();
+                FilterPlayer filter = new FilterPlayer("player other than " + sourceCard.getName() + "'s owner");
+                filter.add(Predicates.not(new OwnerIdPredicate(sourceCard.getOwnerId())));
+                ability.addTarget(new TargetPlayer(1, 1, false, filter));
+            }
+        }
     }
 
     public CrownOfDoom(final CrownOfDoom card) {
         super(card);
+        this.abilityId = card.abilityId;
     }
 
     @Override
