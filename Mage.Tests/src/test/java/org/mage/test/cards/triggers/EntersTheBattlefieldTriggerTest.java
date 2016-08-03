@@ -341,4 +341,21 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Carnivorous Plant", 1, 2);
         assertPowerToughness(playerA, "Carnivorous Plant", -1, 2);
     }
+    
+    @Test
+    public void testHearthcageGiant() {
+        // {6}{R}{R} Creature — Giant Warrior
+        //When Hearthcage Giant enters the battlefield, put two 3/1 red Elemental Shaman creature tokens onto the battlefield.
+        //Sacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
+        addCard(Zone.HAND,playerA,"Hearthcage Giant");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hearthcage Giant");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertPermanentCount(playerA, "Hearthcage Giant", 1);
+        assertPermanentCount(playerA, "Elemental Shaman", 2);
+        assertPowerToughness(playerA, "Elemental Shaman", 3, 1);
+    }
 }
