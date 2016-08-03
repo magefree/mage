@@ -63,7 +63,7 @@ public class CrownOfDoom extends CardImpl {
     private static final FilterPlayer filter = new FilterPlayer("player other than Crown of Doom's owner");
 
     static {
-        filter.add(new PlayerPredicate(TargetController.NOT_YOU));
+        filter.add(new PlayerPredicate(TargetController.OPPONENT));
     }
     
     public CrownOfDoom(UUID ownerId) {
@@ -111,7 +111,7 @@ class CrownOfDoomEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player newController = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller != null && newController != null) {
+        if (controller != null && newController != null && controller.getId() != newController.getId()) {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, newController.getId());
             effect.setTargetPointer(new FixedTarget(source.getSourceId()));
             game.addEffect(effect, source);
