@@ -133,7 +133,7 @@ class HostilityEffect extends PreventionEffectImpl {
 class HostilityElementalToken extends ElementalShamanToken {
 
     public HostilityElementalToken() {
-        super("DD2", 1);
+        super("DD2");
         description = description + " with haste";
         addAbility(HasteAbility.getInstance());
     }
