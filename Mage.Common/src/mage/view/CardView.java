@@ -111,6 +111,8 @@ public class CardView extends SimpleCardView {
 
     protected boolean controlledByOwner = true;
 
+    protected Zone zone;
+
     protected boolean rotate;
     protected boolean hideInfo; // controls if the tooltip window is shown (eg. controlled face down morph card)
 
@@ -161,9 +163,10 @@ public class CardView extends SimpleCardView {
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
         boolean showFaceUp = true;
         if (game != null) {
+            zone = game.getState().getZone(card.getId());
             if (card.isFaceDown(game)) {
                 showFaceUp = false;
-                if (!Zone.BATTLEFIELD.equals(game.getState().getZone(card.getId()))) {
+                if (!Zone.BATTLEFIELD.equals(zone)) {
                     if (showFaceDownCard) {
                         showFaceUp = true;
                     }
@@ -706,6 +709,10 @@ public class CardView extends SimpleCardView {
 
     public boolean isControlledByOwner() {
         return controlledByOwner;
+    }
+
+    public Zone getZone() {
+        return zone;
     }
 
     public boolean isFlipCard() {

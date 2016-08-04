@@ -17,6 +17,7 @@ import mage.client.util.GUISizeHelper;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -342,6 +343,11 @@ public class GuiDisplayUtil {
             legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this" : card.getName());
             legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this" : card.getName());
             buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.TOOLTIP));
+        }
+
+        Zone zone = card.getZone();
+        if (zone != null) {
+            buffer.append("<p style='margin: 2px'><b>Card Zone:</b> ").append(zone).append("</p>");
         }
 
         buffer.append("<br></body></html>");
