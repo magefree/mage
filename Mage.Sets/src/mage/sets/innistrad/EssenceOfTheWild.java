@@ -99,7 +99,11 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourceObject != null) {
-            game.addEffect(new CopyEffect(Duration.Custom, sourceObject, event.getTargetId()), source);
+            Permanent permanentReset = sourceObject.copy();
+            permanentReset.getCounters().clear();
+            permanentReset.getPower().resetToBaseValue();
+            permanentReset.getToughness().resetToBaseValue();
+            game.addEffect(new CopyEffect(Duration.Custom, permanentReset, event.getTargetId()), source);
         }
         return false;
     }

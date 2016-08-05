@@ -31,11 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
-import mage.abilities.effects.common.continuous.SetToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -95,14 +92,14 @@ class MoltenSentryEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             if (controller.flipCoin(game)) {
                 game.informPlayers("Heads: " + permanent.getLogName() + " enters the battlefield as a 5/2 creature with haste");
-                game.addEffect(new SetPowerSourceEffect(new StaticValue(5), Duration.WhileOnBattlefield), source);
-                game.addEffect(new SetToughnessSourceEffect(new StaticValue(2), Duration.WhileOnBattlefield), source);
+                permanent.getPower().modifyBaseValue(5);
+                permanent.getToughness().modifyBaseValue(2);
                 game.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield), source);
                 return true;
             } else {
                 game.informPlayers("Tails: " + permanent.getLogName() + " enters the battlefield as a 2/5 creature with defender");
-                game.addEffect(new SetPowerSourceEffect(new StaticValue(2), Duration.WhileOnBattlefield), source);
-                game.addEffect(new SetToughnessSourceEffect(new StaticValue(5), Duration.WhileOnBattlefield), source);
+                permanent.getPower().modifyBaseValue(2);
+                permanent.getToughness().modifyBaseValue(5);
                 game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield), source);
                 return true;
             }

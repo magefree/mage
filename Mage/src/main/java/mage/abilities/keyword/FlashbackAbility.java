@@ -208,7 +208,6 @@ class FlashbackEffect extends OneShotEffect {
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " flashbacks " + card.getLogName());
                 }
-                // spellAbility.setCostModificationActive(false); // prevents to apply cost modification twice for flashbacked spells
                 if (controller.cast(spellAbility, game, false)) {
                     ContinuousEffect effect = new FlashbackReplacementEffect();
                     effect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())));

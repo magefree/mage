@@ -295,8 +295,8 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     }
 
     public static void setPermanentToFaceDownCreature(MageObject mageObject) {
-        mageObject.getPower().initValue(2);
-        mageObject.getToughness().initValue(2);
+        mageObject.getPower().modifyBaseValue(2);
+        mageObject.getToughness().modifyBaseValue(2);
         mageObject.getAbilities().clear();
         mageObject.getColor(null).setColor(new ObjectColor());
         mageObject.setName("");

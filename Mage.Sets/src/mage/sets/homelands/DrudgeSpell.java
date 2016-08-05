@@ -91,8 +91,8 @@ class SkeletonToken extends Token {
     SkeletonToken() {
         super("Skeleton", "1/1 black Skeleton creature token onto the battlefield. It has \"{B}: Regenerate this creature.\"");
         this.setOriginalExpansionSetCode("HML");
-        this.getPower().initValue(1);
-        this.getToughness().initValue(1);
+        this.getPower().modifyBaseValue(1);
+        this.getToughness().modifyBaseValue(1);
         this.color.setBlack(true);
         this.getSubtype().add("Skeleton");
         this.getCardType().add(CardType.CREATURE);

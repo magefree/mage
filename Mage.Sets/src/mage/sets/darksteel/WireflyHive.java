@@ -113,8 +113,8 @@ class WireflyToken extends Token {
     WireflyToken() {
         super("Wirefly", "2/2 colorless Insect artifact creature token named Wirefly");
         this.setOriginalExpansionSetCode("DST");
-        this.getPower().initValue(2);
-        this.getToughness().initValue(2);
+        this.getPower().modifyBaseValue(2);
+        this.getToughness().modifyBaseValue(2);
         this.getSubtype().add("Insect");
         this.getCardType().add(CardType.ARTIFACT);
         this.getCardType().add(CardType.CREATURE);
