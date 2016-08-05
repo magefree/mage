@@ -32,7 +32,7 @@ import mage.constants.Rarity;
 
 /**
  *
- * @author anonymous
+ * @author choiseul11
  */
 public class CelestialSword extends mage.sets.iceage.CelestialSword {
 

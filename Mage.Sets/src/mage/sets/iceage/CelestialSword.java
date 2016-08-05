@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author choiseul11
  */
 public class CelestialSword extends CardImpl {
 
