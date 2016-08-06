@@ -76,6 +76,7 @@ public class UndyingTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Elite Vanguard", 1);
+        assertCounterCount(playerA, "Elite Vanguard", CounterType.P1P1, 1);
         assertPowerToughness(playerA, "Elite Vanguard", 3, 2);
     }
 
@@ -112,6 +113,7 @@ public class UndyingTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertPermanentCount(playerB, "Strangleroot Geist", 0);
         assertPermanentCount(playerA, "Strangleroot Geist", 1);
+        assertCounterCount(playerA, "Strangleroot Geist", CounterType.P1P1, 1);
         assertPowerToughness(playerA, "Strangleroot Geist", 3, 2);
     }
 
@@ -211,6 +213,7 @@ public class UndyingTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Mikaeus, the Unhallowed", 1);
+        assertCounterCount(playerA, "Silvercoat Lion", CounterType.P1P1, 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 4, 4);
 
     }
@@ -270,6 +273,46 @@ public class UndyingTest extends CardTestPlayerBase {
         assertCounterCount("Tatterkite", CounterType.P1P1, 0);
         assertPowerToughness(playerA, "Tatterkite", 3, 2);
 
+    }
+    
+    /**
+     * I stole my opponents Vorapede using Simic Manipulator and shortly after someone played Wrath of God. 
+     * Instead of returning to my opponent's board, Vorapede came back under my control.
+     *   The rules text for Undying states that it should return under its owner's control, not its controller's.
+     */
+    @Test
+    public void testUndyingCreatureReturnsUnderOwnersControl() {
+        
+        // Creature — Insect
+        // Vigilance, trample
+        // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
+        addCard(Zone.BATTLEFIELD, playerB, "Vorapede"); // {2}{G}{G}{G} 5/4
+        addCard(Zone.HAND, playerB, "Doom Blade"); // {1}{B} destroy target non-black creature
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        
+        // {2}{R} sorcery - Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+        addCard(Zone.HAND, playerA, "Act of Treason"); 
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        
+        // playerA takes control of Vorapede from playerB
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Act of Treason", "Vorapede");
+        attack(1, playerA, "Vorapede");
+        // playerB kills Vorapede under the control of playerA now
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Doom Blade", "Vorapede");
+        
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        
+        assertLife(playerA, 20);
+        assertLife(playerB, 15);
+        assertGraveyardCount(playerA, "Act of Treason", 1);
+        assertGraveyardCount(playerB, "Doom Blade", 1);
+                
+        // Vorapede should return under control of playerA, not playerB
+        assertPermanentCount(playerA, "Vorapede", 1);        
+        assertPermanentCount(playerB, "Vorapede", 0);        
+        assertCounterCount(playerA, "Vorapede", CounterType.P1P1, 1);
+        assertPowerToughness(playerA, "Vorapede", 6, 5);                
     }
 
 }
