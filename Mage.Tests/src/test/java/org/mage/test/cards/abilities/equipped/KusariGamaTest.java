@@ -23,26 +23,26 @@ public class KusariGamaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Kusari-Gama");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate"); // 2/3 vigilance {1}{G}
-        
+
         addCard(Zone.BATTLEFIELD, playerB, "Wall of Omens"); // 0/4 {1}{W}
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 2); // 2/2 {1}{W}
         addCard(Zone.BATTLEFIELD, playerB, "Hill Giant"); // 3/3 {3}{R}
-        
-        activateAbility(1, PhaseStep.BEGIN_COMBAT, playerA, "Equip {3}", "Sylvan Advocate");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {3}", "Sylvan Advocate");
         attack(1, playerA, "Sylvan Advocate");
         block(1, playerB, "Wall of Omens", "Sylvan Advocate");
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
-        
-        assertPermanentCount(playerA, "Kusari-Gama", 1);       
+
+        assertPermanentCount(playerA, "Kusari-Gama", 1);
         assertPermanentCount(playerB, "Wall of Omens", 1);
         assertPermanentCount(playerB, "Hill Giant", 1);
-        
+
         Permanent wallPerm = getPermanent("Wall of Omens", playerB);
-        Permanent giantPerm = getPermanent("Hill Giant", playerB);        
+        Permanent giantPerm = getPermanent("Hill Giant", playerB);
         Assert.assertEquals("Wall of Omens should have 2 damage dealt to it", 2, wallPerm.getDamage());
-        Assert.assertEquals("Hill Giant should have 2 damage dealt to it", 2, giantPerm.getDamage());   
-        
+        Assert.assertEquals("Hill Giant should have 2 damage dealt to it", 2, giantPerm.getDamage());
+
         assertGraveyardCount(playerB, "Silvercoat Lion", 2);
     }
 }
