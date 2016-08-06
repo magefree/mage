@@ -166,4 +166,13 @@ public enum CounterType {
                 return new Counter(name, amount);
         }
     }
+
+    public static CounterType findByName(String name) {
+        for (CounterType counterType : values()) {
+            if (counterType.getName().equals(name)) {
+                return counterType;
+            }
+        }
+        return null;
+    }
 }
