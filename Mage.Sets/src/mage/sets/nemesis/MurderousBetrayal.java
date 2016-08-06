@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author choiseul11
  */
 public class MurderousBetrayal extends mage.sets.eighthedition.MurderousBetrayal {
 

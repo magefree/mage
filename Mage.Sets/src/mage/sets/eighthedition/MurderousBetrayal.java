@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author choiseul11
  */
 public class MurderousBetrayal extends CardImpl {
 
