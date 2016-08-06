@@ -365,7 +365,7 @@ public class Spell extends StackObjImpl implements Card {
                 }
             }
         } else {
-        	card.removeFromZone(game, Zone.STACK, sourceId);
+            card.removeFromZone(game, Zone.STACK, sourceId);
         }
     }
 
@@ -503,11 +503,9 @@ public class Spell extends StackObjImpl implements Card {
             return 0;
         }
         for (SpellAbility spellAbility : spellAbilities) {
-            cmc += spellAbility.getConvertedManaCost();
+            cmc += spellAbility.getConvertedXManaCost();
         }
-        if (this.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
-            cmc += getCard().getManaCost().convertedManaCost();
-        }
+        cmc += getCard().getManaCost().convertedManaCost();
         return cmc;
     }
 
