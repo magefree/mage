@@ -15,20 +15,20 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CantAttackAloneEffect extends RestrictionEffect {
+public class CantAttackAloneSourceEffect extends RestrictionEffect {
 
-    public CantAttackAloneEffect() {
+    public CantAttackAloneSourceEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack alone";
     }
 
-    public CantAttackAloneEffect(final CantAttackAloneEffect effect) {
+    public CantAttackAloneSourceEffect(final CantAttackAloneSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public CantAttackAloneEffect copy() {
-        return new CantAttackAloneEffect(this);
+    public CantAttackAloneSourceEffect copy() {
+        return new CantAttackAloneSourceEffect(this);
     }
 
     @Override
