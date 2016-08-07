@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.UnattachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.SacrificeEquippedEffect;
+import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class GraftedWargear extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 2)));
 
         // Whenever Grafted Wargear becomes unattached from a permanent, sacrifice that permanent.
-        this.addAbility(new UnattachedTriggeredAbility(new SacrificeEquippedEffect(), false));
+        this.addAbility(new UnattachedTriggeredAbility(new SacrificeTargetEffect(), false));
 
         // Equip {0}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)));
