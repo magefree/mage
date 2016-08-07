@@ -28,7 +28,6 @@
 package mage.sets.eighthedition;
 
 import java.util.UUID;
-
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -95,7 +94,7 @@ class MurderousBetrayalCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player controller = game.getPlayer(controllerId);
-        return controller != null && !(controller.getLife() > 0 && !controller.canPayLifeCost());
+        return controller != null && (controller.getLife() < 1 || controller.canPayLifeCost());
     }
 
     @Override
