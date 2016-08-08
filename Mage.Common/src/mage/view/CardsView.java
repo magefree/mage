@@ -66,9 +66,9 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
         }
     }
 
-    public CardsView(Game game, Collection<? extends Card> cards, boolean showFaceDown) {
+    public CardsView(Game game, Collection<? extends Card> cards, boolean showFaceDown, boolean storeZone) {
         for (Card card : cards) {
-            this.put(card.getId(), new CardView(card, game, false, showFaceDown));
+            this.put(card.getId(), new CardView(card, game, false, showFaceDown, storeZone));
         }
     }
 

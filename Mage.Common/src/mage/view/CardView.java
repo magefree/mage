@@ -144,7 +144,7 @@ public class CardView extends SimpleCardView {
      * the card
      */
     public CardView(Card card, Game game, boolean controlled) {
-        this(card, game, controlled, false);
+        this(card, game, controlled, false, false);
     }
 
     /**
@@ -156,21 +156,26 @@ public class CardView extends SimpleCardView {
      * the card
      * @param showFaceDownCard if true and the card is not on the battlefield,
      * also a face down card is shown in the view, face down cards will be shown
+     * @param storeZone if true the card zone will be set in the zone attribute.
      */
-    public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard) {
+    public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null);
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
         boolean showFaceUp = true;
         if (game != null) {
-            zone = game.getState().getZone(card.getId());
+            Zone cardZone = game.getState().getZone(card.getId());
             if (card.isFaceDown(game)) {
                 showFaceUp = false;
-                if (!Zone.BATTLEFIELD.equals(zone)) {
+                if (!Zone.BATTLEFIELD.equals(cardZone)) {
                     if (showFaceDownCard) {
                         showFaceUp = true;
                     }
                 }
+            }
+
+            if (storeZone) {
+                this.zone = cardZone;
             }
         }
         //  boolean showFaceUp = game == null || !card.isFaceDown(game) || (!game.getState().getZone(card.getId()).equals(Zone.BATTLEFIELD) && showFaceDownCard);
