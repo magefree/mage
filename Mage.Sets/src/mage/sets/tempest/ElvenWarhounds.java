@@ -25,49 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.UnattachedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.keyword.EquipAbility;
+import mage.MageInt;
+import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author Plopman
  */
-public class GraftedWargear extends CardImpl {
+public class ElvenWarhounds extends CardImpl {
 
-    public GraftedWargear(UUID ownerId) {
-        super(ownerId, 126, "Grafted Wargear", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Equipment");
+    public ElvenWarhounds(UUID ownerId) {
+        super(ownerId, 119, "Elven Warhounds", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Hound");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Equipped creature gets +3/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 2)));
-
-        // Whenever Grafted Wargear becomes unattached from a permanent, sacrifice that permanent.
-        this.addAbility(new UnattachedTriggeredAbility(new SacrificeTargetEffect(), false));
-
-        // Equip {0}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)));
-
+        // Whenever Elven Warhounds becomes blocked by a creature, put that creature on top of its owner's library.
+        Effect effect = new PutOnLibraryTargetEffect(true);
+        effect.setText("put that creature on top of its owner's library");
+        this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(effect,  false));
     }
 
-    public GraftedWargear(final GraftedWargear card) {
+    public ElvenWarhounds(final ElvenWarhounds card) {
         super(card);
     }
 
     @Override
-    public GraftedWargear copy() {
-        return new GraftedWargear(this);
+    public ElvenWarhounds copy() {
+        return new ElvenWarhounds(this);
     }
 }

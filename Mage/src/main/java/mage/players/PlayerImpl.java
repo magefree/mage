@@ -1134,7 +1134,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         } else {
             int bookmark = game.bookmarkState();
-            if (ability.activate(game, false)) {
+            if (ability.activate(game, ability instanceof FlashbackAbility)) {
                 ability.resolve(game);
                 game.removeBookmark(bookmark);
                 resetStoredBookmark(game);

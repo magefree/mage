@@ -27,8 +27,12 @@
  */
 package mage.sets.eldritchmoon;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
+import mage.MageObjectReference;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,7 +40,6 @@ import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.AttachedCondition;
-import mage.abilities.condition.common.WatcherCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEquippedEffect;
@@ -49,6 +52,7 @@ import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
+
 
 /**
  *
@@ -67,12 +71,12 @@ public class ThirstingAxe extends CardImpl {
         // At the beginning of your end step, if equipped creature didn't deal combat damage to a creature this turn, sacrifice it.
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new SacrificeEquippedEffect(), false);
         Condition condition = new CompoundCondition(
-                new AttachedCondition(),
-                new InvertCondition(new WatcherCondition(CombatDamageToCreatureByEquippedWatcher.BASIC_KEY, WatcherScope.CARD)));
+                AttachedCondition.getInstance(),
+                new InvertCondition(new EquippedDealtCombatDamageToCreatureCondition()));
         String triggeredAbilityText = "At the beginning of your end step, if equipped creature " +
             "didn't deal combat damage to a creature this turn, sacrifice it.";
         ConditionalTriggeredAbility sacrificeTriggeredAbility = new ConditionalTriggeredAbility(ability, condition, triggeredAbilityText);
-        this.addAbility(sacrificeTriggeredAbility, new CombatDamageToCreatureByEquippedWatcher());
+        this.addAbility(sacrificeTriggeredAbility, new CombatDamageToCreatureWatcher());
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
@@ -88,34 +92,62 @@ public class ThirstingAxe extends CardImpl {
     }
 }
 
-class CombatDamageToCreatureByEquippedWatcher extends Watcher {
+class EquippedDealtCombatDamageToCreatureCondition implements Condition {
 
-    public final static String BASIC_KEY = "CombatDamageToCreatureByEquippedWatcher";
-
-    public CombatDamageToCreatureByEquippedWatcher() {
-        super(BASIC_KEY, WatcherScope.CARD);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            CombatDamageToCreatureWatcher watcher =
+                    (CombatDamageToCreatureWatcher) game.getState().getWatchers().get(CombatDamageToCreatureWatcher.BASIC_KEY);
+            return watcher.dealtDamage(equipment.getAttachedTo(), equipment.getAttachedToZoneChangeCounter(), game);
+        }
+        return false;
     }
 
-    public CombatDamageToCreatureByEquippedWatcher(final CombatDamageToCreatureByEquippedWatcher watcher) {
+}
+
+class CombatDamageToCreatureWatcher extends Watcher {
+
+    // which objects dealt combat damage to creature during the turn
+    public final Set<MageObjectReference> dealtCombatDamageToCreature;
+
+    public final static String BASIC_KEY = "CombatDamageToCreatureWatcher";
+
+    public CombatDamageToCreatureWatcher() {
+        super(BASIC_KEY, WatcherScope.GAME);
+        dealtCombatDamageToCreature = new HashSet<>();
+    }
+
+    public CombatDamageToCreatureWatcher(final CombatDamageToCreatureWatcher watcher) {
         super(watcher);
+        dealtCombatDamageToCreature = new HashSet<>(watcher.dealtCombatDamageToCreature);
     }
 
     @Override
-    public CombatDamageToCreatureByEquippedWatcher copy() {
-        return new CombatDamageToCreatureByEquippedWatcher(this);
+    public CombatDamageToCreatureWatcher copy() {
+        return new CombatDamageToCreatureWatcher(this);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
-            Permanent equipment = game.getPermanent(this.getSourceId());
-            if (equipment != null && equipment.getAttachedTo() != null) {
-                if (equipment.getAttachedTo().equals(event.getSourceId())) {
-                    if (((DamagedCreatureEvent)event).isCombatDamage()) {
-                        condition = true;
-                    }
-                }
+            if (((DamagedCreatureEvent) event).isCombatDamage()) {
+                MageObjectReference damageSource = new MageObjectReference(event.getSourceId(), game);
+                dealtCombatDamageToCreature.add(damageSource);
             }
         }
     }
+
+    @Override
+    public void reset() {
+        super.reset();
+        dealtCombatDamageToCreature.clear();
+    }
+
+    public boolean dealtDamage(UUID objectId, int zoneChangeCounter, Game game) {
+        MageObjectReference reference = new MageObjectReference(objectId, zoneChangeCounter, game);
+        return dealtCombatDamageToCreature.contains(reference);
+    }
+
 }

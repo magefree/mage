@@ -25,49 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.nemesis;
 
 import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.UnattachedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.keyword.EquipAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author choiseul11
  */
-public class GraftedWargear extends CardImpl {
+public class MurderousBetrayal extends mage.sets.eighthedition.MurderousBetrayal {
 
-    public GraftedWargear(UUID ownerId) {
-        super(ownerId, 126, "Grafted Wargear", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Equipment");
-
-        // Equipped creature gets +3/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 2)));
-
-        // Whenever Grafted Wargear becomes unattached from a permanent, sacrifice that permanent.
-        this.addAbility(new UnattachedTriggeredAbility(new SacrificeTargetEffect(), false));
-
-        // Equip {0}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)));
-
+    public MurderousBetrayal(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = "61";
+        this.expansionSetCode = "NEM";
     }
 
-    public GraftedWargear(final GraftedWargear card) {
+    public MurderousBetrayal(final MurderousBetrayal card) {
         super(card);
     }
 
     @Override
-    public GraftedWargear copy() {
-        return new GraftedWargear(this);
+    public MurderousBetrayal copy() {
+        return new MurderousBetrayal(this);
     }
 }

@@ -108,9 +108,9 @@ public class CopyTokenFunction implements Function<Token, Card> {
             ability.setSourceId(target.getId());
             target.addAbility(ability);
         }
-        // Needed to do it this way because only the cardValue does not include the increased value from cards like "Intangible Virtue" will be copied.
-        target.getPower().initValue(Integer.parseInt(sourceObj.getPower().toString()));
-        target.getToughness().initValue(Integer.parseInt(sourceObj.getToughness().toString()));
+
+        target.getPower().modifyBaseValue(sourceObj.getPower().getBaseValueModified());
+        target.getToughness().modifyBaseValue(sourceObj.getToughness().getBaseValueModified());
 
         return target;
     }

@@ -25,49 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.homelands;
 
 import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.UnattachedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.keyword.EquipAbility;
+
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author choiseul11
  */
-public class GraftedWargear extends CardImpl {
+public class Shrink extends CardImpl {
 
-    public GraftedWargear(UUID ownerId) {
-        super(ownerId, 126, "Grafted Wargear", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Equipment");
+    public Shrink(UUID ownerId) {
+        super(ownerId, 71, "Shrink", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        this.expansionSetCode = "HML";
 
-        // Equipped creature gets +3/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 2)));
-
-        // Whenever Grafted Wargear becomes unattached from a permanent, sacrifice that permanent.
-        this.addAbility(new UnattachedTriggeredAbility(new SacrificeTargetEffect(), false));
-
-        // Equip {0}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)));
-
+        // Target creature gets -5/-0 until end of turn.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-5, 0, Duration.EndOfTurn));
     }
 
-    public GraftedWargear(final GraftedWargear card) {
+    public Shrink(final Shrink card) {
         super(card);
     }
 
     @Override
-    public GraftedWargear copy() {
-        return new GraftedWargear(this);
+    public Shrink copy() {
+        return new Shrink(this);
     }
 }

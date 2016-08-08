@@ -244,15 +244,15 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silent Departure", 1);
         assertGraveyardCount(playerA, "Runic Repetition", 1);
     }
-    
+
     @Test
     public void testAltarsReap() {
-    	
+
         addCard(Zone.LIBRARY, playerA, "Island", 2);
         addCard(Zone.GRAVEYARD, playerA, "Altar's Reap", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 4);
         addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
         setChoice(playerA, "Altar's Reap");
 
@@ -261,7 +261,48 @@ public class FlashbackTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
+
         assertGraveyardCount(playerA, "Snapcaster Mage", 1);
     }
+
+    /**
+     * Fracturing Gust is bugged. In a match against Affinity, it worked
+     * properly when cast from hand. When I cast it from graveyard c/o
+     * Snapcaster Mage flashback, it destroyed my opponent's Darksteel Citadels,
+     * which it did not do when cast from my hand.
+     */
+    @Test
+    public void testSnapcasterMageWithIcefallRegent() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Snapcaster Mage", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // Destroy target creature. It can't be regenerated.
+        addCard(Zone.GRAVEYARD, playerA, "Terminate");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Berserkers' Onslaught", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Icefall Regent", 1);
+
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        setChoice(playerA, "Terminate");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback"); // Flashback Terminate
+        addTarget(playerA, "Icefall Regent");
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Snapcaster Mage", 1);
+        assertGraveyardCount(playerB, "Icefall Regent", 1);
+        assertExileCount("Terminate", 1);
+
+        assertTappedCount("Mountain", true, 2);
+        assertTappedCount("Island", true, 2);
+        assertTappedCount("Swamp", true, 2);
+
+    }
+
 }

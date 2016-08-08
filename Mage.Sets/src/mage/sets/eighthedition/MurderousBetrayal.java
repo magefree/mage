@@ -25,59 +25,69 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.eighthedition;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author emerald000
+ * @author choiseul11
  */
-public class LurkingEvil extends CardImpl {
+public class MurderousBetrayal extends CardImpl {
 
-    public LurkingEvil(UUID ownerId) {
-        super(ownerId, 140, "Lurking Evil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
-        this.expansionSetCode = "USG";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
-        // Pay half your life, rounded up: Lurking Evil becomes a 4/4 Horror creature with flying.
-        Effect effect = new BecomesCreatureSourceEffect(new LurkingEvilToken(), null, Duration.EndOfGame, true, false);
-        effect.setText("{this} becomes a 4/4 Horror creature with flying");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new LurkingEvilCost()));
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public LurkingEvil(final LurkingEvil card) {
+    public MurderousBetrayal(UUID ownerId) {
+        super(ownerId, 147, "Murderous Betrayal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
+        this.expansionSetCode = "8ED";
+
+        // {B}{B}, Pay half your life, rounded up: Destroy target nonblack creature. It can't be regenerated.
+        Effect effect = new DestroyTargetEffect(true);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new MurderousBetrayalCost());
+        ability.addCost(new ManaCostsImpl("{B}{B}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public MurderousBetrayal(final MurderousBetrayal card) {
         super(card);
     }
 
     @Override
-    public LurkingEvil copy() {
-        return new LurkingEvil(this);
+    public MurderousBetrayal copy() {
+        return new MurderousBetrayal(this);
     }
 }
 
-class LurkingEvilCost extends CostImpl {
+class MurderousBetrayalCost extends CostImpl {
 
-    LurkingEvilCost() {
+    MurderousBetrayalCost() {
         this.text = "Pay half your life, rounded up";
     }
 
-    LurkingEvilCost(LurkingEvilCost cost) {
+    MurderousBetrayalCost(MurderousBetrayalCost cost) {
         super(cost);
     }
 
@@ -104,19 +114,7 @@ class LurkingEvilCost extends CostImpl {
     }
 
     @Override
-    public LurkingEvilCost copy() {
-        return new LurkingEvilCost(this);
-    }
-}
-
-class LurkingEvilToken extends Token {
-
-    LurkingEvilToken() {
-        super("Horror", "4/4 Horror creature with flying");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        subtype.add("Horror");
-        cardType.add(CardType.CREATURE);
-        this.addAbility(FlyingAbility.getInstance());
+    public MurderousBetrayalCost copy() {
+        return new MurderousBetrayalCost(this);
     }
 }

@@ -25,49 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.masterseditioniv;
 
 import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.UnattachedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.keyword.EquipAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author choiseul11
  */
-public class GraftedWargear extends CardImpl {
+public class CelestialSword extends mage.sets.iceage.CelestialSword {
 
-    public GraftedWargear(UUID ownerId) {
-        super(ownerId, 126, "Grafted Wargear", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Equipment");
-
-        // Equipped creature gets +3/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 2)));
-
-        // Whenever Grafted Wargear becomes unattached from a permanent, sacrifice that permanent.
-        this.addAbility(new UnattachedTriggeredAbility(new SacrificeTargetEffect(), false));
-
-        // Equip {0}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)));
-
+    public CelestialSword(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = "188";
+        this.expansionSetCode = "ME4";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public GraftedWargear(final GraftedWargear card) {
+    public CelestialSword(final CelestialSword card) {
         super(card);
     }
 
     @Override
-    public GraftedWargear copy() {
-        return new GraftedWargear(this);
+    public CelestialSword copy() {
+        return new CelestialSword(this);
     }
 }

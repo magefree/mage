@@ -47,13 +47,12 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * This effect lets the card be a 2/2 face-down creature, with no text,
- * no name, no subtypes, and no mana cost, if it's face down on the battlefield.
- * And it adds the a TurnFaceUpAbility ability.
- * 
+ * This effect lets the card be a 2/2 face-down creature, with no text, no name,
+ * no subtypes, and no mana cost, if it's face down on the battlefield. And it
+ * adds the a TurnFaceUpAbility ability.
+ *
  * @author LevelX2
  */
-
 public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements SourceEffect {
 
     public enum FaceDownType {
@@ -65,15 +64,15 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
 
     protected int zoneChangeCounter;
     protected Ability turnFaceUpAbility = null;
-    protected MageObjectReference objectReference= null;
+    protected MageObjectReference objectReference = null;
     protected boolean foundPermanent;
     protected FaceDownType faceDownType;
 
-    public BecomesFaceDownCreatureEffect(Duration duration, FaceDownType faceDownType){
+    public BecomesFaceDownCreatureEffect(Duration duration, FaceDownType faceDownType) {
         this(null, null, duration, faceDownType);
     }
 
-    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, FaceDownType faceDownType){
+    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, FaceDownType faceDownType) {
         this(turnFaceUpCosts, null, faceDownType);
     }
 
@@ -96,7 +95,6 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         foundPermanent = false;
         this.faceDownType = faceDownType;
     }
-
 
     public BecomesFaceDownCreatureEffect(final BecomesFaceDownCreatureEffect effect) {
         super(effect);
@@ -147,11 +145,11 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         } else {
             permanent = game.getPermanent(source.getSourceId());
         }
-        
+
         if (permanent != null && permanent.isFaceDown(game)) {
             if (!foundPermanent) {
                 foundPermanent = true;
-                switch(faceDownType) {
+                switch (faceDownType) {
                     case MANIFESTED:
                     case MANUAL: // sets manifested image
                         permanent.setManifested(true);
@@ -184,11 +182,9 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                         if (ability.getWorksFaceDown()) {
                             ability.setRuleVisible(false);
                             continue;
-                        } else {
-                            if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
-                                if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
-                                    continue;
-                                }
+                        } else if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
+                            if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
+                                continue;
                             }
                         }
                         abilitiesToRemove.add(ability);
@@ -200,14 +196,12 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(2);
-                        permanent.getToughness().setValue(2);
+//                        permanent.getPower().setValue(2);
+//                        permanent.getToughness().setValue(2);
                     }
             }
-        } else {
-            if (duration.equals(Duration.Custom) && foundPermanent == true) {
-                discard();
-            }
+        } else if (duration.equals(Duration.Custom) && foundPermanent == true) {
+            discard();
         }
         return true;
     }

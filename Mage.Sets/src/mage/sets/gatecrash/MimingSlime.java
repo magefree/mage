@@ -95,8 +95,8 @@ class MimingSlimeEffect extends OneShotEffect {
                 }
             }
             OozeToken oozeToken = new OozeToken();
-            oozeToken.getPower().initValue(amount);
-            oozeToken.getToughness().initValue(amount);
+            oozeToken.getPower().modifyBaseValue(amount);
+            oozeToken.getToughness().modifyBaseValue(amount);
             oozeToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             return true;
         }

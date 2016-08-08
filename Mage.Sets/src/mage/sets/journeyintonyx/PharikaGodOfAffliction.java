@@ -73,14 +73,13 @@ public class PharikaGodOfAffliction extends CardImpl {
         // As long as your devotion to black and green is less than seven, Pharika isn't a creature.
         Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.B, ColoredManaSymbol.G), 7);
         effect.setText("As long as your devotion to black and green is less than seven, Pharika isn't a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));             
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // {B}{G}: Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PharikaExileEffect(), new ManaCostsImpl("{B}{G}"));
         Target target = new TargetCardInGraveyard(new FilterCreatureCard("a creature card from a graveyard"));
         ability.addTarget(target);
         this.addAbility(ability);
-                
-        
+
     }
 
     public PharikaGodOfAffliction(final PharikaGodOfAffliction card) {
@@ -98,7 +97,7 @@ class PharikaExileEffect extends OneShotEffect {
     public PharikaExileEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield";
-     }
+    }
 
     public PharikaExileEffect(final PharikaExileEffect effect) {
         super(effect);
@@ -116,8 +115,8 @@ class PharikaExileEffect extends OneShotEffect {
                 Player tokenController = game.getPlayer(targetCard.getOwnerId());
                 if (tokenController != null) {
                     return new PharikaSnakeToken().putOntoBattlefield(1, game, source.getSourceId(), tokenController.getId());
-                }            
-            }            
+                }
+            }
         }
         return false;
     }
@@ -132,15 +131,13 @@ class PharikaExileEffect extends OneShotEffect {
 class PharikaSnakeToken extends Token {
 
     public PharikaSnakeToken() {
-        super("Snake", "1/1 black and green Snake enchantment creature token with deathtouch");
+        super("Snake", "1/1 black and green Snake enchantment creature token with deathtouch", 1, 1);
         this.setOriginalExpansionSetCode("JOU");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         subtype.add("Snake");
         color.setBlack(true);
         color.setGreen(true);
-        power.setValue(1);
-        toughness.setValue(1);
         this.addAbility(DeathtouchAbility.getInstance());
     }
 }

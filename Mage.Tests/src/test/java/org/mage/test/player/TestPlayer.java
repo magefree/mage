@@ -381,7 +381,9 @@ public class TestPlayer implements Player {
     @Override
     public boolean priority(Game game) {
         int numberOfActions = actions.size();
-        for (PlayerAction action : actions) {
+        List<PlayerAction> tempActions = new ArrayList<>();
+        tempActions.addAll(actions);
+        for (PlayerAction action : tempActions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getStep() == game.getStep().getType()) {
 
                 if (action.getAction().startsWith("activate:")) {
@@ -478,7 +480,7 @@ public class TestPlayer implements Player {
                                 int turns = Integer.parseUnsignedInt(groups[1].substring(6));
                                 game.rollbackTurns(turns);
                                 actions.remove(action);
-                                break;
+                                return true;
                             }
                         }
                     }

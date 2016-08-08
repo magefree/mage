@@ -225,6 +225,8 @@ public class MorphTest extends CardTestPlayerBase {
      */
     @Test
     public void testPineWalkerWithUnboostEffect() {
+        // Morph {4}{G}
+        // Whenever Pine Walker or another creature you control is turned face up, untap that creature.
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
 
@@ -641,24 +643,25 @@ public class MorphTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Pine Walker", 5, 5);
         assertTapped("Pine Walker", false);
     }
-    
+
     /**
-     * Reflector Mage bouncing a creature that can be played as a morph should not prevent the card
-     * from being replayed as a morph. Morph creatures are nameless.
-     * 
-     * Reported bug: 
-     * Face-up morph creatures that are bounced by Reflector Mage should be able to be replayed as morphs 
-     * without the "until the next turn" restriction."
+     * Reflector Mage bouncing a creature that can be played as a morph should
+     * not prevent the card from being replayed as a morph. Morph creatures are
+     * nameless.
+     *
+     * Reported bug: Face-up morph creatures that are bounced by Reflector Mage
+     * should be able to be replayed as morphs without the "until the next turn"
+     * restriction."
      */
     @Test
     public void testReflectorMageBouncesFaceupCreatureReplayAsMorph() {
-        
-        // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand. 
+
+        // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand.
         // That creature's owner can't cast spells with the same name as that creature until your next turn.
         addCard(Zone.HAND, playerA, "Reflector Mage"); // 2/3
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        
+
         //Tap: Add {G}, {U}, or {R} to your mana pool.
         // Morph 2 (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
         // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
@@ -666,36 +669,37 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Forest");
         addCard(Zone.BATTLEFIELD, playerB, "Island");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reflector Mage");
         addTarget(playerA, "Rattleclaw Mystic");
-        
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rattleclaw Mystic");
         setChoice(playerB, "Yes"); // cast it face down as 2/2 creature
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
-        
+
         execute();
-        
-        assertPermanentCount(playerA, "Reflector Mage", 1);        
-        assertPermanentCount(playerB, "Rattleclaw Mystic", 0);  
+
+        assertPermanentCount(playerA, "Reflector Mage", 1);
+        assertPermanentCount(playerB, "Rattleclaw Mystic", 0);
         assertHandCount(playerB, "Rattleclaw Mystic", 0); // should have been replayed
         assertPermanentCount(playerB, "", 1); // Rattleclaw played as a morph
     }
-    
+
     /**
-     * Reflector Mage bouncing a creature that can be played as a morph should not prevent the card
-     * from being replayed as a morph. Morph creatures are nameless.
-     * 
-     * Reported bug: 
-     * Face-up morph creatures that are bounced by Reflector Mage should be able to be replayed as morphs 
-     * without the "until the next turn" restriction."
-     * 
+     * Reflector Mage bouncing a creature that can be played as a morph should
+     * not prevent the card from being replayed as a morph. Morph creatures are
+     * nameless.
+     *
+     * Reported bug: Face-up morph creatures that are bounced by Reflector Mage
+     * should be able to be replayed as morphs without the "until the next turn"
+     * restriction."
+     *
      * Testing bouncing a face-down creature played next turn face-up.
      */
     @Test
     public void testReflectorMageBouncesMorphCreatureReplayAsFaceup() {
-                
+
         //Tap: Add {G}, {U}, or {R} to your mana pool.
         // Morph 2 (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
         // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
@@ -703,28 +707,28 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Island");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
-                
-        // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand. 
+
+        // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand.
         // That creature's owner can't cast spells with the same name as that creature until your next turn.
-        addCard(Zone.HAND, playerB, "Reflector Mage"); // 2/3   
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2); 
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);         
-        
+        addCard(Zone.HAND, playerB, "Reflector Mage"); // 2/3
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rattleclaw Mystic");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Reflector Mage");
         addTarget(playerB, "");
-        
+
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Rattleclaw Mystic");
         setChoice(playerA, "No"); // cast it face down as 2/2 creature
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
-        
+
         execute();
-        
-        assertPermanentCount(playerB, "Reflector Mage", 1);      
-        assertPermanentCount(playerA, "Rattleclaw Mystic", 1);  
+
+        assertPermanentCount(playerB, "Reflector Mage", 1);
+        assertPermanentCount(playerA, "Rattleclaw Mystic", 1);
         assertHandCount(playerA, "Rattleclaw Mystic", 0); // should have been replayed faceup
     }
 }

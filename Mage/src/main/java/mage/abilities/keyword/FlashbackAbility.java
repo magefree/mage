@@ -75,6 +75,7 @@ public class FlashbackAbility extends SpellAbility {
         this.timing = timingRule;
         this.usesStack = false;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        setCostModificationActive(false);
     }
 
     public FlashbackAbility(final FlashbackAbility ability) {
@@ -195,7 +196,9 @@ class FlashbackEffect extends OneShotEffect {
                 spellAbility.clear();
                 // set the payed flashback costs to the spell ability so abilities like Converge or calculation of {X} values work
                 spellAbility.getManaCostsToPay().clear();
-                spellAbility.getManaCostsToPay().addAll(source.getManaCostsToPay());
+                spellAbility.getManaCostsToPay().addAll(source.getManaCosts());
+                spellAbility.getManaCosts().clear();
+                spellAbility.getManaCosts().addAll(source.getManaCosts());
                 // needed to get e.g. paid costs from Conflagrate
                 for (Cost cost : source.getCosts()) {
                     if (!(cost instanceof VariableCost)) {
@@ -205,7 +208,6 @@ class FlashbackEffect extends OneShotEffect {
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " flashbacks " + card.getLogName());
                 }
-                spellAbility.setCostModificationActive(false); // prevents to apply cost modification twice for flashbacked spells
                 if (controller.cast(spellAbility, game, false)) {
                     ContinuousEffect effect = new FlashbackReplacementEffect();
                     effect.setTargetPointer(new FixedTarget(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())));

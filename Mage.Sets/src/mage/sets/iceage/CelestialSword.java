@@ -25,49 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthdawn;
+package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.UnattachedTriggeredAbility;
+
+import mage.abilities.Ability;
+import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.keyword.EquipAbility;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.events.GameEvent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author choiseul11
  */
-public class GraftedWargear extends CardImpl {
+public class CelestialSword extends CardImpl {
 
-    public GraftedWargear(UUID ownerId) {
-        super(ownerId, 126, "Grafted Wargear", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "5DN";
-        this.subtype.add("Equipment");
+    public CelestialSword(UUID ownerId) {
+        super(ownerId, 289, "Celestial Sword", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
+        this.expansionSetCode = "ICE";
 
-        // Equipped creature gets +3/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 2)));
-
-        // Whenever Grafted Wargear becomes unattached from a permanent, sacrifice that permanent.
-        this.addAbility(new UnattachedTriggeredAbility(new SacrificeTargetEffect(), false));
-
-        // Equip {0}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)));
-
+        // {3}, {tap}: Target creature you control gets +3/+3 until end of turn. Its controller sacrifices it at the beginning of the next end step.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn), new GenericManaCost(3));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeTargetEffect())));
+        this.addAbility(ability);
     }
 
-    public GraftedWargear(final GraftedWargear card) {
+    public CelestialSword(final CelestialSword card) {
         super(card);
     }
 
     @Override
-    public GraftedWargear copy() {
-        return new GraftedWargear(this);
+    public CelestialSword copy() {
+        return new CelestialSword(this);
     }
 }

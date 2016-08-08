@@ -27,10 +27,8 @@
  */
 package mage.sets.darkascension;
 
+import java.util.UUID;
 import mage.ConditionalMana;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -40,9 +38,11 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-
-import java.util.UUID;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -72,6 +72,7 @@ public class AltarOfTheLost extends CardImpl {
 }
 
 class AltarOfTheLostManaBuilder extends ConditionalManaBuilder {
+
     @Override
     public ConditionalMana build(Object... options) {
         return new AltarOfTheLostConditionalMana(this.mana);
@@ -93,11 +94,12 @@ class AltarOfTheLostConditionalMana extends ConditionalMana {
 }
 
 class AltarOfTheLostManaCondition implements Condition {
+
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object != null && game.getState().getZone(object.getId()) == Zone.GRAVEYARD) {
-            for (Ability ability: object.getAbilities()) {
+        if (object instanceof Spell && ((Spell) object).getFromZone().equals(Zone.GRAVEYARD)) {
+            for (Ability ability : ((Spell) object).getAbilities(game)) {
                 if (ability instanceof FlashbackAbility) {
                     return true;
                 }
