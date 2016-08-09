@@ -74,7 +74,7 @@ public class MeldTest extends CardTestPlayerBase {
     }
 
     /**
-     * brisela is bugged she is still "active" when dead
+     * Brisela is bugged she is still "active" when dead
      */
     @Test
     public void testMeldAndStopRestrictIfMeldCreatureLeftBattlefield() {
@@ -115,6 +115,52 @@ public class MeldTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Vanish into Memory", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 2);
         assertHandCount(playerB, 2 + 9);
+
+    }
+
+    /**
+     * Check that if the exiled parts return Brisela is created again
+     */
+    @Test
+    public void testMeld3() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+        // When you cast Bruna, the Fading Light, you may return target Angel or Human creature card from your graveyard to the battlefield.
+        // Flying, Vigilance
+        // <i>(Melds with Gisela, the Broken Blade.)</i>
+        addCard(Zone.HAND, playerA, "Bruna, the Fading Light"); // {5}{W}{W}
+        // Flying, First strike, Lifelink
+        // At the beginning of your end step, if you both own and control Gisela, the Broken Blade and a
+        // creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.
+        addCard(Zone.HAND, playerA, "Gisela, the Broken Blade"); // {2}{W}{W}
+        // Brisela, Voice of Nightmares  9/10
+        // Flying, First strike, Vigilance, Lifelink
+        // Your opponents can't cast spells with converted mana cost 3 or less.
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 2);
+        // Exile target creature. You draw cards equal to that creature's power.
+        // At the beginning of your next upkeep, return that card to the battlefield under its owner's control.
+        // If you do, discard cards equal to that creature's toughness.
+        addCard(Zone.HAND, playerB, "Vanish into Memory", 1); // Instant {2}{W}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bruna, the Fading Light");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gisela, the Broken Blade");
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Vanish into Memory", "Brisela, Voice of Nightmares");
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+
+        // End step turn 7 the meld takes place again
+        setStopAt(8, PhaseStep.UPKEEP);
+        execute();
+
+        assertExileCount("Bruna, the Fading Light", 0);
+        assertExileCount("Gisela, the Broken Blade", 0);
+        assertPermanentCount(playerA, "Brisela, Voice of Nightmares", 1);
+
+        assertGraveyardCount(playerB, "Vanish into Memory", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 2);
+        assertHandCount(playerB, 0);
 
     }
 }
