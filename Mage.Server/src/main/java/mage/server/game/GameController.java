@@ -836,7 +836,7 @@ public class GameController implements GameCallback {
                     // So always show face up for selection
                     // boolean showFaceDown = targetZone != null && targetZone.equals(Zone.PICK);
                     boolean showFaceDown = true;
-                    getGameSession(playerId).target(question, new CardsView(game, cards.getCards(game), showFaceDown), targets, required, options);
+                    getGameSession(playerId).target(question, new CardsView(game, cards.getCards(game), showFaceDown, true), targets, required, options);
                 } else if (perms != null) {
                     CardsView permsView = new CardsView();
                     for (Permanent perm : perms) {
