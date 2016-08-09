@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class IndulgentAristocrat extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("each Vampire you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Vampire you control");
 
     static {
         filter.add(new SubtypePredicate("Vampire"));
