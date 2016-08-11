@@ -1469,8 +1469,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void addCounters(Counter counter, Game game) {
-        computerPlayer.addCounters(counter, game);
+    public boolean addCounters(Counter counter, Game game) {
+        return computerPlayer.addCounters(counter, game);
     }
 
     @Override

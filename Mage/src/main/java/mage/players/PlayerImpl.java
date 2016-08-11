@@ -1837,7 +1837,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void addCounters(Counter counter, Game game) {
+    public boolean addCounters(Counter counter, Game game) {
+        boolean returnState = true;
         int amount = counter.getCount();
         for (int i = 0; i < amount; i++) {
             Counter eventCounter = counter.copy();
@@ -1845,8 +1846,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, playerId, playerId, counter.getName(), counter.getCount()))) {
                 counters.addCounter(eventCounter);
                 game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), counter.getCount()));
+            } else {
+                returnState = false;
             }
         }
+        return returnState;
     }
 
     @Override
