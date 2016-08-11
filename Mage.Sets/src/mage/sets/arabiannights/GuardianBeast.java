@@ -106,7 +106,7 @@ class GuardianBeastConditionalEffect extends ContinuousRuleModifyingEffectImpl {
 
     public GuardianBeastConditionalEffect(UUID guardianBeastId) {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "Non-creature artifacts you control have they can't be enchanted, they're indestructible, and other players can't gain control of them";
+        staticText = "Noncreature artifacts you control have they can't be enchanted, they're indestructible, and other players can't gain control of them";
         this.guardianBeastId = guardianBeastId;
     }
 
@@ -122,7 +122,7 @@ class GuardianBeastConditionalEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return true || (event.getType() == EventType.TARGET || event.getType() == EventType.LOSE_CONTROL);
+        return true;
     }
 
     @Override
