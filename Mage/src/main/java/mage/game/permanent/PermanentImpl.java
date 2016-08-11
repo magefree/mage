@@ -613,6 +613,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean changeControllerId(UUID controllerId, Game game) {
         Player newController = game.getPlayer(controllerId);
+        
+        GameEvent loseControlEvent = GameEvent.getEvent(GameEvent.EventType.LOSE_CONTROL, this.getId(), null, controllerId);
+
+        if (game.replaceEvent(loseControlEvent)) {
+            return false;
+        }
+        
         if (newController != null && (!newController.hasLeft() || !newController.hasLost())) {
             this.controllerId = controllerId;
             return true;
