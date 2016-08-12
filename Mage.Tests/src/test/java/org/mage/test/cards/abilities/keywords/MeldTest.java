@@ -163,4 +163,47 @@ public class MeldTest extends CardTestPlayerBase {
         assertHandCount(playerB, 0);
 
     }
+
+    /**
+     * With Hanweir Garrison and Hanweir Battlements in your control put Hanweir
+     * Battlements' ability in the stack to transform(i.e. meld). In answer to
+     * that, return to hand Hanweir Garrison. Resolve Hanweir Battlements
+     * ability.
+     *
+     * Expected result: The ability fizzles.
+     *
+     * Actual results: A NPE error is lauched.
+     */
+    @Test
+    public void testReturnToHand() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+
+        // Whenever Hanweir Garrison attacks, put two 1/1 red Human creature tokens onto the battlefield tapped and attacking.
+        // <i>(Melds with Hanweir Battlements.)</i>
+        addCard(Zone.BATTLEFIELD, playerA, "Hanweir Garrison"); // Creature 2/3 {2}{R}
+
+        // {T}: Add {C} to your mana pool.
+        // {R},{T}: Target creature gains haste until end of turn.
+        // {3}{R}{R},{T}: If you both own and control Hanweir Battlements and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
+        addCard(Zone.BATTLEFIELD, playerA, "Hanweir Battlements"); // Land
+
+        // Brisela, Voice of Nightmares  9/10
+        // Flying, First strike, Vigilance, Lifelink
+        // Your opponents can't cast spells with converted mana cost 3 or less.
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        // Return target creature to its owner's hand.
+        addCard(Zone.HAND, playerB, "Unsummon", 1); // Instant {U}
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{R}{R}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Unsummon", "Hanweir Garrison", "{3}{R}{R}");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Unsummon", 1);
+
+        assertPermanentCount(playerA, "Hanweir Battlements", 1);
+        assertHandCount(playerA, "Hanweir Garrison", 1);
+
+    }
 }
