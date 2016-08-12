@@ -245,4 +245,43 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Lambholt Pacifist", 1);
     }
+
+    /**
+     * Mirror Mockery copies the front face of a Transformed card rather than
+     * the current face.
+     *
+     * It's worth pointing out that my opponent cast Mirror Mockery the previous
+     * turn - after it had transformed. I should have included the part of the
+     * log that showed that Mirror Mockery was applied to the Unimpeded
+     * Trespasser.
+     */
+    @Test
+    public void testTransformCopyrnansformed() {
+        // Skulk (This creature can't be blocked by creatures with greater power.)
+        // When Uninvited Geist deals combat damage to a player, transform it.
+        addCard(Zone.BATTLEFIELD, playerA, "Uninvited Geist"); // Creature 2/2 {2}{U}
+        // Transformed side: Unimpeded Trespasser - Creature 3/3
+        // Unimpeded Trespasser can't be blocked.
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        // Enchant creature
+        // Whenever enchanted creature attacks, you may put a token onto the battlefield that's a copy of that creature. Exile that token at the end of combat.
+        addCard(Zone.HAND, playerB, "Mirror Mockery"); // {1}{U}
+
+        attack(1, playerA, "Uninvited Geist");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Mirror Mockery", "Unimpeded Trespasser");
+
+        attack(3, playerA, "Unimpeded Trespasser");
+
+        setStopAt(3, PhaseStep.COMBAT_DAMAGE);
+        execute();
+
+        assertLife(playerB, 15);
+
+        assertPermanentCount(playerB, "Mirror Mockery", 1);
+        assertPermanentCount(playerA, "Unimpeded Trespasser", 1);
+        assertPermanentCount(playerB, "Unimpeded Trespasser", 1);
+        assertPowerToughness(playerB, "Unimpeded Trespasser", 3, 3);
+    }
 }

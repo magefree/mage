@@ -70,7 +70,12 @@ public class CopyTokenFunction implements Function<Token, Card> {
                 MorphAbility.setPermanentToFaceDownCreature(target);
                 return target;
             } else {
-                sourceObj = ((PermanentCard) source).getCard();
+                if (((PermanentCard) source).isTransformed() && source.getSecondCardFace() != null) {
+                    sourceObj = ((PermanentCard) source).getSecondCardFace();
+                } else {
+                    sourceObj = ((PermanentCard) source).getCard();
+                }
+
                 target.setOriginalExpansionSetCode(source.getExpansionSetCode());
                 target.setOriginalCardNumber(source.getCardNumber());
                 target.setCopySourceCard((Card) sourceObj);

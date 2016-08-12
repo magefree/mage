@@ -85,7 +85,7 @@ public class CrownOfDoom extends CardImpl {
             Card sourceCard = game.getCard(ability.getSourceId());
             if (sourceCard != null) {
                 ability.getTargets().clear();
-                FilterPlayer filter = new FilterPlayer("player other than " + sourceCard.getName() + "'s owner");
+                FilterPlayer filter = new FilterPlayer("player other than " + sourceCard.getIdName() + "'s owner");
                 filter.add(Predicates.not(new OwnerIdPredicate(sourceCard.getOwnerId())));
                 ability.addTarget(new TargetPlayer(1, 1, false, filter));
             }
@@ -124,7 +124,8 @@ class CrownOfDoomEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player newController = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && newController != null && controller.getId() != newController.getId()) {
-            ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, newController.getId());
+            // Duration.Custom = effect ends if Artifact leaves the current zone (battlefield)
+            ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
             effect.setTargetPointer(new FixedTarget(source.getSourceId()));
             game.addEffect(effect, source);
             return true;

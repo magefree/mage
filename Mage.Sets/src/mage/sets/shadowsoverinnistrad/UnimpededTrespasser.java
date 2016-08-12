@@ -51,7 +51,7 @@ public class UnimpededTrespasser extends CardImpl {
         // this card is the second face of double-faced card
         this.nightCard = true;
 
-        // Unimpeded Geist can't be blocked.
+        // Unimpeded Trespasser can't be blocked.
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
