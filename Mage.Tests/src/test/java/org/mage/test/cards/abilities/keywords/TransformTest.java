@@ -284,4 +284,41 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Unimpeded Trespasser", 1);
         assertPowerToughness(playerB, "Unimpeded Trespasser", 3, 3);
     }
+
+    /**
+     * Archangel Avacyn still transforms after being bounced by an Eldrazi
+     * Displacer with her trigger on the stack.
+     */
+    @Test
+    public void testTransformArchangelAvacyn() {
+        // Flash, Flying, Vigilance
+        // When Archangel Avacyn enters the battlefield, creatures you control gain indestructible until end of turn.
+        // When a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.
+        addCard(Zone.BATTLEFIELD, playerA, "Archangel Avacyn"); // Creature 4/4
+        // Transformed side: Avacyn, the Purifier - Creature 6/5
+        // Flying
+        // When this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+
+        // Devoid
+        // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
+        addCard(Zone.BATTLEFIELD, playerB, "Eldrazi Displacer", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Wastes", 3);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{C}", "Archangel Avacyn", "Whenever a non-Angel creature you control dies");
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+
+        assertPermanentCount(playerB, "Eldrazi Displacer", 1);
+        assertPermanentCount(playerA, "Avacyn, the Purifier", 0);
+        assertPermanentCount(playerA, "Archangel Avacyn", 1);
+    }
 }
