@@ -477,7 +477,7 @@ public class TestPlayer implements Player {
                     if (groups.length > 0) {
                         if (groups[0].equals("Rollback")) {
                             if (groups.length > 1 && groups[1].startsWith("turns=")) {
-                                int turns = Integer.parseUnsignedInt(groups[1].substring(6));
+                                int turns = Integer.parseInt(groups[1].substring(6));
                                 game.rollbackTurns(turns);
                                 actions.remove(action);
                                 return true;
