@@ -49,4 +49,30 @@ public class TreeOfPerditionTest extends CardTestPlayerBase {
         assertLife(playerB, 13);
         assertPowerToughness(playerA, "Tree of Perdition", 0, 13);
     }
+    
+   /*
+    Reported bug: Tree of Perdition is gaining both power and toughness equal to opponent's life total
+    instead of just toughness equal to it.
+    */
+    @Test
+    public void testTreeOfPerditionOnlyGainsToughnessEqualToLife() {
+        
+        /*
+         Tree of Perdition - {3}{B} - Creature Plant - 0/13
+        Defender
+        Tap: Exchange target opponent's life total with Tree of Perdition's toughness.
+        */
+        addCard(Zone.BATTLEFIELD, playerA, "Tree of Perdition");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:");
+        addTarget(playerA, playerB);
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertLife(playerA, 20);
+        assertLife(playerB, 13);
+        assertPowerToughness(playerA, "Tree of Perdition", 0, 20);
+    }
 }

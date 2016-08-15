@@ -105,7 +105,6 @@ class TreeOfPerditionEffect extends OneShotEffect {
                     return false;
                 }
                 opponent.setLife(amount, game);
-                perm.getPower().modifyBaseValue(life);
                 perm.getToughness().modifyBaseValue(life);
                 // game.addEffect(new SetPowerToughnessSourceEffect(Integer.MIN_VALUE, life, Duration.Custom, SubLayer.SetPT_7b), source);
                 return true;
