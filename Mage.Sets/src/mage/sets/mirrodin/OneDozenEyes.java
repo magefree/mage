@@ -37,7 +37,7 @@ public class OneDozenEyes extends mage.sets.commander2013.OneDozenEyes {
 
     public OneDozenEyes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "MRD";
     }
 

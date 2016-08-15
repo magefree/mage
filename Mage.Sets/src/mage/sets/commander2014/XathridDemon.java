@@ -37,7 +37,7 @@ public class XathridDemon extends mage.sets.magic2010.XathridDemon {
 
     public XathridDemon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "C14";
     }
 

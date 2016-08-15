@@ -43,7 +43,8 @@ public class ZombieToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "MBS", "ALA", "ISD", "C14", "C15", "CNS", "MMA", "BNG", "KTK", "DTK", "ORI", "OGW", "SOI", "EMN"));
+        tokenImageSets.addAll(Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "MBS", "ALA", "ISD", "C14", "C15", "CNS",
+                "MMA", "BNG", "KTK", "DTK", "ORI", "OGW", "SOI", "EMN", "EMA"));
     }
 
     public ZombieToken() {
@@ -64,6 +65,9 @@ public class ZombieToken extends Token {
         }
         if (getOriginalExpansionSetCode().equals("C14")) {
             this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode().equals("EMN")) {
+            this.setTokenType(new Random().nextInt(4) + 1);
         }
     }
 

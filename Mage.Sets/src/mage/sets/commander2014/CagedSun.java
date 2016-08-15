@@ -37,7 +37,7 @@ public class CagedSun extends mage.sets.newphyrexia.CagedSun {
 
     public CagedSun(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = "233";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class KhalniGarden extends mage.sets.worldwake.KhalniGarden {
 
     public KhalniGarden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "ARC";
     }
 

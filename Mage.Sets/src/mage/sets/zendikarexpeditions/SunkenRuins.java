@@ -38,7 +38,7 @@ public class SunkenRuins extends mage.sets.shadowmoor.SunkenRuins {
 
     public SunkenRuins(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

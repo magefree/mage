@@ -38,7 +38,7 @@ public class HuntingCheetah extends mage.sets.portalthreekingdoms.HuntingCheetah
 
     public HuntingCheetah(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class BasalThrull4 extends BasalThrull1 {
 
     public BasalThrull4(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
     }
 
     public BasalThrull4(final BasalThrull4 card) {

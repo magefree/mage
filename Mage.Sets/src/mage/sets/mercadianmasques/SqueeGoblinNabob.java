@@ -37,7 +37,7 @@ public class SqueeGoblinNabob extends mage.sets.tenthedition.SqueeGoblinNabob {
 
     public SqueeGoblinNabob(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "MMQ";
     }
 

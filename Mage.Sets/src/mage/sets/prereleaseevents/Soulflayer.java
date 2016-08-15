@@ -37,7 +37,7 @@ public class Soulflayer extends mage.sets.fatereforged.Soulflayer {
 
     public Soulflayer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class DebilitatingInjury extends mage.sets.khansoftarkir.DebilitatingInju
 
     public DebilitatingInjury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "UGIN";
     }
 

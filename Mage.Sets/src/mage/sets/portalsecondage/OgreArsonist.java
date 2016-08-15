@@ -46,7 +46,7 @@ public class OgreArsonist extends CardImpl {
 
     public OgreArsonist(UUID ownerId) {
         super(ownerId, 110, "Ogre Arsonist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Ogre");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

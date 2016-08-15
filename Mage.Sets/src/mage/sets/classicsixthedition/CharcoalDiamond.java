@@ -37,7 +37,7 @@ public class CharcoalDiamond extends mage.sets.seventhedition.CharcoalDiamond {
 
     public CharcoalDiamond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
+        this.cardNumber = "276";
         this.expansionSetCode = "6ED";
     }
 

@@ -38,7 +38,7 @@ public class MutagenicGrowth extends mage.sets.newphyrexia.MutagenicGrowth {
 
     public MutagenicGrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

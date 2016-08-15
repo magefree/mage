@@ -37,7 +37,7 @@ public class WarrenPilferers extends mage.sets.modernmasters.WarrenPilferers {
 
     public WarrenPilferers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "LRW";
     }
 

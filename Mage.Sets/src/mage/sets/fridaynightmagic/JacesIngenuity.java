@@ -37,7 +37,7 @@ public class JacesIngenuity extends mage.sets.magic2011.JacesIngenuity {
 
     public JacesIngenuity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "FNMP";
     }
 

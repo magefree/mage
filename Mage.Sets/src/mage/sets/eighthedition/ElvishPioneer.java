@@ -37,7 +37,7 @@ public class ElvishPioneer extends mage.sets.onslaught.ElvishPioneer {
 
     public ElvishPioneer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 243;
+        this.cardNumber = "243";
         this.expansionSetCode = "8ED";
     }
 

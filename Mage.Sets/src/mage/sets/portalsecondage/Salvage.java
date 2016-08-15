@@ -42,7 +42,7 @@ public class Salvage extends CardImpl {
 
     public Salvage(UUID ownerId) {
         super(ownerId, 85, "Salvage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
 
         // Put target card from your graveyard on top of your library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

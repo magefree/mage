@@ -37,7 +37,7 @@ public class WingsOfAesthir extends mage.sets.masterseditionii.WingsOfAesthir {
 
     public WingsOfAesthir(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 383;
+        this.cardNumber = "383";
         this.expansionSetCode = "ICE";
     }
 

@@ -37,7 +37,7 @@ public class WrathOfGod extends mage.sets.tenthedition.WrathOfGod {
 
     public WrathOfGod(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 345;
+        this.cardNumber = "345";
         this.expansionSetCode = "5ED";
     }
 

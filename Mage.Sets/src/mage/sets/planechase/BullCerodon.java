@@ -38,7 +38,7 @@ public class BullCerodon extends mage.sets.shardsofalara.BullCerodon {
 
     public BullCerodon (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "HOP";
     }
 

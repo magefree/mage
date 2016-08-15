@@ -37,7 +37,7 @@ public class Cloudthresher extends mage.sets.lorwyn.Cloudthresher {
 
     public Cloudthresher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class DragonlordDromoka extends mage.sets.dragonsoftarkir.DragonlordDromo
 
     public DragonlordDromoka(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 171;
+        this.cardNumber = "171";
         this.expansionSetCode = "PTC";
     }
 

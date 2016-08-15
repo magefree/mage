@@ -38,7 +38,7 @@ public class Groundbreaker extends mage.sets.planarchaos.Groundbreaker {
 
     public Groundbreaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "CP";
         this.rarity = Rarity.SPECIAL;
     }

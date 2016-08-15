@@ -6,7 +6,7 @@ public class SoulOfRavnica extends mage.sets.magic2015.SoulOfRavnica {
     
     public SoulOfRavnica(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "MBP";
     }
     

@@ -37,7 +37,7 @@ public class GhostbladeEidolon extends mage.sets.bornofthegods.GhostbladeEidolon
 
     public GhostbladeEidolon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "C15";
     }
 

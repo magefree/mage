@@ -37,7 +37,7 @@ public class VecTownships extends mage.sets.tempest.VecTownships {
 
     public VecTownships(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 247;
+        this.cardNumber = "247";
         this.expansionSetCode = "TPR";
     }
 

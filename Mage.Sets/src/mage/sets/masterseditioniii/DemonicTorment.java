@@ -38,7 +38,7 @@ public class DemonicTorment extends mage.sets.legends.DemonicTorment {
 
     public DemonicTorment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

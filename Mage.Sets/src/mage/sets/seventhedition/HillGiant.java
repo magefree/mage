@@ -37,7 +37,7 @@ public class HillGiant extends mage.sets.tenthedition.HillGiant {
 
     public HillGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 196;
+        this.cardNumber = "196";
         this.expansionSetCode = "7ED";
     }
 

@@ -37,7 +37,7 @@ public class SpiritMantle extends mage.sets.magic2012.SpiritMantle {
 
     public SpiritMantle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "PC2";
     }
 

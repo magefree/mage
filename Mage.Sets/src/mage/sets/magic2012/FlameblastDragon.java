@@ -37,7 +37,7 @@ public class FlameblastDragon extends mage.sets.shardsofalara.FlameblastDragon {
 
     public FlameblastDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "M12";
     }
 

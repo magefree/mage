@@ -37,7 +37,7 @@ public class SpellSnare extends mage.sets.dissension.SpellSnare {
 
     public SpellSnare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "MMA";
     }
 

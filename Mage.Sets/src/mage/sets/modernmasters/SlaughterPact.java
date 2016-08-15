@@ -37,7 +37,7 @@ public class SlaughterPact extends mage.sets.futuresight.SlaughterPact {
 
     public SlaughterPact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "MMA";
     }
 

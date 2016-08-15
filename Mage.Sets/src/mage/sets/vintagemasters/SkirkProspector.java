@@ -37,7 +37,7 @@ public class SkirkProspector extends mage.sets.onslaught.SkirkProspector {
 
     public SkirkProspector(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = "186";
         this.expansionSetCode = "VMA";
     }
 

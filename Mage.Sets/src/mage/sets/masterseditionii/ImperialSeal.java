@@ -37,7 +37,7 @@ public class ImperialSeal extends mage.sets.portalthreekingdoms.ImperialSeal {
 
     public ImperialSeal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "ME2";
     }
 

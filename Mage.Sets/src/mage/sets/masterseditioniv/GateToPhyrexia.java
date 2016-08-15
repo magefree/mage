@@ -37,7 +37,7 @@ public class GateToPhyrexia extends mage.sets.antiquities.GateToPhyrexia {
 
     public GateToPhyrexia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "ME4";
     }
 

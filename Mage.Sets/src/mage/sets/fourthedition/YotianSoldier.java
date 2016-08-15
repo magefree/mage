@@ -37,7 +37,7 @@ public class YotianSoldier extends mage.sets.mirrodin.YotianSoldier {
 
     public YotianSoldier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 378;
+        this.cardNumber = "378";
         this.expansionSetCode = "4ED";
     }
 

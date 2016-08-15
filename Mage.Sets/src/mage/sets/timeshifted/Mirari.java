@@ -38,7 +38,7 @@ public class Mirari extends mage.sets.commander2013.Mirari {
 
     public Mirari(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

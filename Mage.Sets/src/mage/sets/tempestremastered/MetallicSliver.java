@@ -37,7 +37,7 @@ public class MetallicSliver extends mage.sets.tempest.MetallicSliver {
 
     public MetallicSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 226;
+        this.cardNumber = "226";
         this.expansionSetCode = "TPR";
     }
 

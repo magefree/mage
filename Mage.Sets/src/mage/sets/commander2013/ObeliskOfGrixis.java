@@ -37,7 +37,7 @@ public class ObeliskOfGrixis extends mage.sets.shardsofalara.ObeliskOfGrixis {
 
     public ObeliskOfGrixis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 251;
+        this.cardNumber = "251";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class Ostracize extends mage.sets.urzaslegacy.Ostracize {
 
     public Ostracize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "7ED";
     }
 

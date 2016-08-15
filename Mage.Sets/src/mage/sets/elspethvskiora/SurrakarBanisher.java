@@ -37,7 +37,7 @@ public class SurrakarBanisher extends mage.sets.worldwake.SurrakarBanisher {
 
     public SurrakarBanisher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "DDO";
     }
 

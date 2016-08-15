@@ -37,7 +37,7 @@ public class LeylineOfSanctity extends mage.sets.magic2011.LeylineOfSanctity {
 
     public LeylineOfSanctity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "MM2";
     }
 

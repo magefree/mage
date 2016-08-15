@@ -37,7 +37,7 @@ public class ReturnToDust extends mage.sets.commander.ReturnToDust {
 
     public ReturnToDust(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "TSP";
     }
 

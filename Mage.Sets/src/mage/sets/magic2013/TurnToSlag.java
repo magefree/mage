@@ -37,7 +37,7 @@ public class TurnToSlag extends mage.sets.scarsofmirrodin.TurnToSlag {
 
     public TurnToSlag(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "M13";
     }
 

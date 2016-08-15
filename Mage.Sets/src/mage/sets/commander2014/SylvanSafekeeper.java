@@ -37,7 +37,7 @@ public class SylvanSafekeeper extends mage.sets.judgment.SylvanSafekeeper {
 
     public SylvanSafekeeper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 217;
+        this.cardNumber = "217";
         this.expansionSetCode = "C14";
     }
 

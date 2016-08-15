@@ -106,10 +106,7 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getSourceId().equals(this.getSourceId());
     }
 
     @Override
@@ -127,7 +124,8 @@ class IdentityThiefEffect extends OneShotEffect {
 
     public IdentityThiefEffect() {
         super(Outcome.Detriment);
-        staticText = "you may exile another target nontoken creature. If you do, {this} becomes a copy of that creature until end of turn.  Return that card to the battlefield under its owner's control at the beginning of the next end step";
+        staticText = "you may exile another target nontoken creature. If you do, {this} becomes a copy of that creature until end of turn. "
+                + "Return the exiled card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
     public IdentityThiefEffect(final IdentityThiefEffect effect) {
@@ -140,7 +138,11 @@ class IdentityThiefEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && permanent != null && sourcePermanent != null) {
-            CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, permanent, source.getSourceId());
+            Permanent permanentReset = permanent.copy();
+            permanentReset.getCounters().clear();
+            permanentReset.getPower().resetToBaseValue();
+            permanentReset.getToughness().resetToBaseValue();
+            CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, permanentReset, source.getSourceId());
             if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                 // Copy exiled permanent
                 game.addEffect(copyEffect, source);

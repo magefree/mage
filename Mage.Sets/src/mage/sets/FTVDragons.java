@@ -44,7 +44,7 @@ public class FTVDragons extends ExpansionSet {
     }
 
     private FTVDragons() {
-        super("From the Vault: Dragons", "FVD", "mage.sets.ftvdragons", new GregorianCalendar(2008, 8, 29).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Dragons", "DRB", "mage.sets.ftvdragons", new GregorianCalendar(2008, 8, 29).getTime(), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
     }
 }

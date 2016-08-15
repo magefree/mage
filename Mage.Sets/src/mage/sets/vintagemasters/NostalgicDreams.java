@@ -38,7 +38,7 @@ public class NostalgicDreams extends mage.sets.torment.NostalgicDreams {
 
     public NostalgicDreams(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 222;
+        this.cardNumber = "222";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

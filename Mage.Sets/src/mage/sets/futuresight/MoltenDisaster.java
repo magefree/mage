@@ -37,7 +37,7 @@ public class MoltenDisaster extends mage.sets.modernmasters.MoltenDisaster {
 
     public MoltenDisaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "FUT";
     }
 

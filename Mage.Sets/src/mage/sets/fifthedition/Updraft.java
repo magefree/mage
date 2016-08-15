@@ -38,7 +38,7 @@ public class Updraft extends mage.sets.iceage.Updraft {
 
     public Updraft(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "5ED";
         this.rarity = Rarity.COMMON;
     }

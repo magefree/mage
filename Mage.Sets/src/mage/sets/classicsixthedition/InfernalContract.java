@@ -37,7 +37,7 @@ public class InfernalContract extends mage.sets.seventhedition.InfernalContract 
 
     public InfernalContract(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "6ED";
     }
 

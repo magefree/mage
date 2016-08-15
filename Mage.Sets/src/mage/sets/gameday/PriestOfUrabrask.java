@@ -37,7 +37,7 @@ public class PriestOfUrabrask extends mage.sets.newphyrexia.PriestOfUrabrask {
 
     public PriestOfUrabrask(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "MGDC";
     }
 

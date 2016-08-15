@@ -37,7 +37,7 @@ public class AvenFlock extends mage.sets.ninthedition.AvenFlock {
 
     public AvenFlock(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "8ED";
     }
 

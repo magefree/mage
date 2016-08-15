@@ -37,7 +37,7 @@ public class Oakenform extends mage.sets.magic2010.Oakenform {
 
     public Oakenform(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "W16";
     }
 

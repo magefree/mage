@@ -37,7 +37,7 @@ public class SearchForTomorrow extends mage.sets.timespiral.SearchForTomorrow {
 
     public SearchForTomorrow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "HOP";
     }
 

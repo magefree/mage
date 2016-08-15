@@ -37,7 +37,7 @@ public class JettingGlasskite extends mage.sets.betrayersofkamigawa.JettingGlass
 
     public JettingGlasskite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "CNS";
     }
 

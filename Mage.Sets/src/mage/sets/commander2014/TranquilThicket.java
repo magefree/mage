@@ -37,7 +37,7 @@ public class TranquilThicket extends mage.sets.onslaught.TranquilThicket {
 
     public TranquilThicket(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 316;
+        this.cardNumber = "316";
         this.expansionSetCode = "C14";
     }
 

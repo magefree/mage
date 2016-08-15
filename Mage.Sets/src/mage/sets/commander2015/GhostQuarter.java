@@ -37,7 +37,7 @@ public class GhostQuarter extends mage.sets.innistrad.GhostQuarter {
 
     public GhostQuarter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 285;
+        this.cardNumber = "285";
         this.expansionSetCode = "C15";
     }
 

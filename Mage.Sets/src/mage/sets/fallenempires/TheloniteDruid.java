@@ -38,7 +38,7 @@ public class TheloniteDruid extends mage.sets.masterseditionii.TheloniteDruid {
 
     public TheloniteDruid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "FEM";
         this.rarity = Rarity.UNCOMMON;
     }

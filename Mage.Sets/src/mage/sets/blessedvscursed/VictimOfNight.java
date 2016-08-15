@@ -37,7 +37,7 @@ public class VictimOfNight extends mage.sets.innistrad.VictimOfNight {
 
     public VictimOfNight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "DDQ";
     }
 

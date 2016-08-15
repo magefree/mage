@@ -38,7 +38,7 @@ public class SpikeBreeder extends mage.sets.tempestremastered.SpikeBreeder {
 
     public SpikeBreeder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "STH";
         this.rarity = Rarity.RARE;
     }

@@ -59,7 +59,7 @@ public class WingPuncture extends CardImpl {
         super(ownerId, 133, "Wing Puncture", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "SOM";
 
-
+        // Target creature you control deals damage equal to its power to target creature with flying.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new WingPunctureEffect());

@@ -38,7 +38,7 @@ public class ZombieMaster extends mage.sets.limitedalpha.ZombieMaster {
 
     public ZombieMaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "3ED";
     }
 

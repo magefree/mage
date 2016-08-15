@@ -37,7 +37,7 @@ public class MarshGas extends mage.sets.thedark.MarshGas {
 
     public MarshGas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "4ED";
     }
 

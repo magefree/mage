@@ -38,7 +38,7 @@ public class TeferisMoat extends mage.sets.timeshifted.TeferisMoat {
 
     public TeferisMoat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 279;
+        this.cardNumber = "279";
         this.expansionSetCode = "INV";
         this.rarity = Rarity.RARE;
     }

@@ -37,7 +37,7 @@ public class CourtHussar extends mage.sets.commander.CourtHussar {
 
     public CourtHussar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "DIS";
     }
 

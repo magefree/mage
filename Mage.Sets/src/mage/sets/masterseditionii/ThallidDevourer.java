@@ -38,7 +38,7 @@ public class ThallidDevourer extends mage.sets.fallenempires.ThallidDevourer {
 
     public ThallidDevourer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.COMMON;
     }

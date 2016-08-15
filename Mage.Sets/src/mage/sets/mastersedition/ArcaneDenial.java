@@ -37,7 +37,7 @@ public class ArcaneDenial extends mage.sets.commander2013.ArcaneDenial {
 
     public ArcaneDenial(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "MED";
     }
 

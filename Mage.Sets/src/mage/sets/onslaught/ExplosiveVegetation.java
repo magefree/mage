@@ -37,7 +37,7 @@ public class ExplosiveVegetation extends mage.sets.planechase.ExplosiveVegetatio
 
     public ExplosiveVegetation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 263;
+        this.cardNumber = "263";
         this.expansionSetCode = "ONS";
     }
 

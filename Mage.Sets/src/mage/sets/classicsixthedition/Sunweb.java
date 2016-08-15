@@ -37,7 +37,7 @@ public class Sunweb extends mage.sets.seventhedition.Sunweb {
 
     public Sunweb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "6ED";
     }
 

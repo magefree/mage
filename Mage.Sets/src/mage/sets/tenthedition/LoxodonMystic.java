@@ -37,7 +37,7 @@ public class LoxodonMystic extends mage.sets.darksteel.LoxodonMystic {
 
     public LoxodonMystic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "10E";
     }
 

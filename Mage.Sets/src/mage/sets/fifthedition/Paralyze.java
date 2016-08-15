@@ -37,7 +37,7 @@ public class Paralyze extends mage.sets.limitedalpha.Paralyze {
 
     public Paralyze(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "5ED";
     }
 

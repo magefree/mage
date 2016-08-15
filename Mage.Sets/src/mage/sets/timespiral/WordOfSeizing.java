@@ -37,7 +37,7 @@ public class WordOfSeizing extends mage.sets.commander2014.WordOfSeizing {
 
     public WordOfSeizing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "TSP";
     }
 

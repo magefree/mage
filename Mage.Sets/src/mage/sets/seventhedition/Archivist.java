@@ -37,7 +37,7 @@ public class Archivist extends mage.sets.urzaslegacy.Archivist {
 
     public Archivist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "7ED";
     }
 

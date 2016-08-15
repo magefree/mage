@@ -37,7 +37,7 @@ public class DarkestHour extends mage.sets.seventhedition.DarkestHour {
 
     public DarkestHour(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "USG";
     }
 

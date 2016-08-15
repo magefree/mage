@@ -81,8 +81,8 @@ public class TournamentFactory {
                 if (tournament.getTournamentType().isCubeBooster()) {
                     DraftCube draftCube = null;
 
-                    if (tournament.getOptions().getLimitedOptions().getCubeFromDeckFilename().length() != 0) {
-                        draftCube = CubeFactory.getInstance().createDeckDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName(), tournament.getOptions().getLimitedOptions().getCubeFromDeckFilename());
+                    if (tournament.getOptions().getLimitedOptions().getCubeFromDeck() != null) {
+                        draftCube = CubeFactory.getInstance().createDeckDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName(), tournament.getOptions().getLimitedOptions().getCubeFromDeck());
                     } else {
                         draftCube = CubeFactory.getInstance().createDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName());
                     }

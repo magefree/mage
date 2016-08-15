@@ -103,7 +103,8 @@ class EyeOfTheStormAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getZone() == Zone.HAND) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
+            if (spell != null && !spell.isCopy()
+                    && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
@@ -139,22 +140,21 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        Permanent EyeOfTheStorm = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Player controller = game.getPlayer(source.getControllerId());
-
-        if (controller != null && spell != null && EyeOfTheStorm != null) {
+        Permanent eyeOfTheStorm = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (spell != null && eyeOfTheStorm != null) {
+            Player spellController = game.getPlayer(spell.getControllerId());
             Card card = spell.getCard();
-            if (card == null || !instantOrSorceryfilter.match(card, game)) {
+            if (spellController == null || card == null || !instantOrSorceryfilter.match(card, game)) {
                 return false;
             }
 
-            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), EyeOfTheStorm.getZoneChangeCounter(game));
-            if (controller.moveCardsToExile(spell, source, game, true, exileZoneId, EyeOfTheStorm.getIdName())) {
-                EyeOfTheStorm.imprint(card.getId(), game);
+            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), eyeOfTheStorm.getZoneChangeCounter(game));
+            if (spellController.moveCardsToExile(spell, source, game, true, exileZoneId, eyeOfTheStorm.getIdName())) {
+                eyeOfTheStorm.imprint(card.getId(), game);
 
-                if (EyeOfTheStorm != null && EyeOfTheStorm.getImprinted() != null && EyeOfTheStorm.getImprinted().size() > 0 && controller != null) {
+                if (eyeOfTheStorm.getImprinted() != null && eyeOfTheStorm.getImprinted().size() > 0) {
                     CardsImpl copiedCards = new CardsImpl();
-                    for (UUID uuid : EyeOfTheStorm.getImprinted()) {
+                    for (UUID uuid : eyeOfTheStorm.getImprinted()) {
                         card = game.getCard(uuid);
 
                         // Check if owner of card is still in game
@@ -170,21 +170,21 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
 
                     boolean continueCasting = true;
                     while (continueCasting) {
-                        continueCasting = copiedCards.size() > 1 && controller.chooseUse(outcome, "Cast one of the copied cards without paying its mana cost?", source, game);
+                        continueCasting = copiedCards.size() > 1 && spellController.chooseUse(outcome, "Cast one of the copied cards without paying its mana cost?", source, game);
 
                         Card cardToCopy;
                         if (copiedCards.size() == 1) {
                             cardToCopy = copiedCards.getCards(game).iterator().next();
                         } else {
                             TargetCard target = new TargetCard(1, Zone.EXILED, new FilterCard("card to copy"));
-                            controller.choose(Outcome.Copy, copiedCards, target, game);
+                            spellController.choose(Outcome.Copy, copiedCards, target, game);
                             cardToCopy = copiedCards.get(target.getFirstTarget(), game);
                             copiedCards.remove(cardToCopy);
                         }
                         if (cardToCopy != null) {
                             Card copy = game.copyCard(cardToCopy, source, source.getControllerId());
-                            if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
-                                controller.cast(copy.getSpellAbility(), game, true);
+                            if (spellController.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
+                                spellController.cast(copy.getSpellAbility(), game, true);
                             }
                         }
                     }

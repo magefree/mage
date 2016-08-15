@@ -37,7 +37,7 @@ public class LightningGreaves extends mage.sets.mirrodin.LightningGreaves {
 
     public LightningGreaves(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 257;
+        this.cardNumber = "257";
         this.expansionSetCode = "C15";
     }
 

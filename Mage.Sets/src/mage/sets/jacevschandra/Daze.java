@@ -37,7 +37,7 @@ public class Daze extends mage.sets.nemesis.Daze {
 
     public Daze(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "DD2";
     }
 

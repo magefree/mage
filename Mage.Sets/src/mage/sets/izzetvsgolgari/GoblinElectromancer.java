@@ -37,7 +37,7 @@ public class GoblinElectromancer extends mage.sets.returntoravnica.GoblinElectro
 
     public GoblinElectromancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "DDJ";
     }
 

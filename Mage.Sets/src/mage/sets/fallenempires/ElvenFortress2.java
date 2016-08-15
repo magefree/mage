@@ -37,7 +37,7 @@ public class ElvenFortress2 extends ElvenFortress1 {
 
     public ElvenFortress2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
     }
 
     public ElvenFortress2(final ElvenFortress2 card) {

@@ -37,7 +37,7 @@ public class FaerieInvaders extends mage.sets.magic2013.FaerieInvaders {
 
     public FaerieInvaders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "DDN";
     }
 

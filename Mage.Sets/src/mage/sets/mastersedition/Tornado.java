@@ -37,7 +37,7 @@ public class Tornado extends mage.sets.alliances.Tornado {
 
     public Tornado(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "MED";
     }
 

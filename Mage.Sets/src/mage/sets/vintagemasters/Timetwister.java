@@ -38,7 +38,7 @@ public class Timetwister extends mage.sets.limitedalpha.Timetwister {
 
     public Timetwister(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.BONUS;
     }

@@ -37,7 +37,7 @@ public class PrimevalShambler extends mage.sets.mercadianmasques.PrimevalShamble
 
     public PrimevalShambler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "8ED";
     }
 

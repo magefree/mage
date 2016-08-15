@@ -38,7 +38,7 @@ public class SparkElemental extends mage.sets.tenthedition.SparkElemental {
 
     public SparkElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "5DN";
         this.rarity = Rarity.COMMON;
     }

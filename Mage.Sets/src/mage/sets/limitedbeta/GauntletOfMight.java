@@ -37,7 +37,7 @@ public class GauntletOfMight extends mage.sets.limitedalpha.GauntletOfMight {
 
     public GauntletOfMight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 246;
+        this.cardNumber = "246";
         this.expansionSetCode = "LEB";
     }
 

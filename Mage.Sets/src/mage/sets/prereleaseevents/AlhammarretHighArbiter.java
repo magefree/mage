@@ -37,7 +37,7 @@ public class AlhammarretHighArbiter extends mage.sets.magicorigins.AlhammarretHi
 
     public AlhammarretHighArbiter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "PTC";
     }
 

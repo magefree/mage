@@ -37,7 +37,7 @@ public class FallOfTheHammer extends mage.sets.bornofthegods.FallOfTheHammer {
 
     public FallOfTheHammer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "C15";
     }
 

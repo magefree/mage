@@ -37,7 +37,7 @@ public class TouchOfBrilliance extends mage.sets.portalsecondage.TouchOfBrillian
 
     public TouchOfBrilliance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "POR";
     }
 

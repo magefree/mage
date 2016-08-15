@@ -37,7 +37,7 @@ public class Tariff extends mage.sets.weatherlight.Tariff {
 
     public Tariff(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "6ED";
     }
 

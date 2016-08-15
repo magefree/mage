@@ -37,7 +37,7 @@ public class EssenceScatter extends mage.sets.magic2010.EssenceScatter {
 
     public EssenceScatter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "M14";
     }
 

@@ -37,7 +37,7 @@ public class KiorasFollower extends mage.sets.bornofthegods.KiorasFollower {
 
     public KiorasFollower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "DDO";
     }
 

@@ -38,7 +38,7 @@ public class DarksteelForge extends mage.sets.darksteel.DarksteelForge {
 
     public DarksteelForge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 206;
+        this.cardNumber = "206";
         this.expansionSetCode = "M14";
         this.rarity = Rarity.MYTHIC;
     }

@@ -38,7 +38,7 @@ public class AncestralMask extends mage.sets.mercadianmasques.AncestralMask {
 
     public AncestralMask(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

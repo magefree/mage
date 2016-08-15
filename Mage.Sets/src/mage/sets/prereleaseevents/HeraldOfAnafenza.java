@@ -38,7 +38,7 @@ public class HeraldOfAnafenza extends mage.sets.khansoftarkir.HeraldOfAnafenza {
 
     public HeraldOfAnafenza(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

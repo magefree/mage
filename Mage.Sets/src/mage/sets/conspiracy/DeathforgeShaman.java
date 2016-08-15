@@ -37,7 +37,7 @@ public class DeathforgeShaman extends mage.sets.worldwake.DeathforgeShaman {
 
     public DeathforgeShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "CNS";
     }
 

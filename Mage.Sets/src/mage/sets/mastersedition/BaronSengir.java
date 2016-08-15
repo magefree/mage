@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BaronSengir extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Vampire");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target Vampire");
 
     static {
         filter.add(new SubtypePredicate("Vampire"));
@@ -75,7 +75,7 @@ public class BaronSengir extends CardImpl {
         
         // {tap}: Regenerate another target Vampire.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(1, 1, filter, true));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

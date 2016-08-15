@@ -37,7 +37,7 @@ public class GoblinSkyRaider extends mage.sets.tenthedition.GoblinSkyRaider {
 
     public GoblinSkyRaider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "9ED";
     }
 

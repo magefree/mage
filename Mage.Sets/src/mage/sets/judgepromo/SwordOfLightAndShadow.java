@@ -37,7 +37,7 @@ public class SwordOfLightAndShadow extends mage.sets.darksteel.SwordOfLightAndSh
 
     public SwordOfLightAndShadow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "JR";
     }
 

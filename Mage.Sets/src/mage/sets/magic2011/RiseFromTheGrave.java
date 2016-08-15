@@ -38,7 +38,7 @@ public class RiseFromTheGrave extends mage.sets.magic2010.RiseFromTheGrave {
 
     public RiseFromTheGrave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "M11";
     }
 

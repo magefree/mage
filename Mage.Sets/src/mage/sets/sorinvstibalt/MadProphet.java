@@ -37,7 +37,7 @@ public class MadProphet extends mage.sets.avacynrestored.MadProphet {
 
     public MadProphet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "DDK";
     }
 

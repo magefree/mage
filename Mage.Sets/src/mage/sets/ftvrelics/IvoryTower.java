@@ -38,7 +38,7 @@ public class IvoryTower extends mage.sets.antiquities.IvoryTower {
 
     public IvoryTower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "V10";
         this.rarity = Rarity.MYTHIC;
     }

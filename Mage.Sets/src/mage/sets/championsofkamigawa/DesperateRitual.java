@@ -38,7 +38,7 @@ public class DesperateRitual extends mage.sets.modernmasters.DesperateRitual {
 
     public DesperateRitual(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "CHK";
         this.rarity = Rarity.COMMON;
     }

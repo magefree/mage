@@ -37,7 +37,7 @@ public class SarcomiteMyr extends mage.sets.planechase.SarcomiteMyr {
 
     public SarcomiteMyr(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "FUT";
     }
 

@@ -37,7 +37,7 @@ public class ShatteredAngel extends mage.sets.newphyrexia.ShatteredAngel {
 
     public ShatteredAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "CMD";
     }
 

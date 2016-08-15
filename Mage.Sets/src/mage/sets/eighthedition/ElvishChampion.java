@@ -37,7 +37,7 @@ public class ElvishChampion extends mage.sets.tenthedition.ElvishChampion {
 
     public ElvishChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 241;
+        this.cardNumber = "241";
         this.expansionSetCode = "8ED";
     }
 

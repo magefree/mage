@@ -37,7 +37,7 @@ public class KrosanWarchief extends mage.sets.scourge.KrosanWarchief {
 
     public KrosanWarchief(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "C13";
     }
 

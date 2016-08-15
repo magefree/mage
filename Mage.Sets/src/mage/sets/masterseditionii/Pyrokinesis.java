@@ -38,7 +38,7 @@ public class Pyrokinesis extends mage.sets.alliances.Pyrokinesis {
 
     public Pyrokinesis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.RARE;
     }

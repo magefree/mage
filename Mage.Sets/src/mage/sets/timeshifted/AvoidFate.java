@@ -38,7 +38,7 @@ public class AvoidFate extends mage.sets.legends.AvoidFate {
 
     public AvoidFate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

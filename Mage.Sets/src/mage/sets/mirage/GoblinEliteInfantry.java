@@ -37,7 +37,7 @@ public class GoblinEliteInfantry extends mage.sets.tenthedition.GoblinEliteInfan
 
     public GoblinEliteInfantry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "MIR";
     }
 

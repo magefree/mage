@@ -6,7 +6,7 @@ public class BreathOfMalfegor extends mage.sets.alarareborn.BreathOfMalfegor {
     
     public BreathOfMalfegor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "MBP";
     }
     

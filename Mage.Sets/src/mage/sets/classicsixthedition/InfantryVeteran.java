@@ -37,7 +37,7 @@ public class InfantryVeteran extends mage.sets.magic2011.InfantryVeteran {
 
     public InfantryVeteran(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "6ED";
     }
 

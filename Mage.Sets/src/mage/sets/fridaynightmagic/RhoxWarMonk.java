@@ -37,7 +37,7 @@ public class RhoxWarMonk extends mage.sets.shardsofalara.RhoxWarMonk {
 
     public RhoxWarMonk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "FNMP";
     }
 

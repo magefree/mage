@@ -37,7 +37,7 @@ public class Griselbrand extends mage.sets.avacynrestored.Griselbrand {
 
     public Griselbrand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "GPX";
     }
 

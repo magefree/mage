@@ -37,7 +37,7 @@ public class FistsOfTheAnvil extends mage.sets.tenthedition.FistsOfTheAnvil {
 
     public FistsOfTheAnvil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "MRD";
     }
 

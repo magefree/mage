@@ -38,7 +38,7 @@ public class IncandescentSoulstoke extends mage.sets.lorwyn.IncandescentSoulstok
 
     public IncandescentSoulstoke(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

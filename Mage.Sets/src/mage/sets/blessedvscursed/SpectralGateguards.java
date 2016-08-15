@@ -37,7 +37,7 @@ public class SpectralGateguards extends mage.sets.avacynrestored.SpectralGategua
 
     public SpectralGateguards(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "DDQ";
     }
 

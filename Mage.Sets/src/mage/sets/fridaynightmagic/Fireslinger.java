@@ -38,7 +38,7 @@ public class Fireslinger extends mage.sets.tempest.Fireslinger {
 
     public Fireslinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

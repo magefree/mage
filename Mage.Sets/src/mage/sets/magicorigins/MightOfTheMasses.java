@@ -37,7 +37,7 @@ public class MightOfTheMasses extends mage.sets.riseoftheeldrazi.MightOfTheMasse
 
     public MightOfTheMasses(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "ORI";
     }
 

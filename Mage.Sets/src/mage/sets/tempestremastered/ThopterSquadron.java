@@ -38,7 +38,7 @@ public class ThopterSquadron extends mage.sets.vintagemasters.ThopterSquadron {
 
     public ThopterSquadron(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = "233";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.RARE;
     }

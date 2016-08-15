@@ -37,7 +37,7 @@ public class ScatteringStroke extends mage.sets.commander.ScatteringStroke {
 
     public ScatteringStroke(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "LRW";
     }
 

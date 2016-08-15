@@ -37,7 +37,7 @@ public class BenalishTrapper extends mage.sets.invasion.BenalishTrapper {
 
     public BenalishTrapper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "VMA";
     }
 

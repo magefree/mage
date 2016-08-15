@@ -98,6 +98,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GUI_CARD_HAND_SIZE = "guiCardHandSize";
     public static final String KEY_GUI_CARD_EDITOR_SIZE = "guiCardEditorSize";
     public static final String KEY_GUI_CARD_OFFSET_SIZE = "guiCardOffsetSize";
+    public static final String KEY_GUI_ENLARGED_IMAGE_SIZE = "guiEnlargedImageSize";
 
     public static final String KEY_GUI_STACK_WIDTH = "guiStackWidth";
     public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
@@ -112,6 +113,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
+    public static final String KEY_CARD_IMAGES_THREADS = "cardImagesThreads";
     public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferedImageLaguage";
@@ -349,7 +351,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         addAvatars();
 
         cbPreferedImageLanguage.setModel(new DefaultComboBoxModel<>(new String[]{"en", "de", "fr", "it", "es", "pt", "jp", "cn", "ru", "tw", "ko"}));
-
+        cbNumberOfDownloadThreads.setModel(new DefaultComboBoxModel<>(new String[]{"10", "9", "8", "7", "6", "5", "4", "3", "2", "1"}));
     }
 
     /**
@@ -391,6 +393,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         labelEditorCardSize = new javax.swing.JLabel();
         sliderEditorCardOffset = new javax.swing.JSlider();
         labelEditorCardOffset = new javax.swing.JLabel();
+        sliderEnlargedImageSize = new javax.swing.JSlider();
+        labelEnlargedImageSize = new javax.swing.JLabel();
         guiSizeGame = new javax.swing.JPanel();
         sliderCardSizeHand = new javax.swing.JSlider();
         labelCardSizeHand = new javax.swing.JLabel();
@@ -448,6 +452,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbSaveToZipFiles = new javax.swing.JCheckBox();
         cbPreferedImageLanguage = new javax.swing.JComboBox<>();
         labelPreferedImageLanguage = new javax.swing.JLabel();
+        labelNumberOfDownloadThreads = new javax.swing.JLabel();
+        cbNumberOfDownloadThreads = new javax.swing.JComboBox();
         panelBackgroundImages = new javax.swing.JPanel();
         cbUseDefaultBackground = new javax.swing.JCheckBox();
         txtBackgroundImagePath = new javax.swing.JTextField();
@@ -559,7 +565,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, showCardName)
                     .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         main_cardLayout.setVerticalGroup(
             main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -908,6 +914,35 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         guiSizeBasic.add(labelEditorCardOffset, gridBagConstraints);
+
+        sliderEnlargedImageSize.setMajorTickSpacing(5);
+        sliderEnlargedImageSize.setMaximum(50);
+        sliderEnlargedImageSize.setMinimum(10);
+        sliderEnlargedImageSize.setMinorTickSpacing(1);
+        sliderEnlargedImageSize.setPaintLabels(true);
+        sliderEnlargedImageSize.setPaintTicks(true);
+        sliderEnlargedImageSize.setSnapToTicks(true);
+        sliderEnlargedImageSize.setToolTipText("<HTML>The size of the image shown for the card your mouse pointer<br>is located over while you turn the mouse wheel ");
+        sliderEnlargedImageSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderEnlargedImageSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeBasic.add(sliderEnlargedImageSize, gridBagConstraints);
+
+        labelEnlargedImageSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelEnlargedImageSize.setText("Enlarged image (mouse wheel)");
+        labelEnlargedImageSize.setToolTipText("<HTML>The size of the image shown for the card your mouse pointer<br>is located over while you turn the mouse wheel\n");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeBasic.add(labelEnlargedImageSize, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1393,6 +1428,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         labelPreferedImageLanguage.setText("Prefered image language:");
         labelPreferedImageLanguage.setFocusable(false);
 
+        labelNumberOfDownloadThreads.setText("Number of download threads:");
+
+        cbNumberOfDownloadThreads.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         org.jdesktop.layout.GroupLayout panelCardImagesLayout = new org.jdesktop.layout.GroupLayout(panelCardImages);
         panelCardImages.setLayout(panelCardImagesLayout);
         panelCardImagesLayout.setHorizontalGroup(
@@ -1400,23 +1439,29 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(panelCardImagesLayout.createSequentialGroup()
                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(panelCardImagesLayout.createSequentialGroup()
-                        .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(cbUseDefaultImageFolder)
-                            .add(cbCheckForNewImages)
-                            .add(panelCardImagesLayout.createSequentialGroup()
-                                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .add(labelPreferedImageLanguage))
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, cbSaveToZipFiles))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                        .add(0, 0, Short.MAX_VALUE))
-                    .add(panelCardImagesLayout.createSequentialGroup()
                         .add(24, 24, 24)
                         .add(txtImageFolderPath)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(btnBrowseImageLocation)))
+                        .add(btnBrowseImageLocation))
+                    .add(panelCardImagesLayout.createSequentialGroup()
+                        .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(labelNumberOfDownloadThreads)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(cbUseDefaultImageFolder)
+                                .add(cbCheckForNewImages)
+                                .add(panelCardImagesLayout.createSequentialGroup()
+                                    .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .add(labelPreferedImageLanguage))
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, cbSaveToZipFiles))
+                                    .add(40, 40, 40)
+                                    .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                        .add(0, 251, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelCardImagesLayout.setVerticalGroup(
@@ -1434,9 +1479,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(cbSaveToZipFiles)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labelNumberOfDownloadThreads)
+                    .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(labelPreferedImageLanguage))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images setting:"));
@@ -1561,7 +1610,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
@@ -2171,14 +2220,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(connection_serversLayout.createSequentialGroup()
                         .add(141, 141, 141)
                         .add(jLabel17)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         connection_serversLayout.setVerticalGroup(
             connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(connection_serversLayout.createSequentialGroup()
                 .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(lblURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel17))
         );
@@ -2357,7 +2406,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(6, 6, 6))
-            .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+            .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2409,6 +2458,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
         if (getCachedValue(KEY_GUI_CARD_OFFSET_SIZE, 14) != dialog.sliderEditorCardOffset.getValue()) {
             save(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_ENLARGED_IMAGE_SIZE, 20) != dialog.sliderEnlargedImageSize.getValue()) {
+            save(prefs, dialog.sliderEnlargedImageSize, KEY_GUI_ENLARGED_IMAGE_SIZE, "true", "false", UPDATE_CACHE_POLICY);
             sizeGUIChanged = true;
         }
         if (getCachedValue(KEY_GUI_STACK_WIDTH, 30) != dialog.sliderStackWidth.getValue()) {
@@ -2474,6 +2527,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         saveImagesPath(prefs);
         save(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbNumberOfDownloadThreads, KEY_CARD_IMAGES_THREADS);
         save(prefs, dialog.cbPreferedImageLanguage, KEY_CARD_IMAGES_PREF_LANGUAGE);
 
         save(prefs, dialog.cbUseDefaultBackground, KEY_BACKGROUND_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
@@ -2525,14 +2579,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         dialog.setVisible(false);
     }//GEN-LAST:event_exitButtonActionPerformed
 
-    private void cbUseDefaultImageFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUseDefaultImageFolderActionPerformed
-        if (cbUseDefaultImageFolder.isSelected()) {
-            useDefaultPath();
-        } else {
-            useConfigurablePath();
-        }
-    }//GEN-LAST:event_cbUseDefaultImageFolderActionPerformed
-
     private void useDefaultPath() {
         txtImageFolderPath.setText("./plugins/images/");
         txtImageFolderPath.setEnabled(false);
@@ -2546,15 +2592,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         btnBrowseImageLocation.setEnabled(true);
     }
 
-    private void btnBrowseImageLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseImageLocationActionPerformed
-        int returnVal = fc.showOpenDialog(PreferencesDialog.this);
-
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            txtImageFolderPath.setText(file.getAbsolutePath());
-        }
-    }//GEN-LAST:event_btnBrowseImageLocationActionPerformed
-
     private void cbProxyTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProxyTypeActionPerformed
         this.showProxySettings();
     }//GEN-LAST:event_cbProxyTypeActionPerformed
@@ -2567,14 +2604,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void rememberPswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberPswdActionPerformed
     }//GEN-LAST:event_rememberPswdActionPerformed
-
-    private void cbSaveToZipFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSaveToZipFilesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbSaveToZipFilesActionPerformed
-
-    private void cbCheckForNewImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCheckForNewImagesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCheckForNewImagesActionPerformed
 
     private void cbEnableGameSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableGameSoundsActionPerformed
         // TODO add your handling code here:
@@ -2777,6 +2806,31 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAutoOrderTriggerActionPerformed
 
+    private void cbSaveToZipFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSaveToZipFilesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbSaveToZipFilesActionPerformed
+
+    private void cbCheckForNewImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCheckForNewImagesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCheckForNewImagesActionPerformed
+
+    private void btnBrowseImageLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseImageLocationActionPerformed
+        int returnVal = fc.showOpenDialog(PreferencesDialog.this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            txtImageFolderPath.setText(file.getAbsolutePath());
+        }
+    }//GEN-LAST:event_btnBrowseImageLocationActionPerformed
+
+    private void cbUseDefaultImageFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUseDefaultImageFolderActionPerformed
+        if (cbUseDefaultImageFolder.isSelected()) {
+            useDefaultPath();
+        } else {
+            useConfigurablePath();
+        }
+    }//GEN-LAST:event_cbUseDefaultImageFolderActionPerformed
+
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
         switch (proxyType) {
@@ -2923,6 +2977,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "14");
         load(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "14");
         load(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "14");
+        load(prefs, dialog.sliderEnlargedImageSize, KEY_GUI_ENLARGED_IMAGE_SIZE, "20");
         load(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "14");
         load(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "14");
         load(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "14");
@@ -2946,6 +3001,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
         load(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true");
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
+        dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, "10"));
         dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, "en"));
 
         //add background load precedure
@@ -3337,6 +3393,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbEnableOtherSounds;
     private javax.swing.JCheckBox cbEnableSkipButtonsSounds;
     private javax.swing.JCheckBox cbGameLogAutoSave;
+    private javax.swing.JComboBox cbNumberOfDownloadThreads;
     private javax.swing.JCheckBox cbPassPriorityActivation;
     private javax.swing.JCheckBox cbPassPriorityCast;
     private javax.swing.JComboBox<String> cbPreferedImageLanguage;
@@ -3417,7 +3474,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelDialogFont;
     private javax.swing.JLabel labelEditorCardOffset;
     private javax.swing.JLabel labelEditorCardSize;
+    private javax.swing.JLabel labelEnlargedImageSize;
     private javax.swing.JLabel labelGameFeedback;
+    private javax.swing.JLabel labelNumberOfDownloadThreads;
     private javax.swing.JLabel labelPreferedImageLanguage;
     private javax.swing.JLabel labelStackWidth;
     private javax.swing.JLabel labelTooltipSize;
@@ -3449,6 +3508,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JSlider sliderDialogFont;
     private javax.swing.JSlider sliderEditorCardOffset;
     private javax.swing.JSlider sliderEditorCardSize;
+    private javax.swing.JSlider sliderEnlargedImageSize;
     private javax.swing.JSlider sliderFontSize;
     private javax.swing.JSlider sliderGameFeedbackArea;
     private javax.swing.JSlider sliderStackWidth;

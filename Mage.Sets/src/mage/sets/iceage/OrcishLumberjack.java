@@ -37,7 +37,7 @@ public class OrcishLumberjack extends mage.sets.heroesvsmonsters.OrcishLumberjac
 
     public OrcishLumberjack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 210;
+        this.cardNumber = "210";
         this.expansionSetCode = "ICE";
     }
 

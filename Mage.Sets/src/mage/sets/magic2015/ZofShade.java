@@ -37,7 +37,7 @@ public class ZofShade extends mage.sets.riseoftheeldrazi.ZofShade {
 
     public ZofShade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "M15";
     }
 

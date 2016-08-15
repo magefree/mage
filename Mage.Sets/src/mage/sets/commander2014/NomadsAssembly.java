@@ -37,7 +37,7 @@ public class NomadsAssembly extends mage.sets.riseoftheeldrazi.NomadsAssembly {
 
     public NomadsAssembly(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "C14";
     }
 

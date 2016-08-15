@@ -38,7 +38,7 @@ public class OrosTheAvenger extends mage.sets.commander.OrosTheAvenger {
 
     public OrosTheAvenger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

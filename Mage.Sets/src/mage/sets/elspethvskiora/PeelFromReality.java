@@ -37,7 +37,7 @@ public class PeelFromReality extends mage.sets.avacynrestored.PeelFromReality {
 
     public PeelFromReality(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "DDO";
     }
 

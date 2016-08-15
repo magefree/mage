@@ -38,7 +38,7 @@ public class KarnSilverGolem extends mage.sets.urzassaga.KarnSilverGolem {
 
     public KarnSilverGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "ARENA";
         this.rarity = Rarity.SPECIAL;
     }

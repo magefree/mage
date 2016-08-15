@@ -38,7 +38,7 @@ public class PilgrimsEye extends mage.sets.worldwake.PilgrimsEye {
 
     public PilgrimsEye(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 226;
+        this.cardNumber = "226";
         this.expansionSetCode = "BFZ";
         this.rarity = Rarity.UNCOMMON;
     }

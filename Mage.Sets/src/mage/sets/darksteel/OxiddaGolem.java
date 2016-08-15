@@ -37,7 +37,7 @@ public class OxiddaGolem extends mage.sets.jacevschandra.OxiddaGolem {
 
     public OxiddaGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
+        this.cardNumber = "135";
         this.expansionSetCode = "DST";
     }
 

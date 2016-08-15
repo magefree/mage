@@ -37,7 +37,7 @@ public class AmrouKithkin extends mage.sets.legends.AmrouKithkin {
 
     public AmrouKithkin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "ME3";
     }
 

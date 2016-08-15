@@ -38,7 +38,7 @@ public class Berserk extends mage.sets.limitedalpha.Berserk {
 
     public Berserk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.RARE;
     }

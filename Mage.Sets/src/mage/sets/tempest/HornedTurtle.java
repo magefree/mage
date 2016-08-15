@@ -37,7 +37,7 @@ public class HornedTurtle extends mage.sets.magic2010.HornedTurtle {
 
     public HornedTurtle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "TMP";
     }
 

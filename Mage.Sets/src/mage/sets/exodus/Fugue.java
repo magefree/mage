@@ -37,7 +37,7 @@ public class Fugue extends mage.sets.seventhedition.Fugue {
 
     public Fugue(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "EXO";
     }
 

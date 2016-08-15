@@ -52,7 +52,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  */
 public class PolymorphousRush extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

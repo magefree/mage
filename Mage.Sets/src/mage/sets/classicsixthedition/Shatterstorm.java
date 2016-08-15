@@ -38,7 +38,7 @@ public class Shatterstorm extends mage.sets.fifthedition.Shatterstorm {
 
     public Shatterstorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 205;
+        this.cardNumber = "205";
         this.expansionSetCode = "6ED";
         this.rarity = Rarity.RARE;
     }

@@ -38,7 +38,7 @@ public class ScourgeOfFleets extends mage.sets.journeyintonyx.ScourgeOfFleets {
 
     public ScourgeOfFleets(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

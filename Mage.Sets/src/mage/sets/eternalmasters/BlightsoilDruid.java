@@ -38,7 +38,7 @@ public class BlightsoilDruid extends mage.sets.morningtide.BlightsoilDruid {
 
     public BlightsoilDruid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "EMA";
     }
 

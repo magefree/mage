@@ -37,7 +37,7 @@ public class Earthquake extends mage.sets.magic2010.Earthquake {
 
     public Earthquake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = "223";
         this.expansionSetCode = "5ED";
     }
 

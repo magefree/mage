@@ -37,7 +37,7 @@ public class VulturousZombie extends mage.sets.commander.VulturousZombie {
 
     public VulturousZombie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 238;
+        this.cardNumber = "238";
         this.expansionSetCode = "C15";
     }
 

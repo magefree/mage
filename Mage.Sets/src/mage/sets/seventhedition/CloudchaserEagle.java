@@ -37,7 +37,7 @@ public class CloudchaserEagle extends mage.sets.tempest.CloudchaserEagle {
 
     public CloudchaserEagle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "7ED";
     }
 

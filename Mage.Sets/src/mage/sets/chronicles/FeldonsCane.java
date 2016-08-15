@@ -38,7 +38,7 @@ public class FeldonsCane extends mage.sets.timeshifted.FeldonsCane {
 
     public FeldonsCane(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "CHR";
         this.rarity = Rarity.COMMON;
     }

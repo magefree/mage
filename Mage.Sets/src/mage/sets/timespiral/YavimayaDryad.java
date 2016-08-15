@@ -37,7 +37,7 @@ public class YavimayaDryad extends mage.sets.archenemy.YavimayaDryad {
 
     public YavimayaDryad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 235;
+        this.cardNumber = "235";
         this.expansionSetCode = "TSP";
     }
 

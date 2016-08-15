@@ -37,7 +37,7 @@ public class CavesOfKoilos extends mage.sets.apocalypse.CavesOfKoilos {
 
     public CavesOfKoilos(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 320;
+        this.cardNumber = "320";
         this.expansionSetCode = "9ED";
     }
 

@@ -37,7 +37,7 @@ public class GoldmeadowHarrier extends mage.sets.elspethvstezzeret.GoldmeadowHar
 
     public GoldmeadowHarrier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "LRW";
     }
 

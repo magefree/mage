@@ -38,7 +38,7 @@ public class Electrolyze extends mage.sets.guildpact.Electrolyze {
 
     public Electrolyze(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "CP";
         this.rarity = Rarity.SPECIAL;
     }

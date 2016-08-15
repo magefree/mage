@@ -37,7 +37,7 @@ public class GhoulsFeast extends mage.sets.izzetvsgolgari.GhoulsFeast {
 
     public GhoulsFeast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "MMQ";
     }
 

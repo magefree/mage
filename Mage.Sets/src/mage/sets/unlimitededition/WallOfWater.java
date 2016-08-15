@@ -38,7 +38,7 @@ public class WallOfWater extends mage.sets.limitedalpha.WallOfWater {
 
     public WallOfWater(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "2ED";
     }
 

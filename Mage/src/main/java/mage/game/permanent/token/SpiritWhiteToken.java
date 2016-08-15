@@ -42,7 +42,7 @@ public class SpiritWhiteToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM", "SOI"));
+        tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM", "SOI", "EMA"));
     }
 
     public SpiritWhiteToken() {
@@ -65,7 +65,7 @@ public class SpiritWhiteToken extends Token {
         color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        
+
         addAbility(FlyingAbility.getInstance());
     }
 

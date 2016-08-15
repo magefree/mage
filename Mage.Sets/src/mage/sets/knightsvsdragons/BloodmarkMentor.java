@@ -37,7 +37,7 @@ public class BloodmarkMentor extends mage.sets.shadowmoor.BloodmarkMentor {
 
     public BloodmarkMentor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDG";
     }
 

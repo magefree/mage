@@ -37,7 +37,7 @@ public class KazanduTuskcaller extends mage.sets.riseoftheeldrazi.KazanduTuskcal
 
     public KazanduTuskcaller(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "C13";
     }
 

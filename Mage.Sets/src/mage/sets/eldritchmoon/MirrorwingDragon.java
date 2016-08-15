@@ -108,7 +108,9 @@ class MirrorwingDragonCopyTriggeredAbility extends TriggeredAbilityImpl {
     private boolean checkSpell(Spell spell, Game game) {
         if (spell != null
                 && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
+            boolean noTargets = true;
             for (TargetAddress addr : TargetAddress.walk(spell)) {
+                noTargets = false;
                 Target targetInstance = addr.getTarget(spell);
                 for (UUID target : targetInstance.getTargets()) {
                     Permanent permanent = game.getPermanent(target);
@@ -116,6 +118,9 @@ class MirrorwingDragonCopyTriggeredAbility extends TriggeredAbilityImpl {
                         return false;
                     }
                 }
+            }
+            if (noTargets) {
+                return false;
             }
             getEffects().get(0).setValue("triggeringSpell", spell);
             return true;
@@ -126,7 +131,7 @@ class MirrorwingDragonCopyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a player casts an instant or sorcery spell that targets only {this}, "
-                + "that player copies that spell for each creature he or she controls that the spell could target. "
+                + "that player copies that spell for each other creature he or she controls that the spell could target. "
                 + "Each copy targets a different one of those creatures.";
     }
 }
@@ -135,7 +140,7 @@ class MirrorwingDragonCopySpellEffect extends CopySpellForEachItCouldTargetEffec
 
     public MirrorwingDragonCopySpellEffect() {
         this(new FilterControlledCreaturePermanent());
-        this.staticText = "that player copies that spell for each creature he or she controls that the spell could target. Each copy targets a different one of those creatures.";
+        this.staticText = "that player copies that spell for each other creature he or she controls that the spell could target. Each copy targets a different one of those creatures.";
     }
 
     public MirrorwingDragonCopySpellEffect(MirrorwingDragonCopySpellEffect effect) {
@@ -167,6 +172,17 @@ class MirrorwingDragonCopySpellEffect extends CopySpellForEachItCouldTargetEffec
 
     @Override
     protected void modifyCopy(Spell copy, Game game, Ability source) {
+        Spell spell = getSpell(game, source);
+        copy.setControllerId(spell.getControllerId());
+    }
+
+    @Override
+    protected boolean okUUIDToCopyFor(UUID potentialTarget, Game game, Ability source, Spell spell) {
+        Permanent permanent = game.getPermanent(potentialTarget);
+        if (permanent == null || !permanent.getControllerId().equals(spell.getControllerId())) {
+            return false;
+        }
+        return true;
     }
 
     @Override

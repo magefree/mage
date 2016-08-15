@@ -37,7 +37,7 @@ public class GrayMerchantOfAsphodel extends mage.sets.theros.GrayMerchantOfAspho
 
     public GrayMerchantOfAsphodel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "C14";
     }
 

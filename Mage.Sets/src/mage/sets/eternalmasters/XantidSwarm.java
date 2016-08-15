@@ -38,7 +38,7 @@ public class XantidSwarm extends mage.sets.scourge.XantidSwarm {
 
     public XantidSwarm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "EMA";
     }
 

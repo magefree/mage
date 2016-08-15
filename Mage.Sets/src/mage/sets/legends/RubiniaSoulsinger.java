@@ -37,7 +37,7 @@ public class RubiniaSoulsinger extends mage.sets.commander2013.RubiniaSoulsinger
 
     public RubiniaSoulsinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 296;
+        this.cardNumber = "296";
         this.expansionSetCode = "LEG";
     }
 

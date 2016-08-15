@@ -37,7 +37,7 @@ public class RevenantPatriarch extends mage.sets.sorinvstibalt.RevenantPatriarch
 
     public RevenantPatriarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "GPT";
     }
 

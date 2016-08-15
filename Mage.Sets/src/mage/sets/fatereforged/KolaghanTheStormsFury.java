@@ -69,7 +69,7 @@ public class KolaghanTheStormsFury extends CardImpl {
         
         // Whenever a Dragon you control attacks, creatures you control get +1/+0 until end of turn. 
         this.addAbility(new AttacksAllTriggeredAbility(
-                new BoostControlledEffect(1, 0, Duration.EndOfTurn, new FilterCreaturePermanent("creatures you control"), false),
+                new BoostControlledEffect(1, 0, Duration.EndOfTurn, new FilterCreaturePermanent("creatures"), false),
                 false, filter, SetTargetPointer.NONE, false));
         
         // Dash {3}{B}{R}

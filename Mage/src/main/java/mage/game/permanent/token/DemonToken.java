@@ -29,9 +29,9 @@
 package mage.game.permanent.token;
 
 import java.util.Arrays;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
 
 /**
  *
@@ -47,7 +47,7 @@ public class DemonToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("INN", "AVR", "C14", "ORI"));
+        availableImageSetCodes.addAll(Arrays.asList("ISD", "AVR", "C14", "ORI"));
     }
 
     public DemonToken(final DemonToken token) {

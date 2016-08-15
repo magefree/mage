@@ -44,7 +44,7 @@ public class TownSentry extends CardImpl {
 
     public TownSentry(UUID ownerId) {
         super(ownerId, 145, "Town Sentry", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

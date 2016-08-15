@@ -38,7 +38,7 @@ public class Malfegor extends mage.sets.conflux.Malfegor {
 
     public Malfegor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

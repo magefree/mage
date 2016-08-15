@@ -37,7 +37,7 @@ public class PentadPrism extends mage.sets.planechase.PentadPrism {
 
     public PentadPrism(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "5DN";
     }
 

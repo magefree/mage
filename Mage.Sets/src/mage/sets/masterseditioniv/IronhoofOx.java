@@ -38,7 +38,7 @@ public class IronhoofOx extends mage.sets.portalsecondage.IronhoofOx {
 
     public IronhoofOx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.COMMON;
     }

@@ -38,7 +38,7 @@ public class HeroOfBladehold extends mage.sets.mirrodinbesieged.HeroOfBladehold 
 
     public HeroOfBladehold(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

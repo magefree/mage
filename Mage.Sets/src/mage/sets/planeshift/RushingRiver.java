@@ -75,7 +75,8 @@ public class RushingRiver extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility && KickedCondition.getInstance().apply(game, ability)) {
-            ability.addTarget(new TargetOtherNonlandPermanent(new FilterNonlandPermanent("another target nonland permanent")));
+            ability.getTargets().clear();
+            ability.addTarget(new TargetNonlandPermanent(2));
         }
 
     }
@@ -87,29 +88,5 @@ public class RushingRiver extends CardImpl {
     @Override
     public RushingRiver copy() {
         return new RushingRiver(this);
-    }
-}
-
-class TargetOtherNonlandPermanent extends TargetNonlandPermanent {
-
-    public TargetOtherNonlandPermanent(FilterNonlandPermanent filter) {
-        super(filter);
-    }
-
-    public TargetOtherNonlandPermanent(final TargetOtherNonlandPermanent target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (source.getTargets().get(0).getTargets().contains(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game);
-    }
-
-    @Override
-    public TargetOtherNonlandPermanent copy() {
-        return new TargetOtherNonlandPermanent(this);
     }
 }

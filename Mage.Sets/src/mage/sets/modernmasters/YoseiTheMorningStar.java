@@ -38,7 +38,7 @@ public class YoseiTheMorningStar extends mage.sets.championsofkamigawa.YoseiTheM
 
     public YoseiTheMorningStar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.MYTHIC;
     }

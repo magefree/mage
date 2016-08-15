@@ -38,7 +38,7 @@ public class DragonlordsServant extends mage.sets.dragonsoftarkir.DragonlordsSer
 
     public DragonlordsServant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

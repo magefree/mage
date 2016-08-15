@@ -37,7 +37,7 @@ public class CavePeople extends mage.sets.thedark.CavePeople {
 
     public CavePeople(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "4ED";
     }
 

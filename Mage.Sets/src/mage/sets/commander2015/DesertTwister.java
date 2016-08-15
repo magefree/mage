@@ -37,7 +37,7 @@ public class DesertTwister extends mage.sets.revisededition.DesertTwister {
 
     public DesertTwister(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "C15";
     }
 

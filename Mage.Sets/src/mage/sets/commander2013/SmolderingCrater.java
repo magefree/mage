@@ -37,7 +37,7 @@ public class SmolderingCrater extends mage.sets.urzassaga.SmolderingCrater {
 
     public SmolderingCrater(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 325;
+        this.cardNumber = "325";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class Impulse extends mage.sets.visions.Impulse {
 
     public Impulse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "DDN";
     }
 

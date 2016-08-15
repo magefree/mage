@@ -46,7 +46,7 @@ public class AwakeningZone extends CardImpl {
     public AwakeningZone(UUID ownerId) {
         super(ownerId, 176, "Awakening Zone", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "ROE";
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), TargetController.YOU, true));
     }
 
     public AwakeningZone(final AwakeningZone card) {

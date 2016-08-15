@@ -37,7 +37,7 @@ public class ElvenCache extends mage.sets.visions.ElvenCache {
 
     public ElvenCache(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = "224";
         this.expansionSetCode = "6ED";
     }
 

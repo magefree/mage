@@ -37,7 +37,7 @@ public class NaturesResurgence extends mage.sets.seventhedition.NaturesResurgenc
 
     public NaturesResurgence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "6ED";
     }
 

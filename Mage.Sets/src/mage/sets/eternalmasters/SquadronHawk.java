@@ -37,7 +37,7 @@ public class SquadronHawk extends mage.sets.magic2011.SquadronHawk {
 
     public SquadronHawk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "EMA";
     }
 

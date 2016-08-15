@@ -37,7 +37,7 @@ public class NissaVastwoodSeer extends mage.sets.magicorigins.NissaVastwoodSeer 
 
     public NissaVastwoodSeer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 226;
+        this.cardNumber = "226";
         this.expansionSetCode = "PTC";
     }
 

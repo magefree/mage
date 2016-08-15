@@ -37,7 +37,7 @@ public class DarksteelCitadel extends mage.sets.darksteel.DarksteelCitadel {
 
     public DarksteelCitadel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 238;
+        this.cardNumber = "238";
         this.expansionSetCode = "MM2";
     }
 

@@ -38,7 +38,7 @@ public class ElvishAberration extends mage.sets.scourge.ElvishAberration {
 
     public ElvishAberration(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 206;
+        this.cardNumber = "206";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

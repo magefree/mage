@@ -53,7 +53,7 @@ public class Token extends MageObjectImpl {
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
     private UUID lastAddedTokenId;
     private int tokenType;
-    private int originalCardNumber;
+    private String originalCardNumber;
     private String originalExpansionSetCode;
     private boolean expansionSetCodeChecked;
     private Card copySourceCard; // the card the Token is a copy from
@@ -81,11 +81,11 @@ public class Token extends MageObjectImpl {
         this.name = name;
         this.description = description;
     }
-    
+
     public Token(String name, String description, int power, int toughness) {
         this(name, description);
-        this.power.setValue(power);
-        this.toughness.setValue(toughness);
+        this.power.modifyBaseValue(power);
+        this.toughness.modifyBaseValue(toughness);
     }
 
     public Token(String name, String description, ObjectColor color, List<String> subtype, int power, int toughness, Abilities<Ability> abilities) {
@@ -93,8 +93,8 @@ public class Token extends MageObjectImpl {
         this.cardType.add(CardType.CREATURE);
         this.color = color.copy();
         this.subtype = subtype;
-        this.power.setValue(power);
-        this.toughness.setValue(toughness);
+        this.power.modifyBaseValue(power);
+        this.toughness.modifyBaseValue(toughness);
         if (abilities != null) {
             this.abilities = abilities.copy();
         }
@@ -213,16 +213,15 @@ public class Token extends MageObjectImpl {
                 }
 
             }
-            game.applyEffects();
             return true;
         }
         return false;
     }
-        
+
     public void setPower(int power) {
         this.power.setValue(power);
     }
-    
+
     public void setToughness(int toughness) {
         this.toughness.setValue(toughness);
     }
@@ -235,11 +234,11 @@ public class Token extends MageObjectImpl {
         this.tokenType = tokenType;
     }
 
-    public int getOriginalCardNumber() {
+    public String getOriginalCardNumber() {
         return originalCardNumber;
     }
 
-    public void setOriginalCardNumber(int originalCardNumber) {
+    public void setOriginalCardNumber(String originalCardNumber) {
         this.originalCardNumber = originalCardNumber;
     }
 
@@ -265,17 +264,13 @@ public class Token extends MageObjectImpl {
         if (availableImageSetCodes.size() > 0) {
             if (availableImageSetCodes.contains(code)) {
                 setOriginalExpansionSetCode(code);
-            } else {
-                // we should not set random set if appropriate set is already used
-                if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
-                        || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
-                    setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
-                }
+            } else // we should not set random set if appropriate set is already used
+            if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
+                    || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
+                setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
             }
-        } else {
-            if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()) {
-                setOriginalExpansionSetCode(code);
-            }
+        } else if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()) {
+            setOriginalExpansionSetCode(code);
         }
     }
 

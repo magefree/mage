@@ -38,7 +38,7 @@ public class RootboundCrag extends mage.sets.magic2010.RootboundCrag {
 
     public RootboundCrag(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "M11";
     }
 

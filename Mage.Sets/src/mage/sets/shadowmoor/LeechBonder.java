@@ -123,13 +123,16 @@ class LeechBonderEffect extends OneShotEffect {
             possibleChoices.add(counterName);
         }
         choice.setChoices(possibleChoices);
-        if (controller.choose(Outcome.AIDontUseIt, choice, game)) {
+        if (controller.choose(outcome, choice, game)) {
             String chosen = choice.getChoice();
             if (fromPermanent.getCounters().containsKey(chosen)) {
-                Counter counter = new Counter(chosen, 1);
-                fromPermanent.removeCounters(counter, game);
-                toPermanent.addCounters(counter, game);
-                return true;
+                CounterType counterType = CounterType.findByName(chosen);
+                if (counterType != null) {
+                    Counter counter = counterType.createInstance();
+                    fromPermanent.removeCounters(counter, game);
+                    toPermanent.addCounters(counter, game);
+                    return true;
+                }
             }
         }
         return false;

@@ -38,7 +38,7 @@ public class LeoninScimitar extends mage.sets.tenthedition.LeoninScimitar {
 
     public LeoninScimitar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "MRD";
         this.rarity = Rarity.COMMON;
     }

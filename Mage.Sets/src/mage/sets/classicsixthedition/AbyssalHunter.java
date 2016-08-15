@@ -37,7 +37,7 @@ public class AbyssalHunter extends mage.sets.mirage.AbyssalHunter {
 
     public AbyssalHunter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class Terror extends mage.sets.tenthedition.Terror {
 
     public Terror(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "2ED";
     }
 

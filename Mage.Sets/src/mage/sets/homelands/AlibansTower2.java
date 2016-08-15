@@ -37,7 +37,7 @@ public class AlibansTower2 extends AlibansTower1 {
 
     public AlibansTower2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
     }
 
     public AlibansTower2(final AlibansTower2 card) {

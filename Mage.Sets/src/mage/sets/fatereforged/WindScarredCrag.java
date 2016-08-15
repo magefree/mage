@@ -37,7 +37,7 @@ public class WindScarredCrag extends mage.sets.khansoftarkir.WindScarredCrag {
 
     public WindScarredCrag(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "FRF";
     }
 

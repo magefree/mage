@@ -38,7 +38,7 @@ public class UrzasPowerPlant4 extends mage.sets.fifthedition.UrzasPowerPlant {
 
     public UrzasPowerPlant4(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class BullHippo extends mage.sets.urzassaga.BullHippo {
 
     public BullHippo(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "S99";
     }
 

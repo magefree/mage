@@ -38,7 +38,7 @@ public class Voidslime extends mage.sets.dissension.Voidslime {
 
     public Voidslime(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "CP";
         this.rarity = Rarity.SPECIAL;
     }

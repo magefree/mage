@@ -37,7 +37,7 @@ public class WrexialTheRisenDeep extends mage.sets.worldwake.WrexialTheRisenDeep
 
     public WrexialTheRisenDeep(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "CMD";
     }
 

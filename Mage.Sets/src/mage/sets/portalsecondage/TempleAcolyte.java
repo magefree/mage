@@ -37,8 +37,8 @@ public class TempleAcolyte extends mage.sets.elspethvstezzeret.TempleAcolyte {
 
     public TempleAcolyte(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
-        this.expansionSetCode = "P02";
+        this.cardNumber = "143";
+        this.expansionSetCode = "PO2";
     }
 
     public TempleAcolyte(final TempleAcolyte card) {

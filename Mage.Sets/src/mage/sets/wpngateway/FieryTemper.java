@@ -37,7 +37,7 @@ public class FieryTemper extends mage.sets.timeshifted.FieryTemper {
 
     public FieryTemper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "GRC";
     }
 

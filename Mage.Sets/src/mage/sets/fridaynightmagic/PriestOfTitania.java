@@ -38,7 +38,7 @@ public class PriestOfTitania extends mage.sets.urzassaga.PriestOfTitania {
 
     public PriestOfTitania(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

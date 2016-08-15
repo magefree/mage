@@ -37,7 +37,7 @@ public class ScionOfOona extends mage.sets.lorwyn.ScionOfOona {
 
     public ScionOfOona(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "MMA";
     }
 

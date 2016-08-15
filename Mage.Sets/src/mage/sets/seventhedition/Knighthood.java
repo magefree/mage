@@ -37,7 +37,7 @@ public class Knighthood extends mage.sets.urzaslegacy.Knighthood {
 
     public Knighthood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "7ED";
     }
 

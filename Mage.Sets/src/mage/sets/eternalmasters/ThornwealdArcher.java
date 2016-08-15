@@ -38,7 +38,7 @@ public class ThornwealdArcher extends mage.sets.futuresight.ThornwealdArcher {
 
     public ThornwealdArcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 189;
+        this.cardNumber = "189";
         this.expansionSetCode = "EMA";
     }
 

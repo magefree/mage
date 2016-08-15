@@ -37,7 +37,7 @@ public class GuulDrazOverseer extends mage.sets.battleforzendikar.GuulDrazOverse
 
     public GuulDrazOverseer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 268;
+        this.cardNumber = "268";
         this.expansionSetCode = "PTC";
     }
 

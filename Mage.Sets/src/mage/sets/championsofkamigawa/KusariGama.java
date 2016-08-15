@@ -64,7 +64,7 @@ public class KusariGama extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature has "{2}: This creature gets +1/+0 until end of turn."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new GenericManaCost(2));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2));
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
         effect.setText("Equipped creature has \"{2}: This creature gets +1/+0 until end of turn.\"");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
@@ -144,22 +144,20 @@ class KusariGamaDamageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Integer damage = (Integer) this.getValue("damageAmount");
-        if (damage != null && damage.intValue() > 0) {
+        if (damage != null && damage > 0) {
             UUID damagedCreatureId = (UUID) this.getValue("damagedCreatureId");
             Permanent creature = game.getPermanent(damagedCreatureId);
             if (creature == null) {
                 creature = (Permanent) game.getLastKnownInformation(damagedCreatureId, Zone.BATTLEFIELD);
             }
             if (creature != null) {
-                for (UUID blockerId : game.getCombat().getBlockers()) {
-                    if (!blockerId.equals(damagedCreatureId)) {
-                        Permanent blockingCreature = game.getPermanent(blockerId);
-                        if (blockingCreature != null && blockingCreature.getControllerId().equals(creature.getControllerId())) {
-                            blockingCreature.damage(damage, source.getSourceId(), game, false, true);
-                        }
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), creature.getControllerId(), game)) {
+                    if (!permanent.getId().equals(damagedCreatureId)) {
+                        permanent.damage(damage, source.getSourceId(), game, false, true);
                     }
                 }
             }
+            return true;
         }
         return false;
     }

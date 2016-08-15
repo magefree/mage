@@ -37,7 +37,7 @@ public class KrenkoMobBoss extends mage.sets.magic2013.KrenkoMobBoss {
 
     public KrenkoMobBoss(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "DDN";
     }
 

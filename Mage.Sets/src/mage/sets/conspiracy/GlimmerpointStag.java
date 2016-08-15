@@ -37,7 +37,7 @@ public class GlimmerpointStag extends mage.sets.scarsofmirrodin.GlimmerpointStag
 
     public GlimmerpointStag(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "CNS";
     }
 

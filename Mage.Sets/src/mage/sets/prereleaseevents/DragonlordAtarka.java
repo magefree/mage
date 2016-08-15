@@ -37,7 +37,7 @@ public class DragonlordAtarka extends mage.sets.dragonsoftarkir.DragonlordAtarka
 
     public DragonlordAtarka(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "PTC";
     }
 

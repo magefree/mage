@@ -37,7 +37,7 @@ public class OniOfWildPlaces extends mage.sets.saviorsofkamigawa.OniOfWildPlaces
 
     public OniOfWildPlaces(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "DDN";
     }
 

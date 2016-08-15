@@ -39,7 +39,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -52,13 +51,13 @@ public class BehindTheScenes extends CardImpl {
         super(ownerId, 100, "Behind the Scenes", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "SOI";
 
-        // Creature you control have skulk.
+        // Creatures you control have skulk.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(new SkulkAbility(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent())));
+                new GainAbilityControlledEffect(new SkulkAbility(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("creatures"))));
 
         // {4}{W}: Creatures you control get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent("Creatures you control")),
+                new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent("creatures")),
                 new ManaCostsImpl("{4}{W}")));
     }
 

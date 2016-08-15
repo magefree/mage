@@ -37,7 +37,7 @@ public class FyndhornElves extends mage.sets.iceage.FyndhornElves {
 
     public FyndhornElves(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 210;
+        this.cardNumber = "210";
         this.expansionSetCode = "VMA";
     }
 

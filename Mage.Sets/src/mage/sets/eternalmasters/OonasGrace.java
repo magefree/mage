@@ -37,7 +37,7 @@ public class OonasGrace extends mage.sets.eventide.OonasGrace {
 
     public OonasGrace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "EMA";
     }
 

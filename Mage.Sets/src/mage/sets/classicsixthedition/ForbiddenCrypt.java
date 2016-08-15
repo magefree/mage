@@ -37,7 +37,7 @@ public class ForbiddenCrypt extends mage.sets.mirage.ForbiddenCrypt {
 
     public ForbiddenCrypt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "6ED";
     }
 

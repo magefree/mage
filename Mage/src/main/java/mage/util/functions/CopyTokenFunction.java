@@ -70,7 +70,12 @@ public class CopyTokenFunction implements Function<Token, Card> {
                 MorphAbility.setPermanentToFaceDownCreature(target);
                 return target;
             } else {
-                sourceObj = ((PermanentCard) source).getCard();
+                if (((PermanentCard) source).isTransformed() && source.getSecondCardFace() != null) {
+                    sourceObj = ((PermanentCard) source).getSecondCardFace();
+                } else {
+                    sourceObj = ((PermanentCard) source).getCard();
+                }
+
                 target.setOriginalExpansionSetCode(source.getExpansionSetCode());
                 target.setOriginalCardNumber(source.getCardNumber());
                 target.setCopySourceCard((Card) sourceObj);
@@ -108,9 +113,9 @@ public class CopyTokenFunction implements Function<Token, Card> {
             ability.setSourceId(target.getId());
             target.addAbility(ability);
         }
-        // Needed to do it this way because only the cardValue does not include the increased value from cards like "Intangible Virtue" will be copied.
-        target.getPower().initValue(Integer.parseInt(sourceObj.getPower().toString()));
-        target.getToughness().initValue(Integer.parseInt(sourceObj.getToughness().toString()));
+
+        target.getPower().modifyBaseValue(sourceObj.getPower().getBaseValueModified());
+        target.getToughness().modifyBaseValue(sourceObj.getToughness().getBaseValueModified());
 
         return target;
     }

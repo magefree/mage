@@ -37,7 +37,7 @@ public class MountainGoat extends mage.sets.fifthedition.MountainGoat {
 
     public MountainGoat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "6ED";
     }
 

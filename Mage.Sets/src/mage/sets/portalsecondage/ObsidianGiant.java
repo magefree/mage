@@ -41,7 +41,7 @@ public class ObsidianGiant extends CardImpl {
 
     public ObsidianGiant(UUID ownerId) {
         super(ownerId, 109, "Obsidian Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Giant");
 
         this.power = new MageInt(4);

@@ -37,7 +37,7 @@ public class GhorClanSavage extends mage.sets.guildpact.GhorClanSavage {
 
     public GhorClanSavage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "DDL";
     }
 

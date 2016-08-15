@@ -37,7 +37,7 @@ public class FungalReaches extends mage.sets.commander.FungalReaches {
 
     public FungalReaches(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 273;
+        this.cardNumber = "273";
         this.expansionSetCode = "TSP";
     }
 

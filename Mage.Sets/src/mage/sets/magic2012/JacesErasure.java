@@ -37,7 +37,7 @@ public class JacesErasure extends mage.sets.magic2011.JacesErasure {
 
     public JacesErasure(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "M12";
     }
 

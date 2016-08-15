@@ -37,7 +37,7 @@ public class BogardanRager extends mage.sets.planechase.BogardanRager {
 
     public BogardanRager(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
         this.expansionSetCode = "TSP";
     }
 

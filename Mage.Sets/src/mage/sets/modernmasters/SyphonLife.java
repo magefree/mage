@@ -38,7 +38,7 @@ public class SyphonLife extends mage.sets.eventide.SyphonLife {
 
     public SyphonLife(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.COMMON;
     }

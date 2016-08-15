@@ -44,7 +44,7 @@ public class IronhoofOx extends CardImpl {
 
     public IronhoofOx(UUID ownerId) {
         super(ownerId, 70, "Ironhoof Ox", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Ox");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

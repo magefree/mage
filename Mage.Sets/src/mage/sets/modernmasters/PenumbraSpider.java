@@ -37,7 +37,7 @@ public class PenumbraSpider extends mage.sets.planechase2012.PenumbraSpider {
 
     public PenumbraSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "MMA";
     }
 

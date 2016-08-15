@@ -38,7 +38,7 @@ public class Oxidize extends mage.sets.darksteel.Oxidize {
 
     public Oxidize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class AirElemental extends mage.sets.magic2010.AirElemental {
 
     public AirElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "4ED";
     }
 

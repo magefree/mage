@@ -38,7 +38,7 @@ public class HellsparkElemental extends mage.sets.conflux.HellsparkElemental {
 
     public HellsparkElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

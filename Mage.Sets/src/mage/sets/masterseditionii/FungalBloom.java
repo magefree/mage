@@ -37,7 +37,7 @@ public class FungalBloom extends mage.sets.fallenempires.FungalBloom {
 
     public FungalBloom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "ME2";
     }
 

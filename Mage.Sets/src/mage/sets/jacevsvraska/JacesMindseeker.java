@@ -37,7 +37,7 @@ public class JacesMindseeker extends mage.sets.magic2014.JacesMindseeker {
 
     public JacesMindseeker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "DDM";
     }
 

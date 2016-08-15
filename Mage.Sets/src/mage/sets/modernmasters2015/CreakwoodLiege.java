@@ -37,7 +37,7 @@ public class CreakwoodLiege extends mage.sets.eventide.CreakwoodLiege {
 
     public CreakwoodLiege(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 191;
+        this.cardNumber = "191";
         this.expansionSetCode = "MM2";
     }
 

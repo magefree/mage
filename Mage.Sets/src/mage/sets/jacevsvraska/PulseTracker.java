@@ -37,7 +37,7 @@ public class PulseTracker extends mage.sets.worldwake.PulseTracker {
 
     public PulseTracker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "DDM";
     }
 

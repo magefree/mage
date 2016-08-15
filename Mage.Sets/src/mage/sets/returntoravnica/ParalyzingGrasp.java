@@ -37,7 +37,7 @@ public class ParalyzingGrasp extends mage.sets.zendikar.ParalyzingGrasp {
 
     public ParalyzingGrasp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "RTR";
     }
 

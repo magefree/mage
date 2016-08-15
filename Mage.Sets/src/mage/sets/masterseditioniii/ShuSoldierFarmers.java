@@ -38,7 +38,7 @@ public class ShuSoldierFarmers extends mage.sets.portalthreekingdoms.ShuSoldierF
 
     public ShuSoldierFarmers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

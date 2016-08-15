@@ -37,7 +37,7 @@ public class Peek extends mage.sets.tenthedition.Peek {
 
     public Peek(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "ODY";
     }
 

@@ -37,7 +37,7 @@ public class ShowOfValor extends mage.sets.magic2013.ShowOfValor {
 
     public ShowOfValor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "M14";
     }
 

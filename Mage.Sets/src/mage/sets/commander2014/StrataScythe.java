@@ -37,7 +37,7 @@ public class StrataScythe extends mage.sets.scarsofmirrodin.StrataScythe {
 
     public StrataScythe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 274;
+        this.cardNumber = "274";
         this.expansionSetCode = "C14";
     }
 

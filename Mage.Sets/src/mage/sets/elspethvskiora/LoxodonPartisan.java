@@ -37,7 +37,7 @@ public class LoxodonPartisan extends mage.sets.mirrodinbesieged.LoxodonPartisan 
 
     public LoxodonPartisan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "DDO";
     }
 

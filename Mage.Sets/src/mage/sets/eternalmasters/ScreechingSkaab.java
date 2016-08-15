@@ -38,7 +38,7 @@ public class ScreechingSkaab extends mage.sets.darkascension.ScreechingSkaab {
 
     public ScreechingSkaab(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "EMA";
     }
 

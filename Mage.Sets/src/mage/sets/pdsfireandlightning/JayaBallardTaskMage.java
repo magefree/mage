@@ -37,7 +37,7 @@ public class JayaBallardTaskMage extends mage.sets.timespiral.JayaBallardTaskMag
 
     public JayaBallardTaskMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "PD2";
     }
 

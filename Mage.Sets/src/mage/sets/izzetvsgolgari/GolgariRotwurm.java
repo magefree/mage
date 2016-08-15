@@ -37,7 +37,7 @@ public class GolgariRotwurm extends mage.sets.ravnica.GolgariRotwurm {
 
     public GolgariRotwurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "DDJ";
     }
 

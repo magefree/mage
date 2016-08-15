@@ -37,7 +37,7 @@ public class Steadfastness extends mage.sets.starter1999.Steadfastness {
 
     public Steadfastness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "POR";
     }
 

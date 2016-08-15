@@ -37,7 +37,7 @@ public class TajuruArcher extends mage.sets.zendikar.TajuruArcher {
 
     public TajuruArcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "DDP";
     }
 

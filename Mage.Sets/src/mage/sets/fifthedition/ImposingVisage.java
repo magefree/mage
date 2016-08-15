@@ -37,7 +37,7 @@ public class ImposingVisage extends mage.sets.iceage.ImposingVisage {
 
     public ImposingVisage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 241;
+        this.cardNumber = "241";
         this.expansionSetCode = "5ED";
     }
 

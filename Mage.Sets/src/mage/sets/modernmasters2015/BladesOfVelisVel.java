@@ -37,7 +37,7 @@ public class BladesOfVelisVel extends mage.sets.lorwyn.BladesOfVelisVel {
 
     public BladesOfVelisVel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "MM2";
     }
 

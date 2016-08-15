@@ -93,23 +93,24 @@ class AcademyResearchersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        FilterCard filterCardInHand = new FilterCard();
+        filterCardInHand.add(new SubtypePredicate("Aura"));
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            FilterCard filter = new FilterCard();
-            filter.add(new SubtypePredicate("Aura"));
-            filter.add(new AuraCardCanAttachToPermanentId(permanent.getId()));
-            TargetCardInHand target = new TargetCardInHand(0, 1, filter);
+        Permanent academyResearchers = game.getPermanent(source.getSourceId());
+        if (controller != null && academyResearchers != null) {
+            filterCardInHand.add(new AuraCardCanAttachToPermanentId(academyResearchers.getId()));
+            TargetCardInHand target = new TargetCardInHand(0, 1, filterCardInHand);
             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                 Card auraInHand = game.getCard(target.getFirstTarget());
                 if (auraInHand != null) {
-                    game.getState().setValue("attachTo:" + auraInHand.getId(), permanent);
-                    if (controller.moveCards(auraInHand, Zone.BATTLEFIELD, source, game)) {
-                        permanent.addAttachment(auraInHand.getId(), game);
+                    game.getState().setValue("attachTo:" + auraInHand.getId(), academyResearchers);
+                    auraInHand.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), controller.getId());
+                    if (academyResearchers.addAttachment(auraInHand.getId(), game)) {
+                        game.informPlayers(controller.getLogName() + " put " + auraInHand.getLogName() + " on the battlefield attached to " + academyResearchers.getLogName() + ".");
+                        return true;
                     }
                 }
             }
-            return true;
         }
         return false;
     }

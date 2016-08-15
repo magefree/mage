@@ -37,7 +37,7 @@ public class AEtherize extends mage.sets.gatecrash.AEtherize {
 
     public AEtherize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "DDO";
     }
 

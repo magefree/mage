@@ -37,7 +37,7 @@ public class Myrsmith extends mage.sets.scarsofmirrodin.Myrsmith {
 
     public Myrsmith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "MM2";
     }
 

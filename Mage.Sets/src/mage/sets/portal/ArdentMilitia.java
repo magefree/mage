@@ -37,7 +37,7 @@ public class ArdentMilitia extends mage.sets.eighthedition.ArdentMilitia {
 
     public ArdentMilitia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "POR";
     }
 

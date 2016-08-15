@@ -37,7 +37,7 @@ public class WhirlpoolWarrior extends mage.sets.planechase2012.WhirlpoolWarrior 
 
     public WhirlpoolWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "APC";
     }
 

@@ -37,7 +37,7 @@ public class LodestoneMyr extends mage.sets.planechase.LodestoneMyr {
 
     public LodestoneMyr(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 220;
+        this.cardNumber = "220";
         this.expansionSetCode = "MM2";
     }
 

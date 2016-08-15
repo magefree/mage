@@ -37,7 +37,7 @@ public class SilverbackApe extends mage.sets.eighthedition.SilverbackApe {
 
     public SilverbackApe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "S99";
     }
 

@@ -37,7 +37,7 @@ public class ChimericStaff extends mage.sets.urzassaga.ChimericStaff {
 
     public ChimericStaff(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 313;
+        this.cardNumber = "313";
         this.expansionSetCode = "10E";
     }
 

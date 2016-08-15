@@ -38,7 +38,7 @@ public class SpinedSliver extends mage.sets.stronghold.SpinedSliver {
 
     public SpinedSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

@@ -33,11 +33,11 @@ import java.util.UUID;
  *
  * @author MarcoMarin
  */
-public class Piety extends mage.sets.arabiannights.Piety {
+public class Piety extends mage.sets.arabiannights.Piety1 {
 
     public Piety(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 291;
+        this.cardNumber = "291";
         this.expansionSetCode = "4ED";
     }
 

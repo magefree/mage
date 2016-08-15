@@ -37,7 +37,7 @@ public class PlagueBoiler extends mage.sets.commander2013.PlagueBoiler {
 
     public PlagueBoiler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
+        this.cardNumber = "269";
         this.expansionSetCode = "RAV";
     }
 

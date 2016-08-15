@@ -37,7 +37,7 @@ public class ScaledWurm extends mage.sets.ninthedition.ScaledWurm {
 
     public ScaledWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "5ED";
     }
 

@@ -37,7 +37,7 @@ public class OrimSamiteHealer extends mage.sets.tempest.OrimSamiteHealer {
 
     public OrimSamiteHealer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "TPR";
     }
 

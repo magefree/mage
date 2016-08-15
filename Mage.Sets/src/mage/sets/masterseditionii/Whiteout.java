@@ -38,7 +38,7 @@ public class Whiteout extends mage.sets.iceage.Whiteout {
 
     public Whiteout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = "185";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.COMMON;
     }

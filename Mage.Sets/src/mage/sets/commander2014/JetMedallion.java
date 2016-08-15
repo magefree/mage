@@ -37,7 +37,7 @@ public class JetMedallion extends mage.sets.tempest.JetMedallion {
 
     public JetMedallion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 243;
+        this.cardNumber = "243";
         this.expansionSetCode = "C14";
     }
 

@@ -38,7 +38,7 @@ public class ThunderclapWyvern extends mage.sets.magicorigins.ThunderclapWyvern 
 
     public ThunderclapWyvern(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "EMA";
     }
 

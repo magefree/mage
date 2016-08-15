@@ -37,7 +37,7 @@ public class KothophedSoulHoarder extends mage.sets.magicorigins.KothophedSoulHo
 
     public KothophedSoulHoarder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "PTC";
     }
 

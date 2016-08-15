@@ -38,7 +38,7 @@ public class Unsummon extends mage.sets.conflux.Unsummon {
 
     public Unsummon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "M11";
     }
 

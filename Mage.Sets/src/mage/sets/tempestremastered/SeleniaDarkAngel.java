@@ -37,7 +37,7 @@ public class SeleniaDarkAngel extends mage.sets.tempest.SeleniaDarkAngel {
 
     public SeleniaDarkAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 210;
+        this.cardNumber = "210";
         this.expansionSetCode = "TPR";
     }
 

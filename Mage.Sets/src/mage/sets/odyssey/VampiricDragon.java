@@ -37,7 +37,7 @@ public class VampiricDragon extends mage.sets.archenemy.VampiricDragon {
 
     public VampiricDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 296;
+        this.cardNumber = "296";
         this.expansionSetCode = "ODY";
     }
 

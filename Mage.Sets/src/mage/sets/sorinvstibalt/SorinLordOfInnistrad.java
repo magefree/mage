@@ -37,7 +37,7 @@ public class SorinLordOfInnistrad extends mage.sets.darkascension.SorinLordOfInn
 
     public SorinLordOfInnistrad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DDK";
     }
 

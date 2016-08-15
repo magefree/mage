@@ -37,7 +37,7 @@ public class ShivanReef extends mage.sets.apocalypse.ShivanReef {
 
     public ShivanReef(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 251;
+        this.cardNumber = "251";
         this.expansionSetCode = "ORI";
     }
 

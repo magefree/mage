@@ -37,7 +37,7 @@ public class Repeal extends mage.sets.guildpact.Repeal {
 
     public Repeal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "C15";
     }
 

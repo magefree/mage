@@ -37,7 +37,7 @@ public class Reprisal extends mage.sets.seventhedition.Reprisal {
 
     public Reprisal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "JOU";
     }
 

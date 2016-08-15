@@ -37,7 +37,7 @@ public class GrislySpectacle extends mage.sets.gatecrash.GrislySpectacle {
 
     public GrislySpectacle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "DDM";
     }
 

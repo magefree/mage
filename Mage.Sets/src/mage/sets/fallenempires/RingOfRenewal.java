@@ -37,7 +37,7 @@ public class RingOfRenewal extends mage.sets.masterseditioniv.RingOfRenewal {
 
     public RingOfRenewal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "FEM";
     }
 

@@ -37,7 +37,7 @@ public class FodderCannon extends mage.sets.urzasdestiny.FodderCannon {
 
     public FodderCannon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 302;
+        this.cardNumber = "302";
         this.expansionSetCode = "8ED";
     }
 

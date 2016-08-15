@@ -37,7 +37,7 @@ public class Combust extends mage.sets.magic2011.Combust {
 
     public Combust(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "M12";
     }
 

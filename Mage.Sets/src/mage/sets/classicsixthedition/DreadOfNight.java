@@ -37,7 +37,7 @@ public class DreadOfNight extends mage.sets.tempest.DreadOfNight {
 
     public DreadOfNight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "6ED";
     }
 

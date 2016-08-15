@@ -38,7 +38,7 @@ public class HixusPrisonWarden extends mage.sets.magicorigins.HixusPrisonWarden 
 
     public HixusPrisonWarden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

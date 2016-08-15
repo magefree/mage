@@ -37,7 +37,7 @@ public class Swat extends mage.sets.onslaught.Swat {
 
     public Swat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "ULG";
     }
 

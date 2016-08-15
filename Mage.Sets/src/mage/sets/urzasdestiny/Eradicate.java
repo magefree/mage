@@ -37,7 +37,7 @@ public class Eradicate extends mage.sets.betrayersofkamigawa.Eradicate {
 
     public Eradicate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "UDS";
     }
 

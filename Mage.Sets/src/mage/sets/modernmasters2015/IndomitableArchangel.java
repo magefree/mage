@@ -38,7 +38,7 @@ public class IndomitableArchangel extends mage.sets.scarsofmirrodin.IndomitableA
 
     public IndomitableArchangel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.RARE;
     }

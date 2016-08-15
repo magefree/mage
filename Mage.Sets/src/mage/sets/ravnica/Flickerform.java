@@ -37,7 +37,7 @@ public class Flickerform extends mage.sets.commander2013.Flickerform {
 
     public Flickerform(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "RAV";
     }
 

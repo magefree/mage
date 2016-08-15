@@ -38,7 +38,7 @@ public class JeditOjanen extends mage.sets.legends.JeditOjanen {
 
     public JeditOjanen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

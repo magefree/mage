@@ -37,7 +37,7 @@ public class FactOrFiction extends mage.sets.invasion.FactOrFiction {
 
     public FactOrFiction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "CNS";
     }
 

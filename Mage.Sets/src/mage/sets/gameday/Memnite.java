@@ -37,7 +37,7 @@ public class Memnite extends mage.sets.scarsofmirrodin.Memnite {
 
     public Memnite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "MGDC";
     }
 

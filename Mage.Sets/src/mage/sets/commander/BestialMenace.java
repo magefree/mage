@@ -37,7 +37,7 @@ public class BestialMenace extends mage.sets.worldwake.BestialMenace {
 
     public BestialMenace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "CMD";
     }
 

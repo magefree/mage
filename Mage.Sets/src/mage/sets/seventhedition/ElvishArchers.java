@@ -37,7 +37,7 @@ public class ElvishArchers extends mage.sets.fifthedition.ElvishArchers {
 
     public ElvishArchers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "7ED";
     }
 

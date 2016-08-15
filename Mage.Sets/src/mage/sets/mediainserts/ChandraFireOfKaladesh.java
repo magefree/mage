@@ -38,7 +38,7 @@ public class ChandraFireOfKaladesh extends mage.sets.magicorigins.ChandraFireOfK
 
     public ChandraFireOfKaladesh(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 997;
+        this.cardNumber = "997";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

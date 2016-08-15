@@ -37,7 +37,7 @@ public class SowingSalt extends mage.sets.betrayersofkamigawa.SowingSalt {
 
     public SowingSalt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "UDS";
     }
 

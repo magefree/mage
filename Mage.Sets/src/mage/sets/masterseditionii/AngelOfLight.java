@@ -37,7 +37,7 @@ public class AngelOfLight extends mage.sets.starter1999.AngelOfLight {
 
     public AngelOfLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "ME2";
     }
 

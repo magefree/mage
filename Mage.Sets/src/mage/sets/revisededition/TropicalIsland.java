@@ -37,7 +37,7 @@ public class TropicalIsland extends mage.sets.limitedalpha.TropicalIsland {
 
     public TropicalIsland(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 303;
+        this.cardNumber = "303";
         this.expansionSetCode = "3ED";
     }
 

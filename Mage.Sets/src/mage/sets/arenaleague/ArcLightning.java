@@ -37,7 +37,7 @@ public class ArcLightning extends mage.sets.urzassaga.ArcLightning {
 
     public ArcLightning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "ARENA";
     }
 

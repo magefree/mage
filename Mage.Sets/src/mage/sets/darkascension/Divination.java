@@ -37,7 +37,7 @@ public class Divination extends mage.sets.magic2012.Divination {
 
     public Divination(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "DKA";
     }
 

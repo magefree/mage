@@ -37,7 +37,7 @@ public class ChiefEngineer extends mage.sets.magic2015.ChiefEngineer {
 
     public ChiefEngineer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "MGDC";
     }
 

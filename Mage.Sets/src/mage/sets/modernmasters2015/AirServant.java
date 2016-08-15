@@ -37,7 +37,7 @@ public class AirServant extends mage.sets.magic2011.AirServant {
 
     public AirServant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "MM2";
     }
 

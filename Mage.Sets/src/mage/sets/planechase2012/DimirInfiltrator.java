@@ -37,7 +37,7 @@ public class DimirInfiltrator extends mage.sets.ravnica.DimirInfiltrator {
 
     public DimirInfiltrator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "PC2";
     }
 

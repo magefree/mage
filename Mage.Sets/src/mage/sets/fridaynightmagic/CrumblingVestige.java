@@ -37,7 +37,7 @@ public class CrumblingVestige extends mage.sets.oathofthegatewatch.CrumblingVest
 
     public CrumblingVestige(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "FNMP";
     }
 

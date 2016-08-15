@@ -37,7 +37,7 @@ public class GolgariGraveTroll extends mage.sets.ravnica.GolgariGraveTroll {
 
     public GolgariGraveTroll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "DDJ";
     }
 

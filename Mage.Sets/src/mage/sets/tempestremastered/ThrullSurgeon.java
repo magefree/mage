@@ -38,7 +38,7 @@ public class ThrullSurgeon extends mage.sets.tenthedition.ThrullSurgeon {
 
     public ThrullSurgeon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.COMMON;
     }

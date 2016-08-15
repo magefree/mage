@@ -38,7 +38,7 @@ public class KingCheetah extends mage.sets.ninthedition.KingCheetah {
 
     public KingCheetah(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "VIS";
         this.rarity = Rarity.COMMON;
     }

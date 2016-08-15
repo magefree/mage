@@ -38,7 +38,7 @@ public class EmberSwallower extends mage.sets.theros.EmberSwallower {
 
     public EmberSwallower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

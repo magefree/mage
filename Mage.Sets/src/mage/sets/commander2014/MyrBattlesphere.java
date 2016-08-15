@@ -37,7 +37,7 @@ public class MyrBattlesphere extends mage.sets.scarsofmirrodin.MyrBattlesphere {
 
     public MyrBattlesphere(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 254;
+        this.cardNumber = "254";
         this.expansionSetCode = "C14";
     }
 

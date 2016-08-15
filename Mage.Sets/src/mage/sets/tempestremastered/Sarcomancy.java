@@ -38,7 +38,7 @@ public class Sarcomancy extends mage.sets.tempest.Sarcomancy {
 
     public Sarcomancy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class LivingPlane extends mage.sets.legends.LivingPlane {
 
     public LivingPlane(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "ME3";
     }
 

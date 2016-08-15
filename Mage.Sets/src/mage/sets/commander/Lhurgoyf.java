@@ -37,7 +37,7 @@ public class Lhurgoyf extends mage.sets.iceage.Lhurgoyf {
 
     public Lhurgoyf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "CMD";
     }
 

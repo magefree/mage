@@ -37,7 +37,7 @@ public class Nightmare extends mage.sets.tenthedition.Nightmare {
 
     public Nightmare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "3ED";
     }
 

@@ -38,7 +38,7 @@ public class ShadowGuildmage extends mage.sets.mirage.ShadowGuildmage {
 
     public ShadowGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class CorpseDance extends mage.sets.tempest.CorpseDance {
 
     public CorpseDance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "TPR";
     }
 

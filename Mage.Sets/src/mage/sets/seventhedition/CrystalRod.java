@@ -38,7 +38,7 @@ public class CrystalRod extends mage.sets.limitedalpha.CrystalRod {
 
     public CrystalRod(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 291;
+        this.cardNumber = "291";
         this.expansionSetCode = "7ED";
     }
 

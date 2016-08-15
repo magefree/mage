@@ -28,17 +28,22 @@
 package mage.sets.eldritchmoon;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -66,7 +71,7 @@ public class ClearShot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(effect);
 
-        effect = new DamageTargetEffect(new TargetPermanentPowerCount(), true, "target creature you don't control", true);
+        effect = new ClearShotDamageEffect();
         effect.setText("It deals damage equal to its power to target creature you don't control");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
@@ -81,5 +86,36 @@ public class ClearShot extends CardImpl {
     @Override
     public ClearShot copy() {
         return new ClearShot(this);
+    }
+}
+
+class ClearShotDamageEffect extends OneShotEffect {
+
+    public ClearShotDamageEffect() {
+        super(Outcome.Damage);
+        this.staticText = "It deals damage equal to its power to target creature you don't control";
+    }
+
+    public ClearShotDamageEffect(final ClearShotDamageEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ClearShotDamageEffect copy() {
+        return new ClearShotDamageEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent ownCreature = game.getPermanent(source.getFirstTarget());
+        if (ownCreature != null) {
+            int damage = ownCreature.getPower().getValue();
+            Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+            if (targetCreature != null) {
+                targetCreature.damage(damage, ownCreature.getId(), game, false, true);
+                return true;
+            }
+        }
+        return false;
     }
 }

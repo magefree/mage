@@ -37,7 +37,7 @@ public class Overgrowth extends mage.sets.stronghold.Overgrowth {
 
     public Overgrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 283;
+        this.cardNumber = "283";
         this.expansionSetCode = "10E";
     }
 

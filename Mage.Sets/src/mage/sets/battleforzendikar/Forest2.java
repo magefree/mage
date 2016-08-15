@@ -36,7 +36,7 @@ import java.util.UUID;
 public class Forest2 extends mage.cards.basiclands.Forest {
 
     public Forest2(UUID ownerId) {
-        super(ownerId, 271);
+        super(ownerId, "271a");
         this.expansionSetCode = "BFZ";
     }
 

@@ -37,7 +37,7 @@ public class HellraiserGoblin extends mage.sets.gatecrash.HellraiserGoblin {
 
     public HellraiserGoblin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "DDN";
     }
 

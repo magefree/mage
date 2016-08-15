@@ -37,8 +37,8 @@ public class MysticDenial extends mage.sets.portal.MysticDenial {
 
     public MysticDenial(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
-        this.expansionSetCode = "P02";
+        this.cardNumber = "41";
+        this.expansionSetCode = "PO2";
     }
 
     public MysticDenial(final MysticDenial card) {

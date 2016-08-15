@@ -38,7 +38,7 @@ public class BirdsOfParadise extends mage.sets.tenthedition.BirdsOfParadise {
 
     public BirdsOfParadise(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "M11";
     }
 

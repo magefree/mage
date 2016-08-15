@@ -38,6 +38,10 @@ import mage.abilities.mana.BlackManaAbility;
 public abstract class Swamp extends BasicLand {
 
     public Swamp(UUID ownerId, int cardNumber) {
+        this(ownerId, String.valueOf(cardNumber));
+    }
+
+    public Swamp(UUID ownerId, String cardNumber) {
         super(ownerId, cardNumber, "Swamp", new BlackManaAbility());
     }
 

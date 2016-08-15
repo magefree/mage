@@ -37,7 +37,7 @@ public class Hostility extends mage.sets.jacevschandra.Hostility {
 
     public Hostility(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "C15";
     }
 

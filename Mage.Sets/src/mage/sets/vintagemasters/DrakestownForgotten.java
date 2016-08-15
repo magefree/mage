@@ -37,7 +37,7 @@ public class DrakestownForgotten extends mage.sets.conspiracy.DrakestownForgotte
 
     public DrakestownForgotten(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "VMA";
     }
 

@@ -37,7 +37,7 @@ public class Redirect extends mage.sets.magic2011.Redirect {
 
     public Redirect(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "M12";
     }
 

@@ -38,7 +38,7 @@ public class SpikeFeeder extends mage.sets.timeshifted.SpikeFeeder {
 
     public SpikeFeeder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class FulminatorMage extends mage.sets.shadowmoor.FulminatorMage {
 
     public FulminatorMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "MM2";
     }
 

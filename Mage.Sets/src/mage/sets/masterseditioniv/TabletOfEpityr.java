@@ -37,7 +37,7 @@ public class TabletOfEpityr extends mage.sets.antiquities.TabletOfEpityr {
 
     public TabletOfEpityr(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 230;
+        this.cardNumber = "230";
         this.expansionSetCode = "ME4";
     }
 

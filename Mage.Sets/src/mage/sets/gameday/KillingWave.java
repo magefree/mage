@@ -37,7 +37,7 @@ public class KillingWave extends mage.sets.avacynrestored.KillingWave {
 
     public KillingWave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "MGDC";
     }
 

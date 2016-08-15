@@ -33,7 +33,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -234,19 +233,20 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         // support multiple mage panes
         Object source = event.getSource();
-        if(source instanceof Component) {
-            Component component = (Component)source;
-            while(component != null) {
-                if(component instanceof MagePane) {
-                    frame = (MagePane)component;
+        if (source instanceof Component) {
+            Component component = (Component) source;
+            while (component != null) {
+                if (component instanceof MagePane) {
+                    frame = (MagePane) component;
                     break;
                 }
                 component = component.getParent();
             }
         }
 
-        if(frame != null)
+        if (frame != null) {
             frame.handleEvent(event);
+        }
     }
 
     /**
@@ -281,9 +281,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             {
                 Object value = UIManager.get("SplitPane.ancestorInputMap");
 
-                if(value instanceof InputMap) {
-                    InputMap map = (InputMap)value;
-                    for(int vk = KeyEvent.VK_F2; vk <= KeyEvent.VK_F12; ++vk) {
+                if (value instanceof InputMap) {
+                    InputMap map = (InputMap) value;
+                    for (int vk = KeyEvent.VK_F2; vk <= KeyEvent.VK_F12; ++vk) {
                         map.remove(KeyStroke.getKeyStroke(vk, 0));
                     }
                 }
@@ -452,7 +452,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (cardInfoPane == null) {
             return;
         }
-//        cardInfoPane.setSize(Constants.TOOLTIP_WIDTH_MIN, Constants.TOOLTIP_HEIGHT_MIN);
         cardInfoPane.setLocation(40, 40);
         cardInfoPane.setBackground(new Color(0, 0, 0, 0));
 
@@ -461,9 +460,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         popupContainer.add(cardInfoPane);
         popupContainer.setVisible(false);
-//        popupContainer.setBounds(0, 0,
-//                Constants.TOOLTIP_WIDTH_MIN + Constants.TOOLTIP_BORDER_WIDTH,
-//                Constants.TOOLTIP_HEIGHT_MIN + Constants.TOOLTIP_BORDER_WIDTH);
 
         desktopPane.add(popupContainer, JLayeredPane.POPUP_LAYER);
 
@@ -474,13 +470,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         cardPreviewContainer.setOpaque(false);
         cardPreviewContainer.setLayout(null);
         BigCard bigCard = new BigCard();
-        bigCard.setSize(320, 500);
+        int height = GUISizeHelper.enlargedImageHeight;
+        int width = (int) ((float) height * (float) 0.64);
+        bigCard.setSize(width, height);
         bigCard.setLocation(40, 40);
         bigCard.setBackground(new Color(0, 0, 0, 0));
 
         cardPreviewContainer.add(bigCard);
         cardPreviewContainer.setVisible(false);
-        cardPreviewContainer.setBounds(0, 0, 320 + 80, 500 + 30);
+        cardPreviewContainer.setBounds(0, 0, width + 80, height + 30);
 
         UI.addComponent(MageComponents.CARD_PREVIEW_PANE, bigCard);
         UI.addComponent(MageComponents.CARD_PREVIEW_CONTAINER, cardPreviewContainer);
@@ -492,18 +490,40 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         cardPreviewContainerRotated.setOpaque(false);
         cardPreviewContainerRotated.setLayout(null);
         bigCard = new BigCard(true);
-        bigCard.setSize(500, 350);
+        bigCard.setSize(height, width + 30);
         bigCard.setLocation(40, 40);
         bigCard.setBackground(new Color(0, 0, 0, 0));
         cardPreviewContainerRotated.add(bigCard);
         cardPreviewContainerRotated.setVisible(false);
-        cardPreviewContainerRotated.setBounds(0, 0, 500 + 80, 420 + 30);
+        cardPreviewContainerRotated.setBounds(0, 0, height + 80, width + 100 + 30);
 
         UI.addComponent(MageComponents.CARD_PREVIEW_PANE_ROTATED, bigCard);
         UI.addComponent(MageComponents.CARD_PREVIEW_CONTAINER_ROTATED, cardPreviewContainerRotated);
 
         desktopPane.add(cardPreviewContainerRotated, JLayeredPane.POPUP_LAYER);
 
+    }
+
+    private void setGUISizeTooltipContainer() {
+        try {
+            int height = GUISizeHelper.enlargedImageHeight;
+            int width = (int) ((float) height * (float) 0.64);
+
+            JPanel cardPreviewContainer = (JPanel) UI.getComponent(MageComponents.CARD_PREVIEW_CONTAINER);
+            cardPreviewContainer.setBounds(0, 0, width + 80, height + 30);
+
+            BigCard bigCard = (BigCard) UI.getComponent(MageComponents.CARD_PREVIEW_PANE);
+            bigCard.setSize(width, height);
+
+            JPanel cardPreviewContainerRotated = (JPanel) UI.getComponent(MageComponents.CARD_PREVIEW_CONTAINER_ROTATED);
+            cardPreviewContainerRotated.setBounds(0, 0, height + 80, width + 100 + 30);
+
+            BigCard bigCardRotated = (BigCard) UI.getComponent(MageComponents.CARD_PREVIEW_PANE_ROTATED);
+            bigCardRotated.setSize(height, width + 30);
+
+        } catch (Exception e) {
+            LOGGER.warn("Error while changing tooltip container size.", e);
+        }
     }
 
     private void setBackground() {
@@ -1116,11 +1136,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (setActive) {
             setActive(tablesPane);
         } else // if other panel was already shown, mamke sure it's topmost again
-        {
-            if (topPanebefore != null) {
+         if (topPanebefore != null) {
                 setActive(topPanebefore);
             }
-        }
     }
 
     public void hideGames() {
@@ -1504,6 +1522,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void changeGUISize() {
         ImageCaches.flush();
         setGUISize();
+
+        setGUISizeTooltipContainer();
+
         Plugins.getInstance().changeGUISize();
         CountryUtil.changeGUISize();
         for (Component component : desktopPane.getComponents()) {
@@ -1557,6 +1578,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         }
         balloonTip.setFont(GUISizeHelper.balloonTooltipFont);
+
+        addTooltipContainer();
     }
 }
 

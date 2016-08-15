@@ -37,7 +37,7 @@ public class KorSpiritdancer extends mage.sets.riseoftheeldrazi.KorSpiritdancer 
 
     public KorSpiritdancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "PC2";
     }
 

@@ -37,7 +37,7 @@ public class HowlingBanshee extends mage.sets.magic2010.HowlingBanshee {
 
     public HowlingBanshee(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "DDD";
     }
 

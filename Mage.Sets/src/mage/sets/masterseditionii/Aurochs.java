@@ -37,7 +37,7 @@ public class Aurochs extends mage.sets.iceage.Aurochs {
 
     public Aurochs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "ME2";
     }
 

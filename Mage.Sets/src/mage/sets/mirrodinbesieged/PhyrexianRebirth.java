@@ -81,8 +81,8 @@ public class PhyrexianRebirth extends CardImpl {
                 count += permanent.destroy(source.getSourceId(), game, false) ? 1 : 0;
             }
             HorrorToken horrorToken = new HorrorToken();
-            horrorToken.getPower().initValue(count);
-            horrorToken.getToughness().initValue(count);
+            horrorToken.getPower().modifyBaseValue(count);
+            horrorToken.getToughness().modifyBaseValue(count);
             horrorToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             return true;
         }

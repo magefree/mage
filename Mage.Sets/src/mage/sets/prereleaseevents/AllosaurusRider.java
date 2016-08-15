@@ -38,7 +38,7 @@ public class AllosaurusRider extends mage.sets.elvesvsgoblins.AllosaurusRider {
 
     public AllosaurusRider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

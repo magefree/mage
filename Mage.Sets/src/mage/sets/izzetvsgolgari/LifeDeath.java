@@ -37,7 +37,7 @@ public class LifeDeath extends mage.sets.apocalypse.LifeDeath {
 
     public LifeDeath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "DDJ";
     }
 

@@ -37,7 +37,7 @@ public class Stonehands extends mage.sets.iceage.Stonehands {
 
     public Stonehands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "ME2";
     }
 

@@ -37,7 +37,7 @@ public class GreenWard extends mage.sets.unlimitededition.GreenWard {
 
     public GreenWard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 206;
+        this.cardNumber = "206";
         this.expansionSetCode = "LEB";
     }
 

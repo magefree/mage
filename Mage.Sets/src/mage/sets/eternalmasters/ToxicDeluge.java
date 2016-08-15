@@ -37,7 +37,7 @@ public class ToxicDeluge extends mage.sets.commander2013.ToxicDeluge {
 
     public ToxicDeluge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "EMA";
     }
 

@@ -37,7 +37,7 @@ public class PhantomGeneral extends mage.sets.returntoravnica.PhantomGeneral {
 
     public PhantomGeneral(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "DDK";
     }
 

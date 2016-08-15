@@ -37,7 +37,7 @@ public class OmnathLocusOfRage extends mage.sets.battleforzendikar.OmnathLocusOf
 
     public OmnathLocusOfRage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 279;
+        this.cardNumber = "279";
         this.expansionSetCode = "PTC";
     }
 

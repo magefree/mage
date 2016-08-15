@@ -37,7 +37,7 @@ public class IntrepidHero extends mage.sets.urzassaga.IntrepidHero {
 
     public IntrepidHero(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "M13";
     }
 

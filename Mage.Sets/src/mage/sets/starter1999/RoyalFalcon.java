@@ -37,7 +37,7 @@ public class RoyalFalcon extends mage.sets.starter2000.RoyalFalcon {
 
     public RoyalFalcon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "S99";
     }
 

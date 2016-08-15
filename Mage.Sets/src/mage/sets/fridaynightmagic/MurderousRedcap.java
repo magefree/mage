@@ -37,7 +37,7 @@ public class MurderousRedcap extends mage.sets.shadowmoor.MurderousRedcap {
 
     public MurderousRedcap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "FNMP";
     }
 

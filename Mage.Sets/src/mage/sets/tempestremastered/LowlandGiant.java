@@ -37,7 +37,7 @@ public class LowlandGiant extends mage.sets.tempest.LowlandGiant {
 
     public LowlandGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "TPR";
     }
 

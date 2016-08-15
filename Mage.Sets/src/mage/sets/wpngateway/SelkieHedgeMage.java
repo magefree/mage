@@ -38,7 +38,7 @@ public class SelkieHedgeMage extends mage.sets.eventide.SelkieHedgeMage {
 
     public SelkieHedgeMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -38,7 +38,7 @@ public class MoorishCavalry1 extends mage.sets.timeshifted.MoorishCavalry {
 
     public MoorishCavalry1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "ARN";
         this.rarity = Rarity.COMMON;
     }

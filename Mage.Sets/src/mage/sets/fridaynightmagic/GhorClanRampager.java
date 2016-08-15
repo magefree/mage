@@ -37,7 +37,7 @@ public class GhorClanRampager extends mage.sets.gatecrash.GhorClanRampager {
 
     public GhorClanRampager(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "FNMP";
     }
 

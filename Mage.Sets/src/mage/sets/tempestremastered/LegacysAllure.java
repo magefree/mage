@@ -38,7 +38,7 @@ public class LegacysAllure extends mage.sets.tempest.LegacysAllure {
 
     public LegacysAllure(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.RARE;
     }

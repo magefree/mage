@@ -36,7 +36,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.cards.CardImpl;
+import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ChitteringHost extends CardImpl {
+public class ChitteringHost extends MeldCard {
 
     public ChitteringHost(UUID ownerId) {
         super(ownerId, 96, "Chittering Host", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");
@@ -57,18 +57,21 @@ public class ChitteringHost extends CardImpl {
         this.toughness = new MageInt(6);
 
         this.nightCard = true; // Meld card
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // Menace <i>(This creature can't be blocked except by two or more creatures.
         this.addAbility(new MenaceAbility());
+
         // When Chittering Host enters the battlefield, other creatures you control get +1/+0 and gain menace until end of turn.
         Effect effect = new BoostControlledEffect(1, 0, Duration.EndOfTurn, true);
         effect.setText("other creatures you control get +1/+0");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("other creatures"), true);
         effect.setText("and gain menace until end of turn");
+        ability.addEffect(effect);
         this.addAbility(ability);
-
     }
 
     public ChitteringHost(final ChitteringHost card) {

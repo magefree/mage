@@ -37,7 +37,7 @@ public class SporesowerThallid extends mage.sets.timespiral.SporesowerThallid {
 
     public SporesowerThallid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "MMA";
     }
 

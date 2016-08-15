@@ -38,7 +38,7 @@ public class UncleIstvan extends mage.sets.thedark.UncleIstvan {
 
     public UncleIstvan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

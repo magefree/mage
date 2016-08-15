@@ -37,7 +37,7 @@ public class AvianChangeling extends mage.sets.lorwyn.AvianChangeling {
 
     public AvianChangeling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "MMA";
     }
 

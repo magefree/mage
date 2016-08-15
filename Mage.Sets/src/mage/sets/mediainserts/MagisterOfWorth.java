@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -45,7 +46,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -117,44 +117,14 @@ class MagisterOfWorthVoteEffect extends OneShotEffect {
             if (graceCount > condemnationCount) {
                 new MagisterOfWorthReturnFromGraveyardEffect().apply(game, source);
             } else {
-                new MagisterOfWorthDestroyEffect().apply(game, source);
+                FilterPermanent filter = new FilterCreaturePermanent("creatures other than {this}");
+                filter.add(new AnotherPredicate());
+                new DestroyAllEffect(filter).apply(game, source);
             }
             return true;
         }
         return false;
     }
-}
-
-class MagisterOfWorthDestroyEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures other than {this}");
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public MagisterOfWorthDestroyEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "destroy all creatures other than {this}";
-    }
-
-    public MagisterOfWorthDestroyEffect(final MagisterOfWorthDestroyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.destroy(source.getSourceId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public MagisterOfWorthDestroyEffect copy() {
-        return new MagisterOfWorthDestroyEffect(this);
-    }
-
 }
 
 class MagisterOfWorthReturnFromGraveyardEffect extends OneShotEffect {

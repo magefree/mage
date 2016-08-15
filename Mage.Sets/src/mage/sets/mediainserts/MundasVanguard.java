@@ -37,7 +37,7 @@ public class MundasVanguard extends mage.sets.oathofthegatewatch.MundasVanguard 
 
     public MundasVanguard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "MBP";
     }
 

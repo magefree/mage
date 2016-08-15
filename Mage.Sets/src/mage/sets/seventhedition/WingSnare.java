@@ -37,7 +37,7 @@ public class WingSnare extends mage.sets.urzaslegacy.WingSnare {
 
     public WingSnare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 283;
+        this.cardNumber = "283";
         this.expansionSetCode = "7ED";
     }
 

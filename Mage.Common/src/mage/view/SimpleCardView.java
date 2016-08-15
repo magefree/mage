@@ -39,14 +39,14 @@ public class SimpleCardView implements Serializable {
     protected UUID id;
     protected String expansionSetCode;
     protected String tokenSetCode;
-    protected int cardNumber;
+    protected String cardNumber;
     protected boolean usesVariousArt;
     protected boolean gameObject;
 
-    public SimpleCardView(UUID id, String expansionSetCode, int cardNumber, boolean usesVariousArt, String tokenSetCode) {
+    public SimpleCardView(UUID id, String expansionSetCode, String cardNumber, boolean usesVariousArt, String tokenSetCode) {
         this(id, expansionSetCode, cardNumber, usesVariousArt, tokenSetCode, false);
     }
-    public SimpleCardView(UUID id, String expansionSetCode, int cardNumber, boolean usesVariousArt, String tokenSetCode, boolean isGameObject) {
+    public SimpleCardView(UUID id, String expansionSetCode, String cardNumber, boolean usesVariousArt, String tokenSetCode, boolean isGameObject) {
         this.id = id;
         this.expansionSetCode = expansionSetCode;
         this.cardNumber = cardNumber;
@@ -63,7 +63,7 @@ public class SimpleCardView implements Serializable {
         return expansionSetCode;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 

@@ -37,7 +37,7 @@ public class TemporaryInsanity extends mage.sets.torment.TemporaryInsanity {
 
     public TemporaryInsanity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "DDG";
     }
 

@@ -37,7 +37,7 @@ public class ThousandWinds extends mage.sets.khansoftarkir.ThousandWinds {
 
     public ThousandWinds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "DDN";
     }
 

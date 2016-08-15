@@ -38,7 +38,7 @@ public class Aeolipile extends mage.sets.masterseditionii.Aeolipile {
 
     public Aeolipile(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "FEM";
         this.rarity = Rarity.RARE;
     }

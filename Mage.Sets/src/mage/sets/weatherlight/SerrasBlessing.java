@@ -37,7 +37,7 @@ public class SerrasBlessing extends mage.sets.ninthedition.SerrasBlessing {
 
     public SerrasBlessing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "WTH";
     }
 

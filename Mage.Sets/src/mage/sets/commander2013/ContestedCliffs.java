@@ -37,7 +37,7 @@ public class ContestedCliffs extends mage.sets.onslaught.ContestedCliffs {
 
     public ContestedCliffs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 282;
+        this.cardNumber = "282";
         this.expansionSetCode = "C13";
     }
 

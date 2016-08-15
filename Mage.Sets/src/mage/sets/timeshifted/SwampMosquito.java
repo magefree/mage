@@ -38,7 +38,7 @@ public class SwampMosquito extends mage.sets.alliances.SwampMosquito1 {
 
     public SwampMosquito(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

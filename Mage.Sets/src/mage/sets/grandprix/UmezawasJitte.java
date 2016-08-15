@@ -37,7 +37,7 @@ public class UmezawasJitte extends mage.sets.betrayersofkamigawa.UmezawasJitte {
 
     public UmezawasJitte(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "GPX";
     }
 

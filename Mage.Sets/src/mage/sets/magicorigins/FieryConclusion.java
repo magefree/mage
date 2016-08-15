@@ -38,7 +38,7 @@ public class FieryConclusion extends mage.sets.ravnica.FieryConclusion {
 
     public FieryConclusion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "ORI";
         this.rarity = Rarity.UNCOMMON;
     }

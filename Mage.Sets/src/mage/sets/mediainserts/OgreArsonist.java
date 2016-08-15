@@ -39,7 +39,7 @@ public class OgreArsonist extends mage.sets.portalsecondage.OgreArsonist {
 
     public OgreArsonist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

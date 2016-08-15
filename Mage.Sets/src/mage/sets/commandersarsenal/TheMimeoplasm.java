@@ -38,7 +38,7 @@ public class TheMimeoplasm extends mage.sets.commander.TheMimeoplasm {
 
     public TheMimeoplasm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

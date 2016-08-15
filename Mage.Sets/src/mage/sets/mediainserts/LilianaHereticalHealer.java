@@ -38,7 +38,7 @@ public class LilianaHereticalHealer extends mage.sets.magicorigins.LilianaHereti
 
     public LilianaHereticalHealer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 996;
+        this.cardNumber = "996";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

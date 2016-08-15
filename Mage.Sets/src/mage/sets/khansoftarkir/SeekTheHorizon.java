@@ -37,7 +37,7 @@ public class SeekTheHorizon extends mage.sets.saviorsofkamigawa.SeekTheHorizon {
 
     public SeekTheHorizon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "KTK";
     }
 

@@ -37,7 +37,7 @@ public class NantukoMonastery extends mage.sets.archenemy.NantukoMonastery {
 
     public NantukoMonastery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "JUD";
     }
 

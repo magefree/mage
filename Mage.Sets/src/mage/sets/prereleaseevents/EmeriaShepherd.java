@@ -37,7 +37,7 @@ public class EmeriaShepherd extends mage.sets.battleforzendikar.EmeriaShepherd {
 
     public EmeriaShepherd(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 258;
+        this.cardNumber = "258";
         this.expansionSetCode = "PTC";
     }
 

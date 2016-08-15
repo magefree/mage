@@ -38,7 +38,7 @@ public class MaulSplicer extends mage.sets.newphyrexia.MaulSplicer {
 
     public MaulSplicer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

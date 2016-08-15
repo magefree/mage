@@ -37,7 +37,7 @@ public class KjeldoranRoyalGuard extends mage.sets.iceage.KjeldoranRoyalGuard {
 
     public KjeldoranRoyalGuard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "6ED";
     }
 

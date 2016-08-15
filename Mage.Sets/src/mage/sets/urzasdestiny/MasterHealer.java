@@ -37,7 +37,7 @@ public class MasterHealer extends mage.sets.ninthedition.MasterHealer {
 
     public MasterHealer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "UDS";
     }
 

@@ -37,7 +37,7 @@ public class FyndhornBrownie extends mage.sets.iceage.FyndhornBrownie {
 
     public FyndhornBrownie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 231;
+        this.cardNumber = "231";
         this.expansionSetCode = "6ED";
     }
 

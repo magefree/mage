@@ -37,7 +37,7 @@ public class FreewindEquenaut extends mage.sets.dissension.FreewindEquenaut {
 
     public FreewindEquenaut(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDL";
     }
 

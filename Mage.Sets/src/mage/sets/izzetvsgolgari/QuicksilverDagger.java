@@ -37,7 +37,7 @@ public class QuicksilverDagger extends mage.sets.apocalypse.QuicksilverDagger {
 
     public QuicksilverDagger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "DDJ";
     }
 

@@ -37,7 +37,7 @@ public class QuagVampires extends mage.sets.worldwake.QuagVampires {
 
     public QuagVampires(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "CNS";
     }
 

@@ -38,7 +38,7 @@ public class GaeasRevenge extends mage.sets.magic2011.GaeasRevenge {
 
     public GaeasRevenge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "ORI";
         this.rarity = Rarity.RARE;
     }

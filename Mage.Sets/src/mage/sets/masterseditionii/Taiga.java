@@ -37,7 +37,7 @@ public class Taiga extends mage.sets.limitedalpha.Taiga {
 
     public Taiga(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 238;
+        this.cardNumber = "238";
         this.expansionSetCode = "ME2";
     }
 

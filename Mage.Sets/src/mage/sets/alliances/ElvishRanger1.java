@@ -37,7 +37,7 @@ public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
 
     public ElvishRanger1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "ALL";
     }
 

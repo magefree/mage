@@ -37,7 +37,7 @@ public class AbyssalSpecter extends mage.sets.fifthedition.AbyssalSpecter {
 
     public AbyssalSpecter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class MakeshiftMannequin extends mage.sets.archenemy.MakeshiftMannequin {
 
     public MakeshiftMannequin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "LRW";
     }
 

@@ -37,7 +37,7 @@ public class CripplingBlight extends mage.sets.magic2013.CripplingBlight {
 
     public CripplingBlight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "M15";
     }
 

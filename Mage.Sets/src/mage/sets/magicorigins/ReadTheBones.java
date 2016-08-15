@@ -37,7 +37,7 @@ public class ReadTheBones extends mage.sets.theros.ReadTheBones {
 
     public ReadTheBones(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "ORI";
     }
 

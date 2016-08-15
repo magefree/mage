@@ -37,7 +37,7 @@ public class BogWitch extends mage.sets.mercadianmasques.BogWitch {
 
     public BogWitch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "ARC";
     }
 

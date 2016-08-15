@@ -37,7 +37,7 @@ public class VolrathsLaboratory extends mage.sets.tempestremastered.VolrathsLabo
 
     public VolrathsLaboratory(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "STH";
     }
 

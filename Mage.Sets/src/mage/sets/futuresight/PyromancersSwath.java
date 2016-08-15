@@ -37,7 +37,7 @@ public class PyromancersSwath extends mage.sets.modernmasters.PyromancersSwath {
 
     public PyromancersSwath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "FUT";
     }
 

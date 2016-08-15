@@ -37,7 +37,7 @@ public class TheTabernacleAtPendrellVale extends mage.sets.legends.TheTabernacle
 
     public TheTabernacleAtPendrellVale(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "ME3";
     }
 

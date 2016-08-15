@@ -37,7 +37,7 @@ public class RavensCrime extends mage.sets.eventide.RavensCrime {
 
     public RavensCrime(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "MMA";
     }
 

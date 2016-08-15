@@ -37,7 +37,7 @@ public class FaerieImpostor extends mage.sets.returntoravnica.FaerieImpostor {
 
     public FaerieImpostor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "DDN";
     }
 

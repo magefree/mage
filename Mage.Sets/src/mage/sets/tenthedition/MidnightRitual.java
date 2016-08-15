@@ -37,7 +37,7 @@ public class MidnightRitual extends mage.sets.mercadianmasques.MidnightRitual {
 
     public MidnightRitual(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "10E";
     }
 

@@ -37,7 +37,7 @@ public class WindDrake extends mage.sets.magic2010.WindDrake {
 
     public WindDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "M13";
     }
 

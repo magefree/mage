@@ -37,7 +37,7 @@ public class AltarOfDementia extends mage.sets.tempest.AltarOfDementia {
 
     public AltarOfDementia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 196;
+        this.cardNumber = "196";
         this.expansionSetCode = "CNS";
     }
 

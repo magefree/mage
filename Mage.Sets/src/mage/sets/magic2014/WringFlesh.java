@@ -37,7 +37,7 @@ public class WringFlesh extends mage.sets.magic2012.WringFlesh {
 
     public WringFlesh(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "M14";
     }
 

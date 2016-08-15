@@ -37,7 +37,7 @@ public class UginTheSpiritDragon extends mage.sets.fatereforged.UginTheSpiritDra
 
     public UginTheSpiritDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "UGIN";
     }
 

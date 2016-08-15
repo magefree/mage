@@ -37,7 +37,7 @@ public class FireIce extends mage.sets.apocalypse.FireIce {
 
     public FireIce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "CMD";
     }
 

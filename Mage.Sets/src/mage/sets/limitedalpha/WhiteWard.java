@@ -37,7 +37,7 @@ public class WhiteWard extends mage.sets.limitedbeta.WhiteWard {
 
     public WhiteWard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "LEA";
     }
 

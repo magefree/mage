@@ -37,7 +37,7 @@ public class CanyonWildcat extends mage.sets.tempest.CanyonWildcat {
 
     public CanyonWildcat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "8ED";
     }
 

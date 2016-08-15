@@ -38,7 +38,7 @@ public class WiltLeafCavaliers extends mage.sets.shadowmoor.WiltLeafCavaliers {
 
     public WiltLeafCavaliers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

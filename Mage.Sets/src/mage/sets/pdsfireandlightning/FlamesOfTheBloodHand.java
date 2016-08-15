@@ -37,7 +37,7 @@ public class FlamesOfTheBloodHand extends mage.sets.betrayersofkamigawa.FlamesOf
 
     public FlamesOfTheBloodHand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "PD2";
     }
 

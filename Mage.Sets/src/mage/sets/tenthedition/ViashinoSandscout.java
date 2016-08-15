@@ -37,7 +37,7 @@ public class ViashinoSandscout extends mage.sets.urzaslegacy.ViashinoSandscout {
 
     public ViashinoSandscout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 246;
+        this.cardNumber = "246";
         this.expansionSetCode = "10E";
     }
 

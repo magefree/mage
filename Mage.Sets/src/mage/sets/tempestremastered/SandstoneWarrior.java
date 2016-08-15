@@ -37,7 +37,7 @@ public class SandstoneWarrior extends mage.sets.tempest.SandstoneWarrior {
 
     public SandstoneWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class SpellbreakerBehemoth extends mage.sets.alarareborn.SpellbreakerBehe
 
     public SpellbreakerBehemoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class CourtHomunculus extends mage.sets.conflux.CourtHomunculus {
 
     public CourtHomunculus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "MM2";
     }
 

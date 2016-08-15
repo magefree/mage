@@ -38,7 +38,7 @@ public class KrosanCloudscraper extends mage.sets.timeshifted.KrosanCloudscraper
 
     public KrosanCloudscraper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "LGN";
         this.rarity = Rarity.RARE;
     }

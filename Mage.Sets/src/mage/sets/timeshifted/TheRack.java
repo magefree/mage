@@ -38,7 +38,7 @@ public class TheRack extends mage.sets.fourthedition.TheRack {
 
     public TheRack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class GangOfElk extends mage.sets.urzaslegacy.GangOfElk {
 
     public GangOfElk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 247;
+        this.cardNumber = "247";
         this.expansionSetCode = "7ED";
     }
 

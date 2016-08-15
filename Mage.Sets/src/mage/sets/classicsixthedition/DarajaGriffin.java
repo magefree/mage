@@ -37,7 +37,7 @@ public class DarajaGriffin extends mage.sets.visions.DarajaGriffin {
 
     public DarajaGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "6ED";
     }
 

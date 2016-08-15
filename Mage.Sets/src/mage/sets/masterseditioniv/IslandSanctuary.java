@@ -37,7 +37,7 @@ public class IslandSanctuary extends mage.sets.limitedalpha.IslandSanctuary {
 
     public IslandSanctuary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "ME4";
     }
 

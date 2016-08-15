@@ -42,7 +42,7 @@ public class TalasScout extends CardImpl {
 
     public TalasScout(UUID ownerId) {
         super(ownerId, 52, "Talas Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Pirate");
         this.subtype.add("Scout");

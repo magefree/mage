@@ -37,7 +37,7 @@ public class FeralHydra extends mage.sets.shardsofalara.FeralHydra {
 
     public FeralHydra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "ARC";
     }
 

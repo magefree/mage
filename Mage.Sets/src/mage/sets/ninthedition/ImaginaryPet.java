@@ -37,7 +37,7 @@ public class ImaginaryPet extends mage.sets.urzassaga.ImaginaryPet {
 
     public ImaginaryPet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "9ED";
     }
 

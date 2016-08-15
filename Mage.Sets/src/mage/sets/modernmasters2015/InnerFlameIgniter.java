@@ -38,7 +38,7 @@ public class InnerFlameIgniter extends mage.sets.lorwyn.InnerFlameIgniter {
 
     public InnerFlameIgniter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }

@@ -38,7 +38,7 @@ public class ArchonOfTheTriumvirate extends mage.sets.returntoravnica.ArchonOfTh
 
     public ArchonOfTheTriumvirate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

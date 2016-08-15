@@ -37,7 +37,7 @@ public class Insight extends mage.sets.tempest.Insight {
 
     public Insight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "6ED";
     }
 

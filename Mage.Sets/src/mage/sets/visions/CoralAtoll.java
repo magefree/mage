@@ -37,7 +37,7 @@ public class CoralAtoll extends mage.sets.commander2014.CoralAtoll {
 
     public CoralAtoll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "VIS";
     }
 

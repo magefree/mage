@@ -37,7 +37,7 @@ public class BeastWithin extends mage.sets.newphyrexia.BeastWithin {
 
     public BeastWithin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "PC2";
     }
 

@@ -37,7 +37,7 @@ public class NaturalAffinity extends mage.sets.ninthedition.NaturalAffinity {
 
     public NaturalAffinity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 260;
+        this.cardNumber = "260";
         this.expansionSetCode = "MMQ";
     }
 

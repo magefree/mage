@@ -37,7 +37,7 @@ public class Foratog extends mage.sets.mirage.Foratog {
 
     public Foratog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 249;
+        this.cardNumber = "249";
         this.expansionSetCode = "8ED";
     }
 

@@ -37,7 +37,7 @@ public class BaronSengir extends mage.sets.mastersedition.BaronSengir {
 
     public BaronSengir(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "HML";
     }
 

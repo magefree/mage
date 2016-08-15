@@ -37,7 +37,7 @@ public class IvyElemental extends mage.sets.planechase.IvyElemental {
 
     public IvyElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 245;
+        this.cardNumber = "245";
         this.expansionSetCode = "ODY";
     }
 

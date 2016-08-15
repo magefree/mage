@@ -37,7 +37,7 @@ public class DevotedHero extends mage.sets.portal.DevotedHero {
 
     public DevotedHero(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "S99";
     }
 

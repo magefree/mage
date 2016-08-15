@@ -37,7 +37,7 @@ public class SpinalEmbrace extends mage.sets.invasion.SpinalEmbrace {
 
     public SpinalEmbrace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class LakeOfTheDead extends mage.sets.vintagemasters.LakeOfTheDead {
 
     public LakeOfTheDead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = "185";
         this.expansionSetCode = "ALL";
     }
 

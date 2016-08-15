@@ -134,7 +134,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean canPayLifeCost();
 
     void setCanPaySacrificeCostFilter(FilterPermanent filter);
-    
+
     FilterPermanent getSacrificeCostFilter();
 
     boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game);
@@ -583,7 +583,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game);
 
-    void addCounters(Counter counter, Game game);
+    boolean addCounters(Counter counter, Game game);
 
     void removeCounters(String name, int amount, Ability source, Game game);
 

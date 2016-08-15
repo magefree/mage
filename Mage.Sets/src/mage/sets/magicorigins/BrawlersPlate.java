@@ -37,7 +37,7 @@ public class BrawlersPlate extends mage.sets.magic2015.BrawlersPlate {
 
     public BrawlersPlate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = "224";
         this.expansionSetCode = "ORI";
     }
 

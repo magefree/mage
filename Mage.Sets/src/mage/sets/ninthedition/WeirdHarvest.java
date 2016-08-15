@@ -37,7 +37,7 @@ public class WeirdHarvest extends mage.sets.onslaught.WeirdHarvest {
 
     public WeirdHarvest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 282;
+        this.cardNumber = "282";
         this.expansionSetCode = "9ED";
     }
 

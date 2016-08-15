@@ -37,7 +37,7 @@ public class Fervor extends mage.sets.magic2013.Fervor {
 
     public Fervor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "WTH";
     }
 

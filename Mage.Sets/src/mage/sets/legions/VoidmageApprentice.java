@@ -37,7 +37,7 @@ public class VoidmageApprentice extends mage.sets.anthologyjacevschandra.Voidmag
 
     public VoidmageApprentice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "LGN";
     }
 

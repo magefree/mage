@@ -37,7 +37,7 @@ public class ZameckGuildmage extends mage.sets.gatecrash.ZameckGuildmage {
 
     public ZameckGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "MGDC";
     }
 

@@ -37,7 +37,7 @@ public class Deathmark extends mage.sets.tenthedition.Deathmark {
 
     public Deathmark(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "MM2";
     }
 

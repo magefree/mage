@@ -37,7 +37,7 @@ public class FurnaceOfRath extends mage.sets.tempest.FurnaceOfRath {
 
     public FurnaceOfRath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 187;
+        this.cardNumber = "187";
         this.expansionSetCode = "8ED";
     }
 

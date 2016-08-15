@@ -38,7 +38,7 @@ public class Rout extends mage.sets.conspiracy.Rout {
 
     public Rout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "INV";
     }
 

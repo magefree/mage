@@ -37,8 +37,8 @@ public class Tremor extends mage.sets.seventhedition.Tremor {
 
     public Tremor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
-        this.expansionSetCode = "P02";
+        this.cardNumber = "118";
+        this.expansionSetCode = "PO2";
     }
 
     public Tremor(final Tremor card) {

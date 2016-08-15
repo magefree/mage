@@ -56,7 +56,8 @@ public class DrogskolShieldmate extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Drogskol Shieldmate enters the battlefield, other creatures you control get +0/+1 until end of turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(0, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), true), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new BoostControlledEffect(0, 1, Duration.EndOfTurn, new FilterCreaturePermanent("creatures"), true), false));
     }
 
     public DrogskolShieldmate(final DrogskolShieldmate card) {

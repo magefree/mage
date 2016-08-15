@@ -83,6 +83,7 @@ import mage.actions.MageDrawAction;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.MeldCard;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
 import mage.constants.AbilityType;
@@ -120,6 +121,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentMeld;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -721,6 +723,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Cards discard(int amount, boolean random, Ability source, Game game) {
         Cards discardedCards = new CardsImpl();
+        if (amount <= 0) {
+            return discardedCards;
+        }
         if (this.getHand().size() == 1 || this.getHand().size() == amount) {
             discardedCards.addAll(this.getHand());
             while (this.getHand().size() > 0) {
@@ -1129,7 +1134,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         } else {
             int bookmark = game.bookmarkState();
-            if (ability.activate(game, false)) {
+            if (ability.activate(game, ability instanceof FlashbackAbility)) {
                 ability.resolve(game);
                 game.removeBookmark(bookmark);
                 resetStoredBookmark(game);
@@ -1832,7 +1837,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void addCounters(Counter counter, Game game) {
+    public boolean addCounters(Counter counter, Game game) {
+        boolean returnState = true;
         int amount = counter.getCount();
         for (int i = 0; i < amount; i++) {
             Counter eventCounter = counter.copy();
@@ -1840,8 +1846,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, playerId, playerId, counter.getName(), counter.getCount()))) {
                 counters.addCounter(eventCounter);
                 game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), counter.getCount()));
+            } else {
+                returnState = false;
             }
         }
+        return returnState;
     }
 
     @Override
@@ -3184,6 +3193,24 @@ public abstract class PlayerImpl implements Player, Serializable {
             case BATTLEFIELD: // new logic that does not yet add the permanents to battlefield while replacement effects are handled
                 List<Permanent> permanents = new ArrayList<>();
                 List<Permanent> permanentsEntered = new ArrayList<>();
+                // Move meld pieces instead of the meld card if unmelded
+                Set<Card> meldPiecesToAdd = new HashSet<>(0);
+                Set<MeldCard> meldCardsRemoved = new HashSet<>(0);
+                for (Iterator<Card> it = cards.iterator(); it.hasNext();) {
+                    Card card = it.next();
+                    if (card instanceof MeldCard && !((MeldCard) card).isMelded()) {
+                        MeldCard meldCard = (MeldCard) card;
+                        if (meldCard.getTopLastZoneChangeCounter() == meldCard.getTopHalfCard().getZoneChangeCounter(game)) {
+                            meldPiecesToAdd.add(meldCard.getTopHalfCard());
+                        }
+                        if (meldCard.getBottomLastZoneChangeCounter() == meldCard.getBottomHalfCard().getZoneChangeCounter(game)) {
+                            meldPiecesToAdd.add(meldCard.getBottomHalfCard());
+                        }
+                        meldCardsRemoved.add(meldCard);
+                        it.remove();
+                    }
+                }
+                cards.addAll(meldPiecesToAdd);
                 for (Card card : cards) {
                     UUID controllingPlayerId = byOwner ? card.getOwnerId() : getId();
                     fromZone = game.getState().getZone(card.getId());
@@ -3193,7 +3220,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), controllingPlayerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
                     if (!game.replaceEvent(event)) {
                         // get permanent
-                        Permanent permanent = new PermanentCard(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
+                        Permanent permanent;
+                        if (card instanceof MeldCard) {
+                            permanent = new PermanentMeld(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
+                        } else {
+                            permanent = new PermanentCard(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
+                        }
                         permanents.add(permanent);
                         game.getPermanentsEntering().put(permanent.getId(), permanent);
                         card.checkForCountersToAdd(permanent, game);
@@ -3234,6 +3266,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                     } else {
                         game.getPermanentsEntering().remove(permanent.getId());
                     }
+                }
+                // Update the lastZoneChangeCounter of meld pieces that were moved
+                for (MeldCard meldCard : meldCardsRemoved) {
+                    meldCard.setTopLastZoneChangeCounter(meldCard.getTopHalfCard().getZoneChangeCounter(game));
+                    meldCard.setBottomLastZoneChangeCounter(meldCard.getBottomHalfCard().getZoneChangeCounter(game));
                 }
                 game.applyEffects();
                 break;
@@ -3308,7 +3345,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             card = game.getPermanent(card.getId());
         }
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
-            if (card instanceof PermanentCard) {
+            if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                 card = game.getCard(card.getId());
             }
             if (!game.isSimulation()) {
@@ -3396,7 +3433,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         //    Zone fromZone = game.getState().getZone(card.getId());
         if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null ? fromZone.equals(Zone.BATTLEFIELD) : false)) {
             if (!game.isSimulation()) {
-                if (card instanceof PermanentCard) {
+                if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                     card = game.getCard(card.getId());
                 }
                 StringBuilder sb = new StringBuilder(this.getLogName())
@@ -3419,7 +3456,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean result = false;
         if (card.moveToZone(Zone.LIBRARY, sourceId, game, toTop)) {
             if (!game.isSimulation()) {
-                if (card instanceof PermanentCard) {
+                if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                     card = game.getCard(card.getId());
                 }
                 StringBuilder sb = new StringBuilder(this.getLogName())
@@ -3453,8 +3490,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                     Card basicCard = game.getCard(card.getId());
                     if (basicCard != null) {
                         card = basicCard;
-                    } else {
-                        logger.error("Couldn't get the card object for the PermanenCard named " + card.getName());
                     }
                 }
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() : "a card face down") + " "

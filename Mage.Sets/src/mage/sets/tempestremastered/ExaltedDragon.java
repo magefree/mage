@@ -37,7 +37,7 @@ public class ExaltedDragon extends mage.sets.exodus.ExaltedDragon {
 
     public ExaltedDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "TPR";
     }
 

@@ -38,7 +38,7 @@ public class OonasBlackguard extends mage.sets.morningtide.OonasBlackguard {
 
     public OonasBlackguard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

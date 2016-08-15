@@ -37,7 +37,7 @@ public class SoulManipulation extends mage.sets.alarareborn.SoulManipulation {
 
     public SoulManipulation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 215;
+        this.cardNumber = "215";
         this.expansionSetCode = "C13";
     }
 

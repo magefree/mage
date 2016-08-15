@@ -37,7 +37,7 @@ public class PriceOfProgress extends mage.sets.exodus.PriceOfProgress {
 
     public PriceOfProgress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "PD2";
     }
 

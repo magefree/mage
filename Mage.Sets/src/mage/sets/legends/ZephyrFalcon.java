@@ -37,7 +37,7 @@ public class ZephyrFalcon extends mage.sets.fifthedition.ZephyrFalcon {
 
     public ZephyrFalcon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "LEG";
     }
 

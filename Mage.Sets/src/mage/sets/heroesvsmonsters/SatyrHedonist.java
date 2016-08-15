@@ -37,7 +37,7 @@ public class SatyrHedonist extends mage.sets.theros.SatyrHedonist {
 
     public SatyrHedonist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "DDL";
     }
 

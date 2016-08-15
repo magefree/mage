@@ -38,7 +38,7 @@ public class GaeasBlessing extends mage.sets.timeshifted.GaeasBlessing {
 
     public GaeasBlessing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "WTH";
         this.rarity = Rarity.UNCOMMON;
     }

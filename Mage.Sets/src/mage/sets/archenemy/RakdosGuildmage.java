@@ -37,7 +37,7 @@ public class RakdosGuildmage extends mage.sets.dissension.RakdosGuildmage {
 
     public RakdosGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "ARC";
     }
 

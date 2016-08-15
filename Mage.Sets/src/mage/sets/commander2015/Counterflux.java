@@ -37,7 +37,7 @@ public class Counterflux extends mage.sets.returntoravnica.Counterflux {
 
     public Counterflux(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "C15";
     }
 

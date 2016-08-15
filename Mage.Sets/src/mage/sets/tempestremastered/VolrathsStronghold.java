@@ -38,7 +38,7 @@ public class VolrathsStronghold extends mage.sets.stronghold.VolrathsStronghold 
 
     public VolrathsStronghold(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 248;
+        this.cardNumber = "248";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.MYTHIC;
     }

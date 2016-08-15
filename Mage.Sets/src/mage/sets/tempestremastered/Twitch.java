@@ -37,7 +37,7 @@ public class Twitch extends mage.sets.worldwake.Twitch {
 
     public Twitch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "TPR";
     }
 

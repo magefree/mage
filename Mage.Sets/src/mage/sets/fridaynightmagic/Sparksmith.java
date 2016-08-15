@@ -38,7 +38,7 @@ public class Sparksmith extends mage.sets.onslaught.Sparksmith {
 
     public Sparksmith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

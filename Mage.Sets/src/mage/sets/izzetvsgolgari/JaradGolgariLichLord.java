@@ -37,7 +37,7 @@ public class JaradGolgariLichLord extends mage.sets.returntoravnica.JaradGolgari
 
     public JaradGolgariLichLord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "DDJ";
     }
 

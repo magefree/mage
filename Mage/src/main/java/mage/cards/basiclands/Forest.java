@@ -38,6 +38,10 @@ import mage.abilities.mana.GreenManaAbility;
 public abstract class Forest extends BasicLand {
 
     public Forest(UUID ownerId, int cardNumber) {
+        this(ownerId, String.valueOf(cardNumber));
+    }
+
+    public Forest(UUID ownerId, String cardNumber) {
         super(ownerId, cardNumber, "Forest", new GreenManaAbility());
     }
 

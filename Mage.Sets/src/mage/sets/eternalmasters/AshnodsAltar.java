@@ -37,7 +37,7 @@ public class AshnodsAltar extends mage.sets.fifthedition.AshnodsAltar {
 
     public AshnodsAltar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "EMA";
     }
 

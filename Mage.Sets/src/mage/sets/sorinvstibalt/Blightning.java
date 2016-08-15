@@ -37,7 +37,7 @@ public class Blightning extends mage.sets.shardsofalara.Blightning {
 
     public Blightning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "DDK";
     }
 

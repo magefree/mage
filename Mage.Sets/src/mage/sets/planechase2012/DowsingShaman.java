@@ -37,7 +37,7 @@ public class DowsingShaman extends mage.sets.ravnica.DowsingShaman {
 
     public DowsingShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "PC2";
     }
 

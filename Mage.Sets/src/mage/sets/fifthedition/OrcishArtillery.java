@@ -37,7 +37,7 @@ public class OrcishArtillery extends mage.sets.seventhedition.OrcishArtillery {
 
     public OrcishArtillery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 253;
+        this.cardNumber = "253";
         this.expansionSetCode = "5ED";
     }
 

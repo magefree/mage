@@ -29,6 +29,7 @@ package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -96,4 +97,33 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Primal Clay", 1);
     }
 
+    @Test
+    public void testShouldNotCopyP1P1Counters() {
+        addCard(Zone.BATTLEFIELD, playerA, "Sylvan Advocate", 1); // {1}{G} 2/3 vigilance
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.HAND, playerA, "Battlegrowth"); // {G} instant - Put a +1/+1 counter on target creature.
+        
+        // Whenever Identity Thief attacks, you may exile another target nontoken creature.
+        //   If you do, Identity Thief becomes a copy of that creature until end of turn.
+        //   Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerB, "Identity Thief"); // {2}{U}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Battlegrowth");
+        addTarget(playerA, "Sylvan Advocate");
+        
+        attack(2, playerB, "Identity Thief");
+        addTarget(playerB, "Sylvan Advocate");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertExileCount(playerA, 1);
+        assertExileCount("Sylvan Advocate", 1);
+
+        assertGraveyardCount(playerA, "Battlegrowth", 1);
+        assertPermanentCount(playerB, "Identity Thief", 0);
+        assertPermanentCount(playerB, "Sylvan Advocate", 1);
+        assertCounterCount(playerB, "Sylvan Advocate", CounterType.P1P1, 0);
+        assertPowerToughness(playerB, "Sylvan Advocate", 2, 3); // finds it with 3 power 4 toughness
+    }
 }

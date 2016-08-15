@@ -37,7 +37,7 @@ public class HeartlessHidetsugu extends mage.sets.betrayersofkamigawa.HeartlessH
 
     public HeartlessHidetsugu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "CNS";
     }
 

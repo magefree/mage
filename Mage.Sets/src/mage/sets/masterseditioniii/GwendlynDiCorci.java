@@ -37,7 +37,7 @@ public class GwendlynDiCorci extends mage.sets.legends.GwendlynDiCorci {
 
     public GwendlynDiCorci(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "ME3";
     }
 

@@ -37,7 +37,7 @@ public class ReturnedCentaur extends mage.sets.theros.ReturnedCentaur {
 
     public ReturnedCentaur(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "ORI";
     }
 

@@ -39,7 +39,7 @@ public class MountainYeti extends mage.sets.legends.MountainYeti {
 
     public MountainYeti(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.COMMON;
     }

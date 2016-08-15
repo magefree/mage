@@ -37,7 +37,7 @@ public class ForgottenLore extends mage.sets.masterseditionii.ForgottenLore {
 
     public ForgottenLore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "ICE";
     }
 

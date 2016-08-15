@@ -38,7 +38,7 @@ public class SoldeviSimulacrum extends mage.sets.masterseditionii.SoldeviSimulac
 
     public SoldeviSimulacrum(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 314;
+        this.cardNumber = "314";
         this.expansionSetCode = "ICE";
     }
 

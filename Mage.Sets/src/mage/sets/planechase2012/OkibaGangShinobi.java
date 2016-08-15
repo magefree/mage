@@ -37,7 +37,7 @@ public class OkibaGangShinobi extends mage.sets.betrayersofkamigawa.OkibaGangShi
 
     public OkibaGangShinobi(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "PC2";
     }
 

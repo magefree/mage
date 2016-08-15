@@ -38,7 +38,7 @@ public class ThrullRetainer extends mage.sets.fifthedition.ThrullRetainer {
 
     public ThrullRetainer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.COMMON;
     }

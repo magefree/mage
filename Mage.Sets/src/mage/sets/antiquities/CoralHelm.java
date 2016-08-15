@@ -38,7 +38,7 @@ public class CoralHelm extends mage.sets.masterseditioniv.CoralHelm {
 
     public CoralHelm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.RARE;
     }

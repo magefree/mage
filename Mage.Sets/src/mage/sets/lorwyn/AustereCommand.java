@@ -37,7 +37,7 @@ public class AustereCommand extends mage.sets.commander.AustereCommand {
 
     public AustereCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "LRW";
     }
 

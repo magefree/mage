@@ -37,7 +37,7 @@ public class ElvishScrapper extends mage.sets.onslaught.ElvishScrapper {
 
     public ElvishScrapper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 245;
+        this.cardNumber = "245";
         this.expansionSetCode = "8ED";
     }
 

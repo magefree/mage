@@ -37,7 +37,7 @@ public class KolaghanTheStormsFury extends mage.sets.fatereforged.KolaghanTheSto
 
     public KolaghanTheStormsFury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "PTC";
     }
 

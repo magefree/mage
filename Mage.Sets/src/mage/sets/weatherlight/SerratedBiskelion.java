@@ -37,7 +37,7 @@ public class SerratedBiskelion extends mage.sets.elspethvstezzeret.SerratedBiske
 
     public SerratedBiskelion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "WTH";
     }
 

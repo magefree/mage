@@ -40,7 +40,7 @@ public class SerraAngel extends mage.sets.tenthedition.SerraAngel {
     public SerraAngel(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "M10";
     }
 

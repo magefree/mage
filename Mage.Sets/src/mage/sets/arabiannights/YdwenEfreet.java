@@ -37,7 +37,7 @@ public class YdwenEfreet extends mage.sets.mastersedition.YdwenEfreet {
 
     public YdwenEfreet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "ARN";
     }
 

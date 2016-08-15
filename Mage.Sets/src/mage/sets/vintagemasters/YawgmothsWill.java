@@ -38,7 +38,7 @@ public class YawgmothsWill extends mage.sets.urzassaga.YawgmothsWill {
 
     public YawgmothsWill(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.MYTHIC;
     }

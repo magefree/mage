@@ -38,7 +38,7 @@ public class PowderKeg extends mage.sets.magicplayerrewards.PowderKeg {
 
     public PowderKeg(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "UDS";
         this.rarity = Rarity.RARE;
     }

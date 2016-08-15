@@ -37,7 +37,7 @@ public class SeismicAssault extends mage.sets.seventhedition.SeismicAssault {
 
     public SeismicAssault(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "8ED";
     }
 

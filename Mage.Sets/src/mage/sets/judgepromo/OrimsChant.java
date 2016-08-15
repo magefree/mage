@@ -37,7 +37,7 @@ public class OrimsChant extends mage.sets.planeshift.OrimsChant {
 
     public OrimsChant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "JR";
     }
 

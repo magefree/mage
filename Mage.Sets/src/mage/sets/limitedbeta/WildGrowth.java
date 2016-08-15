@@ -37,7 +37,7 @@ public class WildGrowth extends mage.sets.iceage.WildGrowth {
 
     public WildGrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "LEB";
     }
 

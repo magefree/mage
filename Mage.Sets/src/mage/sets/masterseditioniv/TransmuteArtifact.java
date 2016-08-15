@@ -38,7 +38,7 @@ public class TransmuteArtifact extends mage.sets.antiquities.TransmuteArtifact {
 
     public TransmuteArtifact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.RARE;
     }

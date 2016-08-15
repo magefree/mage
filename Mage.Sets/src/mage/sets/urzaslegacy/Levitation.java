@@ -36,7 +36,7 @@ public class Levitation extends mage.sets.magic2012.Levitation {
 
     public Levitation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "ULG";
     }
 

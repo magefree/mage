@@ -37,7 +37,7 @@ public class RadjanSpirit extends mage.sets.fifthedition.RadjanSpirit {
 
     public RadjanSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 245;
+        this.cardNumber = "245";
         this.expansionSetCode = "6ED";
     }
 

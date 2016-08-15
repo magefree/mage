@@ -38,7 +38,7 @@ public class Lynx extends mage.sets.portalsecondage.Lynx {
 
     public Lynx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "S99";
         this.rarity = Rarity.UNCOMMON;
     }

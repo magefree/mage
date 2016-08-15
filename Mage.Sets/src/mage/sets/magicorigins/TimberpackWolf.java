@@ -37,7 +37,7 @@ public class TimberpackWolf extends mage.sets.magic2013.TimberpackWolf {
 
     public TimberpackWolf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 200;
+        this.cardNumber = "200";
         this.expansionSetCode = "ORI";
     }
 

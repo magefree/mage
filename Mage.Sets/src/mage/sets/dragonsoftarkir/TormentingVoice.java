@@ -37,7 +37,7 @@ public class TormentingVoice extends mage.sets.khansoftarkir.TormentingVoice {
 
     public TormentingVoice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "DTK";
     }
 

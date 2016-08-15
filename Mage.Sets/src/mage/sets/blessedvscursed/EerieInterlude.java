@@ -40,12 +40,15 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentMeld;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTargets;
@@ -105,7 +108,18 @@ class EerieInterludeEffect extends OneShotEffect {
 
             Cards cardsToReturn = new CardsImpl();
             for (Card exiled : toExile) {
-                if (((Permanent) exiled).getZoneChangeCounter(game) == game.getState().getZoneChangeCounter(exiled.getId()) - 1) {
+                if (exiled instanceof PermanentMeld) {
+                    MeldCard meldCard = (MeldCard) ((PermanentCard) exiled).getCard();
+                    Card topCard = meldCard.getTopHalfCard();
+                    Card bottomCard = meldCard.getBottomHalfCard();
+                    if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter()) {
+                        cardsToReturn.add(topCard);
+                    }
+                    if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter()) {
+                        cardsToReturn.add(bottomCard);
+                    }
+                }
+                else if (exiled.getZoneChangeCounter(game) == game.getState().getZoneChangeCounter(exiled.getId()) - 1) {
                     cardsToReturn.add(exiled);
                 }
             }

@@ -37,7 +37,7 @@ public class LeoninBladetrap extends mage.sets.commander2013.LeoninBladetrap {
 
     public LeoninBladetrap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 192;
+        this.cardNumber = "192";
         this.expansionSetCode = "MRD";
     }
 

@@ -37,7 +37,7 @@ public class TowerOfFortunes extends mage.sets.mirrodin.TowerOfFortunes {
 
     public TowerOfFortunes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 268;
+        this.cardNumber = "268";
         this.expansionSetCode = "C13";
     }
 

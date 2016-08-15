@@ -29,15 +29,14 @@ package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -46,11 +45,10 @@ import mage.target.common.TargetOpponent;
  */
 public class StensiaBanquet extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Vampires you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Vampires you control");
 
     static {
-        filter.add(new SubtypePredicate("Vampires"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new SubtypePredicate("Vampire"));
     }
 
     public StensiaBanquet(UUID ownerId) {
@@ -58,7 +56,9 @@ public class StensiaBanquet extends CardImpl {
         this.expansionSetCode = "EMN";
 
         // Stensia Banquet deals damage to target opponent equal to the number of Vampires you control.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
+        Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter));
+        effect.setText("{this} deals damage to target opponent equal to the number of Vampires you control");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Draw a card.

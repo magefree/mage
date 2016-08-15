@@ -37,7 +37,7 @@ public class LordOfTheUndead extends mage.sets.tenthedition.LordOfTheUndead {
 
     public LordOfTheUndead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "8ED";
     }
 

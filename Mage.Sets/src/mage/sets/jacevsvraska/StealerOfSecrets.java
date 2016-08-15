@@ -37,7 +37,7 @@ public class StealerOfSecrets extends mage.sets.returntoravnica.StealerOfSecrets
 
     public StealerOfSecrets(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DDM";
     }
 

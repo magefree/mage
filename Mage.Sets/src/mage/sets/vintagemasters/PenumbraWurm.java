@@ -38,7 +38,7 @@ public class PenumbraWurm extends mage.sets.apocalypse.PenumbraWurm {
 
     public PenumbraWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = "224";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

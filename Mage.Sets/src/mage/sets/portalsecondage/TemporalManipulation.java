@@ -41,7 +41,7 @@ public class TemporalManipulation extends CardImpl {
 
     public TemporalManipulation(UUID ownerId) {
         super(ownerId, 54, "Temporal Manipulation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
 
         // Take an extra turn after this one.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());

@@ -37,7 +37,7 @@ public class Endbringer extends mage.sets.oathofthegatewatch.Endbringer {
 
     public Endbringer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "MLP";
     }
 

@@ -37,7 +37,7 @@ public class Ichorid extends mage.sets.torment.Ichorid {
 
     public Ichorid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "EMA";
     }
 

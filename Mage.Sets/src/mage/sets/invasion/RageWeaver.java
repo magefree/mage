@@ -37,7 +37,7 @@ public class RageWeaver extends mage.sets.tenthedition.RageWeaver {
 
     public RageWeaver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "INV";
     }
 

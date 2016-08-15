@@ -37,7 +37,7 @@ public class FusionElemental extends mage.sets.conflux.FusionElemental {
 
     public FusionElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "PC2";
     }
 

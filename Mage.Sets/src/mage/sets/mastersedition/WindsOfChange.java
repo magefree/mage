@@ -38,7 +38,7 @@ public class WindsOfChange extends mage.sets.fifthedition.WindsOfChange {
 
     public WindsOfChange(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.UNCOMMON;
     }

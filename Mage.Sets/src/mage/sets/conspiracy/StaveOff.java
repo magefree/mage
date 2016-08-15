@@ -37,7 +37,7 @@ public class StaveOff extends mage.sets.magic2012.StaveOff {
 
     public StaveOff(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "CNS";
     }
 

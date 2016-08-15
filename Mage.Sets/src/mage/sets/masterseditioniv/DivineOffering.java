@@ -37,7 +37,7 @@ public class DivineOffering extends mage.sets.mirrodinbesieged.DivineOffering {
 
     public DivineOffering(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "ME4";
     }
 

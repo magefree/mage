@@ -37,7 +37,7 @@ public class PhantasmalTerrain extends mage.sets.limitedalpha.PhantasmalTerrain 
 
     public PhantasmalTerrain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "5ED";
     }
 

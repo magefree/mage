@@ -37,7 +37,7 @@ public class FlowOfIdeas extends mage.sets.shadowmoor.FlowOfIdeas {
 
     public FlowOfIdeas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "RAV";
     }
 

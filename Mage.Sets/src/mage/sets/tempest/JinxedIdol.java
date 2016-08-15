@@ -37,7 +37,7 @@ public class JinxedIdol extends mage.sets.magic2011.JinxedIdol {
 
     public JinxedIdol(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 283;
+        this.cardNumber = "283";
         this.expansionSetCode = "TMP";
     }
 

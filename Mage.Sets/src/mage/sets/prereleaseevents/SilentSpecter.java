@@ -38,7 +38,7 @@ public class SilentSpecter extends mage.sets.onslaught.SilentSpecter {
 
     public SilentSpecter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

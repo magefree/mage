@@ -37,7 +37,7 @@ public class AnaxAndCymede extends mage.sets.theros.AnaxAndCymede {
 
     public AnaxAndCymede(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DDL";
     }
 

@@ -37,7 +37,7 @@ public class HowlOfTheNightPack extends mage.sets.magic2010.HowlOfTheNightPack {
 
     public HowlOfTheNightPack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "SHM";
     }
 

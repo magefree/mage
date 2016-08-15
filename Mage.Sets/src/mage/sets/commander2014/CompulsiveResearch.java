@@ -37,7 +37,7 @@ public class CompulsiveResearch extends mage.sets.ravnica.CompulsiveResearch {
 
     public CompulsiveResearch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "C14";
     }
 

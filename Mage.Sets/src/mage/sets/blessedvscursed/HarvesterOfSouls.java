@@ -37,7 +37,7 @@ public class HarvesterOfSouls extends mage.sets.avacynrestored.HarvesterOfSouls 
 
     public HarvesterOfSouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "DDQ";
     }
 

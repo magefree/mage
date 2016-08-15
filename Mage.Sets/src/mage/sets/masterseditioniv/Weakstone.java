@@ -37,7 +37,7 @@ public class Weakstone extends mage.sets.antiquities.Weakstone {
 
     public Weakstone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "ME4";
     }
 

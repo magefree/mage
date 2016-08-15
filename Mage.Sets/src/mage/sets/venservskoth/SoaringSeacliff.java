@@ -37,7 +37,7 @@ public class SoaringSeacliff extends mage.sets.zendikar.SoaringSeacliff {
 
     public SoaringSeacliff(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "DDI";
     }
 

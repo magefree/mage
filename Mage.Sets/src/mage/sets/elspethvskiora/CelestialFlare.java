@@ -37,7 +37,7 @@ public class CelestialFlare extends mage.sets.magic2014.CelestialFlare {
 
     public CelestialFlare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "DDO";
     }
 

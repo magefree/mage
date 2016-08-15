@@ -38,7 +38,7 @@ public class RighteousAvengers extends mage.sets.legends.RighteousAvengers {
 
     public RighteousAvengers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class BadMoon extends mage.sets.fifthedition.BadMoon {
 
     public BadMoon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "LEA";
     }
 

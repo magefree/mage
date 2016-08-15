@@ -37,7 +37,7 @@ public class ShuCavalry extends mage.sets.masterseditioniii.ShuCavalry {
 
     public ShuCavalry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "PTK";
     }
 

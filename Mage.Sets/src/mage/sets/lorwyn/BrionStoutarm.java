@@ -37,7 +37,7 @@ public class BrionStoutarm extends mage.sets.commander.BrionStoutarm {
 
     public BrionStoutarm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 246;
+        this.cardNumber = "246";
         this.expansionSetCode = "LRW";
     }
 

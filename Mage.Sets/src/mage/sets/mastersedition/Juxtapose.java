@@ -38,7 +38,7 @@ public class Juxtapose extends mage.sets.fifthedition.Juxtapose {
 
     public Juxtapose(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.UNCOMMON;
     }

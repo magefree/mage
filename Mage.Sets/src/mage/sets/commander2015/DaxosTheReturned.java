@@ -102,6 +102,7 @@ class DaxosSpiritToken extends Token {
     DaxosSpiritToken() {
         super("Spirit", "white and black Spirit enchantment creature token with \"This creature's power and toughness are each equal to the number of experience counters you have.\"");
         this.setOriginalExpansionSetCode("C15");
+        setTokenType(2);
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);

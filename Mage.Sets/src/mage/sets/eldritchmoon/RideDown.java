@@ -37,7 +37,7 @@ public class RideDown extends mage.sets.khansoftarkir.RideDown {
 
     public RideDown(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "EMN";
     }
 

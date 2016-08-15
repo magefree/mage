@@ -6,7 +6,7 @@ public class SylvanCaryatid extends mage.sets.theros.SylvanCaryatid {
     
     public SylvanCaryatid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "MBP";
     }
     

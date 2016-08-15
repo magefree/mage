@@ -38,7 +38,7 @@ public class GenjuOfTheSpires extends mage.sets.betrayersofkamigawa.GenjuOfTheSp
 
     public GenjuOfTheSpires(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "ARENA";
         this.rarity = Rarity.SPECIAL;
     }

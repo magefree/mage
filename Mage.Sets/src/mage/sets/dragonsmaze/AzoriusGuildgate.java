@@ -37,7 +37,7 @@ public class AzoriusGuildgate extends mage.sets.returntoravnica.AzoriusGuildgate
 
     public AzoriusGuildgate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "DGM";
     }
 

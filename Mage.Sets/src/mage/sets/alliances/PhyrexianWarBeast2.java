@@ -37,7 +37,7 @@ public class PhyrexianWarBeast2 extends PhyrexianWarBeast1 {
 
     public PhyrexianWarBeast2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
     }
 
     public PhyrexianWarBeast2(final PhyrexianWarBeast2 card) {

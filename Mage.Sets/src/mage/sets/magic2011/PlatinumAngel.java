@@ -39,7 +39,7 @@ public class PlatinumAngel extends mage.sets.magic2010.PlatinumAngel {
 
     public PlatinumAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 212;
+        this.cardNumber = "212";
         this.expansionSetCode = "M11";
         this.rarity = Rarity.MYTHIC;
     }

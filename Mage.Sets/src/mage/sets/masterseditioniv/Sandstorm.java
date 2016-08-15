@@ -37,7 +37,7 @@ public class Sandstorm extends mage.sets.fourthedition.Sandstorm {
 
     public Sandstorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "ME4";
     }
 

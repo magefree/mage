@@ -37,7 +37,7 @@ public class AshesToAshes extends mage.sets.fifthedition.AshesToAshes {
 
     public AshesToAshes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "4ED";
     }
 

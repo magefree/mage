@@ -37,7 +37,7 @@ public class TwilightShepherd extends mage.sets.shadowmoor.TwilightShepherd {
 
     public TwilightShepherd(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DD3DVD";
     }
 

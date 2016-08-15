@@ -77,8 +77,10 @@ public class Cryptbreaker extends CardImpl {
         this.addAbility(ability);
 
         // Tap three untapped Zombies you control: You draw a card and you lose 1 life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true)));
-        Effect effect = new LoseLifeSourceControllerEffect(1);
+        Effect effect = new DrawCardSourceControllerEffect(1);
+        effect.setText("You draw a card");
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true)));
+        effect = new LoseLifeSourceControllerEffect(1);
         effect.setText("and you lose 1 life");
         ability.addEffect(effect);
         this.addAbility(ability);

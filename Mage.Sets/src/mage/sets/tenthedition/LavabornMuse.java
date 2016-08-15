@@ -37,7 +37,7 @@ public class LavabornMuse extends mage.sets.sorinvstibalt.LavabornMuse {
 
     public LavabornMuse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "10E";
     }
 

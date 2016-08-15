@@ -37,7 +37,7 @@ public class PlowUnder extends mage.sets.urzasdestiny.PlowUnder {
 
     public PlowUnder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 272;
+        this.cardNumber = "272";
         this.expansionSetCode = "8ED";
     }
 

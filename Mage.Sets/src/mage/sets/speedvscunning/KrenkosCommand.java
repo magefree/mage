@@ -37,7 +37,7 @@ public class KrenkosCommand extends mage.sets.magic2013.KrenkosCommand {
 
     public KrenkosCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "DDN";
     }
 

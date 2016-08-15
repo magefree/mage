@@ -37,7 +37,7 @@ public class FireServant extends mage.sets.magic2011.FireServant {
 
     public FireServant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "PD2";
     }
 

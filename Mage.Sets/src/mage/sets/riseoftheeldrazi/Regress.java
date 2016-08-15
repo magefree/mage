@@ -38,7 +38,7 @@ public class Regress extends mage.sets.mirrodin.Regress {
 
     public Regress (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "ROE";
     }
 

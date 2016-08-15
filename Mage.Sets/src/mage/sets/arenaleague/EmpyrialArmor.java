@@ -38,7 +38,7 @@ public class EmpyrialArmor extends mage.sets.vintagemasters.EmpyrialArmor {
 
     public EmpyrialArmor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "ARENA";
         this.rarity = Rarity.SPECIAL;
     }

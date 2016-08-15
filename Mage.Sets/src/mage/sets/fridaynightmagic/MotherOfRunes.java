@@ -37,7 +37,7 @@ public class MotherOfRunes extends mage.sets.urzaslegacy.MotherOfRunes {
 
     public MotherOfRunes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "FNMP";
     }
 

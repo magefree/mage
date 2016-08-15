@@ -37,7 +37,7 @@ public class TurntimberBasilisk extends mage.sets.zendikar.TurntimberBasilisk {
 
     public TurntimberBasilisk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "DDP";
     }
 

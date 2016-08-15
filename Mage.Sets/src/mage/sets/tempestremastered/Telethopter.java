@@ -38,7 +38,7 @@ public class Telethopter extends mage.sets.tempest.Telethopter {
 
     public Telethopter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.COMMON;
     }

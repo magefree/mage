@@ -37,7 +37,7 @@ public class DacksDuplicate extends mage.sets.vintagemasters.DacksDuplicate {
 
     public DacksDuplicate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "CNS";
     }
 

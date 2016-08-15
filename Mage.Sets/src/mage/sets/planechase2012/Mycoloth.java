@@ -37,7 +37,7 @@ public class Mycoloth extends mage.sets.shardsofalara.Mycoloth {
 
     public Mycoloth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "PC2";
     }
 

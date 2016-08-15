@@ -38,7 +38,7 @@ public class DancingScimitar extends mage.sets.ninthedition.DancingScimitar {
 
     public DancingScimitar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "ARN";
         this.rarity = Rarity.RARE;
     }

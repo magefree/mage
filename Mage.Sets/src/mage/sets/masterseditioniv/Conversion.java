@@ -38,7 +38,7 @@ public class Conversion extends mage.sets.limitedalpha.Conversion {
 
     public Conversion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.RARE;
     }

@@ -37,7 +37,7 @@ public class Karma extends mage.sets.fifthedition.Karma {
 
     public Karma(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 210;
+        this.cardNumber = "210";
         this.expansionSetCode = "3ED";
     }
 

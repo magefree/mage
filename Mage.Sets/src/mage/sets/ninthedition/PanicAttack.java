@@ -37,7 +37,7 @@ public class PanicAttack extends mage.sets.magic2010.PanicAttack {
 
     public PanicAttack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 207;
+        this.cardNumber = "207";
         this.expansionSetCode = "9ED";
     }
 

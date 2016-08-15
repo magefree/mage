@@ -37,7 +37,7 @@ public class RushOfKnowledge extends mage.sets.commander2014.RushOfKnowledge {
 
     public RushOfKnowledge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "SCG";
     }
 

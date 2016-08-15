@@ -38,7 +38,7 @@ public class ShieldOfKaldra extends mage.sets.darksteel.ShieldOfKaldra {
 
     public ShieldOfKaldra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

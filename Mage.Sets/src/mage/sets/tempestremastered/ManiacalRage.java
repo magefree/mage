@@ -37,7 +37,7 @@ public class ManiacalRage extends mage.sets.conflux.ManiacalRage {
 
     public ManiacalRage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "TPR";
     }
 

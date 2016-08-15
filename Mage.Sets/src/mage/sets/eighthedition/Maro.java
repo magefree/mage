@@ -37,7 +37,7 @@ public class Maro extends mage.sets.ninthedition.Maro {
 
     public Maro(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 264;
+        this.cardNumber = "264";
         this.expansionSetCode = "8ED";
     }
 

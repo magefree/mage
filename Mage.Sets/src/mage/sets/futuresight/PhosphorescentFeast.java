@@ -37,7 +37,7 @@ public class PhosphorescentFeast extends mage.sets.eventide.PhosphorescentFeast 
 
     public PhosphorescentFeast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "FUT";
     }
 

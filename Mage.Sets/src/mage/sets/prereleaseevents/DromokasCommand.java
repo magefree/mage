@@ -37,7 +37,7 @@ public class DromokasCommand extends mage.sets.dragonsoftarkir.DromokasCommand {
 
     public DromokasCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "PTC";
     }
 

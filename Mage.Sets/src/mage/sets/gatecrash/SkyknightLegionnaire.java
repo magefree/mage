@@ -37,7 +37,7 @@ public class SkyknightLegionnaire extends mage.sets.ravnica.SkyknightLegionnaire
 
     public SkyknightLegionnaire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 197;
+        this.cardNumber = "197";
         this.expansionSetCode = "GTC";
     }
 

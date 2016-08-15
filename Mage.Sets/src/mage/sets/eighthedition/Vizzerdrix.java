@@ -37,7 +37,7 @@ public class Vizzerdrix extends mage.sets.seventhedition.Vizzerdrix {
 
     public Vizzerdrix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "8ED";
     }
 

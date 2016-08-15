@@ -37,7 +37,7 @@ public class TraumaticVisions extends mage.sets.conflux.TraumaticVisions {
 
     public TraumaticVisions(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "DDN";
     }
 

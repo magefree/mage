@@ -111,6 +111,8 @@ public class CardView extends SimpleCardView {
 
     protected boolean controlledByOwner = true;
 
+    protected Zone zone;
+
     protected boolean rotate;
     protected boolean hideInfo; // controls if the tooltip window is shown (eg. controlled face down morph card)
 
@@ -142,7 +144,7 @@ public class CardView extends SimpleCardView {
      * the card
      */
     public CardView(Card card, Game game, boolean controlled) {
-        this(card, game, controlled, false);
+        this(card, game, controlled, false, false);
     }
 
     /**
@@ -152,22 +154,28 @@ public class CardView extends SimpleCardView {
      * @param controlled is the card view created for the card controller - used
      * for morph / face down cards to know which player may see information for
      * the card
-     * @param showFaceDownCard if true and the card is not on the battelfield,
+     * @param showFaceDownCard if true and the card is not on the battlefield,
      * also a face down card is shown in the view, face down cards will be shown
+     * @param storeZone if true the card zone will be set in the zone attribute.
      */
-    public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard) {
+    public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null);
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
         boolean showFaceUp = true;
         if (game != null) {
+            Zone cardZone = game.getState().getZone(card.getId());
             if (card.isFaceDown(game)) {
                 showFaceUp = false;
-                if (!Zone.BATTLEFIELD.equals(game.getState().getZone(card.getId()))) {
+                if (!Zone.BATTLEFIELD.equals(cardZone)) {
                     if (showFaceDownCard) {
                         showFaceUp = true;
                     }
                 }
+            }
+
+            if (storeZone) {
+                this.zone = cardZone;
             }
         }
         //  boolean showFaceUp = game == null || !card.isFaceDown(game) || (!game.getState().getZone(card.getId()).equals(Zone.BATTLEFIELD) && showFaceDownCard);
@@ -275,7 +283,8 @@ public class CardView extends SimpleCardView {
             this.isToken = true;
             this.mageObjectType = MageObjectType.TOKEN;
             this.rarity = Rarity.COMMON;
-            if (((PermanentToken) card).getToken().getOriginalCardNumber() > 0) {
+            boolean originalCardNumberIsNull = ((PermanentToken) card).getToken().getOriginalCardNumber() == null;
+            if (!originalCardNumberIsNull && !"0".equals(((PermanentToken) card).getToken().getOriginalCardNumber())) {
                 // a token copied from permanent
                 this.expansionSetCode = ((PermanentToken) card).getToken().getOriginalExpansionSetCode();
                 this.cardNumber = ((PermanentToken) card).getToken().getOriginalCardNumber();
@@ -323,7 +332,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(MageObject object) {
-        super(object.getId(), "", 0, false, "", true);
+        super(object.getId(), "", "0", false, "", true);
         this.name = object.getName();
         this.displayName = object.getName();
         if (object instanceof Permanent) {
@@ -367,7 +376,7 @@ public class CardView extends SimpleCardView {
     }
 
     protected CardView() {
-        super(null, "", 0, false, "", true);
+        super(null, "", "0", false, "", true);
     }
 
     public CardView(EmblemView emblem) {
@@ -384,7 +393,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(boolean empty) {
-        super(null, "", 0, false, "");
+        super(null, "", "0", false, "");
         if (!empty) {
             throw new IllegalArgumentException("Not supported.");
         }
@@ -409,7 +418,7 @@ public class CardView extends SimpleCardView {
         if (!controlled) {
             this.rarity = Rarity.COMMON;
             this.expansionSetCode = "";
-            this.cardNumber = 0;
+            this.cardNumber = "0";
         } else {
             this.rarity = card.getRarity();
         }
@@ -433,7 +442,7 @@ public class CardView extends SimpleCardView {
     }
 
     CardView(Token token) {
-        super(token.getId(), "", 0, false, "");
+        super(token.getId(), "", "0", false, "");
         this.isToken = true;
         this.id = token.getId();
         this.name = token.getName();
@@ -552,7 +561,7 @@ public class CardView extends SimpleCardView {
     }
 
     @Override
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
@@ -705,6 +714,10 @@ public class CardView extends SimpleCardView {
 
     public boolean isControlledByOwner() {
         return controlledByOwner;
+    }
+
+    public Zone getZone() {
+        return zone;
     }
 
     public boolean isFlipCard() {

@@ -37,7 +37,7 @@ public class Inheritance extends mage.sets.alliances.Inheritance {
 
     public Inheritance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "ME2";
     }
 

@@ -37,7 +37,7 @@ public class VesuvanDoppelganger extends mage.sets.unlimitededition.VesuvanDoppe
 
     public VesuvanDoppelganger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "MED";
     }
 

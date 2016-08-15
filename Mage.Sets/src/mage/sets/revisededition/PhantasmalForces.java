@@ -37,7 +37,7 @@ public class PhantasmalForces extends mage.sets.fourthedition.PhantasmalForces {
 
     public PhantasmalForces(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "3ED";
     }
 

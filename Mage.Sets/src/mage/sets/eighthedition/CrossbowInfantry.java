@@ -37,7 +37,7 @@ public class CrossbowInfantry extends mage.sets.ninthedition.CrossbowInfantry {
 
     public CrossbowInfantry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "8ED";
     }
 

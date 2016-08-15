@@ -38,7 +38,7 @@ public class SlithFirewalker extends mage.sets.mirrodin.SlithFirewalker {
 
     public SlithFirewalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "SUS";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class AshnodsBattleGear extends mage.sets.antiquities.AshnodsBattleGear {
 
     public AshnodsBattleGear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 314;
+        this.cardNumber = "314";
         this.expansionSetCode = "4ED";
     }
 

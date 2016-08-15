@@ -37,7 +37,7 @@ public class ZombieGoliath extends mage.sets.magic2012.ZombieGoliath {
 
     public ZombieGoliath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "M13";
     }
 

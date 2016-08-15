@@ -38,7 +38,7 @@ public class ReachOfBranches extends mage.sets.modernmasters.ReachOfBranches {
 
     public ReachOfBranches(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "MOR";
         this.rarity = Rarity.RARE;
     }

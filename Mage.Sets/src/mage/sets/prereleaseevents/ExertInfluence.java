@@ -37,7 +37,7 @@ public class ExertInfluence extends mage.sets.battleforzendikar.ExertInfluence {
 
     public ExertInfluence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 260;
+        this.cardNumber = "260";
         this.expansionSetCode = "PTC";
     }
 

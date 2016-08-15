@@ -38,7 +38,7 @@ public class XathridGorgon extends mage.sets.magic2013.XathridGorgon {
 
     public XathridGorgon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

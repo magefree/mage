@@ -37,7 +37,7 @@ public class Cleanse extends mage.sets.legends.Cleanse {
 
     public Cleanse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "ME3";
     }
 

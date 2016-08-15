@@ -37,7 +37,7 @@ public class QuietDisrepair extends mage.sets.planechase2012.QuietDisrepair {
 
     public QuietDisrepair(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "FUT";
     }
 

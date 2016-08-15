@@ -37,7 +37,7 @@ public class Abduction extends mage.sets.weatherlight.Abduction {
 
     public Abduction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "6ED";
     }
 

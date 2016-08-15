@@ -37,7 +37,7 @@ public class SkirsdagHighPriest extends mage.sets.innistrad.SkirsdagHighPriest {
 
     public SkirsdagHighPriest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "C14";
     }
 

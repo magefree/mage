@@ -38,7 +38,7 @@ public class UrzasRage extends mage.sets.phyrexiavsthecoalition.UrzasRage {
 
     public UrzasRage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "INV";
         this.rarity = Rarity.RARE;
     }

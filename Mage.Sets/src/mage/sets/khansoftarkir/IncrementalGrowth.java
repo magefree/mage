@@ -37,7 +37,7 @@ public class IncrementalGrowth extends mage.sets.modernmasters.IncrementalGrowth
 
     public IncrementalGrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "KTK";
     }
 

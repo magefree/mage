@@ -37,7 +37,7 @@ public class TravelersAmulet extends mage.sets.innistrad.TravelersAmulet {
 
     public TravelersAmulet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "THS";
     }
 

@@ -37,7 +37,7 @@ public class GiantStrength extends mage.sets.tempest.GiantStrength {
 
     public GiantStrength(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = "233";
         this.expansionSetCode = "5ED";
     }
 

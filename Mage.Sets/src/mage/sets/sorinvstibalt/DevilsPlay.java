@@ -37,7 +37,7 @@ public class DevilsPlay extends mage.sets.innistrad.DevilsPlay {
 
     public DevilsPlay(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "DDK";
     }
 

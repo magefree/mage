@@ -37,7 +37,7 @@ public class Tetravus extends mage.sets.antiquities.Tetravus {
 
     public Tetravus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = "233";
         this.expansionSetCode = "ME4";
     }
 

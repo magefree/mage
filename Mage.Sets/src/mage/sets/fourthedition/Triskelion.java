@@ -37,7 +37,7 @@ public class Triskelion extends mage.sets.magic2011.Triskelion {
 
     public Triskelion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 372;
+        this.cardNumber = "372";
         this.expansionSetCode = "4ED";
     }
 

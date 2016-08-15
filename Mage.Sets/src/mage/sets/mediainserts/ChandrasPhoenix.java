@@ -33,7 +33,7 @@ public class ChandrasPhoenix extends mage.sets.magic2012.ChandrasPhoenix {
 
     public ChandrasPhoenix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "MBP";
     }
 

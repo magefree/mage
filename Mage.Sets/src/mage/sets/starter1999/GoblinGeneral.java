@@ -38,7 +38,7 @@ public class GoblinGeneral extends mage.sets.vintagemasters.GoblinGeneral {
 
     public GoblinGeneral(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "S99";
         this.rarity = Rarity.UNCOMMON;
     }

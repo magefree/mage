@@ -37,7 +37,7 @@ public class KitchenFinks extends mage.sets.shadowmoor.KitchenFinks {
 
     public KitchenFinks(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "FNMP";
     }
 

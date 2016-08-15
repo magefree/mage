@@ -37,7 +37,7 @@ public class IzzetGuildgate extends mage.sets.returntoravnica.IzzetGuildgate {
 
     public IzzetGuildgate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 297;
+        this.cardNumber = "297";
         this.expansionSetCode = "C13";
     }
 

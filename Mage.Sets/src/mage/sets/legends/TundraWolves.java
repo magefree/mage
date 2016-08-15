@@ -37,7 +37,7 @@ public class TundraWolves extends mage.sets.tenthedition.TundraWolves {
 
     public TundraWolves(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 209;
+        this.cardNumber = "209";
         this.expansionSetCode = "LEG";
     }
 

@@ -37,7 +37,7 @@ public class UndeadWarchief extends mage.sets.planechase.UndeadWarchief {
 
     public UndeadWarchief(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "TSB";
     }
 

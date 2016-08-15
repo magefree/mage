@@ -37,7 +37,7 @@ public class PlanarOutburst extends mage.sets.battleforzendikar.PlanarOutburst {
 
     public PlanarOutburst(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 283;
+        this.cardNumber = "283";
         this.expansionSetCode = "PTC";
     }
 

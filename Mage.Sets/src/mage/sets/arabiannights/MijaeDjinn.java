@@ -37,7 +37,7 @@ public class MijaeDjinn extends mage.sets.masterseditioniv.MijaeDjinn {
 
     public MijaeDjinn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "ARN";
     }
 

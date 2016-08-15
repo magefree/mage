@@ -37,7 +37,7 @@ public class BrambleElemental extends mage.sets.ravnica.BrambleElemental {
 
     public BrambleElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "PC2";
     }
 

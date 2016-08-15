@@ -38,7 +38,7 @@ public class AnabaAncestor extends mage.sets.homelands.AnabaAncestor {
 
     public AnabaAncestor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

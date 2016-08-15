@@ -38,7 +38,7 @@ public class ArmadilloCloak extends mage.sets.invasion.ArmadilloCloak {
 
     public ArmadilloCloak(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

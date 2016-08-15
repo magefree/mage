@@ -37,7 +37,7 @@ public class JeeringInstigator extends mage.sets.khansoftarkir.JeeringInstigator
 
     public JeeringInstigator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "UGIN";
     }
 

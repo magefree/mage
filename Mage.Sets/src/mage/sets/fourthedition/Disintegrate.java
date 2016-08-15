@@ -37,7 +37,7 @@ public class Disintegrate extends mage.sets.limitedalpha.Disintegrate {
 
     public Disintegrate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 203;
+        this.cardNumber = "203";
         this.expansionSetCode = "4ED";
     }
 

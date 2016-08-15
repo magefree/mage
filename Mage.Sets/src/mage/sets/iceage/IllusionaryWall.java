@@ -37,7 +37,7 @@ public class IllusionaryWall extends mage.sets.mastersedition.IllusionaryWall {
 
     public IllusionaryWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "ICE";
     }
 

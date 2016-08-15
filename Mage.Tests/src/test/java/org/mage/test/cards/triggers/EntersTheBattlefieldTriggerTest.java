@@ -29,6 +29,7 @@ package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -227,4 +228,134 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
     }
 
+    // Test self trigger
+    @Test
+    public void testNoxiousGhoul1() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        // Whenever Noxious Ghoul or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.
+        addCard(Zone.HAND, playerA, "Noxious Ghoul", 1); // {3}{B}{B}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Zephyr Falcon", 1); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Scathe Zombies", 1); // 2/2 Zombie
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Noxious Ghoul");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+
+        execute();
+
+        assertPermanentCount(playerA, "Noxious Ghoul", 1);
+        assertPowerToughness(playerB, "Silvercoat Lion", 1, 1);
+        assertPowerToughness(playerB, "Scathe Zombies", 2, 2);
+        assertGraveyardCount(playerB, "Zephyr Falcon", 1);
+
+    }
+
+    // Test another zombie trigger
+    @Test
+    public void testNoxiousGhoul2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
+        // Whenever Noxious Ghoul or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.
+        addCard(Zone.HAND, playerA, "Noxious Ghoul", 1); // 3/3 Zombie {3}{B}{B}
+        addCard(Zone.HAND, playerA, "Scathe Zombies", 1); // 2/2 Zombie {2}{B}
+
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1); // 2/2
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+        // Changeling (This card is every creature type.)
+        // Creatures target player controls get -2/-0 and lose all creature types until end of turn.
+        addCard(Zone.HAND, playerB, "Ego Erasure", 1); // {2}{U}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Zephyr Falcon", 1); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Scathe Zombies", 1); // 2/2 Zombie {2}{B}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Noxious Ghoul");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Ego Erasure", "targetPlayer=PlayerA", "Whenever");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scathe Zombies");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+
+        execute();
+
+        assertPermanentCount(playerA, "Noxious Ghoul", 1);
+        assertGraveyardCount(playerB, "Ego Erasure", 1);
+        assertPowerToughness(playerA, "Noxious Ghoul", -1, 1);// -2/0 from Ego Erasure / -2/0 from the 2 zombies coming into play
+        assertPermanentCount(playerA, "Scathe Zombies", 1);
+        assertPowerToughness(playerB, "Scathe Zombies", 2, 2);
+        assertGraveyardCount(playerB, "Zephyr Falcon", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+    }
+
+    // Test copy of Noxious Ghoul
+    @Test
+    public void testCopyNoxiousGhoul() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
+        // Whenever Noxious Ghoul or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.
+        addCard(Zone.HAND, playerA, "Noxious Ghoul", 1); // 3/3 Zombie {3}{B}{B}
+        // You may have Clone enter the battlefield as a copy of any creature on the battlefield.
+        addCard(Zone.HAND, playerA, "Clone", 1); // 0/0 Shapeshifter {3}{U}
+
+        addCard(Zone.BATTLEFIELD, playerA, "Carnivorous Plant", 1); // 4/5
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
+        // Changeling (This card is every creature type.)
+        // Creatures target player controls get -2/-0 and lose all creature types until end of turn.
+        addCard(Zone.HAND, playerB, "Ego Erasure", 1); // {2}{U}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Zephyr Falcon", 1); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Carnivorous Plant", 1); // 4/5
+        addCard(Zone.BATTLEFIELD, playerB, "Scathe Zombies", 1); // 2/2 Zombie {2}{B}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Noxious Ghoul");
+        /*
+        * playerA's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 3/4
+        * playerB's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 3/4
+        */
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, "Noxious Ghoul");
+        /*
+        * playerA's Carnivorous Plant will get -1/-1 from Clone -> 2/3
+        * playerB's Carnivorous Plant will get -1/-1 from Clone -> 2/3
+        */
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Ego Erasure", "targetPlayer=PlayerA", "Whenever");
+        /*
+        * playerA' Noxious Ghoul will get -2/0 -> 1/3
+        * playerA's Carnivorous Plant will get -2/0 > 0/3
+        * playerA' Noxious Ghoul will get -1/-1 from Clone -> 0/2
+        * playerA' Noxious Ghoul will get -1/-1 from itself -> -1/1
+        * playerA's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> -1/2
+        * playerB's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 1/2
+        */
+        setStopAt(1, PhaseStep.END_TURN);
+
+        execute();
+
+        assertPermanentCount(playerA, "Noxious Ghoul", 2);
+        assertGraveyardCount(playerB, "Ego Erasure", 1);
+        assertPowerToughness(playerA, "Noxious Ghoul", -1, 1, Filter.ComparisonScope.All);//  -1/-1 from the second  Noxious Ghoul also if it's no zombie
+
+        assertGraveyardCount(playerB, "Zephyr Falcon", 1);
+        assertPowerToughness(playerB, "Carnivorous Plant", 1, 2);
+        assertPowerToughness(playerA, "Carnivorous Plant", -1, 2);
+    }
+    
+    @Test
+    public void testHearthcageGiant() {
+        // {6}{R}{R} Creature — Giant Warrior
+        //When Hearthcage Giant enters the battlefield, put two 3/1 red Elemental Shaman creature tokens onto the battlefield.
+        //Sacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
+        addCard(Zone.HAND,playerA,"Hearthcage Giant");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hearthcage Giant");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertPermanentCount(playerA, "Hearthcage Giant", 1);
+        assertPermanentCount(playerA, "Elemental Shaman", 2);
+        assertPowerToughness(playerA, "Elemental Shaman", 3, 1);
+    }
 }

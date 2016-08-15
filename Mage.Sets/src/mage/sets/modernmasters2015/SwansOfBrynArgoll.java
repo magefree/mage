@@ -37,7 +37,7 @@ public class SwansOfBrynArgoll extends mage.sets.shadowmoor.SwansOfBrynArgoll {
 
     public SwansOfBrynArgoll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "MM2";
     }
 

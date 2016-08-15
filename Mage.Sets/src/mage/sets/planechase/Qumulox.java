@@ -37,7 +37,7 @@ public class Qumulox extends mage.sets.elspethvstezzeret.Qumulox {
 
     public Qumulox(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "HOP";
     }
 

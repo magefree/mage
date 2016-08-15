@@ -38,7 +38,7 @@ public class AncientGrudge extends mage.sets.innistrad.AncientGrudge {
 
     public AncientGrudge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

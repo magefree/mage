@@ -37,7 +37,7 @@ public class WuWarship extends mage.sets.masterseditioniii.WuWarship {
 
     public WuWarship(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "PTK";
     }
 

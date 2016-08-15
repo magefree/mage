@@ -37,7 +37,7 @@ public class Condescend extends mage.sets.fifthdawn.Condescend {
 
     public Condescend(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "DD2";
     }
 

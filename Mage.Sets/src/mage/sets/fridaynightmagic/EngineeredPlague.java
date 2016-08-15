@@ -37,7 +37,7 @@ public class EngineeredPlague extends mage.sets.urzaslegacy.EngineeredPlague {
 
     public EngineeredPlague(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "FNMP";
     }
 

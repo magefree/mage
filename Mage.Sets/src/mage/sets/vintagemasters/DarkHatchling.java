@@ -38,7 +38,7 @@ public class DarkHatchling extends mage.sets.urzassaga.DarkHatchling {
 
     public DarkHatchling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -38,7 +38,7 @@ public class DigThroughTime extends mage.sets.khansoftarkir.DigThroughTime {
 
     public DigThroughTime(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -38,7 +38,7 @@ public class Upheaval extends mage.sets.odyssey.Upheaval {
 
     public Upheaval(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.MYTHIC;
     }

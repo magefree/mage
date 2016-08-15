@@ -38,7 +38,7 @@ public class Domestication extends mage.sets.riseoftheeldrazi.Domestication {
 
     public Domestication(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "M14";
         this.rarity = Rarity.RARE;
     }

@@ -37,7 +37,7 @@ public class ThornElemental extends mage.sets.urzasdestiny.ThornElemental {
 
     public ThornElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "S99";
     }
 

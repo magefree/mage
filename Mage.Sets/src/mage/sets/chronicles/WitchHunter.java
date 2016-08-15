@@ -38,7 +38,7 @@ public class WitchHunter extends mage.sets.thedark.WitchHunter {
 
     public WitchHunter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "CHR";
         this.rarity = Rarity.UNCOMMON;
     }

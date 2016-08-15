@@ -37,7 +37,7 @@ public class HiddenDragonslayer extends mage.sets.dragonsoftarkir.HiddenDragonsl
 
     public HiddenDragonslayer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class LumengridWarden extends mage.sets.tenthedition.LumengridWarden {
 
     public LumengridWarden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "MRD";
     }
 

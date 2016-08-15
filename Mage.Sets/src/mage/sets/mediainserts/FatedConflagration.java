@@ -6,7 +6,7 @@ public class FatedConflagration extends mage.sets.bornofthegods.FatedConflagrati
     
     public FatedConflagration(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "MBP";
     }
     

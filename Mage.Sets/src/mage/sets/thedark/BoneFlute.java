@@ -38,7 +38,7 @@ public class BoneFlute extends mage.sets.masterseditioniii.BoneFlute {
 
     public BoneFlute(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
+        this.cardNumber = "94";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.UNCOMMON;
     }

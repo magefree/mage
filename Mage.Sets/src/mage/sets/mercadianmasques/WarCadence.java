@@ -37,7 +37,7 @@ public class WarCadence extends mage.sets.commander2013.WarCadence {
 
     public WarCadence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = "224";
         this.expansionSetCode = "MMQ";
     }
 

@@ -37,7 +37,7 @@ public class KoboldsOfKherKeep extends mage.sets.legends.KoboldsOfKherKeep {
 
     public KoboldsOfKherKeep(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "ME3";
     }
 

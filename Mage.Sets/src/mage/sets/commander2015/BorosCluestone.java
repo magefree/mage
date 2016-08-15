@@ -37,7 +37,7 @@ public class BorosCluestone extends mage.sets.dragonsmaze.BorosCluestone {
 
     public BorosCluestone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 246;
+        this.cardNumber = "246";
         this.expansionSetCode = "C15";
     }
 

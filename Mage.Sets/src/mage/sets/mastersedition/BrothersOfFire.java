@@ -37,7 +37,7 @@ public class BrothersOfFire extends mage.sets.fourthedition.BrothersOfFire {
 
     public BrothersOfFire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "MED";
     }
 

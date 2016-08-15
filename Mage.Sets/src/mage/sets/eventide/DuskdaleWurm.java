@@ -37,7 +37,7 @@ public class DuskdaleWurm extends mage.sets.magic2011.DuskdaleWurm {
 
     public DuskdaleWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "EVE";
     }
 

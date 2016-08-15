@@ -37,7 +37,7 @@ public class Dystopia extends mage.sets.alliances.Dystopia {
 
     public Dystopia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "ME2";
     }
 

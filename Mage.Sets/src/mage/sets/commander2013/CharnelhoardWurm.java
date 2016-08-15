@@ -37,7 +37,7 @@ public class CharnelhoardWurm extends mage.sets.conflux.CharnelhoardWurm {
 
     public CharnelhoardWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 180;
+        this.cardNumber = "180";
         this.expansionSetCode = "C13";
     }
 

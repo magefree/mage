@@ -37,7 +37,7 @@ public class Jokulhaups extends mage.sets.iceage.Jokulhaups {
 
     public Jokulhaups(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "MED";
     }
 

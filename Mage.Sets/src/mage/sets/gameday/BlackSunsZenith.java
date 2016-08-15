@@ -37,7 +37,7 @@ public class BlackSunsZenith extends mage.sets.mirrodinbesieged.BlackSunsZenith 
 
     public BlackSunsZenith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "MGDC";
     }
 

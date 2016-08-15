@@ -37,7 +37,7 @@ public class SerpentWarrior extends mage.sets.stronghold.SerpentWarrior {
 
     public SerpentWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "TPR";
     }
 

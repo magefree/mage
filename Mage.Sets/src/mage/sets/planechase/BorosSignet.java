@@ -38,7 +38,7 @@ public class BorosSignet extends mage.sets.ravnica.BorosSignet {
 
     public BorosSignet (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "HOP";
     }
 

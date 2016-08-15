@@ -38,7 +38,7 @@ public class FeralThrowback extends mage.sets.prereleaseevents.FeralThrowback {
 
     public FeralThrowback(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "LGN";
         this.rarity = Rarity.RARE;
     }

@@ -47,7 +47,7 @@ public class TempleElder extends CardImpl {
 
     public TempleElder(UUID ownerId) {
         super(ownerId, 144, "Temple Elder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.power = new MageInt(1);

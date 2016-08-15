@@ -38,7 +38,7 @@ public class WeiEliteCompanions extends mage.sets.masterseditioniii.WeiEliteComp
 
     public WeiEliteCompanions(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "PTK";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class ArbiterOfKnollridge extends mage.sets.lorwyn.ArbiterOfKnollridge {
 
     public ArbiterOfKnollridge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "CMD";
     }
 

@@ -37,7 +37,7 @@ public class UrzasChalice extends mage.sets.antiquities.UrzasChalice {
 
     public UrzasChalice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 236;
+        this.cardNumber = "236";
         this.expansionSetCode = "ME4";
     }
 

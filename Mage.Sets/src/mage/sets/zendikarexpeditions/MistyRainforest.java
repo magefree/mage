@@ -38,7 +38,7 @@ public class MistyRainforest extends mage.sets.zendikar.MistyRainforest {
 
     public MistyRainforest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

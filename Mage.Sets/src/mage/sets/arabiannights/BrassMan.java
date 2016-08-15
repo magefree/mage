@@ -37,7 +37,7 @@ public class BrassMan extends mage.sets.fourthedition.BrassMan {
 
     public BrassMan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "ARN";
     }
 

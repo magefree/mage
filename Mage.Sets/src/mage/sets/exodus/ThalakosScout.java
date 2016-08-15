@@ -37,7 +37,7 @@ public class ThalakosScout extends mage.sets.tempestremastered.ThalakosScout {
 
     public ThalakosScout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "EXO";
     }
 

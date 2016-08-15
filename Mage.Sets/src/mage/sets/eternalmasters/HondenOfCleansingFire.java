@@ -38,7 +38,7 @@ public class HondenOfCleansingFire extends mage.sets.championsofkamigawa.HondenO
 
     public HondenOfCleansingFire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "EMA";
     }
 

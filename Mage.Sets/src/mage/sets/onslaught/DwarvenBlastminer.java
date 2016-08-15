@@ -39,17 +39,13 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
  *
  * @author fireshoes
  */
 public class DwarvenBlastminer extends CardImpl {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-
     public DwarvenBlastminer(UUID ownerId) {
         super(ownerId, 199, "Dwarven Blastminer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "ONS";
@@ -60,7 +56,7 @@ public class DwarvenBlastminer extends CardImpl {
         // {2}{R}, {tap}: Destroy target nonbasic land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
         
         // Morph {R}

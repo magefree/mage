@@ -37,7 +37,7 @@ public class BituminousBlast extends mage.sets.alarareborn.BituminousBlast {
 
     public BituminousBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "ARC";
     }
 

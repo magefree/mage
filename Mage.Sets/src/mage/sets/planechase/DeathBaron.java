@@ -37,7 +37,7 @@ public class DeathBaron extends mage.sets.shardsofalara.DeathBaron {
 
     public DeathBaron(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "HOP";
     }
 

@@ -37,7 +37,7 @@ public class BloodPet extends mage.sets.tempest.BloodPet {
 
     public BloodPet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "6ED";
     }
 

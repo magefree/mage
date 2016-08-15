@@ -37,7 +37,7 @@ public class GempalmStrider extends mage.sets.elvesvsgoblins.GempalmStrider {
 
     public GempalmStrider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "LGN";
     }
 

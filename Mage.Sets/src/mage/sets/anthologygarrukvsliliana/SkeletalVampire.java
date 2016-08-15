@@ -37,7 +37,7 @@ public class SkeletalVampire extends mage.sets.guildpact.SkeletalVampire {
 
     public SkeletalVampire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "DD3GVL";
     }
 

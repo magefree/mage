@@ -37,7 +37,7 @@ public class FormOfTheDragon extends mage.sets.scourge.FormOfTheDragon {
 
     public FormOfTheDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "DRB";
     }
 

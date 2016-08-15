@@ -38,7 +38,7 @@ public class ExplorersScope extends mage.sets.zendikar.ExplorersScope {
 
     public ExplorersScope(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "CNS";
         this.rarity = Rarity.UNCOMMON;
     }

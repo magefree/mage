@@ -37,7 +37,7 @@ public class Void extends mage.sets.invasion.Void {
 
     public Void(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 211;
+        this.cardNumber = "211";
         this.expansionSetCode = "EMA";
     }
 

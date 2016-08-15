@@ -37,7 +37,7 @@ public class OgreSavant extends mage.sets.ajanivsnicolbolas.OgreSavant {
 
     public OgreSavant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "GPT";
     }
 

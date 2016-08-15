@@ -37,7 +37,7 @@ public class WingedSliver extends mage.sets.tempest.WingedSliver {
 
     public WingedSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class Nausea extends mage.sets.seventhedition.Nausea {
 
     public Nausea(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "EMA";
     }
 

@@ -39,7 +39,7 @@ public class RallyThePeasants extends mage.sets.innistrad.RallyThePeasants {
 
     public RallyThePeasants(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

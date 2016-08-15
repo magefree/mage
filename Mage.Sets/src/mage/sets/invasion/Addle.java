@@ -38,7 +38,7 @@ public class Addle extends mage.sets.vintagemasters.Addle {
 
     public Addle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "INV";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -6,7 +6,7 @@ public class KarametrasAcolyte extends mage.sets.theros.KarametrasAcolyte {
     
     public KarametrasAcolyte(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "MBP";
     }
     

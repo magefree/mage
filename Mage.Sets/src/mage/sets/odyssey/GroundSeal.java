@@ -37,7 +37,7 @@ public class GroundSeal extends mage.sets.magic2013.GroundSeal {
 
     public GroundSeal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "ODY";
     }
 

@@ -37,7 +37,7 @@ public class Ruination extends mage.sets.stronghold.Ruination {
 
     public Ruination(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "CMD";
     }
 

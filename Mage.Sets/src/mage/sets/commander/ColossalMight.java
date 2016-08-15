@@ -37,7 +37,7 @@ public class ColossalMight extends mage.sets.alarareborn.ColossalMight {
 
     public ColossalMight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "CMD";
     }
 

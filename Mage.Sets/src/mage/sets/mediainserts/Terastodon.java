@@ -6,7 +6,7 @@ public class Terastodon extends mage.sets.worldwake.Terastodon {
     
     public Terastodon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "MBP";
     }
     

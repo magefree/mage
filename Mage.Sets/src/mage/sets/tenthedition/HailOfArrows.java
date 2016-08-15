@@ -37,7 +37,7 @@ public class HailOfArrows extends mage.sets.saviorsofkamigawa.HailOfArrows {
 
     public HailOfArrows(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "10E";
     }
 

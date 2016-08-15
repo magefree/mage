@@ -37,7 +37,7 @@ public class Dispel extends mage.sets.worldwake.Dispel {
 
     public Dispel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "RTR";
     }
 

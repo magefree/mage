@@ -38,7 +38,7 @@ public class ShorelineRanger extends mage.sets.scourge.ShorelineRanger {
 
     public ShorelineRanger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "EMA";
     }
 

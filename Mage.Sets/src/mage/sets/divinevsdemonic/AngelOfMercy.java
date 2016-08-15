@@ -37,7 +37,7 @@ public class AngelOfMercy extends mage.sets.tenthedition.AngelOfMercy {
 
     public AngelOfMercy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "DDC";
     }
 

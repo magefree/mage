@@ -37,7 +37,7 @@ public class DreamCache extends mage.sets.tempest.DreamCache {
 
     public DreamCache(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "MIR";
     }
 

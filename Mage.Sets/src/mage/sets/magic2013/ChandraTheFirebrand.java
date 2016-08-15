@@ -37,7 +37,7 @@ public class ChandraTheFirebrand extends mage.sets.magic2012.ChandraTheFirebrand
 
     public ChandraTheFirebrand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "M13";
     }
 

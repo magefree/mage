@@ -38,7 +38,7 @@ public class CalderaLake extends mage.sets.tempest.CalderaLake {
 
     public CalderaLake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 295;
+        this.cardNumber = "295";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

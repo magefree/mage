@@ -37,7 +37,7 @@ public class VampiricTutor extends mage.sets.visions.VampiricTutor {
 
     public VampiricTutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "JR";
     }
 

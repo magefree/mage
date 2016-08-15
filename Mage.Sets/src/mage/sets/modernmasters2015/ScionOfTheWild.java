@@ -38,7 +38,7 @@ public class ScionOfTheWild extends mage.sets.ravnica.ScionOfTheWild {
 
     public ScionOfTheWild(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }

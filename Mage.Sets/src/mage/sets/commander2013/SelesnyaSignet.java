@@ -37,7 +37,7 @@ public class SelesnyaSignet extends mage.sets.ravnica.SelesnyaSignet {
 
     public SelesnyaSignet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 257;
+        this.cardNumber = "257";
         this.expansionSetCode = "C13";
     }
 

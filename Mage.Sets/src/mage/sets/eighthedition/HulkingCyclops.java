@@ -37,7 +37,7 @@ public class HulkingCyclops extends mage.sets.visions.HulkingCyclops {
 
     public HulkingCyclops(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "8ED";
     }
 

@@ -37,7 +37,7 @@ public class BarlsCage extends mage.sets.thedark.BarlsCage {
 
     public BarlsCage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "ME3";
     }
 

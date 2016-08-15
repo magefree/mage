@@ -37,7 +37,7 @@ public class VaporSnag extends mage.sets.newphyrexia.VaporSnag {
 
     public VaporSnag(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "DDH";
     }
 

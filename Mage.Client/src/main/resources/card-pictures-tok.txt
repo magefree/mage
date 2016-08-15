@@ -1,8 +1,24 @@
+|Generate|TOK:EMA|Carnivore||
+|Generate|TOK:EMA|Dragon||
+|Generate|TOK:EMA|Elemental|1|
+|Generate|TOK:EMA|Elemental|2|
+|Generate|TOK:EMA|Elephant||
+|Generate|TOK:EMA|Elf Warrior||
+|Generate|TOK:EMA|Goblin||
+|Generate|TOK:EMA|Goblin Soldier||
+|Generate|TOK:EMA|Serf||
+|Generate|TOK:EMA|Soldier||
+|Generate|TOK:EMA|Spirit|1|
+|Generate|TOK:EMA|Spirit|2|
+|Generate|TOK:EMA|Wall||
+|Generate|TOK:EMA|Wurm||
+|Generate|TOK:EMA|Zombie||
+|Generate|EMBLEM!:EMA|Emblem Dack Fayden||
+
 |Generate|TOK:EMN|Eldrazi Horror||
 |Generate|TOK:EMN|Human||
 |Generate|TOK:EMN|Human Wizard||
 |Generate|TOK:EMN|Spider||
-|Generate|TOK:EMN|Spirit||
 |Generate|TOK:EMN|Zombie|1|
 |Generate|TOK:EMN|Zombie|2|
 |Generate|TOK:EMN|Zombie|3|

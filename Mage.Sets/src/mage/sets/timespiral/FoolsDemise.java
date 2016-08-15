@@ -37,7 +37,7 @@ public class FoolsDemise extends mage.sets.commander2014.FoolsDemise {
 
     public FoolsDemise(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "TSP";
     }
 

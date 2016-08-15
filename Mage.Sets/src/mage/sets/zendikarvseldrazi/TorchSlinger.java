@@ -37,7 +37,7 @@ public class TorchSlinger extends mage.sets.zendikar.TorchSlinger {
 
     public TorchSlinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "DDP";
     }
 

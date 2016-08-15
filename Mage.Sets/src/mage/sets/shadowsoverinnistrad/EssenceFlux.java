@@ -30,17 +30,23 @@ package mage.sets.shadowsoverinnistrad;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.cards.MeldCard;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -60,7 +66,7 @@ public class EssenceFlux extends CardImpl {
         Effect effect = new ExileTargetForSourceEffect();
         effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new EssenceFluxEffect(false, true));
+        this.getSpellAbility().addEffect(new EssenceFluxEffect());
     }
 
     public EssenceFlux(final EssenceFlux card) {
@@ -73,14 +79,14 @@ public class EssenceFlux extends CardImpl {
     }
 }
 
-class EssenceFluxEffect extends ReturnToBattlefieldUnderOwnerControlTargetEffect {
+class EssenceFluxEffect extends OneShotEffect {
 
-    public EssenceFluxEffect(boolean tapped, boolean fromExileZone) {
-        super(tapped, fromExileZone);
-        staticText = ", then return that card to the battlefield under its owner's control. If it's a Spirit, put a +1/+1 counter on it";
+    EssenceFluxEffect() {
+        super(Outcome.Benefit);
+        staticText = "return that card to the battlefield under its owner's control";
     }
 
-    public EssenceFluxEffect(final EssenceFluxEffect effect) {
+    EssenceFluxEffect(final EssenceFluxEffect effect) {
         super(effect);
     }
 
@@ -91,22 +97,43 @@ class EssenceFluxEffect extends ReturnToBattlefieldUnderOwnerControlTargetEffect
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = null;
-        UUID exilZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-        if (exilZoneId != null) {
-            ExileZone exileZone = game.getExile().getExileZone(exilZoneId);
-            if (exileZone != null && getTargetPointer().getFirst(game, source) != null) {
-                card = exileZone.get(getTargetPointer().getFirst(game, source), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards cardsToBattlefield = new CardsImpl();
+            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            if (exileZoneId != null) {
+                ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
+                if (exileZone != null) {
+                    for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
+                        if (exileZone.contains(targetId)) {
+                            cardsToBattlefield.add(targetId);
+                        }
+                        else {
+                            Card card = game.getCard(targetId);
+                            if (card != null && card instanceof MeldCard) {
+                                MeldCard meldCard = (MeldCard) card;
+                                Card topCard = meldCard.getTopHalfCard();
+                                Card bottomCard = meldCard.getBottomHalfCard();
+                                if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter() && exileZone.contains(topCard.getId())) {
+                                    cardsToBattlefield.add(topCard);
+                                }
+                                if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter() && exileZone.contains(bottomCard.getId())) {
+                                    cardsToBattlefield.add(bottomCard);
+                                }
+                            }
+                        }
+                    }
+                }
             }
-        }
-        if (super.apply(game, source)) {
-            if (card != null) {
-
-                Permanent permanent = game.getPermanent(card.getId());
-                if (permanent != null && permanent.getSubtype().contains("Spirit")) {
-                    Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-                    effect.setTargetPointer(new FixedTarget(permanent, game));
-                    return effect.apply(game, source);
+            if (!cardsToBattlefield.isEmpty()) {
+                controller.moveCards(cardsToBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
+                for (UUID cardId : cardsToBattlefield) {
+                    Permanent permanent = game.getPermanent(cardId);
+                    if (permanent != null && permanent.getSubtype().contains("Spirit")) {
+                        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
+                        return effect.apply(game, source);
+                    }
                 }
             }
             return true;

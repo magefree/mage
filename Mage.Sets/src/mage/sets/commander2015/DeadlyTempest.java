@@ -96,7 +96,7 @@ class DeadlyTempestEffect extends OneShotEffect {
                 if (count > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.damage(count, playerId, game, false, true);
+                        player.loseLife(count, game);
                     }
                 }
             }

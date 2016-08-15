@@ -37,7 +37,7 @@ public class SpireGolem extends mage.sets.jacevschandra.SpireGolem {
 
     public SpireGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "DD3JVC";
     }
 

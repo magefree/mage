@@ -37,7 +37,7 @@ public class InGarruksWake extends mage.sets.magic2015.InGarruksWake {
 
     public InGarruksWake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "MLP";
     }
 

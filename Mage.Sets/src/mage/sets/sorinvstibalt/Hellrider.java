@@ -37,7 +37,7 @@ public class Hellrider extends mage.sets.darkascension.Hellrider {
 
     public Hellrider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "DDK";
     }
 

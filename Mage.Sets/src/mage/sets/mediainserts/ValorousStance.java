@@ -38,7 +38,7 @@ public class ValorousStance extends mage.sets.fatereforged.ValorousStance {
 
     public ValorousStance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

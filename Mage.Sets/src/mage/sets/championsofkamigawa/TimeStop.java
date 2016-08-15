@@ -37,7 +37,7 @@ public class TimeStop extends mage.sets.tenthedition.TimeStop {
 
     public TimeStop(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "CHK";
     }
 

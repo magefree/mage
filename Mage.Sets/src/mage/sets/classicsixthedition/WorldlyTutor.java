@@ -37,7 +37,7 @@ public class WorldlyTutor extends mage.sets.mirage.WorldlyTutor {
 
     public WorldlyTutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
+        this.cardNumber = "269";
         this.expansionSetCode = "6ED";
     }
 

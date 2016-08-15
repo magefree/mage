@@ -38,7 +38,7 @@ public class CourserOfKruphix extends mage.sets.bornofthegods.CourserOfKruphix {
 
     public CourserOfKruphix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

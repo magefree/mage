@@ -37,7 +37,7 @@ public class MindRot extends mage.sets.tenthedition.MindRot {
 
     public MindRot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "8ED";
     }
 

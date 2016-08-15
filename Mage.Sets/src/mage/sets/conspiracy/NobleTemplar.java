@@ -37,7 +37,7 @@ public class NobleTemplar extends mage.sets.scourge.NobleTemplar {
 
     public NobleTemplar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "CNS";
     }
 

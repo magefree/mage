@@ -37,7 +37,7 @@ public class DragonscaleBoon extends mage.sets.khansoftarkir.DragonscaleBoon {
 
     public DragonscaleBoon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "UGIN";
     }
 

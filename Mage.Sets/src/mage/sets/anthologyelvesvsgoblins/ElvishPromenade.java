@@ -37,7 +37,7 @@ public class ElvishPromenade extends mage.sets.lorwyn.ElvishPromenade {
 
     public ElvishPromenade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "DD3EVG";
     }
 

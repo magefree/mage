@@ -37,7 +37,7 @@ public class ActOfAggression extends mage.sets.newphyrexia.ActOfAggression {
 
     public ActOfAggression(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "C15";
     }
 

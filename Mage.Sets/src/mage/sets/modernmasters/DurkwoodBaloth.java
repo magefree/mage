@@ -37,7 +37,7 @@ public class DurkwoodBaloth extends mage.sets.timespiral.DurkwoodBaloth {
 
     public DurkwoodBaloth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "MMA";
     }
 

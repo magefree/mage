@@ -38,7 +38,7 @@ public class ExecutionersCapsule extends mage.sets.shardsofalara.ExecutionersCap
 
     public ExecutionersCapsule(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.UNCOMMON;
     }

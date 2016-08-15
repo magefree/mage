@@ -37,7 +37,7 @@ public class Stun extends mage.sets.tempest.Stun {
 
     public Stun(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 240;
+        this.cardNumber = "240";
         this.expansionSetCode = "10E";
     }
 

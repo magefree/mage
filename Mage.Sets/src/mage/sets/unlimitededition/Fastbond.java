@@ -37,7 +37,7 @@ public class Fastbond extends mage.sets.limitedalpha.Fastbond {
 
     public Fastbond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "2ED";
     }
 

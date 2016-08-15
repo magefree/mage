@@ -37,7 +37,7 @@ public class WeiNightRaiders extends mage.sets.portalthreekingdoms.WeiNightRaide
 
     public WeiNightRaiders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "ME3";
     }
 

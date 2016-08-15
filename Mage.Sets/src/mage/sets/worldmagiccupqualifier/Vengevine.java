@@ -37,7 +37,7 @@ public class Vengevine extends mage.sets.riseoftheeldrazi.Vengevine {
 
     public Vengevine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "WMCQ";
     }
 

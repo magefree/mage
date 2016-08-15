@@ -28,6 +28,7 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
@@ -35,10 +36,14 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
 
 /**
@@ -47,9 +52,12 @@ import mage.target.TargetPermanent;
  */
 public class Legerdemain extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
+    private static final FilterPermanent firstFilter = new FilterPermanent("artifact or creature");
+    private static final FilterPermanent secondFilter = new FilterPermanent("another permanent that shares the type of artifact or creature");
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
+        firstFilter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
+        secondFilter.add(new AnotherTargetPredicate(2));
+        secondFilter.add(new SharesTypePredicate());
     }
 
     public Legerdemain(UUID ownerId) {
@@ -58,8 +66,12 @@ public class Legerdemain extends CardImpl {
 
         // Exchange control of target artifact or creature and another target permanent that shares one of those types with it.
         this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, "Exchange control of target artifact or creature and another target permanent that shares one of those types with it", false, true));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addTarget(new LegerdemainSecondTarget());
+        TargetPermanent firstTarget = new TargetPermanent(firstFilter);
+        firstTarget.setTargetTag(1);
+        TargetPermanent secondTarget = new TargetPermanent(secondFilter);
+        secondTarget.setTargetTag(2);
+        this.getSpellAbility().addTarget(firstTarget);
+        this.getSpellAbility().addTarget(secondTarget);
     }
 
     public Legerdemain(final Legerdemain card) {
@@ -72,34 +84,35 @@ public class Legerdemain extends CardImpl {
     }
 }
 
-class LegerdemainSecondTarget extends TargetPermanent {
-    
-    LegerdemainSecondTarget() {
-        super();
-        this.targetName = "another permanent that shares one of those types";
-    }
-
-    LegerdemainSecondTarget(final LegerdemainSecondTarget target) {
-        super(target);
-    }
+class SharesTypePredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageItem>> {
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        Permanent firstPermanent = game.getPermanent(source.getTargets().getFirstTarget());
-        Permanent secondPermanent = game.getPermanent(id);
-        if (firstPermanent != null && secondPermanent != null) {
-            if (firstPermanent.getCardType().contains(CardType.CREATURE) && secondPermanent.getCardType().contains(CardType.CREATURE)) {
+    public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {
+        StackObject source = game.getStack().getStackObject(input.getSourceId());
+        if (source != null) {
+            if (source.getStackAbility().getTargets().isEmpty()
+                || source.getStackAbility().getTargets().get(0).getTargets().isEmpty()) {
                 return true;
             }
-            if (firstPermanent.getCardType().contains(CardType.ARTIFACT) && secondPermanent.getCardType().contains(CardType.ARTIFACT)) {
-                return true;
+            Permanent firstPermanent = game.getPermanent(
+                    source.getStackAbility().getTargets().get(0).getTargets().get(0));
+            Permanent secondPermanent = game.getPermanent(input.getObject().getId());
+            if (firstPermanent != null && secondPermanent != null) {
+                if (firstPermanent.getCardType().contains(CardType.CREATURE) && secondPermanent.getCardType().contains(CardType.CREATURE)) {
+                    return true;
+                }
+                if (firstPermanent.getCardType().contains(CardType.ARTIFACT) && secondPermanent.getCardType().contains(CardType.ARTIFACT)) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
-    public LegerdemainSecondTarget copy() {
-        return new LegerdemainSecondTarget(this);
+    public String toString() {
+        return "Target permanent that shares the type of artifact or creature";
     }
+    
 }

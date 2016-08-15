@@ -37,7 +37,7 @@ public class Mulch extends mage.sets.innistrad.Mulch {
 
     public Mulch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "STH";
     }
 

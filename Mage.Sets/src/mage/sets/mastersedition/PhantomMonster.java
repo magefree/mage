@@ -38,7 +38,7 @@ public class PhantomMonster extends mage.sets.fifthedition.PhantomMonster {
 
     public PhantomMonster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.COMMON;
     }

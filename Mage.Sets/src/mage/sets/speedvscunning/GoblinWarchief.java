@@ -37,7 +37,7 @@ public class GoblinWarchief extends mage.sets.scourge.GoblinWarchief {
 
     public GoblinWarchief(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "DDN";
     }
 

@@ -37,7 +37,7 @@ public class TorchFiend extends mage.sets.darkascension.TorchFiend {
 
     public TorchFiend(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "CNS";
     }
 

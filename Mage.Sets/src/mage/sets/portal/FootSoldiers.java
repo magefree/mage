@@ -37,7 +37,7 @@ public class FootSoldiers extends mage.sets.ninthedition.FootSoldiers {
 
     public FootSoldiers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "POR";
     }
 

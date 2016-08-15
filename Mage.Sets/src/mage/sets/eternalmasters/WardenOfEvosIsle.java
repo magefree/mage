@@ -39,7 +39,7 @@ public class WardenOfEvosIsle extends mage.sets.magic2014.WardenOfEvosIsle {
 
     public WardenOfEvosIsle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

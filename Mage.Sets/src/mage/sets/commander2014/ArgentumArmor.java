@@ -37,7 +37,7 @@ public class ArgentumArmor extends mage.sets.scarsofmirrodin.ArgentumArmor {
 
     public ArgentumArmor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class MaelstromWanderer extends mage.sets.planechase2012.MaelstromWandere
 
     public MaelstromWanderer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "EMA";
     }
 

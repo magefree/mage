@@ -37,7 +37,7 @@ public class HowlingWolf extends mage.sets.mercadianmasques.HowlingWolf {
 
     public HowlingWolf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "CNS";
     }
 

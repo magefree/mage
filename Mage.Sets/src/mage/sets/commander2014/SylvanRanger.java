@@ -37,7 +37,7 @@ public class SylvanRanger extends mage.sets.magic2011.SylvanRanger {
 
     public SylvanRanger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "C14";
     }
 

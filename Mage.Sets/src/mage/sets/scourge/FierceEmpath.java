@@ -37,7 +37,7 @@ public class FierceEmpath extends mage.sets.commander.FierceEmpath {
 
     public FierceEmpath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "SCG";
     }
 

@@ -37,7 +37,7 @@ public class ThievesAuction extends mage.sets.mercadianmasques.ThievesAuction {
 
     public ThievesAuction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "8ED";
     }
 

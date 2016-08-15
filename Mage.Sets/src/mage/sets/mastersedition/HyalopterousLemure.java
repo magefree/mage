@@ -38,7 +38,7 @@ public class HyalopterousLemure extends mage.sets.iceage.HyalopterousLemure {
 
     public HyalopterousLemure(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.COMMON;
     }

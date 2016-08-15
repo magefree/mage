@@ -37,7 +37,7 @@ public class ShimmeringWings extends mage.sets.tempest.ShimmeringWings {
 
     public ShimmeringWings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "10E";
     }
 

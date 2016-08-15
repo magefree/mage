@@ -37,7 +37,7 @@ public class ErraticMutation extends mage.sets.planarchaos.ErraticMutation {
 
     public ErraticMutation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "MMA";
     }
 

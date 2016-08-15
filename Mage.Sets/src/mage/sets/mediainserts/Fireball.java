@@ -6,7 +6,7 @@ public class Fireball extends mage.sets.limitedalpha.Fireball {
     
     public Fireball(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "MBP";
     }
     

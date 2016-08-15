@@ -37,7 +37,7 @@ public class ImperialHellkite extends mage.sets.archenemy.ImperialHellkite {
 
     public ImperialHellkite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "LGN";
     }
 

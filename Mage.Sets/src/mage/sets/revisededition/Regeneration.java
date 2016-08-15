@@ -37,7 +37,7 @@ public class Regeneration extends mage.sets.iceage.Regeneration {
 
     public Regeneration(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "3ED";
     }
 

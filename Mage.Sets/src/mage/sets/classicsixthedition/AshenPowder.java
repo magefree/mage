@@ -37,7 +37,7 @@ public class AshenPowder extends mage.sets.mirage.AshenPowder {
 
     public AshenPowder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "6ED";
     }
 

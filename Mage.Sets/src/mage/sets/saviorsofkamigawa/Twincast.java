@@ -37,7 +37,7 @@ public class Twincast extends mage.sets.magic2010.Twincast {
 
     public Twincast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "SOK";
     }
 

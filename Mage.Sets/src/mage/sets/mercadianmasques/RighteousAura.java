@@ -38,7 +38,7 @@ public class RighteousAura extends mage.sets.visions.RighteousAura {
 
     public RighteousAura(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "MMQ";
         this.rarity = Rarity.UNCOMMON;
     }

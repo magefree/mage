@@ -38,7 +38,7 @@ public class VolrathsCurse extends mage.sets.tempest.VolrathsCurse {
 
     public VolrathsCurse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

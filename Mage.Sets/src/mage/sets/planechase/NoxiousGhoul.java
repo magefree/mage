@@ -28,14 +28,14 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -59,16 +59,16 @@ public class NoxiousGhoul extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        
+
         filter.add(Predicates.or(
                 new CardIdPredicate(this.getId()),
                 new SubtypePredicate("Zombie")));
-        
+
         filter2.add(new CardTypePredicate(CardType.CREATURE));
         filter2.add(Predicates.not(
                 new SubtypePredicate("Zombie")));
-        
-        final String rule = "Whenever Noxious Ghoul or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.";
+
+        final String rule = "Whenever {this} or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.";
 
         // Whenever Noxious Ghoul or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter2, false), filter, false, rule));

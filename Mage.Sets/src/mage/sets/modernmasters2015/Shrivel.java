@@ -37,7 +37,7 @@ public class Shrivel extends mage.sets.riseoftheeldrazi.Shrivel {
 
     public Shrivel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "MM2";
     }
 

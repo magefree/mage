@@ -38,7 +38,7 @@ public class ChromeMox extends mage.sets.mirrodin.ChromeMox {
 
     public ChromeMox(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 219;
+        this.cardNumber = "219";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.MYTHIC;
     }

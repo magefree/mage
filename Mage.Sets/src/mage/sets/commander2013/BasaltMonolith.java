@@ -37,7 +37,7 @@ public class BasaltMonolith extends mage.sets.limitedalpha.BasaltMonolith {
 
     public BasaltMonolith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "C13";
     }
 

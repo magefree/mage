@@ -37,7 +37,7 @@ public class Necrobite extends mage.sets.avacynrestored.Necrobite {
 
     public Necrobite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "BNG";
     }
 

@@ -41,7 +41,7 @@ public class TouchOfBrilliance extends CardImpl {
 
     public TouchOfBrilliance(UUID ownerId) {
         super(ownerId, 58, "Touch of Brilliance", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

@@ -37,7 +37,7 @@ public class ChainsOfMephistopheles extends mage.sets.legends.ChainsOfMephistoph
 
     public ChainsOfMephistopheles(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "MED";
     }
 

@@ -37,7 +37,7 @@ public class HasranOgress extends mage.sets.masterseditioniv.HasranOgress {
 
     public HasranOgress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "CHR";
     }
 

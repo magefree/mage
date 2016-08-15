@@ -37,7 +37,7 @@ public class Moroii extends mage.sets.ravnica.Moroii {
 
     public Moroii(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "DDH";
     }
 

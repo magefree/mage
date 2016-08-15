@@ -38,7 +38,7 @@ public class ForceOfWill extends mage.sets.alliances.ForceOfWill {
 
     public ForceOfWill(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.RARE;
     }

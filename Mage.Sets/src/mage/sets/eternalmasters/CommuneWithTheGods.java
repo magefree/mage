@@ -38,7 +38,7 @@ public class CommuneWithTheGods extends mage.sets.theros.CommuneWithTheGods {
 
     public CommuneWithTheGods(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "EMA";
     }
 

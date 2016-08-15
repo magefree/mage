@@ -37,7 +37,7 @@ public class PrimordialSage extends mage.sets.ravnica.PrimordialSage {
 
     public PrimordialSage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 211;
+        this.cardNumber = "211";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class PowerArmor extends mage.sets.invasion.PowerArmor {
 
     public PowerArmor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "DDE";
     }
 

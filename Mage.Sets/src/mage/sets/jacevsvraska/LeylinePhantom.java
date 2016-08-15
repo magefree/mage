@@ -37,7 +37,7 @@ public class LeylinePhantom extends mage.sets.gatecrash.LeylinePhantom {
 
     public LeylinePhantom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "DDM";
     }
 

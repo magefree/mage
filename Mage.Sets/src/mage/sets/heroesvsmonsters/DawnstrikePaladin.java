@@ -37,7 +37,7 @@ public class DawnstrikePaladin extends mage.sets.magic2014.DawnstrikePaladin {
 
     public DawnstrikePaladin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "DDL";
     }
 

@@ -37,7 +37,7 @@ public class PeaceStrider extends mage.sets.mirrodinbesieged.PeaceStrider {
 
     public PeaceStrider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "CNS";
     }
 

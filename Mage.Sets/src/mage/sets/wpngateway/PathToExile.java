@@ -38,7 +38,7 @@ public class PathToExile extends mage.sets.conflux.PathToExile {
 
     public PathToExile(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

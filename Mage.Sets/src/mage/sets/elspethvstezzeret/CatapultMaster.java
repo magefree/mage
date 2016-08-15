@@ -38,7 +38,7 @@ public class CatapultMaster extends mage.sets.onslaught.CatapultMaster {
 
     public CatapultMaster (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "DDF";
     }
 

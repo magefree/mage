@@ -41,7 +41,7 @@ public class GoldenBear extends CardImpl {
 
     public GoldenBear(UUID ownerId) {
         super(ownerId, 67, "Golden Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Bear");
 
         this.power = new MageInt(4);

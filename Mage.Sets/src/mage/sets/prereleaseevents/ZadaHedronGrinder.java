@@ -37,7 +37,7 @@ public class ZadaHedronGrinder extends mage.sets.battleforzendikar.ZadaHedronGri
 
     public ZadaHedronGrinder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 305;
+        this.cardNumber = "305";
         this.expansionSetCode = "PTC";
     }
 

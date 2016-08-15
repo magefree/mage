@@ -29,7 +29,7 @@ package mage.sets.guildpact;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class Borborygmos extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // Whenever Borborygmos deals combat damage to a player, put a +1/+1 counter on each creature you control.
-        this.addAbility(new DealsCombatDamageTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), false));
     }
 
     public Borborygmos(final Borborygmos card) {

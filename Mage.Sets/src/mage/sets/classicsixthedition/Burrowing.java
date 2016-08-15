@@ -38,7 +38,7 @@ public class Burrowing extends mage.sets.limitedalpha.Burrowing {
 
     public Burrowing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "6ED";
     }
 

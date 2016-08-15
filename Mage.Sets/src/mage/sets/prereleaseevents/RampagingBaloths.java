@@ -38,7 +38,7 @@ public class RampagingBaloths extends mage.sets.zendikar.RampagingBaloths {
 
     public RampagingBaloths(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

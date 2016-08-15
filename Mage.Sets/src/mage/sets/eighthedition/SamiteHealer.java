@@ -37,7 +37,7 @@ public class SamiteHealer extends mage.sets.tenthedition.SamiteHealer {
 
     public SamiteHealer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "8ED";
     }
 

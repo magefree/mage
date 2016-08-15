@@ -38,7 +38,7 @@ public class MishrasWorkshop extends mage.sets.vintagemasters.MishrasWorkshop {
 
     public MishrasWorkshop(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.RARE;
     }

@@ -38,7 +38,7 @@ public class Grindstone extends mage.sets.tempest.Grindstone {
 
     public Grindstone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = "223";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.MYTHIC;
     }

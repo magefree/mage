@@ -37,7 +37,7 @@ public class InsidiousMist extends mage.sets.shadowsoverinnistrad.InsidiousMist 
 
     public InsidiousMist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "MBP";
     }
 

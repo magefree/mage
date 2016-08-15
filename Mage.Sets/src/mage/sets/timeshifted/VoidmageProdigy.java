@@ -38,7 +38,7 @@ public class VoidmageProdigy extends mage.sets.onslaught.VoidmageProdigy {
 
     public VoidmageProdigy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

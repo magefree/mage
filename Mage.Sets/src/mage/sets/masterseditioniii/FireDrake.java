@@ -38,7 +38,7 @@ public class FireDrake extends mage.sets.fifthedition.FireDrake {
 
     public FireDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = "98";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

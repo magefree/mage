@@ -37,7 +37,7 @@ public class AdunOakenshield extends mage.sets.legends.AdunOakenshield {
 
     public AdunOakenshield(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "MED";
     }
 

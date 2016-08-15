@@ -37,7 +37,7 @@ public class SerpentGenerator extends mage.sets.fifthedition.SerpentGenerator {
 
     public SerpentGenerator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "MED";
     }
 

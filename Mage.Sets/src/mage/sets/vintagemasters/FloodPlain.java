@@ -37,7 +37,7 @@ public class FloodPlain extends mage.sets.venservskoth.FloodPlain {
 
     public FloodPlain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 296;
+        this.cardNumber = "296";
         this.expansionSetCode = "VMA";
     }
 

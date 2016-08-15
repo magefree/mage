@@ -37,7 +37,7 @@ public class Nefashu extends mage.sets.planechase.Nefashu {
 
     public Nefashu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "SCG";
     }
 

@@ -37,7 +37,7 @@ public class CrookshankKobolds extends mage.sets.legends.CrookshankKobolds {
 
     public CrookshankKobolds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "MED";
     }
 

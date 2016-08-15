@@ -38,7 +38,7 @@ public class Dodecapod extends mage.sets.apocalypse.Dodecapod {
 
     public Dodecapod(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

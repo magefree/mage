@@ -37,7 +37,7 @@ public class WayfarersBauble extends mage.sets.commander2013.WayfarersBauble {
 
     public WayfarersBauble(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 274;
+        this.cardNumber = "274";
         this.expansionSetCode = "C15";
     }
 

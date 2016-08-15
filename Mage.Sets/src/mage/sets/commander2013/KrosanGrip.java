@@ -37,7 +37,7 @@ public class KrosanGrip extends mage.sets.timespiral.KrosanGrip {
 
     public KrosanGrip(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "C13";
     }
 

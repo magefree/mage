@@ -37,7 +37,7 @@ public class MosswortBridge extends mage.sets.commander2013.MosswortBridge {
 
     public MosswortBridge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 294;
+        this.cardNumber = "294";
         this.expansionSetCode = "C15";
     }
 

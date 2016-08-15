@@ -41,7 +41,7 @@ public class BarbtoothWurm extends CardImpl {
 
     public BarbtoothWurm(UUID ownerId) {
         super(ownerId, 62, "Barbtooth Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Wurm");
 
         this.power = new MageInt(6);

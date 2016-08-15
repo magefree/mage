@@ -48,9 +48,10 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 public class SelflessSpirit extends CardImpl {
 
     public SelflessSpirit(UUID ownerId) {
-        super(ownerId, 40, "Selfless Soul", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId, 40, "Selfless Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "EMN";
         this.subtype.add("Spirit");
+        this.subtype.add("Cleric");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

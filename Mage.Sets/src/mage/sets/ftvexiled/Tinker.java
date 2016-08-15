@@ -38,7 +38,7 @@ public class Tinker extends mage.sets.urzaslegacy.Tinker {
 
     public Tinker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "V09";
         this.rarity = Rarity.MYTHIC;
     }

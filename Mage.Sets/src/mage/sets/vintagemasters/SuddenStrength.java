@@ -37,7 +37,7 @@ public class SuddenStrength extends mage.sets.judgment.SuddenStrength {
 
     public SuddenStrength(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 233;
+        this.cardNumber = "233";
         this.expansionSetCode = "VMA";
     }
 

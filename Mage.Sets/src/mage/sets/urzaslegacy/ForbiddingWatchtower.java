@@ -36,7 +36,7 @@ public class ForbiddingWatchtower extends mage.sets.tenthedition.ForbiddingWatch
 
     public ForbiddingWatchtower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "ULG";
     }
 

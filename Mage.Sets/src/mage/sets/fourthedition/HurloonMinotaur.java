@@ -37,7 +37,7 @@ public class HurloonMinotaur extends mage.sets.fifthedition.HurloonMinotaur {
 
     public HurloonMinotaur(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 220;
+        this.cardNumber = "220";
         this.expansionSetCode = "4ED";
     }
 

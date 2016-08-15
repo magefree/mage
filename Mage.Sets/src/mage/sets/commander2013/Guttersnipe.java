@@ -37,7 +37,7 @@ public class Guttersnipe extends mage.sets.returntoravnica.Guttersnipe {
 
     public Guttersnipe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "C13";
     }
 

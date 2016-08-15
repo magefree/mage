@@ -37,7 +37,7 @@ public class ZodiacMonkey extends mage.sets.ninthedition.ZodiacMonkey {
 
     public ZodiacMonkey(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "PTK";
     }
 

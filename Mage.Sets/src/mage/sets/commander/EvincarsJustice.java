@@ -37,7 +37,7 @@ public class EvincarsJustice extends mage.sets.tempest.EvincarsJustice {
 
     public EvincarsJustice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "CMD";
     }
 

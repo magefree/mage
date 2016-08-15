@@ -37,7 +37,7 @@ public class TimeStretch extends mage.sets.tenthedition.TimeStretch {
 
     public TimeStretch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "ODY";
     }
 

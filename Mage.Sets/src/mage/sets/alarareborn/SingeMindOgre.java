@@ -55,8 +55,6 @@ public class SingeMindOgre extends CardImpl {
         this.subtype.add("Ogre");
         this.subtype.add("Mutant");
 
-
-        
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
@@ -96,7 +94,7 @@ class SingeMindOgreEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null && targetPlayer.getHand().size() > 0) {
+        if (targetPlayer != null && !targetPlayer.getHand().isEmpty()) {
             Cards revealed = new CardsImpl();
             Card card = targetPlayer.getHand().getRandom(game);
             revealed.add(card);

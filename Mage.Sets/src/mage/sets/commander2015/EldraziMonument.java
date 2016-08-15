@@ -37,7 +37,7 @@ public class EldraziMonument extends mage.sets.zendikar.EldraziMonument {
 
     public EldraziMonument(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 253;
+        this.cardNumber = "253";
         this.expansionSetCode = "C15";
     }
 

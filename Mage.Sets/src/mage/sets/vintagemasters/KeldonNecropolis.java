@@ -37,7 +37,7 @@ public class KeldonNecropolis extends mage.sets.invasion.KeldonNecropolis {
 
     public KeldonNecropolis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 300;
+        this.cardNumber = "300";
         this.expansionSetCode = "VMA";
     }
 

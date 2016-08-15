@@ -37,7 +37,7 @@ public class GiantDustwasp extends mage.sets.planarchaos.GiantDustwasp {
 
     public GiantDustwasp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "MMA";
     }
 

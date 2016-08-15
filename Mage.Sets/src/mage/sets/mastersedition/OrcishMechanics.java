@@ -38,7 +38,7 @@ public class OrcishMechanics extends mage.sets.antiquities.OrcishMechanics {
 
     public OrcishMechanics(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.UNCOMMON;
     }

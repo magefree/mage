@@ -37,7 +37,7 @@ public class Castigate extends mage.sets.guildpact.Castigate {
 
     public Castigate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "ARENA";
     }
 

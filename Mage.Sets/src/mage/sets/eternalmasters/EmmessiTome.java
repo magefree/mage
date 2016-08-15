@@ -39,7 +39,7 @@ public class EmmessiTome extends mage.sets.tempest.EmmessiTome {
 
     public EmmessiTome(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

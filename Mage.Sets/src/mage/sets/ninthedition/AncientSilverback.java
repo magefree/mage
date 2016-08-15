@@ -37,7 +37,7 @@ public class AncientSilverback extends mage.sets.urzasdestiny.AncientSilverback 
 
     public AncientSilverback(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 230;
+        this.cardNumber = "230";
         this.expansionSetCode = "9ED";
     }
 

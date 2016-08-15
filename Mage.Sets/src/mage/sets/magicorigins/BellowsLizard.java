@@ -37,7 +37,7 @@ public class BellowsLizard extends mage.sets.returntoravnica.BellowsLizard {
 
     public BellowsLizard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "ORI";
     }
 

@@ -38,7 +38,7 @@ public class Victimize extends mage.sets.conspiracy.Victimize {
 
     public Victimize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "EMA";
     }
 

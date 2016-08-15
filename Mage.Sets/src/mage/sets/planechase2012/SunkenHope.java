@@ -37,7 +37,7 @@ public class SunkenHope extends mage.sets.planeshift.SunkenHope {
 
     public SunkenHope(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "PC2";
     }
 

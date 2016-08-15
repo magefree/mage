@@ -37,7 +37,7 @@ public class MolimoMaroSorcerer extends mage.sets.tenthedition.MolimoMaroSorcere
 
     public MolimoMaroSorcerer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "ARC";
     }
 

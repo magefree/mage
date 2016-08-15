@@ -30,6 +30,7 @@ package mage.sets.eldritchmoon;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -63,7 +64,9 @@ public class ThaliasLancers extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // When Thalia's Lancers enters the battlefield, you may search your library for a legendary card, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true, true), true));
+        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true, true);
+        effect.setText("you may search your library for a legendary card, reveal it, put it into your hand, then shuffle your library");
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 
     public ThaliasLancers(final ThaliasLancers card) {

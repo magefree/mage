@@ -37,7 +37,7 @@ public class HarmsWay extends mage.sets.magic2010.HarmsWay {
 
     public HarmsWay(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "DDG";
     }
 

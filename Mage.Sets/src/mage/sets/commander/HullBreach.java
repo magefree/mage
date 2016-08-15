@@ -37,7 +37,7 @@ public class HullBreach extends mage.sets.commander2013.HullBreach {
 
     public HullBreach(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 203;
+        this.cardNumber = "203";
         this.expansionSetCode = "CMD";
     }
 

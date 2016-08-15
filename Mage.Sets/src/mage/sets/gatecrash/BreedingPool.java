@@ -37,7 +37,7 @@ public class BreedingPool extends mage.sets.dissension.BreedingPool {
 
     public BreedingPool(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 240;
+        this.cardNumber = "240";
         this.expansionSetCode = "GTC";
     }
 

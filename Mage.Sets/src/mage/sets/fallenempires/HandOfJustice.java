@@ -37,7 +37,7 @@ public class HandOfJustice extends mage.sets.mastersedition.HandOfJustice {
 
     public HandOfJustice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "FEM";
     }
 

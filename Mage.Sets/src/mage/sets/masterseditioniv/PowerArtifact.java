@@ -38,7 +38,7 @@ public class PowerArtifact extends mage.sets.antiquities.PowerArtifact {
 
     public PowerArtifact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.RARE;
     }

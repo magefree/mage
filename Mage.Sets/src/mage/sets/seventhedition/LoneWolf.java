@@ -38,7 +38,7 @@ public class LoneWolf extends mage.sets.urzaslegacy.LoneWolf {
 
     public LoneWolf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 254;
+        this.cardNumber = "254";
         this.expansionSetCode = "7ED";
         this.rarity = Rarity.COMMON;
     }

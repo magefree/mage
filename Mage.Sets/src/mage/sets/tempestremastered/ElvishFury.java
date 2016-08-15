@@ -37,7 +37,7 @@ public class ElvishFury extends mage.sets.tempest.ElvishFury {
 
     public ElvishFury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "TPR";
     }
 

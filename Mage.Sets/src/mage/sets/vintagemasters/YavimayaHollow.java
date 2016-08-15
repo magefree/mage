@@ -37,7 +37,7 @@ public class YavimayaHollow extends mage.sets.urzasdestiny.YavimayaHollow {
 
     public YavimayaHollow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 325;
+        this.cardNumber = "325";
         this.expansionSetCode = "VMA";
     }
 

@@ -38,7 +38,7 @@ public class EbonyHorse extends mage.sets.fourthedition.EbonyHorse {
 
     public EbonyHorse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.COMMON;
     }

@@ -38,7 +38,7 @@ public class LordOfAtlantis extends mage.sets.fifthedition.LordOfAtlantis {
 
     public LordOfAtlantis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "SUS";
         this.rarity = Rarity.SPECIAL;
     }

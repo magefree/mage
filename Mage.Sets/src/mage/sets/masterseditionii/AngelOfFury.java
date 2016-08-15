@@ -37,7 +37,7 @@ public class AngelOfFury extends mage.sets.portalsecondage.AngelOfFury {
 
     public AngelOfFury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "ME2";
     }
 

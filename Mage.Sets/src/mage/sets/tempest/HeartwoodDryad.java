@@ -37,7 +37,7 @@ public class HeartwoodDryad extends mage.sets.tempestremastered.HeartwoodDryad {
 
     public HeartwoodDryad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "TMP";
     }
 

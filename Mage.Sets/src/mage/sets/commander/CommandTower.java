@@ -37,7 +37,7 @@ public class CommandTower extends mage.sets.commander2013.CommandTower {
 
     public CommandTower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
+        this.cardNumber = "269";
         this.expansionSetCode = "CMD";
     }
 

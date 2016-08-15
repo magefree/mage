@@ -37,7 +37,7 @@ public class VividMarsh extends mage.sets.lorwyn.VividMarsh {
 
     public VividMarsh(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 336;
+        this.cardNumber = "336";
         this.expansionSetCode = "C13";
     }
 

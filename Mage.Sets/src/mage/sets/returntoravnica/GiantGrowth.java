@@ -38,7 +38,7 @@ public class GiantGrowth extends mage.sets.tenthedition.GiantGrowth {
 
     public GiantGrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "RTR";
     }
 

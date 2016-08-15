@@ -44,7 +44,7 @@ public class FTVExiled extends ExpansionSet {
     }
 
     private FTVExiled() {
-        super("From the Vault: Exiled", "FVE", "mage.sets.ftvexiled", new GregorianCalendar(2009, 8, 28).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Exiled", "V09", "mage.sets.ftvexiled", new GregorianCalendar(2009, 8, 28).getTime(), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
     }
 }

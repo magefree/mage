@@ -37,7 +37,7 @@ public class HellkiteHatchling extends mage.sets.conflux.HellkiteHatchling {
 
     public HellkiteHatchling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "PC2";
     }
 

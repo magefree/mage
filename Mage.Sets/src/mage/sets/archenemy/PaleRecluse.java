@@ -37,7 +37,7 @@ public class PaleRecluse extends mage.sets.alarareborn.PaleRecluse {
 
     public PaleRecluse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "ARC";
     }
 

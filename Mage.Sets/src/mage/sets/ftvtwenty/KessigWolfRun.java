@@ -38,7 +38,7 @@ public class KessigWolfRun extends mage.sets.innistrad.KessigWolfRun {
 
     public KessigWolfRun(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "V13";
         this.rarity = Rarity.MYTHIC;
     }

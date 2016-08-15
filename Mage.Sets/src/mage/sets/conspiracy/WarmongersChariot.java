@@ -37,7 +37,7 @@ public class WarmongersChariot extends mage.sets.riseoftheeldrazi.WarmongersChar
 
     public WarmongersChariot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 207;
+        this.cardNumber = "207";
         this.expansionSetCode = "CNS";
     }
 

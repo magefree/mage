@@ -37,7 +37,7 @@ public class RainOfDaggers extends mage.sets.portalsecondage.RainOfDaggers {
 
     public RainOfDaggers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
+        this.cardNumber = "94";
         this.expansionSetCode = "ME4";
     }
 

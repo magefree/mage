@@ -37,7 +37,7 @@ public class Galvanoth extends mage.sets.mirrodinbesieged.Galvanoth {
 
     public Galvanoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDJ";
     }
 

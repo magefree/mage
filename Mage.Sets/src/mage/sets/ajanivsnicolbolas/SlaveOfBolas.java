@@ -37,7 +37,7 @@ public class SlaveOfBolas extends mage.sets.alarareborn.SlaveOfBolas {
 
     public SlaveOfBolas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "DDH";
     }
 

@@ -37,7 +37,7 @@ public class ShamanEnKor extends mage.sets.stronghold.ShamanEnKor {
 
     public ShamanEnKor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "TPR";
     }
 

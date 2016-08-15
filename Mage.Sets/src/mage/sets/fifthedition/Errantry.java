@@ -38,7 +38,7 @@ public class Errantry extends mage.sets.masterseditionii.Errantry {
 
     public Errantry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = "224";
         this.expansionSetCode = "5ED";
     }
 

@@ -37,7 +37,7 @@ public class Reverberate extends mage.sets.magic2011.Reverberate {
 
     public Reverberate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "M12";
     }
 

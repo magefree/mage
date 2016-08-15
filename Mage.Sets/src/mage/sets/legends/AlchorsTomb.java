@@ -37,7 +37,7 @@ public class AlchorsTomb extends mage.sets.masterseditioniv.AlchorsTomb {
 
     public AlchorsTomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "LEG";
     }
 

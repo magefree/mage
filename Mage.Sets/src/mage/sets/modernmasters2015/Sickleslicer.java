@@ -38,7 +38,7 @@ public class Sickleslicer extends mage.sets.newphyrexia.Sickleslicer {
 
     public Sickleslicer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }

@@ -42,7 +42,7 @@ public class MoaningSpirit extends CardImpl {
 
     public MoaningSpirit(UUID ownerId) {
         super(ownerId, 19, "Moaning Spirit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Spirit");
 
         this.power = new MageInt(2);

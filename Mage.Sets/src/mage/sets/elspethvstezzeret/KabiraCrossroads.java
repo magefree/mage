@@ -38,7 +38,7 @@ public class KabiraCrossroads extends mage.sets.zendikar.KabiraCrossroads {
 
     public KabiraCrossroads (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "DDF";
     }
 

@@ -37,7 +37,7 @@ public class DiabolicServitude extends mage.sets.urzassaga.DiabolicServitude {
 
     public DiabolicServitude(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "PD3";
     }
 

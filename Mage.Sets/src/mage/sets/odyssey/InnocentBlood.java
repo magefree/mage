@@ -37,7 +37,7 @@ public class InnocentBlood extends mage.sets.planechase.InnocentBlood {
 
     public InnocentBlood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "ODY";
     }
 

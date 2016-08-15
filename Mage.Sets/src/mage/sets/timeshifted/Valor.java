@@ -38,7 +38,7 @@ public class Valor extends mage.sets.judgment.Valor {
 
     public Valor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "TSB";
 		this.rarity = Rarity.SPECIAL;
     }

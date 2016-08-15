@@ -37,7 +37,7 @@ public class SwordOfVengeance extends mage.sets.magic2011.SwordOfVengeance {
 
     public SwordOfVengeance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
+        this.cardNumber = "276";
         this.expansionSetCode = "C14";
     }
 

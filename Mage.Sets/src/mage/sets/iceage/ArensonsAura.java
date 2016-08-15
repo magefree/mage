@@ -39,7 +39,7 @@ public class ArensonsAura extends mage.sets.fifthedition.ArensonsAura {
 
     public ArensonsAura(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "ICE";
         this.rarity = Rarity.COMMON;
     }

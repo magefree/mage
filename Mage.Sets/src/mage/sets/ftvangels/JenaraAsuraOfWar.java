@@ -37,7 +37,7 @@ public class JenaraAsuraOfWar extends mage.sets.alarareborn.JenaraAsuraOfWar {
 
     public JenaraAsuraOfWar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "V15";
     }
 

@@ -37,7 +37,7 @@ public class WildMongrel extends mage.sets.odyssey.WildMongrel {
 
     public WildMongrel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "DD3GVL";
     }
 

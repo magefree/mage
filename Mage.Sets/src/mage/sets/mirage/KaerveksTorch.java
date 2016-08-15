@@ -39,7 +39,7 @@ public class KaerveksTorch extends mage.sets.vintagemasters.KaerveksTorch {
 
     public KaerveksTorch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = "185";
         this.expansionSetCode = "MIR";
         this.rarity = Rarity.COMMON;
     }

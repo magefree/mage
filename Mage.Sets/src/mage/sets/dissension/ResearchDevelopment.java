@@ -170,7 +170,7 @@ class DevelopmentEffect extends OneShotEffect {
                 boolean putToken = true;
                 for (UUID opponentUuid : opponents) {
                     Player opponent = game.getPlayer(opponentUuid);
-                    if (opponent != null && opponent.chooseUse(Outcome.Detriment, 
+                    if (opponent != null && opponent.chooseUse(Outcome.Detriment,
                             "Allow " + player.getLogName() + " to draw a card instead? (" + Integer.toString(i+1) + ")", source, game)) {
                         game.informPlayers(opponent.getLogName() + " had chosen to let " + player.getLogName() + " draw a card.");
                         player.drawCards(1, game);
@@ -179,7 +179,7 @@ class DevelopmentEffect extends OneShotEffect {
                     }
                 }
                 if (putToken) {
-                    new CreateTokenEffect(new ElementalToken()).apply(game, source);
+                    new CreateTokenEffect(new ElementalToken("DIS", 1)).apply(game, source);
                 }
             }
 

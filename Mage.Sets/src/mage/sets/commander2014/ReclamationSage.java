@@ -37,7 +37,7 @@ public class ReclamationSage extends mage.sets.magic2015.ReclamationSage {
 
     public ReclamationSage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 213;
+        this.cardNumber = "213";
         this.expansionSetCode = "C14";
     }
 

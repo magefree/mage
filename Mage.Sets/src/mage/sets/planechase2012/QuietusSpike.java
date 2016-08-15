@@ -37,7 +37,7 @@ public class QuietusSpike extends mage.sets.shardsofalara.QuietusSpike {
 
     public QuietusSpike(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "PC2";
     }
 

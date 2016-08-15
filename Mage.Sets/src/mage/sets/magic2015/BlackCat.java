@@ -37,7 +37,7 @@ public class BlackCat extends mage.sets.darkascension.BlackCat {
 
     public BlackCat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "M15";
     }
 

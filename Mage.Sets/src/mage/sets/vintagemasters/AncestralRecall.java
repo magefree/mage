@@ -38,7 +38,7 @@ public class AncestralRecall extends mage.sets.limitedalpha.AncestralRecall {
 
     public AncestralRecall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.BONUS;
     }

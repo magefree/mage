@@ -39,7 +39,7 @@ public class Disrupt extends mage.sets.invasion.Disrupt {
 
     public Disrupt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "WTH";
         this.rarity = Rarity.COMMON;
     }

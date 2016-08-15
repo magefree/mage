@@ -38,7 +38,7 @@ public class TitaniasSong extends mage.sets.fourthedition.TitaniasSong {
 
     public TitaniasSong(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "ATQ";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -38,7 +38,7 @@ public class BazaarOfBaghdad extends mage.sets.arabiannights.BazaarOfBaghdad {
 
     public BazaarOfBaghdad(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 294;
+        this.cardNumber = "294";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.MYTHIC;
     }

@@ -38,7 +38,7 @@ public class VerdelothTheAncient extends mage.sets.invasion.VerdelothTheAncient 
 
     public VerdelothTheAncient(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

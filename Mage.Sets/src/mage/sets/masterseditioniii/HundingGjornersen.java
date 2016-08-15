@@ -37,7 +37,7 @@ public class HundingGjornersen extends mage.sets.legends.HundingGjornersen {
 
     public HundingGjornersen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "ME3";
     }
 

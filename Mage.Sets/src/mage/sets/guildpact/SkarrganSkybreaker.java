@@ -37,7 +37,7 @@ public class SkarrganSkybreaker extends mage.sets.heroesvsmonsters.SkarrganSkybr
 
     public SkarrganSkybreaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "GPT";
     }
 

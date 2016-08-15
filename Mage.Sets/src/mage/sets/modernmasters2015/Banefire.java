@@ -37,7 +37,7 @@ public class Banefire extends mage.sets.conflux.Banefire {
 
     public Banefire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "MM2";
     }
 

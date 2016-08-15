@@ -37,7 +37,7 @@ public class HoardSmelterDragon extends mage.sets.scarsofmirrodin.HoardSmelterDr
 
     public HoardSmelterDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "C14";
     }
 

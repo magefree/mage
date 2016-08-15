@@ -12,7 +12,7 @@ public class CardDownloadData {
     private String downloadName;
     private String set;
     private String tokenSetCode;
-    private Integer collectorId;
+    private String collectorId;
     private Integer type;
     private boolean token;
     private boolean twoFacedCard;
@@ -23,15 +23,15 @@ public class CardDownloadData {
     private boolean usesVariousArt;
     private boolean isType2;
 
-    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, String tokenSetCode) {
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode) {
         this(name, set, collectorId, usesVariousArt, type, tokenSetCode, false);
     }
 
-    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, boolean token) {
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, boolean token) {
         this(name, set, collectorId, usesVariousArt, type, tokenSetCode, token, false, false);
     }
 
-    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, boolean token, boolean twoFacedCard, boolean secondSide) {
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, boolean token, boolean twoFacedCard, boolean secondSide) {
         this.name = name;
         this.set = set;
         this.collectorId = collectorId;
@@ -102,7 +102,7 @@ public class CardDownloadData {
         return hash;
     }
 
-    public Integer getCollectorId() {
+    public String getCollectorId() {
         return collectorId;
     }
 

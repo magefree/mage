@@ -37,7 +37,7 @@ public class TezzeretTheSeeker extends mage.sets.shardsofalara.TezzeretTheSeeker
 
     public TezzeretTheSeeker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "DDF";
     }
 

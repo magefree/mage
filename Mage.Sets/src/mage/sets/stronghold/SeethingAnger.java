@@ -37,7 +37,7 @@ public class SeethingAnger extends mage.sets.tempestremastered.SeethingAnger {
 
     public SeethingAnger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "STH";
     }
 

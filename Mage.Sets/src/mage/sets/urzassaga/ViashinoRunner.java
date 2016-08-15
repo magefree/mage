@@ -37,7 +37,7 @@ public class ViashinoRunner extends mage.sets.tenthedition.ViashinoRunner {
 
     public ViashinoRunner(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = "224";
         this.expansionSetCode = "USG";
     }
 

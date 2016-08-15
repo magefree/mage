@@ -37,7 +37,7 @@ public class SerendibDjinn extends mage.sets.masterseditioniv.SerendibDjinn {
 
     public SerendibDjinn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "ARN";
     }
 

@@ -37,7 +37,7 @@ public class SilentArbiter extends mage.sets.fifthdawn.SilentArbiter {
 
     public SilentArbiter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "CNS";
     }
 

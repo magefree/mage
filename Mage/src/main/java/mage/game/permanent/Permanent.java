@@ -91,7 +91,7 @@ public interface Permanent extends Card, Controllable {
 
     void setRenowned(boolean value);
 
-    void setCardNumber(int cid);
+    void setCardNumber(String cid);
 
     void setExpansionSetCode(String expansionSetCode);
 

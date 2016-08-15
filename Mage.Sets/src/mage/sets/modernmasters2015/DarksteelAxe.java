@@ -37,7 +37,7 @@ public class DarksteelAxe extends mage.sets.scarsofmirrodin.DarksteelAxe {
 
     public DarksteelAxe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "MM2";
     }
 

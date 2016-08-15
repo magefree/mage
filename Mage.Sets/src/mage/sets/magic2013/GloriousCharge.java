@@ -37,7 +37,7 @@ public class GloriousCharge extends mage.sets.magic2010.GloriousCharge {
 
     public GloriousCharge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "M13";
     }
 

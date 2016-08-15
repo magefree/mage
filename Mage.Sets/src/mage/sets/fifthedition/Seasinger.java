@@ -37,7 +37,7 @@ public class Seasinger extends mage.sets.fallenempires.Seasinger {
 
     public Seasinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "5ED";
     }
 

@@ -38,7 +38,7 @@ public class GroveOfTheGuardian extends mage.sets.returntoravnica.GroveOfTheGuar
 
     public GroveOfTheGuardian(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

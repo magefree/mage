@@ -37,7 +37,7 @@ public class SpellBlast extends mage.sets.limitedalpha.SpellBlast {
 
     public SpellBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "5ED";
     }
 

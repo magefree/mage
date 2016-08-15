@@ -37,7 +37,7 @@ public class ElvesOfDeepShadow extends mage.sets.ravnica.ElvesOfDeepShadow {
 
     public ElvesOfDeepShadow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "DDJ";
     }
 

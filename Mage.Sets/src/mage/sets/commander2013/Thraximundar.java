@@ -37,7 +37,7 @@ public class Thraximundar extends mage.sets.alarareborn.Thraximundar {
 
     public Thraximundar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "C13";
     }
 

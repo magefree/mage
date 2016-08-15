@@ -38,7 +38,7 @@ public class ForgestokerDragon extends mage.sets.bornofthegods.ForgestokerDragon
 
     public ForgestokerDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

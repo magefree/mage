@@ -37,7 +37,7 @@ public class PropheticBolt extends mage.sets.commander.PropheticBolt {
 
     public PropheticBolt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "APC";
     }
 

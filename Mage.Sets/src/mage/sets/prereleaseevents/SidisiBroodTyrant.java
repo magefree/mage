@@ -38,7 +38,7 @@ public class SidisiBroodTyrant extends mage.sets.khansoftarkir.SidisiBroodTyrant
 
     public SidisiBroodTyrant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

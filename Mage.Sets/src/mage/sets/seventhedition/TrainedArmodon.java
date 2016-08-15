@@ -37,7 +37,7 @@ public class TrainedArmodon extends mage.sets.tempest.TrainedArmodon {
 
     public TrainedArmodon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 275;
+        this.cardNumber = "275";
         this.expansionSetCode = "7ED";
     }
 

@@ -37,7 +37,7 @@ public class BeastcallerSavant extends mage.sets.battleforzendikar.BeastcallerSa
 
     public BeastcallerSavant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 244;
+        this.cardNumber = "244";
         this.expansionSetCode = "PTC";
     }
 

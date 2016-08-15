@@ -37,7 +37,7 @@ public class CometStorm extends mage.sets.worldwake.CometStorm {
 
     public CometStorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "MM2";
     }
 

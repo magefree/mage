@@ -37,7 +37,7 @@ public class DongZhouTheTyrant extends mage.sets.portalthreekingdoms.DongZhouThe
 
     public DongZhouTheTyrant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "ME3";
     }
 

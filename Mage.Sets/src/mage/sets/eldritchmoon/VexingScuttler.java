@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.EmergeAbility;
@@ -47,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class VexingScuttler extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 
     static {
@@ -66,8 +67,11 @@ public class VexingScuttler extends CardImpl {
 
         // Emerge {6}{U}
         this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{6}{U}")));
+
         // When you cast Vexing Scuttler, you may return target instant or sorcery card from your graveyard to your hand.
-        Ability ability = new CastSourceTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("you may return target instant or sorcery card from your graveyard to your hand");
+        Ability ability = new CastSourceTriggeredAbility(effect, true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

@@ -37,7 +37,7 @@ public class Clickslither extends mage.sets.elvesvsgoblins.Clickslither {
 
     public Clickslither(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "VMA";
     }
 

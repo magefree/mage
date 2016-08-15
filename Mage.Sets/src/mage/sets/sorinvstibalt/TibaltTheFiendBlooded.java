@@ -37,7 +37,7 @@ public class TibaltTheFiendBlooded extends mage.sets.avacynrestored.TibaltTheFie
 
     public TibaltTheFiendBlooded(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "DDK";
     }
 

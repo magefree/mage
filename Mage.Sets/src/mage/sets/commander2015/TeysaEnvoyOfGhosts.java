@@ -37,7 +37,7 @@ public class TeysaEnvoyOfGhosts extends mage.sets.dragonsmaze.TeysaEnvoyOfGhosts
 
     public TeysaEnvoyOfGhosts(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 234;
+        this.cardNumber = "234";
         this.expansionSetCode = "C15";
     }
 

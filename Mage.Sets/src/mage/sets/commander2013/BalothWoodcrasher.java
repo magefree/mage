@@ -37,7 +37,7 @@ public class BalothWoodcrasher extends mage.sets.zendikar.BalothWoodcrasher {
 
     public BalothWoodcrasher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "C13";
     }
 

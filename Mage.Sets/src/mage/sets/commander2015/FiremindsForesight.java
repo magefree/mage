@@ -37,7 +37,7 @@ public class FiremindsForesight extends mage.sets.returntoravnica.FiremindsFores
 
     public FiremindsForesight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "C15";
     }
 

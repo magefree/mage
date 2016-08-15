@@ -37,7 +37,7 @@ public class MnemonicWall extends mage.sets.riseoftheeldrazi.MnemonicWall {
 
     public MnemonicWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "THS";
     }
 

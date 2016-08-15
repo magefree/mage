@@ -37,7 +37,7 @@ public class MiraculousRecovery extends mage.sets.visions.MiraculousRecovery {
 
     public MiraculousRecovery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "DDL";
     }
 

@@ -37,7 +37,7 @@ public class MothdustChangeling extends mage.sets.morningtide.MothdustChangeling
 
     public MothdustChangeling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "MMA";
     }
 

@@ -37,7 +37,7 @@ public class ReefPirates2 extends ReefPirates1 {
 
     public ReefPirates2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
     }
 
     public ReefPirates2(final ReefPirates2 card) {

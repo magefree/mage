@@ -37,7 +37,7 @@ public class SoltariMonk extends mage.sets.tempest.SoltariMonk {
 
     public SoltariMonk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "TPR";
     }
 

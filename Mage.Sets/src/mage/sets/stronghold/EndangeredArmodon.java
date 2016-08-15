@@ -37,7 +37,7 @@ public class EndangeredArmodon extends mage.sets.tempestremastered.EndangeredArm
 
     public EndangeredArmodon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "STH";
     }
 

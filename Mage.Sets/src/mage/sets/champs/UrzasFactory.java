@@ -38,7 +38,7 @@ public class UrzasFactory extends mage.sets.timespiral.UrzasFactory {
 
     public UrzasFactory(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "CP";
         this.rarity = Rarity.SPECIAL;
     }

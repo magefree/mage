@@ -37,7 +37,7 @@ public class RogueKavu extends mage.sets.ninthedition.RogueKavu {
 
     public RogueKavu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "INV";
     }
 

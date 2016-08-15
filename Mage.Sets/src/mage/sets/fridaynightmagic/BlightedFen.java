@@ -37,7 +37,7 @@ public class BlightedFen extends mage.sets.battleforzendikar.BlightedFen {
 
     public BlightedFen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 191;
+        this.cardNumber = "191";
         this.expansionSetCode = "FNMP";
     }
 

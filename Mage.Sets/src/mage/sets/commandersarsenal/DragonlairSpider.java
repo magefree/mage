@@ -38,7 +38,7 @@ public class DragonlairSpider extends mage.sets.planechase2012.DragonlairSpider 
 
     public DragonlairSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

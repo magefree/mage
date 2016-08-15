@@ -38,7 +38,7 @@ public class RamirezDePietro extends mage.sets.legends.RamirezDePietro {
 
     public RamirezDePietro(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

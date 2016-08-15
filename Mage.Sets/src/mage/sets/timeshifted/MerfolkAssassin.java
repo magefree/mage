@@ -38,7 +38,7 @@ public class MerfolkAssassin extends mage.sets.thedark.MerfolkAssassin {
 
     public MerfolkAssassin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

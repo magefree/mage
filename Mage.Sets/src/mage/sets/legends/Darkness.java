@@ -38,7 +38,7 @@ public class Darkness extends mage.sets.timeshifted.Darkness {
 
     public Darkness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.COMMON;
     }

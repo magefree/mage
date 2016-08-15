@@ -37,7 +37,7 @@ public class EbonDragon extends mage.sets.ftvdragons.EbonDragon {
 
     public EbonDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "POR";
     }
 

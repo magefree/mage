@@ -38,7 +38,7 @@ public class Phytotitan extends mage.sets.magic2015.Phytotitan {
 
     public Phytotitan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

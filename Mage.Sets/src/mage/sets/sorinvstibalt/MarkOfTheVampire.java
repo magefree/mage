@@ -37,7 +37,7 @@ public class MarkOfTheVampire extends mage.sets.magic2013.MarkOfTheVampire {
 
     public MarkOfTheVampire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "DDK";
     }
 

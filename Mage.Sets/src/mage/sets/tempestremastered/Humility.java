@@ -38,7 +38,7 @@ public class Humility extends mage.sets.tempest.Humility {
 
     public Humility(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.MYTHIC;
     }

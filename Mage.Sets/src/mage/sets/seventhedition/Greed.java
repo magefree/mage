@@ -37,7 +37,7 @@ public class Greed extends mage.sets.commander2013.Greed {
 
     public Greed(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "7ED";
     }
 

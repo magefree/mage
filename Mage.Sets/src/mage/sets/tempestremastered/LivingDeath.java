@@ -38,7 +38,7 @@ public class LivingDeath extends mage.sets.tempest.LivingDeath {
 
     public LivingDeath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.MYTHIC;
     }

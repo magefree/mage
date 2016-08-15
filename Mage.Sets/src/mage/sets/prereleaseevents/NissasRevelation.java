@@ -37,7 +37,7 @@ public class NissasRevelation extends mage.sets.magicorigins.NissasRevelation {
 
     public NissasRevelation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 225;
+        this.cardNumber = "225";
         this.expansionSetCode = "PTC";
     }
 

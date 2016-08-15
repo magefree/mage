@@ -37,7 +37,7 @@ public class Zombify extends mage.sets.ninthedition.Zombify {
 
     public Zombify(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "ARC";
     }
 

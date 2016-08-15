@@ -37,7 +37,7 @@ public class RakdosSignet extends mage.sets.dissension.RakdosSignet {
 
     public RakdosSignet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "ARC";
     }
 

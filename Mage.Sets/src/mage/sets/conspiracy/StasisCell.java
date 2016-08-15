@@ -37,7 +37,7 @@ public class StasisCell extends mage.sets.ravnica.StasisCell {
 
     public StasisCell(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "CNS";
     }
 

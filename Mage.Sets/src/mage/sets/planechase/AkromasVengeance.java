@@ -29,19 +29,15 @@ package mage.sets.planechase;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -49,12 +45,21 @@ import mage.game.permanent.Permanent;
  */
 public class AkromasVengeance extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, and enchantments");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.ENCHANTMENT)));
+    }
+
     public AkromasVengeance(UUID ownerId) {
         super(ownerId, 1, "Akroma's Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "HOP";
 
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
-        this.getSpellAbility().addEffect(new AkromasVengeanceEffect());
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
     public AkromasVengeance(final AkromasVengeance card) {
@@ -65,39 +70,4 @@ public class AkromasVengeance extends CardImpl {
     public AkromasVengeance copy() {
         return new AkromasVengeance(this);
     }
-}
-
-class AkromasVengeanceEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
-    public AkromasVengeanceEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "Destroy all artifacts, creatures, and enchantments";
-    }
-
-    public AkromasVengeanceEffect(final AkromasVengeanceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.destroy(source.getSourceId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public AkromasVengeanceEffect copy() {
-        return new AkromasVengeanceEffect(this);
-    }
-
 }

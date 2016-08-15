@@ -38,7 +38,7 @@ public class NimbleMongoose extends mage.sets.odyssey.NimbleMongoose {
 
     public NimbleMongoose(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

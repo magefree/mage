@@ -37,7 +37,7 @@ public class InfiniteReflection extends mage.sets.avacynrestored.InfiniteReflect
 
     public InfiniteReflection(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "C14";
     }
 

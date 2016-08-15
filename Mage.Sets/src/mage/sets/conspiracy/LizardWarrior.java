@@ -37,7 +37,7 @@ public class LizardWarrior extends mage.sets.portal.LizardWarrior {
 
     public LizardWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 146;
+        this.cardNumber = "146";
         this.expansionSetCode = "CNS";
     }
 

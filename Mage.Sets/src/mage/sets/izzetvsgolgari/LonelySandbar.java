@@ -37,7 +37,7 @@ public class LonelySandbar extends mage.sets.onslaught.LonelySandbar {
 
     public LonelySandbar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "DDJ";
     }
 

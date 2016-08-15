@@ -37,7 +37,7 @@ public class CaptainOfTheMists extends mage.sets.avacynrestored.CaptainOfTheMist
 
     public CaptainOfTheMists(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "DDQ";
     }
 

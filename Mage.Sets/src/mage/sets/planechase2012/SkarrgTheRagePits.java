@@ -37,7 +37,7 @@ public class SkarrgTheRagePits extends mage.sets.guildpact.SkarrgTheRagePits {
 
     public SkarrgTheRagePits(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "PC2";
     }
 

@@ -38,7 +38,7 @@ public class RattleclawMystic extends mage.sets.khansoftarkir.RattleclawMystic {
 
     public RattleclawMystic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

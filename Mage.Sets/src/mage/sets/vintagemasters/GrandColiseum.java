@@ -37,7 +37,7 @@ public class GrandColiseum extends mage.sets.onslaught.GrandColiseum {
 
     public GrandColiseum(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 298;
+        this.cardNumber = "298";
         this.expansionSetCode = "VMA";
     }
 

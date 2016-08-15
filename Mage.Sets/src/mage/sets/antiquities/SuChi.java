@@ -38,7 +38,7 @@ public class SuChi extends mage.sets.vintagemasters.SuChi {
 
     public SuChi(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "ATQ";
     }
 

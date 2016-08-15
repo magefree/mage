@@ -37,7 +37,7 @@ public class CursedFlesh extends mage.sets.invasion.CursedFlesh {
 
     public CursedFlesh(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "TPR";
     }
 

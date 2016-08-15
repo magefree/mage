@@ -38,7 +38,7 @@ public class NessianWildsRavager extends mage.sets.bornofthegods.NessianWildsRav
 
     public NessianWildsRavager(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

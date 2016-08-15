@@ -37,7 +37,7 @@ public class CentaurArcher extends mage.sets.iceage.CentaurArcher {
 
     public CentaurArcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "MED";
     }
 

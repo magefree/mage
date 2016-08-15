@@ -37,7 +37,7 @@ public class CryptbornHorror extends mage.sets.returntoravnica.CryptbornHorror {
 
     public CryptbornHorror(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "MGDC";
     }
 

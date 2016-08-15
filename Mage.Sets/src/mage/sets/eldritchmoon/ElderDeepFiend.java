@@ -63,7 +63,7 @@ public class ElderDeepFiend extends CardImpl {
 
         // When you cast Elder Deep-Fiend, tap up to four target permanents.
         Ability ability = new CastSourceTriggeredAbility(new TapTargetEffect());
-        ability.addTarget(new TargetPermanent(0, 4, new FilterPermanent("permanents to tap"), false));
+        ability.addTarget(new TargetPermanent(0, 4, new FilterPermanent("permanent"), false));
         this.addAbility(ability);
     }
 

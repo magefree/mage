@@ -37,7 +37,7 @@ public class MoggConscripts extends mage.sets.tempest.MoggConscripts {
 
     public MoggConscripts(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "TPR";
     }
 

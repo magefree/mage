@@ -37,7 +37,7 @@ public class CunningWish extends mage.sets.judgment.CunningWish {
 
     public CunningWish(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "JR";
     }
 

@@ -38,7 +38,7 @@ public class RavenousDemon extends mage.sets.darkascension.RavenousDemon {
 
     public RavenousDemon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

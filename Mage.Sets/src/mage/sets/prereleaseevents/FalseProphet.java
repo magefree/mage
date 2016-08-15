@@ -39,7 +39,7 @@ public class FalseProphet extends mage.sets.urzasdestiny.FalseProphet {
 
     public FalseProphet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -27,7 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
 
@@ -37,14 +39,29 @@ import mage.constants.CardType;
  */
 public class BeastToken2 extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("ZEN", "C14", "DDD", "C15", "DD3GVL"));
+    }
+
     public BeastToken2() {
+        this(null, 0);
+    }
+
+    public BeastToken2(String setCode) {
+        this(setCode, 0);
+    }
+
+    public BeastToken2(String setCode, int tokenType) {
         super("Beast", "4/4 green Beast creature token");
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Beast");
         power = new MageInt(4);
         toughness = new MageInt(4);
-        availableImageSetCodes.addAll(Arrays.asList("ZEN", "C14", "DDD", "C15"));
     }
 
     public BeastToken2(final BeastToken2 token) {
@@ -59,7 +76,7 @@ public class BeastToken2 extends Token {
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("C14") || getOriginalExpansionSetCode().equals("DDD")) {
+        if (getOriginalExpansionSetCode().equals("C14") || getOriginalExpansionSetCode().equals("DDD") || getOriginalExpansionSetCode().equals("DD3GVL")) {
             this.setTokenType(2);
         }
     }

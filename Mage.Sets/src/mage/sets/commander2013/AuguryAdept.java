@@ -37,7 +37,7 @@ public class AuguryAdept extends mage.sets.shadowmoor.AuguryAdept {
 
     public AuguryAdept(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "C13";
     }
 

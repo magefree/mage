@@ -37,7 +37,7 @@ public class FledglingMawcor extends mage.sets.jacevschandra.FledglingMawcor {
 
     public FledglingMawcor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "TSP";
     }
 

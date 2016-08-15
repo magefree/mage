@@ -37,7 +37,7 @@ public class NayaPanorama extends mage.sets.shardsofalara.NayaPanorama {
 
     public NayaPanorama(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 308;
+        this.cardNumber = "308";
         this.expansionSetCode = "C13";
     }
 

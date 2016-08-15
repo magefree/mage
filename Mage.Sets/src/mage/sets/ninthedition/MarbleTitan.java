@@ -37,7 +37,7 @@ public class MarbleTitan extends mage.sets.tempest.MarbleTitan {
 
     public MarbleTitan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "9ED";
     }
 

@@ -37,7 +37,7 @@ public class OloroAgelessAscetic extends mage.sets.commander2013.OloroAgelessAsc
 
     public OloroAgelessAscetic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "JR";
     }
 

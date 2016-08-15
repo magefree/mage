@@ -75,7 +75,7 @@ public class LoseLifeDefendingPlayerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player defender = null;
         if (attackerIsSource) {
-            defender = game.getPlayer(game.getCombat().getDefenderId(source.getSourceId()));
+            defender = game.getPlayer(game.getCombat().getDefendingPlayerId(source.getSourceId(), game));
         } else {
             defender = game.getPlayer(getTargetPointer().getFirst(game, source));
         }

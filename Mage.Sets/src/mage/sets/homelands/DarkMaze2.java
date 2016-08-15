@@ -37,7 +37,7 @@ public class DarkMaze2 extends mage.sets.fifthedition.DarkMaze {
 
     public DarkMaze2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "HML";
     }
 

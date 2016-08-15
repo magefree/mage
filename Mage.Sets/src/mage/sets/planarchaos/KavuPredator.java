@@ -37,7 +37,7 @@ public class KavuPredator extends mage.sets.heroesvsmonsters.KavuPredator {
 
     public KavuPredator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "PLC";
     }
 

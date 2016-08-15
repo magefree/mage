@@ -37,7 +37,7 @@ public class AmoeboidChangeling extends mage.sets.lorwyn.AmoeboidChangeling {
 
     public AmoeboidChangeling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "H09";
     }
 

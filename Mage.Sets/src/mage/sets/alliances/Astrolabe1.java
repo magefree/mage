@@ -37,7 +37,7 @@ public class Astrolabe1 extends mage.sets.masterseditioniii.Astrolabe {
 
     public Astrolabe1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "ALL";
     }
 

@@ -37,7 +37,7 @@ public class RallyTheAncestors extends mage.sets.fatereforged.RallyTheAncestors 
 
     public RallyTheAncestors(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "PTC";
     }
 

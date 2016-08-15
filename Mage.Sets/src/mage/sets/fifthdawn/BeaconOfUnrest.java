@@ -37,7 +37,7 @@ public class BeaconOfUnrest extends mage.sets.planechase.BeaconOfUnrest {
 
     public BeaconOfUnrest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "5DN";
     }
 

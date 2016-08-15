@@ -37,7 +37,7 @@ public class HuntedDragon extends mage.sets.ravnica.HuntedDragon {
 
     public HuntedDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "C15";
     }
 

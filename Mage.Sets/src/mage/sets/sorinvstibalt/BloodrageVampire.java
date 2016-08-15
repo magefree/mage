@@ -37,7 +37,7 @@ public class BloodrageVampire extends mage.sets.magic2012.BloodrageVampire {
 
     public BloodrageVampire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDK";
     }
 

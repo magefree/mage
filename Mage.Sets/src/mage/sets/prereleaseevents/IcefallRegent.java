@@ -37,7 +37,7 @@ public class IcefallRegent extends mage.sets.dragonsoftarkir.IcefallRegent {
 
     public IcefallRegent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "PTC";
     }
 

@@ -38,7 +38,7 @@ public class SteelOverseer extends mage.sets.magic2011.SteelOverseer {
 
     public SteelOverseer (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "DDF";
     }
 

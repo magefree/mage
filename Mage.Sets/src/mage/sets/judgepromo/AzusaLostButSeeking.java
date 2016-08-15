@@ -37,7 +37,7 @@ public class AzusaLostButSeeking extends mage.sets.championsofkamigawa.AzusaLost
 
     public AzusaLostButSeeking(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "JR";
     }
 

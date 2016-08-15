@@ -37,7 +37,7 @@ public class KeepWatch extends mage.sets.judgment.KeepWatch {
 
     public KeepWatch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "HOP";
     }
 

@@ -39,7 +39,7 @@ public class SnowCoveredSwamp extends mage.sets.iceage.SnowCoveredSwamp {
 
     public SnowCoveredSwamp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 243;
+        this.cardNumber = "243";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.LAND;
     }

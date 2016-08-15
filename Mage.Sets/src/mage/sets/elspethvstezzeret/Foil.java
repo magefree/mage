@@ -37,7 +37,7 @@ public class Foil extends mage.sets.prophecy.Foil {
 
     public Foil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "DDF";
     }
 

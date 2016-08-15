@@ -38,7 +38,7 @@ public class VerdantCatacombs extends mage.sets.zendikar.VerdantCatacombs {
 
     public VerdantCatacombs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

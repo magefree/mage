@@ -38,7 +38,7 @@ public class BountyOfTheHunt extends mage.sets.masterseditionii.BountyOfTheHunt 
 
     public BountyOfTheHunt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "ALL";
         this.rarity = Rarity.UNCOMMON;
     }

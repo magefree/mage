@@ -37,7 +37,7 @@ public class SigilBlessing extends mage.sets.shardsofalara.SigilBlessing {
 
     public SigilBlessing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "DDG";
     }
 

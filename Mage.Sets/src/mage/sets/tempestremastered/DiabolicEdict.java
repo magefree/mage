@@ -37,7 +37,7 @@ public class DiabolicEdict extends mage.sets.tempest.DiabolicEdict {
 
     public DiabolicEdict(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "TPR";
     }
 

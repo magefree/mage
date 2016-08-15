@@ -38,7 +38,7 @@ public class PillarOfFlame extends mage.sets.avacynrestored.PillarOfFlame {
 
     public PillarOfFlame(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class PatagiaViper extends mage.sets.dissension.PatagiaViper {
 
     public PatagiaViper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 197;
+        this.cardNumber = "197";
         this.expansionSetCode = "C15";
     }
 

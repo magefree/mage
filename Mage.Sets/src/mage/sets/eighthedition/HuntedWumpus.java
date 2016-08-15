@@ -37,7 +37,7 @@ public class HuntedWumpus extends mage.sets.ninthedition.HuntedWumpus {
 
     public HuntedWumpus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 258;
+        this.cardNumber = "258";
         this.expansionSetCode = "8ED";
     }
 

@@ -38,7 +38,7 @@ public class BraveTheElements extends mage.sets.zendikar.BraveTheElements {
 
     public BraveTheElements(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class EnsnaringBridge extends mage.sets.stronghold.EnsnaringBridge {
 
     public EnsnaringBridge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 300;
+        this.cardNumber = "300";
         this.expansionSetCode = "8ED";
     }
 

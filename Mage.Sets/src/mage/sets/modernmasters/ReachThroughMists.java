@@ -37,7 +37,7 @@ public class ReachThroughMists extends mage.sets.championsofkamigawa.ReachThroug
 
     public ReachThroughMists(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "MMA";
     }
 

@@ -37,7 +37,7 @@ public class SibilantSpirit extends mage.sets.iceage.SibilantSpirit {
 
     public SibilantSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "ME2";
     }
 

@@ -37,7 +37,7 @@ public class BranchingBolt extends mage.sets.shardsofalara.BranchingBolt {
 
     public BranchingBolt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "HOP";
     }
 

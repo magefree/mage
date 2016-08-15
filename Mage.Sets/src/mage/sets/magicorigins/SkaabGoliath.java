@@ -37,7 +37,7 @@ public class SkaabGoliath extends mage.sets.innistrad.SkaabGoliath {
 
     public SkaabGoliath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "ORI";
     }
 

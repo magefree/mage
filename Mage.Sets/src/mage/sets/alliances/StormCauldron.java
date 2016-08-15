@@ -37,7 +37,7 @@ public class StormCauldron extends mage.sets.seventhedition.StormCauldron {
 
     public StormCauldron(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "ALL";
     }
 

@@ -37,7 +37,7 @@ public class ScatterTheSeeds extends mage.sets.ravnica.ScatterTheSeeds {
 
     public ScatterTheSeeds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "MM2";
     }
 

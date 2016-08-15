@@ -39,7 +39,7 @@ public class HeritageDruid extends mage.sets.morningtide.HeritageDruid {
 
     public HeritageDruid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 171;
+        this.cardNumber = "171";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.RARE;
     }

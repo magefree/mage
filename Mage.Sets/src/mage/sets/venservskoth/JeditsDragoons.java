@@ -37,7 +37,7 @@ public class JeditsDragoons extends mage.sets.timespiral.JeditsDragoons {
 
     public JeditsDragoons(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "DDI";
     }
 

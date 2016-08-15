@@ -37,7 +37,7 @@ public class Burnout extends mage.sets.alliances.Burnout {
 
     public Burnout(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "ME2";
     }
 

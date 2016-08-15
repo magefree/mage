@@ -37,7 +37,7 @@ public class GoblinArsonist extends mage.sets.riseoftheeldrazi.GoblinArsonist {
 
     public GoblinArsonist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "DDK";
     }
 

@@ -37,7 +37,7 @@ public class RazorHippogriff extends mage.sets.scarsofmirrodin.RazorHippogriff {
 
     public RazorHippogriff(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "C13";
     }
 

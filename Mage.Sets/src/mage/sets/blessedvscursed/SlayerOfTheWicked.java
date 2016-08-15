@@ -37,7 +37,7 @@ public class SlayerOfTheWicked extends mage.sets.innistrad.SlayerOfTheWicked {
 
     public SlayerOfTheWicked(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "DDQ";
     }
 

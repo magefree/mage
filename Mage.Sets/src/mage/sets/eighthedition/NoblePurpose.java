@@ -38,7 +38,7 @@ public class NoblePurpose extends mage.sets.mercadianmasques.NoblePurpose {
 
     public NoblePurpose(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.RARE;
     }

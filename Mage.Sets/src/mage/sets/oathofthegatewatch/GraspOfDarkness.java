@@ -38,7 +38,7 @@ public class GraspOfDarkness extends mage.sets.scarsofmirrodin.GraspOfDarkness {
 
     public GraspOfDarkness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "OGW";
         this.rarity = Rarity.UNCOMMON;
     }

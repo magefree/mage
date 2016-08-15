@@ -37,7 +37,7 @@ public class GriffinGuide extends mage.sets.timespiral.GriffinGuide {
 
     public GriffinGuide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "DDG";
     }
 

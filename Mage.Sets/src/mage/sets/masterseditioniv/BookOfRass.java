@@ -37,7 +37,7 @@ public class BookOfRass extends mage.sets.thedark.BookOfRass {
 
     public BookOfRass(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "ME4";
     }
 

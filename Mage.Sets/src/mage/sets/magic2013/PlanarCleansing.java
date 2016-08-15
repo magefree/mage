@@ -37,7 +37,7 @@ public class PlanarCleansing extends mage.sets.magic2010.PlanarCleansing {
 
     public PlanarCleansing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "M13";
     }
 

@@ -37,7 +37,7 @@ public class RumblingSlum extends mage.sets.guildpact.RumblingSlum {
 
     public RumblingSlum(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "HOP";
     }
 

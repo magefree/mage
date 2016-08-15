@@ -37,7 +37,7 @@ public class EchoingCourage extends mage.sets.modernmasters.EchoingCourage {
 
     public EchoingCourage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "CNS";
     }
 

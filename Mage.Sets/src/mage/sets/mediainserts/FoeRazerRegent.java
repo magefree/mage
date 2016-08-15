@@ -38,7 +38,7 @@ public class FoeRazerRegent extends mage.sets.dragonsoftarkir.FoeRazerRegent {
 
     public FoeRazerRegent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

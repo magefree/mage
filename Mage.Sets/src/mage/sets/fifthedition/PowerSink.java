@@ -38,7 +38,7 @@ public class PowerSink extends mage.sets.limitedalpha.PowerSink {
 
     public PowerSink(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "5ED";
         this.rarity = Rarity.UNCOMMON;
     }

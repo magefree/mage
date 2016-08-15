@@ -6,7 +6,7 @@ public class NissaRevane extends mage.sets.zendikar.NissaRevane {
     
     public NissaRevane(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "MBP";
     }
     

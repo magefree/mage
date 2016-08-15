@@ -37,7 +37,7 @@ public class CryptGhast extends mage.sets.gatecrash.CryptGhast {
 
     public CryptGhast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "C14";
     }
 

@@ -38,7 +38,7 @@ public class Narwhal extends mage.sets.homelands.Narwhal {
 
     public Narwhal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.UNCOMMON;
     }

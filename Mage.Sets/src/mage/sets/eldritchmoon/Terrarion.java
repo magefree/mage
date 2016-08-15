@@ -37,7 +37,7 @@ public class Terrarion extends mage.sets.ravnica.Terrarion {
 
     public Terrarion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "EMN";
     }
 

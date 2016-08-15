@@ -38,7 +38,7 @@ public class LadyCaleria extends mage.sets.masterseditioniii.LadyCaleria {
 
     public LadyCaleria(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 279;
+        this.cardNumber = "279";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.RARE;
     }

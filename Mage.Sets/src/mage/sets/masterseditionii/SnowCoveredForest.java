@@ -39,7 +39,7 @@ public class SnowCoveredForest extends mage.sets.iceage.SnowCoveredForest {
 
     public SnowCoveredForest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 245;
+        this.cardNumber = "245";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.LAND;
     }

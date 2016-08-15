@@ -37,7 +37,7 @@ public class Solidarity extends mage.sets.urzasdestiny.Solidarity {
 
     public Solidarity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "8ED";
     }
 

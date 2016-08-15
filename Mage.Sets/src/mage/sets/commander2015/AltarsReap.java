@@ -37,7 +37,7 @@ public class AltarsReap extends mage.sets.innistrad.AltarsReap {
 
     public AltarsReap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "C15";
     }
 

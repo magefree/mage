@@ -38,7 +38,7 @@ public class BloodArtist extends mage.sets.avacynrestored.BloodArtist {
 
     public BloodArtist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "EMA";
     }
 

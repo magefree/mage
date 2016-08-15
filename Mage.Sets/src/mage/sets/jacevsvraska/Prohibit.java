@@ -37,7 +37,7 @@ public class Prohibit extends mage.sets.invasion.Prohibit {
 
     public Prohibit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "DDM";
     }
 

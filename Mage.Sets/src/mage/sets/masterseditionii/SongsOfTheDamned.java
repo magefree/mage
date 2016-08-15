@@ -37,7 +37,7 @@ public class SongsOfTheDamned extends mage.sets.iceage.SongsOfTheDamned {
 
     public SongsOfTheDamned(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "ME2";
     }
 

@@ -37,7 +37,7 @@ public class CarrionFeeder extends mage.sets.scourge.CarrionFeeder {
 
     public CarrionFeeder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "DDE";
     }
 

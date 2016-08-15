@@ -37,7 +37,7 @@ public class HavengulRunebinder extends mage.sets.darkascension.HavengulRunebind
 
     public HavengulRunebinder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "DDQ";
     }
 

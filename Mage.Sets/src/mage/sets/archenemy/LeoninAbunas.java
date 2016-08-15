@@ -37,7 +37,7 @@ public class LeoninAbunas extends mage.sets.mirrodin.LeoninAbunas {
 
     public LeoninAbunas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "ARC";
     }
 

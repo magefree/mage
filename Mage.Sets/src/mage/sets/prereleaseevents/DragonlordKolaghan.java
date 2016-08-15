@@ -38,7 +38,7 @@ public class DragonlordKolaghan extends mage.sets.dragonsoftarkir.DragonlordKola
 
     public DragonlordKolaghan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = "172";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.MYTHIC;
     }

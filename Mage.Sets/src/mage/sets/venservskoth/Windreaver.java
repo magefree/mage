@@ -37,7 +37,7 @@ public class Windreaver extends mage.sets.dissension.Windreaver {
 
     public Windreaver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "DDI";
     }
 

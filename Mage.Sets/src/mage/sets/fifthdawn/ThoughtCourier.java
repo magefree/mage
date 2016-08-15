@@ -38,7 +38,7 @@ public class ThoughtCourier extends mage.sets.ninthedition.ThoughtCourier {
 
     public ThoughtCourier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "5DN";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class LastStand extends mage.sets.planechase2012.LastStand {
 
     public LastStand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "APC";
     }
 

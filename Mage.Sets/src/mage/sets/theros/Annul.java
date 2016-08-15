@@ -37,7 +37,7 @@ public class Annul extends mage.sets.mirrodin.Annul {
 
     public Annul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "THS";
     }
 

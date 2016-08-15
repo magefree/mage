@@ -38,7 +38,7 @@ public class FelidarSovereign extends mage.sets.zendikar.FelidarSovereign {
 
     public FelidarSovereign(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "BFZ";
         this.rarity = Rarity.RARE;
     }

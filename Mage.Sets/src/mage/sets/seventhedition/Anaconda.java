@@ -37,7 +37,7 @@ public class Anaconda extends mage.sets.urzassaga.Anaconda {
 
     public Anaconda(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 229;
+        this.cardNumber = "229";
         this.expansionSetCode = "7ED";
     }
 

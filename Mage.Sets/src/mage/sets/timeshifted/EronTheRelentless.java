@@ -38,7 +38,7 @@ public class EronTheRelentless extends mage.sets.homelands.EronTheRelentless {
 
     public EronTheRelentless(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class MysticSnake extends mage.sets.apocalypse.MysticSnake {
 
     public MysticSnake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 180;
+        this.cardNumber = "180";
         this.expansionSetCode = "MM2";
     }
 

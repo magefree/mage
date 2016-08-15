@@ -37,7 +37,7 @@ public class WildGuess extends mage.sets.magic2013.WildGuess {
 
     public WildGuess(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "M14";
     }
 

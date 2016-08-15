@@ -38,7 +38,7 @@ public class DoranTheSiegeTower extends mage.sets.lorwyn.DoranTheSiegeTower {
 
     public DoranTheSiegeTower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "CP";
         this.rarity = Rarity.SPECIAL;
     }

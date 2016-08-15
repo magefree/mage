@@ -38,7 +38,7 @@ public class InkEyesServantOfOni extends mage.sets.betrayersofkamigawa.InkEyesSe
 
     public InkEyesServantOfOni(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "V13";
         this.rarity = Rarity.MYTHIC;
     }

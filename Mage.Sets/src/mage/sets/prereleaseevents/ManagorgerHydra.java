@@ -37,7 +37,7 @@ public class ManagorgerHydra extends mage.sets.magicorigins.ManagorgerHydra {
 
     public ManagorgerHydra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = "223";
         this.expansionSetCode = "PTC";
     }
 

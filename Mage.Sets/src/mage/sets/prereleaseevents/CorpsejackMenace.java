@@ -38,7 +38,7 @@ public class CorpsejackMenace extends mage.sets.returntoravnica.CorpsejackMenace
 
     public CorpsejackMenace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

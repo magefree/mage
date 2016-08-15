@@ -6,7 +6,7 @@ public class Memoricide extends mage.sets.scarsofmirrodin.Memoricide {
     
     public Memoricide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "MBP";
     }
     

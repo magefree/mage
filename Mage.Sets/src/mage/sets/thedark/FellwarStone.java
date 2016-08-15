@@ -37,7 +37,7 @@ public class FellwarStone extends mage.sets.ninthedition.FellwarStone {
 
     public FellwarStone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "DRK";
     }
 

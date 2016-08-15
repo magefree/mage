@@ -37,7 +37,7 @@ public class CrosstownCourier extends mage.sets.returntoravnica.CrosstownCourier
 
     public CrosstownCourier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "DDM";
     }
 

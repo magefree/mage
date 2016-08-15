@@ -37,7 +37,7 @@ public class Venom extends mage.sets.thedark.Venom {
 
     public Venom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "5ED";
     }
 

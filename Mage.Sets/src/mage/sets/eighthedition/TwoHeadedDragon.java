@@ -37,7 +37,7 @@ public class TwoHeadedDragon extends mage.sets.mercadianmasques.TwoHeadedDragon 
 
     public TwoHeadedDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 229;
+        this.cardNumber = "229";
         this.expansionSetCode = "8ED";
     }
 

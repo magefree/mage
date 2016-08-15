@@ -37,7 +37,7 @@ public class KytheonHeroOfAkros extends mage.sets.magicorigins.KytheonHeroOfAkro
 
     public KytheonHeroOfAkros(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 220;
+        this.cardNumber = "220";
         this.expansionSetCode = "PTC";
     }
 

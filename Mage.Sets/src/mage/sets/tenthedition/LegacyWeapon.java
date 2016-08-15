@@ -37,7 +37,7 @@ public class LegacyWeapon extends mage.sets.apocalypse.LegacyWeapon {
 
     public LegacyWeapon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 330;
+        this.cardNumber = "330";
         this.expansionSetCode = "10E";
     }
 

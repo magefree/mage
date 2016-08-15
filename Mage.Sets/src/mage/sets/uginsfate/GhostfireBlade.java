@@ -37,7 +37,7 @@ public class GhostfireBlade extends mage.sets.khansoftarkir.GhostfireBlade {
 
     public GhostfireBlade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 220;
+        this.cardNumber = "220";
         this.expansionSetCode = "UGIN";
     }
 

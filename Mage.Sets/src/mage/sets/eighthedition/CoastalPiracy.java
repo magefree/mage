@@ -38,7 +38,7 @@ public class CoastalPiracy extends mage.sets.mercadianmasques.CoastalPiracy {
 
     public CoastalPiracy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.RARE;
     }

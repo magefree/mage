@@ -37,7 +37,7 @@ public class ColossalWhale extends mage.sets.magic2014.ColossalWhale {
 
     public ColossalWhale(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "MLP";
     }
 

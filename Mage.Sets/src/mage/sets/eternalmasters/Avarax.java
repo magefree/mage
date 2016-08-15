@@ -39,7 +39,7 @@ public class Avarax extends mage.sets.onslaught.Avarax {
 
     public Avarax(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

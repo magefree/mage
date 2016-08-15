@@ -37,7 +37,7 @@ public class SelesnyaEvangel extends mage.sets.ravnica.SelesnyaEvangel {
 
     public SelesnyaEvangel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = "223";
         this.expansionSetCode = "CMD";
     }
 

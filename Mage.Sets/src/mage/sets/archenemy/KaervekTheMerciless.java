@@ -37,7 +37,7 @@ public class KaervekTheMerciless extends mage.sets.timespiral.KaervekTheMerciles
 
     public KaervekTheMerciless(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "ARC";
     }
 

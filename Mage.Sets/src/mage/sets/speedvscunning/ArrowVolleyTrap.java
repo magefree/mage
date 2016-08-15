@@ -37,7 +37,7 @@ public class ArrowVolleyTrap extends mage.sets.zendikar.ArrowVolleyTrap {
 
     public ArrowVolleyTrap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "DDN";
     }
 

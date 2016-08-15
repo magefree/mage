@@ -37,7 +37,7 @@ public class BurnishedHart extends mage.sets.theros.BurnishedHart {
 
     public BurnishedHart(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "C14";
     }
 

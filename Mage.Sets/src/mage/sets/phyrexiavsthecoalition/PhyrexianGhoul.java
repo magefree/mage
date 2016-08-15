@@ -37,7 +37,7 @@ public class PhyrexianGhoul extends mage.sets.planechase.PhyrexianGhoul {
 
     public PhyrexianGhoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "DDE";
     }
 

@@ -37,7 +37,7 @@ public class Nucklavee extends mage.sets.eventide.Nucklavee {
 
     public Nucklavee(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "CMD";
     }
 

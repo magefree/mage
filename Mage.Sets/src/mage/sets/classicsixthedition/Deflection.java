@@ -37,7 +37,7 @@ public class Deflection extends mage.sets.iceage.Deflection {
 
     public Deflection(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "6ED";
     }
 

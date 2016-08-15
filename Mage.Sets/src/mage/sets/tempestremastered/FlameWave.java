@@ -38,7 +38,7 @@ public class FlameWave extends mage.sets.ninthedition.FlameWave {
 
     public FlameWave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.RARE;
     }

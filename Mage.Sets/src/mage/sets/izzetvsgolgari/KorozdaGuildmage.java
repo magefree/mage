@@ -37,7 +37,7 @@ public class KorozdaGuildmage extends mage.sets.returntoravnica.KorozdaGuildmage
 
     public KorozdaGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "DDJ";
     }
 

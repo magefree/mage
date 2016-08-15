@@ -37,7 +37,7 @@ public class HelmOfObedience extends mage.sets.alliances.HelmOfObedience {
 
     public HelmOfObedience(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 210;
+        this.cardNumber = "210";
         this.expansionSetCode = "ME2";
     }
 

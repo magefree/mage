@@ -37,7 +37,7 @@ public class SilumgarsCommand extends mage.sets.dragonsoftarkir.SilumgarsCommand
 
     public SilumgarsCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 191;
+        this.cardNumber = "191";
         this.expansionSetCode = "PTC";
     }
 

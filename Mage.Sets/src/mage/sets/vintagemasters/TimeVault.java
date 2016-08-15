@@ -38,7 +38,7 @@ public class TimeVault extends mage.sets.unlimitededition.TimeVault {
 
     public TimeVault(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 287;
+        this.cardNumber = "287";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.MYTHIC;
     }

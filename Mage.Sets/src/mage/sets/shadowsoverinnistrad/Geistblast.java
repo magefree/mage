@@ -69,7 +69,7 @@ public class Geistblast extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
-        // {2}{U}, Exile Geist from your graveyard: Copy target instant or sorcery you control. You may choose new targets for the copy.
+        // {2}{U}, Exile Geistblast from your graveyard: Copy target instant or sorcery you control. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new CopyTargetSpellEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetSpell(filter));
         ability.addCost(new ExileSourceFromGraveCost());

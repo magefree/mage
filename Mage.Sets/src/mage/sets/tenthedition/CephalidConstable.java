@@ -37,7 +37,7 @@ public class CephalidConstable extends mage.sets.judgment.CephalidConstable {
 
     public CephalidConstable(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "10E";
     }
 

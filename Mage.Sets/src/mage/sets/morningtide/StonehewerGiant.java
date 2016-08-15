@@ -37,7 +37,7 @@ public class StonehewerGiant extends mage.sets.modernmasters.StonehewerGiant {
 
     public StonehewerGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "MOR";
     }
 

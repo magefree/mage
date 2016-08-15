@@ -37,7 +37,7 @@ public class Stonecloaker extends mage.sets.commander2013.Stonecloaker {
 
     public Stonecloaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "PLC";
     }
 

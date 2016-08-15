@@ -38,7 +38,7 @@ public class ShivanGorge extends mage.sets.urzassaga.ShivanGorge {
 
     public ShivanGorge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

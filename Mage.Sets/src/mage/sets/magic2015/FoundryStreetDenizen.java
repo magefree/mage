@@ -37,7 +37,7 @@ public class FoundryStreetDenizen extends mage.sets.gatecrash.FoundryStreetDeniz
 
     public FoundryStreetDenizen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "M15";
     }
 

@@ -37,7 +37,7 @@ public class Fireball extends mage.sets.magic2010.Fireball {
 
     public Fireball(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "M12";
     }
 

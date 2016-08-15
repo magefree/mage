@@ -37,7 +37,7 @@ public class Trollhide extends mage.sets.magic2012.Trollhide {
 
     public Trollhide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 197;
+        this.cardNumber = "197";
         this.expansionSetCode = "M14";
     }
 

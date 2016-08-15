@@ -37,7 +37,7 @@ public class SpittingHydra extends mage.sets.tempestremastered.SpittingHydra {
 
     public SpittingHydra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "STH";
     }
 

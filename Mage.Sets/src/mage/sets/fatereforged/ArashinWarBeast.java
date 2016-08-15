@@ -58,7 +58,7 @@ public class ArashinWarBeast extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever Arashin War Beast deals combat damage to one or more blockers, manifest the top card of your library.
-        this.addAbility(new ArashinWarBeastTriggeredAbility(new ManifestEffect(1), true));
+        this.addAbility(new ArashinWarBeastTriggeredAbility(new ManifestEffect(1), false));
 
     }
 

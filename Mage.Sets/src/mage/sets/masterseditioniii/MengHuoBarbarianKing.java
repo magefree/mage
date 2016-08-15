@@ -37,7 +37,7 @@ public class MengHuoBarbarianKing extends mage.sets.portalthreekingdoms.MengHuoB
 
     public MengHuoBarbarianKing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "ME3";
     }
 

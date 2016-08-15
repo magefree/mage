@@ -37,7 +37,7 @@ public class FleshbagMarauder extends mage.sets.shardsofalara.FleshbagMarauder {
 
     public FleshbagMarauder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "DDD";
     }
 

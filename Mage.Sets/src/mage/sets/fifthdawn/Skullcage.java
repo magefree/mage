@@ -37,7 +37,7 @@ public class Skullcage extends mage.sets.archenemy.Skullcage {
 
     public Skullcage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "5DN";
     }
 

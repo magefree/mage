@@ -37,7 +37,7 @@ public class LilianaOfTheDarkRealms extends mage.sets.magic2013.LilianaOfTheDark
 
     public LilianaOfTheDarkRealms(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "M14";
     }
 

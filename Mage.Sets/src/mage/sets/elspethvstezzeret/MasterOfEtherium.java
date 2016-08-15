@@ -37,7 +37,7 @@ public class MasterOfEtherium extends mage.sets.shardsofalara.MasterOfEtherium {
 
     public MasterOfEtherium(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "DDF";
     }
 

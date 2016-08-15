@@ -38,7 +38,7 @@ public class HeroesBane extends mage.sets.journeyintonyx.HeroesBane {
 
     public HeroesBane(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

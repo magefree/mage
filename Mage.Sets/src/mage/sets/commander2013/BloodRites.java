@@ -37,7 +37,7 @@ public class BloodRites extends mage.sets.championsofkamigawa.BloodRites {
 
     public BloodRites(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "C13";
     }
 

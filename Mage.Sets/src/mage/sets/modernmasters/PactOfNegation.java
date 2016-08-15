@@ -37,7 +37,7 @@ public class PactOfNegation extends mage.sets.futuresight.PactOfNegation {
 
     public PactOfNegation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "MMA";
     }
 

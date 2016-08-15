@@ -38,7 +38,7 @@ public class GravebaneZombie extends mage.sets.mirage.GravebaneZombie {
 
     public GravebaneZombie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "6ED";
         this.rarity = Rarity.UNCOMMON;
     }

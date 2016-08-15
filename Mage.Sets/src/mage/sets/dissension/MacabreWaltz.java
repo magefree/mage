@@ -38,7 +38,7 @@ public class MacabreWaltz extends mage.sets.magicorigins.MacabreWaltz {
 
     public MacabreWaltz(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "DIS";
     }
 

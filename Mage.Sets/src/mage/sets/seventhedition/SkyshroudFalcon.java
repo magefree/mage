@@ -37,7 +37,7 @@ public class SkyshroudFalcon extends mage.sets.stronghold.SkyshroudFalcon {
 
     public SkyshroudFalcon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "7ED";
     }
 

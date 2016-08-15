@@ -37,7 +37,7 @@ public class GolgariGuildmage extends mage.sets.ravnica.GolgariGuildmage {
 
     public GolgariGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 229;
+        this.cardNumber = "229";
         this.expansionSetCode = "C13";
     }
 

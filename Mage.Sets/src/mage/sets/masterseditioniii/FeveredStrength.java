@@ -37,7 +37,7 @@ public class FeveredStrength extends mage.sets.alliances.FeveredStrength1 {
 
     public FeveredStrength(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "ME3";
     }
 

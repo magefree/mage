@@ -37,7 +37,7 @@ public class IvoryGiant extends mage.sets.timespiral.IvoryGiant {
 
     public IvoryGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "MMA";
     }
 

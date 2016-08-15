@@ -37,7 +37,7 @@ public class Decimate extends mage.sets.odyssey.Decimate {
 
     public Decimate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = "185";
         this.expansionSetCode = "CNS";
     }
 

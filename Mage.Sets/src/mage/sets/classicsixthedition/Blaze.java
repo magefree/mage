@@ -37,7 +37,7 @@ public class Blaze extends mage.sets.planechase.Blaze {
 
     public Blaze(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "6ED";
     }
 

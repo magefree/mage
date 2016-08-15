@@ -37,7 +37,7 @@ public class KessigCagebreakers extends mage.sets.innistrad.KessigCagebreakers {
 
     public KessigCagebreakers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 187;
+        this.cardNumber = "187";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class ScorchingSpear extends mage.sets.starter1999.ScorchingSpear {
 
     public ScorchingSpear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "POR";
     }
 

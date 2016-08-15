@@ -38,7 +38,7 @@ public class FieryJustice extends mage.sets.iceage.FieryJustice {
 
     public FieryJustice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }
