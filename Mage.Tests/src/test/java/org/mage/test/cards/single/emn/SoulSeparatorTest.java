@@ -40,9 +40,9 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         
         Permanent saToken = getPermanent("Sylvan Advocate", playerA);
         Assert.assertTrue(saToken.getAbilities().contains(FlyingAbility.getInstance()));
-        Assert.assertTrue(saToken.getSubtype().contains("Spirit"));
-        assertPowerToughness(playerA, "Sylvan Advocate", 1, 1);        
-        Assert.assertFalse(saToken.getAbilities().contains(VigilanceAbility.getInstance()));
+        Assert.assertTrue(saToken.getSubtype().contains("Spirit"));        
+        Assert.assertTrue(saToken.getAbilities().contains(VigilanceAbility.getInstance()));
+        assertPowerToughness(playerA, "Sylvan Advocate", 1, 1);
     }
     
     // Reported bug: Exiled Tree of Perdition with Soul Separator
@@ -76,11 +76,11 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         
         Permanent treeToken = getPermanent("Tree of Perdition", playerA);
         Assert.assertTrue(treeToken.getAbilities().contains(FlyingAbility.getInstance()));
-        Assert.assertTrue(treeToken.getSubtype().contains("Spirit"));
-                
+        Assert.assertTrue(treeToken.getSubtype().contains("Spirit"));        
+        Assert.assertTrue(treeToken.getAbilities().contains(DefenderAbility.getInstance()));
+        
         assertLife(playerA, 20);
         assertLife(playerB, 1);
-        assertPowerToughness(playerA, "Tree of Perdition", 1, 20);      
-        Assert.assertFalse(treeToken.getAbilities().contains(DefenderAbility.getInstance()));
+        assertPowerToughness(playerA, "Tree of Perdition", 1, 20);
     }
 }
