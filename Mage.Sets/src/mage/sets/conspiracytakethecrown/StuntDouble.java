@@ -25,22 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.conspiracytakethecrown;
 
+import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.common.CopyPermanentEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
- * @author magenoxx_at_gmail.com
+ *
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class WurmToken extends Token {
+public class StuntDouble extends CardImpl {
 
-    public WurmToken() {
-        super("Wurm", "a 6/6 green Wurm creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Wurm");
-        power = new MageInt(6);
-        toughness = new MageInt(6);
+    public StuntDouble(UUID ownerId) {
+        super(ownerId, 38, "Stunt Double", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "CN2";
+        this.subtype.add("Shapeshifter");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
+
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+        // You may have Stunt Double enter the battlefield as a copy of any creature on the battlefield.
+        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(), true));
+    }
+
+    public StuntDouble(final StuntDouble card) {
+        super(card);
+    }
+
+    @Override
+    public StuntDouble copy() {
+        return new StuntDouble(this);
     }
 }
