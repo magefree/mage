@@ -73,6 +73,70 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertExileCount("Fracturing Gust", 1);
     }
 
+        /**
+     * 
+     * Test Granting Flashback to spells with X in manacost which have targeting requirements depending on the choice of X
+     * 
+     * Specific instance: Snapcaster Mage granting Flashback to Repeal
+     */
+    @Test
+    public void testSnapcasterMageWithRepeal(){
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerA, "Snapcaster Mage",1);
+        addCard(Zone.GRAVEYARD, playerA, "Repeal",1);
+
+     
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        setChoice(playerA, "Repeal");     
+        
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback");
+        setChoice(playerA, "X=2");
+        addTarget(playerA, "Snapcaster Mage");
+        
+        setStopAt(1, PhaseStep.END_TURN);
+        
+        execute();
+        
+        assertPermanentCount(playerA, "Snapcaster Mage", 0);
+        assertGraveyardCount(playerA, "Repeal", 0);
+        assertExileCount("Repeal", 1);
+        
+    }
+    
+    /**
+     * 
+     * Test Granting Flashback to spells with X in mana cost, where X has no influence on targeting requirements
+     * 
+     * Specific instance: 
+     * Snapcaser Mage granting Flashback to Blaze
+     */
+    @Test
+    public void testSnapcasterMageWithBlaze(){
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        
+        addCard(Zone.HAND, playerA, "Snapcaster Mage",1);
+        addCard(Zone.GRAVEYARD, playerA, "Blaze",1);
+
+     
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        setChoice(playerA, "B   laze");     
+        
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback");
+        setChoice(playerA, "X=1");
+        addTarget(playerA, "Snapcaster Mage");
+        
+        setStopAt(1, PhaseStep.END_TURN);
+        
+        execute();
+        
+        assertPermanentCount(playerA, "Snapcaster Mage", 0);
+        assertGraveyardCount(playerA, "Blaze", 0);
+        assertExileCount("Blaze", 1);
+        
+    }
+    
+    
     /**
      * My opponent put Iona on the battlefield using Unburial Rites, but my game
      * log didn't show me the color he has chosen.
