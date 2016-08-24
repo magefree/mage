@@ -21,21 +21,21 @@ public class SurviveTheNightTest extends CardTestPlayerBase {
         // Investigate
         addCard(Zone.HAND, playerA, "Survive the Night");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Bronze Sable"); // 2/1
-        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant"); // 3/3
-        
-        attack(1, playerA, "Bronze Sable");
-        block(1, playerB, "Hill Giant", "Bronze Sable");
-        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, "Survive the Night", "Bronze Sable");
-        
-        setStopAt(1, PhaseStep.END_COMBAT);
+        addCard(Zone.BATTLEFIELD, playerA, "Hinterland Logger"); // 2/1
+        addCard(Zone.BATTLEFIELD, playerB, "Bloodbriar"); // 2/3
+
+        attack(1, playerA, "Hinterland Logger");
+        block(1, playerB, "Bloodbriar", "Hinterland Logger");
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, "Survive the Night", "Hinterland Logger");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
-        
+
         assertGraveyardCount(playerA, "Survive the Night", 1);
-        assertGraveyardCount(playerB, "Hill Giant", 1);
+        assertGraveyardCount(playerB, "Bloodbriar", 1);
         assertPermanentCount(playerA, "Clue", 1);
-        assertPermanentCount(playerA, "Bronze Sable", 1);
-        assertPowerToughness(playerA, "Bronze Sable", 3, 1);
-        assertAbility(playerA, "Bronze Sable", IndestructibleAbility.getInstance(), true);
+        assertPermanentCount(playerA, "Hinterland Logger", 1);
+        assertPowerToughness(playerA, "Hinterland Logger", 3, 1);
+        assertAbility(playerA, "Hinterland Logger", IndestructibleAbility.getInstance(), true);
     }
 }
