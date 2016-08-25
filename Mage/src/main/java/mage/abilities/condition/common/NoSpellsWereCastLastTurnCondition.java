@@ -45,6 +45,12 @@ public class NoSpellsWereCastLastTurnCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // Do not check at start of game.
+        // Needed for tests to keep add to battlefield cards setting off condition when not intended.
+        if (game.getTurnNum() < 2) {
+            return false;
+        }
+
         CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
         // if any player cast spell, return false
         for (Integer count : watcher.getAmountOfSpellsCastOnPrevTurn().values()) {
@@ -52,7 +58,8 @@ public class NoSpellsWereCastLastTurnCondition implements Condition {
                 return false;
             }
         }
-        // no one cast spell this turn
+
+        // no one cast spell last turn
         return true;
     }
 }
