@@ -54,7 +54,7 @@ public class PharagaxGiant extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Tribute 2
+        // Tribute 2 (As this creature enters the battlefield, an opponent of your choice may place two +1/+1 counters on it.)
         this.addAbility(new TributeAbility(2));
         // When Pharagax Giant enters the battlefield, if tribute wasn't paid, Pharagax Giant deals 5 damage to each opponent.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(5, TargetController.OPPONENT), false);

@@ -165,8 +165,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private static Map<Key, BufferedImage> IMAGE_CACHE;
 
-    private final static class Key
-    {
+    private final static class Key {
+
         final int width;
         final int height;
         final int cardWidth;
@@ -476,10 +476,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private void setImage(BufferedImage srcImage) {
         synchronized (imagePanel) {
-            if(srcImage != null)
+            if (srcImage != null) {
                 imagePanel.setImage(srcImage);
-            else
+            } else {
                 imagePanel.clearImage();
+            }
             repaint();
         }
         doLayout();
@@ -570,7 +571,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     protected void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D)(g.create());
+        Graphics2D g2d = (Graphics2D) (g.create());
 
         if (alpha != 1.0f) {
             AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha);
@@ -730,7 +731,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public final void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
-        if(cardWidth == this.cardWidth && cardHeight == this.cardHeight) {
+        if (cardWidth == this.cardWidth && cardHeight == this.cardHeight) {
             setBounds(x - cardXOffset, y - cardYOffset, getWidth(), getHeight());
             return;
         }
@@ -757,8 +758,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             int height = cardYOffset * 2 + cardHeight;
             setBounds(x - cardXOffset, y - cardYOffset, width, height);
         }
-        if(imagePanel != null && imagePanel.getSrcImage() != null)
+        if (imagePanel != null && imagePanel.getSrcImage() != null) {
             updateImage();
+        }
     }
 
     public int getXOffset(int cardWidth) {
@@ -844,7 +846,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
         flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
 
-        final CardView gameCard = this.gameCard;
+        //final CardView gameCard = this.gameCard;
         final int stamp = ++updateImageStamp;
 
         Util.threadPool.submit(new Runnable() {
@@ -861,8 +863,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                     }
                     UI.invokeLater(new Runnable() {
                         @Override
-                        public void run () {
-                            if(stamp == updateImageStamp) {
+                        public void run() {
+                            if (stamp == updateImageStamp) {
                                 hasImage = srcImage != null;
                                 setText(gameCard);
                                 setImage(srcImage);

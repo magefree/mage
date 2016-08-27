@@ -254,13 +254,14 @@ public abstract class AbilityImpl implements Ability {
         if (!getModes().choose(game, this)) {
             return false;
         }
+
+        getSourceObject(game);
+
         if (controller.isTestMode()) {
             if (!controller.addTargets(this, game)) {
                 return false;
             }
         }
-
-        getSourceObject(game);
 
         /* 20130201 - 601.2b
          * If the player wishes to splice any cards onto the spell (see rule 702.45), he
@@ -269,7 +270,7 @@ public abstract class AbilityImpl implements Ability {
         if (this.abilityType.equals(AbilityType.SPELL)) {
             game.getContinuousEffects().applySpliceEffects(this, game);
         }
-        
+
         // if ability can be cast for no mana, clear the mana costs now, because additional mana costs must be paid.
         // For Flashback ability can be set X before, so the X costs have to be restored for the flashbacked ability
         if (noMana) {

@@ -314,12 +314,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @return
      */
     private List<Card> getCardList(Zone gameZone, TestPlayer player) {
-        if (gameZone.equals(Zone.HAND)) {
-            return getHandCards(player);
-        } else if (gameZone.equals(Zone.GRAVEYARD)) {
-            return getGraveCards(player);
-        } else if (gameZone.equals(Zone.LIBRARY)) {
-            return getLibraryCards(player);
+        switch (gameZone) {
+            case HAND:
+                return getHandCards(player);
+            case GRAVEYARD:
+                return getGraveCards(player);
+            case LIBRARY:
+                return getLibraryCards(player);
+            default:
+                break;
         }
 
         throw new AssertionError("Zone is not supported by test framework: " + gameZone);
@@ -872,7 +875,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertEquals("(Graveyard " + player.getName() + ") Card counts are not equal (" + cardName + ")", count, actualCount);
     }
-    
+
     /**
      * Assert library card count.
      *
@@ -880,7 +883,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count Expected count.
      */
     public void assertLibraryCount(Player player, int count) throws AssertionError {
-        
+
         List<Card> libraryList = player.getLibrary().getCards(currentGame);
         int actualCount = libraryList != null && !libraryList.isEmpty() ? libraryList.size() : 0;
         Assert.assertEquals("(Library " + player.getName() + ") counts are not equal", count, actualCount);
@@ -949,6 +952,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, Player target, int manaInPool) {
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$targetPlayer=" + target.getName() + "$manaInPool=" + manaInPool);
+    }
+
+    /**
+     * Rollback the number of given turns: 0 = rollback to the start of the
+     * current turn
+     *
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param turns
+     */
+    public void rollbackTurns(int turnNum, PhaseStep step, TestPlayer player, int turns) {
+        player.addAction(turnNum, step, "playerAction:Rollback" + "$turns=" + turns);
     }
 
     /**
@@ -1098,7 +1114,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player
      * @param choice starting with "1" for mode 1, "2" for mode 2 and so on (to
-     * set multiple modes call the command multiple times)
+     * set multiple modes call the command multiple times). If a spell mode can
+     * be used only once like Demonic Pact, the value has to be set to the
+     * number of the remaining modes (e.g. if only 2 are left the number need to
+     * be 1 or 2).
      */
     public void setModeChoice(TestPlayer player, String choice) {
         player.addModeChoice(choice);

@@ -27,6 +27,7 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
+import java.util.HashMap;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -60,7 +61,18 @@ public class FalkenrathGorger extends CardImpl {
         this.subtype.add("Berserker");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-
+        /**
+         * 4/8/2016 Falkenrath Gorger’s ability only applies while it’s on the
+         * battlefield. If you discard it, it won’t give itself madness.
+         * 4/8/2016 If Falkenrath Gorger leaves the battlefield before the
+         * madness trigger has resolved for a Vampire card that gained madness
+         * with its ability, the madness ability will still let you cast that
+         * Vampire card for the appropriate cost even though it no longer has
+         * madness. 4/8/2016 If you discard a Vampire creature card that already
+         * has a madness ability, you’ll choose which madness ability exiles it.
+         * You may choose either the one it normally has or the one it gains
+         * from Falkenrath Gorger.
+         */
         // Each Vampire creature card you own that isn't on the battlefield has madness. Its madness cost is equal to its mana cost.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FalkenrathGorgerEffect()));
     }
@@ -84,6 +96,8 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
 
     }
 
+    HashMap<UUID, MadnessAbility> madnessAbilities = new HashMap<>(); // reuse the same ability for the same object
+
     public FalkenrathGorgerEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Each Vampire creature card you own that isn't on the battlefield has madness. Its madness cost is equal to its mana cost";
@@ -91,6 +105,7 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
 
     public FalkenrathGorgerEffect(final FalkenrathGorgerEffect effect) {
         super(effect);
+        this.madnessAbilities.putAll(effect.madnessAbilities);
     }
 
     @Override
@@ -102,25 +117,37 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            HashMap<UUID, MadnessAbility> usedMadnessAbilities = new HashMap<>();
             // hand
             for (Card card : controller.getHand().getCards(filter, game)) {
-                game.getState().addOtherAbility(card, new MadnessAbility(card, card.getSpellAbility().getManaCosts()));
+                addMadnessToCard(game, card, usedMadnessAbilities);
             }
             // graveyard
             for (Card card : controller.getGraveyard().getCards(filter, game)) {
-                game.getState().addOtherAbility(card, new MadnessAbility(card, card.getSpellAbility().getManaCosts()));
+                addMadnessToCard(game, card, usedMadnessAbilities);
             }
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
                 if (filter.match(card, source.getSourceId(), controller.getId(), game)) {
                     if (card.getOwnerId().equals(controller.getId())) {
-                        game.getState().addOtherAbility(card, new MadnessAbility(card, card.getSpellAbility().getManaCosts()));
+                        addMadnessToCard(game, card, usedMadnessAbilities);
                     }
                 }
             }
+            madnessAbilities.clear();
+            madnessAbilities.putAll(usedMadnessAbilities);
             return true;
         }
 
         return false;
+    }
+
+    private void addMadnessToCard(Game game, Card card, HashMap<UUID, MadnessAbility> usedMadnessAbilities) {
+        MadnessAbility ability = madnessAbilities.get(card.getId());
+        if (ability == null) {
+            ability = new MadnessAbility(card, card.getSpellAbility().getManaCosts());
+        }
+        game.getState().addOtherAbility(card, ability, false);
+        usedMadnessAbilities.put(card.getId(), ability);
     }
 }

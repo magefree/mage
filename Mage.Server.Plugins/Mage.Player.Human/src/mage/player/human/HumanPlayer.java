@@ -160,9 +160,13 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("chooseMulligan", game);
         int nextHandSize = game.mulliganDownTo(playerId);
         do {
-            game.fireAskPlayerEvent(playerId, new MessageToClient("Mulligan "
+            String message = "Mulligan "
                     + (getHand().size() > nextHandSize ? "down to " : "for free, draw ")
-                    + nextHandSize + (nextHandSize == 1 ? " card?" : " cards?")), null);
+                    + nextHandSize + (nextHandSize == 1 ? " card?" : " cards?");
+            Map<String, Serializable> options = new HashMap<>();
+            options.put("UI.left.btn.text", "Mulligan");
+            options.put("UI.right.btn.text", "Keep");
+            game.fireAskPlayerEvent(playerId, new MessageToClient(message), null, options);
             waitForResponse(game);
         } while (response.getBoolean() == null && !abort);
         if (!abort) {

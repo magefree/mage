@@ -203,9 +203,15 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     private void handleOptions(Map<String, Serializable> options) {
         if (options != null) {
+            if (options.containsKey("UI.left.btn.text")) {
+                String text = (String) options.get("UI.left.btn.text");
+                this.btnLeft.setText(text);
+                this.helper.setLeft(text, true);
+            }
             if (options.containsKey("UI.right.btn.text")) {
-                this.btnRight.setText((String) options.get("UI.right.btn.text"));
-                this.helper.setRight((String) options.get("UI.right.btn.text"), true);
+                String text = (String) options.get("UI.right.btn.text");
+                this.btnRight.setText(text);
+                this.helper.setRight(text, true);
             }
             if (options.containsKey("dialog")) {
                 connectedDialog = (MageDialog) options.get("dialog");

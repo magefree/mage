@@ -361,6 +361,89 @@ public class BestowTest extends CardTestPlayerBase {
         Permanent nighthowler = getPermanent("Nighthowler", playerB);
 
         Assert.assertEquals("Nighthowler has to be a creature", true, nighthowler.getCardType().contains(CardType.CREATURE));
+    }
 
+    @Test
+    public void testSightlessBrawlerCantAttackAloneEnforced() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // Enchantment Creature — Human Warrior
+        // 3/2
+        // Bestow 4W (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Sightless Brawler can't attack alone.
+        // Enchanted creature gets +3/+2 and can't attack alone.
+        addCard(Zone.BATTLEFIELD, playerA, "Sightless Brawler");
+
+        attack(1, playerA, "Sightless Brawler");
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerB, 20);
+        assertTapped("Sightless Brawler", false);
+    }
+
+    @Test
+    public void testSightlessBrawlerAttacksWithOthers() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // Enchantment Creature — Human Warrior
+        // 3/2
+        // Bestow 4W (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Sightless Brawler can't attack alone.
+        // Enchanted creature gets +3/+2 and can't attack alone.
+        addCard(Zone.BATTLEFIELD, playerA, "Sightless Brawler"); // 3/2
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // {W} 2/1 creature
+
+        attack(1, playerA, "Sightless Brawler");
+        attack(1, playerA, "Elite Vanguard");
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerB, 15);
+        assertTapped("Sightless Brawler", true);
+    }
+
+    @Test
+    public void testSightlessBrawlerBestowedCantAttackAloneEnforced() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // Enchantment Creature — Human Warrior
+        // 3/2
+        // Bestow 4W (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Sightless Brawler can't attack alone.
+        // Enchanted creature gets +3/+2 and can't attack alone.
+        addCard(Zone.HAND, playerA, "Sightless Brawler");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // {W} 2/1 creature
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sightless Brawler using bestow", "Elite Vanguard");
+        attack(1, playerA, "Elite Vanguard");
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Sightless Brawler", 0);
+        assertLife(playerB, 20);
+        assertTapped("Elite Vanguard", false);
+        assertPowerToughness(playerA, "Elite Vanguard", 5, 3); // 2/1 + 3/2 = 5/3
+    }
+
+    @Test
+    public void testSightlessBrawlerBestowedAttacksWithOthers() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // Enchantment Creature — Human Warrior
+        // 3/2
+        // Bestow 4W (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Sightless Brawler can't attack alone.
+        // Enchanted creature gets +3/+2 and can't attack alone.
+        addCard(Zone.HAND, playerA, "Sightless Brawler");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // {W} 2/1 creature
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite"); // {1} 1/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sightless Brawler using bestow", "Elite Vanguard");
+        attack(1, playerA, "Elite Vanguard");
+        attack(1, playerA, "Memnite");
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Sightless Brawler", 0);
+        assertLife(playerB, 14);
+        assertTapped("Elite Vanguard", true);
+        assertPowerToughness(playerA, "Elite Vanguard", 5, 3); // 2/1 + 3/2 = 5/3
     }
 }

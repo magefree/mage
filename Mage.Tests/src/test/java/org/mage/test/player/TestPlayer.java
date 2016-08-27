@@ -132,13 +132,17 @@ public class TestPlayer implements Player {
     }
 
     public TestPlayer(final TestPlayer testPlayer) {
+        this.AIPlayer = testPlayer.AIPlayer;
+        this.foundNoAction = testPlayer.foundNoAction;
+
         this.actions.addAll(testPlayer.actions);
         this.choices.addAll(testPlayer.choices);
         this.targets.addAll(testPlayer.targets);
         this.modesSet.addAll(testPlayer.modesSet);
         this.computerPlayer = testPlayer.computerPlayer.copy();
-        this.foundNoAction = testPlayer.foundNoAction;
-
+        if (testPlayer.groupsForTargetHandling != null) {
+            this.groupsForTargetHandling = testPlayer.groupsForTargetHandling.clone();
+        }
     }
 
     public void addChoice(String choice) {
@@ -377,7 +381,9 @@ public class TestPlayer implements Player {
     @Override
     public boolean priority(Game game) {
         int numberOfActions = actions.size();
-        for (PlayerAction action : actions) {
+        List<PlayerAction> tempActions = new ArrayList<>();
+        tempActions.addAll(actions);
+        for (PlayerAction action : tempActions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getStep() == game.getStep().getType()) {
 
                 if (action.getAction().startsWith("activate:")) {
@@ -461,6 +467,21 @@ public class TestPlayer implements Player {
                             Counter counter = new Counter(groups[1], Integer.parseInt(groups[2]));
                             permanent.addCounters(counter, game);
                             break;
+                        }
+                    }
+                } else if (action.getAction().startsWith("playerAction:")) {
+                    String command = action.getAction();
+                    command = command.substring(command.indexOf("playerAction:") + 13);
+                    groupsForTargetHandling = null;
+                    String[] groups = command.split("\\$");
+                    if (groups.length > 0) {
+                        if (groups[0].equals("Rollback")) {
+                            if (groups.length > 1 && groups[1].startsWith("turns=")) {
+                                int turns = Integer.parseInt(groups[1].substring(6));
+                                game.rollbackTurns(turns);
+                                actions.remove(action);
+                                return true;
+                            }
                         }
                     }
                 }
@@ -1041,6 +1062,14 @@ public class TestPlayer implements Player {
 
     @Override
     public void restore(Player player) {
+        this.modesSet.clear();
+        this.modesSet.addAll(((TestPlayer) player).modesSet);
+        this.actions.clear();
+        this.actions.addAll(((TestPlayer) player).actions);
+        this.choices.clear();
+        this.choices.addAll(((TestPlayer) player).choices);
+        this.targets.clear();
+        this.targets.addAll(((TestPlayer) player).targets);
         computerPlayer.restore(player);
     }
 
@@ -1440,8 +1469,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void addCounters(Counter counter, Game game) {
-        computerPlayer.addCounters(counter, game);
+    public boolean addCounters(Counter counter, Game game) {
+        return computerPlayer.addCounters(counter, game);
     }
 
     @Override

@@ -150,13 +150,13 @@ public interface Card extends MageObject {
 
     Counters getCounters(Game game);
 
-    void addCounters(String name, int amount, Game game);
+    boolean addCounters(String name, int amount, Game game);
 
-    void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
+    boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
 
-    void addCounters(Counter counter, Game game);
+    boolean addCounters(Counter counter, Game game);
 
-    void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects);
+    boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects);
 
     void removeCounters(String name, int amount, Game game);
 

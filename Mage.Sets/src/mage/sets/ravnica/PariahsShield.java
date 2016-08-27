@@ -84,16 +84,16 @@ class PariahEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null) {
             Permanent p = game.getPermanent(equipment.getAttachedTo());
-            if (p != null) {
+            if (p != null) {                
+                DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
                 p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
                 return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

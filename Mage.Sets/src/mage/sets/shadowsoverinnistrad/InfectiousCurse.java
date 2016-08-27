@@ -29,6 +29,7 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -154,12 +155,14 @@ class InfectiousCurseCostReductionEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (source.getControllerId().equals(abilityToModify.getControllerId())) {
-                for (Target target : abilityToModify.getTargets()) {
-                    for (UUID targetUUID : target.getTargets()) {
-                        Permanent enchantment = game.getPermanent(source.getSourceId());
-                        UUID attachedTo = enchantment.getAttachedTo();
-                        if (targetUUID.equals(attachedTo)) {
-                            return true;
+                for (Mode mode : abilityToModify.getModes().getSelectedModes()) {
+                    for (Target target : mode.getTargets()) {
+                        for (UUID targetUUID : target.getTargets()) {
+                            Permanent enchantment = game.getPermanent(source.getSourceId());
+                            UUID attachedTo = enchantment.getAttachedTo();
+                            if (targetUUID.equals(attachedTo)) {
+                                return true;
+                            }
                         }
                     }
                 }

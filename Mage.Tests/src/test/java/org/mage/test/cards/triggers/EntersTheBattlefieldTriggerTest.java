@@ -309,10 +309,26 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Scathe Zombies", 1); // 2/2 Zombie {2}{B}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Noxious Ghoul");
+        /*
+        * playerA's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 3/4
+        * playerB's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 3/4
+        */
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, "Noxious Ghoul");
+        /*
+        * playerA's Carnivorous Plant will get -1/-1 from Clone -> 2/3
+        * playerB's Carnivorous Plant will get -1/-1 from Clone -> 2/3
+        */
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Ego Erasure", "targetPlayer=PlayerA", "Whenever");
+        /*
+        * playerA' Noxious Ghoul will get -2/0 -> 1/3
+        * playerA's Carnivorous Plant will get -2/0 > 0/3
+        * playerA' Noxious Ghoul will get -1/-1 from Clone -> 0/2
+        * playerA' Noxious Ghoul will get -1/-1 from itself -> -1/1
+        * playerA's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> -1/2
+        * playerB's Carnivorous Plant will get -1/-1 from Noxious Ghoul -> 1/2
+        */
         setStopAt(1, PhaseStep.END_TURN);
 
         execute();
@@ -322,7 +338,24 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Noxious Ghoul", -1, 1, Filter.ComparisonScope.All);//  -1/-1 from the second  Noxious Ghoul also if it's no zombie
 
         assertGraveyardCount(playerB, "Zephyr Falcon", 1);
-        assertPowerToughness(playerB, "Carnivorous Plant", 2, 3);
-        assertPowerToughness(playerA, "Carnivorous Plant", 0, 3);
+        assertPowerToughness(playerB, "Carnivorous Plant", 1, 2);
+        assertPowerToughness(playerA, "Carnivorous Plant", -1, 2);
+    }
+    
+    @Test
+    public void testHearthcageGiant() {
+        // {6}{R}{R} Creature — Giant Warrior
+        //When Hearthcage Giant enters the battlefield, put two 3/1 red Elemental Shaman creature tokens onto the battlefield.
+        //Sacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
+        addCard(Zone.HAND,playerA,"Hearthcage Giant");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hearthcage Giant");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertPermanentCount(playerA, "Hearthcage Giant", 1);
+        assertPermanentCount(playerA, "Elemental Shaman", 2);
+        assertPowerToughness(playerA, "Elemental Shaman", 3, 1);
     }
 }

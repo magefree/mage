@@ -105,14 +105,17 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
     @Test
     public void testMorbidAbility() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        // If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.
+        // If a card would be put into an opponent's graveyard from anywhere, exile it instead.
         addCard(Zone.BATTLEFIELD, playerA, "Leyline of the Void");
         addCard(Zone.HAND, playerA, "Murder");
+         // Morbid — At the beginning of each end step, if a creature died this turn, you may draw a card.
         addCard(Zone.BATTLEFIELD, playerB, "Deathreap Ritual");
         addCard(Zone.BATTLEFIELD, playerB, "Memnite");
-        
-        
+                
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Murder");
         setChoice(playerA, "Memnite");
+        setChoice(playerB, "Yes");
         
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -120,6 +123,35 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         assertHandCount(playerB, 1); // card drawn for turn
         assertExileCount(playerB, 1);
         
+    }
+    
+    /*
+    "Leyline of the Void’s second ability doesn’t affect token permanents that would be put into an opponent’s graveyard from the battlefield. 
+    They’ll be put into that graveyard as normal (causing any applicable triggered abilities to trigger), then they’ll cease to exist."
+    http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=107682
+    
+    */
+    @Test
+    public void testMorbidAbilityWithAwakeningZoneTokens() {
+        // At the beginning of your upkeep, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. 
+        // It has "Sacrifice this creature: Add mana symbol 1 to your mana pool."
+        addCard(Zone.BATTLEFIELD, playerA, "Awakening Zone");
+        // If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.
+        // If a card would be put into an opponent's graveyard from anywhere, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Leyline of the Void");
+        // Morbid — At the beginning of each end step, if a creature died this turn, you may draw a card.
+        addCard(Zone.BATTLEFIELD, playerB, "Deathreap Ritual");
+        
+        setChoice(playerA, "Yes");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice");
+        setChoice(playerB, "Yes");
+        
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        
+        assertPermanentCount(playerA, "Eldrazi Spawn", 0);        
+        assertExileCount(playerB, 0);
+        assertHandCount(playerB, 1); 
     }
 
 }

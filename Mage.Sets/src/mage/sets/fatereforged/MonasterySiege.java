@@ -29,6 +29,7 @@ package mage.sets.fatereforged;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -64,13 +65,13 @@ public class MonasterySiege extends CardImpl {
         // As Monastery Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
                 "As {this} enters the battlefield, choose Khans or Dragons.", ""));
-        
+
         // * Khans - At the beginning of your draw step, draw an additional card, then discard a card.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfDrawTriggeredAbility(new DrawDiscardControllerEffect(1, 1), TargetController.YOU, false),
                 new ModeChoiceSourceCondition("Khans"),
                 "&bull; Khans &mdash; At the beginning of your draw step, draw an additional card, then discard a card."));
-        
+
         // * Dragons - Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MonasterySiegeCostIncreaseEffect()));
     }
@@ -108,14 +109,16 @@ class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
         if (new ModeChoiceSourceCondition("Dragons").apply(game, source)) {
             if (abilityToModify instanceof SpellAbility) {
                 if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                    for (Target target : abilityToModify.getTargets()) {
-                        for (UUID targetUUID : target.getTargets()) {
-                            if (targetUUID.equals(source.getControllerId())) {
-                                return true;
-                            }
-                            Permanent permanent = game.getPermanent(targetUUID);
-                            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
-                                return true;
+                    for (Mode mode : abilityToModify.getModes().getSelectedModes()) {
+                        for (Target target : mode.getTargets()) {
+                            for (UUID targetUUID : target.getTargets()) {
+                                if (targetUUID.equals(source.getControllerId())) {
+                                    return true;
+                                }
+                                Permanent permanent = game.getPermanent(targetUUID);
+                                if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
+                                    return true;
+                                }
                             }
                         }
                     }

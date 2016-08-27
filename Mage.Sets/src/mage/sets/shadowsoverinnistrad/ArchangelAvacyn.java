@@ -29,12 +29,14 @@ package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.TransformTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -53,6 +55,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -124,10 +128,16 @@ class ArchangelAvacynEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        //create delayed triggered ability
-        AtTheBeginOfNextUpkeepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new TransformSourceEffect(true));
-        game.addDelayedTriggeredAbility(delayedAbility, source);
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        if (sourceObject instanceof Permanent) {
+            //create delayed triggered ability
+            Effect effect = new TransformTargetEffect(false);
+            effect.setTargetPointer(new FixedTarget((Permanent) sourceObject, game));
+            AtTheBeginOfNextUpkeepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(effect);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
+        }
         return true;
+
     }
 
     @Override

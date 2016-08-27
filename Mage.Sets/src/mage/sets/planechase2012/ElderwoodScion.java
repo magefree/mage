@@ -27,11 +27,10 @@
  */
 package mage.sets.planechase2012;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -39,14 +38,15 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.Target;
 import mage.util.CardUtil;
-
-import java.util.UUID;
-import mage.constants.CostModificationType;
 
 /**
  *
@@ -106,10 +106,12 @@ class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             if (abilityToModify.getControllerId().equals(source.getControllerId())) {
-                for (Target target :abilityToModify.getTargets()) {
-                    for (UUID targetUUID :target.getTargets()) {
-                        if (targetUUID.equals(source.getSourceId())) {
-                            return true;
+                for (Mode mode : abilityToModify.getModes().getSelectedModes()) {
+                    for (Target target : mode.getTargets()) {
+                        for (UUID targetUUID : target.getTargets()) {
+                            if (targetUUID.equals(source.getSourceId())) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -149,8 +151,8 @@ class ElderwoodScionCostReductionEffect2 extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                for (Target target :abilityToModify.getTargets()) {
-                    for (UUID targetUUID :target.getTargets()) {
+                for (Target target : abilityToModify.getTargets()) {
+                    for (UUID targetUUID : target.getTargets()) {
                         if (targetUUID.equals(source.getSourceId())) {
                             return true;
                         }

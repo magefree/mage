@@ -30,6 +30,7 @@ package mage.sets.dragonsoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -63,7 +64,7 @@ import mage.watchers.Watcher;
  * @author fireshoes
  */
 public class IcefallRegent extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
@@ -79,17 +80,17 @@ public class IcefallRegent extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Icefall Regent enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control Icefall Regent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
         ability.addEffect(new IcefallRegentEffect());
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability, new IcefallRegentWatcher());
-        
+
         // Spells your opponents cast that target Icefall Regent cost {2} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IcefallRegentCostIncreaseEffect()));
-        
+
     }
 
     public IcefallRegent(final IcefallRegent card) {
@@ -122,14 +123,14 @@ class IcefallRegentEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean apply(Game game, Ability source) {
         return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.LOST_CONTROL || 
-                event.getType() == GameEvent.EventType.ZONE_CHANGE || 
-                event.getType() == GameEvent.EventType.UNTAP;
+        return event.getType() == GameEvent.EventType.LOST_CONTROL
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE
+                || event.getType() == GameEvent.EventType.UNTAP;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Source must be on the battlefield (it's neccessary to check here because if as response to the enter
@@ -147,7 +148,7 @@ class IcefallRegentEffect extends ContinuousRuleModifyingEffectImpl {
             }
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 discard();
                 return false;
@@ -167,7 +168,7 @@ class IcefallRegentEffect extends ContinuousRuleModifyingEffectImpl {
 
 class IcefallRegentWatcher extends Watcher {
 
-    IcefallRegentWatcher () {
+    IcefallRegentWatcher() {
         super("ControlLost", WatcherScope.CARD);
     }
 
@@ -183,7 +184,7 @@ class IcefallRegentWatcher extends Watcher {
             return;
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(sourceId)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 condition = true;
                 game.replaceEvent(event);
@@ -226,10 +227,12 @@ class IcefallRegentCostIncreaseEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                for (Target target :abilityToModify.getTargets()) {
-                    for (UUID targetUUID :target.getTargets()) {
-                        if (targetUUID.equals(source.getSourceId())) {
-                            return true;
+                for (Mode mode : abilityToModify.getModes().getSelectedModes()) {
+                    for (Target target : mode.getTargets()) {
+                        for (UUID targetUUID : target.getTargets()) {
+                            if (targetUUID.equals(source.getSourceId())) {
+                                return true;
+                            }
                         }
                     }
                 }

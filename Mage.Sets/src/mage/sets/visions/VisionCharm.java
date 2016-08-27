@@ -40,22 +40,22 @@ import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
-import mage.choices.ChoiceLandType;
 import mage.choices.ChoiceBasicLandType;
+import mage.choices.ChoiceLandType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetArtifactPermanent;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -68,17 +68,19 @@ public class VisionCharm extends CardImpl {
         this.expansionSetCode = "VIS";
 
 
-        // Choose one - Phase target artifact
-        this.getSpellAbility().addEffect(new PhaseOutTargetEffect());
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        // or Target player puts the top four cards of his or her library into his or her graveyard.
+        // Choose one - Target player puts the top four cards of his or her library into his or her graveyard;
+        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
+        this.getSpellAbility().addTarget(new TargetPlayer());
+
+        // or choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn;
         Mode mode = new Mode();
-        mode.getEffects().add(new PutLibraryIntoGraveTargetEffect(4));
-        mode.getTargets().add(new TargetPlayer());
-        this.getSpellAbility().addMode(mode);
-        // or choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.
-        mode = new Mode();
         mode.getEffects().add(new VisionCharmEffect());
+        this.getSpellAbility().addMode(mode);
+
+        // or target artifact phases out.
+        mode = new Mode();
+        mode.getEffects().add(new PhaseOutTargetEffect());
+        mode.getTargets().add(new TargetArtifactPermanent());
         this.getSpellAbility().addMode(mode);
     }
 
@@ -95,7 +97,7 @@ public class VisionCharm extends CardImpl {
 class VisionCharmEffect extends ContinuousEffectImpl {
     private String targetLandType;
     private String targetBasicLandType;
-    
+
      public VisionCharmEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
         staticText = "Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.";
@@ -109,7 +111,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
     public VisionCharmEffect copy() {
         return new VisionCharmEffect(this);
     }
-    
+
     @Override
     public void init(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -117,7 +119,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
             Choice choice = new ChoiceLandType();
             controller.choose(outcome, choice, game);
             targetLandType = choice.getChoice();
-            
+
             choice = new ChoiceBasicLandType();
             controller.choose(outcome, choice, game);
             targetBasicLandType = choice.getChoice();
@@ -135,7 +137,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
             //Remove all existing subtypes and replace them with the selected Basic Land Type
             land.getSubtype().removeAll(land.getSubtype());
             land.getSubtype().add(targetBasicLandType);
-            
+
             /* Remove the existing abilities and replace them with the ability
                of the chosen basic land */
             land.removeAllAbilities(source.getId(), game);

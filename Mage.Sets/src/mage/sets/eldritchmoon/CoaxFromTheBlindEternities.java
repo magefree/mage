@@ -27,6 +27,7 @@
  */
 package mage.sets.eldritchmoon;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -72,7 +73,7 @@ public class CoaxFromTheBlindEternities extends CardImpl {
 
 class CoaxFromTheBlindEternitiesEffect extends OneShotEffect {
 
-    private static final String choiceText = "Choose a Eldrazi card you own from outside the game (sideboard), and put it into your hand?";
+    private static final String choiceText = "Choose a Eldrazi card you own from outside the game (sideboard) or in exile, and put it into your hand?";
 
     private static final FilterCard filter = new FilterCard("Eldrazi card");
 
@@ -99,45 +100,39 @@ class CoaxFromTheBlindEternitiesEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            Cards cards = controller.getSideboard();
-            Card card = null;
-            if (!cards.isEmpty()) {
-                if (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
-                    Set<Card> filtered = cards.getCards(filter, game);
-                    if (filtered.isEmpty()) {
-                        game.informPlayer(controller, "You have no " + filter.getMessage() + " outside the game (your sideboard).");
-                    } else {
-                        Cards filteredCards = new CardsImpl();
-                        for (Card sideboardCard : filtered) {
-                            filteredCards.add(sideboardCard.getId());
-                        }
-                        TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
-                        target.setNotTarget(true);
-                        if (controller.choose(outcome, filteredCards, target, game)) {
-                            card = controller.getSideboard().get(target.getFirstTarget(), game);
+            if (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
+                Set<Card> sideboard = controller.getSideboard().getCards(filter, game);
+                List<Card> exile = game.getExile().getAllCards(game);
+                Cards filteredCards = new CardsImpl();
+                Card card = null;
+
+                for (Card sideboardCard : sideboard) {
+                    filteredCards.add(sideboardCard.getId());
+                }
+                for (Card exileCard : exile) {
+                    if (exileCard.getOwnerId().equals(source.getControllerId()) && exileCard.hasSubtype("Eldrazi")) {
+                        filteredCards.add(exileCard);
+                    }
+                }
+
+                if (filteredCards.isEmpty()) {
+                    game.informPlayer(controller, "You have no " + filter.getMessage() + " outside the game (your sideboard) or in exile.");
+                }
+                else {
+                    TargetCard target = new TargetCard(Zone.OUTSIDE, filter);
+                    target.setNotTarget(true);
+                    if (controller.choose(outcome, filteredCards, target, game)) {
+                        card = controller.getSideboard().get(target.getFirstTarget(), game);
+                        if (card == null) {
+                            card = game.getCard(target.getFirstTarget());
                         }
                     }
                 }
-            }
-            // Choose a card from exile
-            Cards filteredCards = new CardsImpl();
-            for (Card exileCard : game.getExile().getAllCards(game)) {
-                if (exileCard.getOwnerId().equals(source.getControllerId()) && exileCard.hasSubtype("Eldrazi")) {
-                    filteredCards.add(exileCard);
+
+                if (card != null) {
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
                 }
-            }
-            if (filteredCards.isEmpty()) {
-                game.informPlayer(controller, "You have no Eldrazi cards in the exile zone.");
-            } else {
-                TargetCard target = new TargetCard(Zone.EXILED, filter);
-                target.setNotTarget(true);
-                if (controller.choose(Outcome.Benefit, filteredCards, target, game)) {
-                    card = game.getCard(target.getFirstTarget());
-                }
-            }
-            if (card != null) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
             }
             return true;
         }

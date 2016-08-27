@@ -61,6 +61,8 @@ public class PermanentCard extends PermanentImpl {
     }
 
     private void init(Card card, Game game) {
+        power = card.getPower().copy();
+        toughness = card.getToughness().copy();
         copyFromCard(card);
         // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
@@ -94,6 +96,8 @@ public class PermanentCard extends PermanentImpl {
         // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
         copyFromCard(card);
+        power.resetToBaseValue();
+        toughness.resetToBaseValue();
         super.reset(game);
     }
 
@@ -115,8 +119,6 @@ public class PermanentCard extends PermanentImpl {
         this.cardType.addAll(card.getCardType());
         this.color = card.getColor(null).copy();
         this.manaCost = card.getManaCost().copy();
-        this.power = card.getPower().copy();
-        this.toughness = card.getToughness().copy();
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }
@@ -232,6 +234,8 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public boolean turnFaceUp(Game game, UUID playerId) {
         if (super.turnFaceUp(game, playerId)) {
+            power.modifyBaseValue(power.getBaseValue());
+            toughness.modifyBaseValue(toughness.getBaseValue());
             setManifested(false);
             setMorphed(false);
             return true;
@@ -241,12 +245,20 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        card.adjustTargets(ability, game);
+        if (this.isTransformed() && card.getSecondCardFace() != null) {
+            card.getSecondCardFace().adjustTargets(ability, game);
+        } else {
+            card.adjustTargets(ability, game);
+        }
     }
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        card.adjustCosts(ability, game);
+        if (this.isTransformed() && card.getSecondCardFace() != null) {
+            card.getSecondCardFace().adjustCosts(ability, game);
+        } else {
+            card.adjustCosts(ability, game);
+        }
     }
 
     @Override

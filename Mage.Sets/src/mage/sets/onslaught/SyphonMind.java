@@ -28,14 +28,13 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -87,25 +86,25 @@ class SyphonMindEffect extends OneShotEffect {
         int amount = 0;
         boolean result = false;
         Player you = game.getPlayer(source.getControllerId());
-        for (UUID playerId : you.getInRange()) {
-            if (!playerId.equals(source.getControllerId())) {
-                Player otherPlayer = game.getPlayer(playerId);
-                if (otherPlayer != null && otherPlayer.getHand().size() > 0) {
-                    TargetCardInHand target = new TargetCardInHand();
-                    if (otherPlayer.choose(Outcome.Discard, target, source.getSourceId(), game)) {
-                        Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            if (otherPlayer.discard(card, source, game)) {
-                                amount += 1;
-                                result = true;
-                                target.clearChosen();
+        if (you != null) {
+            for (UUID playerId : you.getInRange()) {
+                if (!playerId.equals(source.getControllerId())) {
+                    Player otherPlayer = game.getPlayer(playerId);
+                    if (otherPlayer != null && otherPlayer.getHand().size() > 0) {
+                        TargetCardInHand target = new TargetCardInHand();
+                        if (otherPlayer.choose(Outcome.Discard, target, source.getSourceId(), game)) {
+                            Card card = game.getCard(target.getFirstTarget());
+                            if (card != null) {
+                                if (otherPlayer.discard(card, source, game)) {
+                                    amount += 1;
+                                    result = true;
+                                    target.clearChosen();
+                                }
                             }
                         }
                     }
                 }
-            }
-        }
-        if (you != null) {
+            }            
             you.drawCards(amount, game);
         }
         return result;

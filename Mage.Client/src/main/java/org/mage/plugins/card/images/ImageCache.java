@@ -4,9 +4,7 @@ import mage.client.util.TransformedImageCache;
 import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
-import com.mortennobel.imagescaling.ResampleOp;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -74,6 +72,9 @@ public class ImageCache {
                         String set = m.group(2);
                         Integer type = Integer.parseInt(m.group(3));
                         String collectorId = m.group(4);
+                        if (collectorId.equals("null")) {
+                            collectorId = "0";
+                        }
                         String tokenSetCode = m.group(5);
 
                         CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode);
@@ -340,7 +341,7 @@ public class ImageCache {
             return original;
         }
 
-        return TransformedImageCache.getResizedImage(original, (int)(original.getWidth() * scale), (int)(original.getHeight() * scale));
+        return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));
     }
 
     public static TFile getTFile(String path) {

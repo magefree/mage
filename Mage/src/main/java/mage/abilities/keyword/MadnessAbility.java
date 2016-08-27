@@ -52,7 +52,7 @@ public class MadnessAbility extends StaticAbility {
     @SuppressWarnings("unchecked")
     public MadnessAbility(Card card, ManaCosts madnessCost) {
         super(Zone.HAND, new MadnessReplacementEffect((ManaCosts<ManaCost>) madnessCost));
-        addSubAbility(new MadnessTriggeredAbility((ManaCosts<ManaCost>) madnessCost));
+        addSubAbility(new MadnessTriggeredAbility((ManaCosts<ManaCost>) madnessCost, getOriginalId()));
         rule = "Madness " + madnessCost.getText() + " <i>(If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)</i>";
     }
 
@@ -105,7 +105,8 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
             if (card != null) {
                 if (controller.moveCardToExileWithInfo(card, source.getSourceId(), "Madness", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true)) {
                     game.applyEffects(); // needed to add Madness ability to cards (e.g. by Falkenrath Gorger)
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MADNESS_CARD_EXILED, card.getId(), card.getId(), controller.getId()));
+                    GameEvent gameEvent = GameEvent.getEvent(GameEvent.EventType.MADNESS_CARD_EXILED, card.getId(), source.getOriginalId(), controller.getId());
+                    game.fireEvent(gameEvent);
                 }
                 return true;
             }
@@ -134,14 +135,17 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
 
     //This array holds the Id's of all of the cards that activated madness
     private static ArrayList<UUID> activatedIds = new ArrayList<>();
+    private final UUID madnessOriginalId;
 
-    MadnessTriggeredAbility(ManaCosts<ManaCost> madnessCost) {
+    MadnessTriggeredAbility(ManaCosts<ManaCost> madnessCost, UUID madnessOriginalId) {
         super(Zone.EXILED, new MadnessCastEffect(madnessCost), true);
+        this.madnessOriginalId = madnessOriginalId;
         this.setRuleVisible(false);
     }
 
     MadnessTriggeredAbility(final MadnessTriggeredAbility ability) {
         super(ability);
+        this.madnessOriginalId = ability.madnessOriginalId;
     }
 
     @Override
@@ -156,7 +160,7 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(getSourceId());
+        return event.getSourceId().equals(madnessOriginalId); // Check that the event was from the connected replacement effect
     }
 
     @Override

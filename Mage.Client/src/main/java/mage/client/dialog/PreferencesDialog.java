@@ -98,6 +98,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GUI_CARD_HAND_SIZE = "guiCardHandSize";
     public static final String KEY_GUI_CARD_EDITOR_SIZE = "guiCardEditorSize";
     public static final String KEY_GUI_CARD_OFFSET_SIZE = "guiCardOffsetSize";
+    public static final String KEY_GUI_ENLARGED_IMAGE_SIZE = "guiEnlargedImageSize";
 
     public static final String KEY_GUI_STACK_WIDTH = "guiStackWidth";
     public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
@@ -392,6 +393,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         labelEditorCardSize = new javax.swing.JLabel();
         sliderEditorCardOffset = new javax.swing.JSlider();
         labelEditorCardOffset = new javax.swing.JLabel();
+        sliderEnlargedImageSize = new javax.swing.JSlider();
+        labelEnlargedImageSize = new javax.swing.JLabel();
         guiSizeGame = new javax.swing.JPanel();
         sliderCardSizeHand = new javax.swing.JSlider();
         labelCardSizeHand = new javax.swing.JLabel();
@@ -447,7 +450,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         btnBrowseImageLocation = new javax.swing.JButton();
         cbCheckForNewImages = new javax.swing.JCheckBox();
         cbSaveToZipFiles = new javax.swing.JCheckBox();
-        cbPreferedImageLanguage = new javax.swing.JComboBox<String>();
+        cbPreferedImageLanguage = new javax.swing.JComboBox<>();
         labelPreferedImageLanguage = new javax.swing.JLabel();
         labelNumberOfDownloadThreads = new javax.swing.JLabel();
         cbNumberOfDownloadThreads = new javax.swing.JComboBox();
@@ -505,7 +508,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtURLServerList = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         lblProxyType = new javax.swing.JLabel();
-        cbProxyType = new javax.swing.JComboBox<ProxyType>();
+        cbProxyType = new javax.swing.JComboBox<>();
         pnlProxySettings = new javax.swing.JPanel();
         pnlProxy = new javax.swing.JPanel();
         lblProxyServer = new javax.swing.JLabel();
@@ -559,7 +562,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(main_cardLayout.createSequentialGroup()
                 .add(6, 6, 6)
                 .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 308, Short.MAX_VALUE)
+                    .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, showCardName)
                     .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -911,6 +914,35 @@ public class PreferencesDialog extends javax.swing.JDialog {
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         guiSizeBasic.add(labelEditorCardOffset, gridBagConstraints);
+
+        sliderEnlargedImageSize.setMajorTickSpacing(5);
+        sliderEnlargedImageSize.setMaximum(50);
+        sliderEnlargedImageSize.setMinimum(10);
+        sliderEnlargedImageSize.setMinorTickSpacing(1);
+        sliderEnlargedImageSize.setPaintLabels(true);
+        sliderEnlargedImageSize.setPaintTicks(true);
+        sliderEnlargedImageSize.setSnapToTicks(true);
+        sliderEnlargedImageSize.setToolTipText("<HTML>The size of the image shown for the card your mouse pointer<br>is located over while you turn the mouse wheel ");
+        sliderEnlargedImageSize.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        sliderEnlargedImageSize.setMinimumSize(new java.awt.Dimension(150, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        guiSizeBasic.add(sliderEnlargedImageSize, gridBagConstraints);
+
+        labelEnlargedImageSize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelEnlargedImageSize.setText("Enlarged image (mouse wheel)");
+        labelEnlargedImageSize.setToolTipText("<HTML>The size of the image shown for the card your mouse pointer<br>is located over while you turn the mouse wheel\n");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        guiSizeBasic.add(labelEnlargedImageSize, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1391,7 +1423,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbPreferedImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelPreferedImageLanguage.setText("Prefered image language:");
         labelPreferedImageLanguage.setFocusable(false);
@@ -1429,7 +1461,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                         .add(org.jdesktop.layout.GroupLayout.LEADING, cbSaveToZipFiles))
                                     .add(40, 40, 40)
                                     .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                        .add(0, 142, Short.MAX_VALUE)))
+                        .add(0, 251, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelCardImagesLayout.setVerticalGroup(
@@ -1453,7 +1485,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(labelPreferedImageLanguage))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images setting:"));
@@ -1575,7 +1607,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabImagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 231, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(90, Short.MAX_VALUE))
@@ -2188,7 +2220,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(connection_serversLayout.createSequentialGroup()
                         .add(141, 141, 141)
                         .add(jLabel17)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         connection_serversLayout.setVerticalGroup(
             connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2374,7 +2406,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(6, 6, 6))
-            .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+            .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2426,6 +2458,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
         if (getCachedValue(KEY_GUI_CARD_OFFSET_SIZE, 14) != dialog.sliderEditorCardOffset.getValue()) {
             save(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "true", "false", UPDATE_CACHE_POLICY);
+            sizeGUIChanged = true;
+        }
+        if (getCachedValue(KEY_GUI_ENLARGED_IMAGE_SIZE, 20) != dialog.sliderEnlargedImageSize.getValue()) {
+            save(prefs, dialog.sliderEnlargedImageSize, KEY_GUI_ENLARGED_IMAGE_SIZE, "true", "false", UPDATE_CACHE_POLICY);
             sizeGUIChanged = true;
         }
         if (getCachedValue(KEY_GUI_STACK_WIDTH, 30) != dialog.sliderStackWidth.getValue()) {
@@ -2941,6 +2977,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "14");
         load(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "14");
         load(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "14");
+        load(prefs, dialog.sliderEnlargedImageSize, KEY_GUI_ENLARGED_IMAGE_SIZE, "20");
         load(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "14");
         load(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "14");
         load(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "14");
@@ -3437,6 +3474,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelDialogFont;
     private javax.swing.JLabel labelEditorCardOffset;
     private javax.swing.JLabel labelEditorCardSize;
+    private javax.swing.JLabel labelEnlargedImageSize;
     private javax.swing.JLabel labelGameFeedback;
     private javax.swing.JLabel labelNumberOfDownloadThreads;
     private javax.swing.JLabel labelPreferedImageLanguage;
@@ -3470,6 +3508,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JSlider sliderDialogFont;
     private javax.swing.JSlider sliderEditorCardOffset;
     private javax.swing.JSlider sliderEditorCardSize;
+    private javax.swing.JSlider sliderEnlargedImageSize;
     private javax.swing.JSlider sliderFontSize;
     private javax.swing.JSlider sliderGameFeedbackArea;
     private javax.swing.JSlider sliderStackWidth;

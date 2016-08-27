@@ -30,6 +30,7 @@ package mage.sets.shadowsoverinnistrad;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -138,12 +139,14 @@ class AccursedWitchSpellsCostReductionEffect extends CostModificationEffectImpl 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
-            if(game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                for (Target target : abilityToModify.getTargets()) {
-                    for (UUID targetUUID : target.getTargets()) {
-                        Permanent permanent = game.getPermanent(targetUUID);
-                        if(permanent != null && permanent.getId().equals(source.getSourceId())) {
-                            return true;
+            if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
+                for (Mode mode : abilityToModify.getModes().getSelectedModes()) {
+                    for (Target target : mode.getTargets()) {
+                        for (UUID targetUUID : target.getTargets()) {
+                            Permanent permanent = game.getPermanent(targetUUID);
+                            if (permanent != null && permanent.getId().equals(source.getSourceId())) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -157,5 +160,3 @@ class AccursedWitchSpellsCostReductionEffect extends CostModificationEffectImpl 
         return new AccursedWitchSpellsCostReductionEffect(this);
     }
 }
-
-

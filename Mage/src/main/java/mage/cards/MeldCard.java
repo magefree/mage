@@ -331,30 +331,36 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
-    public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
+    public boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
         if (this.isMelded()) {
-            super.addCounters(counter, game, appliedEffects);
+            return super.addCounters(counter, game, appliedEffects);
         } else {
+            // can this really happen?
+            boolean returnState = true;
             if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)) {
-                topHalfCard.addCounters(counter, game, appliedEffects);
+                returnState |= topHalfCard.addCounters(counter, game, appliedEffects);
             }
             if (bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)) {
-                bottomHalfCard.addCounters(counter, game, appliedEffects);
+                returnState |= bottomHalfCard.addCounters(counter, game, appliedEffects);
             }
+            return returnState;
         }
     }
 
     @Override
-    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
+    public boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
         if (this.isMelded()) {
-            super.addCounters(name, amount, game, appliedEffects);
+            return super.addCounters(name, amount, game, appliedEffects);
         } else {
+            // can this really happen?
+            boolean returnState = true;
             if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)) {
-                topHalfCard.addCounters(name, amount, game, appliedEffects);
+                returnState |= topHalfCard.addCounters(name, amount, game, appliedEffects);
             }
             if (bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)) {
-                bottomHalfCard.addCounters(name, amount, game, appliedEffects);
+                returnState |= bottomHalfCard.addCounters(name, amount, game, appliedEffects);
             }
+            return returnState;
         }
     }
 }

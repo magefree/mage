@@ -54,6 +54,5 @@ public class GainControlAllEffect extends ContinuousEffectImpl {
         StringBuilder sb = new StringBuilder();
         sb.append("Gain control of ").append(filter.getMessage());
         return sb.toString();
-        //return "Gain control of " + filter;
     }
 }

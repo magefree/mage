@@ -62,7 +62,7 @@ public class TreeOfRedemption extends CardImpl {
 
         this.addAbility(DefenderAbility.getInstance());
 
-        // {tap}: Exchange your life total with Tree of Redemption's toughness.
+        // {T}: Exchange your life total with Tree of Redemption's toughness.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TreeOfRedemptionEffect(), new TapSourceCost()));
     }
 
@@ -80,7 +80,7 @@ class TreeOfRedemptionEffect extends OneShotEffect {
 
     public TreeOfRedemptionEffect() {
         super(Outcome.GainLife);
-        staticText = "Exchange your life total with Tree of Redemption's toughness";
+        staticText = "Exchange your life total with {this}'s toughness";
     }
 
     public TreeOfRedemptionEffect(final TreeOfRedemptionEffect effect) {
@@ -105,7 +105,7 @@ class TreeOfRedemptionEffect extends OneShotEffect {
                     return false;
                 }
                 player.setLife(amount, game);
-                game.addEffect(new SetPowerToughnessSourceEffect(Integer.MIN_VALUE, life, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
+                game.addEffect(new SetPowerToughnessSourceEffect(Integer.MIN_VALUE, life, Duration.Custom, SubLayer.SetPT_7b), source);
                 return true;
             }
         }

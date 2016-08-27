@@ -136,7 +136,7 @@ class RebellionOfTheFlamekinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            CreateTokenEffect createTokenEffect = new CreateTokenEffect(new ElementalShamanToken("LRW", 1));
+            CreateTokenEffect createTokenEffect = new CreateTokenEffect(new ElementalShamanToken("LRW"));
             DoIfCostPaid doIfCostPaid = new DoIfCostPaid(createTokenEffect, new ManaCostsImpl("{1}"));
             doIfCostPaid.apply(game, source);
             Permanent token = game.getPermanent(createTokenEffect.getLastAddedTokenId());

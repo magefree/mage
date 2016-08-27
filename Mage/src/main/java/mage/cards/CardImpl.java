@@ -653,12 +653,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void addCounters(String name, int amount, Game game) {
-        addCounters(name, amount, game, null);
+    public boolean addCounters(String name, int amount, Game game) {
+        return addCounters(name, amount, game, null);
     }
 
     @Override
-    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
+    public boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
+        boolean returnCode = true;
         GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, ownerId, name, amount);
         countersEvent.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(countersEvent)) {
@@ -668,18 +669,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 if (!game.replaceEvent(event)) {
                     game.getState().getCardState(this.objectId).getCounters().addCounter(name, 1);
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, name, 1));
+                } else {
+                    returnCode = false;
                 }
             }
+        } else {
+            returnCode = false;
         }
+        return returnCode;
     }
 
     @Override
-    public void addCounters(Counter counter, Game game) {
-        addCounters(counter, game, null);
+    public boolean addCounters(Counter counter, Game game) {
+        return addCounters(counter, game, null);
     }
 
     @Override
-    public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
+    public boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
+        boolean returnCode = true;
         GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, ownerId, counter.getName(), counter.getCount());
         countersEvent.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(countersEvent)) {
@@ -692,9 +699,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 if (!game.replaceEvent(event)) {
                     game.getState().getCardState(this.objectId).getCounters().addCounter(eventCounter);
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, counter.getName(), 1));
+                } else {
+                    returnCode = false;
                 }
             }
+        } else {
+            returnCode = false;
         }
+        return returnCode;
     }
 
     @Override

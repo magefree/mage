@@ -24,10 +24,23 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.client.deckeditor.collection.viewer;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
@@ -39,11 +52,11 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.audio.AudioManager;
 import mage.client.util.Command;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.client.util.NaturalOrderCardNumberComparator;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.sets.ConstructedFormats;
 import mage.components.ImagePanel;
 import mage.constants.Rarity;
@@ -51,20 +64,6 @@ import mage.view.CardView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.GlowText;
 import org.mage.card.arcane.ManaSymbols;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Mage book with cards and page flipping.
@@ -204,7 +203,7 @@ public class MageBook extends JComponent {
                 currentPanel = jPanelRight;
                 image = imageRight;
                 currentTab = tab;
-                selectedTab = count-1;
+                selectedTab = count - 1;
             }
         }
         jPanelLeft.revalidate();
@@ -233,8 +232,8 @@ public class MageBook extends JComponent {
         }
 
         // calculate the x offset of the second (right) page
-        int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH) -
-                (cardDimensions.frameWidth + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
+        int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
+                - (cardDimensions.frameWidth + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
 
         rectangle.setLocation(second_page_x, OFFSET_Y);
         for (int i = conf.CARDS_PER_PAGE / 2; i < Math.min(conf.CARDS_PER_PAGE, size); i++) {
@@ -270,7 +269,7 @@ public class MageBook extends JComponent {
         CardCriteria criteria = new CardCriteria();
         criteria.setCodes(set);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
-        cards.sort(new NaturalOrderCardNumberComparator());
+        Collections.sort(cards, new NaturalOrderCardNumberComparator());
         int start = page * conf.CARDS_PER_PAGE;
         int end = page * conf.CARDS_PER_PAGE + conf.CARDS_PER_PAGE;
         if (end > cards.size()) {
@@ -356,6 +355,7 @@ public class MageBook extends JComponent {
      * Defines the position of the next card on the mage book
      */
     private static class CardPosition {
+
         private CardPosition() {
         }
 
@@ -371,6 +371,7 @@ public class MageBook extends JComponent {
     }
 
     abstract class Configuration {
+
         public int CARDS_PER_PAGE;
         public int CARD_ROWS;
         public int CARD_COLUMNS;
@@ -382,6 +383,7 @@ public class MageBook extends JComponent {
     }
 
     class _3x3Configuration extends Configuration {
+
         _3x3Configuration() {
             this.WIDTH = 950;
             this.HEIGHT = 650;
@@ -394,6 +396,7 @@ public class MageBook extends JComponent {
     }
 
     class _4x4Configuration extends Configuration {
+
         _4x4Configuration() {
             this.WIDTH = 1250;
             this.HEIGHT = 850;
@@ -419,8 +422,8 @@ public class MageBook extends JComponent {
     private static CardDimensions cardDimensions = new CardDimensions(1.2d);
     private static final Logger log = Logger.getLogger(MageBook.class);
     private Dimension cardDimension;
-    private java.util.List<String> setsToDisplay = new ArrayList<String>();
-    private java.util.List<HoverButton> tabs = new ArrayList<HoverButton>();
+    private java.util.List<String> setsToDisplay = new ArrayList<>();
+    private java.util.List<HoverButton> tabs = new ArrayList<>();
     private int selectedTab;
 
     private static final String CENTER_PANEL_IMAGE_PATH = "/book_bg.jpg";

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ReturnToLibrarySpellEffect;
+import mage.abilities.effects.common.ReturnToLibraryPermanentEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -65,7 +65,7 @@ public class PulmonicSliver extends CardImpl {
                 filter, "All Sliver creatures have flying.")));
         // All Slivers have "If this permanent would be put into a graveyard, you may put it on top of its owner's library instead."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new PutIntoGraveFromAnywhereSourceAbility(new ReturnToLibrarySpellEffect(true)), Duration.WhileOnBattlefield,
+                new PutIntoGraveFromAnywhereSourceAbility(new ReturnToLibraryPermanentEffect(true)), Duration.WhileOnBattlefield,
                 filterSlivers, "All Slivers have \"If this permanent would be put into a graveyard, you may put it on top of its owner's library instead.\"")));
     }
 

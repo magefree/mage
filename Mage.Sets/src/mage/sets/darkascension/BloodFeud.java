@@ -28,14 +28,12 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,7 +48,15 @@ public class BloodFeud extends CardImpl {
 
         // Target creature fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
+        TargetCreaturePermanent target = new TargetCreaturePermanent();
+        target.setTargetTag(1);
+        this.getSpellAbility().addTarget(target);
+
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+        filter.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
     }
 
     public BloodFeud(final BloodFeud card) {

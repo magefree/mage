@@ -53,7 +53,7 @@ public class UninvitedGeist extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new UnimpededTrespasser(ownerId);
 
-        // Skulk
+        // Skulk (This creature can't be blocked by creatures with greater power.)
         this.addAbility(new SkulkAbility());
 
         // When Uninvited Geist deals combat damage to a player, transform it.

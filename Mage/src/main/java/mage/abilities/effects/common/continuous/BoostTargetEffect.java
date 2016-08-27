@@ -115,7 +115,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (mode == null || mode.getTargets().size() == 0) {
+        if (mode == null || mode.getTargets().isEmpty()) {
             return "no target";
         }
         Target target = mode.getTargets().get(0);

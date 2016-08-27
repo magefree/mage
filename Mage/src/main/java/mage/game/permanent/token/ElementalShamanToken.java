@@ -45,7 +45,7 @@ public class ElementalShamanToken extends Token {
         tokenImageSets.addAll(Arrays.asList("C15", "DD3JVC", "DD2", "LRW"));
     }
 
-    public ElementalShamanToken(String setCode, int tokenType) {
+    public ElementalShamanToken(String setCode) {
         super("Elemental Shaman", "3/1 red Elemental Shaman creature token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);

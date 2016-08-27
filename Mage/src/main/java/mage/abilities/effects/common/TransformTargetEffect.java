@@ -76,7 +76,9 @@ public class TransformTargetEffect extends OneShotEffect {
         if (staticText != null && staticText.length() > 0) {
             return staticText;
         }
-
+        if (mode.getTargets().isEmpty()) {
+            return "transform target";
+        }
         Target target = mode.getTargets().get(0);
         if (target.getMaxNumberOfTargets() > 1) {
             if (target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {

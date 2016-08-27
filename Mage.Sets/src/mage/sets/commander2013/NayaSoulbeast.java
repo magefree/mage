@@ -35,7 +35,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -112,7 +111,7 @@ class NayaSoulbeastCastEffect extends OneShotEffect {
                     if (player.getLibrary().size() > 0) {
                         Card card = player.getLibrary().getFromTop(game);
                         cmc += card.getConvertedManaCost();
-                        player.revealCards(sourceObject.getName() + " " + player.getName() + ")", new CardsImpl(card), game);
+                        player.revealCards(sourceObject.getName() + " (" + player.getName() + ")", new CardsImpl(card), game);
                     }
                 }
             }
@@ -154,7 +153,7 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Object object = this.getValue("NayaSoulbeastCounters");
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (permanent!= null && object instanceof Integer) {
+        if (permanent != null && object instanceof Integer) {
             int amount = ((Integer) object);
             permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
         }

@@ -51,8 +51,7 @@ public class PermanentMeld extends PermanentCard {
     public int getConvertedManaCost() {
         if (this.isCopy()) {
             return 0;
-        }
-        else {
+        } else {
             return this.getCard().getConvertedManaCost();
         }
     }
@@ -87,8 +86,7 @@ public class PermanentMeld extends PermanentCard {
                         cardsToMove.add(bottomHalfCard);
                         if (flag) {
                             controller.putCardsOnTopOfLibrary(cardsToMove, game, null, true);
-                        }
-                        else {
+                        } else {
                             controller.putCardsOnBottomOfLibrary(cardsToMove, game, null, true);
                         }
                         break;
@@ -131,8 +129,7 @@ public class PermanentMeld extends PermanentCard {
                         if (exileId == null) {
                             game.getExile().getPermanentExile().add(topHalfCard);
                             game.getExile().getPermanentExile().add(bottomHalfCard);
-                        }
-                        else {
+                        } else {
                             game.getExile().createZone(exileId, name).add(topHalfCard);
                             game.getExile().getExileZone(exileId).add(bottomHalfCard);
                         }
@@ -143,8 +140,7 @@ public class PermanentMeld extends PermanentCard {
                         cardsToMove.add(bottomHalfCard);
                         if (event.getFlag()) {
                             controller.putCardsOnTopOfLibrary(cardsToMove, game, null, true);
-                        }
-                        else {
+                        } else {
                             controller.putCardsOnBottomOfLibrary(cardsToMove, game, null, true);
                         }
                         break;
@@ -152,6 +148,7 @@ public class PermanentMeld extends PermanentCard {
                         return false;
                 }
                 meldCard.setMelded(false);
+                game.setZone(meldCard.getId(), Zone.OUTSIDE);
                 game.setZone(topHalfCard.getId(), event.getToZone());
                 game.setZone(bottomHalfCard.getId(), event.getToZone());
                 meldCard.setTopLastZoneChangeCounter(topHalfCard.getZoneChangeCounter(game));
@@ -164,14 +161,16 @@ public class PermanentMeld extends PermanentCard {
     }
 
     @Override
-    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
+    public boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
         MeldCard meldCard = (MeldCard) this.getCard();
         if (meldCard.isMelded()) {
-            super.addCounters(name, amount, game, appliedEffects);
-        }
-        else {
-            meldCard.getTopHalfCard().addCounters(name, amount, game, appliedEffects);
-            meldCard.getBottomHalfCard().addCounters(name, amount, game, appliedEffects);
+            return super.addCounters(name, amount, game, appliedEffects);
+        } else {
+            // can this really happen?
+            boolean returnState = true;
+            returnState |= meldCard.getTopHalfCard().addCounters(name, amount, game, appliedEffects);
+            returnState |= meldCard.getBottomHalfCard().addCounters(name, amount, game, appliedEffects);
+            return returnState;
         }
     }
 }
