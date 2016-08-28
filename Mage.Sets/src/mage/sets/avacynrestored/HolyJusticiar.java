@@ -91,7 +91,7 @@ class HolyJusticiarEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature != null) {
-            if (creature.hasSubtype("Zombie")) {
+            if (creature.hasSubtype("Zombie", game)) {
                 creature.tap(game);
                 creature.moveToExile(source.getSourceId(), creature.getName(), source.getSourceId(), game);
             } else {

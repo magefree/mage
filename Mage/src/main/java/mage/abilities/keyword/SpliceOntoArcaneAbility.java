@@ -182,7 +182,7 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         MageObject object = game.getObject(abilityToModify.getSourceId());
-        if (object != null && object.getSubtype().contains("Arcane")) {
+        if (object != null && object.getSubtype(game).contains("Arcane")) {
             return spliceSpellCanBeActivated(source, game);
         }
         return false;

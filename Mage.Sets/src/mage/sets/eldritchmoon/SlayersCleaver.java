@@ -90,7 +90,7 @@ class SlayersCleaverEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.canBlock(source.getSourceId(), game) && permanent.hasSubtype("Eldrazi");
+        return permanent.canBlock(source.getSourceId(), game) && permanent.hasSubtype("Eldrazi", game);
     }
 
     @Override

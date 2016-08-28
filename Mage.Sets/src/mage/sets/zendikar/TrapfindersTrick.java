@@ -91,7 +91,7 @@ class TrapfindersTrickEffect extends OneShotEffect {
             player.revealCards("Trapfinder's Trick", hand, game);
             Set<Card> cards = hand.getCards(game);
             for (Card card : cards) {
-                if (card != null && card.hasSubtype("Trap")) {
+                if (card != null && card.hasSubtype("Trap", game)) {
                     player.discard(card, source, game);
                 }
             }

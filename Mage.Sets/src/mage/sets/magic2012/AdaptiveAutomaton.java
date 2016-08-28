@@ -102,8 +102,8 @@ class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
-            if (subtype != null && !permanent.getSubtype().contains(subtype)) {
-                permanent.getSubtype().add(subtype);
+            if (subtype != null && !permanent.getSubtype(game).contains(subtype)) {
+                permanent.getSubtype(game).add(subtype);
             }
         }
         return true;

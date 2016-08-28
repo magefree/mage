@@ -88,7 +88,7 @@ class GolemSkinGauntletsAttachedCount implements DynamicValue {
                 List<UUID> attachments = permanent.getAttachments();
                 for (UUID attachmentId : attachments) {
                     Permanent attached = game.getPermanent(attachmentId);
-                    if (attached != null && attached.getSubtype().contains("Equipment")) {
+                    if (attached != null && attached.getSubtype(game).contains("Equipment")) {
                         count++;
                     }
                 }

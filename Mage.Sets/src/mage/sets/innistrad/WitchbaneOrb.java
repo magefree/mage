@@ -88,7 +88,7 @@ class WitchbaneOrbEffect extends OneShotEffect {
         if (player != null) {
             for (UUID attachmentId: player.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
-                if (attachment != null && attachment.getSubtype().contains("Curse")) {
+                if (attachment != null && attachment.getSubtype(game).contains("Curse")) {
                     attachment.destroy(source.getSourceId(), game, false);
                 }
             }

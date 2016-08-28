@@ -63,7 +63,7 @@ public class AuraAttachedCount implements DynamicValue {
             List<UUID> attachments = p.getAttachments();
             for (UUID attachmentId : attachments) {
                 Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.getSubtype().contains("Aura")) {
+                if (attached != null && attached.getSubtype(game).contains("Aura")) {
                     count++;
                 }
             }

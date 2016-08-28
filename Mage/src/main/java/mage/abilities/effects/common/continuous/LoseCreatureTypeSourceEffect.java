@@ -85,7 +85,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().remove(CardType.CREATURE);
-                        permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
+                        permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
                         if (permanent.isAttacking() || permanent.getBlocking() > 0) {
                             permanent.removeFromCombat(game);
                         }

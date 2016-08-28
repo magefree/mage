@@ -116,7 +116,7 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect {
             Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
             if (equipedCreature != null) {
                 for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    if (CardUtil.shareSubtypes(perm, equipedCreature)) {
+                    if (CardUtil.shareSubtypes(perm, equipedCreature, game)) {
                         perm.addPower(power.calculate(game, source, this));
                         perm.addToughness(toughness.calculate(game, source, this));
 

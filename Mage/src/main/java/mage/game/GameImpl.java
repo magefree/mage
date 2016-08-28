@@ -1848,9 +1848,9 @@ public abstract class GameImpl implements Game, Serializable {
                     Permanent attachment = getPermanent(attachmentId);
                     if (attachment != null
                             && (attachment.getCardType().contains(CardType.CREATURE)
-                            || !(attachment.getSubtype().contains("Aura")
-                            || attachment.getSubtype().contains("Equipment")
-                            || attachment.getSubtype().contains("Fortification")))) {
+                            || !(attachment.getSubtype(this).contains("Aura")
+                            || attachment.getSubtype(this).contains("Equipment")
+                            || attachment.getSubtype(this).contains("Fortification")))) {
                         if (perm.removeAttachment(attachment.getId(), this)) {
                             somethingHappened = true;
                             break;
@@ -1875,7 +1875,7 @@ public abstract class GameImpl implements Game, Serializable {
         // This is called the "planeswalker uniqueness rule."
         if (planeswalkers.size() > 1) {  //don't bother checking if less than 2 planeswalkers in play
             for (Permanent planeswalker : planeswalkers) {
-                for (String planeswalkertype : planeswalker.getSubtype()) {
+                for (String planeswalkertype : planeswalker.getSubtype(this)) {
                     FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
                     filterPlaneswalker.add(new SubtypePredicate(planeswalkertype));
                     filterPlaneswalker.add(new ControllerIdPredicate(planeswalker.getControllerId()));

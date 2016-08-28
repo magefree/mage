@@ -123,7 +123,7 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
                 throw new IllegalArgumentException("Params can't be null");
             }
             boolean canProwl = false;
-            for (String subtype : card.getSubtype()) {
+            for (String subtype : card.getSubtype(game)) {
                 if (prowlWatcher.hasSubtypeMadeCombatDamage(ability.getControllerId(), subtype)) {
                     canProwl = true;
                     break;
@@ -187,18 +187,8 @@ public class ProwlAbility extends StaticAbility implements AlternativeSourceCost
     }
 
     private void setReminderText(Card card) {
-        StringBuilder sb = new StringBuilder("(You may cast this for its prowl cost if you dealt combat damage to a player this turn with a ");
-        int i = 0;
-        for (String subtype : card.getSubtype()) {
-            i++;
-            sb.append(subtype);
-            if (card.getSubtype().size() > 1 && i < card.getSubtype().size()) {
-                sb.append(" or ");
-            }
-        }
-        sb.append(".)");
-
-        reminderText = sb.toString();
+        reminderText = 
+                "(You may cast this for its prowl cost if you dealt combat damage to a player this turn with a creature that shared a creature type with {this}";
     }
 
     @Override

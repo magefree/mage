@@ -111,7 +111,7 @@ class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl {
                 zEvent.getToZone() == Zone.GRAVEYARD &&
                 zEvent.getFromZone() == Zone.BATTLEFIELD &&
                 (permanent.getControllerId().equals(this.getControllerId()) &&
-                permanent.hasSubtype("Vampire") || permanent.getId().equals(this.getSourceId()));
+                permanent.hasSubtype("Vampire", game) || permanent.getId().equals(this.getSourceId()));
     }
 
     @Override

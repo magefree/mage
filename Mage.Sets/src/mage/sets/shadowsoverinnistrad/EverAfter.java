@@ -98,7 +98,7 @@ class EverAfterEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            card.getSubtype().add("Zombie");
+                            card.getSubtype(game).add("Zombie");
                         }
                         break;
                     case ColorChangingEffects_5:

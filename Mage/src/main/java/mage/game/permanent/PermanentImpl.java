@@ -992,7 +992,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean cantBeEnchantedBy(MageObject source, Game game) {
         for (ProtectionAbility ability : abilities.getProtectionAbilities()) {
-            if (!(source.getSubtype().contains("Aura")
+            if (!(source.getSubtype(game).contains("Aura")
                     && !ability.removesAuras())
                     && !source.getId().equals(ability.getAuraIdNotToBeRemoved())
                     && !ability.canTarget(source, game)) {

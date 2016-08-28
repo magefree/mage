@@ -108,8 +108,8 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            permanent.getSubtype().clear();
-                            permanent.getSubtype().add("Frog");
+                            permanent.getSubtype(game).clear();
+                            permanent.getSubtype(game).add("Frog");
                         }
 
                         break;

@@ -122,7 +122,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public List<String> getSubtype() {
+    public List<String> getSubtype(Game game) {
         return subtype;
     }
 
@@ -182,11 +182,12 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public boolean hasSubtype(String value) {
+    public boolean hasSubtype(String value, Game game) {
         if (value == null) {
             return false;
         }
-        if (this.subtype.contains(value)) {
+        List<String> subtypes = this.getSubtype(game);
+        if (subtypes.contains(value)) {
             return true;
         } else {
             // checking for Changeling
@@ -196,7 +197,7 @@ public abstract class MageObjectImpl implements MageObject {
                 return false;
             }
             // as it is creature subtype, then check the existence of Changeling
-            return abilities.contains(ChangelingAbility.getInstance()) || this.subtype.contains(ChangelingAbility.ALL_CREATURE_TYPE);
+            return abilities.contains(ChangelingAbility.getInstance()) || subtypes.contains(ChangelingAbility.ALL_CREATURE_TYPE);
         }
     }
 

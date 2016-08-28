@@ -40,7 +40,7 @@ public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
     @Override
     protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
         if (subtype != null) {
-            return permanent.hasSubtype(subtype);
+            return permanent.hasSubtype(subtype, game);
         }
         return false;
     }

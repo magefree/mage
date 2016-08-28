@@ -122,8 +122,8 @@ class SealockMonsterBecomesIslandTargetEffect extends ContinuousEffectImpl {
                         }
                         break;
                     case TypeChangingEffects_4:
-                        if (!land.getSubtype().contains("Island")) {
-                            land.getSubtype().add("Island");
+                        if (!land.getSubtype(game).contains("Island")) {
+                            land.getSubtype(game).add("Island");
                         }
                         break;
                 }

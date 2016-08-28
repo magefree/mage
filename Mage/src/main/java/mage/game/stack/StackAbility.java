@@ -162,12 +162,12 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public List<String> getSubtype() {
+    public List<String> getSubtype(Game game) {
         return emptyString;
     }
 
     @Override
-    public boolean hasSubtype(String subtype) {
+    public boolean hasSubtype(String subtype, Game game) {
         return false;
     }
 

@@ -105,7 +105,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
             filter.add(Predicates.not(new PermanentIdPredicate(this.targetPointer.getFirst(game, source))));
             filter.add(new AttackingPredicate());
             boolean allCreatureTypes = false;
-            if (permanent.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
+            if (permanent.getSubtype(game).contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
                 allCreatureTypes = true;
             } else {
                 for(Ability ability : permanent.getAbilities()){
@@ -116,7 +116,7 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
             }
             if(!allCreatureTypes){
                 ArrayList<Predicate<MageObject>> predicateList = new ArrayList<>();
-                for(String subtype : permanent.getSubtype()){
+                for(String subtype : permanent.getSubtype(game)){
                     predicateList.add(new SubtypePredicate(subtype));
                 }
                 filter.add(Predicates.or(predicateList));

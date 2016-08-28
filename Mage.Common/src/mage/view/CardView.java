@@ -272,7 +272,7 @@ public class CardView extends SimpleCardView {
         this.power = Integer.toString(card.getPower().getValue());
         this.toughness = Integer.toString(card.getToughness().getValue());
         this.cardTypes = card.getCardType();
-        this.subTypes = card.getSubtype();
+        this.subTypes = card.getSubtype(game);
         this.superTypes = card.getSupertype();
         this.color = card.getColor(game);
         this.canTransform = card.canTransform();
@@ -346,7 +346,7 @@ public class CardView extends SimpleCardView {
             this.loyalty = "";
         }
         this.cardTypes = object.getCardType();
-        this.subTypes = object.getSubtype();
+        this.subTypes = object.getSubtype(null);
         this.superTypes = object.getSupertype();
         this.color = object.getColor(null);
         this.manaCost = object.getManaCost().getSymbols();
@@ -452,7 +452,7 @@ public class CardView extends SimpleCardView {
         this.toughness = token.getToughness().toString();
         this.loyalty = "";
         this.cardTypes = token.getCardType();
-        this.subTypes = token.getSubtype();
+        this.subTypes = token.getSubtype(null);
         this.superTypes = token.getSupertype();
         this.color = token.getColor(null);
         this.manaCost = token.getManaCost().getSymbols();

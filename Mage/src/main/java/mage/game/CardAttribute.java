@@ -6,6 +6,8 @@
 package mage.game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import mage.ObjectColor;
 import mage.cards.Card;
 
@@ -17,13 +19,16 @@ import mage.cards.Card;
 public class CardAttribute  implements Serializable {
     
     protected ObjectColor color;
+    protected List<String> subtype;
 
     public CardAttribute(Card card) {
         color = card.getColor(null).copy();
+        subtype = new ArrayList<String>(card.getSubtype(null));
     }
 
     public CardAttribute(CardAttribute cardAttribute) {
         this.color = cardAttribute.color;
+        this.subtype = cardAttribute.subtype;
     }
     
     public CardAttribute copy() {
@@ -32,6 +37,10 @@ public class CardAttribute  implements Serializable {
     
     public ObjectColor getColor() {
        return color;
+    }
+    
+    public List<String> getSubtype() {
+        return subtype;
     }
     
 }

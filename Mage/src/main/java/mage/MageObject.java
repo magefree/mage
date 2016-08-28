@@ -24,9 +24,9 @@ public interface MageObject extends MageItem, Serializable {
 
     List<CardType> getCardType();
 
-    List<String> getSubtype();
+    List<String> getSubtype(Game game);
 
-    boolean hasSubtype(String subtype);
+    boolean hasSubtype(String subtype, Game game);
 
     List<String> getSupertype();
 

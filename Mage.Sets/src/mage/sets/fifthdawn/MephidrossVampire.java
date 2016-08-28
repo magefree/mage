@@ -118,8 +118,8 @@ class MephidrossVampireEffect extends ContinuousEffectImpl {
                     creature.addAbility(new DealsDamageToACreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, false, false), source.getSourceId(), game);
                     break;
                 case TypeChangingEffects_4:
-                    if (!creature.getSubtype().contains("Vampire")) {
-                        creature.getSubtype().add("Vampire");
+                    if (!creature.getSubtype(game).contains("Vampire")) {
+                        creature.getSubtype(game).add("Vampire");
                     }
                     break;
             }

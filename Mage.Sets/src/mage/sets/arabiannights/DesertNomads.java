@@ -96,7 +96,7 @@ class PreventDamageToSourceBySubtypeEffect extends PreventAllDamageToSourceEffec
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (game.getObject(event.getSourceId()).hasSubtype(subtype)){
+            if (game.getObject(event.getSourceId()).hasSubtype(subtype, game)){
                 if (event.getTargetId().equals(source.getSourceId())) {
                     return true;
                 }

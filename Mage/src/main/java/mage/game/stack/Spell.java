@@ -223,7 +223,7 @@ public class Spell extends StackObjImpl implements Card {
             }
             counter(null, game);
             return false;
-        } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
+        } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype(game).contains("Aura")) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
                 boolean bestow = ability instanceof BestowAbility;
@@ -231,7 +231,7 @@ public class Spell extends StackObjImpl implements Card {
                     // Must be removed first time, after that will be removed by continous effect
                     // Otherwise effects like evolve trigger from creature comes into play event
                     card.getCardType().remove(CardType.CREATURE);
-                    card.getSubtype().add("Aura");
+                    card.getSubtype(game).add("Aura");
                 }
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     if (bestow) {
@@ -241,7 +241,7 @@ public class Spell extends StackObjImpl implements Card {
                         if (permanent != null && permanent instanceof PermanentCard) {
                             permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set
                             ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);
-                            ((PermanentCard) permanent).getCard().getSubtype().remove("Aura");
+                            ((PermanentCard) permanent).getCard().getSubtype(game).remove("Aura");
                         }
                     }
                     return ability.resolve(game);
@@ -431,27 +431,27 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public List<String> getSubtype() {
+    public List<String> getSubtype(Game game) {
         if (this.getSpellAbility() instanceof BestowAbility) {
             List<String> subtypes = new ArrayList<>();
-            subtypes.addAll(card.getSubtype());
+            subtypes.addAll(card.getSubtype(game));
             subtypes.add("Aura");
             return subtypes;
         }
-        return card.getSubtype();
+        return card.getSubtype(game);
     }
 
     @Override
-    public boolean hasSubtype(String subtype) {
+    public boolean hasSubtype(String subtype, Game game) {
         if (this.getSpellAbility() instanceof BestowAbility) { // workaround for Bestow (don't like it)
             List<String> subtypes = new ArrayList<>();
-            subtypes.addAll(card.getSubtype());
+            subtypes.addAll(card.getSubtype(game));
             subtypes.add("Aura");
             if (subtypes.contains(subtype)) {
                 return true;
             }
         }
-        return card.hasSubtype(subtype);
+        return card.hasSubtype(subtype, game);
     }
 
     @Override

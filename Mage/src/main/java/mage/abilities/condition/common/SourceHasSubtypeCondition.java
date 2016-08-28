@@ -21,7 +21,7 @@ public class SourceHasSubtypeCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return permanent.hasSubtype(subtype);
+            return permanent.hasSubtype(subtype, game);
         }
         return false;
     }

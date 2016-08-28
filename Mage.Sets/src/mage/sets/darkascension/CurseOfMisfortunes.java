@@ -108,7 +108,7 @@ class CurseOfMisfortunesEffect extends OneShotEffect {
                 // get the names of attached Curses
                 for (UUID attachmentId: targetPlayer.getAttachments()) {
                     Permanent attachment = game.getPermanent(attachmentId);
-                    if (attachment != null && attachment.getSubtype().contains("Curse")) {
+                    if (attachment != null && attachment.getSubtype(game).contains("Curse")) {
                         filter.add(Predicates.not(new NamePredicate(attachment.getName())));
                     }
                 }

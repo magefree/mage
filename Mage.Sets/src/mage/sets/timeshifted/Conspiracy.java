@@ -105,33 +105,33 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             for (UUID cardId : controller.getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    setCreatureSubtype(card, choice);
+                    setCreatureSubtype(card, choice, game);
                 }
             }
             // on Hand
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    setCreatureSubtype(card, choice);
+                    setCreatureSubtype(card, choice, game);
                 }
             }
             // in Exile
             for (Card card : game.getState().getExile().getAllCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
-                    setCreatureSubtype(card, choice);
+                    setCreatureSubtype(card, choice, game);
                 }
             }
             // in Library (e.g. for Mystical Teachings)
             for (Card card : controller.getLibrary().getCards(game)) {
                 if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
-                    setCreatureSubtype(card, choice);
+                    setCreatureSubtype(card, choice, game);
                 }
             }
             // commander in command zone
             if (controller.getCommanderId() != null && game.getState().getZone(controller.getCommanderId()).equals(Zone.COMMAND)) {
                 Card card = game.getCard(controller.getCommanderId());
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    setCreatureSubtype(card, choice);
+                    setCreatureSubtype(card, choice, game);
                 }
             }
             // creature spells you control
@@ -139,27 +139,37 @@ class ConspiracyEffect extends ContinuousEffectImpl {
                 StackObject stackObject = iterator.next();
                 if (stackObject.getControllerId().equals(source.getControllerId()) && 
                         stackObject.getCardType().contains(CardType.CREATURE)) {
-                    setCreatureSubtype(stackObject, choice);
+                    setCreatureSubtype(stackObject, choice, game);
                 }
             }
             // creatures you control
             List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(
                     new FilterControlledCreaturePermanent(), source.getControllerId(), game);
             for (Permanent creature : creatures) {
-                setCreatureSubtype(creature, choice);
+                setCreatureSubtype(creature, choice, game);
             }
             return true;
         }
         return false;
     }
     
-    private void setCreatureSubtype(MageObject object, String subtype) {
-        if (object != null && 
-                (object.getSubtype().size() != 1 || 
-                !object.getSubtype().contains(subtype))) {
-            object.getSubtype().removeAll(
-                    CardRepository.instance.getCreatureTypes());
-            object.getSubtype().add(subtype);
+    private void setCreatureSubtype(MageObject object, String subtype, Game game) {
+        if (object != null) {
+            if (object instanceof Card) {
+                Card card = (Card) object;
+                setChosenSubtype(
+                        game.getState().getCreateCardAttribute(card).getSubtype(), 
+                        subtype);
+            } else {
+                setChosenSubtype(object.getSubtype(game), subtype);
+            }
+        }
+    }
+    
+    private void setChosenSubtype(List<String> subtype, String choice) {
+        if (subtype.size() != 1 ||  !subtype.contains(choice)) {
+            subtype.removeAll(CardRepository.instance.getCreatureTypes());
+            subtype.add(choice);
         }
     }
 

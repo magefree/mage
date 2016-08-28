@@ -125,12 +125,12 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public List<String> getSubtype() {
+    public List<String> getSubtype(Game game) {
         return emptyList;
     }
 
     @Override
-    public boolean hasSubtype(String subtype) {
+    public boolean hasSubtype(String subtype, Game game) {
         return false;
     }
 

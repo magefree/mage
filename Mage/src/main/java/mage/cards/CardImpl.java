@@ -756,6 +756,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 return cardAttribute.getColor();
             }
         }
-        return super.getColor(game); //To change body of generated methods, choose Tools | Templates.
+        return super.getColor(game);
+    }
+    
+    @Override
+    public List<String> getSubtype(Game game) {
+        if (game != null) {
+            CardAttribute cardAttribute = game.getState().getCardAttribute(getId());
+            if (cardAttribute != null) {
+                return cardAttribute.getSubtype();
+            }
+        }
+        return super.getSubtype(game);
     }
 }

@@ -98,7 +98,7 @@ class EverflameEidolonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourceObject != null) {
-            if (sourceObject.getSubtype().contains("Aura")) {
+            if (sourceObject.getSubtype(game).contains("Aura")) {
                 new BoostEnchantedEffect(1, 0, Duration.EndOfTurn).apply(game, source);
             } else {
                 game.addEffect(new BoostSourceEffect(1, 0, Duration.EndOfTurn), source);
