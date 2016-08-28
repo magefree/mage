@@ -30,9 +30,11 @@ package mage.abilities.effects.common;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -44,10 +46,19 @@ import mage.util.CardUtil;
 public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
 
     protected int amount;
-    
+    protected boolean putToGraveyard;
+
     public LookLibraryTopCardTargetPlayerEffect(int amount) {
         super(Outcome.Benefit);
         this.amount = amount;
+        this.putToGraveyard = false;
+        setText();
+    }
+
+    public LookLibraryTopCardTargetPlayerEffect(int amount, boolean putToGraveyard) {
+        super(Outcome.Benefit);
+        this.amount = amount;
+        this.putToGraveyard = putToGraveyard;
         setText();
     }
 
@@ -58,6 +69,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
     public LookLibraryTopCardTargetPlayerEffect(final LookLibraryTopCardTargetPlayerEffect effect) {
         super(effect);
         amount = effect.amount;
+        putToGraveyard = effect.putToGraveyard;
     }
 
     @Override
@@ -74,21 +86,38 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             cards.addAll(targetPlayer.getLibrary().getTopCards(game, amount));
             player.lookAtCards(sourceObject.getName(), cards, game);
+            if (putToGraveyard) {
+                for (Card card : cards.getCards(game)) {
+                    if (player.chooseUse(outcome, "Do you wish to put card into the player's graveyard?", source, game)) {
+                        player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    } else {
+                        game.informPlayers(player.getLogName() + " puts the card back on top of the library.");
+                    }
+                }
+            }
             return true;
         }
         return false;
     }
-    
+
     private void setText() {
-        StringBuilder sb = new StringBuilder("look at the top ");        
+        StringBuilder sb = new StringBuilder("look at the top ");
         if (amount > 1) {
             sb.append(CardUtil.numberToText(amount));
             sb.append(" cards ");
-        }
-        else {
+        } else {
             sb.append(" card ");
         }
         sb.append("of target player's library");
+        if (putToGraveyard) {
+            sb.append(". You may put ");
+            if (amount > 1) {
+                sb.append("those cards");
+            } else {
+                sb.append("that card");
+            }
+            sb.append(" into that player's graveyard");
+        }
         this.staticText = sb.toString();
     }
 }

@@ -29,7 +29,7 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -45,8 +45,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -66,12 +64,11 @@ public class PathOfBravery extends CardImpl {
         super(ownerId, 26, "Path of Bravery", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "M14";
 
-
         // As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new LifeCondition(), rule)));
 
         // Whenever one or more creatures you control attack, you gain life equal to the number of attacking creatures.
-        this.addAbility(new PathOfBraveryTriggeredAbility());
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new PathOfBraveryEffect(), 1));
 
     }
 
@@ -100,37 +97,6 @@ class LifeCondition implements Condition {
             return you.getLife() >= game.getLife();
         }
         return false;
-    }
-}
-
-class PathOfBraveryTriggeredAbility extends TriggeredAbilityImpl {
-
-    public PathOfBraveryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new PathOfBraveryEffect(), false);
-    }
-
-    public PathOfBraveryTriggeredAbility(final PathOfBraveryTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_ATTACKERS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return !game.getCombat().noAttackers() && event.getPlayerId().equals(controllerId);
-    }
-
-    @Override
-    public PathOfBraveryTriggeredAbility copy() {
-        return new PathOfBraveryTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever one or more creatures you control attack, " + super.getRule();
     }
 }
 
