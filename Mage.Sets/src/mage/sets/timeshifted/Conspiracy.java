@@ -137,9 +137,11 @@ class ConspiracyEffect extends ContinuousEffectImpl {
             // creature spells you control
             for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
                 StackObject stackObject = iterator.next();
-                if (stackObject.getControllerId().equals(source.getControllerId()) && 
+                if (stackObject instanceof Spell &&
+                        stackObject.getControllerId().equals(source.getControllerId()) && 
                         stackObject.getCardType().contains(CardType.CREATURE)) {
-                    setCreatureSubtype(stackObject, choice, game);
+                    Card card = ((Spell) stackObject).getCard();
+                    setCreatureSubtype(card, choice, game);
                 }
             }
             // creatures you control
