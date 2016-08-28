@@ -28,26 +28,21 @@
 package mage.sets.commander2014;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continuous.ActivateAbilitiesAnyTimeYouCouldCastInstantEffect;
 import mage.cards.CardImpl;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.target.TargetPermanent;
 
@@ -96,42 +91,6 @@ class TeferiTemporalArchmageEmblem extends Emblem {
     // "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."
     public TeferiTemporalArchmageEmblem() {
         this.setName("EMBLEM: Teferi, Temporal Archmage");
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new TeferiTemporalArchmageAsThoughEffect()));
+        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(LoyaltyAbility.class, "loyalty abilities of planeswalkers you control on any player's turn")));
     }
-}
-
-class TeferiTemporalArchmageAsThoughEffect extends AsThoughEffectImpl {
-
-    public TeferiTemporalArchmageAsThoughEffect() {
-        super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant";
-    }
-
-    public TeferiTemporalArchmageAsThoughEffect(final TeferiTemporalArchmageAsThoughEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public TeferiTemporalArchmageAsThoughEffect copy() {
-        return new TeferiTemporalArchmageAsThoughEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game) {
-        if (affectedAbility.getControllerId().equals(source.getControllerId()) && affectedAbility instanceof LoyaltyAbility) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return false; // Not used
-    }
-
 }

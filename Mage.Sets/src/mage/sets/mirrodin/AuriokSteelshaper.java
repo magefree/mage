@@ -29,27 +29,25 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.util.CardUtil;
 
 /**
  *
  * @author Jason E. Wall
-
+ *
  */
 public class AuriokSteelshaper extends CardImpl {
+
     private static final FilterCreaturePermanent soldiersOrKnights = new FilterCreaturePermanent();
 
     static {
@@ -68,7 +66,7 @@ public class AuriokSteelshaper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Equip costs you pay cost {1} less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AuriokSteelshaperCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbilitiesCostReductionControllerEffect(EquipAbility.class, "Equip")));
 
         // As long as Auriok Steelshaper is equipped, each creature you control that's a Soldier or a Knight gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
@@ -85,34 +83,5 @@ public class AuriokSteelshaper extends CardImpl {
     @java.lang.Override
     public AuriokSteelshaper copy() {
         return new AuriokSteelshaper(this);
-    }
-}
-
-class AuriokSteelshaperCostReductionEffect extends CostModificationEffectImpl {
-
-    public AuriokSteelshaperCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "Equip costs you pay cost {1} less";
-    }
-
-    public AuriokSteelshaperCostReductionEffect(AuriokSteelshaperCostReductionEffect effect) {
-        super(effect);
-    }
-
-    @java.lang.Override
-    public AuriokSteelshaperCostReductionEffect copy() {
-        return new AuriokSteelshaperCostReductionEffect(this);
-    }
-
-    @java.lang.Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, 1);
-        return true;
-    }
-
-    @java.lang.Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getControllerId().equals(source.getControllerId()) &&
-                (abilityToModify instanceof EquipAbility);
     }
 }
