@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.NoCreatureOpponentCondition;
+import mage.abilities.condition.common.CreatureCountCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -58,10 +58,12 @@ public class Kezzerdrix extends CardImpl {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        
+
         // At the beginning of your upkeep, if your opponents control no creatures, Kezzerdrix deals 4 damage to you.
-        ConditionalTriggeredAbility ability = new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(4), TargetController.YOU, false), NoCreatureOpponentCondition.getInstance(), "At the beginning of your upkeep, if your opponents control no creatures, {this} deals 4 damage to you.");
-        this.addAbility(ability);
+        this.addAbility(new ConditionalTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(4), TargetController.YOU, false),
+                new CreatureCountCondition(0, TargetController.OPPONENT),
+                "At the beginning of your upkeep, if your opponents control no creatures, {this} deals 4 damage to you."));
     }
 
     public Kezzerdrix(final Kezzerdrix card) {

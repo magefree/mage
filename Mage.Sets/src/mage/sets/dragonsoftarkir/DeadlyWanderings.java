@@ -30,7 +30,7 @@ package mage.sets.dragonsoftarkir;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.OneControlledCreatureCondition;
+import mage.abilities.condition.common.CreatureCountCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -57,14 +58,16 @@ public class DeadlyWanderings extends CardImpl {
 
         // As long as you control exactly one creature, that creature gets +2/+0 and has deathtouch and lifelink.
         ContinuousEffect boostEffect = new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield);
-        Effect effect = new ConditionalContinuousEffect(boostEffect, new OneControlledCreatureCondition(),
+        Effect effect = new ConditionalContinuousEffect(boostEffect, new CreatureCountCondition(1, TargetController.YOU),
                 "As long as you control exactly one creature, that creature gets +2/+0");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         ContinuousEffect deathtouchEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent());
-        effect = new ConditionalContinuousEffect(deathtouchEffect, new OneControlledCreatureCondition(), "and has deathtouch");
+        effect = new ConditionalContinuousEffect(deathtouchEffect, new CreatureCountCondition(1, TargetController.YOU),
+                "and has deathtouch");
         ability.addEffect(effect);
         ContinuousEffect lifelinkEffect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent());
-        effect = new ConditionalContinuousEffect(lifelinkEffect, new OneControlledCreatureCondition(), "and lifelink");
+        effect = new ConditionalContinuousEffect(lifelinkEffect, new CreatureCountCondition(1, TargetController.YOU),
+                "and lifelink");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

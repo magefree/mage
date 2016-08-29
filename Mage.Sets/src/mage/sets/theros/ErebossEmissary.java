@@ -27,6 +27,7 @@
  */
 package mage.sets.theros;
 
+import java.util.Arrays;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -55,21 +56,22 @@ public class ErebossEmissary extends CardImpl {
         super(ownerId, 86, "Erebos's Emissary", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "THS";
         this.subtype.add("Snake");
-
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Bestow {5}{B}
         this.addAbility(new BestowAbility(this, "{5}{B}"));
+
         // Discard a creature card: Erebos's Emissary gets +2/+2 until end of turn. If Erebos's Emissary is an Aura, enchanted creature gets +2/+2 until end of turn instead.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostEnchantedEffect(2,2, Duration.EndOfTurn),
-                new BoostSourceEffect(2,2, Duration.EndOfTurn),
-                new SourceHasSubtypeCondition("Aura"),
+                new BoostEnchantedEffect(2, 2, Duration.EndOfTurn),
+                new BoostSourceEffect(2, 2, Duration.EndOfTurn),
+                new SourceHasSubtypeCondition(Arrays.asList("Aura")),
                 "{this} gets +2/+2 until end of turn. If Erebos's Emissary is an Aura, enchanted creature gets +2/+2 until end of turn instead"),
                 new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard()))));
+
         // Enchanted creature gets +3/+3
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
     }
 
     public ErebossEmissary(final ErebossEmissary card) {
