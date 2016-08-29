@@ -11,7 +11,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class GratuitousViolenceTest extends CardTestPlayerBase {
     @Test
-    public void testWorksOnCreatures() {
+    public void testDoublesDamageFromCreatures() {
+        // Enchantment: If a creature you control would deal damage to a creature
+        // or player, it deals double that damage to that creature or player instead.
         addCard(Zone.BATTLEFIELD, playerA, "Gratuitous Violence");
         addCard(Zone.BATTLEFIELD, playerA, "Elvish Visionary"); // 1/1
         
@@ -24,8 +26,10 @@ public class GratuitousViolenceTest extends CardTestPlayerBase {
     
     @Test
     public void testIgnoresNonCreatures() {
-        addCard(Zone.BATTLEFIELD, playerA, "Gratuitous Violence");
+        // Legendary Enchantment - Shrine: At the beginning of your upkeep, Honden of Infinite
+        // Rage deals damage to target creature or player equal to the number of Shrines you control.
         addCard(Zone.BATTLEFIELD, playerA, "Honden of Infinite Rage");
+        addCard(Zone.BATTLEFIELD, playerA, "Gratuitous Violence");
         
         addTarget(playerA, playerB);
         
