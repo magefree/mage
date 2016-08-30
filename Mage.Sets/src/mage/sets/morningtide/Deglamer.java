@@ -29,18 +29,12 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ShuffleIntoLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -49,21 +43,18 @@ import mage.target.TargetPermanent;
  */
 public class Deglamer extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                                 new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
     public Deglamer(UUID ownerId) {
         super(ownerId, 118, "Deglamer", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "MOR";
 
-
         // Choose target artifact or enchantment. Its owner shuffles it into his or her library.
-        this.getSpellAbility().addEffect(new DeglamerShuffleIntoLibraryEffect());
-        Target target = new TargetPermanent(1,1,filter,true);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(new ShuffleIntoLibraryTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(1, 1, filter, true));
     }
 
     public Deglamer(final Deglamer card) {
@@ -73,34 +64,5 @@ public class Deglamer extends CardImpl {
     @Override
     public Deglamer copy() {
         return new Deglamer(this);
-    }
-}
-
-class DeglamerShuffleIntoLibraryEffect extends OneShotEffect {
-
-    public DeglamerShuffleIntoLibraryEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Choose target artifact or enchantment. Its owner shuffles it into his or her library";
-    }
-
-    public DeglamerShuffleIntoLibraryEffect(final DeglamerShuffleIntoLibraryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DeglamerShuffleIntoLibraryEffect copy() {
-        return new DeglamerShuffleIntoLibraryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null) {
-            if (permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true) ) {
-                game.getPlayer(permanent.getOwnerId()).shuffleLibrary(source, game);
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -28,19 +28,13 @@
 package mage.sets.bornofthegods;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ShuffleIntoLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -49,11 +43,10 @@ import mage.target.TargetPermanent;
  */
 public class UnravelTheAEther extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
+        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public UnravelTheAEther(UUID ownerId) {
@@ -61,9 +54,8 @@ public class UnravelTheAEther extends CardImpl {
         this.expansionSetCode = "BNG";
 
         // Choose target artifact or enchantment. Its owner shuffles it into his or her library.
-        this.getSpellAbility().addEffect(new UnravelTheAEtherShuffleIntoLibraryEffect());
-        Target target = new TargetPermanent(1, 1, filter, false);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addEffect(new ShuffleIntoLibraryTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(1, 1, filter, true));
     }
 
     public UnravelTheAEther(final UnravelTheAEther card) {
@@ -73,34 +65,5 @@ public class UnravelTheAEther extends CardImpl {
     @Override
     public UnravelTheAEther copy() {
         return new UnravelTheAEther(this);
-    }
-}
-
-class UnravelTheAEtherShuffleIntoLibraryEffect extends OneShotEffect {
-
-    public UnravelTheAEtherShuffleIntoLibraryEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Choose target artifact or enchantment. Its owner shuffles it into his or her library";
-    }
-
-    public UnravelTheAEtherShuffleIntoLibraryEffect(final UnravelTheAEtherShuffleIntoLibraryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UnravelTheAEtherShuffleIntoLibraryEffect copy() {
-        return new UnravelTheAEtherShuffleIntoLibraryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null) {
-            if (permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
-                game.getPlayer(permanent.getOwnerId()).shuffleLibrary(source, game);
-                return true;
-            }
-        }
-        return false;
     }
 }
