@@ -7,11 +7,18 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
+import org.apache.log4j.Logger;
 
 /**
  * @author North
  */
 public class MockCard extends CardImpl {
+    // Needs to be here, as it is normally calculated from the
+    // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
+    // only has MockAbilities.
+    private int startingLoyalty;
+    
     public MockCard(CardInfo card) {
         super(null, card.getName());
         this.cardNumber = card.getCardNumber();
@@ -28,6 +35,9 @@ public class MockCard extends CardImpl {
         this.manaCost = new ManaCostsImpl(join(card.getManaCosts()));
 
         this.color = card.getColor();
+        
+        this.frameColor = card.getFrameColor();
+
         this.splitCard = card.isSplitCard();
         this.flipCard = card.isFlipCard();
 
@@ -36,9 +46,21 @@ public class MockCard extends CardImpl {
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             this.secondSideCard = new MockCard(CardRepository.instance.findCard(card.getSecondSideName()));
         }
+        
+        if (this.cardType.contains(CardType.PLANESWALKER)) {
+            String startingLoyaltyString = card.getStartingLoyalty();
+            if (startingLoyaltyString.isEmpty()) {
+                Logger.getLogger(MockCard.class).warn("Planeswalker `" + this.name + "` has empty starting loyalty.");
+            } else {
+                try {
+                    this.startingLoyalty = Integer.parseInt(startingLoyaltyString);
+                } catch (NumberFormatException e) {
+                    Logger.getLogger(MockCard.class).warn("Planeswalker `" + this.name + "` starting loyalty in bad format: `" + startingLoyaltyString + "`.");
+                }
+            }
+        }
 
         this.flipCardName = card.getFlipCardName();
-
         for(String ruleText: card.getRules()) {
             this.addAbility(textAbilityFromString(ruleText));
         }
@@ -46,6 +68,11 @@ public class MockCard extends CardImpl {
 
     public MockCard(final MockCard card) {
         super(card);
+    }
+    
+    @Override
+    public int getStartingLoyalty() {
+        return startingLoyalty;
     }
 
     @Override

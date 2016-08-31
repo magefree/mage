@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -49,6 +50,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected String name;
     protected ManaCosts<ManaCost> manaCost;
     protected ObjectColor color;
+    protected ObjectColor frameColor;
     protected List<CardType> cardType = new ArrayList<>();
     protected List<String> subtype = new ArrayList<>();
     protected List<String> supertype = new ArrayList<>();
@@ -67,6 +69,7 @@ public abstract class MageObjectImpl implements MageObject {
         power = new MageInt(0);
         toughness = new MageInt(0);
         color = new ObjectColor();
+        frameColor = new ObjectColor();
         manaCost = new ManaCostsImpl<>("");
         abilities = new AbilitiesImpl<>();
     }
@@ -77,6 +80,7 @@ public abstract class MageObjectImpl implements MageObject {
         manaCost = object.manaCost.copy();
         text = object.text;
         color = object.color.copy();
+        frameColor = object.frameColor.copy();
         power = object.power.copy();
         toughness = object.toughness.copy();
         abilities = object.abilities.copy();
@@ -154,10 +158,25 @@ public abstract class MageObjectImpl implements MageObject {
     public MageInt getToughness() {
         return toughness;
     }
+    
+    @Override
+    public int getStartingLoyalty() {
+        for (Ability ab: getAbilities()) {
+            if (ab instanceof PlanswalkerEntersWithLoyalityCountersAbility) {
+                return ((PlanswalkerEntersWithLoyalityCountersAbility)ab).getStartingLoyalty();
+            }
+        }
+        return 0;
+    }
 
     @Override
     public ObjectColor getColor(Game game) {
         return color;
+    }
+    
+    @Override
+    public ObjectColor getFrameColor(Game game) {
+        return frameColor;
     }
 
     @Override

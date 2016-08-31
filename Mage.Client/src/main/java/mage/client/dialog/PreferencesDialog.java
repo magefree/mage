@@ -118,6 +118,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferedImageLaguage";
 
+    public static final String KEY_CARD_RENDERING_FALLBACK = "cardRenderingFallback";
+    public static final String KEY_CARD_RENDERING_REMINDER_TEXT = "cardRenderingReminderText";
+            
     public static final String KEY_BACKGROUND_IMAGE = "backgroundImage";
     public static final String KEY_BATTLEFIELD_IMAGE = "battlefieldImage";
     public static final String KEY_BACKGROUND_IMAGE_DEFAULT = "backgroundImagedDefault";
@@ -464,6 +467,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbUseRandomBattleImage = new javax.swing.JCheckBox();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        cbCardRenderImageFallback = new javax.swing.JCheckBox();
+        cbCardRenderShowReminderText = new javax.swing.JCheckBox();
         tabSounds = new javax.swing.JPanel();
         sounds_clips = new javax.swing.JPanel();
         cbEnableGameSounds = new javax.swing.JCheckBox();
@@ -1385,7 +1391,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(jLabelEndOfTurn)
                     .add(checkBoxEndTurnOthers))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .add(phases_stopSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1439,41 +1445,43 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(panelCardImagesLayout.createSequentialGroup()
                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(panelCardImagesLayout.createSequentialGroup()
-                        .add(24, 24, 24)
+                        .addContainerGap()
                         .add(txtImageFolderPath)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(btnBrowseImageLocation))
                     .add(panelCardImagesLayout.createSequentialGroup()
-                        .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(labelNumberOfDownloadThreads)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                .add(cbUseDefaultImageFolder)
-                                .add(cbCheckForNewImages)
+                        .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                                 .add(panelCardImagesLayout.createSequentialGroup()
-                                    .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                        .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createSequentialGroup()
-                                            .addContainerGap()
-                                            .add(labelPreferedImageLanguage))
-                                        .add(org.jdesktop.layout.GroupLayout.LEADING, cbSaveToZipFiles))
-                                    .add(40, 40, 40)
-                                    .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                        .add(0, 251, Short.MAX_VALUE)))
+                                    .add(cbCheckForNewImages)
+                                    .add(147, 147, 147))
+                                .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                    .add(panelCardImagesLayout.createSequentialGroup()
+                                        .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, panelCardImagesLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .add(labelPreferedImageLanguage))
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, cbSaveToZipFiles))
+                                        .add(20, 20, 20)
+                                        .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                    .add(panelCardImagesLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .add(labelNumberOfDownloadThreads)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                            .add(cbUseDefaultImageFolder))
+                        .add(0, 231, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelCardImagesLayout.setVerticalGroup(
             panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panelCardImagesLayout.createSequentialGroup()
-                .addContainerGap()
                 .add(cbUseDefaultImageFolder)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(txtImageFolderPath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(btnBrowseImageLocation))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(cbCheckForNewImages)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(cbSaveToZipFiles)
@@ -1484,8 +1492,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelCardImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(cbPreferedImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(labelPreferedImageLanguage))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .add(labelPreferedImageLanguage)))
         );
 
         panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images setting:"));
@@ -1592,6 +1599,41 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(jLabel15)))
         );
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card rendering:"));
+
+        cbCardRenderImageFallback.setText("Fall back to plain image based rendering");
+        cbCardRenderImageFallback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCardRenderImageFallbackActionPerformed(evt);
+            }
+        });
+
+        cbCardRenderShowReminderText.setText("Show reminder text in rendered card textboxes");
+        cbCardRenderShowReminderText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCardRenderShowReminderTextActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(cbCardRenderImageFallback)
+                    .add(cbCardRenderShowReminderText))
+                .add(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
+                .add(cbCardRenderImageFallback)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbCardRenderShowReminderText)
+                .add(0, 7, Short.MAX_VALUE))
+        );
+
         org.jdesktop.layout.GroupLayout tabImagesLayout = new org.jdesktop.layout.GroupLayout(tabImages);
         tabImages.setLayout(tabImagesLayout);
         tabImagesLayout.setHorizontalGroup(
@@ -1600,17 +1642,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .add(tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(panelCardImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(tabImagesLayout.createSequentialGroup()
+                        .add(0, 0, 0)
+                        .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         tabImagesLayout.setVerticalGroup(
             tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabImagesLayout.createSequentialGroup()
                 .addContainerGap()
+                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
@@ -2220,7 +2267,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(connection_serversLayout.createSequentialGroup()
                         .add(141, 141, 141)
                         .add(jLabel17)))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         connection_serversLayout.setVerticalGroup(
             connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2406,7 +2453,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(exitButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(6, 6, 6))
-            .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .add(tabsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2534,6 +2584,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbUseDefaultBattleImage, KEY_BATTLEFIELD_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbUseRandomBattleImage, KEY_BATTLEFIELD_IMAGE_RANDOM, "true", "false", UPDATE_CACHE_POLICY);
 
+        // rendering
+        save(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbCardRenderShowReminderText, KEY_CARD_RENDERING_REMINDER_TEXT, "true", "false", UPDATE_CACHE_POLICY);
+        
         // sounds
         save(prefs, dialog.cbEnableGameSounds, KEY_SOUNDS_GAME_ON, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbEnableDraftSounds, KEY_SOUNDS_DRAFT_ON, "true", "false", UPDATE_CACHE_POLICY);
@@ -2806,6 +2860,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAutoOrderTriggerActionPerformed
 
+    private void cbCardRenderImageFallbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCardRenderImageFallbackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCardRenderImageFallbackActionPerformed
+
+    private void cbCardRenderShowReminderTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCardRenderShowReminderTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCardRenderShowReminderTextActionPerformed
+
     private void cbSaveToZipFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSaveToZipFilesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbSaveToZipFilesActionPerformed
@@ -3004,6 +3066,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         dialog.cbNumberOfDownloadThreads.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_THREADS, "10"));
         dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, "en"));
 
+        // rendering settings
+        load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true");
+        load(prefs, dialog.cbCardRenderShowReminderText, KEY_CARD_RENDERING_REMINDER_TEXT, "true");
+        
         //add background load precedure
         prop = prefs.get(KEY_BACKGROUND_IMAGE_DEFAULT, "true");
         if (prop.equals("true")) {
@@ -3384,6 +3450,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbAllowRequestToShowHandCards;
     private javax.swing.JCheckBox cbAskMoveToGraveOrder;
     private javax.swing.JCheckBox cbAutoOrderTrigger;
+    private javax.swing.JCheckBox cbCardRenderImageFallback;
+    private javax.swing.JCheckBox cbCardRenderShowReminderText;
     private javax.swing.JCheckBox cbCheckForNewImages;
     private javax.swing.JCheckBox cbConfirmEmptyManaPool;
     private javax.swing.JCheckBox cbDraftLogAutoSave;
@@ -3443,6 +3511,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelOpponentsTurn;
     private javax.swing.JLabel jLabelUpkeep;
     private javax.swing.JLabel jLabelYourTurn;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;

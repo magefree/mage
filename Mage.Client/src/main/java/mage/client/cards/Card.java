@@ -92,6 +92,7 @@ import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -191,7 +192,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         gSmall.drawImage(ImageHelper.scaleImage(image, Config.dimensions.frameWidth, Config.dimensions.frameHeight), 0, 0, this);
 
         gImage.setFont(new Font("Arial", Font.PLAIN, NAME_FONT_MAX_SIZE));
-        gImage.drawString(card.getName(), CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
+        gImage.drawString(card.getName()+"TEST", CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
         if (card.getCardTypes().contains(CardType.CREATURE)) {
             gImage.drawString(card.getPower() + "/" + card.getToughness(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
         } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
@@ -205,9 +206,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         gImage.dispose();
 
         gSmall.setFont(new Font("Arial", Font.PLAIN, Config.dimensions.nameFontSize));
-        gSmall.drawString(card.getName(), Config.dimensions.contentXOffset, Config.dimensions.nameYOffset);
+        gSmall.drawString(card.getName()+"TEST2", Config.dimensions.contentXOffset, Config.dimensions.nameYOffset);
         if (card.getCardTypes().contains(CardType.CREATURE)) {
-            gSmall.drawString(card.getPower() + "/" + card.getToughness(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
+            gSmall.drawString(card.getPower() + "/-/" + card.getToughness(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
         } else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
             gSmall.drawString(card.getLoyalty(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
         }
@@ -318,6 +319,19 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
         return sbType.toString();
     }
+    
+    protected void drawDetailed(Graphics2D g) {
+        // Get the size of the card
+        int width = getWidth();
+        int height = getHeight();
+        
+        g.setColor(Color.black);
+        g.drawRoundRect(0, 0, width, height, 4, 4);
+        g.setColor(Color.white);
+        g.setFont(new Font("Arial", Font.PLAIN, NAME_FONT_MAX_SIZE));
+        g.drawString(card.getName(), 0, 0);
+        Logger.getLogger(Card.class).info("Drawing");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -355,6 +369,8 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
     @Override
     public void paintComponent(Graphics graphics) {
+        drawDetailed((Graphics2D)graphics);
+        /*
         Graphics2D g2 = (Graphics2D) graphics;
         g2.drawImage(small, 0, 0, this);
 
@@ -365,6 +381,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             g2.setColor(Color.BLACK);
         }
         g2.drawRect(0, 0, Config.dimensions.frameWidth - 1, Config.dimensions.frameHeight - 1);
+        */
     }
 
     @Override

@@ -35,6 +35,8 @@ public interface MageObject extends MageItem, Serializable {
     boolean hasAbility(UUID abilityId, Game game);
 
     ObjectColor getColor(Game game);
+    
+    ObjectColor getFrameColor(Game game);
 
     ManaCosts<ManaCost> getManaCost();
 
@@ -43,6 +45,10 @@ public interface MageObject extends MageItem, Serializable {
     MageInt getPower();
 
     MageInt getToughness();
+    
+    int getStartingLoyalty();
+    
+    
 
     void adjustCosts(Ability ability, Game game);
 

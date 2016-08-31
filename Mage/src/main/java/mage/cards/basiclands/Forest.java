@@ -29,6 +29,7 @@
 package mage.cards.basiclands;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.mana.GreenManaAbility;
 
 /**
@@ -43,6 +44,7 @@ public abstract class Forest extends BasicLand {
 
     public Forest(UUID ownerId, String cardNumber) {
         super(ownerId, cardNumber, "Forest", new GreenManaAbility());
+        this.frameColor = ObjectColor.GREEN;
     }
 
     public Forest(final Forest land) {
