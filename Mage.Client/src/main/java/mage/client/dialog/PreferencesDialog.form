@@ -4156,10 +4156,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="panelCardImages" max="32767" attributes="0"/>
                           <Component id="jPanel1" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                              <Component id="panelBackgroundImages" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="panelBackgroundImages" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -4174,7 +4171,7 @@
                       <Component id="panelCardImages" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelBackgroundImages" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="53" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4506,6 +4503,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cbCardRenderImageFallback" min="-2" max="-2" attributes="0"/>
                               <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -4517,7 +4515,9 @@
                           <Component id="cbCardRenderImageFallback" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -4537,6 +4537,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderShowReminderTextActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbCardRenderHideSetSymbol">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Hide set symbols on cards (more space on the type line for card types)"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCardRenderHideSetSymbolActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

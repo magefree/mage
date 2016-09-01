@@ -37,12 +37,7 @@ public class TextboxRuleParser {
     // if the ability is a loyalty ability, and returning an TextboxRule
     // representing that information, which can be used to render the rule in
     // the textbox of a card.
-    public static TextboxRule parse(CardView source, String rule) {
-        // Kill reminder text
-        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_REMINDER_TEXT, "false").equals("false")) {
-            rule = CardRendererUtils.killReminderText(rule);   
-        }
-        
+    public static TextboxRule parse(CardView source, String rule) {        
         // List of regions to apply
         ArrayList<TextboxRule.AttributeRegion> regions = new ArrayList<>();
         

@@ -36,6 +36,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.swing.ImageIcon;
 import mage.ObjectColor;
+import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
 import mage.view.CardView;
 import mage.view.PermanentView;
@@ -444,10 +445,14 @@ public class ModernCardRenderer extends CardRenderer {
     protected void drawTypeLine(Graphics2D g, int x, int y, int w, int h) {
         // Draw expansion symbol
         int expansionSymbolWidth;
-        if (cardView.isAbility()) {
-            expansionSymbolWidth = 0;
+        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_SET_SYMBOL, "false").equals("false")) {
+            if (cardView.isAbility()) {
+                expansionSymbolWidth = 0;
+            } else {
+                expansionSymbolWidth = drawExpansionSymbol(g, x, y, w, h);
+            }
         } else {
-            expansionSymbolWidth = drawExpansionSymbol(g, x, y, w, h);
+            expansionSymbolWidth = 0;
         }
         
         // Draw type line text
@@ -518,8 +523,10 @@ public class ModernCardRenderer extends CardRenderer {
             curY -= boxHeight;
         }
         
-        // Is it a walker?
-        if (cardView.getCardTypes().contains(CardType.PLANESWALKER)) {
+        // Is it a walker? (But don't draw the box if it's a non-permanent view
+        // of a walker without a starting loyalty (EG: Arlin Kord's flipped side).
+        if (cardView.getCardTypes().contains(CardType.PLANESWALKER)
+                && (cardView instanceof PermanentView || !cardView.getStartingLoyalty().equals("0"))) {
             // Draw the PW loyalty box
             int w = partWidth;
             int h = partWidth/2;
@@ -638,23 +645,36 @@ public class ModernCardRenderer extends CardRenderer {
                 AttributedString attributed = rule.generateAttributedString(font, fontItalic);
                 attributedRules.add(attributed);
             }
+            
+            // Get the new spacing for the small text
+            remaining = h;
+            if (hasKeywords) {
+                remaining -= drawSingleRule(g, keywordRulesAttributed, null, 0, 0, w, remaining, false);
+            }
+            for (TextboxRule rule: textboxRules) {
+                AttributedString attributed = rule.generateAttributedString(font, fontItalic);
+                attributedRules.add(attributed);
+                remaining -= drawSingleRule(g, attributed, rule, 0, 0, w, remaining, false);
+                if (remaining < 0) {
+                    useSmallFont = true;
+                    break;
+                }
+            }
         }
         
         // Do we have room for additional spacing between the parts of text?
         // If so, calculate the spacing based on how much space was left over
-        int spacing;
-        if (useSmallFont) {
-            spacing = 0;
-        } else {
-            spacing = (int)(remaining / (hasKeywords ? (textboxRules.size() + 2) : (textboxRules.size() + 1)));
-        }
+        int spacing = 
+                (int)(remaining / (hasKeywords ? 
+                        (textboxRules.size() + 2) : 
+                        (textboxRules.size() + 1)));
         
         // Do the actual draw
         loyaltyAbilityColorToggle = false;
         g.setColor(Color.black);
         int curY = y + spacing;
         if (hasKeywords) {
-            int adv = drawSingleRule(g, keywordRulesAttributed, null, x, y, w, h, true);
+            int adv = drawSingleRule(g, keywordRulesAttributed, null, x, curY, w, h, true);
             curY += adv + spacing;
             h -= adv;
         }
@@ -685,7 +705,7 @@ public class ModernCardRenderer extends CardRenderer {
     // Draw a single rule and returns the amount vertically advanced by, but
     // only if doDraw is true. If doDraw is false, just returns the vertical
     // advance if the rule were to be drawn.
-    private int drawSingleRule(Graphics2D g, AttributedString text, TextboxRule rule, int x, int y, int w, int h, boolean doDraw) {
+    private int drawSingleRule(Graphics2D g, AttributedString text, TextboxRule rule, int x, int y, int w, int h, boolean doDraw) {        
         // Inset, in case we are a leveler or loyalty ability
         int inset = 0;
         if (rule != null && rule.type == TextboxRuleType.LOYALTY) {

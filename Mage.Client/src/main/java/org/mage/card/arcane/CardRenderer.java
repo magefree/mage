@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
 import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.List;
+import mage.client.dialog.PreferencesDialog;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -140,11 +141,19 @@ public abstract class CardRenderer {
         
         // Translate the textbox text
         for (String rule: card.getRules()) {
-            TextboxRule tbRule = TextboxRuleParser.parse(card, rule);
-            if (tbRule.type == TextboxRuleType.SIMPLE_KEYWORD) {
-                textboxKeywords.add(tbRule);
-            } else {
-                textboxRules.add(tbRule);
+            // Kill reminder text
+            if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_REMINDER_TEXT, "false").equals("false")) {
+                rule = CardRendererUtils.killReminderText(rule).trim();
+            }
+            if (!rule.isEmpty()) {
+                TextboxRule tbRule = TextboxRuleParser.parse(card, rule);
+                if (tbRule.type == TextboxRuleType.SIMPLE_KEYWORD) {
+                    textboxKeywords.add(tbRule);
+                } else if (tbRule.text.isEmpty()) {
+                    // Nothing to do, rule is empty
+                } else {
+                    textboxRules.add(tbRule);
+                }
             }
         }
     }
@@ -281,8 +290,12 @@ public abstract class CardRenderer {
         Image setSymbol = ManaSymbols.getSetSymbolImage(cardView.getExpansionSetCode(), cardView.getRarity().getCode());
         int setSymbolWidth;
         if (setSymbol == null) {
+            // Don't draw anything when we don't have a set symbol
+            return 0;
+            /*
             // Just draw the as a code
-            String code = cardView.getExpansionSetCode().toUpperCase();
+            String code = cardView.getExpansionSetCode();
+            code = (code != null) ? code.toUpperCase() : "";
             FontMetrics metrics = g.getFontMetrics();
             setSymbolWidth = metrics.stringWidth(code);
             if (cardView.getRarity() == Rarity.COMMON) {
@@ -296,6 +309,7 @@ public abstract class CardRenderer {
                     5, 5);
             g.setColor(getRarityColor());
             g.drawString(code, x + w - setSymbolWidth, y + h - 3);
+            */
         } else {
             // Draw the set symbol
             int height = setSymbol.getHeight(null);

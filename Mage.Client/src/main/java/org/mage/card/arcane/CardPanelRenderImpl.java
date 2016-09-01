@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Map;
 import java.util.UUID;
 import mage.cards.action.ActionCallback;
@@ -16,9 +17,12 @@ import mage.constants.CardType;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
+import mage.view.StackAbilityView;
+import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
+import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.ImageCache;
 
 public class CardPanelRenderImpl extends CardPanel {
@@ -360,11 +364,31 @@ public class CardPanelRenderImpl extends CardPanel {
             cardImage = null;
         }
     }
+    
+    private BufferedImage getFaceDownImage() {
+        if (isPermanent()) {
+            if (((PermanentView) gameCard).isMorphed()) {
+                return ImageCache.getMorphImage();
+            } else {
+                return ImageCache.getManifestImage();
+            }
+        } else if (this.gameCard instanceof StackAbilityView) {
+            return ImageCache.getMorphImage();
+        } else {
+            return ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
+        }
+    }
 
     @Override
     public Image getImage() {
-        // Render impl never returns a card image
-        return artImage;
+        if (artImage != null) {
+            if (gameCard.isFaceDown()) {
+                return getFaceDownImage();
+            } else {
+                return ImageCache.getImageOriginal(gameCard);
+            }
+        }
+        return null;
     }
 
     @Override
