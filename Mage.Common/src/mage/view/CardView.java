@@ -159,7 +159,7 @@ public class CardView extends SimpleCardView {
      * @param storeZone if true the card zone will be set in the zone attribute.
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
-        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null);
+        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null, card.getTokenDescriptor());
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
         boolean showFaceUp = true;
@@ -291,6 +291,7 @@ public class CardView extends SimpleCardView {
             } else {
                 // a created token
                 this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
+                this.tokenDescriptor = ((PermanentToken) card).getTokenDescriptor();
             }
             //
             // set code und card number for token copies to get the image
@@ -332,7 +333,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(MageObject object) {
-        super(object.getId(), "", "0", false, "", true);
+        super(object.getId(), "", "0", false, "", true, "");
         this.name = object.getName();
         this.displayName = object.getName();
         if (object instanceof Permanent) {
@@ -376,7 +377,7 @@ public class CardView extends SimpleCardView {
     }
 
     protected CardView() {
-        super(null, "", "0", false, "", true);
+        super(null, "", "0", false, "", true, "");
     }
 
     public CardView(EmblemView emblem) {
@@ -393,7 +394,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(boolean empty) {
-        super(null, "", "0", false, "");
+        super(null, "", "0", false, "", "");
         if (!empty) {
             throw new IllegalArgumentException("Not supported.");
         }
@@ -442,7 +443,7 @@ public class CardView extends SimpleCardView {
     }
 
     CardView(Token token) {
-        super(token.getId(), "", "0", false, "");
+        super(token.getId(), "", "0", false, "", "");
         this.isToken = true;
         this.id = token.getId();
         this.name = token.getName();
@@ -459,6 +460,7 @@ public class CardView extends SimpleCardView {
         this.rarity = Rarity.NA;
         this.type = token.getTokenType();
         this.tokenSetCode = token.getOriginalExpansionSetCode();
+        this.tokenDescriptor = token.getTokenDescriptor();
     }
 
     protected final void setTargets(Targets targets) {

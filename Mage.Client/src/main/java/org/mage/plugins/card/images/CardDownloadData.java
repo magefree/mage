@@ -12,6 +12,7 @@ public class CardDownloadData {
     private String downloadName;
     private String set;
     private String tokenSetCode;
+    private String tokenDescriptor;
     private String collectorId;
     private Integer type;
     private boolean token;
@@ -23,15 +24,15 @@ public class CardDownloadData {
     private boolean usesVariousArt;
     private boolean isType2;
 
-    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode) {
-        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, false);
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor) {
+        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor, false);
     }
 
-    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, boolean token) {
-        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, token, false, false);
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor, boolean token) {
+        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor, token, false, false);
     }
 
-    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, boolean token, boolean twoFacedCard, boolean secondSide) {
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor, boolean token, boolean twoFacedCard, boolean secondSide) {
         this.name = name;
         this.set = set;
         this.collectorId = collectorId;
@@ -41,6 +42,7 @@ public class CardDownloadData {
         this.twoFacedCard = twoFacedCard;
         this.secondSide = secondSide;
         this.tokenSetCode = tokenSetCode;
+        this.tokenDescriptor = tokenDescriptor;
     }
 
     public CardDownloadData(final CardDownloadData card) {
@@ -117,7 +119,7 @@ public class CardDownloadData {
     public String getSet() {
         return set;
     }
-
+    
     public void setSet(String set) {
         this.set = set;
     }
@@ -130,6 +132,13 @@ public class CardDownloadData {
         this.tokenSetCode = tokenSetCode;
     }
 
+    public String getTokenDescriptor() {
+        return tokenDescriptor;
+    }
+
+    public void setTokenDescriptor(String tokenDescriptor) {
+        this.tokenDescriptor = tokenDescriptor;
+    }    
     public boolean isToken() {
         return token;
     }
