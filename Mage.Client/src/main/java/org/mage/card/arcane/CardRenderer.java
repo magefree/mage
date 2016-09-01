@@ -349,12 +349,11 @@ public abstract class CardRenderer {
     // Get a string representing the type line
     protected String getCardTypeLine() {
         if (cardView.isAbility()) {
-            switch (cardView.getAbilityType()) {
-            case TRIGGERED:
+            if (AbilityType.TRIGGERED.equals(cardView.getAbilityType())) {
                 return "Triggered Ability";
-            case ACTIVATED:
+            } else if (AbilityType.ACTIVATED.equals(cardView.getAbilityType())) {
                 return "Activated Ability";
-            default:
+            } else {
                 return "??? Ability";
             }
         } else {
