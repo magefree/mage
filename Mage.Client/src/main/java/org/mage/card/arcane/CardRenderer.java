@@ -18,9 +18,11 @@ import java.awt.image.BufferedImage;
 import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.List;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.Counter;
+import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -108,6 +110,10 @@ public abstract class CardRenderer {
     protected int cardWidth;
     protected int cardHeight;
     
+    // Is it selectable / selected
+    protected boolean isChoosable;
+    protected boolean isSelected;
+    
     // Radius of the corners of the cards
     protected static float CORNER_RADIUS_FRAC = 0.1f; //x cardWidth
     protected static int CORNER_RADIUS_MIN = 3;
@@ -164,17 +170,21 @@ public abstract class CardRenderer {
     // The Draw Method
     // The draw method takes the information caculated by the constructor
     // and uses it to draw to a concrete size of card and graphics.
-    public void draw(Graphics2D g, int cardWidth, int cardHeight) {
+    public void draw(Graphics2D g, CardPanelAttributes attribs) {
         // Pre template method layout, to calculate shared layout info
-        layout(cardWidth, cardHeight);
+        layout(attribs.cardWidth, attribs.cardHeight);
+        isSelected = attribs.isSelected;
+        isChoosable = attribs.isChoosable;
         
         // Call the template methods
         drawBorder(g);
         drawBackground(g);
         drawArt(g);
         drawFrame(g);
-        drawOverlays(g);
-        drawCounters(g);
+        if (!cardView.isAbility()) {
+            drawOverlays(g);
+            drawCounters(g);
+        }
     }
     
     // Template methods to be implemented by sub classes
@@ -196,7 +206,7 @@ public abstract class CardRenderer {
     
     // Draw summoning sickness overlay, and possibly other overlays
     protected void drawOverlays(Graphics2D g) {
-        if (cardView instanceof PermanentView) {
+        if (CardUtil.isCreature(cardView) && cardView instanceof PermanentView) {
             if (((PermanentView)cardView).hasSummoningSickness()) {
                 int x1 = (int)(0.2*cardWidth);
                 int x2 = (int)(0.8*cardWidth);
@@ -229,7 +239,7 @@ public abstract class CardRenderer {
     
     // Draw +1/+1 and other counters     
     protected void drawCounters(Graphics2D g) {
-        int xPos = (int)(0.7*cardWidth);
+        int xPos = (int)(0.65*cardWidth);
         int yPos = (int)(0.15*cardHeight);
         if (cardView.getCounters() != null) {
             for (CounterView v: cardView.getCounters()) {
@@ -245,7 +255,7 @@ public abstract class CardRenderer {
                     } else {
                         p = OTHER_COUNTER_POLY;              
                     }
-                    double scale = (0.1*0.18*cardWidth);
+                    double scale = (0.1*0.25*cardWidth);
                     Graphics2D g2 = (Graphics2D)g.create();
                     g2.translate(xPos, yPos);
                     g2.scale(scale, scale);
@@ -258,7 +268,7 @@ public abstract class CardRenderer {
                     int strW = g2.getFontMetrics().stringWidth(cstr);
                     g2.drawString(cstr, 5 - strW/2, 8);
                     g2.dispose();
-                    yPos += ((int)(0.22*cardWidth));
+                    yPos += ((int)(0.30*cardWidth));
                 }
             }
         }
@@ -324,20 +334,31 @@ public abstract class CardRenderer {
     
     // Get a string representing the type line
     protected String getCardTypeLine() {
-        StringBuilder sbType = new StringBuilder();
-        for (String superType : cardView.getSuperTypes()) {
-            sbType.append(superType).append(" ");
-        }
-        for (CardType cardType : cardView.getCardTypes()) {
-            sbType.append(cardType.toString()).append(" ");
-        }
-        if (cardView.getSubTypes().size() > 0) {
-            sbType.append("- ");
-            for (String subType : cardView.getSubTypes()) {
-                sbType.append(subType).append(" ");
+        if (cardView.isAbility()) {
+            switch (cardView.getAbilityType()) {
+            case TRIGGERED:
+                return "Triggered Ability";
+            case ACTIVATED:
+                return "Activated Ability";
+            default:
+                return "??? Ability";
             }
+        } else {
+            StringBuilder sbType = new StringBuilder();
+            for (String superType : cardView.getSuperTypes()) {
+                sbType.append(superType).append(" ");
+            }
+            for (CardType cardType : cardView.getCardTypes()) {
+                sbType.append(cardType.toString()).append(" ");
+            }
+            if (cardView.getSubTypes().size() > 0) {
+                sbType.append("- ");
+                for (String subType : cardView.getSubTypes()) {
+                    sbType.append(subType).append(" ");
+                }
+            }
+            return sbType.toString();
         }
-        return sbType.toString();
     }
     
     // Set the card art image (CardPanel will give it to us when it

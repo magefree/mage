@@ -223,7 +223,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             // this calls updateImage
             toggleTransformed();
         } else {
-            updateImage();
+            updateArtImage();
         }
     }
 
@@ -372,7 +372,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             setBounds(x - cardXOffset, y - cardYOffset, getWidth(), getHeight());
             return;
         }
-
+        
         this.cardWidth = cardWidth;
         this.symbolWidth = cardWidth / 7;
         this.cardHeight = cardHeight;
@@ -389,8 +389,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             int height = -yOffset + rotCenterY + rotCenterToBottomCorner;
             setBounds(x + xOffset, y + yOffset, width, height);
         } else {
-            cardXOffset = 5;
-            cardYOffset = 5;
+            cardXOffset = 0;
+            cardYOffset = 0;
             int width = cardXOffset * 2 + cardWidth;
             int height = cardYOffset * 2 + cardHeight;
             setBounds(x - cardXOffset, y - cardYOffset, width, height);
@@ -538,6 +538,11 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         // Update panel attributes
         this.isChoosable = card.isChoosable();
         this.isSelected = card.isSelected();
+        
+        // Update art?
+        boolean mustUpdateArt = 
+                (!gameCard.getName().equals(card.getName())) ||
+                (gameCard.isFaceDown() != card.isFaceDown());
 
         // Set the new card
         this.gameCard = card;
@@ -546,8 +551,12 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         String cardType = getType(card);
         tooltipText.setText(getText(cardType, card));
         
-        // Update the image and transform circle if needed
-        updateImage();
+        // Update the image
+        if (mustUpdateArt) {
+            updateArtImage();
+        }
+        
+        // Update transform circle
         if (card.canTransform()) {
             BufferedImage transformIcon;
             if (isTransformed() || card.isTransformed()) {
@@ -783,7 +792,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         String temp = this.gameCard.getAlternateName();
         this.gameCard.setAlternateName(this.gameCard.getOriginalName());
         this.gameCard.setOriginalName(temp);
-        updateImage();
+        updateArtImage();
     }
 
     @Override

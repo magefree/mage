@@ -503,7 +503,7 @@ public class CardPanelComponentImpl extends CardPanel {
         
         // Update image
         if (imagePanel != null && imagePanel.getSrcImage() != null) {
-            updateImage();
+            updateArtImage();
         }
     }
 
@@ -523,15 +523,15 @@ public class CardPanelComponentImpl extends CardPanel {
 
     ///////////////////////////////////////////////////////////
     // Image updating code
-    private int updateImageStamp;
+    private int updateArtImageStamp;
 
     @Override
-    public void updateImage() {
+    public void updateArtImage() {
         tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
         flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
 
         //final CardView gameCard = this.gameCard;
-        final int stamp = ++updateImageStamp;
+        final int stamp = ++updateArtImageStamp;
 
         Util.threadPool.submit(new Runnable() {
             @Override
@@ -548,7 +548,7 @@ public class CardPanelComponentImpl extends CardPanel {
                     UI.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            if (stamp == updateImageStamp) {
+                            if (stamp == updateArtImageStamp) {
                                 hasImage = srcImage != null;
                                 setText(gameCard);
                                 setImage(srcImage);

@@ -222,7 +222,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     }
 
     @Override
-    public void updateImage() {
+    public void updateArtImage() {
 
     }
 

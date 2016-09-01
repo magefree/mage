@@ -42,7 +42,6 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.effects.PlaneswalkerRedirectionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.mock.MockCard;
@@ -190,7 +189,7 @@ public class CardInfo {
                 }
             }
             if (this.startingLoyalty == null) {
-                Logger.getLogger(CardInfo.class).warn("Planeswalker `" + card.getName() + "` missing starting loyalty");
+                //Logger.getLogger(CardInfo.class).warn("Planeswalker `" + card.getName() + "` missing starting loyalty");
                 this.startingLoyalty = "";
             }
         } else {

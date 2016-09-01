@@ -14,6 +14,8 @@ import mage.cards.action.ActionCallback;
 import mage.client.util.ImageCaches;
 import mage.constants.CardType;
 import mage.view.CardView;
+import mage.view.CounterView;
+import mage.view.PermanentView;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import static org.mage.plugins.card.constants.Constants.THUMBNAIL_SIZE_FULL;
@@ -26,6 +28,9 @@ public class CardPanelRenderImpl extends CardPanel {
     private static boolean cardViewEquals(CardView a, CardView b) {
         if (a == b) {
             return true;
+        }
+        if (a.getClass() != b.getClass()) {
+            return false;
         }
         if (!a.getName().equals(b.getName())) {
             return false;
@@ -60,6 +65,28 @@ public class CardPanelRenderImpl extends CardPanel {
         if (!a.getExpansionSetCode().equals(b.getExpansionSetCode())) {
             return false;
         }
+        if (a.getCounters() == null) {
+            if (b.getCounters() != null) {
+                return false;
+            }
+        } else if (!a.getCounters().equals(b.getCounters())) {
+            return false;
+        }
+        if (a.isFaceDown() != b.isFaceDown()) {
+            return false;
+        }
+        if ((a instanceof PermanentView)) {
+            PermanentView aa = (PermanentView)a;
+            PermanentView bb = (PermanentView)b;
+            if (aa.hasSummoningSickness() != bb.hasSummoningSickness()) {
+                // Note: b must be a permanentview too as we aleady checked that classes
+                // are the same for a and b
+                return false;
+            }
+            if (aa.getDamage() != bb.getDamage()) {
+                return false;
+            }
+        }
         return true;       
     }
     
@@ -91,6 +118,11 @@ public class CardPanelRenderImpl extends CardPanel {
             sb.append((char)(isChoosable ? 1 : 0));
             sb.append((char)(this.view.isPlayable() ? 1 : 0));
             sb.append((char)(this.view.isCanAttack() ? 1 : 0));
+            sb.append((char)(this.view.isFaceDown() ? 1 : 0));
+            if (this.view instanceof PermanentView) {
+                sb.append((char)(((PermanentView)this.view).hasSummoningSickness() ? 1 : 0));
+                sb.append((char)(((PermanentView)this.view).getDamage()));
+            }
             sb.append(this.view.getName());
             sb.append(this.view.getPower());
             sb.append(this.view.getToughness());
@@ -111,6 +143,11 @@ public class CardPanelRenderImpl extends CardPanel {
             }
             for (String s: this.view.getRules()) {
                 sb.append(s);
+            }
+            if (this.view.getCounters() != null) {
+                for (CounterView v: this.view.getCounters()) {
+                    sb.append(v.getName()).append(v.getCount());
+                }
             }
             return sb.toString().hashCode();    
         }
@@ -207,7 +244,7 @@ public class CardPanelRenderImpl extends CardPanel {
         }
         
         // And draw the image we now have
-        g.drawImage(cardImage, 0, 0, null);
+        g.drawImage(cardImage, getCardXOffset(), getCardYOffset(), null);
     }
     
     /**
@@ -217,33 +254,34 @@ public class CardPanelRenderImpl extends CardPanel {
     private BufferedImage renderCard() {
         int cardWidth = getCardWidth();
         int cardHeight = getCardHeight();
-        int cardXOffset = getCardXOffset();
-        int cardYOffset = getCardYOffset();
 
         // Create image to render to
         BufferedImage image = 
-                GraphicsUtilities.createCompatibleTranslucentImage(getWidth(), getHeight());
+                GraphicsUtilities.createCompatibleTranslucentImage(cardWidth, cardHeight);
         Graphics2D g2d = image.createGraphics();
         
         // Render with Antialialsing
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+        // Attributes
+        CardPanelAttributes attribs = 
+                new CardPanelAttributes(cardWidth, cardHeight, isChoosable(), isSelected());
+        
         // Draw card itself
-        g2d.translate(cardXOffset, cardYOffset);
-        cardRenderer.draw(g2d, cardWidth - cardXOffset, cardHeight - cardYOffset);
-        g2d.translate(-cardXOffset, -cardYOffset);
+        cardRenderer.draw(g2d, attribs);
         
         // Done
         g2d.dispose();
         return image;
     }
 
-    private int updateImageStamp;
+    private int updateArtImageStamp;
     @Override
-    public void updateImage() {
+    public void updateArtImage() {
         // Invalidate
         artImage = null;
         cardImage = null;
+        cardRenderer.setArtImage(null);
         
         // Stop animation
         tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
@@ -251,43 +289,49 @@ public class CardPanelRenderImpl extends CardPanel {
         
         // Schedule a repaint
         repaint();
+        
+        // See if the image is already loaded
+        //artImage = ImageCache.tryGetImage(gameCard, getCardWidth(), getCardHeight());
+        //this.cardRenderer.setArtImage(artImage);
 
         // Submit a task to draw with the card art when it arrives
-        final int stamp = ++updateImageStamp;
-        Util.threadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final BufferedImage srcImage;
-                    if (gameCard.isFaceDown()) {
-                        // Nothing to do
-                        srcImage = null;
-                    } else if (getCardWidth() > THUMBNAIL_SIZE_FULL.width) {
-                        srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
-                    } else {
-                        srcImage = ImageCache.getThumbnail(gameCard);
-                    }
-                    UI.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (stamp == updateImageStamp) {
-                                CardPanelRenderImpl.this.artImage = srcImage;
-                                CardPanelRenderImpl.this.cardRenderer.setArtImage(srcImage);
-                                if (srcImage != null) {
-                                    // Invalidate and repaint
-                                    CardPanelRenderImpl.this.cardImage = null;
-                                    repaint();
+        if (artImage == null) {
+            final int stamp = ++updateArtImageStamp;
+            Util.threadPool.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        final BufferedImage srcImage;
+                        if (gameCard.isFaceDown()) {
+                            // Nothing to do
+                            srcImage = null;
+                        } else if (getCardWidth() > THUMBNAIL_SIZE_FULL.width) {
+                            srcImage = ImageCache.getImage(gameCard, getCardWidth(), getCardHeight());
+                        } else {
+                            srcImage = ImageCache.getThumbnail(gameCard);
+                        }
+                        UI.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (stamp == updateArtImageStamp) {
+                                    artImage = srcImage;
+                                    cardRenderer.setArtImage(srcImage);
+                                    if (srcImage != null) {
+                                        // Invalidate and repaint
+                                        cardImage = null;
+                                        repaint();
+                                    }
                                 }
                             }
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } catch (Error err) {
-                    err.printStackTrace();
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } catch (Error err) {
+                        err.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
     
     @Override
@@ -296,7 +340,9 @@ public class CardPanelRenderImpl extends CardPanel {
         super.update(card);
         
         // Update renderer
+        cardImage = null;
         cardRenderer = new ModernCardRenderer(gameCard, isTransformed());
+        cardRenderer.setArtImage(artImage);
         
         // Repaint
         repaint();
@@ -304,10 +350,15 @@ public class CardPanelRenderImpl extends CardPanel {
     
     @Override
     public void setCardBounds(int x, int y, int cardWidth, int cardHeight) {
+        int oldCardWidth = getCardWidth();
+        int oldCardHeight = getCardHeight();
+        
         super.setCardBounds(x, y, cardWidth, cardHeight);
         
-        // Rerender
-        cardImage = null;
+        // Rerender if card size changed
+        if (getCardWidth() != oldCardWidth || getCardHeight() != oldCardHeight) {
+            cardImage = null;
+        }
     }
 
     @Override

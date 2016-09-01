@@ -8,6 +8,7 @@ package org.mage.card.arcane;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -22,7 +23,10 @@ import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
 import java.awt.font.TextMeasurer;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.URL;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
@@ -35,6 +39,7 @@ import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.view.CardView;
 import mage.view.PermanentView;
+import net.java.balloontip.styles.RoundedBalloonStyle;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRenderer;
 import org.mage.card.arcane.CardRendererUtils;
@@ -82,6 +87,20 @@ public class ModernCardRenderer extends CardRenderer {
         BufferedImage img = CardRendererUtils.toBufferedImage(icon.getImage());
         return new TexturePaint(img, new Rectangle(0, 0, img.getWidth(), img.getHeight()));
     }
+    private static Font loadFont(String name) {
+        try {
+            return Font.createFont(
+                    Font.TRUETYPE_FONT, 
+                    ModernCardRenderer.class.getResourceAsStream("/cardrender/" + name + ".ttf"));
+        } catch (IOException e) {
+            LOGGER.info("Failed to load font `" + name + "`, couldn't find resource.");
+        } catch (FontFormatException e) {
+            LOGGER.info("Failed to load font `" + name + "`, bad format.");
+        }
+        return new Font("Arial", Font.PLAIN, 1);
+    }
+    public static Font BASE_BELEREN_FONT = loadFont("beleren-bold");
+    
     public static Paint BG_TEXTURE_WHITE    = loadBackgroundTexture("white");
     public static Paint BG_TEXTURE_BLUE     = loadBackgroundTexture("blue");
     public static Paint BG_TEXTURE_BLACK    = loadBackgroundTexture("black");
@@ -152,6 +171,7 @@ public class ModernCardRenderer extends CardRenderer {
     
     // How far down the card is the type line placed?
     protected static float TYPE_LINE_Y_FRAC = 0.57f; // x cardHeight
+    protected static float TYPE_LINE_Y_FRAC_TOKEN = 0.70f;
     protected int typeLineY;
     
     // How large is the box text, and how far is it down the boxes
@@ -195,17 +215,21 @@ public class ModernCardRenderer extends CardRenderer {
                 BOX_HEIGHT_FRAC * cardHeight);
         
         // Type line at
-        typeLineY = (int)(TYPE_LINE_Y_FRAC * cardHeight);
+        if (cardView.isToken()) {
+            typeLineY = (int)(TYPE_LINE_Y_FRAC_TOKEN * cardHeight);
+        } else {
+            typeLineY = (int)(TYPE_LINE_Y_FRAC * cardHeight);
+        }
         
         // Box text height
         boxTextHeight = getTextHeightForBoxHeight(boxHeight);
         boxTextOffset = (boxHeight - boxTextHeight)/2;
-        boxTextFont = new Font("Beleren", Font.PLAIN, boxTextHeight);
+        boxTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, boxTextHeight);
         
         // Box text height
         ptTextHeight = getPTTextHeightForLineHeight(boxHeight);
         ptTextOffset = (boxHeight - ptTextHeight)/2;
-        ptTextFont = new Font("Beleren", Font.PLAIN, ptTextHeight);
+        ptTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, ptTextHeight);
     }
     
     @Override
@@ -213,6 +237,33 @@ public class ModernCardRenderer extends CardRenderer {
         // Draw border as one rounded rectangle
         g.setColor(Color.black);
         g.fillRoundRect(0, 0, cardWidth, cardHeight, cornerRadius, cornerRadius);
+        
+        // Selection Borders
+        Color borderColor;
+        if (isSelected) {
+            borderColor = Color.green;
+        } else if (isChoosable) {
+            borderColor = new Color(250, 250, 0, 230);
+        } else if (cardView.isPlayable()) {
+            borderColor = new Color(153, 102, 204, 200);
+        } else if (cardView instanceof PermanentView && ((PermanentView)cardView).isCanAttack()) {
+            borderColor = new Color(0, 0, 255, 230);
+        } else {
+            borderColor = null;
+        }
+        if (borderColor != null) {
+            float hwidth = borderWidth / 2.0f;
+            Graphics2D g2 = (Graphics2D)g.create();
+            g2.setColor(borderColor);
+            g2.setStroke(new BasicStroke(borderWidth));
+            RoundRectangle2D.Float rect 
+                    = new RoundRectangle2D.Float(
+                            hwidth, hwidth,
+                            cardWidth - borderWidth, cardHeight - borderWidth,
+                            cornerRadius, cornerRadius);
+            g2.draw(rect);
+            g2.dispose();
+        }
     }
     
     @Override
@@ -247,7 +298,7 @@ public class ModernCardRenderer extends CardRenderer {
     
     @Override
     protected void drawArt(Graphics2D g) {
-        if (artImage != null) {
+        if (artImage != null && !cardView.isFaceDown()) {
             int imgWidth = artImage.getWidth();
             int imgHeight = artImage.getHeight();
             BufferedImage subImg = 
@@ -354,14 +405,29 @@ public class ModernCardRenderer extends CardRenderer {
     // Draw the name line
     protected void drawNameLine(Graphics2D g, int x, int y, int w, int h) {
         // Width of the mana symbols
-        int manaCostWidth = CardRendererUtils.getManaCostWidth(manaCostString, boxTextHeight);
-        
+        int manaCostWidth;
+        if (cardView.isAbility()) {
+            manaCostWidth = 0;
+        } else {
+            manaCostWidth = CardRendererUtils.getManaCostWidth(manaCostString, boxTextHeight);
+        }
+                
         // Available width for name. Add a little bit of slop so that one character
         // can partially go underneath the mana cost
         int availableWidth = w - manaCostWidth + 2;
         
         // Draw the name
-        AttributedString str = new AttributedString(cardView.getName());
+        String nameStr;
+        if (cardView.isFaceDown()) {
+            if (cardView instanceof PermanentView && ((PermanentView)cardView).isManifested()) {
+                nameStr = "Manifest: " + cardView.getName();   
+            } else {
+                nameStr = "Morph: " + cardView.getName();
+            }
+        } else {
+            nameStr = cardView.getName();
+        }
+        AttributedString str = new AttributedString(nameStr);
         str.addAttribute(TextAttribute.FONT, boxTextFont);
         TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
         TextLayout layout = measure.getLayout(0, measure.getLineBreakIndex(0, availableWidth));
@@ -369,13 +435,20 @@ public class ModernCardRenderer extends CardRenderer {
         layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);
     
         // Draw the mana symbols
-        ManaSymbols.draw(g, manaCostString, x + w - manaCostWidth, y + boxTextOffset, boxTextHeight);
+        if (!cardView.isAbility() && !cardView.isFaceDown()) {
+            ManaSymbols.draw(g, manaCostString, x + w - manaCostWidth, y + boxTextOffset, boxTextHeight);
+        }
     }
     
     // Draw the type line (color indicator, types, and expansion symbol)
     protected void drawTypeLine(Graphics2D g, int x, int y, int w, int h) {
         // Draw expansion symbol
-        int expansionSymbolWidth = drawExpansionSymbol(g, x, y, w, h);
+        int expansionSymbolWidth;
+        if (cardView.isAbility()) {
+            expansionSymbolWidth = 0;
+        } else {
+            expansionSymbolWidth = drawExpansionSymbol(g, x, y, w, h);
+        }
         
         // Draw type line text
         int availableWidth = w - expansionSymbolWidth + 1;
@@ -387,16 +460,23 @@ public class ModernCardRenderer extends CardRenderer {
             types = types.replace("Legendary", "L.");
         }
         
-        AttributedString str = new AttributedString(types);
-        str.addAttribute(TextAttribute.FONT, boxTextFont);
-        TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
-        TextLayout layout = measure.getLayout(0, measure.getLineBreakIndex(0, availableWidth));
-        g.setColor(getBoxTextColor());
-        layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);        
+        if (!types.isEmpty()) {
+            AttributedString str = new AttributedString(types);
+            str.addAttribute(TextAttribute.FONT, boxTextFont);
+            TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
+            TextLayout layout = measure.getLayout(0, measure.getLineBreakIndex(0, availableWidth));
+            g.setColor(getBoxTextColor());
+            layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);   
+        }
     }
     
     // Draw the P/T and/or Loyalty boxes
     protected void drawBottomRight(Graphics2D g, Paint borderPaint, Color fill) {
+        // No bottom right for abilities
+        if (cardView.isAbility()) {
+            return;
+        }
+        
         // Where to start drawing the things
         int curY = cardHeight - (int)(0.03f*cardHeight);
         
@@ -492,6 +572,20 @@ public class ModernCardRenderer extends CardRenderer {
             
             // Advance
             curY -= (int)(1.2*y);
+        }
+        
+        // does it have damage on it?
+        if ((cardView instanceof PermanentView) && ((PermanentView)cardView).getDamage() > 0) {
+            int x = cardWidth - partWidth - borderWidth;
+            int y = curY - boxHeight;
+            String damage = "" + ((PermanentView)cardView).getDamage();
+            g.setFont(ptTextFont);
+            int txWidth = g.getFontMetrics().stringWidth(damage);
+            g.setColor(Color.red);
+            g.fillRect(x, y, partWidth, boxHeight);
+            g.setColor(Color.white);
+            g.drawRect(x, y, partWidth, boxHeight);
+            g.drawString(damage, x + (partWidth - txWidth)/2, curY - 1);
         }
     }
     
@@ -763,6 +857,8 @@ public class ModernCardRenderer extends CardRenderer {
     protected Color getBoxTextColor() {
         if (isNightCard()) {
             return Color.white;
+        } else if (cardView.isAbility()) {
+            return Color.white;
         } else {
             return Color.black;
         }
@@ -800,8 +896,10 @@ public class ModernCardRenderer extends CardRenderer {
     }
     
     // Get the box color for the given colors
-    protected static Color getBoxColor(ObjectColor colors, Collection<CardType> types, boolean isNightCard) {
-        if (colors.getColorCount() == 2 && types.contains(CardType.LAND)) {
+    protected Color getBoxColor(ObjectColor colors, Collection<CardType> types, boolean isNightCard) {
+        if (cardView.isAbility()) {
+            return Color.BLACK;
+        } else if (colors.getColorCount() == 2 && types.contains(CardType.LAND)) {
             // Special case for two color lands. Boxes should be normal land colored
             // rather than multicolor. Three or greater color lands use a multi-color
             // box as normal.

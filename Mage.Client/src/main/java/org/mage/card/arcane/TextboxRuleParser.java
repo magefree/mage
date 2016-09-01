@@ -17,6 +17,7 @@ import java.util.Deque;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import mage.client.dialog.PreferencesDialog;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 
@@ -37,6 +38,11 @@ public class TextboxRuleParser {
     // representing that information, which can be used to render the rule in
     // the textbox of a card.
     public static TextboxRule parse(CardView source, String rule) {
+        // Kill reminder text
+        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_REMINDER_TEXT, "false").equals("false")) {
+            rule = CardRendererUtils.killReminderText(rule);   
+        }
+        
         // List of regions to apply
         ArrayList<TextboxRule.AttributeRegion> regions = new ArrayList<>();
         
