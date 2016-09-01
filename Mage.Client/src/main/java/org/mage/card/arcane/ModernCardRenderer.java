@@ -664,10 +664,14 @@ public class ModernCardRenderer extends CardRenderer {
         
         // Do we have room for additional spacing between the parts of text?
         // If so, calculate the spacing based on how much space was left over
-        int spacing = 
-                (int)(remaining / (hasKeywords ? 
-                        (textboxRules.size() + 2) : 
-                        (textboxRules.size() + 1)));
+        int spacing;
+        if (remaining <= 0) {
+            spacing = 0;
+        } else {
+            spacing = (int)(remaining / (hasKeywords ?
+                    (textboxRules.size() + 2) :
+                    (textboxRules.size() + 1)));
+        }
         
         // Do the actual draw
         loyaltyAbilityColorToggle = false;
