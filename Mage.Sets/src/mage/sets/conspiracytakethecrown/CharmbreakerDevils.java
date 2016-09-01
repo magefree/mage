@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.conspiracytakethecrown;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
+import java.util.UUID;
 
 /**
- * @author noxx
+ *
+ * @author fireshoes
  */
-public class NoControlledCreatureCondition implements Condition {
+public class CharmbreakerDevils extends mage.sets.innistrad.CharmbreakerDevils {
 
-    private static NoControlledCreatureCondition fInstance = new NoControlledCreatureCondition();
+    public CharmbreakerDevils(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = "155";
+        this.expansionSetCode = "CN2";
+    }
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public static Condition getInstance() {
-        return fInstance;
+    public CharmbreakerDevils(final CharmbreakerDevils card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().countAll(filter, source.getControllerId(), game) == 0;
+    public CharmbreakerDevils copy() {
+        return new CharmbreakerDevils(this);
     }
 }

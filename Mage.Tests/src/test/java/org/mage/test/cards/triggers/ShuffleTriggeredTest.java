@@ -65,6 +65,8 @@ public class ShuffleTriggeredTest extends CardTestPlayerBase {
      * Wenn ich mit Knowledge Exploitation einen Gegner seine Bibliothek mischen
      * lasse, dann triggert Widespread Panic für ihn (sollte garnicht triggern).
      * Bei Bribery ist es genauso.
+     * 
+     * If I have an opponent shuffle his library using Knowledge Exploitation, Widespread Panic triggers for him (shoudn't trigger at all). Same thing with Bribery.
      */
     @Test
     public void testWidespreadPanicDoesNotTriggerIfOpponentShufflesPlayersLibrary() {

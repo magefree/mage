@@ -29,18 +29,13 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.common.continuous.ActivateAbilitiesAnyTimeYouCouldCastInstantEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
 
 /**
  *
@@ -57,7 +52,7 @@ public class LeoninShikari extends CardImpl {
         this.toughness = new MageInt(2);
 
         // You may activate equip abilities any time you could cast an instant.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeoninShikariEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(EquipAbility.class, "equip abilities")));
     }
 
     public LeoninShikari(final LeoninShikari card) {
@@ -67,37 +62,5 @@ public class LeoninShikari extends CardImpl {
     @Override
     public LeoninShikari copy() {
         return new LeoninShikari(this);
-    }
-}
-
-class LeoninShikariEffect extends AsThoughEffectImpl {
-
-    LeoninShikariEffect() {
-        super(AsThoughEffectType.ACTIVATE_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may activate equip abilities any time you could cast an instant";
-    }
-
-    LeoninShikariEffect(final LeoninShikariEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public LeoninShikariEffect copy() {
-        return new LeoninShikariEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game) {
-        return affectedAbility.getControllerId().equals(source.getControllerId()) && affectedAbility instanceof EquipAbility;
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return false; // Not used 
     }
 }

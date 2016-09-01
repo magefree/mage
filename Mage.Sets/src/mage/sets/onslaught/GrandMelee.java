@@ -45,8 +45,8 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public class GrandMelee extends CardImpl {
 
-    public GrandMelee(UUID ownerID) {
-        super(ownerID, 211, "Grand Melee", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
+    public GrandMelee(UUID ownerId) {
+        super(ownerId, 211, "Grand Melee", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "ONS";
 
         // All creatures attack each turn if able.

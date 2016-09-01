@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.conspiracytakethecrown;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
+import java.util.UUID;
 
 /**
- * @author nantuko
+ *
+ * @author fireshoes
  */
-public class NoCreatureCondition implements Condition {
-    
-    private static final NoCreatureCondition fInstance = new NoCreatureCondition();
+public class CovenantOfMinds extends mage.sets.shardsofalara.CovenantOfMinds {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    public CovenantOfMinds(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = "105";
+        this.expansionSetCode = "CN2";
+    }
 
-    public static Condition getInstance() {
-        return fInstance;
+    public CovenantOfMinds(final CovenantOfMinds card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 0;
+    public CovenantOfMinds copy() {
+        return new CovenantOfMinds(this);
     }
 }

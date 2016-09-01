@@ -25,34 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.conspiracytakethecrown;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
+import java.util.UUID;
 
 /**
- * @author noxx
+ *
+ * @author fireshoes
  */
-public class OneControlledCreatureCondition implements Condition {
+public class Guttersnipe extends mage.sets.returntoravnica.Guttersnipe {
 
-    private static final OneControlledCreatureCondition fInstance = new OneControlledCreatureCondition();
+    public Guttersnipe(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = "162";
+        this.expansionSetCode = "CN2";
+    }
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public static Condition getInstance() {
-        return fInstance;
+    public Guttersnipe(final Guttersnipe card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().countAll(filter, source.getControllerId(), game) == 1;
+    public Guttersnipe copy() {
+        return new Guttersnipe(this);
     }
-
-    @Override
-    public String toString() {
-        return "you control exactly one creature";
-    }
-
 }

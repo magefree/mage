@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -62,7 +63,7 @@ public class LurkingInformant extends CardImpl {
 
         // <i>({UB} can be paid with either {U} or {B}.)</i>
         // {2}, {tap}: Look at the top card of target player's library. You may put that card into that player's graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LurkingInformantEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryTopCardTargetPlayerEffect(1, true), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -76,43 +77,4 @@ public class LurkingInformant extends CardImpl {
     public LurkingInformant copy() {
         return new LurkingInformant(this);
     }
-}
-
-class LurkingInformantEffect extends OneShotEffect {
-
-    public LurkingInformantEffect() {
-        super(Outcome.Detriment);
-        staticText = "Look at the top card of target player's library. You may put that card into his or her graveyard";
-    }
-
-    public LurkingInformantEffect(final LurkingInformantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LurkingInformantEffect copy() {
-        return new LurkingInformantEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (controller != null && player != null) {
-            Card card = player.getLibrary().getFromTop(game);
-            if (card != null) {
-                Cards cards = new CardsImpl();
-                cards.add(card);
-                controller.lookAtCards("Lurking Informant", cards, game);
-                if (controller.chooseUse(outcome, "Do you wish to put card into the player's graveyard?", source, game)) {
-                    controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                } else {
-                    game.informPlayers(controller.getLogName() + " puts the card back on top of the library.");
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

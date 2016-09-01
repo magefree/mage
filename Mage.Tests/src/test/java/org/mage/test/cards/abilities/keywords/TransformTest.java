@@ -27,6 +27,7 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -320,5 +321,21 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Eldrazi Displacer", 1);
         assertPermanentCount(playerA, "Avacyn, the Purifier", 0);
         assertPermanentCount(playerA, "Archangel Avacyn", 1);
+    }
+
+    /**
+     * Cards that transform if no spells cast last turn should not transform if the cards were added on turn 1.
+     * This would happen with tests and cheat testing.
+     */
+    @Test
+    public void testNoSpellsCastLastTurnTransformDoesNotTriggerTurn1() {
+
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Hinterland Logger.
+        addCard(Zone.BATTLEFIELD, playerA, "Hinterland Logger");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Hinterland Logger", 1);
     }
 }

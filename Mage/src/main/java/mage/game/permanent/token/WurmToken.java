@@ -43,5 +43,4 @@ public class WurmToken extends Token {
         power = new MageInt(6);
         toughness = new MageInt(6);
     }
-
 }

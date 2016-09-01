@@ -81,6 +81,7 @@ public class PermanentView extends CardView {
             original = new CardView(((PermanentToken) permanent).getToken());
             original.expansionSetCode = permanent.getExpansionSetCode();
             tokenSetCode = original.getTokenSetCode();
+            tokenDescriptor = original.getTokenDescriptor();
         } else {
             if (card != null) {
                 // original may not be face down
