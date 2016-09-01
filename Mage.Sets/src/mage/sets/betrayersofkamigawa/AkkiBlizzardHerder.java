@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class AkkiBlizzardHerder extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 
     public AkkiBlizzardHerder(UUID ownerId) {
         super(ownerId, 91, "Akki Blizzard-Herder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
