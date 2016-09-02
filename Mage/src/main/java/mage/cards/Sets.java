@@ -27,9 +27,6 @@
  */
 package mage.cards;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.*;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
 import mage.cards.decks.DeckCardLists;
@@ -41,6 +38,10 @@ import mage.constants.ColoredManaSymbol;
 import mage.util.ClassScanner;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.*;
 
 /**
  *

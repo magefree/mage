@@ -27,7 +27,6 @@
  */
 package mage.sets.eldritchmoon;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.MeldCondition;
@@ -39,11 +38,14 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +66,9 @@ public class HanweirBattlements extends CardImpl {
         this.addAbility(ability);
 
         // {3}{R}{R},{T}: If you both own and control Hanweir Battlements and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
-        ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new MeldEffect("Hanweir Garrison", new HanweirTheWrithingTownship(ownerId)),
+        ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+                new MeldEffect("Hanweir Garrison",
+                        new HanweirTheWrithingTownship(ownerId, new CardSetInfo("Hanweir, the Writhing Township", "EMN", "130", Rarity.RARE))),
                 new ManaCostsImpl("{3}{R}{R}"), new MeldCondition("Hanweir Garrison"),
                 "{3}{R}{R}, {T}: If you both own and control {this} and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.");
         ability.addCost(new TapSourceCost());

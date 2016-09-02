@@ -27,26 +27,31 @@
  */
 package mage.sets.eldritchmoon;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.game.permanent.token.EldraziHorrorToken;
+
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
 public class HanweirTheWrithingTownship extends MeldCard {
-
+    // TODO: EJM - Remove this
     public HanweirTheWrithingTownship(UUID ownerId) {
-        super(ownerId, 130, "Hanweir, the Writhing Township", Rarity.RARE, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "EMN";
+        this(ownerId, new CardSetInfo("Hanweir, the Writhing Township", "EMN", "130", Rarity.RARE));
+    }
+
+    public HanweirTheWrithingTownship(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.supertype.add("Legendary");
         this.subtype.add("Eldrazi");
         this.subtype.add("Ooze");

@@ -37,6 +37,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
@@ -67,7 +68,10 @@ public class GiselaTheBrokenBlade extends CardImpl {
         
         // At the beginning of your end step, if you both own and control Gisela, the Broken Blade and a creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new MeldEffect("Bruna, the Fading Light", new BriselaVoiceOfNightmares(ownerId)), TargetController.YOU, false),
+                new BeginningOfEndStepTriggeredAbility(
+                        new MeldEffect("Bruna, the Fading Light",
+                        new BriselaVoiceOfNightmares(ownerId,
+                                new CardSetInfo("Brisela, Voice of Nightmares", "EMN", "15", Rarity.MYTHIC))), TargetController.YOU, false),
                 new MeldCondition("Bruna, the Fading Light"),
                 "At the beginning of your end step, if you both own and control {this} and a creature named Bruna, the Fading Light, exile them, "
                         + "then meld them into Brisela, Voice of Nightmares."));

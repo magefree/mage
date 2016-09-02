@@ -37,6 +37,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import mage.cards.FrameStyle;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
@@ -66,7 +67,7 @@ public class CardInfo {
     protected String cardNumber;
     @DatabaseField(indexName = "setCode_cardNumber_index")
     protected String setCode;
-    @DatabaseField(unique = true, indexName = "className_index")
+    @DatabaseField(indexName = "className_index")
     protected String className;
     @DatabaseField
     protected String power;
@@ -202,7 +203,7 @@ public class CardInfo {
     }
 
     public Card getCard() {
-        return CardImpl.createCard(className);
+        return CardImpl.createCard(className, new CardSetInfo(name, setCode, cardNumber, rarity));
     }
 
     public Card getMockCard() {

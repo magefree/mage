@@ -45,6 +45,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
+
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
@@ -113,6 +115,23 @@ public enum CardRepository {
     }
 
     public boolean cardExists(String className) {
+        try {
+            if (classNames == null) {
+                QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+                qb.distinct().selectColumns("className").where().isNotNull("className");
+                List<CardInfo> results = cardDao.query(qb.prepare());
+                classNames = new TreeSet<>();
+                for (CardInfo card : results) {
+                    classNames.add(card.getClassName());
+                }
+            }
+            return classNames.contains(className);
+        } catch (SQLException ex) {
+        }
+        return false;
+    }
+
+    public boolean cardExists(CardSetInfo className) {
         try {
             if (classNames == null) {
                 QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();

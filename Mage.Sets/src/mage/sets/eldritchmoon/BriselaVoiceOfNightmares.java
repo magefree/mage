@@ -27,7 +27,6 @@
  */
 package mage.sets.eldritchmoon;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -37,26 +36,28 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.MeldCard;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
 public class BriselaVoiceOfNightmares extends MeldCard {
-
+    // TODO: EJM - Remove this
     public BriselaVoiceOfNightmares(UUID ownerId) {
-        super(ownerId, 15, "Brisela, Voice of Nightmares", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "EMN";
+        this(ownerId, new CardSetInfo("Brisela, Voice of Nightmares", "EMN", "15", Rarity.MYTHIC));
+    }
+
+    public BriselaVoiceOfNightmares(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.supertype.add("Legendary");
         this.subtype.add("Eldrazi");
         this.subtype.add("Angel");

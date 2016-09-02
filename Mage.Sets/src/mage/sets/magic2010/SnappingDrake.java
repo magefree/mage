@@ -29,11 +29,6 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
 
 /**
  *

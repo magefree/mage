@@ -33,11 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.util.ClassScanner;
 import org.apache.log4j.Logger;
 
@@ -69,10 +65,12 @@ public class CardScanner {
         }
         ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());
 
-        for (ClassLoader cl : packageMap.keySet()) {
-            for (Class c : ClassScanner.findClasses(cl, packageMap.get(cl), CardImpl.class)) {
-                if (!CardRepository.instance.cardExists(c.getCanonicalName())) {
-                    Card card = CardImpl.createCard(c);
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            for (ExpansionSet.SetCardInfo setInfo : set.getSetCardInfo()) {
+                if (CardRepository.instance.findCard(set.getCode(), setInfo.getCardNumber()) == null) {
+                    Card card = CardImpl.createCard(setInfo.getCardClass(),
+                            new CardSetInfo(setInfo.getName(), set.getCode(), setInfo.getCardNumber(),
+                                            setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card != null) {
                         cardsToAdd.add(new CardInfo(card));
                         if (card instanceof SplitCard) {
@@ -84,11 +82,11 @@ public class CardScanner {
                 }
             }
         }
+
         if (!cardsToAdd.isEmpty()) {
             logger.info("Cards need storing in DB: " + cardsToAdd.size());
             CardRepository.instance.addCards(cardsToAdd);
         }
         CardRepository.instance.setContentVersion(CardRepository.instance.getContentVersionConstant());
-
     }
 }

@@ -21,8 +21,8 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
 
     SplitCard splitCardParent;
 
-    public SplitCardHalfImpl(UUID ownerId, String cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SplitCard splitCardParent, SpellAbilityType spellAbilityType) {
-        super(ownerId, cardNumber, name, rarity, cardTypes, costs, spellAbilityType);
+    public SplitCardHalfImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, SplitCard splitCardParent, SpellAbilityType spellAbilityType) {
+        super(ownerId, setInfo, cardTypes, costs, spellAbilityType);
         this.splitCardParent = splitCardParent;
     }
 

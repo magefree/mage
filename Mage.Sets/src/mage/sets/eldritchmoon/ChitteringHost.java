@@ -27,7 +27,6 @@
  */
 package mage.sets.eldritchmoon;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -36,21 +35,27 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MenaceAbility;
+import mage.cards.CardSetInfo;
 import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
  */
 public class ChitteringHost extends MeldCard {
-
+    // TODO: EJM - Remove this
     public ChitteringHost(UUID ownerId) {
-        super(ownerId, 96, "Chittering Host", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "");
-        this.expansionSetCode = "EMN";
+        this(ownerId, new CardSetInfo("Chittering Host", "EMN", "96", Rarity.COMMON));
+    }
+
+    public ChitteringHost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add("Eldrazi");
         this.subtype.add("Horror");
         this.power = new MageInt(5);
