@@ -52,8 +52,8 @@ public class RyuseiTheFallingStar extends CardImpl {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public RyuseiTheFallingStar(UUID ownerID) {
-        super(ownerID, 185, "Ryusei, the Falling Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");
+    public RyuseiTheFallingStar(UUID ownerId) {
+        super(ownerId, 185, "Ryusei, the Falling Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");

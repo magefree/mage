@@ -572,6 +572,11 @@ public class Spell extends StackObjImpl implements Card {
     public String getTokenSetCode() {
         return card.getTokenSetCode();
     }
+    
+    @Override
+    public String getTokenDescriptor() {
+        return card.getTokenDescriptor();
+    }
 
     @Override
     public void setFaceDown(boolean value, Game game) {

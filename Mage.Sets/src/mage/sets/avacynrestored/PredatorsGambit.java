@@ -30,7 +30,6 @@ package mage.sets.avacynrestored;
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.OneControlledCreatureCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -41,8 +40,8 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
 import java.util.UUID;
+import mage.abilities.condition.common.CreatureCountCondition;
 
 /**
  * @author noxx
@@ -55,7 +54,6 @@ public class PredatorsGambit extends CardImpl {
         super(ownerId, 117, "Predator's Gambit", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "AVR";
         this.subtype.add("Aura");
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -70,7 +68,7 @@ public class PredatorsGambit extends CardImpl {
 
         // Enchanted creature has intimidate as long as its controller controls no other creatures.
         ContinuousEffect effect = new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA);
-        ConditionalContinuousEffect intimidate = new ConditionalContinuousEffect(effect, new OneControlledCreatureCondition(), rule);
+        ConditionalContinuousEffect intimidate = new ConditionalContinuousEffect(effect, new CreatureCountCondition(1, TargetController.YOU), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, intimidate));
 
     }

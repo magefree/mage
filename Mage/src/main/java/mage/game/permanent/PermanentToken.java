@@ -86,6 +86,7 @@ public class PermanentToken extends PermanentImpl {
         this.toughness.modifyBaseValue(token.getToughness().getBaseValueModified());
         this.supertype = token.getSupertype();
         this.subtype = token.getSubtype(game);
+        this.tokenDescriptor = token.getTokenDescriptor();
     }
 
     @Override

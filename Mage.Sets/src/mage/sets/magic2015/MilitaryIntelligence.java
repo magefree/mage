@@ -28,16 +28,11 @@
 package mage.sets.magic2015;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -49,9 +44,8 @@ public class MilitaryIntelligence extends CardImpl {
         super(ownerId, 69, "Military Intelligence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "M15";
 
-
         // Whenever you attack with two or more creatures, draw a card.
-        this.addAbility(new MilitaryIntelligenceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1), 2));
     }
 
     public MilitaryIntelligence(final MilitaryIntelligence card) {
@@ -61,36 +55,5 @@ public class MilitaryIntelligence extends CardImpl {
     @Override
     public MilitaryIntelligence copy() {
         return new MilitaryIntelligence(this);
-    }
-}
-
-class MilitaryIntelligenceTriggeredAbility extends TriggeredAbilityImpl {
-
-    public MilitaryIntelligenceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
-
-    public MilitaryIntelligenceTriggeredAbility(final MilitaryIntelligenceTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MilitaryIntelligenceTriggeredAbility copy() {
-        return new MilitaryIntelligenceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARED_ATTACKERS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getAttackers().size() >= 2 && game.getCombat().getAttackerId().equals(getControllerId());
-    }
-
-    @Override
-    public String getRule() {
-        return new StringBuilder("Whenever you attack with two or more creatures, ").append(super.getRule()).toString() ;
     }
 }

@@ -47,7 +47,7 @@ public class ImageCache {
     /**
      * Common pattern for keys. Format: "<cardname>#<setname>#<collectorID>"
      */
-    private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)");
+    private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)#(.*)");
 
     static {
         IMAGE_CACHE = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
@@ -56,12 +56,12 @@ public class ImageCache {
                 try {
 
                     boolean usesVariousArt = false;
-                    if (key.endsWith("#usesVariousArt")) {
+                    if (key.matches(".*#usesVariousArt.*")) {
                         usesVariousArt = true;
                         key = key.replace("#usesVariousArt", "");
                     }
                     boolean thumbnail = false;
-                    if (key.endsWith("#thumb")) {
+                    if (key.matches(".*#thumb.*")) {
                         thumbnail = true;
                         key = key.replace("#thumb", "");
                     }
@@ -76,8 +76,9 @@ public class ImageCache {
                             collectorId = "0";
                         }
                         String tokenSetCode = m.group(5);
+                        String tokenDescriptor = m.group(6);
 
-                        CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode);
+                        CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor);
 
                         String path;
                         if (collectorId.isEmpty() || "0".equals(collectorId)) {
@@ -154,7 +155,7 @@ public class ImageCache {
     }
 
     public static BufferedImage getMorphImage() {
-        CardDownloadData info = new CardDownloadData("Morph", "KTK", "0", false, 0, "KTK");
+        CardDownloadData info = new CardDownloadData("Morph", "KTK", "0", false, 0, "KTK", "");
         info.setToken(true);
         String path = CardImageUtils.generateTokenImagePath(info);
         if (path == null) {
@@ -165,7 +166,7 @@ public class ImageCache {
     }
 
     public static BufferedImage getManifestImage() {
-        CardDownloadData info = new CardDownloadData("Manifest", "FRF", "0", false, 0, "FRF");
+        CardDownloadData info = new CardDownloadData("Manifest", "FRF", "0", false, 0, "FRF", "");
         info.setToken(true);
         String path = CardImageUtils.generateTokenImagePath(info);
         if (path == null) {
@@ -238,8 +239,8 @@ public class ImageCache {
         return name + "#" + card.getExpansionSetCode() + "#" + card.getType() + "#" + card.getCardNumber() + "#"
                 + (card.getTokenSetCode() == null ? "" : card.getTokenSetCode())
                 + suffix
-                + (card.getUsesVariousArt() ? "#usesVariousArt" : "");
-
+                + (card.getUsesVariousArt() ? "#usesVariousArt" : "")
+                + (card.getTokenDescriptor() != null ? "#" + card.getTokenDescriptor() : "#");
     }
 
 //    /**
