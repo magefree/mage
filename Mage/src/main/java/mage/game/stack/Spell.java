@@ -56,6 +56,7 @@ import mage.constants.ZoneDetail;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
@@ -825,7 +826,13 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public Counters getCounters(Game game) {
+
         return card.getCounters(game);
+    }
+
+    @Override
+    public Counters getCounters(GameState state) {
+        return card.getCounters(state);
     }
 
     @Override

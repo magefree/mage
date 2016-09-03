@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.counters.Counters;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.GameState;
 
 public interface Permanent extends Card, Controllable {
 
@@ -161,7 +162,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent);
 
-    String getValue();
+    String getValue(GameState state);
 
     @Deprecated
     void addAbility(Ability ability);

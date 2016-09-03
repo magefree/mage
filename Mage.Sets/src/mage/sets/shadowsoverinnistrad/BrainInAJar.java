@@ -106,7 +106,7 @@ class BrainInAJarCastEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            int counters = sourceObject.getCounters().getCount(CounterType.CHARGE);
+            int counters = sourceObject.getCounters(game).getCount(CounterType.CHARGE);
             FilterCard filter = new FilterInstantOrSorceryCard();
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, counters));
             int cardsToCast = controller.getHand().count(filter, source.getControllerId(), source.getSourceId(), game);

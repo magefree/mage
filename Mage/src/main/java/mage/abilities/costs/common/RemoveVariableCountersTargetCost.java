@@ -95,9 +95,9 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl  {
         int maxValue = 0;
         for (Permanent permanent :game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             if (counterTypeToRemove != null) {
-                maxValue += permanent.getCounters().getCount(counterTypeToRemove);
+                maxValue += permanent.getCounters(game).getCount(counterTypeToRemove);
             } else {
-                for(Counter counter :permanent.getCounters().values()){
+                for(Counter counter :permanent.getCounters(game).values()){
                     maxValue += counter.getCount();
                 }
             }

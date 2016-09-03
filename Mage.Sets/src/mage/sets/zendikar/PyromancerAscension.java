@@ -151,7 +151,7 @@ class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell)) {
                 Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
-                if (permanent != null && permanent.getCounters().getCount(CounterType.QUEST) >= 2) {
+                if (permanent != null && permanent.getCounters(game).getCount(CounterType.QUEST) >= 2) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
                     return true;
                 }

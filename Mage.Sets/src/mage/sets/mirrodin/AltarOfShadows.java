@@ -101,7 +101,7 @@ class AltarOfShadowsEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (sourcePermanent != null && player != null) {
-            int chargeCounters = sourcePermanent.getCounters().getCount(CounterType.CHARGE);
+            int chargeCounters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE);
             if (chargeCounters > 0){
                 player.getManaPool().addMana(Mana.BlackMana(chargeCounters), game, source);
                 return true;

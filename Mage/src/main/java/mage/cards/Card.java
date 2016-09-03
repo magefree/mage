@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.permanent.Permanent;
 
 public interface Card extends MageObject {
@@ -151,6 +152,8 @@ public interface Card extends MageObject {
     boolean getUsesVariousArt();
 
     Counters getCounters(Game game);
+
+    Counters getCounters(GameState state);
 
     boolean addCounters(String name, int amount, Game game);
 

@@ -51,9 +51,9 @@ public class CounterPredicate implements Predicate<Permanent> {
     @Override
     public boolean apply(Permanent input, Game game) {
         if (counter == null) {
-            return !input.getCounters().keySet().isEmpty();
+            return !input.getCounters(game).keySet().isEmpty();
         } else {
-            return input.getCounters().containsKey(counter);
+            return input.getCounters(game).containsKey(counter);
         }
     }
 

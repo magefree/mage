@@ -93,7 +93,7 @@ class CycloneEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        int total = permanent.getCounters().getCount(CounterType.WIND);
+        int total = permanent.getCounters(game).getCount(CounterType.WIND);
         
         String greens = "";
         

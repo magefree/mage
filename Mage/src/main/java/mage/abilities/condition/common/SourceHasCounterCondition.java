@@ -76,7 +76,7 @@ public class SourceHasCounterCondition implements Condition {
             if (card != null) {
                 count = card.getCounters(game).getCount(counterType);
             } else {
-                count = permanent.getCounters().getCount(counterType);
+                count = permanent.getCounters(game).getCount(counterType);
             }
             if (to == Integer.MAX_VALUE) {
                 return count >= from;
@@ -86,7 +86,7 @@ public class SourceHasCounterCondition implements Condition {
             if (card != null) {
                 return card.getCounters(game).getCount(counterType) >= amount;
             } else  {
-                return permanent.getCounters().getCount(counterType) >= amount;
+                return permanent.getCounters(game).getCount(counterType) >= amount;
             }
         }
     }

@@ -67,19 +67,19 @@ public class PermanentHasCounterCondition implements Condition {
         for (Permanent permanent : permanents) {
             switch (this.type) {
                 case FEWER_THAN:
-                    if (permanent.getCounters().getCount(this.counterType) < this.amount) {
+                    if (permanent.getCounters(game).getCount(this.counterType) < this.amount) {
                         conditionApplies = true;
                         break;
                     }
                     break;
                 case MORE_THAN:
-                    if (permanent.getCounters().getCount(this.counterType) > this.amount) {
+                    if (permanent.getCounters(game).getCount(this.counterType) > this.amount) {
                         conditionApplies = true;
                         break;
                     }
                     break;
                 case EQUAL_TO:
-                    if (permanent.getCounters().getCount(this.counterType) == this.amount) {
+                    if (permanent.getCounters(game).getCount(this.counterType) == this.amount) {
                         conditionApplies = true;
                         break;
                     }

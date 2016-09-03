@@ -121,7 +121,7 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent != null
                     && permanent.getControllerId().equals(this.getControllerId())
                     && permanent.getCardType().contains(CardType.CREATURE)
-                    && permanent.getCounters().getCount(CounterType.P1P1) > 0) {
+                    && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game) + 1));
                 }

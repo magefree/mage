@@ -45,7 +45,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -114,7 +113,7 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
             if (fromPermanent == null || toPermanent == null || !fromPermanent.getControllerId().equals(toPermanent.getControllerId())) {
                 return false;
             }
-            int amountCounters = fromPermanent.getCounters().getCount(CounterType.P1P1);
+            int amountCounters = fromPermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amountCounters > 0) {
                 int amountToMove = controller.getAmount(0, amountCounters, "How many counters do you want to move?", game);
                 if (amountToMove > 0) {

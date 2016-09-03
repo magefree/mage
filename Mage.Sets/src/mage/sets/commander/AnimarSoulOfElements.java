@@ -117,7 +117,7 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
         Ability spellAbility = (SpellAbility) abilityToModify;
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null && spellAbility != null) {
-            int amount = sourcePermanent.getCounters().getCount(CounterType.P1P1);
+            int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amount > 0) {
                 CardUtil.reduceCost(spellAbility, amount);
                 return true;

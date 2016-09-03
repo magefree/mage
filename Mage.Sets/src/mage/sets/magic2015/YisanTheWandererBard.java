@@ -105,7 +105,7 @@ class YisanTheWandererBardEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null && controller != null) {
-            int newConvertedCost = sourcePermanent.getCounters().getCount("verse");
+            int newConvertedCost = sourcePermanent.getCounters(game).getCount("verse");
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, newConvertedCost));
             filter.add(new CardTypePredicate(CardType.CREATURE));

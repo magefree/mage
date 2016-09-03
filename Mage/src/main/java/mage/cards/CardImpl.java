@@ -53,6 +53,7 @@ import mage.counters.Counters;
 import mage.game.CardAttribute;
 import mage.game.CardState;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -655,7 +656,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public Counters getCounters(Game game) {
-        return game.getState().getCardState(this.objectId).getCounters();
+        return getCounters(game.getState());
+    }
+
+    @Override
+    public Counters getCounters(GameState state) {
+        return state.getCardState(this.objectId).getCounters();
     }
 
     @Override
@@ -673,7 +679,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, name, 1);
                 event.setAppliedEffects(appliedEffects);
                 if (!game.replaceEvent(event)) {
-                    game.getState().getCardState(this.objectId).getCounters().addCounter(name, 1);
+                    getCounters(game).addCounter(name, 1);
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, name, 1));
                 } else {
                     returnCode = false;
@@ -703,7 +709,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, counter.getName(), 1);
                 event.setAppliedEffects(appliedEffects);
                 if (!game.replaceEvent(event)) {
-                    game.getState().getCardState(this.objectId).getCounters().addCounter(eventCounter);
+                    getCounters(game).addCounter(eventCounter);
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, counter.getName(), 1));
                 } else {
                     returnCode = false;
@@ -718,7 +724,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public void removeCounters(String name, int amount, Game game) {
         for (int i = 0; i < amount; i++) {
-            game.getState().getCardState(this.objectId).getCounters().removeCounter(name, 1);
+            getCounters(game).removeCounter(name, 1);
             GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, ownerId);
             event.setData(name);
             game.fireEvent(event);

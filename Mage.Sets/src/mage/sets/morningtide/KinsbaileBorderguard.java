@@ -92,7 +92,7 @@ class AllCountersCount implements DynamicValue {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
         if(sourcePermanent != null) {
             int total = 0;
-            for(Counter counter : sourcePermanent.getCounters().values()) {
+            for(Counter counter : sourcePermanent.getCounters(game).values()) {
                 total += counter.getCount();
             }
             return total;

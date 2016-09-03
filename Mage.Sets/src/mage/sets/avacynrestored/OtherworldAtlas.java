@@ -91,7 +91,7 @@ class OtherworldAtlasDrawEffect extends OneShotEffect {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            int amount = permanent.getCounters().getCount(CounterType.CHARGE);
+            int amount = permanent.getCounters(game).getCount(CounterType.CHARGE);
             if (amount > 0) {
                 for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
                     Player player = game.getPlayer(playerId);

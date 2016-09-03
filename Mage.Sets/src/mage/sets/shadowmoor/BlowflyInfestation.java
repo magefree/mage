@@ -92,7 +92,7 @@ class BlowflyInfestationCondition implements Condition {
             }
         }
         if (permanent != null) {
-            return permanent.getCounters().containsKey(CounterType.M1M1);
+            return permanent.getCounters(game).containsKey(CounterType.M1M1);
         }
         return false;
     }

@@ -65,6 +65,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.command.CommandObject;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
@@ -219,12 +220,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public String getValue() {
+    public String getValue(GameState state) {
         StringBuilder sb = threadLocalBuilder.get();
         sb.append(controllerId).append(name).append(tapped).append(damage);
         sb.append(subtype).append(supertype).append(power.getValue()).append(toughness.getValue());
         sb.append(abilities.getValue());
-        for (Counter counter : getCounters().values()) {
+        for (Counter counter : getCounters(state).values()) {
             sb.append(counter.getName()).append(counter.getCount());
         }
         return sb.toString();
@@ -333,31 +334,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean addCounters(String name, int amount, Game game) {
-        return addCounters(name, amount, game, null);
-    }
-
-    @Override
-    public boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
-        boolean returnCode = true;
-        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, controllerId, name, amount);
-        countersEvent.setAppliedEffects(appliedEffects);
-        if (!game.replaceEvent(countersEvent)) {
-            for (int i = 0; i < countersEvent.getAmount(); i++) {
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, name, 1);
-                event.setAppliedEffects(appliedEffects);
-                if (!game.replaceEvent(event)) {
-                    counters.addCounter(name, 1);
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, name, 1));
-                } else {
-                    returnCode = false;
-                }
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, controllerId, name, amount));
-        } else {
-            returnCode = false;
-        }
-        return returnCode;
+    public Counters getCounters(GameState state) {
+        return counters;
     }
 
     @Override
@@ -878,10 +856,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             int actualDamage = event.getAmount();
             if (actualDamage > 0) {
                 int countersToRemove = actualDamage;
-                if (countersToRemove > getCounters().getCount(CounterType.LOYALTY)) {
-                    countersToRemove = getCounters().getCount(CounterType.LOYALTY);
+                if (countersToRemove > getCounters(game).getCount(CounterType.LOYALTY)) {
+                    countersToRemove = getCounters(game).getCount(CounterType.LOYALTY);
                 }
-                getCounters().removeCounter(CounterType.LOYALTY, countersToRemove);
+                getCounters(game).removeCounter(CounterType.LOYALTY, countersToRemove);
                 game.fireEvent(new DamagedPlaneswalkerEvent(objectId, sourceId, controllerId, actualDamage, combat));
                 return actualDamage;
             }

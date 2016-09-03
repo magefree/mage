@@ -96,9 +96,9 @@ public class AddCountersTargetEffect extends OneShotEffect {
                         newCounter.remove(newCounter.getCount());
                     }
                     newCounter.add(calculated);
-                    int before = permanent.getCounters().getCount(counter.getName());
+                    int before = permanent.getCounters(game).getCount(counter.getName());
                     permanent.addCounters(newCounter, game);
-                    int numberAdded = permanent.getCounters().getCount(counter.getName()) - before;
+                    int numberAdded = permanent.getCounters(game).getCount(counter.getName()) - before;
                     affectedTargets++;
                     if (!game.isSimulation()) {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
@@ -114,7 +114,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
                                 + counter.getCount() + " " + counter.getName().toLowerCase() + " counter on " + player.getLogName());
                     }
                 } else if (card != null) {
-                    card.addCounters(counter.getName(), counter.getCount(), game);
+                    card.addCounters(counter, game);
                     if (!game.isSimulation()) {
                         game.informPlayers(new StringBuilder("Added ").append(counter.getCount()).append(" ").append(counter.getName())
                                 .append(" counter to ").append(card.getName())

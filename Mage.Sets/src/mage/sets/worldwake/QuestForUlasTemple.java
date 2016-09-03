@@ -141,7 +141,7 @@ class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent quest = game.getPermanent(super.getSourceId());
-        return quest != null && quest.getCounters().getCount(CounterType.QUEST) >= 3;
+        return quest != null && quest.getCounters(game).getCount(CounterType.QUEST) >= 3;
     }
 
     @Override

@@ -100,7 +100,7 @@ class VampireHexmageEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(target.getFirstTarget());
 
         if (permanent != null) {
-            for(Counter counter : permanent.getCounters().values()){
+            for(Counter counter : permanent.getCounters(game).values()){
                 permanent.removeCounters(counter, game);
             }
 

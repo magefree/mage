@@ -35,7 +35,7 @@ public class UndyingAbility extends DiesTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (!permanent.getCounters().containsKey(CounterType.P1P1) || permanent.getCounters().getCount(CounterType.P1P1) == 0) {
+            if (!permanent.getCounters(game).containsKey(CounterType.P1P1) || permanent.getCounters(game).getCount(CounterType.P1P1) == 0) {
                 return true;
             }
         }

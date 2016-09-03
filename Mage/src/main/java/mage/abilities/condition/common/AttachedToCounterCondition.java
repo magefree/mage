@@ -70,13 +70,13 @@ public class AttachedToCounterCondition implements Condition {
             return false;
         }
         if (from != -1) { //range compare
-            int count = attachedTo.getCounters().getCount(counterType);
+            int count = attachedTo.getCounters(game).getCount(counterType);
             if (to == Integer.MAX_VALUE) {
                 return count >= from;
             }
             return count >= from && count <= to;
         } else { // single compare (lte)
-            return attachedTo.getCounters().getCount(counterType) >= amount;
+            return attachedTo.getCounters(game).getCount(counterType) >= amount;
         }
     }
 }

@@ -101,7 +101,7 @@ class PlagueBoilerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            if (!sourcePermanent.getCounters().containsKey(CounterType.PLAGUE) || controller.chooseUse(outcome, "Put a plague counter on? (No removes one)", source, game)) {
+            if (!sourcePermanent.getCounters(game).containsKey(CounterType.PLAGUE) || controller.chooseUse(outcome, "Put a plague counter on? (No removes one)", source, game)) {
                 return new AddCountersSourceEffect(CounterType.PLAGUE.createInstance(), true).apply(game, source);
             } else {
                 return new RemoveCounterSourceEffect(CounterType.PLAGUE.createInstance()).apply(game, source);
@@ -135,7 +135,7 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId()) && event.getData().equals(CounterType.PLAGUE.getName())) {
             Permanent sourcePermanent = game.getPermanent(this.getSourceId());
-            if (sourcePermanent != null && sourcePermanent.getCounters().getCount(CounterType.PLAGUE) >= 3) {
+            if (sourcePermanent != null && sourcePermanent.getCounters(game).getCount(CounterType.PLAGUE) >= 3) {
                 return true;
             }
         }

@@ -110,7 +110,7 @@ class GremlinMineEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
 
         if (player != null && permanent != null) {
-            int existingCount = permanent.getCounters().getCount(CounterType.CHARGE);
+            int existingCount = permanent.getCounters(game).getCount(CounterType.CHARGE);
 
             if (existingCount > 0) {
                 Choice choice = new ChoiceImpl();

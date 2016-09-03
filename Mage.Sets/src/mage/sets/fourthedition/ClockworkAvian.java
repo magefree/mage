@@ -100,7 +100,7 @@ class AvianAddCountersSourceEffect extends AddCountersSourceEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         //record how many counters
-        Counters permCounters = game.getPermanent(source.getSourceId()).getCounters();
+        Counters permCounters = game.getPermanent(source.getSourceId()).getCounters(game);
         int countersWas = permCounters.getCount(CounterType.P1P0);
         if (countersWas < 4){
             super.apply(game, source);  

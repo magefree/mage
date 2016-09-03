@@ -173,7 +173,7 @@ class GutterGrimeCounters implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent p = game.getPermanent(sourceId);
         if (p != null) {
-            return p.getCounters().getCount(CounterType.SLIME);
+            return p.getCounters(game).getCount(CounterType.SLIME);
         }
         return 0;
     }

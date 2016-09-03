@@ -134,7 +134,7 @@ class DelayingShieldUpkeepEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            int numCounters = permanent.getCounters().getCount(CounterType.DELAY);
+            int numCounters = permanent.getCounters(game).getCount(CounterType.DELAY);
             permanent.removeCounters(CounterType.DELAY.createInstance(numCounters), game);
             for (int i = numCounters; i > 0; i--) {
                 if (controller.chooseUse(Outcome.Benefit, "Pay {1}{W}? (" + i + " counters left to pay)", source, game)) {
