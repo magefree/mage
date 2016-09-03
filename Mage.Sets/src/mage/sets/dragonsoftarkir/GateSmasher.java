@@ -29,10 +29,10 @@ package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -46,6 +46,7 @@ import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -65,9 +66,10 @@ public class GateSmasher extends CardImpl {
         this.expansionSetCode = "DTK";
         this.subtype.add("Equipment");
 
+        Target target = new TargetControlledCreaturePermanent(1, 1, filter, false);
         // Gate Smasher can be attached only to a creature with toughness 4 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("{this} can be attached only to a creature with toughness 4 or greater")));
-        
+        this.addAbility(new AttachableToRestrictedAbility(target));
+
         // Equipped creature gets +3/+0 and has trample.
         Effect effect = new BoostEquippedEffect(3, 0);
         effect.setText("Equipped creature gets +3/+0");
@@ -76,13 +78,10 @@ public class GateSmasher extends CardImpl {
         effect.setText("and has trample");
         ability.addEffect(effect);
         this.addAbility(ability);
-        
+
         // Equip {3}
-        this.addAbility(new EquipAbility(
-                Outcome.AddAbility,
-                new GenericManaCost(3), 
-                new TargetControlledCreaturePermanent(1,1, filter, false)));          
-        
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), target));
+
     }
 
     public GateSmasher(final GateSmasher card) {

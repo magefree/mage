@@ -143,7 +143,7 @@ class GlamerSpinnersEffect extends OneShotEffect {
                             }
                             // Check for protection
                             MageObject auraObject = game.getObject(auraId);
-                            if (permanentToAttachAuras.cantBeEnchantedBy(auraObject, game)) {
+                            if (permanentToAttachAuras.cantBeAttachedBy(auraObject, game)) {
                                 passed = false;
                             }
                         }
