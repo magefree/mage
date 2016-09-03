@@ -155,10 +155,6 @@ public interface Card extends MageObject {
 
     Counters getCounters(GameState state);
 
-    boolean addCounters(String name, int amount, Game game);
-
-    boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
-
     boolean addCounters(Counter counter, Game game);
 
     boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects);

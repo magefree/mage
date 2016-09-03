@@ -664,31 +664,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return state.getCardState(this.objectId).getCounters();
     }
 
-    @Override
-    public boolean addCounters(String name, int amount, Game game) {
-        return addCounters(name, amount, game, null);
-    }
-
-    @Override
-    public boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
-        boolean returnCode = true;
-        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, ownerId, name, amount);
-        countersEvent.setAppliedEffects(appliedEffects);
-        if (!game.replaceEvent(countersEvent)) {
-            for (int i = 0; i < countersEvent.getAmount(); i++) {
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, name, 1);
-                event.setAppliedEffects(appliedEffects);
-                if (!game.replaceEvent(event)) {
-                    getCounters(game).addCounter(name, 1);
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, name, 1));
-                } else {
-                    returnCode = false;
-                }
-            }
-        } else {
-            returnCode = false;
-        }
-        return returnCode;
+    /**
+     * @return The controller if available otherwise the owner.
+     */
+    protected UUID getControllerOrOwner() {
+        return ownerId;
     }
 
     @Override
@@ -699,21 +679,26 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
         boolean returnCode = true;
-        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, ownerId, counter.getName(), counter.getCount());
+        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, getControllerOrOwner(), counter.getName(), counter.getCount());
         countersEvent.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(countersEvent)) {
             int amount = countersEvent.getAmount();
+            int finalAmount = amount;
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
-                eventCounter.remove(amount - 1);
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, counter.getName(), 1);
+                eventCounter.remove(eventCounter.getCount() - 1);
+                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, getControllerOrOwner(), counter.getName(), 1);
                 event.setAppliedEffects(appliedEffects);
                 if (!game.replaceEvent(event)) {
                     getCounters(game).addCounter(eventCounter);
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, counter.getName(), 1));
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, getControllerOrOwner(), counter.getName(), 1));
                 } else {
+                    finalAmount--;
                     returnCode = false;
                 }
+            }
+            if(finalAmount > 0) {
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, getControllerOrOwner(), counter.getName(), amount));
             }
         } else {
             returnCode = false;
@@ -725,7 +710,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void removeCounters(String name, int amount, Game game) {
         for (int i = 0; i < amount; i++) {
             getCounters(game).removeCounter(name, 1);
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, ownerId);
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, getControllerOrOwner());
             event.setData(name);
             game.fireEvent(event);
         }

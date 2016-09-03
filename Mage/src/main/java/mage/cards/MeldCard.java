@@ -346,21 +346,4 @@ public abstract class MeldCard extends CardImpl {
             return returnState;
         }
     }
-
-    @Override
-    public boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
-        if (this.isMelded()) {
-            return super.addCounters(name, amount, game, appliedEffects);
-        } else {
-            // can this really happen?
-            boolean returnState = true;
-            if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)) {
-                returnState |= topHalfCard.addCounters(name, amount, game, appliedEffects);
-            }
-            if (bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)) {
-                returnState |= bottomHalfCard.addCounters(name, amount, game, appliedEffects);
-            }
-            return returnState;
-        }
-    }
 }

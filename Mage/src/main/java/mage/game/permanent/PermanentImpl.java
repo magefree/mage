@@ -324,11 +324,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public Counters getCounters() {
-        return counters;
-    }
-
-    @Override
     public Counters getCounters(Game game) {
         return counters;
     }
@@ -339,44 +334,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
-        boolean returnCode = true;
-        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, controllerId, counter.getName(), counter.getCount());
-        countersEvent.setAppliedEffects(appliedEffects);
-        if (!game.replaceEvent(countersEvent)) {
-            int amount = countersEvent.getAmount();
-            for (int i = 0; i < amount; i++) {
-                Counter eventCounter = counter.copy();
-                eventCounter.remove(eventCounter.getCount() - 1);
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, counter.getName(), 1);
-                event.setAppliedEffects(appliedEffects);
-                if (!game.replaceEvent(event)) {
-                    counters.addCounter(eventCounter);
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, counter.getName(), 1));
-                } else {
-                    returnCode = false;
-                }
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, controllerId, counter.getName(), amount));
-        } else {
-            returnCode = false;
-        }
-        return returnCode;
-    }
-
-    @Override
-    public void removeCounters(String name, int amount, Game game) {
-        for (int i = 0; i < amount; i++) {
-            counters.removeCounter(name, 1);
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, controllerId);
-            event.setData(name);
-            game.fireEvent(event);
-        }
-    }
-
-    @Override
-    public void removeCounters(Counter counter, Game game) {
-        removeCounters(counter.getName(), counter.getCount(), game);
+    protected UUID getControllerOrOwner() {
+        return controllerId;
     }
 
     @Override

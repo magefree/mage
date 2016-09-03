@@ -104,8 +104,6 @@ public interface Permanent extends Card, Controllable {
 
     void setSecondCardFace(Card card);
 
-    Counters getCounters();
-
     List<UUID> getAttachments();
 
     UUID getAttachedTo();

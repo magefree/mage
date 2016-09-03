@@ -145,7 +145,9 @@ public class AddCountersTargetEffect extends OneShotEffect {
             sb.append("s");
         }
         sb.append(" on ");
-        
+
+
+
         Target target = mode.getTargets().get(0);
         if (target.getNumberOfTargets() == 0) {
             sb.append("up to ");
