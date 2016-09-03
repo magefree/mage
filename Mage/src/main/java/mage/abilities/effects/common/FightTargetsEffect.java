@@ -46,6 +46,11 @@ public class FightTargetsEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
+    public FightTargetsEffect(String effectText) {
+        this();
+        this.staticText = effectText;
+    }
+
     public FightTargetsEffect(final FightTargetsEffect effect) {
         super(effect);
     }

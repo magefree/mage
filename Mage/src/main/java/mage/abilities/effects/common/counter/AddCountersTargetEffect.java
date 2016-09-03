@@ -41,6 +41,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.util.CardUtil;
 
 /**
@@ -144,17 +145,21 @@ public class AddCountersTargetEffect extends OneShotEffect {
             sb.append("s");
         }
         sb.append(" on ");
+        
+        Target target = mode.getTargets().get(0);
+        if (target.getNumberOfTargets() == 0) {
+            sb.append("up to ");
+        }
 
-        // TODO: add normal text infrastructure for target pointers
-        if (mode.getTargets().size() > 0) {
-            String targetName = mode.getTargets().get(0).getTargetName();
-            if (!targetName.startsWith("another")) {
+        if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
+            sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName());
+        } else {
+            if (!target.getTargetName().startsWith("another")) {
                 sb.append("target ");
             }
-            sb.append(targetName);
-        } else {
-            sb.append("it");
+            sb.append(target.getTargetName());
         }
+
         if (amount.getMessage().length() > 0) {
             sb.append(" for each ").append(amount.getMessage());
         }

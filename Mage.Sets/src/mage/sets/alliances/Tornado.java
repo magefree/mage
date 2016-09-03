@@ -34,7 +34,7 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -61,7 +61,7 @@ public class Tornado extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}")));
         // {2}{G}, Pay 3 life for each velocity counter on Tornado: Destroy target permanent and put a velocity counter on Tornado. Activate this ability only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{G}"));
-        DynamicValue lifeToPayAmount = new MultipliedValue(new CountersCount(CounterType.VELOCITY), 3);
+        DynamicValue lifeToPayAmount = new MultipliedValue(new CountersSourceCount(CounterType.VELOCITY), 3);
         ability.addCost(new PayLifeCost(lifeToPayAmount, "3 life for each velocity counter on {source}"));
         ability.addTarget(new TargetPermanent());
         Effect effect = new AddCountersSourceEffect(CounterType.VELOCITY.createInstance());
