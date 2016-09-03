@@ -29,10 +29,10 @@ package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -46,6 +46,7 @@ import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -65,9 +66,10 @@ public class ONaginata extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Equipment");
 
+        Target target = new TargetControlledCreaturePermanent(1, 1, filter, false);
         // O-Naginata can be attached only to a creature with 3 or more power.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("{this} can be attached only to a creature with 3 or more power")));
-        
+        this.addAbility(new AttachableToRestrictedAbility(target));
+
         // Equipped creature gets +3/+0 and has trample.
         Effect effect = new BoostEquippedEffect(3, 0);
         effect.setText("Equipped creature gets +3/+0");
@@ -76,12 +78,9 @@ public class ONaginata extends CardImpl {
         effect.setText("and has trample");
         ability.addEffect(effect);
         this.addAbility(ability);
-        
+
         // Equip {2}
-        this.addAbility(new EquipAbility(
-                Outcome.AddAbility,
-                new GenericManaCost(2), 
-                new TargetControlledCreaturePermanent(1,1, filter, false)));        
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), target));
     }
 
     public ONaginata(final ONaginata card) {
