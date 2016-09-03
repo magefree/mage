@@ -175,15 +175,15 @@ public class BestowAbility extends SpellAbility {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             if (permanent.getAttachedTo() == null) {
-                                if (wasAttached && permanent.getSubtype().contains("Aura")) {
-                                    permanent.getSubtype().remove("Aura");
+                                if (wasAttached && permanent.getSubtype(game).contains("Aura")) {
+                                    permanent.getSubtype(game).remove("Aura");
                                     wasAttached = false;
                                 }
                             } else {
                                 permanent.getCardType().remove(CardType.CREATURE);
-                                permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
-                                if (!permanent.getSubtype().contains("Aura")) {
-                                    permanent.getSubtype().add("Aura");
+                                permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
+                                if (!permanent.getSubtype(game).contains("Aura")) {
+                                    permanent.getSubtype(game).add("Aura");
                                 }
                                 wasAttached = true;
                             }

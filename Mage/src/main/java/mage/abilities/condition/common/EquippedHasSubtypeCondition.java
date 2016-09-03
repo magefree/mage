@@ -61,12 +61,12 @@ public class EquippedHasSubtypeCondition implements Condition {
             }
             if (attachedTo != null) {
                 if (subType != null) {
-                    if (attachedTo.hasSubtype(this.subType)) {
+                    if (attachedTo.hasSubtype(this.subType, game)) {
                         return true;
                     }
                 } else {
                     for (String s : subTypes) {
-                        if (attachedTo.hasSubtype(s)) {
+                        if (attachedTo.hasSubtype(s, game)) {
                             return true;
                         }
                     }

@@ -112,18 +112,18 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public List<String> getSubtype() {
-        return card.getSubtype();
+    public List<String> getSubtype(Game game) {
+        return card.getSubtype(game);
     }
 
     @Override
-    public boolean hasSubtype(String subtype) {
-        return card.hasSubtype(subtype);
+    public boolean hasSubtype(String subtype, Game game) {
+        return card.hasSubtype(subtype, game);
     }
 
     @Override
     public List<String> getSupertype() {
-        return card.getSubtype();
+        return card.getSupertype();
     }
 
     @Override

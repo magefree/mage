@@ -40,7 +40,7 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         
         Permanent saToken = getPermanent("Sylvan Advocate", playerA);
         Assert.assertTrue(saToken.getAbilities().contains(FlyingAbility.getInstance()));
-        Assert.assertTrue(saToken.getSubtype().contains("Spirit"));        
+        Assert.assertTrue(saToken.getSubtype(currentGame).contains("Spirit"));        
         Assert.assertTrue(saToken.getAbilities().contains(VigilanceAbility.getInstance()));
         assertPowerToughness(playerA, "Sylvan Advocate", 1, 1);
     }
@@ -76,7 +76,7 @@ public class SoulSeparatorTest extends CardTestPlayerBase {
         
         Permanent treeToken = getPermanent("Tree of Perdition", playerA);
         Assert.assertTrue(treeToken.getAbilities().contains(FlyingAbility.getInstance()));
-        Assert.assertTrue(treeToken.getSubtype().contains("Spirit"));        
+        Assert.assertTrue(treeToken.getSubtype(currentGame).contains("Spirit"));        
         Assert.assertTrue(treeToken.getAbilities().contains(DefenderAbility.getInstance()));
         
         assertLife(playerA, 20);

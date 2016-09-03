@@ -94,7 +94,7 @@ class SkeletonToken extends Token {
         this.getPower().modifyBaseValue(1);
         this.getToughness().modifyBaseValue(1);
         this.color.setBlack(true);
-        this.getSubtype().add("Skeleton");
+        this.getSubtype(null).add("Skeleton");
         this.getCardType().add(CardType.CREATURE);
         
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));

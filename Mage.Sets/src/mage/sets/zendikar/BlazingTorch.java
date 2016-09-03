@@ -109,7 +109,7 @@ class BlazingTorchEvasionEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !blocker.hasSubtype("Vampire") && !blocker.hasSubtype("Zombie");
+        return !blocker.hasSubtype("Vampire", game) && !blocker.hasSubtype("Zombie", game);
     }
 
     @Override

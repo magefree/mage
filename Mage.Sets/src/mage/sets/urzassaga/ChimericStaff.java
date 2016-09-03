@@ -91,7 +91,7 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().add(CardType.CREATURE);
-                        permanent.getSubtype().add("Construct");
+                        permanent.getSubtype(game).add("Construct");
                     }
                     break;
                 case PTChangingEffects_7:

@@ -115,7 +115,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
             FilterCreaturePermanent FILTER = new FilterCreaturePermanent();
             StringBuilder sb = new StringBuilder("creature that shares a creature type with the formerly attached creature: ");
             ArrayList<Predicate<MageObject>> subtypes = new ArrayList<>();
-            for (String subtype : lastStateCreature.getSubtype()) {
+            for (String subtype : lastStateCreature.getSubtype(game)) {
                 subtypes.add(new SubtypePredicate(subtype));
                 sb.append(subtype).append(", ");
             }

@@ -114,7 +114,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
                 Target targetInstance = addr.getTarget(spell);
                 for (UUID target : targetInstance.getTargets()) {
                     Permanent permanent = game.getPermanent(target);
-                    if (permanent == null || !permanent.hasSubtype("Golem")) {
+                    if (permanent == null || !permanent.hasSubtype("Golem", game)) {
                         return false;
                     }
                     if (targetGolem == null) {

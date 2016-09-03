@@ -97,7 +97,7 @@ class WarrenPilferersReturnEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         if (card != null) {
             card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-            if (card.getSubtype().contains("Goblin")) {
+            if (card.getSubtype(game).contains("Goblin")) {
                 game.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), source);
             }
             return true;

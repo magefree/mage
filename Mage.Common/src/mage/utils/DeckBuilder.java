@@ -247,9 +247,9 @@ public class DeckBuilder {
             int type;
             if (card.getCardType().contains(CardType.CREATURE)) {
                 type = 10;
-            } else if (card.getSubtype().contains("Equipment")) {
+            } else if (card.getSubtype(null).contains("Equipment")) {
                 type = 8;
-            } else if (card.getSubtype().contains("Aura")) {
+            } else if (card.getSubtype(null).contains("Aura")) {
                 type = 5;
             } else if (card.getCardType().contains(CardType.INSTANT)) {
                 type = 7;

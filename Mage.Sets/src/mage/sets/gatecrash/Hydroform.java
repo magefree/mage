@@ -70,7 +70,7 @@ class HydroformToken extends Token {
     public HydroformToken() {
         super("", "3/3 Elemental creature with flying");
         this.cardType.add(CardType.CREATURE);
-        this.getSubtype().add("Elemental");
+        this.getSubtype(null).add("Elemental");
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

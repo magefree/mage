@@ -99,7 +99,7 @@ class AjanisChosenEffect extends OneShotEffect {
             Token token = new CatToken();
             if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
                 Permanent enchantment = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-                if (enchantment != null && enchantment.getSubtype().contains("Aura")) {
+                if (enchantment != null && enchantment.getSubtype(game).contains("Aura")) {
                     for (UUID tokenId : token.getLastAddedTokenIds()) {
                         Permanent tokenPermanent = game.getPermanent(tokenId);
                         if (tokenPermanent != null) {

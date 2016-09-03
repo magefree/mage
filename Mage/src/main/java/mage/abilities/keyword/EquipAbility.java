@@ -59,7 +59,7 @@ public class EquipAbility extends ActivatedAbilityImpl {
     public boolean canActivate(UUID playerId, Game game) {
         if(super.canActivate(playerId, game)){
             Permanent permanent = game.getPermanent(sourceId);
-            if(permanent != null && permanent.hasSubtype("Equipment")){
+            if(permanent != null && permanent.hasSubtype("Equipment", game)){
                 return true;
             }
         }

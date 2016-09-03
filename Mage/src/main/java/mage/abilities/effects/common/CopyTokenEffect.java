@@ -34,9 +34,9 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         for (CardType type: token.getCardType()) {
             permanent.getCardType().add(type);
         }
-        permanent.getSubtype().clear();
-        for (String type: token.getSubtype()) {
-            permanent.getSubtype().add(type);
+        permanent.getSubtype(game).clear();
+        for (String type: token.getSubtype(game)) {
+            permanent.getSubtype(game).add(type);
         }
         permanent.getSupertype().clear();
         for (String type: token.getSupertype()) {

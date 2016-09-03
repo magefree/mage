@@ -192,24 +192,24 @@ class CrypticGatewayEffect extends OneShotEffect {
                 boolean commonSubType = false;
                 boolean changeling = false;
                 boolean changeling2 = false;
-                if (creature.getAbilities().containsKey(ChangelingAbility.getInstance().getId()) || creature.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
+                if (creature.getAbilities().containsKey(ChangelingAbility.getInstance().getId()) || creature.getSubtype(game).contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
                     changeling = true;
                 }
-                if (creature2.getAbilities().containsKey(ChangelingAbility.getInstance().getId()) || creature2.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
+                if (creature2.getAbilities().containsKey(ChangelingAbility.getInstance().getId()) || creature2.getSubtype(game).contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
                     changeling2 = true;
                 }
 
                 ArrayList<SubtypePredicate> subtypes = new ArrayList<>();
 
-                for (String subtype : creature.getSubtype()) {
-                    if (creature2.getSubtype().contains(subtype) || changeling2) {
+                for (String subtype : creature.getSubtype(game)) {
+                    if (creature2.getSubtype(game).contains(subtype) || changeling2) {
                         subtypes.add(new SubtypePredicate(subtype));
                         commonSubType = true;
                     }
                 }
 
-                for (String subtype : creature2.getSubtype()) {
-                    if (creature.getSubtype().contains(subtype) || changeling) {
+                for (String subtype : creature2.getSubtype(game)) {
+                    if (creature.getSubtype(game).contains(subtype) || changeling) {
                         subtypes.add(new SubtypePredicate(subtype));
                         commonSubType = true;
                     }

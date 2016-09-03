@@ -121,7 +121,7 @@ class IgnitionTeamToken extends Token {
     public IgnitionTeamToken() {
         super("", "4/4 red Elemental creature");
         this.cardType.add(CardType.CREATURE);
-        this.getSubtype().add("Elemental");
+        this.getSubtype(null).add("Elemental");
         this.color.setRed(true);
 
         this.power = new MageInt(4);

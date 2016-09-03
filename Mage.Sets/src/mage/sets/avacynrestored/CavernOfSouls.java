@@ -142,7 +142,7 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
         if (super.apply(game, source)) {
             // check: ... of the chosen type
             MageObject object = game.getObject(source.getSourceId());
-            if (creatureType != null && object.hasSubtype(creatureType)) {
+            if (creatureType != null && object.hasSubtype(creatureType, game)) {
                 return true;
             }
         }

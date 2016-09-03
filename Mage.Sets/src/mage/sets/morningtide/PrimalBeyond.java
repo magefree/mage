@@ -110,6 +110,6 @@ class PrimalBeyondManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        return object != null && object.hasSubtype("Elemental");
+        return object != null && object.hasSubtype("Elemental", game);
     }
 }

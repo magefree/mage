@@ -151,7 +151,7 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
                     switch (layer) {
                         case TypeChangingEffects_4:
                             if (sublayer == SubLayer.NA) {
-                                permanent.getSubtype().addAll(card.getSubtype());
+                                permanent.getSubtype(game).addAll(card.getSubtype(game));
                             }
 
                             break;

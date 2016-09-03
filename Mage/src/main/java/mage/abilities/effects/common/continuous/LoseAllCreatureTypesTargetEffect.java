@@ -61,7 +61,7 @@ public class LoseAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            return permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
+            return permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
         }
         return false;
     }

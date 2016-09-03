@@ -112,13 +112,13 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                 case ALL:
                                 case ALL_BUT_COLOR:
                                 case ABILITIES_SUBTYPE_AND_PT:
-                                    permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
+                                    permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
                                     break;
                             }
-                            if (token.getSubtype().size() > 0) {
-                                for (String t : token.getSubtype()) {
-                                    if (!permanent.getSubtype().contains(t)) {
-                                        permanent.getSubtype().add(t);
+                            if (token.getSubtype(game).size() > 0) {
+                                for (String t : token.getSubtype(game)) {
+                                    if (!permanent.getSubtype(game).contains(t)) {
+                                        permanent.getSubtype(game).add(t);
                                     }
                                 }
                             }

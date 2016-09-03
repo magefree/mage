@@ -158,8 +158,8 @@ class NecromanticSelectionContinuousEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!creature.getSubtype().contains("Zombie")) {
-                            creature.getSubtype().add("Zombie");
+                        if (!creature.getSubtype(game).contains("Zombie")) {
+                            creature.getSubtype(game).add("Zombie");
                         }
                     }
                     break;

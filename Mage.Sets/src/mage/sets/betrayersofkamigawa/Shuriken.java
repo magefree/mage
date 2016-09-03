@@ -208,7 +208,7 @@ class ShurikenControlEffect extends OneShotEffect {
         if (equipment != null) {
             Permanent creature = game.getPermanent(source.getSourceId());
             if (creature != null) {
-                if (!creature.hasSubtype("Ninja")) {
+                if (!creature.hasSubtype("Ninja", game)) {
                     Permanent damagedCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
                     if (damagedCreature == null) {
                         damagedCreature = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);

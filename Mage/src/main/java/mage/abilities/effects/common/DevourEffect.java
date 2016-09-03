@@ -150,7 +150,7 @@ public class DevourEffect extends ReplacementEffectImpl {
                     for (UUID targetId : target.getTargets()) {
                         Permanent targetCreature = game.getPermanent(targetId);
                         if (targetCreature != null) {
-                            cardSubtypes.add((ArrayList<String>) targetCreature.getSubtype());
+                            cardSubtypes.add((ArrayList<String>) targetCreature.getSubtype(game));
                         }
                         if (targetCreature == null || !targetCreature.sacrifice(source.getSourceId(), game)) {
                             return false;

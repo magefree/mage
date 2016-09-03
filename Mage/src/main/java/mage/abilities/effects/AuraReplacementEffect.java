@@ -206,12 +206,12 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (((ZoneChangeEvent) event).getToZone().equals(Zone.BATTLEFIELD)
                 && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.STACK))) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && (card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")
+            if (card != null && (card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura", game)
                     || // in case of transformable enchantments
                     (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null
                     && card.getSecondCardFace() != null
                     && card.getSecondCardFace().getCardType().contains(CardType.ENCHANTMENT)
-                    && card.getSecondCardFace().hasSubtype("Aura")))) {
+                    && card.getSecondCardFace().hasSubtype("Aura", game)))) {
                 return true;
             }
         }

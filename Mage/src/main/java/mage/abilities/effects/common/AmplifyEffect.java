@@ -100,7 +100,7 @@ public class AmplifyEffect extends ReplacementEffectImpl {
         if (controller != null && sourceCreature != null) {
             FilterCreatureCard filter = new FilterCreatureCard("creatures cards to reveal");
             List<SubtypePredicate> filterSubtypes = new ArrayList<>();
-            for (String subtype : sourceCreature.getSubtype()) {
+            for (String subtype : sourceCreature.getSubtype(game)) {
                 filterSubtypes.add(new SubtypePredicate((subtype)));
             }
             if (filterSubtypes.size() > 1) {

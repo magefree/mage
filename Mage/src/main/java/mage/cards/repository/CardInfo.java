@@ -139,7 +139,7 @@ public class CardInfo {
         this.white = card.getColor(null).isWhite();
 
         this.setTypes(card.getCardType());
-        this.setSubtypes(card.getSubtype());
+        this.setSubtypes(card.getSubtype(null));
         this.setSuperTypes(card.getSupertype());
         this.setManaCosts(card.getManaCost().getSymbols());
 

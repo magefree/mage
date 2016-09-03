@@ -62,19 +62,19 @@ public class DomainValue implements DynamicValue {
         }
         for (Permanent p : game.getBattlefield().getAllActivePermanents(targetPlayer)) {
             if (p.getCardType().contains(CardType.LAND)) {
-                if (havePlains == 0 && p.getSubtype().contains("Plains")) {
+                if (havePlains == 0 && p.getSubtype(game).contains("Plains")) {
                     havePlains = 1;
                 }
-                if (haveIslands == 0 && p.getSubtype().contains("Island")) {
+                if (haveIslands == 0 && p.getSubtype(game).contains("Island")) {
                     haveIslands = 1;
                 }
-                if (haveMountains == 0 && p.getSubtype().contains("Mountain")) {
+                if (haveMountains == 0 && p.getSubtype(game).contains("Mountain")) {
                     haveMountains = 1;
                 }
-                if (haveSwamps == 0 && p.getSubtype().contains("Swamp")) {
+                if (haveSwamps == 0 && p.getSubtype(game).contains("Swamp")) {
                     haveSwamps = 1;
                 }
-                if (haveForests == 0 && p.getSubtype().contains("Forest")) {
+                if (haveForests == 0 && p.getSubtype(game).contains("Forest")) {
                     haveForests = 1;
                 }
             }

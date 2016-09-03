@@ -117,8 +117,8 @@ public class ParagonOfTheAmesha extends CardImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        permanent.getSubtype().clear();
-                        permanent.getSubtype().add("Angel");
+                        permanent.getSubtype(game).clear();
+                        permanent.getSubtype(game).add("Angel");
                     }
                     break;
             }

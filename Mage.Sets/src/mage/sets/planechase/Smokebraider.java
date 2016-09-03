@@ -97,7 +97,7 @@ class SmokebraiderManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object != null && object.hasSubtype("Elemental")) {
+        if (object != null && object.hasSubtype("Elemental", game)) {
             return true;
         }
         return false;

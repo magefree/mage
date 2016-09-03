@@ -96,7 +96,7 @@ class ElderCatharAddCountersTargetEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
             if (counter != null) {
-                if (permanent.hasSubtype("Human")) {
+                if (permanent.hasSubtype("Human", game)) {
                     permanent.addCounters(counter2.copy(), game);
                 } else {
                     permanent.addCounters(counter.copy(), game);

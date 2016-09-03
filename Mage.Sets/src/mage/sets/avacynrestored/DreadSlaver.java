@@ -133,7 +133,7 @@ class DreadSlaverContiniousEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        creature.getSubtype().add("Zombie");
+                        creature.getSubtype(game).add("Zombie");
                     }
                     break;
                 case ColorChangingEffects_5:

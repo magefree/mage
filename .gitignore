@@ -92,6 +92,7 @@ hs_err*.log
 *.txt
 Mage.Client/serverlist.txt
 /bin/
+/out/
 /target/
 
 client_secrets.json
