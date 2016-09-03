@@ -1,5 +1,5 @@
 /*
- *  
+ *
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -25,15 +25,15 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
- * 
+ *
  */
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -47,6 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
@@ -56,7 +57,7 @@ import mage.util.CardUtil;
  */
 public class KondasBanner extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("Legendary creatures");
+    private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("legendary creatures");
 
     static {
         legendaryFilter.add(new SupertypePredicate("Legendary"));
@@ -68,8 +69,9 @@ public class KondasBanner extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 
+        Target target = new TargetControlledCreaturePermanent(1, 1, legendaryFilter, false);
         // Konda's Banner can be attached only to a legendary creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("{this} can be attached only to a legendary creature")));
+        this.addAbility(new AttachableToRestrictedAbility(target));
 
         // Creatures that share a color with equipped creature get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KondasBannerColorBoostEffect()));
@@ -78,10 +80,7 @@ public class KondasBanner extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KondasBannerTypeBoostEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(
-                Outcome.AddAbility,
-                new GenericManaCost(2),
-                new TargetControlledCreaturePermanent(1, 1, legendaryFilter, false)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), target));
 
     }
 
