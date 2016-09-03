@@ -30,7 +30,7 @@ package mage.sets.gatecrash;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -52,7 +52,7 @@ public class AssembleTheLegion extends CardImpl {
 
         // At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on Assemble the Legion.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.MUSTER.createInstance()), TargetController.YOU, false);
-        ability.addEffect(new CreateTokenEffect(new SoldierTokenWithHaste(), new CountersCount(CounterType.MUSTER)));
+        ability.addEffect(new CreateTokenEffect(new SoldierTokenWithHaste(), new CountersSourceCount(CounterType.MUSTER)));
         this.addAbility(ability);
     }
 

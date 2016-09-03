@@ -7,15 +7,15 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-public class CountersCount implements DynamicValue {
+public class CountersSourceCount implements DynamicValue {
 
     private final CounterType counter;
 
-    public CountersCount(CounterType counter) {
+    public CountersSourceCount(CounterType counter) {
         this.counter = counter;
     }
 
-    public CountersCount(final CountersCount countersCount) {
+    public CountersSourceCount(final CountersSourceCount countersCount) {
         this.counter = countersCount.counter;
     }
 
@@ -29,8 +29,8 @@ public class CountersCount implements DynamicValue {
     }
 
     @Override
-    public CountersCount copy() {
-        return new CountersCount(this);
+    public CountersSourceCount copy() {
+        return new CountersSourceCount(this);
     }
 
     @Override
