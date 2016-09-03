@@ -5,17 +5,17 @@
  */
 package org.mage.card.arcane;
 
-import java.text.AttributedString;
 import java.util.List;
 
 /**
  * @author StravantUser
  */
 public class TextboxLoyaltyRule extends TextboxRule {
+
     public int loyaltyChange;
-    
+
     public static int MINUS_X = 100;
-    
+
     public String getChangeString() {
         if (loyaltyChange == MINUS_X) {
             return "-X";
@@ -25,7 +25,7 @@ public class TextboxLoyaltyRule extends TextboxRule {
             return "" + loyaltyChange;
         }
     }
-    
+
     public TextboxLoyaltyRule(String text, List<AttributeRegion> regions, int loyaltyChange) {
         super(text, regions, TextboxRuleType.LOYALTY);
         this.loyaltyChange = loyaltyChange;

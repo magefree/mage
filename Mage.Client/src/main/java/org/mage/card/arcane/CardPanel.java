@@ -2,7 +2,6 @@ package org.mage.card.arcane;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -20,8 +19,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -30,7 +27,6 @@ import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
-import mage.client.components.layout.RelativeLayout;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.audio.AudioManager;
@@ -75,7 +71,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public double flippedAngle = 0;
 
     private final List<MagePermanent> links = new ArrayList<>();
-    
+
     public JPanel buttonPanel;
     private JButton dayNightButton;
     private JButton showCopySourceButton;
@@ -118,7 +114,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         this.gameCard = newGameCard;
         this.callback = callback;
         this.gameId = gameId;
-        
+
         // Gather info about the card
         this.isPermanent = this.gameCard instanceof PermanentView;
         if (isPermanent) {
@@ -127,14 +123,14 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
         // Set to requested size
         this.setCardBounds(0, 0, dimension.width, dimension.height);
-        
+
         // Create button panel for Transform and Show Source (copied cards)
         buttonPanel = new JPanel();
         buttonPanel.setLayout(null);
         buttonPanel.setOpaque(false);
         buttonPanel.setVisible(true);
         add(buttonPanel);
-        
+
         // Both card rendering implementations have a transform button
         if (this.gameCard.canTransform()) {
             // Create the day night button
@@ -155,7 +151,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
                     Animation.transformCard(CardPanel.this, CardPanel.this, true);
                 }
             });
-            
+
             // Add it
             buttonPanel.add(dayNightButton);
         }
@@ -199,14 +195,14 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
         flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
     }
-    
+
     @Override
     public void doLayout() {
         // Position transform and show source buttons
         buttonPanel.setLocation(cardXOffset, cardYOffset);
         buttonPanel.setSize(cardWidth, cardHeight);
-        int x = cardWidth/20;
-        int y = cardHeight/10;
+        int x = cardWidth / 20;
+        int y = cardHeight / 10;
         if (dayNightButton != null) {
             dayNightButton.setLocation(x, y);
             y += 25;
@@ -216,9 +212,9 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             showCopySourceButton.setLocation(x, y);
         }
     }
-    
+
     public final void initialDraw() {
-        // Kick off 
+        // Kick off
         if (gameCard.isTransformed()) {
             // this calls updateImage
             toggleTransformed();
@@ -246,8 +242,8 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         this.callback = null;
         this.data = null;
     }
-    
-    // Copy the graphical resources of another CardPanel over to this one, 
+
+    // Copy the graphical resources of another CardPanel over to this one,
     // if possible (may not be possible if they have different implementations)
     // Used when cards are moving between zones
     public abstract void transferResources(CardPanel panel);
@@ -273,7 +269,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public void setAnimationPanel(boolean isAnimationPanel) {
         this.isAnimationPanel = isAnimationPanel;
     }
-    
+
     public boolean isAnimationPanel() {
         return this.isAnimationPanel;
     }
@@ -282,7 +278,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
     }
-    
+
     public boolean isSelected() {
         return this.isSelected;
     }
@@ -291,16 +287,16 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public List<MagePermanent> getLinks() {
         return links;
     }
-    
+
     @Override
     public void setChoosable(boolean isChoosable) {
         this.isChoosable = isChoosable;
     }
-    
+
     public boolean isChoosable() {
         return this.isChoosable;
     }
-    
+
     public boolean hasSickness() {
         return this.hasSickness;
     }
@@ -308,7 +304,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public boolean isPermanent() {
         return this.isPermanent;
     }
-    
+
     @Override
     public void setCardAreaRef(JPanel cardArea) {
         this.cardArea = cardArea;
@@ -317,13 +313,13 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public void setShowCastingCost(boolean showCastingCost) {
         this.showCastingCost = showCastingCost;
     }
-    
+
     public boolean getShowCastingCost() {
         return this.showCastingCost;
     }
-    
+
     /**
-     * Overridden by different card rendering styles 
+     * Overridden by different card rendering styles
      */
     protected abstract void paintCard(Graphics2D g);
 
@@ -356,7 +352,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
 
         // Deferr to subclasses
         paintCard(g2d);
-        
+
         // Done, dispose of the context
         g2d.dispose();
     }
@@ -372,7 +368,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             setBounds(x - cardXOffset, y - cardYOffset, getWidth(), getHeight());
             return;
         }
-        
+
         this.cardWidth = cardWidth;
         this.symbolWidth = cardWidth / 7;
         this.cardHeight = cardHeight;
@@ -436,7 +432,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public final int getCardHeight() {
         return cardHeight;
     }
-    
+
     public final int getSymbolWidth() {
         return symbolWidth;
     }
@@ -510,15 +506,15 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     }
 
     /**
-     * Inheriting classes should implement update(CardView card) by
-     * using this. However, they should ALSO call repaint() after the superclass
-     * call to this function, that can't be done here as the overriders may need 
-     * to do things both before and after this call before repainting.
+     * Inheriting classes should implement update(CardView card) by using this.
+     * However, they should ALSO call repaint() after the superclass call to
+     * this function, that can't be done here as the overriders may need to do
+     * things both before and after this call before repainting.
      */
     @Override
     public void update(CardView card) {
         this.updateCard = card;
-        
+
         // Animation update
         if (isPermanent && (card instanceof PermanentView)) {
             boolean needsTapping = isTapped() != ((PermanentView) card).isTapped();
@@ -538,11 +534,11 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         // Update panel attributes
         this.isChoosable = card.isChoosable();
         this.isSelected = card.isSelected();
-        
+
         // Update art?
-        boolean mustUpdateArt = 
-                (!gameCard.getName().equals(card.getName())) ||
-                (gameCard.isFaceDown() != card.isFaceDown());
+        boolean mustUpdateArt
+                = (!gameCard.getName().equals(card.getName()))
+                || (gameCard.isFaceDown() != card.isFaceDown());
 
         // Set the new card
         this.gameCard = card;
@@ -550,12 +546,12 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
         // Update tooltip text
         String cardType = getType(card);
         tooltipText.setText(getText(cardType, card));
-        
+
         // Update the image
         if (mustUpdateArt) {
             updateArtImage();
         }
-        
+
         // Update transform circle
         if (card.canTransform()) {
             BufferedImage transformIcon;
@@ -742,13 +738,13 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public void update(PermanentView card) {
         this.hasSickness = card.hasSummoningSickness();
         this.showCopySourceButton.setVisible(card.isCopy());
-        update((CardView)card);
+        update((CardView) card);
     }
 
     @Override
     public PermanentView getOriginalPermanent() {
         if (isPermanent) {
-            return (PermanentView)this.gameCard;
+            return (PermanentView) this.gameCard;
         }
         throw new IllegalStateException("Is not permanent.");
     }
@@ -835,7 +831,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
     public void setTextOffset(int yOffset) {
         yTextOffset = yOffset;
     }
-    
+
     public int getTextOffset() {
         return yTextOffset;
     }
