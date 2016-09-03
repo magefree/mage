@@ -168,10 +168,10 @@ class DeceiverOfFormCopyEffect extends ContinuousEffectImpl {
                 permanent.getCardType().add(type);
             }
         }
-        permanent.getSubtype().clear();
-        for (String type : card.getSubtype()) {
-            if (!permanent.getSubtype().contains(type)) {
-                permanent.getSubtype().add(type);
+        permanent.getSubtype(game).clear();
+        for (String type : card.getSubtype(game)) {
+            if (!permanent.getSubtype(game).contains(type)) {
+                permanent.getSubtype(game).add(type);
             }
         }
         permanent.getSupertype().clear();

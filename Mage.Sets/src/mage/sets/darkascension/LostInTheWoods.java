@@ -96,7 +96,7 @@ class LostInTheWoodsEffect extends OneShotEffect {
             controller.revealCards(sourceObject.getName(), cards, game);
 
             if (card != null) {
-                if (card.getSubtype().contains("Forest")) {
+                if (card.getSubtype(game).contains("Forest")) {
                     Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
                     if (permanent != null) {
                         permanent.removeFromCombat(game);

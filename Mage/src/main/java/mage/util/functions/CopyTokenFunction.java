@@ -96,9 +96,9 @@ public class CopyTokenFunction implements Function<Token, Card> {
         for (CardType type : sourceObj.getCardType()) {
             target.getCardType().add(type);
         }
-        target.getSubtype().clear();
-        for (String type : sourceObj.getSubtype()) {
-            target.getSubtype().add(type);
+        target.getSubtype(null).clear();
+        for (String type : sourceObj.getSubtype(null)) {
+            target.getSubtype(null).add(type);
         }
         target.getSupertype().clear();
         for (String type : sourceObj.getSupertype()) {

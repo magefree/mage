@@ -1,7 +1,6 @@
 package mage.abilities.condition.common;
 
 import java.util.List;
-import java.util.Set;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
@@ -24,7 +23,7 @@ public class SourceHasSubtypeCondition implements Condition {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             for (String subtype : subtypes) {
-                if (permanent.hasSubtype(subtype)) {
+                if (permanent.hasSubtype(subtype, game)) {
                     return true;
                 }
             }

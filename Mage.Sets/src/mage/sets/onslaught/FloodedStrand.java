@@ -28,6 +28,7 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.FetchLandActivatedAbility;
@@ -42,6 +43,7 @@ public class FloodedStrand extends CardImpl {
     public FloodedStrand(UUID ownerId) {
         super(ownerId, 316, "Flooded Strand", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ONS";
+        this.frameColor = new ObjectColor("UW");
 
         // {tap}, Pay 1 life, Sacrifice Flooded Strand: Search your library for a Plains or Island card and put it onto the battlefield. Then shuffle your library.
         this.addAbility(new FetchLandActivatedAbility(new String[]{"Plains", "Island"}));

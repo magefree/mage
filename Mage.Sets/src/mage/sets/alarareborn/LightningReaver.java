@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FearAbility;
@@ -98,7 +98,7 @@ class DamageOpponentsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DynamicValue amount = new CountersCount(CounterType.CHARGE);
+        DynamicValue amount = new CountersSourceCount(CounterType.CHARGE);
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

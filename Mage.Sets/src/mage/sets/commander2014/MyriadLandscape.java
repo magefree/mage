@@ -110,11 +110,11 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
                     if (landCard != null) {
                         if (landTypes == null) {
                             landTypes = new HashSet<>();
-                            landTypes.addAll(landCard.getSubtype());
+                            landTypes.addAll(landCard.getSubtype(game));
                         } else {
                             for (Iterator<String> iterator = landTypes.iterator(); iterator.hasNext();) {
                                 String next = iterator.next();
-                                if (!landCard.getSubtype().contains(next)) {
+                                if (!landCard.getSubtype(game).contains(next)) {
                                     iterator.remove();
                                 }
                             }
@@ -125,7 +125,7 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
                 if (card != null && landTypes != null) {
                     for (Iterator<String> iterator = landTypes.iterator(); iterator.hasNext();) {
                         String next = iterator.next();
-                        if (card.getSubtype().contains(next)) {
+                        if (card.getSubtype(game).contains(next)) {
                             return true;
                         }
                     }

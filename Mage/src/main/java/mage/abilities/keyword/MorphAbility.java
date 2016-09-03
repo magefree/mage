@@ -302,7 +302,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         mageObject.setName("");
         mageObject.getCardType().clear();
         mageObject.getCardType().add(CardType.CREATURE);
-        mageObject.getSubtype().clear();
+        mageObject.getSubtype(null).clear();
         mageObject.getSupertype().clear();
         mageObject.getManaCost().clear();
         if (mageObject instanceof Permanent) {

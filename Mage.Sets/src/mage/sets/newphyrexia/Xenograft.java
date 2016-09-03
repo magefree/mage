@@ -89,8 +89,8 @@ class XenograftAddSubtypeEffect extends ContinuousEffectImpl {
         if (subtype != null) {
             List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
             for (Permanent permanent : permanents) {
-                if (permanent != null && !permanent.getSubtype().contains(subtype)) {
-                    permanent.getSubtype().add(subtype);
+                if (permanent != null && !permanent.getSubtype(game).contains(subtype)) {
+                    permanent.getSubtype(game).add(subtype);
                 }
             }
             return true;

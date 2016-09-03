@@ -103,19 +103,19 @@ class NakedSingularityEffect extends ReplacementEffectImpl {
             Permanent permanent = game.getPermanent(event.getSourceId());
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Pick a color to produce");
-            if (permanent.hasSubtype("Plains")) {
+            if (permanent.hasSubtype("Plains", game)) {
                 choice.getChoices().add("Red");
             }
-            if (permanent.hasSubtype("Island")) {
+            if (permanent.hasSubtype("Island", game)) {
                 choice.getChoices().add("Green");
             }
-            if (permanent.hasSubtype("Swamp")) {
+            if (permanent.hasSubtype("Swamp", game)) {
                 choice.getChoices().add("White");
             }
-            if (permanent.hasSubtype("Mountain")) {
+            if (permanent.hasSubtype("Mountain", game)) {
                 choice.getChoices().add("Blue");
             }
-            if (permanent.hasSubtype("Forest")) {
+            if (permanent.hasSubtype("Forest", game)) {
                 choice.getChoices().add("Black");
             }
             String chosenColor;
@@ -159,10 +159,10 @@ class NakedSingularityEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanent(event.getSourceId());
         return permanent != null
-                && (permanent.hasSubtype("Plains")
-                        || permanent.hasSubtype("Island")
-                        || permanent.hasSubtype("Swamp")
-                        || permanent.hasSubtype("Mountain")
-                        || permanent.hasSubtype("Forest"));
+                && (permanent.hasSubtype("Plains", game)
+                        || permanent.hasSubtype("Island", game)
+                        || permanent.hasSubtype("Swamp", game)
+                        || permanent.hasSubtype("Mountain", game)
+                        || permanent.hasSubtype("Forest", game));
     }
 }

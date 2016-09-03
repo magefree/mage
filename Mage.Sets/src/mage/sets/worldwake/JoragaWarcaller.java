@@ -33,7 +33,7 @@ import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -81,7 +81,7 @@ public class JoragaWarcaller extends CardImpl {
         
         // Other Elf creatures you control get +1/+1 for each +1/+1 counter on Joraga Warcaller.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new BoostAllEffect( new CountersCount(CounterType.P1P1), new CountersCount(CounterType.P1P1), Duration.WhileOnBattlefield, filter, true, rule)));
+                new BoostAllEffect( new CountersSourceCount(CounterType.P1P1), new CountersSourceCount(CounterType.P1P1), Duration.WhileOnBattlefield, filter, true, rule)));
         
     }
 

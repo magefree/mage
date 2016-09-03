@@ -84,10 +84,10 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                                 }
                             }
                             if (type == null) {
-                                permanent.getSubtype().clear();
+                                permanent.getSubtype(game).clear();
                             }
-                            if (token.getSubtype().size() > 0) {
-                                permanent.getSubtype().addAll(token.getSubtype());
+                            if (token.getSubtype(game).size() > 0) {
+                                permanent.getSubtype(game).addAll(token.getSubtype(game));
                             }
                         }
                         break;

@@ -110,7 +110,7 @@ class EgoErasureLoseEffect extends ContinuousEffectImpl {
         for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {              
-                permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
+                permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
             } else {
                 it.remove();
             }

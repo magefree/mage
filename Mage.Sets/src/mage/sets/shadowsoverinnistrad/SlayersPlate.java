@@ -101,7 +101,7 @@ class SlayersPlateTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent.getAttachments().contains(this.getSourceId()) && permanent.hasSubtype("Human")) {
+            if (permanent.getAttachments().contains(this.getSourceId()) && permanent.hasSubtype("Human", game)) {
                 return true;
             }
         }

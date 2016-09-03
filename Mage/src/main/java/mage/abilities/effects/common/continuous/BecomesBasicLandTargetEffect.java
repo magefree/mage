@@ -132,7 +132,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             for (UUID targetPermanent : targetPointer.getTargets(game, source)) {
                 Permanent land = game.getPermanent(targetPermanent);
                 if (land != null) {
-                    for (String type : land.getSubtype()) {
+                    for (String type : land.getSubtype(game)) {
                         if (!landTypes.contains(type)) {
                             landTypes.add(type);
                         }
@@ -157,8 +157,8 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                         // So the ability removing has to be done before Layer 6
                         land.removeAllAbilities(source.getSourceId(), game);
                         // 305.7
-                        land.getSubtype().removeAll(CardRepository.instance.getLandTypes());
-                        land.getSubtype().addAll(landTypes);
+                        land.getSubtype(game).removeAll(CardRepository.instance.getLandTypes());
+                        land.getSubtype(game).addAll(landTypes);
                         break;
                     case AbilityAddingRemovingEffects_6:
                         for (String landType : landTypes) {

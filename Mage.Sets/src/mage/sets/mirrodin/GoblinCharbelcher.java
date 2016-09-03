@@ -106,7 +106,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
                 cards.add(card);
                 if (card.getCardType().contains(CardType.LAND)){
                     landFound = true;
-                    if(card.getSubtype().contains("Mountain")){
+                    if(card.getSubtype(game).contains("Mountain")){
                         isMountain = true;
                     }
                     break;

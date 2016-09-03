@@ -58,8 +58,8 @@ import mage.watchers.common.CastFromHandWatcher;
  */
 public class WildPair extends CardImpl {
 
-    public WildPair(UUID ownerID) {
-        super(ownerID, 144, "Wild Pair", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
+    public WildPair(UUID ownerId) {
+        super(ownerId, 144, "Wild Pair", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
         this.expansionSetCode = "PLC";
 
         // Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library.

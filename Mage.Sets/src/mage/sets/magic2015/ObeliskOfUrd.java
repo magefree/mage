@@ -101,7 +101,7 @@ class ObeliskOfUrdBoostEffect extends ContinuousEffectImpl {
             String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
             if (subtype != null) {
                 for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                    if (perm.hasSubtype(subtype)) {
+                    if (perm.hasSubtype(subtype, game)) {
                         perm.addPower(2);
                         perm.addToughness(2);
                     }

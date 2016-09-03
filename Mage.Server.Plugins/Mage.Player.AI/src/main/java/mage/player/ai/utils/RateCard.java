@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
- * Class responsible for reading ratings from resources and rating gived cards.
+ * Class responsible for reading ratings from resources and rating given cards.
  * Based on card relative ratings from resources and card parameters.
  *
  * @author nantuko
@@ -61,9 +61,9 @@ public class RateCard {
             type = 15;
         } else if (card.getCardType().contains(CardType.CREATURE)) {
             type = 10;
-        } else if (card.getSubtype().contains("Equipment")) {
+        } else if (card.getSubtype(null).contains("Equipment")) {
             type = 8;
-        } else if (card.getSubtype().contains("Aura")) {
+        } else if (card.getSubtype(null).contains("Aura")) {
             type = 5;
         } else if (card.getCardType().contains(CardType.INSTANT)) {
             type = 7;
@@ -78,7 +78,7 @@ public class RateCard {
     }
 
     private static int isRemoval(Card card) {
-        if (card.getSubtype().contains("Aura") || card.getCardType().contains(CardType.INSTANT)
+        if (card.getSubtype(null).contains("Aura") || card.getCardType().contains(CardType.INSTANT)
                 || card.getCardType().contains(CardType.SORCERY)) {
 
             for (Ability ability : card.getAbilities()) {

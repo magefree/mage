@@ -28,6 +28,7 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.FetchLandActivatedAbility;
@@ -42,6 +43,7 @@ public class PollutedDelta extends CardImpl {
     public PollutedDelta(UUID ownerId) {
         super(ownerId, 321, "Polluted Delta", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ONS";
+        this.frameColor = new ObjectColor("UB");
 
         // {tap}, Pay 1 life, Sacrifice Polluted Delta: Search your library for an Island or Swamp card and put it onto the battlefield. Then shuffle your library.
         this.addAbility(new FetchLandActivatedAbility(new String[]{"Island", "Swamp"}));

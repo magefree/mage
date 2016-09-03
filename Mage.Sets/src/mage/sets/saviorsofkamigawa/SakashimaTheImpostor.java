@@ -83,7 +83,7 @@ class SakashimaTheImpostorApplier extends ApplyToPermanent {
     @Override
     public Boolean apply(Game game, Permanent permanent) {
         if (!permanent.getSupertype().contains("Legendary")) {
-            permanent.getSubtype().add("Legendary");
+            permanent.getSupertype().add("Legendary");
         }
         permanent.setName("Sakashima the Impostor");
         // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step
@@ -97,7 +97,7 @@ class SakashimaTheImpostorApplier extends ApplyToPermanent {
     @Override
     public Boolean apply(Game game, MageObject mageObject) {
         if (!mageObject.getSupertype().contains("Legendary")) {
-            mageObject.getSubtype().add("Legendary");
+            mageObject.getSupertype().add("Legendary");
         }
         mageObject.setName("Sakashima the Impostor");
         // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step

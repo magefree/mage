@@ -103,14 +103,14 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
                         if (!permanent.getCardType().contains(CardType.CREATURE)) {
                             permanent.getCardType().add(CardType.CREATURE);
                         }
-                        if (!permanent.getSubtype().contains("Saproling")) {
-                            permanent.getSubtype().add("Saproling");
+                        if (!permanent.getSubtype(game).contains("Saproling")) {
+                            permanent.getSubtype(game).add("Saproling");
                         }
                         if (!permanent.getCardType().contains(CardType.LAND)) {
                             permanent.getCardType().add(CardType.LAND);
                         }
-                        if (!permanent.getSubtype().contains("Forest")) {
-                            permanent.getSubtype().add("Forest");
+                        if (!permanent.getSubtype(game).contains("Forest")) {
+                            permanent.getSubtype(game).add("Forest");
                         }
                         break;
                     case ColorChangingEffects_5:

@@ -53,6 +53,7 @@ import mage.target.common.TargetControlledPermanent;
 public class AuriokWindwalker extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
+
     static {
         filter.add(new SubtypePredicate("Equipment"));
     }
@@ -67,7 +68,7 @@ public class AuriokWindwalker extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {tap}: Attach target Equipment you control to target creature you control.
+        // {T}: Attach target Equipment you control to target creature you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachTargetEquipmentEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(filter));
         ability.addTarget(new TargetControlledCreaturePermanent());
@@ -83,7 +84,6 @@ public class AuriokWindwalker extends CardImpl {
         return new AuriokWindwalker(this);
     }
 }
-
 
 class AttachTargetEquipmentEffect extends OneShotEffect {
 

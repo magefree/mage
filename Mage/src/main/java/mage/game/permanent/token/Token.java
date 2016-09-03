@@ -55,6 +55,7 @@ public class Token extends MageObjectImpl {
     private int tokenType;
     private String originalCardNumber;
     private String originalExpansionSetCode;
+    private String tokenDescriptor;
     private boolean expansionSetCodeChecked;
     private Card copySourceCard; // the card the Token is a copy from
 
@@ -113,6 +114,26 @@ public class Token extends MageObjectImpl {
         this.copySourceCard = token.copySourceCard; // will never be changed
         this.availableImageSetCodes = token.availableImageSetCodes;
     }
+    
+    private void setTokenDescriptor() {
+        this.tokenDescriptor = tokenDescriptor();
+    }
+    
+    public String getTokenDescriptor() {
+        this.tokenDescriptor = tokenDescriptor();
+        return tokenDescriptor;
+    }
+    
+    private String tokenDescriptor() {
+        String name = this.name.replaceAll("[^a-zA-Z0-9]", "");
+        String color = this.color.toString().replaceAll("[^a-zA-Z0-9]", "");
+        String subtype = this.subtype.toString().replaceAll("[^a-zA-Z0-9]", "");
+        String cardType = this.cardType.toString().replaceAll("[^a-zA-Z0-9]", "");
+        String originalset = this.getOriginalExpansionSetCode();
+        String descriptor = name + "." + color + "." + subtype + "." + cardType + "." + this.power + "." + this.toughness ; 
+        descriptor = descriptor.toUpperCase();
+        return descriptor;
+    }
 
     public String getDescription() {
         return description;
@@ -166,7 +187,7 @@ public class Token extends MageObjectImpl {
             } else {
                 MageObject object = game.getObject(sourceId);
                 if (object instanceof PermanentToken) {
-                    ((PermanentToken) object).getExpansionSetCode();
+                    setCode = ((PermanentToken) object).getExpansionSetCode();
                 }
             }
         }
@@ -241,13 +262,14 @@ public class Token extends MageObjectImpl {
     public void setOriginalCardNumber(String originalCardNumber) {
         this.originalCardNumber = originalCardNumber;
     }
-
-    public String getOriginalExpansionSetCode() {
+    
+    public String getOriginalExpansionSetCode() {        
         return originalExpansionSetCode;
     }
 
     public void setOriginalExpansionSetCode(String originalExpansionSetCode) {
         this.originalExpansionSetCode = originalExpansionSetCode;
+        setTokenDescriptor();
     }
 
     public Card getCopySourceCard() {
@@ -264,15 +286,20 @@ public class Token extends MageObjectImpl {
         if (availableImageSetCodes.size() > 0) {
             if (availableImageSetCodes.contains(code)) {
                 setOriginalExpansionSetCode(code);
-            } else // we should not set random set if appropriate set is already used
-            if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
-                    || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
-                setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
+            } else {
+                // we should not set random set if appropriate set is already used
+                if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
+                        || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
+                    setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
+                }
             }
-        } else if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()) {
-            setOriginalExpansionSetCode(code);
+        } else {
+            if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()) {
+                setOriginalExpansionSetCode(code);
+            }
         }
-    }
+        setTokenDescriptor();
+    }   
 
     public boolean updateExpansionSetCode(String setCode) {
         if (setCode == null || setCode.isEmpty()) {

@@ -37,7 +37,7 @@ public class ManaSymbols {
     private static boolean smallSymbolsFound = false;
     private static boolean mediumSymbolsFound = false;
 
-    private static final Map<String, Image> setImages = new HashMap<>();
+    private static final Map<String, Map<String, Image>> setImages = new HashMap<>();
     private static final Map<String, Dimension> setImagesExist = new HashMap<>();
     private static final Pattern REPLACE_SYMBOLS_PATTERN = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
     private static String cachedPath;
@@ -57,25 +57,32 @@ public class ManaSymbols {
             return;
         }
         for (String set : setCodes) {
-            File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + set + "-C.jpg");
-            try {
-                Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-                int width = image.getWidth(null);
-                if (width > 21) {
-                    int h = image.getHeight(null);
-                    if (h > 0) {
-                        Rectangle r = new Rectangle(21, (int) (h * 21.0f / width));
-                        BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                        setImages.put(set, resized);
-                    }
-                } else {
-                    setImages.put(set, image);
-                }
-            } catch (Exception e) {
-            }
             String[] codes = new String[]{"C", "U", "R", "M"};
+            
+            Map<String, Image> rarityImages = new HashMap<>();
+            setImages.put(set, rarityImages);
+            
+            for (String rarityCode: codes) {
+                File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + set + "-" + rarityCode + ".jpg");
+                try {
+                    Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
+                    int width = image.getWidth(null);
+                    if (width > 21) {
+                        int h = image.getHeight(null);
+                        if (h > 0) {
+                            Rectangle r = new Rectangle(21, (int) (h * 21.0f / width));
+                            BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+                            rarityImages.put(set, resized);
+                        }
+                    } else {
+                        rarityImages.put(rarityCode, image);
+                    }
+                } catch (Exception e) {
+                }
+            }
+            
             try {
-                file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL);
+                File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL);
                 if (!file.exists()) {
                     file.mkdirs();
                 }
@@ -298,14 +305,27 @@ public class ManaSymbols {
     }
 
     public static Image getSetSymbolImage(String set) {
-        return setImages.get(set);
+        return getSetSymbolImage(set, "C");
+    }
+    
+    public static Image getSetSymbolImage(String set, String rarity) {
+        Map<String, Image> rarityImages = setImages.get(set);
+        if (rarityImages != null) {
+            return rarityImages.get(rarity);
+        } else {
+            return null;
+        }       
     }
 
     public static BufferedImage getSizedManaSymbol(String symbol) {
-        if (!manaImages.containsKey(GUISizeHelper.symbolDialogSize)) {
-            loadSymbolsImages(GUISizeHelper.symbolDialogSize);
+        return getSizedManaSymbol(symbol, GUISizeHelper.symbolDialogSize);
+    }
+    
+    public static BufferedImage getSizedManaSymbol(String symbol, int size) {
+        if (!manaImages.containsKey(size)) {
+            loadSymbolsImages(size);
         }
-        Map<String, BufferedImage> sizedSymbols = manaImages.get(GUISizeHelper.symbolDialogSize);
+        Map<String, BufferedImage> sizedSymbols = manaImages.get(size);
         return sizedSymbols.get(symbol);
     }
 }

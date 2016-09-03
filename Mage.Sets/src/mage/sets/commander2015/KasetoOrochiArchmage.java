@@ -97,7 +97,7 @@ class KasetoEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             game.addEffect(new CantBeBlockedTargetEffect(Duration.EndOfTurn), source);
-            if (permanent.getSubtype().contains("Snake")) {
+            if (permanent.getSubtype(game).contains("Snake")) {
                 game.addEffect(new BoostTargetEffect(2,2,Duration.EndOfTurn), source);
             }
             return true;

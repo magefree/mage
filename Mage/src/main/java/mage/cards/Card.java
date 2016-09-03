@@ -65,6 +65,8 @@ public interface Card extends MageObject {
     String getExpansionSetCode();
 
     String getTokenSetCode();
+    
+    String getTokenDescriptor();
 
     void checkForCountersToAdd(Permanent permanent, Game game);
 

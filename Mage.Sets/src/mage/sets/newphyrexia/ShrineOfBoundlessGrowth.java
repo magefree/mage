@@ -39,7 +39,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -68,7 +68,7 @@ public class ShrineOfBoundlessGrowth extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, false));
 
         // {T}, Sacrifice Shrine of Boundless Growth: Add {C} to your mana pool for each charge counter on Shrine of Boundless Growth.
-        Ability ability = new DynamicManaAbility(Mana.ColorlessMana(1), new CountersCount(CounterType.CHARGE), new TapSourceCost());
+        Ability ability = new DynamicManaAbility(Mana.ColorlessMana(1), new CountersSourceCount(CounterType.CHARGE), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 

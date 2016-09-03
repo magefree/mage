@@ -54,7 +54,7 @@ public class BladeOfTheBloodchief extends CardImpl {
     public BladeOfTheBloodchief(UUID ownerId) {
         super(ownerId, 196, "Blade of the Bloodchief", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "ZEN";
-        this.getSubtype().add("Equipment");
+        this.getSubtype(null).add("Equipment");
 
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
         this.addAbility(new BladeOfTheBloodChiefTriggeredAbility());
@@ -130,7 +130,7 @@ class BladeOfTheBloodchiefEffect extends OneShotEffect {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
-                if (creature.hasSubtype("Vampire")) {
+                if (creature.hasSubtype("Vampire", game)) {
                     creature.addCounters(CounterType.P1P1.createInstance(2), game);
                 } else {
                     creature.addCounters(CounterType.P1P1.createInstance(), game);

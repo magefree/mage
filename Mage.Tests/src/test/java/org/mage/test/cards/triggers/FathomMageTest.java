@@ -60,7 +60,7 @@ public class FathomMageTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Fathom Mage", 3, 3);
 
         Permanent fathomMage = getPermanent("Fathom Mage", playerA);
-        Assert.assertEquals("Fathom Mage has to be a Mutant", true, fathomMage.getSubtype().contains("Mutant"));
+        Assert.assertEquals("Fathom Mage has to be a Mutant", true, fathomMage.getSubtype(currentGame).contains("Mutant"));
 
         assertHandCount(playerA, 2);
     }

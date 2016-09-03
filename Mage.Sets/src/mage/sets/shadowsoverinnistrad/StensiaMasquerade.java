@@ -114,7 +114,7 @@ class StensiaMasqueradeTriggeredAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent permanent = game.getPermanent(event.getSourceId());
         if (damageEvent.isCombatDamage() && permanent != null
-                && permanent.hasSubtype("Vampire") && permanent.getControllerId().equals(controllerId)) {
+                && permanent.hasSubtype("Vampire", game) && permanent.getControllerId().equals(controllerId)) {
             this.getEffects().clear();
             AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
             effect.setTargetPointer(new FixedTarget(permanent.getId()));

@@ -1340,9 +1340,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(this.getId(), game)) {
                 if (game.getOpponents(this.getId()).contains(permanent.getControllerId())
                         && permanent.getCardType().contains(CardType.CREATURE)
-                        && permanent.getSubtype().size() > 0) {
-                    if (choice.getChoices().contains(permanent.getSubtype().get(0))) {
-                        choice.setChoice(permanent.getSubtype().get(0));
+                        && permanent.getSubtype(game).size() > 0) {
+                    if (choice.getChoices().contains(permanent.getSubtype(game).get(0))) {
+                        choice.setChoice(permanent.getSubtype(game).get(0));
                         break;
                     }
                 }
@@ -1352,9 +1352,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (UUID opponentId : game.getOpponents(this.getId())) {
                     Player opponent = game.getPlayer(opponentId);
                     for (Card card : opponent.getGraveyard().getCards(game)) {
-                        if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype().size() > 0) {
-                            if (choice.getChoices().contains(card.getSubtype().get(0))) {
-                                choice.setChoice(card.getSubtype().get(0));
+                        if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype(game).size() > 0) {
+                            if (choice.getChoices().contains(card.getSubtype(game).get(0))) {
+                                choice.setChoice(card.getSubtype(game).get(0));
                                 break;
                             }
                         }
@@ -1368,9 +1368,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // choose a creature type of hand or library
             for (UUID cardId : this.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype().size() > 0) {
-                    if (choice.getChoices().contains(card.getSubtype().get(0))) {
-                        choice.setChoice(card.getSubtype().get(0));
+                if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype(game).size() > 0) {
+                    if (choice.getChoices().contains(card.getSubtype(game).get(0))) {
+                        choice.setChoice(card.getSubtype(game).get(0));
                         break;
                     }
                 }
@@ -1378,9 +1378,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (!choice.isChosen()) {
                 for (UUID cardId : this.getLibrary().getCardList()) {
                     Card card = game.getCard(cardId);
-                    if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype().size() > 0) {
-                        if (choice.getChoices().contains(card.getSubtype().get(0))) {
-                            choice.setChoice(card.getSubtype().get(0));
+                    if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype(game).size() > 0) {
+                        if (choice.getChoices().contains(card.getSubtype(game).get(0))) {
+                            choice.setChoice(card.getSubtype(game).get(0));
                             break;
                         }
                     }

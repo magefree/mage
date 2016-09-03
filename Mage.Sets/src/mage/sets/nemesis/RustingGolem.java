@@ -30,7 +30,7 @@ package mage.sets.nemesis;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.FadingAbility;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class RustingGolem extends CardImpl {
         this.addAbility(new FadingAbility(5, this));
         // Rusting Golem's power and toughness are each equal to the number of fade counters on it.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(
-            new CountersCount(CounterType.FADE), Duration.EndOfGame)));
+            new CountersSourceCount(CounterType.FADE), Duration.EndOfGame)));
     }
 
     public RustingGolem(final RustingGolem card) {

@@ -92,16 +92,16 @@ class CoatOfArmsEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
-            int amount = getAmount(permanents, permanent);
+            int amount = getAmount(permanents, permanent, game);
             permanent.addPower(amount);
             permanent.addToughness(amount);
         }
         return true;
     }
 
-    private int getAmount(List<Permanent> permanents, Permanent target) {
+    private int getAmount(List<Permanent> permanents, Permanent target, Game game) {
         int amount = 0;
-        List<String> targetSubtype = target.getSubtype();
+        List<String> targetSubtype = target.getSubtype(game);
         if (target.getAbilities().contains(ChangelingAbility.getInstance())) {
             return permanents.size() - 1;
         }
@@ -109,7 +109,7 @@ class CoatOfArmsEffect extends ContinuousEffectImpl {
             if (!permanent.getId().equals(target.getId())) {
                 for (String subtype : targetSubtype) {
                     if (!CardUtil.isNonCreatureSubtype(subtype)) {
-                        if (permanent.hasSubtype(subtype)) {
+                        if (permanent.hasSubtype(subtype, game)) {
                             amount++;
                             break;
                         }

@@ -110,7 +110,7 @@ class CoaxFromTheBlindEternitiesEffect extends OneShotEffect {
                     filteredCards.add(sideboardCard.getId());
                 }
                 for (Card exileCard : exile) {
-                    if (exileCard.getOwnerId().equals(source.getControllerId()) && exileCard.hasSubtype("Eldrazi")) {
+                    if (exileCard.getOwnerId().equals(source.getControllerId()) && exileCard.hasSubtype("Eldrazi", game)) {
                         filteredCards.add(exileCard);
                     }
                 }

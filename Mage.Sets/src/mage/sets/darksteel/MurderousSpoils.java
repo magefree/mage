@@ -100,7 +100,7 @@ class MurderousSpoilsEffect extends OneShotEffect {
             List<Permanent> attachments = new ArrayList<Permanent>();
             for (UUID uuid : target.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached.getSubtype().contains("Equipment")) {
+                if (attached.getSubtype(game).contains("Equipment")) {
                     attachments.add(attached);
                 }
             }

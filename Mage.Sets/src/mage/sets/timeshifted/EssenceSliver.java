@@ -98,7 +98,7 @@ class DealsDamageAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature != null && creature.hasSubtype("Sliver")) {
+        if (creature != null && creature.hasSubtype("Sliver", game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setValue("damage", event.getAmount());
             }

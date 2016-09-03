@@ -121,7 +121,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
-    boolean cantBeEnchantedBy(MageObject source, Game game);
+    boolean cantBeAttachedBy(MageObject source, Game game);
 
     boolean wasControlledFromStartOfControllerTurn();
 

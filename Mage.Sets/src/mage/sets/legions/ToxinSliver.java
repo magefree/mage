@@ -97,7 +97,7 @@ class DealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-            if (game.getPermanent(event.getSourceId()).hasSubtype("Sliver")) {
+            if (game.getPermanent(event.getSourceId()).hasSubtype("Sliver", game)) {
                 if (setTargetPointer) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(game.getControllerId(event.getTargetId())));

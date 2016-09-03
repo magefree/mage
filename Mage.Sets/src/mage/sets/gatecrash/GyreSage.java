@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.keyword.EvolveAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class GyreSage extends CardImpl {
         this.addAbility(new EvolveAbility());
         
         //{T} : Add {G} to your mana pool for each +1/+1 counter on Gyre Sage.
-        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new CountersCount(CounterType.P1P1)));
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new CountersSourceCount(CounterType.P1P1)));
     }
 
     public GyreSage(final GyreSage card) {

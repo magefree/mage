@@ -96,7 +96,7 @@ class GuulDrazOverseerEffect extends OneShotEffect {
         Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (controller != null && land != null) {
             int boost = 1;
-            if (land.getSubtype().contains("Swamp")) {
+            if (land.getSubtype(game).contains("Swamp")) {
                 boost = 2;
             }
             game.addEffect(new BoostControlledEffect(boost, 0, Duration.EndOfTurn, true), source);

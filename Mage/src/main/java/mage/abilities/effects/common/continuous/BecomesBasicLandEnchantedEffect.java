@@ -98,27 +98,27 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
                         for (String landType : landTypes) {
                             switch (landType) {
                                 case "Swamp":
-                                    if (permanent.getSubtype().contains("Swamp")) { // type can be removed by other effect with newer timestamp, so no ability adding
+                                    if (permanent.getSubtype(game).contains("Swamp")) { // type can be removed by other effect with newer timestamp, so no ability adding
                                         permanent.addAbility(new BlackManaAbility(), source.getSourceId(), game);
                                     }
                                     break;
                                 case "Mountain":
-                                    if (permanent.getSubtype().contains("Mountain")) {
+                                    if (permanent.getSubtype(game).contains("Mountain")) {
                                         permanent.addAbility(new RedManaAbility(), source.getSourceId(), game);
                                     }
                                     break;
                                 case "Forest":
-                                    if (permanent.getSubtype().contains("Forest")) {
+                                    if (permanent.getSubtype(game).contains("Forest")) {
                                         permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
                                     }
                                     break;
                                 case "Island":
-                                    if (permanent.getSubtype().contains("Island")) {
+                                    if (permanent.getSubtype(game).contains("Island")) {
                                         permanent.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                                     }
                                     break;
                                 case "Plains":
-                                    if (permanent.getSubtype().contains("Plains")) {
+                                    if (permanent.getSubtype(game).contains("Plains")) {
                                         permanent.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
                                     }
                                     break;
@@ -127,8 +127,8 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
                         break;
                     case TypeChangingEffects_4:
                         // subtypes are all removed by changing the subtype to a land type.
-                        permanent.getSubtype().removeAll(allLandTypes);
-                        permanent.getSubtype().addAll(landTypes);
+                        permanent.getSubtype(game).removeAll(allLandTypes);
+                        permanent.getSubtype(game).addAll(landTypes);
                         break;
                 }
                 return true;

@@ -74,6 +74,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String cardNumber;
     public String expansionSetCode;
     protected String tokenSetCode;
+    protected String tokenDescriptor;
     protected Rarity rarity;
     protected boolean canTransform;
     protected Card secondSideCard;
@@ -316,6 +317,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public String getTokenSetCode() {
         return tokenSetCode;
     }
+    
+    @Override
+    public String getTokenDescriptor() {
+        return tokenDescriptor;
+    }    
 
     @Override
     public List<Mana> getMana() {
@@ -756,6 +762,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 return cardAttribute.getColor();
             }
         }
-        return super.getColor(game); //To change body of generated methods, choose Tools | Templates.
+        return super.getColor(game);
+    }
+    
+    @Override
+    public List<String> getSubtype(Game game) {
+        if (game != null) {
+            CardAttribute cardAttribute = game.getState().getCardAttribute(getId());
+            if (cardAttribute != null) {
+                return cardAttribute.getSubtype();
+            }
+        }
+        return super.getSubtype(game);
     }
 }

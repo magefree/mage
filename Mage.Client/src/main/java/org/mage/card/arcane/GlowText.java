@@ -2,20 +2,12 @@ package org.mage.card.arcane;
 
 import com.google.common.base.Function;
 import com.google.common.collect.MapMaker;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
@@ -23,10 +15,12 @@ import java.text.BreakIterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import javax.swing.*;
 import mage.client.util.ImageCaches;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 
 public class GlowText extends JLabel {
+
     private static final long serialVersionUID = 1827677946939348001L;
     private int glowSize;
     @SuppressWarnings("unused")
@@ -36,12 +30,12 @@ public class GlowText extends JLabel {
     private int lineCount = 0;
     private static Map<Key, BufferedImage> IMAGE_CACHE;
 
-    private final static class Key
-    {
+    private final static class Key {
+
         final int width;
         final int height;
         final String text;
-        final Map<TextAttribute,?> fontAttributes;
+        final Map<TextAttribute, ?> fontAttributes;
         final Color color;
         final int glowSize;
         final float glowIntensity;
@@ -53,8 +47,9 @@ public class GlowText extends JLabel {
 
         Font getFont() {
             Font res = this.originalFont.get();
-            if(res == null)
+            if (res == null) {
                 res = Font.getFont(this.fontAttributes);
+            }
             return res;
         }
 
@@ -138,18 +133,18 @@ public class GlowText extends JLabel {
         }));
     }
 
-    public void setGlow (Color glowColor, int size, float intensity) {
+    public void setGlow(Color glowColor, int size, float intensity) {
         this.glowColor = glowColor;
         this.glowSize = size;
         this.glowIntensity = intensity;
     }
 
-    public void setWrap (boolean wrap) {
+    public void setWrap(boolean wrap) {
         this.wrap = wrap;
     }
 
     @Override
-    public Dimension getPreferredSize () {
+    public Dimension getPreferredSize() {
         Dimension size = super.getPreferredSize();
         size.width += glowSize;
         size.height += glowSize / 2;
@@ -157,7 +152,7 @@ public class GlowText extends JLabel {
     }
 
     @Override
-    public void paint (Graphics g) {
+    public void paint(Graphics g) {
         if (getText().length() == 0) {
             return;
         }
@@ -165,7 +160,7 @@ public class GlowText extends JLabel {
         g.drawImage(IMAGE_CACHE.get(new Key(getWidth(), getHeight(), getText(), getFont(), getForeground(), glowSize, glowIntensity, glowColor, wrap)), 0, 0, null);
     }
 
-    private static BufferedImage createImage (Key key) {
+    private static BufferedImage createImage(Key key) {
         Dimension size = new Dimension(key.width, key.height);
         BufferedImage image = GraphicsUtilities.createCompatibleTranslucentImage(size.width, size.height);
         Graphics2D g2d = image.createGraphics();

@@ -151,8 +151,8 @@ class NyleasPresenceLandTypeEffect extends ContinuousEffectImpl {
                         break;
                     case TypeChangingEffects_4:
                         for (String subtype : landTypes) {
-                            if (!land.getSubtype().contains(subtype)) {
-                                land.getSubtype().add(subtype);
+                            if (!land.getSubtype(game).contains(subtype)) {
+                                land.getSubtype(game).add(subtype);
                             }
                         }
                         break;

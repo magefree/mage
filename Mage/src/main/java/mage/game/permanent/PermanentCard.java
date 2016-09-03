@@ -63,7 +63,7 @@ public class PermanentCard extends PermanentImpl {
     private void init(Card card, Game game) {
         power = card.getPower().copy();
         toughness = card.getToughness().copy();
-        copyFromCard(card);
+        copyFromCard(card, game);
         // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
         if (otherAbilities != null) {
@@ -95,13 +95,13 @@ public class PermanentCard extends PermanentImpl {
     public void reset(Game game) {
         // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
-        copyFromCard(card);
+        copyFromCard(card, game);
         power.resetToBaseValue();
         toughness.resetToBaseValue();
         super.reset(game);
     }
 
-    protected void copyFromCard(final Card card) {
+    protected void copyFromCard(final Card card, final Game game) {
         this.name = card.getName();
         this.abilities.clear();
         if (this.faceDown) {
@@ -118,12 +118,13 @@ public class PermanentCard extends PermanentImpl {
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
         this.color = card.getColor(null).copy();
+        this.frameColor = card.getFrameColor(null).copy();
         this.manaCost = card.getManaCost().copy();
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }
         this.subtype.clear();
-        this.subtype.addAll(card.getSubtype());
+        this.subtype.addAll(card.getSubtype(game));
         this.supertype.clear();
         this.supertype.addAll(card.getSupertype());
         this.expansionSetCode = card.getExpansionSetCode();

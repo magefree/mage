@@ -29,6 +29,7 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.FetchLandActivatedAbility;
@@ -43,6 +44,7 @@ public class VerdantCatacombs extends CardImpl {
     public VerdantCatacombs(UUID ownerId) {
         super(ownerId, 229, "Verdant Catacombs", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "ZEN";
+        this.frameColor = new ObjectColor("BG");
         this.addAbility(new FetchLandActivatedAbility(new String[] {"Forest", "Swamp"}));
     }
 

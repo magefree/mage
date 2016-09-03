@@ -127,7 +127,7 @@ class SliverHiveManaCondition extends CreatureCastManaCondition {
     public boolean apply(Game game, Ability source, UUID manaProducer, Cost costToPay) {
         if (super.apply(game, source)) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object.hasSubtype("Sliver")) {
+            if (object.hasSubtype("Sliver", game)) {
                 return true;
             }
         }

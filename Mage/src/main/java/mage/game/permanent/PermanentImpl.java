@@ -625,13 +625,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean changeControllerId(UUID controllerId, Game game) {
         Player newController = game.getPlayer(controllerId);
-        
+
         GameEvent loseControlEvent = GameEvent.getEvent(GameEvent.EventType.LOSE_CONTROL, this.getId(), null, controllerId);
 
         if (game.replaceEvent(loseControlEvent)) {
             return false;
         }
-        
+
         if (newController != null && (!newController.hasLeft() || !newController.hasLost())) {
             this.controllerId = controllerId;
             return true;
@@ -981,7 +981,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean hasProtectionFrom(MageObject source, Game game) {
-        for (ProtectionAbility ability : abilities.getProtectionAbilities()) {
+        for (ProtectionAbility ability : this.getAbilities(game).getProtectionAbilities()) {
             if (!ability.canTarget(source, game)) {
                 return true;
             }
@@ -990,9 +990,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean cantBeEnchantedBy(MageObject source, Game game) {
-        for (ProtectionAbility ability : abilities.getProtectionAbilities()) {
-            if (!(source.getSubtype().contains("Aura")
+    public boolean cantBeAttachedBy(MageObject source, Game game) {
+        for (ProtectionAbility ability : this.getAbilities(game).getProtectionAbilities()) {
+            if (!(source.getSubtype(game).contains("Aura")
                     && !ability.removesAuras())
                     && !source.getId().equals(ability.getAuraIdNotToBeRemoved())
                     && !ability.canTarget(source, game)) {

@@ -135,8 +135,8 @@ class VisionCharmEffect extends ContinuousEffectImpl {
         filter.add(new SubtypePredicate(targetLandType));
         for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             //Remove all existing subtypes and replace them with the selected Basic Land Type
-            land.getSubtype().removeAll(land.getSubtype());
-            land.getSubtype().add(targetBasicLandType);
+            land.getSubtype(game).removeAll(land.getSubtype(game));
+            land.getSubtype(game).add(targetBasicLandType);
 
             /* Remove the existing abilities and replace them with the ability
                of the chosen basic land */
