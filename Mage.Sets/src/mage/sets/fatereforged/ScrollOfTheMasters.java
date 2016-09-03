@@ -34,7 +34,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -69,7 +69,7 @@ public class ScrollOfTheMasters extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), filterNonCreature, false));
 
         // {3}, {T}: Target creature you control gets +1/+1 until end of turn for each lore counter on Scroll of the Masters.
-        DynamicValue xValue = new CountersCount(CounterType.LORE);
+        DynamicValue xValue = new CountersSourceCount(CounterType.LORE);
         Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn);
         effect.setText("Target creature you control gets +1/+1 until end of turn for each lore counter on {this}");
         Ability ability = new SimpleActivatedAbility(

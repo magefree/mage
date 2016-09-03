@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
@@ -73,7 +73,7 @@ public class VastwoodHydra extends CardImpl {
 
         // When Vastwood Hydra dies, you may distribute a number of +1/+1 counters equal to the number of +1/+1 counters on Vastwood Hydra among any number of creatures you control.
         Ability ability = new DiesTriggeredAbility(new VastwoodHydraDistributeEffect(), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(new CountersCount(CounterType.P1P1), filter));
+        ability.addTarget(new TargetCreaturePermanentAmount(new CountersSourceCount(CounterType.P1P1), filter));
         this.addAbility(ability);
     }
 

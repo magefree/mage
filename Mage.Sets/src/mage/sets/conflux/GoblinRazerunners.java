@@ -38,7 +38,7 @@ import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ public class GoblinRazerunners extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your end step, you may have Goblin Razerunners deal damage equal to the number of +1/+1 counters on it to target player.
-        ability = new BeginningOfYourEndStepTriggeredAbility(new DamageTargetEffect(new CountersCount(CounterType.P1P1)), true);
+        ability = new BeginningOfYourEndStepTriggeredAbility(new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)), true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

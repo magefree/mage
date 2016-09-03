@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class MagaTraitorToMortals extends CardImpl {
 
         // When Maga enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new LoseLifeTargetEffect(new CountersCount(CounterType.P1P1)), false);
+                new LoseLifeTargetEffect(new CountersSourceCount(CounterType.P1P1)), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
@@ -68,7 +68,7 @@ public class PetalmaneBaku extends CardImpl {
                 new RemovedCountersForCostValue(),
                 new ManaCostsImpl<>("{1}"),
                 "Add X mana of any one color to your mana pool",
-                true, new CountersCount(CounterType.KI));
+                true, new CountersSourceCount(CounterType.KI));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance(),
                 "Remove X ki counters from {this}"));
         this.addAbility(ability);

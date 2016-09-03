@@ -35,7 +35,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -76,7 +76,7 @@ public class IcatianMoneychanger1 extends CardImpl {
         
         // Sacrifice Icatian Moneychanger: You gain 1 life for each credit counter on Icatian Moneychanger. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
-                new GainLifeEffect(new CountersCount(CounterType.CREDIT)), new SacrificeSourceCost(), new IsStepCondition(PhaseStep.UPKEEP), null));
+                new GainLifeEffect(new CountersSourceCount(CounterType.CREDIT)), new SacrificeSourceCost(), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
     public IcatianMoneychanger1(final IcatianMoneychanger1 card) {

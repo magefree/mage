@@ -30,7 +30,7 @@ package mage.sets.legions;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.AmplifyEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.AmplifyAbility;
@@ -55,7 +55,7 @@ public class EmbalmedBrawler extends CardImpl {
         // Amplify 1
         this.addAbility(new AmplifyAbility(AmplifyEffect.AmplifyFactor.Amplify1));
         // Whenever Embalmed Brawler attacks or blocks, you lose 1 life for each +1/+1 counter on it.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new LoseLifeSourceControllerEffect(new CountersCount(CounterType.P1P1)), false));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new LoseLifeSourceControllerEffect(new CountersSourceCount(CounterType.P1P1)), false));
     }
 
     public EmbalmedBrawler(final EmbalmedBrawler card) {
