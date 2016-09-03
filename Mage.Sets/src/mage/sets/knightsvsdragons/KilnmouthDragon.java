@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.AmplifyEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.AmplifyAbility;
@@ -65,7 +65,7 @@ public class KilnmouthDragon extends CardImpl {
         
         // {tap}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DamageTargetEffect(new CountersCount(CounterType.P1P1)), new TapSourceCost());
+                new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

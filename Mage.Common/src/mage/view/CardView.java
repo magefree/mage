@@ -68,14 +68,16 @@ public class CardView extends SimpleCardView {
     protected String power;
     protected String toughness;
     protected String loyalty;
+    protected String startingLoyalty;
     protected List<CardType> cardTypes;
     protected List<String> subTypes;
     protected List<String> superTypes;
     protected ObjectColor color;
+    protected ObjectColor frameColor;
     protected List<String> manaCost;
     protected int convertedManaCost;
     protected Rarity rarity;
-
+    
     protected MageObjectType mageObjectType = MageObjectType.NULL;
 
     protected boolean isAbility;
@@ -330,6 +332,12 @@ public class CardView extends SimpleCardView {
                 }
             }
         }
+        
+        // Frame color
+        this.frameColor = card.getFrameColor(game);      
+        
+        // Get starting loyalty
+        this.startingLoyalty = "" + card.getStartingLoyalty();
     }
 
     public CardView(MageObject object) {
@@ -374,6 +382,10 @@ public class CardView extends SimpleCardView {
                 this.expansionSetCode = stackAbility.getExpansionSetCode();
             }
         }
+        // Frame color
+        this.frameColor = object.getFrameColor(null);
+        // Starting loyalty. Must be extracted from an ability
+        this.startingLoyalty = "" + object.getStartingLoyalty();
     }
 
     protected CardView() {
@@ -408,10 +420,12 @@ public class CardView extends SimpleCardView {
         this.power = "";
         this.toughness = "";
         this.loyalty = "";
+        this.startingLoyalty = "";
         this.cardTypes = new ArrayList<>();
         this.subTypes = new ArrayList<>();
         this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();
+        this.frameColor = new ObjectColor();
         this.manaCost = new ArrayList<>();
         this.convertedManaCost = 0;
 
@@ -452,15 +466,16 @@ public class CardView extends SimpleCardView {
         this.power = token.getPower().toString();
         this.toughness = token.getToughness().toString();
         this.loyalty = "";
+        this.startingLoyalty = "";
         this.cardTypes = token.getCardType();
         this.subTypes = token.getSubtype(null);
         this.superTypes = token.getSupertype();
         this.color = token.getColor(null);
+        this.frameColor = token.getFrameColor(null);
         this.manaCost = token.getManaCost().getSymbols();
         this.rarity = Rarity.NA;
         this.type = token.getTokenType();
         this.tokenSetCode = token.getOriginalExpansionSetCode();
-        this.tokenDescriptor = token.getTokenDescriptor();
     }
 
     protected final void setTargets(Targets targets) {
@@ -519,6 +534,10 @@ public class CardView extends SimpleCardView {
     public String getLoyalty() {
         return loyalty;
     }
+    
+    public String getStartingLoyalty() {
+        return startingLoyalty;
+    }
 
     public List<CardType> getCardTypes() {
         return cardTypes;
@@ -534,6 +553,10 @@ public class CardView extends SimpleCardView {
 
     public ObjectColor getColor() {
         return color;
+    }
+    
+    public ObjectColor getFrameColor() {
+        return frameColor;
     }
 
     public List<String> getManaCost() {
@@ -767,3 +790,4 @@ public class CardView extends SimpleCardView {
     }
 
 }
+

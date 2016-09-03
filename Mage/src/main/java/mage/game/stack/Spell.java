@@ -75,6 +75,7 @@ public class Spell extends StackObjImpl implements Card {
 
     private final Card card;
     private final ObjectColor color;
+    private final ObjectColor frameColor;
     private final SpellAbility ability;
     private final Zone fromZone;
     private final UUID id;
@@ -87,6 +88,7 @@ public class Spell extends StackObjImpl implements Card {
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
         this.color = card.getColor(null).copy();
+        this.frameColor = card.getFrameColor(null).copy();
         id = ability.getId();
         this.ability = ability;
         this.ability.setControllerId(controllerId);
@@ -127,6 +129,7 @@ public class Spell extends StackObjImpl implements Card {
         this.copiedSpell = spell.copiedSpell;
         this.faceDown = spell.faceDown;
         this.color = spell.color.copy();
+        this.frameColor = spell.color.copy();
     }
 
     public boolean activate(Game game, boolean noMana) {
@@ -482,6 +485,11 @@ public class Spell extends StackObjImpl implements Card {
     public ObjectColor getColor(Game game) {
         return color;
     }
+    
+    @Override
+    public ObjectColor getFrameColor(Game game) {
+        return frameColor;
+    }
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
@@ -517,6 +525,11 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public MageInt getToughness() {
         return card.getToughness();
+    }
+    
+    @Override
+    public int getStartingLoyalty() {
+        return card.getStartingLoyalty();
     }
 
     @Override

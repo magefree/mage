@@ -33,10 +33,12 @@ import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.util.CardUtil;
@@ -49,6 +51,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected String name;
     protected ManaCosts<ManaCost> manaCost;
     protected ObjectColor color;
+    protected ObjectColor frameColor;
     protected List<CardType> cardType = new ArrayList<>();
     protected List<String> subtype = new ArrayList<>();
     protected List<String> supertype = new ArrayList<>();
@@ -67,6 +70,7 @@ public abstract class MageObjectImpl implements MageObject {
         power = new MageInt(0);
         toughness = new MageInt(0);
         color = new ObjectColor();
+        frameColor = new ObjectColor();
         manaCost = new ManaCostsImpl<>("");
         abilities = new AbilitiesImpl<>();
     }
@@ -77,6 +81,7 @@ public abstract class MageObjectImpl implements MageObject {
         manaCost = object.manaCost.copy();
         text = object.text;
         color = object.color.copy();
+        frameColor = object.frameColor.copy();
         power = object.power.copy();
         toughness = object.toughness.copy();
         abilities = object.abilities.copy();
@@ -154,10 +159,66 @@ public abstract class MageObjectImpl implements MageObject {
     public MageInt getToughness() {
         return toughness;
     }
+    
+    @Override
+    public int getStartingLoyalty() {
+        for (Ability ab: getAbilities()) {
+            if (ab instanceof PlanswalkerEntersWithLoyalityCountersAbility) {
+                return ((PlanswalkerEntersWithLoyalityCountersAbility)ab).getStartingLoyalty();
+            }
+        }
+        return 0;
+    }
 
     @Override
     public ObjectColor getColor(Game game) {
         return color;
+    }
+    
+    @Override
+    public ObjectColor getFrameColor(Game game) {
+        // For lands, add any colors of mana the land can produce to
+        // its frame colors.
+        if (getCardType().contains(CardType.LAND)) {
+            ObjectColor cl = frameColor.copy();
+            for (Ability ab: getAbilities()) {
+                if (ab instanceof ManaAbility) {
+                    ManaAbility mana = (ManaAbility)ab;
+                    try {
+                        List<Mana> manaAdded = mana.getNetMana(game);
+                        for (Mana m: manaAdded) {
+                            if (m.getAny() > 0) {
+                                return new ObjectColor("WUBRG");
+                            }
+                            if (m.getWhite() > 0) {
+                                cl.setWhite(true);
+                            }
+                            if (m.getBlue() > 0) {
+                                cl.setBlue(true);
+                            }
+                            if (m.getBlack() > 0) {
+                                cl.setBlack(true);
+                            }
+                            if (m.getRed() > 0) {
+                                cl.setRed(true);
+                            }
+                            if (m.getGreen() > 0) {
+                                cl.setGreen(true);
+                            }
+                        }
+                    } catch (NullPointerException e) {
+                        // Ability depends on game
+                        // but no game passed
+                        // All such abilities are 5-color ones
+                        return new ObjectColor("WUBRG");
+                    }
+                }
+            }
+            return cl;
+        } else {
+            // For everything else, just return the frame colors
+            return frameColor;
+        }
     }
 
     @Override

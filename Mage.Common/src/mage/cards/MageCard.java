@@ -32,7 +32,7 @@ public abstract class MageCard extends JPanel {
 
     public abstract void update(CardView card);
 
-    public abstract void updateImage();
+    public abstract void updateArtImage();
 
     public abstract Image getImage();
 

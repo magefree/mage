@@ -201,6 +201,10 @@ public class ImageCache {
     public static BufferedImage getThumbnail(CardView card) {
         return getImage(getKey(card, card.getName(), "#thumb"));
     }
+    
+    public static BufferedImage tryGetThumbnail(CardView card) {
+        return tryGetImage(getKey(card, card.getName(), "#thumb"));
+    }
 
     public static BufferedImage getImageOriginal(CardView card) {
         return getImage(getKey(card, card.getName(), ""));
@@ -228,6 +232,18 @@ public class ImageCache {
                 return null;
             }
             LOGGER.error(ex, ex);
+            return null;
+        }
+    }
+ 
+    /**
+     * Returns the Image corresponding to the key only if it already exists
+     * in the cache.
+     */
+    private static BufferedImage tryGetImage(String key) {
+        if (IMAGE_CACHE.containsKey(key)) {
+            return IMAGE_CACHE.get(key);
+        } else {
             return null;
         }
     }
@@ -343,6 +359,34 @@ public class ImageCache {
         }
 
         return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));
+    }
+    
+    /**
+     * Returns the image appropriate to display for a card in a picture panel, but
+     * only it was ALREADY LOADED. That is, the call is immediate and will not block
+     * on file IO.
+     * @param card
+     * @param width
+     * @param height
+     * @return 
+     */
+    public static BufferedImage tryGetImage(CardView card, int width, int height) {
+        if (Constants.THUMBNAIL_SIZE_FULL.width + 10 > width) {
+            return tryGetThumbnail(card);
+        }
+        String key = getKey(card, card.getName(), Integer.toString(width));
+        BufferedImage original = tryGetImage(key);
+        if (original == null) {
+            LOGGER.debug(key + " not found");
+            return null;
+        }
+
+        double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
+        if (scale >= 1) {
+            return original;
+        }
+
+        return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));       
     }
 
     public static TFile getTFile(String path) {

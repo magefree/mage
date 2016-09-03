@@ -17,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JLayeredPane;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.util.GUISizeHelper;
 import mage.constants.Rarity;
 import mage.interfaces.plugin.CardPlugin;
@@ -31,6 +32,7 @@ import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.Animation;
 import org.mage.card.arcane.CardPanel;
+import org.mage.card.arcane.CardPanelComponentImpl;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
@@ -41,6 +43,7 @@ import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
+import org.mage.card.arcane.CardPanelRenderImpl;
 
 /**
  * {@link CardPlugin} implementation.
@@ -105,10 +108,23 @@ public class CardPluginImpl implements CardPlugin {
         cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();
         cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();
     }
+    
+    /**
+     * Temporary card rendering shim. Split card rendering isn't implemented yet, so
+     * use old component based rendering for the split cards.
+     */
+    private CardPanel makePanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback, boolean isFoil, Dimension dimension) {
+        String fallback = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false");
+        if (view.isSplitCard() || fallback.equals("true")) {
+            return new CardPanelComponentImpl(view, gameId, loadImage, callback, isFoil, dimension);
+        } else {
+            return new CardPanelRenderImpl(view, gameId, loadImage, callback, isFoil, dimension);
+        }
+    }
 
     @Override
     public MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
-        CardPanel cardPanel = new CardPanel(permanent, gameId, loadImage, callback, false, dimension);
+        CardPanel cardPanel = makePanel(permanent, gameId, loadImage, callback, false, dimension);
         boolean implemented = !permanent.getRarity().equals(Rarity.NA);
         cardPanel.setShowCastingCost(implemented);
         return cardPanel;
@@ -116,7 +132,7 @@ public class CardPluginImpl implements CardPlugin {
 
     @Override
     public MagePermanent getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
-        CardPanel cardPanel = new CardPanel(cardView, gameId, loadImage, callback, false, dimension);
+        CardPanel cardPanel = makePanel(cardView, gameId, loadImage, callback, false, dimension);
         boolean implemented = cardView.getRarity() != null && !cardView.getRarity().equals(Rarity.NA);
         cardPanel.setShowCastingCost(implemented);
         return cardPanel;

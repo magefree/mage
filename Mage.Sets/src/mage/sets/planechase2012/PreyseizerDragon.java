@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.abilities.keyword.DevourAbility;
@@ -63,7 +63,7 @@ public class PreyseizerDragon extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.Devour2));
 
         // Whenever Preyseizer Dragon attacks, it deals damage to target creature or player equal to the number of +1/+1 counters on Preyseizer Dragon.
-        Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(new CountersCount(CounterType.P1P1)), false);
+        Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

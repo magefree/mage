@@ -153,6 +153,11 @@ public class Emblem implements CommandObject {
     public ObjectColor getColor(Game game) {
         return emptyColor;
     }
+    
+    @Override 
+    public ObjectColor getFrameColor(Game game) {
+        return emptyColor;
+    }
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
@@ -172,6 +177,11 @@ public class Emblem implements CommandObject {
     @Override
     public MageInt getToughness() {
         return MageInt.EmptyMageInt;
+    }
+    
+    @Override
+    public int getStartingLoyalty() {
+        return 0;
     }
 
     @Override

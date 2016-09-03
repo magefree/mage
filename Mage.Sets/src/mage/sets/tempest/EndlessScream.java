@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
@@ -67,7 +67,7 @@ public class EndlessScream extends CardImpl {
         // Endless Scream enters the battlefield with X scream counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.SCREAM.createInstance())));
         // Enchanted creature gets +1/+0 for each scream counter on Endless Scream.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new CountersCount(CounterType.SCREAM), new StaticValue(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new CountersSourceCount(CounterType.SCREAM), new StaticValue(0), Duration.WhileOnBattlefield)));
     }
 
     public EndlessScream(final EndlessScream card) {
