@@ -83,7 +83,7 @@ public class MinionsMurmurs extends CardImpl {
             if (controller != null) {
                 int creaturesControlled = game.getBattlefield().countAll(new FilterCreaturePermanent(), controller.getId(), game);
                 controller.drawCards(creaturesControlled, game);
-                controller.damage(creaturesControlled, source.getId(), game, false, true);
+                controller.loseLife(creaturesControlled, game);
                 return true;
             }
             return false;
