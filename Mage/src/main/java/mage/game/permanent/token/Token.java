@@ -187,7 +187,7 @@ public class Token extends MageObjectImpl {
             } else {
                 MageObject object = game.getObject(sourceId);
                 if (object instanceof PermanentToken) {
-                    ((PermanentToken) object).getExpansionSetCode();
+                    setCode = ((PermanentToken) object).getExpansionSetCode();
                 }
             }
         }

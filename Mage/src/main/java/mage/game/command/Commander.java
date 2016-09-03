@@ -144,6 +144,11 @@ public class Commander implements CommandObject {
     public ObjectColor getColor(Game game) {
         return card.getColor(game);
     }
+    
+    @Override
+    public ObjectColor getFrameColor(Game game) {
+        return card.getFrameColor(game);
+    }
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
@@ -163,6 +168,11 @@ public class Commander implements CommandObject {
     @Override
     public MageInt getToughness() {
         return card.getToughness();
+    }
+    
+    @Override
+    public int getStartingLoyalty() {
+        return card.getStartingLoyalty();
     }
 
     @Override

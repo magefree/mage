@@ -28,6 +28,7 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.FetchLandActivatedAbility;
@@ -42,6 +43,7 @@ public class WoodedFoothills extends CardImpl {
     public WoodedFoothills(UUID ownerId) {
         super(ownerId, 330, "Wooded Foothills", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ONS";
+        this.frameColor = new ObjectColor("RG");
 
         // {tap}, Pay 1 life, Sacrifice Wooded Foothills: Search your library for a Mountain or Forest card and put it onto the battlefield. Then shuffle your library.
         this.addAbility(new FetchLandActivatedAbility(new String[]{"Mountain", "Forest"}));

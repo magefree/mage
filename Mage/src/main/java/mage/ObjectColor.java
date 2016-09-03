@@ -81,6 +81,22 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         red = color.red;
         green = color.green;
     }
+    
+    /**
+     * Returns a new color which contains all of the colors of this ObjectColor
+     * in addition to all of the colors of the other ObjectColor.
+     * @param other The other ObjectColor to union with
+     * @return A new color which is the union of this and other
+     */
+    public ObjectColor union(ObjectColor other) {
+        ObjectColor newColor = new ObjectColor();
+        newColor.white = white | other.white;
+        newColor.blue  = blue  | other.blue;
+        newColor.black = black | other.black;
+        newColor.red   = red   | other.red;
+        newColor.green = green | other.green;
+        return newColor;
+    }
 
     public int getColorCount() {
         int count = 0;

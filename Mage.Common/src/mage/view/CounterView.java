@@ -53,4 +53,21 @@ public class CounterView implements Serializable {
     public int getCount() {
         return count;
     }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof CounterView)) {
+            return false;
+        }
+        CounterView oth = (CounterView)other;
+        return
+                (count == oth.count) &&
+                (name.equals(oth.name));
+    }
 }
