@@ -18,7 +18,9 @@ public class MagicCardsImageSource implements CardImageSource {
         {
             put("10E", "tenth-edition");
             put("AER", "aether-revolt");
+            put("AKH", "amonkhet");
             put("ALA", "shards-of-alara");
+            put("ANB", "archenemy-nicol-bolas");
             put("APAC", "asia-pacific-land-program");
             put("APC", "player-rewards-2001");
             put("ARB", "alara-reborn");
@@ -32,6 +34,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("C15", "commander-2015");
             put("C16", "commander-2016");
             put("CLASH", "clash-pack");
+            put("CMA", "commander-anthology");
             put("CMA", "commanders-arsenal");
             put("CMD", "commander");
             put("CN2", "conspiracy-take-the-crown");
@@ -60,6 +63,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("DDP", "duel-decks-zendikar-vs-eldrazi");
             put("DDQ", "duel-decks-blessed-vs-cursed");
             put("DDR", "duel-decks-nissa-vs-ob-nixilis");
+            put("DDS", "duel-decks-mind-vs-might");
             put("DGM", "dragons-maze");
             put("DKA", "dark-ascension");
             put("DRB", "from-the-vault-dragons");
@@ -76,6 +80,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("GRC", "wpngateway");
             put("GTC", "gatecrash");
             put("HOP", "planechase");
+            put("HOU", "hour-of-devastation");
             put("INV", "player-rewards-2001");
             put("ISD", "innistrad");
             put("JOU", "journey-into-nyx");
@@ -94,6 +99,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("MGDC", "magic-game-day-cards");
             put("MLP", "launch-party");
             put("MM2", "modern-masters-2015");
+            put("MM3", "modern-masters-2017");
             put("MMA", "modern-masters");
             put("MOR", "morningtide");
             put("MPRP", "magic-player-rewards");
