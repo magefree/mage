@@ -140,7 +140,7 @@ class GwafaHazidProfiteerEffect2 extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getCounters().containsKey(CounterType.BRIBERY);
+        return permanent.getCounters(game).containsKey(CounterType.BRIBERY);
     }
 
     @Override

@@ -101,7 +101,7 @@ class AEtherVialEffect extends OneShotEffect {
                 return false;
             }
         }
-        int count = permanent.getCounters().getCount(CounterType.CHARGE);
+        int count = permanent.getCounters(game).getCount(CounterType.CHARGE);
 
         FilterCreatureCard filter = new FilterCreatureCard("creature card with converted mana cost equal to " + count);
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, count));

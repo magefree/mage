@@ -138,7 +138,7 @@ public class DustOfMoments extends CardImpl {
           if (permFilter.match(card, game)) {
               final String counterName = counter.getName();
               if (shouldRemoveCounters()) {
-                  final Counter existingCounterOfSameType = card.getCounters().get(counterName);
+                  final Counter existingCounterOfSameType = card.getCounters(game).get(counterName);
                   final int countersToRemove = Math.min(existingCounterOfSameType.getCount(), counter.getCount());
                   final Counter modifiedCounter = new Counter(counterName, countersToRemove);
                   card.removeCounters(modifiedCounter, game);

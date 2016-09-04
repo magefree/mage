@@ -139,7 +139,7 @@ class IdentityThiefEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && permanent != null && sourcePermanent != null) {
             Permanent permanentReset = permanent.copy();
-            permanentReset.getCounters().clear();
+            permanentReset.getCounters(game).clear();
             permanentReset.getPower().resetToBaseValue();
             permanentReset.getToughness().resetToBaseValue();
             CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, permanentReset, source.getSourceId());

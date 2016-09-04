@@ -120,7 +120,7 @@ class HermitDruidEffect extends OneShotEffect {
             } while (library.size() > 0 && card != null && !filter.match(card, game));
 
             if (!cards.isEmpty()) {
-                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                player.moveCards(cards, Zone.GRAVEYARD, source, game);
                 if (card != null) {
                     cards.add(card);
                 }

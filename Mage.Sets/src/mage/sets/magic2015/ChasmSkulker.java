@@ -101,7 +101,7 @@ class ChasmSkulkerEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (permanent != null) {
-                int counters = permanent.getCounters().getCount(CounterType.P1P1);
+                int counters = permanent.getCounters(game).getCount(CounterType.P1P1);
                 if (counters > 0) {
                     return new CreateTokenEffect(new ChasmSkulkerSquidToken(), counters).apply(game, source);
                 }

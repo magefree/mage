@@ -127,10 +127,10 @@ public class AddCountersSourceEffect extends OneShotEffect {
                                 countersToAdd--;
                             }
                             newCounter.add(countersToAdd);
-                            int before = permanent.getCounters().getCount(newCounter.getName());
+                            int before = permanent.getCounters(game).getCount(newCounter.getName());
                             permanent.addCounters(newCounter, game);
                             if (informPlayers && !game.isSimulation()) {
-                                int amountAdded = permanent.getCounters().getCount(newCounter.getName()) - before;
+                                int amountAdded = permanent.getCounters(game).getCount(newCounter.getName()) - before;
                                 Player player = game.getPlayer(source.getControllerId());
                                 if (player != null) {
                                     game.informPlayers(player.getLogName() + " puts " + amountAdded + " " + newCounter.getName().toLowerCase() + " counter on " + permanent.getLogName());

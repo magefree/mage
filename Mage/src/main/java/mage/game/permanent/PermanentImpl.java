@@ -65,6 +65,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.command.CommandObject;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
@@ -219,12 +220,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public String getValue() {
+    public String getValue(GameState state) {
         StringBuilder sb = threadLocalBuilder.get();
         sb.append(controllerId).append(name).append(tapped).append(damage);
         sb.append(subtype).append(supertype).append(power.getValue()).append(toughness.getValue());
         sb.append(abilities.getValue());
-        for (Counter counter : getCounters().values()) {
+        for (Counter counter : getCounters(state).values()) {
             sb.append(counter.getName()).append(counter.getCount());
         }
         return sb.toString();
@@ -323,82 +324,18 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public Counters getCounters() {
-        return counters;
-    }
-
-    @Override
     public Counters getCounters(Game game) {
         return counters;
     }
 
     @Override
-    public boolean addCounters(String name, int amount, Game game) {
-        return addCounters(name, amount, game, null);
+    public Counters getCounters(GameState state) {
+        return counters;
     }
 
     @Override
-    public boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
-        boolean returnCode = true;
-        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, controllerId, name, amount);
-        countersEvent.setAppliedEffects(appliedEffects);
-        if (!game.replaceEvent(countersEvent)) {
-            for (int i = 0; i < countersEvent.getAmount(); i++) {
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, name, 1);
-                event.setAppliedEffects(appliedEffects);
-                if (!game.replaceEvent(event)) {
-                    counters.addCounter(name, 1);
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, name, 1));
-                } else {
-                    returnCode = false;
-                }
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, controllerId, name, amount));
-        } else {
-            returnCode = false;
-        }
-        return returnCode;
-    }
-
-    @Override
-    public boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
-        boolean returnCode = true;
-        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, controllerId, counter.getName(), counter.getCount());
-        countersEvent.setAppliedEffects(appliedEffects);
-        if (!game.replaceEvent(countersEvent)) {
-            int amount = countersEvent.getAmount();
-            for (int i = 0; i < amount; i++) {
-                Counter eventCounter = counter.copy();
-                eventCounter.remove(eventCounter.getCount() - 1);
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, counter.getName(), 1);
-                event.setAppliedEffects(appliedEffects);
-                if (!game.replaceEvent(event)) {
-                    counters.addCounter(eventCounter);
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, counter.getName(), 1));
-                } else {
-                    returnCode = false;
-                }
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, controllerId, counter.getName(), amount));
-        } else {
-            returnCode = false;
-        }
-        return returnCode;
-    }
-
-    @Override
-    public void removeCounters(String name, int amount, Game game) {
-        for (int i = 0; i < amount; i++) {
-            counters.removeCounter(name, 1);
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, controllerId);
-            event.setData(name);
-            game.fireEvent(event);
-        }
-    }
-
-    @Override
-    public void removeCounters(Counter counter, Game game) {
-        removeCounters(counter.getName(), counter.getCount(), game);
+    protected UUID getControllerOrOwner() {
+        return controllerId;
     }
 
     @Override
@@ -878,10 +815,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             int actualDamage = event.getAmount();
             if (actualDamage > 0) {
                 int countersToRemove = actualDamage;
-                if (countersToRemove > getCounters().getCount(CounterType.LOYALTY)) {
-                    countersToRemove = getCounters().getCount(CounterType.LOYALTY);
+                if (countersToRemove > getCounters(game).getCount(CounterType.LOYALTY)) {
+                    countersToRemove = getCounters(game).getCount(CounterType.LOYALTY);
                 }
-                getCounters().removeCounter(CounterType.LOYALTY, countersToRemove);
+                getCounters(game).removeCounter(CounterType.LOYALTY, countersToRemove);
                 game.fireEvent(new DamagedPlaneswalkerEvent(objectId, sourceId, controllerId, actualDamage, combat));
                 return actualDamage;
             }

@@ -96,7 +96,7 @@ class GriefTyrantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
         Permanent griefTyrant = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        int countersOnGriefTyrant = griefTyrant.getCounters().getCount(CounterType.M1M1);
+        int countersOnGriefTyrant = griefTyrant.getCounters(game).getCount(CounterType.M1M1);
         if (targetCreature != null) {
             targetCreature.addCounters(CounterType.M1M1.createInstance(countersOnGriefTyrant), game);
             return true;

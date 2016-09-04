@@ -93,7 +93,7 @@ class SolidarityOfHeroesEffect extends OneShotEffect {
             for (UUID targetId: getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    int existingCounters = permanent.getCounters().getCount(CounterType.P1P1);
+                    int existingCounters = permanent.getCounters(game).getCount(CounterType.P1P1);
                     if (existingCounters > 0) {
                         permanent.addCounters(CounterType.P1P1.createInstance(existingCounters), game);
                     }

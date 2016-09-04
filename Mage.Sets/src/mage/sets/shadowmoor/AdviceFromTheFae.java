@@ -115,7 +115,7 @@ class AdviceFromTheFaeEffect extends OneShotEffect {
             TargetCard target = new TargetCard(moreCreatures ? 2 : 1, Zone.LIBRARY, new FilterCard());
             if (controller.choose(Outcome.DrawCard, cardsFromLibrary, target, game)) {
                 cardsFromLibrary.removeAll(target.getTargets());
-                controller.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
+                controller.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
             }
             controller.putCardsOnBottomOfLibrary(cardsFromLibrary, game, source, true);
             return true;

@@ -111,7 +111,7 @@ class CountersOnControlledCount implements DynamicValue {
         Permanent enchantment = game.getPermanent(sourceAbility.getSourceId());
         for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, sourceAbility.getControllerId(), game)) {
             if (!permanent.getId().equals(enchantment.getAttachedTo())) {
-                count += permanent.getCounters().getCount(CounterType.P1P1);
+                count += permanent.getCounters(game).getCount(CounterType.P1P1);
             }
         }
         return count;

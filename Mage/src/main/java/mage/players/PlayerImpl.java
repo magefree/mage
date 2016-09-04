@@ -1838,19 +1838,30 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean addCounters(Counter counter, Game game) {
-        boolean returnState = true;
-        int amount = counter.getCount();
-        for (int i = 0; i < amount; i++) {
-            Counter eventCounter = counter.copy();
-            eventCounter.remove(amount - 1);
-            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, playerId, playerId, counter.getName(), counter.getCount()))) {
-                counters.addCounter(eventCounter);
-                game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), counter.getCount()));
-            } else {
-                returnState = false;
+        boolean returnCode = true;
+        GameEvent countersEvent = GameEvent.getEvent(EventType.ADD_COUNTERS, playerId, playerId, counter.getName(), counter.getCount());
+        if (!game.replaceEvent(countersEvent)) {
+            int amount = countersEvent.getAmount();
+            int finalAmount = amount;
+            for (int i = 0; i < amount; i++) {
+                Counter eventCounter = counter.copy();
+                eventCounter.remove(amount - 1);
+                GameEvent event = GameEvent.getEvent(EventType.ADD_COUNTER, playerId, playerId, counter.getName(), 1);
+                if (!game.replaceEvent(event)) {
+                    getCounters().addCounter(eventCounter);
+                    game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), 1));
+                } else {
+                    finalAmount--;
+                    returnCode = false;
+                }
             }
+            if(finalAmount > 0) {
+                game.fireEvent(GameEvent.getEvent(EventType.COUNTERS_ADDED, playerId, playerId, counter.getName(), amount));
+            }
+        } else {
+            returnCode = false;
         }
-        return returnState;
+        return returnCode;
     }
 
     @Override
@@ -3103,55 +3114,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public UUID getCommanderId() {
         return this.commanderId;
-    }
-
-    @Override
-    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        if (cards.isEmpty()) {
-            return true;
-        }
-        Set<Card> cardList = new HashSet<>();
-        for (UUID cardId : cards) {
-            fromZone = game.getState().getZone(cardId);
-            if (Zone.BATTLEFIELD.equals(fromZone)) {
-                Permanent permanent = game.getPermanent(cardId);
-                if (permanent != null) {
-                    cardList.add(permanent);
-                }
-            } else {
-                Card card = game.getCard(cardId);
-                if (card == null) {
-                    Spell spell = game.getState().getStack().getSpell(cardId);
-                    if (spell != null) {
-                        if (!spell.isCopy()) {
-                            card = spell.getCard();
-                        } else {
-                            // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
-                            game.getStack().remove(spell);
-                            game.informPlayers(spell.getLogName() + " was removed from the stack");
-                        }
-                    }
-                }
-                if (card != null) {
-                    cardList.add(card);
-                }
-            }
-        }
-        return moveCards(cardList, toZone, source, game);
-    }
-
-    @Override
-    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
-        Set<Card> cardList = new HashSet<>();
-        if (card != null) {
-            cardList.add(card);
-        }
-        return moveCards(cardList, toZone, source, game);
-    }
-
-    @Override
-    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return moveCards(cards, toZone, source, game);
     }
 
     @Override

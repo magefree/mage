@@ -124,7 +124,7 @@ class GuildFeudEffect extends OneShotEffect {
                             }
                         }
                     }
-                    player.moveCards(topThreeCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    player.moveCards(topThreeCards, Zone.GRAVEYARD, source, game);
                 }
             }
             // If two creatures are put onto the battlefield this way, those creatures fight each other

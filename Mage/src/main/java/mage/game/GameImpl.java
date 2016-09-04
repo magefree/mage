@@ -1723,7 +1723,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             if (perm.getCardType().contains(CardType.PLANESWALKER)) {
                 //20091005 - 704.5i
-                if (perm.getCounters().getCount(CounterType.LOYALTY) == 0) {
+                if (perm.getCounters(this).getCount(CounterType.LOYALTY) == 0) {
                     if (movePermanentToGraveyardWithInfo(perm)) {
                         somethingHappened = true;
                         continue;
@@ -1871,12 +1871,12 @@ public abstract class GameImpl implements Game, Serializable {
             }
 
             //20110501 - 704.5r
-            if (perm.getCounters().containsKey(CounterType.P1P1) && perm.getCounters().containsKey(CounterType.M1M1)) {
-                int p1p1 = perm.getCounters().getCount(CounterType.P1P1);
-                int m1m1 = perm.getCounters().getCount(CounterType.M1M1);
+            if (perm.getCounters(this).containsKey(CounterType.P1P1) && perm.getCounters(this).containsKey(CounterType.M1M1)) {
+                int p1p1 = perm.getCounters(this).getCount(CounterType.P1P1);
+                int m1m1 = perm.getCounters(this).getCount(CounterType.M1M1);
                 int min = Math.min(p1p1, m1m1);
-                perm.getCounters().removeCounter(CounterType.P1P1, min);
-                perm.getCounters().removeCounter(CounterType.M1M1, min);
+                perm.getCounters(this).removeCounter(CounterType.P1P1, min);
+                perm.getCounters(this).removeCounter(CounterType.M1M1, min);
             }
 
         }

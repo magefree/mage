@@ -141,7 +141,7 @@ class MakeshiftMannequinGainAbilityEffect extends ContinuousEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        return permanent == null || permanent.getCounters().getCount(CounterType.MANNEQUIN) < 1;
+        return permanent == null || permanent.getCounters(game).getCount(CounterType.MANNEQUIN) < 1;
     }
 
     @Override

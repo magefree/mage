@@ -112,7 +112,7 @@ public class MarathWillOfTheWild extends CardImpl {
         if (ability instanceof SimpleActivatedAbility && ability.getModes().size() == 3) {
             Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
             if (sourcePermanent != null) {
-                int amount = sourcePermanent.getCounters().getCount(CounterType.P1P1);
+                int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
                 if (amount > 0) {
                     for (VariableCost cost: ability.getManaCostsToPay().getVariableCosts()) {
                         if (cost instanceof VariableManaCost) {
@@ -192,7 +192,7 @@ class MarathWillOfTheWildRemoveCountersCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null && permanent.getCounters().getCount(CounterType.P1P1) > 0) {
+        if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
             return true;
         }
         return false;
@@ -202,7 +202,7 @@ class MarathWillOfTheWildRemoveCountersCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         int amount = new ManacostVariableValue().calculate(game, ability, null);
         Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null && permanent.getCounters().getCount(CounterType.P1P1) >= amount) {
+        if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) >= amount) {
             permanent.removeCounters(CounterType.P1P1.getName(), amount, game);
             this.paid = true;
         }

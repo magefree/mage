@@ -93,7 +93,7 @@ class AstralCornucopiaManaAbility extends ManaAbility {
         netMana.clear();
         Permanent sourcePermanent = game.getPermanent(getSourceId());
         if (sourcePermanent != null) {
-            int counters = sourcePermanent.getCounters().getCount(CounterType.CHARGE.getName());
+            int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
             if (counters > 0) {
                 netMana.add(new Mana(0, 0, 0, 0, 0, 0, counters, 0));
             }
@@ -132,7 +132,7 @@ class AstralCornucopiaManaEffect extends ManaEffect {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
                 if (choice.getChoice() != null) {
                     String color = choice.getChoice();
-                    int counters = sourcePermanent.getCounters().getCount(CounterType.CHARGE.getName());
+                    int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
                     switch (color) {
                         case "Red":
                             computedMana.setRed(counters);

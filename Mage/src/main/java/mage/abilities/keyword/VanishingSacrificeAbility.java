@@ -28,7 +28,7 @@ public class VanishingSacrificeAbility extends TriggeredAbilityImpl {
         if (event.getData().equals("time") && event.getTargetId().equals(this.getSourceId())) {
             Permanent p = game.getPermanent(this.getSourceId());
             if (p != null) {
-                return p.getCounters().getCount(CounterType.TIME) == 0;
+                return p.getCounters(game).getCount(CounterType.TIME) == 0;
             }
         }
         return false;

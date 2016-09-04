@@ -98,7 +98,7 @@ class CumulativeUpkeepEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            int ageCounter = permanent.getCounters().getCount(CounterType.AGE);
+            int ageCounter = permanent.getCounters(game).getCount(CounterType.AGE);
             if (cumulativeCost instanceof ManaCost) {
                 ManaCostsImpl totalCost = new ManaCostsImpl<>();
                 for (int i = 0; i < ageCounter; i++) {

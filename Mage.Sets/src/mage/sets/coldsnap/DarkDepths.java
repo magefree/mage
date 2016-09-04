@@ -131,7 +131,7 @@ class DarkDepthsAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(getSourceId());
-        return permanent != null && permanent.getCounters().getCount(CounterType.ICE) == 0;
+        return permanent != null && permanent.getCounters(game).getCount(CounterType.ICE) == 0;
     }
 
     @Override

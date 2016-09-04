@@ -101,7 +101,7 @@ class ThiefOfBloodEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int countersRemoved = 0;
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            Counters counters = permanent.getCounters().copy();
+            Counters counters = permanent.getCounters(game).copy();
             for (Counter counter : counters.values()) {
                 permanent.removeCounters(counter.getName(), counter.getCount(), game);
                 countersRemoved += counter.getCount();

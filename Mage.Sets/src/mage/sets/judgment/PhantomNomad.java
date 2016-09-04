@@ -126,7 +126,7 @@ class PhantomNomadPreventionEffect extends PreventionEffectImpl {
                 }
             }
 
-            if(removeCounter && permanent.getCounters().containsKey(CounterType.P1P1)) {
+            if(removeCounter && permanent.getCounters(game).containsKey(CounterType.P1P1)) {
                 StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
                 permanent.removeCounters(CounterType.P1P1.createInstance(), game);
                 sb.append("Removed a +1/+1 counter ");

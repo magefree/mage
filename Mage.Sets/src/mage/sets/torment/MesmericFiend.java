@@ -147,7 +147,7 @@ class MesmericFiendLeaveEffect extends OneShotEffect {
             int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
             ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exZone != null) {
-                return controller.moveCards(exZone, null, Zone.HAND, source, game);
+                return controller.moveCards(exZone, Zone.HAND, source, game);
             }
         }
         return false;

@@ -93,7 +93,7 @@ class PowderKegEffect extends OneShotEffect {
                 }
             }
 
-            int count = p.getCounters().getCount(CounterType.FUSE);
+            int count = p.getCounters(game).getCount(CounterType.FUSE);
             for (Permanent perm: game.getBattlefield().getAllActivePermanents()) {
                 if (perm.getConvertedManaCost() == count && ((perm.getCardType().contains(CardType.ARTIFACT)) 
                         || (perm.getCardType().contains(CardType.CREATURE)))) {

@@ -103,12 +103,12 @@ class GatherThePackEffect extends OneShotEffect {
                     Cards cardsToHand = new CardsImpl(target.getTargets());
                     if (cardsToHand.size() > 0) {
                         cards.removeAll(cardsToHand);
-                        controller.moveCards(cardsToHand, Zone.LIBRARY, Zone.HAND, source, game);
+                        controller.moveCards(cardsToHand, Zone.HAND, source, game);
                     }
                 }
             }
             if (cards.size() > 0) {
-                controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
         }
         return true;

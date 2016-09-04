@@ -158,7 +158,7 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
         Player you = game.getPlayer(source.getControllerId());
         return event.getPlayerId().equals(source.getControllerId())
                 && archmage != null
-                && archmage.getCounters().getCount(CounterType.QUEST) >= 6
+                && archmage.getCounters(game).getCount(CounterType.QUEST) >= 6
                 && you != null
                 && you.chooseUse(Outcome.Benefit, "Would you like to search your library instead of drawing a card?", source, game);
     }

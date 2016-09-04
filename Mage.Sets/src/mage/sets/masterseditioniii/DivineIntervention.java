@@ -158,7 +158,7 @@ public class DivineIntervention extends CardImpl {
             Player controller = game.getPlayer(source.getControllerId());
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (controller != null && sourcePermanent != null) {
-                if (game.getState().getZone(sourcePermanent.getId()) == Zone.BATTLEFIELD && sourcePermanent.getCounters().getCount(CounterType.INTERVENTION) == 0) {
+                if (game.getState().getZone(sourcePermanent.getId()) == Zone.BATTLEFIELD && sourcePermanent.getCounters(game).getCount(CounterType.INTERVENTION) == 0) {
                     game.setDraw(controller.getId());
 
                     for (UUID player : game.getOpponents(controller.getId())) {

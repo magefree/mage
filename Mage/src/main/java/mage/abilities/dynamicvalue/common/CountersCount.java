@@ -62,7 +62,7 @@ public class CountersCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
-            count += permanent.getCounters().getCount(counter);
+            count += permanent.getCounters(game).getCount(counter);
         }
         return count;
     }

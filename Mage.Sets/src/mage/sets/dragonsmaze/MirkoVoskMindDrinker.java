@@ -119,7 +119,7 @@ class MirkoVoskMindDrinkerEffect extends OneShotEffect {
             }
         }
         player.revealCards("by " + sourceObject.getName() + " from " + player.getName(), cards, game);
-        player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+        player.moveCards(cards, Zone.GRAVEYARD, source, game);
         return true;
     }
 }

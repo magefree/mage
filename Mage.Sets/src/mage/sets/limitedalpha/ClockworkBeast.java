@@ -125,7 +125,7 @@ class BeastAddCountersSourceEffect extends AddCountersSourceEffect {
         
     @Override
     public boolean apply(Game game, Ability source) {
-        Counters permCounters = game.getPermanent(source.getSourceId()).getCounters();
+        Counters permCounters = game.getPermanent(source.getSourceId()).getCounters(game);
         int countersWas = permCounters.getCount(CounterType.P1P0);
         if (countersWas < 7){
             super.apply(game, source);  

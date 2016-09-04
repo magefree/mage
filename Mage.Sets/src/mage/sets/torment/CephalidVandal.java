@@ -97,7 +97,7 @@ class CephalidVandalEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && controller != null) {
-            int amount = permanent.getCounters().getCount(CounterType.SHRED);
+            int amount = permanent.getCounters(game).getCount(CounterType.SHRED);
             controller.moveCards(controller.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
         }
         return true;

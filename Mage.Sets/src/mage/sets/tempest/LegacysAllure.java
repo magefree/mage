@@ -80,7 +80,7 @@ public class LegacysAllure extends CardImpl {
         if (ability.getOriginalId().equals(originalId)) {
             Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
             if (sourcePermanent != null) {
-                int numbCounters = sourcePermanent.getCounters().getCount("treasure");
+                int numbCounters = sourcePermanent.getCounters(game).getCount("treasure");
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power less than or equal to the number of treasure counters on " + getLogName());
                 filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, numbCounters + 1));
                 ability.getTargets().clear();

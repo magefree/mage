@@ -130,7 +130,7 @@ class ThoughtGorgerEffectLeaves extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent thoughtGorgerLastState = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        int numberCounters = thoughtGorgerLastState.getCounters().getCount(CounterType.P1P1);
+        int numberCounters = thoughtGorgerLastState.getCounters(game).getCount(CounterType.P1P1);
         if (player != null) {
             player.drawCards(numberCounters, game);
             return true;

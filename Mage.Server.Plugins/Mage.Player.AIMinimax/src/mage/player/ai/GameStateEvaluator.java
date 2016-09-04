@@ -111,7 +111,7 @@ public class GameStateEvaluator {
             if (!(ability instanceof ManaAbility) && ability.canActivate(ability.getControllerId(), game))
                 value += ability.getEffects().size();
         }
-        for (Counter counter: permanent.getCounters().values()) {
+        for (Counter counter: permanent.getCounters(game).values()) {
             if (!(counter instanceof BoostCounter)) {
                 value += counter.getCount();
             }

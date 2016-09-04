@@ -26,7 +26,7 @@ public class LastTimeCounterRemovedCondition implements Condition{
       permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
     }
     if (permanent != null) {
-      final int timeCounters = permanent.getCounters().getCount(CounterType.TIME);
+      final int timeCounters = permanent.getCounters(game).getCount(CounterType.TIME);
       return timeCounters == 0;
     } else {
       return false;

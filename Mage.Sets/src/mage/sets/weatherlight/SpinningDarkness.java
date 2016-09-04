@@ -118,7 +118,7 @@ class SpinningDarknessCost extends CostImpl {
                     }
                     i++;
                 }
-                paid = controller.moveCards(cardsToExile, Zone.GRAVEYARD, Zone.EXILED, ability, game);
+                paid = controller.moveCards(cardsToExile, Zone.EXILED, ability, game);
             }
         }
         return paid;
