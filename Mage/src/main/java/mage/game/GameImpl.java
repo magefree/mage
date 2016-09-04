@@ -51,6 +51,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.common.GemstoneCavernsAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -1775,12 +1776,12 @@ public abstract class GameImpl implements Game, Serializable {
                                 Filter auraFilter = spellAbility.getTargets().get(0).getFilter();
                                 if (auraFilter instanceof FilterControlledCreaturePermanent) {
                                     if (!((FilterControlledCreaturePermanent) auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this)
-                                            || attachedTo.cantBeEnchantedBy(perm, this)) {
+                                            || attachedTo.cantBeAttachedBy(perm, this)) {
                                         if (movePermanentToGraveyardWithInfo(perm)) {
                                             somethingHappened = true;
                                         }
                                     }
-                                } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeEnchantedBy(perm, this)) {
+                                } else if (!auraFilter.match(attachedTo, this) || attachedTo.cantBeAttachedBy(perm, this)) {
                                     // handle bestow unattachment
                                     Card card = this.getCard(perm.getId());
                                     if (card != null && card.getCardType().contains(CardType.CREATURE)) {
@@ -1816,13 +1817,23 @@ public abstract class GameImpl implements Game, Serializable {
             if (FILTER_EQUIPMENT.match(perm, this)) {
                 //20091005 - 704.5p, 702.14d
                 if (perm.getAttachedTo() != null) {
-                    Permanent creature = getPermanent(perm.getAttachedTo());
-                    if (creature == null || !creature.getAttachments().contains(perm.getId())) {
+                    Permanent attachedTo = getPermanent(perm.getAttachedTo());
+                    if (attachedTo != null) {
+                        for (Ability ability : perm.getAbilities(this)) {
+                            if (ability instanceof AttachableToRestrictedAbility) {
+                                if (!((AttachableToRestrictedAbility) ability).canEquip(attachedTo, null, this)) {
+                                    attachedTo = null;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
                         UUID wasAttachedTo = perm.getAttachedTo();
                         perm.attachTo(null, this);
                         fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
-                    } else if (!creature.getCardType().contains(CardType.CREATURE) || creature.hasProtectionFrom(perm, this)) {
-                        if (creature.removeAttachment(perm.getId(), this)) {
+                    } else if (!attachedTo.getCardType().contains(CardType.CREATURE) || attachedTo.hasProtectionFrom(perm, this)) {
+                        if (attachedTo.removeAttachment(perm.getId(), this)) {
                             somethingHappened = true;
                         }
                     }

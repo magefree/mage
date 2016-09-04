@@ -146,20 +146,22 @@ public class AddCountersTargetEffect extends OneShotEffect {
         }
         sb.append(" on ");
 
-
-
-        Target target = mode.getTargets().get(0);
-        if (target.getNumberOfTargets() == 0) {
-            sb.append("up to ");
-        }
-
-        if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
-            sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName());
-        } else {
-            if (!target.getTargetName().startsWith("another")) {
-                sb.append("target ");
+        if (mode.getTargets().size() > 0) {
+            Target target = mode.getTargets().get(0);
+            if (target.getNumberOfTargets() == 0) {
+                sb.append("up to ");
             }
-            sb.append(target.getTargetName());
+
+            if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
+                sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName());
+            } else {
+                if (!target.getTargetName().startsWith("another")) {
+                    sb.append("target ");
+                }
+                sb.append(target.getTargetName());
+            }
+        } else {
+            sb.append("that creature");
         }
 
         if (amount.getMessage().length() > 0) {

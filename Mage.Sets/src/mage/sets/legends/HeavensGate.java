@@ -25,58 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.keyword;
+
+package mage.sets.legends;
 
 import java.util.UUID;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.effects.common.AttachEffect;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import mage.ObjectColor;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ *
+ * @author maxlebedev
  */
-public class EquipAbility extends ActivatedAbilityImpl {
+public class HeavensGate extends CardImpl {
 
-    public EquipAbility(Outcome outcome, Cost cost) {
-        this(outcome, cost, new TargetControlledCreaturePermanent());
+    public HeavensGate(UUID ownerId) {
+        super(ownerId, 188, "Heaven's Gate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "LEG";
+
+        // Any number of target creatures become white until end of turn.
+        Effect effect = new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn);
+        effect.setText("Any number of target creatures become white until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, new FilterCreaturePermanent(), false));
+
     }
 
-    public EquipAbility(Outcome outcome, Cost cost, Target target) {
-        super(Zone.BATTLEFIELD, new AttachEffect(outcome, "Equip"), cost);
-        this.addTarget(target);
-        this.timing = TimingRule.SORCERY;
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (super.canActivate(playerId, game)) {
-            Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.hasSubtype("Equipment", game)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public EquipAbility(final EquipAbility ability) {
-        super(ability);
+    public HeavensGate(final HeavensGate card) {
+        super(card);
     }
 
     @Override
-    public EquipAbility copy() {
-        return new EquipAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Equip " + costs.getText() + manaCosts.getText() + " (" + manaCosts.getText() + ": <i>Attach to target creature you control. Equip only as a sorcery.)</i>";
+    public HeavensGate copy() {
+        return new HeavensGate(this);
     }
 
 }
+

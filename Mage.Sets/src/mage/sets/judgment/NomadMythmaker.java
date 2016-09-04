@@ -121,7 +121,7 @@ class NomadMythmakerEffect extends OneShotEffect {
                 && controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null
-                    && !permanent.cantBeEnchantedBy(aura, game)) {
+                    && !permanent.cantBeAttachedBy(aura, game)) {
                 game.getState().setValue("attachTo:" + aura.getId(), permanent);
                 controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
                 return permanent.addAttachment(aura.getId(), game);
