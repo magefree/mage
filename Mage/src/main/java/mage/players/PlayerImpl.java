@@ -3117,55 +3117,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        if (cards.isEmpty()) {
-            return true;
-        }
-        Set<Card> cardList = new HashSet<>();
-        for (UUID cardId : cards) {
-            fromZone = game.getState().getZone(cardId);
-            if (Zone.BATTLEFIELD.equals(fromZone)) {
-                Permanent permanent = game.getPermanent(cardId);
-                if (permanent != null) {
-                    cardList.add(permanent);
-                }
-            } else {
-                Card card = game.getCard(cardId);
-                if (card == null) {
-                    Spell spell = game.getState().getStack().getSpell(cardId);
-                    if (spell != null) {
-                        if (!spell.isCopy()) {
-                            card = spell.getCard();
-                        } else {
-                            // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
-                            game.getStack().remove(spell);
-                            game.informPlayers(spell.getLogName() + " was removed from the stack");
-                        }
-                    }
-                }
-                if (card != null) {
-                    cardList.add(card);
-                }
-            }
-        }
-        return moveCards(cardList, toZone, source, game);
-    }
-
-    @Override
-    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
-        Set<Card> cardList = new HashSet<>();
-        if (card != null) {
-            cardList.add(card);
-        }
-        return moveCards(cardList, toZone, source, game);
-    }
-
-    @Override
-    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return moveCards(cards, toZone, source, game);
-    }
-
-    @Override
     public boolean moveCards(Card card, Zone toZone, Ability source, Game game) {
         return moveCards(card, toZone, source, game, false, false, false, null);
     }

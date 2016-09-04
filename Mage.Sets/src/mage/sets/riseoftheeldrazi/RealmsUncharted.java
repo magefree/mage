@@ -128,8 +128,8 @@ class RealmsUnchartedEffect extends OneShotEffect {
                         cards.removeAll(cardsToKeep);
                     }
                 }
-                controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
-                controller.moveCards(cardsToKeep, Zone.LIBRARY, Zone.HAND, source, game);
+                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
+                controller.moveCards(cardsToKeep, Zone.HAND, source, game);
             }
             controller.shuffleLibrary(source, game);
             return true;

@@ -104,7 +104,7 @@ class TeleminPerformanceEffect extends OneShotEffect {
         }
         if (!cards.isEmpty()) {            
             opponent.revealCards("Telemin Performance", cards, game);
-            opponent.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            opponent.moveCards(cards, Zone.GRAVEYARD, source, game);
         }
         if (creature != null) {
             return creature.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());

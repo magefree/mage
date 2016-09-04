@@ -141,6 +141,8 @@ public interface Card extends MageObject {
 
     boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects);
 
+    void setZone(Zone zone, Game game);
+
     List<Mana> getMana();
 
     void build();
@@ -172,6 +174,4 @@ public interface Card extends MageObject {
      * returned
      */
     Card getMainCard();
-
-    void setZone(Zone zone, Game game);
 }

@@ -654,26 +654,16 @@ public interface Player extends MageItem, Copyable<Player> {
      * Moves cards from one zone to another
      *
      * @param cards
-     * @param fromZone
      * @param toZone
      * @param source
      * @param game
      * @return
      */
-    @Deprecated
-    boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game);
-
-    @Deprecated
-    boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game);
-
-    @Deprecated
-    boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
+    boolean moveCards(Cards cards, Zone toZone, Ability source, Game game);
 
     boolean moveCards(Card card, Zone toZone, Ability source, Game game);
 
     boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
-
-    boolean moveCards(Cards cards, Zone toZone, Ability source, Game game);
 
     boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game);
 

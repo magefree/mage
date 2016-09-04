@@ -120,7 +120,7 @@ class SphinxsTutelageEffect extends OneShotEffect {
                         }
                     }
                 }
-                targetPlayer.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                targetPlayer.moveCards(cards, Zone.GRAVEYARD, source, game);
             } while (colorShared && targetPlayer.canRespond());
             return true;
         }

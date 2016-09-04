@@ -84,7 +84,7 @@ public class EnvoyEffect extends OneShotEffect {
             }
         }
         cards.removeAll(cardsToHand);
-        controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+        controller.moveCards(cardsToHand, Zone.HAND, source, game);
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }

@@ -93,7 +93,7 @@ class BaneOfBalaGedEffect extends OneShotEffect {
         if (defendingPlayer != null) {
             Target target = new TargetControlledPermanent(2);
             defendingPlayer.chooseTarget(outcome, target, source, game);
-            defendingPlayer.moveCards(new CardsImpl(target.getTargets()), null, Zone.EXILED, source, game);
+            defendingPlayer.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
             return true;
         }
         return false;

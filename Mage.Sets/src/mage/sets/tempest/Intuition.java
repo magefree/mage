@@ -122,7 +122,7 @@ class IntuitionEffect extends SearchEffect {
                     cards.remove(card);
                     controller.moveCards(card, Zone.HAND, source, game);
                 }
-                controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);                
+                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
             controller.shuffleLibrary(source, game);
             return true;

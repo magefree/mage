@@ -124,7 +124,7 @@ class DesecratorHagEffect extends OneShotEffect {
                     }
                 }
             } else {
-                return you.moveCards(cards, null, Zone.HAND, source, game);
+                return you.moveCards(cards, Zone.HAND, source, game);
             }
         }
         return false;

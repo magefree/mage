@@ -85,7 +85,7 @@ class TransmuteEffect extends OneShotEffect {
                 if (target.getTargets().size() > 0) {
                     Cards revealed = new CardsImpl(target.getTargets());
                     controller.revealCards(sourceObject.getIdName(), revealed, game);
-                    controller.moveCards(revealed, null, Zone.HAND, source, game);
+                    controller.moveCards(revealed, Zone.HAND, source, game);
                 }
             }
             controller.shuffleLibrary(source, game);
