@@ -234,4 +234,14 @@ public class MythicspoilerComSource implements CardImageSource {
     public Float getAverageSize() {
         return 50.0f;
     }
+
+    @Override
+    public String getNextHttpImageUrl() {
+        return null;
+    }
+
+    @Override
+    public String getFileForHttpImage(String httpImageUrl) {
+        return null;
+    }
 }
