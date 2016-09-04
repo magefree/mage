@@ -97,7 +97,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
                 cards.remove(card);
             }
         }
-        controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+        controller.moveCards(cardsToHand, Zone.HAND, source, game);
         controller.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
         return true;
     }

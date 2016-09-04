@@ -125,7 +125,7 @@ class BoundEffect extends OneShotEffect {
                             TargetCardInYourGraveyard targetCard = new TargetCardInYourGraveyard(0, colors,
                                     new FilterCard("up to " + colors + " card" + (colors > 1 ? "s" : "") + " from your graveyard"));
                             controller.chooseTarget(outcome, targetCard, source, game);
-                            controller.moveCards(new CardsImpl(targetCard.getTargets()), null, Zone.HAND, source, game);
+                            controller.moveCards(new CardsImpl(targetCard.getTargets()), Zone.HAND, source, game);
                         }
                     }
                 }

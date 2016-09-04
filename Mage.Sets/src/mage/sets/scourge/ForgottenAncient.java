@@ -116,7 +116,7 @@ public class ForgottenAncient extends CardImpl {
                 return false;
             }
             
-            int numCounters = sourcePermanent.getCounters().getCount(CounterType.P1P1);
+            int numCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             ArrayList<CounterMovement> counterMovements = new ArrayList<>();
             
             do {

@@ -129,7 +129,7 @@ class DimirCharmEffect extends OneShotEffect {
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                         cards.remove(card);
                     }
-                    controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    controller.moveCards(cards, Zone.GRAVEYARD, source, game);
                 }
             }
         }

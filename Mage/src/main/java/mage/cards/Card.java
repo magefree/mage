@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.permanent.Permanent;
 
 public interface Card extends MageObject {
@@ -140,6 +141,8 @@ public interface Card extends MageObject {
 
     boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects);
 
+    void setZone(Zone zone, Game game);
+
     List<Mana> getMana();
 
     void build();
@@ -152,9 +155,7 @@ public interface Card extends MageObject {
 
     Counters getCounters(Game game);
 
-    boolean addCounters(String name, int amount, Game game);
-
-    boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
+    Counters getCounters(GameState state);
 
     boolean addCounters(Counter counter, Game game);
 
@@ -173,6 +174,4 @@ public interface Card extends MageObject {
      * returned
      */
     Card getMainCard();
-
-    void setZone(Zone zone, Game game);
 }

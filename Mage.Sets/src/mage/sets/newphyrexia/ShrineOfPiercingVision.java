@@ -114,7 +114,7 @@ class ShrineOfPiercingVisionEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        int count = permanent.getCounters().getCount(CounterType.CHARGE);
+        int count = permanent.getCounters(game).getCount(CounterType.CHARGE);
 
         Cards cards = new CardsImpl();
         count = Math.min(player.getLibrary().size(), count);

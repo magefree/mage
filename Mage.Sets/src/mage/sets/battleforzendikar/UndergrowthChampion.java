@@ -119,7 +119,7 @@ class UndergrowthChampionPreventionEffect extends PreventionEffectImpl {
                 }
             }
 
-            if(removeCounter && permanent.getCounters().containsKey(CounterType.P1P1)) {
+            if(removeCounter && permanent.getCounters(game).containsKey(CounterType.P1P1)) {
                 preventDamageAction(event, source, game);
                 StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
                 permanent.removeCounters(CounterType.P1P1.createInstance(), game);

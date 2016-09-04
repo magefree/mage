@@ -136,7 +136,7 @@ class MomirVigSimicVisionaryEffect extends OneShotEffect {
                 cards.remove(card);
             }
         }
-        controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+        controller.moveCards(cardsToHand, Zone.HAND, source, game);
         return true;
     }
 }

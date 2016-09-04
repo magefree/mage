@@ -115,7 +115,7 @@ class GrindstoneEffect extends OneShotEffect {
                         colorShared = card1.getColor(game).shares(targetPlayer.getLibrary().removeFromTop(game).getColor(game));
                     }
                 }
-                targetPlayer.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                targetPlayer.moveCards(cards, Zone.GRAVEYARD, source, game);
             } while (colorShared && targetPlayer.canRespond());
             return true;
         }

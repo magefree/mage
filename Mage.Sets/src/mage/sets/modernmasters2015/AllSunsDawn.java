@@ -120,7 +120,7 @@ class AllSunsDawnEffect extends OneShotEffect {
                     cardsToHand.add(card);
                 }
             }
-            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+            controller.moveCards(cardsToHand, Zone.HAND, source, game);
             return true;
         }
         return false;

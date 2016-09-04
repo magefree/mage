@@ -105,7 +105,7 @@ class JhoirasTimebugEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            if (permanent != null && permanent.getCounters().containsKey(CounterType.TIME)) {
+            if (permanent != null && permanent.getCounters(game).containsKey(CounterType.TIME)) {
                 if (controller.chooseUse(Outcome.Benefit, "Add a time counter? (Otherwise remove one)", source, game)) {
                     permanent.addCounters(CounterType.TIME.createInstance(), game);
                 }

@@ -163,7 +163,7 @@ class DanceOfManyExileTokenEffect extends OneShotEffect {
                 for (Permanent permanent : tokenPermanents) {
                     cards.add(permanent);
                 }
-                controller.moveCards(cards, null, Zone.EXILED, source, game);
+                controller.moveCards(cards, Zone.EXILED, source, game);
                 return true;
             }
         }

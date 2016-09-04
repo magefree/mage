@@ -120,7 +120,7 @@ class SuturedGhoulEffect extends OneShotEffect {
                     }
                 }
                 Cards cardsToExile = new CardsImpl(target.getTargets());
-                controller.moveCards(cardsToExile, null, Zone.EXILED, source, game);
+                controller.moveCards(cardsToExile, Zone.EXILED, source, game);
 
                 String msg = count == 1 ? "1 card" : count + "cards";
                 game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " exiled " + msg);

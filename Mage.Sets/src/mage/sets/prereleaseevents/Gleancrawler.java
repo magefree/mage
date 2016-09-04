@@ -117,7 +117,7 @@ class GleancrawlerEffect extends OneShotEffect {
                     }
                 }
             }
-            controller.moveCards(cardsToHand, Zone.GRAVEYARD, Zone.HAND, source, game);
+            controller.moveCards(cardsToHand, Zone.HAND, source, game);
             return true;
         }
         return false;

@@ -104,7 +104,7 @@ class MindFuneralEffect extends OneShotEffect {
                 cards.add(card);
             }
             opponent.revealCards("Mind Funeral", cards, game);
-            opponent.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            opponent.moveCards(cards, Zone.GRAVEYARD, source, game);
             return true;
         }
 

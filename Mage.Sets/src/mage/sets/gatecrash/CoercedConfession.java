@@ -97,7 +97,7 @@ class CoercedConfessionMillEffect extends OneShotEffect {
                     ++foundCreatures;
                 }
             }
-            player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            player.moveCards(cards, Zone.GRAVEYARD, source, game);
             if (foundCreatures > 0) {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {

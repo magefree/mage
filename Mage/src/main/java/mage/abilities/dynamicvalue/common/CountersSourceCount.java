@@ -23,7 +23,7 @@ public class CountersSourceCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
         if (permanent != null) {
-            return permanent.getCounters().getCount(counter);
+            return permanent.getCounters(game).getCount(counter);
         }
         return 0;
     }

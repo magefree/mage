@@ -150,7 +150,7 @@ class RenownedWeaponsmithEffect extends OneShotEffect {
                     Cards revealed = new CardsImpl();
                     revealed.add(card);
                     controller.revealCards(sourceObject.getIdName(), revealed, game);
-                    controller.moveCards(revealed, null, Zone.HAND, source, game);
+                    controller.moveCards(revealed, Zone.HAND, source, game);
                 }
             }
             controller.shuffleLibrary(source, game);

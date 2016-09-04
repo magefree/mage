@@ -102,7 +102,7 @@ class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
             if (permanent != null
                     && permanent.getControllerId().equals(this.getControllerId())
                     && permanent.getCardType().contains(CardType.CREATURE)
-                    && permanent.getCounters().getCount(CounterType.P1P1) > 0) {
+                    && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 return true;
             }
         }

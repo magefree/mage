@@ -246,14 +246,14 @@ public class CardView extends SimpleCardView {
         if (card instanceof Permanent) {
             this.mageObjectType = MageObjectType.PERMANENT;
             Permanent permanent = (Permanent) card;
-            this.loyalty = Integer.toString(permanent.getCounters().getCount(CounterType.LOYALTY));
+            this.loyalty = Integer.toString(permanent.getCounters(game).getCount(CounterType.LOYALTY));
             this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
             if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
                 controlledByOwner = false;
             }
-            if (game != null && permanent.getCounters() != null && !permanent.getCounters().isEmpty()) {
+            if (game != null && permanent.getCounters(game) != null && !permanent.getCounters(game).isEmpty()) {
                 counters = new ArrayList<>();
-                for (Counter counter : permanent.getCounters().values()) {
+                for (Counter counter : permanent.getCounters(game).values()) {
                     counters.add(new CounterView(counter));
                 }
             }
@@ -348,7 +348,7 @@ public class CardView extends SimpleCardView {
             this.mageObjectType = MageObjectType.PERMANENT;
             this.power = Integer.toString(object.getPower().getValue());
             this.toughness = Integer.toString(object.getToughness().getValue());
-            this.loyalty = Integer.toString(((Permanent) object).getCounters().getCount(CounterType.LOYALTY));
+            this.loyalty = Integer.toString(((Permanent) object).getCounters((Game)null).getCount(CounterType.LOYALTY));
         } else {
             this.power = object.getPower().toString();
             this.toughness = object.getToughness().toString();

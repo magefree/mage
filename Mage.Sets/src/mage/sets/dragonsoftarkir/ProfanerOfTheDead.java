@@ -105,7 +105,7 @@ class ProfanerOfTheDeadReturnEffect extends OneShotEffect {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 cardsToHand.add(permanent);
             }
-            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+            controller.moveCards(cardsToHand, Zone.HAND, source, game);
             return true;
         }
         return false;

@@ -1094,21 +1094,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
     public boolean moveCards(Card card, Zone toZone, Ability source, Game game) {
         return false;
     }

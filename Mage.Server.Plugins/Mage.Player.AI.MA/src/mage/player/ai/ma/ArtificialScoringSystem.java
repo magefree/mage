@@ -64,8 +64,8 @@ public class ArtificialScoringSystem {
 
     public static int getVariablePermanentScore(final Game game, final Permanent permanent) {
 
-        int score = permanent.getCounters().getCount(CounterType.CHARGE) * 30;
-        score += permanent.getCounters().getCount(CounterType.LEVEL) * 30;
+        int score = permanent.getCounters(game).getCount(CounterType.CHARGE) * 30;
+        score += permanent.getCounters(game).getCount(CounterType.LEVEL) * 30;
         score -= permanent.getDamage() * 2;
         if (!canTap(permanent)) {
             score += getTappedScore(permanent);

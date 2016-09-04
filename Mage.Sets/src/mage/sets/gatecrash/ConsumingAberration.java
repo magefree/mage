@@ -116,7 +116,7 @@ class ConsumingAberrationEffect extends OneShotEffect {
                 }
             }
             player.revealCards("Consuming Aberrtion", cards, game);
-            player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            player.moveCards(cards, Zone.GRAVEYARD, source, game);
         }
         return true;
     }

@@ -90,7 +90,7 @@ class DarksteelReactorStateTriggeredAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(this.getSourceId());
-        if(permanent != null && permanent.getCounters().getCount(CounterType.CHARGE) >= 20){
+        if(permanent != null && permanent.getCounters(game).getCount(CounterType.CHARGE) >= 20){
             return true;
         }
         return false;

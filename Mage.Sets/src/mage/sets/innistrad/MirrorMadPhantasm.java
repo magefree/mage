@@ -108,7 +108,7 @@ class MirrorMadPhantasmEffect extends OneShotEffect {
                     cards.add(card);
                 }
                 player.revealCards("Mirror-Mad Phantasm", cards, game);
-                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                player.moveCards(cards, Zone.GRAVEYARD, source, game);
                 return true;
             }
         }

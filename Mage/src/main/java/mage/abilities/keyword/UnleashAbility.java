@@ -136,7 +136,7 @@ class UnleashRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent != null && permanent.getId().equals(source.getSourceId())) {
-            if (permanent.getCounters().getCount(CounterType.P1P1) > 0) {
+            if (permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 return true;
             }
         }

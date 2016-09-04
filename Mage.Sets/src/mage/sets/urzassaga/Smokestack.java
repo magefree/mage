@@ -93,7 +93,7 @@ class SmokestackEffect extends OneShotEffect {
         Player activePlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (activePlayer != null && sourcePermanent != null) {
-            int count = sourcePermanent.getCounters().getCount("Soot");
+            int count = sourcePermanent.getCounters(game).getCount("Soot");
             if (count > 0) {
                 int amount = Math.min(count, game.getBattlefield().countAll(new FilterControlledPermanent(), activePlayer.getId(), game));
                 Target target = new TargetControlledPermanent(amount, amount, new FilterControlledPermanent(), false);

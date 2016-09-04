@@ -127,7 +127,7 @@ class JinxedChokerDynamicValue implements DynamicValue {
 
         int count = 0;
         if (permanent != null){
-            count = permanent.getCounters().getCount(CounterType.CHARGE);
+            count = permanent.getCounters(game).getCount(CounterType.CHARGE);
         }
         return count;
     }
@@ -169,7 +169,7 @@ class JinxedChokerCounterEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            if (!sourcePermanent.getCounters().containsKey(CounterType.CHARGE) || controller.chooseUse(outcome, "Put a charge counter on? (No removes one)", source, game)) {
+            if (!sourcePermanent.getCounters(game).containsKey(CounterType.CHARGE) || controller.chooseUse(outcome, "Put a charge counter on? (No removes one)", source, game)) {
                 return new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true).apply(game, source);
             } else {
                 return new RemoveCounterSourceEffect(CounterType.CHARGE.createInstance()).apply(game, source);

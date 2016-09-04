@@ -122,7 +122,7 @@ class AshlingThePilgrimEffect extends OneShotEffect {
             }
             info.activations++;
             if (info.activations == 3) {
-                int damage = sourcePermanent.getCounters().getCount(CounterType.P1P1);
+                int damage = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
                 if (damage > 0) {
                     sourcePermanent.removeCounters(CounterType.P1P1.getName(), damage, game);
                     return new DamageEverythingEffect(damage, new FilterCreaturePermanent()).apply(game, source);
