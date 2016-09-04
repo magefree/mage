@@ -63,7 +63,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author fireshoes
  */
 public class KalitasTraitorOfGhet extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Vampire or Zombie");
 
     static {
@@ -83,10 +83,10 @@ public class KalitasTraitorOfGhet extends CardImpl {
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
-        
+
         // If a nontoken creature an opponent controls would die, instead exile that card and put a 2/2 black Zombie creature token onto the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KalitasTraitorOfGhetEffect()));
-        
+
         // {2}{B}, Sacrifice another Vampire or Zombie: Put two +1/+1 counters on Kalitas, Traitor of Ghet.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
@@ -131,7 +131,7 @@ class KalitasTraitorOfGhetEffect extends ReplacementEffectImpl {
             if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
                 if (permanent != null) {
-                    controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                    controller.moveCards(permanent, Zone.EXILED, source, game);
                     new CreateTokenEffect(new ZombieToken()).apply(game, source);
                     return true;
                 }
