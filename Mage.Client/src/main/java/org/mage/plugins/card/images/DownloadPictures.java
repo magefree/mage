@@ -58,6 +58,7 @@ import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
+import org.mage.plugins.card.dl.sources.MtgOnlTokensImageSource;
 import org.mage.plugins.card.dl.sources.MythicspoilerComSource;
 import org.mage.plugins.card.dl.sources.TokensMtgImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
@@ -145,6 +146,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             "wizards.com",
             "mythicspoiler.com",
             "tokens.mtg.onl", //"mtgimage.com (HQ)",
+            "mtg.onl"
         //"mtgathering.ru HQ",
         //"mtgathering.ru MQ",
         //"mtgathering.ru LQ",
@@ -171,6 +173,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         break;
                     case 3:
                         cardImageSource = TokensMtgImageSource.getInstance();
+                        break;
+                    case 4:
+                        cardImageSource = MtgOnlTokensImageSource.getInstance();
                         break;
                 }
                 int count = DownloadPictures.this.cards.size();
@@ -239,7 +244,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         TFile file;
         for (CardInfo card : allCards) {
             if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
-                CardDownloadData url = new CardDownloadData(card.getName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 
+                CardDownloadData url = new CardDownloadData(card.getName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(),
                         0, "", "", false, card.isDoubleFaced(), card.isNightCard());
                 file = new TFile(CardImageUtils.generateImagePath(url));
                 if (!file.exists()) {
@@ -492,14 +497,29 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         url = cardImageSource.generateURL(card);
                     }
 
-                    if (url != null) {
+                    if (url == null) {
+                        String imageRef = cardImageSource.getNextHttpImageUrl();
+                        String fileName = cardImageSource.getFileForHttpImage(imageRef);
+                        if (imageRef != null && fileName != null) {
+                            imageRef = cardImageSource.getSourceName() + imageRef;
+                            try {
+                                URL imageUrl = new URL(imageRef);
+                                
+                                Runnable task = new DownloadTask(imageUrl, fileName, 1);
+                                executor.execute(task);
+                            } catch (Exception ex) {
+                            }
+                        } else {
+                            if (card != null) {
+                                logger.info("Card not available on " + cardImageSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ")");
+                                synchronized (sync) {
+                                    update(cardIndex + 1, cardsToDownload.size());
+                                }
+                            }
+                        }
+                    } else if (url != null) {
                         Runnable task = new DownloadTask(card, new URL(url), cardsToDownload.size());
                         executor.execute(task);
-                    } else {
-                        logger.info("Card not available on " + cardImageSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ")");
-                        synchronized (sync) {
-                            update(cardIndex + 1, cardsToDownload.size());
-                        }
                     }
 
                 } catch (Exception ex) {
@@ -535,11 +555,23 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         private final CardDownloadData card;
         private final URL url;
         private final int count;
+        private final String actualFilename;
+        private boolean useSpecifiedPaths;
 
         public DownloadTask(CardDownloadData card, URL url, int count) {
             this.card = card;
             this.url = url;
             this.count = count;
+            this.actualFilename = "";
+            useSpecifiedPaths = false;
+        }
+
+        public DownloadTask(URL url, String actualFilename, int count) {
+            this.card = null;
+            this.url = url;
+            this.count = count;
+            this.actualFilename = actualFilename;
+            useSpecifiedPaths = true;
         }
 
         @Override
@@ -549,9 +581,20 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             TFile outputFile = null;
             try {
                 filePath.append(Constants.IO.imageBaseDir);
-                filePath.append(card.hashCode()).append(".").append(card.getName().replace(":", "").replace("//", "-")).append(".jpg");
-                temporaryFile = new File(filePath.toString());
-                String imagePath = CardImageUtils.generateImagePath(card);
+                if (!useSpecifiedPaths && card != null) {
+                    filePath.append(card.hashCode()).append(".").append(card.getName().replace(":", "").replace("//", "-")).append(".jpg");
+                    temporaryFile = new File(filePath.toString());
+                }
+                String imagePath;
+                if (useSpecifiedPaths) {
+                    imagePath = CardImageUtils.getTokenBasePath();    // temporaryFile = plugins/images\NUM.jace, telepath unbound.jpg
+                    imagePath += actualFilename;                      // imagePath = d:\xmage_images\ORI.zip\ORI\Jace,telepathunbound.jpg
+                    String tmpFile = filePath + actualFilename + ".2";
+                    temporaryFile = new File(tmpFile.toString());
+                } else {
+                    imagePath = CardImageUtils.generateImagePath(card);
+                }
+
                 outputFile = new TFile(imagePath);
                 if (!outputFile.exists()) {
                     outputFile.getParentFile().mkdirs();
@@ -599,7 +642,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     out.flush();
                     out.close();
 
-                    if (card.isTwoFacedCard()) {
+                    if (card != null && card.isTwoFacedCard()) {
                         BufferedImage image = ImageIO.read(temporaryFile);
                         if (image.getHeight() == 470) {
                             BufferedImage renderedImage = new BufferedImage(265, 370, BufferedImage.TYPE_INT_RGB);
@@ -620,11 +663,13 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         new TFile(temporaryFile).cp_rp(outputFile);
                     }
                 } else {
-                    logger.warn("Image download for " + card.getName()
-                            + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
-                            + "(" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
+                    if (card != null) {
+                        logger.warn("Image download for " + card.getName()
+                                + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
+                                + "(" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
+                    }
                     if (logger.isDebugEnabled()) { // Shows the returned html from the request to the web server
-                        logger.debug("Return ed HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                        logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
                     }
                 }
 
