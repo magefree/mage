@@ -75,7 +75,7 @@ public class ModularAbility extends DiesTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().getCounters().getCount(CounterType.P1P1) > 0) {
+            if (zEvent.getTarget().getCounters(game).getCount(CounterType.P1P1) > 0) {
                 return true;
             }
         }
@@ -157,7 +157,7 @@ class ModularDistributeCounterEffect extends OneShotEffect {
         Permanent targetArtifact = game.getPermanent(targetPointer.getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
         if (sourcePermanent != null && targetArtifact != null && player != null) {
-            int numberOfCounters = sourcePermanent.getCounters().getCount(CounterType.P1P1);
+            int numberOfCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (numberOfCounters > 0) {
                 targetArtifact.addCounters(CounterType.P1P1.createInstance(numberOfCounters), game);
             }

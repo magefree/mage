@@ -109,7 +109,7 @@ class GlimpseTheFutureEffect extends OneShotEffect {
                         cards.remove(card);
                     }
                 }
-                controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
             return true;
         }

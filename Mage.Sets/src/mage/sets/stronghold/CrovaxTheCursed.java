@@ -113,11 +113,11 @@ class CrovaxTheCursedEffect extends OneShotEffect {
             if (creatures > 0 && controller.chooseUse(outcome, "Sacrifice a creature?", source, game)) {
                 if (new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, "").apply(game, source)) {
                     if (sourceObject != null) {
-                        sourceObject.getCounters().addCounter(CounterType.P1P1.createInstance());
+                        sourceObject.getCounters(game).addCounter(CounterType.P1P1.createInstance());
                         game.informPlayers(controller.getLogName() + " puts a +1/+1 counter on " + sourceObject.getName());
                     }
                 }
-            } else if (sourceObject != null && sourceObject.getCounters().containsKey(CounterType.P1P1)) {
+            } else if (sourceObject != null && sourceObject.getCounters(game).containsKey(CounterType.P1P1)) {
                 sourceObject.removeCounters(CounterType.P1P1.getName(), 1, game);
                 game.informPlayers(controller.getLogName() + " removes a +1/+1 counter from " + sourceObject.getName());
             }

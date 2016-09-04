@@ -57,7 +57,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getCounters().getCount(counter.getName()) >= counter.getCount()) {
+        if (permanent != null && permanent.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
             permanent.removeCounters(counter.getName(), counter.getCount(), game);
             if (!game.isSimulation()) {
                 game.informPlayers("Removed " + counter.getCount() + " " + counter.getName() + " counter from " + permanent.getLogName());

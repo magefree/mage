@@ -65,7 +65,7 @@ public class PersistAbility extends DiesTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-            if (permanent.getCounters().getCount(CounterType.M1M1) == 0) {
+            if (permanent.getCounters(game).getCount(CounterType.M1M1) == 0) {
                 FixedTarget fixedTarget = new FixedTarget(permanent.getId());
                 fixedTarget.init(game, this);
                 return true;

@@ -89,7 +89,7 @@ class WindsOfChangeEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     permanentsCount.put(playerId, player.getHand().size());
-                    player.moveCards(player.getHand(), Zone.HAND, Zone.LIBRARY, source, game);
+                    player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
                     player.shuffleLibrary(source, game);
                 }
             }

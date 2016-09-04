@@ -117,7 +117,7 @@ class EternityVesselEffect2 extends OneShotEffect {
         Permanent vessel = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (vessel != null && controller != null) {
-            controller.setLife(vessel.getCounters().getCount(CounterType.CHARGE), game);
+            controller.setLife(vessel.getCounters(game).getCount(CounterType.CHARGE), game);
             return true;
         }
         return false;

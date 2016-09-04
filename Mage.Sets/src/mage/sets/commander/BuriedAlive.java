@@ -89,7 +89,7 @@ class BuriedAliveEffect extends SearchEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.searchLibrary(target, game)) {
-                controller.moveCards(new CardsImpl(target.getTargets()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                controller.moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
             }
             controller.shuffleLibrary(source, game);
             return true;

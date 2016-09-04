@@ -126,7 +126,7 @@ class GenesisWaveEffect extends OneShotEffect {
                 }
             }
             controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, false, null);
-            controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
         }
         return true;
     }

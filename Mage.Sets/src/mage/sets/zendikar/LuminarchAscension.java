@@ -125,7 +125,7 @@ class SourceHasCountersCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return (game.getPermanent(sourceId).getCounters().getCount(counterType) >= counters);
+        return (game.getPermanent(sourceId).getCounters(game).getCount(counterType) >= counters);
     }
 
     @Override

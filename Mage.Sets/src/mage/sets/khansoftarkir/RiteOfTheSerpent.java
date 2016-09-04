@@ -89,7 +89,7 @@ class RiteOfTheSerpentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
-            if (targetCreature.getCounters().containsKey(CounterType.P1P1)) {
+            if (targetCreature.getCounters(game).containsKey(CounterType.P1P1)) {
                 new CreateTokenEffect(new SnakeToken("KTK")).apply(game, source);
             }
             return true;

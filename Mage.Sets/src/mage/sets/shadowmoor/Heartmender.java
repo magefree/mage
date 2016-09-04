@@ -99,7 +99,7 @@ class HeartmenderEffect extends OneShotEffect {
         }
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             if (creature != null
-                    && creature.getCounters().getCount(counter.getName()) >= counter.getCount()) {
+                    && creature.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
                 creature.removeCounters(counter.getName(), counter.getCount(), game);
                 game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
                         .append(" counter from ").append(creature.getName()).toString());

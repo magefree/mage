@@ -159,18 +159,4 @@ public class PermanentMeld extends PermanentCard {
         }
         return false;
     }
-
-    @Override
-    public boolean addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
-        MeldCard meldCard = (MeldCard) this.getCard();
-        if (meldCard.isMelded()) {
-            return super.addCounters(name, amount, game, appliedEffects);
-        } else {
-            // can this really happen?
-            boolean returnState = true;
-            returnState |= meldCard.getTopHalfCard().addCounters(name, amount, game, appliedEffects);
-            returnState |= meldCard.getBottomHalfCard().addCounters(name, amount, game, appliedEffects);
-            return returnState;
-        }
-    }
 }

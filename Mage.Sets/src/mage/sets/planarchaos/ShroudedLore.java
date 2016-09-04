@@ -132,7 +132,7 @@ class ShroudedLoreEffect extends OneShotEffect {
             if(card != null) {
                 Cards cardsToHand = new CardsImpl();
                 cardsToHand.add(card);
-                you.moveCards(cardsToHand, Zone.GRAVEYARD, Zone.HAND, source, game);
+                you.moveCards(cardsToHand, Zone.HAND, source, game);
             }
             return true;
         }

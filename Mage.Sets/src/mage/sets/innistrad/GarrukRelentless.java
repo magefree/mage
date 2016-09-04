@@ -112,7 +112,7 @@ class GarrukRelentlessTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(sourceId)) {
             Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && !permanent.isTransformed() && permanent.getCounters().getCount(CounterType.LOYALTY) <= 2) {
+            if (permanent != null && !permanent.isTransformed() && permanent.getCounters(game).getCount(CounterType.LOYALTY) <= 2) {
                 return true;
             }
         }

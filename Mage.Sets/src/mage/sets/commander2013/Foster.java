@@ -126,7 +126,7 @@ class FosterEffect extends OneShotEffect {
                 controller.moveCards(cardFound, Zone.HAND, source, game);
                 cards.remove(cardFound);
             }
-            controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
         }
         return true;
     }

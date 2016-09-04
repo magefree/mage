@@ -188,7 +188,7 @@ class HankyuCountersSourceCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent equipment = game.getPermanent(this.effectGivingEquipmentId);
                 if (equipment != null ) {
-                    this.removedCounters = equipment.getCounters().getCount(CounterType.AIM);
+                    this.removedCounters = equipment.getCounters(game).getCount(CounterType.AIM);
                     if (this.removedCounters > 0) {
                             equipment.removeCounters("aim", this.removedCounters, game);
                     }

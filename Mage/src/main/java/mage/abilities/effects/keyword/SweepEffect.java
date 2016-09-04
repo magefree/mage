@@ -74,7 +74,7 @@ public class SweepEffect extends OneShotEffect {
             Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 game.getState().setValue(CardUtil.getCardZoneString("sweep", source.getSourceId(), game), target.getTargets().size());
-                controller.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
+                controller.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
             }
             return true;
         }

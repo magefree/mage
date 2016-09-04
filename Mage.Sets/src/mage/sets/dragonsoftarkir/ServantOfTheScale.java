@@ -104,7 +104,7 @@ class ServantOfTheScaleEffect extends OneShotEffect {
         if (sourcePermanent != null && controller != null &&
             (sourcePermanent.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter()  // Token
                 || sourcePermanent.getZoneChangeCounter(game) + 1 == source.getSourceObjectZoneChangeCounter())) { // PermanentCard
-            int amount = sourcePermanent.getCounters().getCount(CounterType.P1P1);
+            int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amount > 0) {
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(amount));
                 effect.setTargetPointer(targetPointer);

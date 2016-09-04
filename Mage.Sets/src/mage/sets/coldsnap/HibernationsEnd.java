@@ -128,7 +128,7 @@ class HibernationsEndEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null && player != null) {
-            int newConvertedCost = sourcePermanent.getCounters().getCount("age");
+            int newConvertedCost = sourcePermanent.getCounters(game).getCount("age");
             FilterCard filter = new FilterCard("creature card with converted mana cost " + newConvertedCost);
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, newConvertedCost));
             filter.add(new CardTypePredicate(CardType.CREATURE));

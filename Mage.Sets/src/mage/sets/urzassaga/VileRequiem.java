@@ -88,7 +88,7 @@ public class VileRequiem extends CardImpl {
         if (ability.getOriginalId().equals(originalId)) {
             Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
             if (sourcePermanent != null) {
-                int numberCounters = sourcePermanent.getCounters().getCount(CounterType.VERSE);
+                int numberCounters = sourcePermanent.getCounters(game).getCount(CounterType.VERSE);
                 ability.getTargets().clear();
                 FilterCreaturePermanent newFilter = filter.copy();
                 newFilter.setMessage(new StringBuilder("up to ").append(CardUtil.numberToText(numberCounters)).append(" target nonblack creatures").toString());

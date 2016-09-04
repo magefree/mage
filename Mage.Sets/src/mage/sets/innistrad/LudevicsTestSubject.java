@@ -96,8 +96,8 @@ class LudevicsTestSubjectEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
-            if (p.getCounters().getCount(CounterType.HATCHLING) >= 5) {
-                p.removeCounters(CounterType.HATCHLING.getName(), p.getCounters().getCount(CounterType.HATCHLING), game);
+            if (p.getCounters(game).getCount(CounterType.HATCHLING) >= 5) {
+                p.removeCounters(CounterType.HATCHLING.getName(), p.getCounters(game).getCount(CounterType.HATCHLING), game);
                 TransformSourceEffect effect = new TransformSourceEffect(true);
                 return effect.apply(game, source);
             }

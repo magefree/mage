@@ -103,7 +103,7 @@ class NecroskitterTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
             Permanent permanent = zEvent.getTarget();
             if (permanent != null
-                    && permanent.getCounters().containsKey(CounterType.M1M1)
+                    && permanent.getCounters(game).containsKey(CounterType.M1M1)
                     && game.getOpponents(controllerId).contains(permanent.getControllerId())) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId(), game.getState().getZoneChangeCounter(event.getTargetId())));

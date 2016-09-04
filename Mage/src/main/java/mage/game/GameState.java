@@ -264,7 +264,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         sb.append("permanents");
         for (Permanent permanent : battlefield.getAllPermanents()) {
-            sb.append(permanent.getValue());
+            sb.append(permanent.getValue(this));
         }
 
         sb.append("spells");
@@ -305,7 +305,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         sb.append("permanents");
         List<String> perms = new ArrayList<>();
         for (Permanent permanent : battlefield.getAllPermanents()) {
-            perms.add(permanent.getValue());
+            perms.add(permanent.getValue(this));
         }
         Collections.sort(perms);
         sb.append(perms);
@@ -357,7 +357,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         sb.append("permanents");
         List<String> perms = new ArrayList<>();
         for (Permanent permanent : battlefield.getAllPermanents()) {
-            perms.add(permanent.getValue());
+            perms.add(permanent.getValue(this));
         }
         Collections.sort(perms);
         sb.append(perms);

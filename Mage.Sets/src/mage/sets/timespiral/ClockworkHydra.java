@@ -106,7 +106,7 @@ class ClockworkHydraEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && permanent != null && permanent.getCounters().getCount(CounterType.P1P1) > 0) {
+        if (controller != null && permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
             permanent.removeCounters(CounterType.P1P1.createInstance(), game);
             Target target = new TargetCreatureOrPlayer();
             if (controller.chooseTarget(outcome, target, source, game)) {

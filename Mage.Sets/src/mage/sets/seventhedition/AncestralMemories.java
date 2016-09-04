@@ -112,7 +112,7 @@ class AncestralMemoriesEffect extends OneShotEffect {
                         }   
                     }
                 }
-                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                player.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
             return true;
         }

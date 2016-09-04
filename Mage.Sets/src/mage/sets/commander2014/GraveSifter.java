@@ -111,7 +111,7 @@ class GraveSifterEffect extends OneShotEffect {
                         filter.add(new SubtypePredicate(typeChoice.getChoice()));
                         Target target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter);
                         player.chooseTarget(outcome, target, source, game);
-                        player.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
+                        player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
                     }
 
                 }

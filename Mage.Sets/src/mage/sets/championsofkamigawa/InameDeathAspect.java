@@ -98,7 +98,7 @@ class InameDeathAspectEffect extends SearchEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
-                player.moveCards(new CardsImpl(target.getTargets()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                player.moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
             }
             player.shuffleLibrary(source, game);
             return true;
