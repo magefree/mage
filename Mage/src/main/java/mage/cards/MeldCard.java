@@ -32,10 +32,6 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import static mage.constants.Zone.EXILED;
-import static mage.constants.Zone.GRAVEYARD;
-import static mage.constants.Zone.HAND;
-import static mage.constants.Zone.LIBRARY;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -136,8 +132,8 @@ public abstract class MeldCard extends CardImpl {
                     updateZoneChangeCounter(game);
                     switch (event.getToZone()) {
                         case GRAVEYARD:
-                            game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game, true);
-                            game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game, true);
+                            game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game);
+                            game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game);
                             break;
                         case HAND:
                             game.getPlayer(this.getOwnerId()).getHand().add(topHalfCard);
@@ -202,8 +198,8 @@ public abstract class MeldCard extends CardImpl {
                 updateZoneChangeCounter(game);
                 switch (event.getToZone()) {
                     case GRAVEYARD:
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game, true);
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game, true);
+                        game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game);
+                        game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game);
                         break;
                     case HAND:
                         game.getPlayer(this.getOwnerId()).getHand().add(topHalfCard);

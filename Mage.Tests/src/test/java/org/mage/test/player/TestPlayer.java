@@ -1239,8 +1239,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean putInGraveyard(Card card, Game game, boolean fromBattlefield) {
-        return computerPlayer.putInGraveyard(card, game, fromBattlefield);
+    public boolean putInGraveyard(Card card, Game game) {
+        return computerPlayer.putInGraveyard(card, game);
     }
 
     @Override

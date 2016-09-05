@@ -853,11 +853,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean putInGraveyard(Card card, Game game, boolean fromBattlefield) {
+    public boolean putInGraveyard(Card card, Game game) {
         if (card.getOwnerId().equals(playerId)) {
             this.graveyard.add(card);
         } else {
-            return game.getPlayer(card.getOwnerId()).putInGraveyard(card, game, fromBattlefield);
+            return game.getPlayer(card.getOwnerId()).putInGraveyard(card, game);
         }
         return true;
     }

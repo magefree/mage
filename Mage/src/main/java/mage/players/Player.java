@@ -354,7 +354,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean removeFromBattlefield(Permanent permanent, Game game);
 
-    boolean putInGraveyard(Card card, Game game, boolean fromBattlefield);
+    boolean putInGraveyard(Card card, Game game);
 
     boolean removeFromGraveyard(Card card, Game game);
 

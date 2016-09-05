@@ -38,6 +38,8 @@ import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.ZoneInfo;
+import mage.game.ZonesHandler;
 import mage.game.command.Commander;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
@@ -164,7 +166,7 @@ public class PermanentCard extends PermanentImpl {
                     card.updateZoneChangeCounter(game);
                     switch (event.getToZone()) {
                         case GRAVEYARD:
-                            owner.putInGraveyard(card, game, !flag);
+                            owner.putInGraveyard(card, game);
                             break;
                         case HAND:
                             owner.getHand().add(card);

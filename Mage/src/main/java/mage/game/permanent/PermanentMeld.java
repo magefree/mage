@@ -69,8 +69,8 @@ public class PermanentMeld extends PermanentCard {
                 Card bottomHalfCard = meldCard.getBottomHalfCard();
                 switch (event.getToZone()) {
                     case GRAVEYARD:
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game, true);
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game, true);
+                        game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game);
+                        game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game);
                         break;
                     case HAND:
                         game.getPlayer(this.getOwnerId()).getHand().add(topHalfCard);
@@ -118,8 +118,8 @@ public class PermanentMeld extends PermanentCard {
                 Card bottomHalfCard = meldCard.getBottomHalfCard();
                 switch (event.getToZone()) {
                     case GRAVEYARD:
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game, true);
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game, true);
+                        game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game);
+                        game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game);
                         break;
                     case HAND:
                         game.getPlayer(this.getOwnerId()).getHand().add(topHalfCard);

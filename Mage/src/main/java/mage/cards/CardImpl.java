@@ -350,7 +350,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             updateZoneChangeCounter(game);
             switch (event.getToZone()) {
                 case GRAVEYARD:
-                    game.getPlayer(ownerId).putInGraveyard(this, game, !flag);
+                    game.getPlayer(ownerId).putInGraveyard(this, game);
                     break;
                 case HAND:
                     game.getPlayer(ownerId).getHand().add(this);
