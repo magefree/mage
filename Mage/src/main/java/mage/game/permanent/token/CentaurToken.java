@@ -31,6 +31,7 @@ package mage.game.permanent.token;
 import java.util.Random;
 import mage.constants.CardType;
 import mage.MageInt;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -41,7 +42,7 @@ public class CentaurToken extends Token {
     public CentaurToken() {
         super("Centaur", "3/3 green Centaur creature token");
         cardType.add(CardType.CREATURE);
-        setTokenType(new Random().nextInt(2) +1); // randomly take image 1 or 2
+        setTokenType(RandomUtil.nextInt(2) +1); // randomly take image 1 or 2
         color.setGreen(true);
         subtype.add("Centaur");
         power = new MageInt(3);

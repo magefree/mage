@@ -38,6 +38,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -73,7 +74,7 @@ public class ShadowsOverInnistrad extends ExpansionSet {
     public void addDoubleFace(List<Card> booster) {
         for (int i = 0; i < numBoosterDoubleFaced; i++) {
             List<CardInfo> doubleFacedCards;
-            if (rnd.nextInt(15) < 10) {
+            if (RandomUtil.nextInt(15) < 10) {
                 doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.COMMON);
             } else {
                 doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.UNCOMMON);
@@ -99,14 +100,14 @@ public class ShadowsOverInnistrad extends ExpansionSet {
     @Override
     public int getNumberOfSpecialCommons() {
         // Then about an eighth of the packs will have a second double-faced card, which will be a rare or mythic rare.
-        return rnd.nextInt(8) == 0 ? 1 : 0;
+        return RandomUtil.nextInt(8) == 0 ? 1 : 0;
     }
 
     @Override
     public void addSpecialCommon(List<Card> booster, int number) {
         // number is here always 1
         List<CardInfo> doubleFacedCards;
-        if (rnd.nextInt(8) > 0) {
+        if (RandomUtil.nextInt(8) > 0) {
             doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.RARE);
         } else {
             doubleFacedCards = getDoubleFacedCardsByRarity(Rarity.MYTHIC);

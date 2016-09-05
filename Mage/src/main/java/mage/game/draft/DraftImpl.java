@@ -121,6 +121,7 @@ public abstract class DraftImpl implements Draft {
                 for(UUID playerId : players.keySet()) {
                     table.add(playerId);
                 }
+
                 table.setCurrent(currentId);
             }
             if (oldDraftPlayer.isPicking()) {

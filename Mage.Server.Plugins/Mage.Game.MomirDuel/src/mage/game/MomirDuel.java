@@ -56,6 +56,7 @@ import mage.game.permanent.token.EmptyToken;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -135,7 +136,6 @@ class MomirEmblem extends Emblem {
 
 class MomirEffect extends OneShotEffect {
 
-    private static final Random rnd = new Random();
 
     public MomirEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -158,7 +158,7 @@ class MomirEffect extends OneShotEffect {
         CardCriteria criteria = new CardCriteria().types(CardType.CREATURE).convertedManaCost(value);
         List<CardInfo> options = CardRepository.instance.findCards(criteria);
         if (options != null && !options.isEmpty()) {
-            Card card = options.get(rnd.nextInt(options.size())).getCard();
+            Card card = options.get(RandomUtil.nextInt(options.size())).getCard();
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(card);
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);

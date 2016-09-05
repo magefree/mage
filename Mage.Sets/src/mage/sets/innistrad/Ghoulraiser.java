@@ -43,6 +43,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -96,8 +97,7 @@ class GhoulraiserEffect extends OneShotEffect {
             filter.add(new SubtypePredicate("Zombie"));
             Card[] cards = player.getGraveyard().getCards(filter, game).toArray(new Card[0]);
             if (cards.length > 0) {
-                Random rnd = new Random();
-                Card card = cards[rnd.nextInt(cards.length)];
+                Card card = cards[RandomUtil.nextInt(cards.length)];
                 card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 game.informPlayers(card.getName() + "returned to the hand of" + player.getLogName());
                 return true;

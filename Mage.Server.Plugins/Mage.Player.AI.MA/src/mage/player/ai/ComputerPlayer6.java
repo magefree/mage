@@ -104,6 +104,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.Targets;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -128,7 +129,6 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected Set<String> actionCache;
     private static final List<TreeOptimizer> optimizers = new ArrayList<>();
     protected int lastLoggedTurn = 0;
-    Random random = new Random();
     protected static final String BLANKS = "...............................................";
 
     static {
@@ -631,7 +631,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     if (depth == maxDepth && action instanceof PassAbility) {
                         val = val - PASSIVITY_PENALTY; // passivity penalty
                     }
-                    if (val > alpha || (depth == maxDepth && val == alpha && random.nextBoolean())) { // Adding random for equal value to get change sometimes
+                    if (val > alpha || (depth == maxDepth && val == alpha && RandomUtil.nextBoolean())) { // Adding random for equal value to get change sometimes
                         alpha = val;
                         bestNode = newNode;
                         bestNode.setScore(val);

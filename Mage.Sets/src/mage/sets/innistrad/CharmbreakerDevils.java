@@ -49,6 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -114,8 +115,7 @@ class CharmbreakerDevilsEffect extends OneShotEffect {
                     new CardTypePredicate(CardType.SORCERY)));
             Card[] cards = player.getGraveyard().getCards(filter, game).toArray(new Card[0]);
             if (cards.length > 0) {
-                Random rnd = new Random();
-                Card card = cards[rnd.nextInt(cards.length)];
+                Card card = cards[RandomUtil.nextInt(cards.length)];
                 card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 game.informPlayers(new StringBuilder("Charmbreaker Devils: ").append(card.getName()).append(" returned to the hand of ").append(player.getLogName()).toString());
                 return true;

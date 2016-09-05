@@ -46,6 +46,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 public class Token extends MageObjectImpl {
 
@@ -290,7 +291,7 @@ public class Token extends MageObjectImpl {
                 // we should not set random set if appropriate set is already used
                 if (getOriginalExpansionSetCode() == null || getOriginalExpansionSetCode().isEmpty()
                         || !availableImageSetCodes.contains(getOriginalExpansionSetCode())) {
-                    setOriginalExpansionSetCode(availableImageSetCodes.get(new Random().nextInt(availableImageSetCodes.size())));
+                    setOriginalExpansionSetCode(availableImageSetCodes.get(RandomUtil.nextInt(availableImageSetCodes.size())));
                 }
             }
         } else {

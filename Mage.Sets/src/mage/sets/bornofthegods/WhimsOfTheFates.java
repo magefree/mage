@@ -48,6 +48,7 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -76,7 +77,6 @@ public class WhimsOfTheFates extends CardImpl {
 
 class WhimsOfTheFateEffect extends OneShotEffect {
 
-    protected static Random rnd = new Random();
 
     public WhimsOfTheFateEffect() {
         super(Outcome.Detriment);
@@ -173,7 +173,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerPiles.getKey());
                 if (player != null) {
                     // decide which pile to sacrifice
-                    int sacrificePile = rnd.nextInt(3) + 1; // random number from 1 - 3
+                    int sacrificePile = RandomUtil.nextInt(3) + 1; // random number from 1 - 3
                     game.informPlayers(new StringBuilder(player.getLogName()).append(" sacrifices pile number ").append(sacrificePile).toString());
                     for (UUID permanentId : playerPiles.getValue().get(sacrificePile)) {
                         Permanent permanent = game.getPermanent(permanentId);

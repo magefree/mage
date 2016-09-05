@@ -47,6 +47,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -322,7 +323,7 @@ public abstract class TargetImpl implements Target {
                 Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), playerId, game);
                 if (possibleTargets.size() > 0) {
                     int i = 0;
-                    int rnd = new Random().nextInt(possibleTargets.size());
+                    int rnd = RandomUtil.nextInt(possibleTargets.size());
                     Iterator it = possibleTargets.iterator();
                     while (i < rnd) {
                         it.next();
