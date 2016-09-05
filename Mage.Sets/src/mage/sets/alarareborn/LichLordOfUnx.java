@@ -94,7 +94,7 @@ class ZombieWizardToken extends Token {
     ZombieWizardToken() {
         super("Zombie Wizard", "a 1/1 blue and black Zombie Wizard creature token");
         cardType.add(CardType.CREATURE);
-        color.setGreen(true);
+        color.setBlue(true);
         color.setBlack(true);
         subtype.add("Zombie");
         subtype.add("Wizard");
