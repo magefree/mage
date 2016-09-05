@@ -25,75 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.chronicles;
+package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.RegenerateAttachedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.BoostCounter;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Derpthemeus
  */
-public class LivingArmor extends CardImpl {
+public class TheBrute extends CardImpl {
 
-    public LivingArmor(UUID ownerId) {
-        super(ownerId, 83, "Living Armor", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "CHR";
+    public TheBrute(UUID ownerId) {
+        super(ownerId, 272, "The Brute", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+        this.expansionSetCode = "5ED";
+        this.subtype.add("Aura");
 
-        // {tap}, Sacrifice Living Armor: Put X +0/+1 counters on target creature, where X is that creature's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LivingArmorEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        // Enchant creature
+        TargetCreaturePermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // Enchanted creature gets +1/+0.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0)));
+
+        // {R}{R}{R}: Regenerate enchanted creature.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ManaCostsImpl("{R}{R}{R}")));
     }
 
-    public LivingArmor(final LivingArmor card) {
+    public TheBrute(final TheBrute card) {
         super(card);
     }
 
     @Override
-    public LivingArmor copy() {
-        return new LivingArmor(this);
-    }
-
-    class LivingArmorEffect extends OneShotEffect {
-
-        public LivingArmorEffect() {
-            super(Outcome.BoostCreature);
-            this.staticText = "Put X +0/+1 counters on target creature, where X is that creature's converted mana cost";
-        }
-
-        public LivingArmorEffect(final LivingArmorEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public LivingArmorEffect copy() {
-            return new LivingArmorEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
-            if (creature != null) {
-                int amount = creature.getConvertedManaCost();
-                creature.addCounters(new BoostCounter(0, 1, amount), game);
-                return true;
-            }
-            return false;
-        }
+    public TheBrute copy() {
+        return new TheBrute(this);
     }
 }

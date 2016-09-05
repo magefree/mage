@@ -25,75 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.chronicles;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.BoostCounter;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Derpthemeus
  */
-public class LivingArmor extends CardImpl {
+public class IronLance extends CardImpl {
 
-    public LivingArmor(UUID ownerId) {
-        super(ownerId, 83, "Living Armor", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "CHR";
+    public IronLance(UUID ownerId) {
+        super(ownerId, 300, "Iron Lance", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "MMQ";
 
-        // {tap}, Sacrifice Living Armor: Put X +0/+1 counters on target creature, where X is that creature's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LivingArmorEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
+        // {3}, {tap}: Target creature gains first strike until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{3}"));
+        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public LivingArmor(final LivingArmor card) {
+    public IronLance(final IronLance card) {
         super(card);
     }
 
     @Override
-    public LivingArmor copy() {
-        return new LivingArmor(this);
-    }
-
-    class LivingArmorEffect extends OneShotEffect {
-
-        public LivingArmorEffect() {
-            super(Outcome.BoostCreature);
-            this.staticText = "Put X +0/+1 counters on target creature, where X is that creature's converted mana cost";
-        }
-
-        public LivingArmorEffect(final LivingArmorEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public LivingArmorEffect copy() {
-            return new LivingArmorEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
-            if (creature != null) {
-                int amount = creature.getConvertedManaCost();
-                creature.addCounters(new BoostCounter(0, 1, amount), game);
-                return true;
-            }
-            return false;
-        }
+    public IronLance copy() {
+        return new IronLance(this);
     }
 }

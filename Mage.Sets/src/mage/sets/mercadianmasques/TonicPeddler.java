@@ -25,75 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.chronicles;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.BoostCounter;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author Derpthemeus
  */
-public class LivingArmor extends CardImpl {
+public class TonicPeddler extends CardImpl {
 
-    public LivingArmor(UUID ownerId) {
-        super(ownerId, 83, "Living Armor", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "CHR";
+    public TonicPeddler(UUID ownerId) {
+        super(ownerId, 54, "Tonic Peddler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Human");
+        this.subtype.add("Spellshaper");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // {tap}, Sacrifice Living Armor: Put X +0/+1 counters on target creature, where X is that creature's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LivingArmorEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        // {W}, {tap}, Discard a card: Target player gains 3 life.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeTargetEffect(3), new ManaCostsImpl("{W}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardCardCost());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public LivingArmor(final LivingArmor card) {
+    public TonicPeddler(final TonicPeddler card) {
         super(card);
     }
 
     @Override
-    public LivingArmor copy() {
-        return new LivingArmor(this);
-    }
-
-    class LivingArmorEffect extends OneShotEffect {
-
-        public LivingArmorEffect() {
-            super(Outcome.BoostCreature);
-            this.staticText = "Put X +0/+1 counters on target creature, where X is that creature's converted mana cost";
-        }
-
-        public LivingArmorEffect(final LivingArmorEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public LivingArmorEffect copy() {
-            return new LivingArmorEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
-            if (creature != null) {
-                int amount = creature.getConvertedManaCost();
-                creature.addCounters(new BoostCounter(0, 1, amount), game);
-                return true;
-            }
-            return false;
-        }
+    public TonicPeddler copy() {
+        return new TonicPeddler(this);
     }
 }
