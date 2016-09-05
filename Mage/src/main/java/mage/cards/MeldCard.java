@@ -279,7 +279,7 @@ public abstract class MeldCard extends CardImpl {
                 game.setScopeRelevant(false);
                 game.applyEffects();
                 if (entered) {
-                    if (event.getFlag()) {
+                    if (tapped) {
                         permanent.setTapped(true);
                     }
                     event.setTarget(permanent);

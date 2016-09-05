@@ -3179,7 +3179,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (faceDown) {
                         card.setFaceDown(true, game);
                     }
-                    ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), controllingPlayerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
+                    ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), controllingPlayerId, fromZone, Zone.BATTLEFIELD, appliedEffects);
                     if (!game.replaceEvent(event)) {
                         // get permanent
                         Permanent permanent;
