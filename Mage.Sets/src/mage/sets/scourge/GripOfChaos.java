@@ -47,6 +47,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -154,7 +155,7 @@ class GripOfChaosEffect extends OneShotEffect {
                     Set<UUID> possibleTargets = target.possibleTargets(source.getSourceId(), source.getControllerId(), game);
                     if (possibleTargets.size() > 0) {
                         int i = 0;
-                        int rnd = new Random().nextInt(possibleTargets.size());
+                        int rnd = RandomUtil.nextInt(possibleTargets.size());
                         Iterator<UUID> it = possibleTargets.iterator();
                         while (i < rnd) {
                             it.next();

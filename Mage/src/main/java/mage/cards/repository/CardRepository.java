@@ -48,6 +48,7 @@ import java.util.TreeSet;
 import java.util.concurrent.Callable;
 import mage.constants.CardType;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -65,7 +66,6 @@ public enum CardRepository {
     // raise this if new cards were added to the server
     private static final long CARD_CONTENT_VERSION = 57;
 
-    private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
 
@@ -317,7 +317,7 @@ public enum CardRepository {
     public CardInfo findCard(String name) {
         List<CardInfo> cards = findCards(name);
         if (!cards.isEmpty()) {
-            return cards.get(random.nextInt(cards.size()));
+            return cards.get(RandomUtil.nextInt(cards.size()));
         }
         return null;
     }

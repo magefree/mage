@@ -6,6 +6,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 import java.io.File;
 import java.util.Date;
@@ -95,10 +96,9 @@ public class SystemUtil {
                         continue;
                     }
 
-                    Random random = new Random();
                     Set<Card> cardsToLoad = new HashSet<>();
                     for (int i = 0; i < amount; i++) {
-                        CardInfo cardInfo = cards.get(random.nextInt(cards.size()));
+                        CardInfo cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
                         Card card = cardInfo != null ? cardInfo.getCard() : null;
                         if (card != null) {
                             cardsToLoad.add(card);

@@ -44,6 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -115,8 +116,7 @@ class CapriciousEfreetEffect extends OneShotEffect {
         }
 
         if (!targetPermanents.isEmpty()) {
-            Random random = new Random();
-            permanent = targetPermanents.get(random.nextInt(targetPermanents.size()));
+            permanent = targetPermanents.get(RandomUtil.nextInt(targetPermanents.size()));
             permanent.destroy(source.getSourceId(), game, false);
             return true;
         }

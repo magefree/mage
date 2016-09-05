@@ -138,10 +138,7 @@ import mage.target.common.TargetDiscard;
 import mage.target.common.TargetOpponent;
 import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.common.TargetSpellOrPermanent;
-import mage.util.Copier;
-import mage.util.MessageToClient;
-import mage.util.TournamentUtil;
-import mage.util.TreeNode;
+import mage.util.*;
 import org.apache.log4j.Logger;
 
 /**
@@ -165,7 +162,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private transient List<ColoredManaSymbol> chosenColors;
 
     private transient ManaCost currentUnpaidMana;
-    private final Random random = new Random();
 
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
@@ -1258,7 +1254,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
         log.debug("announceXMana");
         //TODO: improve this
-        int value = new Random().nextInt(max + 1);
+        int value = RandomUtil.nextInt(max + 1);
         if (value < max) {
             value++;
         }
@@ -1558,7 +1554,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         //TODO: improve this
         if (min < max && min == 0) {
-            return new Random().nextInt(max + 1);
+            return RandomUtil.nextInt(max + 1);
         }
         return min;
     }
@@ -1587,7 +1583,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     private static void addBasicLands(Deck deck, String landName, int number) {
-        Random random = new Random();
         Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes());
 
         CardCriteria criteria = new CardCriteria();
@@ -1605,7 +1600,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         for (int i = 0; i < number; i++) {
-            Card land = cards.get(random.nextInt(cards.size())).getCard();
+            Card land = cards.get(RandomUtil.nextInt(cards.size())).getCard();
             deck.getCards().add(land);
         }
     }
@@ -2239,7 +2234,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         UUID randomOpponentId = game.getOpponents(abilityControllerId).iterator().next();
         Set<UUID> opponents = game.getOpponents(abilityControllerId);
         if (opponents.size() > 1) {
-            int rand = random.nextInt(opponents.size());
+            int rand = RandomUtil.nextInt(opponents.size());
             int count = 0;
             for (UUID currentId : opponents) {
                 if (count == rand) {

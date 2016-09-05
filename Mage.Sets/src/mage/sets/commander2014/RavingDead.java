@@ -49,6 +49,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -102,10 +103,9 @@ class RavingDeadEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Random random = new Random();
             List<UUID> opponents = new ArrayList<>();
             opponents.addAll(game.getOpponents(controller.getId()));
-            Player opponent = game.getPlayer(opponents.get(random.nextInt(opponents.size())));
+            Player opponent = game.getPlayer(opponents.get(RandomUtil.nextInt(opponents.size())));
             if (opponent != null) {
                 ContinuousEffect effect = new AttacksIfAbleTargetPlayerSourceEffect();
                 effect.setTargetPointer(new FixedTarget(opponent.getId()));

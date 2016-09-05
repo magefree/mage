@@ -41,6 +41,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.util.RandomUtil;
 import mage.util.ThreadLocalStringBuilder;
 
 /**
@@ -51,7 +52,6 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
-    private static Random rnd = new Random();
     private UUID ownerId;
 
     public CardsImpl() {
@@ -114,7 +114,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
             return null;
         }
         UUID[] cards = this.toArray(new UUID[this.size()]);
-        return game.getCard(cards[rnd.nextInt(cards.length)]);
+        return game.getCard(cards[RandomUtil.nextInt(cards.length)]);
     }
 
     @Override

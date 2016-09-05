@@ -51,6 +51,7 @@ import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
+import mage.util.RandomUtil;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
@@ -68,7 +69,6 @@ import org.mage.plugins.card.utils.CardImageUtils;
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
     private static final Logger logger = Logger.getLogger(DownloadPictures.class);
-    private static final Random rnd = new Random();
 
     private JProgressBar bar;
     private final JOptionPane dlg;
@@ -689,7 +689,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         private void setUpConnection(URLConnection httpConn) {
             // images download from magiccards.info may not work with default 'User-Agent: Java/1.x.x' request header
-            switch (rnd.nextInt(3)) {
+            switch (RandomUtil.nextInt(3)) {
                 // chrome
                 case 0:
                     httpConn.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
