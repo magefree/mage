@@ -40,7 +40,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
 import java.util.UUID;
@@ -1010,9 +1009,7 @@ public abstract class GameImpl implements Game, Serializable {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null && player.getHand().size() < startingHandSize) {
-                if (player.chooseUse(Outcome.Benefit, new MessageToClient("Scry 1?", "Look at the top card of your library. You may put that card on the bottom of your library."), null, this)) {
-                    player.scry(1, null, this);
-                }
+                player.scry(1, null, this);
             }
         }
         getState().setChoosingPlayerId(null);

@@ -104,7 +104,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.target.common.TargetPermanentOrPlayer;
-import mage.util.MessageToClient;
 import org.junit.Ignore;
 
 /**
@@ -976,12 +975,12 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
-        return this.chooseUse(outcome, new MessageToClient(message), source, game);
+        return this.chooseUse(outcome, message, null, null, null, source, game);
     }
 
     @Override
-    public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
-        if (message.getMessage().equals("Scry 1?")) {
+    public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
+        if (message.equals("Scry 1?")) {
             return false;
         }
         if (!choices.isEmpty()) {
@@ -994,7 +993,7 @@ public class TestPlayer implements Player {
                 return true;
             }
         }
-        return computerPlayer.chooseUse(outcome, message, source, game);
+        return computerPlayer.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
     }
 
     @Override

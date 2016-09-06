@@ -42,7 +42,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
@@ -1272,11 +1271,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
-        return this.chooseUse(outcome, new MessageToClient(message), source, game);
+        return this.chooseUse(outcome, message, null, null, null, source, game);
     }
 
     @Override
-    public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
+    public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
         log.debug("chooseUse: " + outcome.isGood());
         // Be proactive! Always use abilities, the evaluation function will decide if it's good or not
         // Otherwise some abilities won't be used by AI like LoseTargetEffect that has "bad" outcome

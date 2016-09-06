@@ -79,7 +79,6 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-import mage.util.MessageToClient;
 
 /**
  *
@@ -849,7 +848,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
+    public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
         return false;
     }
 

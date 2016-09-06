@@ -42,7 +42,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
-import mage.util.MessageToClient;
 
 /**
  *
@@ -95,26 +94,22 @@ class RemorselessPunishmentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent != null) {
-            handleBaseEffect(game, source, opponent, 1);
-            handleBaseEffect(game, source, opponent, 2);
+            handleBaseEffect(game, source, opponent, "1st");
+            handleBaseEffect(game, source, opponent, "2nd");
             return true;
         }
         return false;
     }
 
-    private void handleBaseEffect(Game game, Ability source, Player opponent, int iteration) {
+    private void handleBaseEffect(Game game, Ability source, Player opponent, String iteration) {
         if (opponent.getHand().size() > 1) {
-            MessageToClient mtc = new MessageToClient("Discards two cards to prevent to lose 5 life?",
-                    "If you want to sacrifice a creature or planeswalker instead click \"No\". (Iteration " + iteration + ")");
-            if (opponent.chooseUse(outcome, mtc, source, game)) {
+            if (opponent.chooseUse(outcome, "Choose your " + iteration + " punishment.", null, "Discard two cards", "Choose another option", source, game)) {
                 opponent.discard(2, false, source, game);
                 return;
             }
         }
         if (game.getBattlefield().contains(filter, opponent.getId(), 1, game)) {
-            MessageToClient mtc = new MessageToClient("Sacrifice a creature or planeswalker?",
-                    "If you don't sacrifice a creature or planeswalker, you lose 5 life instead. (Iteration " + iteration + ")");
-            if (opponent.chooseUse(outcome, mtc, source, game)) {
+            if (opponent.chooseUse(outcome, "Choose your " + iteration + " punishment.", null, "Sacrifice a creature or planeswalker", "Lose 5 life", source, game)) {
                 TargetPermanent target = new TargetPermanent(1, 1, filter, true);
                 if (target.choose(Outcome.Sacrifice, opponent.getId(), source.getId(), game)) {
                     for (UUID targetId : target.getTargets()) {
