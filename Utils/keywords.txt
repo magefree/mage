@@ -5,6 +5,7 @@ Bloodthirst|number|
 Bushido|number|
 Convoke|new|
 Cascade|new|
+Crew|number|
 Cumulative upkeep|cost|
 Cycling|cost|
 Dash|card, manaString|

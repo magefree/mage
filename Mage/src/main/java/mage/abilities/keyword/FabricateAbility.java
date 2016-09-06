@@ -42,10 +42,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- * If you would draw a card, instead you may put exactly X cards from the top of your library into your graveyard. If
- * you do, return this card from your graveyard to your hand. Otherwise, draw a card.
- *
- * @author North
+ * @author emerald000
  */
 public class FabricateAbility extends EntersBattlefieldTriggeredAbility {
 
