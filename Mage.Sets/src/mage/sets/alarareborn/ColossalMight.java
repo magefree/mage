@@ -29,6 +29,7 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -48,10 +49,14 @@ public class ColossalMight extends CardImpl {
         super(ownerId, 51, "Colossal Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{G}");
         this.expansionSetCode = "ARB";
 
-
+        // Target creature gets +4/+2 and gains trample until end of turn
+        Effect effect = new BoostTargetEffect(4, 2, Duration.EndOfTurn);
+        effect.setText("Target creature gets +4/+2");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains trample until end of turn");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 2, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
     }
 
     public ColossalMight (final ColossalMight card) {

@@ -28,6 +28,7 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -48,8 +49,13 @@ public class LargerThanLife extends CardImpl {
         super(ownerId, 160, "Larger Than Life", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "KLD";
 
-        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        // Target creature gets +4/+4 and gains trample until end of turn
+        Effect effect = new BoostTargetEffect(4, 4, Duration.EndOfTurn);
+        effect.setText("Target creature gets +4/+4");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains trample until end of turn");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
