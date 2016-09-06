@@ -33,6 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -49,6 +50,8 @@ public class ArborbackStomper extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
+        this.addAbility(TrampleAbility.getInstance());
+        
         // When Arborback Stomper enters the battlefield, you gain 5 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5)));
     }
