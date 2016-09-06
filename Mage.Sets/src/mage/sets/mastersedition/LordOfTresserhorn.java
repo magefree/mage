@@ -37,7 +37,7 @@ public class LordOfTresserhorn extends mage.sets.alliances.LordOfTresserhorn {
 
     public LordOfTresserhorn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "MED";
     }
 

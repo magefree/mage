@@ -50,7 +50,7 @@ public class TargetHasSubtypeCondition implements Condition {
         if (!source.getTargets().isEmpty()) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
-                return permanent.hasSubtype(subtype);
+                return permanent.hasSubtype(subtype, game);
             }
         }
         return false;

@@ -37,7 +37,7 @@ public class NivixAerieOfTheFiremind extends mage.sets.izzetvsgolgari.NivixAerie
 
     public NivixAerieOfTheFiremind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "GPT";
     }
 

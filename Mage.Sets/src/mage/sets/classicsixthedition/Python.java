@@ -37,7 +37,7 @@ public class Python extends mage.sets.visions.Python {
 
     public Python(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "6ED";
     }
 

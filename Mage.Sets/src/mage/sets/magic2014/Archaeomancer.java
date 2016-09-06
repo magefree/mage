@@ -37,7 +37,7 @@ public class Archaeomancer extends mage.sets.magic2013.Archaeomancer {
 
     public Archaeomancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "M14";
     }
 

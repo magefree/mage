@@ -29,6 +29,7 @@
 package mage.cards.basiclands;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.mana.WhiteManaAbility;
 
 /**
@@ -38,7 +39,12 @@ import mage.abilities.mana.WhiteManaAbility;
 public abstract class Plains extends BasicLand {
 
     public Plains(UUID ownerId, int cardNumber) {
+        this(ownerId, String.valueOf(cardNumber));
+    }
+
+    public Plains(UUID ownerId, String cardNumber) {
         super(ownerId, cardNumber, "Plains", new WhiteManaAbility());
+        this.frameColor = ObjectColor.WHITE;
     }
 
     public Plains(Plains land) {

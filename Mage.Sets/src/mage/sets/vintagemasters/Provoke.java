@@ -37,7 +37,7 @@ public class Provoke extends mage.sets.stronghold.Provoke {
 
     public Provoke(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 225;
+        this.cardNumber = "225";
         this.expansionSetCode = "VMA";
     }
 

@@ -36,7 +36,7 @@ public class CruelBargain extends mage.sets.vintagemasters.CruelBargain {
 
     public CruelBargain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "POR";
     }
 

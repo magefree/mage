@@ -82,10 +82,10 @@ class CamaridToken extends Token {
     CamaridToken() {
         super("Camarid", "1/1 blue Camarid creature tokens");
         this.setOriginalExpansionSetCode("FEM");
-        this.getPower().initValue(1);
-        this.getToughness().initValue(1);
+        this.getPower().modifyBaseValue(1);
+        this.getToughness().modifyBaseValue(1);
         this.color.setBlue(true);
-        this.getSubtype().add("Camarid");
+        this.getSubtype(null).add("Camarid");
         this.getCardType().add(CardType.CREATURE);
     }
 }

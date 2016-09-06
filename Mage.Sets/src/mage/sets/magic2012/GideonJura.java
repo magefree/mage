@@ -37,7 +37,7 @@ public class GideonJura extends mage.sets.riseoftheeldrazi.GideonJura {
 
     public GideonJura(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "M12";
     }
 

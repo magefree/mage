@@ -37,7 +37,7 @@ public class Fireshrieker extends mage.sets.magic2014.Fireshrieker {
 
     public Fireshrieker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "CNS";
     }
 

@@ -37,7 +37,7 @@ public class MistbladeShinobi extends mage.sets.betrayersofkamigawa.MistbladeShi
 
     public MistbladeShinobi(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "PC2";
     }
 

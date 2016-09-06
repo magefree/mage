@@ -37,7 +37,7 @@ public class NorwoodArchers extends mage.sets.portalsecondage.NorwoodArchers {
 
     public NorwoodArchers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "S99";
     }
 

@@ -37,7 +37,7 @@ public class MightSliver extends mage.sets.timespiral.MightSliver {
 
     public MightSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "H09";
     }
 

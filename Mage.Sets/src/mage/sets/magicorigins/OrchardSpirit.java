@@ -37,7 +37,7 @@ public class OrchardSpirit extends mage.sets.innistrad.OrchardSpirit {
 
     public OrchardSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 192;
+        this.cardNumber = "192";
         this.expansionSetCode = "ORI";
     }
 

@@ -38,7 +38,7 @@ public class NayaSojourners extends mage.sets.alarareborn.NayaSojourners {
 
     public NayaSojourners(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

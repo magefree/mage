@@ -37,7 +37,7 @@ public class VoidWinnower extends mage.sets.battleforzendikar.VoidWinnower {
 
     public VoidWinnower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 302;
+        this.cardNumber = "302";
         this.expansionSetCode = "PTC";
     }
 

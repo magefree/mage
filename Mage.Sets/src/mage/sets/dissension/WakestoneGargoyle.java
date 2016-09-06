@@ -38,7 +38,7 @@ public class WakestoneGargoyle extends mage.sets.conspiracy.WakestoneGargoyle {
 
     public WakestoneGargoyle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "DIS";
         this.rarity = Rarity.RARE;
     }

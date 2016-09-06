@@ -37,7 +37,7 @@ public class SuddenImpact extends mage.sets.seventhedition.SuddenImpact {
 
     public SuddenImpact(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "PD2";
     }
 

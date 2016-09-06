@@ -38,7 +38,7 @@ public class Resurrection extends mage.sets.limitedalpha.Resurrection {
 
     public Resurrection(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "3ED";
     }
 

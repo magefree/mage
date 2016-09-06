@@ -37,7 +37,7 @@ public class PrimalPlasma extends mage.sets.planechase2012.PrimalPlasma {
 
     public PrimalPlasma(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "DDI";
     }
 

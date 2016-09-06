@@ -37,7 +37,7 @@ public class YoungWeiRecruits extends mage.sets.masterseditioniii.YoungWeiRecrui
 
     public YoungWeiRecruits(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
+        this.cardNumber = "94";
         this.expansionSetCode = "PTK";
     }
 

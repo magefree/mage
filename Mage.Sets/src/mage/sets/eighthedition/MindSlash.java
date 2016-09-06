@@ -37,7 +37,7 @@ public class MindSlash extends mage.sets.nemesis.MindSlash {
 
     public MindSlash(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "8ED";
     }
 

@@ -101,8 +101,8 @@ class MulchEffect extends OneShotEffect {
                         otherCards.add(card);
                     }
                 }
-                controller.moveCards(landCards, Zone.LIBRARY, Zone.HAND, source, game);                
-                controller.moveCards(otherCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);                
+                controller.moveCards(landCards, Zone.HAND, source, game);
+                controller.moveCards(otherCards, Zone.GRAVEYARD, source, game);
                 
             }
             return true;

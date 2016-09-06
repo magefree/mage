@@ -38,7 +38,7 @@ public class Carnophage extends mage.sets.exodus.Carnophage {
 
     public Carnophage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class ShieldOfTheAges extends mage.sets.mastersedition.ShieldOfTheAges {
 
     public ShieldOfTheAges(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 310;
+        this.cardNumber = "310";
         this.expansionSetCode = "ICE";
     }
 

@@ -38,7 +38,7 @@ public class MeganticSliver extends mage.sets.magic2014.MeganticSliver {
 
     public MeganticSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

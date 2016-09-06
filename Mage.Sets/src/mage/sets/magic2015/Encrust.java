@@ -37,7 +37,7 @@ public class Encrust extends mage.sets.magic2013.Encrust {
 
     public Encrust(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "M15";
     }
 

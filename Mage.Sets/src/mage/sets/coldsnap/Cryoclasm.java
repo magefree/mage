@@ -37,7 +37,7 @@ public class Cryoclasm extends mage.sets.tenthedition.Cryoclasm {
 
     public Cryoclasm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "CSP";
     }
 

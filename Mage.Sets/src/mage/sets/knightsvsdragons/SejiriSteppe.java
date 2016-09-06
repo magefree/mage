@@ -37,7 +37,7 @@ public class SejiriSteppe extends mage.sets.worldwake.SejiriSteppe {
 
     public SejiriSteppe(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "DDG";
     }
 

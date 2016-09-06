@@ -29,6 +29,7 @@
 package mage.cards.basiclands;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.mana.RedManaAbility;
 
 /**
@@ -38,7 +39,12 @@ import mage.abilities.mana.RedManaAbility;
 public abstract class Mountain extends BasicLand {
 
     public Mountain(UUID ownerId, int cardNumber) {
+        this(ownerId, String.valueOf(cardNumber));
+    }
+
+    public Mountain(UUID ownerId, String cardNumber) {
         super(ownerId, cardNumber, "Mountain", new RedManaAbility());
+        this.frameColor = ObjectColor.RED;
     }
 
     public Mountain(Mountain land) {

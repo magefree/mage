@@ -32,6 +32,9 @@ public class ArchangelAvacynTest extends CardTestPlayerBase {
         // Vigilance
         // When Archangel Avacyn enters the battlefield, creatures you control gain indestructible until end of turn.
         // When a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.
+        // Transformed side: Avacyn, the Purifier - Creature 6/5
+        // Flying
+        // When this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.
         addCard(Zone.BATTLEFIELD, playerA, "Archangel Avacyn");
         addCard(Zone.BATTLEFIELD, playerA, "Wall of Omens"); // 0/4
         addCard(Zone.HAND, playerA, "Elite Vanguard"); // 2/1
@@ -42,19 +45,20 @@ public class ArchangelAvacynTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Shock");
-        addTarget(playerB, "Elite Vanguard");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Shock", "Elite Vanguard");
         setStopAt(3, PhaseStep.DRAW);
         execute();
 
+        assertGraveyardCount(playerB, "Shock", 1);
         assertPermanentCount(playerA, "Avacyn, the Purifier", 1);
         assertPermanentCount(playerA, "Wall of Omens", 1);
         assertGraveyardCount(playerA, "Elite Vanguard", 1);
         assertPermanentCount(playerB, "Wall of Roots", 1);
-        assertGraveyardCount(playerB, "Hill Giant", 1);
-        assertGraveyardCount(playerB, "Shock", 1);
 
         Permanent avacyn = getPermanent("Avacyn, the Purifier", playerA);
         Assert.assertEquals("Damage to Avacyn, the Purifier should be 0 not 3", 0, avacyn.getDamage());
+
+        assertGraveyardCount(playerB, "Hill Giant", 1);
+
     }
 }

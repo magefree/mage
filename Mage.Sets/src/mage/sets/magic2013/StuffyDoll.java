@@ -37,7 +37,7 @@ public class StuffyDoll extends mage.sets.timespiral.StuffyDoll {
 
     public StuffyDoll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "M13";
     }
 

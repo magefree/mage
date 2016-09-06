@@ -99,6 +99,7 @@ class TunnelVisionEffect extends OneShotEffect {
 
         Cards cardsToReveal = new CardsImpl();
         Cards cardsToBury = new CardsImpl();
+        Card namedCard = null;
                 
         // reveal until named card found
         // if named card found, put all revealed cards in grave and put named card on top of library
@@ -109,9 +110,8 @@ class TunnelVisionEffect extends OneShotEffect {
             if (card != null) {
                 cardsToReveal.add(card);
                 if (card.getName().equals(cardName)) {
-                    namedCardFound = true;                                    
-                    targetPlayer.moveCards(cardsToBury, Zone.GRAVEYARD, source, game);
-                    targetPlayer.moveCards(card, Zone.LIBRARY, source, game);
+                    namedCardFound = true;
+                    namedCard = card;
                     break;
                 } else {
                     cardsToBury.add(card);
@@ -119,8 +119,11 @@ class TunnelVisionEffect extends OneShotEffect {
             }
         }
                 
-        targetPlayer.revealCards(sourceObject.getIdName(), cardsToReveal, game);  
-        if (!namedCardFound) {
+        targetPlayer.revealCards(sourceObject.getIdName(), cardsToReveal, game);
+        if (namedCardFound) {
+            targetPlayer.moveCards(cardsToBury, Zone.GRAVEYARD, source, game);
+            targetPlayer.moveCards(namedCard, Zone.LIBRARY, source, game);
+        } else {
             targetPlayer.shuffleLibrary(source, game);
         }
 

@@ -39,7 +39,7 @@ public class ElephantGuide extends mage.sets.judgment.ElephantGuide {
 
     public ElephantGuide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

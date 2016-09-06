@@ -30,18 +30,12 @@ package mage.sets.nemesis;
 import java.util.UUID;
 
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.constants.TurnPhase;
-import mage.game.Game;
-import mage.game.turn.TurnMod;
-import mage.players.Player;
+import mage.abilities.effects.common.SkipNextCombatEffect;
 
 /**
  *
@@ -70,32 +64,5 @@ public class BlindingAngel extends CardImpl {
     @Override
     public BlindingAngel copy() {
         return new BlindingAngel(this);
-    }
-}
-
-class SkipNextCombatEffect extends OneShotEffect {
-
-    public SkipNextCombatEffect() {
-        super(Outcome.Detriment);
-        staticText = "that player skips his or her next combat phase";
-    }
-
-    public SkipNextCombatEffect(final SkipNextCombatEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            game.getState().getTurnMods().add(new TurnMod(player.getId(), TurnPhase.COMBAT, null, true));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public SkipNextCombatEffect copy() {
-        return new SkipNextCombatEffect(this);
     }
 }

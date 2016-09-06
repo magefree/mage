@@ -37,7 +37,7 @@ public class ScrybSprites extends mage.sets.fifthedition.ScrybSprites {
 
     public ScrybSprites(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "3ED";
     }
 

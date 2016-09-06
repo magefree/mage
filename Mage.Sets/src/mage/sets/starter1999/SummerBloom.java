@@ -38,7 +38,7 @@ public class SummerBloom extends mage.sets.ninthedition.SummerBloom {
 
     public SummerBloom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "S99";
         this.rarity = Rarity.RARE;
     }

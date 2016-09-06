@@ -37,7 +37,7 @@ public class GideonAllyOfZendikar extends mage.sets.battleforzendikar.GideonAlly
 
     public GideonAllyOfZendikar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 264;
+        this.cardNumber = "264";
         this.expansionSetCode = "PTC";
     }
 

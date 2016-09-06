@@ -38,7 +38,7 @@ public class ThunderingGiant extends mage.sets.tenthedition.ThunderingGiant {
 
     public ThunderingGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.COMMON;
     }

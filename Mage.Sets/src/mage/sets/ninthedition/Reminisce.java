@@ -37,7 +37,7 @@ public class Reminisce extends mage.sets.onslaught.Reminisce {
 
     public Reminisce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "9ED";
     }
 

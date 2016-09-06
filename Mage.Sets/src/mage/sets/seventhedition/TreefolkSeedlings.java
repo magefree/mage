@@ -37,7 +37,7 @@ public class TreefolkSeedlings extends mage.sets.urzassaga.TreefolkSeedlings {
 
     public TreefolkSeedlings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 277;
+        this.cardNumber = "277";
         this.expansionSetCode = "7ED";
     }
 

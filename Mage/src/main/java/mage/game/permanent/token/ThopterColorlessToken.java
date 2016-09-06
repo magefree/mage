@@ -34,6 +34,7 @@ import java.util.Random;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -63,7 +64,7 @@ public class ThopterColorlessToken extends Token {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode().equals("ORI")) {
-            this.setTokenType(new Random().nextInt(2) + 1);
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
     }
 

@@ -37,7 +37,7 @@ public class Overrule extends mage.sets.venservskoth.Overrule {
 
     public Overrule(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "DIS";
     }
 

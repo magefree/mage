@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.abilities.keyword.DevourAbility;
@@ -60,7 +60,7 @@ public class Mycoloth extends CardImpl {
 
         // At the beginning of your upkeep, put a 1/1 green Saproling creature token onto the battlefield for each +1/+1 counter on Mycoloth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new SaprolingToken(),new CountersCount(CounterType.P1P1)),
+                new CreateTokenEffect(new SaprolingToken(),new CountersSourceCount(CounterType.P1P1)),
                 TargetController.YOU,
                 false
             ));

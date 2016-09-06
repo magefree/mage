@@ -28,13 +28,13 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
+import mage.abilities.keyword.CyclingAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
-import mage.abilities.keyword.CyclingAbility;
-import mage.cards.CardImpl;
 
 /**
  *
@@ -48,7 +48,7 @@ public class Lull extends CardImpl {
 
 
         //Prevent all combat damage that would be dealt this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
 
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }

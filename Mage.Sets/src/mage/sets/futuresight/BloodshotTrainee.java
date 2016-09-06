@@ -37,7 +37,7 @@ public class BloodshotTrainee extends mage.sets.scarsofmirrodin.BloodshotTrainee
 
     public BloodshotTrainee(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "FUT";
     }
 

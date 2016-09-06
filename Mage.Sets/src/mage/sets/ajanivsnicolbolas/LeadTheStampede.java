@@ -37,7 +37,7 @@ public class LeadTheStampede extends mage.sets.mirrodinbesieged.LeadTheStampede 
 
     public LeadTheStampede(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "DDH";
     }
 

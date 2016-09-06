@@ -37,7 +37,7 @@ public class ReitoLantern extends mage.sets.championsofkamigawa.ReitoLantern {
 
     public ReitoLantern(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 202;
+        this.cardNumber = "202";
         this.expansionSetCode = "CNS";
     }
 

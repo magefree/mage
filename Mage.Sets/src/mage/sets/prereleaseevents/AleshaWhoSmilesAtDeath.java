@@ -37,7 +37,7 @@ public class AleshaWhoSmilesAtDeath extends mage.sets.fatereforged.AleshaWhoSmil
 
     public AleshaWhoSmilesAtDeath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "PTC";
     }
 

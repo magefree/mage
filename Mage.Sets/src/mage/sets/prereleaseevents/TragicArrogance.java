@@ -37,7 +37,7 @@ public class TragicArrogance extends mage.sets.magicorigins.TragicArrogance {
 
     public TragicArrogance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 235;
+        this.cardNumber = "235";
         this.expansionSetCode = "PTC";
     }
 

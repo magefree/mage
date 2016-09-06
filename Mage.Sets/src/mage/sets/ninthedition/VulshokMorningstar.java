@@ -38,7 +38,7 @@ public class VulshokMorningstar extends mage.sets.darksteel.VulshokMorningstar {
 
     public VulshokMorningstar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 315;
+        this.cardNumber = "315";
         this.expansionSetCode = "9ED";
         this.rarity = Rarity.UNCOMMON;
     }

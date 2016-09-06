@@ -37,7 +37,7 @@ public class JaceTheMindSculptor extends mage.sets.worldwake.JaceTheMindSculptor
 
     public JaceTheMindSculptor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "EMA";
     }
 

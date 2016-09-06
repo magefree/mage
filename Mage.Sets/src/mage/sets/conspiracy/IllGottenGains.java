@@ -37,7 +37,7 @@ public class IllGottenGains extends mage.sets.urzassaga.IllGottenGains {
 
     public IllGottenGains(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "CNS";
     }
 

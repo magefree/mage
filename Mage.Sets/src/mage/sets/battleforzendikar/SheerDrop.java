@@ -37,7 +37,7 @@ public class SheerDrop extends mage.sets.zendikarvseldrazi.SheerDrop {
 
     public SheerDrop(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "BFZ";
     }
 

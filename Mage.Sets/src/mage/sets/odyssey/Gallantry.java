@@ -37,7 +37,7 @@ public class Gallantry extends mage.sets.tempest.Gallantry {
 
     public Gallantry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "ODY";
     }
 

@@ -37,7 +37,7 @@ public class TurnTheTide extends mage.sets.mirrodinbesieged.TurnTheTide {
 
     public TurnTheTide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "CNS";
     }
 

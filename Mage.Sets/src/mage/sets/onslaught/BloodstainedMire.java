@@ -28,6 +28,7 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.FetchLandActivatedAbility;
@@ -42,6 +43,7 @@ public class BloodstainedMire extends CardImpl {
     public BloodstainedMire(UUID ownerId) {
         super(ownerId, 313, "Bloodstained Mire", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ONS";
+        this.frameColor = new ObjectColor("RB");
 
         // {tap}, Pay 1 life, Sacrifice Bloodstained Mire: Search your library for a Swamp or Mountain card and put it onto the battlefield. Then shuffle your library.
         this.addAbility(new FetchLandActivatedAbility(new String[]{"Swamp", "Mountain"}));

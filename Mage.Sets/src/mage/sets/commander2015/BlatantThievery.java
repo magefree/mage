@@ -37,7 +37,7 @@ public class BlatantThievery extends mage.sets.onslaught.BlatantThievery {
 
     public BlatantThievery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "C15";
     }
 

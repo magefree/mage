@@ -37,7 +37,7 @@ public class AncientCraving extends mage.sets.starter1999.AncientCraving {
 
     public AncientCraving(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "DDK";
     }
 

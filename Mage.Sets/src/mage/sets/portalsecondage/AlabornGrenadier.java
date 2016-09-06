@@ -42,7 +42,7 @@ public class AlabornGrenadier extends CardImpl {
 
     public AlabornGrenadier(UUID ownerId) {
         super(ownerId, 122, "Alaborn Grenadier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 

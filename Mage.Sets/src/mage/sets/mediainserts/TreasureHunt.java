@@ -6,7 +6,7 @@ public class TreasureHunt extends mage.sets.worldwake.TreasureHunt {
     
     public TreasureHunt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "MBP";
     }
     

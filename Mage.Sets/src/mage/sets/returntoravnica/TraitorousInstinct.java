@@ -38,7 +38,7 @@ public class TraitorousInstinct extends mage.sets.riseoftheeldrazi.TraitorousIns
 
     public TraitorousInstinct(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "RTR";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class MarshFlitter extends mage.sets.modernmasters.MarshFlitter {
 
     public MarshFlitter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "LRW";
     }
 

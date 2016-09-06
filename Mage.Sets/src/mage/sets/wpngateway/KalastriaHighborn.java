@@ -38,7 +38,7 @@ public class KalastriaHighborn extends mage.sets.worldwake.KalastriaHighborn {
 
     public KalastriaHighborn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

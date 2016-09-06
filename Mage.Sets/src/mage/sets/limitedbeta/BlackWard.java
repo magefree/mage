@@ -37,7 +37,7 @@ public class BlackWard extends mage.sets.revisededition.BlackWard {
 
     public BlackWard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "LEB";
     }
 

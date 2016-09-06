@@ -66,7 +66,7 @@ public class CardTextPredicate implements Predicate<Card> {
                     }
                 }
 
-                for (String subType : input.getSubtype()) {
+                for (String subType : input.getSubtype(game)) {
                     if (subType.equalsIgnoreCase(token)) {
                         found = true;
                         break;

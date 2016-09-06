@@ -37,7 +37,7 @@ public class StreetSpasm extends mage.sets.returntoravnica.StreetSpasm {
 
     public StreetSpasm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "C13";
     }
 

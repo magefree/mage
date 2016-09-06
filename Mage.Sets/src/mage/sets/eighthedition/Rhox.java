@@ -37,7 +37,7 @@ public class Rhox extends mage.sets.tenthedition.Rhox {
 
     public Rhox(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 277;
+        this.cardNumber = "277";
         this.expansionSetCode = "8ED";
     }
 

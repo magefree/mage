@@ -37,7 +37,7 @@ public class KioraTheCrashingWave extends mage.sets.bornofthegods.KioraTheCrashi
 
     public KioraTheCrashingWave(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "DDO";
     }
 

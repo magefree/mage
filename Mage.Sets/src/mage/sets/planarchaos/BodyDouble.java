@@ -37,7 +37,7 @@ public class BodyDouble extends mage.sets.jacevsvraska.BodyDouble {
 
     public BodyDouble(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "PLC";
     }
 

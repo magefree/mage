@@ -37,7 +37,7 @@ public class ScourgeOfTheThrone extends mage.sets.vintagemasters.ScourgeOfTheThr
 
     public ScourgeOfTheThrone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "CNS";
     }
 

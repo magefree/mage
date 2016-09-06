@@ -37,7 +37,7 @@ public class AstralSlide extends mage.sets.onslaught.AstralSlide {
 
     public AstralSlide(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "VMA";
     }
 

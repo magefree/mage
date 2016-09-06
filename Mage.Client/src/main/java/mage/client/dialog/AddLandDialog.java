@@ -46,6 +46,7 @@ import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.constants.Rarity;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -118,7 +119,6 @@ public class AddLandDialog extends MageDialog {
     }
 
     private void addLands(String landName, int number) {
-        Random random = new Random();
         String landSetName = (String) cbLandSet.getSelectedItem();
 
         CardCriteria criteria = new CardCriteria();
@@ -142,7 +142,7 @@ public class AddLandDialog extends MageDialog {
         }
 
         for (int i = 0; i < number; i++) {
-            Card land = cards.get(random.nextInt(cards.size())).getMockCard();
+            Card land = cards.get(RandomUtil.nextInt(cards.size())).getMockCard();
             deck.getCards().add(land);
         }
     }

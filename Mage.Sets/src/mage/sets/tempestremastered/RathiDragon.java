@@ -37,7 +37,7 @@ public class RathiDragon extends mage.sets.ninthedition.RathiDragon {
 
     public RathiDragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "TPR";
     }
 

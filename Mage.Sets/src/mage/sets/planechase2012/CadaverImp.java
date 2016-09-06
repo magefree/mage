@@ -37,7 +37,7 @@ public class CadaverImp extends mage.sets.riseoftheeldrazi.CadaverImp {
 
     public CadaverImp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "PC2";
     }
 

@@ -37,7 +37,7 @@ public class SorinMarkov extends mage.sets.zendikar.SorinMarkov {
 
     public SorinMarkov(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "M12";
     }
 

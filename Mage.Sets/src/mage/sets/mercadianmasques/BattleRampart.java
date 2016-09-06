@@ -37,7 +37,7 @@ public class BattleRampart extends mage.sets.riseoftheeldrazi.BattleRampart {
 
     public BattleRampart(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "MMQ";
     }
 

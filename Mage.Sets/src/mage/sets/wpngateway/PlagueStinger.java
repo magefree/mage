@@ -38,7 +38,7 @@ public class PlagueStinger extends mage.sets.scarsofmirrodin.PlagueStinger {
 
     public PlagueStinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

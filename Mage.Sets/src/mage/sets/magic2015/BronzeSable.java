@@ -37,7 +37,7 @@ public class BronzeSable extends mage.sets.theros.BronzeSable {
 
     public BronzeSable(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "M15";
     }
 

@@ -39,7 +39,7 @@ public class CephalidSage extends mage.sets.torment.CephalidSage {
 
     public CephalidSage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

@@ -134,10 +134,10 @@ class NissaSageAnimistToken extends Token {
         super("Ashaya, the Awoken World", "legendary 4/4 green Elemental creature token named Ashaya, the Awoken World");
         this.setOriginalExpansionSetCode("ORI");
         this.getSupertype().add("Legendary");
-        this.getPower().initValue(4);
-        this.getToughness().initValue(4);
+        this.getPower().modifyBaseValue(4);
+        this.getToughness().modifyBaseValue(4);
         this.color.setGreen(true);
-        this.getSubtype().add("Elemental");
+        this.getSubtype(null).add("Elemental");
         this.getCardType().add(CardType.CREATURE);
     }
 }
@@ -168,8 +168,8 @@ class NissaSageAnimistMinusSevenEffect extends ContinuousEffectImpl {
                         if (!permanent.getCardType().contains(CardType.CREATURE)) {
                             permanent.getCardType().add(CardType.CREATURE);
                         }
-                        if (!permanent.getSubtype().contains("Elemental")) {
-                            permanent.getSubtype().add("Elemental");
+                        if (!permanent.getSubtype(game).contains("Elemental")) {
+                            permanent.getSubtype(game).add("Elemental");
                         }
                         break;
                     case PTChangingEffects_7:

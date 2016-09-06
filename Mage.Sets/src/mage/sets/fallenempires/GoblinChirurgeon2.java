@@ -38,7 +38,7 @@ public class GoblinChirurgeon2 extends mage.sets.fallenempires.GoblinChirurgeon1
 
     public GoblinChirurgeon2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
     }
 
     public GoblinChirurgeon2(final GoblinChirurgeon2 card) {

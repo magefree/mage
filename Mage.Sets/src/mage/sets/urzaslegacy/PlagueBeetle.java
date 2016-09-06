@@ -36,7 +36,7 @@ public class PlagueBeetle extends mage.sets.tenthedition.PlagueBeetle {
 
     public PlagueBeetle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
+        this.cardNumber = "64";
         this.expansionSetCode = "ULG";
     }
 

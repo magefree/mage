@@ -37,7 +37,7 @@ public class SearingWind extends mage.sets.prophecy.SearingWind {
 
     public SearingWind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "8ED";
     }
 

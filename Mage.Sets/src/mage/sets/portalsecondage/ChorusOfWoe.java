@@ -42,7 +42,7 @@ public class ChorusOfWoe extends CardImpl {
 
     public ChorusOfWoe(UUID ownerId) {
         super(ownerId, 5, "Chorus of Woe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
 
         // Creatures you control get +1/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn));

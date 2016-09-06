@@ -109,7 +109,7 @@ public class LilianaDefiantNecromancer extends CardImpl {
             FilterCard newFilter = filter.copy();
             newFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
             ability.getTargets().clear();
-            ability.addTarget(new TargetCardInYourGraveyard(filter));
+            ability.addTarget(new TargetCardInYourGraveyard(newFilter));
         }
     }
 

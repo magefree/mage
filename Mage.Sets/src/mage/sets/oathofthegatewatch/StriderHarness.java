@@ -38,7 +38,7 @@ public class StriderHarness extends mage.sets.scarsofmirrodin.StriderHarness {
 
     public StriderHarness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "OGW";
         this.rarity = Rarity.UNCOMMON;
     }

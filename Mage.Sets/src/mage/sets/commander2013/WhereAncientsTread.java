@@ -37,7 +37,7 @@ public class WhereAncientsTread extends mage.sets.shardsofalara.WhereAncientsTre
 
     public WhereAncientsTread(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "C13";
     }
 

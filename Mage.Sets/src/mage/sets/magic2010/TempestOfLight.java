@@ -29,16 +29,11 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterEnchantmentPermanent;
 
 /**
  *
@@ -50,7 +45,7 @@ public class TempestOfLight extends CardImpl {
         super(ownerId, 36, "Tempest of Light", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "M10";
 
-        this.getSpellAbility().addEffect(new TempestOfLightEffect());
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
     }
 
     public TempestOfLight(final TempestOfLight card) {
@@ -63,34 +58,3 @@ public class TempestOfLight extends CardImpl {
     }
 }
 
-class TempestOfLightEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
-    public TempestOfLightEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "Destroy all enchantments";
-    }
-
-    public TempestOfLightEffect(final TempestOfLightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.destroy(source.getSourceId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public TempestOfLightEffect copy() {
-        return new TempestOfLightEffect(this);
-    }
-
-}

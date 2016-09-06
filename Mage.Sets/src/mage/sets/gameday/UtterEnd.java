@@ -37,7 +37,7 @@ public class UtterEnd extends mage.sets.khansoftarkir.UtterEnd {
 
     public UtterEnd(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "MGDC";
     }
 

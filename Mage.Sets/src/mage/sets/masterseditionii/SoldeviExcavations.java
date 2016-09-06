@@ -37,7 +37,7 @@ public class SoldeviExcavations extends mage.sets.alliances.SoldeviExcavations {
 
     public SoldeviExcavations(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 236;
+        this.cardNumber = "236";
         this.expansionSetCode = "ME2";
     }
 

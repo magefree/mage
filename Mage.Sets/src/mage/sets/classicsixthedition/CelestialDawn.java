@@ -38,7 +38,7 @@ public class CelestialDawn extends mage.sets.timeshifted.CelestialDawn {
 
     public CelestialDawn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "6ED";
         this.rarity = Rarity.RARE;
     }

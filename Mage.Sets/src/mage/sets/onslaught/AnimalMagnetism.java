@@ -53,8 +53,8 @@ import mage.target.common.TargetOpponent;
  */
 public class AnimalMagnetism extends CardImpl {
 
-    public AnimalMagnetism(UUID ownerID) {
-        super(ownerID, 245, "Animal Magnetism", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
+    public AnimalMagnetism(UUID ownerId) {
+        super(ownerId, 245, "Animal Magnetism", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "ONS";
 
         // Reveal the top five cards of your library. An opponent chooses a creature card from among them. Put that card onto the battlefield and the rest into your graveyard.

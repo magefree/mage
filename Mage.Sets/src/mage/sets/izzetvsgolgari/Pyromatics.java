@@ -37,7 +37,7 @@ public class Pyromatics extends mage.sets.guildpact.Pyromatics {
 
     public Pyromatics(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "DDJ";
     }
 

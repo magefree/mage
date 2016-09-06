@@ -37,7 +37,7 @@ public class AlabornTrooper extends mage.sets.portalsecondage.AlabornTrooper {
 
     public AlabornTrooper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "ME4";
     }
 

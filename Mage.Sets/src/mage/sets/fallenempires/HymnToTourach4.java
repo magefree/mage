@@ -37,7 +37,7 @@ public class HymnToTourach4 extends mage.sets.fallenempires.HymnToTourach1 {
 
     public HymnToTourach4(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
    }
 
     public HymnToTourach4(final HymnToTourach4 card) {

@@ -30,7 +30,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
-import org.mage.test.serverside.base.CardTestAPI.GameResult;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
 /**
@@ -314,12 +313,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @return
      */
     private List<Card> getCardList(Zone gameZone, TestPlayer player) {
-        if (gameZone.equals(Zone.HAND)) {
-            return getHandCards(player);
-        } else if (gameZone.equals(Zone.GRAVEYARD)) {
-            return getGraveCards(player);
-        } else if (gameZone.equals(Zone.LIBRARY)) {
-            return getLibraryCards(player);
+        switch (gameZone) {
+            case HAND:
+                return getHandCards(player);
+            case GRAVEYARD:
+                return getGraveCards(player);
+            case LIBRARY:
+                return getLibraryCards(player);
+            default:
+                break;
         }
 
         throw new AssertionError("Zone is not supported by test framework: " + gameZone);
@@ -634,7 +636,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertNotNull("There is no such permanent " + (player == null ? "" : "for player " + player.getName()) + " on the battlefield, cardName=" + cardName, found);
-        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters().getCount(type));
+        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters(currentGame).getCount(type));
     }
 
     /**
@@ -713,7 +715,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertTrue("(Battlefield) card type not found (" + cardName + ":" + type + ")", found.getCardType().contains(type));
 
-        Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ":" + subType + ")", found.getSubtype().contains(subType));
+        Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ":" + subType + ")", found.getSubtype(currentGame).contains(subType));
     }
 
     /**
@@ -874,7 +876,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Assert card count in player's library.
+     * Assert library card count.
+     *
+     * @param player {@link Player} who's library should be counted.
+     * @param count Expected count.
+     */
+    public void assertLibraryCount(Player player, int count) throws AssertionError {
+
+        List<Card> libraryList = player.getLibrary().getCards(currentGame);
+        int actualCount = libraryList != null && !libraryList.isEmpty() ? libraryList.size() : 0;
+        Assert.assertEquals("(Library " + player.getName() + ") counts are not equal", count, actualCount);
+    }
+
+    /**
+     * Assert specific card count in player's library.
      *
      * @param player {@link Player} who's library should be counted.
      * @param cardName Name of the cards that should be counted.
@@ -939,6 +954,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Rollback the number of given turns: 0 = rollback to the start of the
+     * current turn
+     *
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param turns
+     */
+    public void rollbackTurns(int turnNum, PhaseStep step, TestPlayer player, int turns) {
+        player.addAction(turnNum, step, "playerAction:Rollback" + "$turns=" + turns);
+    }
+
+    /**
      *
      * @param turnNum
      * @param step
@@ -987,9 +1015,13 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, StackClause clause) {
         if (StackClause.WHILE_ON_STACK.equals(clause)) {
-            player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName + "$spellOnStack=" + spellOnStack);
+            player.addAction(turnNum, step, "activate:Cast " + cardName
+                    + "$" + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
+                    + "$spellOnStack=" + spellOnStack);
         } else {
-            player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName + "$!spellOnStack=" + spellOnStack);
+            player.addAction(turnNum, step, "activate:Cast " + cardName
+                    + "$" + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
+                    + "$!spellOnStack=" + spellOnStack);
         }
     }
 
@@ -1081,7 +1113,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player
      * @param choice starting with "1" for mode 1, "2" for mode 2 and so on (to
-     * set multiple modes call the command multiple times)
+     * set multiple modes call the command multiple times). If a spell mode can
+     * be used only once like Demonic Pact, the value has to be set to the
+     * number of the remaining modes (e.g. if only 2 are left the number need to
+     * be 1 or 2).
      */
     public void setModeChoice(TestPlayer player, String choice) {
         player.addModeChoice(choice);

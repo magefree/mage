@@ -37,7 +37,7 @@ public class Hydrosurge extends mage.sets.magic2013.Hydrosurge {
 
     public Hydrosurge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "M15";
     }
 

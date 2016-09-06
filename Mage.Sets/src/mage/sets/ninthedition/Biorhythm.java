@@ -37,7 +37,7 @@ public class Biorhythm extends mage.sets.onslaught.Biorhythm {
 
     public Biorhythm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 231;
+        this.cardNumber = "231";
         this.expansionSetCode = "9ED";
     }
 

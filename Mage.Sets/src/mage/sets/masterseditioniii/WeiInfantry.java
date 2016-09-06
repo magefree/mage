@@ -37,7 +37,7 @@ public class WeiInfantry extends mage.sets.portalthreekingdoms.WeiInfantry {
 
     public WeiInfantry(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 80;
+        this.cardNumber = "80";
         this.expansionSetCode = "ME3";
     }
 

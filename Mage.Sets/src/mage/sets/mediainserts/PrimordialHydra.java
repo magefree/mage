@@ -6,7 +6,7 @@ public class PrimordialHydra extends mage.sets.magic2012.PrimordialHydra {
     
     public PrimordialHydra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "MBP";
     }
     

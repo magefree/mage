@@ -37,7 +37,7 @@ public class JarOfEyeballs extends mage.sets.darkascension.JarOfEyeballs {
 
     public JarOfEyeballs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 244;
+        this.cardNumber = "244";
         this.expansionSetCode = "C13";
     }
 

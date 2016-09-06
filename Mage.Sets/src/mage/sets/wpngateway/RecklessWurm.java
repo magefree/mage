@@ -38,7 +38,7 @@ public class RecklessWurm extends mage.sets.planarchaos.RecklessWurm {
 
     public RecklessWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

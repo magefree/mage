@@ -38,7 +38,7 @@ public class ConsumingAberration extends mage.sets.gatecrash.ConsumingAberration
 
     public ConsumingAberration(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

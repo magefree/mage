@@ -58,7 +58,7 @@ public class ShuffleIntoLibraryGraveOfSourceOwnerEffect extends OneShotEffect {
         }
         Player owner = game.getPlayer(ownerId);
         if (owner != null) {
-            owner.moveCards(owner.getGraveyard(), null, Zone.LIBRARY, source, game);
+            owner.moveCards(owner.getGraveyard(), Zone.LIBRARY, source, game);
             owner.shuffleLibrary(source, game);
             return true;
         }

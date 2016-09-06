@@ -38,7 +38,7 @@ public class RedCliffsArmada extends mage.sets.masterseditionii.RedCliffsArmada 
 
     public RedCliffsArmada(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "PTK";
         this.rarity = Rarity.UNCOMMON;
     }

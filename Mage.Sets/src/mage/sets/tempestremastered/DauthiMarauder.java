@@ -38,7 +38,7 @@ public class DauthiMarauder extends mage.sets.tempest.DauthiMarauder {
 
     public DauthiMarauder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

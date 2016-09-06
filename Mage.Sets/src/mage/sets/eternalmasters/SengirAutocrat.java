@@ -37,7 +37,7 @@ public class SengirAutocrat extends mage.sets.homelands.SengirAutocrat {
 
     public SengirAutocrat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "EMA";
     }
 

@@ -37,7 +37,7 @@ public class BorderlandBehemoth extends mage.sets.commander2015.BorderlandBehemo
 
     public BorderlandBehemoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "MOR";
     }
 

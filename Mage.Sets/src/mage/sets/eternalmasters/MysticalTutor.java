@@ -38,7 +38,7 @@ public class MysticalTutor extends mage.sets.mirage.MysticalTutor {
 
     public MysticalTutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.RARE;
     }

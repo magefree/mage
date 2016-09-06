@@ -37,7 +37,7 @@ public class BoshIronGolem extends mage.sets.planechase.BoshIronGolem {
 
     public BoshIronGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "MRD";
     }
 

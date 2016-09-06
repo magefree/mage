@@ -38,7 +38,7 @@ public class ShuGeneral extends mage.sets.portalthreekingdoms.ShuGeneral {
 
     public ShuGeneral(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

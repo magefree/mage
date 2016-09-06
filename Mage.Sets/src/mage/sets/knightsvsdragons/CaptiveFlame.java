@@ -37,7 +37,7 @@ public class CaptiveFlame extends mage.sets.saviorsofkamigawa.CaptiveFlame {
 
     public CaptiveFlame(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "DDG";
     }
 

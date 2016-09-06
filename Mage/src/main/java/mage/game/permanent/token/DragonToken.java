@@ -28,9 +28,12 @@
 
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
 
 /**
  *
@@ -38,8 +41,24 @@ import mage.abilities.keyword.FlyingAbility;
  */
 public class DragonToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("DTK", "MMA", "ALA"));
+    }
+
     public DragonToken() {
+        this(null, 0);
+    }
+
+    public DragonToken(String setCode) {
+        this(setCode, 0);
+    }
+
+    public DragonToken(String setCode, int tokenType) {
         super("Dragon", "4/4 red Dragon creature token with flying");
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add("Dragon");

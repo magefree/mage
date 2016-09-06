@@ -37,7 +37,7 @@ public class MagusOfTheVineyard extends mage.sets.commander.MagusOfTheVineyard {
 
     public MagusOfTheVineyard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "FUT";
     }
 

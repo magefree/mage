@@ -37,7 +37,7 @@ public class DoublingSeason extends mage.sets.modernmasters.DoublingSeason {
 
     public DoublingSeason(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "JR";
     }
 

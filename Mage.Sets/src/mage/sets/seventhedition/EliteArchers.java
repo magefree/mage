@@ -37,7 +37,7 @@ public class EliteArchers extends mage.sets.urzassaga.EliteArchers {
 
     public EliteArchers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "7ED";
     }
 

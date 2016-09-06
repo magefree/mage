@@ -30,7 +30,7 @@ package mage.sets.judgment;
 import java.util.UUID;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -65,8 +65,8 @@ public class SoulcatchersAerie extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.FEATHER.createInstance()),
             false, filter, false, true));
         // Bird creatures get +1/+1 for each feather counter on Soulcatchers' Aerie.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersCount(CounterType.FEATHER),
-            new CountersCount(CounterType.FEATHER), Duration.WhileOnBattlefield, filter2, false,
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersSourceCount(CounterType.FEATHER),
+            new CountersSourceCount(CounterType.FEATHER), Duration.WhileOnBattlefield, filter2, false,
             "Bird creatures get +1/+1 for each feather counter on {this}.")));
     }
 

@@ -37,7 +37,7 @@ public class FarrelsZealot2 extends FarrelsZealot1 {
 
     public FarrelsZealot2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
     }
 
     public FarrelsZealot2(final FarrelsZealot2 card) {

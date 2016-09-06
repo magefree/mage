@@ -38,7 +38,7 @@ public class EightAndAHalfTails extends mage.sets.championsofkamigawa.EightAndAH
 
     public EightAndAHalfTails(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "EMA";
     }
 

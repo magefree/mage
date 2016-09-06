@@ -38,7 +38,7 @@ public class GhostShip extends mage.sets.timeshifted.GhostShip {
 
     public GhostShip(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "4ED";
         this.rarity = Rarity.UNCOMMON;
     }

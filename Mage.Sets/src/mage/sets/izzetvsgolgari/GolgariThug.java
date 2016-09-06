@@ -37,7 +37,7 @@ public class GolgariThug extends mage.sets.ravnica.GolgariThug {
 
     public GolgariThug(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "DDJ";
     }
 

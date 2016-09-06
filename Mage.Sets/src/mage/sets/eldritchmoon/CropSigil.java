@@ -34,7 +34,6 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -44,7 +43,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -69,12 +68,13 @@ public class CropSigil extends CardImpl {
 
         // <i>Delirium</i> &mdash; {2}{G}, Sacrifice Crop Sigil: Return up to one target creature card and up to one target land card from your graveyard to your hand.
         // Activate this ability only if there are four or more card types among cards in your graveyard.
-        Effect effect = new ReturnToHandTargetEffect(true, true);
-        effect.setText("Return up to one target creature card and up to one target land card from your graveyard to your hand");
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{G}"), DeliriumCondition.getInstance());
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(true, true), new ManaCostsImpl<>("{2}{G}"),
+                DeliriumCondition.getInstance(),
+                "<i>Delirium</i> &mdash; {2}{G}, Sacrifice {this}: Return up to one target creature card and up to one target land card from your graveyard to your hand. "
+                + "Activate this ability only if there are four or more card types among cards in your graveyard");
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCardInGraveyard(0, 1, filterCreature));
-        ability.addTarget(new TargetCardInGraveyard(0, 1, filterLand));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filterCreature));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filterLand));
         this.addAbility(ability);
     }
 

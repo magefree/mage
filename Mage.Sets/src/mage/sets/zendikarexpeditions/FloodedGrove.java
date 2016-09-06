@@ -38,7 +38,7 @@ public class FloodedGrove extends mage.sets.eventide.FloodedGrove {
 
     public FloodedGrove(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

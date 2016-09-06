@@ -27,6 +27,7 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -244,5 +245,97 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Lambholt Butcher", 1);
 
         assertPermanentCount(playerB, "Lambholt Pacifist", 1);
+    }
+
+    /**
+     * Mirror Mockery copies the front face of a Transformed card rather than
+     * the current face.
+     *
+     * It's worth pointing out that my opponent cast Mirror Mockery the previous
+     * turn - after it had transformed. I should have included the part of the
+     * log that showed that Mirror Mockery was applied to the Unimpeded
+     * Trespasser.
+     */
+    @Test
+    public void testTransformCopyrnansformed() {
+        // Skulk (This creature can't be blocked by creatures with greater power.)
+        // When Uninvited Geist deals combat damage to a player, transform it.
+        addCard(Zone.BATTLEFIELD, playerA, "Uninvited Geist"); // Creature 2/2 {2}{U}
+        // Transformed side: Unimpeded Trespasser - Creature 3/3
+        // Unimpeded Trespasser can't be blocked.
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        // Enchant creature
+        // Whenever enchanted creature attacks, you may put a token onto the battlefield that's a copy of that creature. Exile that token at the end of combat.
+        addCard(Zone.HAND, playerB, "Mirror Mockery"); // {1}{U}
+
+        attack(1, playerA, "Uninvited Geist");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Mirror Mockery", "Unimpeded Trespasser");
+
+        attack(3, playerA, "Unimpeded Trespasser");
+
+        setStopAt(3, PhaseStep.COMBAT_DAMAGE);
+        execute();
+
+        assertLife(playerB, 15);
+
+        assertPermanentCount(playerB, "Mirror Mockery", 1);
+        assertPermanentCount(playerA, "Unimpeded Trespasser", 1);
+        assertPermanentCount(playerB, "Unimpeded Trespasser", 1);
+        assertPowerToughness(playerB, "Unimpeded Trespasser", 3, 3);
+    }
+
+    /**
+     * Archangel Avacyn still transforms after being bounced by an Eldrazi
+     * Displacer with her trigger on the stack.
+     */
+    @Test
+    public void testTransformArchangelAvacyn() {
+        // Flash, Flying, Vigilance
+        // When Archangel Avacyn enters the battlefield, creatures you control gain indestructible until end of turn.
+        // When a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.
+        addCard(Zone.BATTLEFIELD, playerA, "Archangel Avacyn"); // Creature 4/4
+        // Transformed side: Avacyn, the Purifier - Creature 6/5
+        // Flying
+        // When this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+
+        // Devoid
+        // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
+        addCard(Zone.BATTLEFIELD, playerB, "Eldrazi Displacer", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Wastes", 3);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{C}", "Archangel Avacyn", "Whenever a non-Angel creature you control dies");
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+
+        assertPermanentCount(playerB, "Eldrazi Displacer", 1);
+        assertPermanentCount(playerA, "Avacyn, the Purifier", 0);
+        assertPermanentCount(playerA, "Archangel Avacyn", 1);
+    }
+
+    /**
+     * Cards that transform if no spells cast last turn should not transform if the cards were added on turn 1.
+     * This would happen with tests and cheat testing.
+     */
+    @Test
+    public void testNoSpellsCastLastTurnTransformDoesNotTriggerTurn1() {
+
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Hinterland Logger.
+        addCard(Zone.BATTLEFIELD, playerA, "Hinterland Logger");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Hinterland Logger", 1);
     }
 }

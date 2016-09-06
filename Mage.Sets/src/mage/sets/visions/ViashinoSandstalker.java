@@ -38,7 +38,7 @@ public class ViashinoSandstalker extends mage.sets.ninthedition.ViashinoSandstal
 
     public ViashinoSandstalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "VIS";
     }
 

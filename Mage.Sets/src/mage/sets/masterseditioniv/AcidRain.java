@@ -37,7 +37,7 @@ public class AcidRain extends mage.sets.legends.AcidRain {
 
     public AcidRain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "ME4";
     }
 

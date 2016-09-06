@@ -38,7 +38,7 @@ public class ChameleonColossus extends mage.sets.morningtide.ChameleonColossus {
 
     public ChameleonColossus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "V13";
         this.rarity = Rarity.MYTHIC;
     }

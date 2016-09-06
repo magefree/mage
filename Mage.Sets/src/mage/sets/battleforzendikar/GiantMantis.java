@@ -37,7 +37,7 @@ public class GiantMantis extends mage.sets.mirage.GiantMantis {
 
     public GiantMantis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 173;
+        this.cardNumber = "173";
         this.expansionSetCode = "BFZ";
     }
 

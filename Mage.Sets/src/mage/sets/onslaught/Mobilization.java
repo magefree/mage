@@ -37,7 +37,7 @@ public class Mobilization extends mage.sets.tenthedition.Mobilization {
 
     public Mobilization(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "ONS";
     }
 

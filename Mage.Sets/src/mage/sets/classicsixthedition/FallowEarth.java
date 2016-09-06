@@ -37,7 +37,7 @@ public class FallowEarth extends mage.sets.mirage.FallowEarth {
 
     public FallowEarth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "6ED";
     }
 

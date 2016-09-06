@@ -37,7 +37,7 @@ public class ShimianSpecter extends mage.sets.magic2013.ShimianSpecter {
 
     public ShimianSpecter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "FUT";
     }
 

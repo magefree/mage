@@ -37,7 +37,7 @@ public class FlowstoneShambler extends mage.sets.ninthedition.FlowstoneShambler 
 
     public FlowstoneShambler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "STH";
     }
 

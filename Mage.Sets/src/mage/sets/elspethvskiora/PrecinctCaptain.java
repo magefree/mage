@@ -37,7 +37,7 @@ public class PrecinctCaptain extends mage.sets.returntoravnica.PrecinctCaptain {
 
     public PrecinctCaptain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "DDO";
     }
 

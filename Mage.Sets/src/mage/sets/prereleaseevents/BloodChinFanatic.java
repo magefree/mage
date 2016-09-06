@@ -37,7 +37,7 @@ public class BloodChinFanatic extends mage.sets.dragonsoftarkir.BloodChinFanatic
 
     public BloodChinFanatic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class SuntouchedMyr extends mage.sets.planechase.SuntouchedMyr {
 
     public SuntouchedMyr(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "5DN";
     }
 

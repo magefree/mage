@@ -37,7 +37,7 @@ public class BenalishLancer extends mage.sets.invasion.BenalishLancer {
 
     public BenalishLancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "DDG";
     }
 

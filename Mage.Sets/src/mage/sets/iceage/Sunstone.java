@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -60,7 +60,7 @@ public class Sunstone extends CardImpl {
         this.expansionSetCode = "ICE";
 
         // {2}, Sacrifice a snow land: Prevent all combat damage that would be dealt this turn.
-        Effect effect = new PreventAllDamageByAllEffect(Duration.EndOfTurn, true);
+        Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt this turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

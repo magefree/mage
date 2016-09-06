@@ -45,6 +45,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -116,7 +117,7 @@ class MoldgrafMonstrosityEffect extends OneShotEffect {
             return null;
         }
         int i = 0;
-        int pick = new Random().nextInt(cards.size());
+        int pick = RandomUtil.nextInt(cards.size());
         for (Card card : cards) {
             if (i == pick) {
                 return card;

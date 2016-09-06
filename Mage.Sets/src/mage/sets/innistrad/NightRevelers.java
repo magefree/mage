@@ -27,23 +27,19 @@
  */
 package mage.sets.innistrad;
 
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
 
-import java.util.Set;
 import java.util.UUID;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -51,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class NightRevelers extends CardImpl {
 
-    private static final String rule = "{this} has haste as long as an opponent controls a Human.";
+    private static final FilterPermanent filter = new FilterPermanent("Human", "Human");
 
     public NightRevelers(UUID ownerId) {
         super(ownerId, 153, "Night Revelers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
@@ -63,9 +59,10 @@ public class NightRevelers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Night Revelers has haste as long as an opponent controls a Human.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance()), new NightRevelersCondition(), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(HasteAbility.getInstance()),
+                new OpponentControlsPermanentCondition(filter),
+                "{this} has haste as long as an opponent controls a Human.")));
     }
 
     public NightRevelers(final NightRevelers card) {
@@ -75,21 +72,5 @@ public class NightRevelers extends CardImpl {
     @Override
     public NightRevelers copy() {
         return new NightRevelers(this);
-    }
-}
-
-class NightRevelersCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean conditionApplies = false;
-        FilterPermanent filter = new FilterPermanent();
-        filter.add(new SubtypePredicate("Human"));
-
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        for (UUID opponentId : opponents) {
-            conditionApplies |= game.getBattlefield().countAll(filter, opponentId, game) > 0;
-        }
-        return conditionApplies;
     }
 }

@@ -37,7 +37,7 @@ public class RestlessApparition extends mage.sets.eventide.RestlessApparition {
 
     public RestlessApparition(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 196;
+        this.cardNumber = "196";
         this.expansionSetCode = "MM2";
     }
 

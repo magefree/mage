@@ -37,7 +37,7 @@ public class LingeringSouls extends mage.sets.darkascension.LingeringSouls {
 
     public LingeringSouls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
         this.expansionSetCode = "FNMP";
     }
 

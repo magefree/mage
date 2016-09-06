@@ -37,7 +37,7 @@ public class MagisterSphinx extends mage.sets.conflux.MagisterSphinx {
 
     public MagisterSphinx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "ARC";
     }
 

@@ -37,7 +37,7 @@ public class AeonChronicler extends mage.sets.jacevsvraska.AeonChronicler {
 
     public AeonChronicler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "PLC";
     }
 

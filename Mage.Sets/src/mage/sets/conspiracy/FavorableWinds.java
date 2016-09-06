@@ -37,7 +37,7 @@ public class FavorableWinds extends mage.sets.avacynrestored.FavorableWinds {
 
     public FavorableWinds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = "98";
         this.expansionSetCode = "CNS";
     }
 

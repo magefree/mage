@@ -37,7 +37,7 @@ public class Borrowing100000Arrows extends mage.sets.commander2013.Borrowing1000
 
     public Borrowing100000Arrows(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "ME3";
     }
 

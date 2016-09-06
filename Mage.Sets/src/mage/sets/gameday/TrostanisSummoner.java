@@ -37,7 +37,7 @@ public class TrostanisSummoner extends mage.sets.dragonsmaze.TrostanisSummoner {
 
     public TrostanisSummoner(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "MGDC";
     }
 

@@ -114,7 +114,7 @@ class MazesEndEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<String> names = new ArrayList<String>();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent.hasSubtype("Gate")) {
+            if (permanent.hasSubtype("Gate", game)) {
                 if (!names.contains(permanent.getName())) {
                     names.add(permanent.getName());
                 }

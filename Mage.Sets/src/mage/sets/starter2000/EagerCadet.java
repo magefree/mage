@@ -37,7 +37,7 @@ public class EagerCadet extends mage.sets.seventhedition.EagerCadet {
 
     public EagerCadet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "S00";
     }
 

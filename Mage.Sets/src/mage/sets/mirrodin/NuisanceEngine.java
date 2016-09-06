@@ -37,7 +37,7 @@ public class NuisanceEngine extends mage.sets.planechase.NuisanceEngine {
 
     public NuisanceEngine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "MRD";
     }
 

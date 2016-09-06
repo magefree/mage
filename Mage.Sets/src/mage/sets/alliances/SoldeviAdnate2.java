@@ -37,7 +37,7 @@ public class SoldeviAdnate2 extends SoldeviAdnate1 {
 
     public SoldeviAdnate2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
     }
 
     public SoldeviAdnate2(final SoldeviAdnate2 card) {

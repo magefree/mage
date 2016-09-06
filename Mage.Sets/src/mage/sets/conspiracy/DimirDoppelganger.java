@@ -37,7 +37,7 @@ public class DimirDoppelganger extends mage.sets.ravnica.DimirDoppelganger {
 
     public DimirDoppelganger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = "186";
         this.expansionSetCode = "CNS";
     }
 

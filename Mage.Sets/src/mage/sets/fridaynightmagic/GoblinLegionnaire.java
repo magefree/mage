@@ -38,7 +38,7 @@ public class GoblinLegionnaire extends mage.sets.apocalypse.GoblinLegionnaire {
 
     public GoblinLegionnaire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

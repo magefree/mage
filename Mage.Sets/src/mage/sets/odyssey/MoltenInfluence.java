@@ -49,6 +49,7 @@ import mage.target.TargetSpell;
 public class MoltenInfluence extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
+
     static {
         Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
@@ -58,7 +59,6 @@ public class MoltenInfluence extends CardImpl {
     public MoltenInfluence(UUID ownerId) {
         super(ownerId, 207, "Molten Influence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ODY";
-
 
         // Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to him or her.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
@@ -80,7 +80,7 @@ class MoltenInfluenceEffect extends OneShotEffect {
 
     public MoltenInfluenceEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to him or her";
+        this.staticText = "Counter target instant or sorcery spell unless its controller has {this} deal 4 damage to him or her";
     }
 
     public MoltenInfluenceEffect(final MoltenInfluenceEffect effect) {

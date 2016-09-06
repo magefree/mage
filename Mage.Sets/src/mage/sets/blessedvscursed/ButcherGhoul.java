@@ -37,7 +37,7 @@ public class ButcherGhoul extends mage.sets.avacynrestored.ButcherGhoul {
 
     public ButcherGhoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "DDQ";
     }
 

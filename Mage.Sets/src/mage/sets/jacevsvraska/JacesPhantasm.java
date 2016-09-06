@@ -37,7 +37,7 @@ public class JacesPhantasm extends mage.sets.magic2013.JacesPhantasm {
 
     public JacesPhantasm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "DDM";
     }
 

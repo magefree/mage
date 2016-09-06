@@ -37,7 +37,7 @@ public class ClockOfOmens extends mage.sets.magic2013.ClockOfOmens {
 
     public ClockOfOmens(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "5DN";
     }
 

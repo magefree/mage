@@ -37,7 +37,7 @@ public class Conviction extends mage.sets.stronghold.Conviction {
 
     public Conviction(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class EssenceDrain extends mage.sets.darksteel.EssenceDrain {
 
     public EssenceDrain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "M13";
     }
 

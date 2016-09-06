@@ -39,7 +39,7 @@ public class CruelRevival extends mage.sets.onslaught.CruelRevival {
     public CruelRevival(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "ORI";
     }
 

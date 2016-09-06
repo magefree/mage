@@ -38,7 +38,7 @@ public class TomeScour extends mage.sets.magic2010.TomeScour {
 
     public TomeScour(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "M11";
     }
 

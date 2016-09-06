@@ -37,7 +37,7 @@ public class CerodonYearling extends mage.sets.alarareborn.CerodonYearling {
 
     public CerodonYearling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "HOP";
     }
 

@@ -38,7 +38,7 @@ public class CanopyVista extends mage.sets.battleforzendikar.CanopyVista {
 
     public CanopyVista(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

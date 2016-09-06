@@ -37,7 +37,7 @@ public class LoyalRetainers extends mage.sets.portalthreekingdoms.LoyalRetainers
 
     public LoyalRetainers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "ME3";
     }
 

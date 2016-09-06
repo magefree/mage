@@ -4,9 +4,7 @@ import mage.client.util.TransformedImageCache;
 import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
-import com.mortennobel.imagescaling.ResampleOp;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +47,7 @@ public class ImageCache {
     /**
      * Common pattern for keys. Format: "<cardname>#<setname>#<collectorID>"
      */
-    private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)");
+    private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)#(.*)");
 
     static {
         IMAGE_CACHE = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
@@ -58,12 +56,12 @@ public class ImageCache {
                 try {
 
                     boolean usesVariousArt = false;
-                    if (key.endsWith("#usesVariousArt")) {
+                    if (key.matches(".*#usesVariousArt.*")) {
                         usesVariousArt = true;
                         key = key.replace("#usesVariousArt", "");
                     }
                     boolean thumbnail = false;
-                    if (key.endsWith("#thumb")) {
+                    if (key.matches(".*#thumb.*")) {
                         thumbnail = true;
                         key = key.replace("#thumb", "");
                     }
@@ -73,13 +71,17 @@ public class ImageCache {
                         String name = m.group(1);
                         String set = m.group(2);
                         Integer type = Integer.parseInt(m.group(3));
-                        Integer collectorId = Integer.parseInt(m.group(4));
+                        String collectorId = m.group(4);
+                        if (collectorId.equals("null")) {
+                            collectorId = "0";
+                        }
                         String tokenSetCode = m.group(5);
+                        String tokenDescriptor = m.group(6);
 
-                        CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode);
+                        CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor);
 
                         String path;
-                        if (collectorId == 0) {
+                        if (collectorId.isEmpty() || "0".equals(collectorId)) {
                             info.setToken(true);
                             path = CardImageUtils.generateTokenImagePath(info);
                             if (path == null) {
@@ -153,7 +155,7 @@ public class ImageCache {
     }
 
     public static BufferedImage getMorphImage() {
-        CardDownloadData info = new CardDownloadData("Morph", "KTK", 0, false, 0, "KTK");
+        CardDownloadData info = new CardDownloadData("Morph", "KTK", "0", false, 0, "KTK", "");
         info.setToken(true);
         String path = CardImageUtils.generateTokenImagePath(info);
         if (path == null) {
@@ -164,7 +166,7 @@ public class ImageCache {
     }
 
     public static BufferedImage getManifestImage() {
-        CardDownloadData info = new CardDownloadData("Manifest", "FRF", 0, false, 0, "FRF");
+        CardDownloadData info = new CardDownloadData("Manifest", "FRF", "0", false, 0, "FRF", "");
         info.setToken(true);
         String path = CardImageUtils.generateTokenImagePath(info);
         if (path == null) {
@@ -199,6 +201,10 @@ public class ImageCache {
     public static BufferedImage getThumbnail(CardView card) {
         return getImage(getKey(card, card.getName(), "#thumb"));
     }
+    
+    public static BufferedImage tryGetThumbnail(CardView card) {
+        return tryGetImage(getKey(card, card.getName(), "#thumb"));
+    }
 
     public static BufferedImage getImageOriginal(CardView card) {
         return getImage(getKey(card, card.getName(), ""));
@@ -229,6 +235,18 @@ public class ImageCache {
             return null;
         }
     }
+ 
+    /**
+     * Returns the Image corresponding to the key only if it already exists
+     * in the cache.
+     */
+    private static BufferedImage tryGetImage(String key) {
+        if (IMAGE_CACHE.containsKey(key)) {
+            return IMAGE_CACHE.get(key);
+        } else {
+            return null;
+        }
+    }
 
     /**
      * Returns the map key for a card, without any suffixes for the image size.
@@ -237,8 +255,8 @@ public class ImageCache {
         return name + "#" + card.getExpansionSetCode() + "#" + card.getType() + "#" + card.getCardNumber() + "#"
                 + (card.getTokenSetCode() == null ? "" : card.getTokenSetCode())
                 + suffix
-                + (card.getUsesVariousArt() ? "#usesVariousArt" : "");
-
+                + (card.getUsesVariousArt() ? "#usesVariousArt" : "")
+                + (card.getTokenDescriptor() != null ? "#" + card.getTokenDescriptor() : "#");
     }
 
 //    /**
@@ -340,7 +358,35 @@ public class ImageCache {
             return original;
         }
 
-        return TransformedImageCache.getResizedImage(original, (int)(original.getWidth() * scale), (int)(original.getHeight() * scale));
+        return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));
+    }
+    
+    /**
+     * Returns the image appropriate to display for a card in a picture panel, but
+     * only it was ALREADY LOADED. That is, the call is immediate and will not block
+     * on file IO.
+     * @param card
+     * @param width
+     * @param height
+     * @return 
+     */
+    public static BufferedImage tryGetImage(CardView card, int width, int height) {
+        if (Constants.THUMBNAIL_SIZE_FULL.width + 10 > width) {
+            return tryGetThumbnail(card);
+        }
+        String key = getKey(card, card.getName(), Integer.toString(width));
+        BufferedImage original = tryGetImage(key);
+        if (original == null) {
+            LOGGER.debug(key + " not found");
+            return null;
+        }
+
+        double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
+        if (scale >= 1) {
+            return original;
+        }
+
+        return TransformedImageCache.getResizedImage(original, (int) (original.getWidth() * scale), (int) (original.getHeight() * scale));       
     }
 
     public static TFile getTFile(String path) {

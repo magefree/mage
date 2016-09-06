@@ -37,7 +37,7 @@ public class TuktukTheExplorer extends mage.sets.riseoftheeldrazi.TuktukTheExplo
 
     public TuktukTheExplorer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "C14";
     }
 

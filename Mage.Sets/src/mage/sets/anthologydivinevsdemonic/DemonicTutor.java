@@ -37,7 +37,7 @@ public class DemonicTutor extends mage.sets.limitedalpha.DemonicTutor {
 
     public DemonicTutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "DD3DVD";
     }
 

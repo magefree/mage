@@ -37,7 +37,7 @@ public class ArgothianPixies extends mage.sets.antiquities.ArgothianPixies {
 
     public ArgothianPixies(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "CHR";
     }
 

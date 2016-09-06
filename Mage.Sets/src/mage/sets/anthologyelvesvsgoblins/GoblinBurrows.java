@@ -37,7 +37,7 @@ public class GoblinBurrows extends mage.sets.onslaught.GoblinBurrows {
 
     public GoblinBurrows(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "DD3EVG";
     }
 

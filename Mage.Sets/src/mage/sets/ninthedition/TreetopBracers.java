@@ -38,7 +38,7 @@ public class TreetopBracers extends mage.sets.nemesis.TreetopBracers {
 
     public TreetopBracers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
+        this.cardNumber = "276";
         this.expansionSetCode = "9ED";
     }
 

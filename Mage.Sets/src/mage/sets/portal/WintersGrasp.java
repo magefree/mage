@@ -37,7 +37,7 @@ public class WintersGrasp extends mage.sets.tempest.WintersGrasp {
 
     public WintersGrasp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "POR";
     }
 

@@ -63,7 +63,7 @@ public class HunterOfEyeblights extends CardImpl {
     }
 
     public HunterOfEyeblights(UUID ownerId) {
-        super(ownerId, 119, "Hunter Of Eyeblights", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        super(ownerId, 119, "Hunter of Eyeblights", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Elf");
         this.subtype.add("Assassin");

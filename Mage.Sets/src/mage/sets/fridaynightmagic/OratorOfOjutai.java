@@ -37,7 +37,7 @@ public class OratorOfOjutai extends mage.sets.dragonsoftarkir.OratorOfOjutai {
 
     public OratorOfOjutai(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = "184";
         this.expansionSetCode = "FNMP";
     }
 

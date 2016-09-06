@@ -38,7 +38,7 @@ public class DragonStyleTwins extends mage.sets.khansoftarkir.DragonStyleTwins {
 
     public DragonStyleTwins(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = "98";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

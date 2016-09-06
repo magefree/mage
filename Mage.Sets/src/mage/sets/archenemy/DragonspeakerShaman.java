@@ -37,7 +37,7 @@ public class DragonspeakerShaman extends mage.sets.scourge.DragonspeakerShaman {
 
     public DragonspeakerShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "ARC";
     }
 

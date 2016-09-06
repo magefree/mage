@@ -37,7 +37,7 @@ public class CorpseTraders extends mage.sets.avacynrestored.CorpseTraders {
 
     public CorpseTraders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "DDM";
     }
 

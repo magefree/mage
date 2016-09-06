@@ -37,7 +37,7 @@ public class StinkdrinkerDaredevil extends mage.sets.lorwyn.StinkdrinkerDaredevi
 
     public StinkdrinkerDaredevil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "MMA";
     }
 

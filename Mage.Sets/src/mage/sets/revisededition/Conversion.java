@@ -37,7 +37,7 @@ public class Conversion extends mage.sets.limitedalpha.Conversion {
 
     public Conversion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "3ED";
     }
 

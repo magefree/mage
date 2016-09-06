@@ -37,7 +37,7 @@ public class AEtherMembrane extends mage.sets.venservskoth.AEtherMembrane {
 
     public AEtherMembrane(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "PLC";
     }
 

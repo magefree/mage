@@ -37,7 +37,7 @@ public class TreasureTrove extends mage.sets.ninthedition.TreasureTrove {
 
     public TreasureTrove(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "8ED";
     }
 

@@ -37,7 +37,7 @@ public class WaywardSoul extends mage.sets.tempestremastered.WaywardSoul {
 
     public WaywardSoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "EXO";
     }
 

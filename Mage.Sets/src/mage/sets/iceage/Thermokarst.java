@@ -38,7 +38,7 @@ public class Thermokarst extends mage.sets.masterseditionii.Thermokarst {
 
     public Thermokarst(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "ICE";
         this.rarity = Rarity.UNCOMMON;
     }

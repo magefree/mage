@@ -37,7 +37,7 @@ public class GerrardsCommand extends mage.sets.phyrexiavsthecoalition.GerrardsCo
 
     public GerrardsCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "PLS";
     }
 

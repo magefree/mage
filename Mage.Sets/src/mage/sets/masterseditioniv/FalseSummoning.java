@@ -37,7 +37,7 @@ public class FalseSummoning extends mage.sets.portalsecondage.FalseSummoning {
 
     public FalseSummoning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "ME4";
     }
 

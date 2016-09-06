@@ -37,7 +37,7 @@ public class DeathHoodCobra extends mage.sets.newphyrexia.DeathHoodCobra {
 
     public DeathHoodCobra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "DDM";
     }
 

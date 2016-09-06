@@ -37,7 +37,7 @@ public class Spitebellows extends mage.sets.commander.Spitebellows {
 
     public Spitebellows(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "MM2";
     }
 

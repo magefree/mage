@@ -28,7 +28,7 @@
 package mage.sets.magicorigins;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -54,7 +54,7 @@ public class VineSnare extends CardImpl {
         this.expansionSetCode = "ORI";
 
         // Prevent all combat damage that would be dealt this turn by creatures with power 4 or less.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(filter, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
     }
 
     public VineSnare(final VineSnare card) {

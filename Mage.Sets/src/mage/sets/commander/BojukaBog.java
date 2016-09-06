@@ -37,7 +37,7 @@ public class BojukaBog extends mage.sets.worldwake.BojukaBog {
 
     public BojukaBog(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 267;
+        this.cardNumber = "267";
         this.expansionSetCode = "CMD";
     }
 

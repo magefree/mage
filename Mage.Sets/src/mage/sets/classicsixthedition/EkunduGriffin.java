@@ -37,7 +37,7 @@ public class EkunduGriffin extends mage.sets.mirage.EkunduGriffin {
 
     public EkunduGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "6ED";
     }
 

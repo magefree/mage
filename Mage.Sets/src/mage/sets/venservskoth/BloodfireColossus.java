@@ -37,7 +37,7 @@ public class BloodfireColossus extends mage.sets.apocalypse.BloodfireColossus {
 
     public BloodfireColossus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "DDI";
     }
 

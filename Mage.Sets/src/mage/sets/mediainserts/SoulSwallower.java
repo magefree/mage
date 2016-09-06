@@ -37,7 +37,7 @@ public class SoulSwallower extends mage.sets.shadowsoverinnistrad.SoulSwallower 
 
     public SoulSwallower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "MBP";
     }
 

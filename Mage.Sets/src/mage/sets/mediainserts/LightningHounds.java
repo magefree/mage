@@ -38,7 +38,7 @@ public class LightningHounds extends mage.sets.mercadianmasques.LightningHounds 
 
     public LightningHounds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

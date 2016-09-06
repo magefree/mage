@@ -37,7 +37,7 @@ public class NumotTheDevastator extends mage.sets.commander.NumotTheDevastator {
 
     public NumotTheDevastator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "PLC";
     }
 

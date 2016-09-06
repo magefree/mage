@@ -37,7 +37,7 @@ public class HillcomberGiant extends mage.sets.lorwyn.HillcomberGiant {
 
     public HillcomberGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "MMA";
     }
 

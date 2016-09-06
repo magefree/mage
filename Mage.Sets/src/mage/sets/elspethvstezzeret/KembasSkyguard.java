@@ -38,7 +38,7 @@ public class KembasSkyguard extends mage.sets.scarsofmirrodin.KembasSkyguard {
 
     public KembasSkyguard (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "DDF";
     }
 

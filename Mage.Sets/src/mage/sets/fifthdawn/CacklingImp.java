@@ -37,7 +37,7 @@ public class CacklingImp extends mage.sets.divinevsdemonic.CacklingImp {
 
     public CacklingImp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "5DN";
     }
 

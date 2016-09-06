@@ -38,7 +38,7 @@ public class Unsummon extends mage.sets.tenthedition.Unsummon {
 
     public Unsummon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "CON";
     }
 

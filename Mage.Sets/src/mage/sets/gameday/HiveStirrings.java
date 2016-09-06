@@ -37,7 +37,7 @@ public class HiveStirrings extends mage.sets.magic2014.HiveStirrings {
 
     public HiveStirrings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "MGDC";
     }
 

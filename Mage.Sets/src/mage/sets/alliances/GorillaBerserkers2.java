@@ -37,7 +37,7 @@ public class GorillaBerserkers2 extends GorillaBerserkers1 {
 
     public GorillaBerserkers2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
     }
 
     public GorillaBerserkers2(final GorillaBerserkers2 card) {

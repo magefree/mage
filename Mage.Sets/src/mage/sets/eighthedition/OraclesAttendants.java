@@ -37,7 +37,7 @@ public class OraclesAttendants extends mage.sets.nemesis.OraclesAttendants {
 
     public OraclesAttendants(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "8ED";
     }
 

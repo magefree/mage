@@ -37,7 +37,7 @@ public class TheloniteHermit extends mage.sets.timespiral.TheloniteHermit {
 
     public TheloniteHermit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "ARC";
     }
 

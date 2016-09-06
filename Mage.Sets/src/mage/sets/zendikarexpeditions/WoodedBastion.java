@@ -38,7 +38,7 @@ public class WoodedBastion extends mage.sets.shadowmoor.WoodedBastion {
 
     public WoodedBastion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

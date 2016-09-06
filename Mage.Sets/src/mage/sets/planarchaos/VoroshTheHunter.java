@@ -37,7 +37,7 @@ public class VoroshTheHunter extends mage.sets.commander.VoroshTheHunter {
 
     public VoroshTheHunter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "PLC";
     }
 

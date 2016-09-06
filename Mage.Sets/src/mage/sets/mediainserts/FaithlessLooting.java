@@ -6,7 +6,7 @@ public class FaithlessLooting extends mage.sets.darkascension.FaithlessLooting {
     
     public FaithlessLooting(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "MBP";
     }
     

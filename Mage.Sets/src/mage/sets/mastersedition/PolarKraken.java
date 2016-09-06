@@ -37,7 +37,7 @@ public class PolarKraken extends mage.sets.iceage.PolarKraken {
 
     public PolarKraken(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "MED";
     }
 

@@ -37,7 +37,7 @@ public class WallOfBrambles extends mage.sets.limitedalpha.WallOfBrambles {
 
     public WallOfBrambles(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "3ED";
     }
 

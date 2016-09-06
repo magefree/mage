@@ -37,7 +37,7 @@ public class Remedy extends mage.sets.visions.Remedy {
 
     public Remedy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "6ED";
     }
 

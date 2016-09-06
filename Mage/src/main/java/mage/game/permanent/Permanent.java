@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.counters.Counters;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.GameState;
 
 public interface Permanent extends Card, Controllable {
 
@@ -91,7 +92,7 @@ public interface Permanent extends Card, Controllable {
 
     void setRenowned(boolean value);
 
-    void setCardNumber(int cid);
+    void setCardNumber(String cid);
 
     void setExpansionSetCode(String expansionSetCode);
 
@@ -102,8 +103,6 @@ public interface Permanent extends Card, Controllable {
     void setFlipCardName(String flipCardName);
 
     void setSecondCardFace(Card card);
-
-    Counters getCounters();
 
     List<UUID> getAttachments();
 
@@ -121,7 +120,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
-    boolean cantBeEnchantedBy(MageObject source, Game game);
+    boolean cantBeAttachedBy(MageObject source, Game game);
 
     boolean wasControlledFromStartOfControllerTurn();
 
@@ -161,7 +160,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent);
 
-    String getValue();
+    String getValue(GameState state);
 
     @Deprecated
     void addAbility(Ability ability);

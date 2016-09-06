@@ -37,7 +37,7 @@ public class SengirBats1 extends mage.sets.homelands.SengirBats2 {
 
     public SengirBats1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "HML";
     }
 

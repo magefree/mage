@@ -37,7 +37,7 @@ public class RazorfootGriffin extends mage.sets.magic2010.RazorfootGriffin {
 
     public RazorfootGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "8ED";
     }
 

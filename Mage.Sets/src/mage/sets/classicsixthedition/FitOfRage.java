@@ -37,7 +37,7 @@ public class FitOfRage extends mage.sets.weatherlight.FitOfRage {
 
     public FitOfRage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = "178";
         this.expansionSetCode = "6ED";
     }
 

@@ -31,6 +31,7 @@ import java.lang.reflect.Constructor;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import mage.cards.decks.Deck;
 import mage.game.draft.DraftCube;
 import org.apache.log4j.Logger;
 
@@ -67,13 +68,13 @@ public class CubeFactory {
         return draftCube;
     }
 
-    public DraftCube createDeckDraftCube(String draftCubeName, String chosenDckFile) {
+    public DraftCube createDeckDraftCube(String draftCubeName, Deck cubeFromDeck) {
 
         DraftCube draftCube;
         Constructor<?> con;
         try {
-            con = draftCubes.get(draftCubeName).getConstructor(new Class[]{String.class});
-            draftCube = (DraftCube)con.newInstance(new Object[] {chosenDckFile});
+            con = draftCubes.get(draftCubeName).getConstructor(new Class[]{Deck.class});
+            draftCube = (DraftCube)con.newInstance(new Object[] {cubeFromDeck});
         } catch (Exception ex) {
             logger.fatal("CubeFactory error", ex);
             return null;

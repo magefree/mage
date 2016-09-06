@@ -37,7 +37,7 @@ public class CouncilsJudgment extends mage.sets.vintagemasters.CouncilsJudgment 
 
     public CouncilsJudgment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "CNS";
     }
 

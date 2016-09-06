@@ -38,7 +38,7 @@ public class BindingGrasp extends mage.sets.masterseditionii.BindingGrasp {
 
     public BindingGrasp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "ICE";
         this.rarity = Rarity.UNCOMMON;
     }

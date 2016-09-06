@@ -37,7 +37,7 @@ public class Bribery extends mage.sets.mercadianmasques.Bribery {
 
     public Bribery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "JR";
     }
 

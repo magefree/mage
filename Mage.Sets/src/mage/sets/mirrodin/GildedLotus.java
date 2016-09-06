@@ -37,7 +37,7 @@ public class GildedLotus extends mage.sets.magic2013.GildedLotus {
 
     public GildedLotus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "MRD";
     }
 

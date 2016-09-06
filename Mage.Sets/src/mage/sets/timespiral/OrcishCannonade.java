@@ -37,7 +37,7 @@ public class OrcishCannonade extends mage.sets.speedvscunning.OrcishCannonade {
 
     public OrcishCannonade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = "172";
         this.expansionSetCode = "TSP";
     }
 

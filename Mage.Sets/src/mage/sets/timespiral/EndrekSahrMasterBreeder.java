@@ -37,7 +37,7 @@ public class EndrekSahrMasterBreeder extends mage.sets.commander2013.EndrekSahrM
 
     public EndrekSahrMasterBreeder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "TSP";
     }
 

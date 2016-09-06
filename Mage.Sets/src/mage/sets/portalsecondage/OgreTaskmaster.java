@@ -37,8 +37,8 @@ public class OgreTaskmaster extends mage.sets.ninthedition.OgreTaskmaster {
 
     public OgreTaskmaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
-        this.expansionSetCode = "P02";
+        this.cardNumber = "112";
+        this.expansionSetCode = "PO2";
     }
 
     public OgreTaskmaster(final OgreTaskmaster card) {

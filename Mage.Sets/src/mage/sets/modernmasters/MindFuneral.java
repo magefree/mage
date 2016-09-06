@@ -37,7 +37,7 @@ public class MindFuneral extends mage.sets.alarareborn.MindFuneral {
 
     public MindFuneral(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 181;
+        this.cardNumber = "181";
         this.expansionSetCode = "MMA";
     }
 

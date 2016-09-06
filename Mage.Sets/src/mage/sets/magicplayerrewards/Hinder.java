@@ -38,7 +38,7 @@ public class Hinder extends mage.sets.championsofkamigawa.Hinder {
 
     public Hinder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class Aquamoeba extends mage.sets.torment.Aquamoeba {
 
     public Aquamoeba(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "VMA";
     }
 

@@ -38,7 +38,7 @@ public class Pyrotechnics extends mage.sets.seventhedition.Pyrotechnics {
 
     public Pyrotechnics(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "LEG";
         this.rarity = Rarity.COMMON;
     }

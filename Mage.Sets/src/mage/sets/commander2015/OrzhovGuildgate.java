@@ -37,7 +37,7 @@ public class OrzhovGuildgate extends mage.sets.gatecrash.OrzhovGuildgate {
 
     public OrzhovGuildgate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 299;
+        this.cardNumber = "299";
         this.expansionSetCode = "C15";
     }
 

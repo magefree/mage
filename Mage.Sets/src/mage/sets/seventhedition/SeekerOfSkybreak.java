@@ -37,7 +37,7 @@ public class SeekerOfSkybreak extends mage.sets.tempest.SeekerOfSkybreak {
 
     public SeekerOfSkybreak(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 268;
+        this.cardNumber = "268";
         this.expansionSetCode = "7ED";
     }
 

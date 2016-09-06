@@ -37,7 +37,7 @@ public class Blight extends mage.sets.fifthedition.Blight {
 
     public Blight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "MED";
     }
 

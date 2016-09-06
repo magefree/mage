@@ -44,7 +44,7 @@ public class FTVRelics extends ExpansionSet {
     }
 
     private FTVRelics() {
-        super("From the Vault: Relics", "FVR", "mage.sets.ftvrelics", new GregorianCalendar(2010, 8, 27).getTime(), SetType.SUPPLEMENTAL);
+        super("From the Vault: Relics", "V10", "mage.sets.ftvrelics", new GregorianCalendar(2010, 8, 27).getTime(), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
     }
 }

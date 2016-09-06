@@ -37,7 +37,7 @@ public class FledglingDjinn extends mage.sets.weatherlight.FledglingDjinn {
 
     public FledglingDjinn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "VMA";
     }
 

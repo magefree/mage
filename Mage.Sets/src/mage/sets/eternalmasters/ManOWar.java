@@ -37,7 +37,7 @@ public class ManOWar extends mage.sets.visions.ManOWar {
 
     public ManOWar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "EMA";
     }
 

@@ -37,7 +37,7 @@ public class LightningBlast extends mage.sets.tempest.LightningBlast {
 
     public LightningBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 200;
+        this.cardNumber = "200";
         this.expansionSetCode = "7ED";
     }
 

@@ -37,7 +37,7 @@ public class CelestialCrusader extends mage.sets.elspethvstezzeret.CelestialCrus
 
     public CelestialCrusader(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "C14";
     }
 

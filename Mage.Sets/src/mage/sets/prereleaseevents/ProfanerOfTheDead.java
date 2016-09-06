@@ -37,7 +37,7 @@ public class ProfanerOfTheDead extends mage.sets.dragonsoftarkir.ProfanerOfTheDe
 
     public ProfanerOfTheDead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "PTC";
     }
 

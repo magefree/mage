@@ -37,7 +37,7 @@ public class WolfPack extends mage.sets.masterseditionii.WolfPack {
 
     public WolfPack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = "158";
         this.expansionSetCode = "PTK";
     }
 

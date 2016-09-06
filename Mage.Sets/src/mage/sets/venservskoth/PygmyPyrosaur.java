@@ -37,7 +37,7 @@ public class PygmyPyrosaur extends mage.sets.urzaslegacy.PygmyPyrosaur {
 
     public PygmyPyrosaur(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "DDI";
     }
 

@@ -37,7 +37,7 @@ public class MonstrousGrowth extends mage.sets.seventhedition.MonstrousGrowth {
 
     public MonstrousGrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 266;
+        this.cardNumber = "266";
         this.expansionSetCode = "8ED";
     }
 

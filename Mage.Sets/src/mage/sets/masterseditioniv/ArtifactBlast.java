@@ -37,7 +37,7 @@ public class ArtifactBlast extends mage.sets.antiquities.ArtifactBlast {
 
     public ArtifactBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "ME4";
     }
 

@@ -37,7 +37,7 @@ public class NayaCharm extends mage.sets.shardsofalara.NayaCharm {
 
     public NayaCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "DDH";
     }
 

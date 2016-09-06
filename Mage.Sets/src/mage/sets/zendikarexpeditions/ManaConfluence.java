@@ -38,7 +38,7 @@ public class ManaConfluence extends mage.sets.journeyintonyx.ManaConfluence {
 
     public ManaConfluence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

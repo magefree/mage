@@ -37,7 +37,7 @@ public class VictorysHerald extends mage.sets.mirrodinbesieged.VictorysHerald {
 
     public VictorysHerald(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "C15";
     }
 

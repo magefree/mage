@@ -38,7 +38,7 @@ public class KrosanTusker extends mage.sets.heroesvsmonsters.KrosanTusker {
 
     public KrosanTusker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

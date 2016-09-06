@@ -37,7 +37,7 @@ public class BrutalHordechief extends mage.sets.fatereforged.BrutalHordechief {
 
     public BrutalHordechief(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "PTC";
     }
 

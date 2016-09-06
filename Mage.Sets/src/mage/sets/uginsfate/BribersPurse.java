@@ -37,7 +37,7 @@ public class BribersPurse extends mage.sets.khansoftarkir.BribersPurse {
 
     public BribersPurse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 217;
+        this.cardNumber = "217";
         this.expansionSetCode = "UGIN";
     }
 

@@ -37,7 +37,7 @@ public class GathanRaiders extends mage.sets.futuresight.GathanRaiders {
 
     public GathanRaiders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 40;
+        this.cardNumber = "40";
         this.expansionSetCode = "ARC";
     }
 

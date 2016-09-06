@@ -39,7 +39,7 @@ public class TwistedAbomination extends mage.sets.timeshifted.TwistedAbomination
 
     public TwistedAbomination(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

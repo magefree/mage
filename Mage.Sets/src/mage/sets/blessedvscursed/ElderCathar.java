@@ -37,7 +37,7 @@ public class ElderCathar extends mage.sets.innistrad.ElderCathar {
 
     public ElderCathar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "DDQ";
     }
 

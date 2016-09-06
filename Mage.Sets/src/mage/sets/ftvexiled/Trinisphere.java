@@ -38,7 +38,7 @@ public class Trinisphere extends mage.sets.darksteel.Trinisphere {
 
     public Trinisphere(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "V09";
         this.rarity = Rarity.MYTHIC;
     }

@@ -37,7 +37,7 @@ public class TidehollowStrix extends mage.sets.shardsofalara.TidehollowStrix {
 
     public TidehollowStrix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 222;
+        this.cardNumber = "222";
         this.expansionSetCode = "C13";
     }
 

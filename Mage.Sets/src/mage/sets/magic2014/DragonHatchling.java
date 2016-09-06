@@ -37,7 +37,7 @@ public class DragonHatchling extends mage.sets.magic2013.DragonHatchling {
 
     public DragonHatchling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "M14";
     }
 

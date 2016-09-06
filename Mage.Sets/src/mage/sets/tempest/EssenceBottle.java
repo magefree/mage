@@ -101,7 +101,7 @@ class EssenceBottleCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(ability.getSourceId());
         if (permanent != null) {
-            this.removedCounters = permanent.getCounters().getCount(CounterType.ELIXIR);
+            this.removedCounters = permanent.getCounters(game).getCount(CounterType.ELIXIR);
             if (this.removedCounters > 0) {
                 permanent.removeCounters(CounterType.ELIXIR.createInstance(this.removedCounters), game);
             }

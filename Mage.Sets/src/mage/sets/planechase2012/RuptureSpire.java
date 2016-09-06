@@ -37,7 +37,7 @@ public class RuptureSpire extends mage.sets.conflux.RuptureSpire {
 
     public RuptureSpire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "PC2";
     }
 

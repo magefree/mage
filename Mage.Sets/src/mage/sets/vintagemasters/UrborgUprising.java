@@ -9,7 +9,7 @@ public class UrborgUprising extends mage.sets.apocalypse.UrborgUprising {
 
     public UrborgUprising(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "VMA";
     }
 

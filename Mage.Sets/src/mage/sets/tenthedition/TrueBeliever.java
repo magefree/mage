@@ -37,7 +37,7 @@ public class TrueBeliever extends mage.sets.onslaught.TrueBeliever {
 
     public TrueBeliever(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "10E";
     }
 

@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.SunburstAbility;
@@ -56,7 +56,7 @@ public class Heliophial extends CardImpl {
         // Sunburst
         this.addAbility(new SunburstAbility(this));
         // {2}, Sacrifice Heliophial: Heliophial deals damage equal to the number of charge counters on it to target creature or player.
-        Effect effect = new DamageTargetEffect(new CountersCount(CounterType.CHARGE));
+        Effect effect = new DamageTargetEffect(new CountersSourceCount(CounterType.CHARGE));
         effect.setText("{this} deals damage equal to the number of charge counters on it to target creature or player");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
         ability.addCost(new SacrificeSourceCost());

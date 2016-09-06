@@ -37,7 +37,7 @@ public class FuryOfTheHorde extends mage.sets.coldsnap.FuryOfTheHorde {
 
     public FuryOfTheHorde(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "DDN";
     }
 

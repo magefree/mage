@@ -38,7 +38,7 @@ public class FlamewaveInvoker extends mage.sets.tenthedition.FlamewaveInvoker {
 
     public FlamewaveInvoker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "LGN";
         this.rarity = Rarity.COMMON;
     }

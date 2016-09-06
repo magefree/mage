@@ -38,7 +38,7 @@ public class FracturingGust extends mage.sets.shadowmoor.FracturingGust {
 
     public FracturingGust(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "V14";
         this.rarity = Rarity.MYTHIC;
     }

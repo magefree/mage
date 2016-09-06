@@ -45,7 +45,7 @@ public class BloodcurdlingScream extends CardImpl {
 
     public BloodcurdlingScream(UUID ownerId) {
         super(ownerId, 3, "Bloodcurdling Scream", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
 
         // Target creature gets +X/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new ExileFromHandCostCardConvertedMana(), new StaticValue(0), Duration.EndOfTurn));

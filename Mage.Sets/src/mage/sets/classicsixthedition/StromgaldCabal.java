@@ -37,7 +37,7 @@ public class StromgaldCabal extends mage.sets.iceage.StromgaldCabal {
 
     public StromgaldCabal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "6ED";
     }
 

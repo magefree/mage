@@ -37,7 +37,7 @@ public class PhyrexianDelver extends mage.sets.invasion.PhyrexianDelver {
 
     public PhyrexianDelver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "C13";
     }
 

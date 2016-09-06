@@ -38,7 +38,7 @@ public class AnthousaSetessanHero extends mage.sets.theros.AnthousaSetessanHero 
 
     public AnthousaSetessanHero(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

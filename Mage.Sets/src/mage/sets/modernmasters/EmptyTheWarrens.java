@@ -37,7 +37,7 @@ public class EmptyTheWarrens extends mage.sets.timespiral.EmptyTheWarrens {
 
     public EmptyTheWarrens(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 112;
+        this.cardNumber = "112";
         this.expansionSetCode = "MMA";
     }
 

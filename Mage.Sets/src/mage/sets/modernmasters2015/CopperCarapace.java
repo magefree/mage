@@ -37,7 +37,7 @@ public class CopperCarapace extends mage.sets.mirrodinbesieged.CopperCarapace {
 
     public CopperCarapace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 205;
+        this.cardNumber = "205";
         this.expansionSetCode = "MM2";
     }
 

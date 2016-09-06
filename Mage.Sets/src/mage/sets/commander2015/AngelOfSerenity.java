@@ -37,7 +37,7 @@ public class AngelOfSerenity extends mage.sets.returntoravnica.AngelOfSerenity {
 
     public AngelOfSerenity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "C15";
     }
 

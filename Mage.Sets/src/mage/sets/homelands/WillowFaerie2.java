@@ -37,7 +37,7 @@ public class WillowFaerie2 extends mage.sets.homelands.WillowFaerie1 {
 
     public WillowFaerie2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "HML";
     }
 

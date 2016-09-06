@@ -38,7 +38,7 @@ public class DarkHeartOfTheWood extends mage.sets.ravnica.DarkHeartOfTheWood {
 
     public DarkHeartOfTheWood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.COMMON;
     }

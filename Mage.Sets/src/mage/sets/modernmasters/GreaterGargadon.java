@@ -37,7 +37,7 @@ public class GreaterGargadon extends mage.sets.timespiral.GreaterGargadon {
 
     public GreaterGargadon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 117;
+        this.cardNumber = "117";
         this.expansionSetCode = "MMA";
     }
 

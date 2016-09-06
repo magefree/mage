@@ -37,7 +37,7 @@ public class LeshracsRite extends mage.sets.iceage.LeshracsRite {
 
     public LeshracsRite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "6ED";
     }
 

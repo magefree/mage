@@ -37,7 +37,7 @@ public class QuagSickness extends mage.sets.magic2011.QuagSickness {
 
     public QuagSickness(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "M14";
     }
 

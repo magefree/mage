@@ -37,7 +37,7 @@ public class CelestialFlare extends mage.sets.magic2014.CelestialFlare {
 
     public CelestialFlare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "ORI";
     }
 

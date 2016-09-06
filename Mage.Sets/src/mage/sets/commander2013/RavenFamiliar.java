@@ -37,7 +37,7 @@ public class RavenFamiliar extends mage.sets.urzaslegacy.RavenFamiliar {
 
     public RavenFamiliar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "C13";
     }
 

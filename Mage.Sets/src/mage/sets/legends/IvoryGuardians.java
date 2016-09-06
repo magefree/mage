@@ -27,13 +27,11 @@
  */
 package mage.sets.legends;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.ProtectionAbility;
@@ -44,10 +42,11 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.Game;
 
 /**
  *
@@ -55,13 +54,16 @@ import mage.game.Game;
  */
 public class IvoryGuardians extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("red");
+    private static final FilterCard protectionFilter = new FilterCard("red");
+    private static final FilterPermanent controlFilter = new FilterPermanent("nontoken red permanent");
+    private static final FilterCreaturePermanent boostFilter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+        protectionFilter.add(new ColorPredicate(ObjectColor.RED));
+        controlFilter.add(new ColorPredicate(ObjectColor.RED));
+        controlFilter.add(Predicates.not(new TokenPredicate()));
+        boostFilter.add(new NamePredicate("Ivory Guardians"));
     }
-
-    private static final String rule = "Creatures named {this} get +1/+1 as long as an opponent controls a nontoken red permanent";
 
     public IvoryGuardians(UUID ownerId) {
         super(ownerId, 192, "Ivory Guardians", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
@@ -72,11 +74,12 @@ public class IvoryGuardians extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Protection from red
-        this.addAbility(new ProtectionAbility(filter));
-
+        this.addAbility(new ProtectionAbility(protectionFilter));
         // Creatures named Ivory Guardians get +1/+1 as long as an opponent controls a nontoken red permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield), new IvoryGuardiansCondition(), rule)));
-
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+                new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, boostFilter, false),
+                new OpponentControlsPermanentCondition(controlFilter),
+                "Creatures named Ivory Guardians get +1/+1 as long as an opponent controls a nontoken red permanent")));
     }
 
     public IvoryGuardians(final IvoryGuardians card) {
@@ -86,21 +89,5 @@ public class IvoryGuardians extends CardImpl {
     @Override
     public IvoryGuardians copy() {
         return new IvoryGuardians(this);
-    }
-}
-
-class IvoryGuardiansCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean conditionApplies = false;
-        FilterPermanent filter = new FilterPermanent();
-        filter.add(Predicates.not(new TokenPredicate()));
-        filter.add(new ColorPredicate(ObjectColor.RED));
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        for (UUID opponentId : opponents) {
-            conditionApplies |= game.getBattlefield().countAll(filter, opponentId, game) > 0;
-        }
-        return conditionApplies;
     }
 }

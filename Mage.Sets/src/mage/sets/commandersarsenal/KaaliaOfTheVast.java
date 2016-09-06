@@ -38,7 +38,7 @@ public class KaaliaOfTheVast extends mage.sets.commander.KaaliaOfTheVast {
 
     public KaaliaOfTheVast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "CMA";
         this.rarity = Rarity.SPECIAL;
     }

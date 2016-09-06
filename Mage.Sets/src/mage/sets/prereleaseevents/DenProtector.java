@@ -37,7 +37,7 @@ public class DenProtector extends mage.sets.dragonsoftarkir.DenProtector {
 
     public DenProtector(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 169;
+        this.cardNumber = "169";
         this.expansionSetCode = "PTC";
     }
 

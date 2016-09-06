@@ -37,7 +37,7 @@ public class ShowAndTell extends mage.sets.urzassaga.ShowAndTell {
 
     public ShowAndTell(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "JR";
     }
 

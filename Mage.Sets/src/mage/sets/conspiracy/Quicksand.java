@@ -37,7 +37,7 @@ public class Quicksand extends mage.sets.tenthedition.Quicksand {
 
     public Quicksand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 209;
+        this.cardNumber = "209";
         this.expansionSetCode = "CNS";
     }
 

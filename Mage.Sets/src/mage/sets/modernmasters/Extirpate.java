@@ -37,7 +37,7 @@ public class Extirpate extends mage.sets.planarchaos.Extirpate {
 
     public Extirpate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 84;
+        this.cardNumber = "84";
         this.expansionSetCode = "MMA";
     }
 

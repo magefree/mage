@@ -6,7 +6,7 @@ public class IvorytuskFortress extends mage.sets.khansoftarkir.IvorytuskFortress
     
     public IvorytuskFortress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "MBP";
     }
     

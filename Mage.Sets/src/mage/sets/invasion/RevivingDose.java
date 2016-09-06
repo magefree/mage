@@ -37,7 +37,7 @@ public class RevivingDose extends mage.sets.tenthedition.RevivingDose {
 
     public RevivingDose(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "INV";
     }
 

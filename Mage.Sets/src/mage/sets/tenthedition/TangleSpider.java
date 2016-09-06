@@ -38,7 +38,7 @@ public class TangleSpider extends mage.sets.darksteel.TangleSpider {
 
     public TangleSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 303;
+        this.cardNumber = "303";
         this.expansionSetCode = "10E";
         this.rarity = Rarity.UNCOMMON;
     }

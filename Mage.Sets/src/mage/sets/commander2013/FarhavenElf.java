@@ -37,7 +37,7 @@ public class FarhavenElf extends mage.sets.shadowmoor.FarhavenElf {
 
     public FarhavenElf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = "144";
         this.expansionSetCode = "C13";
     }
 

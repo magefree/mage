@@ -37,7 +37,7 @@ public class BattlegateMimic extends mage.sets.eventide.BattlegateMimic {
 
     public BattlegateMimic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 98;
+        this.cardNumber = "98";
         this.expansionSetCode = "HOP";
     }
 

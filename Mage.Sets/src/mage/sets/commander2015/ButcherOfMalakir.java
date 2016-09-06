@@ -37,7 +37,7 @@ public class ButcherOfMalakir extends mage.sets.worldwake.ButcherOfMalakir {
 
     public ButcherOfMalakir(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "C15";
     }
 

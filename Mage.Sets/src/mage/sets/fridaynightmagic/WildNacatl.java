@@ -38,7 +38,7 @@ public class WildNacatl extends mage.sets.shardsofalara.WildNacatl {
 
     public WildNacatl(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class HulkingGoblin extends mage.sets.vintagemasters.HulkingGoblin {
 
     public HulkingGoblin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "S99";
     }
 

@@ -37,7 +37,7 @@ public class Equilibrium extends mage.sets.exodus.Equilibrium {
 
     public Equilibrium(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "7ED";
     }
 

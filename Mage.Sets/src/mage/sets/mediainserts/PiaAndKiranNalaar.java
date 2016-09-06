@@ -38,7 +38,7 @@ public class PiaAndKiranNalaar extends mage.sets.magicorigins.PiaAndKiranNalaar 
 
     public PiaAndKiranNalaar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 128;
+        this.cardNumber = "128";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -44,7 +44,7 @@ public class LurkingNightstalker extends CardImpl {
 
     public LurkingNightstalker(UUID ownerId) {
         super(ownerId, 17, "Lurking Nightstalker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Nightstalker");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

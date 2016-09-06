@@ -37,7 +37,7 @@ public class Reincarnation extends mage.sets.commander2013.Reincarnation {
 
     public Reincarnation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "ME3";
     }
 

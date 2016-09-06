@@ -53,7 +53,7 @@ public class CemeteryRecruitment extends CardImpl {
 
         // Return target creature card from your graveyard to your hand. If it's a Zombie card, draw a card.
         this.getSpellAbility().addEffect(new CemeteryRecruitmentEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, new FilterCreatureCard("creature card from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
     }
 
     public CemeteryRecruitment(final CemeteryRecruitment card) {
@@ -89,7 +89,7 @@ class CemeteryRecruitmentEffect extends OneShotEffect {
             Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
                 if (controller.moveCards(card, Zone.HAND, source, game)
-                        && card.getSubtype().contains("Zombie")) {
+                        && card.getSubtype(game).contains("Zombie")) {
                     controller.drawCards(1, game);
                 }
             }

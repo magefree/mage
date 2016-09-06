@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.SunburstAbility;
@@ -57,7 +57,7 @@ public class Solarion extends CardImpl {
         // Sunburst
         this.addAbility(new SunburstAbility(this));
         // {tap}: Double the number of +1/+1 counters on Solarion.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), new CountersCount(CounterType.P1P1), true);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), new CountersSourceCount(CounterType.P1P1), true);
         effect.setText("Double the number of +1/+1 counters on {this}");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost()));
     }

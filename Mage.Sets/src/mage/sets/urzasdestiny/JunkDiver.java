@@ -37,7 +37,7 @@ public class JunkDiver extends mage.sets.commander2014.JunkDiver {
 
     public JunkDiver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 132;
+        this.cardNumber = "132";
         this.expansionSetCode = "UDS";
     }
 

@@ -38,7 +38,7 @@ public class Skinrender extends mage.sets.scarsofmirrodin.Skinrender {
 
     public Skinrender(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

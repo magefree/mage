@@ -25,16 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -44,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ViridianEmissary extends CardImpl {
 
-    public ViridianEmissary (UUID ownerId) {
+    public ViridianEmissary(UUID ownerId) {
         super(ownerId, 95, "Viridian Emissary", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Elf");
@@ -52,10 +51,12 @@ public class ViridianEmissary extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
+        // When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true), true));
     }
 
-    public ViridianEmissary (final ViridianEmissary card) {
+    public ViridianEmissary(final ViridianEmissary card) {
         super(card);
     }
 

@@ -135,7 +135,7 @@ class SirensCallDestroyEffect extends OneShotEffect {
         if (player != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(player.getId())) {
                 // Walls are safe.
-                if (permanent.getSubtype().contains("Wall")) {
+                if (permanent.getSubtype(game).contains("Wall")) {
                     continue;
                 }
                 // Creatures that attacked are safe.

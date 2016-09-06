@@ -38,7 +38,7 @@ public class IcyPrison extends mage.sets.iceage.IcyPrison {
 
     public IcyPrison(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.COMMON;
     }

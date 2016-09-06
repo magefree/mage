@@ -37,7 +37,7 @@ public class NephaliaMoondrakes extends mage.sets.shadowsoverinnistrad.NephaliaM
 
     public NephaliaMoondrakes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "MBP";
     }
 

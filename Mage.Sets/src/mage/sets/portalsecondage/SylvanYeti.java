@@ -37,8 +37,8 @@ public class SylvanYeti extends mage.sets.starter1999.SylvanYeti {
 
     public SylvanYeti(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
-        this.expansionSetCode = "P02";
+        this.cardNumber = "87";
+        this.expansionSetCode = "PO2";
     }
 
     public SylvanYeti(final SylvanYeti card) {

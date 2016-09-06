@@ -37,7 +37,7 @@ public class WallOfOmens extends mage.sets.riseoftheeldrazi.WallOfOmens {
 
     public WallOfOmens(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "CMD";
     }
 

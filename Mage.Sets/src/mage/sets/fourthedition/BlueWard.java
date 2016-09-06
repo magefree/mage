@@ -37,7 +37,7 @@ public class BlueWard extends mage.sets.unlimitededition.BlueWard {
 
     public BlueWard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 260;
+        this.cardNumber = "260";
         this.expansionSetCode = "4ED";
     }
 

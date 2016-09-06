@@ -37,7 +37,7 @@ public class MoldShambler extends mage.sets.zendikar.MoldShambler {
 
     public MoldShambler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "DDM";
     }
 

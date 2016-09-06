@@ -38,7 +38,7 @@ public class ManaCrypt extends mage.sets.vintagemasters.ManaCrypt {
 
     public ManaCrypt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.RARE;
     }

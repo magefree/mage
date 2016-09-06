@@ -37,7 +37,7 @@ public class JacquesLeVert extends mage.sets.legends.JacquesLeVert {
 
     public JacquesLeVert(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "MED";
     }
 

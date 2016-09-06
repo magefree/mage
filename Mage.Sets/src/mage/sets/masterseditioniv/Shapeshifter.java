@@ -38,7 +38,7 @@ public class Shapeshifter extends mage.sets.antiquities.Shapeshifter {
 
     public Shapeshifter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 226;
+        this.cardNumber = "226";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

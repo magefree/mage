@@ -38,7 +38,7 @@ public class FerventCathar extends mage.sets.avacynrestored.FerventCathar {
 
     public FerventCathar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "EMA";
     }
 

@@ -38,7 +38,7 @@ public class BrindleShoat extends mage.sets.planechase2012.BrindleShoat {
 
     public BrindleShoat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

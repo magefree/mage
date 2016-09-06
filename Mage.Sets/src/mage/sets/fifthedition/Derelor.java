@@ -37,7 +37,7 @@ public class Derelor extends mage.sets.fallenempires.Derelor {
 
     public Derelor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "5ED";
     }
 

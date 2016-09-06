@@ -37,7 +37,7 @@ public class AnimateDead extends mage.sets.limitedalpha.AnimateDead {
 
     public AnimateDead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "PD3";
     }
 

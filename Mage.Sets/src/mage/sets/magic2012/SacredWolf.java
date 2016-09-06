@@ -37,7 +37,7 @@ public class SacredWolf extends mage.sets.magic2011.SacredWolf {
 
     public SacredWolf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 194;
+        this.cardNumber = "194";
         this.expansionSetCode = "M12";
     }
 

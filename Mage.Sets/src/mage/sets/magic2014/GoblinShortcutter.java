@@ -37,7 +37,7 @@ public class GoblinShortcutter extends mage.sets.zendikar.GoblinShortcutter {
 
     public GoblinShortcutter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 142;
+        this.cardNumber = "142";
         this.expansionSetCode = "M14";
     }
 

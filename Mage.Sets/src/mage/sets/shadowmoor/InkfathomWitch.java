@@ -37,7 +37,7 @@ public class InkfathomWitch extends mage.sets.planechase2012.InkfathomWitch {
 
     public InkfathomWitch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "SHM";
     }
 

@@ -38,7 +38,10 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
+import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -60,8 +63,14 @@ public class UlvenwaldTracker extends CardImpl {
         // {1}{G}, {tap}: Target creature you control fights another target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FightTargetsEffect(), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetOtherCreaturePermanent());
+        Target controlledTarget = new TargetControlledCreaturePermanent();
+        controlledTarget.setTargetTag(1);
+        ability.addTarget(controlledTarget);
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature to fight");
+        filter.add(new AnotherTargetPredicate(2));
+        Target secondTarget = new TargetCreaturePermanent(filter);
+        secondTarget.setTargetTag(2);
+        ability.addTarget(secondTarget);
         this.addAbility(ability);
     }
 
@@ -73,28 +82,4 @@ public class UlvenwaldTracker extends CardImpl {
     public UlvenwaldTracker copy() {
         return new UlvenwaldTracker(this);
     }
-}
-class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
-    
-    public TargetOtherCreaturePermanent() {
-        super();
-    }
-
-    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (source.getTargets().get(0).getTargets().contains(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game);
-    }
-
-    @Override
-    public TargetOtherCreaturePermanent copy() {
-        return new TargetOtherCreaturePermanent(this);
-    }
-
 }

@@ -146,7 +146,7 @@ class AkoumHellkiteDamageEffect extends OneShotEffect {
         Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         Player player = game.getPlayer(source.getFirstTarget());
         if (land != null && player != null) {
-            if (land.hasSubtype("Mountain")) {
+            if (land.hasSubtype("Mountain", game)) {
                 player.damage(2, source.getSourceId(), game, false, true);
             } else {
                 player.damage(1, source.getSourceId(), game, false, true);
@@ -155,7 +155,7 @@ class AkoumHellkiteDamageEffect extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (land != null && permanent != null) {
-            if (land.hasSubtype("Mountain")) {
+            if (land.hasSubtype("Mountain", game)) {
                 permanent.damage(2, source.getSourceId(), game, false, true);
             } else {
                 permanent.damage(1, source.getSourceId(), game, false, true);

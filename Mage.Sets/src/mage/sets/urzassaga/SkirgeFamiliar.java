@@ -38,7 +38,7 @@ public class SkirgeFamiliar extends mage.sets.vintagemasters.SkirgeFamiliar {
 
     public SkirgeFamiliar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 157;
+        this.cardNumber = "157";
         this.expansionSetCode = "USG";
         this.rarity = Rarity.UNCOMMON;
     }

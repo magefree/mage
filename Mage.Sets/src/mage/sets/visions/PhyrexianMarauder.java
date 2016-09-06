@@ -99,7 +99,7 @@ class PhyrexianMarauderCantAttackUnlessYouPayEffect extends CantAttackBlockUnles
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (sourceObject != null) {
-            int counter = sourceObject.getCounters().getCount(CounterType.P1P1);
+            int counter = sourceObject.getCounters(game).getCount(CounterType.P1P1);
             if (counter > 0) {
                 return new ManaCostsImpl<>("{" + counter + "}");
             }

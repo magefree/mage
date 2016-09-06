@@ -37,7 +37,7 @@ public class MelekIzzetParagon extends mage.sets.dragonsmaze.MelekIzzetParagon {
 
     public MelekIzzetParagon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "MGDC";
     }
 

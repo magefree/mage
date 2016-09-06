@@ -38,7 +38,7 @@ public class Castle extends mage.sets.limitedalpha.Castle {
 
     public Castle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "2ED";
     }
 

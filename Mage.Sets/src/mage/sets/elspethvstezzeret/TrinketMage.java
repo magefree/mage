@@ -40,7 +40,7 @@ public class TrinketMage extends mage.sets.scarsofmirrodin.TrinketMage {
     public TrinketMage (UUID ownerId) {
         super(ownerId);
         this.expansionSetCode = "DDF";
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.rarity = Rarity.COMMON;
     }
 

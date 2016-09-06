@@ -37,7 +37,7 @@ public class SeaSerpent extends mage.sets.limitedalpha.SeaSerpent {
 
     public SeaSerpent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "ME4";
     }
 

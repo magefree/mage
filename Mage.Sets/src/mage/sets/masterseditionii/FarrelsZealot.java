@@ -38,7 +38,7 @@ public class FarrelsZealot extends mage.sets.fallenempires.FarrelsZealot1 {
 
     public FarrelsZealot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.UNCOMMON;
     }

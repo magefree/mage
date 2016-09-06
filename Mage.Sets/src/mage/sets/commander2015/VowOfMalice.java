@@ -37,7 +37,7 @@ public class VowOfMalice extends mage.sets.commander.VowOfMalice {
 
     public VowOfMalice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "C15";
     }
 

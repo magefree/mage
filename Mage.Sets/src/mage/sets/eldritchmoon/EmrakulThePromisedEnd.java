@@ -37,6 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.effects.common.turn.ControlTargetPlayerNextTurnEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -143,10 +144,10 @@ class EmrakulThePromisedEndCostReductionEffect extends CostModificationEffectImp
     }
 }
 
-class EmrakulThePromisedEndGainControlEffect extends OneShotEffect {
+class EmrakulThePromisedEndGainControlEffect extends ControlTargetPlayerNextTurnEffect {
 
     EmrakulThePromisedEndGainControlEffect() {
-        super(Outcome.GainControl);
+        super();
         this.staticText = "you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn";
     }
 
@@ -165,9 +166,7 @@ class EmrakulThePromisedEndGainControlEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
             game.getState().getTurnMods().add(new TurnMod(targetPlayer.getId(), false));
-            game.getState().getTurnMods().add(new TurnMod(targetPlayer.getId(), controller.getId()));
-            return true;
         }
-        return false;
+        return super.apply(game, source);
     }
 }

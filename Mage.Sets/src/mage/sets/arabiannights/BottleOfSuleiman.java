@@ -37,7 +37,7 @@ public class BottleOfSuleiman extends mage.sets.fifthedition.BottleOfSuleiman {
 
     public BottleOfSuleiman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "ARN";
     }
 

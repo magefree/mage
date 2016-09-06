@@ -37,7 +37,7 @@ public class HarbingerOfTheTides extends mage.sets.magicorigins.HarbingerOfTheTi
 
     public HarbingerOfTheTides(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 213;
+        this.cardNumber = "213";
         this.expansionSetCode = "PTC";
     }
 

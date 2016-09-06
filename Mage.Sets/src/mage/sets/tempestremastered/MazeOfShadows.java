@@ -37,7 +37,7 @@ public class MazeOfShadows extends mage.sets.tempest.MazeOfShadows {
 
     public MazeOfShadows(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 238;
+        this.cardNumber = "238";
         this.expansionSetCode = "TPR";
     }
 

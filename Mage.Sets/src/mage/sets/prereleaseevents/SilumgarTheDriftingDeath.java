@@ -37,7 +37,7 @@ public class SilumgarTheDriftingDeath extends mage.sets.fatereforged.SilumgarThe
 
     public SilumgarTheDriftingDeath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "PTC";
     }
 

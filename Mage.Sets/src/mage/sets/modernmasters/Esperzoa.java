@@ -37,7 +37,7 @@ public class Esperzoa extends mage.sets.conflux.Esperzoa {
 
     public Esperzoa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "MMA";
     }
 

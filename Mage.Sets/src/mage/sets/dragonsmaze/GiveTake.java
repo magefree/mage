@@ -93,7 +93,7 @@ class TakeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
         if (creature != null) {
-            int numberCounters = creature.getCounters().getCount(CounterType.P1P1);
+            int numberCounters = creature.getCounters(game).getCount(CounterType.P1P1);
             if (numberCounters > 0) {
                 creature.removeCounters(CounterType.P1P1.getName(), numberCounters, game);
                 Player controller = game.getPlayer(source.getControllerId());

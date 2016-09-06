@@ -37,7 +37,7 @@ public class AbattoirGhoul extends mage.sets.innistrad.AbattoirGhoul {
 
     public AbattoirGhoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDQ";
     }
 

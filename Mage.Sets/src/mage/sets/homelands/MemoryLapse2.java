@@ -37,7 +37,7 @@ public class MemoryLapse2 extends mage.sets.seventhedition.MemoryLapse {
 
     public MemoryLapse2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "HML";
     }
 

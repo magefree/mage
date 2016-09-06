@@ -38,7 +38,7 @@ public class Murder extends mage.sets.magic2013.Murder {
 
     public Murder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "EMN";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class StaticOrb extends mage.sets.tempest.StaticOrb {
 
     public StaticOrb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 319;
+        this.cardNumber = "319";
         this.expansionSetCode = "7ED";
     }
 

@@ -37,7 +37,7 @@ public class InstillEnergy extends mage.sets.fifthedition.InstillEnergy {
 
     public InstillEnergy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "4ED";
     }
 

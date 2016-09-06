@@ -104,7 +104,7 @@ class LostAuramancersAbility extends PutIntoGraveFromBattlefieldSourceTriggeredA
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (!permanent.getCounters().containsKey(CounterType.TIME) || permanent.getCounters().getCount(CounterType.TIME) == 0) {
+            if (!permanent.getCounters(game).containsKey(CounterType.TIME) || permanent.getCounters(game).getCount(CounterType.TIME) == 0) {
                 return true;
             }
         }

@@ -37,7 +37,7 @@ public class BorosCharm extends mage.sets.gatecrash.BorosCharm {
 
     public BorosCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "C13";
     }
 

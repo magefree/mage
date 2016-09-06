@@ -37,7 +37,7 @@ public class Rancor extends mage.sets.urzaslegacy.Rancor {
 
     public Rancor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "ARC";
     }
 

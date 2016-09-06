@@ -37,7 +37,7 @@ public class DauthiWarlord extends mage.sets.tempestremastered.DauthiWarlord {
 
     public DauthiWarlord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "EXO";
     }
 

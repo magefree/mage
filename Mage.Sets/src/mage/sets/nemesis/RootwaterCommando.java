@@ -37,7 +37,7 @@ public class RootwaterCommando extends mage.sets.tenthedition.RootwaterCommando 
 
     public RootwaterCommando(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "NEM";
     }
 

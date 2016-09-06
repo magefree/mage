@@ -37,7 +37,7 @@ public class KirtarsWrath extends mage.sets.commander2013.KirtarsWrath {
 
     public KirtarsWrath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "ODY";
     }
 

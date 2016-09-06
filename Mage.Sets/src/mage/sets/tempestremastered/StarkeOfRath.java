@@ -38,7 +38,7 @@ public class StarkeOfRath extends mage.sets.tempest.StarkeOfRath {
 
     public StarkeOfRath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.MYTHIC;
     }

@@ -37,7 +37,7 @@ public class ApprenticeWizard extends mage.sets.mastersedition.ApprenticeWizard 
 
     public ApprenticeWizard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "4ED";
     }
 

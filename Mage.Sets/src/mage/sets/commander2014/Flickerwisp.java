@@ -37,7 +37,7 @@ public class Flickerwisp extends mage.sets.eventide.Flickerwisp {
 
     public Flickerwisp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "C14";
     }
 

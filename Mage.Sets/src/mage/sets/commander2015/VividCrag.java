@@ -37,7 +37,7 @@ public class VividCrag extends mage.sets.lorwyn.VividCrag {
 
     public VividCrag(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 316;
+        this.cardNumber = "316";
         this.expansionSetCode = "C15";
     }
 

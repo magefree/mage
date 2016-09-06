@@ -37,7 +37,7 @@ public class VisionSkeins extends mage.sets.commander2013.VisionSkeins {
 
     public VisionSkeins(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "CMD";
     }
 

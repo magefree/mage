@@ -37,7 +37,7 @@ public class SliceAndDice extends mage.sets.onslaught.SliceAndDice {
 
     public SliceAndDice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "FNMP";
     }
 

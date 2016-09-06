@@ -37,7 +37,7 @@ public class DreadDefiler extends mage.sets.oathofthegatewatch.DreadDefiler {
 
     public DreadDefiler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "MBP";
     }
 

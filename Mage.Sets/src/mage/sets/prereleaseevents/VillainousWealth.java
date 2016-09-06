@@ -38,7 +38,7 @@ public class VillainousWealth extends mage.sets.khansoftarkir.VillainousWealth {
 
     public VillainousWealth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

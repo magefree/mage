@@ -39,7 +39,7 @@ public class GarruksPackleader extends mage.sets.magic2011.GarruksPackleader {
     public GarruksPackleader(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 283;
+        this.cardNumber = "283";
         this.expansionSetCode = "M15";
     }
 

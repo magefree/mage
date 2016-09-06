@@ -37,7 +37,7 @@ public class OverwhelmingIntellect extends mage.sets.saviorsofkamigawa.Overwhelm
 
     public OverwhelmingIntellect(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "DDJ";
     }
 

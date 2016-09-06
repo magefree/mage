@@ -37,7 +37,7 @@ public class TerritorialBaloth extends mage.sets.zendikar.TerritorialBaloth {
 
     public TerritorialBaloth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 196;
+        this.cardNumber = "196";
         this.expansionSetCode = "BFZ";
     }
 

@@ -37,7 +37,7 @@ public class MesaFalcon2 extends mage.sets.homelands.MesaFalcon1 {
 
     public MesaFalcon2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 113;
+        this.cardNumber = "113";
         this.expansionSetCode = "HML";
     }
 

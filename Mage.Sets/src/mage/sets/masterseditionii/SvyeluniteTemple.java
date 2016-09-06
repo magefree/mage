@@ -37,7 +37,7 @@ public class SvyeluniteTemple extends mage.sets.fallenempires.SvyeluniteTemple {
 
     public SvyeluniteTemple(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "ME2";
     }
 

@@ -37,7 +37,7 @@ public class Farseek extends mage.sets.ravnica.Farseek {
 
     public Farseek(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "M13";
     }
 

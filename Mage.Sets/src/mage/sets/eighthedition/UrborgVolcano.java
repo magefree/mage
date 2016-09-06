@@ -37,7 +37,7 @@ public class UrborgVolcano extends mage.sets.invasion.UrborgVolcano {
 
     public UrborgVolcano(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 327;
+        this.cardNumber = "327";
         this.expansionSetCode = "8ED";
     }
 

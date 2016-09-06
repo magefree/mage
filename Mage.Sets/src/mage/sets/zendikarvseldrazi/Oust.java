@@ -37,7 +37,7 @@ public class Oust extends mage.sets.riseoftheeldrazi.Oust {
 
     public Oust(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "DDP";
     }
 

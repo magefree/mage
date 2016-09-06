@@ -39,7 +39,7 @@ public class StaffOfTheMindMagus extends mage.sets.magic2014.StaffOfTheMindMagus
     public StaffOfTheMindMagus(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 234;
+        this.cardNumber = "234";
         this.expansionSetCode = "M15";
     }
 

@@ -38,7 +38,7 @@ public class BreedingPool extends mage.sets.dissension.BreedingPool {
 
     public BreedingPool(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

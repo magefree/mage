@@ -37,7 +37,7 @@ public class ReaperOfTheWilds extends mage.sets.theros.ReaperOfTheWilds {
 
     public ReaperOfTheWilds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "DDM";
     }
 

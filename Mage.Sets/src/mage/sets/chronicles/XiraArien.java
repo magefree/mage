@@ -37,7 +37,7 @@ public class XiraArien extends mage.sets.legends.XiraArien {
 
     public XiraArien(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "CHR";
     }
 

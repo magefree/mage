@@ -37,7 +37,7 @@ public class JaceBeleren extends mage.sets.magic2010.JaceBeleren {
 
     public JaceBeleren(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DD2";
     }
 

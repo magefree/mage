@@ -37,7 +37,7 @@ public class TrygonPredator extends mage.sets.modernmasters.TrygonPredator {
 
     public TrygonPredator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "DIS";
     }
 

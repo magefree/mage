@@ -37,7 +37,7 @@ public class Deathlace extends mage.sets.limitedbeta.Deathlace {
 
     public Deathlace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "4ED";
     }
 

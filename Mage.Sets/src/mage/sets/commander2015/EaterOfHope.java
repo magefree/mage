@@ -37,7 +37,7 @@ public class EaterOfHope extends mage.sets.bornofthegods.EaterOfHope {
 
     public EaterOfHope(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "C15";
     }
 

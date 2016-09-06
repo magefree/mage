@@ -37,7 +37,7 @@ public class Dehydration extends mage.sets.tenthedition.Dehydration {
 
     public Dehydration(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 75;
+        this.cardNumber = "75";
         this.expansionSetCode = "8ED";
     }
 

@@ -37,7 +37,7 @@ public class CurseOfTheNightlyHunt extends mage.sets.innistrad.CurseOfTheNightly
 
     public CurseOfTheNightlyHunt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "C15";
     }
 

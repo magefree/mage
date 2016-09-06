@@ -37,7 +37,7 @@ public class WastelandStrangler extends mage.sets.battleforzendikar.WastelandStr
 
     public WastelandStrangler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 303;
+        this.cardNumber = "303";
         this.expansionSetCode = "PTC";
     }
 

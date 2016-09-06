@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.AmplifyEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.AmplifyAbility;
@@ -60,7 +60,7 @@ public class CanopyCrawler extends CardImpl {
         // Amplify 1
         this.addAbility(new AmplifyAbility(AmplifyEffect.AmplifyFactor.Amplify1));
         // {tap}: Target creature gets +1/+1 until end of turn for each +1/+1 counter on Canopy Crawler.
-        CountersCount count = new CountersCount(CounterType.P1P1);
+        CountersSourceCount count = new CountersSourceCount(CounterType.P1P1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(count, count, Duration.EndOfTurn, true), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

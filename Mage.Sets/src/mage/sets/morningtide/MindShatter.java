@@ -37,7 +37,7 @@ public class MindShatter extends mage.sets.magic2010.MindShatter {
 
     public MindShatter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "MOR";
     }
 

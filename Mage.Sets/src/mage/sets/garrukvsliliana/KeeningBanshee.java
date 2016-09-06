@@ -37,7 +37,7 @@ public class KeeningBanshee extends mage.sets.ravnica.KeeningBanshee {
 
     public KeeningBanshee(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "DDD";
     }
 

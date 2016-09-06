@@ -37,7 +37,7 @@ public class SatyrWayfinder extends mage.sets.bornofthegods.SatyrWayfinder {
 
     public SatyrWayfinder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "C15";
     }
 

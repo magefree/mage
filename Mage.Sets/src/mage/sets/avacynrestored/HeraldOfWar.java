@@ -94,7 +94,7 @@ class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl {
         SpellAbility spellAbility = (SpellAbility) abilityToModify;
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
-            int amount = sourcePermanent.getCounters().getCount(CounterType.P1P1);
+            int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amount > 0) {
                 CardUtil.adjustCost(spellAbility, amount);
                 return true;
@@ -107,7 +107,7 @@ class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             Card sourceCard = game.getCard(abilityToModify.getSourceId());
-            if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.hasSubtype("Angel") || sourceCard.hasSubtype("Human"))) {
+            if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.hasSubtype("Angel", game) || sourceCard.hasSubtype("Human", game))) {
                 return true;
             }
         }

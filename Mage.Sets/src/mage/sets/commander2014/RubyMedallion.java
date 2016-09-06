@@ -37,7 +37,7 @@ public class RubyMedallion extends mage.sets.tempest.RubyMedallion {
 
     public RubyMedallion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 265;
+        this.cardNumber = "265";
         this.expansionSetCode = "C14";
     }
 

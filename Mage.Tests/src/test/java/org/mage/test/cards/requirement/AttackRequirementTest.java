@@ -48,7 +48,7 @@ public class AttackRequirementTest extends CardTestPlayerBase {
         // Juggernaut can't be blocked by Walls
         addCard(Zone.BATTLEFIELD, playerB, "Juggernaut"); // 5/3
 
-        // Juggernaut should be forced to ttack
+        // Juggernaut should be forced to attack
         block(2, playerA, "Wall of Tanglecord", "Juggernaut"); // this block should'nt work because of Juggernauts restriction
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
@@ -75,7 +75,7 @@ public class AttackRequirementTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ghostly Prison");
 
-        // Juggernaut is forced to attack but can't without paying the Ghostly Prison cost and don't has to pay the costs so no attack
+        // Juggernaut is forced to attack but can't without paying the Ghostly Prison cost - no pay, no attack
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -104,5 +104,19 @@ public class AttackRequirementTest extends CardTestPlayerBase {
         assertLife(playerA, 12); // got damage 1 from Token, 3 from Boggart Brute + 2 + 2 from Goblin Rabblemaster = 9
         assertLife(playerB, 20);
 
+    }
+    
+    // Reported bug: Berserkers of Blood Ridge not forced to attack each turn (AI controlled)
+    @Test
+    public void testSimpleAttackRequirementBerserkersofBloodRidge() {
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Berserkers of Blood Ridge"); // 4/4 must attach each turn if able
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 16);
+        assertTapped("Berserkers of Blood Ridge", true);
     }
 }

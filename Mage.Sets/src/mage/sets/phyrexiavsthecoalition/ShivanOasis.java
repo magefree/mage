@@ -37,7 +37,7 @@ public class ShivanOasis extends mage.sets.planechase.ShivanOasis {
 
     public ShivanOasis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "DDE";
     }
 

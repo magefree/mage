@@ -37,7 +37,7 @@ public class Flare extends mage.sets.fifthedition.Flare {
 
     public Flare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = "185";
         this.expansionSetCode = "ICE";
     }
 

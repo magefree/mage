@@ -37,7 +37,7 @@ public class SmiteTheMonstrous extends mage.sets.innistrad.SmiteTheMonstrous {
 
     public SmiteTheMonstrous(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "DDL";
     }
 

@@ -37,7 +37,7 @@ public class JalumTome extends mage.sets.seventhedition.JalumTome {
 
     public JalumTome(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "C14";
     }
 

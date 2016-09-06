@@ -95,7 +95,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
         if (sourcePermanent != null
                 && permanent != null
                 && !sourcePermanent.getId().equals(permanent.getId())
-                && sourcePermanent.getCounters().containsKey(CounterType.P1P1)
+                && sourcePermanent.getCounters(game).containsKey(CounterType.P1P1)
                 && filter.match(permanent, game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -168,7 +168,7 @@ class GraftDistributeCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
-            int numberOfCounters = sourcePermanent.getCounters().getCount(CounterType.P1P1);
+            int numberOfCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (numberOfCounters > 0) {
                 Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
                 if (targetCreature != null) {

@@ -38,7 +38,7 @@ public class VerdantTouch extends mage.sets.tempestremastered.VerdantTouch {
 
     public VerdantTouch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "STH";
         this.rarity = Rarity.RARE;
     }

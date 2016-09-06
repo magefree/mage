@@ -38,7 +38,7 @@ public class SerratedArrows extends mage.sets.homelands.SerratedArrows {
 
     public SerratedArrows(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.UNCOMMON;
     }

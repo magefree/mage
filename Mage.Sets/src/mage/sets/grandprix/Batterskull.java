@@ -37,7 +37,7 @@ public class Batterskull extends mage.sets.newphyrexia.Batterskull {
 
     public Batterskull(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "GPX";
     }
 

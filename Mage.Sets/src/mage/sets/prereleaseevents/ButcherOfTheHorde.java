@@ -38,7 +38,7 @@ public class ButcherOfTheHorde extends mage.sets.khansoftarkir.ButcherOfTheHorde
 
     public ButcherOfTheHorde(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

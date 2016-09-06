@@ -37,7 +37,7 @@ public class Preacher extends mage.sets.mastersedition.Preacher {
 
     public Preacher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "DRK";
     }
 

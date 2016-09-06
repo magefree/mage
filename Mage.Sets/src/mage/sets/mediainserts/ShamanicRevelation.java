@@ -38,7 +38,7 @@ public class ShamanicRevelation extends mage.sets.fatereforged.ShamanicRevelatio
 
     public ShamanicRevelation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

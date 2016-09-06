@@ -38,7 +38,7 @@ public class Amnesia extends mage.sets.thedark.Amnesia {
 
     public Amnesia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.RARE;
     }

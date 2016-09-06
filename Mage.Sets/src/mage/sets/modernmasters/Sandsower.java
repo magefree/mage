@@ -37,7 +37,7 @@ public class Sandsower extends mage.sets.ravnica.Sandsower {
 
     public Sandsower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "MMA";
     }
 

@@ -37,7 +37,7 @@ public class GryffVanguard extends mage.sets.avacynrestored.GryffVanguard {
 
     public GryffVanguard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "DDQ";
     }
 

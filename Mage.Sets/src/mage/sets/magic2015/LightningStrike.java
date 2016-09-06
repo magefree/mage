@@ -37,7 +37,7 @@ public class LightningStrike extends mage.sets.theros.LightningStrike {
 
     public LightningStrike(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "M15";
     }
 

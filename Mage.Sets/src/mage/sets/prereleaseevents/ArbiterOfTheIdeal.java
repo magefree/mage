@@ -38,7 +38,7 @@ public class ArbiterOfTheIdeal extends mage.sets.bornofthegods.ArbiterOfTheIdeal
 
     public ArbiterOfTheIdeal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

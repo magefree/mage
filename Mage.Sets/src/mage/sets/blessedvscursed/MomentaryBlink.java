@@ -37,7 +37,7 @@ public class MomentaryBlink extends mage.sets.timespiral.MomentaryBlink {
 
     public MomentaryBlink(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "DDQ";
     }
 

@@ -37,7 +37,7 @@ public class PolukranosWorldEater extends mage.sets.theros.PolukranosWorldEater 
 
     public PolukranosWorldEater(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "DDL";
     }
 

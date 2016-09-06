@@ -38,7 +38,7 @@ public class DeathWind extends mage.sets.avacynrestored.DeathWind {
 
     public DeathWind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 95;
+        this.cardNumber = "95";
         this.expansionSetCode = "DTK";
         this.rarity = Rarity.UNCOMMON;
     }

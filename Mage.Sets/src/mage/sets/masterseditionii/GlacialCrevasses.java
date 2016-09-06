@@ -37,7 +37,7 @@ public class GlacialCrevasses extends mage.sets.iceage.GlacialCrevasses {
 
     public GlacialCrevasses(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "ME2";
     }
 

@@ -37,7 +37,7 @@ public class BloodSeeker extends mage.sets.zendikar.BloodSeeker {
 
     public BloodSeeker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "M12";
     }
 

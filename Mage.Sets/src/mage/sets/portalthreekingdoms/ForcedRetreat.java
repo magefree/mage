@@ -37,7 +37,7 @@ public class ForcedRetreat extends mage.sets.masterseditioniii.ForcedRetreat {
 
     public ForcedRetreat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "PTK";
     }
 

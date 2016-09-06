@@ -37,7 +37,7 @@ public class DriftingMeadow extends mage.sets.urzassaga.DriftingMeadow {
 
     public DriftingMeadow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 282;
+        this.cardNumber = "282";
         this.expansionSetCode = "C15";
     }
 

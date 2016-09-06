@@ -37,7 +37,7 @@ public class SuturePriest extends mage.sets.newphyrexia.SuturePriest {
 
     public SuturePriest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "MGDC";
     }
 

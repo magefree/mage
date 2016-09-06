@@ -37,7 +37,7 @@ public class DanceOfTheDead extends mage.sets.iceage.DanceOfTheDead {
 
     public DanceOfTheDead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "ME2";
     }
 

@@ -153,8 +153,8 @@ class BoostCreatureEffectEffect extends ContinuousEffectImpl {
             String subtype = (String) game.getState().getValue(permanent.getId() + "_type");
             if (subtype != null) {
                 for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                    if (perm.hasSubtype(subtype)) {
-                        int boost = permanent.getCounters().getCount(CounterType.CHARGE);
+                    if (perm.hasSubtype(subtype, game)) {
+                        int boost = permanent.getCounters(game).getCount(CounterType.CHARGE);
                         perm.addPower(boost);
                         perm.addToughness(boost);
                     }

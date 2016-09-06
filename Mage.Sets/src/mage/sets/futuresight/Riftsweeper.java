@@ -37,7 +37,7 @@ public class Riftsweeper extends mage.sets.modernmasters.Riftsweeper {
 
     public Riftsweeper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "FUT";
     }
 

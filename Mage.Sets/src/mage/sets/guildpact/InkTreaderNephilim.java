@@ -44,6 +44,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.Target;
 import mage.util.TargetAddress;
 
@@ -97,8 +98,8 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null &&
-            (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))){
+        if (spell != null
+                && (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
             for (Effect effect : getEffects()) {
                 effect.setValue("triggeringSpell", spell);
             }
@@ -133,7 +134,6 @@ class InkTreaderNephilimTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-
 class InkTreaderNephilimEffect extends CopySpellForEachItCouldTargetEffect<Permanent> {
 
     public InkTreaderNephilimEffect() {
@@ -146,6 +146,11 @@ class InkTreaderNephilimEffect extends CopySpellForEachItCouldTargetEffect<Perma
 
     private InkTreaderNephilimEffect(FilterInPlay<Permanent> filter) {
         super(filter);
+    }
+
+    @Override
+    protected Player getPlayer(Game game, Ability source) {
+        return game.getPlayer(source.getControllerId());
     }
 
     @Override

@@ -37,7 +37,7 @@ public class Farmstead extends mage.sets.unlimitededition.Farmstead {
 
     public Farmstead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 203;
+        this.cardNumber = "203";
         this.expansionSetCode = "3ED";
     }
 

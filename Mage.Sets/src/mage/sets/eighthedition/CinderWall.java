@@ -37,7 +37,7 @@ public class CinderWall extends mage.sets.knightsvsdragons.CinderWall {
 
     public CinderWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 182;
+        this.cardNumber = "182";
         this.expansionSetCode = "8ED";
     }
 

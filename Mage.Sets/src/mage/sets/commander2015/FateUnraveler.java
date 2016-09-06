@@ -37,7 +37,7 @@ public class FateUnraveler extends mage.sets.bornofthegods.FateUnraveler {
 
     public FateUnraveler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "C15";
     }
 

@@ -38,7 +38,7 @@ public class SpawnOfThraxes extends mage.sets.journeyintonyx.SpawnOfThraxes {
 
     public SpawnOfThraxes(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

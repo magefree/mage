@@ -37,7 +37,7 @@ public class ScarlandThrinax extends mage.sets.conflux.ScarlandThrinax {
 
     public ScarlandThrinax(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 209;
+        this.cardNumber = "209";
         this.expansionSetCode = "C13";
     }
 

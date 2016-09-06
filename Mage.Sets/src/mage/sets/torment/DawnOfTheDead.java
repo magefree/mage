@@ -65,8 +65,8 @@ public class DawnOfTheDead extends CardImpl {
 
         // At the beginning of your upkeep, you lose 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));
-        
-        // At the beginning of your upkeep, you may return target creature card from your graveyard to the battlefield. 
+
+        // At the beginning of your upkeep, you may return target creature card from your graveyard to the battlefield.
         // That creature gains haste until end of turn. Exile it at the beginning of the next end step.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DawnOfTheDeadEffect(), TargetController.YOU, true);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
@@ -115,10 +115,7 @@ class DawnOfTheDeadEffect extends OneShotEffect {
                     ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
                     exileEffect.setTargetPointer(new FixedTarget(creature, game));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    game.addDelayedTriggeredAbility(delayedAbility, source);
                 }
             }
             return true;

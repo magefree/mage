@@ -37,7 +37,7 @@ public class KavuClimber extends mage.sets.tenthedition.KavuClimber {
 
     public KavuClimber(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 192;
+        this.cardNumber = "192";
         this.expansionSetCode = "INV";
     }
 

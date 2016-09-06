@@ -37,7 +37,7 @@ public class PlagueRats extends mage.sets.unlimitededition.PlagueRats {
 
     public PlagueRats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "5ED";
     }
 

@@ -37,7 +37,7 @@ public class OrdealOfPurphoros extends mage.sets.theros.OrdealOfPurphoros {
 
     public OrdealOfPurphoros(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "DDL";
     }
 

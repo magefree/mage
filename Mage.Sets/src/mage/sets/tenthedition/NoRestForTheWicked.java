@@ -37,7 +37,7 @@ public class NoRestForTheWicked extends mage.sets.urzassaga.NoRestForTheWicked {
 
     public NoRestForTheWicked(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 165;
+        this.cardNumber = "165";
         this.expansionSetCode = "10E";
     }
 

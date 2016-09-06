@@ -38,7 +38,7 @@ public class Recall extends mage.sets.fifthedition.Recall {
 
     public Recall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.UNCOMMON;
     }

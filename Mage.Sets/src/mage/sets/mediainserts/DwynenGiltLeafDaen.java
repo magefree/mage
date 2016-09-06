@@ -38,7 +38,7 @@ public class DwynenGiltLeafDaen extends mage.sets.magicorigins.DwynenGiltLeafDae
 
     public DwynenGiltLeafDaen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

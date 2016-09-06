@@ -37,7 +37,7 @@ public class MerchantOfSecrets extends mage.sets.legions.MerchantOfSecrets {
 
     public MerchantOfSecrets(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "8ED";
     }
 

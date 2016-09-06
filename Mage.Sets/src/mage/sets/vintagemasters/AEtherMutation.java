@@ -37,7 +37,7 @@ public class AEtherMutation extends mage.sets.apocalypse.AEtherMutation {
 
     public AEtherMutation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 241;
+        this.cardNumber = "241";
         this.expansionSetCode = "VMA";
     }
 

@@ -37,7 +37,7 @@ public class StormtideLeviathan extends mage.sets.magic2011.StormtideLeviathan {
 
     public StormtideLeviathan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "M13";
     }
 

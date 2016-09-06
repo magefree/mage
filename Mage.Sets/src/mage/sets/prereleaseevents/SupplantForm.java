@@ -37,7 +37,7 @@ public class SupplantForm extends mage.sets.fatereforged.SupplantForm {
 
     public SupplantForm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "PTC";
     }
 

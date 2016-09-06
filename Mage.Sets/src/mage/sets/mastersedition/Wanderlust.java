@@ -38,7 +38,7 @@ public class Wanderlust extends mage.sets.unlimitededition.Wanderlust {
 
     public Wanderlust(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.COMMON;
     }

@@ -38,7 +38,7 @@ public class DimirCutpurse extends mage.sets.ravnica.DimirCutpurse {
 
     public DimirCutpurse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "DDH";
     }
 

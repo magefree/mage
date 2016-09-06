@@ -37,7 +37,7 @@ public class ReignOfThePit extends mage.sets.vintagemasters.ReignOfThePit {
 
     public ReignOfThePit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "CNS";
     }
 

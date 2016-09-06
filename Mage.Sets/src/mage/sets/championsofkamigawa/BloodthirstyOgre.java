@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -75,7 +75,7 @@ public class BloodthirstyOgre extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.DEVOTION.createInstance()),new TapSourceCost()));
 
         // {T}: Target creature gets -X/-X until end of turn, where X is the number of devotion counters on Bloodthirsty Ogre. Activate this ability only if you control a Demon.
-        DynamicValue devotionCounters = new SignInversionDynamicValue(new CountersCount(CounterType.DEVOTION));
+        DynamicValue devotionCounters = new SignInversionDynamicValue(new CountersSourceCount(CounterType.DEVOTION));
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(devotionCounters,devotionCounters, Duration.EndOfTurn, true),
                 new TapSourceCost(),

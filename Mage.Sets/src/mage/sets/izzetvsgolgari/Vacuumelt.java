@@ -37,7 +37,7 @@ public class Vacuumelt extends mage.sets.guildpact.Vacuumelt {
 
     public Vacuumelt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "DDJ";
     }
 

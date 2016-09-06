@@ -37,7 +37,7 @@ public class AEtherTradewinds extends mage.sets.worldwake.AEtherTradewinds {
 
     public AEtherTradewinds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "CNS";
     }
 

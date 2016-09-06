@@ -47,7 +47,7 @@ public class InexorableBlob extends CardImpl {
     public InexorableBlob(UUID ownerId) {
         super(ownerId, 212, "Inexorable Blob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "SOI";
-        this.subtype.add("Oooze");
+        this.subtype.add("Ooze");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

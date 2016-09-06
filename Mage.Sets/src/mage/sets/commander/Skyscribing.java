@@ -37,7 +37,7 @@ public class Skyscribing extends mage.sets.commander2013.Skyscribing {
 
     public Skyscribing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "CMD";
     }
 

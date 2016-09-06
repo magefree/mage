@@ -37,7 +37,7 @@ public class OrochiHatchery extends mage.sets.championsofkamigawa.OrochiHatchery
 
     public OrochiHatchery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 260;
+        this.cardNumber = "260";
         this.expansionSetCode = "C15";
     }
 

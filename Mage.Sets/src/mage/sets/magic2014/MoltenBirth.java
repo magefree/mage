@@ -41,6 +41,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -106,7 +107,7 @@ class ElementalToken extends Token {
     public ElementalToken() {
         super("Elemental", "1/1 red Elemental creature");
         this.setOriginalExpansionSetCode("M14");
-        this.setTokenType(new Random().nextInt(2) + 1);
+        this.setTokenType(RandomUtil.nextInt(2) + 1);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add("Elemental");

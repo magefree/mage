@@ -37,7 +37,7 @@ public class ThornscapeApprentice extends mage.sets.phyrexiavsthecoalition.Thorn
 
     public ThornscapeApprentice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 215;
+        this.cardNumber = "215";
         this.expansionSetCode = "INV";
     }
 

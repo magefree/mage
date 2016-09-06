@@ -37,7 +37,7 @@ public class MarchOfTheMachines extends mage.sets.tenthedition.MarchOfTheMachine
 
     public MarchOfTheMachines(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "ARC";
     }
 

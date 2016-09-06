@@ -28,7 +28,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantAttackAloneEffect;
+import mage.abilities.effects.common.combat.CantAttackAloneSourceEffect;
 import mage.constants.Zone;
 
 /**
@@ -37,7 +37,7 @@ import mage.constants.Zone;
 public class CantAttackAloneAbility extends SimpleStaticAbility {
 
     public CantAttackAloneAbility() {
-        super(Zone.BATTLEFIELD, new CantAttackAloneEffect());
+        super(Zone.BATTLEFIELD, new CantAttackAloneSourceEffect());
     }
 
     private CantAttackAloneAbility(CantAttackAloneAbility ability) {

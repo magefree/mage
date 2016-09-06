@@ -37,7 +37,7 @@ public class MightWeaver extends mage.sets.tenthedition.MightWeaver {
 
     public MightWeaver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "INV";
     }
 

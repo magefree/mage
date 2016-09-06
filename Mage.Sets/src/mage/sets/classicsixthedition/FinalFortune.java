@@ -37,7 +37,7 @@ public class FinalFortune extends mage.sets.seventhedition.FinalFortune {
 
     public FinalFortune(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "6ED";
     }
 

@@ -37,7 +37,7 @@ public class CrypticCommand extends mage.sets.lorwyn.CrypticCommand {
 
     public CrypticCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "MMA";
     }
 

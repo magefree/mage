@@ -37,7 +37,7 @@ public class VedalkenOrrery extends mage.sets.fifthdawn.VedalkenOrrery {
 
     public VedalkenOrrery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 206;
+        this.cardNumber = "206";
         this.expansionSetCode = "CNS";
     }
 

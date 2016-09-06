@@ -37,7 +37,7 @@ public class RemoteIsle extends mage.sets.urzassaga.RemoteIsle {
 
     public RemoteIsle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 309;
+        this.cardNumber = "309";
         this.expansionSetCode = "C14";
     }
 

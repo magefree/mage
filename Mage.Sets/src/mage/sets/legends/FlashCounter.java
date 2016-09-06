@@ -37,7 +37,7 @@ public class FlashCounter extends mage.sets.eighthedition.FlashCounter {
 
     public FlashCounter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "LEG";
     }
 

@@ -38,7 +38,7 @@ public class TempleOfMystery extends mage.sets.theros.TempleOfMystery {
 
     public TempleOfMystery(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "CLASH";
         this.rarity = Rarity.SPECIAL;
     }

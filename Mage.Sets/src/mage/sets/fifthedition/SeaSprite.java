@@ -37,7 +37,7 @@ public class SeaSprite extends mage.sets.homelands.SeaSprite {
 
     public SeaSprite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "5ED";
     }
 

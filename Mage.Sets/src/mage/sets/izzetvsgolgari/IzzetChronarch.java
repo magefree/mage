@@ -37,7 +37,7 @@ public class IzzetChronarch extends mage.sets.guildpact.IzzetChronarch {
 
     public IzzetChronarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DDJ";
     }
 

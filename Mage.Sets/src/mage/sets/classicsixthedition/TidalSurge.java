@@ -37,7 +37,7 @@ public class TidalSurge extends mage.sets.stronghold.TidalSurge {
 
     public TidalSurge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "6ED";
     }
 

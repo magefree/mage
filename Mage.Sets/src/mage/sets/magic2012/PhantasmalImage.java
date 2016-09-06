@@ -54,8 +54,8 @@ public class PhantasmalImage extends CardImpl {
     ApplyToPermanent phantasmalImageApplier = new ApplyToPermanent() {
         @Override
         public Boolean apply(Game game, Permanent permanent) {
-            if (!permanent.getSubtype().contains("Illusion")) {
-                permanent.getSubtype().add("Illusion");
+            if (!permanent.getSubtype(game).contains("Illusion")) {
+                permanent.getSubtype(game).add("Illusion");
             }
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
             permanent.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
@@ -65,8 +65,8 @@ public class PhantasmalImage extends CardImpl {
 
         @Override
         public Boolean apply(Game game, MageObject mageObject) {
-            if (!mageObject.getSubtype().contains("Illusion")) {
-                mageObject.getSubtype().add("Illusion");
+            if (!mageObject.getSubtype(game).contains("Illusion")) {
+                mageObject.getSubtype(game).add("Illusion");
             }
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
             mageObject.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));

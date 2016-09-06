@@ -37,7 +37,7 @@ public class BoggartShenanigans extends mage.sets.elvesvsgoblins.BoggartShenanig
 
     public BoggartShenanigans(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "LRW";
     }
 

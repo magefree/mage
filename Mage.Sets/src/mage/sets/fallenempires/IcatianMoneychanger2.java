@@ -37,7 +37,7 @@ public class IcatianMoneychanger2 extends IcatianMoneychanger1 {
 
     public IcatianMoneychanger2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
     }
 
     public IcatianMoneychanger2(final IcatianMoneychanger2 card) {

@@ -37,7 +37,7 @@ public class AmberPrison extends mage.sets.mirage.AmberPrison {
 
     public AmberPrison(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 272;
+        this.cardNumber = "272";
         this.expansionSetCode = "6ED";
     }
 

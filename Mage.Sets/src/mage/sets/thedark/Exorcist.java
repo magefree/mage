@@ -38,7 +38,7 @@ public class Exorcist extends mage.sets.masterseditioniii.Exorcist {
 
     public Exorcist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.RARE;
     }

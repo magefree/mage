@@ -37,7 +37,7 @@ public class GuardianOfTazeem extends mage.sets.battleforzendikar.GuardianOfTaze
 
     public GuardianOfTazeem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 267;
+        this.cardNumber = "267";
         this.expansionSetCode = "PTC";
     }
 

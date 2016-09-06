@@ -37,7 +37,7 @@ public class DarigaazsCharm extends mage.sets.planeshift.DarigaazsCharm {
 
     public DarigaazsCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "DDE";
     }
 

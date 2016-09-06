@@ -38,7 +38,7 @@ public class LadyOrca extends mage.sets.legends.LadyOrca {
 
     public LadyOrca(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

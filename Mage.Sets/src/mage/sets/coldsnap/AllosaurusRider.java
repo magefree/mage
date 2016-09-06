@@ -37,7 +37,7 @@ public class AllosaurusRider extends mage.sets.elvesvsgoblins.AllosaurusRider {
 
     public AllosaurusRider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "CSP";
     }
 

@@ -124,7 +124,7 @@ class P1P1CountersOnControlledCreaturesCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), sourceAbility.getControllerId(), game)) {
-            count += permanent.getCounters().getCount(CounterType.P1P1);
+            count += permanent.getCounters(game).getCount(CounterType.P1P1);
         }
         return count;
     }

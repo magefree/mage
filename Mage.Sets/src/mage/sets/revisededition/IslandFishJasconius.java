@@ -37,7 +37,7 @@ public class IslandFishJasconius extends mage.sets.fourthedition.IslandFishJasco
 
     public IslandFishJasconius(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "3ED";
     }
 

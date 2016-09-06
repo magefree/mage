@@ -37,7 +37,7 @@ public class UnrulyMob extends mage.sets.innistrad.UnrulyMob {
 
     public UnrulyMob(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 47;
+        this.cardNumber = "47";
         this.expansionSetCode = "SOI";
     }
 

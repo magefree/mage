@@ -39,7 +39,7 @@ public class YavimayaEnchantress extends mage.sets.tenthedition.YavimayaEnchantr
 
     public YavimayaEnchantress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 194;
+        this.cardNumber = "194";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

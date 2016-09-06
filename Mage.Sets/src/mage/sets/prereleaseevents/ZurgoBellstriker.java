@@ -37,7 +37,7 @@ public class ZurgoBellstriker extends mage.sets.dragonsoftarkir.ZurgoBellstriker
 
     public ZurgoBellstriker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 197;
+        this.cardNumber = "197";
         this.expansionSetCode = "PTC";
     }
 

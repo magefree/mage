@@ -37,7 +37,7 @@ public class AngelicCaptain extends mage.sets.battleforzendikar.AngelicCaptain {
 
     public AngelicCaptain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 242;
+        this.cardNumber = "242";
         this.expansionSetCode = "PTC";
     }
 

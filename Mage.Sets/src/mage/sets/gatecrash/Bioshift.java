@@ -28,6 +28,7 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
+import mage.MageItem;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -37,8 +38,12 @@ import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,8 +59,19 @@ public class Bioshift extends CardImpl {
 
         // Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
         getSpellAbility().addEffect(new MoveCounterFromTargetToTargetEffect());
-        getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (you take counters from)")));
-        getSpellAbility().addTarget(new BioshiftSecondTargetCreaturePermanent());
+        
+        TargetCreaturePermanent target = new TargetCreaturePermanent(
+                new FilterCreaturePermanent("creature (you take counters from)"));
+        target.setTargetTag(1);
+        this.getSpellAbility().addTarget(target);
+        
+        FilterCreaturePermanent filter = new FilterCreaturePermanent(
+                "another target creature with the same controller (counters go to)");
+        filter.add(new AnotherTargetPredicate(2));
+        filter.add(new SameControllerPredicate());
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
     }
     
 
@@ -97,7 +113,7 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
             if (fromPermanent == null || toPermanent == null || !fromPermanent.getControllerId().equals(toPermanent.getControllerId())) {
                 return false;
             }
-            int amountCounters = fromPermanent.getCounters().getCount(CounterType.P1P1);
+            int amountCounters = fromPermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amountCounters > 0) {
                 int amountToMove = controller.getAmount(0, amountCounters, "How many counters do you want to move?", game);
                 if (amountToMove > 0) {
@@ -112,32 +128,29 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
     }
 }
 
-class BioshiftSecondTargetCreaturePermanent extends TargetCreaturePermanent {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature with the same controller (counters go to)");
-    
-    BioshiftSecondTargetCreaturePermanent() {
-        super(filter);
-    }
-
-    BioshiftSecondTargetCreaturePermanent(final BioshiftSecondTargetCreaturePermanent target) {
-        super(target);
-    }
+class SameControllerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageItem>> {
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        Permanent firstPermanent = game.getPermanent(source.getTargets().getFirstTarget());
-        Permanent secondPermanent = game.getPermanent(id);
-        if (firstPermanent != null && secondPermanent != null) {
-            if (!firstPermanent.getId().equals(id) && firstPermanent.getControllerId().equals(secondPermanent.getControllerId())) {
-                return super.canTarget(controllerId, id, source, game);
+    public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {
+        StackObject source = game.getStack().getStackObject(input.getSourceId());
+        if (source != null) {
+            if (source.getStackAbility().getTargets().isEmpty()
+                || source.getStackAbility().getTargets().get(0).getTargets().isEmpty()) {
+                return true;
+            }
+            Permanent firstTarget = game.getPermanent(
+                    source.getStackAbility().getTargets().get(0).getTargets().get(0));
+            Permanent inputPermanent = game.getPermanent(input.getObject().getId());
+            if (firstTarget != null && inputPermanent != null) {
+                return firstTarget.getControllerId().equals(inputPermanent.getControllerId());
             }
         }
-        return false;
+        return true;
     }
 
     @Override
-    public BioshiftSecondTargetCreaturePermanent copy() {
-        return new BioshiftSecondTargetCreaturePermanent(this);
+    public String toString() {
+        return "Target with the same controller";
     }
+    
 }

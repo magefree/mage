@@ -38,7 +38,7 @@ public class RathiAssassin extends mage.sets.nemesis.RathiAssassin {
 
     public RathiAssassin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

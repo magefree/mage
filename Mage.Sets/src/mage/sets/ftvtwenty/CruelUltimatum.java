@@ -38,7 +38,7 @@ public class CruelUltimatum extends mage.sets.shardsofalara.CruelUltimatum {
 
     public CruelUltimatum(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "V13";
         this.rarity = Rarity.MYTHIC;
     }

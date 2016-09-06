@@ -37,7 +37,7 @@ public class CoralFighters extends mage.sets.venservskoth.CoralFighters {
 
     public CoralFighters(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "MIR";
     }
 

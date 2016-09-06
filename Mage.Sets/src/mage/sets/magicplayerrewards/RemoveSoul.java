@@ -38,7 +38,7 @@ public class RemoveSoul extends mage.sets.tenthedition.RemoveSoul {
 
     public RemoveSoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -6,7 +6,7 @@ public class BonescytheSliver extends mage.sets.magic2014.BonescytheSliver {
     
     public BonescytheSliver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "MBP";
     }
     

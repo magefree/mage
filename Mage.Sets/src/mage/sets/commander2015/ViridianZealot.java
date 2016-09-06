@@ -37,7 +37,7 @@ public class ViridianZealot extends mage.sets.darksteel.ViridianZealot {
 
     public ViridianZealot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 210;
+        this.cardNumber = "210";
         this.expansionSetCode = "C15";
     }
 

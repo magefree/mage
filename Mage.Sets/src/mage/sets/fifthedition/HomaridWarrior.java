@@ -37,7 +37,7 @@ public class HomaridWarrior extends mage.sets.fallenempires.HomaridWarrior1 {
 
     public HomaridWarrior(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "5ED";
     }
 

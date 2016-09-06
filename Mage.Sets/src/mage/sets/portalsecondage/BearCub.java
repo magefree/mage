@@ -41,7 +41,7 @@ public class BearCub extends CardImpl {
 
     public BearCub(UUID ownerId) {
         super(ownerId, 63, "Bear Cub", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Bear");
 
         this.power = new MageInt(2);

@@ -37,7 +37,7 @@ public class RadiantsJudgment extends mage.sets.urzaslegacy.RadiantsJudgment {
 
     public RadiantsJudgment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "VMA";
     }
 

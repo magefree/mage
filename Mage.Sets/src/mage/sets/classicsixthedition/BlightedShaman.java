@@ -37,7 +37,7 @@ public class BlightedShaman extends mage.sets.mirage.BlightedShaman {
 
     public BlightedShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "6ED";
     }
 

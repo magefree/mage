@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -74,7 +74,7 @@ public class MwonvuliOoze extends CardImpl {
 }
 
 
-class MwonvuliOozePTValue extends CountersCount {
+class MwonvuliOozePTValue extends CountersSourceCount {
 
     public MwonvuliOozePTValue() {
         super(CounterType.AGE);

@@ -37,7 +37,7 @@ public class Enrage extends mage.sets.ninthedition.Enrage {
 
     public Enrage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "SCG";
     }
 

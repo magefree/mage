@@ -37,7 +37,7 @@ public class SanguineGuard extends mage.sets.urzassaga.SanguineGuard {
     
     public SanguineGuard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "DDE";
     }
     

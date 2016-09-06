@@ -37,7 +37,7 @@ public class BalduvianDead extends mage.sets.masterseditionii.BalduvianDead {
 
     public BalduvianDead(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "ALL";
     }
 

@@ -37,7 +37,7 @@ public class MentorOfTheMeek extends mage.sets.innistrad.MentorOfTheMeek {
 
     public MentorOfTheMeek(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "C14";
     }
 

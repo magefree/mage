@@ -37,7 +37,7 @@ public class CapriciousEfreet extends mage.sets.magic2010.CapriciousEfreet {
 
     public CapriciousEfreet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class Lumberknot extends mage.sets.innistrad.Lumberknot {
 
     public Lumberknot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "PC2";
     }
 

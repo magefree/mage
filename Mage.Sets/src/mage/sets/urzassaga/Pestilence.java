@@ -34,12 +34,13 @@ import mage.constants.Rarity;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.NoCreatureCondition;
+import mage.abilities.condition.common.CreatureCountCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.events.GameEvent;
 
@@ -55,10 +56,9 @@ public class Pestilence extends CardImpl {
         super(ownerId, 147, "Pestilence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "USG";
 
-		
         // At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
-        this.addAbility(new ConditionalTriggeredAbility(triggered, new NoCreatureCondition(), ruleText));
+        this.addAbility(new ConditionalTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), ruleText));
 
         // {B}: Pestilence deals 1 damage to each creature and each player.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{B}")));

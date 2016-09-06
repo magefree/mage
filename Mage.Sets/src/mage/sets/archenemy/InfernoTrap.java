@@ -37,7 +37,7 @@ public class InfernoTrap extends mage.sets.zendikar.InfernoTrap {
 
     public InfernoTrap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 43;
+        this.cardNumber = "43";
         this.expansionSetCode = "ARC";
     }
 

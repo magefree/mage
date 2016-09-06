@@ -37,7 +37,7 @@ public class DimirSignet extends mage.sets.ravnica.DimirSignet {
 
     public DimirSignet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 246;
+        this.cardNumber = "246";
         this.expansionSetCode = "CMD";
     }
 

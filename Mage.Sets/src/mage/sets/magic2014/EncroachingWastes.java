@@ -39,16 +39,13 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
  *
  * @author LevelX2
  */
 public class EncroachingWastes extends CardImpl {
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-
     public EncroachingWastes(UUID ownerId) {
         super(ownerId, 227, "Encroaching Wastes", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "M14";
@@ -59,7 +56,7 @@ public class EncroachingWastes extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
     }
 

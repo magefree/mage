@@ -41,6 +41,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -83,7 +84,7 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             // because second flip is ignored it may not be done by the player method
-            boolean secondCoinFlip = new Random().nextBoolean();
+            boolean secondCoinFlip = RandomUtil.nextBoolean();
             if (!game.isSimulation()) {
                 game.informPlayers("[Flip a coin] " + player.getLogName() + (secondCoinFlip ? " won (head)." : " lost (tail)."));
             }

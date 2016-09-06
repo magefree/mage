@@ -37,7 +37,7 @@ public class IvoryMask extends mage.sets.ninthedition.IvoryMask {
 
     public IvoryMask(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "MMQ";
     }
 

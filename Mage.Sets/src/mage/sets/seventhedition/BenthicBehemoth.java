@@ -37,7 +37,7 @@ public class BenthicBehemoth extends mage.sets.tempest.BenthicBehemoth {
 
     public BenthicBehemoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "7ED";
     }
 

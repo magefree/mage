@@ -118,23 +118,23 @@ public class DeckArea extends javax.swing.JPanel {
     private void initComponents() {
 
         deckAreaSplitPane = new javax.swing.JSplitPane();
-        deckList = new mage.client.cards.CardsList();
         sideboardList = new mage.client.cards.CardsList();
+        deckList = new mage.client.cards.CardsList();
 
-        deckAreaSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        deckAreaSplitPane.setResizeWeight(0.8);
-        deckAreaSplitPane.setLeftComponent(deckList);
+        deckAreaSplitPane.setBorder(null);
+        deckAreaSplitPane.setResizeWeight(0.6);
         deckAreaSplitPane.setRightComponent(sideboardList);
+        deckAreaSplitPane.setLeftComponent(deckList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(deckAreaSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+            .addComponent(deckAreaSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(deckAreaSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+            .addComponent(deckAreaSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

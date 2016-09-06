@@ -37,7 +37,7 @@ public class Metallurgeon extends mage.sets.shardsofalara.Metallurgeon {
 
     public Metallurgeon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "ARC";
     }
 

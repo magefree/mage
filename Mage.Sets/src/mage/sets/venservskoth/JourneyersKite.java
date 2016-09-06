@@ -37,7 +37,7 @@ public class JourneyersKite extends mage.sets.championsofkamigawa.JourneyersKite
 
     public JourneyersKite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "DDI";
     }
 

@@ -72,15 +72,15 @@ class QuicksilverGargantuanApplyToPermanent extends ApplyToPermanent {
 
     @Override
     public Boolean apply(Game game, Permanent permanent) {
-        permanent.getPower().initValue(7);
-        permanent.getToughness().initValue(7);
+        permanent.getPower().modifyBaseValue(7);
+        permanent.getToughness().modifyBaseValue(7);
         return true;
     }
 
     @Override
     public Boolean apply(Game game, MageObject mageObject) {
-        mageObject.getPower().initValue(7);
-        mageObject.getToughness().initValue(7);
+        mageObject.getPower().modifyBaseValue(7);
+        mageObject.getToughness().modifyBaseValue(7);
         return true;
     }
 

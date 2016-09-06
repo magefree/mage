@@ -38,7 +38,7 @@ public class GrislySalvage extends mage.sets.returntoravnica.GrislySalvage {
 
     public GrislySalvage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

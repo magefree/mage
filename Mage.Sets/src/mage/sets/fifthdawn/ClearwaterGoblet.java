@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
@@ -53,7 +53,7 @@ public class ClearwaterGoblet extends CardImpl {
         // Sunburst
         this.addAbility(new SunburstAbility(this));
         // At the beginning of your upkeep, you may gain life equal to the number of charge counters on Clearwater Goblet.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CountersCount(CounterType.CHARGE)), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CountersSourceCount(CounterType.CHARGE)), TargetController.YOU, true));
     }
 
     public ClearwaterGoblet(final ClearwaterGoblet card) {

@@ -38,7 +38,7 @@ public class Afterlife extends mage.sets.mirage.Afterlife {
 
     public Afterlife(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class NephaliaSeakite extends mage.sets.darkascension.NephaliaSeakite {
 
     public NephaliaSeakite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "M14";
     }
 

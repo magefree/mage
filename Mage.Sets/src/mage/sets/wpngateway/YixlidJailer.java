@@ -38,7 +38,7 @@ public class YixlidJailer extends mage.sets.futuresight.YixlidJailer {
 
     public YixlidJailer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

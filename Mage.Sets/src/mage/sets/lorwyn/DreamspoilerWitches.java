@@ -37,7 +37,7 @@ public class DreamspoilerWitches extends mage.sets.modernmasters.DreamspoilerWit
 
     public DreamspoilerWitches(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "LRW";
     }
 

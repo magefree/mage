@@ -37,7 +37,7 @@ public class AvenWindreader extends mage.sets.ninthedition.AvenWindreader {
 
     public AvenWindreader(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "10E";
     }
 

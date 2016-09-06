@@ -37,7 +37,7 @@ public class Hellfire extends mage.sets.masterseditioniii.Hellfire {
 
     public Hellfire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "LEG";
     }
 

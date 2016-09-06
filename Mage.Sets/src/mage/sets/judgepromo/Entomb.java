@@ -37,7 +37,7 @@ public class Entomb extends mage.sets.odyssey.Entomb {
 
     public Entomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "JR";
     }
 

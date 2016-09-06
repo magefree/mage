@@ -37,7 +37,7 @@ public class Watercourser extends mage.sets.magic2013.Watercourser {
 
     public Watercourser(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "ORI";
     }
 

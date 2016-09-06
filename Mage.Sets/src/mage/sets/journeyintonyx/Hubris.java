@@ -101,7 +101,7 @@ class HubrisReturnEffect extends OneShotEffect {
                 if (creature != null) {
                     Cards cardsToHand = new CardsImpl(creature.getAttachments());
                     cardsToHand.add(creature);
-                    controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+                    controller.moveCards(cardsToHand, Zone.HAND, source, game);
                 }
             }
             return true;

@@ -37,7 +37,7 @@ public class ChimericIdol extends mage.sets.prophecy.ChimericIdol {
 
     public ChimericIdol(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 264;
+        this.cardNumber = "264";
         this.expansionSetCode = "VMA";
     }
 

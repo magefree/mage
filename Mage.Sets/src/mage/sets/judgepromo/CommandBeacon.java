@@ -37,7 +37,7 @@ public class CommandBeacon extends mage.sets.commander2015.CommandBeacon {
 
     public CommandBeacon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "JR";
     }
 

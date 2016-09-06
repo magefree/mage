@@ -38,7 +38,7 @@ public class HymnToTourach extends mage.sets.fallenempires.HymnToTourach1 {
 
     public HymnToTourach(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class KnightOfNewAlara extends mage.sets.alarareborn.KnightOfNewAlara {
 
     public KnightOfNewAlara(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "MLP";
     }
 

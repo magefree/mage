@@ -37,7 +37,7 @@ public class AvenSquire extends mage.sets.conflux.AvenSquire {
 
     public AvenSquire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "M13";
     }
 

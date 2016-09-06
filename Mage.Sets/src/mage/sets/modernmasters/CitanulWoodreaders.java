@@ -37,7 +37,7 @@ public class CitanulWoodreaders extends mage.sets.planarchaos.CitanulWoodreaders
 
     public CitanulWoodreaders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "MMA";
     }
 

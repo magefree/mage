@@ -37,7 +37,7 @@ public class RidgelineRager extends mage.sets.prophecy.RidgelineRager {
 
     public RidgelineRager(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 215;
+        this.cardNumber = "215";
         this.expansionSetCode = "8ED";
     }
 

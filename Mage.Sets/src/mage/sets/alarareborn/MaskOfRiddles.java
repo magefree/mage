@@ -28,8 +28,6 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -38,6 +36,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.constants.*;
 
 /**
  *
@@ -49,9 +48,6 @@ public class MaskOfRiddles extends CardImpl {
         super(ownerId, 25, "Mask of Riddles", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{U}{B}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Equipment");
-
-
-        
 
         // Equipped creature has fear.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.EQUIPMENT)));

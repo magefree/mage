@@ -37,7 +37,7 @@ public class CarnivorousPlant extends mage.sets.fourthedition.CarnivorousPlant {
 
     public CarnivorousPlant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "DRK";
     }
 

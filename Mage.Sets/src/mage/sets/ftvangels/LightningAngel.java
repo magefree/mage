@@ -38,7 +38,7 @@ public class LightningAngel extends mage.sets.apocalypse.LightningAngel {
 
     public LightningAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "V15";
         this.rarity = Rarity.MYTHIC;
     }

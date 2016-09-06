@@ -38,7 +38,7 @@ public class CivicWayfinder extends mage.sets.tenthedition.CivicWayfinder {
 
     public CivicWayfinder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "EMA";
     }
 

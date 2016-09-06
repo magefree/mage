@@ -37,7 +37,7 @@ public class Bayou extends mage.sets.limitedalpha.Bayou {
 
     public Bayou(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "ME3";
     }
 

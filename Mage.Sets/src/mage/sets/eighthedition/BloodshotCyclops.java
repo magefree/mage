@@ -37,7 +37,7 @@ public class BloodshotCyclops extends mage.sets.urzasdestiny.BloodshotCyclops {
 
     public BloodshotCyclops(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "8ED";
     }
 

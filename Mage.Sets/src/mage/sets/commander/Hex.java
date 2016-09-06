@@ -37,7 +37,7 @@ public class Hex extends mage.sets.ravnica.Hex {
 
     public Hex(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "CMD";
     }
 

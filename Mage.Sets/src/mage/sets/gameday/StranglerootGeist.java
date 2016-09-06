@@ -37,7 +37,7 @@ public class StranglerootGeist extends mage.sets.darkascension.StranglerootGeist
 
     public StranglerootGeist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "MGDC";
     }
 

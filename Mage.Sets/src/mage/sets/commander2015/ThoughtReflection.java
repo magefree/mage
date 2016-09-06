@@ -37,7 +37,7 @@ public class ThoughtReflection extends mage.sets.shadowmoor.ThoughtReflection {
 
     public ThoughtReflection(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "C15";
     }
 

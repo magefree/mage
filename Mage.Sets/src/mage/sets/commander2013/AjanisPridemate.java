@@ -37,7 +37,7 @@ public class AjanisPridemate extends mage.sets.magic2011.AjanisPridemate {
 
     public AjanisPridemate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "C13";
     }
 

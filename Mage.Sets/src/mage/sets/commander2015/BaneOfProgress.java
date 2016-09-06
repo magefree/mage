@@ -37,7 +37,7 @@ public class BaneOfProgress extends mage.sets.commander2013.BaneOfProgress {
 
     public BaneOfProgress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 175;
+        this.cardNumber = "175";
         this.expansionSetCode = "C15";
     }
 

@@ -37,7 +37,7 @@ public class MerfolkWayfinder extends mage.sets.zendikar.MerfolkWayfinder {
 
     public MerfolkWayfinder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "DDM";
     }
 

@@ -122,7 +122,7 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getData().equals(CounterType.FUSE.getName())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && filter.match(permanent, game)) {
-                if (4 <= permanent.getCounters().getCount(CounterType.FUSE)) {
+                if (4 <= permanent.getCounters(game).getCount(CounterType.FUSE)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(permanent.getId()));
                     }
@@ -159,7 +159,7 @@ class BombSquadDamgeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (creature != null) {
-            creature.removeCounters(CounterType.FUSE.getName(), creature.getCounters().getCount(CounterType.FUSE), game);
+            creature.removeCounters(CounterType.FUSE.getName(), creature.getCounters(game).getCount(CounterType.FUSE), game);
             creature.destroy(source.getSourceId(), game, false);
         }
         if (creature == null) {

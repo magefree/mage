@@ -37,7 +37,7 @@ public class SeasonedMarshal extends mage.sets.elspethvstezzeret.SeasonedMarshal
 
     public SeasonedMarshal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "9ED";
     }
 

@@ -38,7 +38,7 @@ public class OverbeingOfMyth extends mage.sets.eventide.OverbeingOfMyth {
 
     public OverbeingOfMyth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

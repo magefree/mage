@@ -37,7 +37,7 @@ public class MagmaticChasm extends mage.sets.dragonsoftarkir.MagmaticChasm {
 
     public MagmaticChasm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = "172";
         this.expansionSetCode = "SOI";
     }
 

@@ -6,7 +6,7 @@ public class AngelicSkirmisher extends mage.sets.gatecrash.AngelicSkirmisher {
     
     public AngelicSkirmisher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "MBP";
     }
     

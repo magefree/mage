@@ -43,7 +43,7 @@ public class FalseSummoning extends CardImpl {
 
     public FalseSummoning(UUID ownerId) {
         super(ownerId, 40, "False Summoning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
 
         // Counter target creature spell.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterCreatureSpell()));

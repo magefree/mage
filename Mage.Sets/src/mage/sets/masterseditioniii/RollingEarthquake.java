@@ -37,7 +37,7 @@ public class RollingEarthquake extends mage.sets.portalthreekingdoms.RollingEart
 
     public RollingEarthquake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "ME3";
     }
 

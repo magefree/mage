@@ -37,7 +37,7 @@ public class Thrive extends mage.sets.prophecy.Thrive {
 
     public Thrive(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "MM2";
     }
 

@@ -37,7 +37,7 @@ public class VexingShusher extends mage.sets.shadowmoor.VexingShusher {
 
     public VexingShusher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "MLP";
     }
 

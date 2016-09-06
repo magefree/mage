@@ -38,7 +38,7 @@ public class DauntlessDourbark extends mage.sets.lorwyn.DauntlessDourbark {
 
     public DauntlessDourbark(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

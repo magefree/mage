@@ -37,7 +37,7 @@ public class SoulExchange extends mage.sets.masterseditionii.SoulExchange {
 
     public SoulExchange(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "FEM";
     }
 

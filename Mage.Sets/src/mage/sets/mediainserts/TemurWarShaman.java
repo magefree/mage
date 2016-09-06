@@ -38,7 +38,7 @@ public class TemurWarShaman extends mage.sets.fatereforged.TemurWarShaman {
 
     public TemurWarShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

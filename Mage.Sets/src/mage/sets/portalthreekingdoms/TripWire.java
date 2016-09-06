@@ -38,7 +38,7 @@ public class TripWire extends mage.sets.masterseditioniii.TripWire {
 
     public TripWire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 156;
+        this.cardNumber = "156";
         this.expansionSetCode = "PTK";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class AtarkasCommand extends mage.sets.dragonsoftarkir.AtarkasCommand {
 
     public AtarkasCommand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class MoxRuby extends mage.sets.limitedalpha.MoxRuby {
 
     public MoxRuby(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 265;
+        this.cardNumber = "265";
         this.expansionSetCode = "2ED";
     }
 

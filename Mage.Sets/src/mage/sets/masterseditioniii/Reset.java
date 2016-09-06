@@ -38,7 +38,7 @@ public class Reset extends mage.sets.legends.Reset {
 
     public Reset(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.RARE;
     }

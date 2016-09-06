@@ -38,7 +38,7 @@ public class SiegeMastodon extends mage.sets.magic2010.SiegeMastodon {
 
     public SiegeMastodon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "M11";
     }
 

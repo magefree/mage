@@ -37,7 +37,7 @@ public class ReaperFromTheAbyss extends mage.sets.innistrad.ReaperFromTheAbyss {
 
     public ReaperFromTheAbyss(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "C14";
     }
 

@@ -38,7 +38,7 @@ public class ElephantGraveyard extends mage.sets.masterseditioniv.ElephantGravey
 
     public ElephantGraveyard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "ARN";
         this.rarity = Rarity.RARE;
     }

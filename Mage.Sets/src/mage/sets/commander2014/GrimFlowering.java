@@ -37,7 +37,7 @@ public class GrimFlowering extends mage.sets.darkascension.GrimFlowering {
 
     public GrimFlowering(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "C14";
     }
 

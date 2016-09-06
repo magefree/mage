@@ -37,7 +37,7 @@ public class AffaGuardHound extends mage.sets.riseoftheeldrazi.AffaGuardHound {
 
     public AffaGuardHound(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "DDP";
     }
 

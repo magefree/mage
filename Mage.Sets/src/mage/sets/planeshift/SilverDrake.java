@@ -39,7 +39,7 @@ public class SilverDrake extends mage.sets.mediainserts.SilverDrake {
 
     public SilverDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "PLS";
         this.rarity = Rarity.COMMON;
     }

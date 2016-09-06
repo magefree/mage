@@ -37,7 +37,7 @@ public class DregsOfSorrow extends mage.sets.commander2014.DregsOfSorrow {
 
     public DregsOfSorrow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "7ED";
     }
 

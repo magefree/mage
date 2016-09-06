@@ -37,7 +37,7 @@ public class SlaveringNulls extends mage.sets.worldwake.SlaveringNulls {
 
     public SlaveringNulls(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "DDH";
     }
 

@@ -37,7 +37,7 @@ public class RecklessAbandon extends mage.sets.speedvscunning.RecklessAbandon {
 
     public RecklessAbandon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 94;
+        this.cardNumber = "94";
         this.expansionSetCode = "UDS";
     }
 

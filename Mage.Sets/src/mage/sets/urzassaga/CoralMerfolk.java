@@ -37,7 +37,7 @@ public class CoralMerfolk extends mage.sets.magic2010.CoralMerfolk {
 
     public CoralMerfolk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "USG";
     }
 

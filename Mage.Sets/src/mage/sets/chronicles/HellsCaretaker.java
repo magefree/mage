@@ -37,7 +37,7 @@ public class HellsCaretaker extends mage.sets.ninthedition.HellsCaretaker {
 
     public HellsCaretaker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 7;
+        this.cardNumber = "7";
         this.expansionSetCode = "CHR";
     }
 

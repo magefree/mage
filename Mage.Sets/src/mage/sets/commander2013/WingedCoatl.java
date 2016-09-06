@@ -37,7 +37,7 @@ public class WingedCoatl extends mage.sets.alarareborn.WingedCoatl {
 
     public WingedCoatl(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 226;
+        this.cardNumber = "226";
         this.expansionSetCode = "C13";
     }
 

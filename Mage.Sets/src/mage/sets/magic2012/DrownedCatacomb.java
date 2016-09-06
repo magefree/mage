@@ -37,7 +37,7 @@ public class DrownedCatacomb extends mage.sets.magic2010.DrownedCatacomb {
 
     public DrownedCatacomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 226;
+        this.cardNumber = "226";
         this.expansionSetCode = "M12";
     }
 

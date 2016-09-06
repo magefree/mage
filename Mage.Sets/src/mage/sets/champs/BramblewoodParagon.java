@@ -38,7 +38,7 @@ public class BramblewoodParagon extends mage.sets.morningtide.BramblewoodParagon
 
     public BramblewoodParagon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "CP";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class Distress extends mage.sets.tenthedition.Distress {
 
     public Distress(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 111;
+        this.cardNumber = "111";
         this.expansionSetCode = "CHK";
     }
 

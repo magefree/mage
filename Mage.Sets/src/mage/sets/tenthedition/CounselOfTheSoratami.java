@@ -39,7 +39,7 @@ public class CounselOfTheSoratami extends mage.sets.championsofkamigawa.CounselO
     public CounselOfTheSoratami (UUID ownerId) {
         super(ownerId);
         this.expansionSetCode = "10E";
-        this.cardNumber = 76;
+        this.cardNumber = "76";
 
     }
 

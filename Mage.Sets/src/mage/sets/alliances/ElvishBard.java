@@ -37,7 +37,7 @@ public class ElvishBard extends mage.sets.ninthedition.ElvishBard {
 
     public ElvishBard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "ALL";
     }
 

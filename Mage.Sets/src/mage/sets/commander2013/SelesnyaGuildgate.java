@@ -37,7 +37,7 @@ public class SelesnyaGuildgate extends mage.sets.returntoravnica.SelesnyaGuildga
 
     public SelesnyaGuildgate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 321;
+        this.cardNumber = "321";
         this.expansionSetCode = "C13";
     }
 

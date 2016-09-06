@@ -38,7 +38,7 @@ public class SorceressQueen extends mage.sets.revisededition.SorceressQueen {
 
     public SorceressQueen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "ARN";
         this.rarity = Rarity.UNCOMMON;
     }

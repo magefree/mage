@@ -38,7 +38,7 @@ public class RoyalHerbalist2 extends mage.sets.alliances.RoyalHerbalist1 {
 
     public RoyalHerbalist2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
     }
 
     public RoyalHerbalist2(final RoyalHerbalist2 card) {

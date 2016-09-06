@@ -37,7 +37,7 @@ public class HalimarDepths extends mage.sets.worldwake.HalimarDepths {
 
     public HalimarDepths(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "DDM";
     }
 

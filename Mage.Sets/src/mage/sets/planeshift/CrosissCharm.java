@@ -37,7 +37,7 @@ public class CrosissCharm extends mage.sets.commander2013.CrosissCharm {
 
     public CrosissCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
+        this.cardNumber = "99";
         this.expansionSetCode = "PLS";
     }
 

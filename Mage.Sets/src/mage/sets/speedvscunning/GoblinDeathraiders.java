@@ -37,7 +37,7 @@ public class GoblinDeathraiders extends mage.sets.shardsofalara.GoblinDeathraide
 
     public GoblinDeathraiders(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "DDN";
     }
 

@@ -37,7 +37,7 @@ public class ClearAPath extends mage.sets.dragonsmaze.ClearAPath {
 
     public ClearAPath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 136;
+        this.cardNumber = "136";
         this.expansionSetCode = "M15";
     }
 

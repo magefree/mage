@@ -37,7 +37,7 @@ public class FlowstoneBlade extends mage.sets.conspiracy.FlowstoneBlade {
 
     public FlowstoneBlade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "STH";
     }
 

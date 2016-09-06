@@ -38,7 +38,7 @@ public class VigeanGraftmage extends mage.sets.dissension.VigeanGraftmage {
 
     public VigeanGraftmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }

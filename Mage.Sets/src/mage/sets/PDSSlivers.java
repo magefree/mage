@@ -44,7 +44,7 @@ public class PDSSlivers extends ExpansionSet {
     }
 
     private PDSSlivers() {
-        super("Premium Deck Series: Slivers", "PDS", "mage.sets.pdsslivers", new GregorianCalendar(2009, 11, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Premium Deck Series: Slivers", "H09", "mage.sets.pdsslivers", new GregorianCalendar(2009, 11, 1).getTime(), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
     }
 }

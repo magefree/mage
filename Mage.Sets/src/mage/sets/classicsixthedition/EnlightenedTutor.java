@@ -37,7 +37,7 @@ public class EnlightenedTutor extends mage.sets.mirage.EnlightenedTutor {
 
     public EnlightenedTutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "6ED";
     }
 

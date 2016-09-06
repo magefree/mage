@@ -37,7 +37,7 @@ public class KorAeronaut extends mage.sets.zendikar.KorAeronaut {
 
     public KorAeronaut(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDF";
     }
 

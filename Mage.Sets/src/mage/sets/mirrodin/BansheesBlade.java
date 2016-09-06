@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -59,7 +59,7 @@ public class BansheesBlade extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+1 for each charge counter on Banshee's Blade.
-        CountersCount chargeCountersCount = new CountersCount(CounterType.CHARGE);
+        CountersSourceCount chargeCountersCount = new CountersSourceCount(CounterType.CHARGE);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(chargeCountersCount, chargeCountersCount)));
         // Whenever equipped creature deals combat damage, put a charge counter on Banshee's Blade.
         this.addAbility(new BansheesBladeAbility());

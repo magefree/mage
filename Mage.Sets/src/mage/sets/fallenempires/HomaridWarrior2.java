@@ -37,7 +37,7 @@ public class HomaridWarrior2 extends HomaridWarrior1 {
 
     public HomaridWarrior2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
     }
 
     public HomaridWarrior2(final HomaridWarrior2 card) {

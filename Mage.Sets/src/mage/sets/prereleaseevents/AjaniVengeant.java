@@ -38,7 +38,7 @@ public class AjaniVengeant extends mage.sets.shardsofalara.AjaniVengeant {
 
     public AjaniVengeant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

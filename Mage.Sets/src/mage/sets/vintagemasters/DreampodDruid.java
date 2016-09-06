@@ -37,7 +37,7 @@ public class DreampodDruid extends mage.sets.planechase2012.DreampodDruid {
 
     public DreampodDruid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "VMA";
     }
 

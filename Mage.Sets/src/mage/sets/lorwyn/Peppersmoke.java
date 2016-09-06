@@ -37,7 +37,7 @@ public class Peppersmoke extends mage.sets.modernmasters.Peppersmoke {
 
     public Peppersmoke(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "LRW";
     }
 

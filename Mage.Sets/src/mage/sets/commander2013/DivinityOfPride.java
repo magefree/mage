@@ -37,7 +37,7 @@ public class DivinityOfPride extends mage.sets.eventide.DivinityOfPride {
 
     public DivinityOfPride(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "C13";
     }
 

@@ -9,8 +9,10 @@ Seventh Edition|7ED|
 Eighth Edition|8ED|
 Ninth Edition|9ED|
 Aether Revolt|AER|
+Amonkhet|AKH|
 Shards of Alara|ALA|
 Alliances|ALL|
+Archenemy: Nicol Bolas|ANB|
 Asia Pacific Land Program|APAC|
 Apocalypse|APC|
 Alara Reborn|ARB|
@@ -32,8 +34,8 @@ Commander 2016 Edition|C16|
 Champions of Kamigawa|CHK|
 Chronicles|CHR|
 Clash Pack|CLASH|
+Commander Anthology|CMA|
 Commander's Arsenal|CMA|
-Commander|CMD|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|
 Champs|CP|
@@ -59,6 +61,8 @@ Duel Decks: Elspeth vs. Kiora|DDO|
 Duel Decks: Zendikar vs. Eldrazi|DDP|
 Duel Decks: Blessed vs. Cursed|DDQ|
 Duel Decks: Nissa vs. Ob Nixilis|DDR|
+Duel Decks: Mind vs. Might|DDS|
+Duels of the Planeswalkers|DPA|
 Dragon's Maze|DGM|
 Dissension|DIS|
 Dark Ascension|DKA|
@@ -86,6 +90,7 @@ Guru|GUR|
 Premium Deck Series: Slivers|H09|
 Homelands|HML|
 Planechase|HOP|
+Hour of Devastation|HOU|
 Ice Age|ICE|
 Invasion|INV|
 Innistrad|ISD|
@@ -105,6 +110,7 @@ Magic 2012|M12|
 Magic 2013|M13|
 Magic 2014|M14|
 Magic 2015|M15|
+Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
 Mirrodin Besieged|MBS|
@@ -116,6 +122,7 @@ Game Day|MGDC|
 Mirage|MIR|
 Launch Party|MLP|
 Modern Masters 2015|MM2|
+Modern Masters 2017|MM3|
 Modern Masters|MMA|
 Mercadian Masques|MMQ|
 Morningtide|MOR|

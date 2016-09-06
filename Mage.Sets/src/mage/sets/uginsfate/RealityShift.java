@@ -37,7 +37,7 @@ public class RealityShift extends mage.sets.fatereforged.RealityShift {
 
     public RealityShift(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "UGIN";
     }
 

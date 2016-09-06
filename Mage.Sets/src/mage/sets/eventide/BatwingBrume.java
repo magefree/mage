@@ -36,7 +36,7 @@ import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
@@ -61,7 +61,7 @@ public class BatwingBrume extends CardImpl {
 
 
         // Prevent all combat damage that would be dealt this turn if {W} was spent to cast Batwing Brume. Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast Batwing Brume.
-        Effect effect = new ConditionalReplacementEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true),
+        Effect effect = new ConditionalReplacementEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true),
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.W)));
         effect.setText("Prevent all combat damage that would be dealt this turn if {W} was spent to cast {this}");
         this.getSpellAbility().addEffect(effect);

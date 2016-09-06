@@ -37,7 +37,7 @@ public class ThunderWall extends mage.sets.iceage.ThunderWall {
 
     public ThunderWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "ME2";
     }
 

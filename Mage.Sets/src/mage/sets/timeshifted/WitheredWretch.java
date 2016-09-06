@@ -38,7 +38,7 @@ public class WitheredWretch extends mage.sets.planechase.WitheredWretch {
 
     public WitheredWretch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.RARE;
     }

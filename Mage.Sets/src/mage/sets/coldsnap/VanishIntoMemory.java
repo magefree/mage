@@ -37,7 +37,7 @@ public class VanishIntoMemory extends mage.sets.venservskoth.VanishIntoMemory {
 
     public VanishIntoMemory(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 133;
+        this.cardNumber = "133";
         this.expansionSetCode = "CSP";
     }
 

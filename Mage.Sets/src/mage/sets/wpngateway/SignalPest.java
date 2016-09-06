@@ -38,7 +38,7 @@ public class SignalPest extends mage.sets.mirrodinbesieged.SignalPest {
 
     public SignalPest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

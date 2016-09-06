@@ -37,7 +37,7 @@ public class AvatarOfMight extends mage.sets.prophecy.AvatarOfMight {
 
     public AvatarOfMight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 251;
+        this.cardNumber = "251";
         this.expansionSetCode = "10E";
     }
 

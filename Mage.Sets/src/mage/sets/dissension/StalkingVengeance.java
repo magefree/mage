@@ -37,7 +37,7 @@ public class StalkingVengeance extends mage.sets.commander2013.StalkingVengeance
 
     public StalkingVengeance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "DIS";
     }
 

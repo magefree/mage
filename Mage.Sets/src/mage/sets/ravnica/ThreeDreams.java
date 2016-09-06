@@ -37,7 +37,7 @@ public class ThreeDreams extends mage.sets.planechase2012.ThreeDreams {
 
     public ThreeDreams(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "RAV";
     }
 

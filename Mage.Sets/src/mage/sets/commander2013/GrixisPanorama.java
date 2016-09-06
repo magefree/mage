@@ -37,7 +37,7 @@ public class GrixisPanorama extends mage.sets.shardsofalara.GrixisPanorama {
 
     public GrixisPanorama(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 293;
+        this.cardNumber = "293";
         this.expansionSetCode = "C13";
     }
 

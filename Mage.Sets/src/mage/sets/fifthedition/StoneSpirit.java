@@ -37,7 +37,7 @@ public class StoneSpirit extends mage.sets.iceage.StoneSpirit {
 
     public StoneSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 271;
+        this.cardNumber = "271";
         this.expansionSetCode = "5ED";
     }
 

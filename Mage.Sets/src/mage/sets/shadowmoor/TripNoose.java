@@ -37,7 +37,7 @@ public class TripNoose extends mage.sets.elspethvstezzeret.TripNoose {
 
     public TripNoose(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 266;
+        this.cardNumber = "266";
         this.expansionSetCode = "SHM";
     }
 

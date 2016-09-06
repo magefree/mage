@@ -73,25 +73,28 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public boolean checkTrigger(GameEvent event, Game game) {        
         if (!onlyCombat || ((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
-                if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setValue("damage", event.getAmount());
-                        switch (setTargetPointer) {
-                            case PLAYER:
-                                effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                                break;
-                            case PERMANENT:
-                                effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
-                                break;
-                        }
+            if (permanent != null) {
+                controllerId = permanent.getControllerId();
+                if (filter.match(permanent, sourceId, controllerId, game)) {
+                    if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setValue("damage", event.getAmount());
+                            switch (setTargetPointer) {
+                                case PLAYER:
+                                    effect.setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                                    break;
+                                case PERMANENT:
+                                    effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
+                                    break;
+                            }
 
+                        }
                     }
+                    return true;
                 }
-                return true;
             }
         }
         return false;

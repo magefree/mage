@@ -37,7 +37,7 @@ public class BringToLight extends mage.sets.battleforzendikar.BringToLight {
 
     public BringToLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 246;
+        this.cardNumber = "246";
         this.expansionSetCode = "PTC";
     }
 

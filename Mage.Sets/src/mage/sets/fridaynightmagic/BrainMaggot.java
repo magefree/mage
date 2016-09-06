@@ -38,7 +38,7 @@ public class BrainMaggot extends mage.sets.journeyintonyx.BrainMaggot {
 
     public BrainMaggot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.UNCOMMON;
     }

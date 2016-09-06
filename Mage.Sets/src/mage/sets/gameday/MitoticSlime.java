@@ -37,7 +37,7 @@ public class MitoticSlime extends mage.sets.magic2011.MitoticSlime {
 
     public MitoticSlime(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "MGDC";
     }
 

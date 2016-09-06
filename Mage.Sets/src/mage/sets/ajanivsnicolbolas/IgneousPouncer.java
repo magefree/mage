@@ -37,7 +37,7 @@ public class IgneousPouncer extends mage.sets.alarareborn.IgneousPouncer {
 
     public IgneousPouncer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "DDH";
     }
 

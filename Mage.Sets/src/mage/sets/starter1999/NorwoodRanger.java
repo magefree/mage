@@ -37,7 +37,7 @@ public class NorwoodRanger extends mage.sets.ninthedition.NorwoodRanger {
 
     public NorwoodRanger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "S99";
     }
 

@@ -37,7 +37,7 @@ public class JandorsSaddlebags extends mage.sets.seventhedition.JandorsSaddlebag
 
     public JandorsSaddlebags(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "ARN";
     }
 

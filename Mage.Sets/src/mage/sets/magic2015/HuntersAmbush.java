@@ -29,7 +29,7 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -56,7 +56,7 @@ public class HuntersAmbush extends CardImpl {
 
 
         // Prevent all combat damage that would be dealt by nongreen creatures this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(filter, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
     }
 
     public HuntersAmbush(final HuntersAmbush card) {

@@ -37,7 +37,7 @@ public class HavenwoodBattleground extends mage.sets.fallenempires.HavenwoodBatt
 
     public HavenwoodBattleground(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 230;
+        this.cardNumber = "230";
         this.expansionSetCode = "ME2";
     }
 

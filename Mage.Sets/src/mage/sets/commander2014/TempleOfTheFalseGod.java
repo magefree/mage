@@ -37,7 +37,7 @@ public class TempleOfTheFalseGod extends mage.sets.commander2013.TempleOfTheFals
 
     public TempleOfTheFalseGod(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 314;
+        this.cardNumber = "314";
         this.expansionSetCode = "C14";
     }
 

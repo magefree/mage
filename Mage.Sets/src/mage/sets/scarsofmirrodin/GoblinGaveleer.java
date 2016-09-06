@@ -28,16 +28,17 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -54,6 +55,9 @@ public class GoblinGaveleer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Goblin Gaveleer gets +2/+0 for each Equipment attached to it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new EquipmentAttachedCount(2),
                 new StaticValue(0), Duration.WhileOnBattlefield)));
     }

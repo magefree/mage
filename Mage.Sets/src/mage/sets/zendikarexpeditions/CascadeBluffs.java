@@ -38,7 +38,7 @@ public class CascadeBluffs extends mage.sets.eventide.CascadeBluffs {
 
     public CascadeBluffs(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

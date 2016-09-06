@@ -27,15 +27,16 @@
  */
 package mage.sets.judgment;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -43,8 +44,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.UUID;
 
 /**
  *
@@ -61,7 +60,6 @@ public class QuietSpeculation extends CardImpl {
     public QuietSpeculation(UUID ownerId) {
         super(ownerId, 49, "Quiet Speculation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "JUD";
-
 
         // Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles his or her library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filterCard);
@@ -97,20 +95,18 @@ class SearchLibraryPutInGraveEffect extends SearchEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player == null) {
-            return false;
-        }
-        if (player.searchLibrary(target, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        UUID targetPlayerID = source.getFirstTarget();
+        if (controller != null && targetPlayerID != null && controller.searchLibrary(target, game, targetPlayerID)) {
             if (target.getTargets().size() > 0) {
                 Cards cards = new CardsImpl(target.getTargets());
-                player.revealCards("Quiet Speculation", cards, game);
-                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                controller.revealCards("Quiet Speculation", cards, game);
+                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
-            player.shuffleLibrary(source, game);
+            controller.shuffleLibrary(source, game);
             return true;
         }
-        player.shuffleLibrary(source, game);
+        controller.shuffleLibrary(source, game);
         return false;
     }
 

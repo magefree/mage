@@ -37,7 +37,7 @@ public class ArmyOfTheDamned extends mage.sets.innistrad.ArmyOfTheDamned {
 
     public ArmyOfTheDamned(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "C13";
     }
 

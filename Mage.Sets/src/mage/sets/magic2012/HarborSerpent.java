@@ -37,7 +37,7 @@ public class HarborSerpent extends mage.sets.magic2011.HarborSerpent {
 
     public HarborSerpent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "M12";
     }
 

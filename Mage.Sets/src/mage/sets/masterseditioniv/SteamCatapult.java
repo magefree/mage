@@ -37,7 +37,7 @@ public class SteamCatapult extends mage.sets.portalsecondage.SteamCatapult {
 
     public SteamCatapult(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "ME4";
     }
 

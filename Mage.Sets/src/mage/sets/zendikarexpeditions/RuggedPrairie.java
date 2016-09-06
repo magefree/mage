@@ -38,7 +38,7 @@ public class RuggedPrairie extends mage.sets.eventide.RuggedPrairie {
 
     public RuggedPrairie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

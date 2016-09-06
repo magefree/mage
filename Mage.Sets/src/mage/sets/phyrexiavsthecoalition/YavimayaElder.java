@@ -37,7 +37,7 @@ public class YavimayaElder extends mage.sets.commander.YavimayaElder {
 
     public YavimayaElder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "DDE";
     }
 

@@ -37,7 +37,7 @@ public class WeaveFate extends mage.sets.khansoftarkir.WeaveFate {
 
     public WeaveFate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 279;
+        this.cardNumber = "279";
         this.expansionSetCode = "ORI";
     }
 

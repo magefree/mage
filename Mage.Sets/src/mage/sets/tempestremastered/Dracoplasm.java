@@ -37,7 +37,7 @@ public class Dracoplasm extends mage.sets.tempest.Dracoplasm {
 
     public Dracoplasm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
+        this.cardNumber = "208";
         this.expansionSetCode = "TPR";
     }
 

@@ -37,7 +37,7 @@ public class MarhaultElsdragon extends mage.sets.legends.MarhaultElsdragon {
 
     public MarhaultElsdragon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "CHR";
     }
 

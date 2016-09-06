@@ -37,7 +37,7 @@ public class GlassesOfUrza extends mage.sets.limitedalpha.GlassesOfUrza {
 
     public GlassesOfUrza(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 287;
+        this.cardNumber = "287";
         this.expansionSetCode = "6ED";
     }
 

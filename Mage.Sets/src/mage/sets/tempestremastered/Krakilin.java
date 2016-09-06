@@ -38,7 +38,7 @@ public class Krakilin extends mage.sets.tempest.Krakilin {
 
     public Krakilin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.RARE;
     }

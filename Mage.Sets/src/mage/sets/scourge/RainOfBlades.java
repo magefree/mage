@@ -37,7 +37,7 @@ public class RainOfBlades extends mage.sets.magic2013.RainOfBlades {
 
     public RainOfBlades(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "SCG";
     }
 

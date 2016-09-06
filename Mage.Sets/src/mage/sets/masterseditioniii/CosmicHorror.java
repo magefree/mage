@@ -37,7 +37,7 @@ public class CosmicHorror extends mage.sets.legends.CosmicHorror {
 
     public CosmicHorror(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "ME3";
     }
 

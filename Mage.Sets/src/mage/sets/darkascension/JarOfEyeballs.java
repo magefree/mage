@@ -148,7 +148,7 @@ class JarOfEyeballsCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(ability.getSourceId());
         if (permanent != null) {
-            this.removedCounters = permanent.getCounters().getCount(CounterType.EYEBALL);
+            this.removedCounters = permanent.getCounters(game).getCount(CounterType.EYEBALL);
             if (this.removedCounters > 0) {
                 permanent.removeCounters(CounterType.EYEBALL.createInstance(this.removedCounters), game);
             }

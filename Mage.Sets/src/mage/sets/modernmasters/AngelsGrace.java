@@ -37,7 +37,7 @@ public class AngelsGrace extends mage.sets.timespiral.AngelsGrace {
 
     public AngelsGrace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "MMA";
     }
 

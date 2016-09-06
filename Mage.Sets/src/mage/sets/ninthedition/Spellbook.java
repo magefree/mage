@@ -37,7 +37,7 @@ public class Spellbook extends mage.sets.magic2010.Spellbook {
 
     public Spellbook(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 309;
+        this.cardNumber = "309";
         this.expansionSetCode = "9ED";
     }
 

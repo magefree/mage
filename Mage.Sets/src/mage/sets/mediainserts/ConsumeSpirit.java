@@ -6,7 +6,7 @@ public class ConsumeSpirit extends mage.sets.planechase.ConsumeSpirit {
     
     public ConsumeSpirit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "MBP";
     }
     

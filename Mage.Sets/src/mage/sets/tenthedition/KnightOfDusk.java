@@ -37,7 +37,7 @@ public class KnightOfDusk extends mage.sets.tempest.KnightOfDusk {
 
     public KnightOfDusk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "10E";
     }
 

@@ -38,7 +38,7 @@ public class SimicGrowthChamber extends mage.sets.dissension.SimicGrowthChamber 
 
     public SimicGrowthChamber(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 249;
+        this.cardNumber = "249";
         this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }

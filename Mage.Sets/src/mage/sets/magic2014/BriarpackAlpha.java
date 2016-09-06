@@ -37,7 +37,7 @@ public class BriarpackAlpha extends mage.sets.darkascension.BriarpackAlpha {
 
     public BriarpackAlpha(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "M14";
     }
 

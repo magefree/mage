@@ -37,7 +37,7 @@ public class HorrorOfHorrors extends mage.sets.legends.HorrorOfHorrors {
 
     public HorrorOfHorrors(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "9ED";
     }
 

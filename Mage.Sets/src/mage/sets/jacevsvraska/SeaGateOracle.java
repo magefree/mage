@@ -37,7 +37,7 @@ public class SeaGateOracle extends mage.sets.riseoftheeldrazi.SeaGateOracle {
 
     public SeaGateOracle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDM";
     }
 

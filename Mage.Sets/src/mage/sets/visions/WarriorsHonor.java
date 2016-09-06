@@ -37,7 +37,7 @@ public class WarriorsHonor extends mage.sets.tenthedition.WarriorsHonor {
 
     public WarriorsHonor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "VIS";
     }
 

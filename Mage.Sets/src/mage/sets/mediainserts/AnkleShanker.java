@@ -6,7 +6,7 @@ public class AnkleShanker extends mage.sets.khansoftarkir.AnkleShanker {
     
     public AnkleShanker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "MBP";
     }
     

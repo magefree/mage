@@ -37,7 +37,7 @@ public class ArcboundStinger extends mage.sets.darksteel.ArcboundStinger {
 
     public ArcboundStinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "MMA";
     }
 

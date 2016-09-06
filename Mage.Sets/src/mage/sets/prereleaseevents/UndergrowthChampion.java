@@ -37,7 +37,7 @@ public class UndergrowthChampion extends mage.sets.battleforzendikar.Undergrowth
 
     public UndergrowthChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 300;
+        this.cardNumber = "300";
         this.expansionSetCode = "PTC";
     }
 

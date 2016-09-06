@@ -37,7 +37,7 @@ public class TemporalAdept extends mage.sets.ninthedition.TemporalAdept {
 
     public TemporalAdept(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "8ED";
     }
 

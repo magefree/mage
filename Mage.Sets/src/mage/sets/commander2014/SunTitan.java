@@ -37,7 +37,7 @@ public class SunTitan extends mage.sets.magic2011.SunTitan {
 
     public SunTitan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 91;
+        this.cardNumber = "91";
         this.expansionSetCode = "C14";
     }
 

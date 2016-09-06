@@ -37,7 +37,7 @@ public class SeaMonster extends mage.sets.tempest.SeaMonster {
 
     public SeaMonster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "7ED";
     }
 

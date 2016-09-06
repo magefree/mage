@@ -37,7 +37,7 @@ public class KarnLiberated extends mage.sets.newphyrexia.KarnLiberated {
 
     public KarnLiberated(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "MM2";
     }
 

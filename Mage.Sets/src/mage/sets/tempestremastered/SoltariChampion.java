@@ -38,7 +38,7 @@ public class SoltariChampion extends mage.sets.stronghold.SoltariChampion {
 
     public SoltariChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

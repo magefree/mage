@@ -37,7 +37,7 @@ public class WistfulSelkie extends mage.sets.eventide.WistfulSelkie {
 
     public WistfulSelkie(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 243;
+        this.cardNumber = "243";
         this.expansionSetCode = "C15";
     }
 

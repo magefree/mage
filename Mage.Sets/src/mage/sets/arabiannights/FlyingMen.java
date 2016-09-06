@@ -38,7 +38,7 @@ public class FlyingMen extends mage.sets.timeshifted.FlyingMen {
 
     public FlyingMen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "ARN";
         this.rarity = Rarity.COMMON;
     }

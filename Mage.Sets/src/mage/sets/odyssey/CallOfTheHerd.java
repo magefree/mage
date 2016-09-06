@@ -38,7 +38,7 @@ public class CallOfTheHerd extends mage.sets.timeshifted.CallOfTheHerd {
 
     public CallOfTheHerd(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 231;
+        this.cardNumber = "231";
         this.expansionSetCode = "ODY";
         this.rarity = Rarity.RARE;
     }

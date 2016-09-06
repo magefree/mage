@@ -37,7 +37,7 @@ public class LivingWall extends mage.sets.unlimitededition.LivingWall {
 
     public LivingWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 262;
+        this.cardNumber = "262";
         this.expansionSetCode = "3ED";
     }
 

@@ -49,7 +49,7 @@ public class RainOfDaggers extends CardImpl {
 
     public RainOfDaggers(UUID ownerId) {
         super(ownerId, 25, "Rain of Daggers", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
 
         // Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way.
         this.getSpellAbility().addEffect(new RainOfDaggersEffect());

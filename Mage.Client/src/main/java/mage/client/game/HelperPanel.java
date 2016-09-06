@@ -323,6 +323,13 @@ public class HelperPanel extends JPanel {
         this.btnUndo.setVisible(enabled);
     }
 
+    public void setLeft(String text, boolean visible) {
+        this.btnLeft.setVisible(visible);
+        if (!text.isEmpty()) {
+            this.btnLeft.setText(text);
+        }
+    }
+
     public void setRight(String txtRight, boolean rightVisible) {
         this.btnRight.setVisible(rightVisible);
         if (!txtRight.isEmpty()) {

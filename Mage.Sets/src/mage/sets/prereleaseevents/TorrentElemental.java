@@ -37,7 +37,7 @@ public class TorrentElemental extends mage.sets.fatereforged.TorrentElemental {
 
     public TorrentElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "PTC";
     }
 

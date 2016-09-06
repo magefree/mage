@@ -37,7 +37,7 @@ public class SulfurousSprings extends mage.sets.tenthedition.SulfurousSprings {
 
     public SulfurousSprings(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 325;
+        this.cardNumber = "325";
         this.expansionSetCode = "9ED";
     }
 

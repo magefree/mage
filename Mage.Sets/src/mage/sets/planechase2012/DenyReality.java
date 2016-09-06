@@ -37,7 +37,7 @@ public class DenyReality extends mage.sets.alarareborn.DenyReality {
 
     public DenyReality(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "PC2";
     }
 

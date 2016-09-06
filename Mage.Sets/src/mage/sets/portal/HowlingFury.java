@@ -38,7 +38,7 @@ public class HowlingFury extends mage.sets.starter1999.HowlingFury {
 
     public HowlingFury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "POR";
         this.rarity = Rarity.COMMON;
     }

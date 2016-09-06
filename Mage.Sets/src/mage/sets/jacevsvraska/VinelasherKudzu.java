@@ -37,7 +37,7 @@ public class VinelasherKudzu extends mage.sets.ravnica.VinelasherKudzu {
 
     public VinelasherKudzu(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "DDM";
     }
 

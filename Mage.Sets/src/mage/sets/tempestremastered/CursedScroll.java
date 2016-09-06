@@ -38,7 +38,7 @@ public class CursedScroll extends mage.sets.tempest.CursedScroll {
 
     public CursedScroll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 220;
+        this.cardNumber = "220";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.MYTHIC;
     }

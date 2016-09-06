@@ -37,7 +37,7 @@ public class SymbioticWurm extends mage.sets.onslaught.SymbioticWurm {
 
     public SymbioticWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "CMD";
     }
 

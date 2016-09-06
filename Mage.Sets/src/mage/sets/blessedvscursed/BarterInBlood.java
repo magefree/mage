@@ -37,7 +37,7 @@ public class BarterInBlood extends mage.sets.avacynrestored.BarterInBlood {
 
     public BarterInBlood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "DDQ";
     }
 

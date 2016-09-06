@@ -37,7 +37,7 @@ public class BrainFreeze extends mage.sets.scourge.BrainFreeze {
 
     public BrainFreeze(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "VMA";
     }
 

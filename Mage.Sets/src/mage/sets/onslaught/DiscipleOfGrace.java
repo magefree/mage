@@ -37,7 +37,7 @@ public class DiscipleOfGrace extends mage.sets.urzassaga.DiscipleOfGrace {
 
     public DiscipleOfGrace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "ONS";
     }
 

@@ -37,7 +37,7 @@ public class Intuition extends mage.sets.tempest.Intuition {
 
     public Intuition(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "JR";
     }
 

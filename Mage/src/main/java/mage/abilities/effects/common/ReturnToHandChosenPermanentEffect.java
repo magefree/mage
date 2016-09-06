@@ -77,7 +77,7 @@ public class ReturnToHandChosenPermanentEffect extends OneShotEffect {
             if (available > 0) {
                 TargetControlledPermanent target = new TargetControlledPermanent(Math.min(number, available), number, filter, true);
                 if (player.chooseTarget(this.outcome, target, source, game)) {
-                    player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, Zone.HAND, source, game);
+                    player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
                 }
             }
             return true;

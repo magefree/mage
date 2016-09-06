@@ -37,7 +37,7 @@ public class JundCharm extends mage.sets.shardsofalara.JundCharm {
 
     public JundCharm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "C13";
     }
 

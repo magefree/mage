@@ -37,7 +37,7 @@ public class AngelOfSalvation extends mage.sets.elspethvstezzeret.AngelOfSalvati
 
     public AngelOfSalvation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "FUT";
     }
 

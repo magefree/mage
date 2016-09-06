@@ -37,7 +37,7 @@ public class AEtherFlash extends mage.sets.seventhedition.AEtherFlash {
 
     public AEtherFlash(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "WTH";
     }
 

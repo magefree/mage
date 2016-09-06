@@ -6,7 +6,7 @@ public class RakshasaVizier extends mage.sets.khansoftarkir.RakshasaVizier {
     
     public RakshasaVizier(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "MBP";
     }
     

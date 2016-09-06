@@ -126,7 +126,7 @@ class KinshipBaseEffect extends OneShotEffect {
                 if (card != null) {
                     Cards cards = new CardsImpl(card);
                     controller.lookAtCards(sourcePermanent.getName(), cards, game);
-                    if (CardUtil.shareSubtypes(sourcePermanent, card)) {
+                    if (CardUtil.shareSubtypes(sourcePermanent, card, game)) {
                         if (controller.chooseUse(outcome,new StringBuilder("Kinship - Reveal ").append(card.getLogName()).append("?").toString(), source, game)) {
                             controller.revealCards(sourcePermanent.getName(), cards, game);
                             for (Effect effect: kinshipEffects) {

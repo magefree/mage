@@ -37,7 +37,7 @@ public class AvatarOfTheResolute extends mage.sets.dragonsoftarkir.AvatarOfTheRe
 
     public AvatarOfTheResolute(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "PTC";
     }
 

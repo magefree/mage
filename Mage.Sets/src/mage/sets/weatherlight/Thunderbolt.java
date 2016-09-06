@@ -37,7 +37,7 @@ public class Thunderbolt extends mage.sets.avacynrestored.Thunderbolt {
 
     public Thunderbolt(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "WTH";
     }
 

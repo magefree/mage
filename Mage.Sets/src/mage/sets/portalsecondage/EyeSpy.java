@@ -37,8 +37,8 @@ public class EyeSpy extends mage.sets.starter1999.EyeSpy {
 
     public EyeSpy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
-        this.expansionSetCode = "P02";
+        this.cardNumber = "39";
+        this.expansionSetCode = "PO2";
     }
 
     public EyeSpy(final EyeSpy card) {

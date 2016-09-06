@@ -37,7 +37,7 @@ public class DispellersCapsule extends mage.sets.shardsofalara.DispellersCapsule
 
     public DispellersCapsule(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 12;
+        this.cardNumber = "12";
         this.expansionSetCode = "MMA";
     }
 

@@ -37,7 +37,7 @@ public class CrypticAnnelid extends mage.sets.futuresight.CrypticAnnelid {
 
     public CrypticAnnelid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "DDI";
     }
 

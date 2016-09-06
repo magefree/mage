@@ -37,7 +37,7 @@ public class SoulCollector extends mage.sets.timeshifted.SoulCollector {
 
     public SoulCollector(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "PTC";
     }
 

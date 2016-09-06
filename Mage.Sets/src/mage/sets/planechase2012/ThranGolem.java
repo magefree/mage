@@ -37,7 +37,7 @@ public class ThranGolem extends mage.sets.magic2012.ThranGolem {
 
     public ThranGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "PC2";
     }
 

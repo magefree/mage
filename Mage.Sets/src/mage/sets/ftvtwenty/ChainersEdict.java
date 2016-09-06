@@ -38,7 +38,7 @@ public class ChainersEdict extends mage.sets.vintagemasters.ChainersEdict {
 
     public ChainersEdict(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "V13";
         this.rarity = Rarity.MYTHIC;
     }

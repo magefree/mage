@@ -38,7 +38,7 @@ public class GoblinGoon extends mage.sets.legions.GoblinGoon {
 
     public GoblinGoon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 166;
+        this.cardNumber = "166";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

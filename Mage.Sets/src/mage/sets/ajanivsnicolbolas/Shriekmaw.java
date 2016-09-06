@@ -37,7 +37,7 @@ public class Shriekmaw extends mage.sets.commander.Shriekmaw {
 
     public Shriekmaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "DDH";
     }
 

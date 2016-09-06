@@ -37,7 +37,7 @@ public class DictateOfHeliod extends mage.sets.journeyintonyx.DictateOfHeliod {
 
     public DictateOfHeliod(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "C15";
     }
 

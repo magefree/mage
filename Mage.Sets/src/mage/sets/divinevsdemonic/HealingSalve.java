@@ -37,7 +37,7 @@ public class HealingSalve extends mage.sets.seventhedition.HealingSalve {
 
     public HealingSalve(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "DDC";
     }
 

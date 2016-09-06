@@ -37,7 +37,7 @@ public class ElvishBerserker extends mage.sets.ninthedition.ElvishBerserker {
 
     public ElvishBerserker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "EXO";
     }
 

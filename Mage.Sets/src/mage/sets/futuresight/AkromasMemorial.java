@@ -38,7 +38,7 @@ public class AkromasMemorial extends mage.sets.magic2013.AkromasMemorial {
 
     public AkromasMemorial(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 159;
+        this.cardNumber = "159";
         this.expansionSetCode = "FUT";
         this.rarity = Rarity.RARE;
     }

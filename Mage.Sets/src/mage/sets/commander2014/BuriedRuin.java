@@ -37,7 +37,7 @@ public class BuriedRuin extends mage.sets.magic2012.BuriedRuin {
 
     public BuriedRuin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 286;
+        this.cardNumber = "286";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class RestorationAngel extends mage.sets.avacynrestored.RestorationAngel 
 
     public RestorationAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "MLP";
     }
 

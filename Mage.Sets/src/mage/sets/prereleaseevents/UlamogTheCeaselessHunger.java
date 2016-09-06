@@ -37,7 +37,7 @@ public class UlamogTheCeaselessHunger extends mage.sets.battleforzendikar.Ulamog
 
     public UlamogTheCeaselessHunger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 299;
+        this.cardNumber = "299";
         this.expansionSetCode = "PTC";
     }
 

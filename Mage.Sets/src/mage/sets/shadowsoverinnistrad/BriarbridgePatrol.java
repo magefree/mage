@@ -94,7 +94,7 @@ class BriarbridgePatrolCondition implements Condition {
             if (sacrificedPermanents != null && !sacrificedPermanents.isEmpty()) {
                 int amountOfClues = 0;
                 for (Permanent permanent : sacrificedPermanents) {
-                    if (permanent.getSubtype().contains("Clue")) {
+                    if (permanent.getSubtype(game).contains("Clue")) {
                         amountOfClues++;
                     }
                 }

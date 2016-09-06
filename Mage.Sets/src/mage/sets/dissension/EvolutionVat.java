@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -62,7 +62,7 @@ public class EvolutionVat extends CardImpl {
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("and put a +1/+1 counter on it");
         ability.addEffect(effect);
-        effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(), new CountersCount(CounterType.P1P1), false);
+        effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(), new CountersSourceCount(CounterType.P1P1), false);
         effect.setText("Double the number of +1/+1 counters on this creature");
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{G}{U}"));
         ability.addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn,

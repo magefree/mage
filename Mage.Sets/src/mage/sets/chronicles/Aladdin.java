@@ -38,7 +38,7 @@ public class Aladdin extends mage.sets.masterseditioniv.Aladdin {
 
     public Aladdin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "CHR";
         this.rarity = Rarity.RARE; // U1
     }

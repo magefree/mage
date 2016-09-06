@@ -37,7 +37,7 @@ public class InspiredCharge extends mage.sets.magic2011.InspiredCharge {
 
     public InspiredCharge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "BFZ";
     }
 

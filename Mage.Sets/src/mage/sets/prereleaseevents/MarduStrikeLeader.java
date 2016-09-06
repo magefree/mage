@@ -37,7 +37,7 @@ public class MarduStrikeLeader extends mage.sets.fatereforged.MarduStrikeLeader 
 
     public MarduStrikeLeader(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "PTC";
     }
 

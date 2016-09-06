@@ -37,7 +37,7 @@ public class MarkovDreadknight extends mage.sets.shadowsoverinnistrad.MarkovDrea
 
     public MarkovDreadknight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "MBP";
     }
 

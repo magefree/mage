@@ -37,7 +37,7 @@ public class SuturedGhoul extends mage.sets.magic2012.SuturedGhoul {
 
     public SuturedGhoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "JUD";
     }
 

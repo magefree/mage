@@ -37,7 +37,7 @@ public class NeurokInvisimancer extends mage.sets.scarsofmirrodin.NeurokInvisima
 
     public NeurokInvisimancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "DDI";
     }
 

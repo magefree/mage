@@ -38,7 +38,7 @@ public class VirtuesRuin extends mage.sets.portal.VirtuesRuin {
 
     public VirtuesRuin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "V14";
         this.rarity = Rarity.MYTHIC;
     }

@@ -37,7 +37,7 @@ public class CallerOfTheClaw extends mage.sets.legions.CallerOfTheClaw {
 
     public CallerOfTheClaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "C15";
     }
 

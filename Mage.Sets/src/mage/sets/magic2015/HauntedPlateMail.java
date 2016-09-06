@@ -37,7 +37,7 @@ public class HauntedPlateMail extends mage.sets.magic2014.HauntedPlateMail {
 
     public HauntedPlateMail(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "M15";
     }
 

@@ -37,7 +37,7 @@ public class Telepathy extends mage.sets.urzassaga.Telepathy {
 
     public Telepathy(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "7ED";
     }
 

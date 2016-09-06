@@ -37,7 +37,7 @@ public class ThallidGerminator extends mage.sets.timespiral.ThallidGerminator {
 
     public ThallidGerminator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "MMA";
     }
 

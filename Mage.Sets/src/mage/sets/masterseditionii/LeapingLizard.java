@@ -37,7 +37,7 @@ public class LeapingLizard extends mage.sets.homelands.LeapingLizard {
 
     public LeapingLizard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 171;
+        this.cardNumber = "171";
         this.expansionSetCode = "ME2";
     }
 

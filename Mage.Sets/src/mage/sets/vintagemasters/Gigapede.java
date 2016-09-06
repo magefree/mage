@@ -37,7 +37,7 @@ public class Gigapede extends mage.sets.onslaught.Gigapede {
 
     public Gigapede(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 214;
+        this.cardNumber = "214";
         this.expansionSetCode = "VMA";
     }
 

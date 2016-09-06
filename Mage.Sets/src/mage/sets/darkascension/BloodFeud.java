@@ -28,12 +28,12 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,11 +46,17 @@ public class BloodFeud extends CardImpl {
         super(ownerId, 83, "Blood Feud", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "DKA";
 
-
         // Target creature fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetOtherCreaturePermanent());
+        TargetCreaturePermanent target = new TargetCreaturePermanent();
+        target.setTargetTag(1);
+        this.getSpellAbility().addTarget(target);
+
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+        filter.add(new AnotherTargetPredicate(2));
+        TargetCreaturePermanent target2 = new TargetCreaturePermanent(filter);
+        target2.setTargetTag(2);
+        this.getSpellAbility().addTarget(target2);
     }
 
     public BloodFeud(final BloodFeud card) {
@@ -61,29 +67,4 @@ public class BloodFeud extends CardImpl {
     public BloodFeud copy() {
         return new BloodFeud(this);
     }
-}
-
-class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
-
-    public TargetOtherCreaturePermanent() {
-        super();
-    }
-
-    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (source.getTargets().get(0).getTargets().contains(id)) {
-            return false;
-        }
-        return super.canTarget(controllerId, id, source, game);
-    }
-
-    @Override
-    public TargetOtherCreaturePermanent copy() {
-        return new TargetOtherCreaturePermanent(this);
-    }
-
 }

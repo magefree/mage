@@ -37,7 +37,7 @@ public class Tromokratis extends mage.sets.bornofthegods.Tromokratis {
 
     public Tromokratis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "MLP";
     }
 

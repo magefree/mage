@@ -37,7 +37,7 @@ public class CrawGiant extends mage.sets.legends.CrawGiant {
 
     public CrawGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 147;
+        this.cardNumber = "147";
         this.expansionSetCode = "5ED";
     }
 

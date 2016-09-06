@@ -37,7 +37,7 @@ public class Doomgape extends mage.sets.eventide.Doomgape {
 
     public Doomgape(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "DDJ";
     }
 

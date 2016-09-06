@@ -37,7 +37,7 @@ public class GreaterGood extends mage.sets.ninthedition.GreaterGood {
 
     public GreaterGood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 81;
+        this.cardNumber = "81";
         this.expansionSetCode = "JR";
     }
 

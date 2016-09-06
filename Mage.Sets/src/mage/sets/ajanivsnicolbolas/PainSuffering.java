@@ -37,7 +37,7 @@ public class PainSuffering extends mage.sets.invasion.PainSuffering {
 
     public PainSuffering(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "DDH";
     }
 

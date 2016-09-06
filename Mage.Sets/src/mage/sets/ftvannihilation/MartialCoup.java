@@ -38,7 +38,7 @@ public class MartialCoup extends mage.sets.conflux.MartialCoup {
 
     public MartialCoup(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
+        this.cardNumber = "9";
         this.expansionSetCode = "V14";
         this.rarity = Rarity.MYTHIC;
     }

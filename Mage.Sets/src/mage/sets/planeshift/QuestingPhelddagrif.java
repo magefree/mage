@@ -39,7 +39,7 @@ public class QuestingPhelddagrif extends mage.sets.prereleaseevents.QuestingPhel
 
     public QuestingPhelddagrif(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "PLS";
         this.rarity = Rarity.RARE;
     }

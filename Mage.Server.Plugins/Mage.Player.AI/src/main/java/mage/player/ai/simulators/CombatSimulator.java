@@ -68,7 +68,7 @@ public class CombatSimulator implements Serializable {
             }
             else {
                 Permanent permanent = game.getPermanent(defenderId);
-                simCombat.planeswalkerLoyalty.put(defenderId, permanent.getCounters().getCount(CounterType.LOYALTY));
+                simCombat.planeswalkerLoyalty.put(defenderId, permanent.getCounters(game).getCount(CounterType.LOYALTY));
             }
         }
         return simCombat;

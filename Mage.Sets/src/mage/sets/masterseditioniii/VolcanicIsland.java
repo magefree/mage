@@ -37,7 +37,7 @@ public class VolcanicIsland extends mage.sets.unlimitededition.VolcanicIsland {
 
     public VolcanicIsland(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 215;
+        this.cardNumber = "215";
         this.expansionSetCode = "ME3";
     }
 

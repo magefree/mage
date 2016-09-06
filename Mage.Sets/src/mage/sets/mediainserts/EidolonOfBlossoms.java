@@ -6,7 +6,7 @@ public class EidolonOfBlossoms extends mage.sets.journeyintonyx.EidolonOfBlossom
     
     public EidolonOfBlossoms(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "MBP";
     }
     

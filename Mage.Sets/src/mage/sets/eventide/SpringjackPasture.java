@@ -38,7 +38,7 @@ public class SpringjackPasture extends mage.sets.commander2013.SpringjackPasture
 
     public SpringjackPasture(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "EVE";
     }
 

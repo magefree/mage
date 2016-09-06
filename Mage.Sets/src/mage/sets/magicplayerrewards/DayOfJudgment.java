@@ -38,7 +38,7 @@ public class DayOfJudgment extends mage.sets.zendikar.DayOfJudgment {
 
     public DayOfJudgment(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

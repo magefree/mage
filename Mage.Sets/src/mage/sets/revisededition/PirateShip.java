@@ -38,7 +38,7 @@ public class PirateShip extends mage.sets.limitedalpha.PirateShip {
 
     public PirateShip(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 72;
+        this.cardNumber = "72";
         this.expansionSetCode = "3ED";
     }
 

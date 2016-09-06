@@ -37,7 +37,7 @@ public class ShrewdHatchling extends mage.sets.eventide.ShrewdHatchling {
 
     public ShrewdHatchling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "MM2";
     }
 

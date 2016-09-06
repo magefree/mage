@@ -36,6 +36,9 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,12 +47,18 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ActOfAggression extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
+
     public ActOfAggression(UUID ownerId) {
         super(ownerId, 78, "Act of Aggression", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{RP}{RP}");
         this.expansionSetCode = "NPH";
 
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));

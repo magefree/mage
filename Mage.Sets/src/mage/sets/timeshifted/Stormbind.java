@@ -39,7 +39,7 @@ public class Stormbind extends mage.sets.iceage.Stormbind {
 
     public Stormbind(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 102;
+        this.cardNumber = "102";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

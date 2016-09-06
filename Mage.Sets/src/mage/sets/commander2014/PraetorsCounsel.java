@@ -37,7 +37,7 @@ public class PraetorsCounsel extends mage.sets.mirrodinbesieged.PraetorsCounsel 
 
     public PraetorsCounsel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 209;
+        this.cardNumber = "209";
         this.expansionSetCode = "C14";
     }
 

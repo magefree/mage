@@ -37,7 +37,7 @@ public class RakdosCarnarium extends mage.sets.dissension.RakdosCarnarium {
 
     public RakdosCarnarium(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 313;
+        this.cardNumber = "313";
         this.expansionSetCode = "C13";
     }
 

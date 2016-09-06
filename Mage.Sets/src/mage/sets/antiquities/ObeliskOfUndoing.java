@@ -37,7 +37,7 @@ public class ObeliskOfUndoing extends mage.sets.chronicles.ObeliskOfUndoing {
 
     public ObeliskOfUndoing(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "ATQ";
     }
 

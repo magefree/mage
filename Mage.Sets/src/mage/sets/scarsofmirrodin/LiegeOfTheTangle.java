@@ -135,12 +135,12 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
         for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
             Permanent perm = it.next().getPermanent(game);
             if (perm != null) {
-                if (perm.getCounters().getCount(CounterType.AWAKENING) > 0) {
+                if (perm.getCounters(game).getCount(CounterType.AWAKENING) > 0) {
                     switch (layer) {
                         case TypeChangingEffects_4:
                             if (sublayer == SubLayer.NA) {
                                 perm.getCardType().addAll(token.getCardType());
-                                perm.getSubtype().addAll(token.getSubtype());
+                                perm.getSubtype(game).addAll(token.getSubtype(game));
                             }
                             break;
                         case ColorChangingEffects_5:

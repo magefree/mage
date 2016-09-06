@@ -38,7 +38,7 @@ public class WreckingBall extends mage.sets.commander.WreckingBall {
 
     public WreckingBall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "DIS";
     }
 

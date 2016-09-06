@@ -37,7 +37,7 @@ public class VengefulRebirth extends mage.sets.alarareborn.VengefulRebirth {
 
     public VengefulRebirth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 188;
+        this.cardNumber = "188";
         this.expansionSetCode = "MM2";
     }
 

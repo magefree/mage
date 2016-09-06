@@ -38,7 +38,7 @@ public class BeetlebackChief extends mage.sets.planechase2012.BeetlebackChief {
 
     public BeetlebackChief(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 150;
+        this.cardNumber = "150";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

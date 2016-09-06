@@ -37,7 +37,7 @@ public class Mortivore extends mage.sets.tenthedition.Mortivore {
 
     public Mortivore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "ODY";
     }
 

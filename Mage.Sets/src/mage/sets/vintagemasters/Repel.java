@@ -37,7 +37,7 @@ public class Repel extends mage.sets.odyssey.Repel {
 
     public Repel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "VMA";
     }
 

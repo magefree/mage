@@ -37,7 +37,7 @@ public class DeathbringerRegent extends mage.sets.dragonsoftarkir.DeathbringerRe
 
     public DeathbringerRegent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "MLP";
     }
 

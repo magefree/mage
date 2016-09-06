@@ -37,7 +37,7 @@ public class DoomedNecromancer extends mage.sets.tenthedition.DoomedNecromancer 
 
     public DoomedNecromancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "ONS";
     }
 

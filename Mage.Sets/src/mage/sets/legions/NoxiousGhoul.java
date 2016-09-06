@@ -37,7 +37,7 @@ public class NoxiousGhoul extends mage.sets.planechase.NoxiousGhoul {
 
     public NoxiousGhoul(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "LGN";
     }
 

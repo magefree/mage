@@ -37,7 +37,7 @@ public class AnimateWall extends mage.sets.limitedalpha.AnimateWall {
 
     public AnimateWall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 186;
+        this.cardNumber = "186";
         this.expansionSetCode = "LEB";
     }
 

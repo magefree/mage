@@ -38,7 +38,7 @@ public class Wakedancer extends mage.sets.darkascension.Wakedancer {
 
     public Wakedancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "CNS";
         this.rarity = Rarity.COMMON;
     }

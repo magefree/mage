@@ -97,7 +97,7 @@ class WoodenStakeBlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbility
         if (equipment != null && equipment.getAttachedTo() != null) {
             if (event.getSourceId().equals(equipment.getAttachedTo())) {
                 Permanent blocks = game.getPermanent(event.getTargetId());
-                if (blocks != null && blocks.hasSubtype("Vampire")) {
+                if (blocks != null && blocks.hasSubtype("Vampire", game)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }
@@ -107,7 +107,7 @@ class WoodenStakeBlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbility
             }
             if (event.getTargetId().equals(equipment.getAttachedTo())) {
                 Permanent blockedBy = game.getPermanent(event.getSourceId());
-                if (blockedBy != null && blockedBy.hasSubtype("Vampire")) {
+                if (blockedBy != null && blockedBy.hasSubtype("Vampire", game)) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                     }

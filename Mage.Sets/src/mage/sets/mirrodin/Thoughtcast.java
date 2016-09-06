@@ -37,7 +37,7 @@ public class Thoughtcast extends mage.sets.elspethvstezzeret.Thoughtcast {
 
     public Thoughtcast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
+        this.cardNumber = "54";
         this.expansionSetCode = "MRD";
     }
 

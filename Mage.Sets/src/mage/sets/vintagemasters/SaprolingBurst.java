@@ -151,7 +151,7 @@ class SaprolingBurstTokenDynamicValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent permanent = this.saprolingBurstMOR.getPermanent(game);
         if (permanent != null) {
-            return permanent.getCounters().getCount(CounterType.FADE);
+            return permanent.getCounters(game).getCount(CounterType.FADE);
         }
         return 0;
     }

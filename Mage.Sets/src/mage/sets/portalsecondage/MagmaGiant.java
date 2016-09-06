@@ -43,7 +43,7 @@ public class MagmaGiant extends CardImpl {
 
     public MagmaGiant(UUID ownerId) {
         super(ownerId, 108, "Magma Giant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Giant");
 
         this.power = new MageInt(5);

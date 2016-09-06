@@ -37,7 +37,7 @@ public class GlintHawkIdol extends mage.sets.scarsofmirrodin.GlintHawkIdol {
 
     public GlintHawkIdol(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 216;
+        this.cardNumber = "216";
         this.expansionSetCode = "MM2";
     }
 

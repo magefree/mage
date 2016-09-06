@@ -37,7 +37,7 @@ public class KnightOfCliffhaven extends mage.sets.riseoftheeldrazi.KnightOfCliff
 
     public KnightOfCliffhaven(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "DDG";
     }
 

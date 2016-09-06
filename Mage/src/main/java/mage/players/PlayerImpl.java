@@ -83,6 +83,7 @@ import mage.actions.MageDrawAction;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.MeldCard;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
 import mage.constants.AbilityType;
@@ -120,6 +121,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentMeld;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -133,13 +135,13 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
     private static final Logger logger = Logger.getLogger(PlayerImpl.class);
 
-    private static Random rnd = new Random();
     private static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     /**
@@ -721,6 +723,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Cards discard(int amount, boolean random, Ability source, Game game) {
         Cards discardedCards = new CardsImpl();
+        if (amount <= 0) {
+            return discardedCards;
+        }
         if (this.getHand().size() == 1 || this.getHand().size() == amount) {
             discardedCards.addAll(this.getHand());
             while (this.getHand().size() > 0) {
@@ -1129,7 +1134,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         } else {
             int bookmark = game.bookmarkState();
-            if (ability.activate(game, false)) {
+            if (ability.activate(game, ability instanceof FlashbackAbility)) {
                 ability.resolve(game);
                 game.removeBookmark(bookmark);
                 resetStoredBookmark(game);
@@ -1832,16 +1837,31 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void addCounters(Counter counter, Game game) {
-        int amount = counter.getCount();
-        for (int i = 0; i < amount; i++) {
-            Counter eventCounter = counter.copy();
-            eventCounter.remove(amount - 1);
-            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, playerId, playerId, counter.getName(), counter.getCount()))) {
-                counters.addCounter(eventCounter);
-                game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), counter.getCount()));
+    public boolean addCounters(Counter counter, Game game) {
+        boolean returnCode = true;
+        GameEvent countersEvent = GameEvent.getEvent(EventType.ADD_COUNTERS, playerId, playerId, counter.getName(), counter.getCount());
+        if (!game.replaceEvent(countersEvent)) {
+            int amount = countersEvent.getAmount();
+            int finalAmount = amount;
+            for (int i = 0; i < amount; i++) {
+                Counter eventCounter = counter.copy();
+                eventCounter.remove(amount - 1);
+                GameEvent event = GameEvent.getEvent(EventType.ADD_COUNTER, playerId, playerId, counter.getName(), 1);
+                if (!game.replaceEvent(event)) {
+                    getCounters().addCounter(eventCounter);
+                    game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), 1));
+                } else {
+                    finalAmount--;
+                    returnCode = false;
+                }
             }
+            if(finalAmount > 0) {
+                game.fireEvent(GameEvent.getEvent(EventType.COUNTERS_ADDED, playerId, playerId, counter.getName(), amount));
+            }
+        } else {
+            returnCode = false;
         }
+        return returnCode;
     }
 
     @Override
@@ -2309,7 +2329,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
-        boolean result = rnd.nextBoolean();
+        boolean result = RandomUtil.nextBoolean();
         if (!game.isSimulation()) {
             game.informPlayers("[Flip a coin] " + getLogName() + (result ? " won (head)." : " lost (tail)."));
         }
@@ -3097,55 +3117,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        if (cards.isEmpty()) {
-            return true;
-        }
-        Set<Card> cardList = new HashSet<>();
-        for (UUID cardId : cards) {
-            fromZone = game.getState().getZone(cardId);
-            if (Zone.BATTLEFIELD.equals(fromZone)) {
-                Permanent permanent = game.getPermanent(cardId);
-                if (permanent != null) {
-                    cardList.add(permanent);
-                }
-            } else {
-                Card card = game.getCard(cardId);
-                if (card == null) {
-                    Spell spell = game.getState().getStack().getSpell(cardId);
-                    if (spell != null) {
-                        if (!spell.isCopy()) {
-                            card = spell.getCard();
-                        } else {
-                            // If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve
-                            game.getStack().remove(spell);
-                            game.informPlayers(spell.getLogName() + " was removed from the stack");
-                        }
-                    }
-                }
-                if (card != null) {
-                    cardList.add(card);
-                }
-            }
-        }
-        return moveCards(cardList, toZone, source, game);
-    }
-
-    @Override
-    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
-        Set<Card> cardList = new HashSet<>();
-        if (card != null) {
-            cardList.add(card);
-        }
-        return moveCards(cardList, toZone, source, game);
-    }
-
-    @Override
-    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return moveCards(cards, toZone, source, game);
-    }
-
-    @Override
     public boolean moveCards(Card card, Zone toZone, Ability source, Game game) {
         return moveCards(card, toZone, source, game, false, false, false, null);
     }
@@ -3184,6 +3155,24 @@ public abstract class PlayerImpl implements Player, Serializable {
             case BATTLEFIELD: // new logic that does not yet add the permanents to battlefield while replacement effects are handled
                 List<Permanent> permanents = new ArrayList<>();
                 List<Permanent> permanentsEntered = new ArrayList<>();
+                // Move meld pieces instead of the meld card if unmelded
+                Set<Card> meldPiecesToAdd = new HashSet<>(0);
+                Set<MeldCard> meldCardsRemoved = new HashSet<>(0);
+                for (Iterator<Card> it = cards.iterator(); it.hasNext();) {
+                    Card card = it.next();
+                    if (card instanceof MeldCard && !((MeldCard) card).isMelded()) {
+                        MeldCard meldCard = (MeldCard) card;
+                        if (meldCard.getTopLastZoneChangeCounter() == meldCard.getTopHalfCard().getZoneChangeCounter(game)) {
+                            meldPiecesToAdd.add(meldCard.getTopHalfCard());
+                        }
+                        if (meldCard.getBottomLastZoneChangeCounter() == meldCard.getBottomHalfCard().getZoneChangeCounter(game)) {
+                            meldPiecesToAdd.add(meldCard.getBottomHalfCard());
+                        }
+                        meldCardsRemoved.add(meldCard);
+                        it.remove();
+                    }
+                }
+                cards.addAll(meldPiecesToAdd);
                 for (Card card : cards) {
                     UUID controllingPlayerId = byOwner ? card.getOwnerId() : getId();
                     fromZone = game.getState().getZone(card.getId());
@@ -3193,7 +3182,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), controllingPlayerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
                     if (!game.replaceEvent(event)) {
                         // get permanent
-                        Permanent permanent = new PermanentCard(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
+                        Permanent permanent;
+                        if (card instanceof MeldCard) {
+                            permanent = new PermanentMeld(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
+                        } else {
+                            permanent = new PermanentCard(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
+                        }
                         permanents.add(permanent);
                         game.getPermanentsEntering().put(permanent.getId(), permanent);
                         card.checkForCountersToAdd(permanent, game);
@@ -3234,6 +3228,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                     } else {
                         game.getPermanentsEntering().remove(permanent.getId());
                     }
+                }
+                // Update the lastZoneChangeCounter of meld pieces that were moved
+                for (MeldCard meldCard : meldCardsRemoved) {
+                    meldCard.setTopLastZoneChangeCounter(meldCard.getTopHalfCard().getZoneChangeCounter(game));
+                    meldCard.setBottomLastZoneChangeCounter(meldCard.getBottomHalfCard().getZoneChangeCounter(game));
                 }
                 game.applyEffects();
                 break;
@@ -3308,7 +3307,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             card = game.getPermanent(card.getId());
         }
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
-            if (card instanceof PermanentCard) {
+            if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                 card = game.getCard(card.getId());
             }
             if (!game.isSimulation()) {
@@ -3396,7 +3395,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         //    Zone fromZone = game.getState().getZone(card.getId());
         if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null ? fromZone.equals(Zone.BATTLEFIELD) : false)) {
             if (!game.isSimulation()) {
-                if (card instanceof PermanentCard) {
+                if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                     card = game.getCard(card.getId());
                 }
                 StringBuilder sb = new StringBuilder(this.getLogName())
@@ -3419,7 +3418,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean result = false;
         if (card.moveToZone(Zone.LIBRARY, sourceId, game, toTop)) {
             if (!game.isSimulation()) {
-                if (card instanceof PermanentCard) {
+                if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                     card = game.getCard(card.getId());
                 }
                 StringBuilder sb = new StringBuilder(this.getLogName())
@@ -3453,8 +3452,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                     Card basicCard = game.getCard(card.getId());
                     if (basicCard != null) {
                         card = basicCard;
-                    } else {
-                        logger.error("Couldn't get the card object for the PermanenCard named " + card.getName());
                     }
                 }
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() : "a card face down") + " "

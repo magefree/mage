@@ -38,7 +38,7 @@ public class TimeWalk extends mage.sets.limitedalpha.TimeWalk {
 
     public TimeWalk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.BONUS;
     }

@@ -110,7 +110,7 @@ class GryffsBoonEffect extends OneShotEffect {
         if (aura != null
                 && game.getState().getZone(aura.getId()).equals(Zone.GRAVEYARD)) {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (!targetPermanent.cantBeEnchantedBy(aura, game)) {
+            if (!targetPermanent.cantBeAttachedBy(aura, game)) {
                 game.getState().setValue("attachTo:" + aura.getId(), targetPermanent);
                 aura.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
                 return targetPermanent.addAttachment(aura.getId(), game);

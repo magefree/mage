@@ -38,7 +38,7 @@ public class BallynockCohort extends mage.sets.shadowmoor.BallynockCohort {
 
     public BallynockCohort(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "EMA";
     }
 

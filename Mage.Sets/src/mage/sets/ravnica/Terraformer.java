@@ -140,8 +140,8 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
                     switch (layer) {
                         case TypeChangingEffects_4:
                             if (sublayer == SubLayer.NA) {
-                                land.getSubtype().clear();
-                                land.getSubtype().add(choice);
+                                land.getSubtype(game).clear();
+                                land.getSubtype(game).add(choice);
                             }
                             break;
                         case AbilityAddingRemovingEffects_6:

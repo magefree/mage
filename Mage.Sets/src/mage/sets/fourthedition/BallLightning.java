@@ -37,7 +37,7 @@ public class BallLightning extends mage.sets.magic2010.BallLightning {
 
     public BallLightning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 194;
+        this.cardNumber = "194";
         this.expansionSetCode = "4ED";
     }
 

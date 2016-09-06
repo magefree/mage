@@ -37,7 +37,7 @@ public class AbyssalGatekeeper extends mage.sets.divinevsdemonic.AbyssalGatekeep
 
     public AbyssalGatekeeper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "DD3DVD";
     }
 

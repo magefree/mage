@@ -37,7 +37,7 @@ public class CinderMarsh extends mage.sets.tempest.CinderMarsh {
 
     public CinderMarsh(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 236;
+        this.cardNumber = "236";
         this.expansionSetCode = "TPR";
     }
 

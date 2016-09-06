@@ -39,7 +39,7 @@ public class FalseDemise2 extends mage.sets.mercadianmasques.FalseDemise {
 
     public FalseDemise2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "ALL";
         this.rarity = Rarity.COMMON;
     }

@@ -37,7 +37,7 @@ public class CraftyPathmage extends mage.sets.tenthedition.CraftyPathmage {
 
     public CraftyPathmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "ONS";
     }
 

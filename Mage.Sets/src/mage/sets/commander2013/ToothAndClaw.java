@@ -37,7 +37,7 @@ public class ToothAndClaw extends mage.sets.tempest.ToothAndClaw {
 
     public ToothAndClaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 127;
+        this.cardNumber = "127";
         this.expansionSetCode = "C13";
     }
 

@@ -37,7 +37,7 @@ public class VrynWingmare extends mage.sets.magicorigins.VrynWingmare {
 
     public VrynWingmare(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 236;
+        this.cardNumber = "236";
         this.expansionSetCode = "PTC";
     }
 

@@ -37,7 +37,7 @@ public class RuneclawBear extends mage.sets.magic2010.RuneclawBear {
 
     public RuneclawBear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "M12";
     }
 

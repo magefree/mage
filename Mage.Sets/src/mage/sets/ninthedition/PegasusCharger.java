@@ -37,7 +37,7 @@ public class PegasusCharger extends mage.sets.urzassaga.PegasusCharger {
 
     public PegasusCharger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "9ED";
     }
 

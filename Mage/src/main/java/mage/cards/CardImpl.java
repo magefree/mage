@@ -53,6 +53,7 @@ import mage.counters.Counters;
 import mage.game.CardAttribute;
 import mage.game.CardState;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -71,9 +72,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     private static final Logger logger = Logger.getLogger(CardImpl.class);
 
     protected UUID ownerId;
-    protected int cardNumber;
+    protected String cardNumber;
     public String expansionSetCode;
     protected String tokenSetCode;
+    protected String tokenDescriptor;
     protected Rarity rarity;
     protected boolean canTransform;
     protected Card secondSideCard;
@@ -86,10 +88,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean morphCard;
 
     public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
+        this(ownerId, String.valueOf(cardNumber), name, rarity, cardTypes, costs, SpellAbilityType.BASE);
+    }
+
+    public CardImpl(UUID ownerId, String cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         this(ownerId, cardNumber, name, rarity, cardTypes, costs, SpellAbilityType.BASE);
     }
 
-    public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
+    public CardImpl(UUID ownerId, String cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
         this(ownerId, name);
         this.rarity = rarity;
         this.cardNumber = cardNumber;
@@ -183,7 +189,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
@@ -312,6 +318,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public String getTokenSetCode() {
         return tokenSetCode;
     }
+    
+    @Override
+    public String getTokenDescriptor() {
+        return tokenDescriptor;
+    }    
 
     @Override
     public List<Mana> getMana() {
@@ -645,59 +656,61 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public Counters getCounters(Game game) {
-        return game.getState().getCardState(this.objectId).getCounters();
+        return getCounters(game.getState());
     }
 
     @Override
-    public void addCounters(String name, int amount, Game game) {
-        addCounters(name, amount, game, null);
+    public Counters getCounters(GameState state) {
+        return state.getCardState(this.objectId).getCounters();
+    }
+
+    /**
+     * @return The controller if available otherwise the owner.
+     */
+    protected UUID getControllerOrOwner() {
+        return ownerId;
     }
 
     @Override
-    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
-        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, ownerId, name, amount);
-        countersEvent.setAppliedEffects(appliedEffects);
-        if (!game.replaceEvent(countersEvent)) {
-            for (int i = 0; i < countersEvent.getAmount(); i++) {
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, name, 1);
-                event.setAppliedEffects(appliedEffects);
-                if (!game.replaceEvent(event)) {
-                    game.getState().getCardState(this.objectId).getCounters().addCounter(name, 1);
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, name, 1));
-                }
-            }
-        }
+    public boolean addCounters(Counter counter, Game game) {
+        return addCounters(counter, game, null);
     }
 
     @Override
-    public void addCounters(Counter counter, Game game) {
-        addCounters(counter, game, null);
-    }
-
-    @Override
-    public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
-        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, ownerId, counter.getName(), counter.getCount());
+    public boolean addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
+        boolean returnCode = true;
+        GameEvent countersEvent = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTERS, objectId, getControllerOrOwner(), counter.getName(), counter.getCount());
         countersEvent.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(countersEvent)) {
             int amount = countersEvent.getAmount();
+            int finalAmount = amount;
             for (int i = 0; i < amount; i++) {
                 Counter eventCounter = counter.copy();
-                eventCounter.remove(amount - 1);
-                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, counter.getName(), 1);
+                eventCounter.remove(eventCounter.getCount() - 1);
+                GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, getControllerOrOwner(), counter.getName(), 1);
                 event.setAppliedEffects(appliedEffects);
                 if (!game.replaceEvent(event)) {
-                    game.getState().getCardState(this.objectId).getCounters().addCounter(eventCounter);
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, counter.getName(), 1));
+                    getCounters(game).addCounter(eventCounter);
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, getControllerOrOwner(), counter.getName(), 1));
+                } else {
+                    finalAmount--;
+                    returnCode = false;
                 }
             }
+            if(finalAmount > 0) {
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, getControllerOrOwner(), counter.getName(), amount));
+            }
+        } else {
+            returnCode = false;
         }
+        return returnCode;
     }
 
     @Override
     public void removeCounters(String name, int amount, Game game) {
         for (int i = 0; i < amount; i++) {
-            game.getState().getCardState(this.objectId).getCounters().removeCounter(name, 1);
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, ownerId);
+            getCounters(game).removeCounter(name, 1);
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, getControllerOrOwner());
             event.setData(name);
             game.fireEvent(event);
         }
@@ -740,6 +753,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 return cardAttribute.getColor();
             }
         }
-        return super.getColor(game); //To change body of generated methods, choose Tools | Templates.
+        return super.getColor(game);
+    }
+    
+    @Override
+    public List<String> getSubtype(Game game) {
+        if (game != null) {
+            CardAttribute cardAttribute = game.getState().getCardAttribute(getId());
+            if (cardAttribute != null) {
+                return cardAttribute.getSubtype();
+            }
+        }
+        return super.getSubtype(game);
     }
 }

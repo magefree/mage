@@ -37,7 +37,7 @@ public class RiptideSurvivor extends mage.sets.commander2014.RiptideSurvivor {
 
     public RiptideSurvivor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "SCG";
     }
 

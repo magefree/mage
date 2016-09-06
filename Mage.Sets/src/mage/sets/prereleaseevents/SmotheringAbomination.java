@@ -37,7 +37,7 @@ public class SmotheringAbomination extends mage.sets.battleforzendikar.Smotherin
 
     public SmotheringAbomination(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 296;
+        this.cardNumber = "296";
         this.expansionSetCode = "PTC";
     }
 

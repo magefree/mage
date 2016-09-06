@@ -38,7 +38,7 @@ public class RedElementalBlast extends mage.sets.limitedalpha.RedElementalBlast 
 
     public RedElementalBlast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class Dissipate extends mage.sets.innistrad.Dissipate {
 
     public Dissipate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "MIR";
     }
 

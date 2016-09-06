@@ -37,7 +37,7 @@ public class MyrEnforcer extends mage.sets.planechase.MyrEnforcer {
 
     public MyrEnforcer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = "224";
         this.expansionSetCode = "MM2";
     }
 

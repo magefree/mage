@@ -38,7 +38,7 @@ public class CentaurChieftain extends mage.sets.torment.CentaurChieftain {
 
     public CentaurChieftain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "EMA";
     }
 

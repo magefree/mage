@@ -37,7 +37,7 @@ public class PlatedSeastrider extends mage.sets.scarsofmirrodin.PlatedSeastrider
 
     public PlatedSeastrider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "CNS";
     }
 

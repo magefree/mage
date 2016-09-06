@@ -38,7 +38,7 @@ public class SafePassage extends mage.sets.magic2010.SafePassage {
 
     public SafePassage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "M11";
     }
 

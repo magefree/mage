@@ -58,7 +58,7 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
         EntersTheBattlefieldEvent ebe = (EntersTheBattlefieldEvent) event;
         if (ebe.getTarget().getControllerId().equals(this.controllerId)
                 && (event.getTargetId().equals(this.getSourceId())
-                || (ebe.getTarget().hasSubtype("Ally") && !event.getTargetId().equals(this.getSourceId())))) {
+                || (ebe.getTarget().hasSubtype("Ally", game) && !event.getTargetId().equals(this.getSourceId())))) {
             return true;
         }
         return false;

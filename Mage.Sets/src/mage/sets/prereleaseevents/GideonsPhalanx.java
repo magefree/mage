@@ -37,7 +37,7 @@ public class GideonsPhalanx extends mage.sets.magicorigins.GideonsPhalanx {
 
     public GideonsPhalanx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 209;
+        this.cardNumber = "209";
         this.expansionSetCode = "PTC";
     }
 

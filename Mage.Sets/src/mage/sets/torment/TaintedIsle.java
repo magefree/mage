@@ -37,7 +37,7 @@ public class TaintedIsle extends mage.sets.planechase2012.TaintedIsle {
 
     public TaintedIsle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "TOR";
     }
 

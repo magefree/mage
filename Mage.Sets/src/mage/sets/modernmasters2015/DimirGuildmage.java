@@ -37,7 +37,7 @@ public class DimirGuildmage extends mage.sets.ravnica.DimirGuildmage {
 
     public DimirGuildmage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 192;
+        this.cardNumber = "192";
         this.expansionSetCode = "MM2";
     }
 

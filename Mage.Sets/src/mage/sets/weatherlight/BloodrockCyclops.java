@@ -37,7 +37,7 @@ public class BloodrockCyclops extends mage.sets.tenthedition.BloodrockCyclops {
 
     public BloodrockCyclops(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "WTH";
     }
 

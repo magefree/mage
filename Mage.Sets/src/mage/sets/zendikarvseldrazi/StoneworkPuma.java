@@ -37,7 +37,7 @@ public class StoneworkPuma extends mage.sets.zendikar.StoneworkPuma {
 
     public StoneworkPuma(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 30;
+        this.cardNumber = "30";
         this.expansionSetCode = "DDP";
     }
 

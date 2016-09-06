@@ -38,7 +38,7 @@ public class ThornscapeBattlemage extends mage.sets.phyrexiavsthecoalition.Thorn
 
     public ThornscapeBattlemage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

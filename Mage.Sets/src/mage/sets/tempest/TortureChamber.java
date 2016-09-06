@@ -106,7 +106,7 @@ class TortureChamberCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(ability.getSourceId());
         if (permanent != null) {
-            this.removedCounters = permanent.getCounters().getCount(CounterType.PAIN);
+            this.removedCounters = permanent.getCounters(game).getCount(CounterType.PAIN);
             if (this.removedCounters > 0) {
                 permanent.removeCounters(CounterType.PAIN.createInstance(this.removedCounters), game);
             }
@@ -146,7 +146,7 @@ class TortureChamberEffect1 extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            int painCounters = permanent.getCounters().getCount(CounterType.PAIN);
+            int painCounters = permanent.getCounters(game).getCount(CounterType.PAIN);
             player.damage(painCounters, source.getSourceId(), game, false, true);
             return true;
         }

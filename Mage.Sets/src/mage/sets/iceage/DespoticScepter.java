@@ -37,7 +37,7 @@ public class DespoticScepter extends mage.sets.masterseditionii.DespoticScepter 
 
     public DespoticScepter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 291;
+        this.cardNumber = "291";
         this.expansionSetCode = "ICE";
     }
 

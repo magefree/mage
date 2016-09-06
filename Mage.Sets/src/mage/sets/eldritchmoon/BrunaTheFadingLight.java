@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -70,7 +71,9 @@ public class BrunaTheFadingLight extends CardImpl {
         this.toughness = new MageInt(7);
 
         // When you cast Bruna, the Fading Light, you may return target Angel or Human creature card from your graveyard to the battlefield.
-        Ability ability = new CastSourceTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
+        Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
+        effect.setText("you may return target Angel or Human creature card from your graveyard to the battlefield");
+        Ability ability = new CastSourceTriggeredAbility(effect, true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 

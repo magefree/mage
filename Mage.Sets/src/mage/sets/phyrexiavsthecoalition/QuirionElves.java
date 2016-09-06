@@ -37,7 +37,7 @@ public class QuirionElves extends mage.sets.mirage.QuirionElves {
 
     public QuirionElves(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 39;
+        this.cardNumber = "39";
         this.expansionSetCode = "DDE";
     }
 

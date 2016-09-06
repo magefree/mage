@@ -37,7 +37,7 @@ public class KrovikanSorcerer extends mage.sets.vintagemasters.KrovikanSorcerer 
 
     public KrovikanSorcerer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "ME2";
     }
 

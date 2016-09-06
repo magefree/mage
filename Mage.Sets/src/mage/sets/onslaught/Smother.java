@@ -37,7 +37,7 @@ public class Smother extends mage.sets.worldwake.Smother {
 
     public Smother(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "ONS";
     }
 

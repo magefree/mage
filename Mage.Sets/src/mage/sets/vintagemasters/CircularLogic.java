@@ -38,7 +38,7 @@ public class CircularLogic extends mage.sets.torment.CircularLogic {
 
     public CircularLogic(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 60;
+        this.cardNumber = "60";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.COMMON;
     }

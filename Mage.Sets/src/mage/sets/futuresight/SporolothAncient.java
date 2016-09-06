@@ -37,7 +37,7 @@ public class SporolothAncient extends mage.sets.modernmasters.SporolothAncient {
 
     public SporolothAncient(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 152;
+        this.cardNumber = "152";
         this.expansionSetCode = "FUT";
     }
 

@@ -37,7 +37,7 @@ public class Okk extends mage.sets.urzassaga.Okk {
 
     public Okk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "7ED";
     }
 

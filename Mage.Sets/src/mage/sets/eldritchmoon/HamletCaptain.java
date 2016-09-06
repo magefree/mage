@@ -37,7 +37,7 @@ public class HamletCaptain extends mage.sets.innistrad.HamletCaptain {
 
     public HamletCaptain(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 161;
+        this.cardNumber = "161";
         this.expansionSetCode = "EMN";
     }
 

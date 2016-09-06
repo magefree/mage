@@ -37,7 +37,7 @@ public class MortalsArdor extends mage.sets.bornofthegods.MortalsArdor {
 
     public MortalsArdor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "DDO";
     }
 

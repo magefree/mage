@@ -37,7 +37,7 @@ public class DiscipleOfBolas extends mage.sets.magic2013.DiscipleOfBolas {
 
     public DiscipleOfBolas(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "C14";
     }
 

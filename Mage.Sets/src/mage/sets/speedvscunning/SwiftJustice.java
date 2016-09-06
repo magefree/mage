@@ -37,7 +37,7 @@ public class SwiftJustice extends mage.sets.returntoravnica.SwiftJustice {
 
     public SwiftJustice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "DDN";
     }
 

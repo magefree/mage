@@ -39,7 +39,7 @@ public class PrismaticLens extends mage.sets.timespiral.PrismaticLens {
 
     public PrismaticLens(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 230;
+        this.cardNumber = "230";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

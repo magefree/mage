@@ -38,7 +38,7 @@ public class GoblinCommando extends mage.sets.vintagemasters.GoblinCommando {
 
     public GoblinCommando(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "S99";
         this.rarity = Rarity.UNCOMMON;
     }

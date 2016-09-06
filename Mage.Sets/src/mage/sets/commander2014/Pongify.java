@@ -37,7 +37,7 @@ public class Pongify extends mage.sets.planarchaos.Pongify {
 
     public Pongify(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 120;
+        this.cardNumber = "120";
         this.expansionSetCode = "C14";
     }
 

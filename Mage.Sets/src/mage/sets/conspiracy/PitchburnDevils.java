@@ -37,7 +37,7 @@ public class PitchburnDevils extends mage.sets.innistrad.PitchburnDevils {
 
     public PitchburnDevils(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "CNS";
     }
 

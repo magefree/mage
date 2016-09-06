@@ -37,7 +37,7 @@ public class ArgentSphinx extends mage.sets.scarsofmirrodin.ArgentSphinx {
 
     public ArgentSphinx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "MM2";
     }
 

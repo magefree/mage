@@ -37,7 +37,7 @@ public class Blustersquall extends mage.sets.returntoravnica.Blustersquall {
 
     public Blustersquall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "C15";
     }
 

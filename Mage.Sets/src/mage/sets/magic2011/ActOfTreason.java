@@ -38,7 +38,7 @@ import mage.constants.Rarity;
 public class ActOfTreason extends mage.sets.magic2010.ActOfTreason {
 
     public ActOfTreason(UUID ownerId) {
-        super(ownerId);this.cardNumber = 121;
+        super(ownerId);this.cardNumber = "121";
         this.expansionSetCode = "M11";
         this.rarity = Rarity.COMMON;
     }

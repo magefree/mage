@@ -39,7 +39,7 @@ public class LilianaVess extends mage.sets.magic2010.LilianaVess {
 
     public LilianaVess(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "LRW";
         this.rarity = Rarity.RARE;
     }

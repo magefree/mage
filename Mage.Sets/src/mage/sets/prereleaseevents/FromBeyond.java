@@ -37,7 +37,7 @@ public class FromBeyond extends mage.sets.battleforzendikar.FromBeyond {
 
     public FromBeyond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 263;
+        this.cardNumber = "263";
         this.expansionSetCode = "PTC";
     }
 

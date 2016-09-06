@@ -38,7 +38,7 @@ public class Verdigris extends mage.sets.tempest.Verdigris {
 
     public Verdigris(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 204;
+        this.cardNumber = "204";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.COMMON;
     }

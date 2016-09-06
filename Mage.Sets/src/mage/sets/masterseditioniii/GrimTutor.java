@@ -37,7 +37,7 @@ public class GrimTutor extends mage.sets.starter1999.GrimTutor {
 
     public GrimTutor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "ME3";
     }
 

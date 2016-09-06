@@ -75,23 +75,25 @@ public class ProliferateEffect extends OneShotEffect {
             UUID chosen = (UUID) target.getTargets().get(idx);
             Permanent permanent = game.getPermanent(chosen);
             if (permanent != null) {
-                if (permanent.getCounters().size() > 0) {
-                    if (permanent.getCounters().size() == 1) {
-                        for (Counter counter : permanent.getCounters().values()) {
-                            permanent.addCounters(counter.getName(), 1, game);
+                if (permanent.getCounters(game).size() > 0) {
+                    if (permanent.getCounters(game).size() == 1) {
+                        for (Counter counter : permanent.getCounters(game).values()) {
+                            Counter newCounter = new Counter(counter.getName());
+                            permanent.addCounters(newCounter, game);
                         }
                     } else {
                         Choice choice = new ChoiceImpl(true);
                         Set<String> choices = new HashSet<>();
-                        for (Counter counter : permanent.getCounters().values()) {
+                        for (Counter counter : permanent.getCounters(game).values()) {
                             choices.add(counter.getName());
                         }
                         choice.setChoices(choices);
                         choice.setMessage("Choose a counter to proliferate (" + permanent.getIdName() + ")");
                         controller.choose(Outcome.Benefit, choice, game);
-                        for (Counter counter : permanent.getCounters().values()) {
+                        for (Counter counter : permanent.getCounters(game).values()) {
                             if (counter.getName().equals(choice.getChoice())) {
-                                permanent.addCounters(counter.getName(), 1, game);
+                                Counter newCounter = new Counter(counter.getName());
+                                permanent.addCounters(newCounter, game);
                                 break;
                             }
                         }

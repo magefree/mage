@@ -37,7 +37,7 @@ public class DeathcoilWurm extends mage.sets.portalsecondage.DeathcoilWurm {
 
     public DeathcoilWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "ME4";
     }
 

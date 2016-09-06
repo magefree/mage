@@ -37,7 +37,7 @@ public class FathomSeer extends mage.sets.jacevschandra.FathomSeer {
 
     public FathomSeer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "C14";
     }
 

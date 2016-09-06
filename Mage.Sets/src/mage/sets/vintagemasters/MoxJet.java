@@ -38,7 +38,7 @@ public class MoxJet extends mage.sets.limitedalpha.MoxJet {
 
     public MoxJet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.BONUS;
     }

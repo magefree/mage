@@ -37,7 +37,7 @@ public class UndergroundSea extends mage.sets.limitedalpha.UndergroundSea {
 
     public UndergroundSea(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 240;
+        this.cardNumber = "240";
         this.expansionSetCode = "ME2";
     }
 

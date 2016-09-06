@@ -37,7 +37,7 @@ public class GhostCouncilOfOrzhova extends mage.sets.guildpact.GhostCouncilOfOrz
 
     public GhostCouncilOfOrzhova(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 176;
+        this.cardNumber = "176";
         this.expansionSetCode = "MM2";
     }
 

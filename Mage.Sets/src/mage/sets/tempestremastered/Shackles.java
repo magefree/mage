@@ -37,7 +37,7 @@ public class Shackles extends mage.sets.invasion.Shackles {
 
     public Shackles(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "TPR";
     }
 

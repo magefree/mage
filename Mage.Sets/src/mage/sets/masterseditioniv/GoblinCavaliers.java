@@ -37,7 +37,7 @@ public class GoblinCavaliers extends mage.sets.portalsecondage.GoblinCavaliers {
 
     public GoblinCavaliers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "ME4";
     }
 

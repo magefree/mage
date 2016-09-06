@@ -37,7 +37,7 @@ public class ArmsDealer extends mage.sets.magic2013.ArmsDealer {
 
     public ArmsDealer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = "172";
         this.expansionSetCode = "MMQ";
     }
 

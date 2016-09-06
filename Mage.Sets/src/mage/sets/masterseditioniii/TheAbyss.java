@@ -37,7 +37,7 @@ public class TheAbyss extends mage.sets.legends.TheAbyss {
 
     public TheAbyss(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 77;
+        this.cardNumber = "77";
         this.expansionSetCode = "ME3";
     }
 

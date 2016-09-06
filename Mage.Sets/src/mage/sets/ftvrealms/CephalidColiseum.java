@@ -38,7 +38,7 @@ public class CephalidColiseum extends mage.sets.odyssey.CephalidColiseum {
 
     public CephalidColiseum(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

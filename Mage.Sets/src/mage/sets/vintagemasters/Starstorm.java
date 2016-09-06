@@ -37,7 +37,7 @@ public class Starstorm extends mage.sets.onslaught.Starstorm {
 
     public Starstorm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 189;
+        this.cardNumber = "189";
         this.expansionSetCode = "VMA";
     }
 

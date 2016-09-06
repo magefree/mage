@@ -38,7 +38,7 @@ public class WhispersOfTheMuse extends mage.sets.tempest.WhispersOfTheMuse {
 
     public WhispersOfTheMuse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

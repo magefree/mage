@@ -37,7 +37,7 @@ public class SimianGrunts extends mage.sets.urzaslegacy.SimianGrunts {
 
     public SimianGrunts(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "VMA";
     }
 

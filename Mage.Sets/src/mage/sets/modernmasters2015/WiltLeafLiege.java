@@ -37,7 +37,7 @@ public class WiltLeafLiege extends mage.sets.shadowmoor.WiltLeafLiege {
 
     public WiltLeafLiege(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 200;
+        this.cardNumber = "200";
         this.expansionSetCode = "MM2";
     }
 

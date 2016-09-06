@@ -38,7 +38,7 @@ public class Tranquility extends mage.sets.tempest.Tranquility {
 
     public Tranquility(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.UNCOMMON;
     }

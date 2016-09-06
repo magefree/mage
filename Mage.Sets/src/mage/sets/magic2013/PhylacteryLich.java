@@ -37,7 +37,7 @@ public class PhylacteryLich extends mage.sets.magic2011.PhylacteryLich {
 
     public PhylacteryLich(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "M13";
     }
 

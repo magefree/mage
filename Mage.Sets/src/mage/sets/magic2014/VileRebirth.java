@@ -37,7 +37,7 @@ public class VileRebirth extends mage.sets.magic2013.VileRebirth {
 
     public VileRebirth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 121;
+        this.cardNumber = "121";
         this.expansionSetCode = "M14";
     }
 

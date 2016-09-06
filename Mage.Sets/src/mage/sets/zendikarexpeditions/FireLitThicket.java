@@ -38,7 +38,7 @@ public class FireLitThicket extends mage.sets.shadowmoor.FireLitThicket {
 
     public FireLitThicket(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

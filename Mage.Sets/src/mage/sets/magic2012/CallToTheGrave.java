@@ -28,18 +28,17 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.condition.common.NoCreatureCondition;
+import mage.abilities.condition.common.CreatureCountCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -52,7 +51,7 @@ import mage.game.events.GameEvent;
  */
 public class CallToTheGrave extends CardImpl {
 
-    private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice Call to the Grave.";
+    private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a non-Zombie creature");
 
     static {
@@ -63,13 +62,12 @@ public class CallToTheGrave extends CardImpl {
         super(ownerId, 85, "Call to the Grave", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
         this.expansionSetCode = "M12";
 
-
         // At the beginning of each player's upkeep, that player sacrifices a non-Zombie creature.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player "), TargetController.ANY, false);
         this.addAbility(ability);
         // At the beginning of the end step, if no creatures are on the battlefield, sacrifice Call to the Grave.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
-        this.addAbility(new ConditionalTriggeredAbility(triggered, new NoCreatureCondition(), ruleText));
+        this.addAbility(new ConditionalTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), ruleText));
     }
 
     public CallToTheGrave(final CallToTheGrave card) {

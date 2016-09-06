@@ -37,7 +37,7 @@ public class AuguryOwl extends mage.sets.magic2011.AuguryOwl {
 
     public AuguryOwl(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "PC2";
     }
 

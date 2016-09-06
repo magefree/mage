@@ -37,7 +37,7 @@ public class FiresOfYavimaya extends mage.sets.planechase.FiresOfYavimaya {
 
     public FiresOfYavimaya(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "ARC";
     }
 

@@ -37,7 +37,7 @@ public class GoForTheThroat extends mage.sets.mirrodinbesieged.GoForTheThroat {
 
     public GoForTheThroat(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "FNMP";
     }
 

@@ -38,7 +38,7 @@ public class ElvesOfDeepShadow extends mage.sets.ravnica.ElvesOfDeepShadow {
 
     public ElvesOfDeepShadow(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 68;
+        this.cardNumber = "68";
         this.expansionSetCode = "FNMP";
         this.rarity = Rarity.COMMON;
     }

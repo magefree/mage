@@ -37,7 +37,7 @@ public class PrairieStream extends mage.sets.battleforzendikar.PrairieStream {
 
     public PrairieStream(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 284;
+        this.cardNumber = "284";
         this.expansionSetCode = "PTC";
     }
 

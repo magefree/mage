@@ -37,7 +37,7 @@ public class AgonizingDemise extends mage.sets.ajanivsnicolbolas.AgonizingDemise
 
     public AgonizingDemise(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "INV";
     }
 

@@ -56,7 +56,7 @@ public class SteamCatapult extends CardImpl {
 
     public SteamCatapult(UUID ownerId) {
         super(ownerId, 142, "Steam Catapult", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

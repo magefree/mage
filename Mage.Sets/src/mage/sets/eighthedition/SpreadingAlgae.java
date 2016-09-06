@@ -37,7 +37,7 @@ public class SpreadingAlgae extends mage.sets.urzassaga.SpreadingAlgae {
 
     public SpreadingAlgae(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 281;
+        this.cardNumber = "281";
         this.expansionSetCode = "8ED";
     }
 

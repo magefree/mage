@@ -37,7 +37,7 @@ public class DungroveElder extends mage.sets.magic2012.DungroveElder {
 
     public DungroveElder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "MGDC";
     }
 

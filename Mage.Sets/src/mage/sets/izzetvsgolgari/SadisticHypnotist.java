@@ -37,7 +37,7 @@ public class SadisticHypnotist extends mage.sets.odyssey.SadisticHypnotist {
 
     public SadisticHypnotist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "DDJ";
     }
 

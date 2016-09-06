@@ -41,7 +41,6 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
 public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
 
     protected int amount;
@@ -97,15 +96,18 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
 
     private String setText() {
         String text = "{this} can block ";
-        switch(amount) {
+        switch (amount) {
             case 0:
                 text += "any number of creatures";
                 break;
             default:
                 text += CardUtil.numberToText(amount, "an") + " additional creature" + (amount > 1 ? "s" : "");
         }
-        if(duration == Duration.EndOfTurn) {
+        if (duration.equals(Duration.EndOfTurn)) {
             text += " this turn";
+        }
+        if (duration.equals(Duration.WhileOnBattlefield)) {
+            text += " each combat";
         }
         return text;
     }

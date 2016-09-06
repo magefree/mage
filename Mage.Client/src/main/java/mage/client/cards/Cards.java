@@ -114,7 +114,7 @@ public class Cards extends javax.swing.JPanel {
         setGUISize();
         for (MageCard mageCard : cards.values()) {
             mageCard.setCardBounds(0, 0, getCardDimension().width, getCardDimension().height);
-            mageCard.updateImage();
+            mageCard.updateArtImage();
             mageCard.doLayout();
         }
         layoutCards();

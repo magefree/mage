@@ -37,7 +37,7 @@ public class JourneyToNowhere extends mage.sets.zendikar.JourneyToNowhere {
 
     public JourneyToNowhere(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "CMD";
     }
 

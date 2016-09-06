@@ -37,7 +37,7 @@ public class VerduranEmissary extends mage.sets.phyrexiavsthecoalition.VerduranE
 
     public VerduranEmissary(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 221;
+        this.cardNumber = "221";
         this.expansionSetCode = "INV";
     }
 

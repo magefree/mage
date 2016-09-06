@@ -37,7 +37,7 @@ public class CinderGlade extends mage.sets.battleforzendikar.CinderGlade {
 
     public CinderGlade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 250;
+        this.cardNumber = "250";
         this.expansionSetCode = "PTC";
     }
 

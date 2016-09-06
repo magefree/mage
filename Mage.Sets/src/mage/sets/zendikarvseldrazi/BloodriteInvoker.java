@@ -37,7 +37,7 @@ public class BloodriteInvoker extends mage.sets.riseoftheeldrazi.BloodriteInvoke
 
     public BloodriteInvoker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "DDP";
     }
 

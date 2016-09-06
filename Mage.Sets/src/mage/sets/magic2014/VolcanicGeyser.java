@@ -37,7 +37,7 @@ public class VolcanicGeyser extends mage.sets.magic2013.VolcanicGeyser {
 
     public VolcanicGeyser(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "M14";
     }
 

@@ -37,7 +37,7 @@ public class FlamekinHarbinger extends mage.sets.planechase.FlamekinHarbinger {
 
     public FlamekinHarbinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 167;
+        this.cardNumber = "167";
         this.expansionSetCode = "LRW";
     }
 

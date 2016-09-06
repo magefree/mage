@@ -37,7 +37,7 @@ public class CryptCreeper extends mage.sets.avacynrestored.CryptCreeper {
 
     public CryptCreeper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "ODY";
     }
 

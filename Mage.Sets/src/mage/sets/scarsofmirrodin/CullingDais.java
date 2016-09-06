@@ -92,7 +92,7 @@ class CullingDaisEffect extends OneShotEffect {
         Permanent p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         Player player = game.getPlayer(source.getControllerId());
         if (p != null && player != null) {
-            int count = p.getCounters().getCount(CounterType.CHARGE);
+            int count = p.getCounters(game).getCount(CounterType.CHARGE);
             player.drawCards(count, game);
             return true;
         }

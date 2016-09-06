@@ -38,7 +38,7 @@ public class GwyllionHedgeMage extends mage.sets.commander.GwyllionHedgeMage {
 
     public GwyllionHedgeMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 89;
+        this.cardNumber = "89";
         this.expansionSetCode = "EVE";
     }
 

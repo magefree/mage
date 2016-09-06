@@ -37,6 +37,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -61,6 +62,6 @@ public class EldraziSpawnToken extends Token {
 
         availableImageSetCodes = tokenImageSets;
         // Get one of the three possible token images
-        this.setTokenType(new Random().nextInt(3) + 1);
+        this.setTokenType(RandomUtil.nextInt(3) + 1);
     }
 }

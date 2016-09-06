@@ -56,7 +56,7 @@ public class WharfInfiltrator extends CardImpl {
     public WharfInfiltrator(UUID ownerId) {
         super(ownerId, 80, "Wharf Infiltrator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "EMN";
-        this.subtype.add("Eldrazi");
+        this.subtype.add("Human");
         this.subtype.add("Horror");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

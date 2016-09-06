@@ -45,6 +45,7 @@ import mage.game.result.ResultProtos.MatchProto;
 import mage.game.result.ResultProtos.MatchQuitStatus;
 import mage.players.Player;
 import mage.util.DateFormat;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -243,7 +244,7 @@ public abstract class MatchImpl implements Match {
     }
 
     protected void shufflePlayers() {
-        Collections.shuffle(this.players, new Random());
+        Collections.shuffle(this.players, RandomUtil.getRandom());
     }
 
     @Override

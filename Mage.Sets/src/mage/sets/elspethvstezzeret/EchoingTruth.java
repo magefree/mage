@@ -103,7 +103,7 @@ class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 cardsToHand.add(perm);
             }
-            controller.moveCards(cardsToHand, null, Zone.HAND, source, game);
+            controller.moveCards(cardsToHand, Zone.HAND, source, game);
             return true;
         }
         return true;

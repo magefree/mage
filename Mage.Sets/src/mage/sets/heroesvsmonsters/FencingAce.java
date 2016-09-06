@@ -37,7 +37,7 @@ public class FencingAce extends mage.sets.returntoravnica.FencingAce {
 
     public FencingAce(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "DDL";
     }
 

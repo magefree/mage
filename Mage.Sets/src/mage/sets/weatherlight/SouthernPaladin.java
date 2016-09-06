@@ -38,7 +38,7 @@ public class SouthernPaladin extends mage.sets.seventhedition.SouthernPaladin {
 
     public SouthernPaladin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "WTH";
     }
 

@@ -113,8 +113,8 @@ class BoldwyrIntimidatorEffect extends RestrictionEffect {
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         if (attacker != null && blocker != null) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null && attacker.getSubtype().contains("Warrior")) {
-                return !blocker.getSubtype().contains("Coward");
+            if (sourcePermanent != null && attacker.getSubtype(game).contains("Warrior")) {
+                return !blocker.getSubtype(game).contains("Coward");
             }
         }
         return true;

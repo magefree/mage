@@ -91,7 +91,7 @@ public class AboutDialog extends MageDialog {
 
         jLabel3.setText("Devs: BetaSteward, Noxx, Eugen.Rivniy, North, LevelX2, Jeff, Plopman, dustinconrad, emerald000.,");
 
-        jLabel4.setText("fireshoes, lunaskyrise, mnapoleon, jgod, LoneFox.");
+        jLabel4.setText("fireshoes, lunaskyrise, mnapoleon, jgod, LoneFox, drmDev, spjspj.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

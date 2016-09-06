@@ -37,7 +37,7 @@ public class SanctumGargoyle extends mage.sets.shardsofalara.SanctumGargoyle {
 
     public SanctumGargoyle(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "MMA";
     }
 

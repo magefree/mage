@@ -37,7 +37,7 @@ public class NewBenalia extends mage.sets.futuresight.NewBenalia {
 
     public NewBenalia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 295;
+        this.cardNumber = "295";
         this.expansionSetCode = "C15";
     }
 

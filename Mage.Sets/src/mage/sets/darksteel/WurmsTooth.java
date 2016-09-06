@@ -38,7 +38,7 @@ public class WurmsTooth extends mage.sets.tenthedition.WurmsTooth {
 
     public WurmsTooth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 162;
+        this.cardNumber = "162";
         this.expansionSetCode = "DST";
     }
 

@@ -37,7 +37,7 @@ public class ScourgeDevil extends mage.sets.shardsofalara.ScourgeDevil {
 
     public ScourgeDevil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "DDK";
     }
 

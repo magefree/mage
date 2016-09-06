@@ -37,7 +37,7 @@ public class MoonsilverSpear extends mage.sets.avacynrestored.MoonsilverSpear {
 
     public MoonsilverSpear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 251;
+        this.cardNumber = "251";
         this.expansionSetCode = "C14";
     }
 

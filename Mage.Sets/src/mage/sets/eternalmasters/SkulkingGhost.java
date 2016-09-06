@@ -38,7 +38,7 @@ public class SkulkingGhost extends mage.sets.mirage.SkulkingGhost {
 
     public SkulkingGhost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "EMA";
     }
 

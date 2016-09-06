@@ -37,7 +37,7 @@ public class SkirkMarauder extends mage.sets.legions.SkirkMarauder {
 
     public SkirkMarauder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 50;
+        this.cardNumber = "50";
         this.expansionSetCode = "ARENA";
     }
 

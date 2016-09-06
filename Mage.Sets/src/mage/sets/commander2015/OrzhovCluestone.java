@@ -37,7 +37,7 @@ public class OrzhovCluestone extends mage.sets.dragonsmaze.OrzhovCluestone {
 
     public OrzhovCluestone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 261;
+        this.cardNumber = "261";
         this.expansionSetCode = "C15";
     }
 

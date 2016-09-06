@@ -38,7 +38,7 @@ public class HondenOfLifesWeb extends mage.sets.championsofkamigawa.HondenOfLife
 
     public HondenOfLifesWeb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = "172";
         this.expansionSetCode = "EMA";
     }
 

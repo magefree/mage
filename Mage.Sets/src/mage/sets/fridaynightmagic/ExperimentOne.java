@@ -37,7 +37,7 @@ public class ExperimentOne extends mage.sets.gatecrash.ExperimentOne {
 
     public ExperimentOne(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 160;
+        this.cardNumber = "160";
         this.expansionSetCode = "FNMP";
     }
 

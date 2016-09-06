@@ -38,7 +38,7 @@ public class WuLongbowman extends mage.sets.portalthreekingdoms.WuLongbowman {
 
     public WuLongbowman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

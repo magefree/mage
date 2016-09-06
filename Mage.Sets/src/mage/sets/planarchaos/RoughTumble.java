@@ -38,7 +38,7 @@ public class RoughTumble extends mage.sets.commander2013.RoughTumble {
 
     public RoughTumble(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "PLC";
     }
 

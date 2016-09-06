@@ -38,7 +38,7 @@ public class ShardlessAgent extends mage.sets.planechase2012.ShardlessAgent {
 
     public ShardlessAgent(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 206;
+        this.cardNumber = "206";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.RARE;
     }

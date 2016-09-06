@@ -37,7 +37,7 @@ public class RuinsOfTrokair extends mage.sets.fallenempires.RuinsOfTrokair {
 
     public RuinsOfTrokair(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 438;
+        this.cardNumber = "438";
         this.expansionSetCode = "5ED";
     }
 

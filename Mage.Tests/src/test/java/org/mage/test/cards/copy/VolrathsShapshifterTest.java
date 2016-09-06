@@ -43,7 +43,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Assault Griffin", 3, 2);
 
         Permanent shapeshifter = getPermanent("Assault Griffin", playerA.getId());
-        Assert.assertTrue(shapeshifter.getSubtype().contains("Griffin"));
+        Assert.assertTrue(shapeshifter.getSubtype(currentGame).contains("Griffin"));
         Assert.assertTrue("Volrath's Shapeshifter must have flying", shapeshifter.getAbilities().contains(FlyingAbility.getInstance()));
         Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshiftersOriginalAbility(shapeshifter));
     }
@@ -73,7 +73,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Volrath's Shapeshifter", 0, 1);
 
         Permanent shapeshifter = getPermanent("Volrath's Shapeshifter", playerA.getId());
-        Assert.assertTrue(shapeshifter.getSubtype().contains("Shapeshifter"));
+        Assert.assertTrue(shapeshifter.getSubtype(currentGame).contains("Shapeshifter"));
         Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshiftersOriginalAbility(shapeshifter));
     }
     
@@ -100,7 +100,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Dutiful Thrull", 1, 1);
 
         Permanent shapeshifter = getPermanent("Dutiful Thrull", playerA.getId());
-        Assert.assertTrue(shapeshifter.getSubtype().contains("Thrull"));
+        Assert.assertTrue(shapeshifter.getSubtype(currentGame).contains("Thrull"));
         Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshiftersOriginalAbility(shapeshifter));
         
         

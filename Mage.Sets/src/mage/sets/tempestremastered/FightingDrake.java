@@ -37,7 +37,7 @@ public class FightingDrake extends mage.sets.tempest.FightingDrake {
 
     public FightingDrake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "TPR";
     }
 

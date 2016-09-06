@@ -37,7 +37,7 @@ public class SnakeUmbra extends mage.sets.riseoftheeldrazi.SnakeUmbra {
 
     public SnakeUmbra(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "PC2";
     }
 

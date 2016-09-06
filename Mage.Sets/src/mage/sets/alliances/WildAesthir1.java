@@ -37,7 +37,7 @@ public class WildAesthir1 extends mage.sets.masterseditioniv.WildAesthir {
 
     public WildAesthir1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 154;
+        this.cardNumber = "154";
         this.expansionSetCode = "ALL";
     }
 

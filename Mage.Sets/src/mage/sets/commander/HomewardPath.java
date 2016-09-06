@@ -37,7 +37,7 @@ public class HomewardPath extends mage.sets.commander2013.HomewardPath {
 
     public HomewardPath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 277;
+        this.cardNumber = "277";
         this.expansionSetCode = "CMD";
     }
 

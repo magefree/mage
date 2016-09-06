@@ -38,7 +38,7 @@ public class Recollect extends mage.sets.tenthedition.Recollect {
 
     public Recollect(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

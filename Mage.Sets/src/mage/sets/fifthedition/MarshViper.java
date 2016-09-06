@@ -37,7 +37,7 @@ public class MarshViper extends mage.sets.thedark.MarshViper {
 
     public MarshViper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "5ED";
     }
 

@@ -37,7 +37,7 @@ public class Despise extends mage.sets.newphyrexia.Despise {
 
     public Despise(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 141;
+        this.cardNumber = "141";
         this.expansionSetCode = "FNMP";
     }
 

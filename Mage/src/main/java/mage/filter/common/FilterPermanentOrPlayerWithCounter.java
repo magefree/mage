@@ -59,7 +59,7 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
                 return false;
             }
         } else if (o instanceof Permanent) {
-            if (((Permanent)o).getCounters().size() == 0) {
+            if (((Permanent)o).getCounters(game).size() == 0) {
                 return false;
             }
         }

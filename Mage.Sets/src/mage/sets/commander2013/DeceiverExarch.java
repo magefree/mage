@@ -37,7 +37,7 @@ public class DeceiverExarch extends mage.sets.newphyrexia.DeceiverExarch {
 
     public DeceiverExarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 37;
+        this.cardNumber = "37";
         this.expansionSetCode = "C13";
     }
 

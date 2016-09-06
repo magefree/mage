@@ -37,7 +37,7 @@ public class FiendHunter extends mage.sets.innistrad.FiendHunter {
 
     public FiendHunter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "DDK";
     }
 

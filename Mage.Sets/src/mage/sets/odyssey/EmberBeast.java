@@ -37,7 +37,7 @@ public class EmberBeast extends mage.sets.gatecrash.EmberBeast {
 
     public EmberBeast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 190;
+        this.cardNumber = "190";
         this.expansionSetCode = "ODY";
     }
 

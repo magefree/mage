@@ -42,7 +42,7 @@ public class TalasAirShip extends CardImpl {
 
     public TalasAirShip(UUID ownerId) {
         super(ownerId, 48, "Talas Air Ship", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Human");
         this.subtype.add("Pirate");
 

@@ -39,7 +39,7 @@ public class GloryOfWarfare extends mage.sets.alarareborn.GloryOfWarfare {
     public GloryOfWarfare (UUID ownerId) {
         super(ownerId);
         this.expansionSetCode = "HOP";
-        this.cardNumber = 88;
+        this.cardNumber = "88";
     }
 
     public GloryOfWarfare (final GloryOfWarfare card) {

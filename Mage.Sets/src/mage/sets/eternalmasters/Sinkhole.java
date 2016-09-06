@@ -38,7 +38,7 @@ public class Sinkhole extends mage.sets.limitedalpha.Sinkhole {
 
     public Sinkhole(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.RARE;
     }

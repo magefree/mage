@@ -37,7 +37,7 @@ public class BattleOfWits extends mage.sets.ninthedition.BattleOfWits {
 
     public BattleOfWits(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 69;
+        this.cardNumber = "69";
         this.expansionSetCode = "ODY";
     }
 

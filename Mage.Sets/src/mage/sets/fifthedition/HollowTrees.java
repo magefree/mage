@@ -37,7 +37,7 @@ public class HollowTrees extends mage.sets.fallenempires.HollowTrees {
 
     public HollowTrees(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 422;
+        this.cardNumber = "422";
         this.expansionSetCode = "5ED";
     }
 

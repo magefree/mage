@@ -37,7 +37,7 @@ public class RakdosGuildgate extends mage.sets.returntoravnica.RakdosGuildgate {
 
     public RakdosGuildgate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 314;
+        this.cardNumber = "314";
         this.expansionSetCode = "C13";
     }
 

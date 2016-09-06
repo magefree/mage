@@ -38,7 +38,7 @@ public class Flood extends mage.sets.fourthedition.Flood {
 
     public Flood(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "DRK";
         this.rarity = Rarity.UNCOMMON;
     }

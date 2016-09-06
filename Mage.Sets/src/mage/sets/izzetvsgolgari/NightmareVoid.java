@@ -37,7 +37,7 @@ public class NightmareVoid extends mage.sets.ravnica.NightmareVoid {
 
     public NightmareVoid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "DDJ";
     }
 

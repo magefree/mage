@@ -37,7 +37,7 @@ public class JohtullWurm extends mage.sets.iceage.JohtullWurm {
 
     public JohtullWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 168;
+        this.cardNumber = "168";
         this.expansionSetCode = "ME2";
     }
 

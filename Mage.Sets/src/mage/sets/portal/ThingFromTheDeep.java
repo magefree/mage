@@ -37,7 +37,7 @@ public class ThingFromTheDeep extends mage.sets.masterseditioniv.ThingFromTheDee
 
     public ThingFromTheDeep(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "POR";
     }
 

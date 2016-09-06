@@ -37,7 +37,7 @@ public class DragonThroneOfTarkir extends mage.sets.khansoftarkir.DragonThroneOf
 
     public DragonThroneOfTarkir(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 27;
+        this.cardNumber = "27";
         this.expansionSetCode = "MLP";
     }
 

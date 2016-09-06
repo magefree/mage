@@ -37,7 +37,7 @@ public class ValorMadeReal extends mage.sets.conspiracy.ValorMadeReal {
 
     public ValorMadeReal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "DIS";
     }
 

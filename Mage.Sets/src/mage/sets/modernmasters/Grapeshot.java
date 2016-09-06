@@ -37,7 +37,7 @@ public class Grapeshot extends mage.sets.timespiral.Grapeshot {
 
     public Grapeshot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "MMA";
     }
 

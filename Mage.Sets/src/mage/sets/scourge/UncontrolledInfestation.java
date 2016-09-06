@@ -37,31 +37,21 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
  *
  * @author LoneFox
  */
 public class UncontrolledInfestation extends CardImpl {
-
-    private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-
-    static{
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
-    }
-
     public UncontrolledInfestation(UUID ownerId) {
         super(ownerId, 108, "Uncontrolled Infestation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "SCG";
         this.subtype.add("Aura");
 
         // Enchant nonbasic land
-        TargetPermanent auraTarget = new TargetLandPermanent(filter);
+        TargetPermanent auraTarget = new TargetNonBasicLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());

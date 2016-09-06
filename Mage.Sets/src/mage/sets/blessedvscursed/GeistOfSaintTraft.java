@@ -37,7 +37,7 @@ public class GeistOfSaintTraft extends mage.sets.innistrad.GeistOfSaintTraft {
 
     public GeistOfSaintTraft(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "DDQ";
     }
 

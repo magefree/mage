@@ -38,7 +38,7 @@ public class BloodsoakedChampion extends mage.sets.khansoftarkir.BloodsoakedCham
 
     public BloodsoakedChampion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 92;
+        this.cardNumber = "92";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

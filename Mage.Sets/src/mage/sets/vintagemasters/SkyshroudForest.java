@@ -38,7 +38,7 @@ public class SkyshroudForest extends mage.sets.tempest.SkyshroudForest {
 
     public SkyshroudForest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 315;
+        this.cardNumber = "315";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.UNCOMMON;
     }

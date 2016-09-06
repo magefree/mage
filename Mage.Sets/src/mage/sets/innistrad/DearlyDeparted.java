@@ -94,7 +94,7 @@ class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.hasSubtype("Human")) {
+        if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.hasSubtype("Human", game)) {
             return true;
         }
         return false;

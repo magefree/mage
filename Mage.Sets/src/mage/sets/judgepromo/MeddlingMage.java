@@ -37,7 +37,7 @@ public class MeddlingMage extends mage.sets.alarareborn.MeddlingMage {
 
     public MeddlingMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "JR";
     }
 

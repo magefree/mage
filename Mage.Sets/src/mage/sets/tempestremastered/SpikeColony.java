@@ -37,7 +37,7 @@ public class SpikeColony extends mage.sets.stronghold.SpikeColony {
 
     public SpikeColony(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 195;
+        this.cardNumber = "195";
         this.expansionSetCode = "TPR";
     }
 

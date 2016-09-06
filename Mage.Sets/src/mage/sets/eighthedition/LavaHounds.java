@@ -38,7 +38,7 @@ public class LavaHounds extends mage.sets.weatherlight.LavaHounds {
 
     public LavaHounds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 198;
+        this.cardNumber = "198";
         this.expansionSetCode = "8ED";
         this.rarity = Rarity.RARE;
     }

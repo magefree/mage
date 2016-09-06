@@ -37,7 +37,7 @@ public class FarsightMask extends mage.sets.mirrodin.FarsightMask {
 
     public FarsightMask(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "PC2";
     }
 

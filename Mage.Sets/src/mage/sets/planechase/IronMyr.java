@@ -38,7 +38,7 @@ public class IronMyr extends mage.sets.mirrodin.IronMyr {
 
     public IronMyr (UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 115;
+        this.cardNumber = "115";
         this.expansionSetCode = "HOP";
     }
 

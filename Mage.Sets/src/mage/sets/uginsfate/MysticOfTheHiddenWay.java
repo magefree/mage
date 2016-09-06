@@ -37,7 +37,7 @@ public class MysticOfTheHiddenWay extends mage.sets.khansoftarkir.MysticOfTheHid
 
     public MysticOfTheHiddenWay(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 48;
+        this.cardNumber = "48";
         this.expansionSetCode = "UGIN";
     }
 

@@ -45,7 +45,7 @@ public class SubtypePredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        return input.hasSubtype(subtype);
+        return input.hasSubtype(subtype, game);
     }
 
     @Override

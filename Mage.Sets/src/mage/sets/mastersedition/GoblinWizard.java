@@ -37,7 +37,7 @@ public class GoblinWizard extends mage.sets.thedark.GoblinWizard {
 
     public GoblinWizard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 97;
+        this.cardNumber = "97";
         this.expansionSetCode = "MED";
     }
 

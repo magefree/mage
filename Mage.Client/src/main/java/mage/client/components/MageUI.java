@@ -7,8 +7,8 @@ import javax.swing.JButton;
 
 public class MageUI {
 
-    private final Map<MageComponents, Component> ui = new EnumMap<MageComponents, Component>(MageComponents.class);
-    private final Map<MageComponents, Object> sync = new EnumMap<MageComponents, Object>(MageComponents.class);
+    private final Map<MageComponents, Component> ui = new EnumMap<>(MageComponents.class);
+    private final Map<MageComponents, Object> sync = new EnumMap<>(MageComponents.class);
 
     public JButton getButton(MageComponents name) throws InterruptedException {
         //System.out.println("request for " + name);
@@ -63,7 +63,7 @@ public class MageUI {
             if (sync.containsKey(name)) {
                 synchronized (sync.get(name)) {
                     //System.out.println("notifyAll - " + name);
-                    sync.get(name).notifyAll();    
+                    sync.get(name).notifyAll();
                 }
             }
         }
@@ -80,7 +80,7 @@ public class MageUI {
             ui.put(name, component);
             if (sync.containsKey(name)) {
                 synchronized (sync.get(name)) {
-                    sync.get(name).notifyAll();    
+                    sync.get(name).notifyAll();
                 }
             }
         }
@@ -96,7 +96,7 @@ public class MageUI {
         while (!j.isEnabled()) {
             Thread.sleep(10);
         }
-        Thread t = new Thread(new Runnable()  {
+        Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 j.doClick();

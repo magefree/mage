@@ -37,7 +37,7 @@ public class Deathgazer extends mage.sets.ninthedition.Deathgazer {
 
     public Deathgazer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "8ED";
     }
 

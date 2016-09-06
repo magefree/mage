@@ -37,7 +37,7 @@ public class AccumulatedKnowledge extends mage.sets.nemesis.AccumulatedKnowledge
 
     public AccumulatedKnowledge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 35;
+        this.cardNumber = "35";
         this.expansionSetCode = "DDO";
     }
 

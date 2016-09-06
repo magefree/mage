@@ -37,7 +37,7 @@ public class ShamanOfThePack extends mage.sets.magicorigins.ShamanOfThePack {
 
     public ShamanOfThePack(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 205;
+        this.cardNumber = "205";
         this.expansionSetCode = "EMA";
     }
 

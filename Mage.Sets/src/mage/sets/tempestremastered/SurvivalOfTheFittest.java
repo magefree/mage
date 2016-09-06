@@ -38,7 +38,7 @@ public class SurvivalOfTheFittest extends mage.sets.exodus.SurvivalOfTheFittest 
 
     public SurvivalOfTheFittest(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 199;
+        this.cardNumber = "199";
         this.expansionSetCode = "TPR";
         this.rarity = Rarity.MYTHIC;
     }

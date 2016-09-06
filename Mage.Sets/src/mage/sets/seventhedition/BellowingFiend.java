@@ -38,7 +38,7 @@ public class BellowingFiend extends mage.sets.tempest.BellowingFiend {
 
     public BellowingFiend(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 119;
+        this.cardNumber = "119";
         this.expansionSetCode = "7ED";
     }
 

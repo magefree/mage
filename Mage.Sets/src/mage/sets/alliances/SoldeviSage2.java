@@ -37,7 +37,7 @@ public class SoldeviSage2 extends mage.sets.alliances.SoldeviSage1 {
 
     public SoldeviSage2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "ALL";
     }
 

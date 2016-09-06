@@ -37,7 +37,7 @@ public class CarnageAltar extends mage.sets.zendikar.CarnageAltar {
 
     public CarnageAltar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 238;
+        this.cardNumber = "238";
         this.expansionSetCode = "C13";
     }
 

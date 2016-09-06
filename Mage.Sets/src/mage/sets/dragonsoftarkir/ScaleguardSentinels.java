@@ -37,7 +37,7 @@ public class ScaleguardSentinels extends mage.sets.gameday.ScaleguardSentinels {
 
     public ScaleguardSentinels(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 201;
+        this.cardNumber = "201";
         this.expansionSetCode = "DTK";
     }
 

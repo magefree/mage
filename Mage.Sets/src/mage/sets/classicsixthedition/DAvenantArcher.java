@@ -37,7 +37,7 @@ public class DAvenantArcher extends mage.sets.fifthedition.DAvenantArcher {
 
     public DAvenantArcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "6ED";
     }
 

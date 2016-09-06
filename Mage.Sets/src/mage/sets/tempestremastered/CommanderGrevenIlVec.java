@@ -37,7 +37,7 @@ public class CommanderGrevenIlVec extends mage.sets.tempest.CommanderGrevenIlVec
 
     public CommanderGrevenIlVec(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "TPR";
     }
 

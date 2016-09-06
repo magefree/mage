@@ -38,7 +38,7 @@ public class Deadshot extends mage.sets.tempestremastered.Deadshot {
 
     public Deadshot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 170;
+        this.cardNumber = "170";
         this.expansionSetCode = "TMP";
         this.rarity = Rarity.RARE;
     }

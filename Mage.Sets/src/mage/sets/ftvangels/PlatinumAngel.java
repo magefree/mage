@@ -38,7 +38,7 @@ public class PlatinumAngel extends mage.sets.tenthedition.PlatinumAngel {
 
     public PlatinumAngel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "V15";
         this.rarity = Rarity.MYTHIC;
     }

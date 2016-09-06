@@ -37,7 +37,7 @@ public class DivineIntervention extends mage.sets.masterseditioniii.DivineInterv
 
     public DivineIntervention(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "LEG";
     }
 

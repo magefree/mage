@@ -38,7 +38,7 @@ public class TribalFlames extends mage.sets.invasion.TribalFlames {
 
     public TribalFlames(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -38,7 +38,7 @@ public class AmbitionsCost extends mage.sets.eighthedition.AmbitionsCost {
 
     public AmbitionsCost(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = "67";
         this.expansionSetCode = "PTK";
         this.rarity = Rarity.RARE;
     }

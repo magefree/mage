@@ -37,7 +37,7 @@ public class Oblation extends mage.sets.onslaught.Oblation {
 
     public Oblation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "CMD";
     }
 

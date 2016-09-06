@@ -37,7 +37,7 @@ public class MossDiamond extends mage.sets.seventhedition.MossDiamond {
 
     public MossDiamond(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 277;
+        this.cardNumber = "277";
         this.expansionSetCode = "MIR";
     }
 

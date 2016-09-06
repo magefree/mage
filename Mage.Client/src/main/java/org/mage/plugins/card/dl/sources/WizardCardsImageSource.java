@@ -89,8 +89,10 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("8ED", "Eighth Edition");
         setsAliases.put("9ED", "Ninth Edition");
         setsAliases.put("AER", "Aether Revolt");
+        setsAliases.put("AKH", "Amonkhet");
         setsAliases.put("ALA", "Shards of Alara");
         setsAliases.put("ALL", "Alliances");
+        setsAliases.put("ANB", "Archenemy: Nicol Bolas");
         setsAliases.put("APC", "Apocalypse");
         setsAliases.put("ARB", "Alara Reborn");
         setsAliases.put("ARC", "Archenemy");
@@ -107,6 +109,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("C14", "Commander 2014");
         setsAliases.put("C15", "Commander 2015");
         setsAliases.put("C16", "Commander 2016");
+        setsAliases.put("CMA", "Commander Anthology");
         setsAliases.put("CHK", "Champions of Kamigawa");
         setsAliases.put("CHR", "Chronicles");
         setsAliases.put("CMD", "Magic: The Gathering-Commander");
@@ -115,10 +118,10 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("CON", "Conflux");
         setsAliases.put("CSP", "Coldsnap");
         setsAliases.put("DD2", "Duel Decks: Jace vs. Chandra");
-        setsAliases.put("DD3A", "Duel Decks Anthology, Divine vs. Demonic");
-        setsAliases.put("DD3B", "Duel Decks Anthology, Elves vs. Goblins");
-        setsAliases.put("DD3C", "Duel Decks Anthology, Garruk vs. Liliana");
-        setsAliases.put("DD3D", "Duel Decks Anthology, Jace vs. Chandra");
+        setsAliases.put("DD3DVD", "Duel Decks Anthology, Divine vs. Demonic");
+        setsAliases.put("DD3EVG", "Duel Decks Anthology, Elves vs. Goblins");
+        setsAliases.put("DD3GVL", "Duel Decks Anthology, Garruk vs. Liliana");
+        setsAliases.put("DD3JVC", "Duel Decks Anthology, Jace vs. Chandra");
         setsAliases.put("DDC", "Duel Decks: Divine vs. Demonic");
         setsAliases.put("DDD", "Duel Decks: Garruk vs. Liliana");
         setsAliases.put("DDE", "Duel Decks: Phyrexia vs. the Coalition");
@@ -134,11 +137,13 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DDO", "Duel Decks: Elspeth vs. Kiora");
         setsAliases.put("DDP", "Duel Decks: Zendikar vs. Eldrazi");
         setsAliases.put("DDQ", "Duel Decks: Blessed vs. Cursed");
-        setsAliases.put("DDR", "Duel Decks: Nissa vs Ob Nixilis");
+        setsAliases.put("DDR", "Duel Decks: Nissa vs. Ob Nixilis");
+        setsAliases.put("DDS", "Duel Decks: Mind vs. Might");
         setsAliases.put("DGM", "Dragon's Maze");
         setsAliases.put("DIS", "Dissension");
         setsAliases.put("DKA", "Dark Ascension");
         setsAliases.put("DKM", "Deckmasters");
+        setsAliases.put("DRB", "From the Vault: Dragons");
         setsAliases.put("DRK", "The Dark");
         setsAliases.put("DST", "Darksteel");
         setsAliases.put("DTK", "Dragons of Tarkir");
@@ -151,16 +156,14 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("FNMP", "Friday Night Magic");
         setsAliases.put("FRF", "Fate Reforged");
         setsAliases.put("FUT", "Future Sight");
-        setsAliases.put("FVD", "From the Vault: Dragons");
-        setsAliases.put("FVE", "From the Vault: Exiled");
-        setsAliases.put("FVL", "From the Vault: Legends");
-        setsAliases.put("FVR", "From the Vault: Relics");
         setsAliases.put("GPT", "Guildpact");
         setsAliases.put("GPX", "Grand Prix");
         setsAliases.put("GRC", "WPN Gateway");
         setsAliases.put("GTC", "Gatecrash");
+        setsAliases.put("H09", "Premium Deck Series: Slivers");
         setsAliases.put("HML", "Homelands");
         setsAliases.put("HOP", "Planechase");
+        setsAliases.put("HOU", "Hour of Devastation");
         setsAliases.put("ICE", "Ice Age");
         setsAliases.put("INV", "Invasion");
         setsAliases.put("ISD", "Innistrad");
@@ -191,11 +194,12 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("MLP", "Launch Party");
         setsAliases.put("MMA", "Modern Masters");
         setsAliases.put("MM2", "Modern Masters 2015");
+        setsAliases.put("MM3", "Modern Masters 2017");
         setsAliases.put("MMQ", "Mercadian Masques");
         setsAliases.put("MOR", "Morningtide");
         setsAliases.put("MPRP", "Magic Player Rewards");
         setsAliases.put("MRD", "Mirrodin");
-        setsAliases.put("NMS", "Nemesis");
+        setsAliases.put("NEM", "Nemesis");
         setsAliases.put("NPH", "New Phyrexia");
         setsAliases.put("OGW", "Oath of the Gatewatch");
         setsAliases.put("ODY", "Odyssey");
@@ -204,7 +208,6 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("PC2", "Planechase 2012 Edition");
         setsAliases.put("PCY", "Prophecy");
         setsAliases.put("PD2", "Premium Deck Series: Fire and Lightning");
-        setsAliases.put("PDS", "Premium Deck Series: Slivers");
         setsAliases.put("PLC", "Planar Chaos");
         setsAliases.put("PLS", "Planeshift");
         setsAliases.put("PO2", "Portal Second Age");
@@ -233,6 +236,9 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("ULG", "Urza's Legacy");
         setsAliases.put("UNH", "Unhinged");
         setsAliases.put("USG", "Urza's Saga");
+        setsAliases.put("V09", "From the Vault: Exiled");
+        setsAliases.put("V10", "From the Vault: Relics");
+        setsAliases.put("V11", "From the Vault: Legends");
         setsAliases.put("V12", "From the Vault: Realms");
         setsAliases.put("V13", "From the Vault: Twenty");
         setsAliases.put("V14", "From the Vault: Annihilation (2014)");
@@ -250,7 +256,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("WTH", "Weatherlight");
         setsAliases.put("WWK", "Worldwake");
         setsAliases.put("ZEN", "Zendikar");
-        
+
         languageAliases = new HashMap<>();
         languageAliases.put("es", "Spanish");
         languageAliases.put("jp", "Japanese");
@@ -260,6 +266,16 @@ public class WizardCardsImageSource implements CardImageSource {
         languageAliases.put("de", "German");
     }
 
+    @Override
+    public String getNextHttpImageUrl() {
+        return null;
+    }
+    
+    @Override
+    public String getFileForHttpImage(String httpImageUrl) {
+        return null;
+    }
+    
     private Map<String, String> getSetLinks(String cardSet) {
         ConcurrentHashMap<String, String> setLinks = new ConcurrentHashMap<>();
         ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -298,16 +314,16 @@ public class WizardCardsImageSource implements CardImageSource {
         } catch (IOException ex) {
             System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
         }
-        
+
         executor.shutdown();
-        
+
         while (!executor.isTerminated()) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ie) {
             }
         }
-        
+
         return setLinks;
     }
 
@@ -323,9 +339,9 @@ public class WizardCardsImageSource implements CardImageSource {
             URL url = new URL(urlString);
             Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
             HttpURLConnection uc = (HttpURLConnection)url.openConnection(proxy);
-            
+
             uc.connect();
-            
+
             String line;
             StringBuffer tmp = new StringBuffer();
             BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
@@ -336,7 +352,7 @@ public class WizardCardsImageSource implements CardImageSource {
         }
         return doc;
     }
-    
+
     private Map<String, String> getLandVariations(Integer multiverseId, String cardName) throws IOException, NumberFormatException {
         String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
         Document landDoc = getDocument(urlLandDocument);
@@ -352,7 +368,7 @@ public class WizardCardsImageSource implements CardImageSource {
         } else {
             links.put(cardName.toLowerCase(), generateLink(multiverseId));
         }
-        
+
         return links;
     }
 
@@ -364,7 +380,7 @@ public class WizardCardsImageSource implements CardImageSource {
         if (preferedLanguage.equals("en")) {
             return multiverseId;
         }
-        
+
         String languageName = languageAliases.get(preferedLanguage);
         HashMap<String, Integer> localizedLanguageIds = getlocalizedMultiverseIds(multiverseId);
         if (localizedLanguageIds.containsKey(languageName)) {
@@ -373,7 +389,7 @@ public class WizardCardsImageSource implements CardImageSource {
             return multiverseId;
         }
     }
-    
+
     private HashMap<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) throws IOException {
         String cardLanguagesUrl = "http://gatherer.wizards.com/Pages/Card/Languages.aspx?multiverseid=" + englishMultiverseId;
         Document cardLanguagesDoc = getDocument(cardLanguagesUrl);
@@ -401,7 +417,7 @@ public class WizardCardsImageSource implements CardImageSource {
     	}
         return name.replace("\u2014", "-").replace("\u2019", "'")
                 .replace("\u00C6", "AE").replace("\u00E6", "ae")
-                .replace("\u00C3\u2020", "AE")                
+                .replace("\u00C3\u2020", "AE")
                 .replace("\u00C1", "A").replace("\u00E1", "a")
                 .replace("\u00C2", "A").replace("\u00E2", "a")
                 .replace("\u00D6", "O").replace("\u00F6", "o")
@@ -413,7 +429,7 @@ public class WizardCardsImageSource implements CardImageSource {
 
     @Override
     public String generateURL(CardDownloadData card) throws Exception {
-        Integer collectorId = card.getCollectorId();
+        String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
@@ -430,12 +446,20 @@ public class WizardCardsImageSource implements CardImageSource {
             }
             String link = setLinks.get(card.getDownloadName().toLowerCase());
             if (link == null) {
-                if (setLinks.size() >= collectorId) {
-                    link = setLinks.get(Integer.toString(collectorId - 1));
+                int length = collectorId.length();
+
+                if (Character.isLetter(collectorId.charAt(length -1))) {
+                    length -= 1;
+                }
+
+                int number = Integer.parseInt(collectorId.substring(0, length));
+
+                if (setLinks.size() >= number) {
+                    link = setLinks.get(Integer.toString(number - 1));
                 } else {
-                    link = setLinks.get(Integer.toString(collectorId - 21));
+                    link = setLinks.get(Integer.toString(number - 21));
                     if (link != null) {
-                        link = link.replace(Integer.toString(collectorId - 20), (Integer.toString(collectorId - 20) + "a"));
+                        link = link.replace(Integer.toString(number - 20), (Integer.toString(number - 20) + "a"));
                     }
                 }
             }
@@ -456,21 +480,21 @@ public class WizardCardsImageSource implements CardImageSource {
     public Float getAverageSize() {
         return 60.0f;
     }
-    
+
     private final class GetImageLinkTask implements Runnable {
 
         private final Integer multiverseId;
         private final String cardName;
         private final String preferedLanguage;
         private final ConcurrentHashMap setLinks;
-        
+
         public GetImageLinkTask(Integer multiverseId, String cardName, String preferedLanguage, ConcurrentHashMap setLinks) {
             this.multiverseId = multiverseId;
             this.cardName = cardName;
             this.preferedLanguage = preferedLanguage;
             this.setLinks = setLinks;
         }
-        
+
         @Override
         public void run() {
             try {
@@ -484,7 +508,7 @@ public class WizardCardsImageSource implements CardImageSource {
                 System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
             }
         }
-        
+
     }
-    
+
 }

@@ -38,7 +38,7 @@ public class SacredMesa extends mage.sets.mirage.SacredMesa {
 
     public SacredMesa(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

@@ -45,6 +45,7 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.util.ClassScanner;
 
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -55,7 +56,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
     private static final Logger logger = Logger.getLogger(Sets.class);
     private static final Sets fINSTANCE =  new Sets();
-    protected static Random rnd = new Random();
 
     public static Sets getInstance() {
         return fINSTANCE;
@@ -111,7 +111,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         int tries = 0;
         List<Card> cardPool = new ArrayList<>();
         while (count < cardsCount) {
-            CardInfo cardInfo = cards.get(rnd.nextInt(cards.size()));
+            CardInfo cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
             Card card = cardInfo != null ? cardInfo.getCard() : null;
             if (card != null) {
                 cardPool.add(card);
@@ -163,10 +163,10 @@ public class Sets extends HashMap<String, ExpansionSet> {
             }
 
             for (Map.Entry<String, DeckCardInfo> entry: deckCards.entrySet()) {
-                out.printf("%d [%s:%d] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
+                out.printf("%d [%s:%s] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
             }
             for (Map.Entry<String, DeckCardInfo> entry: sideboard.entrySet()) {
-                out.printf("SB: %d [%s:%d] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
+                out.printf("SB: %d [%s:%s] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
             }
         }
         finally {

@@ -37,7 +37,7 @@ public class Simoon extends mage.sets.visions.Simoon {
 
     public Simoon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 272;
+        this.cardNumber = "272";
         this.expansionSetCode = "INV";
     }
 

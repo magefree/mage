@@ -38,7 +38,7 @@ import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -157,7 +157,7 @@ class TidalInfluenceTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return new CountersCount(CounterType.TIDE).calculate(game, this, null) == 4;
+        return new CountersSourceCount(CounterType.TIDE).calculate(game, this, null) == 4;
     }
 
     @Override

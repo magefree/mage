@@ -83,8 +83,8 @@ class DevastatingSummonsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ElementalToken token = new ElementalToken();
         
-        token.getPower().initValue(new GetXValue().calculate(game, source, this));
-        token.getToughness().initValue(new GetXValue().calculate(game, source, this));
+        token.getPower().modifyBaseValue(new GetXValue().calculate(game, source, this));
+        token.getToughness().modifyBaseValue(new GetXValue().calculate(game, source, this));
         
         token.putOntoBattlefield(2, game, source.getSourceId(), source.getControllerId());
         

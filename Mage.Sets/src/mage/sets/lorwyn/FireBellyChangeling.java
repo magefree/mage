@@ -37,7 +37,7 @@ public class FireBellyChangeling extends mage.sets.knightsvsdragons.FireBellyCha
 
     public FireBellyChangeling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 164;
+        this.cardNumber = "164";
         this.expansionSetCode = "LRW";
     }
 

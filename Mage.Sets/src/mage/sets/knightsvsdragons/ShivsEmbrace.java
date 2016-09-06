@@ -37,7 +37,7 @@ public class ShivsEmbrace extends mage.sets.magic2011.ShivsEmbrace {
 
     public ShivsEmbrace(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 74;
+        this.cardNumber = "74";
         this.expansionSetCode = "DDG";
     }
 

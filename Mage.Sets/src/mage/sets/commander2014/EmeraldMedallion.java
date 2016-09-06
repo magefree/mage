@@ -37,7 +37,7 @@ public class EmeraldMedallion extends mage.sets.tempest.EmeraldMedallion {
 
     public EmeraldMedallion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 237;
+        this.cardNumber = "237";
         this.expansionSetCode = "C14";
     }
 

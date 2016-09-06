@@ -37,7 +37,7 @@ public class DarigaazTheIgniter extends mage.sets.phyrexiavsthecoalition.Darigaa
 
     public DarigaazTheIgniter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 243;
+        this.cardNumber = "243";
         this.expansionSetCode = "INV";
     }
 

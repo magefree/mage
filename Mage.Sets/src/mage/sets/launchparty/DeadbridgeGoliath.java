@@ -37,7 +37,7 @@ public class DeadbridgeGoliath extends mage.sets.returntoravnica.DeadbridgeGolia
 
     public DeadbridgeGoliath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 20;
+        this.cardNumber = "20";
         this.expansionSetCode = "MLP";
     }
 

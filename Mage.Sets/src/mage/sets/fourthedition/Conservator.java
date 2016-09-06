@@ -38,7 +38,7 @@ public class Conservator extends mage.sets.limitedalpha.Conservator {
 
     public Conservator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 327;
+        this.cardNumber = "327";
         this.expansionSetCode = "4ED";
     }
 

@@ -38,7 +38,7 @@ public class GrinningIgnus extends mage.sets.modernmasters.GrinningIgnus {
 
     public GrinningIgnus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 116;
+        this.cardNumber = "116";
         this.expansionSetCode = "FUT";
         this.rarity = Rarity.COMMON;
     }

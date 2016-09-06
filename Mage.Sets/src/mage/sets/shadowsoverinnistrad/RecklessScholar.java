@@ -38,7 +38,7 @@ public class RecklessScholar extends mage.sets.zendikar.RecklessScholar {
 
     public RecklessScholar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "SOI";
         this.rarity = Rarity.UNCOMMON;
     }

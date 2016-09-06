@@ -37,7 +37,7 @@ public class MakindiGriffin extends mage.sets.riseoftheeldrazi.MakindiGriffin {
 
     public MakindiGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "DDP";
     }
 

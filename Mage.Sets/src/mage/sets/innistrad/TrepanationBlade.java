@@ -120,7 +120,7 @@ class TrepanationBladeDiscardEffect extends OneShotEffect {
                     }
                 }
             }
-            player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            player.moveCards(cards, Zone.GRAVEYARD, source, game);
             if (!cards.isEmpty()) {
                 player.revealCards(equipment.getName(), cards, game);
                 game.getState().setValue(source.getSourceId().toString() + "_TrepanationBlade", cards.size());

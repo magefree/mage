@@ -42,7 +42,7 @@ public class Lynx extends CardImpl {
 
     public Lynx(UUID ownerId) {
         super(ownerId, 72, "Lynx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Cat");
 
         this.power = new MageInt(2);

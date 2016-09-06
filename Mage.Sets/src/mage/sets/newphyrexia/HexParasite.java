@@ -99,14 +99,14 @@ class HexParasiteEffect extends OneShotEffect {
         if (permanent != null && player != null) {
             int toRemove = source.getManaCostsToPay().getX();
             int removed = 0;
-            String[] counterNames = permanent.getCounters().keySet().toArray(new String[0]);
+            String[] counterNames = permanent.getCounters(game).keySet().toArray(new String[0]);
             for (String counterName : counterNames) {
                 if (player.chooseUse(Outcome.Neutral, "Do you want to remove " + counterName + " counters?", source, game)) {
-                    if (permanent.getCounters().get(counterName).getCount() == 1 || toRemove == 1) {
+                    if (permanent.getCounters(game).get(counterName).getCount() == 1 || toRemove == 1) {
                         permanent.removeCounters(counterName, 1, game);
                         removed++;
                     } else {
-                        int amount = player.getAmount(1, Math.min(permanent.getCounters().get(counterName).getCount(), toRemove - removed), "How many?", game);
+                        int amount = player.getAmount(1, Math.min(permanent.getCounters(game).get(counterName).getCount(), toRemove - removed), "How many?", game);
                         if (amount > 0) {
                             removed += amount;
                             permanent.removeCounters(counterName, amount, game);

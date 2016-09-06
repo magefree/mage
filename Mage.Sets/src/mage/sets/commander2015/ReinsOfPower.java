@@ -37,7 +37,7 @@ public class ReinsOfPower extends mage.sets.stronghold.ReinsOfPower {
 
     public ReinsOfPower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "C15";
     }
 

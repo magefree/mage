@@ -37,7 +37,7 @@ public class ConundrumSphinx extends mage.sets.magic2011.ConundrumSphinx {
 
     public ConundrumSphinx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 42;
+        this.cardNumber = "42";
         this.expansionSetCode = "CMD";
     }
 

@@ -37,7 +37,7 @@ public class DerangedHermit extends mage.sets.urzaslegacy.DerangedHermit {
 
     public DerangedHermit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "JR";
     }
 

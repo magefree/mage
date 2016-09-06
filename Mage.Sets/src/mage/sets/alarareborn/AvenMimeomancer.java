@@ -116,7 +116,7 @@ class AvenEffect extends ContinuousEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         Permanent creature = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (creature != null && creature.getCounters().getCount(CounterType.FEATHER) < 1) {
+        if (creature != null && creature.getCounters(game).getCount(CounterType.FEATHER) < 1) {
             return true;
         }
         return false;
@@ -160,7 +160,7 @@ class AvenEffect2 extends ContinuousEffectImpl {
     @Override
     public boolean isInactive(Ability source, Game game) {
         Permanent creature = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (creature != null && creature.getCounters().getCount(CounterType.FEATHER) < 1) {
+        if (creature != null && creature.getCounters(game).getCount(CounterType.FEATHER) < 1) {
             return true;
         }
         return false;

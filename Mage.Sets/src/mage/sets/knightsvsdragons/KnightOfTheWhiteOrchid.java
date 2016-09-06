@@ -37,7 +37,7 @@ public class KnightOfTheWhiteOrchid extends mage.sets.shardsofalara.KnightOfTheW
 
     public KnightOfTheWhiteOrchid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = "6";
         this.expansionSetCode = "DDG";
     }
 

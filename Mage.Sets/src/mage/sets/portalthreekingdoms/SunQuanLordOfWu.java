@@ -37,7 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -57,7 +57,7 @@ public class SunQuanLordOfWu extends CardImpl {
 
         // Creatures you control have horsemanship.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HorsemanshipAbility.getInstance(), 
-                Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent("creatures"))));
     }
 
     public SunQuanLordOfWu(final SunQuanLordOfWu card) {

@@ -37,7 +37,7 @@ public class MomentOfHeroism extends mage.sets.innistrad.MomentOfHeroism {
 
     public MomentOfHeroism(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 25;
+        this.cardNumber = "25";
         this.expansionSetCode = "DDL";
     }
 

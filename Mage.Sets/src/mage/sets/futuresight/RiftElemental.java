@@ -37,7 +37,7 @@ public class RiftElemental extends mage.sets.modernmasters.RiftElemental {
 
     public RiftElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
+        this.cardNumber = "106";
         this.expansionSetCode = "FUT";
     }
 

@@ -102,7 +102,7 @@ class KembasLegionEffect extends ContinuousEffectImpl {
                     int count = 0;
                     for (UUID attachmentId : attachments) {
                         Permanent attachment = game.getPermanent(attachmentId);
-                        if (attachment != null && attachment.hasSubtype("Equipment")) {
+                        if (attachment != null && attachment.hasSubtype("Equipment", game)) {
                             count++;
                         }
                     }

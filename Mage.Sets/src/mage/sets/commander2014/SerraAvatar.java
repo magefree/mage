@@ -38,7 +38,7 @@ public class SerraAvatar extends mage.sets.urzassaga.SerraAvatar {
 
     public SerraAvatar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = "87";
         this.expansionSetCode = "C14";
         this.rarity = Rarity.MYTHIC;
     }

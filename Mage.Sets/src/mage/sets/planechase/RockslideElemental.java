@@ -37,7 +37,7 @@ public class RockslideElemental extends mage.sets.shardsofalara.RockslideElement
 
     public RockslideElemental(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "HOP";
     }
 

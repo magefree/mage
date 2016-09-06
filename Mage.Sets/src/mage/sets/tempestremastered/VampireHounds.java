@@ -37,7 +37,7 @@ public class VampireHounds extends mage.sets.exodus.VampireHounds {
 
     public VampireHounds(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 122;
+        this.cardNumber = "122";
         this.expansionSetCode = "TPR";
     }
 

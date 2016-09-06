@@ -37,7 +37,7 @@ public class BoldwyrIntimidator extends mage.sets.morningtide.BoldwyrIntimidator
 
     public BoldwyrIntimidator(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "CNS";
     }
 

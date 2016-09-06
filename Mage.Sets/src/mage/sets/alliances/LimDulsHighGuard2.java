@@ -37,7 +37,7 @@ public class LimDulsHighGuard2 extends LimDulsHighGuard1 {
 
     public LimDulsHighGuard2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
     }
 
     public LimDulsHighGuard2(final LimDulsHighGuard2 card) {

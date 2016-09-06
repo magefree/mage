@@ -37,7 +37,7 @@ public class Fissure extends mage.sets.thedark.Fissure {
 
     public Fissure(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 93;
+        this.cardNumber = "93";
         this.expansionSetCode = "MED";
     }
 

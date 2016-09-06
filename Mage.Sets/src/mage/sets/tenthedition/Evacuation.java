@@ -37,7 +37,7 @@ public class Evacuation extends mage.sets.stronghold.Evacuation {
 
     public Evacuation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "10E";
     }
 

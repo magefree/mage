@@ -106,7 +106,7 @@ class OonasBlackguardReplacementEffect extends ReplacementEffectImpl {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null && creature.getControllerId().equals(source.getControllerId())
                 && creature.getCardType().contains(CardType.CREATURE)
-                && creature.hasSubtype("Rogue")
+                && creature.hasSubtype("Rogue", game)
                 && !event.getTargetId().equals(source.getSourceId())) {
             return true;
         }
@@ -157,7 +157,7 @@ class OonasBlackguardTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && creature.getControllerId().equals(getControllerId()) && creature.getCounters().getCount(CounterType.P1P1) > 0) {
+            if (creature != null && creature.getControllerId().equals(getControllerId()) && creature.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }

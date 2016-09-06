@@ -38,7 +38,7 @@ public class SoulWarden extends mage.sets.magic2010.SoulWarden {
 
     public SoulWarden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "10E";
         this.rarity = Rarity.UNCOMMON;
     }

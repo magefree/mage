@@ -37,7 +37,7 @@ public class CourtStreetDenizen extends mage.sets.gatecrash.CourtStreetDenizen {
 
     public CourtStreetDenizen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "DDO";
     }
 

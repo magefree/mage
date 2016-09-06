@@ -38,7 +38,7 @@ public class RuggedHighlands extends mage.sets.khansoftarkir.RuggedHighlands {
 
     public RuggedHighlands(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 243;
+        this.cardNumber = "243";
         this.expansionSetCode = "EMA";
     }
 

@@ -138,10 +138,7 @@ import mage.target.common.TargetDiscard;
 import mage.target.common.TargetOpponent;
 import mage.target.common.TargetPermanentOrPlayer;
 import mage.target.common.TargetSpellOrPermanent;
-import mage.util.Copier;
-import mage.util.MessageToClient;
-import mage.util.TournamentUtil;
-import mage.util.TreeNode;
+import mage.util.*;
 import org.apache.log4j.Logger;
 
 /**
@@ -165,7 +162,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private transient List<ColoredManaSymbol> chosenColors;
 
     private transient ManaCost currentUnpaidMana;
-    private final Random random = new Random();
 
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
@@ -1258,7 +1254,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
         log.debug("announceXMana");
         //TODO: improve this
-        int value = new Random().nextInt(max + 1);
+        int value = RandomUtil.nextInt(max + 1);
         if (value < max) {
             value++;
         }
@@ -1340,9 +1336,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(this.getId(), game)) {
                 if (game.getOpponents(this.getId()).contains(permanent.getControllerId())
                         && permanent.getCardType().contains(CardType.CREATURE)
-                        && permanent.getSubtype().size() > 0) {
-                    if (choice.getChoices().contains(permanent.getSubtype().get(0))) {
-                        choice.setChoice(permanent.getSubtype().get(0));
+                        && permanent.getSubtype(game).size() > 0) {
+                    if (choice.getChoices().contains(permanent.getSubtype(game).get(0))) {
+                        choice.setChoice(permanent.getSubtype(game).get(0));
                         break;
                     }
                 }
@@ -1352,9 +1348,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 for (UUID opponentId : game.getOpponents(this.getId())) {
                     Player opponent = game.getPlayer(opponentId);
                     for (Card card : opponent.getGraveyard().getCards(game)) {
-                        if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype().size() > 0) {
-                            if (choice.getChoices().contains(card.getSubtype().get(0))) {
-                                choice.setChoice(card.getSubtype().get(0));
+                        if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype(game).size() > 0) {
+                            if (choice.getChoices().contains(card.getSubtype(game).get(0))) {
+                                choice.setChoice(card.getSubtype(game).get(0));
                                 break;
                             }
                         }
@@ -1368,9 +1364,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             // choose a creature type of hand or library
             for (UUID cardId : this.getHand()) {
                 Card card = game.getCard(cardId);
-                if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype().size() > 0) {
-                    if (choice.getChoices().contains(card.getSubtype().get(0))) {
-                        choice.setChoice(card.getSubtype().get(0));
+                if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype(game).size() > 0) {
+                    if (choice.getChoices().contains(card.getSubtype(game).get(0))) {
+                        choice.setChoice(card.getSubtype(game).get(0));
                         break;
                     }
                 }
@@ -1378,9 +1374,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (!choice.isChosen()) {
                 for (UUID cardId : this.getLibrary().getCardList()) {
                     Card card = game.getCard(cardId);
-                    if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype().size() > 0) {
-                        if (choice.getChoices().contains(card.getSubtype().get(0))) {
-                            choice.setChoice(card.getSubtype().get(0));
+                    if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype(game).size() > 0) {
+                        if (choice.getChoices().contains(card.getSubtype(game).get(0))) {
+                            choice.setChoice(card.getSubtype(game).get(0));
                             break;
                         }
                     }
@@ -1558,7 +1554,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         //TODO: improve this
         if (min < max && min == 0) {
-            return new Random().nextInt(max + 1);
+            return RandomUtil.nextInt(max + 1);
         }
         return min;
     }
@@ -1587,7 +1583,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     private static void addBasicLands(Deck deck, String landName, int number) {
-        Random random = new Random();
         Set<String> landSets = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes());
 
         CardCriteria criteria = new CardCriteria();
@@ -1605,7 +1600,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         for (int i = 0; i < number; i++) {
-            Card land = cards.get(random.nextInt(cards.size())).getCard();
+            Card land = cards.get(RandomUtil.nextInt(cards.size())).getCard();
             deck.getCards().add(land);
         }
     }
@@ -2239,7 +2234,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         UUID randomOpponentId = game.getOpponents(abilityControllerId).iterator().next();
         Set<UUID> opponents = game.getOpponents(abilityControllerId);
         if (opponents.size() > 1) {
-            int rand = random.nextInt(opponents.size());
+            int rand = RandomUtil.nextInt(opponents.size());
             int count = 0;
             for (UUID currentId : opponents) {
                 if (count == rand) {

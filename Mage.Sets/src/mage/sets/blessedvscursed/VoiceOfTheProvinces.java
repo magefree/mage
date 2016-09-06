@@ -37,7 +37,7 @@ public class VoiceOfTheProvinces extends mage.sets.avacynrestored.VoiceOfTheProv
 
     public VoiceOfTheProvinces(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "DDQ";
     }
 

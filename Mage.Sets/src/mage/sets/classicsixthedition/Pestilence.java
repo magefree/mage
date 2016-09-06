@@ -37,7 +37,7 @@ public class Pestilence extends mage.sets.urzassaga.Pestilence {
 
     public Pestilence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 149;
+        this.cardNumber = "149";
         this.expansionSetCode = "6ED";
     }
 

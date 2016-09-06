@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PreventAllDamageByAllEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -59,7 +59,7 @@ public class RevealingWind extends CardImpl {
         this.expansionSetCode = "DTK";
 
         // Prevent all combat damage that would be dealt this turn. You may look at each face-down creature that's attacking or blocking.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
         this.getSpellAbility().addEffect(new RevealingWindEffect());
     }
 

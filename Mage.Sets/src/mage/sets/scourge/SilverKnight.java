@@ -37,7 +37,7 @@ public class SilverKnight extends mage.sets.knightsvsdragons.SilverKnight {
 
     public SilverKnight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 23;
+        this.cardNumber = "23";
         this.expansionSetCode = "SCG";
     }
 

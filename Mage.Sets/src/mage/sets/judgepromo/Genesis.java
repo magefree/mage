@@ -37,7 +37,7 @@ public class Genesis extends mage.sets.judgment.Genesis {
 
     public Genesis(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 79;
+        this.cardNumber = "79";
         this.expansionSetCode = "JR";
     }
 

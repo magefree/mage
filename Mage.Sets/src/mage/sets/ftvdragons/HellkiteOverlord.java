@@ -38,7 +38,7 @@ public class HellkiteOverlord extends mage.sets.shardsofalara.HellkiteOverlord {
 
     public HellkiteOverlord(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 8;
+        this.cardNumber = "8";
         this.expansionSetCode = "DRB";
         this.rarity = Rarity.RARE;
     }

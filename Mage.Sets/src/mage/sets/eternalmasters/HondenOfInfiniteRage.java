@@ -38,7 +38,7 @@ public class HondenOfInfiniteRage extends mage.sets.championsofkamigawa.HondenOf
 
     public HondenOfInfiniteRage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 134;
+        this.cardNumber = "134";
         this.expansionSetCode = "EMA";
     }
 

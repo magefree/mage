@@ -37,7 +37,7 @@ public class SpinerockKnoll extends mage.sets.lorwyn.SpinerockKnoll {
 
     public SpinerockKnoll(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 309;
+        this.cardNumber = "309";
         this.expansionSetCode = "C15";
     }
 

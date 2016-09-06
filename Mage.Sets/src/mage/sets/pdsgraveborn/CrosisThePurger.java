@@ -38,7 +38,7 @@ public class CrosisThePurger extends mage.sets.invasion.CrosisThePurger {
 
     public CrosisThePurger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "PD3";
     }
 

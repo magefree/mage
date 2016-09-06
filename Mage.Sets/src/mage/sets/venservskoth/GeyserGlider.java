@@ -37,7 +37,7 @@ public class GeyserGlider extends mage.sets.zendikar.GeyserGlider {
 
     public GeyserGlider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 56;
+        this.cardNumber = "56";
         this.expansionSetCode = "DDI";
     }
 

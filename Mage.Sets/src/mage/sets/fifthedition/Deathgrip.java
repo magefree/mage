@@ -37,7 +37,7 @@ public class Deathgrip extends mage.sets.limitedbeta.Deathgrip {
 
     public Deathgrip(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "5ED";
     }
 

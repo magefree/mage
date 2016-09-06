@@ -39,7 +39,7 @@ public class HavocDemon extends mage.sets.legions.HavocDemon {
 
     public HavocDemon(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = "90";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.UNCOMMON;
     }

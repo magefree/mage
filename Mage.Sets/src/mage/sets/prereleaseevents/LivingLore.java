@@ -37,7 +37,7 @@ public class LivingLore extends mage.sets.dragonsoftarkir.LivingLore {
 
     public LivingLore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 182;
+        this.cardNumber = "182";
         this.expansionSetCode = "PTC";
     }
 

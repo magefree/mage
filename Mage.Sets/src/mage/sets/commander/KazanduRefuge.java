@@ -37,7 +37,7 @@ public class KazanduRefuge extends mage.sets.zendikar.KazanduRefuge {
 
     public KazanduRefuge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 280;
+        this.cardNumber = "280";
         this.expansionSetCode = "CMD";
     }
 

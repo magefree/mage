@@ -38,7 +38,7 @@ public class Scragnoth extends mage.sets.tempest.Scragnoth {
 
     public Scragnoth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 83;
+        this.cardNumber = "83";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

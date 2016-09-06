@@ -38,7 +38,7 @@ public class MurmuringBosk extends mage.sets.morningtide.MurmuringBosk {
 
     public MurmuringBosk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

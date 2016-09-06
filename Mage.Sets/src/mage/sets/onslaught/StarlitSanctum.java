@@ -141,7 +141,7 @@ class StarlitSanctumBlackEffect extends OneShotEffect {
         if (amount > 0) {
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
+                player.loseLife(amount, game);
                 return true;
             }
         }

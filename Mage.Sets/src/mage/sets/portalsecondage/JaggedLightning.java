@@ -37,8 +37,8 @@ public class JaggedLightning extends mage.sets.urzassaga.JaggedLightning {
 
     public JaggedLightning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 106;
-        this.expansionSetCode = "P02";
+        this.cardNumber = "106";
+        this.expansionSetCode = "PO2";
     }
 
     public JaggedLightning(final JaggedLightning card) {

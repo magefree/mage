@@ -38,7 +38,7 @@ public class Skyshaper extends mage.sets.tempestremastered.Skyshaper {
 
     public Skyshaper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 137;
+        this.cardNumber = "137";
         this.expansionSetCode = "EXO";
         this.rarity = Rarity.UNCOMMON;
     }

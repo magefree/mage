@@ -37,7 +37,7 @@ public class Magmaquake extends mage.sets.magic2013.Magmaquake {
 
     public Magmaquake(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 180;
+        this.cardNumber = "180";
         this.expansionSetCode = "C14";
     }
 

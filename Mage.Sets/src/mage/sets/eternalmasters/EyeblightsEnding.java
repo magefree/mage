@@ -38,7 +38,7 @@ public class EyeblightsEnding extends mage.sets.lorwyn.EyeblightsEnding {
 
     public EyeblightsEnding(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 88;
+        this.cardNumber = "88";
         this.expansionSetCode = "EMA";
     }
 

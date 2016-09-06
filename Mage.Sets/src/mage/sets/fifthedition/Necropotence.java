@@ -37,7 +37,7 @@ public class Necropotence extends mage.sets.iceage.Necropotence {
 
     public Necropotence(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "5ED";
     }
 

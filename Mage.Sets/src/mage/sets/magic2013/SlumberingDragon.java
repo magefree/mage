@@ -96,7 +96,7 @@ class SlumberingDragonEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            if (permanent.getCounters().getCount(CounterType.P1P1) >= 5) {
+            if (permanent.getCounters(game).getCount(CounterType.P1P1) >= 5) {
                 return false;
             }
             return true;

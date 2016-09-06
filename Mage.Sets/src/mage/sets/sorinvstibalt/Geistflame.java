@@ -37,7 +37,7 @@ public class Geistflame extends mage.sets.innistrad.Geistflame {
 
     public Geistflame(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "DDK";
     }
 

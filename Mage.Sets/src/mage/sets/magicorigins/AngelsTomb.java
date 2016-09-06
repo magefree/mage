@@ -37,7 +37,7 @@ public class AngelsTomb extends mage.sets.avacynrestored.AngelsTomb {
 
     public AngelsTomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 222;
+        this.cardNumber = "222";
         this.expansionSetCode = "ORI";
     }
 

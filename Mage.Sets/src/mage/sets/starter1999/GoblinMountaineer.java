@@ -37,7 +37,7 @@ public class GoblinMountaineer extends mage.sets.shardsofalara.GoblinMountaineer
 
     public GoblinMountaineer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "S99";
     }
 

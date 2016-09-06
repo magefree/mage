@@ -31,16 +31,15 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -103,7 +102,7 @@ class CoercivePortalEffect extends OneShotEffect {
             }
             if (carnageCount > homageCount) {
                 new SacrificeSourceEffect().apply(game, source);
-                new CoercivePortalDestroyEffect().apply(game, source);
+                new DestroyAllEffect(new FilterNonlandPermanent()).apply(game, source);
             } else {
                 controller.drawCards(1, game);
             }
@@ -111,32 +110,4 @@ class CoercivePortalEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class CoercivePortalDestroyEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterNonlandPermanent();
-
-    public CoercivePortalDestroyEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "sacrifice Coercive Portal and destroy all nonland permanents";
-    }
-
-    public CoercivePortalDestroyEffect(final CoercivePortalDestroyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.destroy(source.getSourceId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public CoercivePortalDestroyEffect copy() {
-        return new CoercivePortalDestroyEffect(this);
-    }
-
 }

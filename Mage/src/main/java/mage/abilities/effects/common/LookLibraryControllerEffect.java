@@ -171,7 +171,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
                 }
                 break;
             case GRAVEYARD:
-                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                player.moveCards(cards, Zone.GRAVEYARD, source, game);
                 break;
             default:
             // not supported yet

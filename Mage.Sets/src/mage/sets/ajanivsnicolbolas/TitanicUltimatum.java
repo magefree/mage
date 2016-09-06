@@ -37,7 +37,7 @@ public class TitanicUltimatum extends mage.sets.shardsofalara.TitanicUltimatum {
 
     public TitanicUltimatum(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "DDH";
     }
 

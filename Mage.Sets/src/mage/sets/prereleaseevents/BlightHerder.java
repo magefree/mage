@@ -37,7 +37,7 @@ public class BlightHerder extends mage.sets.battleforzendikar.BlightHerder {
 
     public BlightHerder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 245;
+        this.cardNumber = "245";
         this.expansionSetCode = "PTC";
     }
 

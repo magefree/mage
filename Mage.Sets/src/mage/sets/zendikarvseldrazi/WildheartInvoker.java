@@ -37,7 +37,7 @@ public class WildheartInvoker extends mage.sets.riseoftheeldrazi.WildheartInvoke
 
     public WildheartInvoker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 26;
+        this.cardNumber = "26";
         this.expansionSetCode = "DDP";
     }
 

@@ -38,7 +38,7 @@ public class RoyalTrooper extends mage.sets.starter1999.RoyalTrooper {
 
     public RoyalTrooper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
+        this.cardNumber = "32";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.COMMON;
     }

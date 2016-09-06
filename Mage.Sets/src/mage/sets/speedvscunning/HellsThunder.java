@@ -37,7 +37,7 @@ public class HellsThunder extends mage.sets.shardsofalara.HellsThunder {
 
     public HellsThunder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "DDN";
     }
 

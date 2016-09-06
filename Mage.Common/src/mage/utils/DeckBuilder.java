@@ -14,6 +14,7 @@ import mage.cards.decks.Deck;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.interfaces.rate.RateCallback;
+import mage.util.RandomUtil;
 
 /**
  * Builds deck from provided card pool.
@@ -205,7 +206,7 @@ public class DeckBuilder {
             ColoredManaSymbol bestColor = null;
             //Default to a color in the allowed colors
             if (allowedColors != null && !allowedColors.isEmpty()) {
-                bestColor = allowedColors.get(new Random().nextInt(allowedColors.size()));
+                bestColor = allowedColors.get(RandomUtil.nextInt(allowedColors.size()));
             }
             int lowestRatio = Integer.MAX_VALUE;
             for (final ColoredManaSymbol color : ColoredManaSymbol.values()) {
@@ -247,9 +248,9 @@ public class DeckBuilder {
             int type;
             if (card.getCardType().contains(CardType.CREATURE)) {
                 type = 10;
-            } else if (card.getSubtype().contains("Equipment")) {
+            } else if (card.getSubtype(null).contains("Equipment")) {
                 type = 8;
-            } else if (card.getSubtype().contains("Aura")) {
+            } else if (card.getSubtype(null).contains("Aura")) {
                 type = 5;
             } else if (card.getCardType().contains(CardType.INSTANT)) {
                 type = 7;

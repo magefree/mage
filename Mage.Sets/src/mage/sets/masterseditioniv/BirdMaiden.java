@@ -37,7 +37,7 @@ public class BirdMaiden extends mage.sets.fifthedition.BirdMaiden {
 
     public BirdMaiden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = "110";
         this.expansionSetCode = "ME4";
     }
 

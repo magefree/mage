@@ -37,7 +37,7 @@ public class BadRiver extends mage.sets.mirage.BadRiver {
 
     public BadRiver(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 290;
+        this.cardNumber = "290";
         this.expansionSetCode = "VMA";
     }
 

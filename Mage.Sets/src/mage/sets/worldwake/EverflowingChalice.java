@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MultikickerAbility;
@@ -64,7 +64,7 @@ public class EverflowingChalice extends CardImpl {
                 "with a charge counter on it for each time it was kicked"));
 
         // {T}: Add {C} to your mana pool for each charge counter on Everflowing Chalice.
-        this.addAbility(new DynamicManaAbility(Mana.ColorlessMana(1), new CountersCount(CounterType.CHARGE)));
+        this.addAbility(new DynamicManaAbility(Mana.ColorlessMana(1), new CountersSourceCount(CounterType.CHARGE)));
     }
 
     public EverflowingChalice(final EverflowingChalice card) {

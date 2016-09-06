@@ -114,7 +114,7 @@ class MikaeusTheUnhallowedAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.controllerId)) {
             Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.hasSubtype("Human")) {
+            if (permanent != null && permanent.hasSubtype("Human", game)) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
                 return true;
             }

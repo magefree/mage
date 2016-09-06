@@ -38,7 +38,7 @@ public class SproutingThrinax extends mage.sets.shardsofalara.SproutingThrinax {
 
     public SproutingThrinax(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 21;
+        this.cardNumber = "21";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }

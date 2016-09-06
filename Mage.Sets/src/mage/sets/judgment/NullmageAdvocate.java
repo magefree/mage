@@ -37,7 +37,7 @@ public class NullmageAdvocate extends mage.sets.planechase2012.NullmageAdvocate 
 
     public NullmageAdvocate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 126;
+        this.cardNumber = "126";
         this.expansionSetCode = "JUD";
     }
 

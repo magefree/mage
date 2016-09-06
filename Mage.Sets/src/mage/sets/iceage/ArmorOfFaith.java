@@ -37,7 +37,7 @@ public class ArmorOfFaith extends mage.sets.masterseditionii.ArmorOfFaith {
 
     public ArmorOfFaith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 228;
+        this.cardNumber = "228";
         this.expansionSetCode = "ICE";
     }
 

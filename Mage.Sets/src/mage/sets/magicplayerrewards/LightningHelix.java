@@ -38,7 +38,7 @@ public class LightningHelix extends mage.sets.ravnica.LightningHelix {
 
     public LightningHelix(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "MPRP";
         this.rarity = Rarity.SPECIAL;
     }

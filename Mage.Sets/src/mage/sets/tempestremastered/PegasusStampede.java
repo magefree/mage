@@ -37,7 +37,7 @@ public class PegasusStampede extends mage.sets.exodus.PegasusStampede {
 
     public PegasusStampede(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "TPR";
     }
 

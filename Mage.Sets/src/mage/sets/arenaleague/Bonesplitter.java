@@ -37,7 +37,7 @@ public class Bonesplitter extends mage.sets.mirrodin.Bonesplitter {
 
     public Bonesplitter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 52;
+        this.cardNumber = "52";
         this.expansionSetCode = "ARENA";
     }
 

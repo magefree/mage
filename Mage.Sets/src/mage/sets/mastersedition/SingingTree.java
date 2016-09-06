@@ -38,7 +38,7 @@ public class SingingTree extends mage.sets.arabiannights.SingingTree {
 
     public SingingTree(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 130;
+        this.cardNumber = "130";
         this.expansionSetCode = "MED";
         this.rarity = Rarity.UNCOMMON;
     }

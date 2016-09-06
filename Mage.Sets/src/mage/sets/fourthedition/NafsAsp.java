@@ -33,11 +33,11 @@ import java.util.UUID;
  *
  * @author LoneFox
  */
-public class NafsAsp extends mage.sets.arabiannights.NafsAsp {
+public class NafsAsp extends mage.sets.arabiannights.NafsAsp1 {
 
     public NafsAsp(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 148;
+        this.cardNumber = "148";
         this.expansionSetCode = "4ED";
     }
 

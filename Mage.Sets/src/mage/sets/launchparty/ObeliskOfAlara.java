@@ -37,7 +37,7 @@ public class ObeliskOfAlara extends mage.sets.conflux.ObeliskOfAlara {
 
     public ObeliskOfAlara(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "MLP";
     }
 

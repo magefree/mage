@@ -28,6 +28,7 @@
 package mage.util;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
@@ -59,6 +60,7 @@ public class TargetAddress {
             this.card = card;
         }
 
+        @Override
         public Iterator<TargetAddress> iterator() {
             return new TargetAddressIterator(card);
         }
@@ -87,10 +89,12 @@ public class TargetAddress {
             calcNext();
         }
 
+        @Override
         public boolean hasNext() {
             return lastTargetIndex != null;
         }
 
+        @Override
         public TargetAddress next() {
             TargetAddress ret = new TargetAddress(lastSpellAbilityIndex,
                     lastMode,
@@ -100,6 +104,7 @@ public class TargetAddress {
 
         }
 
+        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }
@@ -187,5 +192,26 @@ public class TargetAddress {
     @Override
     public int hashCode() {
         return spellAbilityIndex ^ mode.hashCode() ^ targetIndex;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TargetAddress other = (TargetAddress) obj;
+        if (this.spellAbilityIndex != other.spellAbilityIndex) {
+            return false;
+        }
+        if (this.targetIndex != other.targetIndex) {
+            return false;
+        }
+        return Objects.equals(this.mode, other.mode);
     }
 }

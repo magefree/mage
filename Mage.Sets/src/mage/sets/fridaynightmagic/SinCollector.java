@@ -37,7 +37,7 @@ public class SinCollector extends mage.sets.dragonsmaze.SinCollector {
     
     public SinCollector(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 163;
+        this.cardNumber = "163";
         this.expansionSetCode = "FNMP";
     }
     

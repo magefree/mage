@@ -28,20 +28,17 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -58,8 +55,10 @@ public class MortisDogs extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Whenever Mortis Dogs attacks, it gets +2/+0 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
-        Ability ability = new DiesTriggeredAbility(new MortisDogsEffect());
+        // When Mortis Dogs dies, target player loses life equal to its power.
+        Ability ability = new DiesTriggeredAbility(new LoseLifeTargetEffect(new SourcePermanentPowerCount()));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -72,29 +71,4 @@ public class MortisDogs extends CardImpl {
     public MortisDogs copy() {
         return new MortisDogs(this);
     }
-}
-
-class MortisDogsEffect extends OneShotEffect {
-
-    public MortisDogsEffect() {
-        super(Outcome.Damage);
-        staticText = "target player loses life equal to its power";
-    }
-
-    @Override
-    public MortisDogsEffect copy() {
-        return new MortisDogsEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            player.loseLife(sourcePermanent.getPower().getValue(), game);
-            return true;
-        }
-        return false;
-    }
-
 }

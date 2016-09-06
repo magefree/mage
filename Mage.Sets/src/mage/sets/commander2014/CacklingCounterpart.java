@@ -37,7 +37,7 @@ public class CacklingCounterpart extends mage.sets.innistrad.CacklingCounterpart
 
     public CacklingCounterpart(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "C14";
     }
 

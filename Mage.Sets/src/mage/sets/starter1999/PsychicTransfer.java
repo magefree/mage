@@ -37,7 +37,7 @@ public class PsychicTransfer extends mage.sets.mirage.PsychicTransfer {
 
     public PsychicTransfer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "S99";
     }
 

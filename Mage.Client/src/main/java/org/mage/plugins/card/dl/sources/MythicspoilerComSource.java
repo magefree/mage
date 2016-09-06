@@ -114,66 +114,19 @@ public class MythicspoilerComSource implements CardImageSource {
             for (String setName : setNames.split("\\^")) {
                 String URLSetName = URLEncoder.encode(setName, "UTF-8");
                 String baseUrl = "http://mythicspoiler.com/" + URLSetName + "/";
-                String urlDocument;
-                Document doc;
-                if (proxyType.equals(ProxyType.NONE)) {
-                    urlDocument = baseUrl;
-                    doc = Jsoup.connect(urlDocument).get();
-                } else {
-                    String proxyServer = prefs.get("proxyAddress", "");
-                    int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
-                    URL url = new URL(baseUrl);
-                    Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
-                    HttpURLConnection uc = (HttpURLConnection) url.openConnection(proxy);
 
-                    uc.connect();
+                Map<String, String> pageLinks = getSetLinksFromPage(cardSet, aliasesStart, prefs, proxyType, baseUrl, baseUrl);
+                setLinks.putAll(pageLinks);
 
-                    String line;
-                    StringBuffer tmp = new StringBuffer();
-                    BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-                    while ((line = in.readLine()) != null) {
-                        tmp.append(line);
-                    }
-                    doc = Jsoup.parse(String.valueOf(tmp));
+                // try to download images for double-faced cards
+                try {
+                    String doubleFacedUrl = baseUrl + "dfc.html";
+                    pageLinks = getSetLinksFromPage(cardSet, aliasesStart, prefs, proxyType, baseUrl, doubleFacedUrl);
+                    setLinks.putAll(pageLinks);
                 }
-
-                Elements cardsImages = doc.select("img[src^=cards/]"); // starts with cards/
-                if (!aliasesStart.isEmpty()) {
-                    for (String text : aliasesStart) {
-                        cardsImages.addAll(doc.select("img[src^=" + text + "]"));
-                    }
+                catch (Exception ex) {
+                    // that's ok if we cannot download double-faced cards for some sets
                 }
-                if (cardsImages.isEmpty()) {
-                    break;
-                }
-
-                for (Element cardsImage : cardsImages) {
-                    String cardLink = cardsImage.attr("src");
-                    String cardName = null;
-                    if (cardLink.startsWith("cards/") && cardLink.endsWith(".jpg")) {
-                        cardName = cardLink.substring(6, cardLink.length() - 4);
-                    } else if (aliasesStart.contains(cardLink)) {
-                        cardName = cardLink.substring(0, cardLink.length() - 4);;
-                    }
-                    if (cardName != null && !cardName.isEmpty()) {
-                        if (cardNameAliases.containsKey(cardSet + "-" + cardName)) {
-                            cardName = cardNameAliases.get(cardSet + "-" + cardName);
-                        } else {
-                            if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3") || cardName.endsWith("4") || cardName.endsWith("5")) {
-                                if (!cardName.startsWith("forest")
-                                        && !cardName.startsWith("swamp")
-                                        && !cardName.startsWith("mountain")
-                                        && !cardName.startsWith("island")
-                                        && !cardName.startsWith("plains")) {
-
-                                    cardName = cardName.substring(0, cardName.length() - 1);
-                                }
-                            }
-                        }
-                        setLinks.put(cardName, baseUrl + cardLink);
-                    }
-                }
-
             }
 
         } catch (IOException ex) {
@@ -182,9 +135,74 @@ public class MythicspoilerComSource implements CardImageSource {
         return setLinks;
     }
 
+    private Map<String, String> getSetLinksFromPage(String cardSet, Set<String> aliasesStart, Preferences prefs,
+                                                    ProxyType proxyType, String baseUrl, String pageUrl) throws IOException {
+        Map<String, String> pageLinks = new HashMap<>();
+
+        String urlDocument;
+        Document doc;
+        if (proxyType.equals(ProxyType.NONE)) {
+            urlDocument = pageUrl;
+            doc = Jsoup.connect(urlDocument).get();
+        } else {
+            String proxyServer = prefs.get("proxyAddress", "");
+            int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
+            URL url = new URL(pageUrl);
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
+            HttpURLConnection uc = (HttpURLConnection) url.openConnection(proxy);
+
+            uc.connect();
+
+            String line;
+            StringBuffer tmp = new StringBuffer();
+            BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+            while ((line = in.readLine()) != null) {
+                tmp.append(line);
+            }
+            doc = Jsoup.parse(String.valueOf(tmp));
+        }
+
+        Elements cardsImages = doc.select("img[src^=cards/]"); // starts with cards/
+        if (!aliasesStart.isEmpty()) {
+            for (String text : aliasesStart) {
+                cardsImages.addAll(doc.select("img[src^=" + text + "]"));
+            }
+        }
+
+        for (Element cardsImage : cardsImages) {
+            String cardLink = cardsImage.attr("src");
+            String cardName = null;
+            if (cardLink.startsWith("cards/") && cardLink.endsWith(".jpg")) {
+                cardName = cardLink.substring(6, cardLink.length() - 4);
+            } else if (aliasesStart.contains(cardLink)) {
+                cardName = cardLink.substring(0, cardLink.length() - 4);
+                ;
+            }
+            if (cardName != null && !cardName.isEmpty()) {
+                if (cardNameAliases.containsKey(cardSet + "-" + cardName)) {
+                    cardName = cardNameAliases.get(cardSet + "-" + cardName);
+                } else {
+                    if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3") || cardName.endsWith("4") || cardName.endsWith("5")) {
+                        if (!cardName.startsWith("forest")
+                                && !cardName.startsWith("swamp")
+                                && !cardName.startsWith("mountain")
+                                && !cardName.startsWith("island")
+                                && !cardName.startsWith("plains")) {
+
+                            cardName = cardName.substring(0, cardName.length() - 1);
+                        }
+                    }
+                }
+                pageLinks.put(cardName, baseUrl + cardLink);
+            }
+        }
+
+        return pageLinks;
+    }
+
     @Override
     public String generateURL(CardDownloadData card) throws Exception {
-        Integer collectorId = card.getCollectorId();
+        String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
@@ -215,5 +233,15 @@ public class MythicspoilerComSource implements CardImageSource {
     @Override
     public Float getAverageSize() {
         return 50.0f;
+    }
+
+    @Override
+    public String getNextHttpImageUrl() {
+        return null;
+    }
+
+    @Override
+    public String getFileForHttpImage(String httpImageUrl) {
+        return null;
     }
 }

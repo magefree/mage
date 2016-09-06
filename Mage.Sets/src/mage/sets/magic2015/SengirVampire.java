@@ -39,7 +39,7 @@ public class SengirVampire extends mage.sets.tenthedition.SengirVampire {
     public SengirVampire(UUID ownerId) {
         super(ownerId);
         this.rarity = Rarity.UNCOMMON;
-        this.cardNumber = 277;
+        this.cardNumber = "277";
         this.expansionSetCode = "M15";
     }
 

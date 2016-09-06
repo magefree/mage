@@ -37,7 +37,7 @@ public class GreaterBasilisk extends mage.sets.magic2011.GreaterBasilisk {
 
     public GreaterBasilisk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "M12";
     }
 

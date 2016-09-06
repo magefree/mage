@@ -37,7 +37,7 @@ public class RiftwingCloudskate extends mage.sets.timespiral.RiftwingCloudskate 
 
     public RiftwingCloudskate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 18;
+        this.cardNumber = "18";
         this.expansionSetCode = "DDM";
     }
 

@@ -37,7 +37,7 @@ public class SpineOfIshSah extends mage.sets.mirrodinbesieged.SpineOfIshSah {
 
     public SpineOfIshSah(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 272;
+        this.cardNumber = "272";
         this.expansionSetCode = "C14";
     }
 

@@ -37,7 +37,7 @@ public class MoonSprite extends mage.sets.portal.MoonSprite {
 
     public MoonSprite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 11;
+        this.cardNumber = "11";
         this.expansionSetCode = "S00";
     }
 

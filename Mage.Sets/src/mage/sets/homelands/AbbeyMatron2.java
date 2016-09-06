@@ -37,7 +37,7 @@ public class AbbeyMatron2 extends mage.sets.homelands.AbbeyMatron1 {
 
     public AbbeyMatron2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "HML";
     }
 

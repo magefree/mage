@@ -37,7 +37,7 @@ public class Blightcaster extends mage.sets.magic2014.Blightcaster {
 
     public Blightcaster(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "ORI";
     }
 

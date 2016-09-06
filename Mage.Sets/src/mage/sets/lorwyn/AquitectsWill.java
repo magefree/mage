@@ -105,7 +105,7 @@ class AquitectsWillEffect extends BecomesBasicLandTargetEffect {
         if (land == null) {
             // if permanent left battlefield the effect can be removed because it was only valid for that object
             this.discard();
-        } else if (land.getCounters().getCount(CounterType.FLOOD) > 0) {
+        } else if (land.getCounters(game).getCount(CounterType.FLOOD) > 0) {
             // only if Flood counter is on the object it becomes an Island.(it would be possible to remove and return the counters with e.g. Fate Transfer if the land becomes a creature too)
             super.apply(layer, sublayer, source, game);
         }

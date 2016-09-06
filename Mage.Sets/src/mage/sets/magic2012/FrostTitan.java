@@ -37,7 +37,7 @@ public class FrostTitan extends mage.sets.magic2011.FrostTitan {
 
     public FrostTitan(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "M12";
     }
 

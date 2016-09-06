@@ -37,7 +37,7 @@ public class WirewoodSymbiote extends mage.sets.scourge.WirewoodSymbiote {
 
     public WirewoodSymbiote(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 17;
+        this.cardNumber = "17";
         this.expansionSetCode = "DD3EVG";
     }
 

@@ -37,7 +37,7 @@ public class Sunforger extends mage.sets.ravnica.Sunforger {
 
     public Sunforger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 232;
+        this.cardNumber = "232";
         this.expansionSetCode = "MM2";
     }
 

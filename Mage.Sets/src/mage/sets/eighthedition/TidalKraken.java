@@ -37,7 +37,7 @@ public class TidalKraken extends mage.sets.ninthedition.TidalKraken {
 
     public TidalKraken(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 108;
+        this.cardNumber = "108";
         this.expansionSetCode = "8ED";
     }
 

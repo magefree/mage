@@ -37,7 +37,7 @@ public class RootMaze extends mage.sets.tempest.RootMaze {
 
     public RootMaze(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 292;
+        this.cardNumber = "292";
         this.expansionSetCode = "10E";
     }
 

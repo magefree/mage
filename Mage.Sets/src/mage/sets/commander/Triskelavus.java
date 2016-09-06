@@ -37,7 +37,7 @@ public class Triskelavus extends mage.sets.timespiral.Triskelavus {
 
     public Triskelavus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 263;
+        this.cardNumber = "263";
         this.expansionSetCode = "CMD";
     }
 

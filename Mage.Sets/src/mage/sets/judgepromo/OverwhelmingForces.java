@@ -37,7 +37,7 @@ public class OverwhelmingForces extends mage.sets.portalthreekingdoms.Overwhelmi
 
     public OverwhelmingForces(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 76;
+        this.cardNumber = "76";
         this.expansionSetCode = "JR";
     }
 

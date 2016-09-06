@@ -38,7 +38,7 @@ public class RiddleOfLightning extends mage.sets.journeyintonyx.RiddleOfLightnin
 
     public RiddleOfLightning(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "FUT";
         this.rarity = Rarity.COMMON;
     }

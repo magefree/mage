@@ -37,7 +37,7 @@ public class Werebear extends mage.sets.odyssey.Werebear {
 
     public Werebear(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 191;
+        this.cardNumber = "191";
         this.expansionSetCode = "EMA";
     }
 

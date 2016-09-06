@@ -37,7 +37,7 @@ public class SporecapSpider extends mage.sets.riseoftheeldrazi.SporecapSpider {
 
     public SporecapSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 179;
+        this.cardNumber = "179";
         this.expansionSetCode = "CNS";
     }
 

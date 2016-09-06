@@ -37,7 +37,7 @@ public class Thunderstaff extends mage.sets.commander2013.Thunderstaff {
 
     public Thunderstaff(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 153;
+        this.cardNumber = "153";
         this.expansionSetCode = "DST";
     }
 

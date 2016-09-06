@@ -38,7 +38,7 @@ public class HowlpackAlpha extends mage.sets.innistrad.HowlpackAlpha {
 
     public HowlpackAlpha(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

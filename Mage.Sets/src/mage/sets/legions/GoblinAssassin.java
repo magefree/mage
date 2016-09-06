@@ -97,7 +97,7 @@ class GoblinAssassinTriggeredAbiliy extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        if ((targetId.equals(this.getSourceId())) || (permanent.hasSubtype("Goblin") && !targetId.equals(this.getSourceId()))) {
+        if ((targetId.equals(this.getSourceId())) || (permanent.hasSubtype("Goblin", game) && !targetId.equals(this.getSourceId()))) {
             return true;
         }
         return false;

@@ -37,7 +37,7 @@ public class Palinchron extends mage.sets.urzaslegacy.Palinchron {
 
     public Palinchron(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 86;
+        this.cardNumber = "86";
         this.expansionSetCode = "VMA";
     }
 

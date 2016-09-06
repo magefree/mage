@@ -37,7 +37,7 @@ public class GoblinWelder extends mage.sets.urzaslegacy.GoblinWelder {
 
     public GoblinWelder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 177;
+        this.cardNumber = "177";
         this.expansionSetCode = "C14";
     }
 

@@ -39,7 +39,7 @@ public class Plains2 extends mage.cards.basiclands.Plains {
 
     public Plains2(UUID ownerId) {
         super(ownerId, 161);
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
     }
 
     public Plains2(final Plains2 card) {

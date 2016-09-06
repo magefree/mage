@@ -37,7 +37,7 @@ public class RighteousCharge extends mage.sets.gatecrash.RighteousCharge {
 
     public RighteousCharge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "S99";
     }
 

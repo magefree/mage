@@ -34,6 +34,7 @@ import mage.cards.Card;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -71,7 +72,6 @@ public abstract class DraftCube {
 
     private static final Logger logger = Logger.getLogger(DraftCube.class);
 
-    private static final Random rnd = new Random();
     private final String name;
     private final int boosterSize = 15;
 
@@ -100,7 +100,7 @@ public abstract class DraftCube {
             boolean done = false;
             int notValid = 0;
             while (!done) {
-                int index = rnd.nextInt(leftCubeCards.size());
+                int index = RandomUtil.nextInt(leftCubeCards.size());
                 CardIdentity cardId = leftCubeCards.get(index);
                 leftCubeCards.remove(index);
                 if (!cardId.getName().isEmpty()) {

@@ -37,7 +37,7 @@ public class ZuranOrb extends mage.sets.iceage.ZuranOrb {
 
     public ZuranOrb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "MED";
     }
 

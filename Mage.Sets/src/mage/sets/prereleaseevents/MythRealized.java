@@ -37,7 +37,7 @@ public class MythRealized extends mage.sets.dragonsoftarkir.MythRealized {
 
     public MythRealized(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 183;
+        this.cardNumber = "183";
         this.expansionSetCode = "PTC";
     }
 

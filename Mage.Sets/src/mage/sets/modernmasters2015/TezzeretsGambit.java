@@ -37,7 +37,7 @@ public class TezzeretsGambit extends mage.sets.newphyrexia.TezzeretsGambit {
 
     public TezzeretsGambit(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 63;
+        this.cardNumber = "63";
         this.expansionSetCode = "MM2";
     }
 

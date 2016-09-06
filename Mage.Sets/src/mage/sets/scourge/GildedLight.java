@@ -38,7 +38,7 @@ public class GildedLight extends mage.sets.vintagemasters.GildedLight {
 
     public GildedLight(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 16;
+        this.cardNumber = "16";
         this.expansionSetCode = "SCG";
         this.rarity = Rarity.UNCOMMON;
     }

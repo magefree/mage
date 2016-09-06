@@ -41,7 +41,7 @@ public class PlatedWurm extends CardImpl {
 
     public PlatedWurm(UUID ownerId) {
         super(ownerId, 81, "Plated Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Wurm");
 
         this.power = new MageInt(4);

@@ -37,7 +37,7 @@ public class DivineTransformation extends mage.sets.fifthedition.DivineTransform
 
     public DivineTransformation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 273;
+        this.cardNumber = "273";
         this.expansionSetCode = "4ED";
     }
 

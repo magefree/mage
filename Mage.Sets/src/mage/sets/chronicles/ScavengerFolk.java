@@ -37,7 +37,7 @@ public class ScavengerFolk extends mage.sets.fifthedition.ScavengerFolk {
 
     public ScavengerFolk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 41;
+        this.cardNumber = "41";
         this.expansionSetCode = "CHR";
     }
 

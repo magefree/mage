@@ -38,7 +38,7 @@ public class VisaraTheDreadful extends mage.sets.onslaught.VisaraTheDreadful {
 
     public VisaraTheDreadful(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
+        this.cardNumber = "114";
         this.expansionSetCode = "EMA";
     }
 

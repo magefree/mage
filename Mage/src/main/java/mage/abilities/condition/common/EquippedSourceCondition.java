@@ -52,7 +52,7 @@ public class EquippedSourceCondition implements Condition {
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached != null && attached.getSubtype().contains("Equipment")) {
+                if (attached != null && attached.getSubtype(game).contains("Equipment")) {
                     return true;
                 }
             }

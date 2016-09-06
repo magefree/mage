@@ -37,7 +37,7 @@ public class DefenseGrid extends mage.sets.ninthedition.DefenseGrid {
 
     public DefenseGrid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "ULG";
     }
 

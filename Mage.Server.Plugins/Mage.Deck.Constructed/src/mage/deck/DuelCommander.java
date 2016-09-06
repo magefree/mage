@@ -41,6 +41,7 @@ public class DuelCommander extends Commander {
         banned.add("Back to Basics");
         banned.add("Black Lotus");
         banned.add("Channel");
+        banned.add("Dig Through Time");
         banned.add("Entomb");
         banned.add("Fastbond");
         banned.add("Food Chain");
@@ -67,6 +68,7 @@ public class DuelCommander extends Commander {
         banned.add("Mystical Tutor");
         banned.add("Natural Order");
         banned.add("Necropotence");
+        banned.add("Necrotic Oooze");
         banned.add("Oath of Druids");
         banned.add("Protean Hulk");
         banned.add("Sensei's Divining Top");
@@ -79,12 +81,14 @@ public class DuelCommander extends Commander {
         banned.add("Time Walk");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
+        banned.add("Treasure Cruise");
         banned.add("Vampiric Tutor");
         banned.add("Yawgmoth’s Bargain");
 
         bannedCommander.add("Derevi, Empyrial Tactician");
         bannedCommander.add("Edric, Spymaster of Trest");
         bannedCommander.add("Erayo, Soratami Ascendant");
+        bannedCommander.add("Marath, Will of the Wild");
         bannedCommander.add("Oloro, Ageless Ascetic");
         bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Tasigur, the Golden Fang");

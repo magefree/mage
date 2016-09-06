@@ -37,7 +37,7 @@ public class Pentavus extends mage.sets.elspethvstezzeret.Pentavus {
 
     public Pentavus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "HOP";
     }
 

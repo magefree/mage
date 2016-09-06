@@ -37,7 +37,7 @@ public class SkirsdagCultist extends mage.sets.innistrad.SkirsdagCultist {
 
     public SkirsdagCultist(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 53;
+        this.cardNumber = "53";
         this.expansionSetCode = "DDK";
     }
 

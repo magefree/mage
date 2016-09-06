@@ -37,7 +37,7 @@ public class HazezonTamar extends mage.sets.legends.HazezonTamar {
 
     public HazezonTamar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 151;
+        this.cardNumber = "151";
         this.expansionSetCode = "ME3";
     }
 

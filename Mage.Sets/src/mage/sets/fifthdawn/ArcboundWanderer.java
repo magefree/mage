@@ -38,7 +38,7 @@ public class ArcboundWanderer extends mage.sets.modernmasters.ArcboundWanderer {
 
     public ArcboundWanderer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "5DN";
         this.rarity = Rarity.UNCOMMON;
     }

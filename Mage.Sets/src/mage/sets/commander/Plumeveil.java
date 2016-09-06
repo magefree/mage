@@ -37,7 +37,7 @@ public class Plumeveil extends mage.sets.shadowmoor.Plumeveil {
 
     public Plumeveil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 218;
+        this.cardNumber = "218";
         this.expansionSetCode = "CMD";
     }
 

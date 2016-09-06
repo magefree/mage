@@ -75,12 +75,12 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (loseOther) {
-                            permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
-                            permanent.getSubtype().addAll(subtypes);
+                            permanent.getSubtype(game).retainAll(CardRepository.instance.getLandTypes());
+                            permanent.getSubtype(game).addAll(subtypes);
                         } else {
                             for (String subtype : subtypes) {
-                                if (!permanent.getSubtype().contains(subtype)) {
-                                    permanent.getSubtype().add(subtype);
+                                if (!permanent.getSubtype(game).contains(subtype)) {
+                                    permanent.getSubtype(game).add(subtype);
                                 }
                             }
                         }

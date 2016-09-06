@@ -37,7 +37,7 @@ public class Pox extends mage.sets.fifthedition.Pox {
 
     public Pox(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "ICE";
     }
 

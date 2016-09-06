@@ -37,7 +37,7 @@ public class PeerThroughDepths extends mage.sets.championsofkamigawa.PeerThrough
 
     public PeerThroughDepths(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 57;
+        this.cardNumber = "57";
         this.expansionSetCode = "MMA";
     }
 

@@ -37,7 +37,7 @@ public class NomadicElf extends mage.sets.invasion.NomadicElf {
 
     public NomadicElf(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 38;
+        this.cardNumber = "38";
         this.expansionSetCode = "DDE";
     }
 

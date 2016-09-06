@@ -37,7 +37,7 @@ public class BloodOgre extends mage.sets.magic2012.BloodOgre {
 
     public BloodOgre(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "DDL";
     }
 

@@ -38,7 +38,7 @@ public class ChandraRoaringFlame extends mage.sets.magicorigins.ChandraRoaringFl
 
     public ChandraRoaringFlame(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 997;
+        this.cardNumber = "997";
         this.expansionSetCode = "MBP";
         this.rarity = Rarity.SPECIAL;
     }

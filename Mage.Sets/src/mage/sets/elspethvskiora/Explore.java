@@ -37,7 +37,7 @@ public class Explore extends mage.sets.worldwake.Explore {
 
     public Explore(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 45;
+        this.cardNumber = "45";
         this.expansionSetCode = "DDO";
     }
 

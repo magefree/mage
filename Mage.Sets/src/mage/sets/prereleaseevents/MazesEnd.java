@@ -38,7 +38,7 @@ public class MazesEnd extends mage.sets.dragonsmaze.MazesEnd {
 
     public MazesEnd(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

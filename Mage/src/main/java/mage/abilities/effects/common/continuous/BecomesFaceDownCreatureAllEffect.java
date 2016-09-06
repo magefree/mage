@@ -110,7 +110,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                         permanent.getSupertype().clear();
                         permanent.getCardType().clear();
                         permanent.getCardType().add(CardType.CREATURE);
-                        permanent.getSubtype().clear();
+                        permanent.getSubtype(game).clear();
                         permanent.getManaCost().clear();
                         break;
                     case ColorChangingEffects_5:

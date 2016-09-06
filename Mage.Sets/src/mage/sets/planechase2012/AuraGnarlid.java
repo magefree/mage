@@ -37,7 +37,7 @@ public class AuraGnarlid extends mage.sets.riseoftheeldrazi.AuraGnarlid {
 
     public AuraGnarlid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 55;
+        this.cardNumber = "55";
         this.expansionSetCode = "PC2";
     }
 

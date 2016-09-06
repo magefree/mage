@@ -37,7 +37,7 @@ public class ChordOfCalling extends mage.sets.ravnica.ChordOfCalling {
 
     public ChordOfCalling(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = "172";
         this.expansionSetCode = "M15";
     }
 

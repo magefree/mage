@@ -37,7 +37,7 @@ public class PollenLullaby extends mage.sets.commander.PollenLullaby {
 
     public PollenLullaby(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 36;
+        this.cardNumber = "36";
         this.expansionSetCode = "LRW";
     }
 

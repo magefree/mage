@@ -39,7 +39,7 @@ public class Humble extends mage.sets.urzassaga.Humble {
 
     public Humble(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
+        this.cardNumber = "14";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

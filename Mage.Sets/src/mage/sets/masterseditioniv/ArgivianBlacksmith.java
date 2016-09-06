@@ -38,7 +38,7 @@ public class ArgivianBlacksmith extends mage.sets.antiquities.ArgivianBlacksmith
 
     public ArgivianBlacksmith(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 4;
+        this.cardNumber = "4";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -38,7 +38,7 @@ public class ProwlingPangolin extends mage.sets.onslaught.ProwlingPangolin {
 
     public ProwlingPangolin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 104;
+        this.cardNumber = "104";
         this.expansionSetCode = "EMA";
         this.rarity = Rarity.COMMON;
     }

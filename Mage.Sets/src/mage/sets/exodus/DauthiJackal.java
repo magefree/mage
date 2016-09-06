@@ -37,7 +37,7 @@ public class DauthiJackal extends mage.sets.tempestremastered.DauthiJackal {
 
     public DauthiJackal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "EXO";
     }
 

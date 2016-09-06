@@ -38,7 +38,7 @@ public class LimDulsHighGuard extends mage.sets.alliances.LimDulsHighGuard1 {
 
     public LimDulsHighGuard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 103;
+        this.cardNumber = "103";
         this.expansionSetCode = "ME2";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class EmbermawHellion extends mage.sets.magicorigins.EmbermawHellion {
 
     public EmbermawHellion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 205;
+        this.cardNumber = "205";
         this.expansionSetCode = "PTC";
     }
 

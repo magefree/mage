@@ -37,7 +37,7 @@ public class PsychicVenom extends mage.sets.limitedalpha.PsychicVenom {
 
     public PsychicVenom(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 46;
+        this.cardNumber = "46";
         this.expansionSetCode = "MED";
     }
 

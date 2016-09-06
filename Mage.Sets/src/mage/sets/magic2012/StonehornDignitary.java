@@ -34,13 +34,8 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SkipNextCombatEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.constants.TurnPhase;
-import mage.game.Game;
-import mage.game.turn.TurnMod;
-import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -60,8 +55,7 @@ public class StonehornDignitary extends CardImpl {
 
         // When Stonehorn Dignitary enters the battlefield, target opponent skips his or her next combat phase.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SkipNextCombatEffect());
-        Target target = new TargetOpponent();
-        ability.addTarget(target);
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
@@ -72,32 +66,5 @@ public class StonehornDignitary extends CardImpl {
     @Override
     public StonehornDignitary copy() {
         return new StonehornDignitary(this);
-    }
-}
-
-class SkipNextCombatEffect extends OneShotEffect {
-
-    public SkipNextCombatEffect() {
-        super(Outcome.Detriment);
-        staticText = "target opponent skips his or her next combat phase";
-    }
-
-    public SkipNextCombatEffect(SkipNextCombatEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID targetId = source.getFirstTarget();
-        if (targetId != null) {
-            game.getState().getTurnMods().add(new TurnMod(targetId, TurnPhase.COMBAT, null, true));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public SkipNextCombatEffect copy() {
-        return new SkipNextCombatEffect();
     }
 }

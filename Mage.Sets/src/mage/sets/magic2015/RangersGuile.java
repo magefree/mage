@@ -37,7 +37,7 @@ public class RangersGuile extends mage.sets.innistrad.RangersGuile {
 
     public RangersGuile(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 193;
+        this.cardNumber = "193";
         this.expansionSetCode = "M15";
     }
 

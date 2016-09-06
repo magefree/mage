@@ -37,7 +37,7 @@ public class FlamesOfTheFirebrand extends mage.sets.magic2013.FlamesOfTheFirebra
 
     public FlamesOfTheFirebrand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 139;
+        this.cardNumber = "139";
         this.expansionSetCode = "M14";
     }
 

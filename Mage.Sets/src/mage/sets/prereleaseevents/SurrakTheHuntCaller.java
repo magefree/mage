@@ -37,7 +37,7 @@ public class SurrakTheHuntCaller extends mage.sets.dragonsoftarkir.SurrakTheHunt
 
     public SurrakTheHuntCaller(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 194;
+        this.cardNumber = "194";
         this.expansionSetCode = "PTC";
     }
 

@@ -41,7 +41,7 @@ public class OgreWarrior extends CardImpl {
 
     public OgreWarrior(UUID ownerId) {
         super(ownerId, 113, "Ogre Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
 

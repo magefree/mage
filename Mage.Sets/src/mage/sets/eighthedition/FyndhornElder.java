@@ -37,7 +37,7 @@ public class FyndhornElder extends mage.sets.iceage.FyndhornElder {
 
     public FyndhornElder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 251;
+        this.cardNumber = "251";
         this.expansionSetCode = "8ED";
     }
 

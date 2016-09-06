@@ -95,7 +95,9 @@ class GratuitousViolenceReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        return permanent != null && permanent.getControllerId().equals(source.getControllerId());
+        return permanent != null
+                && permanent.getCardType().contains(CardType.CREATURE)
+                && permanent.getControllerId().equals(source.getControllerId());
     }
 
     @Override

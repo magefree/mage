@@ -38,7 +38,7 @@ public class PerilousResearch extends mage.sets.commander.PerilousResearch {
 
     public PerilousResearch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 58;
+        this.cardNumber = "58";
         this.expansionSetCode = "MMA";
         this.rarity = Rarity.COMMON;
     }

@@ -38,7 +38,7 @@ public class TwilightMire extends mage.sets.eventide.TwilightMire {
 
     public TwilightMire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 33;
+        this.cardNumber = "33";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

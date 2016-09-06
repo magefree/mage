@@ -38,7 +38,7 @@ public class SirShandlarOfEberyn extends mage.sets.legends.SirShandlarOfEberyn {
 
     public SirShandlarOfEberyn(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 174;
+        this.cardNumber = "174";
         this.expansionSetCode = "ME3";
         this.rarity = Rarity.COMMON;
     }

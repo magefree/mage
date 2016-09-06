@@ -37,7 +37,7 @@ public class SylvanBasilisk extends mage.sets.portalsecondage.SylvanBasilisk {
 
     public SylvanBasilisk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "S99";
     }
 

@@ -38,7 +38,7 @@ public class CryptRats extends mage.sets.visions.CryptRats {
 
     public CryptRats(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 125;
+        this.cardNumber = "125";
         this.expansionSetCode = "7ED";
         this.rarity = Rarity.UNCOMMON;
     }

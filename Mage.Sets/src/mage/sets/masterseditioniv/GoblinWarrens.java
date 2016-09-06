@@ -38,7 +38,7 @@ public class GoblinWarrens extends mage.sets.fallenempires.GoblinWarrens {
 
     public GoblinWarrens(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 123;
+        this.cardNumber = "123";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

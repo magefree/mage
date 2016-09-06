@@ -37,7 +37,7 @@ public class GraypeltRefuge extends mage.sets.zendikar.GraypeltRefuge {
 
     public GraypeltRefuge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 118;
+        this.cardNumber = "118";
         this.expansionSetCode = "PC2";
     }
 

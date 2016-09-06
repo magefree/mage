@@ -37,7 +37,7 @@ public class SphinxBoneWand extends mage.sets.riseoftheeldrazi.SphinxBoneWand {
 
     public SphinxBoneWand(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 29;
+        this.cardNumber = "29";
         this.expansionSetCode = "DDJ";
     }
 

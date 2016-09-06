@@ -37,7 +37,7 @@ public class Ponder extends mage.sets.magic2010.Ponder {
 
     public Ponder(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 73;
+        this.cardNumber = "73";
         this.expansionSetCode = "M12";
     }
 

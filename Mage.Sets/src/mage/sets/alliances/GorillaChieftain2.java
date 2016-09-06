@@ -37,7 +37,7 @@ public class GorillaChieftain2 extends mage.sets.seventhedition.GorillaChieftain
 
     public GorillaChieftain2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 78;
+        this.cardNumber = "78";
         this.expansionSetCode = "ALL";
     }
 

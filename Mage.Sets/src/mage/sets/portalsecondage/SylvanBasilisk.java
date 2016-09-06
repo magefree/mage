@@ -43,7 +43,7 @@ public class SylvanBasilisk extends CardImpl {
 
     public SylvanBasilisk(UUID ownerId) {
         super(ownerId, 86, "Sylvan Basilisk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        this.expansionSetCode = "P02";
+        this.expansionSetCode = "PO2";
         this.subtype.add("Basilisk");
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

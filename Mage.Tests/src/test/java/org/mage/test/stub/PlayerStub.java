@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -210,19 +209,20 @@ public class PlayerStub implements Player {
         return false;
     }
 
-	@Override
-	public void setCanPaySacrificeCostFilter(FilterPermanent filter) {
-	}
+    @Override
+    public void setCanPaySacrificeCostFilter(FilterPermanent filter) {
+    }
 
-	@Override
-	public FilterPermanent getSacrificeCostFilter() {
-		return null;
-	}
+    @Override
+    public FilterPermanent getSacrificeCostFilter() {
+        return null;
+    }
 
-	@Override
-	public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game) {
-		return false;
-	}
+    @Override
+    public boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game) {
+        return false;
+    }
+
     @Override
     public void setLifeTotalCanChange(boolean lifeTotalCanChange) {
 
@@ -1019,8 +1019,8 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void addCounters(Counter counter, Game game) {
-
+    public boolean addCounters(Counter counter, Game game) {
+        return true;
     }
 
     @Override
@@ -1091,21 +1091,6 @@ public class PlayerStub implements Player {
     @Override
     public UUID getCommanderId() {
         return null;
-    }
-
-    @Override
-    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
-        return false;
     }
 
     @Override

@@ -37,7 +37,7 @@ public class Fecundity extends mage.sets.urzassaga.Fecundity {
 
     public Fecundity(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 145;
+        this.cardNumber = "145";
         this.expansionSetCode = "C13";
     }
 

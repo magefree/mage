@@ -37,7 +37,7 @@ public class StoicRebuttal extends mage.sets.scarsofmirrodin.StoicRebuttal {
 
     public StoicRebuttal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 59;
+        this.cardNumber = "59";
         this.expansionSetCode = "MM2";
     }
 

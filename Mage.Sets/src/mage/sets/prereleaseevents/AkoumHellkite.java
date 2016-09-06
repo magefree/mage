@@ -37,7 +37,7 @@ public class AkoumHellkite extends mage.sets.battleforzendikar.AkoumHellkite {
 
     public AkoumHellkite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 239;
+        this.cardNumber = "239";
         this.expansionSetCode = "PTC";
     }
 

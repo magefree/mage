@@ -37,7 +37,7 @@ public class Draco extends mage.sets.ftvdragons.Draco {
 
     public Draco(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 131;
+        this.cardNumber = "131";
         this.expansionSetCode = "PLS";
     }
 

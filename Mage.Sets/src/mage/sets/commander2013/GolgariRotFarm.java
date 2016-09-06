@@ -37,7 +37,7 @@ public class GolgariRotFarm extends mage.sets.ravnica.GolgariRotFarm {
 
     public GolgariRotFarm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 291;
+        this.cardNumber = "291";
         this.expansionSetCode = "C13";
     }
 

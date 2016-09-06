@@ -37,7 +37,7 @@ public class ElvishSkysweeper extends mage.sets.ravnica.ElvishSkysweeper {
 
     public ElvishSkysweeper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 143;
+        this.cardNumber = "143";
         this.expansionSetCode = "C13";
     }
 

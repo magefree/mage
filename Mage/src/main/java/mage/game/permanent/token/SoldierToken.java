@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Random;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -43,7 +44,7 @@ public class SoldierToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("10E", "M15", "C14", "ORI", "ALA", "DDF", "THS", "M12", "M13", "MM2", "MMA", "RTR", "SOM", "DDF", "M10"));
+        tokenImageSets.addAll(Arrays.asList("10E", "M15", "C14", "ORI", "ALA", "DDF", "THS", "M12", "M13", "MM2", "MMA", "RTR", "SOM", "DDO", "M10", "ORI"));
     }
 
     public SoldierToken() {
@@ -62,7 +63,7 @@ public class SoldierToken extends Token {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode().equals("THS")) {
-            this.setTokenType(new Random().nextInt(2) + 1);
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
     }
 

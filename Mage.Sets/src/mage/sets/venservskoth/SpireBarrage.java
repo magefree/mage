@@ -37,7 +37,7 @@ public class SpireBarrage extends mage.sets.zendikar.SpireBarrage {
 
     public SpireBarrage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 71;
+        this.cardNumber = "71";
         this.expansionSetCode = "DDI";
     }
 

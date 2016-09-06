@@ -74,11 +74,11 @@ class CatWarriorToken extends Token {
     CatWarriorToken() {
         super("Cat Warrior", "2/2 green Cat Warrior creature token with forestwalk");
         this.setOriginalExpansionSetCode("PLC");
-        this.getPower().initValue(2);
-        this.getToughness().initValue(2);
+        this.getPower().modifyBaseValue(2);
+        this.getToughness().modifyBaseValue(2);
         this.color.setGreen(true);
-        this.getSubtype().add("Cat");
-        this.getSubtype().add("Warrior");
+        this.getSubtype(null).add("Cat");
+        this.getSubtype(null).add("Warrior");
         this.getCardType().add(CardType.CREATURE);
         this.addAbility(new ForestwalkAbility());
     }

@@ -32,6 +32,7 @@ import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardInfo;
 import mage.constants.ColoredManaSymbol;
+import mage.util.RandomUtil;
 
 import java.util.*;
 
@@ -390,7 +391,6 @@ public class DeckGeneratorPool
      */
     private List<Card> getFixedSpells()
     {
-        Random random = new Random();
         int spellSize = deckCards.size();
         int nonLandSize = (deckSize - landCount);
 
@@ -409,7 +409,7 @@ public class DeckGeneratorPool
                     spellsToAdd.add(reserveSpells.get(i));
 
                 for (int i = spellsNeeded + 1; i < reserveSpells.size() - 1; i++) {
-                    int j = random.nextInt(i);
+                    int j = RandomUtil.nextInt(i);
                     Card randomCard = reserveSpells.get(j);
                     if (isValidSpellCard(randomCard) && j < spellsToAdd.size()) {
                         spellsToAdd.set(j, randomCard);
@@ -424,7 +424,7 @@ public class DeckGeneratorPool
         else if(spellSize > (deckSize - landCount)) {
             int spellsRemoved = (spellSize)-(deckSize-landCount);
             for(int i = 0; i < spellsRemoved; ++i) {
-                deckCards.remove(random.nextInt(deckCards.size()));
+                deckCards.remove(RandomUtil.nextInt(deckCards.size()));
             }
         }
 

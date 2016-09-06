@@ -37,7 +37,7 @@ public class WarriorEnKor extends mage.sets.tempestremastered.WarriorEnKor {
 
     public WarriorEnKor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 124;
+        this.cardNumber = "124";
         this.expansionSetCode = "STH";
     }
 

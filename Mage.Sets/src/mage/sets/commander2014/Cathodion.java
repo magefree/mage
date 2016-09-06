@@ -37,7 +37,7 @@ public class Cathodion extends mage.sets.mirrodin.Cathodion {
 
     public Cathodion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 234;
+        this.cardNumber = "234";
         this.expansionSetCode = "C14";
     }
 

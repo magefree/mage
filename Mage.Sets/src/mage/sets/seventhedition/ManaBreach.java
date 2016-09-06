@@ -38,7 +38,7 @@ public class ManaBreach extends mage.sets.exodus.ManaBreach {
 
     public ManaBreach(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 85;
+        this.cardNumber = "85";
         this.expansionSetCode = "7ED";
     }
 

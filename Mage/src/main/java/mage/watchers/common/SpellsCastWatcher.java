@@ -32,6 +32,7 @@ public class SpellsCastWatcher extends Watcher {
 
     public SpellsCastWatcher(final SpellsCastWatcher watcher) {
         super(watcher);
+        this.spellsCast.putAll(watcher.spellsCast);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class AncestorsChosen extends mage.sets.tenthedition.AncestorsChosen {
 
     public AncestorsChosen(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 1;
+        this.cardNumber = "1";
         this.expansionSetCode = "JUD";
     }
 

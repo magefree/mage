@@ -37,7 +37,7 @@ public class FieldMarshal extends mage.sets.tenthedition.FieldMarshal {
 
     public FieldMarshal(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = "5";
         this.expansionSetCode = "CSP";
     }
 

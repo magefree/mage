@@ -37,7 +37,7 @@ public class Recoil extends mage.sets.invasion.Recoil {
 
     public Recoil(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
+        this.cardNumber = "61";
         this.expansionSetCode = "DDH";
     }
 

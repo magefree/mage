@@ -37,7 +37,7 @@ public class Cobblebrute extends mage.sets.returntoravnica.Cobblebrute {
 
     public Cobblebrute(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 138;
+        this.cardNumber = "138";
         this.expansionSetCode = "ORI";
     }
 

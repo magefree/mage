@@ -38,7 +38,7 @@ public class SwordsToPlowshares extends mage.sets.fourthedition.SwordsToPlowshar
 
     public SwordsToPlowshares(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 2;
+        this.cardNumber = "2";
         this.expansionSetCode = "V13";
         this.rarity = Rarity.MYTHIC;
     }

@@ -38,7 +38,7 @@ public class OvergrownTomb extends mage.sets.ravnica.OvergrownTomb {
 
     public OvergrownTomb(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 13;
+        this.cardNumber = "13";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

@@ -38,7 +38,7 @@ public class Millikin extends mage.sets.odyssey.Millikin {
 
     public Millikin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 226;
+        this.cardNumber = "226";
         this.expansionSetCode = "EMA";
     }
 

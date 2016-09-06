@@ -37,7 +37,7 @@ public class Agoraphobia extends mage.sets.gatecrash.Agoraphobia {
 
     public Agoraphobia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 22;
+        this.cardNumber = "22";
         this.expansionSetCode = "DDM";
     }
 

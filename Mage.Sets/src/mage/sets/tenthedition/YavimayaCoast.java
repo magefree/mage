@@ -37,7 +37,7 @@ public class YavimayaCoast extends mage.sets.apocalypse.YavimayaCoast {
 
     public YavimayaCoast(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 363;
+        this.cardNumber = "363";
         this.expansionSetCode = "10E";
     }
 

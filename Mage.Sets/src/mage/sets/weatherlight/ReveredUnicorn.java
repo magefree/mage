@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class ReveredUnicorn extends CardImpl {
         // Cumulative upkeep {1}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
         // When Revered Unicorn leaves the battlefield, you gain life equal to the number of age counters on it.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new GainLifeEffect(new CountersCount(CounterType.AGE)), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new GainLifeEffect(new CountersSourceCount(CounterType.AGE)), false));
     }
 
     public ReveredUnicorn(final ReveredUnicorn card) {

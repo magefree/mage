@@ -38,7 +38,7 @@ public class BraidsCabalMinion extends mage.sets.odyssey.BraidsCabalMinion {
 
     public BraidsCabalMinion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "EMA";
     }
 

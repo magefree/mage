@@ -159,7 +159,7 @@ public abstract class Animation {
 
     public static void transformCard(final CardPanel panel, final MagePermanent parent, final boolean transformed) {
 
-        new Animation(1200) {
+        new Animation(600) {
             private boolean state = false;
 
             @Override
@@ -256,7 +256,7 @@ public abstract class Animation {
                             public void run() {
                                 if (placeholder != null) {
                                     placeholder.setDisplayEnabled(true);
-                                    placeholder.setImage(animationPanel);
+                                    placeholder.transferResources(animationPanel);
                                 }
                                 animationPanel.setVisible(false);
                                 animationPanel.repaint();
@@ -303,7 +303,7 @@ public abstract class Animation {
                             public void run() {
                                 if (placeholder != null) {
                                     placeholder.setDisplayEnabled(true);
-                                    placeholder.setImage(animationPanel);
+                                    placeholder.transferResources(animationPanel);
                                 }
                                 animationPanel.setVisible(false);
                                 animationPanel.repaint();

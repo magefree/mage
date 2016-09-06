@@ -38,7 +38,7 @@ public class MayorOfAvabruck extends mage.sets.innistrad.MayorOfAvabruck {
 
     public MayorOfAvabruck(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 51;
+        this.cardNumber = "51";
         this.expansionSetCode = "PTC";
         this.rarity = Rarity.SPECIAL;
     }

@@ -37,7 +37,7 @@ public class EnslavedScout2 extends mage.sets.alliances.EnslavedScout1 {
 
     public EnslavedScout2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 105;
+        this.cardNumber = "105";
         this.expansionSetCode = "ALL";
     }
 

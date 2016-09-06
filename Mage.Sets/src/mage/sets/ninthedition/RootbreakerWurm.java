@@ -38,7 +38,7 @@ public class RootbreakerWurm extends mage.sets.tempest.RootbreakerWurm {
 
     public RootbreakerWurm(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 267;
+        this.cardNumber = "267";
         this.expansionSetCode = "9ED";
         this.rarity = Rarity.UNCOMMON;
     }

@@ -37,7 +37,7 @@ public class RishadanPort extends mage.sets.mercadianmasques.RishadanPort {
 
     public RishadanPort(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 96;
+        this.cardNumber = "96";
         this.expansionSetCode = "JR";
     }
 

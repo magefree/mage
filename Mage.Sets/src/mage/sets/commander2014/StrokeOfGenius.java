@@ -37,7 +37,7 @@ public class StrokeOfGenius extends mage.sets.urzassaga.StrokeOfGenius {
 
     public StrokeOfGenius(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 129;
+        this.cardNumber = "129";
         this.expansionSetCode = "C14";
     }
 

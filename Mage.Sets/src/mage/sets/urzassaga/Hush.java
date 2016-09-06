@@ -29,18 +29,13 @@ package mage.sets.urzassaga;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterEnchantmentPermanent;
 
 /**
  *
@@ -53,7 +48,7 @@ public class Hush extends CardImpl {
         this.expansionSetCode = "USG";
 
 
-        this.getSpellAbility().addEffect(new HushEffect());
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
@@ -64,36 +59,5 @@ public class Hush extends CardImpl {
     @Override
     public Hush copy() {
         return new Hush(this);
-    }
-}
-
-class HushEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
-    public HushEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "Destroy all enchantments";
-    }
-
-    public HushEffect(final HushEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.destroy(source.getSourceId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public HushEffect copy() {
-        return new HushEffect(this);
     }
 }

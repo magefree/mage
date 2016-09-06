@@ -37,7 +37,7 @@ public class TaureanMauler extends mage.sets.planechase.TaureanMauler {
 
     public TaureanMauler(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 49;
+        this.cardNumber = "49";
         this.expansionSetCode = "ARC";
     }
 

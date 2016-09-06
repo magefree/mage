@@ -37,7 +37,7 @@ public class EtheriumSculptor extends mage.sets.shardsofalara.EtheriumSculptor {
 
     public EtheriumSculptor(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 44;
+        this.cardNumber = "44";
         this.expansionSetCode = "MMA";
     }
 

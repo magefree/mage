@@ -29,16 +29,11 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterEnchantmentPermanent;
 
 /**
  *
@@ -50,7 +45,7 @@ public class Tranquility extends CardImpl {
         super(ownerId, 155, "Tranquility", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "TMP";
 
-        this.getSpellAbility().addEffect(new TranquilityEffect());
+        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
     }
 
     public Tranquility(final Tranquility card) {
@@ -61,36 +56,4 @@ public class Tranquility extends CardImpl {
     public Tranquility copy() {
         return new Tranquility(this);
     }
-}
-
-class TranquilityEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
-    }
-
-    public TranquilityEffect() {
-        super(Outcome.DestroyPermanent);
-        staticText = "Destroy all enchantments";
-    }
-
-    public TranquilityEffect(final TranquilityEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.destroy(source.getSourceId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public TranquilityEffect copy() {
-        return new TranquilityEffect(this);
-    }
-
 }

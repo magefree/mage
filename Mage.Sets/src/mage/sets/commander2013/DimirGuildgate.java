@@ -37,7 +37,7 @@ public class DimirGuildgate extends mage.sets.gatecrash.DimirGuildgate {
 
     public DimirGuildgate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 284;
+        this.cardNumber = "284";
         this.expansionSetCode = "C13";
     }
 

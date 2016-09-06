@@ -37,7 +37,7 @@ public class ThirstForKnowledge extends mage.sets.planechase.ThirstForKnowledge 
 
     public ThirstForKnowledge(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 100;
+        this.cardNumber = "100";
         this.expansionSetCode = "FNMP";
     }
 

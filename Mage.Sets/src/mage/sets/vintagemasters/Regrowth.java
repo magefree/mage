@@ -38,7 +38,7 @@ public class Regrowth extends mage.sets.limitedalpha.Regrowth {
 
     public Regrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 227;
+        this.cardNumber = "227";
         this.expansionSetCode = "VMA";
         this.rarity = Rarity.RARE;
     }

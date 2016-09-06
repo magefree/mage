@@ -37,7 +37,7 @@ public class SapphireMedallion extends mage.sets.tempest.SapphireMedallion {
 
     public SapphireMedallion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 266;
+        this.cardNumber = "266";
         this.expansionSetCode = "C14";
     }
 

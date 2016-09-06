@@ -38,7 +38,7 @@ public class UncontrollableAnger extends mage.sets.championsofkamigawa.Uncontrol
 
     public UncontrollableAnger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = "155";
         this.expansionSetCode = "CNS";
         this.rarity = Rarity.UNCOMMON;
     }

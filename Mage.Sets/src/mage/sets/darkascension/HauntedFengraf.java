@@ -46,6 +46,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -98,8 +99,7 @@ class HauntedFengrafEffect extends OneShotEffect {
         if (player != null) {
             Card[] cards = player.getGraveyard().getCards(new FilterCreatureCard(), game).toArray(new Card[0]);
             if (cards.length > 0) {
-                Random rnd = new Random();
-                Card card = cards[rnd.nextInt(cards.length)];
+                Card card = cards[RandomUtil.nextInt(cards.length)];
                 card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 game.informPlayers(card.getName() + " returned to the hand of " + player.getLogName());
                 return true;

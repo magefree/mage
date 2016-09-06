@@ -37,7 +37,7 @@ public class Magmaw extends mage.sets.riseoftheeldrazi.Magmaw {
 
     public Magmaw(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = "62";
         this.expansionSetCode = "DDP";
     }
 

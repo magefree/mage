@@ -47,7 +47,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Library;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -106,14 +105,14 @@ class StromkirkOccultistExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null && controller != null && controller.getLibrary().size() > 0) {
-            Library library = controller.getLibrary();
-            Card card = library.removeFromTop(game);
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 String exileName = new StringBuilder(sourcePermanent.getIdName()).append(" <this card may be played the turn it was exiled>").toString();
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), exileName, source.getSourceId(), game, Zone.LIBRARY, true);
-                ContinuousEffect effect = new StromkirkOccultistPlayFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId()));
-                game.addEffect(effect, source);
+                if (controller.moveCardToExileWithInfo(card, source.getSourceId(), exileName, source.getSourceId(), game, Zone.LIBRARY, true)) {
+                    ContinuousEffect effect = new StromkirkOccultistPlayFromExileEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
+                }
             }
             return true;
         }
@@ -144,7 +143,7 @@ class StromkirkOccultistPlayFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.getControllerId().equals(affectedControllerId) &&
-                objectId.equals(getTargetPointer().getFirst(game, source));
+        return source.getControllerId().equals(affectedControllerId)
+                && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }

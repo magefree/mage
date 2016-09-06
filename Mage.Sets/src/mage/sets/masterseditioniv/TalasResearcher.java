@@ -38,7 +38,7 @@ public class TalasResearcher extends mage.sets.portalsecondage.TalasResearcher {
 
     public TalasResearcher(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 66;
+        this.cardNumber = "66";
         this.expansionSetCode = "ME4";
         this.rarity = Rarity.UNCOMMON;
     }

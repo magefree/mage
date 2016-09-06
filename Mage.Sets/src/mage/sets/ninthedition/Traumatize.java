@@ -37,7 +37,7 @@ public class Traumatize extends mage.sets.tenthedition.Traumatize {
 
     public Traumatize(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 109;
+        this.cardNumber = "109";
         this.expansionSetCode = "9ED";
     }
 

@@ -37,7 +37,7 @@ public class LlanowarEmpath extends mage.sets.futuresight.LlanowarEmpath {
 
     public LlanowarEmpath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = "185";
         this.expansionSetCode = "ORI";
     }
 

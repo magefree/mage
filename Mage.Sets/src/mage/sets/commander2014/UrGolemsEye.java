@@ -38,7 +38,7 @@ public class UrGolemsEye extends mage.sets.darksteel.UrGolemsEye {
 
     public UrGolemsEye(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 280;
+        this.cardNumber = "280";
         this.expansionSetCode = "C14";
         this.rarity = Rarity.UNCOMMON;
     }

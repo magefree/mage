@@ -37,7 +37,7 @@ public class Hibernation extends mage.sets.urzassaga.Hibernation {
 
     public Hibernation(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 82;
+        this.cardNumber = "82";
         this.expansionSetCode = "8ED";
     }
 

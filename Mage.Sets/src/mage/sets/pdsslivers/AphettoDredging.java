@@ -37,7 +37,7 @@ public class AphettoDredging extends mage.sets.onslaught.AphettoDredging {
 
     public AphettoDredging(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 28;
+        this.cardNumber = "28";
         this.expansionSetCode = "H09";
     }
 

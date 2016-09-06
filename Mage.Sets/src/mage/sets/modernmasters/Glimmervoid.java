@@ -37,7 +37,7 @@ public class Glimmervoid extends mage.sets.mirrodin.Glimmervoid {
 
     public Glimmervoid(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 223;
+        this.cardNumber = "223";
         this.expansionSetCode = "MMA";
     }
 

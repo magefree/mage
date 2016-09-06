@@ -37,7 +37,7 @@ public class UnseenWalker extends mage.sets.mirage.UnseenWalker {
 
     public UnseenWalker(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 262;
+        this.cardNumber = "262";
         this.expansionSetCode = "6ED";
     }
 

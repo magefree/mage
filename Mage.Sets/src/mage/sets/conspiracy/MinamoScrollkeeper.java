@@ -37,7 +37,7 @@ public class MinamoScrollkeeper extends mage.sets.saviorsofkamigawa.MinamoScroll
 
     public MinamoScrollkeeper(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 101;
+        this.cardNumber = "101";
         this.expansionSetCode = "CNS";
     }
 

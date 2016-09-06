@@ -37,7 +37,7 @@ public class CribSwap extends mage.sets.lorwyn.CribSwap {
 
     public CribSwap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 65;
+        this.cardNumber = "65";
         this.expansionSetCode = "C15";
     }
 

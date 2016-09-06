@@ -37,7 +37,7 @@ public class EssenceWarden extends mage.sets.planarchaos.EssenceWarden {
 
     public EssenceWarden(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 3;
+        this.cardNumber = "3";
         this.expansionSetCode = "DDH";
     }
 

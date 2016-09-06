@@ -37,7 +37,7 @@ public class IfhBiffEfreet extends mage.sets.mastersedition.IfhBiffEfreet {
 
     public IfhBiffEfreet(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 34;
+        this.cardNumber = "34";
         this.expansionSetCode = "ARN";
     }
 

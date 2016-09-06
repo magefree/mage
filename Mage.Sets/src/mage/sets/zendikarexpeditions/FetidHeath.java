@@ -38,7 +38,7 @@ public class FetidHeath extends mage.sets.eventide.FetidHeath {
 
     public FetidHeath(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 31;
+        this.cardNumber = "31";
         this.expansionSetCode = "EXP";
         this.rarity = Rarity.MYTHIC;
     }

@@ -105,7 +105,7 @@ class CantBeBlockedByWallsEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (!blocker.hasSubtype("Wall")) {
+        if (!blocker.hasSubtype("Wall", game)) {
             return false;
         }
         return true;

@@ -37,7 +37,7 @@ public class MerrowReejerey extends mage.sets.lorwyn.MerrowReejerey {
 
     public MerrowReejerey(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 107;
+        this.cardNumber = "107";
         this.expansionSetCode = "FNMP";
     }
 

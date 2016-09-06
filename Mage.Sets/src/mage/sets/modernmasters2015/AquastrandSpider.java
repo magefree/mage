@@ -37,7 +37,7 @@ public class AquastrandSpider extends mage.sets.dissension.AquastrandSpider {
 
     public AquastrandSpider(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 140;
+        this.cardNumber = "140";
         this.expansionSetCode = "MM2";
     }
 

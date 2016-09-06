@@ -37,7 +37,7 @@ public class Windfall extends mage.sets.urzassaga.Windfall {
 
     public Windfall(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 70;
+        this.cardNumber = "70";
         this.expansionSetCode = "CMD";
     }
 

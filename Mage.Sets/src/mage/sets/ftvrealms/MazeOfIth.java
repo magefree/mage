@@ -38,7 +38,7 @@ public class MazeOfIth extends mage.sets.thedark.MazeOfIth {
 
     public MazeOfIth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "V12";
         this.rarity = Rarity.MYTHIC;
     }

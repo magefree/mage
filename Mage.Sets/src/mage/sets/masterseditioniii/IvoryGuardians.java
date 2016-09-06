@@ -37,7 +37,7 @@ public class IvoryGuardians extends mage.sets.legends.IvoryGuardians {
 
     public IvoryGuardians(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 15;
+        this.cardNumber = "15";
         this.expansionSetCode = "ME3";
     }
 

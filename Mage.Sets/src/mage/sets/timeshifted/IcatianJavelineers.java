@@ -38,7 +38,7 @@ public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelinee
 
     public IcatianJavelineers(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 10;
+        this.cardNumber = "10";
         this.expansionSetCode = "TSB";
         this.rarity = Rarity.SPECIAL;
     }

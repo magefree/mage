@@ -37,7 +37,7 @@ public class RitualOfTheMachine extends mage.sets.masterseditionii.RitualOfTheMa
 
     public RitualOfTheMachine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 24;
+        this.cardNumber = "24";
         this.expansionSetCode = "ALL";
     }
 

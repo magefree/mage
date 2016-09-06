@@ -38,7 +38,7 @@ public class DuergarHedgeMage extends mage.sets.commander.DuergarHedgeMage {
 
     public DuergarHedgeMage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 19;
+        this.cardNumber = "19";
         this.expansionSetCode = "GRC";
         this.rarity = Rarity.SPECIAL;
     }
