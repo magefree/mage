@@ -165,6 +165,7 @@ public class ModernCardRenderer extends CardRenderer {
     protected int boxTextHeight;
     protected int boxTextOffset;
     protected Font boxTextFont;
+    protected Font boxTextFontNarrow;
 
     // How large is the P/T text, and how far is it down the boxes
     protected int ptTextHeight;
@@ -211,11 +212,16 @@ public class ModernCardRenderer extends CardRenderer {
         // Box text height
         boxTextHeight = getTextHeightForBoxHeight(boxHeight);
         boxTextOffset = (boxHeight - boxTextHeight) / 2;
-        boxTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, boxTextHeight);
-
+        // Not using Beleren for now because it looks bad at small font sizes. Maybe we want to in the future?
+        //boxTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, boxTextHeight);
+        boxTextFont = new Font("Arial", Font.PLAIN, boxTextHeight);
+        boxTextFontNarrow = new Font("Arial Narrow", Font.PLAIN, boxTextHeight);
+        
+        
         // Box text height
         ptTextHeight = getPTTextHeightForLineHeight(boxHeight);
         ptTextOffset = (boxHeight - ptTextHeight) / 2;
+        // Beleren font does work well for numbers though
         ptTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, ptTextHeight);
     }
 
@@ -417,7 +423,14 @@ public class ModernCardRenderer extends CardRenderer {
         AttributedString str = new AttributedString(nameStr);
         str.addAttribute(TextAttribute.FONT, boxTextFont);
         TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
-        TextLayout layout = measure.getLayout(0, measure.getLineBreakIndex(0, availableWidth));
+        int breakIndex = measure.getLineBreakIndex(0, availableWidth);
+        if (breakIndex < nameStr.length()) {
+            str = new AttributedString(nameStr);
+            str.addAttribute(TextAttribute.FONT, boxTextFontNarrow);
+            measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
+            breakIndex = measure.getLineBreakIndex(0, availableWidth);
+        }
+        TextLayout layout = measure.getLayout(0, breakIndex);
         g.setColor(getBoxTextColor());
         layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);
 
@@ -455,7 +468,14 @@ public class ModernCardRenderer extends CardRenderer {
             AttributedString str = new AttributedString(types);
             str.addAttribute(TextAttribute.FONT, boxTextFont);
             TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
-            TextLayout layout = measure.getLayout(0, measure.getLineBreakIndex(0, availableWidth));
+            int breakIndex = measure.getLineBreakIndex(0, availableWidth);
+            if (breakIndex < types.length()) {
+                str = new AttributedString(types);
+                str.addAttribute(TextAttribute.FONT, boxTextFontNarrow);
+                measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
+                breakIndex = measure.getLineBreakIndex(0, availableWidth);
+            }
+            TextLayout layout = measure.getLayout(0, breakIndex);
             g.setColor(getBoxTextColor());
             layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);
         }
