@@ -49,6 +49,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -140,7 +141,8 @@ class KarnLiberatedEffect extends OneShotEffect {
                         && !player.getSideboard().contains(card.getId())
                         && !cards.contains(card)) { // not the exiled cards
                     if (card.getId().equals(player.getCommanderId())) {
-                        card.moveToZone(Zone.COMMAND, null, game, true);
+                        game.addCommander(new Commander(card));
+                        game.setZone(card.getId(), Zone.COMMAND);
                     } else {
                         player.getLibrary().putOnTop(card, game);
                     }
