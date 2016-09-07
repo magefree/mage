@@ -377,6 +377,24 @@ public class CardPanelRenderImpl extends CardPanel {
             return ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
         }
     }
+    
+    @Override
+    public void setSelected(boolean selected) {
+        if (selected != isSelected()) {
+            super.setSelected(selected);
+            // Invalidate our render
+            cardImage = null;
+        }
+    }
+    
+    @Override
+    public void setChoosable(boolean choosable) {
+        if (choosable != isChoosable()) {
+            super.setChoosable(choosable);
+            // Invalidate our render
+            cardImage = null;
+        }
+    }
 
     @Override
     public Image getImage() {

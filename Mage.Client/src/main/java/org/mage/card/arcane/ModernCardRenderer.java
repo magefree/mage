@@ -227,10 +227,6 @@ public class ModernCardRenderer extends CardRenderer {
 
     @Override
     protected void drawBorder(Graphics2D g) {
-        // Draw border as one rounded rectangle
-        g.setColor(Color.black);
-        g.fillRoundRect(0, 0, cardWidth, cardHeight, cornerRadius, cornerRadius);
-
         // Selection Borders
         Color borderColor;
         if (isSelected) {
@@ -242,8 +238,14 @@ public class ModernCardRenderer extends CardRenderer {
         } else if (cardView instanceof PermanentView && ((PermanentView) cardView).isCanAttack()) {
             borderColor = new Color(0, 0, 255, 230);
         } else {
-            borderColor = null;
+            borderColor = Color.BLACK;
         }
+        
+        // Draw border as one rounded rectangle
+        g.setColor(borderColor);
+        g.fillRoundRect(0, 0, cardWidth, cardHeight, cornerRadius, cornerRadius);
+        
+        /* // Separate selection highlight border from card itself. Not used right now
         if (borderColor != null) {
             float hwidth = borderWidth / 2.0f;
             Graphics2D g2 = (Graphics2D) g.create();
@@ -257,6 +259,7 @@ public class ModernCardRenderer extends CardRenderer {
             g2.draw(rect);
             g2.dispose();
         }
+        */
     }
 
     @Override
