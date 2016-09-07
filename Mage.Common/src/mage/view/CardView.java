@@ -475,7 +475,8 @@ public class CardView extends SimpleCardView {
         this.manaCost = token.getManaCost().getSymbols();
         this.rarity = Rarity.NA;
         this.type = token.getTokenType();
-        this.tokenSetCode = token.getOriginalExpansionSetCode();
+        this.tokenDescriptor = token.getTokenDescriptor();
+        this.tokenSetCode = token.getOriginalExpansionSetCode();        
     }
 
     protected final void setTargets(Targets targets) {
