@@ -62,16 +62,16 @@ public enum CardRepository {
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
     // raise this if db structure was changed
-    private static final long CARD_DB_VERSION = 46;
+    private static final long CARD_DB_VERSION = 47;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 57;
+    private static final long CARD_CONTENT_VERSION = 58;
 
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
 
     private final TreeSet<String> landTypes = new TreeSet();
 
-    private CardRepository() {
+    CardRepository() {
         File file = new File("db");
         if (!file.exists()) {
             file.mkdirs();
