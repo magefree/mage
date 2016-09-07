@@ -206,6 +206,7 @@ public class ModernCardRenderer extends CardRenderer {
                 BOX_HEIGHT_FRAC * cardHeight);
 
         // Type line at
+        LOGGER.info("Draw, " + cardView.getFrameStyle() + ", " + cardView.getFrameStyle().isFullArt());
         typeLineY = (int)(getTypeLineYFrac() * cardHeight);
 
         // Box text height
@@ -297,7 +298,7 @@ public class ModernCardRenderer extends CardRenderer {
      */
     private Rectangle2D getArtRect() {
         Rectangle2D rect;
-        if (cardView.getFrameStyle().isFullArt()) {
+        if (cardView.getFrameStyle().isFullArt() || cardView.isToken()) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
         } else {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .42f);
@@ -307,7 +308,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     private float getTypeLineYFrac() {
         if (cardView.isToken()) {
-            return TYPE_LINE_Y_FRAC;
+            return TYPE_LINE_Y_FRAC_TOKEN;
         } else if (cardView.getFrameStyle().isFullArt()) {
             return TYPE_LINE_Y_FRAC_FULL_ART;
         } else {

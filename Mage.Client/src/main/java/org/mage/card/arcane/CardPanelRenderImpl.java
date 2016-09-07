@@ -66,6 +66,9 @@ public class CardPanelRenderImpl extends CardPanel {
         if (!a.getExpansionSetCode().equals(b.getExpansionSetCode())) {
             return false;
         }
+        if (a.getFrameStyle() != b.getFrameStyle()) {
+            return false;
+        }
         if (a.getCounters() == null) {
             if (b.getCounters() != null) {
                 return false;
@@ -121,6 +124,7 @@ public class CardPanelRenderImpl extends CardPanel {
             sb.append((char) (this.view.isPlayable() ? 1 : 0));
             sb.append((char) (this.view.isCanAttack() ? 1 : 0));
             sb.append((char) (this.view.isFaceDown() ? 1 : 0));
+            sb.append((char) this.view.getFrameStyle().ordinal());
             if (this.view instanceof PermanentView) {
                 sb.append((char) (((PermanentView) this.view).hasSummoningSickness() ? 1 : 0));
                 sb.append((char) (((PermanentView) this.view).getDamage()));

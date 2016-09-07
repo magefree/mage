@@ -30,6 +30,7 @@ package mage.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Mode;
@@ -54,6 +55,7 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
