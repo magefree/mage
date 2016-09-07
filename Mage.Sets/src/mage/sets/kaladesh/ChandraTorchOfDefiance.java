@@ -120,7 +120,7 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
             Card card = library.removeFromTop(game);
             if (card != null) {
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                if (controller.chooseUse(Outcome.Benefit, "Cast the card?", source, game)) {
+                if (controller.chooseUse(Outcome.Benefit, "Cast the card? (You still pay the costs)", source, game) && !card.getCardType().contains(CardType.LAND)) {
                             controller.cast(card.getSpellAbility(), game, false);
                         } else {
                             new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT).apply(game, source);
