@@ -18,12 +18,33 @@ public enum FrameStyle {
     /**
      * Battle for Zendkiar full art basic lands
      */
-    BFZ_FULL_ART_BASIC(BorderType.M15, true);
+    BFZ_FULL_ART_BASIC(BorderType.M15, true),
+
+    /**
+     * Zenkikar full art lands
+     */
+    ZEN_FULL_ART_BASIC(BorderType.MOD, true),
+
+    /**
+     * Unhinged full art lands
+     */
+    UNH_FULL_ART_BASIC(BorderType.SPC, true),
+
+    /**
+     * Unglued full art lands
+     */
+    UGL_FULL_ART_BASIC(BorderType.SPC, true);
 
     /**
      * General type of card
      */
     public enum BorderType {
+        /**
+         * Various specialty borders
+         * EG: Unhinged, Unglued
+         */
+        SPC,
+
         /**
          * Old border cards
          */

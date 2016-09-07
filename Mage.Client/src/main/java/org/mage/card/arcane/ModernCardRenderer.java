@@ -20,6 +20,7 @@ import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
 import java.awt.font.TextMeasurer;
+import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -32,6 +33,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.swing.ImageIcon;
 import mage.ObjectColor;
+import mage.cards.FrameStyle;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
 import mage.view.CardView;
@@ -159,6 +161,7 @@ public class ModernCardRenderer extends CardRenderer {
     // How far down the card is the type line placed?
     protected static float TYPE_LINE_Y_FRAC = 0.57f; // x cardHeight
     protected static float TYPE_LINE_Y_FRAC_TOKEN = 0.70f;
+    protected static float TYPE_LINE_Y_FRAC_FULL_ART = 0.74f;
     protected int typeLineY;
 
     // How large is the box text, and how far is it down the boxes
@@ -203,11 +206,7 @@ public class ModernCardRenderer extends CardRenderer {
                 BOX_HEIGHT_FRAC * cardHeight);
 
         // Type line at
-        if (cardView.isToken()) {
-            typeLineY = (int) (TYPE_LINE_Y_FRAC_TOKEN * cardHeight);
-        } else {
-            typeLineY = (int) (TYPE_LINE_Y_FRAC * cardHeight);
-        }
+        typeLineY = (int)(getTypeLineYFrac() * cardHeight);
 
         // Box text height
         boxTextHeight = getTextHeightForBoxHeight(boxHeight);
@@ -235,7 +234,7 @@ public class ModernCardRenderer extends CardRenderer {
             borderColor = new Color(250, 250, 0, 230);
         } else if (cardView.isPlayable()) {
             borderColor = new Color(153, 102, 204, 200);
-        } else if (cardView instanceof PermanentView && ((PermanentView) cardView).isCanAttack()) {
+        } else if (cardView.isCanAttack()) {
             borderColor = new Color(0, 0, 255, 230);
         } else {
             borderColor = Color.BLACK;
@@ -292,18 +291,58 @@ public class ModernCardRenderer extends CardRenderer {
         }
     }
 
+    /**
+     * Get the region to slice out of a source art image for the card
+     * @return
+     */
+    private Rectangle2D getArtRect() {
+        Rectangle2D rect;
+        if (cardView.getFrameStyle().isFullArt()) {
+            rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
+        } else {
+            rect = new Rectangle2D.Float(.079f, .11f, .84f, .42f);
+        }
+        return rect;
+    }
+
+    private float getTypeLineYFrac() {
+        if (cardView.isToken()) {
+            return TYPE_LINE_Y_FRAC;
+        } else if (cardView.getFrameStyle().isFullArt()) {
+            return TYPE_LINE_Y_FRAC_FULL_ART;
+        } else {
+            return TYPE_LINE_Y_FRAC;
+        }
+    }
+
     @Override
     protected void drawArt(Graphics2D g) {
         if (artImage != null && !cardView.isFaceDown()) {
-            int imgWidth = artImage.getWidth();
-            int imgHeight = artImage.getHeight();
+            Rectangle2D artRect = getArtRect();
+
+            // Perform a process to make sure that the art is scaled uniformly to fill the frame, cutting
+            // off the minimum amount necessary to make it completely fill the frame without "squashing" it.
+            double fullCardImgWidth = artImage.getWidth();
+            double fullCardImgHeight = artImage.getHeight();
+            double artWidth = artRect.getWidth() * fullCardImgWidth;
+            double artHeight = artRect.getHeight() * fullCardImgHeight;
+            double targetWidth = contentWidth - 2;
+            double targetHeight = typeLineY - totalContentInset - boxHeight;
+            double targetAspect = targetWidth / targetHeight;
+            if (targetAspect * artHeight < artWidth) {
+                // Trim off some width
+                artWidth = targetAspect * artHeight;
+            } else {
+                // Trim off some height
+                artHeight = artWidth / targetAspect;
+            }
             BufferedImage subImg
                     = artImage.getSubimage(
-                            (int) (.079 * imgWidth), (int) (.11 * imgHeight),
-                            (int) (.84 * imgWidth), (int) (.42 * imgHeight));
+                    (int)(artRect.getX() * fullCardImgWidth), (int)(artRect.getY() * fullCardImgHeight),
+                    (int)artWidth, (int)artHeight);
             g.drawImage(subImg,
                     totalContentInset + 1, totalContentInset + boxHeight,
-                    contentWidth - 2, typeLineY - totalContentInset - boxHeight,
+                    (int)targetWidth, (int)targetHeight,
                     null);
         }
     }
@@ -664,7 +703,6 @@ public class ModernCardRenderer extends CardRenderer {
                 attributedRules.add(attributed);
                 remaining -= drawSingleRule(g, attributed, rule, 0, 0, w, remaining, false);
                 if (remaining < 0) {
-                    useSmallFont = true;
                     break;
                 }
             }
@@ -676,7 +714,7 @@ public class ModernCardRenderer extends CardRenderer {
         if (remaining <= 0) {
             spacing = 0;
         } else {
-            spacing = (int) (remaining / (hasKeywords
+            spacing = (int) (((float)remaining) / (hasKeywords
                     ? (textboxRules.size() + 2)
                     : (textboxRules.size() + 1)));
         }

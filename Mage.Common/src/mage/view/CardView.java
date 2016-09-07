@@ -36,6 +36,7 @@ import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
+import mage.cards.FrameStyle;
 import mage.cards.SplitCard;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -74,6 +75,7 @@ public class CardView extends SimpleCardView {
     protected List<String> superTypes;
     protected ObjectColor color;
     protected ObjectColor frameColor;
+    protected FrameStyle frameStyle;
     protected List<String> manaCost;
     protected int convertedManaCost;
     protected Rarity rarity;
@@ -334,7 +336,10 @@ public class CardView extends SimpleCardView {
         }
         
         // Frame color
-        this.frameColor = card.getFrameColor(game);      
+        this.frameColor = card.getFrameColor(game);
+
+        // Frame style
+        this.frameStyle = card.getFrameStyle();
         
         // Get starting loyalty
         this.startingLoyalty = "" + card.getStartingLoyalty();
@@ -384,6 +389,8 @@ public class CardView extends SimpleCardView {
         }
         // Frame color
         this.frameColor = object.getFrameColor(null);
+        // Frame style
+        this.frameStyle = object.getFrameStyle();
         // Starting loyalty. Must be extracted from an ability
         this.startingLoyalty = "" + object.getStartingLoyalty();
     }
@@ -401,6 +408,7 @@ public class CardView extends SimpleCardView {
         this.displayName = name;
         this.rules = emblem.getRules();
         // emblem images are always with common (black) symbol
+        this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
         this.rarity = Rarity.COMMON;
     }
@@ -426,6 +434,7 @@ public class CardView extends SimpleCardView {
         this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();
         this.frameColor = new ObjectColor();
+        this.frameStyle = FrameStyle.M15_NORMAL;
         this.manaCost = new ArrayList<>();
         this.convertedManaCost = 0;
 
@@ -472,6 +481,7 @@ public class CardView extends SimpleCardView {
         this.superTypes = token.getSupertype();
         this.color = token.getColor(null);
         this.frameColor = token.getFrameColor(null);
+        this.frameStyle = token.getFrameStyle();
         this.manaCost = token.getManaCost().getSymbols();
         this.rarity = Rarity.NA;
         this.type = token.getTokenType();
@@ -557,6 +567,10 @@ public class CardView extends SimpleCardView {
     
     public ObjectColor getFrameColor() {
         return frameColor;
+    }
+
+    public FrameStyle getFrameStyle() {
+        return frameStyle;
     }
 
     public List<String> getManaCost() {

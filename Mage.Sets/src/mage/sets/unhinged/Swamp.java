@@ -28,6 +28,8 @@
 
 package mage.sets.unhinged;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class Swamp extends mage.cards.basiclands.Swamp {
     public Swamp(UUID ownerId) {
         super(ownerId, 138);
         this.expansionSetCode = "UNH";
+        this.frameStyle = FrameStyle.UNH_FULL_ART_BASIC;
     }
 
     public Swamp(final Swamp card) {

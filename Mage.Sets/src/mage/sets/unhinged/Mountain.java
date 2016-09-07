@@ -28,6 +28,8 @@
 
 package mage.sets.unhinged;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class Mountain extends mage.cards.basiclands.Mountain {
     public Mountain(UUID ownerId) {
         super(ownerId, 139);
         this.expansionSetCode = "UNH";
+        this.frameStyle = FrameStyle.UNH_FULL_ART_BASIC;
     }
 
     public Mountain(final Mountain card) {
