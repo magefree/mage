@@ -56,7 +56,7 @@ public class ParadoxicalOutcome extends CardImpl {
         filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
         filter.add(Predicates.not(new TokenPredicate()));
 
-        this.getSpellAbility().addEffect(new SweepEffect(filter, "nonland, nontoken permanents "));
+        this.getSpellAbility().addEffect(new SweepEffect(filter, "nonland, nontoken permanents ", false));
         DynamicValue paradoxicalOutcomeValue = new SweepNumber("nonland, nontoken permanents ", false);
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(paradoxicalOutcomeValue));
     }
