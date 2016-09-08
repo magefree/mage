@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.constants.CardType;
-import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
@@ -58,8 +58,7 @@ public class PlayerView implements Serializable {
     private final UUID playerId;
     private final String name;
     private final int life;
-    private final int poison;
-    private final int experience;
+    private final Counters counters;
     private final int wins;
     private final int winsNeeded;
     private final long deckHashCode;
@@ -90,8 +89,7 @@ public class PlayerView implements Serializable {
         this.playerId = player.getId();
         this.name = player.getName();
         this.life = player.getLife();
-        this.poison = player.getCounters().getCount(CounterType.POISON);
-        this.experience = player.getCounters().getCount(CounterType.EXPERIENCE);
+        this.counters = player.getCounters();
         this.wins = player.getMatchPlayer().getWins();
         this.winsNeeded = player.getMatchPlayer().getWinsNeeded();
         // If match ended immediately before, deck can be set to null so check is necessarry here
@@ -195,12 +193,8 @@ public class PlayerView implements Serializable {
         return this.life;
     }
 
-    public int getPoison() {
-        return this.poison;
-    }
-
-    public int getExperience() {
-        return this.experience;
+    public Counters getCounters() {
+        return this.counters;
     }
 
     public int getLibraryCount() {

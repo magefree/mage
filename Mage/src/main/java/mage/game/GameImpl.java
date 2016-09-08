@@ -40,7 +40,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
 import java.util.UUID;
@@ -124,6 +123,7 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.GameLog;
 import mage.util.MessageToClient;
+import mage.util.RandomUtil;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watchers;
 import mage.watchers.common.BlockedAttackerWatcher;
@@ -159,7 +159,6 @@ public abstract class GameImpl implements Game, Serializable {
         FILTER_LEGENDARY.add(new SupertypePredicate("Legendary"));
     }
 
-    private static Random rnd = new Random();
 
     private transient Object customData;
     protected boolean simulation = false;
@@ -1010,9 +1009,7 @@ public abstract class GameImpl implements Game, Serializable {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null && player.getHand().size() < startingHandSize) {
-                if (player.chooseUse(Outcome.Benefit, new MessageToClient("Scry 1?", "Look at the top card of your library. You may put that card on the bottom of your library."), null, this)) {
-                    player.scry(1, null, this);
-                }
+                player.scry(1, null, this);
             }
         }
         getState().setChoosingPlayerId(null);
@@ -1098,7 +1095,7 @@ public abstract class GameImpl implements Game, Serializable {
         UUID[] players = getPlayers().keySet().toArray(new UUID[0]);
         UUID playerId;
         while (!hasEnded()) {
-            playerId = players[rnd.nextInt(players.length)];
+            playerId = players[RandomUtil.nextInt(players.length)];
             Player player = getPlayer(playerId);
             if (player != null && player.isInGame()) {
                 fireInformEvent(state.getPlayer(playerId).getLogName() + " won the toss");

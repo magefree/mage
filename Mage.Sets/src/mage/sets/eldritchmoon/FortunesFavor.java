@@ -43,7 +43,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
-import mage.util.MessageToClient;
 
 /**
  *
@@ -102,8 +101,7 @@ class FortunesFavorEffect extends OneShotEffect {
             cards.removeAll(target.getTargets());
             controller.revealCards(sourceObject.getIdName() + " - cards in face-up pile", cards, game);
             game.informPlayers(targetOpponent.getLogName() + " puts " + faceDownPile.size() + " card(s) into the face-down pile");
-            MessageToClient message = new MessageToClient("Put the face-down pile into your hand?", "(If you say yes, the face-up pile goes to the graveyard.)");
-            if (controller.chooseUse(outcome, message, source, game)) {
+            if (controller.chooseUse(outcome, "Choose a pile to put in your hand.", null, "Face-down", "Face-up", source, game)) {
                 controller.moveCards(faceDownPile, Zone.HAND, source, game);
                 controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             } else {

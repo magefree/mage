@@ -50,7 +50,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.common.TargetOpponent;
-import mage.util.MessageToClient;
 
 /**
  *
@@ -157,10 +156,14 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
                     cards.add(controllerCreatureCard);
                 }
                 if (!cards.isEmpty()) {
-                    MessageToClient message = new MessageToClient("Return those cards to the battlefield under their owners' control?",
-                            "Opponent's creature card: " + (cardOpponentGraveyard == null ? "none" : cardOpponentGraveyard.getLogName())
-                            + ", your creature card: " + (controllerCreatureCard == null ? "none" : controllerCreatureCard.getLogName()));
-                    if (controller.chooseUse(outcome, message, source, game)) {
+                    if (controller.chooseUse(
+                            outcome,
+                            "Return those cards to the battlefield under their owners' control?",
+                            "Opponent's creature card: " + (cardOpponentGraveyard == null ? "none" : cardOpponentGraveyard.getLogName()) + ", your creature card: " + (controllerCreatureCard == null ? "none" : controllerCreatureCard.getLogName()),
+                            null,
+                            null,
+                            source,
+                            game)) {
                         controller.moveCards(cards, Zone.BATTLEFIELD, source, game, false, false, true, null);
                     }
                 }

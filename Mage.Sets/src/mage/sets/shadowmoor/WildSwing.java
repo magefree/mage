@@ -43,6 +43,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -98,8 +99,8 @@ class WildSwingEffect extends OneShotEffect {
         if (!source.getTargets().isEmpty() && sourceObject != null) {
             Target target = source.getTargets().get(0);
             if (target != null && !target.getTargets().isEmpty()) {
-                Random rnd = new Random();
-                Permanent targetPermanent = game.getPermanent(target.getTargets().get(rnd.nextInt(target.getTargets().size())));
+
+                Permanent targetPermanent = game.getPermanent(target.getTargets().get(RandomUtil.nextInt(target.getTargets().size())));
                 if (targetPermanent != null) {
                     game.informPlayers(sourceObject.getLogName() + ": The randomly chosen target to destroy is " + targetPermanent.getLogName());
                     targetPermanent.destroy(source.getSourceId(), game, false);

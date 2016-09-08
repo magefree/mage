@@ -58,5 +58,11 @@ public class Kaladesh extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        /* There are additional cards, numbered 265–270, that don't appear in Kaladesh
+         booster packs. These are new cards that are exclusive in the Planeswalker
+         Decks supplemental product, which are replacing Intro Packs.
+         These additional cards have a Kaladesh expansion symbol and are legal in all
+         formats in which Kaladesh is legal. */
+        this.maxCardNumberInBooster = 264;
     }
 }

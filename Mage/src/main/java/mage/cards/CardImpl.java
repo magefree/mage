@@ -138,6 +138,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ownerId = card.ownerId;
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
+        tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
         canTransform = card.canTransform;

@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -69,10 +70,10 @@ public class ClueArtifactToken extends Token {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode().equals("SOI")) {
-            this.setTokenType(new Random().nextInt(6) + 1); // 6 different images
+            this.setTokenType(RandomUtil.nextInt(6) + 1); // 6 different images
         }
         if (getOriginalExpansionSetCode().equals("EDM")) {
-            this.setTokenType(new Random().nextInt(6) + 1); // 6 different images
+            this.setTokenType(RandomUtil.nextInt(6) + 1); // 6 different images
         }
     }
 

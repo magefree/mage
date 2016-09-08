@@ -5,6 +5,7 @@ Bloodthirst|number|
 Bushido|number|
 Convoke|new|
 Cascade|new|
+Crew|number|
 Cumulative upkeep|cost|
 Cycling|cost|
 Dash|card, manaString|
@@ -20,6 +21,7 @@ Evoke|card, manaString|
 Exalted|new|
 Exploit|new|
 Extort|new|
+Fabricate|number|
 Fear|instance|
 First strike|instance|
 Flanking|new|

@@ -89,8 +89,10 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("8ED", "Eighth Edition");
         setsAliases.put("9ED", "Ninth Edition");
         setsAliases.put("AER", "Aether Revolt");
+        setsAliases.put("AKH", "Amonkhet");
         setsAliases.put("ALA", "Shards of Alara");
         setsAliases.put("ALL", "Alliances");
+        setsAliases.put("ANB", "Archenemy: Nicol Bolas");
         setsAliases.put("APC", "Apocalypse");
         setsAliases.put("ARB", "Alara Reborn");
         setsAliases.put("ARC", "Archenemy");
@@ -107,6 +109,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("C14", "Commander 2014");
         setsAliases.put("C15", "Commander 2015");
         setsAliases.put("C16", "Commander 2016");
+        setsAliases.put("CMA", "Commander Anthology");
         setsAliases.put("CHK", "Champions of Kamigawa");
         setsAliases.put("CHR", "Chronicles");
         setsAliases.put("CMD", "Magic: The Gathering-Commander");
@@ -134,7 +137,8 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("DDO", "Duel Decks: Elspeth vs. Kiora");
         setsAliases.put("DDP", "Duel Decks: Zendikar vs. Eldrazi");
         setsAliases.put("DDQ", "Duel Decks: Blessed vs. Cursed");
-        setsAliases.put("DDR", "Duel Decks: Nissa vs Ob Nixilis");
+        setsAliases.put("DDR", "Duel Decks: Nissa vs. Ob Nixilis");
+        setsAliases.put("DDS", "Duel Decks: Mind vs. Might");
         setsAliases.put("DGM", "Dragon's Maze");
         setsAliases.put("DIS", "Dissension");
         setsAliases.put("DKA", "Dark Ascension");
@@ -159,6 +163,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("H09", "Premium Deck Series: Slivers");
         setsAliases.put("HML", "Homelands");
         setsAliases.put("HOP", "Planechase");
+        setsAliases.put("HOU", "Hour of Devastation");
         setsAliases.put("ICE", "Ice Age");
         setsAliases.put("INV", "Invasion");
         setsAliases.put("ISD", "Innistrad");
@@ -189,6 +194,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("MLP", "Launch Party");
         setsAliases.put("MMA", "Modern Masters");
         setsAliases.put("MM2", "Modern Masters 2015");
+        setsAliases.put("MM3", "Modern Masters 2017");
         setsAliases.put("MMQ", "Mercadian Masques");
         setsAliases.put("MOR", "Morningtide");
         setsAliases.put("MPRP", "Magic Player Rewards");
@@ -260,6 +266,16 @@ public class WizardCardsImageSource implements CardImageSource {
         languageAliases.put("de", "German");
     }
 
+    @Override
+    public String getNextHttpImageUrl() {
+        return null;
+    }
+    
+    @Override
+    public String getFileForHttpImage(String httpImageUrl) {
+        return null;
+    }
+    
     private Map<String, String> getSetLinks(String cardSet) {
         ConcurrentHashMap<String, String> setLinks = new ConcurrentHashMap<>();
         ExecutorService executor = Executors.newFixedThreadPool(10);

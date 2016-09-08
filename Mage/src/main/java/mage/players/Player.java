@@ -78,7 +78,6 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
-import mage.util.MessageToClient;
 
 /**
  *
@@ -486,7 +485,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean chooseUse(Outcome outcome, String message, Ability source, Game game);
 
-    boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game);
+    boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game);
 
     boolean choose(Outcome outcome, Choice choice, Game game);
 

@@ -14,6 +14,7 @@ import mage.cards.decks.Deck;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.interfaces.rate.RateCallback;
+import mage.util.RandomUtil;
 
 /**
  * Builds deck from provided card pool.
@@ -205,7 +206,7 @@ public class DeckBuilder {
             ColoredManaSymbol bestColor = null;
             //Default to a color in the allowed colors
             if (allowedColors != null && !allowedColors.isEmpty()) {
-                bestColor = allowedColors.get(new Random().nextInt(allowedColors.size()));
+                bestColor = allowedColors.get(RandomUtil.nextInt(allowedColors.size()));
             }
             int lowestRatio = Integer.MAX_VALUE;
             for (final ColoredManaSymbol color : ColoredManaSymbol.values()) {

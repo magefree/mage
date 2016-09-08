@@ -177,17 +177,25 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
-        return this.chooseUse(outcome, new MessageToClient(message), source, game);
+        return this.chooseUse(outcome, message, null, null, null, source, game);
     }
 
     @Override
-    public boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game) {
+    public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
+        MessageToClient messageToClient = new MessageToClient(message, secondMessage);
+        Map<String, Serializable> options = new HashMap<>(2);
+        if (trueText != null) {
+            options.put("UI.left.btn.text", trueText);
+        }
+        if (falseText != null) {
+            options.put("UI.right.btn.text", falseText);
+        }
         if (source != null) {
-            Boolean answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message.getMessage());
+            Boolean answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message);
             if (answer != null) {
                 return answer;
             } else {
-                answer = requestAutoAnswerText.get(message.getMessage());
+                answer = requestAutoAnswerText.get(message);
                 if (answer != null) {
                     return answer;
                 }
@@ -195,10 +203,10 @@ public class HumanPlayer extends PlayerImpl {
         }
         updateGameStatePriority("chooseUse", game);
         do {
-            if (message.getSecondMessage() == null) {
-                message.setSecondMessage(getRelatedObjectName(source, game));
+            if (messageToClient.getSecondMessage() == null) {
+                messageToClient.setSecondMessage(getRelatedObjectName(source, game));
             }
-            game.fireAskPlayerEvent(playerId, message, source);
+            game.fireAskPlayerEvent(playerId, messageToClient, source, options);
             waitForResponse(game);
         } while (response.getBoolean() == null && !abort);
         if (!abort) {

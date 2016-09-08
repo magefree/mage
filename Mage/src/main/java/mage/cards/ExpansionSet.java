@@ -38,13 +38,13 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ExpansionSet implements Serializable {
 
-    protected static Random rnd = new Random();
 
     protected String name;
     protected String code;
@@ -136,7 +136,7 @@ public abstract class ExpansionSet implements Serializable {
 
     protected void addToBooster(List<Card> booster, List<CardInfo> cards) {
         if (!cards.isEmpty()) {
-            CardInfo cardInfo = cards.remove(rnd.nextInt(cards.size()));
+            CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size()));
             if (cardInfo != null) {
                 Card card = cardInfo.getCard();
                 if (card != null) {
@@ -156,7 +156,7 @@ public abstract class ExpansionSet implements Serializable {
             List<CardInfo> specialLands = getSpecialLand();
             List<CardInfo> basicLands = getCardsByRarity(Rarity.LAND);
             for (int i = 0; i < numBoosterLands; i++) {
-                if (ratioBoosterSpecialLand > 0 && rnd.nextInt(ratioBoosterSpecialLand) == 0 && specialLands != null) {
+                if (ratioBoosterSpecialLand > 0 && RandomUtil.nextInt(ratioBoosterSpecialLand) == 0 && specialLands != null) {
                     addToBooster(booster, specialLands);
                 } else {
                     addToBooster(booster, basicLands);
@@ -183,7 +183,7 @@ public abstract class ExpansionSet implements Serializable {
         List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
         List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
         for (int i = 0; i < numBoosterRare; i++) {
-            if (ratioBoosterMythic > 0 && rnd.nextInt(ratioBoosterMythic) == 0) {
+            if (ratioBoosterMythic > 0 && RandomUtil.nextInt(ratioBoosterMythic) == 0) {
                 addToBooster(booster, mythics);
             } else {
                 addToBooster(booster, rares);
@@ -208,11 +208,11 @@ public abstract class ExpansionSet implements Serializable {
         for (int i = 0; i < numBoosterDoubleFaced; i++) {
             CardCriteria criteria = new CardCriteria();
             criteria.setCodes(this.code).doubleFaced(true);
-            if (rnd.nextInt(15) < 10) {
+            if (RandomUtil.nextInt(15) < 10) {
                 criteria.rarities(Rarity.COMMON);
-            } else if (rnd.nextInt(5) < 4) {
+            } else if (RandomUtil.nextInt(5) < 4) {
                 criteria.rarities(Rarity.UNCOMMON);
-            } else if (rnd.nextInt(8) < 7) {
+            } else if (RandomUtil.nextInt(8) < 7) {
                 criteria.rarities(Rarity.RARE);
             } else {
                 criteria.rarities(Rarity.MYTHIC);
@@ -265,7 +265,7 @@ public abstract class ExpansionSet implements Serializable {
         }
         if (specialCards > 0) {
             for (int i = 0; i < numBoosterSpecial; i++) {
-                if (rnd.nextInt(15) < 10) {
+                if (RandomUtil.nextInt(15) < 10) {
                     if (specialCommon != null && !specialCommon.isEmpty()) {
                         addToBooster(booster, specialCommon);
                     } else {
@@ -273,7 +273,7 @@ public abstract class ExpansionSet implements Serializable {
                     }
                     continue;
                 }
-                if (rnd.nextInt(4) < 3) {
+                if (RandomUtil.nextInt(4) < 3) {
                     if (specialUncommon != null && !specialUncommon.isEmpty()) {
                         addToBooster(booster, specialUncommon);
                     } else {
@@ -281,7 +281,7 @@ public abstract class ExpansionSet implements Serializable {
                     }
                     continue;
                 }
-                if (rnd.nextInt(8) < 7) {
+                if (RandomUtil.nextInt(8) < 7) {
                     if (specialRare != null && !specialRare.isEmpty()) {
                         addToBooster(booster, specialRare);
                     } else {
@@ -291,7 +291,7 @@ public abstract class ExpansionSet implements Serializable {
                 }
                 if (specialMythic != null && !specialMythic.isEmpty()) {
                     if (specialBonus != null && !specialBonus.isEmpty()) {
-                        if (rnd.nextInt(3) < 2) {
+                        if (RandomUtil.nextInt(3) < 2) {
                             addToBooster(booster, specialMythic);
                             continue;
                         }

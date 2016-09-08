@@ -57,6 +57,7 @@ import mage.game.result.ResultProtos.MatchQuitStatus;
 import mage.game.result.ResultProtos.TourneyProto;
 import mage.game.result.ResultProtos.TourneyRoundProto;
 import mage.players.Player;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -68,7 +69,6 @@ public abstract class TournamentImpl implements Tournament {
     protected UUID id = UUID.randomUUID();
     protected List<Round> rounds = new CopyOnWriteArrayList<>();
     protected Map<UUID, TournamentPlayer> players = new HashMap<>();
-    protected static Random rnd = new Random();
     protected String matchName;
     protected TournamentOptions options;
     protected TournamentType tournamentType;
@@ -217,7 +217,7 @@ public abstract class TournamentImpl implements Tournament {
     private TournamentPlayer getNextAvailablePlayer(List<TournamentPlayer> roundPlayers, List<TournamentPlayer> playerWithByes) {
         TournamentPlayer nextPlayer;
         if (playerWithByes.isEmpty()) {
-            int i = rnd.nextInt(roundPlayers.size());
+            int i = RandomUtil.nextInt(roundPlayers.size());
             nextPlayer = roundPlayers.get(i);
             roundPlayers.remove(i);
         } else { // prefer players with byes to pair

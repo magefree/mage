@@ -1,9 +1,11 @@
 Aether Revolt|aetherrevolt|
 Alara Reborn|alarareborn|
 Alliances|alliances|
+Amonkhet|amonkhet|
 Antiquities|antiquities|
 Apocalypse|apocalypse|
 Archenemy|archenemy|
+Archenemy: Nicol Bolas|archenemynicolbolas|
 Arabian Nights|arabiannights|
 Arena League|arenaleague|
 Asia Pacific Land Program|asiapacificlandprogram|
@@ -21,6 +23,7 @@ Commander 2013 Edition|commander2013|
 Commander 2014 Edition|commander2014|
 Commander 2015|commander2015|
 Commander 2016|commander2016|
+Commander Anthology|commanderanthology|
 Commander's Arsenal|commandersarsenal|
 Conflux|conflux|
 Conspiracy: Take the Crown|conspiracytakethecrown|
@@ -45,6 +48,7 @@ Duel Decks: Izzet vs. Golgari|izzetvsgolgari|
 Duel Decks: Jace vs. Chandra|jacevschandra|
 Duel Decks: Jace vs. Vraska|jacevsvraska|
 Duel Decks: Knights vs. Dragons|knightsvsdragons|
+Duel Decks: Mind vs. Might|mindvsmight|
 Duel Decks: Nissa vs. Ob Nixilis|nissavsobnixilis|
 Duel Decks: Phyrexia vs. the Coalition|phyrexiavsthecoalition|
 Duel Decks: Sorin vs. Tibalt|sorinvstibalt|
@@ -79,6 +83,7 @@ Gatecrash|gatecrash|
 Grand Prix|grandprix|
 Guildpact|guildpact|
 Homelands|homelands|
+Hour of Devastation|hourofdevastation|
 Ice Age|iceage|
 Innistrad|innistrad|
 Invasion|invasion|
@@ -114,6 +119,7 @@ Mirrodin Besieged|mirrodinbesieged|
 Mirrodin|mirrodin|
 Modern Masters|modernmasters|
 Modern Masters 2015|modernmasters2015|
+Modern Masters 2017|modernmasters2017|
 Morningtide|morningtide|
 Nemesis|nemesis|
 New Phyrexia|newphyrexia|

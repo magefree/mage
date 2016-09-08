@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Random;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -61,13 +62,13 @@ public class ZombieToken extends Token {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode().equals("ISD")) {
-            this.setTokenType(new Random().nextInt(3) + 1);
+            this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
         if (getOriginalExpansionSetCode().equals("C14")) {
             this.setTokenType(2);
         }
         if (getOriginalExpansionSetCode().equals("EMN")) {
-            this.setTokenType(new Random().nextInt(4) + 1);
+            this.setTokenType(RandomUtil.nextInt(4) + 1);
         }
     }
 

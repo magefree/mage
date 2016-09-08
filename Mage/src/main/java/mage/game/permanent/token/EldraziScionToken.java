@@ -37,6 +37,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -65,10 +66,10 @@ public class EldraziScionToken extends Token {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode().equals("BFZ")) {
-            this.setTokenType(new Random().nextInt(3) + 1); // 3 different images
+            this.setTokenType(RandomUtil.nextInt(3) + 1); // 3 different images
         }
         if (getOriginalExpansionSetCode().equals("OGW")) {
-            this.setTokenType(new Random().nextInt(6) + 1); // 6 different images
+            this.setTokenType(RandomUtil.nextInt(6) + 1); // 6 different images
         }
     }
 

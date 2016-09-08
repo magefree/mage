@@ -27,6 +27,8 @@
  */
 package mage.sets.eldritchmoon;
 
+import mage.sets.EldritchMoon;
+
 import java.util.UUID;
 
 /**

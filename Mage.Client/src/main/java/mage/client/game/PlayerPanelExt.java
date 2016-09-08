@@ -77,13 +77,14 @@ import static mage.constants.Constants.DEFAULT_AVATAR_ID;
 import static mage.constants.Constants.MAX_AVATAR_ID;
 import static mage.constants.Constants.MIN_AVATAR_ID;
 import mage.constants.ManaType;
+import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.remote.Session;
 import mage.utils.timer.PriorityTimer;
+import mage.view.CardView;
 import mage.view.ManaPoolView;
 import mage.view.PlayerView;
 import org.mage.card.arcane.ManaSymbols;
-import mage.players.Player;
-import mage.view.CardView;
 
 /**
  * Enhanced player pane.
@@ -191,7 +192,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             changedFontLife = false;
         }
         lifeLabel.setText(Integer.toString(playerLife));
-        poisonLabel.setText(Integer.toString(player.getPoison()));
+        poisonLabel.setText(Integer.toString(player.getCounters().getCount(CounterType.POISON)));
         handLabel.setText(Integer.toString(player.getHandCount()));
         int libraryCards = player.getLibraryCount();
         if (libraryCards > 99) {
@@ -330,9 +331,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
         // Extend tooltip
         StringBuilder tooltipText = new StringBuilder(basicTooltipText);
-        if (player.getExperience() > 0) {
-            tooltipText.append("<br/>Experience counters: ").append(player.getExperience());
+        for (Counter counter : player.getCounters().values()) {
+            tooltipText.append("<br/>").append(counter.getName()).append(" counters: ").append(counter.getCount());
         }
+
         avatar.setToolTipText(tooltipText.toString());
         avatar.repaint();
 
