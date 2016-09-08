@@ -2118,6 +2118,10 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean scry(int value, Ability source, Game game) {
+        // Don't scry at the start of the game.
+        if (game.getTurnNum() == 1 && game.getStep() == null) {
+            return false;
+        }
         return computerPlayer.scry(value, source, game);
     }
 
