@@ -28,6 +28,7 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -48,10 +49,15 @@ public class Enlarge extends CardImpl {
         super(ownerId, 170, "Enlarge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "M14";
 
-
-        // Target creature gets +7/+7 and gains trample until end of turn. It must be blocked this turn if able.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(7,7, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        // Target creature gets +7/+7 and gains trample until end of turn. 
+        Effect effect = new BoostTargetEffect(7, 7, Duration.EndOfTurn);
+        effect.setText("Target creature gets +7/+7");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains trample until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        
+        // It must be blocked this turn if able.
         this.getSpellAbility().addEffect(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

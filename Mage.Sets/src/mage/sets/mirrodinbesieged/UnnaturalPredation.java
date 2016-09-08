@@ -29,6 +29,7 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -49,8 +50,13 @@ public class UnnaturalPredation extends CardImpl {
         super(ownerId, 93, "Unnatural Predation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "MBS";
 
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        // Target creature gets +1/+1 and gains trample until end of turn
+        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
+        effect.setText("Target creature gets +1/+1");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains trample until end of turn");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
