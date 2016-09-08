@@ -101,10 +101,11 @@ public class MeldEffect extends OneShotEffect {
                 if (!sourceCard.isCopy() && !meldWithCard.isCopy()) {
                     meldCard.setOwnerId(controller.getId());
                     meldCard.setTopHalfCard(meldWithCard, game);
-                    meldCard.setbottomHalfCard(sourceCard, game);
+                    meldCard.setBottomHalfCard(sourceCard, game);
                     meldCard.setMelded(true);
                     game.addMeldCard(meldCard.getId(), meldCard);
                     game.getState().addCard(meldCard);
+                    meldCard.setZone(Zone.EXILED, game);
                     meldCard.moveToZone(Zone.BATTLEFIELD, sourceId, game, false);
                 }
                 return true;

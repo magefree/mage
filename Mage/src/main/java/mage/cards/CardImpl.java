@@ -28,10 +28,8 @@
 package mage.cards;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -50,10 +48,7 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
-import mage.game.CardAttribute;
-import mage.game.CardState;
-import mage.game.Game;
-import mage.game.GameState;
+import mage.game.*;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -61,6 +56,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.players.Player;
 import mage.util.GameLog;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
@@ -344,79 +340,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone, appliedEffects);
-        if (!game.replaceEvent(event)) {
-            removeFromZone(game, fromZone, sourceId);
-            setFaceDown(false, game);
-            updateZoneChangeCounter(game);
-            switch (event.getToZone()) {
-                case GRAVEYARD:
-                    game.getPlayer(ownerId).putInGraveyard(this, game);
-                    break;
-                case HAND:
-                    game.getPlayer(ownerId).getHand().add(this);
-                    break;
-                case STACK:
-                    game.getStack().push(new Spell(this, this.getSpellAbility().copy(), ownerId, event.getFromZone()));
-                    break;
-                case EXILED:
-                    game.getExile().getPermanentExile().add(this);
-                    break;
-                case COMMAND:
-                    game.addCommander(new Commander(this));
-                    break;
-                case LIBRARY:
-                    if (flag) {
-                        game.getPlayer(ownerId).getLibrary().putOnTop(this, game);
-                    } else {
-                        game.getPlayer(ownerId).getLibrary().putOnBottom(this, game);
-                    }
-                    break;
-                case BATTLEFIELD:
-                    PermanentCard permanent = new PermanentCard(this, event.getPlayerId(), game); // controller can be replaced (e.g. Gather Specimens)
-                    game.addPermanent(permanent);
-                    game.setZone(objectId, Zone.BATTLEFIELD);
-                    game.setScopeRelevant(true);
-                    game.applyEffects();
-                    boolean entered = permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
-                    game.setScopeRelevant(false);
-                    game.applyEffects();
-                    if (entered) {
-                        if (flag) {
-                            permanent.setTapped(true);
-                        }
-                        event.setTarget(permanent);
-                    } else {
-                        return false;
-                    }
-                    break;
-                default:
-                    Card sourceCard = game.getCard(sourceId);
-                    logger.fatal(new StringBuilder("Invalid to zone [").append(toZone)
-                            .append("] for card [").append(this.getName())
-                            .append("] to zone [").append(toZone)
-                            .append("] source [").append(sourceCard != null ? sourceCard.getName() : "null").append("]").toString());
-                    return false;
-            }
-            game.setZone(objectId, event.getToZone());
-            game.addSimultaneousEvent(event);
-            return game.getState().getZone(objectId) == toZone;
+        ZoneChangeInfo zoneChangeInfo;
+        if (toZone == Zone.LIBRARY) {
+            zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
+        } else if (toZone == Zone.BATTLEFIELD) {
+            zoneChangeInfo = new ZoneChangeInfo.Battlefield(event, flag /* comes into play tapped */);
+        } else {
+            zoneChangeInfo = new ZoneChangeInfo(event);
         }
-        return false;
+        return ZonesHandler.moveCard(zoneChangeInfo, game);
     }
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         Card mainCard = getMainCard();
         ZoneChangeEvent event = new ZoneChangeEvent(mainCard.getId(), ability.getId(), controllerId, fromZone, Zone.STACK);
-        if (!game.replaceEvent(event)) {
-            mainCard.removeFromZone(game, fromZone, ability.getSourceId());
-            game.getStack().push(new Spell(this, ability.copy(), controllerId, event.getFromZone()));
-            updateZoneChangeCounter(game);
-            setZone(event.getToZone(), game);
-            game.fireEvent(event);
-            return game.getState().getZone(mainCard.getId()) == Zone.STACK;
-        }
-        return false;
+        ZoneChangeInfo.Stack info =
+                new ZoneChangeInfo.Stack(event, new Spell(this, ability.copy(), controllerId, event.getFromZone()));
+        return ZonesHandler.cast(info, game);
     }
 
     @Override
@@ -428,20 +369,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
-        if (!game.replaceEvent(event)) {
-            removeFromZone(game, fromZone, sourceId);
-            if (exileId == null) {
-                game.getExile().getPermanentExile().add(this);
-            } else {
-                game.getExile().createZone(exileId, name).add(this);
-            }
-            setFaceDown(false, game);
-            updateZoneChangeCounter(game);
-            game.setZone(objectId, event.getToZone());
-            game.addSimultaneousEvent(event);
-            return true;
-        }
-        return false;
+        ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
+        return ZonesHandler.moveCard(info, game);
     }
 
     @Override
@@ -455,44 +384,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown) {
-        return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, tapped, facedown, null);
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean faceDown) {
+        return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, tapped, faceDown, null);
     }
 
     @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects) {
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean faceDown, ArrayList<UUID> appliedEffects) {
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, controllerId, fromZone, Zone.BATTLEFIELD, appliedEffects);
-        if (facedown) {
-            this.setFaceDown(true, game);
-        }
-        if (!game.replaceEvent(event)) {
-            if (facedown) {
-                this.setFaceDown(false, game);
-            }
-            removeFromZone(game, fromZone, sourceId);
-            updateZoneChangeCounter(game);
-            PermanentCard permanent = new PermanentCard(this, event.getPlayerId(), game);
-            // make sure the controller of all continuous effects of this card are switched to the current controller
-            game.getContinuousEffects().setController(objectId, event.getPlayerId());
-            game.addPermanent(permanent);
-            setZone(Zone.BATTLEFIELD, game);
-            // check if there are counters to add to the permanent (e.g. from non replacement effects like Persist)
-            checkForCountersToAdd(permanent, game);
-            game.setScopeRelevant(true);
-            permanent.setTapped(tapped);
-            permanent.setFaceDown(facedown, game);
-            boolean entered = permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
-            game.setScopeRelevant(false);
-            game.applyEffects();
-            if (entered) {
-                game.addSimultaneousEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), fromZone, Zone.BATTLEFIELD));
-                return true;
-            }
-        }
-        if (facedown) {
-            this.setFaceDown(false, game);
-        }
-        return false;
+        ZoneChangeInfo.Battlefield info = new ZoneChangeInfo.Battlefield(event, faceDown, tapped);
+        return ZonesHandler.moveCard(info, game);
     }
 
     @Override

@@ -35,6 +35,7 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentMeld;
 import mage.players.Player;
 
@@ -49,9 +50,11 @@ public abstract class MeldCard extends CardImpl {
     protected int topLastZoneChangeCounter;
     protected int bottomLastZoneChangeCounter;
     protected boolean isMelded;
+    protected Cards halves;
 
     public MeldCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         super(ownerId, cardNumber, name, rarity, cardTypes, costs);
+        halves = new CardsImpl();
     }
 
     public MeldCard(MeldCard card) {
@@ -60,6 +63,7 @@ public abstract class MeldCard extends CardImpl {
         this.bottomHalfCard = card.bottomHalfCard;
         this.topLastZoneChangeCounter = card.topLastZoneChangeCounter;
         this.bottomLastZoneChangeCounter = card.bottomLastZoneChangeCounter;
+        this.halves = new CardsImpl(halves);
         this.isMelded = card.isMelded;
     }
 
@@ -78,6 +82,7 @@ public abstract class MeldCard extends CardImpl {
     public void setTopHalfCard(Card topHalfCard, Game game) {
         this.topHalfCard = topHalfCard;
         this.topLastZoneChangeCounter = topHalfCard.getZoneChangeCounter(game);
+        halves.add(topHalfCard.getId());
     }
 
     public int getTopLastZoneChangeCounter() {
@@ -92,9 +97,10 @@ public abstract class MeldCard extends CardImpl {
         return bottomHalfCard;
     }
 
-    public void setbottomHalfCard(Card bottomHalfCard, Game game) {
+    public void setBottomHalfCard(Card bottomHalfCard, Game game) {
         this.bottomHalfCard = bottomHalfCard;
         this.bottomLastZoneChangeCounter = bottomHalfCard.getZoneChangeCounter(game);
+        halves.add(bottomHalfCard.getId());
     }
 
     public int getBottomLastZoneChangeCounter() {
@@ -110,204 +116,6 @@ public abstract class MeldCard extends CardImpl {
         super.assignNewId();
         topHalfCard.assignNewId();
         bottomHalfCard.assignNewId();
-    }
-
-    @Override
-    public void setCopy(boolean isCopy) {
-        super.setCopy(isCopy);
-        topHalfCard.setCopy(isCopy);
-        bottomHalfCard.setCopy(isCopy);
-    }
-
-    @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
-        if (this.isMelded()) {
-            // Initial move to battlefield
-            if (toZone == Zone.BATTLEFIELD) {
-                return this.putOntoBattlefield(game, Zone.EXILED, sourceId, this.getOwnerId(), false, false, appliedEffects);
-            } // Move when melded from the battlefield to elsewhere
-            else {
-                ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.BATTLEFIELD, toZone, appliedEffects);
-                if (!game.replaceEvent(event)) {
-                    updateZoneChangeCounter(game);
-                    switch (event.getToZone()) {
-                        case GRAVEYARD:
-                            game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game);
-                            game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game);
-                            break;
-                        case HAND:
-                            game.getPlayer(this.getOwnerId()).getHand().add(topHalfCard);
-                            game.getPlayer(this.getOwnerId()).getHand().add(bottomHalfCard);
-                            break;
-                        case EXILED:
-                            game.getExile().getPermanentExile().add(topHalfCard);
-                            game.getExile().getPermanentExile().add(bottomHalfCard);
-                            break;
-                        case LIBRARY:
-                            Player controller = game.getPlayer(this.getOwnerId());
-                            if (controller != null) {
-                                CardsImpl cardsToMove = new CardsImpl();
-                                cardsToMove.add(topHalfCard);
-                                cardsToMove.add(bottomHalfCard);
-                                if (flag) {
-                                    controller.putCardsOnTopOfLibrary(cardsToMove, game, null, true);
-                                } else {
-                                    controller.putCardsOnBottomOfLibrary(cardsToMove, game, null, true);
-                                }
-                            }
-                            break;
-                        default:
-                            return false;
-                    }
-                    this.setMelded(false);
-                    game.setZone(topHalfCard.getId(), event.getToZone());
-                    game.setZone(bottomHalfCard.getId(), event.getToZone());
-                    this.topLastZoneChangeCounter = topHalfCard.getZoneChangeCounter(game);
-                    this.bottomLastZoneChangeCounter = bottomHalfCard.getZoneChangeCounter(game);
-                    game.addSimultaneousEvent(event);
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        } else {
-            // Try to move the former meld cards after it has already left the battlefield.
-            // If the meld parts didn't move from that zone, move them instead of the meld card.
-            // Reset the local zcc so the meld card lose track of them.
-            boolean returnValue = false;
-            if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)) {
-                topHalfCard.moveToZone(toZone, sourceId, game, flag, appliedEffects);
-                topLastZoneChangeCounter = topHalfCard.getZoneChangeCounter(game);
-                returnValue = true;
-            }
-            if (bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)) {
-                bottomHalfCard.moveToZone(toZone, sourceId, game, flag, appliedEffects);
-                bottomLastZoneChangeCounter = bottomHalfCard.getZoneChangeCounter(game);
-                returnValue = true;
-            }
-            return returnValue;
-        }
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
-        if (this.isMelded()) {
-            // Move when melded from the battlefield to exile
-            ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.BATTLEFIELD, Zone.EXILED, appliedEffects);
-            if (!game.replaceEvent(event)) {
-                updateZoneChangeCounter(game);
-                switch (event.getToZone()) {
-                    case GRAVEYARD:
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game);
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game);
-                        break;
-                    case HAND:
-                        game.getPlayer(this.getOwnerId()).getHand().add(topHalfCard);
-                        game.getPlayer(this.getOwnerId()).getHand().add(bottomHalfCard);
-                        break;
-                    case EXILED:
-                        if (exileId == null) {
-                            game.getExile().getPermanentExile().add(topHalfCard);
-                            game.getExile().getPermanentExile().add(bottomHalfCard);
-                        } else {
-                            game.getExile().createZone(exileId, name).add(topHalfCard);
-                            game.getExile().getExileZone(exileId).add(bottomHalfCard);
-                        }
-                        break;
-                    case LIBRARY:
-                        Player controller = game.getPlayer(this.getOwnerId());
-                        if (controller != null) {
-                            CardsImpl cardsToMove = new CardsImpl();
-                            cardsToMove.add(topHalfCard);
-                            cardsToMove.add(bottomHalfCard);
-                            if (event.getFlag()) {
-                                controller.putCardsOnTopOfLibrary(cardsToMove, game, null, true);
-                            } else {
-                                controller.putCardsOnBottomOfLibrary(cardsToMove, game, null, true);
-                            }
-                        }
-                        break;
-                    default:
-                        return false;
-                }
-                this.setMelded(false);
-                game.setZone(topHalfCard.getId(), event.getToZone());
-                game.setZone(bottomHalfCard.getId(), event.getToZone());
-                this.topLastZoneChangeCounter = topHalfCard.getZoneChangeCounter(game);
-                this.bottomLastZoneChangeCounter = bottomHalfCard.getZoneChangeCounter(game);
-                game.addSimultaneousEvent(event);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            // Try to move the former meld cards after it has already left the battlefield.
-            // If the meld parts didn't move from that zone, move them instead of the meld card.
-            // Reset the local zcc so the meld card lose track of them.
-            boolean returnValue = false;
-            if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)) {
-                topHalfCard.moveToExile(exileId, name, sourceId, game, appliedEffects);
-                topLastZoneChangeCounter = topHalfCard.getZoneChangeCounter(game);
-                returnValue = true;
-            }
-            if (bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)) {
-                bottomHalfCard.moveToExile(exileId, name, sourceId, game, appliedEffects);
-                bottomLastZoneChangeCounter = bottomHalfCard.getZoneChangeCounter(game);
-                returnValue = true;
-            }
-            return returnValue;
-        }
-    }
-
-    @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects) {
-        // Initial move to battlefield
-        if (this.isMelded()) {
-            ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, controllerId, Zone.EXILED, Zone.BATTLEFIELD, appliedEffects);
-            if (!game.replaceEvent(event) && event.getToZone() == Zone.BATTLEFIELD) {
-                updateZoneChangeCounter(game);
-                PermanentMeld permanent = new PermanentMeld(this, event.getPlayerId(), game); // controller can be replaced (e.g. Gather Specimens)
-                game.addPermanent(permanent);
-                game.setZone(objectId, Zone.BATTLEFIELD);
-                game.setScopeRelevant(true);
-                game.applyEffects();
-                boolean entered = permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
-                game.setScopeRelevant(false);
-                game.applyEffects();
-                if (entered) {
-                    if (tapped) {
-                        permanent.setTapped(true);
-                    }
-                    event.setTarget(permanent);
-                } else {
-                    return false;
-                }
-                game.setZone(objectId, event.getToZone());
-                game.addSimultaneousEvent(event);
-                game.getExile().removeCard(this.topHalfCard, game);
-                game.getExile().removeCard(this.bottomHalfCard, game);
-                return true;
-            } else {
-                this.setMelded(false);
-                return false;
-            }
-        } else {
-            // Try to move the former meld cards after it has already left the battlefield.
-            // If the meld parts didn't move from that zone, move them instead of the meld card.
-            // Reset the local zcc so the meld card lose track of them.
-            boolean returnValue = false;
-            if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)) {
-                topHalfCard.moveToZone(Zone.BATTLEFIELD, sourceId, game, tapped, appliedEffects);
-                topLastZoneChangeCounter = topHalfCard.getZoneChangeCounter(game);
-                returnValue = true;
-            }
-            if (bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)) {
-                bottomHalfCard.moveToZone(Zone.BATTLEFIELD, sourceId, game, tapped, appliedEffects);
-                bottomLastZoneChangeCounter = bottomHalfCard.getZoneChangeCounter(game);
-                returnValue = true;
-            }
-            return returnValue;
-        }
     }
 
     @Override
@@ -333,13 +141,76 @@ public abstract class MeldCard extends CardImpl {
         } else {
             // can this really happen?
             boolean returnState = true;
-            if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)) {
+            if (hasTopHalf(game)) {
                 returnState |= topHalfCard.addCounters(counter, game, appliedEffects);
             }
-            if (bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)) {
+            if (hasBottomHalf(game)) {
                 returnState |= bottomHalfCard.addCounters(counter, game, appliedEffects);
             }
             return returnState;
         }
+    }
+
+    public boolean hasTopHalf(Game game) {
+        boolean value = topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)
+                && halves.contains(topHalfCard.getId());
+        if (!value) {
+            halves.remove(topHalfCard);
+        }
+        return value;
+    }
+
+    public boolean hasBottomHalf(Game game) {
+        boolean value = bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)
+                && halves.contains(bottomHalfCard.getId());
+        if (!value) {
+            halves.remove(bottomHalfCard);
+        }
+        return value;
+    }
+
+    @Override
+    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+        if (isCopy()) {
+            return super.removeFromZone(game, fromZone, sourceId);
+        }
+        if (isMelded() && fromZone == Zone.BATTLEFIELD) {
+            Permanent permanent = game.getPermanent(objectId);
+            return permanent != null && permanent.removeFromZone(game, fromZone, sourceId);
+        }
+        boolean  topRemoved = hasTopHalf(game) && topHalfCard.removeFromZone(game, fromZone, sourceId);
+        if (!topRemoved) {
+            // The top half isn't being moved with the pair anymore.
+            halves.remove(topHalfCard);
+        }
+        boolean  bottomRemoved = hasBottomHalf(game) && bottomHalfCard.removeFromZone(game, fromZone, sourceId);
+        if (!bottomRemoved) {
+            // The bottom half isn't being moved with the pair anymore.
+            halves.remove(bottomHalfCard);
+        }
+        return topRemoved || bottomRemoved;
+    }
+
+    @Override
+    public void updateZoneChangeCounter(Game game) {
+        if (isCopy() || !isMelded()) {
+            super.updateZoneChangeCounter(game);
+            return;
+        }
+        game.getState().updateZoneChangeCounter(objectId);
+        if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)
+                && halves.contains(topHalfCard.getId())) {
+            topHalfCard.updateZoneChangeCounter(game);
+            topLastZoneChangeCounter = topHalfCard.getZoneChangeCounter(game);
+        }
+        if (bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)
+                && halves.contains(bottomHalfCard.getId())) {
+            bottomHalfCard.updateZoneChangeCounter(game);
+            bottomLastZoneChangeCounter = bottomHalfCard.getZoneChangeCounter(game);
+        }
+    }
+
+    public Cards getHalves() {
+        return halves;
     }
 }
