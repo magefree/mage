@@ -50,6 +50,7 @@ public class SweepEffect extends OneShotEffect {
 
     private final String sweepSubtype;
     private FilterPermanent setFilter = null;
+    private boolean notTarget = true;
 
     public SweepEffect(String sweepSubtype) {
         super(Outcome.Benefit);
@@ -57,11 +58,12 @@ public class SweepEffect extends OneShotEffect {
         this.staticText = "<i>Sweep</i> - Return any number of " + sweepSubtype + (sweepSubtype.endsWith("s") ? "" : "s") + " you control to their owner's hand";
     }
     
-    public SweepEffect(FilterPermanent filter, String text) {
+    public SweepEffect(FilterPermanent filter, String text, boolean notTarget) {
         super(Outcome.Benefit);
         this.sweepSubtype = text;
         this.staticText = "Return any number of " + text + " you control to their owner's hand";
         this.setFilter = filter;
+        this.notTarget = notTarget;
     }
     
     
@@ -70,6 +72,7 @@ public class SweepEffect extends OneShotEffect {
         super(effect);
         this.sweepSubtype = effect.sweepSubtype;
         this.setFilter = effect.setFilter;
+        this.notTarget = effect.notTarget;
     }
 
     @Override
@@ -89,7 +92,7 @@ public class SweepEffect extends OneShotEffect {
                 filter = setFilter;
             }
                 
-            Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
+            Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, notTarget);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 game.getState().setValue(CardUtil.getCardZoneString("sweep", source.getSourceId(), game), target.getTargets().size());
                 controller.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
