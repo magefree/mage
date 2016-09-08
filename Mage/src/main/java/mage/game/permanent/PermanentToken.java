@@ -49,6 +49,8 @@ public class PermanentToken extends PermanentImpl {
         this.token = token.copy();
         this.token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
+        this.power.modifyBaseValue(token.getPower().getBaseValueModified());
+        this.toughness.modifyBaseValue(token.getToughness().getBaseValueModified());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
     }
 
@@ -62,6 +64,9 @@ public class PermanentToken extends PermanentImpl {
     public void reset(Game game) {
         copyFromToken(token, game, true);
         super.reset(game);
+        // Because the P/T objects have there own base value for reset we have to take it from there instead of from the basic token object
+        this.power.resetToBaseValue();
+        this.toughness.resetToBaseValue();
     }
 
     private void copyFromToken(Token token, Game game, boolean reset) {
@@ -84,8 +89,6 @@ public class PermanentToken extends PermanentImpl {
         this.color = token.getColor(game).copy();
         this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();
-        this.power.modifyBaseValue(token.getPower().getBaseValueModified());
-        this.toughness.modifyBaseValue(token.getToughness().getBaseValueModified());
         this.supertype = token.getSupertype();
         this.subtype = token.getSubtype(game);
         this.tokenDescriptor = token.getTokenDescriptor();
