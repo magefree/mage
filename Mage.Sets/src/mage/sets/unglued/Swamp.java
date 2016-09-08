@@ -28,6 +28,8 @@
 
 package mage.sets.unglued;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -38,6 +40,7 @@ public class Swamp extends mage.cards.basiclands.Swamp {
     public Swamp(UUID ownerId) {
         super(ownerId, 86);
         this.expansionSetCode = "UGL";
+        this.frameStyle = FrameStyle.UGL_FULL_ART_BASIC;
     }
 
     public Swamp(final Swamp card) {

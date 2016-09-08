@@ -39,6 +39,7 @@ import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
+import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.util.GameLog;
@@ -148,6 +149,11 @@ public class Commander implements CommandObject {
     @Override
     public ObjectColor getFrameColor(Game game) {
         return card.getFrameColor(game);
+    }
+
+    @Override
+    public FrameStyle getFrameStyle() {
+        return card.getFrameStyle();
     }
 
     @Override

@@ -39,6 +39,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ManaAbility;
+import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.util.CardUtil;
@@ -52,6 +53,7 @@ public abstract class MageObjectImpl implements MageObject {
     protected ManaCosts<ManaCost> manaCost;
     protected ObjectColor color;
     protected ObjectColor frameColor;
+    protected FrameStyle frameStyle;
     protected List<CardType> cardType = new ArrayList<>();
     protected List<String> subtype = new ArrayList<>();
     protected List<String> supertype = new ArrayList<>();
@@ -71,6 +73,7 @@ public abstract class MageObjectImpl implements MageObject {
         toughness = new MageInt(0);
         color = new ObjectColor();
         frameColor = new ObjectColor();
+        frameStyle = FrameStyle.M15_NORMAL;
         manaCost = new ManaCostsImpl<>("");
         abilities = new AbilitiesImpl<>();
     }
@@ -82,6 +85,7 @@ public abstract class MageObjectImpl implements MageObject {
         text = object.text;
         color = object.color.copy();
         frameColor = object.frameColor.copy();
+        frameStyle = object.frameStyle;
         power = object.power.copy();
         toughness = object.toughness.copy();
         abilities = object.abilities.copy();
@@ -219,6 +223,11 @@ public abstract class MageObjectImpl implements MageObject {
             // For everything else, just return the frame colors
             return frameColor;
         }
+    }
+
+    @Override
+    public FrameStyle getFrameStyle() {
+        return frameStyle;
     }
 
     @Override

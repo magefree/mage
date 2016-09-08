@@ -38,6 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.util.GameLog;
@@ -55,6 +56,7 @@ public class Emblem implements CommandObject {
     private UUID id;
     private UUID controllerId;
     private UUID sourceId;
+    private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
     private String expansionSetCodeForImage = null;
 
@@ -65,9 +67,15 @@ public class Emblem implements CommandObject {
     public Emblem(final Emblem emblem) {
         this.id = emblem.id;
         this.name = emblem.name;
+        this.frameStyle = emblem.frameStyle;
         this.controllerId = emblem.controllerId;
         this.sourceId = emblem.sourceId;
         this.abilites = emblem.abilites.copy();
+    }
+
+    @Override
+    public FrameStyle getFrameStyle() {
+        return frameStyle;
     }
 
     @Override

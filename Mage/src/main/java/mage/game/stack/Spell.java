@@ -46,6 +46,7 @@ import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
+import mage.cards.FrameStyle;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -77,6 +78,7 @@ public class Spell extends StackObjImpl implements Card {
     private final Card card;
     private final ObjectColor color;
     private final ObjectColor frameColor;
+    private final FrameStyle frameStyle;
     private final SpellAbility ability;
     private final Zone fromZone;
     private final UUID id;
@@ -90,6 +92,7 @@ public class Spell extends StackObjImpl implements Card {
         this.card = card;
         this.color = card.getColor(null).copy();
         this.frameColor = card.getFrameColor(null).copy();
+        this.frameStyle = card.getFrameStyle();
         id = ability.getId();
         this.ability = ability;
         this.ability.setControllerId(controllerId);
@@ -131,6 +134,7 @@ public class Spell extends StackObjImpl implements Card {
         this.faceDown = spell.faceDown;
         this.color = spell.color.copy();
         this.frameColor = spell.color.copy();
+        this.frameStyle = spell.frameStyle;
     }
 
     public boolean activate(Game game, boolean noMana) {
@@ -490,6 +494,11 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public ObjectColor getFrameColor(Game game) {
         return frameColor;
+    }
+
+    @Override
+    public FrameStyle getFrameStyle() {
+        return frameStyle;
     }
 
     @Override

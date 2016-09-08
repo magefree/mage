@@ -28,6 +28,8 @@
 
 package mage.sets.unhinged;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class Island extends mage.cards.basiclands.Island {
     public Island(UUID ownerId) {
         super(ownerId, 137);
         this.expansionSetCode = "UNH";
+        this.frameStyle = FrameStyle.UNH_FULL_ART_BASIC;
     }
 
     public Island(final Island card) {

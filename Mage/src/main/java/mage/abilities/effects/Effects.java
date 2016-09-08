@@ -65,12 +65,12 @@ public class Effects extends ArrayList<Effect> {
         StringBuilder sbText = new StringBuilder();
         String lastRule = null;
         for (Effect effect: this) {
-            String endString = "";            
+            String endString = "";
             String nextRule = effect.getText(mode);
             if (nextRule != null) {
                 if (nextRule.startsWith("and ") || nextRule.startsWith("with ")) {
                     endString = " ";
-                } else if (nextRule.startsWith(",")) {
+                } else if (nextRule.startsWith(",") || nextRule.startsWith(" ")) {
                     endString = "";
                 } else if (lastRule != null && lastRule.length()> 3) {
                     if (!lastRule.endsWith(".") && !lastRule.endsWith("<br>")) {
@@ -84,7 +84,7 @@ public class Effects extends ArrayList<Effect> {
             }
             lastRule = nextRule;
         }
-        if (lastRule != null && lastRule.length()> 3 && 
+        if (lastRule != null && lastRule.length()> 3 &&
                 !lastRule.endsWith(".") &&
                 !lastRule.endsWith("\"") &&
                 !lastRule.startsWith("<b>Level ") &&

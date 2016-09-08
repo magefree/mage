@@ -38,7 +38,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import mage.cards.Card;
@@ -52,7 +51,6 @@ import mage.util.RandomUtil;
  * @author BetaSteward_at_googlemail.com
  */
 public class Library implements Serializable {
-
 
     private boolean emptyDraw;
     private final Deque<UUID> library = new ArrayDeque<>();

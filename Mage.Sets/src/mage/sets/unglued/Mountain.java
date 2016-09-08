@@ -28,6 +28,8 @@
 
 package mage.sets.unglued;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -38,6 +40,7 @@ public class Mountain extends mage.cards.basiclands.Mountain {
     public Mountain(UUID ownerId) {
         super(ownerId, 87);
         this.expansionSetCode = "UGL";
+        this.frameStyle = FrameStyle.UGL_FULL_ART_BASIC;
     }
 
     public Mountain(final Mountain card) {

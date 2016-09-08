@@ -27,6 +27,8 @@
  */
 package mage.sets.battleforzendikar;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -38,6 +40,7 @@ public class Swamp10 extends mage.cards.basiclands.Swamp {
     public Swamp10(UUID ownerId) {
         super(ownerId, "264b");
         this.expansionSetCode = "BFZ";
+        this.frameStyle = FrameStyle.BFZ_FULL_ART_BASIC;
     }
 
     public Swamp10(final Swamp10 card) {

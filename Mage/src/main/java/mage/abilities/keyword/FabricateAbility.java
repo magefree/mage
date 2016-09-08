@@ -27,17 +27,15 @@
  */
 package mage.abilities.keyword;
 
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ServoToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -103,17 +101,5 @@ class FabricateEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class ServoToken extends Token {
-
-    ServoToken() {
-        super("Servo", "1/1 colorless Servo artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Servo");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

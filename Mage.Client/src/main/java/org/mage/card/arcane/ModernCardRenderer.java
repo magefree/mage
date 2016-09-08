@@ -20,8 +20,9 @@ import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
 import java.awt.font.TextMeasurer;
-import java.awt.geom.RoundRectangle2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.RasterFormatException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.AttributedCharacterIterator;
@@ -159,12 +160,17 @@ public class ModernCardRenderer extends CardRenderer {
     // How far down the card is the type line placed?
     protected static float TYPE_LINE_Y_FRAC = 0.57f; // x cardHeight
     protected static float TYPE_LINE_Y_FRAC_TOKEN = 0.70f;
+    protected static float TYPE_LINE_Y_FRAC_FULL_ART = 0.74f;
     protected int typeLineY;
+
+    // Possible sizes of rules text font
+    protected static int[] RULES_TEXT_FONT_SIZES = {24, 18, 15, 12, 9};
 
     // How large is the box text, and how far is it down the boxes
     protected int boxTextHeight;
     protected int boxTextOffset;
     protected Font boxTextFont;
+    protected Font boxTextFontNarrow;
 
     // How large is the P/T text, and how far is it down the boxes
     protected int ptTextHeight;
@@ -202,29 +208,26 @@ public class ModernCardRenderer extends CardRenderer {
                 BOX_HEIGHT_FRAC * cardHeight);
 
         // Type line at
-        if (cardView.isToken()) {
-            typeLineY = (int) (TYPE_LINE_Y_FRAC_TOKEN * cardHeight);
-        } else {
-            typeLineY = (int) (TYPE_LINE_Y_FRAC * cardHeight);
-        }
+        typeLineY = (int)(getTypeLineYFrac() * cardHeight);
 
         // Box text height
         boxTextHeight = getTextHeightForBoxHeight(boxHeight);
         boxTextOffset = (boxHeight - boxTextHeight) / 2;
-        boxTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, boxTextHeight);
-
+        // Not using Beleren for now because it looks bad at small font sizes. Maybe we want to in the future?
+        //boxTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, boxTextHeight);
+        boxTextFont = new Font("Arial", Font.PLAIN, boxTextHeight);
+        boxTextFontNarrow = new Font("Arial Narrow", Font.PLAIN, boxTextHeight);
+        
+        
         // Box text height
         ptTextHeight = getPTTextHeightForLineHeight(boxHeight);
         ptTextOffset = (boxHeight - ptTextHeight) / 2;
+        // Beleren font does work well for numbers though
         ptTextFont = BASE_BELEREN_FONT.deriveFont(Font.PLAIN, ptTextHeight);
     }
 
     @Override
     protected void drawBorder(Graphics2D g) {
-        // Draw border as one rounded rectangle
-        g.setColor(Color.black);
-        g.fillRoundRect(0, 0, cardWidth, cardHeight, cornerRadius, cornerRadius);
-
         // Selection Borders
         Color borderColor;
         if (isSelected) {
@@ -233,11 +236,17 @@ public class ModernCardRenderer extends CardRenderer {
             borderColor = new Color(250, 250, 0, 230);
         } else if (cardView.isPlayable()) {
             borderColor = new Color(153, 102, 204, 200);
-        } else if (cardView instanceof PermanentView && ((PermanentView) cardView).isCanAttack()) {
+        } else if (cardView.isCanAttack()) {
             borderColor = new Color(0, 0, 255, 230);
         } else {
-            borderColor = null;
+            borderColor = Color.BLACK;
         }
+        
+        // Draw border as one rounded rectangle
+        g.setColor(borderColor);
+        g.fillRoundRect(0, 0, cardWidth, cardHeight, cornerRadius, cornerRadius);
+        
+        /* // Separate selection highlight border from card itself. Not used right now
         if (borderColor != null) {
             float hwidth = borderWidth / 2.0f;
             Graphics2D g2 = (Graphics2D) g.create();
@@ -251,6 +260,7 @@ public class ModernCardRenderer extends CardRenderer {
             g2.draw(rect);
             g2.dispose();
         }
+        */
     }
 
     @Override
@@ -283,19 +293,63 @@ public class ModernCardRenderer extends CardRenderer {
         }
     }
 
+    /**
+     * Get the region to slice out of a source art image for the card
+     * @return
+     */
+    private Rectangle2D getArtRect() {
+        Rectangle2D rect;
+        if (cardView.getFrameStyle().isFullArt() || cardView.isToken()) {
+            rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
+        } else {
+            rect = new Rectangle2D.Float(.079f, .11f, .84f, .42f);
+        }
+        return rect;
+    }
+
+    private float getTypeLineYFrac() {
+        if (cardView.isToken()) {
+            return TYPE_LINE_Y_FRAC_TOKEN;
+        } else if (cardView.getFrameStyle().isFullArt()) {
+            return TYPE_LINE_Y_FRAC_FULL_ART;
+        } else {
+            return TYPE_LINE_Y_FRAC;
+        }
+    }
+
     @Override
     protected void drawArt(Graphics2D g) {
         if (artImage != null && !cardView.isFaceDown()) {
-            int imgWidth = artImage.getWidth();
-            int imgHeight = artImage.getHeight();
-            BufferedImage subImg
-                    = artImage.getSubimage(
-                            (int) (.079 * imgWidth), (int) (.11 * imgHeight),
-                            (int) (.84 * imgWidth), (int) (.42 * imgHeight));
-            g.drawImage(subImg,
-                    totalContentInset + 1, totalContentInset + boxHeight,
-                    contentWidth - 2, typeLineY - totalContentInset - boxHeight,
-                    null);
+            Rectangle2D artRect = getArtRect();
+
+            // Perform a process to make sure that the art is scaled uniformly to fill the frame, cutting
+            // off the minimum amount necessary to make it completely fill the frame without "squashing" it.
+            double fullCardImgWidth = artImage.getWidth();
+            double fullCardImgHeight = artImage.getHeight();
+            double artWidth = artRect.getWidth() * fullCardImgWidth;
+            double artHeight = artRect.getHeight() * fullCardImgHeight;
+            double targetWidth = contentWidth - 2;
+            double targetHeight = typeLineY - totalContentInset - boxHeight;
+            double targetAspect = targetWidth / targetHeight;
+            if (targetAspect * artHeight < artWidth) {
+                // Trim off some width
+                artWidth = targetAspect * artHeight;
+            } else {
+                // Trim off some height
+                artHeight = artWidth / targetAspect;
+            }
+            try {
+                BufferedImage subImg
+                        = artImage.getSubimage(
+                        (int) (artRect.getX() * fullCardImgWidth), (int) (artRect.getY() * fullCardImgHeight),
+                        (int) artWidth, (int) artHeight);
+                g.drawImage(subImg,
+                        totalContentInset + 1, totalContentInset + boxHeight,
+                        (int) targetWidth, (int) targetHeight,
+                        null);
+            } catch (RasterFormatException e) {
+                // At very small card sizes we may encounter a problem with rounding error making the rect not fit
+            }
         }
     }
 
@@ -414,12 +468,23 @@ public class ModernCardRenderer extends CardRenderer {
         } else {
             nameStr = cardView.getName();
         }
-        AttributedString str = new AttributedString(nameStr);
-        str.addAttribute(TextAttribute.FONT, boxTextFont);
-        TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
-        TextLayout layout = measure.getLayout(0, measure.getLineBreakIndex(0, availableWidth));
-        g.setColor(getBoxTextColor());
-        layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);
+        if (!nameStr.isEmpty()) {
+            AttributedString str = new AttributedString(nameStr);
+            str.addAttribute(TextAttribute.FONT, boxTextFont);
+            TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
+            int breakIndex = measure.getLineBreakIndex(0, availableWidth);
+            if (breakIndex < nameStr.length()) {
+                str = new AttributedString(nameStr);
+                str.addAttribute(TextAttribute.FONT, boxTextFontNarrow);
+                measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
+                breakIndex = measure.getLineBreakIndex(0, availableWidth);
+            }
+            if (breakIndex > 0) {
+                TextLayout layout = measure.getLayout(0, breakIndex);
+                g.setColor(getBoxTextColor());
+                layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);
+            }
+        }
 
         // Draw the mana symbols
         if (!cardView.isAbility() && !cardView.isFaceDown()) {
@@ -455,9 +520,18 @@ public class ModernCardRenderer extends CardRenderer {
             AttributedString str = new AttributedString(types);
             str.addAttribute(TextAttribute.FONT, boxTextFont);
             TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
-            TextLayout layout = measure.getLayout(0, measure.getLineBreakIndex(0, availableWidth));
-            g.setColor(getBoxTextColor());
-            layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);
+            int breakIndex = measure.getLineBreakIndex(0, availableWidth);
+            if (breakIndex < types.length()) {
+                str = new AttributedString(types);
+                str.addAttribute(TextAttribute.FONT, boxTextFontNarrow);
+                measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
+                breakIndex = measure.getLineBreakIndex(0, availableWidth);
+            }
+            if (breakIndex > 0) {
+                TextLayout layout = measure.getLayout(0, breakIndex);
+                g.setColor(getBoxTextColor());
+                layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);
+            }
         }
     }
 
@@ -475,7 +549,7 @@ public class ModernCardRenderer extends CardRenderer {
         int partWidth = (int) Math.max(30, 0.20f * cardWidth);
 
         // Is it a creature?
-        if (cardView.getCardTypes().contains(CardType.CREATURE)) {
+        if (cardView.getCardTypes().contains(CardType.CREATURE) || cardView.getSubTypes().contains("Vehicle")) {
             int x = cardWidth - borderWidth - partWidth;
 
             // Draw PT box
@@ -500,12 +574,7 @@ public class ModernCardRenderer extends CardRenderer {
             g.drawString(ptText,
                     x + (partWidth - ptTextWidth) / 2, curY - ptTextOffset - 1);
 
-            // Does it have damage on it?
-            if ((cardView instanceof PermanentView) && ((PermanentView) cardView).getDamage() > 0) {
-                // Show marked damage
-
-            }
-
+            // Advance
             curY -= boxHeight;
         }
 
@@ -583,95 +652,92 @@ public class ModernCardRenderer extends CardRenderer {
     // Draw the card's textbox in a given rect
     protected boolean loyaltyAbilityColorToggle = false;
 
-    protected void drawRulesText(Graphics2D g, int x, int y, int w, int h) {
-        // Initial font size to try to render at
-        Font font = new Font("Arial", Font.PLAIN, 12);
-        Font fontItalic = new Font("Arial", Font.ITALIC, 12);
+    private class RuleLayout {
+        public List<AttributedString> attributedRules;
+        public int remainingHeight;
+        public boolean fits;
+        public Font font;
+        public Font fontItalic;
+    }
 
-        // Handle the keyword rules
-        boolean hasKeywords = !textboxKeywords.isEmpty();
-        String keywordRulesString = getKeywordRulesString();
-        AttributedString keywordRulesAttributed = new AttributedString(keywordRulesString);
-        if (hasKeywords) {
-            keywordRulesAttributed.addAttribute(TextAttribute.FONT, font);
-        }
+    /**
+     * Figure out if a given text size will work for laying out the rules in a card textbox
+     */
+    protected RuleLayout layoutRules(Graphics2D g, List<TextboxRule> rules, int w, int h, int fontSize) {
+        // The fonts to try
+        Font font = new Font("Arial", Font.PLAIN, fontSize);
+        Font fontItalic = new Font("Arial", Font.ITALIC, fontSize);
 
-        // Get the total height
+        // Get the total height of the rules
         List<AttributedString> attributedRules = new ArrayList<>();
-        boolean useSmallFont = false;
+        boolean fits = true;
         int remaining = h;
-        {
-            if (hasKeywords) {
-                remaining -= drawSingleRule(g, keywordRulesAttributed, null, 0, 0, w, remaining, false);
-            }
-            for (TextboxRule rule : textboxRules) {
-                AttributedString attributed = rule.generateAttributedString(font, fontItalic);
-                attributedRules.add(attributed);
-                remaining -= drawSingleRule(g, attributed, rule, 0, 0, w, remaining, false);
-                if (remaining < 0) {
-                    useSmallFont = true;
-                    break;
-                }
+        for (TextboxRule rule : rules) {
+            AttributedString attributed = rule.generateAttributedString(font, fontItalic);
+            attributedRules.add(attributed);
+            remaining -= drawSingleRule(g, attributed, rule, 0, 0, w, remaining, /*doDraw=*/false);
+            if (remaining < 0) {
+                fits = false;
+                break;
             }
         }
 
-        // If there wasn't enough room, try using a smaller font
-        if (useSmallFont) {
-            font = new Font("Arial", Font.PLAIN, 9);
-            fontItalic = new Font("Arial", Font.ITALIC, 9);
-            if (hasKeywords) {
-                keywordRulesAttributed = new AttributedString(keywordRulesString);
-                keywordRulesAttributed.addAttribute(TextAttribute.FONT, font);
-            }
+        // Return the information
+        RuleLayout layout = new RuleLayout();
+        layout.attributedRules = attributedRules;
+        layout.remainingHeight = remaining;
+        layout.fits = fits;
+        layout.font = font;
+        layout.fontItalic = fontItalic;
+        return layout;
+    }
 
-            // Clear out the attributed rules and reatribute them with the new font size
-            attributedRules.clear();
-            for (TextboxRule rule : textboxRules) {
-                AttributedString attributed = rule.generateAttributedString(font, fontItalic);
-                attributedRules.add(attributed);
-            }
+    protected void drawRulesText(Graphics2D g, int x, int y, int w, int h) {
+        // Gather all rules to render
+        List<TextboxRule> allRules = new ArrayList<>(textboxRules);
 
-            // Get the new spacing for the small text
-            remaining = h;
-            if (hasKeywords) {
-                remaining -= drawSingleRule(g, keywordRulesAttributed, null, 0, 0, w, remaining, false);
-            }
-            for (TextboxRule rule : textboxRules) {
-                AttributedString attributed = rule.generateAttributedString(font, fontItalic);
-                attributedRules.add(attributed);
-                remaining -= drawSingleRule(g, attributed, rule, 0, 0, w, remaining, false);
-                if (remaining < 0) {
-                    useSmallFont = true;
-                    break;
-                }
+        // Add the keyword rule if there are any keywords
+        if (!textboxKeywords.isEmpty()) {
+            String keywordRulesString = getKeywordRulesString();
+            TextboxRule keywordsRule = new TextboxRule(keywordRulesString, new ArrayList<TextboxRule.AttributeRegion>());
+            allRules.add(keywordsRule);
+        }
+
+        // Go through possible font sizes in descending order to find the best fit
+        RuleLayout bestLayout = null;
+        for (int fontSize: RULES_TEXT_FONT_SIZES) {
+            bestLayout = layoutRules(g, allRules, w, h, fontSize);
+
+            // Stop, we found a good fit
+            if (bestLayout.fits) {
+                break;
             }
         }
 
-        // Do we have room for additional spacing between the parts of text?
-        // If so, calculate the spacing based on how much space was left over
-        int spacing;
-        if (remaining <= 0) {
-            spacing = 0;
+        // Nothing to draw
+        if (bestLayout == null) {
+            return;
+        }
+
+        // Do we have room for additional padding between the parts of text?
+        // If so, calculate the padding based on how much space was left over
+        int padding;
+        if (bestLayout.fits) {
+            padding = (int) (((float)bestLayout.remainingHeight) / (1 + allRules.size()));
         } else {
-            spacing = (int) (remaining / (hasKeywords
-                    ? (textboxRules.size() + 2)
-                    : (textboxRules.size() + 1)));
+            // When the text doesn't fit to begin with there's no room for padding
+            padding = 0;
         }
 
         // Do the actual draw
         loyaltyAbilityColorToggle = false;
         g.setColor(Color.black);
-        int curY = y + spacing;
-        if (hasKeywords) {
-            int adv = drawSingleRule(g, keywordRulesAttributed, null, x, curY, w, h, true);
-            curY += adv + spacing;
-            h -= adv;
-        }
-        for (int i = 0; i < textboxRules.size(); ++i) {
-            TextboxRule rule = textboxRules.get(i);
-            AttributedString attributedRule = attributedRules.get(i);
+        int curY = y + padding;
+        for (int i = 0; i < bestLayout.attributedRules.size(); ++i) {
+            AttributedString attributedRule = bestLayout.attributedRules.get(i);
+            TextboxRule rule = allRules.get(i);
             int adv = drawSingleRule(g, attributedRule, rule, x, curY, w, h, true);
-            curY += adv + spacing;
+            curY += adv + padding;
             h -= adv;
             if (h < 0) {
                 break;
@@ -710,7 +776,8 @@ public class ModernCardRenderer extends CardRenderer {
         AttributedCharacterIterator newLineCheck = text.getIterator();
         while (measure.getPosition() < textIter.getEndIndex()) {
             // Advance iterator to next line break
-            char ch = newLineCheck.setIndex(measure.getPosition());
+            newLineCheck.setIndex(measure.getPosition());
+            char ch;
             while ((ch = newLineCheck.next()) != CharacterIterator.DONE) {
                 if (ch == '\n') {
                     break;

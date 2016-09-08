@@ -120,6 +120,7 @@ public class PermanentCard extends PermanentImpl {
         this.cardType.addAll(card.getCardType());
         this.color = card.getColor(null).copy();
         this.frameColor = card.getFrameColor(null).copy();
+        this.frameStyle = card.getFrameStyle();
         this.manaCost = card.getManaCost().copy();
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;

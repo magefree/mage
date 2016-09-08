@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
@@ -100,6 +101,8 @@ public class CardInfo {
     @DatabaseField
     protected String frameColor;
     @DatabaseField
+    protected String frameStyle;
+    @DatabaseField
     protected boolean splitCard;
     @DatabaseField
     protected boolean splitCardHalf;
@@ -138,6 +141,7 @@ public class CardInfo {
             this.secondSideName = secondSide.getName();
         }
 
+        this.frameStyle = card.getFrameStyle().toString();
         this.frameColor = card.getFrameColor(null).toString();
         this.blue = card.getColor(null).isBlue();
         this.black = card.getColor(null).isBlack();
@@ -225,6 +229,10 @@ public class CardInfo {
     
     public ObjectColor getFrameColor() {
         return new ObjectColor(frameColor);
+    }
+
+    public FrameStyle getFrameStyle() {
+        return FrameStyle.valueOf(this.frameStyle);
     }
 
     private String joinList(List<String> items) {

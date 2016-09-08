@@ -27,6 +27,8 @@
  */
 package mage.sets.battleforzendikar;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -38,6 +40,7 @@ public class Plains10 extends mage.cards.basiclands.Plains {
     public Plains10(UUID ownerId) {
         super(ownerId, "254b");
         this.expansionSetCode = "BFZ";
+        this.frameStyle = FrameStyle.BFZ_FULL_ART_BASIC;
     }
 
     public Plains10(final Plains10 card) {

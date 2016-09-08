@@ -28,6 +28,8 @@
 
 package mage.sets.unglued;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -38,6 +40,7 @@ public class Forest extends mage.cards.basiclands.Forest {
     public Forest(UUID ownerId) {
         super(ownerId, 88);
         this.expansionSetCode = "UGL";
+        this.frameStyle = FrameStyle.UGL_FULL_ART_BASIC;
     }
 
     public Forest(final Forest card) {

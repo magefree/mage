@@ -27,6 +27,8 @@
  */
 package mage.sets.battleforzendikar;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -38,6 +40,7 @@ public class Island9 extends mage.cards.basiclands.Island {
     public Island9(UUID ownerId) {
         super(ownerId, "258b");
         this.expansionSetCode = "BFZ";
+        this.frameStyle = FrameStyle.BFZ_FULL_ART_BASIC;
     }
 
     public Island9(final Island9 card) {

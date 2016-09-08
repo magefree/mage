@@ -57,8 +57,8 @@ public class SoulSeparator extends CardImpl {
         super(ownerId, 199, "Soul Separator", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "EMN";
 
-        // {5}, {T}, Sacrifice Soul Separator: Exile target creature card from your graveyard. 
-        // Put a token onto the battlefield that's a copy of that card except it's 1/1, it's a Spirit in addition to its other types, and it has flying. 
+        // {5}, {T}, Sacrifice Soul Separator: Exile target creature card from your graveyard.
+        // Put a token onto the battlefield that's a copy of that card except it's 1/1, it's a Spirit in addition to its other types, and it has flying.
         // Put a black Zombie creature token onto the battlefield with power equal to that card's power and toughness equal that card's toughness.
         PutTokenOntoBattlefieldCopyTargetEffect copyEffect = new PutTokenOntoBattlefieldCopyTargetEffect(null, null, false, 1, false, false, null, 1, 1, true);
         copyEffect.setAdditionalSubType("Spirit");
@@ -85,7 +85,7 @@ class SoulSeparatorEffect extends OneShotEffect {
 
     public SoulSeparatorEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put a black Zombie creature token onto the battlefield with power equal to that card's power and toughness equal that card's toughness.";
+        this.staticText = "Put a black Zombie creature token onto the battlefield with power equal to that card's power and toughness equal that card's toughness";
     }
 
     public SoulSeparatorEffect(final SoulSeparatorEffect effect) {

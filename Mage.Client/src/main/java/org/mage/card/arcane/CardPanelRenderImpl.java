@@ -66,6 +66,9 @@ public class CardPanelRenderImpl extends CardPanel {
         if (!a.getExpansionSetCode().equals(b.getExpansionSetCode())) {
             return false;
         }
+        if (a.getFrameStyle() != b.getFrameStyle()) {
+            return false;
+        }
         if (a.getCounters() == null) {
             if (b.getCounters() != null) {
                 return false;
@@ -121,6 +124,7 @@ public class CardPanelRenderImpl extends CardPanel {
             sb.append((char) (this.view.isPlayable() ? 1 : 0));
             sb.append((char) (this.view.isCanAttack() ? 1 : 0));
             sb.append((char) (this.view.isFaceDown() ? 1 : 0));
+            sb.append((char) this.view.getFrameStyle().ordinal());
             if (this.view instanceof PermanentView) {
                 sb.append((char) (((PermanentView) this.view).hasSummoningSickness() ? 1 : 0));
                 sb.append((char) (((PermanentView) this.view).getDamage()));
@@ -375,6 +379,24 @@ public class CardPanelRenderImpl extends CardPanel {
             return ImageCache.getMorphImage();
         } else {
             return ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));
+        }
+    }
+    
+    @Override
+    public void setSelected(boolean selected) {
+        if (selected != isSelected()) {
+            super.setSelected(selected);
+            // Invalidate our render
+            cardImage = null;
+        }
+    }
+    
+    @Override
+    public void setChoosable(boolean choosable) {
+        if (choosable != isChoosable()) {
+            super.setChoosable(choosable);
+            // Invalidate our render
+            cardImage = null;
         }
     }
 

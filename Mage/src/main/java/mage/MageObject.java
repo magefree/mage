@@ -7,6 +7,7 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.game.Game;
 
@@ -37,6 +38,8 @@ public interface MageObject extends MageItem, Serializable {
     ObjectColor getColor(Game game);
     
     ObjectColor getFrameColor(Game game);
+    
+    FrameStyle getFrameStyle();
 
     ManaCosts<ManaCost> getManaCost();
 

@@ -28,6 +28,8 @@
 
 package mage.sets.zendikar;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class Forest4 extends mage.cards.basiclands.Forest {
     public Forest4(UUID ownerId) {
         super(ownerId, 249);
         this.expansionSetCode = "ZEN";
+        this.frameStyle = FrameStyle.ZEN_FULL_ART_BASIC;
     }
 
     public Forest4(final Forest4 card) {

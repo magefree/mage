@@ -28,6 +28,8 @@
 
 package mage.sets.unglued;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -38,6 +40,7 @@ public class Plains extends mage.cards.basiclands.Plains {
     public Plains(UUID ownerId) {
         super(ownerId, 84);
         this.expansionSetCode = "UGL";
+        this.frameStyle = FrameStyle.UGL_FULL_ART_BASIC;
     }
 
     public Plains(final Plains card) {
