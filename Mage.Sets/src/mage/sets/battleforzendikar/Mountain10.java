@@ -27,6 +27,8 @@
  */
 package mage.sets.battleforzendikar;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -38,6 +40,7 @@ public class Mountain10 extends mage.cards.basiclands.Mountain {
     public Mountain10(UUID ownerId) {
         super(ownerId, "269b");
         this.expansionSetCode = "BFZ";
+        this.frameStyle = FrameStyle.BFZ_FULL_ART_BASIC;
     }
 
     public Mountain10(final Mountain10 card) {

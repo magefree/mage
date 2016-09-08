@@ -28,6 +28,8 @@
 
 package mage.sets.zendikar;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class Island1 extends mage.cards.basiclands.Island {
     public Island1(UUID ownerId) {
         super(ownerId, 234);
         this.expansionSetCode = "ZEN";
+        this.frameStyle = FrameStyle.ZEN_FULL_ART_BASIC;
     }
 
     public Island1(final Island1 card) {

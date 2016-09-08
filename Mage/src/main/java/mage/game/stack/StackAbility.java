@@ -49,6 +49,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
+import mage.cards.FrameStyle;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
@@ -196,6 +197,12 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public ObjectColor getFrameColor(Game game) {
         return ability.getSourceObject(game).getFrameColor(game);
+    }
+
+    @Override
+    public FrameStyle getFrameStyle() {
+        // Abilities all use the same frame
+        return FrameStyle.M15_NORMAL;
     }
 
     @Override

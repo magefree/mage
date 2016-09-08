@@ -28,6 +28,8 @@
 
 package mage.sets.zendikar;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class Plains3 extends mage.cards.basiclands.Plains {
     public Plains3(UUID ownerId) {
         super(ownerId, 232);
         this.expansionSetCode = "ZEN";
+        this.frameStyle = FrameStyle.ZEN_FULL_ART_BASIC;
     }
 
     public Plains3(final Plains3 card) {

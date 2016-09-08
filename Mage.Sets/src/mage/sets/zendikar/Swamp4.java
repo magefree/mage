@@ -28,6 +28,8 @@
 
 package mage.sets.zendikar;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class Swamp4 extends mage.cards.basiclands.Swamp {
     public Swamp4(UUID ownerId) {
         super(ownerId, 241);
         this.expansionSetCode = "ZEN";
+        this.frameStyle = FrameStyle.ZEN_FULL_ART_BASIC;
     }
 
     public Swamp4(final Swamp4 card) {

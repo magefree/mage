@@ -28,6 +28,8 @@
 
 package mage.sets.zendikar;
 
+import mage.cards.FrameStyle;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +41,7 @@ public class Mountain4 extends mage.cards.basiclands.Mountain {
     public Mountain4(UUID ownerId) {
         super(ownerId, 245);
         this.expansionSetCode = "ZEN";
+        this.frameStyle = FrameStyle.ZEN_FULL_ART_BASIC;
     }
 
     public Mountain4(final Mountain4 card) {
