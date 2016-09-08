@@ -121,7 +121,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             }
         }
 
-        game.applyEffects(); // So continuousEffects are removed if previous effect of the same ability did move objects that cuase continuous effects
+        game.applyEffects(); // So continuousEffects are removed if previous effect of the same ability did move objects that cause continuous effects
         Player controllingPlayer = null;
         if (targetId == null) {
             SpellAbility spellAbility = card.getSpellAbility();
