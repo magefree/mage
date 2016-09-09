@@ -109,7 +109,7 @@ class ShapesharerEffect extends OneShotEffect {
         if (copyTo != null) {
             Permanent copyFrom = game.getPermanentOrLKIBattlefield(ability.getTargets().get(1).getFirstTarget());
             if (copyFrom != null) {
-                game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), ability, new EmptyApplyToPermanent());
+                game.copyPermanent(Duration.UntilYourNextTurn, copyFrom, copyTo.getId(), ability, new EmptyApplyToPermanent());
             }
         }
         return true;
