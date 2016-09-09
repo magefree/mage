@@ -65,6 +65,8 @@ public class UlrichUncontestedAlpha extends CardImpl {
         this.subtype.add("Werewolf");
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
+        this.color.setRed(true);
+        this.color.setGreen(true);
 
         // this card is the second face of double-faced card
         this.nightCard = true;
