@@ -1,0 +1,260 @@
+package mage.game;
+
+import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.cards.MeldCard;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.game.command.Commander;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentMeld;
+import mage.game.stack.Spell;
+import mage.players.Player;
+import mage.target.TargetCard;
+
+import java.util.*;
+
+/**
+ * Created by samuelsandeen on 9/6/16.
+ */
+public class ZonesHandler {
+    public static boolean cast(ZoneChangeInfo info, Game game) {
+        if (maybeRemoveFromSourceZone(info, game)) {
+            placeInDestinationZone(info, game);
+            game.fireEvent(info.event);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean moveCard(ZoneChangeInfo info, Game game) {
+        List<ZoneChangeInfo> list = new ArrayList<ZoneChangeInfo>();
+        list.add(info);
+        return moveCards(list, game).size() > 0;
+    }
+
+    public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game) {
+        // Handle Unmelded Meld Cards
+        for(ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext();) {
+            ZoneChangeInfo info = itr.next();
+            MeldCard card = game.getMeldCard(info.event.getTargetId());
+            // Copies should be handled as normal cards.
+            if (card != null && !card.isMelded() && !card.isCopy()) {
+                ZoneChangeInfo.Unmelded unmelded = new ZoneChangeInfo.Unmelded(info, game);
+                if (unmelded.subInfo.isEmpty()) {
+                    itr.remove();
+                } else {
+                    itr.set(unmelded);
+                }
+            }
+        }
+        for (Iterator<ZoneChangeInfo> itr = zoneChangeInfos.iterator(); itr.hasNext();) {
+            if (!maybeRemoveFromSourceZone(itr.next(), game)) {
+                itr.remove();
+            }
+        }
+        for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
+            placeInDestinationZone(zoneChangeInfo, game);
+            game.addSimultaneousEvent(zoneChangeInfo.event);
+        }
+        return zoneChangeInfos;
+    }
+
+    private static void placeInDestinationZone(ZoneChangeInfo info, Game game) {
+        // Handle unmelded cards
+        if (info instanceof ZoneChangeInfo.Unmelded) {
+            ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
+            Zone toZone = null;
+            for (ZoneChangeInfo subInfo : unmelded.subInfo) {
+                toZone = subInfo.event.getToZone();
+                placeInDestinationZone(subInfo, game);
+            }
+            if (toZone != null) {
+                game.setZone(unmelded.event.getTargetId(), toZone);
+            }
+            return;
+        }
+        // Handle normal cases
+        ZoneChangeEvent event = info.event;
+        Zone toZone = event.getToZone();
+        Card targetCard = game.getCard(event.getTargetId());
+        Cards cards;
+        if (targetCard instanceof MeldCard) {
+            cards = ((MeldCard) targetCard).getHalves();
+        } else {
+            cards = new CardsImpl(targetCard);
+        }
+        Player owner = game.getPlayer(targetCard.getOwnerId());
+        switch (toZone) {
+            case HAND:
+                for (Card card : cards.getCards(game)) {
+                    game.getPlayer(card.getOwnerId()).getHand().add(card);
+                }
+                break;
+            case GRAVEYARD:
+                for (Card card : chooseOrder(
+                        "order to put in graveyard (last chosen will be on top)", cards, owner, game)) {
+                    game.getPlayer(card.getOwnerId()).getGraveyard().add(card);
+                }
+                break;
+            case LIBRARY:
+                if (info instanceof ZoneChangeInfo.Library && ((ZoneChangeInfo.Library) info).top) {
+                    for (Card card : chooseOrder(
+                            "order to put on top of library (last chosen will be topmost)", cards, owner, game)) {
+                        game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
+                    }
+                } else {
+                    for (Card card : chooseOrder(
+                            "order to put on bottom of library (last chosen will be bottommost)", cards, owner, game)) {
+                        game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
+                    }
+                }
+                break;
+            case EXILED:
+                for (Card card : cards.getCards(game)) {
+                    if (info instanceof ZoneChangeInfo.Exile && ((ZoneChangeInfo.Exile) info).id != null) {
+                        ZoneChangeInfo.Exile exileInfo = (ZoneChangeInfo.Exile) info;
+                        game.getExile().createZone(exileInfo.id, exileInfo.name).add(card);
+                    } else {
+                        game.getExile().getPermanentExile().add(card);
+                    }
+                }
+                break;
+            case COMMAND:
+                // There should never be more than one card here.
+                for (Card card : cards.getCards(game)) {
+                    game.addCommander(new Commander(card));
+                }
+                break;
+            case STACK:
+                // There should never be more than one card here.
+                for (Card card : cards.getCards(game)) {
+                    if (info instanceof ZoneChangeInfo.Stack && ((ZoneChangeInfo.Stack) info).spell != null) {
+                        game.getStack().push(((ZoneChangeInfo.Stack) info).spell);
+                    } else {
+                        game.getStack().push(
+                                new Spell(card, card.getSpellAbility().copy(), card.getOwnerId(), event.getFromZone()));
+                    }
+                }
+                break;
+            case BATTLEFIELD:
+                Permanent permanent = event.getTarget();
+                game.addPermanent(permanent);
+                game.getPermanentsEntering().remove(permanent.getId());
+                break;
+            default:
+                throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
+        }
+        game.setZone(event.getTargetId(), event.getToZone());
+        if (targetCard instanceof MeldCard) {
+            if (event.getToZone() != Zone.BATTLEFIELD) {
+                ((MeldCard) targetCard).setMelded(false);
+            }
+            for (Card card : cards.getCards(game)) {
+                game.setZone(card.getId(), event.getToZone());
+            }
+        }
+    }
+
+    private static boolean maybeRemoveFromSourceZone(ZoneChangeInfo info, Game game) {
+        // Handle Unmelded Cards
+        if (info instanceof ZoneChangeInfo.Unmelded) {
+            ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
+            MeldCard meld = game.getMeldCard(info.event.getTargetId());
+            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext();) {
+                ZoneChangeInfo subInfo = itr.next();
+                if (!maybeRemoveFromSourceZone(subInfo, game)) {
+                    itr.remove();
+                } else {
+                    if (subInfo.event.getTargetId() == meld.getTopHalfCard().getId()) {
+                        meld.setTopLastZoneChangeCounter(meld.getTopHalfCard().getZoneChangeCounter(game));
+                    } else if (subInfo.event.getTargetId() == meld.getBottomHalfCard().getId()) {
+                        meld.setBottomLastZoneChangeCounter(meld.getBottomHalfCard().getZoneChangeCounter(game));
+                    }
+                }
+            }
+            if (unmelded.subInfo.isEmpty()) {
+                return false;
+            }
+            meld.updateZoneChangeCounter(game);
+            return true;
+        }
+        // Handle all normal cases
+        ZoneChangeEvent event = info.event;
+        Card card = game.getCard(event.getTargetId());
+        boolean success = false;
+        if (info.faceDown) {
+            card.setFaceDown(true, game);
+        }
+        if(!game.replaceEvent(event)) {
+            Zone fromZone = event.getFromZone();
+            if (event.getToZone() == Zone.BATTLEFIELD) {
+                // controlling player can be replaced so use event player now
+                Permanent permanent;
+                if (card instanceof MeldCard) {
+                    permanent = new PermanentMeld(card, event.getPlayerId(), game);
+                } else {
+                    permanent = new PermanentCard(card, event.getPlayerId(), game);
+                }
+                game.getPermanentsEntering().put(permanent.getId(), permanent);
+                card.checkForCountersToAdd(permanent, game);
+                permanent.setTapped(
+                        info instanceof ZoneChangeInfo.Battlefield && ((ZoneChangeInfo.Battlefield) info).tapped);
+                permanent.setFaceDown(info.faceDown, game);
+
+                if (info.faceDown) {
+                    card.setFaceDown(false, game);
+                }
+
+                // make sure the controller of all continuous effects of this card are switched to the current controller
+                game.setScopeRelevant(true);
+                game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
+                if (permanent.entersBattlefield(event.getSourceId(), game, fromZone, true)
+                        && card.removeFromZone(game, fromZone, event.getSourceId())) {
+                    success = true;
+                    event.setTarget(permanent);
+                } else {
+                    // revert controller to owner if permanent does not enter
+                    game.getContinuousEffects().setController(permanent.getId(), permanent.getOwnerId());
+                    game.getPermanentsEntering().remove(permanent.getId());
+                }
+                game.setScopeRelevant(false);
+            } else if (event.getTarget() != null) {
+                card.setFaceDown(info.faceDown, game);
+                Permanent target = event.getTarget();
+                success = game.getPlayer(target.getControllerId()).removeFromBattlefield(target, game)
+                        && target.removeFromZone(game, fromZone, event.getSourceId());
+            } else {
+                card.setFaceDown(info.faceDown, game);
+                success = card.removeFromZone(game, fromZone, event.getSourceId());
+            }
+        }
+        if (success) {
+            if (event.getToZone() == Zone.BATTLEFIELD && event.getTarget() != null) {
+                event.getTarget().updateZoneChangeCounter(game);
+            } else {
+                card.updateZoneChangeCounter(game);
+            }
+        }
+        return success;
+    }
+
+    public static List<Card> chooseOrder(String message, Cards cards, Player player, Game game) {
+        List<Card> order = new ArrayList<Card>();
+        TargetCard target = new TargetCard(Zone.ALL, new FilterCard(message));
+        target.setRequired(true);
+        while (player.isInGame() && cards.size() > 1) {
+            player.choose(Outcome.Neutral, cards, target, game);
+            UUID targetObjectId = target.getFirstTarget();
+            order.add(cards.get(targetObjectId, game));
+            cards.remove(targetObjectId);
+            target.clearChosen();
+        }
+        order.add(cards.getCards(game).iterator().next());
+        return order;
+    }
+}

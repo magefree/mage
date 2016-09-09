@@ -38,7 +38,8 @@ import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.command.Commander;
+import mage.game.ZoneChangeInfo;
+import mage.game.ZonesHandler;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
@@ -147,81 +148,28 @@ public class PermanentCard extends PermanentImpl {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
-        return moveToZone(toZone, sourceId, game, flag, null);
-    }
-
-    @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
-            if (!game.replaceEvent(event)) {
-                controller.removeFromBattlefield(this, game);
-                Player owner = game.getPlayer(ownerId);
-                game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-                if (owner != null) {
-                    card.updateZoneChangeCounter(game);
-                    switch (event.getToZone()) {
-                        case GRAVEYARD:
-                            owner.putInGraveyard(card, game, !flag);
-                            break;
-                        case HAND:
-                            owner.getHand().add(card);
-                            break;
-                        case EXILED:
-                            game.getExile().getPermanentExile().add(card);
-                            break;
-                        case COMMAND:
-                            game.addCommander(new Commander(card));
-                            break;
-                        case LIBRARY:
-                            if (flag) {
-                                owner.getLibrary().putOnTop(card, game);
-                            } else {
-                                owner.getLibrary().putOnBottom(card, game);
-                            }
-                            break;
-                        case BATTLEFIELD:
-                            //should never happen
-                            break;
-                    }
-                    game.setZone(objectId, event.getToZone());
-                    game.addSimultaneousEvent(event);
-                    return game.getState().getZone(objectId) == toZone;
-                }
+            ZoneChangeInfo zoneChangeInfo;
+            if (toZone == Zone.LIBRARY) {
+                zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
+            } else {
+                zoneChangeInfo = new ZoneChangeInfo(event);
             }
+            return ZonesHandler.moveCard(zoneChangeInfo, game);
         }
         return false;
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-        return moveToExile(exileId, name, sourceId, game, null);
     }
 
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
-        Player controller = game.getPlayer(controllerId);
-        if (controller != null && controller.removeFromBattlefield(this, game)) {
-            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
-            if (!game.replaceEvent(event)) {
-                game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-                // update zone change counter of original card
-                card.updateZoneChangeCounter(game);
-                if (exileId == null) {
-                    game.getExile().getPermanentExile().add(card);
-                } else {
-                    game.getExile().createZone(exileId, name).add(card);
-                }
-                game.setZone(objectId, event.getToZone());
-                game.addSimultaneousEvent(event);
-                return true;
-            }
-        }
-        return false;
+        ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
+        ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
+        return ZonesHandler.moveCard(info, game);
     }
 
     @Override

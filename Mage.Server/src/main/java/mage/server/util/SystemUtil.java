@@ -125,8 +125,11 @@ public class SystemUtil {
      * @param card Card to put to player's hand
      */
     private static void swapWithAnyCard(Game game, Player player, Card card, Zone zone) {
+        // Put the card in Exile to start. Otherwise the game doesn't know where to remove the card from.
+        game.getExile().getPermanentExile().add(card);
+        game.setZone(card.getId(), Zone.EXILED);
         if (zone.equals(Zone.BATTLEFIELD)) {
-            card.putOntoBattlefield(game, Zone.OUTSIDE, null, player.getId());
+            card.putOntoBattlefield(game, Zone.EXILED, null, player.getId());
         } else if (zone.equals(Zone.LIBRARY)) {
             card.setZone(Zone.LIBRARY, game);
             player.getLibrary().putOnTop(card, game);

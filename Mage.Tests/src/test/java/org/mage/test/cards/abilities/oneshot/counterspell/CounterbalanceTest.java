@@ -77,8 +77,8 @@ public class CounterbalanceTest extends CardTestPlayerBase {
     }
 
     /**
-     * Test that if the top cardis a split card, both casting costs of the split cards
-     * count to counter the spell. If one of the split cards halfes has the equal casting
+     * Test that if the top card is a split card, both casting costs of the split cards
+     * count to counter the spell. If one of the split cards halves has the equal casting
      * cost, the spell is countered.
      *
      */

@@ -107,10 +107,7 @@ import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
-import mage.game.ExileZone;
-import mage.game.Game;
-import mage.game.Graveyard;
-import mage.game.Table;
+import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
 import mage.game.events.DamagePlayerEvent;
@@ -853,11 +850,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean putInGraveyard(Card card, Game game, boolean fromBattlefield) {
+    public boolean putInGraveyard(Card card, Game game) {
         if (card.getOwnerId().equals(playerId)) {
             this.graveyard.add(card);
         } else {
-            return game.getPlayer(card.getOwnerId()).putInGraveyard(card, game, fromBattlefield);
+            return game.getPlayer(card.getOwnerId()).putInGraveyard(card, game);
         }
         return true;
     }
@@ -2769,7 +2766,6 @@ public abstract class PlayerImpl implements Player, Serializable {
      * Used to mark the playable cards in GameView
      *
      * @return A Set of cardIds that are playable
-     * @see mage.server.GameSessionPlayer#getGameView()
      *
      * @param game
      *
@@ -3153,86 +3149,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                 successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
                 return successfulMovedCards.size() > 0;
             case BATTLEFIELD: // new logic that does not yet add the permanents to battlefield while replacement effects are handled
-                List<Permanent> permanents = new ArrayList<>();
-                List<Permanent> permanentsEntered = new ArrayList<>();
-                // Move meld pieces instead of the meld card if unmelded
-                Set<Card> meldPiecesToAdd = new HashSet<>(0);
-                Set<MeldCard> meldCardsRemoved = new HashSet<>(0);
-                for (Iterator<Card> it = cards.iterator(); it.hasNext();) {
-                    Card card = it.next();
-                    if (card instanceof MeldCard && !((MeldCard) card).isMelded()) {
-                        MeldCard meldCard = (MeldCard) card;
-                        if (meldCard.getTopLastZoneChangeCounter() == meldCard.getTopHalfCard().getZoneChangeCounter(game)) {
-                            meldPiecesToAdd.add(meldCard.getTopHalfCard());
-                        }
-                        if (meldCard.getBottomLastZoneChangeCounter() == meldCard.getBottomHalfCard().getZoneChangeCounter(game)) {
-                            meldPiecesToAdd.add(meldCard.getBottomHalfCard());
-                        }
-                        meldCardsRemoved.add(meldCard);
-                        it.remove();
-                    }
-                }
-                cards.addAll(meldPiecesToAdd);
+                List<ZoneChangeInfo> infoList = new ArrayList<ZoneChangeInfo>();
                 for (Card card : cards) {
-                    UUID controllingPlayerId = byOwner ? card.getOwnerId() : getId();
                     fromZone = game.getState().getZone(card.getId());
-                    if (faceDown) {
-                        card.setFaceDown(true, game);
-                    }
-                    ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), controllingPlayerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
-                    if (!game.replaceEvent(event)) {
-                        // get permanent
-                        Permanent permanent;
-                        if (card instanceof MeldCard) {
-                            permanent = new PermanentMeld(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
-                        } else {
-                            permanent = new PermanentCard(card, event.getPlayerId(), game);// controlling player can be replaced so use event player now
-                        }
-                        permanents.add(permanent);
-                        game.getPermanentsEntering().put(permanent.getId(), permanent);
-                        card.checkForCountersToAdd(permanent, game);
-                        permanent.setTapped(tapped);
-                        permanent.setFaceDown(faceDown, game);
-                    }
-                    if (faceDown) {
-                        card.setFaceDown(false, game);
-                    }
+                    ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), byOwner ? card.getOwnerId() : getId(), fromZone, Zone.BATTLEFIELD, appliedEffects);
+                    infoList.add(new ZoneChangeInfo.Battlefield(event, faceDown, tapped));
                 }
-                game.setScopeRelevant(true);
-                for (Permanent permanent : permanents) {
-                    fromZone = game.getState().getZone(permanent.getId());
-                    // make sure the controller of all continuous effects of this card are switched to the current controller
-                    game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
-                    if (permanent.entersBattlefield(source.getSourceId(), game, fromZone, true)) {
-                        permanentsEntered.add(permanent);
-                    } else {
-                        // revert controller to owner if permanent does not enter
-                        game.getContinuousEffects().setController(permanent.getId(), permanent.getOwnerId());
-                        game.getPermanentsEntering().remove(permanent.getId());
-                    }
-                }
-                game.setScopeRelevant(false);
-                for (Permanent permanent : permanentsEntered) {
-                    fromZone = game.getState().getZone(permanent.getId());
-                    if (((Card) permanent).removeFromZone(game, fromZone, source.getSourceId())) {
-                        permanent.updateZoneChangeCounter(game);
-                        game.addPermanent(permanent);
-                        permanent.setZone(Zone.BATTLEFIELD, game);
-                        game.getPermanentsEntering().remove(permanent.getId());
+                infoList = ZonesHandler.moveCards(infoList, game);
+                for (ZoneChangeInfo info : infoList) {
+                    Permanent permanent = game.getPermanent(info.event.getTargetId());
+                    if (permanent != null) {
                         successfulMovedCards.add(permanent);
-                        game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), fromZone, Zone.BATTLEFIELD));
                         if (!game.isSimulation()) {
-                            game.informPlayers(this.getLogName() + " puts " + (faceDown ? "a card face down " : permanent.getLogName())
-                                    + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield");
+                            game.informPlayers(game.getPlayer(info.event.getPlayerId()) + " puts " +
+                                    (info.faceDown ? "a card face down " : permanent.getLogName()) + " from " +
+                                    fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield");
                         }
-                    } else {
-                        game.getPermanentsEntering().remove(permanent.getId());
                     }
-                }
-                // Update the lastZoneChangeCounter of meld pieces that were moved
-                for (MeldCard meldCard : meldCardsRemoved) {
-                    meldCard.setTopLastZoneChangeCounter(meldCard.getTopHalfCard().getZoneChangeCounter(game));
-                    meldCard.setBottomLastZoneChangeCounter(meldCard.getBottomHalfCard().getZoneChangeCounter(game));
                 }
                 game.applyEffects();
                 break;

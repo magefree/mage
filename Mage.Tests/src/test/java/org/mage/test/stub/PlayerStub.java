@@ -593,7 +593,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean putInGraveyard(Card card, Game game, boolean fromBattlefield) {
+    public boolean putInGraveyard(Card card, Game game) {
         return false;
     }
 
