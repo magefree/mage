@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-plugins</artifactId>
-        <version>1.4.14</version>
+        <version>1.4.15</version>
     </parent>
 
     <artifactId>mage-counter-plugin</artifactId>
