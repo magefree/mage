@@ -57,7 +57,8 @@ public class VernalEquinox extends CardImpl {
         this.expansionSetCode = "MMQ";
 
         // Any player may cast creature and enchantment cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, true)));
+
     }
 
     public VernalEquinox(final VernalEquinox card) {

@@ -36,7 +36,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import mage.filter.FilterCard;
@@ -110,7 +109,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Card getRandom(Game game) {
-        if (this.size() == 0) {
+        if (this.isEmpty()) {
             return null;
         }
         UUID[] cards = this.toArray(new UUID[this.size()]);

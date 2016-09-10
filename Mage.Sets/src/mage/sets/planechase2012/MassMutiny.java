@@ -70,7 +70,7 @@ public class MassMutiny extends CardImpl {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
                     ability.getTargets().clear();
-                    FilterCreaturePermanent filter = new FilterCreaturePermanent("creature from opponent " + opponent.getLogName());
+                    FilterCreaturePermanent filter = new FilterCreaturePermanent("creature from opponent " + opponent.getName());
                     filter.add(new ControllerIdPredicate(opponentId));
                     TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
                     ability.addTarget(target);

@@ -24,14 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
-
 
 /**
  * Checks if permanent was paid tribute to as it entered the battlefield
@@ -42,7 +40,8 @@ public class TributeNotPaidCondition implements Condition {
 
     private static TributeNotPaidCondition fInstance = null;
 
-    private TributeNotPaidCondition() {}
+    private TributeNotPaidCondition() {
+    }
 
     public static Condition getInstance() {
         if (fInstance == null) {
@@ -53,9 +52,9 @@ public class TributeNotPaidCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Object tribute = game.getState().getValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString());
+        Object tribute = game.getState().getValue("tributeValue" + source.getSourceId());
         if (tribute != null) {
-            return ((String)tribute).equals("no");
+            return ((String) tribute).equals("no");
         }
         return false;
     }
