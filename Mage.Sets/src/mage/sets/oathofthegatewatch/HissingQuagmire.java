@@ -56,11 +56,11 @@ public class HissingQuagmire extends CardImpl {
 
         // Hissing Quagmire enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         // {T}: Add {B} or {G} to your mana pool.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());
-        
+
         // {1}{B}{G}: Hissing Quagmire becomes a 2/2 black and green Elemental creature with deathtouch until end of turn. It's still a land.
         Effect effect = new BecomesCreatureSourceEffect(new HissingQuagmireToken(), "land", Duration.EndOfTurn);
         effect.setText("{this} becomes a 2/2 black and green Elemental creature with deathtouch until end of turn. It's still a land");
@@ -83,8 +83,8 @@ class HissingQuagmireToken extends Token {
         super("", "2/2 black and green Elemental creature with deathtouch");
         cardType.add(CardType.CREATURE);
         subtype.add("Elemental");
-        color.setRed(true);
-        color.setWhite(true);
+        color.setBlack(true);
+        color.setGreen(true);
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(DeathtouchAbility.getInstance());
