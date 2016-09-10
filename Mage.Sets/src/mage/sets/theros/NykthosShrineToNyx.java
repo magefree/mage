@@ -75,7 +75,7 @@ public class NykthosShrineToNyx extends CardImpl {
 }
 
 class NykthosShrineToNyxManaAbility extends ManaAbility {
-   
+
     public NykthosShrineToNyxManaAbility() {
         super(Zone.BATTLEFIELD, new NykthosDynamicManaEffect(), new GenericManaCost(2));
         this.addCost(new TapSourceCost());
@@ -94,14 +94,13 @@ class NykthosShrineToNyxManaAbility extends ManaAbility {
     public List<Mana> getNetMana(Game game) {
         netMana.clear();
         if (game != null) {
-            for (String colorChoice :ChoiceColor.colorChoices) {
-                netMana.add(((NykthosDynamicManaEffect)this.getEffects().get(0)).computeMana(colorChoice, game, this));
+            for (String colorChoice : ChoiceColor.colorChoices) {
+                netMana.add(((NykthosDynamicManaEffect) this.getEffects().get(0)).computeMana(colorChoice, game, this));
             }
         }
         return netMana;
     }
 }
-
 
 class NykthosDynamicManaEffect extends ManaEffect {
 
@@ -132,7 +131,7 @@ class NykthosDynamicManaEffect extends ManaEffect {
             if (controller.choose(outcome, choice, game)) {
                 computeMana(choice.getChoice(), game, source);
                 checkToFirePossibleEvents(computedMana, game, source);
-                game.getPlayer(source.getControllerId()).getManaPool().addMana(computedMana, game, source);
+                controller.getManaPool().addMana(computedMana, game, source);
                 return true;
             }
         }
@@ -145,10 +144,9 @@ class NykthosDynamicManaEffect extends ManaEffect {
         return null;
     }
 
-
-    public Mana computeMana(String color, Game game, Ability source){
+    public Mana computeMana(String color, Game game, Ability source) {
         this.computedMana.clear();
-        if (color !=null && !color.isEmpty()) {
+        if (color != null && !color.isEmpty()) {
             switch (color) {
                 case "Red":
                     computedMana.setRed(new DevotionCount(ColoredManaSymbol.R).calculate(game, source, this));
