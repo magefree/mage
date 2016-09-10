@@ -78,17 +78,17 @@ public class LeovoldEmissaryOfTrest extends CardImpl {
 
 class LeovoldEmissaryOfTrestWatcher extends Watcher {
 
-    private final HashSet<UUID> opponentsThatDrewCard;
+    private final HashSet<UUID> playersThatDrewCard;
 
     public LeovoldEmissaryOfTrestWatcher() {
         super("DrewCard", WatcherScope.GAME);
-        this.opponentsThatDrewCard = new HashSet<>();
+        this.playersThatDrewCard = new HashSet<>();
     }
 
     public LeovoldEmissaryOfTrestWatcher(final LeovoldEmissaryOfTrestWatcher watcher) {
         super(watcher);
-        this.opponentsThatDrewCard = new HashSet<>();
-        opponentsThatDrewCard.addAll(watcher.opponentsThatDrewCard);
+        this.playersThatDrewCard = new HashSet<>();
+        playersThatDrewCard.addAll(watcher.playersThatDrewCard);
     }
 
     @Override
@@ -99,8 +99,8 @@ class LeovoldEmissaryOfTrestWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD ) {
-            if (!event.getPlayerId().equals(this.getControllerId()) && !opponentsThatDrewCard.contains(event.getPlayerId())) {
-                opponentsThatDrewCard.add(event.getPlayerId());
+            if (!playersThatDrewCard.contains(event.getPlayerId())) {
+                playersThatDrewCard.add(event.getPlayerId());
             }
         }
     }
@@ -108,11 +108,11 @@ class LeovoldEmissaryOfTrestWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        opponentsThatDrewCard.clear();
+        playersThatDrewCard.clear();
     }
 
     public boolean hasPlayerDrewCardThisTurn(UUID playerId) {
-        return opponentsThatDrewCard.contains(playerId);
+        return playersThatDrewCard.contains(playerId);
     }
 
 }
@@ -146,7 +146,10 @@ class LeovoldEmissaryOfTrestEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         LeovoldEmissaryOfTrestWatcher watcher = (LeovoldEmissaryOfTrestWatcher) game.getState().getWatchers().get("DrewCard");
-        return watcher != null && watcher.hasPlayerDrewCardThisTurn(event.getPlayerId());
+
+        Player controller = game.getPlayer(source.getControllerId());
+        return watcher != null && controller != null && watcher.hasPlayerDrewCardThisTurn(event.getPlayerId())
+                && game.isOpponent(controller, event.getPlayerId());
     }
 
 }
