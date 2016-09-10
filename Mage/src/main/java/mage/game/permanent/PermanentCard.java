@@ -240,8 +240,8 @@ public class PermanentCard extends PermanentImpl {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
-        card.updateZoneChangeCounter(game);
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        card.updateZoneChangeCounter(game, event);
         zoneChangeCounter = card.getZoneChangeCounter(game);
     }
 

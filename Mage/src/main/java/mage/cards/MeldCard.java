@@ -36,8 +36,6 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentMeld;
-import mage.players.Player;
 
 /**
  *
@@ -192,20 +190,20 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         if (isCopy() || !isMelded()) {
-            super.updateZoneChangeCounter(game);
+            super.updateZoneChangeCounter(game, event);
             return;
         }
         game.getState().updateZoneChangeCounter(objectId);
         if (topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)
                 && halves.contains(topHalfCard.getId())) {
-            topHalfCard.updateZoneChangeCounter(game);
+            topHalfCard.updateZoneChangeCounter(game, event);
             topLastZoneChangeCounter = topHalfCard.getZoneChangeCounter(game);
         }
         if (bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)
                 && halves.contains(bottomHalfCard.getId())) {
-            bottomHalfCard.updateZoneChangeCounter(game);
+            bottomHalfCard.updateZoneChangeCounter(game, event);
             bottomLastZoneChangeCounter = bottomHalfCard.getZoneChangeCounter(game);
         }
     }

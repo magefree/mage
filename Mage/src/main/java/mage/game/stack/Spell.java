@@ -778,7 +778,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 

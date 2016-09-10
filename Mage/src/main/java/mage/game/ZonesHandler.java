@@ -73,6 +73,7 @@ public class ZonesHandler {
                 toZone = subInfo.event.getToZone();
                 placeInDestinationZone(subInfo, game);
             }
+            // We arbitrarily prefer the bottom half card. This should never be relevant.
             if (toZone != null) {
                 game.setZone(unmelded.event.getTargetId(), toZone);
             }
@@ -180,7 +181,8 @@ public class ZonesHandler {
             if (unmelded.subInfo.isEmpty()) {
                 return false;
             }
-            meld.updateZoneChangeCounter(game);
+            // We arbitrarily prefer the bottom half card. This should never be relevant.
+            meld.updateZoneChangeCounter(game, unmelded.subInfo.get(unmelded.subInfo.size() - 1).event);
             return true;
         }
         // Handle all normal cases
@@ -235,9 +237,9 @@ public class ZonesHandler {
         }
         if (success) {
             if (event.getToZone() == Zone.BATTLEFIELD && event.getTarget() != null) {
-                event.getTarget().updateZoneChangeCounter(game);
+                event.getTarget().updateZoneChangeCounter(game, event);
             } else {
-                card.updateZoneChangeCounter(game);
+                card.updateZoneChangeCounter(game, event);
             }
         }
         return success;

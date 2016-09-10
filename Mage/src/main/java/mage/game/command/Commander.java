@@ -42,6 +42,7 @@ import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 
 public class Commander implements CommandObject {
@@ -214,8 +215,8 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
-        card.updateZoneChangeCounter(game);
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        card.updateZoneChangeCounter(game, event);
     }
 
     @Override

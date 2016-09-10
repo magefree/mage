@@ -41,6 +41,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 
 /**
@@ -233,7 +234,7 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 

@@ -58,6 +58,7 @@ import mage.constants.Zone;
 import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
@@ -557,7 +558,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
