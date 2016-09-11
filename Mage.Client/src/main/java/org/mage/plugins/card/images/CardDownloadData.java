@@ -44,7 +44,7 @@ public class CardDownloadData {
         this.tokenSetCode = tokenSetCode;
         this.tokenDescriptor = tokenDescriptor;
         
-        if (this.tokenDescriptor == null || this.tokenDescriptor.equalsIgnoreCase("") == 0) {
+        if (this.tokenDescriptor == null || this.tokenDescriptor.equalsIgnoreCase("")) {
             this.tokenDescriptor = lastDitchTokenDescriptor();
         }
     }
