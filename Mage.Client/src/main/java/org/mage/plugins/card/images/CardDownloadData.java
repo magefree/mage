@@ -43,6 +43,10 @@ public class CardDownloadData {
         this.secondSide = secondSide;
         this.tokenSetCode = tokenSetCode;
         this.tokenDescriptor = tokenDescriptor;
+        
+        if (this.tokenDescriptor == null || this.tokenDescriptor.equalsIgnoreCase("") == 0) {
+            this.tokenDescriptor = lastDitchTokenDescriptor();
+        }
     }
 
     public CardDownloadData(final CardDownloadData card) {
@@ -55,6 +59,8 @@ public class CardDownloadData {
         this.type = card.type;
         this.usesVariousArt = card.usesVariousArt;
         this.tokenSetCode = card.tokenSetCode;
+        this.tokenDescriptor = card.tokenDescriptor;
+
     }
 
     @Override
@@ -138,7 +144,15 @@ public class CardDownloadData {
 
     public void setTokenDescriptor(String tokenDescriptor) {
         this.tokenDescriptor = tokenDescriptor;
-    }    
+    }  
+    
+    private String lastDitchTokenDescriptor() {
+        String name = this.name.replaceAll("[^a-zA-Z0-9]", "");
+        String descriptor = name + "...."; 
+        descriptor = descriptor.toUpperCase();
+        return descriptor;
+    }  
+    
     public boolean isToken() {
         return token;
     }
