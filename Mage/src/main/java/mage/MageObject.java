@@ -10,6 +10,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 
 public interface MageObject extends MageItem, Serializable {
 
@@ -75,7 +76,7 @@ public interface MageObject extends MageItem, Serializable {
 
     int getZoneChangeCounter(Game game);
 
-    void updateZoneChangeCounter(Game game);
+    void updateZoneChangeCounter(Game game, ZoneChangeEvent event);
 
     void setZoneChangeCounter(int value, Game game);
 

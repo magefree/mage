@@ -174,8 +174,9 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (targetCard != null || targetPermanent != null || targetPlayer != null) {
             card = game.getCard(event.getTargetId());
             card.removeFromZone(game, fromZone, sourceId);
-            card.updateZoneChangeCounter(game);
             PermanentCard permanent = new PermanentCard(card, (controllingPlayer == null ? card.getOwnerId() : controllingPlayer.getId()), game);
+            ZoneChangeEvent zoneChangeEvent = new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD);
+            permanent.updateZoneChangeCounter(game, zoneChangeEvent);
             game.getBattlefield().addPermanent(permanent);
             card.setZone(Zone.BATTLEFIELD, game);
             if (permanent.entersBattlefield(event.getSourceId(), game, fromZone, true)) {
@@ -188,7 +189,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
                 }
                 game.applyEffects();
 
-                game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
+                game.fireEvent(zoneChangeEvent);
                 return true;
             }
 

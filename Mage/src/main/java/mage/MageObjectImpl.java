@@ -42,6 +42,7 @@ import mage.abilities.mana.ManaAbility;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 
@@ -287,7 +288,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         game.getState().updateZoneChangeCounter(objectId);
     }
 
