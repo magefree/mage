@@ -43,7 +43,9 @@ public class DeckImporterUtil {
         } else if (file.toLowerCase().endsWith("txt")) {
             return new TxtDeckImporter();
         } else if (file.toLowerCase().endsWith("dck")) {
-            return new DckDeckImporter();
+            return new DekDeckImporter();
+        } else if (file.toLowerCase().endsWith("dek")) {
+            return new DekDeckImporter();
         } else {
             return null;
         }
