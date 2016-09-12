@@ -103,6 +103,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("MMA", "modern-masters");
             put("MOR", "morningtide");
             put("MPRP", "magic-player-rewards");
+            put("MPS", "masterpiece-series");
             put("NPH", "new-phyrexia");
             put("ODY", "player-rewards-2002");
             put("OGW", "oath-of-the-gatewatch");
@@ -151,12 +152,12 @@ public class MagicCardsImageSource implements CardImageSource {
         }
         return instance;
     }
-    
+
     @Override
     public String getNextHttpImageUrl() {
         return null;
     }
-    
+
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;

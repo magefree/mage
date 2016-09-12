@@ -109,6 +109,7 @@ Magic Player Rewards|magicplayerrewards|
 Magic: The Gathering-Commander|commander|
 Media Inserts|mediainserts|
 Magic: The Gathering-Conspiracy|conspiracy|
+Masterpiece Series|masterpieceseries|
 Masters Edition|mastersedition|
 Masters Edition II|masterseditionii|
 Masters Edition III|masterseditioniii|

@@ -198,6 +198,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("MMQ", "Mercadian Masques");
         setsAliases.put("MOR", "Morningtide");
         setsAliases.put("MPRP", "Magic Player Rewards");
+        setsAliases.put("MPS", "Masterpiece Series");
         setsAliases.put("MRD", "Mirrodin");
         setsAliases.put("NEM", "Nemesis");
         setsAliases.put("NPH", "New Phyrexia");
@@ -270,12 +271,12 @@ public class WizardCardsImageSource implements CardImageSource {
     public String getNextHttpImageUrl() {
         return null;
     }
-    
+
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
     }
-    
+
     private Map<String, String> getSetLinks(String cardSet) {
         ConcurrentHashMap<String, String> setLinks = new ConcurrentHashMap<>();
         ExecutorService executor = Executors.newFixedThreadPool(10);

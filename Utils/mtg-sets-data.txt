@@ -127,6 +127,7 @@ Modern Masters|MMA|
 Mercadian Masques|MMQ|
 Morningtide|MOR|
 Magic Player Rewards|MPRP|
+Masterpiece Series|MPS|
 Mirrodin|MRD|
 Nemesis|NEM|
 New Phyrexia|NPH|
