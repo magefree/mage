@@ -81,10 +81,13 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
 
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-                sb.append("up to ");
+        if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+            sb.append("up to ");
+            if (target.getMaxNumberOfTargets() == 1) {
+                sb.append("one ");
             }
+        }
+        if (target.getMaxNumberOfTargets() > 1) {
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName());
