@@ -63,7 +63,19 @@ public class CardPanelRenderImpl extends CardPanel {
         if (!a.getRules().equals(b.getRules())) {
             return false;
         }
-        if (!a.getExpansionSetCode().equals(b.getExpansionSetCode())) {
+
+        // Expansion set code, with null checking:
+        // TODO: The null checks should not be necessary, but thanks to Issue #2260
+        // some tokens / commandobjects will be missing expansion set codes.
+        String expA = a.getExpansionSetCode();
+        if (expA == null) {
+            expA = "";
+        }
+        String expB = b.getExpansionSetCode();
+        if (expB == null) {
+            expB = "";
+        }
+        if (!expA.equals(expB)) {
             return false;
         }
         if (a.getFrameStyle() != b.getFrameStyle()) {
