@@ -105,4 +105,9 @@ public class MtgImageSource implements CardImageSource {
     public Float getAverageSize() {
         return 70.0f;
     }
+    
+    @Override
+    public Integer getTotalImages() {
+        return -1;
+    }
 }

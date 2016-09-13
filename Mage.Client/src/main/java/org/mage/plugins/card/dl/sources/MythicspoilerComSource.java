@@ -244,4 +244,9 @@ public class MythicspoilerComSource implements CardImageSource {
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
     }
+    
+    @Override
+    public Integer getTotalImages() {
+        return -1;
+    }
 }

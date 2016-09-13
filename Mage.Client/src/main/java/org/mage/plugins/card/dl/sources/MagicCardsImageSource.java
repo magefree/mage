@@ -152,12 +152,12 @@ public class MagicCardsImageSource implements CardImageSource {
         }
         return instance;
     }
-
+    
     @Override
     public String getNextHttpImageUrl() {
         return null;
     }
-
+    
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
@@ -215,5 +215,10 @@ public class MagicCardsImageSource implements CardImageSource {
     @Override
     public Float getAverageSize() {
         return 70.0f;
+    }
+    
+    @Override
+    public Integer getTotalImages() {
+        return -1;
     }
 }
