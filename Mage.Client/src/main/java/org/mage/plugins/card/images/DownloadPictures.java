@@ -60,6 +60,7 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
 import org.mage.plugins.card.dl.sources.MtgOnlTokensImageSource;
+import org.mage.plugins.card.dl.sources.AltMtgOnlTokensImageSource;
 import org.mage.plugins.card.dl.sources.MythicspoilerComSource;
 import org.mage.plugins.card.dl.sources.TokensMtgImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
@@ -146,7 +147,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             "wizards.com",
             "mythicspoiler.com",
             "tokens.mtg.onl", //"mtgimage.com (HQ)",
-            "mtg.onl"
+            "mtg.onl",
+            "alternative.mtg.onl"
         //"mtgathering.ru HQ",
         //"mtgathering.ru MQ",
         //"mtgathering.ru LQ",
@@ -177,6 +179,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     case 4:
                         cardImageSource = MtgOnlTokensImageSource.getInstance();
                         break;
+                    case 5:
+                        cardImageSource = AltMtgOnlTokensImageSource.getInstance();
+                        break;                        
                 }
                 int count = DownloadPictures.this.cards.size();
                 float mb = (count * cardImageSource.getAverageSize()) / 1024;
