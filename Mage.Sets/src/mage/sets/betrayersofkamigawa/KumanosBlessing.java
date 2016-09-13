@@ -38,12 +38,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -53,6 +48,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
+
 
 /**
  *
@@ -159,9 +155,8 @@ class DamagedByEnchantedWatcher extends Watcher {
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 if (enchantment.getAttachedTo().equals(event.getSourceId())) {
                     MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
-                    if (!damagedCreatures.contains(mor)) {
                         damagedCreatures.add(mor);
-                    }
+
                 }
             }
         }

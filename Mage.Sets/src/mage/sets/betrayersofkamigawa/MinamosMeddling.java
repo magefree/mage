@@ -46,6 +46,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
+
 /**
  *
  * @author LevelX2
@@ -103,7 +106,7 @@ class MinamosMeddlingCounterTargetEffect extends OneShotEffect {
                         for (SpellAbility spellAbility : spell.getSpellAbilities()) {
                             if (spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
                                 for (Card card: spellController.getHand().getCards(game)) {
-                                    if (card.getName().equals(spellAbility.getCardName()) && !cardsToDiscard.contains(card.getId())) {
+                                    if (card.getName().equals(spellAbility.getCardName())) {
                                         cardsToDiscard.add(card);
                                     }
                                 }
