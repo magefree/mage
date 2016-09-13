@@ -41,8 +41,8 @@ import org.mage.plugins.card.images.DownloadPictures;
 public class MtgOnlTokensImageSource implements CardImageSource {
 
     private static final Logger logger = Logger.getLogger(MtgOnlTokensImageSource.class);
-
     private static CardImageSource instance = new MtgOnlTokensImageSource();
+    private static int maxTimes = 0;
 
     public static CardImageSource getInstance() {
         if (instance == null) {
@@ -66,10 +66,19 @@ public class MtgOnlTokensImageSource implements CardImageSource {
         if (copyUrlToImage == null) {
             setupLinks();
         }
-        
+
         for (String key : copyUrlToImageDone.keySet()) {
-            if (copyUrlToImageDone.get(key) == false) {
-                copyUrlToImageDone.put(key, true);
+            if (copyUrlToImageDone.get(key) < maxTimes) {
+                copyUrlToImageDone.put(key, maxTimes);
+                return key;
+            }
+        }
+        if (maxTimes < 2) {
+            maxTimes++;
+        }
+        for (String key : copyUrlToImageDone.keySet()) {
+            if (copyUrlToImageDone.get(key) < maxTimes) {
+                copyUrlToImageDone.put(key, maxTimes);
                 return key;
             }
         }
@@ -91,7 +100,7 @@ public class MtgOnlTokensImageSource implements CardImageSource {
 
     HashMap<String, String> copyUrlToImage = null;
     HashMap<String, String> copyImageToUrl = null;
-    HashMap<String, Boolean> copyUrlToImageDone = null;
+    HashMap<String, Integer> copyUrlToImageDone = null;
 
     private void setupLinks() {
         if (copyUrlToImage != null) {
@@ -99,7 +108,7 @@ public class MtgOnlTokensImageSource implements CardImageSource {
         }
         copyUrlToImage = new HashMap<String, String>();
         copyImageToUrl = new HashMap<String, String>();
-        copyUrlToImageDone = new HashMap<String, Boolean>();
+        copyUrlToImageDone = new HashMap<String, Integer>();
         copyUrlToImage.put("Angel_B_3_3.jpg", "ANGEL.B.ANGEL.CREATURE.3.3.full.jpg");
         copyUrlToImage.put("Angel_W_3_3.jpg", "ANGEL.W.ANGEL.CREATURE.3.3.full.jpg");
         copyUrlToImage.put("Angel_W_4_4.jpg", "ANGEL.W.ANGEL.CREATURE.4.4.full.jpg");
@@ -338,21 +347,30 @@ public class MtgOnlTokensImageSource implements CardImageSource {
         copyUrlToImage.put("Zombie_B_X_X.jpg", "ZOMBIE.B.ZOMBIE.CREATURE.X.X.full.jpg");
         copyUrlToImage.put("Zombie_Horror_B_X_X.jpg", "ZOMBIEHORROR.B.ZOMBIEHORROR.CREATURE.X.X.full.jpg");
         copyUrlToImage.put("Zombie_U_X_X.jpg", "ZOMBIE.U.ZOMBIE.CREATURE.X.X.full.jpg");
-        copyUrlToImage.put("Zombie_Wizard_UB_1_1.jpg", "ZOMBIEWIZARD.BG.ZOMBIEWIZARD.CREATURE.1.1.full.jpg");
         copyUrlToImage.put("Zombie_Wizard_UB_1_1.jpg", "ZOMBIEWIZARD.UB.ZOMBIEWIZARD.CREATURE.1.1.full.jpg");
 
         for (String key : copyUrlToImage.keySet()) {
-            copyUrlToImageDone.put(key, false);
+            copyUrlToImageDone.put(key, maxTimes);
             copyImageToUrl.put(copyUrlToImage.get(key), key);
         }
     }
 
     @Override
     public String generateTokenUrl(CardDownloadData card) throws IOException {
-
         if (copyUrlToImage == null) {
             setupLinks();
         }
         return null;
+    }
+
+    @Override
+    public Integer getTotalImages() {
+        if (copyUrlToImage == null) {
+            setupLinks();
+        }
+        if (copyUrlToImage != null) {
+            return copyImageToUrl.size();
+        }
+        return -1;
     }
 }

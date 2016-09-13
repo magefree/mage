@@ -271,12 +271,12 @@ public class WizardCardsImageSource implements CardImageSource {
     public String getNextHttpImageUrl() {
         return null;
     }
-
+    
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
     }
-
+    
     private Map<String, String> getSetLinks(String cardSet) {
         ConcurrentHashMap<String, String> setLinks = new ConcurrentHashMap<>();
         ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -511,5 +511,9 @@ public class WizardCardsImageSource implements CardImageSource {
         }
 
     }
-
+    
+    @Override
+    public Integer getTotalImages() {
+        return -1;
+    }
 }
