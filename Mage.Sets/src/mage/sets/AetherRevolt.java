@@ -31,7 +31,9 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.SetType;
 
 /**
@@ -58,6 +60,23 @@ public class AetherRevolt extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        /* The Masterpiece Series will exist at a rarity higher than mythic rare. For example, in Kaladesh, you will open a Kaladesh Inventions card roughly
+         1 out of every 144 boosters. (Technically, the Kaladesh booster pack says the ratio is 1:2,160 cards.) This is slightly more often than opening a
+         premium mythic rare. These ratios may change for future sets. */
+        this.ratioBoosterSpecialLand = 144;
         this.parentSet = Kaladesh.getInstance();
+    }
+
+    @Override
+    public List<CardInfo> getSpecialLand() {
+        if (savedSpecialLand.isEmpty()) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes("MPS");
+            criteria.minCardNumber(31);
+            criteria.maxCardNumber(54);
+            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+        }
+
+        return new ArrayList<>(savedSpecialLand);
     }
 }

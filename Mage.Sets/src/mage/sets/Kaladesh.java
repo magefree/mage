@@ -31,7 +31,9 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.constants.SetType;
 
 /**
@@ -58,11 +60,29 @@ public class Kaladesh extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.numBoosterSpecial = 0;
         /* There are additional cards, numbered 265–270, that don't appear in Kaladesh
          booster packs. These are new cards that are exclusive in the Planeswalker
          Decks supplemental product, which are replacing Intro Packs.
          These additional cards have a Kaladesh expansion symbol and are legal in all
          formats in which Kaladesh is legal. */
         this.maxCardNumberInBooster = 264;
+        /* The Masterpiece Series will exist at a rarity higher than mythic rare. For example, in Kaladesh, you will open a Kaladesh Inventions card roughly
+         1 out of every 144 boosters. (Technically, the Kaladesh booster pack says the ratio is 1:2,160 cards.) This is slightly more often than opening a
+         premium mythic rare. These ratios may change for future sets. */
+        this.ratioBoosterSpecialLand = 144;
+    }
+
+    @Override
+    public List<CardInfo> getSpecialLand() {
+        if (savedSpecialLand.isEmpty()) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes("MPS");
+            criteria.minCardNumber(1);
+            criteria.maxCardNumber(30);
+            savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
+        }
+
+        return new ArrayList<>(savedSpecialLand);
     }
 }

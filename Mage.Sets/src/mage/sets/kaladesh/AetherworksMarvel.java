@@ -44,7 +44,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -63,7 +63,7 @@ public class AetherworksMarvel extends CardImpl {
         this.supertype.add("Legendary");
 
         // Whenever a permanent you control is put into a graveyard, you get {E}.
-        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new GetEnergyCountersControllerEffect(1), false, new FilterPermanent("a permanent"), false));
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new GetEnergyCountersControllerEffect(1), false, new FilterControlledPermanent("a permanent you control"), false));
 
         // {T}, Pay {E}{E}{E}{E}{E}{E}: Look at the top six cards of your library. You may cast a card from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AetherworksMarvelEffect(), new TapSourceCost());
