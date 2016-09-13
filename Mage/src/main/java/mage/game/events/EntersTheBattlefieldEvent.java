@@ -43,17 +43,17 @@ public class EntersTheBattlefieldEvent extends GameEvent {
     private Permanent target;
 
     public EntersTheBattlefieldEvent(Permanent target, UUID sourceId, UUID playerId, Zone fromZone) {
-        super(EventType.ENTERS_THE_BATTLEFIELD, target.getId(), sourceId, playerId);
-        this.fromZone = fromZone;
-        this.target = target;
+        this(target, sourceId, playerId, fromZone, null);
     }
 
     public EntersTheBattlefieldEvent(Permanent target, UUID sourceId, UUID playerId, Zone fromZone, ArrayList<UUID> appliedEffects) {
         super(EventType.ENTERS_THE_BATTLEFIELD, target.getId(), sourceId, playerId);
         this.fromZone = fromZone;
+        this.target = target;
         if (appliedEffects != null) {
             this.appliedEffects = appliedEffects;
         }
+        this.amount = 1; // Number of times to trigger (Panharmonicon can change that value)
     }
 
     public Zone getFromZone() {
