@@ -160,7 +160,6 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
                     if (controller.choose(Outcome.PlayForFree, exileZone, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
-                            game.getExile().removeCard(card, game);
                             return controller.cast(card.getSpellAbility(), game, true);
                         }
                     }

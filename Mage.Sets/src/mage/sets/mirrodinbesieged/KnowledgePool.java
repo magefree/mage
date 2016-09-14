@@ -178,7 +178,6 @@ class KnowledgePoolEffect2 extends OneShotEffect {
                     while (player.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null && !card.getId().equals(spell.getSourceId())) {
-                            game.getExile().removeCard(card, game);
                             return player.cast(card.getSpellAbility(), game, true);
                         }
                         target.clearChosen();
