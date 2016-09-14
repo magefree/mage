@@ -46,6 +46,10 @@ public class AnotherTargetPredicate implements ObjectSourcePlayerPredicate<Objec
 
     private final int targetTag;
 
+    /**
+     *
+     * @param targetTag tag of the target the filter belongs to
+     */
     public AnotherTargetPredicate(int targetTag) {
         this.targetTag = targetTag;
     }
@@ -58,7 +62,7 @@ public class AnotherTargetPredicate implements ObjectSourcePlayerPredicate<Objec
                 if (target.getTargetTag() > 0 // target is included in the target group to check
                         && target.getTargetTag() != targetTag // it's not the target of this predicate
                         && target.getTargets().contains(input.getObject().getId())) { // if the uuid already is used for another target in the group it's not allowed here
-                        return false;
+                    return false;
                 }
             }
         }
