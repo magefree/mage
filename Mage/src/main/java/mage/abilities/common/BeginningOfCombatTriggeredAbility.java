@@ -45,7 +45,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
             case YOU:
                 boolean yours = event.getPlayerId().equals(this.controllerId);
                 if (yours && setTargetPointer) {
-                    if (getTargets().size() == 0) {
+                    if (getTargets().isEmpty()) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }

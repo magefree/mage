@@ -67,7 +67,7 @@ public class GetEnergyCountersControllerEffect extends OneShotEffect {
         for (int i = 0; i < value; i++) {
             this.staticText += "{E}";
         }
-        this.staticText += " <i>(" + CardUtil.numberToText(value, "an") + " energy counter" + (value > 1 ? "s" : "") + ")</i>";
+        this.staticText += " <i>(" + CardUtil.numberToText(value, "an") + " energy counter" + (value > 1 ? "s" : "") + ").</i>";
     }
 
     @Override

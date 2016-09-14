@@ -94,7 +94,7 @@ class RivalryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (getTargets().size() == 0) {
+        if (getTargets().isEmpty()) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
             }

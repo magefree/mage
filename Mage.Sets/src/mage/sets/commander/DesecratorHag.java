@@ -112,7 +112,7 @@ class DesecratorHagEffect extends OneShotEffect {
                     }
                 }
             }
-            if (cards.size() == 0) {
+            if (cards.isEmpty()) {
                 return true;
             }
             if (cards.size() > 1

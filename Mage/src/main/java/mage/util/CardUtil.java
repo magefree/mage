@@ -78,7 +78,7 @@ public class CardUtil {
         // Enchantment subtypes
         "Aura", "Curse", "Shrine",
         // Artifact subtypes
-        "Clue", "Equipment", "Fortification", "Contraption",
+        "Clue", "Equipment", "Fortification", "Contraption", "Vehicle",
         // Land subtypes
         "Desert", "Gate", "Lair", "Locus", "Urza's", "Mine", "Power-Plant", "Tower",
         // Planeswalker subtypes

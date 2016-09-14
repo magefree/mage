@@ -80,13 +80,13 @@ public class TargetPermanentOrPlayerWithCounter extends TargetPermanentOrPlayer 
     public boolean canTarget(UUID id, Game game) {
         Permanent permanent = game.getPermanent(id);
         if (permanent != null) {
-            if (permanent.getCounters(game).size() == 0) {
+            if (permanent.getCounters(game).isEmpty()) {
                 return false;
             }
         }
         Player player = game.getPlayer(id);
         if (player != null) {
-            if (player.getCounters().size() == 0) {
+            if (player.getCounters().isEmpty()) {
                 return false;
             }
         }
@@ -97,13 +97,13 @@ public class TargetPermanentOrPlayerWithCounter extends TargetPermanentOrPlayer 
     public boolean canTarget(UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         if (permanent != null) {
-            if (permanent.getCounters(game).size() == 0) {
+            if (permanent.getCounters(game).isEmpty()) {
                 return false;
             }
         }
         Player player = game.getPlayer(id);
         if (player != null) {
-            if (player.getCounters().size() == 0) {
+            if (player.getCounters().isEmpty()) {
                 return false;
             }
         }

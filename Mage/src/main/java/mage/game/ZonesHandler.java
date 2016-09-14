@@ -1,5 +1,6 @@
 package mage.game;
 
+import java.util.*;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -16,12 +17,11 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
 
-import java.util.*;
-
 /**
  * Created by samuelsandeen on 9/6/16.
  */
 public class ZonesHandler {
+
     public static boolean cast(ZoneChangeInfo info, Game game) {
         if (maybeRemoveFromSourceZone(info, game)) {
             placeInDestinationZone(info, game);
@@ -32,14 +32,14 @@ public class ZonesHandler {
     }
 
     public static boolean moveCard(ZoneChangeInfo info, Game game) {
-        List<ZoneChangeInfo> list = new ArrayList<ZoneChangeInfo>();
+        List<ZoneChangeInfo> list = new ArrayList<>();
         list.add(info);
         return moveCards(list, game).size() > 0;
     }
 
     public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game) {
         // Handle Unmelded Meld Cards
-        for(ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext();) {
+        for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext();) {
             ZoneChangeInfo info = itr.next();
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
@@ -170,12 +170,10 @@ public class ZonesHandler {
                 ZoneChangeInfo subInfo = itr.next();
                 if (!maybeRemoveFromSourceZone(subInfo, game)) {
                     itr.remove();
-                } else {
-                    if (subInfo.event.getTargetId() == meld.getTopHalfCard().getId()) {
-                        meld.setTopLastZoneChangeCounter(meld.getTopHalfCard().getZoneChangeCounter(game));
-                    } else if (subInfo.event.getTargetId() == meld.getBottomHalfCard().getId()) {
-                        meld.setBottomLastZoneChangeCounter(meld.getBottomHalfCard().getZoneChangeCounter(game));
-                    }
+                } else if (subInfo.event.getTargetId() == meld.getTopHalfCard().getId()) {
+                    meld.setTopLastZoneChangeCounter(meld.getTopHalfCard().getZoneChangeCounter(game));
+                } else if (subInfo.event.getTargetId() == meld.getBottomHalfCard().getId()) {
+                    meld.setBottomLastZoneChangeCounter(meld.getBottomHalfCard().getZoneChangeCounter(game));
                 }
             }
             if (unmelded.subInfo.isEmpty()) {
@@ -189,10 +187,13 @@ public class ZonesHandler {
         ZoneChangeEvent event = info.event;
         Card card = game.getCard(event.getTargetId());
         boolean success = false;
+        if (card == null) {
+            return success;
+        }
         if (info.faceDown) {
             card.setFaceDown(true, game);
         }
-        if(!game.replaceEvent(event)) {
+        if (!game.replaceEvent(event)) {
             Zone fromZone = event.getFromZone();
             if (event.getToZone() == Zone.BATTLEFIELD) {
                 // controlling player can be replaced so use event player now
@@ -246,7 +247,7 @@ public class ZonesHandler {
     }
 
     public static List<Card> chooseOrder(String message, Cards cards, Player player, Game game) {
-        List<Card> order = new ArrayList<Card>();
+        List<Card> order = new ArrayList<>();
         TargetCard target = new TargetCard(Zone.ALL, new FilterCard(message));
         target.setRequired(true);
         while (player.isInGame() && cards.size() > 1) {

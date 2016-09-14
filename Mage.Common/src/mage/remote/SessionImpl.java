@@ -27,22 +27,6 @@
  */
 package mage.remote;
 
-import java.io.IOException;
-import java.lang.reflect.UndeclaredThrowableException;
-import java.net.Authenticator;
-import java.net.ConnectException;
-import java.net.MalformedURLException;
-import java.net.PasswordAuthentication;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -62,28 +46,21 @@ import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.utils.CompressUtil;
-import mage.view.DraftPickView;
-import mage.view.GameTypeView;
-import mage.view.MatchView;
-import mage.view.RoomUsersView;
-import mage.view.TableView;
-import mage.view.TournamentTypeView;
-import mage.view.TournamentView;
-import mage.view.UserView;
+import mage.view.*;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.CannotConnectException;
-import org.jboss.remoting.Client;
-import org.jboss.remoting.ConnectionListener;
-import org.jboss.remoting.ConnectionValidator;
-import org.jboss.remoting.InvocationFailureException;
-import org.jboss.remoting.InvokerLocator;
-import org.jboss.remoting.Remoting;
+import org.jboss.remoting.*;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
+
+import java.io.IOException;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  *

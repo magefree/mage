@@ -77,7 +77,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
             case YOU:
                 boolean yours = event.getPlayerId().equals(this.controllerId);
                 if (yours) {
-                    if (getTargets().size() == 0) {
+                    if (getTargets().isEmpty()) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
@@ -86,7 +86,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                 return yours;
             case OPPONENT:
                 if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
-                    if (getTargets().size() == 0) {
+                    if (getTargets().isEmpty()) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
@@ -96,7 +96,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                 break;
             case NOT_YOU:
                 if (!this.controllerId.equals(event.getPlayerId())) {
-                    if (getTargets().size() == 0) {
+                    if (getTargets().isEmpty()) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
@@ -109,7 +109,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                 if (attachment != null && attachment.getAttachedTo() != null) {
                     Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
                     if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
-                        if (getTargets().size() == 0) {
+                        if (getTargets().isEmpty()) {
                             for (Effect effect : this.getEffects()) {
                                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                             }
@@ -119,7 +119,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 break;
             case ANY:
-                if (getTargets().size() == 0) {
+                if (getTargets().isEmpty()) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }

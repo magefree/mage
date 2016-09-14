@@ -31,25 +31,35 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
  * @author LevelX2
  */
 public class RalZarek extends CardImpl {
+
+    private static final FilterPermanent secondFilter = new FilterPermanent("another target permanent");
+
+    static {
+        secondFilter.add(new AnotherTargetPredicate(2));
+    }
 
     public RalZarek(UUID ownerId) {
         super(ownerId, 94, "Ral Zarek", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
@@ -59,8 +69,17 @@ public class RalZarek extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Tap target permanent, then untap another target permanent.
-        LoyaltyAbility ability1 = new LoyaltyAbility(new RalZarekTapUntapEffect(), 1);
-        ability1.addTarget(new TargetPermanent(2, 2, new FilterPermanent(), false));
+        LoyaltyAbility ability1 = new LoyaltyAbility(new TapTargetEffect(), 1);
+        TargetPermanent firstTarget = new TargetPermanent();
+        firstTarget.setTargetTag(1);
+        ability1.addTarget(firstTarget);
+        Effect effect = new UntapTargetEffect();
+        effect.setText(", then untap another target permanent");
+        effect.setTargetPointer(new SecondTargetPointer());
+        ability1.addEffect(effect);
+        TargetPermanent secondTarget = new TargetPermanent(secondFilter);
+        secondTarget.setTargetTag(2);
+        ability1.addTarget(secondTarget);
         this.addAbility(ability1);
 
         // -2: Ral Zarek deals 3 damage to target creature or player.
@@ -80,45 +99,6 @@ public class RalZarek extends CardImpl {
     @Override
     public RalZarek copy() {
         return new RalZarek(this);
-    }
-}
-
-class RalZarekTapUntapEffect extends OneShotEffect {
-
-    public RalZarekTapUntapEffect() {
-        super(Outcome.Tap);
-        this.staticText = "Tap target permanent, then untap another target permanent";
-    }
-
-    public RalZarekTapUntapEffect(final RalZarekTapUntapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RalZarekTapUntapEffect copy() {
-        return new RalZarekTapUntapEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int i = 0;
-            for (UUID targetId : source.getTargets().get(0).getTargets()) {
-                i++;
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    if (i == 1) {
-                        permanent.tap(game);
-                    }
-                    if (i == 2) {
-                        permanent.untap(game);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
 

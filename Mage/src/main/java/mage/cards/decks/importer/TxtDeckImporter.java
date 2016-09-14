@@ -61,7 +61,7 @@ public class TxtDeckImporter extends DeckImporter {
 
         // Start the sideboard on empty line that follows
         // at least 1 non-empty line
-        if (line.length() == 0 && nonEmptyLinesTotal > 0) {
+        if (line.isEmpty() && nonEmptyLinesTotal > 0) {
             sideboard = true;
             return;
         } else {

@@ -43,6 +43,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
+
 /**
  *
  * @author maxlebedev
@@ -99,9 +100,8 @@ class LeovoldEmissaryOfTrestWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD ) {
-            if (!playersThatDrewCard.contains(event.getPlayerId())) {
                 playersThatDrewCard.add(event.getPlayerId());
-            }
+
         }
     }
 

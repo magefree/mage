@@ -97,7 +97,7 @@ public class GameEvent implements Serializable {
         CLASH, CLASHED,
         DAMAGE_PLAYER,
         /* DAMAGED_PLAYER
-         targetId    the id of the damged player
+         targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
          playerId    the id of the damged player
          amount      amount of damage
@@ -109,6 +109,12 @@ public class GameEvent implements Serializable {
         GAIN_LIFE, GAINED_LIFE,
         LOSE_LIFE, LOST_LIFE,
         PLAY_LAND, LAND_PLAYED,
+        CREWED_VEHICLE,
+        /* CREWED_VEHICLE
+         targetId    the id of the creature that crewed a vehicle
+         sourceId    sourceId of the vehicle
+         playerId    the id of the controlling player
+         */
         CAST_SPELL,
         /* SPELL_CAST
          x-Costs are already defined

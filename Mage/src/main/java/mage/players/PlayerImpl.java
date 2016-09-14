@@ -40,7 +40,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import mage.ConditionalMana;
@@ -83,7 +82,6 @@ import mage.actions.MageDrawAction;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.MeldCard;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
 import mage.constants.AbilityType;
@@ -118,7 +116,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentMeld;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -1852,7 +1849,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     returnCode = false;
                 }
             }
-            if(finalAmount > 0) {
+            if (finalAmount > 0) {
                 game.fireEvent(GameEvent.getEvent(EventType.COUNTERS_ADDED, playerId, playerId, counter.getName(), amount));
             }
         } else {
@@ -2536,7 +2533,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 }
                             }
 
-                            if (manaCosts.size() == 0) {
+                            if (manaCosts.isEmpty()) {
                                 return true;
                             } else {
                                 if (available == null) {
@@ -2567,7 +2564,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 }
                             }
 
-                            if (manaCosts.size() == 0) {
+                            if (manaCosts.isEmpty()) {
                                 return true;
                             } else {
                                 for (Mana mana : manaCosts.getOptions()) {
@@ -2604,7 +2601,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     }
 
-                    if (manaCosts.size() == 0) {
+                    if (manaCosts.isEmpty()) {
                         return true;
                     } else {
                         for (Mana mana : manaCosts.getOptions()) {
@@ -3161,9 +3158,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (permanent != null) {
                         successfulMovedCards.add(permanent);
                         if (!game.isSimulation()) {
-                            game.informPlayers(game.getPlayer(info.event.getPlayerId()) + " puts " +
-                                    (info.faceDown ? "a card face down " : permanent.getLogName()) + " from " +
-                                    fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield");
+                            game.informPlayers(game.getPlayer(info.event.getPlayerId()) + " puts "
+                                    + (info.faceDown ? "a card face down " : permanent.getLogName()) + " from "
+                                    + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield");
                         }
                     }
                 }

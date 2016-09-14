@@ -85,7 +85,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
     }
 
     public void loadBooster(CardsView booster, BigCard bigCard) {
-        if (booster instanceof CardsView && booster.size() == 0) {
+        if (booster instanceof CardsView && booster.isEmpty()) {
             emptyGrid = true;
         } else {
             if (!emptyGrid) {

@@ -126,7 +126,7 @@ public class ChoiceDialog extends IDialogPanel {
     }
 
     private void displayCards(CardsView cards, UUID gameId, BigCard bigCard) {
-        if (cards.size() == 0) {
+        if (cards.isEmpty()) {
             return;
         }
 

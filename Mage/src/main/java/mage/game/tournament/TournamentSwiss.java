@@ -28,7 +28,7 @@
 package mage.game.tournament;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import mage.constants.TournamentPlayerState;
@@ -49,7 +49,7 @@ public abstract class TournamentSwiss extends TournamentImpl {
 
     @Override
     protected void runTournament() {
-        for (Map.Entry<UUID, TournamentPlayer> entry : players.entrySet()) {
+        for (Entry<UUID, TournamentPlayer> entry : players.entrySet()) {
             if (entry.getValue().getPlayer().autoLoseGame()) {
                 entry.getValue().setEliminated();
                 entry.getValue().setResults("Auto Eliminated");

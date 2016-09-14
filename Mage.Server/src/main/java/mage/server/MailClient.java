@@ -15,7 +15,7 @@ public class MailClient {
     private static final Logger logger = Logger.getLogger(Main.class);
 
     public static boolean sendMessage(String email, String subject, String text) {
-        if (email.length() == 0) {
+        if (email.isEmpty()) {
             logger.info("Email is not sent because the address is empty");
             return false;
         }

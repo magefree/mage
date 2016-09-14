@@ -259,7 +259,7 @@ public class ResetPasswordDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGetAuthTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetAuthTokenActionPerformed
-        if (this.txtEmail.getText().length() == 0) {
+        if (this.txtEmail.getText().isEmpty()) {
             MageFrame.getInstance().showError("Please enter an email address.");
             return;
         }
@@ -275,15 +275,15 @@ public class ResetPasswordDialog extends MageDialog {
     }//GEN-LAST:event_btnGetAuthTokenActionPerformed
 
     private void btnSubmitNewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitNewPasswordActionPerformed
-        if (this.txtEmail.getText().length() == 0) {
+        if (this.txtEmail.getText().isEmpty()) {
             MageFrame.getInstance().showError("Please enter an email address.");
             return;
         }
-        if (this.txtAuthToken.getText().length() == 0) {
+        if (this.txtAuthToken.getText().isEmpty()) {
             MageFrame.getInstance().showError("Please enter an auth token.");
             return;
         }
-        if (this.txtPassword.getText().length() == 0) {
+        if (this.txtPassword.getText().isEmpty()) {
             MageFrame.getInstance().showError("Please enter a new password.");
             return;
         }

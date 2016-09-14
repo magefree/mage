@@ -182,9 +182,13 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public Set<Card> getCards(Game game) {
         Set<Card> cards = new LinkedHashSet<>();
-        for (Iterator<UUID> it = this.iterator(); it.hasNext();) { // Changed to iterator becuase of ConcurrentModificationException
+        for (Iterator<UUID> it = this.iterator(); it.hasNext();) { // Changed to iterator because of ConcurrentModificationException
             UUID cardId = it.next();
+
             Card card = game.getCard(cardId);
+            if (card == null) {
+                card = game.getPermanent(cardId); // needed to get TokenCard objects
+            }
             if (card != null) { // this can happen during the cancelation (player concedes) of a game
                 cards.add(card);
             }

@@ -105,7 +105,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             case PRECOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
                     printOutState(game);
-                    if (actions.size() == 0) {
+                    if (actions.isEmpty()) {
                         logger.info("Sim Calculate pre combat actions ----------------------------------------------------- ");
                         calculatePreCombatActions(game);
                     }
@@ -122,7 +122,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             case DECLARE_ATTACKERS:
                 if (!game.getActivePlayerId().equals(playerId)) {
                     printOutState(game);
-                    if (actions.size() == 0) {
+                    if (actions.isEmpty()) {
                         logger.info("Sim Calculate declare attackers actions ----------------------------------------------------- ");
                         calculatePreCombatActions(game);
                     }
@@ -142,7 +142,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             case POSTCOMBAT_MAIN:
 //                if (game.getActivePlayerId().equals(playerId)) {
                     printOutState(game);
-                    if (actions.size() == 0) {
+                    if (actions.isEmpty()) {
                         calculatePostCombatActions(game);
                     }
                     act(game);

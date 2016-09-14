@@ -27,6 +27,8 @@
  */
 package mage.sets.worldwake;
 
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -43,7 +45,6 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ElephantToken;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -100,17 +101,24 @@ class TerastodonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        HashMap<UUID, Integer> destroyedPermanents = new HashMap<>();
         for (UUID targetID : this.targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
                     if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
-                        Player controller = game.getPlayer(permanent.getControllerId());
-                        ElephantToken elephantToken = new ElephantToken();
-                        elephantToken.putOntoBattlefield(1, game, source.getSourceId(), controller.getId());
+                        int numberPermanents = 0;
+                        if (destroyedPermanents.containsKey(permanent.getControllerId())) {
+                            numberPermanents = destroyedPermanents.get(permanent.getControllerId());
+                        }
+                        destroyedPermanents.put(permanent.getControllerId(), numberPermanents);
                     }
                 }
             }
+        }
+        ElephantToken elephantToken = new ElephantToken();
+        for (Entry<UUID, Integer> entry : destroyedPermanents.entrySet()) {
+            elephantToken.putOntoBattlefield(entry.getValue(), game, source.getSourceId(), entry.getKey());
         }
         return true;
     }

@@ -95,7 +95,7 @@ class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityI
             if (object != null && object instanceof Spell) {
                 Card c = (Spell) object;
                 if (c.getCardType().contains(CardType.INSTANT) || c.getCardType().contains(CardType.SORCERY)) {
-                    if (getTargets().size() == 0) {
+                    if (getTargets().isEmpty()) {
                         for (Effect effect : getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                         }
