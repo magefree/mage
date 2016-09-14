@@ -117,7 +117,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
             case COMBAT_DAMAGE:
             case END_COMBAT:
             case POSTCOMBAT_MAIN:
-                if (actions.size() == 0) {
+                if (actions.isEmpty()) {
                     calculateActions(game);
                 }
                 act(game);
@@ -131,7 +131,7 @@ public class ComputerPlayer2 extends ComputerPlayer implements Player {
     }
 
     protected void act(Game game) {
-        if (actions == null || actions.size() == 0)
+        if (actions == null || actions.isEmpty())
             pass(game);
         else {
             boolean usedStack = false;

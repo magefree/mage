@@ -2536,7 +2536,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 }
                             }
 
-                            if (manaCosts.size() == 0) {
+                            if (manaCosts.isEmpty()) {
                                 return true;
                             } else {
                                 if (available == null) {
@@ -2567,7 +2567,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 }
                             }
 
-                            if (manaCosts.size() == 0) {
+                            if (manaCosts.isEmpty()) {
                                 return true;
                             } else {
                                 for (Mana mana : manaCosts.getOptions()) {
@@ -2604,7 +2604,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     }
 
-                    if (manaCosts.size() == 0) {
+                    if (manaCosts.isEmpty()) {
                         return true;
                     } else {
                         for (Mana mana : manaCosts.getOptions()) {

@@ -71,7 +71,7 @@ public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl {
                 break;
             case OPPONENT:
                 if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
-                    if (getTargets().size() == 0) {
+                    if (getTargets().isEmpty()) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
@@ -82,7 +82,7 @@ public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl {
             case ANY:
                 controller = game.getPlayer(this.getControllerId());
                 if (controller != null && controller.getInRange().contains(event.getPlayerId())) {
-                    if (getTargets().size() == 0) {
+                    if (getTargets().isEmpty()) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }

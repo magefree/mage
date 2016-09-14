@@ -102,7 +102,7 @@ class CloneShellEffect extends OneShotEffect {
             cards.add(card);
         }
 
-        if (cards.size() == 0) {
+        if (cards.isEmpty()) {
             return false;
 
         }

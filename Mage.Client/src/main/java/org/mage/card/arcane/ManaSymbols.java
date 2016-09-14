@@ -217,7 +217,7 @@ public class ManaSymbols {
             loadSymbolsImages(symbolWidth);
         }
         Map<String, BufferedImage> sizedSymbols = manaImages.get(symbolWidth);
-        if (manaCost.length() == 0) {
+        if (manaCost.isEmpty()) {
             return;
         }
         manaCost = manaCost.replace("\\", "");

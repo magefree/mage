@@ -41,7 +41,7 @@ public class HellbentCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getPlayer(source.getControllerId()).getHand().size() == 0;
+        return game.getPlayer(source.getControllerId()).getHand().isEmpty();
     }
 
     @Override

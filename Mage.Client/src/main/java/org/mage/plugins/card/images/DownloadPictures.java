@@ -98,7 +98,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         ArrayList<CardDownloadData> cards = getNeededCards(allCards);
 
         /*
-         * if (cards == null || cards.size() == 0) {
+         * if (cards == null || cards.isEmpty()) {
          * JOptionPane.showMessageDialog(null,
          * "All card pictures have been downloaded."); return; }
          */

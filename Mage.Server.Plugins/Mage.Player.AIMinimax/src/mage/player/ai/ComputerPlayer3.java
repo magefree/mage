@@ -78,7 +78,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 return false;
             case PRECOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
-                    if (actions.size() == 0) {
+                    if (actions.isEmpty()) {
                         calculatePreCombatActions(game);
                     }
                     act(game);
@@ -92,7 +92,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 return false;
             case DECLARE_ATTACKERS:
                 if (!game.getActivePlayerId().equals(playerId)) {
-                    if (actions.size() == 0) {
+                    if (actions.isEmpty()) {
                         calculatePreCombatActions(game);
                     }
                     act(game);
@@ -109,7 +109,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 return false;
             case POSTCOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
-                    if (actions.size() == 0) {
+                    if (actions.isEmpty()) {
                         calculatePostCombatActions(game);
                     }
                     act(game);
