@@ -8,21 +8,18 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class RandomUtil {
 
-    private final static ThreadLocalRandom random = ThreadLocalRandom.current();
 
-    public static Random getRandom() {
-        return random;
-    }
+    public static Random getRandom() {return ThreadLocalRandom.current();}
 
     public static int nextInt() {
-        return random.nextInt();
+        return ThreadLocalRandom.current().nextInt();
     }
 
     public static int nextInt(int max) {
-        return random.nextInt(max);
+        return ThreadLocalRandom.current().nextInt(max);
     }
 
     public static boolean nextBoolean() {
-        return random.nextBoolean();
+        return ThreadLocalRandom.current().nextBoolean();
     }
 }
