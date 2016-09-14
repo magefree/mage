@@ -91,7 +91,7 @@ class CantBeBlockedByCreaturesWithFlyingAttachedEffect extends RestrictionEffect
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !this.applies(attacker, source, game) || !blocker.getAbilities().contains(FlyingAbility.getInstance());
+        return !blocker.getAbilities().contains(FlyingAbility.getInstance());
     }
 
     @Override
