@@ -41,6 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -77,6 +78,7 @@ public class CrewAbility extends SimpleActivatedAbility {
 class CrewCost extends CostImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
+
     static {
         filter.add(Predicates.not(new TappedPredicate()));
     }
@@ -104,6 +106,11 @@ class CrewCost extends CostImpl {
                 }
             }
             paid = sumPower >= value;
+            if (paid) {
+                for (UUID targetId : target.getTargets()) {
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREWED_VEHICLE, targetId, sourceId, controllerId));
+                }
+            }
         }
         return paid;
     }
