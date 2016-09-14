@@ -82,7 +82,11 @@ public class ZonesHandler {
         // Handle normal cases
         ZoneChangeEvent event = info.event;
         Zone toZone = event.getToZone();
-        Card targetCard = game.getCard(event.getTargetId());
+        Card targetCard = getTargetCard(game, event.getTargetId());
+        if (targetCard == null) {
+            // This should never happen.
+            return;
+        }
         Cards cards;
         if (targetCard instanceof MeldCard) {
             cards = ((MeldCard) targetCard).getHalves();
@@ -161,6 +165,19 @@ public class ZonesHandler {
         }
     }
 
+    private static Card getTargetCard(Game game, UUID targetId) {
+        if (game.getCard(targetId) != null) {
+            return game.getCard(targetId);
+        }
+        if (game.getMeldCard(targetId) != null) {
+            return game.getMeldCard(targetId);
+        }
+        if (game.getPermanent(targetId) != null) {
+            return game.getPermanent(targetId);
+        }
+        return null;
+    }
+
     private static boolean maybeRemoveFromSourceZone(ZoneChangeInfo info, Game game) {
         // Handle Unmelded Cards
         if (info instanceof ZoneChangeInfo.Unmelded) {
@@ -185,7 +202,11 @@ public class ZonesHandler {
         }
         // Handle all normal cases
         ZoneChangeEvent event = info.event;
-        Card card = game.getCard(event.getTargetId());
+        Card card = getTargetCard(game, event.getTargetId());
+        if (card == null) {
+            // If we can't find the card we can't remove it.
+            return false;
+        }
         boolean success = false;
         if (card == null) {
             return success;
@@ -200,6 +221,9 @@ public class ZonesHandler {
                 Permanent permanent;
                 if (card instanceof MeldCard) {
                     permanent = new PermanentMeld(card, event.getPlayerId(), game);
+                } else if (card instanceof Permanent) {
+                    // This should never happen.
+                    permanent = (Permanent) card;
                 } else {
                     permanent = new PermanentCard(card, event.getPlayerId(), game);
                 }
@@ -239,7 +263,7 @@ public class ZonesHandler {
         if (success) {
             if (event.getToZone() == Zone.BATTLEFIELD && event.getTarget() != null) {
                 event.getTarget().updateZoneChangeCounter(game, event);
-            } else {
+            } else if (!(card instanceof Permanent)) {
                 card.updateZoneChangeCounter(game, event);
             }
         }
