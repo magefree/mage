@@ -90,7 +90,7 @@ class MindlessNullEffect extends RestrictionEffect {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !(game.getBattlefield().countAll(filter, source.getControllerId(), game) == 0);
+        return game.getBattlefield().countAll(filter, source.getControllerId(), game) != 0;
     }
 
     @Override
