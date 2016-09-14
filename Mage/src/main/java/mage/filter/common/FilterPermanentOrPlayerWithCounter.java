@@ -55,11 +55,11 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
     @Override
     public boolean match(MageItem o, Game game) {
         if (o instanceof Player) {
-            if (((Player)o).getCounters().size() == 0) {
+            if (((Player)o).getCounters().isEmpty()) {
                 return false;
             }
         } else if (o instanceof Permanent) {
-            if (((Permanent)o).getCounters(game).size() == 0) {
+            if (((Permanent)o).getCounters(game).isEmpty()) {
                 return false;
             }
         }

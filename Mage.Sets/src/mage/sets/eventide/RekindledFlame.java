@@ -85,7 +85,7 @@ class OpponentHasNoCardsInHandCondition implements Condition {
         if (player != null) {
             for (UUID playerId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(playerId);
-                if (opponent != null && opponent.getHand().size() == 0) {
+                if (opponent != null && opponent.getHand().isEmpty()) {
                     return true;
                 }
             }

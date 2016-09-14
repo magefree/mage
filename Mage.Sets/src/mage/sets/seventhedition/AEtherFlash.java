@@ -89,7 +89,7 @@ class AEtherFlashTriggeredAbility extends TriggeredAbilityImpl {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
         if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-            if (getTargets().size() == 0) {
+            if (getTargets().isEmpty()) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(targetId));
                 }

@@ -110,7 +110,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
         }
 
         StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().size() == 0) {
+        if (mode.getTargets().isEmpty()) {
             sb.append("counter it");
         } else {
             sb.append("Counter target ").append(mode.getTargets().get(0).getTargetName());

@@ -102,7 +102,7 @@ class NezumiGraverobberFlipEffect extends OneShotEffect {
         if (card != null) {
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
-                if (player.getGraveyard().size() == 0) {
+                if (player.getGraveyard().isEmpty()) {
                     return new FlipSourceEffect(new NighteyesTheDesecratorToken()).apply(game, source);
                 }
             }

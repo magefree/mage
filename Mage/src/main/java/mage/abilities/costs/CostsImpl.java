@@ -70,7 +70,7 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
         if (text != null) {
             return text;
         }
-        if (this.size() == 0) {
+        if (this.isEmpty()) {
             return "";
         }
 

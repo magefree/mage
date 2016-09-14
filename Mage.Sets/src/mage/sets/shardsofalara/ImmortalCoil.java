@@ -100,7 +100,7 @@ class ImmortalCoilAbility extends StateTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Player player = game.getPlayer(this.getControllerId());
-        return player != null && player.getGraveyard().size() == 0;
+        return player != null && player.getGraveyard().isEmpty();
     }
 
     @Override

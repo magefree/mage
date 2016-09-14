@@ -166,7 +166,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
     private void cbPlayerTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayerTypeActionPerformed
         if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
             this.pnlPlayerName.setVisible(true);
-            if (this.txtPlayerName.getText().length() == 0) {
+            if (this.txtPlayerName.getText().isEmpty()) {
                 this.txtPlayerName.setText("Computer " + this.lblPlayerNum.getText());
             }
         }

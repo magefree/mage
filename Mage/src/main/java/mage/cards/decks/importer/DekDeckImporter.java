@@ -13,7 +13,7 @@ public class DekDeckImporter extends DeckImporter {
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
 
-        if (line.length() == 0 || line.startsWith("#") || !line.contains("<Cards CatID")) {
+        if (line.isEmpty() || line.startsWith("#") || !line.contains("<Cards CatID")) {
             return;
         }
         try {

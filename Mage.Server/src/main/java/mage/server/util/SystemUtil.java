@@ -55,7 +55,7 @@ public class SystemUtil {
             try {
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine().trim();
-                    if (line.trim().length() == 0 || line.startsWith("#")) {
+                    if (line.trim().isEmpty() || line.startsWith("#")) {
                         continue;
                     }
 

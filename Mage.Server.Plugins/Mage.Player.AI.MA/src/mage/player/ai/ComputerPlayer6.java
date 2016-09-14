@@ -185,7 +185,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     if (logger.isInfoEnabled()) {
                         printOutState(game);
                     }
-                    if (actions.size() == 0) {
+                    if (actions.isEmpty()) {
                         calculateActions(game);
                     }
                     act(game);
@@ -351,7 +351,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
 
                 /*
                  * // Try to fix horizon effect if (root.combat == null ||
-                 * root.combat.getAttackers().size() == 0) {
+                 * root.combat.getAttackers().isEmpty()) {
                  * FilterCreatureForAttack attackFilter = new
                  * FilterCreatureForAttack();
                  * attackFilter.getControllerId().add(playerId); List<Permanent>

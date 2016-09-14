@@ -90,7 +90,7 @@ class GuulDrazSpecterCondition implements Condition {
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         for (UUID opponentId : opponents) {
-            result |= game.getPlayer(opponentId).getHand().size() == 0;
+            result |= game.getPlayer(opponentId).getHand().isEmpty();
         }
 
         return result;

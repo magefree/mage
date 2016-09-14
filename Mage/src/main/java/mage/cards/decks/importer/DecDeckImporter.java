@@ -40,7 +40,7 @@ public class DecDeckImporter extends DeckImporter {
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
-        if (line.length() == 0 || line.startsWith("//")) {
+        if (line.isEmpty() || line.startsWith("//")) {
             return;
         }
 

@@ -262,11 +262,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         // First try only to pay colored mana with the pool
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof MonoHybridManaCost) {
-                if (((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.W)) && pool.getWhite() > 0)
-                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.B)) && pool.getBlack() > 0)
-                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.R)) && pool.getRed() > 0)
-                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.G)) && pool.getGreen() > 0)
-                        || ((((MonoHybridManaCost) cost).containsColor(ColoredManaSymbol.U)) && pool.getBlue() > 0)) {
+                if (((cost.containsColor(ColoredManaSymbol.W)) && pool.getWhite() > 0)
+                        || ((cost.containsColor(ColoredManaSymbol.B)) && pool.getBlack() > 0)
+                        || ((cost.containsColor(ColoredManaSymbol.R)) && pool.getRed() > 0)
+                        || ((cost.containsColor(ColoredManaSymbol.G)) && pool.getGreen() > 0)
+                        || ((cost.containsColor(ColoredManaSymbol.U)) && pool.getBlue() > 0)) {
                     cost.assignPayment(game, ability, pool, costToPay);
                     if (pool.count() == 0) {
                         return;
@@ -315,12 +315,12 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     public final void load(String mana) {
         this.clear();
         if (costs.containsKey(mana)) {
-            ManaCosts<T> savedCosts = costs.get(mana);
+            ManaCosts<ManaCost> savedCosts = costs.get(mana);
             for (ManaCost cost : savedCosts) {
-                this.add((T) cost.copy());
+                this.add(cost.copy());
             }
         } else {
-            if (mana == null || mana.length() == 0) {
+            if (mana == null || mana.isEmpty()) {
                 return;
             }
             String[] symbols = mana.split("^\\{|\\}\\{|\\}$");
@@ -347,11 +347,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                             this.add(new VariableManaCost(modifierForX));
                         } //TODO: handle multiple {X} and/or {Y} symbols
                     } else if (Character.isDigit(symbol.charAt(0))) {
-                        this.add((T) new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
+                        this.add(new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
                     } else if (symbol.contains("P")) {
-                        this.add((T) new PhyrexianManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
+                        this.add(new PhyrexianManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
                     } else {
-                        this.add((T) new HybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(0)), ColoredManaSymbol.lookup(symbol.charAt(2))));
+                        this.add(new HybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(0)), ColoredManaSymbol.lookup(symbol.charAt(2))));
                     }
                 }
             }
@@ -392,7 +392,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         if (text != null) {
             return text;
         }
-        if (this.size() == 0) {
+        if (this.isEmpty()) {
             return "";
         }
 

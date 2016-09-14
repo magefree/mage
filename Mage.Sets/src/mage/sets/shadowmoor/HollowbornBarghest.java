@@ -134,7 +134,7 @@ class HollowbornBarghestTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Player opponent = game.getPlayer(event.getPlayerId());
-            if (opponent != null && opponent.getHand().size() == 0) {
+            if (opponent != null && opponent.getHand().isEmpty()) {
                 opponent.loseLife(2, game);
                 return true;
             }

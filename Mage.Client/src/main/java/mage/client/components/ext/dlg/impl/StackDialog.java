@@ -103,7 +103,7 @@ public class StackDialog extends IDialogPanel {
 
     private void displayStack(CardsView cards, UUID gameId, BigCard bigCard) {
 
-        if (cards == null || cards.size() == 0) {
+        if (cards == null || cards.isEmpty()) {
             return;
         }
 

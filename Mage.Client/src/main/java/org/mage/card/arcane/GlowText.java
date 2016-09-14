@@ -153,7 +153,7 @@ public class GlowText extends JLabel {
 
     @Override
     public void paint(Graphics g) {
-        if (getText().length() == 0) {
+        if (getText().isEmpty()) {
             return;
         }
 

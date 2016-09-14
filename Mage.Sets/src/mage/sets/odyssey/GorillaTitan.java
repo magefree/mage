@@ -84,7 +84,7 @@ class GorillaTitanCondition implements Condition {
         Player p = game.getPlayer(source.getControllerId());
         if (p != null)
         {
-                    return p.getGraveyard().size() == 0;
+                    return p.getGraveyard().isEmpty();
         }
         return false;
     }
