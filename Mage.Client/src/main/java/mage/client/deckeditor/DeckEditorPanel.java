@@ -925,7 +925,7 @@ class ImportFilter extends FileFilter {
             ext = s.substring(i + 1).toLowerCase();
         }
         if (ext != null) {
-            if (ext.toLowerCase().equals("dec") || ext.toLowerCase().equals("mwdeck") || ext.toLowerCase().equals("txt")) {
+            if (ext.toLowerCase().equals("dec") || ext.toLowerCase().equals("mwdeck") || ext.toLowerCase().equals("txt") || ext.toLowerCase().equals("dek")) {
                 return true;
             }
         }
@@ -934,7 +934,7 @@ class ImportFilter extends FileFilter {
 
     @Override
     public String getDescription() {
-        return "*.dec | *.mwDeck | *.txt";
+        return "*.dec | *.mwDeck | *.txt | *.dek";
     }
 }
 

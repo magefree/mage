@@ -462,7 +462,7 @@ public class LegacyCubeJanuary2016 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Recurring Nightmare",""));
         cubeCards.add(new DraftCube.CardIdentity("Reflecting Pool",""));
         cubeCards.add(new DraftCube.CardIdentity("Regrowth",""));
-        cubeCards.add(new DraftCube.CardIdentity("Relic of Progenitus",""));        
+        cubeCards.add(new DraftCube.CardIdentity("Relic of Progenitus",""));
         cubeCards.add(new DraftCube.CardIdentity("Remand",""));
         cubeCards.add(new DraftCube.CardIdentity("Remove Soul",""));
         cubeCards.add(new DraftCube.CardIdentity("Repeal",""));

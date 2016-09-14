@@ -25,7 +25,6 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.plugins.card.dl.sources;
 
 import java.io.BufferedReader;
@@ -66,12 +65,12 @@ public class TokensMtgImageSource implements CardImageSource {
     public Float getAverageSize() {
         return 26.7f;
     }
-    
+
     @Override
     public String getNextHttpImageUrl() {
         return null;
     }
-    
+
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
@@ -168,7 +167,7 @@ public class TokensMtgImageSource implements CardImageSource {
             tokenData = matchedTokens.get(card.getType() - 1);
         }
 
-        String url =  "http://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + "_"
+        String url = "http://tokens.mtg.onl/tokens/" + tokenData.getExpansionSetCode().trim() + "_"
                 + tokenData.getNumber().trim() + "-" + tokenData.getName().trim()+ ".jpg";
         url = url.replace(' ', '-');
         return url;
@@ -269,19 +268,19 @@ public class TokensMtgImageSource implements CardImageSource {
                     }
                 } else {
                     if (state == 0) {
-                        set = line.substring(0, 3);
-                        state = 1;
-                    } else {
-                        if (state == 1) {
-                            state = 2;
-                        }
-                        String[] split = line.split(",");
-                        // replace special comma for cards like 'Ashaya‚ the Awoken World'
-                        String name = split[0].replace('‚', ',');
-                        String number = split[1];
-                        TokenData token = new TokenData(name, number, set);
-                        tokensData.add(token);
+                    set = line.substring(0, 3);
+                    state = 1;
+                } else {
+                    if (state == 1) {
+                        state = 2;
                     }
+                    String[] split = line.split(",");
+                    // replace special comma for cards like 'Ashaya‚ the Awoken World'
+                    String name = split[0].replace('‚', ',');
+                    String number = split[1];
+                    TokenData token = new TokenData(name, number, set);
+                    tokensData.add(token);
+                }
                 }
 
                 line = reader.readLine();
@@ -307,6 +306,7 @@ public class TokensMtgImageSource implements CardImageSource {
     }
 
     final class TokenData {
+
         final private String name;
         final private String number;
         final private String expansionSetCode;
@@ -330,4 +330,8 @@ public class TokensMtgImageSource implements CardImageSource {
         }
     }
 
+    @Override
+    public Integer getTotalImages() {
+        return -1;
+    }
 }

@@ -60,6 +60,7 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
 import org.mage.plugins.card.dl.sources.MtgOnlTokensImageSource;
+import org.mage.plugins.card.dl.sources.AltMtgOnlTokensImageSource;
 import org.mage.plugins.card.dl.sources.MythicspoilerComSource;
 import org.mage.plugins.card.dl.sources.TokensMtgImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
@@ -146,7 +147,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             "wizards.com",
             "mythicspoiler.com",
             "tokens.mtg.onl", //"mtgimage.com (HQ)",
-            "mtg.onl"
+            "mtg.onl",
+            "alternative.mtg.onl"
         //"mtgathering.ru HQ",
         //"mtgathering.ru MQ",
         //"mtgathering.ru LQ",
@@ -177,6 +179,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     case 4:
                         cardImageSource = MtgOnlTokensImageSource.getInstance();
                         break;
+                    case 5:
+                        cardImageSource = AltMtgOnlTokensImageSource.getInstance();
+                        break;                        
                 }
                 int count = DownloadPictures.this.cards.size();
                 float mb = (count * cardImageSource.getAverageSize()) / 1024;
@@ -285,7 +290,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         try {
             offlineMode = true;
-
             for (CardInfo card : allCards) {
                 if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()
                         && !ignoreUrls.contains(card.getSetCode())) {
@@ -328,10 +332,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 }
             }
             allCardsUrls.addAll(getTokenCardUrls());
-
         } catch (Exception e) {
             logger.error(e);
         }
+
         int numberTokenImages = allCardsUrls.size() - numberCardImages;
         TFile file;
 
@@ -504,17 +508,14 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             imageRef = cardImageSource.getSourceName() + imageRef;
                             try {
                                 URL imageUrl = new URL(imageRef);
-                                
-                                Runnable task = new DownloadTask(imageUrl, fileName, 1);
+                                Runnable task = new DownloadTask(imageUrl, fileName, cardImageSource.getTotalImages());
                                 executor.execute(task);
                             } catch (Exception ex) {
                             }
-                        } else {
-                            if (card != null) {
-                                logger.info("Card not available on " + cardImageSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ")");
-                                synchronized (sync) {
-                                    update(cardIndex + 1, cardsToDownload.size());
-                                }
+                        } else if (card != null && cardImageSource.getTotalImages() == -1) {
+                            logger.info("Card not available on " + cardImageSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ")");
+                            synchronized (sync) {
+                                update(cardIndex + 1, cardsToDownload.size());
                             }
                         }
                     } else if (url != null) {
@@ -587,9 +588,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 }
                 String imagePath;
                 if (useSpecifiedPaths) {
-                    imagePath = CardImageUtils.getTokenBasePath();    // temporaryFile = plugins/images\NUM.jace, telepath unbound.jpg
-                    imagePath += actualFilename;                      // imagePath = d:\xmage_images\ORI.zip\ORI\Jace,telepathunbound.jpg
-                    String tmpFile = filePath + actualFilename + ".2";
+                    imagePath = CardImageUtils.getTokenBasePath();
+                    imagePath += actualFilename;
+                    String tmpFile = filePath + "ADDTOTOK" + actualFilename;
                     temporaryFile = new File(tmpFile.toString());
                 } else {
                     imagePath = CardImageUtils.generateImagePath(card);
@@ -663,7 +664,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         new TFile(temporaryFile).cp_rp(outputFile);
                     }
                 } else {
-                    if (card != null) {
+                    if (card != null && !useSpecifiedPaths) {
                         logger.warn("Image download for " + card.getName()
                                 + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
                                 + "(" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());

@@ -120,24 +120,22 @@ public class CardImageUtils {
     
     public static String getTokenBasePath() {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String imagesPath = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-
-        if (PreferencesDialog.isSaveImagesToZip()) {
-            return imagesPath + TFile.separator + "TOK" + ".zip" + TFile.separator;
-        } else {
-            return imagesPath + TFile.separator + "TOK" + TFile.separator;
+        String imagesPath = useDefault.equals("true") ? Constants.IO.imageBaseDir : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        if (!imagesPath.endsWith(TFile.separator)) {
+            imagesPath += TFile.separator;
         }
+
+        String finalPath = "";
+        if (PreferencesDialog.isSaveImagesToZip()) {
+            finalPath = imagesPath + "TOK" + ".zip" + TFile.separator;
+        } else {
+            finalPath = imagesPath + "TOK" + TFile.separator;
+        }
+        return finalPath;
     }
 
     private static String getTokenDescriptorImagePath(CardDownloadData card) {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String imagesPath = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-
-        if (PreferencesDialog.isSaveImagesToZip()) {
-            return imagesPath + TFile.separator + "TOK" + ".zip" + TFile.separator + card.getTokenDescriptor() + ".full.jpg";
-        } else {
-            return imagesPath + TFile.separator + "TOK" + TFile.separator + card.getTokenDescriptor() + ".full.jpg";
-        }
+        return getTokenBasePath() + card.getTokenDescriptor() + ".full.jpg";
     }
 
     private static String buildTokenPath(String imagesDir, String set) {

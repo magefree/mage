@@ -59,7 +59,7 @@ public class FateReforged extends ExpansionSet {
         this.parentSet = KhansOfTarkir.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
-        this.numBoosterSpecial = 1; // a speical land slot that can contain basic lands (language dependent) the common lands or the rare fetch lands from KTK
+        this.numBoosterSpecial = 1; // a special land slot that can contain basic lands (language dependent) the common lands or the rare fetch lands from KTK
         this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
@@ -75,6 +75,7 @@ public class FateReforged extends ExpansionSet {
             List<CardInfo> savedCardsInfos = savedCards.get(rarity);
             if (savedCardsInfos == null) {
                 CardCriteria criteria = new CardCriteria();
+                criteria.rarities(Rarity.COMMON);
                 criteria.setCodes(this.code).notTypes(CardType.LAND);
                 if (maxCardNumberInBooster != Integer.MAX_VALUE) {
                     criteria.maxCardNumber(maxCardNumberInBooster);

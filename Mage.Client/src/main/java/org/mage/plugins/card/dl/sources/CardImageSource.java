@@ -14,4 +14,5 @@ public interface CardImageSource {
     String getFileForHttpImage(String httpImageUrl);
     String getSourceName();
     Float getAverageSize();
+    Integer getTotalImages();
 }

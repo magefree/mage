@@ -82,7 +82,7 @@ public class ChandraTorchOfDefiance extends CardImpl {
         this.addAbility(ability);
 
         // -7: You get an emblem with "Whenever you cast a spell, this emblem deals 5 damage to target creature or player."
-        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ChandraTorchOfDefianceEmblem()), -6));
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ChandraTorchOfDefianceEmblem()), -7));
     }
 
     public ChandraTorchOfDefiance(final ChandraTorchOfDefiance card) {
@@ -121,10 +121,10 @@ class ChandraTorchOfDefianceEffect extends OneShotEffect {
             if (card != null) {
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                 if (controller.chooseUse(Outcome.Benefit, "Cast the card? (You still pay the costs)", source, game) && !card.getCardType().contains(CardType.LAND)) {
-                            controller.cast(card.getSpellAbility(), game, false);
-                        } else {
-                            new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT).apply(game, source);
-                        }
+                    controller.cast(card.getSpellAbility(), game, false);
+                } else {
+                    new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT).apply(game, source);
+                }
             }
             return true;
         }

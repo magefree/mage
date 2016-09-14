@@ -1,3 +1,8 @@
+|Generate|TOK:KLD|Beast||
+|Generate|TOK:KLD|Construct||
+|Generate|TOK:KLD|Servo||
+|Generate|TOK:KLD|Thopter||
+
 |Generate|TOK:CN2|Assassin||
 |Generate|TOK:CN2|Beast||
 |Generate|TOK:CN2|Construct||

@@ -198,6 +198,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("MMQ", "Mercadian Masques");
         setsAliases.put("MOR", "Morningtide");
         setsAliases.put("MPRP", "Magic Player Rewards");
+        setsAliases.put("MPS", "Masterpiece Series");
         setsAliases.put("MRD", "Mirrodin");
         setsAliases.put("NEM", "Nemesis");
         setsAliases.put("NPH", "New Phyrexia");
@@ -510,5 +511,9 @@ public class WizardCardsImageSource implements CardImageSource {
         }
 
     }
-
+    
+    @Override
+    public Integer getTotalImages() {
+        return -1;
+    }
 }

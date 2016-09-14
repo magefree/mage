@@ -103,6 +103,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("MMA", "modern-masters");
             put("MOR", "morningtide");
             put("MPRP", "magic-player-rewards");
+            put("MPS", "masterpiece-series");
             put("NPH", "new-phyrexia");
             put("ODY", "player-rewards-2002");
             put("OGW", "oath-of-the-gatewatch");
@@ -214,5 +215,10 @@ public class MagicCardsImageSource implements CardImageSource {
     @Override
     public Float getAverageSize() {
         return 70.0f;
+    }
+    
+    @Override
+    public Integer getTotalImages() {
+        return -1;
     }
 }
