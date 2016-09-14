@@ -34,15 +34,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
+
 
 /**
  *
@@ -96,9 +92,8 @@ class SpiritOfTheLabyrinthWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD ) {
-            if (!playersThatDrewCard.contains(event.getPlayerId())) {
                 playersThatDrewCard.add(event.getPlayerId());
-            }
+
         }
     }
 
