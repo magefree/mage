@@ -49,7 +49,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.OwnerIdPredicate;
+import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -86,7 +86,7 @@ public class CrownOfDoom extends CardImpl {
             if (sourceCard != null) {
                 ability.getTargets().clear();
                 FilterPlayer filter = new FilterPlayer("player other than " + sourceCard.getIdName() + "'s owner");
-                filter.add(Predicates.not(new OwnerIdPredicate(sourceCard.getOwnerId())));
+                filter.add(Predicates.not(new PlayerIdPredicate(sourceCard.getOwnerId())));
                 ability.addTarget(new TargetPlayer(1, 1, false, filter));
             }
         }
