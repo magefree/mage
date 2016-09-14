@@ -25,53 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.counter;
+package mage.sets.kaladesh;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.CardUtil;
+import java.util.UUID;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.PayEnergyCost;
+import mage.abilities.effects.common.PreventAllDamageFromChosenSourceToYouEffect;
+import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterObject;
 
 /**
- * @author emerald000
+ *
+ * @author LevelX2
  */
-public class GetEnergyCountersControllerEffect extends OneShotEffect {
+public class ConsulateSurveillance extends CardImpl {
 
-    private final int value;
+    public ConsulateSurveillance(UUID ownerId) {
+        super(ownerId, 10, "Consulate Surveillance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
+        this.expansionSetCode = "KLD";
 
-    public GetEnergyCountersControllerEffect(int value) {
-        super(Outcome.Benefit);
-        this.value = value;
-        setText();
+        // When Consulate Surveillance enters the battlefield, you get {E}{E}{E}{E}.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(4)));
+
+        // Pay {E}{E}: Prevent all damage that would be dealt to you this turn by a source of your choice.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new PreventAllDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, new FilterObject("source"), false),
+                new PayEnergyCost(2)));
+
     }
 
-    public GetEnergyCountersControllerEffect(final GetEnergyCountersControllerEffect effect) {
-        super(effect);
-        this.value = effect.value;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            return player.addCounters(CounterType.ENERGY.createInstance(value), game);
-        }
-        return false;
-    }
-
-    private void setText() {
-        this.staticText = "you get ";
-        for (int i = 0; i < value; i++) {
-            this.staticText += "{E}";
-        }
-        this.staticText += " <i>(" + CardUtil.numberToText(value, "an") + " energy counter" + (value > 1 ? "s" : "") + ").</i>";
+    public ConsulateSurveillance(final ConsulateSurveillance card) {
+        super(card);
     }
 
     @Override
-    public GetEnergyCountersControllerEffect copy() {
-        return new GetEnergyCountersControllerEffect(this);
+    public ConsulateSurveillance copy() {
+        return new ConsulateSurveillance(this);
     }
 }

@@ -25,53 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.counter;
+package mage.sets.kaladesh;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.CardUtil;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.keyword.FabricateAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
- * @author emerald000
+ *
+ * @author LevelX2
  */
-public class GetEnergyCountersControllerEffect extends OneShotEffect {
+public class AngelOfInvention extends CardImpl {
 
-    private final int value;
+    public AngelOfInvention(UUID ownerId) {
+        super(ownerId, 4, "Angel of Invention", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+        this.expansionSetCode = "KLD";
+        this.subtype.add("Angel");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-    public GetEnergyCountersControllerEffect(int value) {
-        super(Outcome.Benefit);
-        this.value = value;
-        setText();
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
+        // Lifelink
+        this.addAbility(LifelinkAbility.getInstance());
+        // Fabricate 2
+        this.addAbility(new FabricateAbility(2));
+        // Other creatures you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, true)));
     }
 
-    public GetEnergyCountersControllerEffect(final GetEnergyCountersControllerEffect effect) {
-        super(effect);
-        this.value = effect.value;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            return player.addCounters(CounterType.ENERGY.createInstance(value), game);
-        }
-        return false;
-    }
-
-    private void setText() {
-        this.staticText = "you get ";
-        for (int i = 0; i < value; i++) {
-            this.staticText += "{E}";
-        }
-        this.staticText += " <i>(" + CardUtil.numberToText(value, "an") + " energy counter" + (value > 1 ? "s" : "") + ").</i>";
+    public AngelOfInvention(final AngelOfInvention card) {
+        super(card);
     }
 
     @Override
-    public GetEnergyCountersControllerEffect copy() {
-        return new GetEnergyCountersControllerEffect(this);
+    public AngelOfInvention copy() {
+        return new AngelOfInvention(this);
     }
 }

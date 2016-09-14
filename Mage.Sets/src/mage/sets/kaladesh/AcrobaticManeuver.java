@@ -25,53 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.counter;
+package mage.sets.kaladesh;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
-import mage.util.CardUtil;
+import java.util.UUID;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
- * @author emerald000
+ *
+ * @author LevelX2
  */
-public class GetEnergyCountersControllerEffect extends OneShotEffect {
+public class AcrobaticManeuver extends CardImpl {
 
-    private final int value;
+    public AcrobaticManeuver(UUID ownerId) {
+        super(ownerId, 1, "Acrobatic Maneuver", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "KLD";
 
-    public GetEnergyCountersControllerEffect(int value) {
-        super(Outcome.Benefit);
-        this.value = value;
-        setText();
+        // Exile target creature you control, then return that card to the battlefield under its owner's control.
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        Effect effect = new ExileTargetForSourceEffect();
+        effect.setApplyEffectsAfter();
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true));
+
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public GetEnergyCountersControllerEffect(final GetEnergyCountersControllerEffect effect) {
-        super(effect);
-        this.value = effect.value;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            return player.addCounters(CounterType.ENERGY.createInstance(value), game);
-        }
-        return false;
-    }
-
-    private void setText() {
-        this.staticText = "you get ";
-        for (int i = 0; i < value; i++) {
-            this.staticText += "{E}";
-        }
-        this.staticText += " <i>(" + CardUtil.numberToText(value, "an") + " energy counter" + (value > 1 ? "s" : "") + ").</i>";
+    public AcrobaticManeuver(final AcrobaticManeuver card) {
+        super(card);
     }
 
     @Override
-    public GetEnergyCountersControllerEffect copy() {
-        return new GetEnergyCountersControllerEffect(this);
+    public AcrobaticManeuver copy() {
+        return new AcrobaticManeuver(this);
     }
 }
