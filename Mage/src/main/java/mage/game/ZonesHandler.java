@@ -208,9 +208,6 @@ public class ZonesHandler {
             return false;
         }
         boolean success = false;
-        if (card == null) {
-            return success;
-        }
         if (info.faceDown) {
             card.setFaceDown(true, game);
         }
