@@ -15,4 +15,5 @@ public interface CardImageSource {
     String getSourceName();
     Float getAverageSize();
     Integer getTotalImages();
+    Boolean isTokenSource();
 }

@@ -118,12 +118,17 @@ public class CardImageUtils {
         }
     }
     
-    public static String getTokenBasePath() {
+    public static String getImageBasePath() {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String imagesPath = useDefault.equals("true") ? Constants.IO.imageBaseDir : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
         if (!imagesPath.endsWith(TFile.separator)) {
             imagesPath += TFile.separator;
         }
+        return imagesPath;
+    }
+    
+    public static String getTokenBasePath() {
+        String imagesPath = getImageBasePath();
 
         String finalPath = "";
         if (PreferencesDialog.isSaveImagesToZip()) {

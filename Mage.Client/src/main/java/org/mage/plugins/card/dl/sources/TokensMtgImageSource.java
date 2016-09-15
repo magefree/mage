@@ -334,4 +334,9 @@ public class TokensMtgImageSource implements CardImageSource {
     public Integer getTotalImages() {
         return -1;
     }
+    
+    @Override
+    public Boolean isTokenSource() {
+        return true;
+    }
 }

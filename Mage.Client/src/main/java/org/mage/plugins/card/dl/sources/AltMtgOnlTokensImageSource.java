@@ -173,4 +173,9 @@ public class AltMtgOnlTokensImageSource implements CardImageSource {
         }
         return -1;
     }
+    
+    @Override
+    public Boolean isTokenSource() {
+        return true;
+    }
 }

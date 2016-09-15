@@ -61,6 +61,7 @@ import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
 import org.mage.plugins.card.dl.sources.MtgOnlTokensImageSource;
 import org.mage.plugins.card.dl.sources.AltMtgOnlTokensImageSource;
+import org.mage.plugins.card.dl.sources.GrabbagImageSource;
 import org.mage.plugins.card.dl.sources.MythicspoilerComSource;
 import org.mage.plugins.card.dl.sources.TokensMtgImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
@@ -148,7 +149,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             "mythicspoiler.com",
             "tokens.mtg.onl", //"mtgimage.com (HQ)",
             "mtg.onl",
-            "alternative.mtg.onl"
+            "alternative.mtg.onl",
+            "GrabBag"
         //"mtgathering.ru HQ",
         //"mtgathering.ru MQ",
         //"mtgathering.ru LQ",
@@ -182,6 +184,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     case 5:
                         cardImageSource = AltMtgOnlTokensImageSource.getInstance();
                         break;                        
+                    case 6:
+                        cardImageSource = GrabbagImageSource.getInstance();
+                        break;                   
                 }
                 int count = DownloadPictures.this.cards.size();
                 float mb = (count * cardImageSource.getAverageSize()) / 1024;
@@ -508,7 +513,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             imageRef = cardImageSource.getSourceName() + imageRef;
                             try {
                                 URL imageUrl = new URL(imageRef);
-                                Runnable task = new DownloadTask(imageUrl, fileName, cardImageSource.getTotalImages());
+                                if (card != null) {
+                                    card.setToken(cardImageSource.isTokenSource());
+                                }
+                                Runnable task = new DownloadTask(card, imageUrl, fileName, cardImageSource.getTotalImages());
                                 executor.execute(task);
                             } catch (Exception ex) {
                             }
@@ -567,8 +575,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             useSpecifiedPaths = false;
         }
 
-        public DownloadTask(URL url, String actualFilename, int count) {
-            this.card = null;
+        public DownloadTask(CardDownloadData card, URL url, String actualFilename, int count) {
+            this.card = card;
             this.url = url;
             this.count = count;
             this.actualFilename = actualFilename;
@@ -588,10 +596,21 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 }
                 String imagePath;
                 if (useSpecifiedPaths) {
-                    imagePath = CardImageUtils.getTokenBasePath();
-                    imagePath += actualFilename;
-                    String tmpFile = filePath + "ADDTOTOK" + actualFilename;
+                    if (card != null && card.isToken()) {
+                        imagePath = CardImageUtils.getTokenBasePath() + actualFilename;;
+                    } else {
+                        if (card != null) {
+                            imagePath = CardImageUtils.getImageBasePath() + actualFilename;
+                        } else {
+                            imagePath = Constants.IO.imageBaseDir;
+                        }
+                    }
+                    
+                    String tmpFile = filePath + "temporary" + actualFilename;
                     temporaryFile = new File(tmpFile.toString());
+                    if (!temporaryFile.exists()) {
+                        temporaryFile.getParentFile().mkdirs();
+                    }
                 } else {
                     imagePath = CardImageUtils.generateImagePath(card);
                 }
@@ -657,10 +676,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             graphics2D.dispose();
                             writeImageToFile(renderedImage, outputFile);
                         } else {
+                            outputFile.getParentFile().mkdirs();
                             new TFile(temporaryFile).cp_rp(outputFile);
                         }
                         temporaryFile.delete();
                     } else {
+                        outputFile.getParentFile().mkdirs();
                         new TFile(temporaryFile).cp_rp(outputFile);
                     }
                 } else {

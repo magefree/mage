@@ -373,4 +373,9 @@ public class MtgOnlTokensImageSource implements CardImageSource {
         }
         return -1;
     }
+    
+    @Override
+    public Boolean isTokenSource() {
+        return true;
+    }
 }
