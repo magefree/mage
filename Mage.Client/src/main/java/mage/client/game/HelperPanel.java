@@ -49,6 +49,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.components.MageTextArea;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
@@ -100,7 +101,6 @@ public class HelperPanel extends JPanel {
     private String message;
 
     private UUID gameId;
-    private Session session;
 
     public HelperPanel() {
         initComponents();
@@ -108,7 +108,6 @@ public class HelperPanel extends JPanel {
 
     public void init(UUID gameId) {
         this.gameId = gameId;
-        session = MageFrame.getSession();
     }
 
     public void changeGUISize() {
@@ -414,23 +413,23 @@ public class HelperPanel extends JPanel {
     public void handleAutoAnswerPopupMenuEvent(ActionEvent e) {
         switch (e.getActionCommand()) {
             case CMD_AUTO_ANSWER_ID_YES:
-                session.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_YES, gameId, originalId.toString() + "#" + message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_YES, gameId, originalId.toString() + "#" + message);
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_ID_NO:
-                session.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_NO, gameId, originalId.toString() + "#" + message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_NO, gameId, originalId.toString() + "#" + message);
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_NAME_YES:
-                session.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_YES, gameId, message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_YES, gameId, message);
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_NAME_NO:
-                session.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_NO, gameId, message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_NO, gameId, message);
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_RESET_ALL:
-                session.sendPlayerAction(REQUEST_AUTO_ANSWER_RESET_ALL, gameId, null);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_RESET_ALL, gameId, null);
                 break;
         }
     }

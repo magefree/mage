@@ -35,6 +35,7 @@ import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
@@ -168,7 +169,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
                 this.btnGenDeck.setVisible(false);
-                if (!MageFrame.getSession().isTestMode()) {
+                if (!SessionHandler.isTestMode()) {
                     this.btnLoad.setVisible(false);
                 }
                 this.deckArea.showSideboard(false);
@@ -178,7 +179,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 if (timeout != 0) {
                     countdown.start();
                     if (updateDeckTask == null || updateDeckTask.isDone()) {
-                        updateDeckTask = new UpdateDeckTask(MageFrame.getSession(), tableId, deck);
+                        updateDeckTask = new UpdateDeckTask(SessionHandler.getSession(), tableId, deck);
                         updateDeckTask.execute();
                     }
                 }
@@ -192,7 +193,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.btnExit.setVisible(true);
                 this.btnImport.setVisible(true);
                 this.btnGenDeck.setVisible(true);
-                if (!MageFrame.getSession().isTestMode()) {
+                if (!SessionHandler.isTestMode()) {
                     this.btnLoad.setVisible(true);
                 }
                 this.deckArea.showSideboard(true);
@@ -841,7 +842,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             updateDeckTask.cancel(true);
         }
 
-        if (MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists())) {
+        if (SessionHandler.submitDeck(tableId, deck.getDeckCardLists())) {
             removeDeckEditor();
         }
     }//GEN-LAST:event_btnSubmitActionPerformed

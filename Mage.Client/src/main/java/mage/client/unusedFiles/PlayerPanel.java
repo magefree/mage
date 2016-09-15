@@ -37,6 +37,7 @@ package mage.client.unusedFiles;
 import java.awt.Color;
 import java.util.UUID;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.dialog.ShowCardsDialog;
 import mage.remote.Session;
@@ -50,7 +51,6 @@ public class PlayerPanel extends javax.swing.JPanel {
 
     private UUID playerId;
     private UUID gameId;
-    private Session session;
     private PlayerView player;
 
     private ShowCardsDialog graveyard;
@@ -67,7 +67,6 @@ public class PlayerPanel extends javax.swing.JPanel {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
-        session = MageFrame.getSession();
     }
 
     public void update(PlayerView player) {
@@ -192,7 +191,7 @@ public class PlayerPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlayerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayerNameActionPerformed
-        session.sendPlayerUUID(gameId, playerId);
+        SessionHandler.sendPlayerUUID(gameId, playerId);
     }//GEN-LAST:event_btnPlayerNameActionPerformed
 
     private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraveActionPerformed

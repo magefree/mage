@@ -101,7 +101,6 @@ import org.apache.log4j.Logger;
 @SuppressWarnings("serial")
 public class Card extends MagePermanent implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
-    protected static Session session = MageFrame.getSession();
     protected static DefaultActionCallback callback = DefaultActionCallback.getInstance();
 
     protected Point p;
@@ -401,7 +400,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     @Override
     public void mousePressed(MouseEvent e) {
         requestFocusInWindow();
-        callback.mouseClicked(e, gameId, session, card);
+        callback.mouseClicked(e, gameId, card);
     }
 
     @Override

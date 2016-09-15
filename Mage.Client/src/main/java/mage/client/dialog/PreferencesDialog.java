@@ -59,6 +59,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.util.Config;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
@@ -2627,7 +2628,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         updateCache(KEY_AVATAR, String.valueOf(selectedAvatarId));
 
         try {
-            MageFrame.getSession().updatePreferencesForServer(getUserData());
+            SessionHandler.updatePreferencesForServer(getUserData());
 
             prefs.flush();
         } catch (BackingStoreException ex) {
@@ -3428,7 +3429,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 public void mousePressed(MouseEvent e) {
                     if (selectedAvatarId != id) {
                         setSelectedId(id);
-                        MageFrame.getSession().updatePreferencesForServer(getUserData());
+                        SessionHandler.updatePreferencesForServer(getUserData());
                     }
                 }
             });

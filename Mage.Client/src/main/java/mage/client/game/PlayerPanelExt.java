@@ -61,6 +61,7 @@ import javax.swing.border.LineBorder;
 import mage.MageException;
 import mage.cards.decks.importer.DckDeckImporter;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
@@ -134,8 +135,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
-        session = MageFrame.getSession();
-        cheat.setVisible(session.isTestMode());
+        cheat.setVisible(SessionHandler.isTestMode());
         cheat.setFocusable(false);
         flagName = null;
         if (priorityTime > 0) {

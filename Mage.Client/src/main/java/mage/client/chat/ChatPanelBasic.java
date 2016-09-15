@@ -40,8 +40,8 @@ import java.awt.event.KeyEvent;
 import java.util.UUID;
 import javax.swing.JTextField;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.util.GUISizeHelper;
-import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import org.mage.card.arcane.ManaSymbols;
@@ -53,7 +53,6 @@ import org.mage.card.arcane.ManaSymbols;
 public class ChatPanelBasic extends javax.swing.JPanel {
 
     protected UUID chatId;
-    protected Session session;
     /**
      * Chat message color for opponents.
      */
@@ -172,16 +171,15 @@ public class ChatPanelBasic extends javax.swing.JPanel {
     }
 
     public void connect(UUID chatId) {
-        session = MageFrame.getSession();
         this.chatId = chatId;
-        if (session.joinChat(chatId)) {
+        if (SessionHandler.joinChat(chatId)) {
             MageFrame.addChat(chatId, this);
         }
     }
 
     public void disconnect() {
-        if (session != null) {
-            session.leaveChat(chatId);
+        if (SessionHandler.getSession() != null) {
+            SessionHandler.leaveChat(chatId);
             MageFrame.removeChat(chatId);
         }
     }
@@ -216,9 +214,9 @@ public class ChatPanelBasic extends javax.swing.JPanel {
                 break;
             default:
                 if (parentChatRef != null) {
-                    userColor = parentChatRef.session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 } else {
-                    userColor = session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 }
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
@@ -343,9 +341,9 @@ public class ChatPanelBasic extends javax.swing.JPanel {
     public void handleKeyTyped(java.awt.event.KeyEvent evt) {
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             if (parentChatRef != null) {
-                parentChatRef.session.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
+                SessionHandler.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
             } else {
-                session.sendChatMessage(chatId, this.txtMessage.getText());
+                SessionHandler.sendChatMessage(chatId, this.txtMessage.getText());
             }
             this.txtMessage.setText("");
             this.txtMessage.repaint();
