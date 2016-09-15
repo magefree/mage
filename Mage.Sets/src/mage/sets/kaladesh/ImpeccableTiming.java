@@ -28,56 +28,33 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.ServoToken;
+import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
  *
- * @author fireshoes
+ * @author LevelX2
  */
-public class MasterTrinketeer extends CardImpl {
+public class ImpeccableTiming extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Servo and Thopter creatures");
-
-    static {
-        filter.add(Predicates.or(new SubtypePredicate("Servo"),
-                new SubtypePredicate("Thopter")));
-    }
-
-    public MasterTrinketeer(UUID ownerId) {
-        super(ownerId, 21, "Master Trinketeer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public ImpeccableTiming(UUID ownerId) {
+        super(ownerId, 19, "Impeccable Timing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "KLD";
-        this.subtype.add("Dwarf");
-        this.subtype.add("Artificer");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
 
-        // Servo and Thopter creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
-
-        // {3}{W}: Create a 1/1 colorless Servo artifact creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ServoToken(), 1), new ManaCostsImpl("{3}{W}")));
+        // Impeccable Timing deals 3 damage to target attacking or blocking creature.
+        this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 
-    public MasterTrinketeer(final MasterTrinketeer card) {
+    public ImpeccableTiming(final ImpeccableTiming card) {
         super(card);
     }
 
     @Override
-    public MasterTrinketeer copy() {
-        return new MasterTrinketeer(this);
+    public ImpeccableTiming copy() {
+        return new ImpeccableTiming(this);
     }
 }
