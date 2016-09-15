@@ -764,7 +764,7 @@ public class ModernCardRenderer extends CardRenderer {
         }
 
         // Basic mana draw mana symbol in textbox (for basic lands)
-        if (allRules.size() == 1 && allRules.get(0) instanceof TextboxBasicManaRule) {
+        if (allRules.size() == 1 && (allRules.get(0) instanceof TextboxBasicManaRule) && cardView.getCardTypes().contains(CardType.LAND)) {
             drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule)allRules.get(0)).getBasicManaSymbol());
             return;
         }
