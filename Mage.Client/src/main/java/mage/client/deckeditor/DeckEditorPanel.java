@@ -154,6 +154,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         switch (mode) {
             case LIMITED_BUILDING:
+                this.deckArea.setOrientation(/*limitedBuildingOrientation = */true);
                 this.btnAddLand.setVisible(true);
                 this.txtTimeRemaining.setVisible(true);
             case SIDEBOARDING:
@@ -162,6 +163,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     this.cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), this.bigCard);
                 }
                 // TODO: take from preferences
+                this.deckArea.setOrientation(/*limitedBuildingOrientation = */false);
                 this.cardSelector.switchToGrid();
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
@@ -182,6 +184,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
                 break;
             case FREE_BUILDING:
+                this.deckArea.setOrientation(/*limitedBuildingOrientation = */false);
                 this.btnSubmit.setVisible(false);
                 this.btnAddLand.setVisible(true);
                 this.cardSelector.loadCards(this.bigCard);

@@ -41,6 +41,8 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.view.CardsView;
 
+import javax.swing.*;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -74,6 +76,14 @@ public class DeckArea extends javax.swing.JPanel {
     }
 
     private void setGUISize() {
+    }
+
+    public void setOrientation(boolean limitedBuildingOrientation) {
+        if (limitedBuildingOrientation) {
+            deckAreaSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+        } else {
+            deckAreaSplitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
+        }
     }
 
     public void showSideboard(boolean show) {
