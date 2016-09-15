@@ -25,44 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.kaladesh;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.PayEnergyCost;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
+import mage.game.permanent.token.Token;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class VinelasherKudzu extends CardImpl {
+public class ArchitectOfTheUntamed extends CardImpl {
 
-    public VinelasherKudzu(UUID ownerId) {
-        super(ownerId, 189, "Vinelasher Kudzu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Plant");
+    public ArchitectOfTheUntamed(UUID ownerId) {
+        super(ownerId, 143, "Architect of the Untamed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "KLD";
+        this.subtype.add("Elf");
+        this.subtype.add("Artificer");
+        this.subtype.add("Druid");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        // Whenever a land enters the battlefield under your control, you get {E}.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GetEnergyCountersControllerEffect(1), new FilterControlledLandPermanent("a land"), false, null, true));
 
-        // Whenever a land enters the battlefield under your control, put a +1/+1 counter on Vinelasher Kudzu.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterControlledLandPermanent("a land"), false, null, true));
+        // Pay {E}{E}{E}{E}{E}{E}{E}{E}: Create a 6/6 colorless Beast artifact creature token.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ArchitectOfTheUntamedBeastToken(), 1), new PayEnergyCost(8)));
     }
-
-    public VinelasherKudzu(final VinelasherKudzu card) {
+    
+    public ArchitectOfTheUntamed(final ArchitectOfTheUntamed card) {
         super(card);
     }
 
     @Override
-    public VinelasherKudzu copy() {
-        return new VinelasherKudzu(this);
+    public ArchitectOfTheUntamed copy() {
+        return new ArchitectOfTheUntamed(this);
+    }
+}
+
+class ArchitectOfTheUntamedBeastToken extends Token {
+
+    ArchitectOfTheUntamedBeastToken() {
+        super("Beast", "6/6 colorless Beast artifact creature token");
+        cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
+        subtype.add("Beast");
+        power = new MageInt(6);
+        toughness = new MageInt(6);
     }
 }

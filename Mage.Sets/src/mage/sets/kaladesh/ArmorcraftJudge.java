@@ -25,44 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.kaladesh;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class VinelasherKudzu extends CardImpl {
+public class ArmorcraftJudge extends CardImpl {
 
-    public VinelasherKudzu(UUID ownerId) {
-        super(ownerId, 189, "Vinelasher Kudzu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Plant");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with a +1/+1 counter on it");
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever a land enters the battlefield under your control, put a +1/+1 counter on Vinelasher Kudzu.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterControlledLandPermanent("a land"), false, null, true));
+    static {
+        filter.add(new CounterPredicate(CounterType.P1P1));
     }
 
-    public VinelasherKudzu(final VinelasherKudzu card) {
+    public ArmorcraftJudge(UUID ownerId) {
+        super(ownerId, 144, "Armorcraft Judge", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "KLD";
+        this.subtype.add("Elf");
+        this.subtype.add("Artificer");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // When Armorcraft Judge enters the battlefield, draw a card for each creature you control with a +1/+1 counter on it.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter))));
+    }
+
+    public ArmorcraftJudge(final ArmorcraftJudge card) {
         super(card);
     }
 
     @Override
-    public VinelasherKudzu copy() {
-        return new VinelasherKudzu(this);
+    public ArmorcraftJudge copy() {
+        return new ArmorcraftJudge(this);
     }
 }

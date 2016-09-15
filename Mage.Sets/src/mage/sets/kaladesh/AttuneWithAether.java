@@ -25,44 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class VinelasherKudzu extends CardImpl {
+public class AttuneWithAether extends CardImpl {
 
-    public VinelasherKudzu(UUID ownerId) {
-        super(ownerId, 189, "Vinelasher Kudzu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Plant");
+    public AttuneWithAether(UUID ownerId) {
+        super(ownerId, 145, "Attune with Aether", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
+        this.expansionSetCode = "KLD";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever a land enters the battlefield under your control, put a +1/+1 counter on Vinelasher Kudzu.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterControlledLandPermanent("a land"), false, null, true));
+        // Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library. You get {E}{E}.
+        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true);
+        effect.setText("Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
     }
 
-    public VinelasherKudzu(final VinelasherKudzu card) {
+    public AttuneWithAether(final AttuneWithAether card) {
         super(card);
     }
 
     @Override
-    public VinelasherKudzu copy() {
-        return new VinelasherKudzu(this);
+    public AttuneWithAether copy() {
+        return new AttuneWithAether(this);
     }
 }

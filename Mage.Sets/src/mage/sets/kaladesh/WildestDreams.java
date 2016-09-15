@@ -25,44 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.FilterCard;
+import mage.game.Game;
+import mage.target.Target;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class VinelasherKudzu extends CardImpl {
+public class WildestDreams extends CardImpl {
 
-    public VinelasherKudzu(UUID ownerId) {
-        super(ownerId, 189, "Vinelasher Kudzu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Plant");
+    public WildestDreams(UUID ownerId) {
+        super(ownerId, 174, "Wildest Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{G}");
+        this.expansionSetCode = "KLD";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        // Return X target cards from your graveyard to your hand.
+        // Exile Wildest Dreams.
+        Effect effect = new ReturnFromGraveyardToHandTargetEffect();
+        effect.setText("Return X target cards from your graveyard to your hand");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
 
-        // Whenever a land enters the battlefield under your control, put a +1/+1 counter on Vinelasher Kudzu.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterControlledLandPermanent("a land"), false, null, true));
     }
 
-    public VinelasherKudzu(final VinelasherKudzu card) {
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        int xValue = new GetXValue().calculate(game, ability, null);
+        Target target = new TargetCardInYourGraveyard(xValue, new FilterCard("card from your graveyard"));
+        ability.addTarget(target);
+    }
+
+    public WildestDreams(final WildestDreams card) {
         super(card);
     }
 
     @Override
-    public VinelasherKudzu copy() {
-        return new VinelasherKudzu(this);
+    public WildestDreams copy() {
+        return new WildestDreams(this);
     }
 }

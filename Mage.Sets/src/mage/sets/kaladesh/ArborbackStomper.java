@@ -25,44 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.kaladesh;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterControlledLandPermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class VinelasherKudzu extends CardImpl {
+public class ArborbackStomper extends CardImpl {
 
-    public VinelasherKudzu(UUID ownerId) {
-        super(ownerId, 189, "Vinelasher Kudzu", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Plant");
+    public ArborbackStomper(UUID ownerId) {
+        super(ownerId, 142, "Arborback Stomper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "KLD";
+        this.subtype.add("Beast");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(4);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // Whenever a land enters the battlefield under your control, put a +1/+1 counter on Vinelasher Kudzu.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterControlledLandPermanent("a land"), false, null, true));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // When Arborback Stomper enters the battlefield, you gain 5 life.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5)));
     }
 
-    public VinelasherKudzu(final VinelasherKudzu card) {
+    public ArborbackStomper(final ArborbackStomper card) {
         super(card);
     }
 
     @Override
-    public VinelasherKudzu copy() {
-        return new VinelasherKudzu(this);
+    public ArborbackStomper copy() {
+        return new ArborbackStomper(this);
     }
 }
