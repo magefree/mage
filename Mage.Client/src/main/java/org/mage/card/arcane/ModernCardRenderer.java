@@ -22,10 +22,12 @@ import java.text.CharacterIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 import javax.swing.ImageIcon;
 
 import mage.ObjectColor;
 import mage.cards.FrameStyle;
+import mage.client.cards.Permanent;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.CardType;
 import mage.view.CardView;
@@ -627,7 +629,19 @@ public class ModernCardRenderer extends CardRenderer {
                     partWidth - 2 * contentInset, 1);
 
             // Draw text
-            g.setColor(isVehicle ? Color.white : getBoxTextColor());
+            Color textColor;
+            if (isVehicle) {
+                boolean isAnimated = !(cardView instanceof PermanentView) || cardView.getCardTypes().contains(CardType.CREATURE);
+                if (isAnimated) {
+                    textColor = Color.white;
+                } else {
+                    textColor = new Color(180, 180, 180);
+                }
+
+            } else {
+                textColor = getBoxTextColor();
+            }
+            g.setColor(textColor);
             g.setFont(ptTextFont);
             String ptText = cardView.getPower() + "/" + cardView.getToughness();
             int ptTextWidth = g.getFontMetrics().stringWidth(ptText);
