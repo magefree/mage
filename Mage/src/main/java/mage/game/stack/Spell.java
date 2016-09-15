@@ -141,16 +141,20 @@ public class Spell extends StackObjImpl implements Card {
         if (!spellAbilities.get(0).activate(game, noMana)) {
             return false;
         }
-        // if there are more abilities (fused split spell) or first ability added new abilities (splice), activate the additional abilities
-        boolean ignoreAbility = true;
-        boolean payNoMana = noMana;
-        for (SpellAbility spellAbility : spellAbilities) {
-            // costs for spliced abilities were added to main spellAbility, so pay no mana for spliced abilities
-            payNoMana |= spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE);
-            if (ignoreAbility) {
-                ignoreAbility = false;
-            } else if (!spellAbility.activate(game, payNoMana)) {
-                return false;
+        if (spellAbilities.size() > 1) {
+            // if there are more abilities (fused split spell) or first ability added new abilities (splice), activate the additional abilities
+            boolean ignoreAbility = true;
+            boolean payNoMana = noMana;
+            for (SpellAbility spellAbility : spellAbilities) {
+                if (ignoreAbility) {
+                    ignoreAbility = false;
+                } else {
+                    // costs for spliced abilities were added to main spellAbility, so pay no mana for spliced abilities
+                    payNoMana |= spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE);
+                    if (!spellAbility.activate(game, payNoMana)) {
+                        return false;
+                    }
+                }
             }
         }
         return true;
@@ -490,7 +494,7 @@ public class Spell extends StackObjImpl implements Card {
     public ObjectColor getColor(Game game) {
         return color;
     }
-    
+
     @Override
     public ObjectColor getFrameColor(Game game) {
         return frameColor;
@@ -536,7 +540,7 @@ public class Spell extends StackObjImpl implements Card {
     public MageInt getToughness() {
         return card.getToughness();
     }
-    
+
     @Override
     public int getStartingLoyalty() {
         return card.getStartingLoyalty();
@@ -595,7 +599,7 @@ public class Spell extends StackObjImpl implements Card {
     public String getTokenSetCode() {
         return card.getTokenSetCode();
     }
-    
+
     @Override
     public String getTokenDescriptor() {
         return card.getTokenDescriptor();

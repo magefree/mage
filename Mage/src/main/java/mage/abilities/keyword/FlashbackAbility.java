@@ -27,11 +27,14 @@
  */
 package mage.abilities.keyword;
 
+import java.util.Iterator;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -200,9 +203,30 @@ class FlashbackEffect extends OneShotEffect {
                 spellAbility.getManaCosts().clear();
                 spellAbility.getManaCosts().addAll(source.getManaCosts());
                 // needed to get e.g. paid costs from Conflagrate
+
                 for (Cost cost : source.getCosts()) {
-                    if (!(cost instanceof VariableCost)) {
-                        spellAbility.getCosts().add(cost);
+                    if (cost instanceof Costs) {
+                        Costs listOfcosts = (Costs) cost;
+                        for (Iterator itListOfcosts = listOfcosts.iterator(); itListOfcosts.hasNext();) {
+                            Object singleCost = itListOfcosts.next();
+                            if (singleCost instanceof ManaCost) {
+                                ((ManaCost) singleCost).clearPaid();
+                                spellAbility.getManaCosts().add((ManaCost) singleCost);
+                                spellAbility.getManaCostsToPay().add((ManaCost) singleCost);
+                            } else {
+                                spellAbility.getCosts().add((Cost) singleCost);
+                            }
+                        }
+
+                    }
+
+                    if (!(cost instanceof VariableCost) && !(cost instanceof Costs)) {
+                        if (cost instanceof ManaCost) {
+                            spellAbility.getManaCosts().add((ManaCost) cost);
+                            spellAbility.getManaCostsToPay().add((ManaCost) cost);
+                        } else {
+                            spellAbility.getCosts().add(cost);
+                        }
                     }
                 }
                 if (!game.isSimulation()) {
@@ -217,8 +241,10 @@ class FlashbackEffect extends OneShotEffect {
                 return false;
             }
         }
+
         return false;
     }
+
 }
 
 class FlashbackReplacementEffect extends ReplacementEffectImpl {
