@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 import javax.swing.*;
+import mage.client.SessionHandler;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -424,7 +425,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
     public class AbilityPickerAction extends AbstractAction {
 
-        private UUID id;
+        private final UUID id;
 
         public AbilityPickerAction(UUID id, String choice) {
             this.id = id;
@@ -445,7 +446,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             if (id == null) {
                 cancel();
             } else {
-                session.sendPlayerUUID(gameId, id);
+                SessionHandler.sendPlayerUUID(gameId, id);
             }
             setVisible(false);
             AbilityPicker.this.selected = true;
@@ -460,7 +461,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
     private void cancel() {
         try {
-            session.sendPlayerBoolean(gameId, false);
+            SessionHandler.sendPlayerBoolean(gameId, false);
         } catch (Exception e) {
             log.error("Couldn't cancel choose dialog: " + e, e);
         }
