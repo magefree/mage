@@ -14,6 +14,8 @@ import java.awt.Paint;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
+import mage.abilities.Ability;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -345,6 +347,9 @@ public abstract class CardRenderer {
                 return "Triggered Ability";
             } else if (AbilityType.ACTIVATED.equals(cardView.getAbilityType())) {
                 return "Activated Ability";
+            } else if (cardView.getAbilityType() == null) {
+                // TODO: Triggered abilities waiting to be put onto the stack have abilityType = null. Figure out why
+                return "Triggered Ability";
             } else {
                 return "??? Ability";
             }

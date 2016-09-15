@@ -27,6 +27,9 @@
  */
 package mage.sets.masterpieceseries;
 
+import mage.cards.FrameStyle;
+import mage.constants.Rarity;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +42,8 @@ public class VerdurousGearhulk extends mage.sets.kaladesh.VerdurousGearhulk {
         super(ownerId);
         this.cardNumber = "5";
         this.expansionSetCode = "MPS";
+        this.rarity = Rarity.MYTHIC;
+        this.frameStyle = FrameStyle.KLD_INVENTION;
     }
 
     public VerdurousGearhulk(final VerdurousGearhulk card) {

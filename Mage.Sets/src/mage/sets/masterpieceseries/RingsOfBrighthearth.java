@@ -28,6 +28,8 @@
 package mage.sets.masterpieceseries;
 
 import java.util.UUID;
+
+import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 
 /**
@@ -41,6 +43,7 @@ public class RingsOfBrighthearth extends mage.sets.lorwyn.RingsOfBrighthearth {
         this.cardNumber = "21";
         this.expansionSetCode = "MPS";
         this.rarity = Rarity.MYTHIC;
+        this.frameStyle = FrameStyle.KLD_INVENTION;
     }
 
     public RingsOfBrighthearth(final RingsOfBrighthearth card) {

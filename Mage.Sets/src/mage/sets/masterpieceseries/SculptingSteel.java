@@ -28,6 +28,8 @@
 package mage.sets.masterpieceseries;
 
 import java.util.UUID;
+
+import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 
 /**
@@ -41,6 +43,7 @@ public class SculptingSteel extends mage.sets.tenthedition.SculptingSteel {
         this.cardNumber = "23";
         this.expansionSetCode = "MPS";
         this.rarity = Rarity.MYTHIC;
+        this.frameStyle = FrameStyle.KLD_INVENTION;
     }
 
     public SculptingSteel(final SculptingSteel card) {

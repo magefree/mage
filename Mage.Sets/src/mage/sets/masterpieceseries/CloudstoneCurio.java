@@ -28,6 +28,8 @@
 package mage.sets.masterpieceseries;
 
 import java.util.UUID;
+
+import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 
 /**
@@ -41,6 +43,7 @@ public class CloudstoneCurio extends mage.sets.ravnica.CloudstoneCurio {
         this.cardNumber = "10";
         this.expansionSetCode = "MPS";
         this.rarity = Rarity.MYTHIC;
+        this.frameStyle = FrameStyle.KLD_INVENTION;
     }
 
     public CloudstoneCurio(final CloudstoneCurio card) {

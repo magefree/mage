@@ -28,6 +28,8 @@
 package mage.sets.masterpieceseries;
 
 import java.util.UUID;
+
+import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 
 /**
@@ -41,6 +43,7 @@ public class SolemnSimulacrum extends mage.sets.magic2012.SolemnSimulacrum {
         this.cardNumber = "25";
         this.expansionSetCode = "MPS";
         this.rarity = Rarity.MYTHIC;
+        this.frameStyle = FrameStyle.KLD_INVENTION;
     }
 
     public SolemnSimulacrum(final SolemnSimulacrum card) {

@@ -27,6 +27,9 @@
  */
 package mage.sets.masterpieceseries;
 
+import mage.cards.FrameStyle;
+import mage.constants.Rarity;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +42,8 @@ public class CataclysmicGearhulk extends mage.sets.kaladesh.CataclysmicGearhulk 
         super(ownerId);
         this.cardNumber = "1";
         this.expansionSetCode = "MPS";
+        this.rarity = Rarity.MYTHIC;
+        this.frameStyle = FrameStyle.KLD_INVENTION;
     }
 
     public CataclysmicGearhulk(final CataclysmicGearhulk card) {

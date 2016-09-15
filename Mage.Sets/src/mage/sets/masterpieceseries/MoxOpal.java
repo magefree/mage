@@ -27,6 +27,9 @@
  */
 package mage.sets.masterpieceseries;
 
+import mage.cards.FrameStyle;
+import mage.constants.Rarity;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +42,8 @@ public class MoxOpal extends mage.sets.scarsofmirrodin.MoxOpal {
         super(ownerId);
         this.cardNumber = "19";
         this.expansionSetCode = "MPS";
+        this.rarity = Rarity.MYTHIC;
+        this.frameStyle = FrameStyle.KLD_INVENTION;
     }
 
     public MoxOpal(final MoxOpal card) {

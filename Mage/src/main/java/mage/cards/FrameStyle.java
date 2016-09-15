@@ -21,6 +21,11 @@ public enum FrameStyle {
     BFZ_FULL_ART_BASIC(BorderType.M15, true),
 
     /**
+     * Kaladesh block Inventions
+     */
+    KLD_INVENTION(BorderType.M15, false),
+
+    /**
      * Zenkikar full art lands
      */
     ZEN_FULL_ART_BASIC(BorderType.MOD, true),

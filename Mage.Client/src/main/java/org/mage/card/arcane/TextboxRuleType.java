@@ -19,6 +19,9 @@ public enum TextboxRuleType {
     
     /* Loyalty abilities on planeswalkers */
     LOYALTY,
+
+    /* Basic mana ability */
+    BASIC_MANA,
     
     /* Levelup creature - static ability at a given level */
     LEVEL

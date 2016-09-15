@@ -22,6 +22,7 @@ public class TextboxRuleParser {
 
     private static final Logger LOGGER = Logger.getLogger(CardPanel.class);
 
+    private static final Pattern BasicManaAbility = Pattern.compile("\\{T\\}: Add \\{(\\w)\\} to your mana pool\\.");
     private static final Pattern LevelAbilityPattern = Pattern.compile("Level (\\d+)-?(\\d*)(\\+?)");
     private static final Pattern LoyaltyAbilityPattern = Pattern.compile("^(\\+|\\-)(\\d+|X): ");
     private static final Pattern SimpleKeywordPattern = Pattern.compile("^(\\w+( \\w+)?)\\s*(\\([^\\)]*\\))?\\s*$");
@@ -35,13 +36,16 @@ public class TextboxRuleParser {
         // List of regions to apply
         ArrayList<TextboxRule.AttributeRegion> regions = new ArrayList<>();
 
-        // Leveler / loyalty
+        // Leveler / loyalty / basic
         boolean isLeveler = false;
         int levelFrom = 0;
         int levelTo = 0;
 
         boolean isLoyalty = false;
         int loyaltyChange = 0;
+
+        boolean isBasicMana = false;
+        String basicManaSymbol = "";
 
         // Parse the attributedString contents
         int index = 0;
@@ -52,6 +56,15 @@ public class TextboxRuleParser {
             Matcher simpleKeywordMatch = SimpleKeywordPattern.matcher(rule);
             if (simpleKeywordMatch.find()) {
                 return new TextboxKeywordRule(simpleKeywordMatch.group(1), regions);
+            }
+        }
+
+        // Is it a basic mana ability?
+        {
+            Matcher basicManaMatcher = BasicManaAbility.matcher(rule);
+            if (basicManaMatcher.find()) {
+                isBasicMana = true;
+                basicManaSymbol = basicManaMatcher.group(1);
             }
         }
 
@@ -244,6 +257,8 @@ public class TextboxRuleParser {
             return new TextboxLoyaltyRule(rule, regions, loyaltyChange);
         } else if (isLeveler) {
             return new TextboxLevelRule(rule, regions, levelFrom, levelTo);
+        } else if (isBasicMana) {
+            return new TextboxBasicManaRule(rule, regions, basicManaSymbol);
         } else {
             return new TextboxRule(rule, regions);
         }

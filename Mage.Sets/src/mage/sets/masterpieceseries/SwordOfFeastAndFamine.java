@@ -27,6 +27,9 @@
  */
 package mage.sets.masterpieceseries;
 
+import mage.cards.FrameStyle;
+import mage.constants.Rarity;
+
 import java.util.UUID;
 
 /**
@@ -39,6 +42,8 @@ public class SwordOfFeastAndFamine extends mage.sets.mirrodinbesieged.SwordOfFea
         super(ownerId);
         this.cardNumber = "28";
         this.expansionSetCode = "MPS";
+        this.rarity = Rarity.MYTHIC;
+        this.frameStyle = FrameStyle.KLD_INVENTION;
     }
 
     public SwordOfFeastAndFamine(final SwordOfFeastAndFamine card) {
