@@ -29,6 +29,7 @@ package mage.sets.kaladesh;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -103,12 +104,13 @@ class BomatCourierExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
                 card.setFaceDown(true, game);
-                controller.moveCardsToExile(card, source, game, false, exileZoneId, "Bomat Courier");
+                controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName());
                 card.setFaceDown(true, game);
                 return true;
             }

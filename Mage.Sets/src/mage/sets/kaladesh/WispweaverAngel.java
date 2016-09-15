@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  */
 public class WispweaverAngel extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another taget creature you control");
 
     static {
         filter.add(new AnotherPredicate());
@@ -121,8 +121,7 @@ class WispweaverAngelEffect extends OneShotEffect {
                     for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                         if (exileZone.contains(targetId)) {
                             cardsToBattlefield.add(targetId);
-                        }
-                        else {
+                        } else {
                             Card card = game.getCard(targetId);
                             if (card != null && card instanceof MeldCard) {
                                 MeldCard meldCard = (MeldCard) card;

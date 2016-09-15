@@ -3146,7 +3146,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 successfulMovedCards = moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
                 return successfulMovedCards.size() > 0;
             case BATTLEFIELD: // new logic that does not yet add the permanents to battlefield while replacement effects are handled
-                List<ZoneChangeInfo> infoList = new ArrayList<ZoneChangeInfo>();
+                List<ZoneChangeInfo> infoList = new ArrayList<>();
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source.getSourceId(), byOwner ? card.getOwnerId() : getId(), fromZone, Zone.BATTLEFIELD, appliedEffects);
@@ -3158,9 +3158,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (permanent != null) {
                         successfulMovedCards.add(permanent);
                         if (!game.isSimulation()) {
-                            game.informPlayers(game.getPlayer(info.event.getPlayerId()) + " puts "
-                                    + (info.faceDown ? "a card face down " : permanent.getLogName()) + " from "
-                                    + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield");
+                            Player eventPlayer = game.getPlayer(info.event.getPlayerId());
+                            if (eventPlayer != null && fromZone != null) {
+                                game.informPlayers(eventPlayer.getLogName() + " puts "
+                                        + (info.faceDown ? "a card face down " : permanent.getLogName()) + " from "
+                                        + fromZone.toString().toLowerCase(Locale.ENGLISH) + " onto the Battlefield");
+                            }
                         }
                     }
                 }
