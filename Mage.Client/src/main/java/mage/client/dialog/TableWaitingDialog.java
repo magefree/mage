@@ -42,6 +42,7 @@ import javax.swing.Icon;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
 import mage.client.components.tray.MageTray;
@@ -68,7 +69,6 @@ public class TableWaitingDialog extends MageDialog {
     private UUID tableId;
     private UUID roomId;
     private boolean isTournament;
-    private Session session;
     private final TableWaitModel tableWaitModel;
     private UpdateSeatsTask updateTask;
 
@@ -77,7 +77,6 @@ public class TableWaitingDialog extends MageDialog {
      */
     public TableWaitingDialog() {
 
-        session = MageFrame.getSession();
         tableWaitModel = new TableWaitModel();
 
         initComponents();
@@ -150,9 +149,8 @@ public class TableWaitingDialog extends MageDialog {
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
-        session = MageFrame.getSession();
-        updateTask = new UpdateSeatsTask(session, roomId, tableId, this);
-        if (session.isTableOwner(roomId, tableId)) {
+        updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
+        if (SessionHandler.isTableOwner(roomId, tableId)) {
             this.btnStart.setVisible(true);
             this.btnMoveDown.setVisible(true);
             this.btnMoveUp.setVisible(true);
@@ -161,7 +159,7 @@ public class TableWaitingDialog extends MageDialog {
             this.btnMoveDown.setVisible(false);
             this.btnMoveUp.setVisible(false);
         }
-        UUID chatId = session.getTableChatId(tableId);
+        UUID chatId = SessionHandler.getTableChatId(tableId);
         if (chatId != null) {
             this.chatPanel.connect(chatId);
             updateTask.execute();
@@ -283,17 +281,17 @@ public class TableWaitingDialog extends MageDialog {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         if (!isTournament) {
-            if (session.startMatch(roomId, tableId)) {
+            if (SessionHandler.startMatch(roomId, tableId)) {
                 closeDialog();
             }
-        } else if (session.startTournament(roomId, tableId)) {
+        } else if (SessionHandler.startTournament(roomId, tableId)) {
             closeDialog();
         }
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         try {
-            if (!session.leaveTable(roomId, tableId)) {
+            if (!SessionHandler.leaveTable(roomId, tableId)) {
                 return; // already started, so leave no more possible
             }
         } catch (Exception e) {
@@ -306,7 +304,7 @@ public class TableWaitingDialog extends MageDialog {
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
         int row = this.tableSeats.getSelectedRow();
         if (row < this.tableSeats.getRowCount() - 1) {
-            session.swapSeats(roomId, tableId, row, row + 1);
+            SessionHandler.swapSeats(roomId, tableId, row, row + 1);
             this.tableSeats.getSelectionModel().setSelectionInterval(row + 1, row + 1);
         }
 
@@ -315,7 +313,7 @@ public class TableWaitingDialog extends MageDialog {
     private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
         int row = this.tableSeats.getSelectedRow();
         if (row > 0) {
-            session.swapSeats(roomId, tableId, row, row - 1);
+            SessionHandler.swapSeats(roomId, tableId, row, row - 1);
             this.tableSeats.getSelectionModel().setSelectionInterval(row - 1, row - 1);
         }
     }//GEN-LAST:event_btnMoveUpActionPerformed

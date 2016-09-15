@@ -28,6 +28,8 @@
 package mage.client.chat;
 
 import java.awt.Font;
+
+import mage.client.SessionHandler;
 import mage.client.components.ColorPane;
 import mage.client.util.GUISizeHelper;
 import mage.view.ChatMessage;
@@ -78,9 +80,9 @@ public class ChatPanelSeparated extends ChatPanelBasic {
                 break;
             default:
                 if (parentChatRef != null) {
-                    userColor = parentChatRef.session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 } else {
-                    userColor = session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 }
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";

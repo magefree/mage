@@ -31,6 +31,7 @@ import java.util.UUID;
 import javax.swing.JComponent;
 import mage.client.MageFrame;
 import mage.client.MagePane;
+import mage.client.SessionHandler;
 import mage.client.plugins.impl.Plugins;
 
 /**
@@ -70,7 +71,7 @@ public class TablesPane extends MagePane {
     }
 
     public void showTables() {
-        UUID roomId = MageFrame.getSession().getMainRoomId();
+        UUID roomId = SessionHandler.getSession().getMainRoomId();
         if (roomId != null) {
             this.setTitle("Tables");
             tablesPanel.showTables(roomId);

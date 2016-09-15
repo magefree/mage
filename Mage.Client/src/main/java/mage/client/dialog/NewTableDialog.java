@@ -38,6 +38,7 @@ import javax.swing.*;
 
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.components.MageComponents;
 import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
@@ -47,7 +48,6 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
-import mage.remote.Session;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
@@ -63,7 +63,6 @@ public class NewTableDialog extends MageDialog {
     private TableView table;
     private UUID playerId;
     private UUID roomId;
-    private final Session session;
     private String lastSessionId;
     private final List<TablePlayerPanel> players = new ArrayList<>();
     private final List<String> prefPlayerTypes = new ArrayList<>();
@@ -74,7 +73,6 @@ public class NewTableDialog extends MageDialog {
      * Creates new form NewTableDialog
      */
     public NewTableDialog() {
-        session = MageFrame.getSession();
         lastSessionId = "";
         initComponents();
         player1Panel.showLevel(false);
@@ -402,13 +400,13 @@ public class NewTableDialog extends MageDialog {
         }
         saveGameSettingsToPrefs(options, this.player1Panel.getDeckFile());
 
-        table = session.createTable(roomId, options);
+        table = SessionHandler.createTable(roomId, options);
         if (table == null) {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
-            if (session.joinTable(
+            if (SessionHandler.joinTable(
                     roomId,
                     table.getTableId(),
                     this.player1Panel.getPlayerName(),
@@ -419,7 +417,7 @@ public class NewTableDialog extends MageDialog {
                     if (!player.getPlayerType().equals("Human")) {
                         if (!player.joinTable(roomId, table.getTableId())) {
                             // error message must be send by the server
-                            session.removeTable(roomId, table.getTableId());
+                            SessionHandler.removeTable(roomId, table.getTableId());
                             table = null;
                             return;
                         }
@@ -436,7 +434,7 @@ public class NewTableDialog extends MageDialog {
             handleError(ex);
         }
         // JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
-        session.removeTable(roomId, table.getTableId());
+        SessionHandler.removeTable(roomId, table.getTableId());
         table = null;
     }//GEN-LAST:event_btnOKActionPerformed
 
@@ -560,11 +558,11 @@ public class NewTableDialog extends MageDialog {
 
     public void showDialog(UUID roomId) {
         this.roomId = roomId;
-        if (!lastSessionId.equals(MageFrame.getSession().getSessionId())) {
-            lastSessionId = session.getSessionId();
-            this.player1Panel.setPlayerName(session.getUserName());
-            cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes().toArray()));
-            cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));
+        if (!lastSessionId.equals(SessionHandler.getSessionId())) {
+            lastSessionId = SessionHandler.getSessionId();
+            this.player1Panel.setPlayerName(SessionHandler.getUserName());
+            cbGameType.setModel(new DefaultComboBoxModel(SessionHandler.getGameTypes().toArray()));
+            cbDeckType.setModel(new DefaultComboBoxModel(SessionHandler.getDeckTypes()));
             selectLimitedByDefault();
             cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
             cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
@@ -614,7 +612,7 @@ public class NewTableDialog extends MageDialog {
         this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, "2")));
 
         String gameTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, "Two Player Duel");
-        for (GameTypeView gtv : session.getGameTypes()) {
+        for (GameTypeView gtv : SessionHandler.getGameTypes()) {
             if (gtv.getName().equals(gameTypeName)) {
                 cbGameType.setSelectedItem(gtv);
                 break;

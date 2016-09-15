@@ -31,6 +31,7 @@ import java.util.UUID;
 import javax.swing.JOptionPane;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.remote.Session;
 import org.apache.log4j.Logger;
 
@@ -58,7 +59,7 @@ public class JoinTableDialog extends MageDialog {
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
-        this.newPlayerPanel.setPlayerName(MageFrame.getSession().getUserName());
+        this.newPlayerPanel.setPlayerName(SessionHandler.getUserName());
         this.newPlayerPanel.showDeckElements(!isLimited);
         this.setModal(true);
         this.setLocation(100, 100);
@@ -146,7 +147,7 @@ public class JoinTableDialog extends MageDialog {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        Session session = MageFrame.getSession();
+        Session session = SessionHandler.getSession();
         try {
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD_JOIN, txtPassword.getText());
             if (isTournament) {

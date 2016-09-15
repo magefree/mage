@@ -167,7 +167,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static MageFrame instance;
 
-    private static Session session;
     private ConnectDialog connectDialog;
     private final ErrorDialog errorDialog;
     private static CallbackClient callbackClient;
@@ -199,9 +198,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     /**
      * @return the session
      */
-    public static Session getSession() {
-        return session;
-    }
 
     public static JDesktopPane getDesktop() {
         return desktopPane;
@@ -308,7 +304,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         DialogManager.updateParams(768, 1024, false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        session = new SessionImpl(this);
+        SessionHandler.startSession(this);
         callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
         desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
@@ -320,7 +316,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         PING_TASK_EXECUTOR.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                session.ping();
+                SessionHandler.ping();
             }
         }, 60, 60, TimeUnit.SECONDS);
 
@@ -445,7 +441,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void setWindowTitle() {
         setTitle(TITLE_NAME + "  Client: "
                 + (VERSION == null ? "<not available>" : VERSION.toString()) + "  Server: "
-                + ((session != null && session.isConnected()) ? session.getVersionInfo() : "<not connected>"));
+                + ((SessionHandler.getSession() != null && SessionHandler.isConnected()) ? SessionHandler.getVersionInfo() : "<not connected>"));
     }
 
     private void addTooltipContainer() {
@@ -820,13 +816,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public static boolean connect(Connection connection) {
-        boolean result = session.connect(connection);
+        boolean result = SessionHandler.connect(connection);
         MageFrame.getInstance().setWindowTitle();
         return result;
     }
 
     public static boolean stopConnecting() {
-        return session.stopConnecting();
+        return SessionHandler.stopConnecting();
     }
 
     public boolean autoConnect() {
@@ -1056,7 +1052,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
-        if (session.isConnected()) {
+        if (SessionHandler.isConnected()) {
             UserRequestMessage message = new UserRequestMessage("Confirm disconnect", "Are you sure you want to disconnect?");
             message.setButton1("No", null);
             message.setButton2("Yes", PlayerAction.CLIENT_DISCONNECT);
@@ -1089,7 +1085,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnPreferencesActionPerformed
 
     public void btnSendFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendFeedbackActionPerformed
-        if (!session.isConnected()) {
+        if (!SessionHandler.isConnected()) {
             JOptionPane.showMessageDialog(null, "You may send us feedback only when connected to server.", "Information", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -1097,7 +1093,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnSendFeedbackActionPerformed
 
     public void exitApp() {
-        if (session.isConnected()) {
+        if (SessionHandler.isConnected()) {
             UserRequestMessage message = new UserRequestMessage("Confirm disconnect", "You are currently connected.  Are you sure you want to disconnect?");
             message.setButton1("No", null);
             message.setButton2("Yes", PlayerAction.CLIENT_EXIT);
@@ -1424,7 +1420,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     disableButtons();
                     hideGames();
                     hideTables();
-                    session.disconnect(false);
+                    SessionHandler.disconnect(false);
                     if (errorCall) {
                         UserRequestMessage message = new UserRequestMessage("Connection lost", "The connection to server was lost. Reconnect?");
                         message.setButton1("No", null);
@@ -1441,14 +1437,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void showMessage(String message) {
         final UserRequestMessage requestMessage = new UserRequestMessage("Message", message);
         requestMessage.setButton1("OK", null);
-        MageFrame.getInstance().showUserRequestDialog(requestMessage);
+        showUserRequestDialog(requestMessage);
     }
 
     @Override
     public void showError(final String message) {
         final UserRequestMessage requestMessage = new UserRequestMessage("Error", message);
         requestMessage.setButton1("OK", null);
-        MageFrame.getInstance().showUserRequestDialog(requestMessage);
+        showUserRequestDialog(requestMessage);
     }
 
     @Override
@@ -1465,26 +1461,26 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 DownloadPictures.startDownload(null, missingCards);
                 break;
             case CLIENT_DISCONNECT:
-                session.disconnect(false);
+                SessionHandler.disconnect(false);
                 tablesPane.clearChat();
                 showMessage("You have disconnected");
                 setWindowTitle();
                 break;
             case CLIENT_QUIT_TOURNAMENT:
-                MageFrame.getSession().quitTournament(userRequestMessage.getTournamentId());
+                SessionHandler.quitTournament(userRequestMessage.getTournamentId());
                 break;
             case CLIENT_QUIT_DRAFT_TOURNAMENT:
-                MageFrame.getSession().quitDraft(userRequestMessage.getTournamentId());
+                SessionHandler.quitDraft(userRequestMessage.getTournamentId());
                 MageFrame.removeDraft(userRequestMessage.getTournamentId());
                 break;
             case CLIENT_CONCEDE_GAME:
-                MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, userRequestMessage.getGameId(), null);
+                SessionHandler.sendPlayerAction(PlayerAction.CONCEDE, userRequestMessage.getGameId(), null);
                 break;
             case CLIENT_CONCEDE_MATCH:
-                MageFrame.getSession().quitMatch(userRequestMessage.getGameId());
+                SessionHandler.quitMatch(userRequestMessage.getGameId());
                 break;
             case CLIENT_STOP_WATCHING:
-                session.stopWatching(userRequestMessage.getGameId());
+                SessionHandler.stopWatching(userRequestMessage.getGameId());
                 GamePanel gamePanel = getGame(userRequestMessage.getGameId());
                 if (gamePanel != null) {
                     gamePanel.removeGame();
@@ -1492,8 +1488,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 removeGame(userRequestMessage.getGameId());
                 break;
             case CLIENT_EXIT:
-                if (session.isConnected()) {
-                    session.disconnect(false);
+                if (SessionHandler.isConnected()) {
+                    SessionHandler.disconnect(false);
                 }
                 CardRepository.instance.closeDB();
                 tablesPane.cleanUp();
@@ -1502,7 +1498,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 System.exit(0);
                 break;
             case CLIENT_REMOVE_TABLE:
-                session.removeTable(userRequestMessage.getRoomId(), userRequestMessage.getTableId());
+                SessionHandler.removeTable(userRequestMessage.getRoomId(), userRequestMessage.getTableId());
                 break;
             case CLIENT_RECONNECT:
                 if (performConnect()) {
@@ -1510,11 +1506,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
                 break;
             case CLIENT_REPLAY_ACTION:
-                session.stopReplay(userRequestMessage.getGameId());
+                SessionHandler.stopReplay(userRequestMessage.getGameId());
                 break;
             default:
-                if (session != null && playerAction != null) {
-                    session.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
+                if (SessionHandler.getSession() != null && playerAction != null) {
+                    SessionHandler.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
                 }
 
         }

@@ -78,8 +78,8 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
     }
 
-    public void init(Session session, UUID gameId) {
-        this.session = session;
+    public void init(UUID gameId) {
+
         this.gameId = gameId;
     }
 

@@ -40,6 +40,7 @@ import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -53,7 +54,6 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
     protected PlayerTypeEventSource playerTypeEventSource = new PlayerTypeEventSource();
 
-    private Session session;
 
     /** Creates new form TablePlayerPanel */
     public TablePlayerPanel() {
@@ -62,8 +62,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
     }
 
     public void init(int playerNum, String playerType) {
-        session = MageFrame.getSession();
-        cbPlayerType.setModel(new DefaultComboBoxModel(session.getPlayerTypes()));
+        cbPlayerType.setModel(new DefaultComboBoxModel(SessionHandler.getPlayerTypes()));
         this.lblPlayerNum.setText("Player " + playerNum);
         if (Config.defaultOtherPlayerIndex != null) {
             if (Integer.valueOf(Config.defaultOtherPlayerIndex) >= cbPlayerType.getItemCount()) {
@@ -81,7 +80,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
     public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {
         if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-            return session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (String)this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()),"");
+            return SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (String)this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()),"");
          }
         return true;
     }

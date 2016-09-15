@@ -49,6 +49,7 @@ import javax.swing.Icon;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_MATCH_COLUMNS_ORDER;
@@ -61,7 +62,6 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
 import mage.constants.PlayerAction;
-import mage.remote.Session;
 import mage.view.RoundView;
 import mage.view.TournamentGameView;
 import mage.view.TournamentPlayerView;
@@ -82,7 +82,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     private UUID tournamentId;
     private boolean firstInitDone = false;
-    private Session session;
+
     private final TournamentPlayersTableModel playersModel;
     private TournamentMatchesTableModel matchesModel;
     private UpdateTournamentTask updateTask;
@@ -129,7 +129,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 //                }
                 if (state.startsWith("Dueling") && actionText.equals("Watch")) {
                     LOGGER.info("Watching game " + gameId);
-                    session.watchTournamentTable(tableId);
+                    SessionHandler.watchTournamentTable(tableId);
                 }
             }
         };
@@ -201,10 +201,9 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     public synchronized void showTournament(UUID tournamentId) {
         this.tournamentId = tournamentId;
-        session = MageFrame.getSession();
         // MageFrame.addTournament(tournamentId, this);
-        UUID chatRoomId = session.getTournamentChatId(tournamentId);
-        if (session.joinTournament(tournamentId) && chatRoomId != null) {
+        UUID chatRoomId = SessionHandler.getTournamentChatId(tournamentId);
+        if (SessionHandler.joinTournament(tournamentId) && chatRoomId != null) {
             this.chatPanel1.connect(chatRoomId);
             startTasks();
             this.setVisible(true);
@@ -292,7 +291,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         btnQuitTournament.setVisible(false);
         if (tournament.getEndTime() == null) {
             for (TournamentPlayerView player : tournament.getPlayers()) {
-                if (player.getName().equals(session.getUserName())) {
+                if (player.getName().equals(SessionHandler.getUserName())) {
                     if (!player.hasQuit()) {
                         btnQuitTournament.setVisible(true);
                     }
@@ -304,9 +303,9 @@ public class TournamentPanel extends javax.swing.JPanel {
     }
 
     public void startTasks() {
-        if (session != null) {
+        if (SessionHandler.getSession() != null) {
             if (updateTask == null || updateTask.isDone()) {
-                updateTask = new UpdateTournamentTask(session, tournamentId, this);
+                updateTask = new UpdateTournamentTask(tournamentId, this);
                 updateTask.execute();
             }
         }
@@ -725,14 +724,13 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 
 class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
 
-    private final Session session;
     private final UUID tournamentId;
     private final TournamentPanel panel;
 
     private static final Logger logger = Logger.getLogger(UpdateTournamentTask.class);
 
-    UpdateTournamentTask(Session session, UUID tournamentId, TournamentPanel panel) {
-        this.session = session;
+    UpdateTournamentTask(UUID tournamentId, TournamentPanel panel) {
+
         this.tournamentId = tournamentId;
         this.panel = panel;
     }
@@ -740,7 +738,7 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            this.publish(session.getTournament(tournamentId));
+            this.publish(SessionHandler.getTournament(tournamentId));
             Thread.sleep(2000);
         }
         return null;

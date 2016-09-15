@@ -27,6 +27,7 @@ import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.components.MageComponents;
 import mage.client.dialog.PreferencesDialog;
@@ -38,7 +39,6 @@ import mage.client.util.gui.ArrowUtil;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.components.CardInfoPane;
 import mage.constants.EnlargeMode;
-import mage.remote.Session;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
 import mage.view.PermanentView;
@@ -69,7 +69,7 @@ public class MageActionCallback implements ActionCallback {
     private JPopupMenu jPopupMenu;
     private BigCard bigCard;
     protected static final DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
-    protected static Session session = MageFrame.getSession();
+
     private CardView tooltipCard;
     private TransferData popupData;
     private JComponent cardInfoPane;
@@ -104,9 +104,6 @@ public class MageActionCallback implements ActionCallback {
     }
 
     public synchronized void refreshSession() {
-        if (session == null) {
-            session = MageFrame.getSession();
-        }
         if (cardInfoPane == null) {
             cardInfoPane = Plugins.getInstance().getCardInfoPane();
         }
@@ -173,7 +170,7 @@ public class MageActionCallback implements ActionCallback {
             public void run() {
                 ThreadUtils.sleep(tooltipDelay);
 
-                if (tooltipCard == null || !tooltipCard.equals(data.card) || session == null || !popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
+                if (tooltipCard == null || !tooltipCard.equals(data.card) || SessionHandler.getSession() == null || !popupTextWindowOpen || !enlargedWindowState.equals(EnlargedWindowState.CLOSED)) {
                     return;
                 }
 
@@ -253,14 +250,14 @@ public class MageActionCallback implements ActionCallback {
             this.startedDragging = false;
             if (maxXOffset < MIN_X_OFFSET_REQUIRED) { // we need this for protection from small card movements
                 transferData.component.requestFocusInWindow();
-                defaultCallback.mouseClicked(e, transferData.gameId, session, transferData.card);
+                defaultCallback.mouseClicked(e, transferData.gameId, transferData.card);
                 // Closes popup & enlarged view if a card/Permanent is selected
                 hideTooltipPopup();
             }
             e.consume();
         } else {
             transferData.component.requestFocusInWindow();
-            defaultCallback.mouseClicked(e, transferData.gameId, session, transferData.card);
+            defaultCallback.mouseClicked(e, transferData.gameId, transferData.card);
             // Closes popup & enlarged view if a card/Permanent is selected
             hideTooltipPopup();
             e.consume();
@@ -423,7 +420,7 @@ public class MageActionCallback implements ActionCallback {
             jPopupMenu.setVisible(false);
         }
         try {
-            if (session == null) {
+            if (SessionHandler.getSession() == null) {
                 return;
             }
             // set enlarged card display to visible = false
