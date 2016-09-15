@@ -760,7 +760,7 @@ public class ModernCardRenderer extends CardRenderer {
         if (!textboxKeywords.isEmpty()) {
             String keywordRulesString = getKeywordRulesString();
             TextboxRule keywordsRule = new TextboxRule(keywordRulesString, new ArrayList<TextboxRule.AttributeRegion>());
-            allRules.add(keywordsRule);
+            allRules.add(0, keywordsRule);
         }
 
         // Basic mana draw mana symbol in textbox (for basic lands)
