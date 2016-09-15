@@ -27,7 +27,6 @@
  */
 package mage.game.permanent;
 
-import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -36,12 +35,8 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.ZoneChangeInfo;
-import mage.game.ZonesHandler;
 import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -145,31 +140,6 @@ public class PermanentCard extends PermanentImpl {
 
     public Card getCard() {
         return card;
-    }
-
-    @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
-        Zone fromZone = game.getState().getZone(objectId);
-        Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
-            ZoneChangeInfo zoneChangeInfo;
-            if (toZone == Zone.LIBRARY) {
-                zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
-            } else {
-                zoneChangeInfo = new ZoneChangeInfo(event);
-            }
-            return ZonesHandler.moveCard(zoneChangeInfo, game);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
-        Zone fromZone = game.getState().getZone(objectId);
-        ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
-        ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
-        return ZonesHandler.moveCard(info, game);
     }
 
     @Override

@@ -83,79 +83,78 @@ public class ZonesHandler {
         ZoneChangeEvent event = info.event;
         Zone toZone = event.getToZone();
         Card targetCard = getTargetCard(game, event.getTargetId());
-        if (targetCard == null) {
-            // This should never happen.
-            return;
-        }
-        Cards cards;
-        if (targetCard instanceof MeldCard) {
-            cards = ((MeldCard) targetCard).getHalves();
-        } else {
-            cards = new CardsImpl(targetCard);
-        }
-        Player owner = game.getPlayer(targetCard.getOwnerId());
-        switch (toZone) {
-            case HAND:
-                for (Card card : cards.getCards(game)) {
-                    game.getPlayer(card.getOwnerId()).getHand().add(card);
-                }
-                break;
-            case GRAVEYARD:
-                for (Card card : chooseOrder(
-                        "order to put in graveyard (last chosen will be on top)", cards, owner, game)) {
-                    game.getPlayer(card.getOwnerId()).getGraveyard().add(card);
-                }
-                break;
-            case LIBRARY:
-                if (info instanceof ZoneChangeInfo.Library && ((ZoneChangeInfo.Library) info).top) {
+        Cards cards = null;
+        // If we're moving a token it shouldn't be put into any zone as an object.
+        if (!(targetCard instanceof Permanent) && targetCard != null) {
+            if (targetCard instanceof MeldCard) {
+                cards = ((MeldCard) targetCard).getHalves();
+            } else {
+                cards = new CardsImpl(targetCard);
+            }
+            Player owner = game.getPlayer(targetCard.getOwnerId());
+            switch (toZone) {
+                case HAND:
+                    for (Card card : cards.getCards(game)) {
+                        game.getPlayer(card.getOwnerId()).getHand().add(card);
+                    }
+                    break;
+                case GRAVEYARD:
                     for (Card card : chooseOrder(
-                            "order to put on top of library (last chosen will be topmost)", cards, owner, game)) {
-                        game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
+                            "order to put in graveyard (last chosen will be on top)", cards, owner, game)) {
+                        game.getPlayer(card.getOwnerId()).getGraveyard().add(card);
                     }
-                } else {
-                    for (Card card : chooseOrder(
-                            "order to put on bottom of library (last chosen will be bottommost)", cards, owner, game)) {
-                        game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
-                    }
-                }
-                break;
-            case EXILED:
-                for (Card card : cards.getCards(game)) {
-                    if (info instanceof ZoneChangeInfo.Exile && ((ZoneChangeInfo.Exile) info).id != null) {
-                        ZoneChangeInfo.Exile exileInfo = (ZoneChangeInfo.Exile) info;
-                        game.getExile().createZone(exileInfo.id, exileInfo.name).add(card);
+                    break;
+                case LIBRARY:
+                    if (info instanceof ZoneChangeInfo.Library && ((ZoneChangeInfo.Library) info).top) {
+                        for (Card card : chooseOrder(
+                                "order to put on top of library (last chosen will be topmost)", cards, owner, game)) {
+                            game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
+                        }
                     } else {
-                        game.getExile().getPermanentExile().add(card);
+                        for (Card card : chooseOrder(
+                                "order to put on bottom of library (last chosen will be bottommost)", cards, owner, game)) {
+                            game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
+                        }
                     }
-                }
-                break;
-            case COMMAND:
-                // There should never be more than one card here.
-                for (Card card : cards.getCards(game)) {
-                    game.addCommander(new Commander(card));
-                }
-                break;
-            case STACK:
-                // There should never be more than one card here.
-                for (Card card : cards.getCards(game)) {
-                    if (info instanceof ZoneChangeInfo.Stack && ((ZoneChangeInfo.Stack) info).spell != null) {
-                        game.getStack().push(((ZoneChangeInfo.Stack) info).spell);
-                    } else {
-                        game.getStack().push(
-                                new Spell(card, card.getSpellAbility().copy(), card.getOwnerId(), event.getFromZone()));
+                    break;
+                case EXILED:
+                    for (Card card : cards.getCards(game)) {
+                        if (info instanceof ZoneChangeInfo.Exile && ((ZoneChangeInfo.Exile) info).id != null) {
+                            ZoneChangeInfo.Exile exileInfo = (ZoneChangeInfo.Exile) info;
+                            game.getExile().createZone(exileInfo.id, exileInfo.name).add(card);
+                        } else {
+                            game.getExile().getPermanentExile().add(card);
+                        }
                     }
-                }
-                break;
-            case BATTLEFIELD:
-                Permanent permanent = event.getTarget();
-                game.addPermanent(permanent);
-                game.getPermanentsEntering().remove(permanent.getId());
-                break;
-            default:
-                throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
+                    break;
+                case COMMAND:
+                    // There should never be more than one card here.
+                    for (Card card : cards.getCards(game)) {
+                        game.addCommander(new Commander(card));
+                    }
+                    break;
+                case STACK:
+                    // There should never be more than one card here.
+                    for (Card card : cards.getCards(game)) {
+                        if (info instanceof ZoneChangeInfo.Stack && ((ZoneChangeInfo.Stack) info).spell != null) {
+                            game.getStack().push(((ZoneChangeInfo.Stack) info).spell);
+                        } else {
+                            game.getStack().push(
+                                    new Spell(card, card.getSpellAbility().copy(), card.getOwnerId(), event.getFromZone()));
+                        }
+                    }
+                    break;
+                case BATTLEFIELD:
+                    Permanent permanent = event.getTarget();
+                    game.addPermanent(permanent);
+                    game.getPermanentsEntering().remove(permanent.getId());
+                    break;
+                default:
+                    throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
+            }
         }
         game.setZone(event.getTargetId(), event.getToZone());
-        if (targetCard instanceof MeldCard) {
+        if (targetCard instanceof MeldCard && cards != null) {
             if (event.getToZone() != Zone.BATTLEFIELD) {
                 ((MeldCard) targetCard).setMelded(false);
             }
