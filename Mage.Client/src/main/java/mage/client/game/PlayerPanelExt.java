@@ -223,7 +223,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             changedFontGrave = false;
         }
         graveLabel.setText(Integer.toString(graveCards));
-        graveLabel.setToolTipText("Card Types: " +  qtyCardTypes(player.getGraveyard()));
+        graveLabel.setToolTipText("Card Types: " + qtyCardTypes(player.getGraveyard()));
 
         int exileCards = player.getExile().size();
         if (exileCards > 99) {
@@ -402,7 +402,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         avatar.setObserver(new Command() {
             @Override
             public void execute() {
-                session.sendPlayerUUID(gameId, playerId);
+                SessionHandler.sendPlayerUUID(gameId, playerId);
             }
         });
 
@@ -531,7 +531,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         btnPlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                session.sendPlayerUUID(gameId, playerId);
+                SessionHandler.sendPlayerUUID(gameId, playerId);
             }
         });
 
@@ -847,7 +847,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnManaActionPerformed(ManaType manaType) {
-        session.sendPlayerManaType(gameId, player.getPlayerId(), manaType);
+        SessionHandler.sendPlayerManaType(gameId, player.getPlayerId(), manaType);
     }
 
     private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {
@@ -868,23 +868,27 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed
         DckDeckImporter deckImporter = new DckDeckImporter();
-        session.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck"));
+        SessionHandler.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck"));
     }
 
     public PlayerView getPlayer() {
         return player;
     }
 
-    private int qtyCardTypes(mage.view.CardsView cardsView){
-        Set<String> cardTypesPresent = new LinkedHashSet<String>() {};
-        for (CardView card : cardsView.values()){
+    private int qtyCardTypes(mage.view.CardsView cardsView) {
+        Set<String> cardTypesPresent = new LinkedHashSet<String>() {
+        };
+        for (CardView card : cardsView.values()) {
             List<CardType> cardTypes = card.getCardTypes();
-            for (CardType cardType : cardTypes){
+            for (CardType cardType : cardTypes) {
                 cardTypesPresent.add(cardType.toString());
             }
         }
-        if (cardTypesPresent.isEmpty()) return 0;
-        else return cardTypesPresent.size();
+        if (cardTypesPresent.isEmpty()) {
+            return 0;
+        } else {
+            return cardTypesPresent.size();
+        }
     }
 
     private HoverButton avatar;

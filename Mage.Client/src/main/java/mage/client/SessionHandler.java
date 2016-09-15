@@ -1,6 +1,11 @@
 package mage.client;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
+import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
@@ -10,11 +15,6 @@ import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.view.*;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * Created by IGOUDT on 15-9-2016.
@@ -45,7 +45,7 @@ public class SessionHandler {
     }
 
     public static boolean connect(Connection connection) {
-     return   session.connect(connection);
+        return session.connect(connection);
     }
 
     public static boolean stopConnecting() {
@@ -61,7 +61,7 @@ public class SessionHandler {
     }
 
     public static void quitTournament(UUID tournamentId) {
-            session.quitTournament(tournamentId);
+        session.quitTournament(tournamentId);
     }
 
     public static void quitDraft(UUID tournamentId) {
@@ -77,7 +77,7 @@ public class SessionHandler {
     }
 
     public static void removeTable(UUID roomId, UUID tableId) {
-            session.removeTable(roomId, tableId);
+        session.removeTable(roomId, tableId);
     }
 
     public static void stopReplay(UUID gameId) {
@@ -85,7 +85,7 @@ public class SessionHandler {
     }
 
     public static void sendPlayerUUID(UUID gameId, UUID id) {
-            session.sendPlayerUUID(gameId, id);
+        session.sendPlayerUUID(gameId, id);
     }
 
     public static void sendPlayerBoolean(UUID gameId, boolean b) {
@@ -101,7 +101,7 @@ public class SessionHandler {
     }
 
     public static void sendPlayerInteger(UUID gameId, int data) {
-            session.sendPlayerInteger(gameId, data);
+        session.sendPlayerInteger(gameId, data);
     }
 
     public static void sendPlayerString(UUID gameId, String data) {
@@ -109,7 +109,7 @@ public class SessionHandler {
     }
 
     public static boolean sendFeedback(String title, String type, String message, String email) {
-      return  session.sendFeedback(title, type, message, email);
+        return session.sendFeedback(title, type, message, email);
     }
 
     public static void swapSeats(UUID roomId, UUID tableId, int row, int targetrow) {
@@ -121,11 +121,11 @@ public class SessionHandler {
     }
 
     public static void updatePreferencesForServer(UserData userData) {
-            session.updatePreferencesForServer(userData);
+        session.updatePreferencesForServer(userData);
     }
 
     public static boolean isTableOwner(UUID roomId, UUID tableId) {
-            return session.isTableOwner(roomId, tableId);
+        return session.isTableOwner(roomId, tableId);
     }
 
     public static UUID getTableChatId(UUID tableId) {
@@ -133,7 +133,7 @@ public class SessionHandler {
     }
 
     public static boolean startTournament(UUID roomId, UUID tableId) {
-            return session.startTournament(roomId, tableId);
+        return session.startTournament(roomId, tableId);
     }
 
     public static boolean startMatch(UUID roomId, UUID tableId) {
@@ -153,7 +153,7 @@ public class SessionHandler {
     }
 
     public static void watchTournamentTable(UUID tableId) {
-            session.watchTournamentTable(tableId);
+        session.watchTournamentTable(tableId);
     }
 
     public static boolean joinTournament(UUID tournamentId) {
@@ -161,7 +161,7 @@ public class SessionHandler {
     }
 
     public static UUID getTournamentChatId(UUID tournamentId) {
-            return session.getTournamentChatId(tournamentId);
+        return session.getTournamentChatId(tournamentId);
     }
 
     public static TournamentView getTournament(UUID tournamentId) {
@@ -175,7 +175,7 @@ public class SessionHandler {
     }
 
     public static String getUserName() {
-            return session.getUserName();
+        return session.getUserName();
     }
 
     public static boolean watchGame(UUID gameId) {
@@ -195,7 +195,7 @@ public class SessionHandler {
     }
 
     public static boolean isTestMode() {
-            return session.isTestMode();
+        return session.isTestMode();
     }
 
     public static void cheat(UUID gameId, UUID playerId, DeckCardLists deckCardLists) {
@@ -203,7 +203,7 @@ public class SessionHandler {
     }
 
     public static String getSessionId() {
-                return session.getSessionId();
+        return session.getSessionId();
     }
 
     public static List<TournamentTypeView> getTournamentTypes() {
@@ -215,7 +215,7 @@ public class SessionHandler {
     }
 
     public static String[] getDeckTypes() {
-                return session.getDeckTypes();
+        return session.getDeckTypes();
     }
 
     public static String[] getDraftCubes() {
@@ -239,7 +239,7 @@ public class SessionHandler {
     }
 
     public static List<GameTypeView> getGameTypes() {
-            return session.getGameTypes();
+        return session.getGameTypes();
     }
 
     public static boolean joinDraft(UUID draftId) {
@@ -294,7 +294,7 @@ public class SessionHandler {
     }
 
     public static List<String> getServerMessages() {
-            return session.getServerMessages();
+        return session.getServerMessages();
     }
 
     public static boolean joinChat(UUID chatId) {
@@ -302,10 +302,15 @@ public class SessionHandler {
     }
 
     public static boolean leaveChat(UUID chatId) {
-            return session.leaveChat(chatId);
+        return session.leaveChat(chatId);
     }
 
     public static boolean sendChatMessage(UUID chatId, String text) {
         return session.sendChatMessage(chatId, text);
     }
+
+    public static boolean sendPlayerManaType(UUID gameId, UUID playerId, ManaType data) {
+        return session.sendPlayerManaType(gameId, playerId, data);
+    }
+
 }
