@@ -100,9 +100,12 @@ class CrewCost extends CostImpl {
         if (target.choose(Outcome.Tap, controllerId, sourceId, game)) {
             int sumPower = 0;
             for (UUID targetId : target.getTargets()) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && permanent.tap(game)) {
-                    sumPower += permanent.getPower().getValue();
+                GameEvent event = new GameEvent(GameEvent.EventType.CREW_VEHICLE, targetId, sourceId, controllerId);
+                if (!game.replaceEvent(event)) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null && permanent.tap(game)) {
+                        sumPower += permanent.getPower().getValue();
+                    }
                 }
             }
             paid = sumPower >= value;

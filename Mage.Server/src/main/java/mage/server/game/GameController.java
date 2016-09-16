@@ -156,123 +156,123 @@ public class GameController implements GameCallback {
     private void init() {
         game.addTableEventListener(
                 new Listener<TableEvent>() {
-                    @Override
-                    public void event(TableEvent event) {
-                        try {
-                            PriorityTimer timer;
-                            UUID playerId;
-                            switch (event.getEventType()) {
-                                case UPDATE:
-                                    updateGame();
-                                    break;
-                                case INFO:
-                                    ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, ChatMessage.MessageType.GAME);
-                                    logger.trace(game.getId() + " " + event.getMessage());
-                                    break;
-                                case STATUS:
-                                    ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), ChatMessage.MessageType.GAME);
-                                    logger.trace(game.getId() + " " + event.getMessage());
-                                    break;
-                                case ERROR:
-                                    error(event.getMessage(), event.getException());
-                                    break;
-                                case END_GAME_INFO:
-                                    endGameInfo();
-                                    break;
-                                case INIT_TIMER:
-                                    final UUID initPlayerId = event.getPlayerId();
-                                    if (initPlayerId == null) {
-                                        throw new MageException("INIT_TIMER: playerId can't be null");
-                                    }
-                                    createPlayerTimer(event.getPlayerId(), game.getPriorityTime());
-                                    break;
-                                case RESUME_TIMER:
-                                    playerId = event.getPlayerId();
-                                    if (playerId == null) {
-                                        throw new MageException("RESUME_TIMER: playerId can't be null");
-                                    }
-                                    timer = timers.get(playerId);
-                                    if (timer == null) {
-                                        Player player = game.getState().getPlayer(playerId);
-                                        if (player != null) {
-                                            timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
-                                        } else {
-                                            throw new MageException("RESUME_TIMER: player can't be null");
-                                        }
-                                    }
-                                    timer.resume();
-                                    break;
-                                case PAUSE_TIMER:
-                                    playerId = event.getPlayerId();
-                                    if (playerId == null) {
-                                        throw new MageException("PAUSE_TIMER: playerId can't be null");
-                                    }
-                                    timer = timers.get(playerId);
-                                    if (timer == null) {
-                                        throw new MageException("PAUSE_TIMER: couldn't find timer for player: " + playerId);
-                                    }
-                                    timer.pause();
-                                    break;
+            @Override
+            public void event(TableEvent event) {
+                try {
+                    PriorityTimer timer;
+                    UUID playerId;
+                    switch (event.getEventType()) {
+                        case UPDATE:
+                            updateGame();
+                            break;
+                        case INFO:
+                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, ChatMessage.MessageType.GAME);
+                            logger.trace(game.getId() + " " + event.getMessage());
+                            break;
+                        case STATUS:
+                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime(), ChatMessage.MessageType.GAME);
+                            logger.trace(game.getId() + " " + event.getMessage());
+                            break;
+                        case ERROR:
+                            error(event.getMessage(), event.getException());
+                            break;
+                        case END_GAME_INFO:
+                            endGameInfo();
+                            break;
+                        case INIT_TIMER:
+                            final UUID initPlayerId = event.getPlayerId();
+                            if (initPlayerId == null) {
+                                throw new MageException("INIT_TIMER: playerId can't be null");
                             }
-                        } catch (MageException ex) {
-                            logger.fatal("Table event listener error ", ex);
-                        }
+                            createPlayerTimer(event.getPlayerId(), game.getPriorityTime());
+                            break;
+                        case RESUME_TIMER:
+                            playerId = event.getPlayerId();
+                            if (playerId == null) {
+                                throw new MageException("RESUME_TIMER: playerId can't be null");
+                            }
+                            timer = timers.get(playerId);
+                            if (timer == null) {
+                                Player player = game.getState().getPlayer(playerId);
+                                if (player != null) {
+                                    timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
+                                } else {
+                                    throw new MageException("RESUME_TIMER: player can't be null");
+                                }
+                            }
+                            timer.resume();
+                            break;
+                        case PAUSE_TIMER:
+                            playerId = event.getPlayerId();
+                            if (playerId == null) {
+                                throw new MageException("PAUSE_TIMER: playerId can't be null");
+                            }
+                            timer = timers.get(playerId);
+                            if (timer == null) {
+                                throw new MageException("PAUSE_TIMER: couldn't find timer for player: " + playerId);
+                            }
+                            timer.pause();
+                            break;
                     }
+                } catch (MageException ex) {
+                    logger.fatal("Table event listener error ", ex);
                 }
+            }
+        }
         );
         game.addPlayerQueryEventListener(
                 new Listener<PlayerQueryEvent>() {
-                    @Override
-                    public void event(PlayerQueryEvent event) {
-                        logger.trace(new StringBuilder(event.getPlayerId().toString()).append("--").append(event.getQueryType()).append("--").append(event.getMessage()).toString());
-                        try {
-                            switch (event.getQueryType()) {
-                                case ASK:
-                                    ask(event.getPlayerId(), event.getMessage(), event.getOptions());
-                                    break;
-                                case PICK_TARGET:
-                                    target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getPerms(), event.getTargets(), event.isRequired(), event.getOptions());
-                                    break;
-                                case PICK_ABILITY:
-                                    target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired(), event.getOptions());
-                                    break;
-                                case SELECT:
-                                    select(event.getPlayerId(), event.getMessage(), event.getOptions());
-                                    break;
-                                case PLAY_MANA:
-                                    playMana(event.getPlayerId(), event.getMessage(), event.getOptions());
-                                    break;
-                                case PLAY_X_MANA:
-                                    playXMana(event.getPlayerId(), event.getMessage());
-                                    break;
-                                case CHOOSE_ABILITY:
-                                    String objectName = null;
-                                    if (event.getChoices() != null && event.getChoices().size() > 0) {
-                                        objectName = event.getChoices().iterator().next();
-                                    }
-                                    chooseAbility(event.getPlayerId(), objectName, event.getAbilities());
-                                    break;
-                                case CHOOSE_PILE:
-                                    choosePile(event.getPlayerId(), event.getMessage(), event.getPile1(), event.getPile2());
-                                    break;
-                                case CHOOSE_MODE:
-                                    chooseMode(event.getPlayerId(), event.getModes());
-                                    break;
-                                case CHOOSE_CHOICE:
-                                    chooseChoice(event.getPlayerId(), event.getChoice());
-                                    break;
-                                case AMOUNT:
-                                    amount(event.getPlayerId(), event.getMessage(), event.getMin(), event.getMax());
-                                    break;
-                                case PERSONAL_MESSAGE:
-                                    informPersonal(event.getPlayerId(), event.getMessage());
-                                    break;
+            @Override
+            public void event(PlayerQueryEvent event) {
+                logger.trace(new StringBuilder(event.getPlayerId().toString()).append("--").append(event.getQueryType()).append("--").append(event.getMessage()).toString());
+                try {
+                    switch (event.getQueryType()) {
+                        case ASK:
+                            ask(event.getPlayerId(), event.getMessage(), event.getOptions());
+                            break;
+                        case PICK_TARGET:
+                            target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getPerms(), event.getTargets(), event.isRequired(), event.getOptions());
+                            break;
+                        case PICK_ABILITY:
+                            target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired(), event.getOptions());
+                            break;
+                        case SELECT:
+                            select(event.getPlayerId(), event.getMessage(), event.getOptions());
+                            break;
+                        case PLAY_MANA:
+                            playMana(event.getPlayerId(), event.getMessage(), event.getOptions());
+                            break;
+                        case PLAY_X_MANA:
+                            playXMana(event.getPlayerId(), event.getMessage());
+                            break;
+                        case CHOOSE_ABILITY:
+                            String objectName = null;
+                            if (event.getChoices() != null && event.getChoices().size() > 0) {
+                                objectName = event.getChoices().iterator().next();
                             }
-                        } catch (MageException ex) {
-                            logger.fatal("Player event listener error ", ex);
-                        }
+                            chooseAbility(event.getPlayerId(), objectName, event.getAbilities());
+                            break;
+                        case CHOOSE_PILE:
+                            choosePile(event.getPlayerId(), event.getMessage(), event.getPile1(), event.getPile2());
+                            break;
+                        case CHOOSE_MODE:
+                            chooseMode(event.getPlayerId(), event.getModes());
+                            break;
+                        case CHOOSE_CHOICE:
+                            chooseChoice(event.getPlayerId(), event.getChoice());
+                            break;
+                        case AMOUNT:
+                            amount(event.getPlayerId(), event.getMessage(), event.getMin(), event.getMax());
+                            break;
+                        case PERSONAL_MESSAGE:
+                            informPersonal(event.getPlayerId(), event.getMessage());
+                            break;
                     }
+                } catch (MageException ex) {
+                    logger.fatal("Player event listener error ", ex);
                 }
+            }
+        }
         );
         joinWaitingExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
@@ -380,11 +380,9 @@ public class GameController implements GameCallback {
                         }
 
                     }
-                } else {
-                    if (!player.hasLeft()) {
-                        logger.debug("Player " + player.getName() + " canceled game (no user) gameId: " + game.getId());
-                        player.leave();
-                    }
+                } else if (!player.hasLeft()) {
+                    logger.debug("Player " + player.getName() + " canceled game (no user) gameId: " + game.getId());
+                    player.leave();
                 }
             }
         }
@@ -405,11 +403,11 @@ public class GameController implements GameCallback {
             joinWaitingExecutor.shutdownNow();
             ThreadExecutor.getInstance().getCallExecutor().execute(
                     new Runnable() {
-                        @Override
-                        public void run() {
-                            startGame();
-                        }
-                    });
+                @Override
+                public void run() {
+                    startGame();
+                }
+            });
         }
     }
 
@@ -1077,11 +1075,11 @@ public class GameController implements GameCallback {
         cancelTimeout();
         futureTimeout = timeoutIdleExecutor.schedule(
                 new Runnable() {
-                    @Override
-                    public void run() {
-                        idleTimeout(playerId);
-                    }
-                },
+            @Override
+            public void run() {
+                idleTimeout(playerId);
+            }
+        },
                 Main.isTestMode() ? 3600 : ConfigSettings.getInstance().getMaxSecondsIdle(),
                 TimeUnit.SECONDS
         );
