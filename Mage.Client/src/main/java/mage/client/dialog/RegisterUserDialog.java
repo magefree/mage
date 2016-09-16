@@ -6,10 +6,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import javax.swing.SwingWorker;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.remote.Connection;
-import mage.remote.Session;
-import mage.remote.SessionImpl;
 import org.apache.log4j.Logger;
 
 public class RegisterUserDialog extends MageDialog {
@@ -18,7 +17,6 @@ public class RegisterUserDialog extends MageDialog {
     private ConnectDialog connectDialog;
     private Connection connection;
     private ConnectTask task;
-    private Session session;
 
     /**
      * Creates new form RegisterUserDialog
@@ -226,8 +224,7 @@ public class RegisterUserDialog extends MageDialog {
         protected Boolean doInBackground() throws Exception {
             lblStatus.setText("Connecting...");
             btnRegister.setEnabled(false);
-            session = new SessionImpl(MageFrame.getInstance());
-            result = session.register(connection);
+            result = SessionHandler.register(connection);
             return result;
         }
 

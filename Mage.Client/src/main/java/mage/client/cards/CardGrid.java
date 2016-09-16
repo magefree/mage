@@ -149,7 +149,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         int numColumns = maxWidth / cardDimension.width;
         int curColumn = 0;
         int curRow = 0;
-        if (cards.size() > 0) {
+        if (!cards.isEmpty()) {
             Rectangle rectangle = new Rectangle(cardDimension.width, cardDimension.height);
             List<MageCard> sortedCards = new ArrayList<>(cards.values());
             switch (sortSetting.getSortBy()) {

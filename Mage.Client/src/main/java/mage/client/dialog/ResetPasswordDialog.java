@@ -6,10 +6,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import javax.swing.SwingWorker;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.remote.Connection;
-import mage.remote.Session;
-import mage.remote.SessionImpl;
 import org.apache.log4j.Logger;
 
 public class ResetPasswordDialog extends MageDialog {
@@ -17,7 +16,6 @@ public class ResetPasswordDialog extends MageDialog {
     private static final Logger logger = Logger.getLogger(ResetPasswordDialog.class);
     private ConnectDialog connectDialog;
     private Connection connection;
-    private Session session;
     private GetAuthTokenTask getAuthTokenTask;
     private ResetPasswordTask resetPasswordTask;
 
@@ -328,8 +326,7 @@ public class ResetPasswordDialog extends MageDialog {
         protected Boolean doInBackground() throws Exception {
             lblStatus.setText("Connecting...");
             disableButtons();
-            session = new SessionImpl(MageFrame.getInstance());
-            result = session.emailAuthToken(connection);
+            result = SessionHandler.emailAuthToken(connection);
             return result;
         }
 
@@ -371,8 +368,7 @@ public class ResetPasswordDialog extends MageDialog {
         protected Boolean doInBackground() throws Exception {
             lblStatus.setText("Connecting...");
             disableButtons();
-            session = new SessionImpl(MageFrame.getInstance());
-            result = session.resetPassword(connection);
+            result = SessionHandler.resetPassword(connection);
             return result;
         }
 
