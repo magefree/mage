@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author spjspj
  */
 public class CombustibleGearhulk extends mage.sets.kaladesh.CombustibleGearhulk {
 
