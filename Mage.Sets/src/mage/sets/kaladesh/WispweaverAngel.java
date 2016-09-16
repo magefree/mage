@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  */
 public class WispweaverAngel extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another taget creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
         filter.add(new AnotherPredicate());

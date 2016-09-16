@@ -28,38 +28,42 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.game.permanent.token.ThopterColorlessToken;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class AttuneWithAether extends CardImpl {
+public class ExperimentalAviator extends CardImpl {
 
-    public AttuneWithAether(UUID ownerId) {
-        super(ownerId, 145, "Attune with Aether", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
+    public ExperimentalAviator(UUID ownerId) {
+        super(ownerId, 46, "Experimental Aviator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "KLD";
+        this.subtype.add("Human");
+        this.subtype.add("Artificer");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(3);
 
-        // Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library. You get {E}{E}.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true);
-        effect.setText("Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // When Experimental Aviator enters the battlefield, create two 1/1 colorless Thopter artifact creature tokens with flying.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), 2)));
     }
 
-    public AttuneWithAether(final AttuneWithAether card) {
+    public ExperimentalAviator(final ExperimentalAviator card) {
         super(card);
     }
 
     @Override
-    public AttuneWithAether copy() {
-        return new AttuneWithAether(this);
+    public ExperimentalAviator copy() {
+        return new ExperimentalAviator(this);
     }
 }

@@ -28,38 +28,42 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class AttuneWithAether extends CardImpl {
+public class RecklessFireweaver extends CardImpl {
 
-    public AttuneWithAether(UUID ownerId) {
-        super(ownerId, 145, "Attune with Aether", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
+    public RecklessFireweaver(UUID ownerId) {
+        super(ownerId, 126, "Reckless Fireweaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "KLD";
+        this.subtype.add("Human");
+        this.subtype.add("Artificer");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        // Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library. You get {E}{E}.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true);
-        effect.setText("Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
+        // Whenever an artifact enters the battlefield under your control, Reckless Fireweaver deals 1 damage to each opponent.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT),
+                new FilterControlledArtifactPermanent(), false,
+            "Whenever an artifact enters the battlefield under your control, Reckless Fireweaver deals 1 damage to each opponent."));
     }
 
-    public AttuneWithAether(final AttuneWithAether card) {
+    public RecklessFireweaver(final RecklessFireweaver card) {
         super(card);
     }
 
     @Override
-    public AttuneWithAether copy() {
-        return new AttuneWithAether(this);
+    public RecklessFireweaver copy() {
+        return new RecklessFireweaver(this);
     }
 }

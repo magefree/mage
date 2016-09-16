@@ -28,38 +28,36 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.MageInt;
+import mage.abilities.keyword.FabricateAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class AttuneWithAether extends CardImpl {
+public class AmbitiousAetherborn extends CardImpl {
 
-    public AttuneWithAether(UUID ownerId) {
-        super(ownerId, 145, "Attune with Aether", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
+    public AmbitiousAetherborn(UUID ownerId) {
+        super(ownerId, 72, "Ambitious Aetherborn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "KLD";
+        this.subtype.add("Aetherborn");
+        this.subtype.add("Artificer");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library. You get {E}{E}.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true);
-        effect.setText("Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
+        // Fabricate 1
+        this.addAbility(new FabricateAbility(1));
     }
 
-    public AttuneWithAether(final AttuneWithAether card) {
+    public AmbitiousAetherborn(final AmbitiousAetherborn card) {
         super(card);
     }
 
     @Override
-    public AttuneWithAether copy() {
-        return new AttuneWithAether(this);
+    public AmbitiousAetherborn copy() {
+        return new AmbitiousAetherborn(this);
     }
 }

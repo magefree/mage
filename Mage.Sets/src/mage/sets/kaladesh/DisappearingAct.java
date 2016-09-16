@@ -28,38 +28,39 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.TargetSpell;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class AttuneWithAether extends CardImpl {
+public class DisappearingAct extends CardImpl {
 
-    public AttuneWithAether(UUID ownerId) {
-        super(ownerId, 145, "Attune with Aether", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
+    public DisappearingAct(UUID ownerId) {
+        super(ownerId, 43, "Disappearing Act", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "KLD";
 
-        // Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library. You get {E}{E}.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true);
-        effect.setText("Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
+        // As an additional cost to cast Disappearing Act, return a permanent you control to its owner's hand.
+        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledPermanent("a permanent you control"))));
+
+        // Counter target spell.
+        getSpellAbility().addEffect(new CounterTargetEffect());
+        getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public AttuneWithAether(final AttuneWithAether card) {
+    public DisappearingAct(final DisappearingAct card) {
         super(card);
     }
 
     @Override
-    public AttuneWithAether copy() {
-        return new AttuneWithAether(this);
+    public DisappearingAct copy() {
+        return new DisappearingAct(this);
     }
 }

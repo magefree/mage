@@ -28,38 +28,35 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.MageInt;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class AttuneWithAether extends CardImpl {
+public class BrazenScourge extends CardImpl {
 
-    public AttuneWithAether(UUID ownerId) {
-        super(ownerId, 145, "Attune with Aether", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
+    public BrazenScourge(UUID ownerId) {
+        super(ownerId, 107, "Brazen Scourge", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "KLD";
+        this.subtype.add("Gremlin");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library. You get {E}{E}.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true);
-        effect.setText("Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
     }
 
-    public AttuneWithAether(final AttuneWithAether card) {
+    public BrazenScourge(final BrazenScourge card) {
         super(card);
     }
 
     @Override
-    public AttuneWithAether copy() {
-        return new AttuneWithAether(this);
+    public BrazenScourge copy() {
+        return new BrazenScourge(this);
     }
 }

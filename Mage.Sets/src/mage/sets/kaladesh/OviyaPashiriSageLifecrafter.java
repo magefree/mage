@@ -66,7 +66,7 @@ public class OviyaPashiriSageLifecrafter extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ServoToken(), 1), new ManaCostsImpl("{2}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        // {4}{G}, {T}: Create an X/X colorless Construct artifact creature token, where X is the number of creature you control.
+        // {4}{G}, {T}: Create an X/X colorless Construct artifact creature token, where X is the number of creatures you control.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new OviyaPashiriSageLifecrafterToken()), new ManaCostsImpl("{4}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -84,10 +84,10 @@ public class OviyaPashiriSageLifecrafter extends CardImpl {
 
 class OviyaPashiriSageLifecrafterToken extends Token {
 
-    final static FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("creature you control");
+    final static FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("creatures you control");
 
     OviyaPashiriSageLifecrafterToken() {
-        super("Construct", "an X/X colorless Construct artifact creature token, where X is the number of creature you control");
+        super("Construct", "an X/X colorless Construct artifact creature token, where X is the number of creatures you control");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Construct");

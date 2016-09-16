@@ -28,38 +28,41 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class AttuneWithAether extends CardImpl {
+public class WeldfastWingsmith extends CardImpl {
 
-    public AttuneWithAether(UUID ownerId) {
-        super(ownerId, 145, "Attune with Aether", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
+    public WeldfastWingsmith(UUID ownerId) {
+        super(ownerId, 69, "Weldfast Wingsmith", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "KLD";
+        this.subtype.add("Human");
+        this.subtype.add("Artificer");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Search you library for a basic land card, reveal it, put it into your hand, then shuffle your library. You get {E}{E}.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true);
-        effect.setText("Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
+        // Whenever an artifact enters the battlefield under your control, Weldfast Wingsmith gains flying until end of turn.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
+                new FilterControlledArtifactPermanent(), "Whenever an artifact enters the battlefield under your control, Weldfast Wingsmith gains flying until end of turn."));
     }
 
-    public AttuneWithAether(final AttuneWithAether card) {
+    public WeldfastWingsmith(final WeldfastWingsmith card) {
         super(card);
     }
 
     @Override
-    public AttuneWithAether copy() {
-        return new AttuneWithAether(this);
+    public WeldfastWingsmith copy() {
+        return new WeldfastWingsmith(this);
     }
 }
