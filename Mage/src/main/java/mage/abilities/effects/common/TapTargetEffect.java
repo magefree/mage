@@ -37,6 +37,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.util.CardUtil;
+import mage.util.StringUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -76,7 +77,7 @@ public class TapTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (staticText.length() > 0) {
+        if (StringUtil.isNotEmpty(staticText)) {
             return "tap " + staticText;
         }
 

@@ -14,6 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.target.Target;
 import mage.util.CardUtil;
+import mage.util.StringUtil;
 
 /**
  *
@@ -73,7 +74,7 @@ public class TransformTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (staticText != null && staticText.length() > 0) {
+        if (StringUtil.isNotEmpty(staticText)) {
             return staticText;
         }
         if (mode.getTargets().isEmpty()) {

@@ -18,6 +18,7 @@ import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.util.StringUtil;
 import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -339,7 +340,7 @@ public class GuiDisplayUtil {
         }
 
         String legal = rule.toString();
-        if (legal.length() > 0) {
+        if (StringUtil.isNotEmpty(legal)) {
             legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this" : card.getName());
             legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this" : card.getName());
             buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.TOOLTIP));

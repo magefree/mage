@@ -36,6 +36,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.StringUtil;
 
 /**
  *
@@ -116,7 +117,7 @@ public class DiscardControllerEffect extends OneShotEffect {
             sb.append(" at random");
         }
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (StringUtil.isNotEmpty(message)) {
             sb.append(" for each ");
         }
         sb.append(message);

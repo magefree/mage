@@ -36,6 +36,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.StringUtil;
 
 
 public class LoseLifeControllerAttachedEffect extends OneShotEffect {
@@ -88,7 +89,7 @@ public class LoseLifeControllerAttachedEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("it's controller loses ").append(amount.toString()).append(" life");
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (StringUtil.isNotEmpty(message)) {
             sb.append(" for each ");
             sb.append(message);
         }

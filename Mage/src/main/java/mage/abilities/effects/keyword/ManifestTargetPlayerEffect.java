@@ -44,6 +44,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.StringUtil;
 
 /**
  *
@@ -104,7 +105,7 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
 
     private String setText() {
         StringBuilder sb = new StringBuilder();
-        if (prefix != null && !prefix.isEmpty()) {
+        if (StringUtil.isNotEmpty(prefix)) {
             sb.append(prefix).append(" ");
         }
         sb.append("manifest the top ");

@@ -296,7 +296,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             text = text.replace("\r\n", "<div style='font-size:5pt'></div>");
             //text += "<br>";
 
-            if (text.length() > 0) {
+            if (!text.isEmpty()) {
                 buffer.append(ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.DIALOG));
             }
 
