@@ -87,6 +87,7 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
 import mage.remote.Session;
+import mage.util.StringUtil;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -248,7 +249,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             for (String rule : getRules()) {
                 sb.append("\n").append(rule);
             }
-            if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0) {
+            if (StringUtil.isNotEmpty(card.getExpansionSetCode())) {
                 sb.append("\n").append(card.getCardNumber()).append(" - ");
                 sb.append(Sets.getInstance().get(card.getExpansionSetCode()).getName()).append(" - ");
                 sb.append(card.getRarity().toString());

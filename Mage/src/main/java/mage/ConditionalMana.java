@@ -206,26 +206,21 @@ public class ConditionalMana extends Mana implements Serializable {
                 break;
             case BLUE:
                 blue += amount;
-                ;
                 break;
             case GREEN:
                 green += amount;
-                ;
                 break;
             case RED:
                 red += amount;
-                ;
                 break;
             case WHITE:
                 white += amount;
-                ;
                 break;
             case COLORLESS:
                 colorless += amount;
-                ;
+
             case GENERIC:
                 generic += amount;
-                ;
                 break;
         }
     }

@@ -45,7 +45,17 @@ public class ChatMessage implements Serializable {
     private MessageType messageType;
 
     public enum MessageColor {
-        BLACK, RED, GREEN, BLUE, ORANGE, YELLOW;
+        BLACK("Black"), RED("Red"), GREEN("Green"), BLUE("Blue"), ORANGE("Orange"), YELLOW("Yellow");
+
+        private String color;
+
+        MessageColor(String t){
+            color = t;
+        }
+
+        public String toString(){
+            return color;
+        }
     }
 
     public enum MessageType {

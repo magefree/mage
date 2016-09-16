@@ -37,6 +37,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.StringUtil;
 
 /**
  *
@@ -143,7 +144,7 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl  {
 
     @Override
     public String getText(Mode mode) {
-        if (staticText == null || staticText.isEmpty() && this.effect != null) { // usefull for conditional night/day card abilities
+        if (StringUtil.isEmpty(staticText) && this.effect != null) { // usefull for conditional night/day card abilities
             return effect.getText(mode);
         }
         return staticText;
