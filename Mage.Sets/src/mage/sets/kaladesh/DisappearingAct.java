@@ -48,7 +48,7 @@ public class DisappearingAct extends CardImpl {
         this.expansionSetCode = "KLD";
 
         // As an additional cost to cast Disappearing Act, return a permanent you control to its owner's hand.
-        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledPermanent("a permanent you control"))));
+        this.getSpellAbility().addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledPermanent("a permanent"))));
 
         // Counter target spell.
         getSpellAbility().addEffect(new CounterTargetEffect());
