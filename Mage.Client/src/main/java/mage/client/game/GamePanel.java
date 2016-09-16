@@ -2173,7 +2173,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 choices,
                 this.chosenHandKey);
 
-        if (newChosenHandKey != null && newChosenHandKey.length() > 0) {
+        if (newChosenHandKey != null && !newChosenHandKey.isEmpty()) {
             this.chosenHandKey = newChosenHandKey;
             CardsView cards = handCards.get(chosenHandKey);
             handContainer.loadCards(cards, bigCard, gameId);

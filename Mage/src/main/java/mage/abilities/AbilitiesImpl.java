@@ -39,6 +39,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.util.StringUtil;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
 
@@ -105,11 +106,10 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                     rules.add(sbRule.toString());
                 }
                 String rule = ability.getRule();
-                if (rule != null) {
-                    if (rule.length() > 0) {
+                if (StringUtil.isNotEmpty(rule)){
                         rules.add(Character.toUpperCase(rule.charAt(0)) + rule.substring(1));
                     }
-                } else { // logging so we can still can be made aware of rule problems a card has
+                else { // logging so we can still can be made aware of rule problems a card has
                     String cardName = ((SpellAbility) ability).getCardName();
                     logger.fatal("Error in rule text generation of " + cardName + ": Create a bug report or fix the source code");
                 }

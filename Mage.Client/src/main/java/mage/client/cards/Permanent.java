@@ -54,6 +54,7 @@ import static mage.client.constants.Constants.POWBOX_TEXT_MAX_TOP;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.constants.CardType;
+import mage.util.StringUtil;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import org.mage.plugins.card.images.ImageCache;
@@ -124,7 +125,7 @@ public class Permanent extends Card {
         for (String rule: getRules()) {
             sb.append("\n").append(rule);
         }
-        if (permanent.getOriginal().getExpansionSetCode().length() > 0) {
+        if (StringUtil.isNotEmpty(permanent.getOriginal().getExpansionSetCode())) {
             sb.append("\n").append(permanent.getCardNumber()).append(" - ");
             sb.append("\n").append(Sets.getInstance().get(permanent.getOriginal().getExpansionSetCode()).getName()).append(" - ");
             sb.append(permanent.getOriginal().getRarity().toString());

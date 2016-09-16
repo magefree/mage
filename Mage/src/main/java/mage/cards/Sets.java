@@ -46,6 +46,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.util.ClassScanner;
 
 import mage.util.RandomUtil;
+import mage.util.StringUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -138,10 +139,11 @@ public class Sets extends HashMap<String, ExpansionSet> {
         Map<String, DeckCardInfo> deckCards = new HashMap<>();
         Map<String, DeckCardInfo> sideboard = new HashMap<>();
         try {
-            if (deck.getName() != null && deck.getName().length() > 0) {
+
+            if (StringUtil.isNotEmpty(deck.getName())) {
                 out.println("NAME:" + deck.getName());
             }
-            if (deck.getAuthor() != null && deck.getAuthor().length() > 0) {
+            if (StringUtil.isNotEmpty(deck.getAuthor())) {
                 out.println("AUTHOR:" + deck.getAuthor());
             }
             for (DeckCardInfo deckCardInfo: deck.getCards()) {

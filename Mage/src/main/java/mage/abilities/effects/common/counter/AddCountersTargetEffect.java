@@ -43,6 +43,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
+import mage.util.StringUtil;
 
 /**
  *
@@ -164,7 +165,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
             sb.append("that creature");
         }
 
-        if (amount.getMessage().length() > 0) {
+        if (StringUtil.isNotEmpty(amount.getMessage())) {
             sb.append(" for each ").append(amount.getMessage());
         }
         return sb.toString();

@@ -39,6 +39,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.StringUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -132,7 +133,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         if (duration != Duration.WhileOnBattlefield)
             sb.append(" ").append(duration.toString());
         String message = power.getMessage();
-        if (message.length() > 0) {
+        if (StringUtil.isNotEmpty(message)) {
             sb.append(" for each ");
         }
         sb.append(message);
