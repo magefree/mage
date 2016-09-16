@@ -132,6 +132,7 @@ public class SystemUtil {
             card.putOntoBattlefield(game, Zone.EXILED, null, player.getId());
         } else if (zone.equals(Zone.LIBRARY)) {
             card.setZone(Zone.LIBRARY, game);
+            game.getExile().getPermanentExile().remove(card);
             player.getLibrary().putOnTop(card, game);
         } else {
             card.moveToZone(zone, null, game, false);

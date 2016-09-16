@@ -66,13 +66,10 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.ZoneChangeInfo;
+import mage.game.ZonesHandler;
 import mage.game.command.CommandObject;
-import mage.game.events.DamageCreatureEvent;
-import mage.game.events.DamagePlaneswalkerEvent;
-import mage.game.events.DamagedCreatureEvent;
-import mage.game.events.DamagedPlaneswalkerEvent;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
+import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -1375,6 +1372,31 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public ObjectColor getColor(Game game) {
         return color;
+    }
+
+    @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
+        Zone fromZone = game.getState().getZone(objectId);
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
+            ZoneChangeInfo zoneChangeInfo;
+            if (toZone == Zone.LIBRARY) {
+                zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
+            } else {
+                zoneChangeInfo = new ZoneChangeInfo(event);
+            }
+            return ZonesHandler.moveCard(zoneChangeInfo, game);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
+        Zone fromZone = game.getState().getZone(objectId);
+        ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
+        ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
+        return ZonesHandler.moveCard(info, game);
     }
 
 }

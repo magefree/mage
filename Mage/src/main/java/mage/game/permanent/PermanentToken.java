@@ -30,9 +30,7 @@ package mage.game.permanent;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
 
 /**
@@ -92,31 +90,6 @@ public class PermanentToken extends PermanentImpl {
         this.supertype = token.getSupertype();
         this.subtype = token.getSubtype(game);
         this.tokenDescriptor = token.getTokenDescriptor();
-    }
-
-    @Override
-    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
-        if (!game.replaceEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone))) {
-            game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-            if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-                game.setZone(objectId, zone); // needed for triggered dies abilities
-                game.addSimultaneousEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-        if (!game.replaceEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED))) {
-            game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-            if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-                game.addSimultaneousEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED));
-                return true;
-            }
-        }
-        return false;
     }
 
     public Token getToken() {
