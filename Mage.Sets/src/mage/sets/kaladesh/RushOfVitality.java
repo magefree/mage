@@ -21,6 +21,9 @@ public class RushOfVitality extends CardImpl {
 
     public RushOfVitality(final UUID ownerId){
         super(ownerId,99,"Rush of Vitality", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1B}");
+
+        this.expansionSetCode = "KLD";
+
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));

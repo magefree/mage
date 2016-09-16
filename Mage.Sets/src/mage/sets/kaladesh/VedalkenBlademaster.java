@@ -17,6 +17,9 @@ public class VedalkenBlademaster extends CardImpl {
 
     public VedalkenBlademaster(final UUID ownerId){
         super(ownerId, 68, "Vedalken Blademaster", Rarity.COMMON, new CardType[]{CardType.CREATURE},"{2U}");
+
+        this.expansionSetCode = "KLD";
+
         this.subtype.add("Vedalken");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);
