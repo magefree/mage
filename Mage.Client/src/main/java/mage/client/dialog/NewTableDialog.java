@@ -405,25 +405,33 @@ public class NewTableDialog extends MageDialog {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (SessionHandler.joinTable(
-                roomId,
-                table.getTableId(),
-                this.player1Panel.getPlayerName(),
-                "Human", 1,
-                DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),
-                this.txtPassword.getText())) {
-            for (TablePlayerPanel player : players) {
-                if (!player.getPlayerType().equals("Human")) {
-                    if (!player.joinTable(roomId, table.getTableId())) {
-                        // error message must be send by the server
-                        SessionHandler.removeTable(roomId, table.getTableId());
-                        table = null;
-                        return;
+        try {
+            if (SessionHandler.joinTable(
+                    roomId,
+                    table.getTableId(),
+                    this.player1Panel.getPlayerName(),
+                    "Human", 1,
+                    DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),
+                    this.txtPassword.getText())) {
+                for (TablePlayerPanel player : players) {
+                    if (!player.getPlayerType().equals("Human")) {
+                        if (!player.joinTable(roomId, table.getTableId())) {
+                            // error message must be send by the server
+                            SessionHandler.removeTable(roomId, table.getTableId());
+                            table = null;
+                            return;
+                        }
                     }
                 }
+                this.hideDialog();
+                return;
             }
-            this.hideDialog();
-            return;
+        } catch (FileNotFoundException ex) {
+            handleError(ex);
+        } catch (IOException ex) {
+            handleError(ex);
+        } catch (ClassNotFoundException ex) {
+            handleError(ex);
         }
         // JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
         SessionHandler.removeTable(roomId, table.getTableId());

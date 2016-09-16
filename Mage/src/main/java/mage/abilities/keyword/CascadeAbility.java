@@ -133,7 +133,7 @@ class CascadeEffect extends OneShotEffect {
         Cards cardsFromExile = new CardsImpl();
         Cards cardsToLibrary = new CardsImpl();
         cardsFromExile.addAll(exile);
-        while (!cardsFromExile.isEmpty()) {
+        while (cardsFromExile.size() > 0) {
             card = cardsFromExile.getRandom(game);
             cardsFromExile.remove(card.getId());
             cardsToLibrary.add(card);

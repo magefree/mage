@@ -37,7 +37,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.util.StringUtil;
 
 import java.util.UUID;
 
@@ -143,7 +142,7 @@ public class DamageTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (StringUtil.isNotEmpty(staticText)) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
@@ -153,12 +152,12 @@ public class DamageTargetEffect extends OneShotEffect {
             sb.append(amount);
         }
         sb.append(" damage to ");
-        if (StringUtil.isNotEmpty(targetDescription)){
+        if (targetDescription.length() > 0) {
             sb.append(targetDescription);
         } else {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         }
-        if (StringUtil.isNotEmpty(message)) {
+        if (message.length() > 0) {
             if (message.equals("1")) {
                 sb.append(" equal to the number of ");
             } else {

@@ -35,7 +35,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.StringUtil;
 
 /**
  *
@@ -79,7 +78,7 @@ public class LoseLifeSourceControllerEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("you lose ").append(amount.toString()).append(" life");
         String message = amount.getMessage();
-        if (StringUtil.isNotEmpty(message)) {
+        if (message.length() > 0) {
             sb.append(" for each ");
         }
         sb.append(message);

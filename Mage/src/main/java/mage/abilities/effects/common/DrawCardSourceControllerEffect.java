@@ -36,7 +36,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-import mage.util.StringUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -84,7 +83,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
             sb.append("s");
         }
         String message = amount.getMessage();
-        if (StringUtil.isNotEmpty(message)) {
+        if (message.length() > 0) {
             sb.append(" for each ");
         }
         sb.append(message);

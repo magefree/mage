@@ -32,7 +32,6 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.audio.AudioManager;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
-import mage.util.StringUtil;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.PermanentView;
@@ -726,7 +725,7 @@ public abstract class CardPanel extends MagePermanent implements MouseListener, 
             for (String rule : card.getRules()) {
                 sb.append("\n").append(rule);
             }
-            if (StringUtil.isNotEmpty(card.getExpansionSetCode())) {
+            if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0) {
                 sb.append("\n").append(card.getCardNumber()).append(" - ");
                 sb.append(card.getExpansionSetCode()).append(" - ");
                 sb.append(card.getRarity().toString());

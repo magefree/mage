@@ -42,7 +42,6 @@ import javax.swing.JTextField;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.util.GUISizeHelper;
-import mage.util.StringUtil;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import org.mage.card.arcane.ManaSymbols;
@@ -222,13 +221,13 @@ public class ChatPanelBasic extends javax.swing.JPanel {
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
         }
-        if (color == MessageColor.ORANGE) {
+        if (color.equals(MessageColor.ORANGE)) {
             textColor = "Orange";
         }
-        if (color == MessageColor.YELLOW) {
+        if (color.equals(MessageColor.YELLOW)) {
             textColor = "Yellow";
         }
-        if (StringUtil.isNotEmpty(username)) {
+        if (username != null && !username.isEmpty()) {
             text.append(getColoredText(userColor, username + userSeparator));
         }
         text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.CHAT)));

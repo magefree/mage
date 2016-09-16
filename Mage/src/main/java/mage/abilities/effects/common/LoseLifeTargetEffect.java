@@ -35,7 +35,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.StringUtil;
 
 /**
  *
@@ -82,7 +81,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
 
-        if (!mode.getTargets().isEmpty()) {
+        if (mode.getTargets().size() > 0) {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("that player");
@@ -92,7 +91,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
             sb.append(amount).append(" ");
         }
         sb.append("life");
-        if (StringUtil.isNotEmpty(message)) {
+        if (message.length() > 0) {
             if (amount.toString().equals("X")) {
                 sb.append(", where X is ");
             } else {

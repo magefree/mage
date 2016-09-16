@@ -87,7 +87,7 @@ public class LoseLifeOpponentsEffect extends OneShotEffect {
             sb.append(amount).append(" ");
         }
         sb.append("life");
-        if (!message.isEmpty()) {
+        if (message.length() > 0) {
             sb.append(message.equals("1") || message.startsWith("the ") ? " equal to the number of " : " for each ");
             sb.append(message);
         }

@@ -134,7 +134,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
             sb.append(" ").append(duration.toString());
         }
         String message = power.getMessage();
-        if (!message.isEmpty()) {
+        if (message.length() > 0) {
             sb.append(" for each ");
         }
         sb.append(message);

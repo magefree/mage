@@ -597,15 +597,15 @@ public class User {
         builder.append(proto.getMatches());
         List<String> quit = new ArrayList<>();
         if (proto.getMatchesIdleTimeout() > 0) {
-            quit.add("I:" + proto.getMatchesIdleTimeout());//Integer.toString(proto.getMatchesIdleTimeout()));
+            quit.add("I:" + Integer.toString(proto.getMatchesIdleTimeout()));
         }
         if (proto.getMatchesTimerTimeout() > 0) {
-            quit.add("T:" + proto.getMatchesTimerTimeout());//Integer.toString(proto.getMatchesTimerTimeout()));
+            quit.add("T:" + Integer.toString(proto.getMatchesTimerTimeout()));
         }
         if (proto.getMatchesQuit() > 0) {
-            quit.add("Q:" + proto.getMatchesQuit());//Integer.toString(proto.getMatchesQuit()));
+            quit.add("Q:" + Integer.toString(proto.getMatchesQuit()));
         }
-        if (!quit.isEmpty()) {
+        if (quit.size() > 0) {
             builder.append(" (");
             joinStrings(builder, quit, " ");
             builder.append(")");
@@ -629,15 +629,15 @@ public class User {
         builder.append(proto.getTourneys());
         List<String> quit = new ArrayList<>();
         if (proto.getTourneysQuitDuringDrafting() > 0) {
-            quit.add("D:" + proto.getTourneysQuitDuringDrafting());//Integer.toString(proto.getTourneysQuitDuringDrafting()));
+            quit.add("D:" + Integer.toString(proto.getTourneysQuitDuringDrafting()));
         }
         if (proto.getTourneysQuitDuringConstruction() > 0) {
-            quit.add("C:" + proto.getTourneysQuitDuringConstruction());//Integer.toString(proto.getTourneysQuitDuringConstruction()));
+            quit.add("C:" + Integer.toString(proto.getTourneysQuitDuringConstruction()));
         }
         if (proto.getTourneysQuitDuringRound() > 0) {
-            quit.add("R:" + proto.getTourneysQuitDuringRound());//Integer.toString(proto.getTourneysQuitDuringRound()));
+            quit.add("R:" + Integer.toString(proto.getTourneysQuitDuringRound()));
         }
-        if (!quit.isEmpty()) {
+        if (quit.size() > 0) {
             builder.append(" (");
             joinStrings(builder, quit, " ");
             builder.append(")");

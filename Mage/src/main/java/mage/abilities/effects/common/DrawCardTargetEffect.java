@@ -136,7 +136,7 @@ public class DrawCardTargetEffect extends OneShotEffect {
             sb.append("s");
         }
         String message = amount.getMessage();
-        if (!message.isEmpty()) {
+        if (message.length() > 0) {
             sb.append(" for each ");
         }
         sb.append(message);

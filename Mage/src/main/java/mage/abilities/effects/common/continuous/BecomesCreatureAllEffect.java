@@ -39,7 +39,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.util.StringUtil;
 
 /**
  * @author LevelX2
@@ -77,11 +76,13 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
+                            if (token.getCardType().size() > 0) {
                                 for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
                                         permanent.getCardType().add(t);
                                     }
                                 }
+                            }
                             if (type == null) {
                                 permanent.getSubtype(game).clear();
                             }
@@ -139,7 +140,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         }
         sb.append(filter.getMessage());
         sb.append(" become a ").append(token.getDescription());
-        if (StringUtil.isNotEmpty(type)) {
+        if (type != null && type.length() > 0) {
             sb.append(". They are still ").append(type);
         }
         return sb.toString();

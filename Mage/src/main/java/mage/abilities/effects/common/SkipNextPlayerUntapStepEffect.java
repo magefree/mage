@@ -37,7 +37,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
-import mage.util.StringUtil;
 
 /**
  *
@@ -78,7 +77,7 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (StringUtil.isNotEmpty(staticText)) {
+        if (staticText.length() > 0) {
             sb.append(staticText);
         } else {
             sb.append("target");
