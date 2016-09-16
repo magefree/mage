@@ -958,7 +958,7 @@ class UpdateDeckTask extends SwingWorker<Void, Void> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            session.updateDeck(tableId, deck.getDeckCardLists());
+            SessionHandler.updateDeck(tableId, deck.getDeckCardLists());
             Thread.sleep(5000);
         }
         return null;

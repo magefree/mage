@@ -313,4 +313,23 @@ public class SessionHandler {
         return session.sendPlayerManaType(gameId, playerId, data);
     }
 
+    public static TableView getTable(UUID roomId, UUID tableId) {
+        return session.getTable(roomId, tableId);
+    }
+
+    public static void updateDeck(UUID tableId, DeckCardLists deckCardLists) {
+         session.updateDeck(tableId, deckCardLists);
+    }
+
+    public static boolean emailAuthToken(Connection connection) {
+        return session.emailAuthToken(connection);
+    }
+
+    public static boolean resetPassword(Connection connection) {
+            return session.resetPassword(connection);
+    }
+
+    public static boolean register(Connection connection) {
+            return session.register(connection);
+    }
 }
