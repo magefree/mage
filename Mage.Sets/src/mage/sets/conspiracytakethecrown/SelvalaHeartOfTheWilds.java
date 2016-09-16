@@ -63,6 +63,8 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
         filter.add(new GreatestPowerPredicate());
     }
 
+    private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power";
+
     public SelvalaHeartOfTheWilds(UUID ownerId) {
         super(ownerId, 70, "Selvala, Heart of the Wilds", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "CN2";
@@ -73,7 +75,8 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.
-        this.addAbility(new SelvalaHeartOfTheWildsTriggeredAbility(new SelvalaHeartOfTheWildsEffect(), filter));
+
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SelvalaHeartOfTheWildsEffect(), filter, false, SetTargetPointer.PERMANENT, rule));
 
         // {G}, {T}: Add X mana in any combination of colors to your mana pool, where X is the greatest power among creatures you control.
         this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1, 0), new GreatestPowerYouControlValue(), new TapSourceCost(),
@@ -88,23 +91,6 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
     public SelvalaHeartOfTheWilds copy() {
         return new SelvalaHeartOfTheWilds(this);
     }
-}
-
-
-class SelvalaHeartOfTheWildsTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
-    private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power";
-    public SelvalaHeartOfTheWildsTriggeredAbility(Effect effect, FilterPermanent filter) {
-        super(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PERMANENT, rule);
-    }
-
-    public SelvalaHeartOfTheWildsTriggeredAbility(final SelvalaHeartOfTheWildsTriggeredAbility ability) {
-        super(ability);
-    }
-    @Override
-    public SelvalaHeartOfTheWildsTriggeredAbility copy() {
-        return new SelvalaHeartOfTheWildsTriggeredAbility(this);
-    }
-
 }
 
 class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
