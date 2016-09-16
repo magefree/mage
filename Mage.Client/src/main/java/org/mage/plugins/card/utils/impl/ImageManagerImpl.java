@@ -35,7 +35,7 @@ public class ImageManagerImpl implements ImageManager {
                 "Main2", "Cleanup", "Next_Turn"};
         phasesImages = new HashMap<>();
         for (String name : phases) {
-            Image image = getImageFromResource("/phases/phase_" + name.toLowerCase() + ".png", new Rectangle(36, 36));
+            Image image = getImageFromResource("/phases/phase_" + name.toLowerCase() + ".png", new Rectangle(63, 24));
             phasesImages.put(name, image);
         }
     }

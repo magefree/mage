@@ -148,7 +148,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class);
     private static final String YOUR_HAND = "Your hand";
-    private static final int X_PHASE_WIDTH = 55;
+    private static final int X_PHASE_WIDTH = 63;
     private static final int STACK_MIN_CARDS_OFFSET_Y = 7;  // TODO: Size bui GUISize value
 
     private static final String CMD_AUTO_ORDER_FIRST = "cmdAutoOrderFirst";
@@ -1895,7 +1895,7 @@ public final class GamePanel extends javax.swing.JPanel {
         jPhases = new JPanel();
         jPhases.setBackground(new Color(0, 0, 0, 0));
         jPhases.setLayout(null);
-        jPhases.setPreferredSize(new Dimension(X_PHASE_WIDTH, 435));
+        jPhases.setPreferredSize(new Dimension(X_PHASE_WIDTH, 295));
 
         MouseAdapter phasesMouseAdapter = new MouseAdapter() {
             @Override
@@ -1914,7 +1914,7 @@ public final class GamePanel extends javax.swing.JPanel {
         for (String name : hoverButtons.keySet()) {
             HoverButton hoverButton = hoverButtons.get(name);
             hoverButton.setAlignmentX(LEFT_ALIGNMENT);
-            hoverButton.setBounds(X_PHASE_WIDTH - 36, i * 36, 36, 36);
+            hoverButton.setBounds(X_PHASE_WIDTH - 48, i * 24, 63, 24);
             jPhases.add(hoverButton);
             i++;
         }
@@ -2234,10 +2234,10 @@ public final class GamePanel extends javax.swing.JPanel {
         if (hoverButtons == null) {
             hoverButtons = new LinkedHashMap<>();
         }
-        Rectangle rect = new Rectangle(36, 36);
+        Rectangle rect = new Rectangle(63, 24);
         HoverButton button = new HoverButton("", ImageManagerImpl.getInstance().getPhaseImage(name), rect);
         button.setToolTipText(name.replaceAll("_", " "));
-        button.setPreferredSize(new Dimension(36, 36));
+        button.setPreferredSize(new Dimension(63, 24));
         button.addMouseListener(mouseAdapter);
         hoverButtons.put(name, button);
     }
