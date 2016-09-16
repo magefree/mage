@@ -365,7 +365,7 @@ public class CardPanelComponentImpl extends CardPanel {
         if (!key.hasImage) {
             g2d.setColor(new Color(30, 200, 200, 120));
         } else {
-            g2d.setColor(new Color(0, 0, 0, 255));
+            g2d.setColor(new Color(0, 0, 0, 0));
         }
 
         int cornerSize = Math.max(4, Math.round(cardWidth * ROUNDED_CORNER_SIZE));
