@@ -15,7 +15,7 @@ import java.util.UUID;
 public class GlimmerOfGenius extends CardImpl {
 
     public GlimmerOfGenius(final UUID ownerId){
-        super(ownerId,49,"Glimmer of Genius", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT},"{3U}");
+        super(ownerId,49,"Glimmer of Genius", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT},"{3}{U}");
         this.expansionSetCode = "KLD";
         this.getSpellAbility().addEffect(new ScryEffect(2));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

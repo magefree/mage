@@ -16,7 +16,7 @@ import java.util.UUID;
 public class VedalkenBlademaster extends CardImpl {
 
     public VedalkenBlademaster(final UUID ownerId){
-        super(ownerId, 68, "Vedalken Blademaster", Rarity.COMMON, new CardType[]{CardType.CREATURE},"{2U}");
+        super(ownerId, 68, "Vedalken Blademaster", Rarity.COMMON, new CardType[]{CardType.CREATURE},"{2}{U}");
 
         this.expansionSetCode = "KLD";
 

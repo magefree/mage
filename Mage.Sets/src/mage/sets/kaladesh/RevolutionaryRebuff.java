@@ -23,14 +23,14 @@ public class RevolutionaryRebuff extends CardImpl {
 
 
     public RevolutionaryRebuff(final UUID ownerId){
-        super(ownerId, 61, "Revolutionary Rebuff", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1U}");
+        super(ownerId, 61, "Revolutionary Rebuff", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1}{U}");
         this.expansionSetCode = "KLD";
 
         FilterSpell filter = new FilterSpell();
         filter.add(Predicates.not(new SubtypePredicate("Artifact")));
 
         this.getSpellAbility().addTarget(new TargetSpell(filter) );
-        
+
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));
 
     }
