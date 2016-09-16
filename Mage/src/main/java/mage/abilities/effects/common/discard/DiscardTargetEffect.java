@@ -36,7 +36,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-import mage.util.StringUtil;
 
 /**
  *
@@ -96,7 +95,7 @@ public class DiscardTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (StringUtil.isNotEmpty(staticText)) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
@@ -115,7 +114,7 @@ public class DiscardTargetEffect extends OneShotEffect {
             sb.append(" at random");
         }
         String message = amount.getMessage();
-        if (StringUtil.isNotEmpty(message)) {
+        if (message.length() > 0) {
             sb.append(" for each ");
         }
         sb.append(message);

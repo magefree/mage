@@ -44,7 +44,6 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Targets;
 import mage.util.ManaUtil;
-import mage.util.StringUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -321,13 +320,13 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 this.add(cost.copy());
             }
         } else {
-            if (StringUtil.isNotEmpty(mana)) {
+            if (mana == null || mana.isEmpty()) {
                 return;
             }
             String[] symbols = mana.split("^\\{|\\}\\{|\\}$");
             int modifierForX = 0;
             for (String symbol : symbols) {
-                if (StringUtil.isNotEmpty(symbol)) {
+                if (symbol.length() > 0) {
                     if (symbol.length() == 1 || isNumeric(symbol)) {
                         if (Character.isDigit(symbol.charAt(0))) {
                             this.add(new GenericManaCost(Integer.valueOf(symbol)));

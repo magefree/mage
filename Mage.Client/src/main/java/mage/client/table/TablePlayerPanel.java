@@ -69,7 +69,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
                 cbPlayerType.setSelectedIndex(cbPlayerType.getItemCount() - 1);
             }
             else {
-                int index = Integer.parseInt(Config.defaultOtherPlayerIndex);
+                Integer index = Integer.parseInt(Config.defaultOtherPlayerIndex); 
                 cbPlayerType.setSelectedIndex(index);
             }
         }
@@ -78,7 +78,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         } 
     }
 
-    public boolean joinTable(UUID roomId, UUID tableId)  {
+    public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {
         if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
             return SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (String)this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()),"");
          }

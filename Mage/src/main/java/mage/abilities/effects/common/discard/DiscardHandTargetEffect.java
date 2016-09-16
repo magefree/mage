@@ -35,7 +35,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.StringUtil;
 
 /**
  *
@@ -81,11 +80,11 @@ public class DiscardHandTargetEffect extends OneShotEffect {
     
     @Override
     public String getText(Mode mode) {
-        if (StringUtil.isNotEmpty(staticText)) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (StringUtil.isNotEmpty(targetDescription)) {
+        if (targetDescription.length() > 0) {
             sb.append(targetDescription);
         } else {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());

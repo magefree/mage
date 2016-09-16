@@ -51,7 +51,7 @@ public class MageTextArea extends JEditorPane {
         text = text.replace("\r\n", "<div style='font-size:5pt'></div>");
 
         final String basicText = ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.DIALOG);
-        if (!text.isEmpty()) {
+        if (text.length() > 0) {
             buffer.append(basicText);
         }
 

@@ -163,7 +163,7 @@ public class CardArea extends JPanel implements MouseListener {
     private void loadCardsMany(CardsView showCards, BigCard bigCard, UUID gameId) {
         int rowsOfCards = 20;
         int columns = 1;
-        if (showCards != null && !showCards.isEmpty()) {
+        if (showCards != null && showCards.size() > 0) {
             Rectangle rectangle = new Rectangle(cardDimension.width, cardDimension.height);
             int count = 0;
             for (CardView card : showCards.values()) {

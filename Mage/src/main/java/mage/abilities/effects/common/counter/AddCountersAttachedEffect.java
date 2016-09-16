@@ -36,7 +36,6 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-import mage.util.StringUtil;
 
 /**
  *
@@ -102,7 +101,7 @@ public class AddCountersAttachedEffect extends OneShotEffect {
         }
         sb.append(counter.getName().toLowerCase()).append(" counter on ");
         sb.append(textEnchanted);
-        if (StringUtil.isNotEmpty(amount.getMessage())) {
+        if (amount.getMessage().length() > 0) {
             sb.append(" for each ").append(amount.getMessage());
         }
         staticText = sb.toString();
