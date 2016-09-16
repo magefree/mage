@@ -36,6 +36,7 @@ import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -81,7 +82,7 @@ class CabalTherapyEffect extends OneShotEffect {
 
     public CabalTherapyEffect() {
         super(Outcome.Discard);
-        staticText = "Name a nonland card. Search target player's hand for all cards with that name and discard them";
+        staticText = "Name a nonland card. Target player reveals his or her hand and discards all cards with that name";
     }
 
     public CabalTherapyEffect(final CabalTherapyEffect effect) {
@@ -95,12 +96,14 @@ class CabalTherapyEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (targetPlayer != null && controller != null && sourceObject != null) {
             String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
-            for (Card card : targetPlayer.getHand().getCards(game)) {
+            Cards hand = targetPlayer.getHand();
+
+            for (Card card : hand.getCards(game)) {
                 if (card.getName().equals(cardName)) {
                     targetPlayer.discard(card, source, game);
                 }
             }
-            controller.lookAtCards(sourceObject.getName() + " Hand", targetPlayer.getHand(), game);
+            targetPlayer.revealCards("Cabal Therapy", hand, game);
         }
         return true;
     }
