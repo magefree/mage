@@ -41,8 +41,8 @@ public AdamStyborskisPauperCube() {
         cubeCards.add(new CardIdentity("Act of Treason", ""));
         cubeCards.add(new CardIdentity("Adventuring Gear", ""));
         cubeCards.add(new CardIdentity("Aerie Ouphes", ""));
-        cubeCards.add(new CardIdentity("AEther Adept", ""));
-        cubeCards.add(new CardIdentity("AEthersnipe", ""));
+        cubeCards.add(new CardIdentity("Aether Adept", ""));
+        cubeCards.add(new CardIdentity("Aethersnipe", ""));
         cubeCards.add(new CardIdentity("Agony Warp", ""));
         cubeCards.add(new CardIdentity("Aim High", ""));
         cubeCards.add(new CardIdentity("Ambush Viper", ""));

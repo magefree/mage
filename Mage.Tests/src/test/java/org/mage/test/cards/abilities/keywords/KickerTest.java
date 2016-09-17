@@ -70,43 +70,43 @@ public class KickerTest extends CardTestPlayerBase {
      *
      */
     /**
-     * AEther Figment Creature — Illusion 1/1, 1U (2) Kicker {3} (You may pay an
-     * additional {3} as you cast this spell.) AEther Figment can't be blocked.
-     * If AEther Figment was kicked, it enters the battlefield with two +1/+1
+     * Aether Figment Creature — Illusion 1/1, 1U (2) Kicker {3} (You may pay an
+     * additional {3} as you cast this spell.) Aether Figment can't be blocked.
+     * If Aether Figment was kicked, it enters the battlefield with two +1/+1
      * counters on it.
      *
      */
     @Test
     public void testUseKicker() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Zone.HAND, playerA, "AEther Figment");
+        addCard(Zone.HAND, playerA, "Aether Figment");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "AEther Figment");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
         setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "AEther Figment", 1);
-        assertCounterCount("AEther Figment", CounterType.P1P1, 2);
-        assertPowerToughness(playerA, "AEther Figment", 3, 3);
+        assertPermanentCount(playerA, "Aether Figment", 1);
+        assertCounterCount("Aether Figment", CounterType.P1P1, 2);
+        assertPowerToughness(playerA, "Aether Figment", 3, 3);
 
     }
 
     @Test
     public void testDontUseKicker() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Zone.HAND, playerA, "AEther Figment");
+        addCard(Zone.HAND, playerA, "Aether Figment");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "AEther Figment");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
         setChoice(playerA, "No");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, "AEther Figment", 1);
-        assertCounterCount("AEther Figment", CounterType.P1P1, 0);
-        assertPowerToughness(playerA, "AEther Figment", 1, 1);
+        assertPermanentCount(playerA, "Aether Figment", 1);
+        assertCounterCount("Aether Figment", CounterType.P1P1, 0);
+        assertPowerToughness(playerA, "Aether Figment", 1, 1);
 
     }
 

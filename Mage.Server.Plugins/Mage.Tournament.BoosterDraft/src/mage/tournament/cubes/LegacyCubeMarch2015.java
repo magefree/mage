@@ -43,7 +43,7 @@ public class LegacyCubeMarch2015 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Acidic Slime",""));
         cubeCards.add(new DraftCube.CardIdentity("Act of Aggression",""));
         cubeCards.add(new DraftCube.CardIdentity("Adarkar Wastes",""));
-        cubeCards.add(new DraftCube.CardIdentity("AEther Vial",""));
+        cubeCards.add(new DraftCube.CardIdentity("Aether Vial",""));
         cubeCards.add(new DraftCube.CardIdentity("Ajani Goldmane",""));
         cubeCards.add(new DraftCube.CardIdentity("Ajani Vengeant",""));
         cubeCards.add(new DraftCube.CardIdentity("Ajani, Caller of the Pride",""));

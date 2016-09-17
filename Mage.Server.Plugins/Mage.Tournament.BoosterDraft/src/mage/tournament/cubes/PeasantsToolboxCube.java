@@ -43,10 +43,10 @@ public class PeasantsToolboxCube extends DraftCube {
         cubeCards.add(new CardIdentity("Acidic Slime", ""));
         cubeCards.add(new CardIdentity("Act of Aggression", ""));
         cubeCards.add(new CardIdentity("Aerie Worshippers", ""));
-        cubeCards.add(new CardIdentity("AEther Figment", ""));
-        cubeCards.add(new CardIdentity("AEther Vial", ""));
-        cubeCards.add(new CardIdentity("AEtherize", ""));
-        cubeCards.add(new CardIdentity("AEthersnipe", ""));
+        cubeCards.add(new CardIdentity("Aether Figment", ""));
+        cubeCards.add(new CardIdentity("Aether Vial", ""));
+        cubeCards.add(new CardIdentity("Aetherize", ""));
+        cubeCards.add(new CardIdentity("Aethersnipe", ""));
         cubeCards.add(new CardIdentity("Affa Guard Hound", ""));
         cubeCards.add(new CardIdentity("Agent of Acquisitions", ""));
         cubeCards.add(new CardIdentity("Agent of Horizons", ""));

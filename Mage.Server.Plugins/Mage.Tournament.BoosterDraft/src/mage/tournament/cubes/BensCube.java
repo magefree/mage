@@ -37,16 +37,16 @@ public class BensCube extends DraftCube {
 
     public BensCube() {
         super("Ben's Cube (720 cards)"); // http://cubetutor.com/viewcube/1
-        
+
         cubeCards.add(new CardIdentity("Abrupt Decay", ""));
         cubeCards.add(new CardIdentity("Abyssal Persecutor", ""));
         cubeCards.add(new CardIdentity("Academy Rector", ""));
         cubeCards.add(new CardIdentity("Academy Ruins", ""));
         cubeCards.add(new CardIdentity("Accorder Paladin", ""));
         cubeCards.add(new CardIdentity("Acidic Slime", ""));
-        cubeCards.add(new CardIdentity("AEther Adept", ""));
-        cubeCards.add(new CardIdentity("AEther Vial", ""));
-        cubeCards.add(new CardIdentity("AEtherling", ""));
+        cubeCards.add(new CardIdentity("Aether Adept", ""));
+        cubeCards.add(new CardIdentity("Aether Vial", ""));
+        cubeCards.add(new CardIdentity("Aetherling", ""));
         cubeCards.add(new CardIdentity("Agony Warp", ""));
         cubeCards.add(new CardIdentity("Ajani Goldmane", ""));
         cubeCards.add(new CardIdentity("Ajani Steadfast", ""));
