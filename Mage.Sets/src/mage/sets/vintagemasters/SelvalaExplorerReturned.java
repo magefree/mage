@@ -31,16 +31,15 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.ParleyCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -62,7 +61,8 @@ public class SelvalaExplorerReturned extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Parley - {T}: Each player reveals the top card of his or her library. For each nonland card revealed this way, add {G} to your mana pool and you gain 1 life. Then each player draws a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SelvalaExplorerReturnedEffect(), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new SelvalaExplorerReturnedEffect(), new TapSourceCost());
+
         ability.setAbilityWord(AbilityWord.PARLEY);
         Effect effect = new DrawCardAllEffect(1);
         effect.setText("Then each player draws a card");
@@ -80,12 +80,12 @@ public class SelvalaExplorerReturned extends CardImpl {
     }
 }
 
-class SelvalaExplorerReturnedEffect extends OneShotEffect {
+class SelvalaExplorerReturnedEffect extends ManaEffect {
 
     public SelvalaExplorerReturnedEffect() {
-        super(Outcome.Benefit);
         this.staticText = "Each player reveals the top card of his or her library. For each nonland card revealed this way, add {G} to your mana pool and you gain 1 life";
     }
+
 
     public SelvalaExplorerReturnedEffect(final SelvalaExplorerReturnedEffect effect) {
         super(effect);
@@ -100,13 +100,19 @@ class SelvalaExplorerReturnedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int parley = ParleyCount.getInstance().calculate(game, source, this);
-            if (parley > 0) {
-                controller.getManaPool().addMana(new Mana(0, parley, 0, 0, 0, 0, 0, 0), game, source);
-                controller.gainLife(parley, game);
+            Mana parley = getMana(game, source);
+            if (parley.getAny() > 0) {
+                controller.getManaPool().addMana(parley, game, source);
+                controller.gainLife(parley.getAny(), game);
             }
             return true;
         }
         return false;
+    }
+
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return Mana.GreenMana(ParleyCount.getInstance().calculate(game, source, this));
     }
 }
