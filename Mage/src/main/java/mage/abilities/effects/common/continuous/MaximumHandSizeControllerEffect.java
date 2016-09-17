@@ -173,8 +173,10 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
         } else if ((handSize instanceof StaticValue && ((StaticValue) handSize).getValue() == Integer.MAX_VALUE) || !(handSize instanceof StaticValue)) {
             sb.append(" is ");
         }
-        if ((handSize instanceof StaticValue && ((StaticValue) handSize).getValue() != Integer.MAX_VALUE) || !(handSize instanceof StaticValue)) {
+        if ((handSize instanceof StaticValue && ((StaticValue) handSize).getValue() != Integer.MAX_VALUE)) {
             sb.append(CardUtil.numberToText(((StaticValue) handSize).getValue()));
+        } else if (!(handSize instanceof StaticValue)) {
+            sb.append(handSize.getMessage());
         }
         if (duration == Duration.EndOfGame) {
             sb.append(" for the rest of the game");
