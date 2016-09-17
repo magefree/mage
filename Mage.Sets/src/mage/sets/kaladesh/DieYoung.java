@@ -99,6 +99,7 @@ class DieYoungEffect extends OneShotEffect {
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
                     Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
                     if (targetCreature != null) {
+                        numberToPayed *= -1;
                         ContinuousEffect effect = new BoostTargetEffect(numberToPayed, numberToPayed, Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(targetCreature, game));
                         game.addEffect(effect, source);

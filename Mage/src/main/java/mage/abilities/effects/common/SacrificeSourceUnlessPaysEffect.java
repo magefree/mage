@@ -29,18 +29,19 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
+        if (controller != null && sourcePermanent != null) {
             StringBuilder sb = new StringBuilder(cost.getText()).append("?");
             if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ")) {
                 sb.insert(0, "Pay ");
             }
             String message = CardUtil.replaceSourceName(sb.toString(), sourcePermanent.getLogName());
             message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
-            if (player.chooseUse(Outcome.Benefit, message, source, game)) {
+            if (controller.chooseUse(Outcome.Benefit, message, source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                    game.informPlayers(controller.getLogName() + " pays " + cost.toString());
                     return true;
                 }
             }

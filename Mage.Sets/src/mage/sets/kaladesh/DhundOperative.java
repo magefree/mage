@@ -60,7 +60,7 @@ public class DhundOperative extends CardImpl {
 
         // As long as you control an artifact, Dhund Operative gets +1/+0 and has deathtouch.
         Effect boostEffect = new ConditionalContinuousEffect(
-                new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
+                new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),
                 "As long as you control an artifact, {this} gets +1/+0");
         Effect gainAbilityEffect = new ConditionalContinuousEffect(
