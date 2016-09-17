@@ -146,9 +146,9 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
                 }
-                while (!topCards.isEmpty()) {
+                while (!topCards.isEmpty() && controller.isInGame()) {
                     Card libCard = topCards.getRandom(game);
-                    topCards.remove(card);
+                    topCards.remove(libCard);
                     controller.moveCardToLibraryWithInfo(libCard, source.getSourceId(), game, Zone.LIBRARY, false, false);
                 }
             }
