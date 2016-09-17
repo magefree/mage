@@ -31,10 +31,10 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -54,7 +54,7 @@ public class CoalGolem extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {3}, Sacrifice Coal Golem: Add {R}{R}{R} to your mana pool.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(3)),new GenericManaCost(3));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(3),new GenericManaCost(3));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

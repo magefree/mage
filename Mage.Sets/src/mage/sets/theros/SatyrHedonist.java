@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -55,8 +56,8 @@ public class SatyrHedonist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, Sacrifice Satyr Hedonist: Add {R}{R}{R} to your mana pool.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(3)),new ManaCostsImpl("{R}"));
-        ability.addCost(new SacrificeSourceCost());
+        SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(3), new ManaCostsImpl("{R}"));
+        ability .addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 
     }

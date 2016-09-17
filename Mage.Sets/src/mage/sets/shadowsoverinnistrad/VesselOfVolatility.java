@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -50,7 +51,7 @@ public class VesselOfVolatility extends CardImpl {
         this.expansionSetCode = "SOI";
 
         // {1}{R}, Sacrifice Vessel of Volatility: Add {R}{R}{R}{R} to your mana pool.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(4)), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(4), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
