@@ -43,9 +43,8 @@ import mage.constants.Rarity;
 public class GlimmerOfGenius extends CardImpl {
 
     public GlimmerOfGenius(UUID ownerId) {
-        super(ownerId, 49, "Glimmer of Genius", Rarity.UNCOMMON, new CardType[]{}, "{3}{U}");
+        super(ownerId, 49, "Glimmer of Genius", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "KLD";
-        this.supertype.add("instant");
 
         // Scry 2, then draw two card. You get {E}{E}.
         this.getSpellAbility().addEffect(new ScryEffect(2));
