@@ -29,6 +29,8 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -48,7 +50,7 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
         SET, INCREASE, REDUCE
     };
 
-    protected int handSize;
+    protected DynamicValue handSize;
     protected HandSizeModification handSizeModification;
     protected TargetController targetController;
 
@@ -63,6 +65,10 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
     }
 
     public MaximumHandSizeControllerEffect(int handSize, Duration duration, HandSizeModification handSizeModification, TargetController targetController) {
+        this(new StaticValue(handSize), duration, handSizeModification, targetController);
+    }
+
+    public MaximumHandSizeControllerEffect(DynamicValue handSize, Duration duration, HandSizeModification handSizeModification, TargetController targetController) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, defineOutcome(handSizeModification, targetController));
         this.handSize = handSize;
         this.handSizeModification = handSizeModification;
@@ -98,16 +104,16 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
             switch (targetController) {
                 case ANY:
                     for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                        setHandSize(game, playerId);
+                        setHandSize(game, source, playerId);
                     }
                     break;
                 case OPPONENT:
                     for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                        setHandSize(game, playerId);
+                        setHandSize(game, source, playerId);
                     }
                     break;
                 case YOU:
-                    setHandSize(game, source.getControllerId());
+                    setHandSize(game, source, source.getControllerId());
                     break;
                 default:
                     throw new UnsupportedOperationException("Not supported yet.");
@@ -117,18 +123,18 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
         return false;
     }
 
-    private void setHandSize(Game game, UUID playerId) {
+    private void setHandSize(Game game, Ability source, UUID playerId) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
             switch (handSizeModification) {
                 case SET:
-                    player.setMaxHandSize(handSize);
+                    player.setMaxHandSize(handSize.calculate(game, source, this));
                     break;
                 case INCREASE:
-                    player.setMaxHandSize(player.getMaxHandSize() + handSize);
+                    player.setMaxHandSize(player.getMaxHandSize() + handSize.calculate(game, source, this));
                     break;
                 case REDUCE:
-                    player.setMaxHandSize(player.getMaxHandSize() - handSize);
+                    player.setMaxHandSize(player.getMaxHandSize() - handSize.calculate(game, source, this));
                     break;
             }
         }
@@ -138,21 +144,21 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
         StringBuilder sb = new StringBuilder();
         switch (targetController) {
             case ANY:
-                if (handSize == Integer.MAX_VALUE) {
+                if (handSize instanceof StaticValue && ((StaticValue) handSize).getValue() == Integer.MAX_VALUE) {
                     sb.append("All players have no ");
                 } else {
                     sb.append("All players ");
                 }
                 break;
             case OPPONENT:
-                if (handSize == Integer.MAX_VALUE) {
+                if (handSize instanceof StaticValue && ((StaticValue) handSize).getValue() == Integer.MAX_VALUE) {
                     sb.append("Each opponent has no ");
                 } else {
                     sb.append("Each opponent's ");
                 }
                 break;
             case YOU:
-                if (handSize == Integer.MAX_VALUE) {
+                if (handSize instanceof StaticValue && ((StaticValue) handSize).getValue() == Integer.MAX_VALUE) {
                     sb.append("You have no ");
                 } else {
                     sb.append("Your ");
@@ -164,11 +170,11 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
             sb.append(" is increased by ");
         } else if (handSizeModification.equals(HandSizeModification.REDUCE)) {
             sb.append(" is reduced by ");
-        } else if (handSize != Integer.MAX_VALUE) {
+        } else if ((handSize instanceof StaticValue && ((StaticValue) handSize).getValue() == Integer.MAX_VALUE) || !(handSize instanceof StaticValue)) {
             sb.append(" is ");
         }
-        if (handSize != Integer.MAX_VALUE) {
-            sb.append(CardUtil.numberToText(handSize));
+        if ((handSize instanceof StaticValue && ((StaticValue) handSize).getValue() != Integer.MAX_VALUE) || !(handSize instanceof StaticValue)) {
+            sb.append(CardUtil.numberToText(((StaticValue) handSize).getValue()));
         }
         if (duration == Duration.EndOfGame) {
             sb.append(" for the rest of the game");

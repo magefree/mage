@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
@@ -39,17 +38,17 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SacrificeXTargetCost extends VariableCostImpl  {
+public class SacrificeXTargetCost extends VariableCostImpl {
 
     protected FilterControlledPermanent filter;
-    
+
     public SacrificeXTargetCost(FilterControlledPermanent filter) {
         this(filter, false);
     }
 
     public SacrificeXTargetCost(FilterControlledPermanent filter, boolean additionalCostText) {
-        super(new StringBuilder(filter.getMessage()).append(" to sacrifice").toString());
-        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, sacrifice ":"Sacrifice ").append(xText).append(" ").append(filter.getMessage()).toString();
+        super(filter.getMessage() + " to sacrifice");
+        this.text = (additionalCostText ? "As an additional cost to cast {source}, sacrifice " : "Sacrifice ") + xText + " " + filter.getMessage();
         this.filter = filter;
     }
 

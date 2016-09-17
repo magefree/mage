@@ -51,10 +51,6 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  */
 public class ScrapyardMongrel extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledArtifactPermanent();
-    
-    private static final String rule = "As long as you control an artifact, {this} gets +2/+0 and has trample";
-    
     public ScrapyardMongrel(UUID ownerId) {
         super(ownerId, 160, "Scrapyard Mongrel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "M15";
@@ -65,6 +61,7 @@ public class ScrapyardMongrel extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As long as you control an artifact, Scrapyard Mongrel gets +2/+0 and has trample.
+        FilterPermanent filter = new FilterControlledArtifactPermanent();
         Effect boostEffect = new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),

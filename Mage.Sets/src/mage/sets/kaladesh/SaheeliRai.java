@@ -47,10 +47,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
@@ -62,11 +60,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author emerald000
  */
 public class SaheeliRai extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature you control");
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
-    }
 
     public SaheeliRai(UUID ownerId) {
         super(ownerId, 186, "Saheeli Rai", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}");
@@ -84,11 +77,11 @@ public class SaheeliRai extends CardImpl {
 
         // -2: Create a token that's a copy of target artifact or creature you control, except it's an artifact in addition to its other types. That token gains haste. Exile it at the beginning of the next end step.
         ability = new LoyaltyAbility(new SaheeliRaiCreateTokenEffect(), -2);
-        ability.addTarget(new TargetControlledPermanent(filter));
+        ability.addTarget(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
 
         // -7: Search your library for up to three artifact cards with different names, put them onto the battlefield, then shuffle your library.
-        this.addAbility(new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new SaheeliRaiTarget()) , -7));
+        this.addAbility(new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new SaheeliRaiTarget()), -7));
     }
 
     public SaheeliRai(final SaheeliRai card) {

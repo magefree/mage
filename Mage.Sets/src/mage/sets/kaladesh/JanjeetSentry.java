@@ -40,9 +40,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
@@ -50,15 +48,6 @@ import mage.target.TargetPermanent;
  * @author LevelX2
  */
 public class JanjeetSentry extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)
-        ));
-    }
 
     public JanjeetSentry(UUID ownerId) {
         super(ownerId, 53, "Janjeet Sentry", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -75,7 +64,7 @@ public class JanjeetSentry extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new TapSourceCost());
         ability.addCost(new PayEnergyCost(2));
         this.addAbility(ability);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
     }
 
     public JanjeetSentry(final JanjeetSentry card) {

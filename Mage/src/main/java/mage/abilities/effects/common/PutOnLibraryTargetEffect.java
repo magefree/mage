@@ -30,19 +30,18 @@ package mage.abilities.effects.common;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.UUID;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.target.Target;
 import mage.util.CardUtil;
 
@@ -149,16 +148,14 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        sb.append("Put ");
+        sb.append("put ");
         if (target.getMaxNumberOfTargets() == 0) {
             sb.append("any number of ");
-        } else {
-            if (target.getMaxNumberOfTargets() != 1 || target.getNumberOfTargets() != 1) {
-                if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {
-                    sb.append("up to ");
-                }
-                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+        } else if (target.getMaxNumberOfTargets() != 1 || target.getNumberOfTargets() != 1) {
+            if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {
+                sb.append("up to ");
             }
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
         sb.append(onTop ? "top" : "the bottom").append(" of its owner's library");

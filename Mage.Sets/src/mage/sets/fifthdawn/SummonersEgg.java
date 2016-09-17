@@ -97,7 +97,8 @@ class SummonersEggImprintEffect extends OneShotEffect {
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getIdName() +" (Imprint)", source.getSourceId(), game, Zone.HAND, true);
+                        card.setFaceDown(true, game);
+                        controller.moveCardsToExile(card, source, game, false, source.getSourceId(), sourcePermanent.getIdName() + " (Imprint)");
                         card.setFaceDown(true, game);
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
@@ -110,7 +111,7 @@ class SummonersEggImprintEffect extends OneShotEffect {
             return true;
         }
         return false;
-        
+
     }
 
     @Override
@@ -144,10 +145,10 @@ class SummonersEggPutOntoBattlefieldEffect extends OneShotEffect {
             if (SummonersEgg != null && SummonersEgg.getImprinted() != null && !SummonersEgg.getImprinted().isEmpty()) {
                 Card imprintedCard = game.getCard(SummonersEgg.getImprinted().get(0));
                 if (imprintedCard != null && game.getState().getZone(imprintedCard.getId()).equals(Zone.EXILED)) {
-                    //turn the exiled card face up. 
+                    //turn the exiled card face up.
                     imprintedCard.turnFaceUp(game, source.getControllerId());
-                    //If it's a creature card, 
-                    if(imprintedCard.getCardType().contains(CardType.CREATURE)){
+                    //If it's a creature card,
+                    if (imprintedCard.getCardType().contains(CardType.CREATURE)) {
                         //put it onto the battlefield under your control
                         imprintedCard.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
                     }

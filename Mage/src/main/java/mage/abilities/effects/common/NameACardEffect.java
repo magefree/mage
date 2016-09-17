@@ -50,6 +50,7 @@ public class NameACardEffect extends OneShotEffect {
     public enum TypeOfName {
 
         ALL,
+        NON_ARTFIACT_AND_NON_LAND_NAME,
         NON_LAND_NAME,
         NON_LAND_AND_NON_CREATURE_NAME,
         CREATURE_NAME
@@ -81,6 +82,10 @@ public class NameACardEffect extends OneShotEffect {
                 case ALL:
                     cardChoice.setChoices(CardRepository.instance.getNames());
                     cardChoice.setMessage("Name a card");
+                    break;
+                case NON_ARTFIACT_AND_NON_LAND_NAME:
+                    cardChoice.setChoices(CardRepository.instance.getNonArtifactAndNonLandNames());
+                    cardChoice.setMessage("Name a non artifact and non land card");
                     break;
                 case NON_LAND_AND_NON_CREATURE_NAME:
                     cardChoice.setChoices(CardRepository.instance.getNonLandAndNonCreatureNames());
@@ -124,6 +129,9 @@ public class NameACardEffect extends OneShotEffect {
         switch (typeOfName) {
             case ALL:
                 sb.append("card");
+                break;
+            case NON_ARTFIACT_AND_NON_LAND_NAME:
+                sb.append("nonartifact, nonland card");
                 break;
             case NON_LAND_AND_NON_CREATURE_NAME:
                 sb.append("card other than a creature or a land card");

@@ -55,7 +55,7 @@ public class ShrewdNegotiation extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                        new CardTypePredicate(CardType.CREATURE)));
+                new CardTypePredicate(CardType.CREATURE)));
     }
 
     public ShrewdNegotiation(UUID ownerId) {

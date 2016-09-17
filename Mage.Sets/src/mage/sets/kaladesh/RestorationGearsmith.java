@@ -35,9 +35,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -45,11 +43,6 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author emerald000
  */
 public class RestorationGearsmith extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("artifact or creature card");
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.CREATURE)));
-    }
 
     public RestorationGearsmith(UUID ownerId) {
         super(ownerId, 185, "Restoration Gearsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
@@ -61,7 +54,7 @@ public class RestorationGearsmith extends CardImpl {
 
         // When Restoration Gearsmith enters the battlefield, return target artifact or creature card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
     }
 

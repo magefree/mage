@@ -42,7 +42,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
@@ -199,6 +198,28 @@ public enum CardRepository {
             qb.distinct().selectColumns("name");
             Where where = qb.where();
             where.and(where.not().like("types", '%' + CardType.CREATURE.name() + '%'), where.not().like("types", '%' + CardType.LAND.name() + '%'));
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                int result = card.getName().indexOf(" // ");
+                if (result > 0) {
+                    names.add(card.getName().substring(0, result));
+                    names.add(card.getName().substring(result + 4));
+                } else {
+                    names.add(card.getName());
+                }
+            }
+        } catch (SQLException ex) {
+        }
+        return names;
+    }
+
+    public Set<String> getNonArtifactAndNonLandNames() {
+        Set<String> names = new TreeSet<>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("name");
+            Where where = qb.where();
+            where.and(where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'), where.not().like("types", '%' + CardType.LAND.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");
