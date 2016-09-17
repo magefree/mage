@@ -71,7 +71,7 @@ public class ConsulsShieldguard extends CardImpl {
         // Whenever Consul's Shiedguard attacks, you may pay {E}. If you do, another target attacking creature gets indestructible until end of turn.
         DoIfCostPaid doIfCostPaidEffect = new DoIfCostPaid(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new PayEnergyCost(1));
         Ability ability = new AttacksTriggeredAbility(doIfCostPaidEffect, false,
-                "Whenever {this} attacks you may pay {E}. If you do, another target attacking creature gets indestructible until end of turn.");
+                "Whenever {this} attacks, you may pay {E}. If you do, another target attacking creature gets indestructible until end of turn.");
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 

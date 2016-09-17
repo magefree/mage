@@ -27,17 +27,11 @@
  */
 package mage.sets.urzassaga;
 
-import java.util.Set;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.discard.DiscardHandDrawSameNumberSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -49,9 +43,8 @@ public class TolarianWinds extends CardImpl {
         super(ownerId, 104, "Tolarian Winds", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "USG";
 
-
         // Discard all the cards in your hand, then draw that many cards.
-        this.getSpellAbility().addEffect(new TolarianWindsEffect());
+        this.getSpellAbility().addEffect(new DiscardHandDrawSameNumberSourceEffect());
     }
 
     public TolarianWinds(final TolarianWinds card) {
@@ -61,37 +54,5 @@ public class TolarianWinds extends CardImpl {
     @Override
     public TolarianWinds copy() {
         return new TolarianWinds(this);
-    }
-}
-
-class TolarianWindsEffect extends OneShotEffect {
-
-    TolarianWindsEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Discard all the cards in your hand, then draw that many cards";
-    }
-
-    TolarianWindsEffect(final TolarianWindsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TolarianWindsEffect copy() {
-        return new TolarianWindsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Set<Card> cardsInHand = player.getHand().getCards(game);
-            int amount = cardsInHand.size();
-            for (Card card : cardsInHand) {
-                player.discard(card, source, game);
-            }
-            player.drawCards(amount, game);
-            return true;
-        }
-        return false;
     }
 }

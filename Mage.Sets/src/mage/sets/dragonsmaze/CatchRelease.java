@@ -25,24 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dragonsmaze;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -56,28 +55,27 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
-/**
- *
- * @author LevelX2
- */
-
-
 public class CatchRelease extends SplitCard {
 
     public CatchRelease(UUID ownerId) {
-        super(ownerId, 125, "Catch", "Release", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{R}", "{4}{R}{W}",true);
+        super(ownerId, 125, "Catch", "Release", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{R}", "{4}{R}{W}", true);
         this.expansionSetCode = "DGM";
 
         // Catch
         // Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(new FilterPermanent()));
         getLeftHalfCard().getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        getLeftHalfCard().getSpellAbility().addEffect(new UntapTargetEffect());
+        Effect effect = new UntapTargetEffect();
+        effect.setText("Untap it");
+        this.getSpellAbility().addEffect(effect);
+        getLeftHalfCard().getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("It gains haste until end of turn");
+        getLeftHalfCard().getSpellAbility().addEffect(effect);
 
         // Release
         // Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker.
-        getRightHalfCard().getSpellAbility().addEffect(new ReleaseSacrificeEffect());   
+        getRightHalfCard().getSpellAbility().addEffect(new ReleaseSacrificeEffect());
 
     }
 

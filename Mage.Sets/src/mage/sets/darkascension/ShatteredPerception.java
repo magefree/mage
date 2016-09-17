@@ -27,20 +27,14 @@
  */
 package mage.sets.darkascension;
 
-import java.util.Set;
 import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.discard.DiscardHandDrawSameNumberSourceEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
-import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -52,9 +46,8 @@ public class ShatteredPerception extends CardImpl {
         super(ownerId, 104, "Shattered Perception", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "DKA";
 
-
         // Discard all the cards in your hand, then draw that many cards.
-        this.getSpellAbility().addEffect(new ShatteredPerceptionEffect());
+        this.getSpellAbility().addEffect(new DiscardHandDrawSameNumberSourceEffect());
         // Flashback {5}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}"), TimingRule.SORCERY));
     }
@@ -66,37 +59,5 @@ public class ShatteredPerception extends CardImpl {
     @Override
     public ShatteredPerception copy() {
         return new ShatteredPerception(this);
-    }
-}
-
-class ShatteredPerceptionEffect extends OneShotEffect {
-
-    public ShatteredPerceptionEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Discard all the cards in your hand, then draw that many cards";
-    }
-
-    public ShatteredPerceptionEffect(final ShatteredPerceptionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ShatteredPerceptionEffect copy() {
-        return new ShatteredPerceptionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Set<Card> cardsInHand = player.getHand().getCards(game);
-            int amount = cardsInHand.size();
-            for (Card card : cardsInHand) {
-                player.discard(card, source, game);
-            }
-            player.drawCards(amount, game);
-            return true;
-        }
-        return false;
     }
 }

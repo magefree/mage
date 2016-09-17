@@ -28,6 +28,7 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.TargetHasCardTypeCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -53,7 +54,7 @@ public class BuiltToLast extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new TargetHasCardTypeCondition(CardType.ARTIFACT),
+                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new LockedInCondition(new TargetHasCardTypeCondition(CardType.ARTIFACT)),
                 "If its an artifact creature, it gains indestructible until end of turn"));
 
     }

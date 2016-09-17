@@ -134,10 +134,12 @@ class JaliraMasterPolymorphistEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 controller.revealCards(sourceObject.getIdName(), cards, game);
             }
-            // put nonlegendary creature card to battlefield
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            // remove it from revealed card list
-            cards.remove(card);
+            if (card != null && filter.match(card, game)) {
+                // put nonlegendary creature card to battlefield
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                // remove it from revealed card list
+                cards.remove(card);
+            }
             // Put the rest on the bottom of your library in a random order
             while (cards.size() > 0) {
                 card = cards.getRandom(game);

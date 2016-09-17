@@ -27,7 +27,9 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,29 +44,17 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  * @author nantuko
  */
 public class GolemArtisan extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact creature");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
 
     public GolemArtisan(UUID ownerId) {
         super(ownerId, 159, "Golem Artisan", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
@@ -76,14 +66,12 @@ public class GolemArtisan extends CardImpl {
 
         // {2}: Target artifact creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(2));
-        Target target = new TargetPermanent(filter);
-        ability.addTarget(target);
+        ability.addTarget(new TargetArtifactPermanent(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT));
         this.addAbility(ability);
 
         // {2}: Target artifact creature gains your choice of flying, trample, or haste until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GolemArtisanEffect(), new GenericManaCost(2));
-        target = new TargetPermanent(filter);
-        ability.addTarget(target);
+        ability.addTarget(new TargetArtifactPermanent(StaticFilters.FILTER_ARTIFACT_CREATURE_PERMANENT));
         this.addAbility(ability);
 
     }
@@ -99,6 +87,7 @@ public class GolemArtisan extends CardImpl {
 }
 
 class GolemArtisanEffect extends OneShotEffect {
+
     GolemArtisanEffect() {
         super(Outcome.AddAbility);
         staticText = "Target artifact creature gains your choice of flying, trample, or haste until end of turn";

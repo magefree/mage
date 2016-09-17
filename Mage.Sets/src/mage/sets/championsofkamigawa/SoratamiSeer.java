@@ -25,28 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.discard.DiscardHandDrawSameNumberSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -69,7 +63,7 @@ public class SoratamiSeer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {4}, Return two lands you control to their owner's hand: Discard all the cards in your hand, then draw that many cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoratamiSeerEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardHandDrawSameNumberSourceEffect(), new GenericManaCost(4));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(2, 2, filter, false)));
         this.addAbility(ability);
     }
@@ -81,38 +75,6 @@ public class SoratamiSeer extends CardImpl {
     @Override
     public SoratamiSeer copy() {
         return new SoratamiSeer(this);
-    }
-
-}
-
-class SoratamiSeerEffect extends OneShotEffect {
-
-    public SoratamiSeerEffect() {
-        super(Outcome.DrawCard);
-        staticText = "Discard all the cards in your hand, then draw that many cards";
-    }
-
-    public SoratamiSeerEffect(final SoratamiSeerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int amount = player.getHand().getCards(game).size();
-            for (Card c : player.getHand().getCards(game)) {
-                player.discard(c, source, game);
-            }
-            player.drawCards(amount, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public SoratamiSeerEffect copy() {
-        return new SoratamiSeerEffect(this);
     }
 
 }
