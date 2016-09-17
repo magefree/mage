@@ -28,13 +28,15 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -59,15 +61,15 @@ public class ComaVeil extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Aura");
 
-
         // Enchant artifact or creature
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        // Enchanted permanent doesn't untap during its controller's untap step.
         EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
-        ability.addEffect(new DontUntapInControllersUntapStepEnchantedEffect("permanent"));
         this.addAbility(ability);
+
+        // Enchanted permanent doesn't untap during its controller's untap step.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
     }
 
     public ComaVeil(final ComaVeil card) {

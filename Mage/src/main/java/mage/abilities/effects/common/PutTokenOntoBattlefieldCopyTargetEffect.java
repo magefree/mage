@@ -66,6 +66,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
     private final int tokenPower;
     private final int tokenToughness;
     private boolean gainsFlying;
+    private boolean becomesArtifact;
 
     public PutTokenOntoBattlefieldCopyTargetEffect() {
         super(Outcome.PutCreatureInPlay);
@@ -78,6 +79,7 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.tokenPower = Integer.MIN_VALUE;
         this.tokenToughness = Integer.MIN_VALUE;
         this.gainsFlying = false;
+        this.becomesArtifact = false;
     }
 
     public PutTokenOntoBattlefieldCopyTargetEffect(UUID playerId) {
@@ -139,6 +141,11 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         this.tokenPower = effect.tokenPower;
         this.tokenToughness = effect.tokenToughness;
         this.gainsFlying = effect.gainsFlying;
+        this.becomesArtifact = effect.becomesArtifact;
+    }
+
+    public void setBecomesArtifact(boolean becomesArtifact) {
+        this.becomesArtifact = becomesArtifact;
     }
 
     @Override
@@ -182,7 +189,9 @@ public class PutTokenOntoBattlefieldCopyTargetEffect extends OneShotEffect {
         EmptyToken token = new EmptyToken();
         CardUtil.copyTo(token).from(copyFrom); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token);
-
+        if (becomesArtifact) {
+            token.getCardType().add(CardType.ARTIFACT);
+        }
         if (additionalCardType != null && !token.getCardType().contains(additionalCardType)) {
             token.getCardType().add(additionalCardType);
         }

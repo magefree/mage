@@ -28,25 +28,21 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 
 /**
  * @author Loki
  */
 public class LeoninAbunas extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterArtifactPermanent();
 
     public LeoninAbunas(UUID ownerId) {
         super(ownerId, 8, "Leonin Abunas", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -56,7 +52,9 @@ public class LeoninAbunas extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+
+        // Artifacts you control have hexproof.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterArtifactPermanent(), false)));
     }
 
     public LeoninAbunas(final LeoninAbunas card) {

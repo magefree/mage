@@ -39,12 +39,13 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-
 public class CanAttackAsThoughItDidntHaveDefenderSourceEffect extends AsThoughEffectImpl {
 
     public CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration duration) {
         super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
-        staticText = "{this} can attack as though it didn't have defender";
+        staticText = "{this} can attack "
+                + (duration.equals(Duration.EndOfTurn) ? "this turn " : "")
+                + "as though it didn't have defender";
     }
 
     public CanAttackAsThoughItDidntHaveDefenderSourceEffect(final CanAttackAsThoughItDidntHaveDefenderSourceEffect effect) {

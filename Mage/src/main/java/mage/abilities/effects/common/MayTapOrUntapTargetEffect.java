@@ -30,10 +30,8 @@ public class MayTapOrUntapTargetEffect extends OneShotEffect {
                 if (player.chooseUse(Outcome.Untap, "Untap that permanent?", source, game)) {
                     target.untap(game);
                 }
-            } else {
-                if (player.chooseUse(Outcome.Tap, "Tap that permanent?", source, game)) {
-                    target.tap(game);
-                }
+            } else if (player.chooseUse(Outcome.Tap, "Tap that permanent?", source, game)) {
+                target.tap(game);
             }
             return true;
         }
@@ -47,6 +45,9 @@ public class MayTapOrUntapTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (!staticText.isEmpty()) {
+            return staticText;
+        }
         if (mode.getTargets().isEmpty()) {
             return "you may tap or untap it";
         } else {
