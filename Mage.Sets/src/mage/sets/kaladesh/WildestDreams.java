@@ -29,7 +29,7 @@ package mage.sets.kaladesh;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -38,7 +38,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -62,9 +61,11 @@ public class WildestDreams extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = new GetXValue().calculate(game, ability, null);
-        Target target = new TargetCardInYourGraveyard(xValue, new FilterCard("card from your graveyard"));
-        ability.addTarget(target);
+        if (ability instanceof SpellAbility) {
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.getTargets().clear();
+            ability.addTarget(new TargetCardInYourGraveyard(xValue, new FilterCard("card from your graveyard")));
+        }
     }
 
     public WildestDreams(final WildestDreams card) {

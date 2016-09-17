@@ -109,7 +109,7 @@ class LiberatingCombustionEffect extends OneShotEffect {
             if (controller.choose(outcome, allCards, target, game)) {
                 Card cardFound = game.getCard(target.getFirstTarget());
                 if (cardFound != null) {
-                    controller.revealCards(sourceObject.getIdName(), allCards, game);
+                    controller.revealCards(sourceObject.getIdName(), new CardsImpl(cardFound), game);
                     controller.moveCards(cardFound, Zone.HAND, source, game);
                 }
             }

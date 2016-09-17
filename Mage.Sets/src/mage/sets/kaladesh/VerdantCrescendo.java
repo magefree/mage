@@ -102,7 +102,7 @@ class VerdantCrescendoEffect extends OneShotEffect {
             allCards.addAll(controller.getGraveyard());
             FilterCard filter = new FilterCard("a card named Nissa, Nature's Artisan");
             filter.add(new NamePredicate("Nissa, Nature's Artisan"));
-            TargetCard target = new TargetCard(0, 1, Zone.ALL, new FilterCard());
+            TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
             if (controller.choose(outcome, allCards, target, game)) {
                 Card cardFound = game.getCard(target.getFirstTarget());
                 if (cardFound != null) {
