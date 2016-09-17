@@ -141,7 +141,7 @@ public class CubeTutor720 extends DraftCube {
         cubeCards.add(new CardIdentity("Snapcaster Mage",""));
         cubeCards.add(new CardIdentity("Waterfront Bouncer",""));
         cubeCards.add(new CardIdentity("Willbender",""));
-        cubeCards.add(new CardIdentity("AEther Adept",""));
+        cubeCards.add(new CardIdentity("Aether Adept",""));
         cubeCards.add(new CardIdentity("Kira, Great Glass-Spinner",""));
         cubeCards.add(new CardIdentity("Man-o'-War",""));
         cubeCards.add(new CardIdentity("Pestermite",""));
@@ -160,7 +160,7 @@ public class CubeTutor720 extends DraftCube {
         cubeCards.add(new CardIdentity("Mulldrifter",""));
         cubeCards.add(new CardIdentity("Riftwing Cloudskate",""));
         cubeCards.add(new CardIdentity("Teferi, Mage of Zhalfir",""));
-        cubeCards.add(new CardIdentity("AEtherling",""));
+        cubeCards.add(new CardIdentity("Aetherling",""));
         cubeCards.add(new CardIdentity("Consecrated Sphinx",""));
         cubeCards.add(new CardIdentity("Frost Titan",""));
         cubeCards.add(new CardIdentity("Keiga, the Tide Star",""));
@@ -599,7 +599,7 @@ public class CubeTutor720 extends DraftCube {
         cubeCards.add(new CardIdentity("Mox Pearl",""));
         cubeCards.add(new CardIdentity("Mox Ruby",""));
         cubeCards.add(new CardIdentity("Mox Sapphire",""));
-        cubeCards.add(new CardIdentity("AEther Vial",""));
+        cubeCards.add(new CardIdentity("Aether Vial",""));
         cubeCards.add(new CardIdentity("Basilisk Collar",""));
         cubeCards.add(new CardIdentity("Black Vise",""));
         cubeCards.add(new CardIdentity("Bonesplitter",""));

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class AetherAdept extends CardImpl {
 
     public AetherAdept(UUID ownerId) {
-        super(ownerId, 41, "AEther Adept", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        super(ownerId, 41, "Aether Adept", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.expansionSetCode = "M11";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
@@ -52,7 +52,7 @@ public class AetherAdept extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When AEther Adept enters the battlefield, return target creature to its owner's hand.
+        // When Aether Adept enters the battlefield, return target creature to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -156,7 +156,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
     
     /*
     I had a Stoneforge Mystic equipped with a Umesawa's Jitte. I activated Jitte 4 times to make
-    Stoneforge Mystic 9/10. My opponent put into play a Flickerwisp with his AEther Vial and
+    Stoneforge Mystic 9/10. My opponent put into play a Flickerwisp with his Aether Vial and
     targeted my Stoneforge Mystic. At the end of my turn, Stoneforge Mystic came back as a 9/10,
     before going down to 1/2 normally once my turn ended.
     */

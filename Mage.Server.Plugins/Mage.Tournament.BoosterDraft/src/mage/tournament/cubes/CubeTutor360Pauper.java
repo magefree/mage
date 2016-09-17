@@ -100,7 +100,7 @@ public class CubeTutor360Pauper extends DraftCube {
         cubeCards.add(new CardIdentity("Merfolk Looter",""));
         cubeCards.add(new CardIdentity("Thought Courier",""));
         cubeCards.add(new CardIdentity("Waterfront Bouncer",""));
-        cubeCards.add(new CardIdentity("AEther Adept",""));
+        cubeCards.add(new CardIdentity("Aether Adept",""));
         cubeCards.add(new CardIdentity("Calcite Snapper",""));
         cubeCards.add(new CardIdentity("Man-o'-War",""));
         cubeCards.add(new CardIdentity("Pestermite",""));
@@ -117,7 +117,7 @@ public class CubeTutor360Pauper extends DraftCube {
         cubeCards.add(new CardIdentity("Gryff Vanguard",""));
         cubeCards.add(new CardIdentity("Mnemonic Wall",""));
         cubeCards.add(new CardIdentity("Mulldrifter",""));
-        cubeCards.add(new CardIdentity("AEthersnipe",""));
+        cubeCards.add(new CardIdentity("Aethersnipe",""));
         cubeCards.add(new CardIdentity("Errant Ephemeron",""));
         cubeCards.add(new CardIdentity("Spined Thopter",""));
         cubeCards.add(new CardIdentity("Brainstorm",""));

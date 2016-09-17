@@ -158,7 +158,7 @@ public class VintageCube2013 extends DraftCube {
         cubeCards.add(new CardIdentity("Tamiyo, the Moon Sage",""));
         cubeCards.add(new CardIdentity("Timetwister",""));
         cubeCards.add(new CardIdentity("Show and Tell",""));
-        cubeCards.add(new CardIdentity("AEtherling",""));
+        cubeCards.add(new CardIdentity("Aetherling",""));
         cubeCards.add(new CardIdentity("Memory Lapse",""));
         cubeCards.add(new CardIdentity("Dream Halls",""));
         cubeCards.add(new CardIdentity("Opposition",""));

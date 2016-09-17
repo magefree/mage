@@ -107,7 +107,7 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (attackingCreature != null && game.getState().getCombat() != null) {
-                // Possible ruling (see Ætherplasm)
+                // Possible ruling (see Aetherplasm)
                 // The token you put onto the battlefield is blocking the attacking creature,
                 // even if the block couldn't legally be declared (for example, if that creature
                 // enters the battlefield tapped, or it can't block, or the attacking creature
