@@ -31,8 +31,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -44,7 +44,6 @@ import mage.util.RandomUtil;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ExpansionSet implements Serializable {
-
 
     protected String name;
     protected String code;
@@ -330,10 +329,21 @@ public abstract class ExpansionSet implements Serializable {
             if (numBoosterDoubleFaced > -1) {
                 criteria.doubleFaced(false);
             }
-            if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                criteria.maxCardNumber(maxCardNumberInBooster);
-            }
+//            if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+//                criteria.maxCardNumber(maxCardNumberInBooster);
+//            }
             savedCardsInfos = CardRepository.instance.findCards(criteria);
+            // Workaround after card number is numeric
+            if (maxCardNumberInBooster != Integer.MAX_VALUE) {
+                Iterator<CardInfo> iterator = savedCardsInfos.iterator();
+                while (iterator.hasNext()) {
+                    CardInfo next = iterator.next();
+                    if (Integer.valueOf(next.getCardNumber()) > maxCardNumberInBooster) {
+                        iterator.remove();
+                    }
+                }
+            }
+
             savedCards.put(rarity, savedCardsInfos);
         }
         // Return a copy of the saved cards information, as not to let modify the original.

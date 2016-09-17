@@ -31,21 +31,21 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
 import mage.game.permanent.token.ServoToken;
 import mage.game.permanent.token.Token;
+import mage.players.Player;
 
 /**
  *
@@ -67,7 +67,7 @@ public class OviyaPashiriSageLifecrafter extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // {4}{G}, {T}: Create an X/X colorless Construct artifact creature token, where X is the number of creatures you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new OviyaPashiriSageLifecrafterToken()), new ManaCostsImpl("{4}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OviyaPashiriSageLifecrafterEffect(), new ManaCostsImpl("{4}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -82,18 +82,43 @@ public class OviyaPashiriSageLifecrafter extends CardImpl {
     }
 }
 
+class OviyaPashiriSageLifecrafterEffect extends OneShotEffect {
+
+    public OviyaPashiriSageLifecrafterEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "Create an X/X colorless Construct artifact creature token, where X is the number of creatures you control";
+    }
+
+    public OviyaPashiriSageLifecrafterEffect(final OviyaPashiriSageLifecrafterEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OviyaPashiriSageLifecrafterEffect copy() {
+        return new OviyaPashiriSageLifecrafterEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int creatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
+            return new CreateTokenEffect(new OviyaPashiriSageLifecrafterToken(creatures)).apply(game, source);
+        }
+        return false;
+    }
+}
+
 class OviyaPashiriSageLifecrafterToken extends Token {
 
     final static FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("creatures you control");
 
-    OviyaPashiriSageLifecrafterToken() {
+    OviyaPashiriSageLifecrafterToken(int number) {
         super("Construct", "an X/X colorless Construct artifact creature token, where X is the number of creatures you control");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Construct");
-        power = new MageInt(0);
-        toughness = new MageInt(0);
-        DynamicValue controlledCreatures = new PermanentsOnBattlefieldCount(filterCreature);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(controlledCreatures, controlledCreatures, Duration.WhileOnBattlefield)));
+        power = new MageInt(number);
+        toughness = new MageInt(number);
     }
 }

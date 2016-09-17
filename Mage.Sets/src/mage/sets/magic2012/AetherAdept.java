@@ -27,15 +27,13 @@
  */
 package mage.sets.magic2012;
 
-import mage.sets.magic2011.AetherAdept;
-
 import java.util.UUID;
 
 /**
  *
  * @author nantuko
  */
-public class AetherAdept extends AetherAdept {
+public class AetherAdept extends mage.sets.magic2011.AetherAdept {
 
     public AetherAdept(UUID ownerId) {
         super(ownerId);
