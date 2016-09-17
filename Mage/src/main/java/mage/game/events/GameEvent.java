@@ -109,6 +109,12 @@ public class GameEvent implements Serializable {
         GAIN_LIFE, GAINED_LIFE,
         LOSE_LIFE, LOST_LIFE,
         PLAY_LAND, LAND_PLAYED,
+        CREW_VEHICLE,
+        /* CREW_VEHICLE
+         targetId    the id of the creature that crewed a vehicle
+         sourceId    sourceId of the vehicle
+         playerId    the id of the controlling player
+         */
         CREWED_VEHICLE,
         /* CREWED_VEHICLE
          targetId    the id of the creature that crewed a vehicle

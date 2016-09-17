@@ -149,6 +149,12 @@ public abstract class CardRenderer {
         }
     }
 
+    private static int getBorderWidth(int cardWidth) {
+        return (int) Math.max(
+                BORDER_WIDTH_MIN,
+                BORDER_WIDTH_FRAC * cardWidth);
+    }
+
     // Layout operation
     // Calculate common layout metrics that will be used by several
     // of the operations in the template method.
@@ -162,9 +168,26 @@ public abstract class CardRenderer {
                 CORNER_RADIUS_MIN,
                 CORNER_RADIUS_FRAC * cardWidth);
 
-        borderWidth = (int) Math.max(
-                BORDER_WIDTH_MIN,
-                BORDER_WIDTH_FRAC * cardWidth);
+        borderWidth = getBorderWidth(cardWidth);
+    }
+
+    /**
+     * How far does a card have to be spaced down from
+     * a rendered card to show it's entire name line?
+     * This function is a bit of a hack, as different card faces need
+     * slightly different spacing, but we need it in a static context
+     * so that spacing is consistent in GY / deck views etc.
+     * @return
+     */
+    public static int getCardTopHeight(int cardWidth) {
+        // Constants copied over from ModernCardRenderer and tweaked
+        float BOX_HEIGHT_FRAC = 0.065f; // x cardHeight
+        int BOX_HEIGHT_MIN = 16;
+        int boxHeight = (int) Math.max(
+                BOX_HEIGHT_MIN,
+                BOX_HEIGHT_FRAC * cardWidth * 1.4f);
+        int borderWidth = getBorderWidth(cardWidth);
+        return 2*borderWidth + boxHeight;
     }
 
     // The Draw Method

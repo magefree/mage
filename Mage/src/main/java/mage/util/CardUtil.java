@@ -82,8 +82,8 @@ public class CardUtil {
         // Land subtypes
         "Desert", "Gate", "Lair", "Locus", "Urza's", "Mine", "Power-Plant", "Tower",
         // Planeswalker subtypes
-        "Ajani", "Arlinn", "Ashiok", "Bolas", "Chandra", "Dack", "Daretti", "Domri", "Elspeth", "Freyalise", "Garruk", "Gideon", "Jace",
-        "Karn", "Kiora", "Koth", "Liliana", "Nahiri", "Nissa", "Narset", "Nixilis", "Ral", "Sarkhan", "Sorin", "Tamiyo", "Teferi",
+        "Ajani", "Arlinn", "Ashiok", "Bolas", "Chandra", "Dack", "Daretti", "Domri", "Dovin", "Elspeth", "Freyalise", "Garruk", "Gideon", "Jace",
+        "Karn", "Kiora", "Koth", "Liliana", "Nahiri", "Nissa", "Narset", "Nixilis", "Ral", "Saheeli", "Sarkhan", "Sorin", "Tamiyo", "Teferi",
         "Tezzeret", "Tibalt", "Ugin", "Venser", "Vraska", "Xenagos",
         // Instant sorcery subtypes
         "Trap", "Arcane"};

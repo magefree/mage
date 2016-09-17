@@ -398,8 +398,9 @@ public class CardPanelRenderImpl extends CardPanel {
     public void setSelected(boolean selected) {
         if (selected != isSelected()) {
             super.setSelected(selected);
-            // Invalidate our render
+            // Invalidate our render and trigger a repaint
             cardImage = null;
+            repaint();
         }
     }
     
@@ -407,8 +408,9 @@ public class CardPanelRenderImpl extends CardPanel {
     public void setChoosable(boolean choosable) {
         if (choosable != isChoosable()) {
             super.setChoosable(choosable);
-            // Invalidate our render
+            // Invalidate our render and trigger a repaint
             cardImage = null;
+            repaint();
         }
     }
 
