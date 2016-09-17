@@ -54,10 +54,10 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RevokePrivilege extends CardImpl {
+public class RevokePrivileges extends CardImpl {
 
-    public RevokePrivilege(UUID ownerId) {
-        super(ownerId, 26, "Revoke Privilege", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+    public RevokePrivileges(UUID ownerId) {
+        super(ownerId, 26, "Revoke Privileges", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "KLD";
         this.subtype.add("Aura");
 
@@ -77,13 +77,13 @@ public class RevokePrivilege extends CardImpl {
 
     }
 
-    public RevokePrivilege(final RevokePrivilege card) {
+    public RevokePrivileges(final RevokePrivileges card) {
         super(card);
     }
 
     @Override
-    public RevokePrivilege copy() {
-        return new RevokePrivilege(this);
+    public RevokePrivileges copy() {
+        return new RevokePrivileges(this);
     }
 }
 

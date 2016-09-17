@@ -39,10 +39,10 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class SageOfShaliasClaim extends CardImpl {
+public class SageOfShailasClaim extends CardImpl {
 
-    public SageOfShaliasClaim(UUID ownerId) {
-        super(ownerId, 168, "Sage of Shalia's Claim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+    public SageOfShailasClaim(UUID ownerId) {
+        super(ownerId, 168, "Sage of Shaila's Claim", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "KLD";
         this.subtype.add("Elf");
         this.subtype.add("Druid");
@@ -53,12 +53,12 @@ public class SageOfShaliasClaim extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(3)));
     }
 
-    public SageOfShaliasClaim(final SageOfShaliasClaim card) {
+    public SageOfShailasClaim(final SageOfShailasClaim card) {
         super(card);
     }
 
     @Override
-    public SageOfShaliasClaim copy() {
-        return new SageOfShaliasClaim(this);
+    public SageOfShailasClaim copy() {
+        return new SageOfShailasClaim(this);
     }
 }
