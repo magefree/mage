@@ -63,8 +63,8 @@ public class JanjeetSentry extends CardImpl {
         // Tap, Pay {E}{E}: You may tap or untap target artifact or creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new TapSourceCost());
         ability.addCost(new PayEnergyCost(2));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
-        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
     }
 
     public JanjeetSentry(final JanjeetSentry card) {
