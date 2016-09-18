@@ -88,7 +88,7 @@ class ParadoxicalOutcomeEffect extends OneShotEffect {
 
     ParadoxicalOutcomeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Return any number of target artifact cards from target player's graveyard to the top of his or her library in any order";
+        this.staticText = "Return any number of target nonland, nontoken permanents you control to their owners' hands. Draw a card for each card returned to your hand this way";
     }
 
     ParadoxicalOutcomeEffect(final ParadoxicalOutcomeEffect effect) {
