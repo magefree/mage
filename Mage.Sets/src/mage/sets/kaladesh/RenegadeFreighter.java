@@ -34,6 +34,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.CrewAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,8 +59,12 @@ public class RenegadeFreighter extends CardImpl {
         effect.setText("it gets +1/+1");
         TriggeredAbility ability = new AttacksTriggeredAbility(effect, false);
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);
         this.addAbility(ability);
+        
+        // Crew 2
+        this.addAbility(new CrewAbility(2));
     }
 
     public RenegadeFreighter(final RenegadeFreighter card) {
