@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SelectForInspection extends CardImpl {
 
     public SelectForInspection(UUID ownerId) {
-        super(ownerId, 63, "Select for Inspection", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        super(ownerId, 63, "Select for Inspection", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "KLD";
 
         // Return target tapped creature to its owner's hand.  Scry 1.

@@ -41,7 +41,7 @@ import mage.constants.Rarity;
 public class GlintSleeveArtisan extends CardImpl {
 
     public GlintSleeveArtisan(UUID ownerId) {
-        super(ownerId, 017, "Glint-Sleeve Artisan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        super(ownerId, 17, "Glint-Sleeve Artisan", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "KLD";
         this.subtype.add("Dwarf");
         this.subtype.add("Artificer");
