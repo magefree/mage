@@ -30,6 +30,7 @@ package org.mage.plugins.card.dl.sources;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.DownloadPictures;
@@ -53,7 +54,7 @@ public class GrabbagImageSource implements CardImageSource {
 
     @Override
     public String getSourceName() {
-        return "http://anonymouse.org/cgi-bin/anon-www.cgi/http://magiccards.info/scans/en/";
+        return "http://magiccards.info/scans/en/" ;
     }
 
     @Override
@@ -65,6 +66,10 @@ public class GrabbagImageSource implements CardImageSource {
     public String getNextHttpImageUrl() {
         if (copyUrlToImage == null) {
             setupLinks();
+        }
+        try { 
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {            
         }
 
         for (String key : copyUrlToImageDone.keySet()) {
