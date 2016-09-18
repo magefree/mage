@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
+import mage.abilities.effects.common.combat.CantAttackAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
@@ -82,11 +82,7 @@ public class CapturedByTheConsulate extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack.
-<<<<<<< HEAD
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
-=======
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
->>>>>>> b5d965d9ba252dbda528f73a80679958f253b8f6
 
         // Whenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able.
         this.addAbility(new CapturedByTheConsulateTriggeredAbility(Zone.BATTLEFIELD, new CapturedByTheConsulateEffect()));
