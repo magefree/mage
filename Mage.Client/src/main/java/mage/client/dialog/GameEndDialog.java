@@ -75,7 +75,7 @@ public class GameEndDialog extends MageDialog {
         pnlText.setBackground(new Color(240,240,240,140));
         
         Rectangle r = new Rectangle(610, 250);
-        Image image = ImageHelper.getImageFromResources(gameEndView.hasWon() ?"/game_won.jpg":"/game_lost.jpg");
+        Image image = ImageHelper.getImageFromResources(gameEndView.hasWon() ?"/game_won.png":"/game_lost.png");
         BufferedImage imageResult = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         ImageIcon icon = new ImageIcon(imageResult);
         lblResultImage.setIcon(icon);

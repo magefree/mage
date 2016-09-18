@@ -110,11 +110,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final int PANEL_HEIGHT_SMALL = 212;
     private static final int MANA_LABEL_SIZE_HORIZONTAL = 20;
 
-    private static final Border GREEN_BORDER = new LineBorder(Color.green, 3);
+    private static final Border GREEN_BORDER = new LineBorder(Color.lightGray, 2);
     private static final Border RED_BORDER = new LineBorder(Color.red, 2);
     private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
-    private final Color greenBackgroundColor = new Color(180, 255, 180, 200);
-    private final Color deadBackgroundColor = new Color(200, 180, 180, 200);
+    private final Color greenBackgroundColor = new Color(120, 117, 103, 200);
+    private final Color deadBackgroundColor = new Color(67, 49, 49, 200);
 
     private int avatarId = -1;
     private String flagName;
@@ -430,7 +430,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         // Poison count
         poisonLabel.setText("0");
-        r = new Rectangle(14, 14);
+        r = new Rectangle(18, 18);
         poisonLabel.setToolTipText("Poison");
         Image imagePoison = ImageHelper.getImageFromResources("/info/poison.png");
         BufferedImage resizedPoison = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imagePoison, BufferedImage.TYPE_INT_ARGB), r);
@@ -518,7 +518,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 btnCommandZoneActionPerformed(null);
             }
         });
-        commandZone.setBounds(5, 0, 21, 21);
+        commandZone.setBounds(3, 0, 21, 21);
         zonesPanel.add(commandZone);
 
         cheat.setBounds(28, 0, 25, 21);
@@ -649,9 +649,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 .addGroup(gl_panelBackground.createSequentialGroup()
                         .addGap(9)
                         .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                .addGroup(gl_panelBackground.createSequentialGroup()
-                                        .addGap(3)
-                                        .addComponent(poison, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(gl_panelBackground.createSequentialGroup()                                      
+                                        .addComponent(poison, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(gl_panelBackground.createSequentialGroup()
                                         .addGap(2)
                                         .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
@@ -717,10 +716,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                         .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                 .addComponent(btnPlayer, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(timerLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(avatar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                                .addComponent(avatar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)) 
                         //                        .addGroup(gl_panelBackground.createSequentialGroup()
                         //                                .addComponent(avatarFlag, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
-                        .addGap(14))
+                        .addGap(8))
                 .addGroup(gl_panelBackground.createSequentialGroup()
                         .addGap(6)
                         .addComponent(zonesPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -734,7 +733,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(btnPlayer)
                         .addComponent(timerLabel)
-                        .addGap(1)
+                        .addGap(2)
                         // Life & Hand
                         .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                 .addGroup(gl_panelBackground.createSequentialGroup()
@@ -743,21 +742,21 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                 .addGroup(gl_panelBackground.createSequentialGroup()
                                         .addGap(1)
                                         .addComponent(hand, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-                                .addComponent(lifeLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lifeLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)    
                                 .addComponent(handLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
                         .addGap(1)
                         // Poison
                         .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                 .addGroup(gl_panelBackground.createSequentialGroup()
-                                        .addGap(4)
-                                        .addComponent(poison, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(2)
+                                        .addComponent(poison, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
                                         .addGap(4)
                                         .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
                                         .addGap(2)
                                         .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
                                         .addGap(2)
                                         .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(5)
+                                        .addGap(3)
                                         .addComponent(grave, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
                                 )
                                 .addGroup(gl_panelBackground.createSequentialGroup()
