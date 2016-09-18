@@ -58,7 +58,7 @@ public class TakeDown extends CardImpl {
         // Choose one —
         // • Take Down deals 4 damage to target creature with flying.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // • Take Down deals 1 damage to each creature with flying
         Mode mode = new Mode();
