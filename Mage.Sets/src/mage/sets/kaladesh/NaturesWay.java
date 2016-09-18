@@ -28,7 +28,7 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -68,7 +68,7 @@ public class NaturesWay extends CardImpl {
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and trample until end of turn");
         this.getSpellAbility().addEffect(effect);
-        effect = new DamageTargetEffect(new SourcePermanentPowerCount(), true, null, true);
+        effect = new DamageTargetEffect(new TargetPermanentPowerCount(), true, null, true);
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("It deals damage equal to its power to target creature you don't control");
         this.getSpellAbility().addEffect(effect);
