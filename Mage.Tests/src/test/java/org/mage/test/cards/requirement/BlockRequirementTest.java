@@ -231,12 +231,12 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Memnite"); // {1} 1/1
         
-        addCard(Zone.BATTLEFIELD, playerB, "Wretched Gryff"); // {7} Flying 3/4 - Eldrazi Hippogriff
-        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant"); // {3}{R} 3/3
+        addCard(Zone.BATTLEFIELD, playerB, "Dimensional Infiltrator"); // 2/1 - Eldrazi
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves"); // 1/1
         
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Memnite"); // pumps to 4/2
-        attack(1, playerA, "Memnite"); // must be blocked by Wretched Gryff
-        block(1, playerB, "Hill Giant", "Memnite"); // should not be allowed as only blocker
+        attack(1, playerA, "Memnite"); // must be blocked by Dimensional Infiltrator
+        block(1, playerB, "Llanowar Elves", "Memnite"); // should not be allowed as only blocker
         
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
@@ -244,7 +244,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Slayer's Cleaver", 1);
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, "Memnite", 1);
-        assertGraveyardCount(playerB, "Wretched Gryff", 1);
-        assertPermanentCount(playerB, "Hill Giant", 1);
+        assertGraveyardCount(playerB, "Dimensional Infiltrator", 1);
+        assertGraveyardCount(playerB, "Llanowar Elves", 1);
     }
 }

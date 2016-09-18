@@ -56,7 +56,6 @@ public class SlayersCleaver extends CardImpl {
 
         // Equipped creature gets +3/+1 and must be blocked by an Eldrazi if able.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1));
-        // TODO: The effect does not work correctly yet, we need to do some chnanges to combat handling to fix this
         ability.addEffect(new SlayersCleaverEffect());
         this.addAbility(ability);
         // Equip {4}
