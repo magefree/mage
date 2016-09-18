@@ -30,6 +30,7 @@ package mage.sets.kaladesh;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -52,7 +53,10 @@ public class StartYourEngines extends CardImpl {
         this.expansionSetCode = "KLD";
 
         // Vehicles you control becomes artifact creatures until end of turn.
-        this.getSpellAbility().addEffect(new StartYourEnginesEffect());
+        Effect effect = new StartYourEnginesEffect();
+        effect.setApplyEffectsAfter(); // needed to recognize vehicle as creatures by the next effect
+        this.getSpellAbility().addEffect(effect);
+
         // Creatures you control get +2/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
     }
