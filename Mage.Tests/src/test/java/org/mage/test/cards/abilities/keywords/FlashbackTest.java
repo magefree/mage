@@ -119,7 +119,7 @@ public class FlashbackTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
-        setChoice(playerA, "B   laze");
+        setChoice(playerA, "Blaze");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback");
         setChoice(playerA, "X=1");
