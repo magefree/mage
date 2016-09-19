@@ -30,7 +30,7 @@ package mage.sets.ravnica;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,12 +41,8 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -54,6 +50,12 @@ import mage.game.permanent.token.SpiritWhiteToken;
  * @author emerald000
  */
 public class TwilightDrover extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature token");
+
+    static {
+        filter.add(new TokenPredicate());
+    }
 
     public TwilightDrover(UUID ownerId) {
         super(ownerId, 33, "Twilight Drover", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -64,8 +66,8 @@ public class TwilightDrover extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a creature token leaves the battlefield, put a +1/+1 counter on Twilight Drover.
-        this.addAbility(new TwilightDroverTriggeredAbility());
-        
+        this.addAbility(new LeavesBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
+
         // {2}{W}, Remove a +1/+1 counter from Twilight Drover: Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken("RAV"), 2), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
@@ -79,44 +81,5 @@ public class TwilightDrover extends CardImpl {
     @Override
     public TwilightDrover copy() {
         return new TwilightDrover(this);
-    }
-}
-
-class TwilightDroverTriggeredAbility extends TriggeredAbilityImpl {
-    
-    TwilightDroverTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-    }
-    
-    TwilightDroverTriggeredAbility(final TwilightDroverTriggeredAbility ability) {
-        super(ability);
-    }
-    
-    @Override
-    public TwilightDroverTriggeredAbility copy() {
-        return new TwilightDroverTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
-    }
-    
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-            if (permanent != null) {
-                return permanent.getCardType().contains(CardType.CREATURE) && permanent instanceof PermanentToken;
-            }
-        }
-        return false;
-    }
-    
-    @Override
-    public String getRule() {
-        return "Whenever a creature token leaves the battlefield, put a +1/+1 counter on {this}";
     }
 }

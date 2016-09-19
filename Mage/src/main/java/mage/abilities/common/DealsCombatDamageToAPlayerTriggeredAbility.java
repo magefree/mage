@@ -29,6 +29,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -41,7 +42,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean setTargetPointer;
+    protected boolean setTargetPointer;
+    protected String text;
 
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
@@ -52,8 +54,15 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         this.setTargetPointer = setTargetPointer;
     }
 
+    public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional, String text, boolean setTargetPointer) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.text = text;
+        this.setTargetPointer = setTargetPointer;
+    }
+
     public DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
         super(ability);
+        this.text = ability.text;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
@@ -84,7 +93,10 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, " + super.getRule();
+        if (text == null || text.isEmpty()) {
+            return "Whenever {this} deals combat damage to a player, " + super.getRule();
+        }
+        return text;
     }
 
 }
