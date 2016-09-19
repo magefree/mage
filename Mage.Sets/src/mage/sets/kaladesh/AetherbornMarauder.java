@@ -101,7 +101,7 @@ class AetherbornMarauderEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control from where you like to remove +1/+1 counters");
+            FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control to remove +1/+1 counters from");
             filter.add(new AnotherPredicate());
             filter.add(new CounterPredicate(CounterType.P1P1));
             boolean firstRun = true;
@@ -109,16 +109,19 @@ class AetherbornMarauderEffect extends OneShotEffect {
                 if (controller.chooseUse(outcome, "Move " + (firstRun ? "any" : "more") + " +1/+1 counters from other permanents you control to " + sourceObject.getLogName() + "?", source, game)) {
                     firstRun = false;
                     TargetControlledPermanent target = new TargetControlledPermanent(filter);
-                    Permanent fromPermanent = game.getPermanent(target.getFirstTarget());
-                    if (fromPermanent != null) {
-                        int numberOfCounters = fromPermanent.getCounters(game).getCount(CounterType.P1P1);
-                        int numberToMove = 1;
-                        if (numberOfCounters > 1) {
-                            numberToMove = controller.getAmount(0, numberOfCounters, "How many +1/+1 counters do you want to move?", game);
-                        }
-                        if (numberToMove > 0) {
-                            fromPermanent.removeCounters(CounterType.P1P1.createInstance(numberToMove), game);
-                            sourceObject.addCounters(CounterType.P1P1.createInstance(numberToMove), game);
+                    target.setNotTarget(true);
+                    if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), game)) {
+                        Permanent fromPermanent = game.getPermanent(target.getFirstTarget());
+                        if (fromPermanent != null) {
+                            int numberOfCounters = fromPermanent.getCounters(game).getCount(CounterType.P1P1);
+                            int numberToMove = 1;
+                            if (numberOfCounters > 1) {
+                                numberToMove = controller.getAmount(0, numberOfCounters, "How many +1/+1 counters do you want to move?", game);
+                            }
+                            if (numberToMove > 0) {
+                                fromPermanent.removeCounters(CounterType.P1P1.createInstance(numberToMove), game);
+                                sourceObject.addCounters(CounterType.P1P1.createInstance(numberToMove), game);
+                            }
                         }
                     }
                 } else {
