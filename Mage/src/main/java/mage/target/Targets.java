@@ -100,7 +100,7 @@ public class Targets extends ArrayList<Target> {
                 if (target.getTargetController() != null) { // some targets can have controller different than ability controller
                     targetController = target.getTargetController();
                 }
-                if (noMana) { // if cast without mana (e.g. by supend you may notr be able to cancel the casting if you are able to cast it
+                if (noMana) { // if cast without mana (e.g. by suspend you may not be able to cancel the casting if you are able to cast it
                     target.setRequired(true);
                 }
                 if (!target.chooseTarget(outcome, targetController, source, game)) {
