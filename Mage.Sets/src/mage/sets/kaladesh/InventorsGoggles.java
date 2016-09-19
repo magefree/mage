@@ -28,7 +28,7 @@
 package mage.sets.kaladesh;
 
 import java.util.UUID;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
@@ -58,7 +58,7 @@ public class InventorsGoggles extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 2, Duration.WhileOnBattlefield)));
 
         // Whenever an Artificer enters the battlefield under your control, you may attach Inventor's Goggles to it.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AttachEffect(Outcome.BoostCreature, "attach {this} to it"),
                 new FilterPermanent("Artificer", "Artificer"), 
