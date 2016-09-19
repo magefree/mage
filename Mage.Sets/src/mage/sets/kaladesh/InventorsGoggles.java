@@ -61,11 +61,10 @@ public class InventorsGoggles extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AttachEffect(Outcome.BoostCreature, "attach {this} to it"),
-                new FilterPermanent("Artificer", "Artificer"), 
+                new FilterPermanent("Artificer", "Artificer"),
                 true,
                 SetTargetPointer.PERMANENT,
-                null,
-                true));
+                null));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
