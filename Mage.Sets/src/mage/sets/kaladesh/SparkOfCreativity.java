@@ -44,6 +44,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -57,6 +58,7 @@ public class SparkOfCreativity extends CardImpl {
 
         // Choose target creature. Exile the top card of your library. You may have Spark of Creativity deal damage to that creature equal to the converted mana cost of the exiled card. If you don't, you may play that card until end of turn.
         this.getSpellAbility().addEffect(new SparkOfCreativityEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public SparkOfCreativity(final SparkOfCreativity card) {
@@ -142,9 +144,7 @@ class SparkOfCreativityPlayEffect extends AsThoughEffectImpl {
         if (objectReference.refersTo(objectId, game) && affectedControllerId.equals(source.getControllerId())) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                if (controller.chooseUse(outcome, "Play the exiled card?", source, game)) {
-                    return true;
-                }
+                return true;
             } else {
                 discard();
             }
