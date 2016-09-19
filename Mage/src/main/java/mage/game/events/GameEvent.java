@@ -266,6 +266,7 @@ public class GameEvent implements Serializable {
         REGENERATE,
         REGENERATED,
         CHANGE_COLOR, COLOR_CHANGED,
+        NUMBER_OF_TRIGGERS,
         //combat events
         COMBAT_DAMAGE_APPLIED,
         SELECTED_ATTACKER, SELECTED_BLOCKER;

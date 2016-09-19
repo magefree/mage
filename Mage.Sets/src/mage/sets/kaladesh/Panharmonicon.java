@@ -41,7 +41,7 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.game.events.NumberOfTriggersEvent;
 
 /**
  *
@@ -85,15 +85,19 @@ class PanharmoniconEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+        return event.getType() == EventType.NUMBER_OF_TRIGGERS;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event instanceof EntersTheBattlefieldEvent) {
-            Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null) {
-                return permanent.getCardType().contains(CardType.ARTIFACT) || permanent.getCardType().contains(CardType.CREATURE);
+        if (event instanceof NumberOfTriggersEvent) {
+            NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
+            if (source.getControllerId().equals(event.getPlayerId())) {
+                GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+                if (sourceEvent.getType() == EventType.ENTERS_THE_BATTLEFIELD && sourceEvent instanceof EntersTheBattlefieldEvent) {
+                    EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
+                    return entersTheBattlefieldEvent.getTarget().getCardType().contains(CardType.ARTIFACT) || entersTheBattlefieldEvent.getTarget().getCardType().contains(CardType.CREATURE);
+                }
             }
         }
         return false;
