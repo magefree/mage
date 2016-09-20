@@ -118,20 +118,19 @@ class FoodChainManaEffect extends ManaEffect {
             ChoiceColor choice = new ChoiceColor();
             controller.choose(Outcome.PutManaInPool, choice, game);
             ObjectColor chosenColor = choice.getColor();
+            if (chosenColor == null) {
+                return false;
+            }
             Mana mana = null;
             if (chosenColor.isBlack()) {
                 mana = new FoodChainManaBuilder().setMana(Mana.BlackMana(manaCostExiled + 1), source, game).build();
-            }
-            else if (chosenColor.isBlue()) {
+            } else if (chosenColor.isBlue()) {
                 mana = new FoodChainManaBuilder().setMana(Mana.BlueMana(manaCostExiled + 1), source, game).build();
-            }
-            else if (chosenColor.isRed()) {
+            } else if (chosenColor.isRed()) {
                 mana = new FoodChainManaBuilder().setMana(Mana.RedMana(manaCostExiled + 1), source, game).build();
-            }
-            else if (chosenColor.isGreen()) {
+            } else if (chosenColor.isGreen()) {
                 mana = new FoodChainManaBuilder().setMana(Mana.GreenMana(manaCostExiled + 1), source, game).build();
-            }
-            else if (chosenColor.isWhite()) {
+            } else if (chosenColor.isWhite()) {
                 mana = new FoodChainManaBuilder().setMana(Mana.WhiteMana(manaCostExiled + 1), source, game).build();
             }
             if (mana != null) {

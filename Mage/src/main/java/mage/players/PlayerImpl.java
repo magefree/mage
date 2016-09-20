@@ -996,6 +996,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                 Zone fromZone = game.getState().getZone(card.getMainCard().getId());
                 card.cast(game, fromZone, ability, playerId);
                 Spell spell = game.getStack().getSpell(ability.getId());
+                if (spell == null) {
+                    logger.error("Got no spell from stack. ability: " + ability.getRule());
+                    return false;
+                }
                 // some effects set sourceId to cast without paying mana costs or other costs
                 if (ability.getSourceId().equals(getCastSourceIdWithAlternateMana())) {
                     Ability spellAbility = spell.getSpellAbility();

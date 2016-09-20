@@ -730,11 +730,14 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     private boolean checkPassStep(Game game) {
-        if (playerId.equals(game.getActivePlayerId())) {
-            return !this.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
-        } else {
-            return !this.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
+        if (game.getStep() != null) {
+            if (playerId.equals(game.getActivePlayerId())) {
+                return !this.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
+            } else {
+                return !this.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
+            }
         }
+        return true;
     }
 
     @Override
