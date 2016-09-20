@@ -76,12 +76,12 @@ class CurfewEffect extends OneShotEffect{
 
     public CurfewEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "Each player returns a creature he or she controls to its owner's hand instead";
+        staticText = "Each player returns a creature he or she controls to its owner's hand";
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.informPlayers("Each player returns a creature he or she controls to its owner's hand instead");
+        game.informPlayers("Each player returns a creature he or she controls to its owner's hand");
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
