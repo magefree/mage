@@ -102,4 +102,28 @@ public class PanharmoniconTest extends CardTestPlayerBase {
 
         assertLife(playerA, 22);
     }
+
+    /**
+     * Check that Panharmonicon doesn't add to non-permanents triggers.
+     *
+     */
+    @Test
+    public void testDoesntAddNonPermanentsTriggers() {
+        // If an artifact or creature entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+        addCard(Zone.BATTLEFIELD, playerA, "Panharmonicon");
+        // When a Dragon enters the battlefield, you may return Bladewing's Thrall from your graveyard to the battlefield.
+        addCard(Zone.GRAVEYARD, playerA, "Bladewing's Thrall");
+        // A 4/4 vanilla dragon
+        addCard(Zone.HAND, playerA, "Scion of Ugin");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scion of Ugin");
+        setChoice(playerA, "No"); // Return Bladewing's Thrall from your graveyard to the battlefield?
+        setChoice(playerA, "Yes"); // Should not get run since there is only one trigger.
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Bladewing's Thrall", 1);
+    }
 }

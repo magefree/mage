@@ -125,7 +125,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                 }
 
                 if (ability.checkTrigger(event, game)) {
-                    NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability.getControllerId(), event);
+                    NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability.getControllerId(), ability.getSourceId(), event);
                     if (!game.replaceEvent(numberOfTriggersEvent)) {
                         for (int i = 0; i < numberOfTriggersEvent.getAmount(); i++) {
                             ability.trigger(game, ability.getControllerId());

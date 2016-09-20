@@ -92,11 +92,20 @@ class PanharmoniconEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event instanceof NumberOfTriggersEvent) {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
+            // Only triggers of the controller of Panharmonicon
             if (source.getControllerId().equals(event.getPlayerId())) {
                 GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+                // Only EtB triggers
                 if (sourceEvent.getType() == EventType.ENTERS_THE_BATTLEFIELD && sourceEvent instanceof EntersTheBattlefieldEvent) {
                     EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
-                    return entersTheBattlefieldEvent.getTarget().getCardType().contains(CardType.ARTIFACT) || entersTheBattlefieldEvent.getTarget().getCardType().contains(CardType.CREATURE);
+                    // Only for entering artifacts or creatures
+                    if (entersTheBattlefieldEvent.getTarget().getCardType().contains(CardType.ARTIFACT)
+                            || entersTheBattlefieldEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
+                        // Only for triggers of permanents
+                        if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
+                            return true;
+                        }
+                    }
                 }
             }
         }
