@@ -72,8 +72,7 @@ public class MultiformWonder extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MultiformWonderEffect(), new PayEnergyCost(1)));
 
         // Pay {E}: Multiform Wonder gets +2/-2 or -2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new PayEnergyCost(1)));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-2, 2, Duration.EndOfTurn), new PayEnergyCost(1)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MultiformWonder2Effect(), new PayEnergyCost(1)));
     }
 
     public MultiformWonder(final MultiformWonder card) {
@@ -138,6 +137,61 @@ class MultiformWonderEffect extends OneShotEffect {
             }
 
             game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.EndOfTurn), source);
+            return true;
+        }
+        return false;
+    }
+
+}
+
+class MultiformWonder2Effect extends OneShotEffect {
+
+    private static final HashSet<String> choices = new HashSet<>();
+    private BoostSourceEffect boost;
+
+    static {
+        choices.add("-2/+2");
+        choices.add("+2/-2");
+    }
+
+    public MultiformWonder2Effect() {
+        super(Outcome.AddAbility);
+
+        staticText = "{this} gains either +2/-2 or -2/+2 until end of turn";
+    }
+
+    public MultiformWonder2Effect(final MultiformWonder2Effect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MultiformWonder2Effect copy() {
+        return new MultiformWonder2Effect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose mode");
+            choice.setChoices(choices);
+            while (!controller.choose(outcome, choice, game)) {
+                if (controller.canRespond()) {
+                    return false;
+                }
+            }
+
+            String chosen = choice.getChoice();
+            switch (chosen) {
+                case "+2/-2":
+                    boost = new BoostSourceEffect(2, -2, Duration.EndOfTurn);
+                    break;
+                default: //"-2/+2":
+                    boost = new BoostSourceEffect(-2, +2, Duration.EndOfTurn);
+                    break;
+            }
+            game.addEffect(boost, source);
             return true;
         }
         return false;
