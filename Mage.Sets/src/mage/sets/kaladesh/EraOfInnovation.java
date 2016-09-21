@@ -53,7 +53,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class EraOfInnovation extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or Artificer");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
@@ -64,7 +64,7 @@ public class EraOfInnovation extends CardImpl {
         super(ownerId, 45, "Era of Innovation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "KLD";
 
-        // Whenever an artifact or creature enters the battlefield under you control, you may pay {1}. If you do, you get {E}{E}.
+        // Whenever an artifact or Artificer enters the battlefield under you control, you may pay {1}. If you do, you get {E}{E}.
         Effect effect = new DoIfCostPaid(new GetEnergyCountersControllerEffect(2), new GenericManaCost(1));
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(effect, filter,
                 "Whenever an artifact or Artificer enters the battlefield under you control, you may pay {1}. If you do, you get {E}{E}."));
