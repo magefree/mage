@@ -52,7 +52,6 @@ public class LightmineField extends CardImpl {
         super(ownerId, 32, "Lightmine Field", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "ROE";
 
-
         // Whenever one or more creatures attack, Lightmine Field deals damage to each of those creatures equal to the number of attacking creatures.
         this.addAbility(new LightmineFieldTriggeredAbility());
     }
@@ -122,7 +121,7 @@ class LightmineFieldEffect extends OneShotEffect {
             for (UUID attacker : attackers) {
                 Permanent creature = game.getPermanent(attacker);
                 if (creature != null) {
-                    creature.damage(damage, source.getSourceId(), game, false, false);
+                    creature.damage(damage, source.getSourceId(), game, false, true);
                 }
             }
             return true;
