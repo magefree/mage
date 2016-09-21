@@ -30,13 +30,12 @@ package mage.sets.kaladesh;
 import java.util.HashSet;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayEnergyCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -47,13 +46,10 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -145,24 +141,27 @@ class MultiformWonderEffect extends OneShotEffect {
         }
         return false;
     }
+
 }
 
-class MultiformWonder2Effect extends ContinuousEffectImpl {
+class MultiformWonder2Effect extends OneShotEffect {
 
-    private int power;
-    private int toughness;
+    private static final HashSet<String> choices = new HashSet<>();
+    private BoostSourceEffect boost;
+
+    static {
+        choices.add("-2/+2");
+        choices.add("+2/-2");
+    }
 
     public MultiformWonder2Effect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        this.power = 2;
-        this.toughness = -2;
-        this.staticText = "{this} gets +2/-2 or -2/+2 until end of turn";
+        super(Outcome.AddAbility);
+
+        staticText = "{this} gains either +2/-2 or -2/+2 until end of turn";
     }
 
     public MultiformWonder2Effect(final MultiformWonder2Effect effect) {
         super(effect);
-        this.power = effect.power;
-        this.toughness = effect.toughness;
     }
 
     @Override
@@ -171,26 +170,28 @@ class MultiformWonder2Effect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            String message = "Should " + sourceObject.getLogName() + " get -2/+2 instead of +2/-2?";
-            if (controller.chooseUse(Outcome.Neutral, message, source, game)) {
-                this.power *= -1;
-                this.toughness *= -1;
-            }
-        }
-
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target != null) {
-            target.addPower(power);
-            target.addToughness(toughness);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Choice choice = new ChoiceImpl(true);
+            choice.setMessage("Choose mode");
+            choice.setChoices(choices);
+            while (!controller.choose(outcome, choice, game)) {
+                if (controller.canRespond()) {
+                    return false;
+                }
+            }
+
+            String chosen = choice.getChoice();
+            switch (chosen) {
+                case "+2/-2":
+                    boost = new BoostSourceEffect(2, -2, Duration.EndOfTurn);
+                    break;
+                default: //"-2/+2":
+                    boost = new BoostSourceEffect(-2, +2, Duration.EndOfTurn);
+                    break;
+            }
+            game.addEffect(boost, source);
             return true;
         }
         return false;
