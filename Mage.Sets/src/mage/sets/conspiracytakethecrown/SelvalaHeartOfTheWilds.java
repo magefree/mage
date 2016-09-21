@@ -39,7 +39,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -48,7 +47,6 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -56,8 +54,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SelvalaHeartOfTheWilds extends CardImpl {
 
-
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+
     static {
         filter.add(new AnotherPredicate());
         filter.add(new GreatestPowerPredicate());
@@ -75,12 +73,11 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.
-
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SelvalaHeartOfTheWildsEffect(), filter, false, SetTargetPointer.PERMANENT, rule));
 
         // {G}, {T}: Add X mana in any combination of colors to your mana pool, where X is the greatest power among creatures you control.
-        this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1, 0), new GreatestPowerYouControlValue(), new TapSourceCost(),
-                "Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control."));
+        this.addAbility(new DynamicManaAbility(new Mana(0, 0, 0, 0, 0, 0, 1, 0), new GreatestPowerYouControlValue(), new TapSourceCost(),
+                "Add X mana in any combination of colors to your mana pool, where X is the greatest power among creatures you control."));
     }
 
     public SelvalaHeartOfTheWilds(final SelvalaHeartOfTheWilds card) {
@@ -112,12 +109,12 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if(permanent == null){
-            permanent = (Permanent)game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
+        if (permanent == null) {
+            permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
         }
         if (permanent != null) {
             Player cardowner = game.getPlayer(permanent.getControllerId());
-            if(cardowner.chooseUse(Outcome.DrawCard, "Would you like to draw a card?", source, game)){
+            if (cardowner.chooseUse(Outcome.DrawCard, "Would you like to draw a card?", source, game)) {
                 cardowner.drawCards(1, game);
             }
         }
@@ -125,18 +122,17 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
     }
 }
 
-
 class GreatestPowerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<Permanent>> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         int pow = input.getObject().getPower().getValue();
 
-        for (UUID id :game.getPlayerList()){
+        for (UUID id : game.getPlayerList()) {
             Player player = game.getPlayer(id);
             if (player != null) {
                 for (Permanent p : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), id, game)) {
-                    if(p.getPower().getValue() >= pow && !p.equals(input.getObject())){
+                    if (p.getPower().getValue() >= pow && !p.equals(input.getObject())) {
                         return false; //we found something with equal/more power
                     }
                 }
@@ -144,6 +140,7 @@ class GreatestPowerPredicate implements ObjectSourcePlayerPredicate<ObjectSource
         }
         return true;
     }
+
     @Override
     public String toString() {
         return "Greatest Power";
