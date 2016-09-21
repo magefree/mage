@@ -73,12 +73,11 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {        
+    public boolean checkTrigger(GameEvent event, Game game) {
         if (!onlyCombat || ((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null) {
-                controllerId = permanent.getControllerId();
-                if (filter.match(permanent, sourceId, controllerId, game)) {
+                if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
                     if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
                         for (Effect effect : this.getEffects()) {
                             effect.setValue("damage", event.getAmount());
