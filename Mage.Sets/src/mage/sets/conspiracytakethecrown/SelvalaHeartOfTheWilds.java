@@ -33,6 +33,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -76,8 +77,11 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SelvalaHeartOfTheWildsEffect(), filter, false, SetTargetPointer.PERMANENT, rule));
 
         // {G}, {T}: Add X mana in any combination of colors to your mana pool, where X is the greatest power among creatures you control.
-        this.addAbility(new DynamicManaAbility(new Mana(0, 0, 0, 0, 0, 0, 1, 0), new GreatestPowerYouControlValue(), new TapSourceCost(),
-                "Add X mana in any combination of colors to your mana pool, where X is the greatest power among creatures you control."));
+        Ability ability = new DynamicManaAbility(new Mana(0, 0, 0, 0, 0, 0, 1, 0), new GreatestPowerYouControlValue(), new ManaCostsImpl<>("{G}"),
+                "Add X mana in any combination of colors to your mana pool, where X is the greatest power among creatures you control.");
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
     }
 
     public SelvalaHeartOfTheWilds(final SelvalaHeartOfTheWilds card) {
