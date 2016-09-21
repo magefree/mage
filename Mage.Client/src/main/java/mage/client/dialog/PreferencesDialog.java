@@ -3447,7 +3447,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"),
                 getUserSkipPrioritySteps(),
                 MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world"),
-                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true").equals("true"),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "false").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PASS_PRIORITY_CAST, "true").equals("true"),
