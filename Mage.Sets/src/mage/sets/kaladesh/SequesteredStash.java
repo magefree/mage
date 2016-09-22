@@ -33,15 +33,18 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTopCardOfLibraryIntoGraveControllerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -61,10 +64,7 @@ public class SequesteredStash extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveControllerEffect(5), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        Effect effect = new PutOnLibraryTargetEffect(true);
-        effect.setText("Then you may put an artifact card from your graveyard on top of your library");
-        ability.addEffect(effect);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
+        ability.addEffect(new SequesteredStashEffect());
         this.addAbility(ability);
 
     }
@@ -76,5 +76,41 @@ public class SequesteredStash extends CardImpl {
     @Override
     public SequesteredStash copy() {
         return new SequesteredStash(this);
+    }
+}
+
+class SequesteredStashEffect extends OneShotEffect {
+
+    public SequesteredStashEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Then you may put an artifact card from your graveyard on top of your library";
+    }
+
+    public SequesteredStashEffect(final SequesteredStashEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SequesteredStashEffect copy() {
+        return new SequesteredStashEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard"));
+        target.setNotTarget(true);
+        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+                && controller.chooseUse(outcome, "Put an artifact card from your graveyard to library?", source, game)
+                && controller.choose(outcome, target, source.getSourceId(), game)) {
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null) {
+                controller.moveCards(card, Zone.LIBRARY, source, game);
+            }
+        }
+        return true;
     }
 }

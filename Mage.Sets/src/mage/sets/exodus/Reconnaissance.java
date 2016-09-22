@@ -80,7 +80,7 @@ class ReconnaissanceRemoveFromCombatEffect extends OneShotEffect {
 
     public ReconnaissanceRemoveFromCombatEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Remove target attacking creature from combat and untap it";
+        this.staticText = "Remove target attacking creature you control from combat and untap it";
     }
 
     public ReconnaissanceRemoveFromCombatEffect(final ReconnaissanceRemoveFromCombatEffect effect) {
