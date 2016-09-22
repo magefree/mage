@@ -30,9 +30,9 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
+import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -60,7 +60,8 @@ public class EverlastingTorment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
 
         // Damage can't be prevented.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DamageCantBePreventedEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new DamageCantBePreventedEffect(Duration.WhileOnBattlefield, "Damage can't be prevented", true, false)));
 
         // All damage is dealt as though its source had wither.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DamageDealtAsIfSourceHadWitherEffect()));
@@ -74,38 +75,6 @@ public class EverlastingTorment extends CardImpl {
     @Override
     public EverlastingTorment copy() {
         return new EverlastingTorment(this);
-    }
-}
-
-class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public DamageCantBePreventedEffect(Duration duration) {
-        super(duration, Outcome.Benefit);
-        staticText = "Damage can't be prevented";
-    }
-
-    public DamageCantBePreventedEffect(final DamageCantBePreventedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DamageCantBePreventedEffect copy() {
-        return new DamageCantBePreventedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.PREVENT_DAMAGE);
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
     }
 }
 

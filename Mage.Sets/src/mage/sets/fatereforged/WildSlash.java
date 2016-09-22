@@ -27,22 +27,19 @@
  */
 package mage.sets.fatereforged;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffect;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +52,7 @@ public class WildSlash extends CardImpl {
         this.expansionSetCode = "FRF";
 
         // <i>Ferocious</i> If you control a creature with power 4 or greater, damage can't be prevented this turn.
-        ContinuousRuleModifyingEffect effect = new DamageCantBePreventedEffect();
+        ContinuousRuleModifyingEffect effect = new DamageCantBePreventedEffect(Duration.EndOfTurn, "damage can't be prevented this turn", false, false);
         effect.setText("<i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, damage can't be prevented this turn.<br>");
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(effect,
                 new LockedInCondition(FerociousCondition.getInstance())));
@@ -73,32 +70,5 @@ public class WildSlash extends CardImpl {
     @Override
     public WildSlash copy() {
         return new WildSlash(this);
-    }
-}
-
-class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public DamageCantBePreventedEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit, false, false);
-        staticText = "damage can't be prevented this turn";
-    }
-
-    public DamageCantBePreventedEffect(final DamageCantBePreventedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DamageCantBePreventedEffect copy() {
-        return new DamageCantBePreventedEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.PREVENT_DAMAGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
     }
 }

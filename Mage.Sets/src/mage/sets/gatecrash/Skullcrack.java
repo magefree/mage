@@ -27,20 +27,16 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
+import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.Rarity;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +51,7 @@ public class Skullcrack extends CardImpl {
 
         // Players can't gain life this turn. Damage can't be prevented this turn. Skullcrack deals 3 damage to target player.
         this.getSpellAbility().addEffect(new CantGainLifeAllEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new DamageCantBePreventedEffect());
+        this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn", true, false));
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -68,37 +64,5 @@ public class Skullcrack extends CardImpl {
     @Override
     public Skullcrack  copy() {
         return new Skullcrack(this);
-    }
-}
-
-class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public DamageCantBePreventedEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Damage can't be prevented this turn";
-    }
-
-    public DamageCantBePreventedEffect(final DamageCantBePreventedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DamageCantBePreventedEffect copy() {
-        return new DamageCantBePreventedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.PREVENT_DAMAGE;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
     }
 }
