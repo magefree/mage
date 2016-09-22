@@ -61,8 +61,8 @@ public class QuilledSliver extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-		// All Slivers have "{tap}: This permanent deals 1 damage to target attacking or blocking creature."
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        // All Slivers have "{tap}: This permanent deals 1 damage to target attacking or blocking creature."
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
