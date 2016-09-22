@@ -110,7 +110,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final int PANEL_HEIGHT_SMALL = 212;
     private static final int MANA_LABEL_SIZE_HORIZONTAL = 20;
 
-    private static final Border GREEN_BORDER = new LineBorder(Color.white, 3);
+    private static final Border GREEN_BORDER = new LineBorder(Color.green, 3);
     private static final Border RED_BORDER = new LineBorder(Color.red, 2);
     private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
     private final Color greenBackgroundColor = new Color(206, 192, 174, 200);
