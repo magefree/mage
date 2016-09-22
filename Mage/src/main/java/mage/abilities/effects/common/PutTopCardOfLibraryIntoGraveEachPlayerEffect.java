@@ -111,13 +111,13 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
         StringBuilder sb = new StringBuilder();
         switch (targetController) {
             case OPPONENT:
-                sb.append("Each opponent ");
+                sb.append("each opponent ");
                 break;
             case ANY:
-                sb.append("Each player ");
+                sb.append("each player ");
                 break;
             case NOT_YOU:
-                sb.append("Each other player ");
+                sb.append("each other player ");
                 break;
             default:
                 throw new UnsupportedOperationException("TargetController type not supported.");
