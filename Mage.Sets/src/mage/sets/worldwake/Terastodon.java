@@ -111,7 +111,7 @@ class TerastodonEffect extends OneShotEffect {
                         if (destroyedPermanents.containsKey(permanent.getControllerId())) {
                             numberPermanents = destroyedPermanents.get(permanent.getControllerId());
                         }
-                        destroyedPermanents.put(permanent.getControllerId(), numberPermanents);
+                        destroyedPermanents.put(permanent.getControllerId(), numberPermanents + 1);
                     }
                 }
             }
