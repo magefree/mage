@@ -453,6 +453,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 } else if (game.getPlayer(ownerId).getSideboard().contains(this.getId())) {
                     game.getPlayer(ownerId).getSideboard().remove(this.getId());
                     removed = true;
+                } else if (game.getPhase() == null) {
+                    // E.g. Commander of commander game
+                    removed = true;
                 }
                 break;
             case BATTLEFIELD: // for sacrificing permanents or putting to library
@@ -465,7 +468,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 break;
         }
         if (removed) {
-            game.rememberLKI(lkiObject != null ? lkiObject.getId() : objectId, fromZone, lkiObject != null ? lkiObject : this);
+            if (!fromZone.equals(Zone.OUTSIDE)) {
+                game.rememberLKI(lkiObject != null ? lkiObject.getId() : objectId, fromZone, lkiObject != null ? lkiObject : this);
+            }
         } else {
             logger.warn("Couldn't find card in fromZone, card=" + getIdName() + ", fromZone=" + fromZone);
         }

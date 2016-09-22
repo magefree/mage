@@ -59,7 +59,9 @@ public class ZonesHandler {
         }
         for (ZoneChangeInfo zoneChangeInfo : zoneChangeInfos) {
             placeInDestinationZone(zoneChangeInfo, game);
-            game.addSimultaneousEvent(zoneChangeInfo.event);
+            if (game.getPhase() != null) { // moving cards to zones before game started does not need events
+                game.addSimultaneousEvent(zoneChangeInfo.event);
+            }
         }
         return zoneChangeInfos;
     }
