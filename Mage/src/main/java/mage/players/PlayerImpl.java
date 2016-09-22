@@ -863,8 +863,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
-        if (!cards.isEmpty()) {
+    public boolean putCardsOnBottomOfLibrary(Cards cardsToLibrary, Game game, Ability source, boolean anyOrder) {
+        if (!cardsToLibrary.isEmpty()) {
+            Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             if (!anyOrder) {
                 for (UUID objectId : cards) {
                     moveObjectToLibrary(objectId, source == null ? null : source.getSourceId(), game, false, false);

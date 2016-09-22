@@ -30,11 +30,11 @@ package mage.sets.timespiral;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -47,7 +47,8 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author HanClinto
  *
- * A relatively straightforward merge between GemhideSliver.java and CrossbowInfantry.java
+ * A relatively straightforward merge between GemhideSliver.java and
+ * CrossbowInfantry.java
  */
 public class QuilledSliver extends CardImpl {
 
