@@ -27,7 +27,6 @@
  */
 package mage.sets.conspiracytakethecrown;
 
-import java.util.HashSet;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,8 +40,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.watchers.Watcher;
-
+import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
 
 /**
  *
@@ -60,7 +58,7 @@ public class LeovoldEmissaryOfTrest extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Each opponent can't draw more than one card each turn.  (Based on SpiritOfTheLabyrinth)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeovoldEmissaryOfTrestEffect()), new LeovoldEmissaryOfTrestWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeovoldEmissaryOfTrestEffect()), new CardsAmountDrawnThisTurnWatcher());
 
         // Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
         this.addAbility(new LeovoldEmissaryOfTrestTriggeredAbility());
@@ -74,47 +72,6 @@ public class LeovoldEmissaryOfTrest extends CardImpl {
     public LeovoldEmissaryOfTrest copy() {
         return new LeovoldEmissaryOfTrest(this);
     }
-}
-
-
-class LeovoldEmissaryOfTrestWatcher extends Watcher {
-
-    private final HashSet<UUID> playersThatDrewCard;
-
-    public LeovoldEmissaryOfTrestWatcher() {
-        super("DrewCard", WatcherScope.GAME);
-        this.playersThatDrewCard = new HashSet<>();
-    }
-
-    public LeovoldEmissaryOfTrestWatcher(final LeovoldEmissaryOfTrestWatcher watcher) {
-        super(watcher);
-        this.playersThatDrewCard = new HashSet<>();
-        playersThatDrewCard.addAll(watcher.playersThatDrewCard);
-    }
-
-    @Override
-    public LeovoldEmissaryOfTrestWatcher copy() {
-        return new LeovoldEmissaryOfTrestWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD ) {
-                playersThatDrewCard.add(event.getPlayerId());
-
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        playersThatDrewCard.clear();
-    }
-
-    public boolean hasPlayerDrewCardThisTurn(UUID playerId) {
-        return playersThatDrewCard.contains(playerId);
-    }
-
 }
 
 class LeovoldEmissaryOfTrestEffect extends ContinuousRuleModifyingEffectImpl {
@@ -134,21 +91,15 @@ class LeovoldEmissaryOfTrestEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        LeovoldEmissaryOfTrestWatcher watcher = (LeovoldEmissaryOfTrestWatcher) game.getState().getWatchers().get("DrewCard");
-
+        CardsAmountDrawnThisTurnWatcher watcher = (CardsAmountDrawnThisTurnWatcher) game.getState().getWatchers().get(CardsAmountDrawnThisTurnWatcher.BASIC_KEY);
         Player controller = game.getPlayer(source.getControllerId());
-        return watcher != null && controller != null && watcher.hasPlayerDrewCardThisTurn(event.getPlayerId())
+        return watcher != null && controller != null && watcher.getAmountCardsDrawn(event.getPlayerId()) >= 1
                 && game.isOpponent(controller, event.getPlayerId());
     }
 
@@ -178,9 +129,10 @@ class LeovoldEmissaryOfTrestTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Player controller = game.getPlayer(this.getControllerId());
         Player targetter = game.getPlayer(event.getPlayerId());
-        if (controller != null && targetter != null && !controller.getId().equals(targetter.getId())) {
+        if (controller != null && targetter != null
+                && game.isOpponent(controller, targetter.getId())) {
             if (event.getTargetId().equals(controller.getId())) {
-                return true;
+                return true; // Player was targeted
             }
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (permanent != null && this.getControllerId().equals(permanent.getControllerId())) {
@@ -192,6 +144,6 @@ class LeovoldEmissaryOfTrestTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.";
+        return "Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, " + super.getRule();
     }
 }
