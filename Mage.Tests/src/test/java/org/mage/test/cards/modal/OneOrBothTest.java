@@ -49,8 +49,9 @@ public class OneOrBothTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Subtle Strike", "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Subtle Strike", "Pillarfield Ox");
         setModeChoice(playerA, "1");
+        setModeChoice(playerA, null);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -72,6 +73,7 @@ public class OneOrBothTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Subtle Strike", "Pillarfield Ox");
         setModeChoice(playerA, "2");
+        setModeChoice(playerA, null);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

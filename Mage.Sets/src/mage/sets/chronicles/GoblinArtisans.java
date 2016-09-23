@@ -70,7 +70,7 @@ public class GoblinArtisans extends CardImpl {
 
         // {tap}: Flip a coin. If you win the flip, draw a card. If you lose the flip, counter target artifact spell you control that isn't the target of an ability from another creature named Goblin Artisans.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinArtisansEffect(), new TapSourceCost()));
-        
+
     }
 
     public GoblinArtisans(final GoblinArtisans card) {
@@ -83,15 +83,14 @@ public class GoblinArtisans extends CardImpl {
     }
 }
 
-
 class GoblinArtisansEffect extends OneShotEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent named Goblin Artisans");
-    
+
     static {
         filter.add(new NamePredicate("Goblin Artisans"));
     }
-    
+
     public GoblinArtisansEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, draw a card. If you lose the flip, counter target artifact spell you control that isn't the target of an ability from another creature named Goblin Artisans.";
@@ -109,37 +108,38 @@ class GoblinArtisansEffect extends OneShotEffect {
                 controller.drawCards(1, game);
             } else {
                 List<Permanent> artifacts = game.getBattlefield().getActivePermanents(new FilterControlledArtifactPermanent(), source.getControllerId(), game);
-                if (artifacts.isEmpty()){//Don't even bother if there is no artifact to 'counter'/sacrifice
+                if (artifacts.isEmpty()) {//Don't even bother if there is no artifact to 'counter'/sacrifice
                     return true;
-                }      
-                
+                }
+
                 filter.add(Predicates.not(new PermanentIdPredicate(source.getSourceId())));
-                //removed the activating instance of Artisans, btw, wasn't that filter declared as static final? How come I can do this here? :)                
-                List<Permanent> list = game.getBattlefield().getAllActivePermanents(filter, game);                
-                for (Permanent perm : list){ // should I limit below for a particular kind of ability? Going for the most general, it's unlikely there'll be any other artisans anyway, so not concerned about efficiency :p                    
-                    for (Ability abil : perm.getAbilities(game)){//below is copied from TargetsPermanentPredicate, but why only "selectedModes"? Shouldnt be more general as well?
-                        for (Mode mode : abil.getModes().getSelectedModes()){
+                //removed the activating instance of Artisans, btw, wasn't that filter declared as static final? How come I can do this here? :)
+                List<Permanent> list = game.getBattlefield().getAllActivePermanents(filter, game);
+                for (Permanent perm : list) { // should I limit below for a particular kind of ability? Going for the most general, it's unlikely there'll be any other artisans anyway, so not concerned about efficiency :p
+                    for (Ability abil : perm.getAbilities(game)) {//below is copied from TargetsPermanentPredicate, but why only "selectedModes"? Shouldnt be more general as well?
+                        for (UUID modeId : abil.getModes().getSelectedModes()) {
+                            Mode mode = abil.getModes().get(modeId);
                             for (Target target : mode.getTargets()) {
-                                for (UUID targetId : target.getTargets()) {                                    
-                                    artifacts.remove(game.getPermanentOrLKIBattlefield(targetId));                                    
-                                    }// we could
-                                }// remove this
-                            }//closing bracers
-                        }// pyramid, if it's bothering anyone
-                    } //they are all one-liners after all :)
-                if (!artifacts.isEmpty()){
-                    Cards cards=new CardsImpl();
-                    for (Permanent perm : artifacts){
+                                for (UUID targetId : target.getTargets()) {
+                                    artifacts.remove(game.getPermanentOrLKIBattlefield(targetId));
+                                }// we could
+                            }// remove this
+                        }//closing bracers
+                    }// pyramid, if it's bothering anyone
+                } //they are all one-liners after all :)
+                if (!artifacts.isEmpty()) {
+                    Cards cards = new CardsImpl();
+                    for (Permanent perm : artifacts) {
                         cards.add(perm.getId());
                     }
-                    TargetCard target = new TargetCard(Zone.BATTLEFIELD, new FilterCard());                    
+                    TargetCard target = new TargetCard(Zone.BATTLEFIELD, new FilterCard());
                     controller.choose(Outcome.Sacrifice, cards, target, game);
-                    game.getPermanent(target.getFirstTarget()).sacrifice(source.getSourceId(), game);                    
-                }  
+                    game.getPermanent(target.getFirstTarget()).sacrifice(source.getSourceId(), game);
+                }
                 return true;
-              }
             }
-               
+        }
+
         return false;
     }
 

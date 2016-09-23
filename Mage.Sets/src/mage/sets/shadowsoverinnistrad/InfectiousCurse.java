@@ -155,7 +155,8 @@ class InfectiousCurseCostReductionEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (source.getControllerId().equals(abilityToModify.getControllerId())) {
-                for (Mode mode : abilityToModify.getModes().getSelectedModes()) {
+                for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
+                    Mode mode = abilityToModify.getModes().get(modeId);
                     for (Target target : mode.getTargets()) {
                         for (UUID targetUUID : target.getTargets()) {
                             Permanent enchantment = game.getPermanent(source.getSourceId());

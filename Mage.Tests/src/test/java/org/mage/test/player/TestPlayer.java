@@ -287,7 +287,8 @@ public class TestPlayer implements Player {
                 }
                 UUID modeId = ability.getModes().getModeId(modeNr);
 
-                for (Mode mode : ability.getModes().getSelectedModes()) {
+                for (UUID currentModeId : ability.getModes().getSelectedModes()) {
+                    Mode mode = ability.getModes().get(currentModeId);
                     if (mode.getId().equals(modeId)) {
                         selectedMode = mode;
                         ability.getModes().setActiveMode(mode);

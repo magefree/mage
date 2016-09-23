@@ -1326,7 +1326,8 @@ public class HumanPlayer extends PlayerImpl {
             AvailableModes:
             for (Mode mode : modes.getAvailableModes(source, game)) {
                 int timesSelected = 0;
-                for (Mode selectedMode : modes.getSelectedModes()) {
+                for (UUID selectedModeId : modes.getSelectedModes()) {
+                    Mode selectedMode = modes.get(selectedModeId);
                     if (mode.getId().equals(selectedMode.getId())) {
                         if (modes.isEachModeMoreThanOnce()) {
                             timesSelected++;

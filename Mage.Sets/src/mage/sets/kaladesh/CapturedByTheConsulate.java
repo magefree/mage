@@ -141,7 +141,8 @@ class CapturedByTheConsulateTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (stackObject != null) {
             int numberOfTargets = 0;
-            for (Mode mode : stackObject.getStackAbility().getModes().getSelectedModes()) {
+            for (UUID modeId : stackObject.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = stackObject.getStackAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
                     numberOfTargets += target.getTargets().size();
                 }

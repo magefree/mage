@@ -314,7 +314,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (StackObject spell : stack) {
             sb.append(spell.getControllerId()).append(spell.getName());
             sb.append(spell.getStackAbility().toString());
-            for (Mode mode : spell.getStackAbility().getModes().getSelectedModes()) {
+            for (UUID modeId : spell.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = spell.getStackAbility().getModes().get(modeId);
                 if (!mode.getTargets().isEmpty()) {
                     sb.append("targets");
                     for (Target target : mode.getTargets()) {
@@ -366,7 +367,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (StackObject spell : stack) {
             sb.append(spell.getControllerId()).append(spell.getName());
             sb.append(spell.getStackAbility().toString());
-            for (Mode mode : spell.getStackAbility().getModes().getSelectedModes()) {
+            for (UUID modeId : spell.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = spell.getStackAbility().getModes().get(modeId);
                 if (!mode.getTargets().isEmpty()) {
                     sb.append("targets");
                     for (Target target : mode.getTargets()) {
@@ -784,7 +786,8 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addAbility(Ability ability, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
-            for (Mode mode : ability.getModes().getSelectedModes()) {
+            for (UUID modeId : ability.getModes().getSelectedModes()) {
+                Mode mode = ability.getModes().get(modeId);
                 for (Effect effect : mode.getEffects()) {
                     if (effect instanceof ContinuousEffect) {
                         addEffect((ContinuousEffect) effect, ability);
@@ -806,7 +809,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      */
     public void addAbility(Ability ability, UUID sourceId, Card attachedTo) {
         if (ability instanceof StaticAbility) {
-            for (Mode mode : ability.getModes().getSelectedModes()) {
+            for (UUID modeId : ability.getModes().getSelectedModes()) {
+                Mode mode = ability.getModes().get(modeId);
                 for (Effect effect : mode.getEffects()) {
                     if (effect instanceof ContinuousEffect) {
                         addEffect((ContinuousEffect) effect, sourceId, ability);

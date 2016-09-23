@@ -39,20 +39,22 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class BrutalExpulsionTest extends CardTestPlayerBase {
 
     /**
-     * Brutal Expulsion targeting Gideon, Ally of Zendikar. Gideon has 3 loyalty. Brutal Expulsion resolves,
-     * leaves 1 loyalty. I attack Gideon for 1 with a Scion token, Gideon dies. Instead of going to graveyard,
-     * Expulsion sends Gideon to exile. However, in game Gideon went to graveyard.
+     * Brutal Expulsion targeting Gideon, Ally of Zendikar. Gideon has 3
+     * loyalty. Brutal Expulsion resolves, leaves 1 loyalty. I attack Gideon for
+     * 1 with a Scion token, Gideon dies. Instead of going to graveyard,
+     * Expulsion sends Gideon to exile. However, in game Gideon went to
+     * graveyard.
      */
     @Test
     public void testPlaneswalkerExile() {
         // Choose one or both
         // - Return target spell or creature to its owner's hand;
         // or Brutal Expulsion deals 2 damage to target creature or planeswalker. If that permanent would be put into a graveyard this turn, exile it instead.
-        addCard(Zone.HAND, playerA, "Brutal Expulsion");
+        addCard(Zone.HAND, playerA, "Brutal Expulsion"); // {2}{U}{R}
         // Shock deals 2 damage to target creature or player.
-        addCard(Zone.HAND, playerA, "Shock");
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, "Shock"); // {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
         // Planeswalker with 4 loyalty.
         addCard(Zone.BATTLEFIELD, playerB, "Gideon, Ally of Zendikar");
@@ -60,12 +62,12 @@ public class BrutalExpulsionTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brutal Expulsion", playerB);
         setModeChoice(playerA, "2");
         setModeChoice(playerA, null);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // Redirect to planeswalker
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
-        setChoice(playerA, "Yes");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Shock", playerB);
+        setChoice(playerA, "Yes"); // Redirect to planeswalker
 
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertPermanentCount(playerB, "Gideon, Ally of Zendikar", 0);

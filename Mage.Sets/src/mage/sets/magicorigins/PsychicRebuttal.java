@@ -135,7 +135,8 @@ class PsychicRebuttalPredicate implements ObjectPlayerPredicate<ObjectPlayer<Sta
         if (controllerId == null) {
             return false;
         }
-        for (Mode mode : input.getObject().getStackAbility().getModes().getSelectedModes()) {
+        for (UUID modeId : input.getObject().getStackAbility().getModes().getSelectedModes()) {
+            Mode mode = input.getObject().getStackAbility().getModes().get(modeId);
             for (Target target : mode.getTargets()) {
                 for (UUID targetId : target.getTargets()) {
                     if (controllerId.equals(targetId)) {

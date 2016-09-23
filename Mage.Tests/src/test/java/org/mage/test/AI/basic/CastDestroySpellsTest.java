@@ -38,10 +38,6 @@ import org.mage.test.serverside.base.CardTestPlayerBaseAI;
  */
 public class CastDestroySpellsTest extends CardTestPlayerBaseAI {
 
-    /**
-     *
-     *
-     */
     @Test
     public void testOrzhovCharm() {
         // Choose one -
@@ -58,6 +54,8 @@ public class CastDestroySpellsTest extends CardTestPlayerBaseAI {
         // Cycling abilities you activate cost you up to {2} less to activate.
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Orzhov Charm", "Silvercoat Lion");
+        setModeChoice(playerA, "2");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

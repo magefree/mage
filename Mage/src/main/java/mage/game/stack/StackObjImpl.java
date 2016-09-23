@@ -117,7 +117,8 @@ public abstract class StackObjImpl implements StackObject {
             }
             for (Ability ability : objectAbilities) {
                 // Some spells can have more than one mode
-                for (Mode mode : ability.getModes().getSelectedModes()) {
+                for (UUID modeId : ability.getModes().getSelectedModes()) {
+                    Mode mode = ability.getModes().get(modeId);
                     ability.getModes().setActiveMode(mode);
                     oldTargetDescription.append(ability.getTargetDescription(mode.getTargets(), game));
                     for (Target target : mode.getTargets()) {
@@ -210,8 +211,7 @@ public abstract class StackObjImpl implements StackObject {
                                 again = true;
                             }
                         } else // if possible add the alternate Target - it may not be included in the old definition nor in the already selected targets of the new definition
-                        {
-                            if (newTarget.getTargets().contains(tempTarget.getFirstTarget()) || target.getTargets().contains(tempTarget.getFirstTarget())) {
+                         if (newTarget.getTargets().contains(tempTarget.getFirstTarget()) || target.getTargets().contains(tempTarget.getFirstTarget())) {
                                 if (targetController.isHuman()) {
                                     if (targetController.chooseUse(Outcome.Benefit, "This target was already selected from origin spell. Reset to original target?", ability, game)) {
                                         // use previous target no target was selected
@@ -240,7 +240,6 @@ public abstract class StackObjImpl implements StackObject {
                                 // valid target was selected, add it to the new target definition
                                 newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), ability, game, false);
                             }
-                        }
                     } while (again && targetController.canRespond());
                 }
             } // keep the target
