@@ -41,7 +41,6 @@ import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -240,29 +239,29 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
      * @param game
      */
     private void setAlreadySelectedModes(ArrayList<Mode> selectedModes, Ability source, Game game) {
-        String key = getKey(source, game);
-        @SuppressWarnings("unchecked")
-        Set<UUID> onceSelectedModes = (Set<UUID>) game.getState().getValue(key);
-        if (onceSelectedModes == null) {
-            onceSelectedModes = new HashSet<>();
-        }
         for (Mode mode : selectedModes) {
-            onceSelectedModes.add(mode.getId());
+            String key = getKey(source, game, mode.getId());
+            game.getState().setValue(key, true);
         }
-
-        game.getState().setValue(key, onceSelectedModes);
     }
 
     // The already once selected modes for a modal card are stored as a state value
     // That's important for modal abilities with modes that can only selected once while the object stays in its zone
     @SuppressWarnings("unchecked")
     private Set<UUID> getAlreadySelectedModes(Ability source, Game game) {
-        return (Set<UUID>) game.getState().getValue(getKey(source, game));
+        Set<UUID> onceSelectedModes = new HashSet<>();
+        for (UUID modeId : this.keySet()) {
+            Object exist = game.getState().getValue(getKey(source, game, modeId));
+            if (exist != null) {
+                onceSelectedModes.add(modeId);
+            }
+        }
+        return onceSelectedModes;
     }
 
     // creates the key the selected modes are saved with to the state values
-    private String getKey(Ability source, Game game) {
-        return CardUtil.getObjectZoneString("selectedModes", source.getSourceId(), game, game.getState().getZoneChangeCounter(source.getSourceId()), false);
+    private String getKey(Ability source, Game game, UUID modeId) {
+        return source.getSourceId().toString() + game.getState().getZoneChangeCounter(source.getSourceId()) + modeId.toString();
     }
 
     /**
