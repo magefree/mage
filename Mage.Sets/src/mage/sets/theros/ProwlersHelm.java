@@ -27,20 +27,17 @@
  */
 package mage.sets.theros;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.*;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,13 +45,19 @@ import mage.game.permanent.Permanent;
  */
 public class ProwlersHelm extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
+    static {
+        filter.add(Predicates.not(new SubtypePredicate("Wall")));
+    }
+
     public ProwlersHelm(UUID ownerId) {
         super(ownerId, 219, "Prowler's Helm", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "THS";
         this.subtype.add("Equipment");
 
         // Equipped creature can't be blocked except by Walls.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByWallsEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.EQUIPMENT)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2)));
@@ -67,41 +70,5 @@ public class ProwlersHelm extends CardImpl {
     @Override
     public ProwlersHelm copy() {
         return new ProwlersHelm(this);
-    }
-}
-
-class CantBeBlockedByWallsEffect extends RestrictionEffect {
-
-    public CantBeBlockedByWallsEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Equipped creature can't be blocked except by Walls";
-    }
-
-    public CantBeBlockedByWallsEffect(final CantBeBlockedByWallsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            if (permanent.getId().equals(equipment.getAttachedTo())) {
-                return true;
-            }            
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (!blocker.hasSubtype("Wall", game)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public CantBeBlockedByWallsEffect copy() {
-        return new CantBeBlockedByWallsEffect(this);
     }
 }

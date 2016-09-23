@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.PhasingAbility;
@@ -42,6 +43,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -52,6 +56,10 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class CloakOfInvisibility extends CardImpl {
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
+    static {
+        filter.add(Predicates.not(new SubtypePredicate("Wall")));
+    }
 
     public CloakOfInvisibility(UUID ownerId) {
         super(ownerId, 58, "Cloak of Invisibility", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
@@ -67,7 +75,7 @@ public class CloakOfInvisibility extends CardImpl {
         
         // Enchanted creature has phasing and can't be blocked except by Walls.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(PhasingAbility.getInstance(), AttachmentType.AURA));
-        ability.addEffect(new CantBeBlockedByWallsEffect());
+        ability.addEffect(new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.AURA));
         this.addAbility(ability);
     }
 
@@ -78,41 +86,5 @@ public class CloakOfInvisibility extends CardImpl {
     @Override
     public CloakOfInvisibility copy() {
         return new CloakOfInvisibility(this);
-    }
-}
-
-class CantBeBlockedByWallsEffect extends RestrictionEffect {
-
-    public CantBeBlockedByWallsEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Enchanted creature can't be blocked except by Walls";
-    }
-
-    public CantBeBlockedByWallsEffect(final CantBeBlockedByWallsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            if (permanent.getId().equals(enchantment.getAttachedTo())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (!blocker.hasSubtype("Wall", game)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public CantBeBlockedByWallsEffect copy() {
-        return new CantBeBlockedByWallsEffect(this);
     }
 }
