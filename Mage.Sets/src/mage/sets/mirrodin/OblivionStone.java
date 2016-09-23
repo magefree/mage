@@ -70,7 +70,7 @@ public class OblivionStone extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public OblivionStone copy() {
         return new OblivionStone(this);
     }
@@ -87,7 +87,7 @@ class OblivionStoneEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent p : game.getBattlefield().getAllActivePermanents()) {
             if (!(p.getCardType().contains(CardType.LAND) || p.getCounters(game).containsKey(CounterType.FATE))) {
@@ -102,7 +102,7 @@ class OblivionStoneEffect extends OneShotEffect {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public OblivionStoneEffect copy() {
         return new OblivionStoneEffect(this);
     }

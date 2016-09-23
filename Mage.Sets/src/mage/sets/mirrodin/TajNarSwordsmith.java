@@ -69,7 +69,7 @@ public class TajNarSwordsmith extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TajNarSwordsmith copy() {
         return new TajNarSwordsmith(this);
     }
@@ -86,12 +86,12 @@ class TajNarSwordsmithEffect extends OneShotEffect {
         super(effect);
     }
     
-    @java.lang.Override
+    @Override
     public TajNarSwordsmithEffect copy() {
         return new TajNarSwordsmithEffect(this);
     }
     
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.chooseUse(Outcome.BoostCreature, "Do you want to to pay {X}?", source, game)) {

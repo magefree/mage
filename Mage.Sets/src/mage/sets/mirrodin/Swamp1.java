@@ -45,7 +45,7 @@ public class Swamp1 extends mage.cards.basiclands.Swamp {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Swamp1 copy() {
         return new Swamp1(this);
     }

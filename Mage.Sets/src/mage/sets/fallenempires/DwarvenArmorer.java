@@ -101,12 +101,12 @@ class DwarvenArmorerEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public DwarvenArmorerEffect copy() {
         return new DwarvenArmorerEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if(controller != null) {

@@ -47,9 +47,9 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Override extends CardImpl {
+public class OverrideCard extends CardImpl {
 
-    public Override(UUID ownerId) {
+    public OverrideCard(UUID ownerId) {
         super(ownerId, 45, "Override", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "MRD";
 
@@ -58,13 +58,13 @@ public class Override extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Override(final Override card) {
+    public OverrideCard(final OverrideCard card) {
         super(card);
     }
 
-    @java.lang.Override
-    public Override copy() {
-        return new Override(this);
+    @Override
+    public OverrideCard copy() {
+        return new OverrideCard(this);
     }
 }
 
@@ -78,12 +78,12 @@ class OverrideEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public OverrideEffect copy() {
         return new OverrideEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
@@ -105,7 +105,7 @@ class OverrideEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public String getText(Mode mode) {
         return "Counter target spell unless its controller pays {1} for each artifact you control";
     }

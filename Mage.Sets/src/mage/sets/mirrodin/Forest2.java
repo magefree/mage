@@ -44,7 +44,7 @@ public class Forest2 extends mage.cards.basiclands.Forest {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Forest2 copy() {
         return new Forest2(this);
     }

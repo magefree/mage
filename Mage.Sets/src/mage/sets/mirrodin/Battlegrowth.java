@@ -53,7 +53,7 @@ public class Battlegrowth extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Battlegrowth copy() {
         return new Battlegrowth(this);
     }

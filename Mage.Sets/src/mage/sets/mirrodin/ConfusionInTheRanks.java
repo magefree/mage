@@ -86,7 +86,7 @@ public class ConfusionInTheRanks extends CardImpl {
         this.originalId = card.originalId;
     }
 
-    @java.lang.Override
+    @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability.getOriginalId().equals(originalId)) {
             UUID enteringPermanentId = null;
@@ -118,7 +118,7 @@ public class ConfusionInTheRanks extends CardImpl {
         }
     }
 
-    @java.lang.Override
+    @Override
     public ConfusionInTheRanks copy() {
         return new ConfusionInTheRanks(this);
     }

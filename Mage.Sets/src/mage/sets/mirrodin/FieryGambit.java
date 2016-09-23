@@ -62,7 +62,7 @@ public class FieryGambit extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public FieryGambit copy() {
         return new FieryGambit(this);
     }
@@ -79,12 +79,12 @@ class FieryGambitEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public FieryGambitEffect copy() {
         return new FieryGambitEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);

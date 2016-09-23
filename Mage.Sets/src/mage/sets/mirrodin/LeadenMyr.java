@@ -54,7 +54,7 @@ public class LeadenMyr extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LeadenMyr copy() {
         return new LeadenMyr(this);
     }

@@ -55,7 +55,7 @@ public class Bloodscent extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Bloodscent copy() {
         return new Bloodscent(this);
     }

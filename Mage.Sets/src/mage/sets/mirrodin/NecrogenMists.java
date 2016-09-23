@@ -55,7 +55,7 @@ public class NecrogenMists extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public NecrogenMists copy() {
         return new NecrogenMists(this);
     }

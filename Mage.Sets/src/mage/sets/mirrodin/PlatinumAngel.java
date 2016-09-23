@@ -45,7 +45,7 @@ public class PlatinumAngel extends mage.sets.tenthedition.PlatinumAngel {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public PlatinumAngel copy() {
         return new PlatinumAngel(this);
     }

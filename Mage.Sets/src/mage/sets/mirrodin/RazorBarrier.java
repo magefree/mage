@@ -45,7 +45,7 @@ public class RazorBarrier extends mage.sets.elspethvstezzeret.RazorBarrier {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public RazorBarrier copy() {
         return new RazorBarrier(this);
     }

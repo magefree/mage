@@ -56,7 +56,7 @@ public class MassHysteria extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public MassHysteria copy() {
         return new MassHysteria(this);
     }

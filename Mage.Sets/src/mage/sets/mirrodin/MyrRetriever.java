@@ -45,7 +45,7 @@ public class MyrRetriever extends mage.sets.modernmasters.MyrRetriever {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public MyrRetriever copy() {
         return new MyrRetriever(this);
     }

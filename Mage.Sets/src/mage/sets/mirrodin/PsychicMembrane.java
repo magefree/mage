@@ -59,7 +59,7 @@ public class PsychicMembrane extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public PsychicMembrane copy() {
         return new PsychicMembrane(this);
     }

@@ -79,7 +79,7 @@ public class ScytheOfTheWretched extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ScytheOfTheWretched copy() {
         return new ScytheOfTheWretched(this);
     }
@@ -95,17 +95,17 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @java.lang.Override
+    @Override
     public ScytheOfTheWretchedTriggeredAbility copy() {
         return new ScytheOfTheWretchedTriggeredAbility(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zoneChange = (ZoneChangeEvent) event;
         if (zoneChange.isDiesEvent() && zoneChange.getTarget().getCardType().contains(CardType.CREATURE)) {
@@ -122,7 +122,7 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "Whenever a creature dealt damage by equipped creature this turn dies, " + super.getRule();
     }
@@ -153,7 +153,7 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
@@ -168,7 +168,7 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public Effect copy() {
         return new ScytheOfTheWretchedReanimateEffect(this);
     }

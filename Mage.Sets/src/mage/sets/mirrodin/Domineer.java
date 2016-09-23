@@ -74,7 +74,7 @@ public class Domineer extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Domineer copy() {
         return new Domineer(this);
     }

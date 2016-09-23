@@ -45,7 +45,7 @@ public class PromiseOfPower extends mage.sets.commander2014.PromiseOfPower {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public PromiseOfPower copy() {
         return new PromiseOfPower(this);
     }

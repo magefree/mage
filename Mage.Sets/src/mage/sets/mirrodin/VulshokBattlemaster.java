@@ -66,7 +66,7 @@ public class VulshokBattlemaster extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public VulshokBattlemaster copy() {
         return new VulshokBattlemaster(this);
     }
@@ -82,12 +82,12 @@ public class VulshokBattlemaster extends CardImpl {
             super(effect);
         }
 
-        @java.lang.Override
+        @Override
         public VulshokBattlemasterEffect copy() {
             return new VulshokBattlemasterEffect(this);
         }
 
-        @java.lang.Override
+        @Override
         public boolean apply(Game game, Ability source) {
             Permanent battlemaster = game.getPermanent(source.getSourceId());
             if (battlemaster != null) {

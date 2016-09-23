@@ -69,7 +69,7 @@ public class MoriokScavenger extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public MoriokScavenger copy() {
         return new MoriokScavenger(this);
     }

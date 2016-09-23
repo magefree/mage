@@ -74,7 +74,7 @@ public class VulshokGauntlets extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public VulshokGauntlets copy() {
         return new VulshokGauntlets(this);
     }
@@ -91,22 +91,22 @@ class VulshokGauntletsEffect extends ReplacementEffectImpl {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public VulshokGauntletsEffect copy() {
         return new VulshokGauntletsEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.UNTAP;
     }
     
-    @java.lang.Override
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
             Permanent equipment = game.getPermanent(source.getSourceId());

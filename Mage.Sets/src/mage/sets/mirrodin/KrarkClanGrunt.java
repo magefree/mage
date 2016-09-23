@@ -74,7 +74,7 @@ public class KrarkClanGrunt extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public KrarkClanGrunt copy() {
         return new KrarkClanGrunt(this);
     }

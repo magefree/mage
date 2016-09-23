@@ -62,7 +62,7 @@ public class ElectrostaticBolt extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ElectrostaticBolt copy() {
         return new ElectrostaticBolt(this);
     }
@@ -76,7 +76,7 @@ class ElectrostaticBoltDamageValue implements DynamicValue {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    @java.lang.Override
+    @Override
     public int calculate(Game game, Ability source, Effect effect) {
         Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
         if(targetPermanent != null) {
@@ -88,12 +88,12 @@ class ElectrostaticBoltDamageValue implements DynamicValue {
         return 0;
     }
 
-    @java.lang.Override
+    @Override
     public ElectrostaticBoltDamageValue copy() {
         return new ElectrostaticBoltDamageValue();
     }
 
-    @java.lang.Override
+    @Override
     public String getMessage() {
         return "";
     }

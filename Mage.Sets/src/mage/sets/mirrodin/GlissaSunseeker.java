@@ -72,7 +72,7 @@ public class GlissaSunseeker extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public GlissaSunseeker copy() {
         return new GlissaSunseeker(this);
     }
@@ -89,12 +89,12 @@ class GlissaSunseekerEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public GlissaSunseekerEffect copy() {
         return new GlissaSunseekerEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ManaPool pool = controller.getManaPool();

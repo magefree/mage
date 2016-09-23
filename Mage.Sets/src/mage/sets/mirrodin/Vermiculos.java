@@ -67,7 +67,7 @@ public class Vermiculos extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Vermiculos copy() {
         return new Vermiculos(this);
     }

@@ -62,7 +62,7 @@ public class MyrMindservant extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public MyrMindservant copy() {
         return new MyrMindservant(this);
     }

@@ -45,7 +45,7 @@ public class Frogmite extends mage.sets.elspethvstezzeret.Frogmite {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Frogmite copy() {
         return new Frogmite(this);
     }

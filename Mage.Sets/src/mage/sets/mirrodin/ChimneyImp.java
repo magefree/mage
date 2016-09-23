@@ -71,7 +71,7 @@ public class ChimneyImp extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override 
+    @Override
     public ChimneyImp copy() {
         return new ChimneyImp(this);
     }
@@ -88,12 +88,12 @@ class ChimneyImpEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public ChimneyImpEffect copy() {
         return new ChimneyImpEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (targetOpponent != null) {

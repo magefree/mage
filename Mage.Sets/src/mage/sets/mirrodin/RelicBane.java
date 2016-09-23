@@ -70,7 +70,7 @@ public class RelicBane extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public RelicBane copy() {
         return new RelicBane(this);
     }

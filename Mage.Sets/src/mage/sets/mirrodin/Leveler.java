@@ -63,7 +63,7 @@ public class Leveler extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Leveler copy() {
         return new Leveler(this);
     }
@@ -76,12 +76,12 @@ class LevelerExileLibraryEffect extends OneShotEffect {
         staticText = "exile all cards from your library";
     }
 
-    @java.lang.Override
+    @Override
     public LevelerExileLibraryEffect copy() {
         return new LevelerExileLibraryEffect();
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {

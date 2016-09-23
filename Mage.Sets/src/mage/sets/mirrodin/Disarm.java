@@ -61,7 +61,7 @@ public class Disarm extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Disarm copy() {
         return new Disarm(this);
     }
@@ -77,12 +77,12 @@ public class Disarm extends CardImpl {
             super(effect);
         }
 
-        @java.lang.Override
+        @Override
         public DisarmEffect copy() {
             return new DisarmEffect(this);
         }
 
-        @java.lang.Override
+        @Override
         public boolean apply(Game game, Ability source) {
             Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
             if (creature != null) {

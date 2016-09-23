@@ -66,7 +66,7 @@ public class LivingHive extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LivingHive copy() {
         return new LivingHive(this);
     }
@@ -83,12 +83,12 @@ class LivingHiveEffect extends OneShotEffect {
         super(effect);
     }
     
-    @java.lang.Override
+    @Override
     public LivingHiveEffect copy() {
         return new LivingHiveEffect(this);
     }
     
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {

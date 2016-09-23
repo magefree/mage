@@ -120,12 +120,12 @@ class SavageAllianceGainTrampleEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public SavageAllianceGainTrampleEffect copy() {
         return new SavageAllianceGainTrampleEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {

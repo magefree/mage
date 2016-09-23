@@ -50,7 +50,7 @@ public class SeatOfTheSynod extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SeatOfTheSynod copy() {
         return new SeatOfTheSynod(this);
     }

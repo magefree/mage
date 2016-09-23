@@ -45,7 +45,7 @@ public class FistsOfTheAnvil extends mage.sets.tenthedition.FistsOfTheAnvil {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public FistsOfTheAnvil copy() {
         return new FistsOfTheAnvil(this);
     }

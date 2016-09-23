@@ -45,7 +45,7 @@ public class IcyManipulator extends mage.sets.tenthedition.IcyManipulator {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public IcyManipulator copy() {
         return new IcyManipulator(this);
     }

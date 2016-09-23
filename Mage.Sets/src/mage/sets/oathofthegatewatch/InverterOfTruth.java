@@ -83,12 +83,12 @@ class ExileLibraryEffect extends OneShotEffect {
         staticText = "exile all cards from your library face down, then shuffle all cards from your graveyard into your library";
     }
 
-    @java.lang.Override
+    @Override
     public ExileLibraryEffect copy() {
         return new ExileLibraryEffect();
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {

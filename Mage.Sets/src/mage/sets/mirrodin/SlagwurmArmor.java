@@ -56,7 +56,7 @@ public class SlagwurmArmor extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SlagwurmArmor copy() {
         return new SlagwurmArmor(this);
     }

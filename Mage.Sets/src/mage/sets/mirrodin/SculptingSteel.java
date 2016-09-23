@@ -45,7 +45,7 @@ public class SculptingSteel extends mage.sets.tenthedition.SculptingSteel {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SculptingSteel copy() {
         return new SculptingSteel(this);
     }

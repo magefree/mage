@@ -45,7 +45,7 @@ public class TempestOfLight extends mage.sets.magic2010.TempestOfLight {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TempestOfLight copy() {
         return new TempestOfLight(this);
     }

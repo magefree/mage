@@ -80,7 +80,7 @@ public class ThoughtPrison extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ThoughtPrison copy() {
         return new ThoughtPrison(this);
     }
@@ -103,7 +103,7 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
@@ -133,7 +133,7 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public ThoughtPrisonImprintEffect copy() {
         return new ThoughtPrisonImprintEffect(this);
     }
@@ -149,17 +149,17 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @java.lang.Override
+    @Override
     public ThoughtPrisonTriggeredAbility copy() {
         return new ThoughtPrisonTriggeredAbility(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.SPELL_CAST;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = (Spell) game.getObject(event.getTargetId());
         Permanent sourcePermanent = game.getPermanent(this.getSourceId());
@@ -199,7 +199,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "Whenever a player casts a spell that shares a color or converted mana cost with the exiled card, " + super.getRule();
     }
@@ -216,12 +216,12 @@ class ThoughtPrisonDamageEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public ThoughtPrisonDamageEffect copy() {
         return new ThoughtPrisonDamageEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {

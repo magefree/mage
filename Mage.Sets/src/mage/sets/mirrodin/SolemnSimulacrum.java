@@ -45,7 +45,7 @@ public class SolemnSimulacrum extends mage.sets.magic2012.SolemnSimulacrum {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SolemnSimulacrum copy() {
         return new SolemnSimulacrum(this);
     }

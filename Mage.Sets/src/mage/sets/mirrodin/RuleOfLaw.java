@@ -47,7 +47,7 @@ public class RuleOfLaw extends mage.sets.tenthedition.RuleOfLaw {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public RuleOfLaw copy() {
         return new RuleOfLaw(this);
     }

@@ -61,7 +61,7 @@ public class PredatorsStrike extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public PredatorsStrike copy() {
         return new PredatorsStrike(this);
     }

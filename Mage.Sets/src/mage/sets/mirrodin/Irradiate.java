@@ -57,7 +57,7 @@ public class Irradiate extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Irradiate copy() {
         return new Irradiate(this);
     }

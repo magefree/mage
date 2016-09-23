@@ -45,7 +45,7 @@ public class ThirstForKnowledge extends mage.sets.planechase.ThirstForKnowledge 
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ThirstForKnowledge copy() {
         return new ThirstForKnowledge(this);
     }

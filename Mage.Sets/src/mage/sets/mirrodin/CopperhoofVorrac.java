@@ -74,7 +74,7 @@ public class CopperhoofVorrac extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public CopperhoofVorrac copy() {
         return new CopperhoofVorrac(this);
     }

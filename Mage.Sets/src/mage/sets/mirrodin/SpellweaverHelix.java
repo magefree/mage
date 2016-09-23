@@ -78,7 +78,7 @@ public class SpellweaverHelix extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SpellweaverHelix copy() {
         return new SpellweaverHelix(this);
     }
@@ -95,12 +95,12 @@ class SpellweaverHelixImprintEffect extends OneShotEffect {
         super(effect);
     }
     
-    @java.lang.Override
+    @Override
     public SpellweaverHelixImprintEffect copy() {
         return new SpellweaverHelixImprintEffect(this);
     }
     
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
@@ -130,17 +130,17 @@ class SpellweaverHelixTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
     
-    @java.lang.Override
+    @Override
     public SpellweaverHelixTriggeredAbility copy() {
         return new SpellweaverHelixTriggeredAbility(this);
     }
     
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && spell.getCard() != null && !spell.getCard().isCopy()) {
@@ -152,7 +152,7 @@ class SpellweaverHelixTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkInterveningIfClause(Game game) {
         Spell spell = game.getStack().getSpell(this.getEffects().get(0).getTargetPointer().getFirst(game, this));
         if (spell != null) {
@@ -171,7 +171,7 @@ class SpellweaverHelixTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
     
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "Whenever a player casts a card, if it has the same name as one of the cards exiled with Spellweaver Helix, you may copy the other. If you do, you may cast the copy without paying its mana cost.";
     }
@@ -191,7 +191,7 @@ class SpellweaverHelixCastEffect extends OneShotEffect {
         this.spellName = effect.spellName;
     }
     
-    @java.lang.Override
+    @Override
     public SpellweaverHelixCastEffect copy() {
         return new SpellweaverHelixCastEffect(this);
     }
@@ -200,7 +200,7 @@ class SpellweaverHelixCastEffect extends OneShotEffect {
         this.spellName = spellName;
     }
     
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {

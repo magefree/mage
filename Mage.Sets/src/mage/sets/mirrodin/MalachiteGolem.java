@@ -59,7 +59,7 @@ public class MalachiteGolem extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public MalachiteGolem copy() {
         return new MalachiteGolem(this);
     }

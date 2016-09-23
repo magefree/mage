@@ -55,7 +55,7 @@ public class LeoninSunStandard extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LeoninSunStandard copy() {
         return new LeoninSunStandard(this);
     }

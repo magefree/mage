@@ -63,7 +63,7 @@ public class GridMonitor extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public GridMonitor copy() {
         return new GridMonitor(this);
     }
@@ -80,17 +80,17 @@ class GridMonitorEffect extends ContinuousRuleModifyingEffectImpl {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public GridMonitorEffect copy() {
         return new GridMonitorEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getPlayerId().equals(source.getControllerId())) {
             MageObject object = game.getObject(event.getSourceId());

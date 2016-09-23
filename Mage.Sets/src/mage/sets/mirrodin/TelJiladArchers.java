@@ -60,7 +60,7 @@ public class TelJiladArchers extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TelJiladArchers copy() {
         return new TelJiladArchers(this);
     }

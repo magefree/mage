@@ -45,7 +45,7 @@ public class NuisanceEngine extends mage.sets.planechase.NuisanceEngine {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public NuisanceEngine copy() {
         return new NuisanceEngine(this);
     }

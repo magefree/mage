@@ -60,7 +60,7 @@ public class DragonBlood extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public DragonBlood copy() {
         return new DragonBlood(this);
     }

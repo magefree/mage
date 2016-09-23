@@ -77,7 +77,7 @@ public class SoulFoundry extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public void adjustCosts(Ability ability, Game game) {
         if (ability instanceof SimpleActivatedAbility) {
             Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
@@ -100,7 +100,7 @@ public class SoulFoundry extends CardImpl {
         }
     }
 
-    @java.lang.Override
+    @Override
     public SoulFoundry copy() {
         return new SoulFoundry(this);
     }
@@ -123,7 +123,7 @@ class SoulFoundryImprintEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
@@ -148,7 +148,7 @@ class SoulFoundryImprintEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public SoulFoundryImprintEffect copy() {
         return new SoulFoundryImprintEffect(this);
     }
@@ -165,7 +165,7 @@ class SoulFoundryEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
@@ -185,7 +185,7 @@ class SoulFoundryEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public SoulFoundryEffect copy() {
         return new SoulFoundryEffect(this);
     }

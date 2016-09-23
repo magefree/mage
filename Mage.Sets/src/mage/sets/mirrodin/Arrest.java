@@ -70,7 +70,7 @@ public class Arrest extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Arrest copy() {
         return new Arrest(this);
     }

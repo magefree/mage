@@ -60,7 +60,7 @@ public class Glimmervoid extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Glimmervoid copy() {
         return new Glimmervoid(this);
     }
@@ -78,27 +78,27 @@ class GlimmervoidTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @java.lang.Override
+    @Override
     public GlimmervoidTriggeredAbility copy() {
         return new GlimmervoidTriggeredAbility(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkInterveningIfClause(Game game) {
         return game.getBattlefield().countAll(filter, controllerId, game) == 0;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.END_TURN_STEP_PRE;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "At the beginning of the end step, if you control no artifacts, sacrifice {this}.";
     }

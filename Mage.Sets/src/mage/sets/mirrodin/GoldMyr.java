@@ -54,7 +54,7 @@ public class GoldMyr extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public GoldMyr copy() {
         return new GoldMyr(this);
     }

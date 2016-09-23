@@ -62,7 +62,7 @@ public class KrarksThumb extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public KrarksThumb copy() {
         return new KrarksThumb(this);
     }
@@ -79,7 +79,7 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
@@ -98,22 +98,22 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.FLIP_COIN;
     }
 
-    @java.lang.Override
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.getControllerId().equals(event.getPlayerId());
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public KrarksThumbEffect copy() {
         return new KrarksThumbEffect(this);
     }

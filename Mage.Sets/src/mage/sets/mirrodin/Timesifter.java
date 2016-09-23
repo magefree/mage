@@ -63,7 +63,7 @@ public class Timesifter extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Timesifter copy() {
         return new Timesifter(this);
     }
@@ -80,12 +80,12 @@ class TimesifterEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public TimesifterEffect copy() {
         return new TimesifterEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         List<UUID> playersExiling = game.getState().getPlayersInRange(source.getControllerId(), game);
         do {

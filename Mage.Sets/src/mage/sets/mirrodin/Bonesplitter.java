@@ -58,7 +58,7 @@ public class Bonesplitter extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Bonesplitter copy() {
         return new Bonesplitter(this);
     }

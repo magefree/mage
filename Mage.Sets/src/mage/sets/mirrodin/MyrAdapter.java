@@ -62,7 +62,7 @@ public class MyrAdapter extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public MyrAdapter copy() {
         return new MyrAdapter(this);
     }

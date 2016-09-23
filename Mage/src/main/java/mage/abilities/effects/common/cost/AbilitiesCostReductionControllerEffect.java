@@ -31,18 +31,18 @@ public class AbilitiesCostReductionControllerEffect extends CostModificationEffe
         this.activatedAbility = effect.activatedAbility;
     }
 
-    @java.lang.Override
+    @Override
     public AbilitiesCostReductionControllerEffect copy() {
         return new AbilitiesCostReductionControllerEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         CardUtil.reduceCost(abilityToModify, 1);
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify.getControllerId().equals(source.getControllerId())
                 && activatedAbility.isInstance(abilityToModify);

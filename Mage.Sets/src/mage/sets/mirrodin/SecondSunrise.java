@@ -60,7 +60,7 @@ public class SecondSunrise extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SecondSunrise copy() {
         return new SecondSunrise(this);
     }
@@ -77,7 +77,7 @@ class SecondSunriseEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         SecondSunriseWatcher watcher = (SecondSunriseWatcher) game.getState().getWatchers().get("SecondSunriseWatcher");
         if (watcher != null) {
@@ -94,7 +94,7 @@ class SecondSunriseEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public SecondSunriseEffect copy() {
         return new SecondSunriseEffect(this);
     }
@@ -112,19 +112,19 @@ class SecondSunriseWatcher extends Watcher {
         this.cards.addAll(watcher.cards);
     }
 
-    @java.lang.Override
+    @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             cards.add(event.getTargetId());
         }
     }
 
-    @java.lang.Override
+    @Override
     public SecondSunriseWatcher copy() {
         return new SecondSunriseWatcher(this);
     }
 
-    @java.lang.Override
+    @Override
     public void reset() {
         super.reset();
         cards.clear();

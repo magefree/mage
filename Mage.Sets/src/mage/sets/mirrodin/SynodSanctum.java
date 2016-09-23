@@ -45,7 +45,7 @@ public class SynodSanctum extends mage.sets.archenemy.SynodSanctum {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SynodSanctum copy() {
         return new SynodSanctum(this);
     }

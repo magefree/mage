@@ -68,7 +68,7 @@ public class RustElemental extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public RustElemental copy() {
         return new RustElemental(this);
     }
@@ -91,12 +91,12 @@ class RustElementalEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public RustElementalEffect copy() {
         return new RustElementalEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourceObject != null) {

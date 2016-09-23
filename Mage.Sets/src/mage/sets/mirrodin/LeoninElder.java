@@ -60,7 +60,7 @@ public class LeoninElder extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LeoninElder copy() {
         return new LeoninElder(this);
     }

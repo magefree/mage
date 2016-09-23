@@ -68,7 +68,7 @@ public class GoblinDirigible extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public GoblinDirigible copy() {
         return new GoblinDirigible(this);
     }

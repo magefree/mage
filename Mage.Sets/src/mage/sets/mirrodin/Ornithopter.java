@@ -45,7 +45,7 @@ public class Ornithopter extends mage.sets.tenthedition.Ornithopter {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Ornithopter copy() {
         return new Ornithopter(this);
     }

@@ -60,7 +60,7 @@ public class TowerOfMurmurs extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TowerOfMurmurs copy() {
         return new TowerOfMurmurs(this);
     }

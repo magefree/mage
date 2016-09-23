@@ -75,7 +75,7 @@ public class IsochronScepter extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public IsochronScepter copy() {
         return new IsochronScepter(this);
     }
@@ -99,7 +99,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
@@ -125,7 +125,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
 
     }
 
-    @java.lang.Override
+    @Override
     public IsochronScepterImprintEffect copy() {
         return new IsochronScepterImprintEffect(this);
     }
@@ -143,12 +143,12 @@ class IsochronScepterCopyEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public IsochronScepterCopyEffect copy() {
         return new IsochronScepterCopyEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {

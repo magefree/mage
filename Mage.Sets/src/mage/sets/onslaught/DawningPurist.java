@@ -86,17 +86,17 @@ class DawningPuristTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @java.lang.Override
+    @Override
     public DawningPuristTriggeredAbility copy() {
         return new DawningPuristTriggeredAbility(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
@@ -111,7 +111,7 @@ class DawningPuristTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, you may destroy target enchantment that player controls.";
     }

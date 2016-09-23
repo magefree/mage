@@ -61,7 +61,7 @@ public class ChromaticSphere extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ChromaticSphere copy() {
         return new ChromaticSphere(this);
     }

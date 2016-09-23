@@ -76,7 +76,7 @@ public class ChromeMox extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ChromeMox copy() {
         return new ChromeMox(this);
     }
@@ -99,7 +99,7 @@ class ChromeMoxEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
@@ -126,7 +126,7 @@ class ChromeMoxEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public ChromeMoxEffect copy() {
         return new ChromeMoxEffect(this);
     }
@@ -144,12 +144,12 @@ class ChromeMoxManaEffect extends ManaEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public ChromeMoxManaEffect copy() {
         return new ChromeMoxManaEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
@@ -206,7 +206,7 @@ class ChromeMoxManaEffect extends ManaEffect {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public Mana getMana(Game game, Ability source) {
         return null;
     }

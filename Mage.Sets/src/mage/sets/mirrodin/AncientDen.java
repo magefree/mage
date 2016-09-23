@@ -50,7 +50,7 @@ public class AncientDen extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public AncientDen copy() {
         return new AncientDen(this);
     }

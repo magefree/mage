@@ -67,7 +67,7 @@ public class ChaliceOfTheVoid extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ChaliceOfTheVoid copy() {
         return new ChaliceOfTheVoid(this);
     }
@@ -83,17 +83,17 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
         super(abiltity);
     }
 
-    @java.lang.Override
+    @Override
     public ChaliceOfTheVoidTriggeredAbility copy() {
         return new ChaliceOfTheVoidTriggeredAbility(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent chalice = game.getPermanent(getSourceId());
         Spell spell = game.getStack().getSpell(event.getTargetId());
@@ -106,7 +106,7 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "Whenever a player casts a spell with converted mana cost equal to the number of charge counters on {this}, counter that spell.";
     }
@@ -122,12 +122,12 @@ class CounterEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public CounterEffect copy() {
         return new CounterEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         return game.getStack().counter(this.getTargetPointer().getFirst(game, source), source.getSourceId(), game);
     }

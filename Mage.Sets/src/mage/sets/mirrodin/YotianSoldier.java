@@ -55,7 +55,7 @@ public class YotianSoldier extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public YotianSoldier copy() {
         return new YotianSoldier(this);
     }

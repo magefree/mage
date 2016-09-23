@@ -123,7 +123,7 @@ class ClockworkAvianEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
@@ -133,7 +133,7 @@ class ClockworkAvianEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public ClockworkAvianEffect copy() {
         return new ClockworkAvianEffect(this);
     }

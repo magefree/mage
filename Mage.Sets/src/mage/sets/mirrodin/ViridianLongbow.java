@@ -70,7 +70,7 @@ public class ViridianLongbow extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ViridianLongbow copy() {
         return new ViridianLongbow(this);
     }

@@ -68,7 +68,7 @@ public class DrossScorpion extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public DrossScorpion copy() {
         return new DrossScorpion(this);
     }

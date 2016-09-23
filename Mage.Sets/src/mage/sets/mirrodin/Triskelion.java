@@ -45,7 +45,7 @@ public class Triskelion extends mage.sets.magic2011.Triskelion {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Triskelion copy() {
         return new Triskelion(this);
     }

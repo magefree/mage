@@ -63,7 +63,7 @@ public class WailOfTheNim extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public WailOfTheNim copy() {
         return new WailOfTheNim(this);
     }

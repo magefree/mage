@@ -90,7 +90,7 @@ public class NimDevourer extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public NimDevourer copy() {
         return new NimDevourer(this);
     }
@@ -107,12 +107,12 @@ class NimDevourerEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public NimDevourerEffect copy() {
         return new NimDevourerEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {

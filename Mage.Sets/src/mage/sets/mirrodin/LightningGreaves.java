@@ -68,7 +68,7 @@ public class LightningGreaves extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LightningGreaves copy() {
         return new LightningGreaves(this);
     }

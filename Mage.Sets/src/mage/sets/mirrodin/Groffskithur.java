@@ -68,7 +68,7 @@ public class Groffskithur extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Groffskithur copy() {
         return new Groffskithur(this);
     }

@@ -61,7 +61,7 @@ public class WrenchMind extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public WrenchMind copy() {
         return new WrenchMind(this);
     }
@@ -78,12 +78,12 @@ class WrenchMindEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public WrenchMindEffect copy() {
         return new WrenchMindEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (targetPlayer != null && !targetPlayer.getHand().isEmpty()) {

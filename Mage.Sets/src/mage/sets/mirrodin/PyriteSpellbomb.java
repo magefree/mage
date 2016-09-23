@@ -65,7 +65,7 @@ public class PyriteSpellbomb extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public PyriteSpellbomb copy() {
         return new PyriteSpellbomb(this);
     }

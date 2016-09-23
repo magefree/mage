@@ -45,7 +45,7 @@ public class WizardReplica extends mage.sets.planechase.WizardReplica {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public WizardReplica copy() {
         return new WizardReplica(this);
     }

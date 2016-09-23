@@ -66,7 +66,7 @@ public class TrashForTreasure extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TrashForTreasure copy() {
         return new TrashForTreasure(this);
     }

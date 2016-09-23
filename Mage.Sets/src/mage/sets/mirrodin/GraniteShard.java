@@ -64,7 +64,7 @@ public class GraniteShard extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public GraniteShard copy() {
         return new GraniteShard(this);
     }

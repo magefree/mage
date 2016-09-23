@@ -45,7 +45,7 @@ public class SunDroplet extends mage.sets.commander2013.SunDroplet {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SunDroplet copy() {
         return new SunDroplet(this);
     }

@@ -67,7 +67,7 @@ public class AuriokBladewarden extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public AuriokBladewarden copy() {
         return new AuriokBladewarden(this);
     }

@@ -75,7 +75,7 @@ public class SolarTide extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SolarTide copy() {
         return new SolarTide(this);
     }

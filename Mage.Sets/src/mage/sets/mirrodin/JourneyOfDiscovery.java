@@ -65,7 +65,7 @@ public class JourneyOfDiscovery extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public JourneyOfDiscovery copy() {
         return new JourneyOfDiscovery(this);
     }

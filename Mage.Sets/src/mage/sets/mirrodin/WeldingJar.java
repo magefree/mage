@@ -58,7 +58,7 @@ public class WeldingJar extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public WeldingJar copy() {
         return new WeldingJar(this);
     }

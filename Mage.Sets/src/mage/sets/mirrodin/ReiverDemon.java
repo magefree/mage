@@ -45,7 +45,7 @@ public class ReiverDemon extends mage.sets.divinevsdemonic.ReiverDemon {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ReiverDemon copy() {
         return new ReiverDemon(this);
     }

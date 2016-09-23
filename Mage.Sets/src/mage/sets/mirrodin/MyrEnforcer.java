@@ -45,7 +45,7 @@ public class MyrEnforcer extends mage.sets.planechase.MyrEnforcer {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public MyrEnforcer copy() {
         return new MyrEnforcer(this);
     }

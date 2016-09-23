@@ -65,7 +65,7 @@ public class DampingMatrix extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public DampingMatrix copy() {
         return new DampingMatrix(this);
     }
@@ -89,22 +89,22 @@ class DampingMatrixEffect extends ReplacementEffectImpl {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public DampingMatrixEffect copy() {
         return new DampingMatrixEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
     
-    @java.lang.Override
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ACTIVATE_ABILITY;
     }
     
-    @java.lang.Override
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         if (object instanceof Permanent && filter.match((Permanent)object, game)) {
