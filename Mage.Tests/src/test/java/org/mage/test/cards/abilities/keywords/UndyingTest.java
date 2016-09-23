@@ -219,7 +219,7 @@ public class UndyingTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tatterkite is getting counters on it, i have him in a edh deck with
+     * Tatterkite is getting counters on it, I have him in a edh deck with
      * Mikaeus, the Lunarch and when Tatterkite dies it triggers the undying and
      * he gets the +1/+1 counters
      */
