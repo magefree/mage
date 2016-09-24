@@ -27,13 +27,10 @@
  */
 package mage.cards.decks;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import mage.cards.Card;
+import mage.cards.Sets;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.Rarity;
@@ -51,6 +48,9 @@ public class Constructed extends DeckValidator {
     protected List<String> restricted = new ArrayList<>();
     protected List<String> setCodes = new ArrayList<>();
     protected List<Rarity> rarities = new ArrayList<>();
+
+    protected boolean allowAllCustomSets = false;
+    protected Set<String> allowedCustomSetCodes = new HashSet<>();
 
     public Constructed() {
         super("Constructed");
@@ -126,22 +126,21 @@ public class Constructed extends DeckValidator {
             }
         }
 
-        if (!setCodes.isEmpty()) {
-            for (Card card : deck.getCards()) {
-                if (!setCodes.contains(card.getExpansionSetCode())) {
-                    if( !legalSets(card) ){
-                        valid = false;
-                    }
-                }
-            }
-            for (Card card : deck.getSideboard()) {
-                if (!setCodes.contains(card.getExpansionSetCode())) {
-                    if( !legalSets(card) ){
-                        valid = false;
-                    }
+        for (Card card : deck.getCards()) {
+            if (!isSetAllowed(card.getExpansionSetCode())) {
+                if( !legalSets(card) ){
+                    valid = false;
                 }
             }
         }
+        for (Card card : deck.getSideboard()) {
+            if (!isSetAllowed(card.getExpansionSetCode())) {
+                if( !legalSets(card) ){
+                    valid = false;
+                }
+            }
+        }
+
         logger.debug("DECK validate end: " + name + " deckname: " + deck.getName() + " invalids:" + invalid.size());
         return valid;
     }
@@ -168,6 +167,16 @@ public class Constructed extends DeckValidator {
     }
 
     /**
+     * Checks if a given set is legal in this format.
+     * @param code - the set code to check
+     * @return Whether the set is legal in this format.
+     */
+    protected boolean isSetAllowed(String code) {
+        if(Sets.isCustomSet(code)) return allowAllCustomSets || allowedCustomSetCodes.contains(code);
+        else                       return setCodes.isEmpty() || setCodes.contains(code);
+    }
+
+    /**
      * Checks if the given card is legal in any of the given sets
      * @param card - the card to check
      * @return Whether the card was printed in any of this format's sets.
@@ -177,7 +186,7 @@ public class Constructed extends DeckValidator {
         boolean legal = false;
         List<CardInfo> cardInfos = CardRepository.instance.findCards(card.getName());
         for (CardInfo cardInfo : cardInfos) {
-            if (setCodes.contains(cardInfo.getSetCode())) {
+            if (isSetAllowed(cardInfo.getSetCode())) {
                 legal = true;
                 break;
             }

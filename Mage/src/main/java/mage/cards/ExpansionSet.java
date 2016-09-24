@@ -68,6 +68,8 @@ public abstract class ExpansionSet implements Serializable {
     protected String packageName;
     protected int maxCardNumberInBooster; // used to ommit cards with collector numbers beyond the regular cards in a set for boosters
 
+    protected boolean isCustomSet = false;
+
     protected final EnumMap<Rarity, List<CardInfo>> savedCards;
 
     public ExpansionSet(String name, String code, String packageName, Date releaseDate, SetType setType) {
@@ -373,6 +375,8 @@ public abstract class ExpansionSet implements Serializable {
     public List<CardInfo> getSpecialLand() {
         return null;
     }
+
+    public boolean isCustomSet() { return isCustomSet; }
 
     public void removeSavedCards() {
         savedCards.clear();
