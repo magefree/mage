@@ -120,7 +120,7 @@ class JelevaNephaliasScourgeEffect extends OneShotEffect {
                             for (int i = 0; i < cardsToExile; i++) {
                                 Card card = player.getLibrary().removeFromTop(game);
                                 if (card != null) {
-                                    card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceCard.getName(), source.getSourceId(), game);
+                                    card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceCard.getIdName(), source.getSourceId(), game);
                                 }
                             }
                         }
