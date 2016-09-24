@@ -125,6 +125,7 @@ public class Main {
         File[] customSetDirectories = customSetsFolder.listFiles();
         if(customSetDirectories != null) for(File f : customSetDirectories) if(f.isDirectory())
             try {
+                logger.info(" - Loading custom set module from "+f);
                 customSets.add(CustomSetLoader.loadCustomSet(f));
             } catch (IOException e) {
                 logger.error("Could not load custom package in "+f+"!", e);
