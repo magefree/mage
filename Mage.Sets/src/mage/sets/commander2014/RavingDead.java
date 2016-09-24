@@ -38,6 +38,7 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
+import mage.abilities.effects.common.combat.AttackIfAbleTargetRandomOpponentSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -68,7 +69,7 @@ public class RavingDead extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // At the beginning of combat on your turn, choose an opponent at random. Raving Dead attacks that player this combat if able.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new RavingDeadEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new AttackIfAbleTargetRandomOpponentSourceEffect(), TargetController.YOU, false));
         // Whenever Raving Dead deals combat damage to a player, that player loses half his or her life, rounded down.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RavingDeadDamageEffect(), false, true));
     }
@@ -80,40 +81,6 @@ public class RavingDead extends CardImpl {
     @Override
     public RavingDead copy() {
         return new RavingDead(this);
-    }
-}
-
-class RavingDeadEffect extends OneShotEffect {
-
-    public RavingDeadEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "choose an opponent at random. {this} attacks that player this combat if able";
-    }
-
-    public RavingDeadEffect(final RavingDeadEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RavingDeadEffect copy() {
-        return new RavingDeadEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            List<UUID> opponents = new ArrayList<>();
-            opponents.addAll(game.getOpponents(controller.getId()));
-            Player opponent = game.getPlayer(opponents.get(RandomUtil.nextInt(opponents.size())));
-            if (opponent != null) {
-                ContinuousEffect effect = new AttacksIfAbleTargetPlayerSourceEffect();
-                effect.setTargetPointer(new FixedTarget(opponent.getId()));
-                game.addEffect(effect, source);
-                return true;
-            }
-        }
-        return false;
     }
 }
 
@@ -145,45 +112,4 @@ class RavingDeadDamageEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class AttacksIfAbleTargetPlayerSourceEffect extends RequirementEffect {
-
-    public AttacksIfAbleTargetPlayerSourceEffect() {
-        super(Duration.EndOfTurn);
-        staticText = "{this} attacks that player this combat if able";
-    }
-
-    public AttacksIfAbleTargetPlayerSourceEffect(final AttacksIfAbleTargetPlayerSourceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AttacksIfAbleTargetPlayerSourceEffect copy() {
-        return new AttacksIfAbleTargetPlayerSourceEffect(this);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean mustAttack(Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean mustBlock(Game game) {
-        return false;
-    }
-
-    @Override
-    public UUID mustAttackDefender(Ability source, Game game) {
-        return getTargetPointer().getFirst(game, source);
-    }
-
 }
