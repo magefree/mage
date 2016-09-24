@@ -28,12 +28,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -41,6 +35,11 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -54,7 +53,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class QuestForTheGoblinLord extends CardImpl {
 
-    private static final String rule = "As long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.";
+    private static final String rule = "As long as {this} has five or more quest counters on it, creatures you control get +2/+0";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterPermanent goblinFilter = new FilterControlledCreaturePermanent();
 
@@ -66,7 +65,6 @@ public class QuestForTheGoblinLord extends CardImpl {
     public QuestForTheGoblinLord(UUID ownerId) {
         super(ownerId, 86, "Quest for the Goblin Lord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "WWK";
-
 
         // Whenever a Goblin enters the battlefield under your control, you may put a quest counter on Quest for the Goblin Lord.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), goblinFilter, true));
