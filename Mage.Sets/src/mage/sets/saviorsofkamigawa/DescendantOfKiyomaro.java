@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;

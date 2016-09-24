@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -44,8 +44,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -90,26 +88,3 @@ public class AkutaBornOfAsh extends CardImpl {
     }
 }
 
-class MoreCardsInHandThanOpponentsCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int cardsInHand = player.getHand().size();
-            for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                Player opponent = game.getPlayer(playerId);
-                if (opponent != null && opponent.getHand().size() >= cardsInHand) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "you have more cards in hand than each opponent";
-    }
-    
-}
