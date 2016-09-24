@@ -30,10 +30,10 @@ package mage.sets.dissension;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.RevealTopLandToBattlefieldElseHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.sets.conflux.SkywardEyeProphets.SkywardEyeProphetsEffect;
 
 /**
  * @author mluds
@@ -51,7 +51,7 @@ public class CoilingOracle extends CardImpl {
         this.toughness = new MageInt(1);
 	
         // When Coiling Oracle enters the battlefield, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put that card into your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SkywardEyeProphetsEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealTopLandToBattlefieldElseHandEffect()));
     }
 
     public CoilingOracle(final CoilingOracle card) {
