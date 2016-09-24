@@ -52,21 +52,50 @@ public class MatchOptions implements Serializable {
     protected String deckType;
     protected boolean limited;
     protected List<String> playerTypes = new ArrayList<>();
+    protected boolean multiPlayer;
+    protected int numSeats;
     protected String password;
     protected SkillLevel skillLevel;
     protected boolean rollbackTurnsAllowed;
     protected int quitRatio;
     protected boolean rated;
+    protected int numSeatsForMatch;
 
     /**
      * Time each player has during the game to play using his\her priority.
      */
     protected MatchTimeLimit matchTimeLimit; // 0 = no priorityTime handling
 
-    public MatchOptions(String name, String gameType) {
+    /*public MatchOptions(String name, String gameType) {
         this.name = name;
         this.gameType = gameType;
         this.password = "";
+        this.multiPlayer = false;
+        this.numSeats = 2;
+    }*/
+
+    public MatchOptions(String name, String gameType, boolean multiPlayer, int numSeats ) {
+        this.name = name;
+        this.gameType = gameType;
+        this.password = "";
+        this.multiPlayer = multiPlayer;
+        this.numSeats = numSeats;
+    }
+
+    public void setNumSeats (int numSeats) {
+        this.numSeats = numSeats;
+    }
+
+    public int getNumSeats () {
+        return numSeats;
+    }
+
+    public void setMultiPlayer(boolean multiPlayer) {
+        this.multiPlayer = multiPlayer;
+    }
+
+    public boolean getMultiPlayer() {
+        return multiPlayer;
     }
 
     public String getName() {

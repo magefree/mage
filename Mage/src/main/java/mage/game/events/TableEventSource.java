@@ -38,6 +38,7 @@ import mage.game.tournament.TournamentPairing;
 
 import java.io.Serializable;
 import java.util.UUID;
+import mage.game.tournament.MultiplayerRound;
 
 /**
  *
@@ -92,5 +93,9 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
 
     public void fireTableEvent(EventType eventType, TournamentPairing pair, MatchOptions options) {
         dispatcher.fireEvent(new TableEvent(eventType, pair, options));
+    }
+    
+    public void fireTableEvent(EventType eventType, MultiplayerRound round, MatchOptions options) {
+        dispatcher.fireEvent(new TableEvent(eventType, round, options));
     }
 }

@@ -29,11 +29,8 @@
                   <Component id="pnlPacks" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblNbrPlayers" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="spnNumPlayers" min="-2" pref="46" max="-2" attributes="0"/>
-                          </Group>
+                          <Group type="102" alignment="0" attributes="0"> <Component id="lblNbrPlayers" min="-2" max="-2" attributes="0"/> <EmptySpace max="-2" attributes="0"/> <Component id="spnNumPlayers" min="-2" pref="46" max="-2" attributes="0"/> </Group>
+                          <Group type="102" alignment="0" attributes="0"> <Component id="lblNbrSeats" min="-2" max="-2" attributes="0"/> <EmptySpace max="-2" attributes="0"/> <Component id="spnNumSeats" min="-2" pref="46" max="-2" attributes="0"/> </Group>
                           <Component id="lblPacks" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPlayer1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -175,6 +172,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblPacks" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="pnlPacks" min="-2" max="-2" attributes="0"/>
@@ -191,7 +189,12 @@
                           <Component id="spnNumPlayers" alignment="1" max="32767" attributes="1"/>
                           <Component id="pnlDraftOptions" alignment="1" pref="0" max="32767" attributes="1"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="lblNbrSeats" alignment="1" max="32767" attributes="0"/>
+                          <Component id="spnNumSeats" alignment="1" max="32767" attributes="1"/>
+                      </Group>
+                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblPlayer1" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -200,6 +203,7 @@
                       <Component id="chkRollbackTurnsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+
               <EmptySpace max="-2" attributes="0"/>
               <Component id="player1Panel" min="-2" pref="62" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -377,17 +381,19 @@
         <Property name="rows" type="int" value="0"/>
       </Layout>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblNbrPlayers">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Players:"/>
-      </Properties>
-    </Component>
+    <Component class="javax.swing.JLabel" name="lblNbrPlayers"> <Properties> <Property name="text" type="java.lang.String" value="Players:"/> </Properties> </Component>
+    <Component class="javax.swing.JLabel" name="lblNbrSeats"> <Properties> <Property name="text" type="java.lang.String" value="Seats:"/> </Properties> </Component>
     <Component class="javax.swing.JSpinner" name="spnNumPlayers">
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnNumPlayersStateChanged"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JPanel" name="pnlDraftOptions">
+    <Component class="javax.swing.JSpinner" name="spnNumSeats">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnNumSeatsStateChanged"/>
+      </Events>
+    </Component>
+     <Container class="javax.swing.JPanel" name="pnlDraftOptions">
 
       <Layout>
         <DimensionLayout dim="0">
