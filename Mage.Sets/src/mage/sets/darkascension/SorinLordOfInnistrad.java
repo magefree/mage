@@ -80,7 +80,7 @@ public class SorinLordOfInnistrad extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new VampireToken()), 1));
 
         // -2: You get an emblem with "Creatures you control get +1/+0."
-        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new SorinEmblem()), -2));
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new SorinLordOfInnistradEmblem()), -2));
 
         // -6: Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
         LoyaltyAbility ability = new LoyaltyAbility(new SorinLordOfInnistradEffect(), -6);
@@ -111,9 +111,9 @@ class VampireToken extends Token {
     }
 }
 
-class SorinEmblem extends Emblem {
+class SorinLordOfInnistradEmblem extends Emblem {
 
-    public SorinEmblem() {
+    public SorinLordOfInnistradEmblem() {
         this.setName("EMBLEM: Sorin, Lord of Innistrad");
         BoostControlledEffect effect = new BoostControlledEffect(1, 0, Duration.EndOfGame);
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
