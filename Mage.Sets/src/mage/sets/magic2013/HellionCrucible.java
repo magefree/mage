@@ -81,16 +81,16 @@ public class HellionCrucible extends CardImpl {
     public HellionCrucible copy() {
         return new HellionCrucible(this);
     }
-}
 
-class HellionToken extends Token {
-    public HellionToken() {
-        super("Hellion", "4/4 red Hellion creature token with haste");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Hellion");
-        power = new MageInt(4);
-        toughness = new MageInt(4);
-        addAbility(HasteAbility.getInstance());
+    class HellionToken extends Token {
+        public HellionToken() {
+            super("Hellion", "4/4 red Hellion creature token with haste");
+            cardType.add(CardType.CREATURE);
+            color.setRed(true);
+            subtype.add("Hellion");
+            power = new MageInt(4);
+            toughness = new MageInt(4);
+            addAbility(HasteAbility.getInstance());
+        }
     }
 }

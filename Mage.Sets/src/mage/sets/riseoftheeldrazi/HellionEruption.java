@@ -92,16 +92,16 @@ class HellionEruptionEffect extends OneShotEffect {
         (new HellionToken()).putOntoBattlefield(permanents.size(), game, source.getSourceId(), source.getControllerId());
         return true;
     }
-}
 
-class HellionToken extends Token {
+    class HellionToken extends Token {
 
-    HellionToken() {
-        super("Hellion", "4/4 red Hellion creature token");
-        this.cardType.add(CardType.CREATURE);
-        this.color.setRed(true);
-        this.subtype.add("Hellion");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        HellionToken() {
+            super("Hellion", "4/4 red Hellion creature token");
+            this.cardType.add(CardType.CREATURE);
+            this.color.setRed(true);
+            this.subtype.add("Hellion");
+            this.power = new MageInt(4);
+            this.toughness = new MageInt(4);
+        }
     }
 }
