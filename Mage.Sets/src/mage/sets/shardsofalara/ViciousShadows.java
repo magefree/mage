@@ -29,14 +29,11 @@ package mage.sets.shardsofalara;
 
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -53,7 +50,7 @@ public class ViciousShadows extends CardImpl {
 
 
         // Whenever a creature dies, you may have Vicious Shadows deal damage to target player equal to the number of cards in that player's hand.
-        Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(new TargetPlayerCardsInHandCount()), true);
+        Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(new CardsInTargetHandCount()), true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -65,33 +62,5 @@ public class ViciousShadows extends CardImpl {
     @Override
     public ViciousShadows copy() {
         return new ViciousShadows(this);
-    }
-}
-
-class TargetPlayerCardsInHandCount implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Player targetPlayer = game.getPlayer(sourceAbility.getFirstTarget());
-        if (targetPlayer != null) {
-            return targetPlayer.getHand().size();
-        }
-
-        return 0;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new TargetPlayerCardsInHandCount();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "target player's cards in hand";
     }
 }
