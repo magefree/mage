@@ -46,10 +46,10 @@ import java.util.jar.JarInputStream;
  */
 public class ClassScanner {
 
-    public static List<Class> findClasses(List<String> packages, Class<?> type) {
+    public static List<Class> findClasses(ClassLoader classLoader, List<String> packages, Class<?> type) {
         List<Class> cards = new ArrayList<>();
         try {
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            if(classLoader == null) classLoader = Thread.currentThread().getContextClassLoader();
             assert classLoader != null;
 
             HashMap<String, String> dirs = new HashMap<>();
@@ -71,19 +71,19 @@ public class ClassScanner {
             }
 
             for (String filePath : dirs.keySet()) {
-                cards.addAll(findClasses(new File(filePath), dirs.get(filePath), type));
+                cards.addAll(findClasses(classLoader, new File(filePath), dirs.get(filePath), type));
             }
 
             for (String filePath : jars) {
                 File file = new File(URLDecoder.decode(filePath, "UTF-8"));
-                cards.addAll(findClassesInJar(file, packages, type));
+                cards.addAll(findClassesInJar(classLoader, file, packages, type));
             }
         } catch (IOException ex) {
         }
         return cards;
     }
 
-    private static List<Class> findClasses(File directory, String packageName, Class<?> type) {
+    private static List<Class> findClasses(ClassLoader classLoader, File directory, String packageName, Class<?> type) {
         List<Class> cards = new ArrayList<>();
         if (!directory.exists()) {
             return cards;
@@ -92,7 +92,7 @@ public class ClassScanner {
         for (File file : directory.listFiles()) {
             if (file.getName().endsWith(".class")) {
                 try {
-                    Class<?> clazz = Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6));
+                    Class<?> clazz = Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6), true, classLoader);
                     if (type.isAssignableFrom(clazz)) {
                         cards.add(clazz);
                     }
@@ -103,7 +103,7 @@ public class ClassScanner {
         return cards;
     }
 
-    private static List<Class> findClassesInJar(File file, List<String> packages, Class<?> type) {
+    private static List<Class> findClassesInJar(ClassLoader classLoader, File file, List<String> packages, Class<?> type) {
         List<Class> cards = new ArrayList<>();
         if (!file.exists()) {
             return cards;
@@ -123,7 +123,7 @@ public class ClassScanner {
                     if (packages.contains(packageName)) {
                         Class<?> clazz;
                         try {
-                            clazz = Class.forName(className);
+                            clazz = Class.forName(className, true, classLoader);
                             if (type.isAssignableFrom(clazz)) {
                                 cards.add(clazz);
                             }

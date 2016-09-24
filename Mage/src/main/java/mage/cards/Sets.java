@@ -64,7 +64,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
     private Sets() {
         ArrayList<String> packages = new ArrayList<>();
         packages.add("mage.sets");
-        for (Class c : ClassScanner.findClasses(packages, ExpansionSet.class)) {
+        for (Class c : ClassScanner.findClasses(null, packages, ExpansionSet.class)) {
             try {
                 addSet((ExpansionSet) c.getMethod("getInstance").invoke(null));
             } catch (Exception ex) {

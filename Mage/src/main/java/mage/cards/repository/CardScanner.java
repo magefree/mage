@@ -63,7 +63,7 @@ public class CardScanner {
         }
         ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());
 
-        for (Class c : ClassScanner.findClasses(packages, CardImpl.class)) {
+        for (Class c : ClassScanner.findClasses(null, packages, CardImpl.class)) {
             if (!CardRepository.instance.cardExists(c.getCanonicalName())) {
                 Card card = CardImpl.createCard(c);
                 if (card != null) {
