@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CrewsVehicleSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -70,43 +71,5 @@ public class GearshiftAce extends CardImpl {
     @Override
     public GearshiftAce copy() {
         return new GearshiftAce(this);
-    }
-}
-
-class GearshiftAceTriggeredAbility extends TriggeredAbilityImpl {
-
-    public GearshiftAceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
-    }
-
-    public GearshiftAceTriggeredAbility(final GearshiftAceTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GearshiftAceTriggeredAbility copy() {
-        return new GearshiftAceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CREWED_VEHICLE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getSourceId())) {
-            for (Effect effect : getEffects()) {
-                // set the vehicle id as target
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} crews a Vehicle, " + super.getRule();
     }
 }
