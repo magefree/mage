@@ -881,12 +881,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
         if (!game.replaceEvent(event)) {
             if (fireEvent) {
-                // Trigger multiple times with Panharmonicon.
-                for (int i = 0; i < event.getAmount(); i++) {
-                    game.addSimultaneousEvent(event);
-                }
+                game.addSimultaneousEvent(event);
+                return true;
             }
-            return true;
         }
         return false;
     }

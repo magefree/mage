@@ -43,6 +43,7 @@ import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import org.apache.log4j.Logger;
@@ -95,6 +96,12 @@ class ChooseNumberEffect extends OneShotEffect {
 
         int numberChoice = controller.announceXMana(0, Integer.MAX_VALUE, "Choose a number. Noncreature spells with the chosen converted mana cost can't be cast", game, source);
         game.getState().setValue(source.getSourceId().toString(), numberChoice);
+
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        permanent.addInfo("chosen players", "<font color = 'blue'>Chosen Number: "+ numberChoice +"</font>", game);
+
+        game.informPlayers(permanent.getLogName() + ", chosen number: "+numberChoice);
+
         return true;
     }
 

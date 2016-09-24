@@ -730,11 +730,14 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     private boolean checkPassStep(Game game) {
-        if (playerId.equals(game.getActivePlayerId())) {
-            return !this.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
-        } else {
-            return !this.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
+        if (game.getStep() != null) {
+            if (playerId.equals(game.getActivePlayerId())) {
+                return !this.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
+            } else {
+                return !this.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
+            }
         }
+        return true;
     }
 
     @Override
@@ -1323,7 +1326,8 @@ public class HumanPlayer extends PlayerImpl {
             AvailableModes:
             for (Mode mode : modes.getAvailableModes(source, game)) {
                 int timesSelected = 0;
-                for (Mode selectedMode : modes.getSelectedModes()) {
+                for (UUID selectedModeId : modes.getSelectedModes()) {
+                    Mode selectedMode = modes.get(selectedModeId);
                     if (mode.getId().equals(selectedMode.getId())) {
                         if (modes.isEachModeMoreThanOnce()) {
                             timesSelected++;

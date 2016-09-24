@@ -45,6 +45,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -52,21 +53,21 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class EraOfInnovation extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or Artificer");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
+                new SubtypePredicate("Artificer")));
     }
 
     public EraOfInnovation(UUID ownerId) {
         super(ownerId, 45, "Era of Innovation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "KLD";
 
-        // Whenever an artifact or creature enters the battlefield under you control, you may pay {1}. If you do, you get {E}{E}.
+        // Whenever an artifact or Artificer enters the battlefield under you control, you may pay {1}. If you do, you get {E}{E}.
         Effect effect = new DoIfCostPaid(new GetEnergyCountersControllerEffect(2), new GenericManaCost(1));
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(effect, filter,
-                "Whenever an artifact or creature enters the battlefield under you control, you may pay {1}. If you do, you get {E}{E}."));
+                "Whenever an artifact or Artificer enters the battlefield under you control, you may pay {1}. If you do, you get {E}{E}."));
 
         // {E}{E}{E}{E}{E}{E}, Sacrifice Era of Innovation: Draw three cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new PayEnergyCost(6));

@@ -104,7 +104,8 @@ class ZadaHedronGrinderTriggeredAbility extends TriggeredAbilityImpl {
             if (isControlledInstantOrSorcery(spell)) {
                 boolean targetsSource = false;
                 for (Ability ability : spell.getSpellAbilities()) {
-                    for (Mode mode : ability.getModes().getSelectedModes()) {
+                    for (UUID modeId : ability.getModes().getSelectedModes()) {
+                        Mode mode = ability.getModes().get(modeId);
                         for (Target target : mode.getTargets()) {
                             if (!target.isNotTarget()) {
                                 for (UUID targetId : target.getTargets()) {
@@ -167,7 +168,8 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
             Target usedTarget = null;
             setUsedTarget:
             for (Ability ability : spell.getSpellAbilities()) {
-                for (Mode mode : ability.getModes().getSelectedModes()) {
+                for (UUID modeId : ability.getModes().getSelectedModes()) {
+                    Mode mode = ability.getModes().get(modeId);
                     for (Target target : mode.getTargets()) {
                         if (!target.isNotTarget() && target.getFirstTarget().equals(source.getSourceId())) {
                             usedTarget = target.copy();
@@ -185,7 +187,8 @@ class ZadaHedronGrinderEffect extends OneShotEffect {
                     Spell copy = spell.copySpell(source.getControllerId());
                     game.getStack().push(copy);
                     setTarget:
-                    for (Mode mode : copy.getSpellAbility().getModes().getSelectedModes()) {
+                    for (UUID modeId : copy.getSpellAbility().getModes().getSelectedModes()) {
+                        Mode mode = copy.getSpellAbility().getModes().get(modeId);
                         for (Target target : mode.getTargets()) {
                             if (target.getClass().equals(usedTarget.getClass())) {
                                 target.clearChosen(); // For targets with Max > 1 we need to clear before the text is comapred

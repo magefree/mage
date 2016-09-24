@@ -41,6 +41,7 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
@@ -124,7 +125,12 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                 }
 
                 if (ability.checkTrigger(event, game)) {
-                    ability.trigger(game, ability.getControllerId());
+                    NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability.getControllerId(), ability.getSourceId(), event);
+                    if (!game.replaceEvent(numberOfTriggersEvent)) {
+                        for (int i = 0; i < numberOfTriggersEvent.getAmount(); i++) {
+                            ability.trigger(game, ability.getControllerId());
+                        }
+                    }
                 }
             }
         }

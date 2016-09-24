@@ -29,18 +29,12 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.common.ruleModifying.CantHaveCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -58,7 +52,7 @@ public class MelirasKeepers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Melira's Keepers can't have counters placed on it
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MelirasKeepersEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantHaveCountersSourceEffect()));
     }
 
     public MelirasKeepers(final MelirasKeepers card) {
@@ -68,34 +62,6 @@ public class MelirasKeepers extends CardImpl {
     @Override
     public MelirasKeepers copy() {
         return new MelirasKeepers(this);
-    }
-
-}
-
-class MelirasKeepersEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public MelirasKeepersEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
-        staticText = "{this} can't have counters placed on it";
-    }
-
-    public MelirasKeepersEffect(final MelirasKeepersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MelirasKeepersEffect copy() {
-        return new MelirasKeepersEffect(this);
-    }
-   
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ADD_COUNTER;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(source.getSourceId());
     }
 
 }

@@ -916,33 +916,33 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void updateSkipButtons(boolean turn, boolean endOfTurn, boolean nextMain, boolean allTurns, boolean stack, boolean endStepBeforeYourStep) {
         if (turn) { //F4
-            btnSkipToNextTurn.setBorder(new LineBorder(Color.red, BORDER_SIZE));
+            btnSkipToNextTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
         } else {
             btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         }
         if (endOfTurn) { // F5
-            btnSkipToEndTurn.setBorder(new LineBorder(Color.red, BORDER_SIZE));
+            btnSkipToEndTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
         } else {
             btnSkipToEndTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         }
         if (nextMain) { // F7
-            btnSkipToNextMain.setBorder(new LineBorder(Color.red, BORDER_SIZE));
+            btnSkipToNextMain.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
         } else {
             btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         }
         if (stack) { // F8
-            btnSkipStack.setBorder(new LineBorder(Color.red, BORDER_SIZE));
+            btnSkipStack.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
         } else {
             btnSkipStack.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         }
         if (allTurns) { // F9
-            btnSkipToYourTurn.setBorder(new LineBorder(Color.red, BORDER_SIZE));
+            btnSkipToYourTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
         } else {
             btnSkipToYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         }
 
         if (endStepBeforeYourStep) { // F11
-            btnSkipToEndStepBeforeYourTurn.setBorder(new LineBorder(Color.red, BORDER_SIZE));
+            btnSkipToEndStepBeforeYourTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
         } else {
             btnSkipToEndStepBeforeYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
         }

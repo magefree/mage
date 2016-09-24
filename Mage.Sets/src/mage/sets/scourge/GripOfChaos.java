@@ -28,7 +28,6 @@
 package mage.sets.scourge;
 
 import java.util.Iterator;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -108,7 +107,8 @@ class GripOfChaosTriggeredAbility extends TriggeredAbilityImpl {
         }
         if (stackObject != null) {
             int numberOfTargets = 0;
-            for (Mode mode : stackObject.getStackAbility().getModes().getSelectedModes()) {
+            for (UUID modeId : stackObject.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = stackObject.getStackAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
                     numberOfTargets += target.getTargets().size();
                 }
@@ -149,7 +149,8 @@ class GripOfChaosEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(this.getTargetPointer().getFirst(game, source));
         if (stackObject != null) {
-            for (Mode mode : stackObject.getStackAbility().getModes().getSelectedModes()) {
+            for (UUID modeId : stackObject.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = stackObject.getStackAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
                     UUID oldTargetId = target.getFirstTarget();
                     Set<UUID> possibleTargets = target.possibleTargets(source.getSourceId(), source.getControllerId(), game);

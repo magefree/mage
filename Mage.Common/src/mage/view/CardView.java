@@ -30,7 +30,6 @@ package mage.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Mode;
@@ -55,7 +54,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
-import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -81,7 +79,7 @@ public class CardView extends SimpleCardView {
     protected List<String> manaCost;
     protected int convertedManaCost;
     protected Rarity rarity;
-    
+
     protected MageObjectType mageObjectType = MageObjectType.NULL;
 
     protected boolean isAbility;
@@ -323,7 +321,8 @@ public class CardView extends SimpleCardView {
             this.mageObjectType = MageObjectType.SPELL;
             Spell spell = (Spell) card;
             for (SpellAbility spellAbility : spell.getSpellAbilities()) {
-                for (Mode mode : spellAbility.getModes().getSelectedModes()) {
+                for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                    Mode mode = spellAbility.getModes().get(modeId);
                     if (mode.getTargets().size() > 0) {
                         setTargets(spellAbility.getTargets());
                     }
@@ -331,18 +330,19 @@ public class CardView extends SimpleCardView {
             }
             // show for modal spell, which mode was choosen
             if (spell.getSpellAbility().isModal()) {
-                for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
+                for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
+                    Mode mode = spell.getSpellAbility().getModes().get(modeId);
                     this.rules.add("<span color='green'><i>Chosen mode: " + mode.getEffects().getText(mode) + "</i></span>");
                 }
             }
         }
-        
+
         // Frame color
         this.frameColor = card.getFrameColor(game);
 
         // Frame style
         this.frameStyle = card.getFrameStyle();
-        
+
         // Get starting loyalty
         this.startingLoyalty = "" + card.getStartingLoyalty();
     }
@@ -355,7 +355,7 @@ public class CardView extends SimpleCardView {
             this.mageObjectType = MageObjectType.PERMANENT;
             this.power = Integer.toString(object.getPower().getValue());
             this.toughness = Integer.toString(object.getToughness().getValue());
-            this.loyalty = Integer.toString(((Permanent) object).getCounters((Game)null).getCount(CounterType.LOYALTY));
+            this.loyalty = Integer.toString(((Permanent) object).getCounters((Game) null).getCount(CounterType.LOYALTY));
         } else {
             this.power = object.getPower().toString();
             this.toughness = object.getToughness().toString();
@@ -488,7 +488,7 @@ public class CardView extends SimpleCardView {
         this.rarity = Rarity.NA;
         this.type = token.getTokenType();
         this.tokenDescriptor = token.getTokenDescriptor();
-        this.tokenSetCode = token.getOriginalExpansionSetCode();        
+        this.tokenSetCode = token.getOriginalExpansionSetCode();
     }
 
     protected final void setTargets(Targets targets) {
@@ -547,7 +547,7 @@ public class CardView extends SimpleCardView {
     public String getLoyalty() {
         return loyalty;
     }
-    
+
     public String getStartingLoyalty() {
         return startingLoyalty;
     }
@@ -567,7 +567,7 @@ public class CardView extends SimpleCardView {
     public ObjectColor getColor() {
         return color;
     }
-    
+
     public ObjectColor getFrameColor() {
         return frameColor;
     }
@@ -807,4 +807,3 @@ public class CardView extends SimpleCardView {
     }
 
 }
-

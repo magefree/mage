@@ -81,7 +81,7 @@ class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
     public boolean apply(Game game, Ability source) {
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
+        if (targetPlayer != null && cardName != null && !cardName.isEmpty()) {
             FilterCard filter = new FilterCard();
             filter.add(new NamePredicate(cardName));
             int cardsInHandBefore = targetPlayer.getHand().count(filter, game);

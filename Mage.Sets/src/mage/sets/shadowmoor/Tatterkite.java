@@ -29,19 +29,14 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.common.ruleModifying.CantHaveCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -60,7 +55,7 @@ public class Tatterkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Tatterkite can't have counters placed on it.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantHaveCountersSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantHaveCountersSourceEffect()));
 
     }
 
@@ -71,36 +66,5 @@ public class Tatterkite extends CardImpl {
     @Override
     public Tatterkite copy() {
         return new Tatterkite(this);
-    }
-}
-
-class CantHaveCountersSourceEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public CantHaveCountersSourceEffect(Duration duration) {
-        super(duration, Outcome.Detriment);
-        staticText = "{this} can't have counters placed on it";
-    }
-
-    public CantHaveCountersSourceEffect(final CantHaveCountersSourceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CantHaveCountersSourceEffect copy() {
-        return new CantHaveCountersSourceEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ADD_COUNTERS;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        UUID sourceId = source.getSourceId();
-        if (sourceId != null) {
-            return sourceId.equals(event.getTargetId());
-        }
-        return false;
     }
 }

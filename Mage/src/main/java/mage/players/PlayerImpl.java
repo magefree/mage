@@ -863,8 +863,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
-        if (!cards.isEmpty()) {
+    public boolean putCardsOnBottomOfLibrary(Cards cardsToLibrary, Game game, Ability source, boolean anyOrder) {
+        if (!cardsToLibrary.isEmpty()) {
+            Cards cards = new CardsImpl(cardsToLibrary); // prevent possible ConcurrentModificationException
             if (!anyOrder) {
                 for (UUID objectId : cards) {
                     moveObjectToLibrary(objectId, source == null ? null : source.getSourceId(), game, false, false);
@@ -996,6 +997,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                 Zone fromZone = game.getState().getZone(card.getMainCard().getId());
                 card.cast(game, fromZone, ability, playerId);
                 Spell spell = game.getStack().getSpell(ability.getId());
+                if (spell == null) {
+                    logger.error("Got no spell from stack. ability: " + ability.getRule());
+                    return false;
+                }
                 // some effects set sourceId to cast without paying mana costs or other costs
                 if (ability.getSourceId().equals(getCastSourceIdWithAlternateMana())) {
                     Ability spellAbility = spell.getSpellAbility();
@@ -2865,7 +2870,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Mode mode : option.getModes().values()) {
             Ability newOption = option.copy();
             newOption.getModes().getSelectedModes().clear();
-            newOption.getModes().getSelectedModes().add(mode);
+            newOption.getModes().getSelectedModes().add(mode.getId());
             newOption.getModes().setActiveMode(mode);
             if (newOption.getTargets().getUnchosen().size() > 0) {
                 if (newOption.getManaCosts().getVariableCosts().size() > 0) {

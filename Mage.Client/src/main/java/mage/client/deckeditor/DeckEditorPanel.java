@@ -27,6 +27,25 @@
  */
 package mage.client.deckeditor;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.filechooser.FileFilter;
 import mage.cards.Card;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
@@ -39,8 +58,8 @@ import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
-import mage.client.deck.generator.DeckGenerator;
 import mage.client.deck.generator.DeckGenerator.DeckGeneratorException;
+import mage.client.deck.generator.DeckGenerator;
 import mage.client.dialog.AddLandDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
@@ -52,22 +71,6 @@ import mage.remote.Session;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import javax.swing.Timer;
-import javax.swing.filechooser.FileFilter;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-import java.util.List;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -84,6 +87,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private int timeout;
     private Timer countdown;
     private UpdateDeckTask updateDeckTask;
+    private int timeToSubmit = -1;
 
     /**
      * Creates new form DeckEditorPanel
@@ -160,6 +164,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.txtTimeRemaining.setVisible(true);
             case SIDEBOARDING:
                 this.btnSubmit.setVisible(true);
+                this.btnSubmitTimer.setVisible(true);
                 if (deck != null) {
                     this.cardSelector.loadSideboard(new ArrayList<>(deck.getSideboard()), this.bigCard);
                 }
@@ -187,6 +192,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             case FREE_BUILDING:
                 this.deckArea.setOrientation(/*limitedBuildingOrientation = */false);
                 this.btnSubmit.setVisible(false);
+                this.btnSubmitTimer.setVisible(false);
                 this.btnAddLand.setVisible(true);
                 this.cardSelector.loadCards(this.bigCard);
                 //this.cardTableSelector.loadCards(this.bigCard);
@@ -484,6 +490,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         if (s == 60) {
             AudioManager.playOnCountdown1();
         }
+        if (timeToSubmit > 0) {
+            timeToSubmit --;
+            btnSubmitTimer.setText("Submit (" + timeToSubmit + ")");
+            btnSubmitTimer.setToolTipText("Submit your deck in " + timeToSubmit + " seconds!");
+        }
     }
 
     private void initComponents() {
@@ -501,6 +512,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnExit = new javax.swing.JButton();
         btnImport = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
+        btnSubmitTimer = new javax.swing.JButton();
         btnAddLand = new javax.swing.JButton();
         btnGenDeck = new javax.swing.JButton();
         txtTimeRemaining = new javax.swing.JTextField();
@@ -594,11 +606,22 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         });
 
         btnSubmit.setText("Submit");
+        btnSubmitTimer.setToolTipText("Submit your deck now!");
         btnSubmit.setName("btnSubmit"); // NOI18N
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
+            }
+        });
+
+        btnSubmitTimer.setText("Submit (60s)");
+        btnSubmitTimer.setToolTipText("Submit your deck in one minute!");
+        btnSubmitTimer.setName("btnSubmitTimer");
+        btnSubmitTimer.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitTimerActionPerformed(evt);
             }
         });
 
@@ -610,7 +633,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 btnAddLandActionPerformed(evt);
             }
         });
-        
+
         btnGenDeck.setText("Generate");
         btnGenDeck.setName("btnGenDeck");
         btnGenDeck.addActionListener(new java.awt.event.ActionListener() {
@@ -658,7 +681,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                         .addContainerGap()
                                         .addComponent(btnAddLand)
                                         .addContainerGap()
-                                        .addComponent(btnSubmit))
+                                        .addComponent(btnSubmit)
+                                        .addContainerGap()
+                                        .addComponent(btnSubmitTimer))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addContainerGap()
                                         .addComponent(txtTimeRemaining))
@@ -682,7 +707,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 .addComponent(btnImport)
                                 .addComponent(btnGenDeck)
                                 .addComponent(btnAddLand)
-                                .addComponent(btnSubmit))
+                                .addComponent(btnSubmit)
+                                .addComponent(btnSubmitTimer))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtTimeRemaining))
@@ -847,6 +873,26 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    private void btnSubmitTimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitTimerActionPerformed
+
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+        timeToSubmit = 60;
+        this.btnSubmitTimer.setEnabled(false);
+
+        ScheduledFuture scheduledFuture = scheduledExecutorService.schedule(new Callable() {
+            public Object call() throws Exception {
+                if (updateDeckTask != null) {
+                    updateDeckTask.cancel(true);
+                }
+
+                if (SessionHandler.submitDeck(tableId, deck.getDeckCardLists())) {
+                    removeDeckEditor();
+                }
+                return null;
+            }
+        }, 60, TimeUnit.SECONDS);
+    }//GEN-LAST:event_btnSubmitTimerActionPerformed
+
     private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLandActionPerformed
         AddLandDialog addLand = new AddLandDialog();
         addLand.showDialog(deck, mode);
@@ -867,7 +913,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
         refreshDeck();
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnExit;
@@ -882,6 +928,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblDeckName;
     private javax.swing.JTextField txtDeckName;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnSubmitTimer;
     private javax.swing.JButton btnAddLand;
     private javax.swing.JButton btnGenDeck;
     private JComponent cardInfoPane;

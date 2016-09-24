@@ -122,7 +122,10 @@ class CrewCost extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         int sumPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
-            sumPower += permanent.getPower().getValue();
+            int powerToAdd = permanent.getPower().getValue();
+            if (powerToAdd > 0) {
+                sumPower += powerToAdd;
+            }
             if (sumPower >= value) {
                 return true;
             }

@@ -567,7 +567,7 @@ public class TableController {
             String creator = null;
             StringBuilder opponent = new StringBuilder();
             for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) { // no AI players
-                if (!match.getPlayer(entry.getValue()).hasQuit()) {
+                if (match.getPlayer(entry.getValue()) != null && !match.getPlayer(entry.getValue()).hasQuit()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
                         user.ccGameStarted(match.getGame().getId(), entry.getValue());

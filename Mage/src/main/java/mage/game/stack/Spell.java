@@ -210,7 +210,8 @@ public class Spell extends StackObjImpl implements Card {
             if (notTargeted || legalParts) {
                 for (SpellAbility spellAbility : this.spellAbilities) {
                     if (spellAbilityHasLegalParts(spellAbility, game)) {
-                        for (Mode mode : spellAbility.getModes().getSelectedModes()) {
+                        for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                            Mode mode = spellAbility.getModes().get(modeId);
                             spellAbility.getModes().setActiveMode(mode);
                             if (mode.getTargets().stillLegal(spellAbility, game)) {
                                 if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
@@ -283,7 +284,8 @@ public class Spell extends StackObjImpl implements Card {
 
     private boolean hasTargets(SpellAbility spellAbility, Game game) {
         if (spellAbility.getModes().getSelectedModes().size() > 1) {
-            for (Mode mode : spellAbility.getModes().getSelectedModes()) {
+            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                Mode mode = spellAbility.getModes().get(modeId);
                 if (!mode.getTargets().isEmpty()) {
                     return true;
                 }
@@ -299,7 +301,8 @@ public class Spell extends StackObjImpl implements Card {
         if (spellAbility.getModes().getSelectedModes().size() > 1) {
             boolean targetedMode = false;
             boolean legalTargetedMode = false;
-            for (Mode mode : spellAbility.getModes().getSelectedModes()) {
+            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                Mode mode = spellAbility.getModes().get(modeId);
                 if (mode.getTargets().size() > 0) {
                     targetedMode = true;
                     if (mode.getTargets().stillLegal(spellAbility, game)) {

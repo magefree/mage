@@ -45,6 +45,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -139,7 +140,11 @@ class BomatCourierReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return controller.moveCards(game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true)), Zone.HAND, source, game);
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId(), true));
+            if (exileZone != null) {
+                controller.moveCards(exileZone, Zone.HAND, source, game);
+            }
+            return true;
         }
         return false;
     }

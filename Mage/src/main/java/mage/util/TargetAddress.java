@@ -70,7 +70,7 @@ public class TargetAddress {
 
         protected Iterator<SpellAbility> spellAbilityIterator;
         protected Integer lastSpellAbilityIndex = null;
-        protected Iterator<Mode> modeIterator = null;
+        protected Iterator<UUID> modeIterator = null;
         protected Modes modes = null;
         protected UUID lastMode = null;
         protected Iterator<Target> targetIterator = null;
@@ -127,7 +127,7 @@ public class TargetAddress {
                 }
 
                 if (modeIterator != null && modeIterator.hasNext()) {
-                    lastMode = modeIterator.next().getId();
+                    lastMode = modeIterator.next();
                     targetIterator = modes.get(lastMode).getTargets().iterator();
                 } else {
                     lastMode = null;

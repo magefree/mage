@@ -306,7 +306,8 @@ public abstract class AbilityImpl implements Ability {
                 && game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE, getId(), getSourceId(), getControllerId()), this)) {
             return false;
         }
-        for (Mode mode : this.getModes().getSelectedModes()) {
+        for (UUID modeId : this.getModes().getSelectedModes()) {
+            Mode mode = this.getModes().get(modeId);
             this.getModes().setActiveMode(mode);
             //20121001 - 601.2c
             // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
@@ -1060,7 +1061,8 @@ public abstract class AbilityImpl implements Ability {
             }
         } else if (object instanceof Spell && ((Spell) object).getSpellAbility().getModes().size() > 1) {
             Modes spellModes = ((Spell) object).getSpellAbility().getModes();
-            for (Mode selectedMode : spellModes.getSelectedModes()) {
+            for (UUID selectedModeId : spellModes.getSelectedModes()) {
+                Mode selectedMode = spellModes.get(selectedModeId);
                 int item = 0;
                 for (Mode mode : spellModes.values()) {
                     item++;

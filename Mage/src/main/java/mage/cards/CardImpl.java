@@ -29,7 +29,6 @@ package mage.cards;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
-
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -53,10 +52,8 @@ import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.util.GameLog;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
@@ -315,11 +312,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public String getTokenSetCode() {
         return tokenSetCode;
     }
-    
+
     @Override
     public String getTokenDescriptor() {
         return tokenDescriptor;
-    }    
+    }
 
     @Override
     public List<Mana> getMana() {
@@ -342,22 +339,29 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone, appliedEffects);
         ZoneChangeInfo zoneChangeInfo;
-        if (toZone == Zone.LIBRARY) {
-            zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
-        } else if (toZone == Zone.BATTLEFIELD) {
-            zoneChangeInfo = new ZoneChangeInfo.Battlefield(event, flag /* comes into play tapped */);
-        } else {
-            zoneChangeInfo = new ZoneChangeInfo(event);
+        if (null != toZone) {
+            switch (toZone) {
+                case LIBRARY:
+                    zoneChangeInfo = new ZoneChangeInfo.Library(event, flag /* put on top */);
+                    break;
+                case BATTLEFIELD:
+                    zoneChangeInfo = new ZoneChangeInfo.Battlefield(event, flag /* comes into play tapped */);
+                    break;
+                default:
+                    zoneChangeInfo = new ZoneChangeInfo(event);
+                    break;
+            }
+            return ZonesHandler.moveCard(zoneChangeInfo, game);
         }
-        return ZonesHandler.moveCard(zoneChangeInfo, game);
+        return false;
     }
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         Card mainCard = getMainCard();
         ZoneChangeEvent event = new ZoneChangeEvent(mainCard.getId(), ability.getId(), controllerId, fromZone, Zone.STACK);
-        ZoneChangeInfo.Stack info =
-                new ZoneChangeInfo.Stack(event, new Spell(this, ability.copy(), controllerId, event.getFromZone()));
+        ZoneChangeInfo.Stack info
+                = new ZoneChangeInfo.Stack(event, new Spell(this, ability.copy(), controllerId, event.getFromZone()));
         return ZonesHandler.cast(info, game);
     }
 
@@ -449,6 +453,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 } else if (game.getPlayer(ownerId).getSideboard().contains(this.getId())) {
                     game.getPlayer(ownerId).getSideboard().remove(this.getId());
                     removed = true;
+                } else if (game.getPhase() == null) {
+                    // E.g. Commander of commander game
+                    removed = true;
                 }
                 break;
             case BATTLEFIELD: // for sacrificing permanents or putting to library
@@ -461,7 +468,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 break;
         }
         if (removed) {
-            game.rememberLKI(lkiObject != null ? lkiObject.getId() : objectId, fromZone, lkiObject != null ? lkiObject : this);
+            if (!fromZone.equals(Zone.OUTSIDE)) {
+                game.rememberLKI(lkiObject != null ? lkiObject.getId() : objectId, fromZone, lkiObject != null ? lkiObject : this);
+            }
         } else {
             logger.warn("Couldn't find card in fromZone, card=" + getIdName() + ", fromZone=" + fromZone);
         }
@@ -598,7 +607,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     returnCode = false;
                 }
             }
-            if(finalAmount > 0) {
+            if (finalAmount > 0) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, getControllerOrOwner(), counter.getName(), amount));
             }
         } else {
@@ -656,7 +665,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         return super.getColor(game);
     }
-    
+
     @Override
     public List<String> getSubtype(Game game) {
         if (game != null) {
