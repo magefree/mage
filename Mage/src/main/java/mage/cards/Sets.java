@@ -73,7 +73,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
     public void addSet(ExpansionSet set) {
         if(containsKey(set.getCode())) throw new IllegalArgumentException("Set code "+set.getCode()+" already exists.");
         this.put(set.getCode(), set);
-        if(set.isCustomSet) customSets.add(set.getCode());
+        if(set.isCustomSet()) customSets.add(set.getCode());
     }
 
     public static boolean isCustomSet(String setCode) {

@@ -11,7 +11,8 @@ public enum SetType {
     SUPPLEMENTAL("Supplemental"),
     SUPPLEMENTAL_STANDARD_LEGAL("Standard Legal Supplemental"),
     PROMOTIONAL("Promotional"),
-    JOKESET("Joke Set");
+    JOKESET("Joke Set"),
+    CUSTOM_SET("Unofficial Set");
 
     private final String text;
 
