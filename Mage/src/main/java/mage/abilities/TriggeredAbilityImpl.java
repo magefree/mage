@@ -88,7 +88,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
             if (player != null && object != null) {
-                if (!player.chooseUse(getEffects().get(0).getOutcome(), (object != null ? this.getRule(object.getLogName()) : this.getRule()), this, game)) {
+                if (!player.chooseUse(getEffects().get(0).getOutcome(), this.getRule(object.getLogName()), this, game)) {
                     return false;
                 }
             } else {
@@ -216,7 +216,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     /*
      603.6c,603.6d
-     This has to be set, if the triggered ability has to check back in time if the permanent the ability is connected to had the ability on the battlefeild while the trigger is checked
+     This has to be set, if the triggered ability has to check back in time if the permanent the ability is connected to had the ability on the battlefield while the trigger is checked
      */
     @Override
     public final void setLeavesTheBattlefieldTrigger(boolean leavesTheBattlefieldTrigger) {
