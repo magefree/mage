@@ -63,7 +63,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 47;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 61;
+    private static final long CARD_CONTENT_VERSION = 62;
 
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
