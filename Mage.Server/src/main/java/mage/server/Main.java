@@ -29,12 +29,19 @@ package mage.server;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.management.MBeanServer;
+
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.repository.CardScanner;
+import mage.cards.repository.PluginClassloaderRegistery;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
@@ -82,7 +89,9 @@ public class Main {
     private static final String testModeArg = "-testMode=";
     private static final String fastDBModeArg = "-fastDbMode=";
     private static final String adminPasswordArg = "-adminPassword=";
-    private static final String pluginFolder = "plugins";
+
+    private static final File pluginFolder = new File("plugins");
+    private static final File customSetsFolder = new File("customSets");
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
     public static TransporterServer server;
@@ -107,6 +116,31 @@ public class Main {
             } else if (arg.startsWith(fastDBModeArg)) {
                 fastDbMode = Boolean.valueOf(arg.replace(fastDBModeArg, ""));
             }
+        }
+
+        logger.info("Loading custom set packages...");
+        List<CustomSetPackage> customSets = new ArrayList<>();
+        if(!customSetsFolder.exists()) if(!customSetsFolder.mkdirs())
+            logger.error("Could not create custom sets directory.");
+        File[] customSetDirectories = customSetsFolder.listFiles();
+        if(customSetDirectories != null) for(File f : customSetDirectories) if(f.isDirectory())
+            try {
+                customSets.add(CustomSetLoader.loadCustomSet(f));
+            } catch (IOException e) {
+                logger.error("Could not load custom package in "+f+"!", e);
+            }
+        logger.info("Done.");
+
+        if(!customSets.isEmpty()) {
+            logger.info("Registering custom sets...");
+            for(CustomSetPackage pkg : customSets) {
+                for(ExpansionSet set : pkg.getSets()) {
+                    logger.info("- Loading "+set.getName()+" ("+set.getCode()+")");
+                    Sets.getInstance().addSet(set);
+                }
+                PluginClassloaderRegistery.registerPluginClassloader(pkg.getClassLoader());
+            }
+            logger.info("Done.");
         }
 
         logger.info("Loading cards...");
@@ -137,6 +171,16 @@ public class Main {
         }
         for (Plugin plugin : config.getDeckTypes()) {
             DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
+        }
+
+        for (CustomSetPackage pkg : customSets) {
+            Map<String, Class> draftCubes = pkg.getDraftCubes();
+            for (String name : draftCubes.keySet())
+                CubeFactory.getInstance().addDraftCube(name, draftCubes.get(name));
+
+            Map<String, Class> deckTypes = pkg.getDeckTypes();
+            for (String name : deckTypes.keySet())
+                DeckValidatorFactory.getInstance().addDeckType(name, deckTypes.get(name));
         }
 
         logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
@@ -316,7 +360,7 @@ public class Main {
 
     private static Class<?> loadPlugin(Plugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
@@ -329,7 +373,7 @@ public class Main {
 
     private static MatchType loadGameType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading game type: " + plugin.getClassName());
             return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
@@ -342,7 +386,7 @@ public class Main {
 
     private static TournamentType loadTournamentType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
