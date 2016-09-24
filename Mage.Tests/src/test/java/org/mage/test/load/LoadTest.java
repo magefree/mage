@@ -267,7 +267,7 @@ public class LoadTest {
      * @return
      */
     private MatchOptions createGameOptions(GameTypeView gameTypeView, Session session) {
-        MatchOptions options = new MatchOptions("Test game", gameTypeView.getName());
+        MatchOptions options = new MatchOptions("Test game", gameTypeView.getName(), false, 2);
 
         options.getPlayerTypes().add("Human");
         options.getPlayerTypes().add("Human");

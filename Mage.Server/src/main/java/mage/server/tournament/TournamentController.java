@@ -43,6 +43,7 @@ import mage.game.events.TableEvent;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.result.ResultProtos.TourneyQuitStatus;
+import mage.game.tournament.MultiplayerRound;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
@@ -112,6 +113,19 @@ public class TournamentController {
                                 if (!isAbort()) {
                                     initTournament(); // set state
                                     startMatch(event.getPair(), event.getMatchOptions());
+                                }
+                                break;
+                            case START_MULTIPLAYER_MATCH:
+                                if (!isAbort()) {
+                                    initTournament(); // set state
+                                    MatchOptions matchOptions = event.getMatchOptions();
+                                    if (matchOptions != null && event.getMultiplayerRound() != null) {
+                                        for (TournamentPlayer player : event.getMultiplayerRound().getAllPlayers()) {
+                                            matchOptions.getPlayerTypes().add(player.getPlayerType());                                            
+                                        }
+                                    }
+                                    
+                                    startMultiplayerMatch(event.getMultiplayerRound(), event.getMatchOptions());
                                 }
                                 break;
                             case END:
@@ -264,6 +278,31 @@ public class TournamentController {
             logger.fatal("TournamentController startMatch error", ex);
         }
     }
+    
+    private void startMultiplayerMatch(MultiplayerRound round, MatchOptions matchOptions) {
+        try {
+            TableManager tableManager = TableManager.getInstance();
+            Table table = tableManager.createTable(GamesRoomManager.getInstance().getMainRoomId(), matchOptions);
+            table.setTournamentSubTable(true);
+            table.setTournament(tournament);
+            table.setState(TableState.WAITING);
+            
+            for (TournamentPlayer player : round.getAllPlayers()) {
+                tableManager.addPlayer(getPlayerUserId(player.getPlayer().getId()), table.getId(), player.getPlayer(), player.getPlayerType(), player.getDeck());
+            }
+            table.setState(TableState.STARTING);
+            tableManager.startTournamentSubMatch(null, table.getId());
+            Match match = tableManager.getMatch(table.getId());
+            match.setTableId(tableId);
+            round.setMatch(match);
+            round.setTableId(table.getId());
+            for (TournamentPlayer player : round.getAllPlayers()) {
+                player.setState(TournamentPlayerState.DUELING);
+            }
+        } catch (GameException ex) {
+            logger.fatal("TournamentController startMatch error", ex);
+        }
+    }    
 
     private void startDraft(Draft draft) {
         TableManager.getInstance().startDraft(tableId, draft);

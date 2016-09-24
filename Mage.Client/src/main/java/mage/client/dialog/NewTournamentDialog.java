@@ -170,6 +170,8 @@ public class NewTournamentDialog extends MageDialog {
         pnlPacks = new javax.swing.JPanel();
         lblNbrPlayers = new javax.swing.JLabel();
         spnNumPlayers = new javax.swing.JSpinner();
+        lblNbrSeats = new javax.swing.JLabel();
+        spnNumSeats = new javax.swing.JSpinner();
         pnlDraftOptions = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         cbDraftTiming = new javax.swing.JComboBox();
@@ -277,6 +279,14 @@ public class NewTournamentDialog extends MageDialog {
             }
         });
 
+        lblNbrSeats.setText("Seats:");
+
+        spnNumSeats.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnNumSeatsStateChanged(evt);
+            }
+        });
+
         jLabel6.setText("Timing:");
 
         cbDraftTiming.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -358,6 +368,8 @@ public class NewTournamentDialog extends MageDialog {
         lblQuitRatio.setText("Allowed quit %:");
 
         spnQuitRatio.setToolTipText("Players with quit % more than this value can't join this table");
+        spnNumSeats.setToolTipText("The number of seats for each duel. If more than 2, will set number of wins to 1");
+        spnNumPlayers.setToolTipText("The total number of players who will draft");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -373,7 +385,11 @@ public class NewTournamentDialog extends MageDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblNbrPlayers)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNbrSeats)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnNumSeats, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblPacks)
                             .addComponent(lblPlayer1))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,6 +520,8 @@ public class NewTournamentDialog extends MageDialog {
                                 .addComponent(lblNumRounds))
                             .addComponent(lblNbrPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(spnNumPlayers)
+                            .addComponent(lblNbrSeats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(spnNumSeats)
                             .addComponent(pnlDraftOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -533,7 +551,8 @@ public class NewTournamentDialog extends MageDialog {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-        TournamentOptions tOptions = new TournamentOptions(this.txtName.getText());
+        int numSeats = (Integer)this.spnNumSeats.getValue();
+        TournamentOptions tOptions = new TournamentOptions(this.txtName.getText(), "", numSeats);
         tOptions.setTournamentType(tournamentType.getName());
         tOptions.setPassword(txtPassword.getText());
         tOptions.getPlayerTypes().add("Human");
@@ -653,13 +672,51 @@ public class NewTournamentDialog extends MageDialog {
         this.hideDialog();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void updateNumSeats() {
+        int numPlayers = (Integer)this.spnNumPlayers.getValue();
+        int numSeats = (Integer)this.spnNumSeats.getValue();
+
+        if (numSeats > 2) {
+            TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
+            if (numSeats >= tournamentType.getMinPlayers()) {
+                createPlayers(numSeats - 1);
+                spnNumPlayers.setValue(numSeats);
+            } else {
+                numSeats = tournamentType.getMinPlayers();
+                createPlayers(numSeats - 1);
+                spnNumPlayers.setValue(numSeats);
+                spnNumSeats.setValue(numSeats);
+            }
+            spnNumWins.setValue(1);
+        }
+    }
+
     private void spnNumPlayersStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumPlayersStateChanged
-        int numPlayers = (Integer)this.spnNumPlayers.getValue() - 1;
-        createPlayers(numPlayers);
+        int numPlayers = (Integer)this.spnNumPlayers.getValue();
+        createPlayers(numPlayers - 1);
+        int numSeats = (Integer)this.spnNumSeats.getValue();
+        if (numSeats > 2 && numPlayers != numSeats) {
+            updateNumSeats();
+        }
     }//GEN-LAST:event_spnNumPlayersStateChanged
 
+    private void spnNumSeatsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumSeatsStateChanged
+        int numSeats = (Integer)this.spnNumSeats.getValue();
+        if (numSeats > 2) {
+            this.spnNumPlayers.setEnabled(false);
+        } else {
+            this.spnNumPlayers.setEnabled(true);
+        }
+        updateNumSeats();
+    }//GEN-LAST:event_spnNumSeatsStateChanged
+ 
+
     private void spnNumWinsnumPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumWinsnumPlayersChanged
-        // TODO add your handling code here:
+        int numSeats = (Integer)this.spnNumSeats.getValue();
+        int numWins = (Integer)this.spnNumSeats.getValue();
+        if (numSeats > 2) {
+            spnNumWins.setValue(1);
+        }
     }//GEN-LAST:event_spnNumWinsnumPlayersChanged
 
     private JFileChooser fcSelectDeck = null;
@@ -725,6 +782,8 @@ public class NewTournamentDialog extends MageDialog {
         this.spnNumPlayers.setModel(new SpinnerNumberModel(numPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
         createPlayers((Integer) spnNumPlayers.getValue() - 1);
+
+        this.spnNumSeats.setModel(new SpinnerNumberModel(2, 2, tournamentType.getMaxPlayers(), 1));
 
         if (tournamentType.isLimited()) {
             this.isRandom = tournamentType.isRandom();
@@ -913,6 +972,8 @@ public class NewTournamentDialog extends MageDialog {
         setNumberOfSwissRoundsMin(numPlayers);
 
     }
+
+
 
     private void drawPlayers() {
         this.pnlOtherPlayers.removeAll();
@@ -1119,6 +1180,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JLabel lblGameType;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblNbrPlayers;
+    private javax.swing.JLabel lblNbrSeats;
     private javax.swing.JLabel lblNumRounds;
     private javax.swing.JLabel lblNumWins;
     private javax.swing.JLabel lblPacks;
@@ -1135,6 +1197,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JSpinner spnConstructTime;
     private javax.swing.JSpinner spnFreeMulligans;
     private javax.swing.JSpinner spnNumPlayers;
+    private javax.swing.JSpinner spnNumSeats;
     private javax.swing.JSpinner spnNumRounds;
     private javax.swing.JSpinner spnNumWins;
     private javax.swing.JSpinner spnQuitRatio;

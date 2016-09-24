@@ -1272,7 +1272,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 return;
             }
 
-            MatchOptions options = new MatchOptions("1", "Two Player Duel");
+            MatchOptions options = new MatchOptions("1", "Two Player Duel", false, 2);
             options.getPlayerTypes().add("Human");
             options.getPlayerTypes().add("Computer - mad");
             options.setDeckType("Limited");
