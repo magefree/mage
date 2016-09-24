@@ -51,7 +51,8 @@ public class ChangeATargetOfTargetSpellAbilityToSourceEffect extends OneShotEffe
             } else {
                 return false;
             }
-            for (Mode mode : sourceAbility.getModes().getSelectedModes()) {
+            for (UUID modeId : sourceAbility.getModes().getSelectedModes()) {
+                Mode mode = sourceAbility.getModes().get(modeId);
                 targets.addAll(mode.getTargets());
             }
 
@@ -102,12 +103,10 @@ public class ChangeATargetOfTargetSpellAbilityToSourceEffect extends OneShotEffe
             }
             if (oldTargetName != null) {
                 game.informPlayers(sourceObject.getLogName() + ": Changed target of " + stackObject.getLogName() + " from " + oldTargetName + " to " + sourceObject.getLogName());
+            } else if (twoTimesTarget) {
+                game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its not valid to target it twice for " + stackObject.getLogName());
             } else {
-                if (twoTimesTarget) {
-                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its not valid to target it twice for " + stackObject.getLogName());
-                } else {
-                    game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its no valid target for " + stackObject.getLogName());
-                }
+                game.informPlayers(sourceObject.getLogName() + ": Target not changed to " + sourceObject.getLogName() + " because its no valid target for " + stackObject.getLogName());
             }
             return true;
         }

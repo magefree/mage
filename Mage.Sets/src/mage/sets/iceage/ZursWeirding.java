@@ -45,7 +45,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.players.PlayerList;
 
 /**
  *
@@ -103,31 +102,30 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
                 // reveals it instead
-                player.revealCards(sourceObject.getIdName() + " next draw of " + player.getName() + " (" + game.getTurnNum()+"|"+game.getPhase().getType() +")", new CardsImpl(card), game);
+                player.revealCards(sourceObject.getIdName() + " next draw of " + player.getName() + " (" + game.getTurnNum() + "|" + game.getPhase().getType() + ")", new CardsImpl(card), game);
 
                 // Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard
-                PlayerList playerList = game.getPlayerList().copy();
-                playerList.setCurrent(player.getId());
-                Player currentPlayer = playerList.getNext(game);
-                String message = new StringBuilder("Pay 2 life to put ").append(card.getLogName()).append(" into graveyard?").toString();
-                while (!currentPlayer.getId().equals(player.getId())) {
-                    if (currentPlayer.canPayLifeCost() &&
-                            currentPlayer.getLife() >= 2 &&
-                            currentPlayer.chooseUse(Outcome.Benefit, message, source, game)) {
-                        currentPlayer.loseLife(2, game);
-                        player.moveCards(card, Zone.GRAVEYARD, source, game);
-//                        game.getState().getRevealed().reset();
-                        return true;
+                String message = "Pay 2 life to put " + card.getLogName() + " into graveyard?";
+                for (UUID playerId : game.getState().getPlayersInRange(player.getId(), game)) {
+                    if (playerId.equals(player.getId())) {
+                        continue;
                     }
-
-                    currentPlayer = playerList.getNext(game);
+                    Player otherPlayer = game.getPlayer(playerId);
+                    if (otherPlayer.canPayLifeCost()
+                            && otherPlayer.getLife() >= 2
+                            && otherPlayer.chooseUse(Outcome.Benefit, message, source, game)) {
+                        otherPlayer.loseLife(2, game);
+                        player.moveCards(card, Zone.GRAVEYARD, source, game);
+                        break;
+                    }
                 }
 
-//                game.getState().getRevealed().reset();
             }
+            return true;
         }
         return false;
     }
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;

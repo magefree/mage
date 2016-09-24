@@ -1,4 +1,4 @@
- /*
+/*
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -82,7 +82,8 @@ public class HeroicAbility extends TriggeredAbilityImpl {
     private boolean checkSpell(Spell spell, Game game) {
         if (spell != null) {
             SpellAbility sa = spell.getSpellAbility();
-            for (Mode mode : sa.getModes().getSelectedModes()) {
+            for (UUID modeId : sa.getModes().getSelectedModes()) {
+                Mode mode = sa.getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
                     if (!target.isNotTarget() && target.getTargets().contains(this.getSourceId())) {
                         return true;

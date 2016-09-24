@@ -113,13 +113,13 @@ class TorchlingTargetPredicate implements Predicate<MageObject> {
         if (spell != null) {
             int numberOfTargets = 0;
             for (SpellAbility spellAbility : spell.getSpellAbilities()) {
-                for (Mode mode : spellAbility.getModes().getSelectedModes()) {
+                for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                    Mode mode = spellAbility.getModes().get(modeId);
                     for (Target target : mode.getTargets()) {
                         for (UUID targetId : target.getTargets()) {
                             if (!targetId.equals(sourceId)) {
                                 return false;
-                            }
-                            else {
+                            } else {
                                 numberOfTargets++;
                             }
                         }

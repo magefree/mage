@@ -2870,7 +2870,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (Mode mode : option.getModes().values()) {
             Ability newOption = option.copy();
             newOption.getModes().getSelectedModes().clear();
-            newOption.getModes().getSelectedModes().add(mode);
+            newOption.getModes().getSelectedModes().add(mode.getId());
             newOption.getModes().setActiveMode(mode);
             if (newOption.getTargets().getUnchosen().size() > 0) {
                 if (newOption.getManaCosts().getVariableCosts().size() > 0) {

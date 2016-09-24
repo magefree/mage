@@ -261,6 +261,12 @@ public abstract class TournamentImpl implements Tournament {
         }
         updateResults();
     }
+    
+    protected void playMultiplayerRound(MultiplayerRound round) {
+        playMultiPlayerMatch(round);
+        
+        updateResults(); // show points from byes
+    }    
 
     protected List<TournamentPlayer> getActivePlayers() {
         List<TournamentPlayer> activePlayers = new ArrayList<>();
@@ -455,6 +461,10 @@ public abstract class TournamentImpl implements Tournament {
         options.getMatchOptions().getPlayerTypes().add(pair.getPlayer1().getPlayerType());
         options.getMatchOptions().getPlayerTypes().add(pair.getPlayer2().getPlayerType());
         tableEventSource.fireTableEvent(EventType.START_MATCH, pair, options.getMatchOptions());
+    }
+    
+    public void playMultiPlayerMatch(MultiplayerRound round) {
+        tableEventSource.fireTableEvent(EventType.START_MULTIPLAYER_MATCH, round, options.getMatchOptions());
     }
 
     public void end() {

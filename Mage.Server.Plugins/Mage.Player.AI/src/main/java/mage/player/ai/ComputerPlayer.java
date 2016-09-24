@@ -1516,7 +1516,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         //TODO: improve this;
         AvailableMode:
         for (Mode mode : modes.getAvailableModes(source, game)) {
-            for (Mode selectedMode : modes.getSelectedModes()) {
+            for (UUID selectedModeId : modes.getSelectedModes()) {
+                Mode selectedMode = modes.get(selectedModeId);
                 if (selectedMode.getId().equals(mode.getId())) {
                     continue AvailableMode;
                 }

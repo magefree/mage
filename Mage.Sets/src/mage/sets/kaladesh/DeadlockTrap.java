@@ -93,7 +93,7 @@ class DeadlockTrapCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return getTargetPointer().getFirst(game, source).equals(permanent.getId());
+        return permanent.getId().equals(getTargetPointer().getFirst(game, source));
     }
 
     @Override

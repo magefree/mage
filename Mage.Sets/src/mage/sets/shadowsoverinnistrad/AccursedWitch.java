@@ -140,7 +140,8 @@ class AccursedWitchSpellsCostReductionEffect extends CostModificationEffectImpl 
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
-                for (Mode mode : abilityToModify.getModes().getSelectedModes()) {
+                for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
+                    Mode mode = abilityToModify.getModes().get(modeId);
                     for (Target target : mode.getTargets()) {
                         for (UUID targetUUID : target.getTargets()) {
                             Permanent permanent = game.getPermanent(targetUUID);

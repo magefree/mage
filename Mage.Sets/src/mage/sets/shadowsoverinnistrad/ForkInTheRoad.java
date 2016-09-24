@@ -100,8 +100,10 @@ class ForkInTheRoadEffect extends OneShotEffect {
             if (target.getTargets().size() > 0) {
                 Cards revealed = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {
-                    Card card = controller.getLibrary().getCard(cardId, game);
-                    revealed.add(card);
+                    Card card = game.getCard(cardId);
+                    if (card != null) {
+                        revealed.add(card);
+                    }
                 }
                 controller.revealCards(sourceObject.getIdName(), revealed, game);
                 if (target.getTargets().size() > 0) {
