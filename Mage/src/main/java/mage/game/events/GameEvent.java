@@ -47,6 +47,7 @@ public class GameEvent implements Serializable {
     protected String data;
     protected Zone zone;
     protected ArrayList<UUID> appliedEffects = new ArrayList<>();
+    protected UUID pluginEventType = null;
 
     public enum EventType {
 
@@ -269,20 +270,36 @@ public class GameEvent implements Serializable {
         NUMBER_OF_TRIGGERS,
         //combat events
         COMBAT_DAMAGE_APPLIED,
-        SELECTED_ATTACKER, SELECTED_BLOCKER;
+        SELECTED_ATTACKER, SELECTED_BLOCKER,
+        //custom events
+        PLUGIN_EVENT;
     }
 
-    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
-        this(type, targetId, sourceId, playerId, 0, false);
-    }
-
-    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+    private GameEvent(EventType type, UUID pluginEventType,
+                     UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
         this.type = type;
+        this.pluginEventType = pluginEventType;
         this.targetId = targetId;
         this.sourceId = sourceId;
         this.amount = amount;
         this.playerId = playerId;
         this.flag = flag;
+    }
+
+    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
+        this(type, null, targetId, sourceId, playerId, 0, false);
+    }
+
+    public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+        this(type, null, targetId, sourceId, playerId, amount, flag);
+    }
+
+    public GameEvent(UUID pluginEventType, UUID targetId, UUID sourceId, UUID playerId) {
+        this(EventType.PLUGIN_EVENT, pluginEventType, targetId, sourceId, playerId, 0, false);
+    }
+
+    public GameEvent(UUID pluginEventType, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+        this(EventType.PLUGIN_EVENT, pluginEventType, targetId, sourceId, playerId, amount, flag);
     }
 
     public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount) {
@@ -304,9 +321,30 @@ public class GameEvent implements Serializable {
         return event;
     }
 
+    public static GameEvent getEvent(UUID pluginEventType, UUID targetId, UUID sourceId, UUID playerId, int amount) {
+        return new GameEvent(pluginEventType, targetId, sourceId, playerId, amount, false);
+    }
+
+    public static GameEvent getEvent(UUID pluginEventType, UUID targetId, UUID sourceId, UUID playerId) {
+        return new GameEvent(pluginEventType, targetId, sourceId, playerId);
+    }
+
+    public static GameEvent getEvent(UUID pluginEventType, UUID targetId, UUID playerId) {
+        return new GameEvent(pluginEventType, targetId, null, playerId);
+    }
+
+    public static GameEvent getEvent(UUID pluginEventType, UUID targetId, UUID playerId, String data, int amount) {
+        GameEvent event = getEvent(pluginEventType, targetId, playerId);
+        event.setAmount(amount);
+        event.setData(data);
+        return event;
+    }
+
     public EventType getType() {
         return type;
     }
+
+    public UUID getPluginEventType() { return pluginEventType; }
 
     public UUID getTargetId() {
         return targetId;
@@ -372,6 +410,10 @@ public class GameEvent implements Serializable {
      */
     public ArrayList<UUID> getAppliedEffects() {
         return appliedEffects;
+    }
+
+    public boolean isPluginEvent(UUID pluginEventType) {
+        return type == EventType.PLUGIN_EVENT && this.pluginEventType.equals(pluginEventType);
     }
 
     public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
