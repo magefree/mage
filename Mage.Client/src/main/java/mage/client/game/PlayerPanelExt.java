@@ -106,8 +106,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final String DEFAULT_AVATAR_PATH = "/avatars/" + DEFAULT_AVATAR_ID + ".jpg";
 
     private static final int PANEL_WIDTH = 94;
-    private static final int PANEL_HEIGHT = 242;
-    private static final int PANEL_HEIGHT_SMALL = 212;
+    private static final int PANEL_HEIGHT = 262;
+    private static final int PANEL_HEIGHT_SMALL = 232;
     private static final int MANA_LABEL_SIZE_HORIZONTAL = 20;
 
     private static final Border GREEN_BORDER = new LineBorder(Color.green, 3);
@@ -193,6 +193,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
         lifeLabel.setText(Integer.toString(playerLife));
         poisonLabel.setText(Integer.toString(player.getCounters().getCount(CounterType.POISON)));
+        energyLabel.setText(Integer.toString(player.getCounters().getCount(CounterType.ENERGY)));
+        experienceLabel.setText(Integer.toString(player.getCounters().getCount(CounterType.EXPERIENCE)));
         handLabel.setText(Integer.toString(player.getHandCount()));
         int libraryCards = player.getLibraryCount();
         if (libraryCards > 99) {
@@ -380,6 +382,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         lifeLabel = new JLabel();
         handLabel = new JLabel();
         poisonLabel = new JLabel();
+        energyLabel = new JLabel();
+        experienceLabel = new JLabel();
         graveLabel = new JLabel();
         libraryLabel = new JLabel();
         setOpaque(false);
@@ -454,7 +458,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         });
 
-        // Grave count and open graveyard button
+       // Grave count and open graveyard button
         r = new Rectangle(21, 21);
         graveLabel.setToolTipText("Card Types: 0");
         Image imageGrave = ImageHelper.getImageFromResources("/info/grave.png");
@@ -501,8 +505,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         });
 
         zonesPanel = new JPanel();
-        zonesPanel.setPreferredSize(new Dimension(100, 20));
-        zonesPanel.setSize(100, 20);
+        zonesPanel.setPreferredSize(new Dimension(100, 60));
+        zonesPanel.setSize(100, 60);
         zonesPanel.setLayout(null);
         zonesPanel.setOpaque(false);
 
@@ -523,6 +527,40 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         cheat.setBounds(28, 0, 25, 21);
         zonesPanel.add(cheat);
+
+        energyExperiencePanel = new JPanel();
+        energyExperiencePanel.setPreferredSize(new Dimension(100, 20));
+        energyExperiencePanel.setSize(100, 20);
+        energyExperiencePanel.setLayout(null);
+        energyExperiencePanel.setOpaque(false);
+
+        // Energy count
+        energyLabel.setText("0");
+        r = new Rectangle(18, 18);
+        energyLabel.setToolTipText("Energy");
+        Image imageEnergy = ImageHelper.getImageFromResources("/info/energy.png");
+        BufferedImage resizedEnergy = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageEnergy, BufferedImage.TYPE_INT_ARGB), r);
+        energy = new ImagePanel(resizedEnergy, ImagePanel.ACTUAL);
+        energy.setToolTipText("Energy");
+        energy.setOpaque(false);
+        // Experience count
+        experienceLabel.setText("0");
+        r = new Rectangle(18, 18);
+        experienceLabel.setToolTipText("Experience");
+        Image imageExperience = ImageHelper.getImageFromResources("/info/experience.png");
+        BufferedImage resizedExperience = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageExperience, BufferedImage.TYPE_INT_ARGB), r);
+        experience = new ImagePanel(resizedExperience, ImagePanel.ACTUAL);
+        experience.setToolTipText("Experience");
+        experience.setOpaque(false);
+
+        energy.setBounds(5, 22, 21, 21);
+        zonesPanel.add(energy);
+        energyLabel.setBounds(27, 22, 21, 21);
+        zonesPanel.add(energyLabel);
+        experience.setBounds(48, 22, 21, 21);
+        zonesPanel.add(experience);
+        experienceLabel.setBounds(69, 22, 21, 21);
+        zonesPanel.add(experienceLabel);
 
         btnPlayer = new JButton();
         btnPlayer.setText("Player");
@@ -895,6 +933,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private JButton btnPlayer;
     private ImagePanel life;
     private ImagePanel poison;
+    private ImagePanel energy;
+    private ImagePanel experience;
     private ImagePanel hand;
     private HoverButton grave;
     private HoverButton library;
@@ -906,6 +946,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private JLabel handLabel;
     private JLabel libraryLabel;
     private JLabel poisonLabel;
+    private JLabel energyLabel;
+    private JLabel experienceLabel;
     private JLabel graveLabel;
     private JLabel exileLabel;
     private boolean changedFontLibrary;
@@ -914,6 +956,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private boolean changedFontExile;
 
     private JPanel zonesPanel;
+    private JPanel energyExperiencePanel;
     private HoverButton exileZone;
     private HoverButton commandZone;
     private HoverButton enchantPlayerViewZone;
