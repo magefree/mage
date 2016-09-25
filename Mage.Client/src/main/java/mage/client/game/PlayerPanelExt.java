@@ -543,6 +543,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         energy = new ImagePanel(resizedEnergy, ImagePanel.ACTUAL);
         energy.setToolTipText("Energy");
         energy.setOpaque(false);
+        
         // Experience count
         experienceLabel.setText("0");
         r = new Rectangle(18, 18);
@@ -553,13 +554,13 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         experience.setToolTipText("Experience");
         experience.setOpaque(false);
 
-        energy.setBounds(5, 22, 21, 21);
+        energy.setBounds(2, 22, 21, 21);
         zonesPanel.add(energy);
-        energyLabel.setBounds(27, 22, 21, 21);
+        energyLabel.setBounds(24, 22, 18, 21);
         zonesPanel.add(energyLabel);
-        experience.setBounds(48, 22, 21, 21);
+        experience.setBounds(41, 22, 21, 21);
         zonesPanel.add(experience);
-        experienceLabel.setBounds(69, 22, 21, 21);
+        experienceLabel.setBounds(58, 22, 21, 21);
         zonesPanel.add(experienceLabel);
 
         btnPlayer = new JButton();
