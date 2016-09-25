@@ -31,15 +31,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ChromaOutrageShamanCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -77,31 +74,3 @@ public class OutrageShaman extends CardImpl {
     }
 }
 
-class ChromaOutrageShamanCount implements DynamicValue {
-
-    private int chroma;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        chroma = 0;
-        for (Card card : game.getBattlefield().getAllActivePermanents(new FilterControlledPermanent(), sourceAbility.getControllerId(), game)) {
-            chroma += card.getManaCost().getMana().getRed();
-        }
-        return chroma;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new ChromaOutrageShamanCount();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-}
