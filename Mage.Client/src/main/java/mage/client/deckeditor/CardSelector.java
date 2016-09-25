@@ -41,10 +41,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -58,9 +55,7 @@ import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.client.cards.BigCard;
-import mage.client.cards.CardGrid;
-import mage.client.cards.ICardGrid;
+import mage.client.cards.*;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
 import mage.client.util.GUISizeHelper;
@@ -74,13 +69,14 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
+import mage.view.CardView;
 import mage.view.CardsView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com, nantuko
  */
-public class CardSelector extends javax.swing.JPanel implements ComponentListener {
+public class CardSelector extends javax.swing.JPanel implements ComponentListener, DragCardTarget {
 
     private final List<Card> cards = new ArrayList<>();
     private BigCard bigCard;
@@ -1221,4 +1217,23 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         }
     }
 
+    @Override
+    public void dragCardEnter(MouseEvent e) {
+        // Nothing to do for now. We could show something
+    }
+
+    @Override
+    public void dragCardMove(MouseEvent e) {
+        // Nothing to do for now. We could show something
+    }
+
+    @Override
+    public void dragCardExit(MouseEvent e) {
+        // Nothing to do for now. We could show something
+    }
+
+    @Override
+    public void dragCardDrop(MouseEvent e, DragCardSource source, Collection<CardView> cards) {
+        // Nothing to do, just eat the dropped cards, they're being removed from the deck or sideboard
+    }
 }

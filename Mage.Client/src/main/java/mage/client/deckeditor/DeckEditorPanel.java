@@ -104,6 +104,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         deckArea.setOpaque(false);
         jPanel1.setOpaque(false);
         jSplitPane1.setOpaque(false);
+        jSplitPane1.setResizeWeight(0.3);
         countdown = new Timer(1000,
                 new ActionListener() {
             @Override
@@ -232,10 +233,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             }
                             break;
                         case "remove-main":
-                            DeckEditorPanel.this.deckArea.getDeckList().handleDoubleClick();
+                            //DeckEditorPanel.this.deckArea.getDeckList().handleDoubleClick();
                             break;
                         case "remove-sideboard":
-                            DeckEditorPanel.this.deckArea.getSideboardList().handleDoubleClick();
+                            //DeckEditorPanel.this.deckArea.getSideboardList().handleDoubleClick();
                             break;
                     }
                     refreshDeck();
@@ -277,6 +278,19 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         case "set-number": {
                             setCardNumberToCardsList(event, deck.getCards());
                         }
+                        case "remove-specific-card": {
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getCards()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getCards().remove(card);
+                                    break;
+                                }
+                            }
+                        }
+                        case "add-specific-card-maindeck": {
+                            SimpleCardView cardView = (CardView) event.getSource();
+                            deck.getCards().add(CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).getCard());
+                        }
                     }
                 } else {
                     // constructing phase or sideboarding during match -> card goes always to sideboard
@@ -296,10 +310,24 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             refreshDeck();
                             break;
                         }
+                        case "remove-specific-card": {
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getCards()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getCards().remove(card);
+                                    break;
+                                }
+                            }
+                        }
+                        case "add-specific-card-maindeck": {
+                            SimpleCardView cardView = (CardView) event.getSource();
+                            deck.getCards().add(CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).getCard());
+                        }
                     }
                 }
             }
         });
+        this.deckArea.clearSideboardEventListeners();
         this.deckArea.addSideboardEventListener(
                 new Listener<Event>() {
             @Override
@@ -335,10 +363,36 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         case "set-number": {
                             setCardNumberToCardsList(event, deck.getSideboard());
                         }
+                        case "remove-specific-card": {
+                            cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getSideboard()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getSideboard().remove(card);
+                                    break;
+                                }
+                            }
+                        }
+                        case "add-specific-card-sideboard": {
+                            cardView = (CardView) event.getSource();
+                            deck.getSideboard().add(CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).getCard());
+                        }
                     }
                 } else {
                     // construct phase or sideboarding during match
                     switch (event.getEventName()) {
+                        case "remove-specific-card": {
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            for (Card card : deck.getSideboard()) {
+                                if (card.getId().equals(cardView.getId())) {
+                                    deck.getSideboard().remove(card);
+                                    break;
+                                }
+                            }
+                        }
+                        case "add-specific-card-sideboard": {
+                            SimpleCardView cardView = (CardView) event.getSource();
+                            deck.getSideboard().add(CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).getCard());
+                        }
                         case "double-click":
                         case "alt-double-click":
                             SimpleCardView cardView = (SimpleCardView) event.getSource();

@@ -3,6 +3,7 @@ package mage.client.cards;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
 import mage.view.CardView;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,11 +16,11 @@ import java.util.Collection;
 /**
  * Created by StravantUser on 2016-09-22.
  */
-public class CardDraggerGlassPane extends JPanel implements MouseListener, MouseMotionListener {
+public class CardDraggerGlassPane implements MouseListener, MouseMotionListener {
     private DragCardSource source;
     private Component dragComponent;
     private JRootPane currentRoot;
-    private Component oldGlassPane;
+    private JComponent glassPane;
     private ArrayList<CardView> currentCards;
     private MageCard dragView;
     private DragCardTarget currentDragTarget;
@@ -28,10 +29,6 @@ public class CardDraggerGlassPane extends JPanel implements MouseListener, Mouse
     public CardDraggerGlassPane(DragCardSource source) {
         this.source = source;
 
-        // Listen on self
-        setLayout(null);
-        setOpaque(false);
-        setVisible(true);
     }
 
     public void beginDrag(Component c, MouseEvent e) {
@@ -45,19 +42,18 @@ public class CardDraggerGlassPane extends JPanel implements MouseListener, Mouse
         dragComponent = c;
         currentRoot = SwingUtilities.getRootPane(c);
 
+        // Pane
+        glassPane = (JComponent)currentRoot.getGlassPane();
+        glassPane.setLayout(null);
+        glassPane.setOpaque(false);
+        glassPane.setVisible(true);
+
         // Hook up events
         c.addMouseListener(this);
         c.addMouseMotionListener(this);
 
-        // Switch glass pane to us
-        oldGlassPane = currentRoot.getGlassPane();
-        setVisible(false);
-        currentRoot.setGlassPane(this);
-        setVisible(true);
-        revalidate();
-
         // Event to local space
-        e = SwingUtilities.convertMouseEvent(c, e, this);
+        e = SwingUtilities.convertMouseEvent(c, e, glassPane);
 
         // Get the cards to drag
         currentCards = new ArrayList<>(source.dragCardList());
@@ -70,15 +66,15 @@ public class CardDraggerGlassPane extends JPanel implements MouseListener, Mouse
         for (MouseMotionListener l : dragView.getMouseMotionListeners()) {
             dragView.removeMouseMotionListener(l);
         }
-        this.add(dragView);
         dragView.setLocation(e.getX(), e.getY());
+        glassPane.add(dragView);
 
         // Notify the sounce
         source.dragCardBegin();
 
         // Update the target
         currentDragTarget = null;
-        updateCurrentTarget(SwingUtilities.convertMouseEvent(c, e, currentRoot), false);
+        updateCurrentTarget(SwingUtilities.convertMouseEvent(glassPane, e, currentRoot), false);
     }
 
     // e is relative to currentRoot
@@ -132,11 +128,9 @@ public class CardDraggerGlassPane extends JPanel implements MouseListener, Mouse
         // Convert the event into root coords
         e = SwingUtilities.convertMouseEvent(dragComponent, e, currentRoot);
 
-        // Switch back glass pane
-        currentRoot.setGlassPane(oldGlassPane);
-
         // Remove the drag card
-        this.remove(dragView);
+        glassPane.remove(dragView);
+        glassPane.repaint();
 
         // Update the target, and do the drop
         updateCurrentTarget(e, true);
@@ -148,10 +142,9 @@ public class CardDraggerGlassPane extends JPanel implements MouseListener, Mouse
     @Override
     public void mouseDragged(MouseEvent e) {
         // Update the view
-        MouseEvent glassE = SwingUtilities.convertMouseEvent(dragComponent, e, this);
+        MouseEvent glassE = SwingUtilities.convertMouseEvent(dragComponent, e, glassPane);
         dragView.setLocation(glassE.getX(), glassE.getY());
         dragView.repaint();
-
         // Convert the event into root coords and update target
         e = SwingUtilities.convertMouseEvent(dragComponent, e, currentRoot);
         updateCurrentTarget(e, false);

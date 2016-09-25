@@ -35,11 +35,13 @@ package mage.client.deckeditor;
 import mage.cards.decks.Deck;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardsList;
+import mage.client.cards.DragCardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.view.CardsView;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 
@@ -54,13 +56,11 @@ public class DeckArea extends javax.swing.JPanel {
      */
     public DeckArea() {
         initComponents();
-        deckAreaSplitPane.setOpaque(false);
-        deckList.setSortSetting(SortSettingDeck.getInstance());
-        sideboardList.setSortSetting(SortSettingSideboard.getInstance());
-        deckList.setOpaque(false);
-        sideboardList.setOpaque(false);
-        deckList.setDisplayNoCopies(true);
-        sideboardList.setDisplayNoCopies(true);
+        //deckAreaSplitPane.setOpaque(false);
+        //deckList.setOpaque(false);
+        //sideboardList.setOpaque(false);
+        deckList.setRole(DragCardGrid.Role.MAINDECK);
+        sideboardList.setRole(DragCardGrid.Role.SIDEBOARD);
     }
 
     public void cleanUp() {
@@ -91,14 +91,16 @@ public class DeckArea extends javax.swing.JPanel {
     }
 
     public void setDeckEditorMode(DeckEditorMode mode) {
-        this.deckList.setDeckEditorMode(mode);
-        this.sideboardList.setDeckEditorMode(mode);
+        // Maybe we need this? Right now it isn't needed. Will add if it is.
+        //this.deckList.setDeckEditorMode(mode);
+        //this.sideboardList.setDeckEditorMode(mode);
     }
 
     public void loadDeck(Deck deck, BigCard bigCard) {
-        deckList.loadCards(new CardsView(deck.getCards()), bigCard, null);
+        deckList.setCards(new CardsView(deck.getCards()), bigCard);
+        Logger.getLogger(DeckArea.class).info("Loading, sideboard is visible=" + sideboardList.isVisible());
         if (sideboardList.isVisible()) {
-            sideboardList.loadCards(new CardsView(deck.getSideboard()), bigCard, null);
+            sideboardList.setCards(new CardsView(deck.getSideboard()), bigCard);
         }
     }
 
@@ -128,13 +130,13 @@ public class DeckArea extends javax.swing.JPanel {
     private void initComponents() {
 
         deckAreaSplitPane = new javax.swing.JSplitPane();
-        sideboardList = new mage.client.cards.CardsList();
-        deckList = new mage.client.cards.CardsList();
+        deckList = new mage.client.cards.DragCardGrid();
+        sideboardList = new mage.client.cards.DragCardGrid();
 
         deckAreaSplitPane.setBorder(null);
         deckAreaSplitPane.setResizeWeight(0.6);
-        deckAreaSplitPane.setRightComponent(sideboardList);
         deckAreaSplitPane.setLeftComponent(deckList);
+        deckAreaSplitPane.setRightComponent(sideboardList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -148,18 +150,18 @@ public class DeckArea extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public CardsList getDeckList() {
+    public DragCardGrid getDeckList() {
         return deckList;
     }
 
-    public CardsList getSideboardList() {
+    public DragCardGrid getSideboardList() {
         return sideboardList;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSplitPane deckAreaSplitPane;
-    private mage.client.cards.CardsList deckList;
-    private mage.client.cards.CardsList sideboardList;
+    private mage.client.cards.DragCardGrid deckList;
+    private mage.client.cards.DragCardGrid sideboardList;
     // End of variables declaration//GEN-END:variables
 
 }
