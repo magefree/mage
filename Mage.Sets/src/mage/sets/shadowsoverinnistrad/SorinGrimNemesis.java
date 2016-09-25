@@ -28,7 +28,7 @@
 package mage.sets.shadowsoverinnistrad;
 
 import java.util.UUID;
-import mage.MageInt;
+
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -40,7 +40,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -50,7 +49,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.VampireKnightToken;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.common.TargetCreatureOrPlaneswalker;
@@ -203,16 +202,3 @@ class SorinTokenEffect extends OneShotEffect {
     }
 }
 
-class VampireKnightToken extends Token {
-
-    public VampireKnightToken() {
-        super("Vampire Knight", "1/1 black Vampire Knight creature token with lifelink");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Vampire");
-        subtype.add("Knight");
-        color.setBlack(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(LifelinkAbility.getInstance());
-    }
-}
