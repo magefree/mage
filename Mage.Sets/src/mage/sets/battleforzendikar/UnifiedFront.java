@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.game.permanent.token.KorAllyToken;
 
 /**
  *

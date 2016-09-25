@@ -28,7 +28,7 @@
 package mage.sets.oathofthegatewatch;
 
 import java.util.UUID;
-import mage.MageInt;
+
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KorAllyToken;
 
 /**
  *
@@ -71,16 +71,3 @@ public class CaptainsClaws extends CardImpl {
     }
 }
 
-class KorAllyToken extends Token {
-
-    public KorAllyToken() {
-        super("Kor Ally", "1/1 white Kor Ally creature token");
-        this.setExpansionSetCodeForImage("BFZ");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Kor");
-        subtype.add("Ally");
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-}
