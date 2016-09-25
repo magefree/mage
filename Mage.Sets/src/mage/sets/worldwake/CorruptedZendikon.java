@@ -27,9 +27,6 @@
  */
 package mage.sets.worldwake;
 
-import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -39,9 +36,12 @@ import mage.abilities.effects.common.ReturnToHandAttachedEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.constants.*;
+import mage.game.permanent.token.OozeToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,7 +65,7 @@ public class CorruptedZendikon extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new OozeToken(), "Enchanted land is a 3/3 black Ooze creature. It's still a land.", Duration.WhileOnBattlefield));
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new OozeToken(new MageInt(3), new MageInt(3)), "Enchanted land is a 3/3 black Ooze creature. It's still a land.", Duration.WhileOnBattlefield));
         this.addAbility(ability2);
 
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false, false);
@@ -79,17 +79,5 @@ public class CorruptedZendikon extends CardImpl {
     @Override
     public CorruptedZendikon copy() {
         return new CorruptedZendikon(this);
-    }
-}
-
-class OozeToken extends Token {
-
-    OozeToken() {
-        super("Ooze", "3/3 black Ooze creature");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Ooze");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
     }
 }

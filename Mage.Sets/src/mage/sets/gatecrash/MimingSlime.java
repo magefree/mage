@@ -27,20 +27,20 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.List;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.OozeToken;
 import mage.players.Player;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -101,17 +101,5 @@ class MimingSlimeEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class OozeToken extends Token {
-    public OozeToken() {
-        super("Ooze", "X/X green Ooze creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Ooze");
-        color.setGreen(true);
-        power = new MageInt(0);
-        toughness = new MageInt(0);
-        setOriginalExpansionSetCode("RTR");
     }
 }
