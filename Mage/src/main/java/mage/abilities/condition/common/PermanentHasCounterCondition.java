@@ -41,9 +41,10 @@ import java.util.List;
  */
 public class PermanentHasCounterCondition implements Condition {
 
-    public static enum CountType {MORE_THAN, FEWER_THAN, EQUAL_TO}
+    public static enum CountType {
+        MORE_THAN, FEWER_THAN, EQUAL_TO
+    };
 
-    ;
     private CounterType counterType;
     private int amount;
     private FilterPermanent filter;
@@ -62,30 +63,26 @@ public class PermanentHasCounterCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean conditionApplies = false;
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(this.filter, source.getControllerId(), game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(this.filter, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             switch (this.type) {
                 case FEWER_THAN:
                     if (permanent.getCounters(game).getCount(this.counterType) < this.amount) {
-                        conditionApplies = true;
-                        break;
+                        return true;
                     }
                     break;
                 case MORE_THAN:
                     if (permanent.getCounters(game).getCount(this.counterType) > this.amount) {
-                        conditionApplies = true;
-                        break;
+                        return true;
                     }
                     break;
                 case EQUAL_TO:
                     if (permanent.getCounters(game).getCount(this.counterType) == this.amount) {
-                        conditionApplies = true;
-                        break;
+                        return true;
                     }
                     break;
             }
         }
-        return conditionApplies;
+        return false;
     }
 }
