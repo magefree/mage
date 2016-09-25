@@ -96,7 +96,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = game.getObject(source.getSourceId());
             if (player != null && controller != null && sourceObject != null) {
-                int amount = new greatestPowerCountCreatureYouControl().calculate(game, source, this);
+                int amount = new GreatestPowerCountCreatureYouControl().calculate(game, source, this);
                 GenericManaCost cost = new GenericManaCost(amount);
                 StringBuilder sb = new StringBuilder("Pay {").append(amount).append("}? (otherwise ").append(spell.getName()).append(" will be countered)");
                 if (player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
@@ -120,7 +120,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
     }
 }
 
-class greatestPowerCountCreatureYouControl implements DynamicValue {
+class GreatestPowerCountCreatureYouControl implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -135,7 +135,7 @@ class greatestPowerCountCreatureYouControl implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new greatestPowerCount();
+        return new GreatestPowerCountCreatureYouControl();
     }
 
     @Override
