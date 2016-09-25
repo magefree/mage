@@ -81,7 +81,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private JCheckBoxMenuItem allowViewHandCardsMenuItem;
     private JCheckBoxMenuItem holdPriorityMenuItem;
 
-    public static final int PANEL_HEIGHT = 262;
+    public static final int PANEL_HEIGHT = 263;
     public static final int PANEL_HEIGHT_SMALL = 190;
 
     /**
