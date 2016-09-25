@@ -29,15 +29,12 @@
 package mage.sets.championsofkamigawa;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.Game;
 import mage.watchers.common.ZuberasDiedWatcher;
 
 import java.util.UUID;
@@ -70,26 +67,3 @@ public class FloatingDreamZubera extends CardImpl {
 }
 
 
-class ZuberasDiedDynamicValue implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        ZuberasDiedWatcher watcher = (ZuberasDiedWatcher) game.getState().getWatchers().get("ZuberasDied");
-        return watcher.zuberasDiedThisTurn;
-    }
-
-    @Override
-    public ZuberasDiedDynamicValue copy() {
-        return new ZuberasDiedDynamicValue();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "Zubera that died this turn";
-    }
-}

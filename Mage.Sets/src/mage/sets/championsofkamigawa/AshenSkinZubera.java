@@ -30,6 +30,7 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
+import mage.abilities.dynamicvalue.common.ZuberasDiedDynamicValue;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
