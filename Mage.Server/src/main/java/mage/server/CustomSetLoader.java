@@ -62,7 +62,7 @@ public class CustomSetLoader {
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Entry point file not found!", e);
+            throw new RuntimeException("Entry point class not found!", e);
         } catch (ClassCastException e) {
             throw new RuntimeException("Entry point not an instance of CustomSetPackage.", e);
         }
