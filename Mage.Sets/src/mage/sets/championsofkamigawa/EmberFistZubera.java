@@ -38,6 +38,7 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.watchers.common.ZuberasDiedWatcher;
 
 /**
  *

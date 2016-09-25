@@ -36,6 +36,7 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.SpiritToken;
+import mage.watchers.common.ZuberasDiedWatcher;
 
 /**
  *

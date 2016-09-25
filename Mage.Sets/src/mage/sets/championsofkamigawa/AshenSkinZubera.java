@@ -38,6 +38,7 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetOpponent;
+import mage.watchers.common.ZuberasDiedWatcher;
 
 /**
  * @author Loki
