@@ -543,7 +543,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         energy = new ImagePanel(resizedEnergy, ImagePanel.ACTUAL);
         energy.setToolTipText("Energy");
         energy.setOpaque(false);
-
         // Experience count
         experienceLabel.setText("0");
         r = new Rectangle(18, 18);
