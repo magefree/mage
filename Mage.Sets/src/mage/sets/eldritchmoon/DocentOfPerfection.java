@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HumanWizardToken;
 import mage.players.Player;
 
 /**
@@ -134,15 +134,3 @@ class DocentOfPerfectionEffect extends OneShotEffect {
     }
 }
 
-class HumanWizardToken extends Token {
-
-    public HumanWizardToken() {
-        super("Human Wizard", "1/1 blue Human Wizard creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Wizard");
-        color.setBlue(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-}
