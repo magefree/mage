@@ -91,7 +91,7 @@ public class Main {
     private static final String adminPasswordArg = "-adminPassword=";
 
     private static final File pluginFolder = new File("plugins");
-    private static final File customSetsFolder = new File("customSets");
+    private static final File extensionFolder = new File("extensions");
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
     public static TransporterServer server;
@@ -118,23 +118,23 @@ public class Main {
             }
         }
 
-        logger.info("Loading custom set packages...");
-        List<CustomSetPackage> customSets = new ArrayList<>();
-        if(!customSetsFolder.exists()) if(!customSetsFolder.mkdirs())
-            logger.error("Could not create custom sets directory.");
-        File[] customSetDirectories = customSetsFolder.listFiles();
-        if(customSetDirectories != null) for(File f : customSetDirectories) if(f.isDirectory())
+        logger.info("Loading extension packages...");
+        List<ExtensionPackage> extensions = new ArrayList<>();
+        if(!extensionFolder.exists()) if(!extensionFolder.mkdirs())
+            logger.error("Could not create extensions directory.");
+        File[] extensionDirectories = extensionFolder.listFiles();
+        if(extensionDirectories != null) for(File f : extensionDirectories) if(f.isDirectory())
             try {
-                logger.info(" - Loading custom set module from "+f);
-                customSets.add(CustomSetLoader.loadCustomSet(f));
+                logger.info(" - Loading extension from "+f);
+                extensions.add(ExtensionPackageLoader.loadExtension(f));
             } catch (IOException e) {
-                logger.error("Could not load custom package in "+f+"!", e);
+                logger.error("Could not load extension in "+f+"!", e);
             }
         logger.info("Done.");
 
-        if(!customSets.isEmpty()) {
+        if(!extensions.isEmpty()) {
             logger.info("Registering custom sets...");
-            for(CustomSetPackage pkg : customSets) {
+            for(ExtensionPackage pkg : extensions) {
                 for(ExpansionSet set : pkg.getSets()) {
                     logger.info("- Loading "+set.getName()+" ("+set.getCode()+")");
                     Sets.getInstance().addSet(set);
@@ -174,14 +174,17 @@ public class Main {
             DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
         }
 
-        for (CustomSetPackage pkg : customSets) {
+        for (ExtensionPackage pkg : extensions) {
             Map<String, Class> draftCubes = pkg.getDraftCubes();
-            for (String name : draftCubes.keySet())
+            for (String name : draftCubes.keySet()) {
+                logger.info("Loading extension: ["+name+"] "+draftCubes.get(name).toString());
                 CubeFactory.getInstance().addDraftCube(name, draftCubes.get(name));
-
+            }
             Map<String, Class> deckTypes = pkg.getDeckTypes();
-            for (String name : deckTypes.keySet())
+            for (String name : deckTypes.keySet()) {
+                logger.info("Loading extension: ["+name+"] "+deckTypes.get(name));
                 DeckValidatorFactory.getInstance().addDeckType(name, deckTypes.get(name));
+            }
         }
 
         logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());

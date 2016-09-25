@@ -37,8 +37,8 @@ import java.util.Scanner;
 /**
  * @author Lymia
  */
-public class CustomSetLoader {
-    public static CustomSetPackage loadCustomSet(File directory) throws IOException {
+public class ExtensionPackageLoader {
+    public static ExtensionPackage loadExtension(File directory) throws IOException {
         if(!directory.exists     ()) throw new RuntimeException("File not found "+directory);
         if(!directory.isDirectory()) throw new RuntimeException(directory+" is not a directory");
 
@@ -58,13 +58,13 @@ public class CustomSetLoader {
         for(File f : packagesDirectory.listFiles()) classLoader.addURL(f.toURI().toURL());
 
         try {
-            return (CustomSetPackage) Class.forName(entryPoint, false, classLoader).newInstance();
+            return (ExtensionPackage) Class.forName(entryPoint, false, classLoader).newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Entry point class not found!", e);
         } catch (ClassCastException e) {
-            throw new RuntimeException("Entry point not an instance of CustomSetPackage.", e);
+            throw new RuntimeException("Entry point not an instance of ExtensionPackage.", e);
         }
     }
 }

@@ -36,10 +36,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Main entry point for external packages containing custom sets.
+ * Main entry point for external packages.
  * @author Lymia
  */
-public abstract class CustomSetPackage {
+public abstract class ExtensionPackage {
     protected List<ExpansionSet> expansions = new ArrayList<>();
     protected Map<String, Class> deckTypes = new HashMap<>();
     protected Map<String, Class> draftCubes = new HashMap<>();
