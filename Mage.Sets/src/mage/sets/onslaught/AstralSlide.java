@@ -84,20 +84,19 @@ class AstralSlideEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 UUID exileId = UUID.randomUUID();
-                if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+                if (controller.moveCardsToExile(permanent, source, game, true, exileId, sourceObject.getIdName())) {
                     //create delayed triggered ability
                     AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD, false));
                     game.addDelayedTriggeredAbility(delayedAbility, source);
-                    return true;
                 }
             }
+            return true;
         }
-
         return false;
     }
 
