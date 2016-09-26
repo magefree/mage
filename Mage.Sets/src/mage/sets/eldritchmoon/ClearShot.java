@@ -29,10 +29,8 @@ package mage.sets.eldritchmoon;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.TargetPermanentPowerCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -107,7 +105,7 @@ class ClearShotDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent ownCreature = game.getPermanent(source.getFirstTarget());
+        Permanent ownCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (ownCreature != null) {
             int damage = ownCreature.getPower().getValue();
             Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());

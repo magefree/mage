@@ -54,7 +54,7 @@ public class WarstormSurge extends CardImpl {
         super(ownerId, 160, "Warstorm Surge", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
         this.expansionSetCode = "M12";
 
-
+        // Whenever a creature enters the battlefield under your control, it deals damage equal to its power to target creature or player.
         Ability ability = new WarstormSurgeTriggeredAbility();
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -127,10 +127,7 @@ class WarstormSurgeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID creatureId = (UUID) getValue("damageSource");
-        Permanent creature = game.getPermanent(creatureId);
-        if (creature == null) {
-            creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
-        }
+        Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
         if (creature != null) {
             int amount = creature.getPower().getValue();
             UUID target = source.getTargets().getFirstTarget();

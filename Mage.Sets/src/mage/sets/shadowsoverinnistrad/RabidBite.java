@@ -35,7 +35,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -80,7 +79,7 @@ class RabidBiteEffect extends OneShotEffect {
     public RabidBiteEffect() {
         super(Outcome.Damage);
         staticText = "Target creature you control deals damage equal to its power to target creature you don't control";
-     }
+    }
 
     public RabidBiteEffect(final RabidBiteEffect effect) {
         super(effect);
@@ -88,12 +87,8 @@ class RabidBiteEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getFirstTarget());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
-
-        Permanent targetPermanent = (Permanent) game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (sourcePermanent != null && targetPermanent != null) {
             targetPermanent.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, false, true);
         }
