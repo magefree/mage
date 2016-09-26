@@ -39,6 +39,7 @@ import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.mana.ManaAbility;
+import mage.cards.repository.PluginClassloaderRegistery;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
@@ -160,6 +161,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         try {
             return createCard(Class.forName(name));
         } catch (ClassNotFoundException ex) {
+            try {
+                return createCard(PluginClassloaderRegistery.forName(name));
+            } catch (ClassNotFoundException ex2) {
+                // ignored
+            }
             logger.fatal("Error loading card: " + name, ex);
             return null;
         }

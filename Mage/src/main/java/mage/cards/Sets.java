@@ -30,11 +30,7 @@ package mage.cards;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
@@ -61,10 +57,12 @@ public class Sets extends HashMap<String, ExpansionSet> {
         return fINSTANCE;
     }
 
+    private Set<String> customSets = new HashSet<>();
+
     private Sets() {
         ArrayList<String> packages = new ArrayList<>();
         packages.add("mage.sets");
-        for (Class c : ClassScanner.findClasses(packages, ExpansionSet.class)) {
+        for (Class c : ClassScanner.findClasses(null, packages, ExpansionSet.class)) {
             try {
                 addSet((ExpansionSet) c.getMethod("getInstance").invoke(null));
             } catch (Exception ex) {
@@ -72,8 +70,14 @@ public class Sets extends HashMap<String, ExpansionSet> {
         }
     }
 
-    private void addSet(ExpansionSet set) {
+    public void addSet(ExpansionSet set) {
+        if(containsKey(set.getCode())) throw new IllegalArgumentException("Set code "+set.getCode()+" already exists.");
         this.put(set.getCode(), set);
+        if(set.isCustomSet()) customSets.add(set.getCode());
+    }
+
+    public static boolean isCustomSet(String setCode) {
+        return getInstance().customSets.contains(setCode);
     }
 
     /**

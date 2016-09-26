@@ -29,7 +29,10 @@
 package mage.cards.repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
@@ -55,23 +58,28 @@ public class CardScanner {
         scanned = true;
 
         List<CardInfo> cardsToAdd = new ArrayList<>();
-        List<String> packages = new ArrayList<>();
+        Map<ClassLoader, List<String>> packageMap = new HashMap<>();
 
         for (ExpansionSet set : Sets.getInstance().values()) {
+            ClassLoader cl = set.getClass().getClassLoader();
+            if(!packageMap.containsKey(cl)) packageMap.put(cl, new ArrayList<String>());
+            List<String> packages = packageMap.get(cl);
             packages.add(set.getPackageName());
             ExpansionRepository.instance.add(new ExpansionInfo(set));
         }
         ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());
 
-        for (Class c : ClassScanner.findClasses(packages, CardImpl.class)) {
-            if (!CardRepository.instance.cardExists(c.getCanonicalName())) {
-                Card card = CardImpl.createCard(c);
-                if (card != null) {
-                    cardsToAdd.add(new CardInfo(card));
-                    if (card instanceof SplitCard) {
-                        SplitCard splitCard = (SplitCard) card;
-                        cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));
-                        cardsToAdd.add(new CardInfo(splitCard.getRightHalfCard()));
+        for (ClassLoader cl : packageMap.keySet()) {
+            for (Class c : ClassScanner.findClasses(cl, packageMap.get(cl), CardImpl.class)) {
+                if (!CardRepository.instance.cardExists(c.getCanonicalName())) {
+                    Card card = CardImpl.createCard(c);
+                    if (card != null) {
+                        cardsToAdd.add(new CardInfo(card));
+                        if (card instanceof SplitCard) {
+                            SplitCard splitCard = (SplitCard) card;
+                            cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));
+                            cardsToAdd.add(new CardInfo(splitCard.getRightHalfCard()));
+                        }
                     }
                 }
             }

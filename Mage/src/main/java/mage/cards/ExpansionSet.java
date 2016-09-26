@@ -374,6 +374,10 @@ public abstract class ExpansionSet implements Serializable {
         return null;
     }
 
+    public boolean isCustomSet() {
+        return setType == SetType.CUSTOM_SET;
+    }
+
     public void removeSavedCards() {
         savedCards.clear();
     }
