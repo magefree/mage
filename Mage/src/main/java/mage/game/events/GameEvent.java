@@ -276,7 +276,7 @@ public class GameEvent implements Serializable {
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                     UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
+            UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
         this.type = type;
         this.customEventType = customEventType;
         this.targetId = targetId;
