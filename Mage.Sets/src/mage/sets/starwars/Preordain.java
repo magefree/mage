@@ -25,58 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.constants;
+package mage.sets.starwars;
+
+import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
+ * @author Styxo
  */
-public enum AbilityWord {
+public class Preordain extends mage.sets.magic2011.Preordain {
 
-    BATTALION("Battalion"),
-    BLOODRUSH("Bloodrush"),
-    CHANNEL("Channel"),
-    CHROMA("Chroma"),
-    COHORT("Cohort"),
-    CONSTELLATION("Constellation"),
-    CONVERGE("Converge"),
-    DELIRIUM("Delirium"),
-    DOMAIN("Domain"),
-    FATEFUL_HOUR("Fateful hour"),
-    FEROCIOUS("Ferocious"),
-    FORMIDABLE("Formidable"),
-    GRANDEUR("Grandeur"),
-    HATE("Hate"),
-    HELLBENT("Hellbent"),
-    HEROIC("Heroic"),
-    IMPRINT("Imprint"),
-    INSPIRED("Inspired"),
-    JOIN_FORCES("Join forces"),
-    KINSHIP("Kinship"),
-    LANDFALL("Landfall"),
-    LIEUTENANT("Lieutenant"),
-    METALCRAFT("Metalcraft"),
-    MORBID("Morbid"),
-    PARLEY("Parley"),
-    RADIANCE("Radiance"),
-    RAID("Raid"),
-    RALLY("Rally"),
-    SPELL_MASTERY("Spell mastery"),
-    STRIVE("Strive"),
-    SWEEP("Sweep"),
-    TEMPTING_OFFER("Tempting offer"),
-    THRESHOLD("Threshold"),
-    WILL_OF_THE_COUNCIL("Will of the council");
+    public Preordain(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = "33";
+        this.expansionSetCode = "SWS";
+        this.rarity = Rarity.UNCOMMON;
 
-    private final String text;
+    }
 
-    AbilityWord(String text) {
-        this.text = text;
+    public Preordain(final Preordain card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return text;
+    public Preordain copy() {
+        return new Preordain(this);
     }
-
 }

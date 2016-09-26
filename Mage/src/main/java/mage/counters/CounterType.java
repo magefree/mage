@@ -94,6 +94,7 @@ public enum CounterType {
     POLYP("polyp"),
     POISON("poison"),
     PRESSURE("pressure"),
+    REPAIR("repair"),
     QUEST("quest"),
     SCREAM("scream"),
     SHELL("shell"),
