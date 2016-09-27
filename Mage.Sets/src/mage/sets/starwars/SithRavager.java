@@ -29,17 +29,17 @@ package mage.sets.starwars;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 
 /**
@@ -49,7 +49,7 @@ import mage.game.events.GameEvent;
 public class SithRavager extends CardImpl {
 
     public SithRavager(UUID ownerId) {
-        super(ownerId, 122, "Sith Ravager", Rarity.NA/*COMMON*/, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        super(ownerId, 122, "Sith Ravager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "SWS";
         this.subtype.add("Human");
         this.subtype.add("Sith");
@@ -87,31 +87,20 @@ public class SithRavager extends CardImpl {
 
         @Override
         public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                    || event.getType() == GameEvent.EventType.LOST_LIFE;
+            return event.getType() == GameEvent.EventType.LOST_LIFE;
         }
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            // ON DAMAGE TRIGGER TWICE
-            if (event.getType() == GameEvent.EventType.LOST_LIFE) {
-                game.informPlayers("LOST LIFE TRIGGER");
-            }
-            if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-                game.informPlayers("DAMAGED PLAYER TRIGGER " + ((DamagedPlayerEvent) event).isCombatDamage());
-            }
-
-            if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-                return !((DamagedPlayerEvent) event).isCombatDamage() && game.getOpponents(game.getControllerId(sourceId)).contains(event.getPlayerId());
-            } else if (event.getType() == GameEvent.EventType.LOST_LIFE) {
-                return game.getOpponents(game.getControllerId(sourceId)).contains(event.getPlayerId());
+            if (!game.getStep().getType().equals(PhaseStep.COMBAT_DAMAGE)) {
+                return game.getOpponents(game.getControllerId(getSourceId())).contains(event.getPlayerId());
             }
             return false;
         }
 
         @Override
         public String getRule() {
-            return "<i>Hate</i> &mdash; Whenever an opponent loses life from a source other than combat damage, Sith Ravager gains haste and trample until end of turn";
+            return "<i>Hate</i> &mdash; Whenever an opponent loses life from a source other than combat damage, {this} gains haste and trample until end of turn.";
         }
 
     }
