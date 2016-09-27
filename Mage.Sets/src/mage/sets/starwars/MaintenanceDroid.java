@@ -48,6 +48,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
+import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -142,23 +143,4 @@ class MaintenanceDroidEffect extends OneShotEffect {
         return false;
     }
 
-}
-
-class CounterPredicate implements Predicate<MageObject> {
-
-    private final CounterType counter;
-
-    public CounterPredicate(CounterType counter) {
-        this.counter = counter;
-    }
-
-    @Override
-    public boolean apply(MageObject input, Game game) {
-        return game.getCard(input.getId()).getCounters(game).getCount(counter) > 0;
-    }
-
-    @Override
-    public String toString() {
-        return "CounterType(" + counter.getName() + ')';
-    }
 }
