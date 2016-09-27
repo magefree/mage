@@ -59,9 +59,9 @@ public class VolrathsLaboratory extends CardImpl {
 
         // As Volrath's Laboratory enters the battlefield, choose a color and a creature type.
         Ability ability = new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
-        Effect effect = new ChooseColorEffect(Outcome.Neutral);
+        Effect effect = new ChooseCreatureTypeEffect(Outcome.Neutral);
         effect.setText("and a creature type");
-        ability.addEffect(new ChooseCreatureTypeEffect(Outcome.Neutral));
+        ability.addEffect(effect);
         this.addAbility(ability);
 
         // {5}, {T}: Put a 2/2 creature token of the chosen color and type onto the battlefield.
