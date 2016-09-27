@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MonstrosityAbility;
@@ -43,7 +44,9 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import static mage.sets.starwars.RavenousWampa.RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -57,8 +60,10 @@ public class RavenousWampa extends CardImpl {
         filter.add(new AnotherPredicate());
     }
 
+    public static final String RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX = "TOU_SAC_CRE";
+
     public RavenousWampa(UUID ownerId) {
-        super(ownerId, 229, "Ravenous Wampa", Rarity.NA/*UNCOMMON*/, new CardType[]{CardType.CREATURE}, "{2}{R/W}{R/W}");
+        super(ownerId, 229, "Ravenous Wampa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}{R/W}");
         this.expansionSetCode = "SWS";
         this.subtype.add("Beast");
         this.power = new MageInt(4);
@@ -66,7 +71,7 @@ public class RavenousWampa extends CardImpl {
 
         // {1}{G}, Sacrifice another creature: Monstrosity 2.
         Ability ability = new MonstrosityAbility("{1}{G}", 2);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
+        ability.addCost(new RavenousWampaSacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         this.addAbility(ability);
 
         // When Ravenous Wampa becomes monstrous, you gain life equal to the sacrificied creature's toughness.
@@ -101,17 +106,45 @@ class RavenousWampaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // NEED TO GET SACKED PERMANENT
-        Permanent p = null;
-        if (p != null) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                player.gainLife(p.getToughness().getValue(), game);
-                return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            Integer toughness = (Integer) game.getState().getValue(RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX + source.getSourceId() + sourceObject.getZoneChangeCounter(game));
+            if (toughness != null) {
+                controller.gainLife(toughness, game);
             }
-
+            return true;
         }
         return false;
-
     }
+}
+
+class RavenousWampaSacrificeTargetCost extends SacrificeTargetCost {
+
+    public RavenousWampaSacrificeTargetCost(TargetControlledPermanent target) {
+        super(target);
+    }
+
+    public RavenousWampaSacrificeTargetCost(RavenousWampaSacrificeTargetCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+        boolean result = super.pay(ability, game, sourceId, controllerId, noMana, costToPay);
+        if (paid && !getPermanents().isEmpty()) {
+            Permanent sacrificedPermanen = getPermanents().get(0);
+            Permanent sourcePermanent = game.getPermanent(sourceId);
+            if (sourcePermanent != null && sacrificedPermanen != null) {
+                game.getState().setValue(RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX + sourceId + sourcePermanent.getZoneChangeCounter(game), sacrificedPermanen.getToughness().getValue());
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public RavenousWampaSacrificeTargetCost copy() {
+        return new RavenousWampaSacrificeTargetCost(this);
+    }
+
 }
