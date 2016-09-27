@@ -27,15 +27,14 @@
  */
 package mage.abilities.keyword;
 
-import mage.constants.Duration;
+import java.io.ObjectStreamException;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.io.ObjectStreamException;
 
 /**
  *
@@ -59,7 +58,7 @@ public class SpaceflightAbility extends EvasionAbility implements MageSingleton 
 
     @Override
     public String getRule() {
-        return "Spaceflight";
+        return "Spaceflight <i>(This creature can only block or be blocked by creatures with spaceflight)</i>";
     }
 
     @Override
