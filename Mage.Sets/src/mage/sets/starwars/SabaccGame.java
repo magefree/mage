@@ -28,9 +28,24 @@
 package mage.sets.starwars;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.other.PlayerIdPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -38,18 +53,26 @@ import mage.constants.Rarity;
  */
 public class SabaccGame extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("permanent an opponent controls");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
+
     public SabaccGame(UUID ownerId) {
-        super(ownerId, 54, "Sabacc Game", Rarity.NA/*UNCOMMON*/, new CardType[]{CardType.SORCERY}, "{1}{U}");
+        super(ownerId, 54, "Sabacc Game", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "SWS";
 
         // Almost the same as unimplemented Mogg Assassin from Exodus
-        
+        // Not exactly. Because the permanent choosen by opponent does not have the target word in rule text it is chosen during resolution.
         /*
-         * Choose target permanent an opponent controls. That opponent choosers a permanent you control. 
-         * Flip a coin. If you win the flip, gain control of the permanent you chose. 
+         * Choose target permanent an opponent controls. That opponent chooses a permanent you control.
+         * Flip a coin. If you win the flip, gain control of the permanent you chose.
          * If you lose the flip, your opponent gains control of the permanent they chose.
          */
-}
+        this.getSpellAbility().getEffects().add(new SabaccGameEffect());
+        this.getSpellAbility().getTargets().add(new TargetPermanent(filter));
+    }
 
     public SabaccGame(final SabaccGame card) {
         super(card);
@@ -58,5 +81,57 @@ public class SabaccGame extends CardImpl {
     @Override
     public SabaccGame copy() {
         return new SabaccGame(this);
+    }
+}
+
+class SabaccGameEffect extends OneShotEffect {
+
+    public SabaccGameEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Choose target permanent an opponent controls. That opponent chooses a permanent you control. "
+                + "Flip a coin. If you win the flip, gain control of the permanent you chose. "
+                + "If you lose the flip, your opponent gains control of the permanent they chose";
+    }
+
+    public SabaccGameEffect(final SabaccGameEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SabaccGameEffect copy() {
+        return new SabaccGameEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent targetPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+            if (targetPermanent != null) {
+                Player opponent = game.getPlayer(targetPermanent.getControllerId());
+                if (opponent != null) {
+                    FilterPermanent filter = new FilterPermanent("permanent controlled by " + controller.getName());
+                    filter.add(new PlayerIdPredicate(controller.getId()));
+                    TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+                    Permanent chosenPermanent = null;
+                    if (target.chooseTarget(outcome, opponent.getId(), source, game)) {
+                        chosenPermanent = game.getPermanent(target.getFirstTarget());
+                    }
+                    boolean flipWin = controller.flipCoin(game);
+                    if (flipWin) {
+                        ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, controller.getId());
+                        effect.setTargetPointer(new FixedTarget(targetPermanent, game));
+                        game.addEffect(effect, source);
+                    } else if (chosenPermanent != null) {
+                        ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, opponent.getId());
+                        effect.setTargetPointer(new FixedTarget(chosenPermanent, game));
+                        game.addEffect(effect, source);
+                    }
+
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }
