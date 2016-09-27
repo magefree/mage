@@ -95,14 +95,14 @@ class DevastatingSummonsEffect extends OneShotEffect {
     public DevastatingSummonsEffect copy() {
         return new DevastatingSummonsEffect(this);
     }
-}
 
-class ElementalToken extends Token {
+    class ElementalToken extends Token {
 
-    public ElementalToken() {
-        super("Elemental", "X/X red Elemental creature");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Elemental");
+        public ElementalToken() {
+            super("Elemental", "X/X red Elemental creature");
+            cardType.add(CardType.CREATURE);
+            color.setRed(true);
+            subtype.add("Elemental");
+        }
     }
 }

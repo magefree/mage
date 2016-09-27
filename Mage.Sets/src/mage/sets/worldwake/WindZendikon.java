@@ -81,16 +81,16 @@ public class WindZendikon extends CardImpl {
     public WindZendikon copy() {
         return new WindZendikon(this);
     }
-}
 
-class ElementalToken extends Token {
-    ElementalToken() {
-        super("", "2/2 blue Elemental creature with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Elemental");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
+    class ElementalToken extends Token {
+        ElementalToken() {
+            super("", "2/2 blue Elemental creature with flying");
+            cardType.add(CardType.CREATURE);
+            color.setBlue(true);
+            subtype.add("Elemental");
+            power = new MageInt(2);
+            toughness = new MageInt(2);
+            addAbility(FlyingAbility.getInstance());
+        }
     }
 }

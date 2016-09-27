@@ -72,17 +72,17 @@ public class RakkaMar extends CardImpl {
     public RakkaMar copy() {
         return new RakkaMar(this);
     }
-}
 
-class ElementalToken extends Token {
+    static class ElementalToken extends Token {
 
-    public ElementalToken() {
-        super("Elemental", "3/1 red Elemental creature with Haste");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Elemental");
-        power = new MageInt(3);
-        toughness = new MageInt(1);
-        addAbility(HasteAbility.getInstance());
+        public ElementalToken() {
+            super("Elemental", "3/1 red Elemental creature with Haste");
+            cardType.add(CardType.CREATURE);
+            color.setRed(true);
+            subtype.add("Elemental");
+            power = new MageInt(3);
+            toughness = new MageInt(1);
+            addAbility(HasteAbility.getInstance());
+        }
     }
 }

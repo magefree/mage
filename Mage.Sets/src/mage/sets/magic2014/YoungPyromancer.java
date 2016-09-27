@@ -37,6 +37,8 @@ import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.game.permanent.token.Token;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -73,5 +75,19 @@ public class YoungPyromancer extends CardImpl {
     @Override
     public YoungPyromancer copy() {
         return new YoungPyromancer(this);
+    }
+
+    class ElementalToken extends Token {
+
+        public ElementalToken() {
+            super("Elemental", "1/1 red Elemental creature");
+            this.setOriginalExpansionSetCode("M14");
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
+            cardType.add(CardType.CREATURE);
+            color.setRed(true);
+            subtype.add("Elemental");
+            power = new MageInt(1);
+            toughness = new MageInt(1);
+        }
     }
 }

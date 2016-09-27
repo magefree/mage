@@ -124,17 +124,17 @@ class ElementalMasteryEffect extends OneShotEffect {
         }
         return false;
     }
-}
 
-class ElementalToken extends Token {
+    class ElementalToken extends Token {
 
-    public ElementalToken() {
-        super("Elemental", "1/1 red Elemental creature token with haste");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Elemental");
-        color.setRed(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(HasteAbility.getInstance());
+        public ElementalToken() {
+            super("Elemental", "1/1 red Elemental creature token with haste");
+            cardType.add(CardType.CREATURE);
+            subtype.add("Elemental");
+            color.setRed(true);
+            power = new MageInt(1);
+            toughness = new MageInt(1);
+            addAbility(HasteAbility.getInstance());
+        }
     }
 }

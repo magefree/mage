@@ -28,6 +28,10 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+
+import mage.MageInt;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -44,6 +48,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -108,5 +113,19 @@ class ElementalAppealEffect extends OneShotEffect {
             }
         }
         return true;
+    }
+
+    class ElementalToken extends Token {
+
+        public ElementalToken() {
+            super("Elemental", "7/1 red Elemental creature token with trample and haste");
+            cardType.add(CardType.CREATURE);
+            color.setRed(true);
+            subtype.add("Elemental");
+            power = new MageInt(7);
+            toughness = new MageInt(1);
+            addAbility(TrampleAbility.getInstance());
+            addAbility(HasteAbility.getInstance());
+        }
     }
 }
