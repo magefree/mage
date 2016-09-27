@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.constants.SetType;
@@ -27,6 +26,7 @@ public class ConstructedFormats {
     public static final String ALL = "- All Sets";
     public static final String STANDARD = "- Standard";
     public static final String EXTENDED = "- Extended";
+    public static final String FRONTIER = "- Frontier";
     public static final String MODERN = "- Modern";
     public static final Standard STANDARD_CARDS = new Standard();
 
@@ -76,6 +76,12 @@ public class ConstructedFormats {
                     	underlyingSetCodesPerFormat.put(EXTENDED, new ArrayList<String>());
                     }
                     underlyingSetCodesPerFormat.get(EXTENDED).add(set.getCode());
+                }
+                if (set.getReleaseDate().after(frontierDate)) {
+                    if(underlyingSetCodesPerFormat.get(FRONTIER) == null) {
+                    	underlyingSetCodesPerFormat.put(FRONTIER, new ArrayList<String>());
+                    }
+                    underlyingSetCodesPerFormat.get(FRONTIER).add(set.getCode());
                 }
                 if (set.getReleaseDate().after(modernDate)) {
                     if(underlyingSetCodesPerFormat.get(MODERN) == null) {
@@ -210,6 +216,7 @@ public class ConstructedFormats {
 		});
         if (!formats.isEmpty()) {
             formats.add(0, MODERN);
+            formats.add(0, FRONTIER);
             formats.add(0, EXTENDED);
             formats.add(0, STANDARD);
         }
@@ -225,7 +232,7 @@ public class ConstructedFormats {
 
 
     private static final Date extendedDate = new GregorianCalendar(2009, 8, 20).getTime();
-
+    private static final Date frontierDate = new GregorianCalendar(2014, 7, 17).getTime();
     private static final Date modernDate = new GregorianCalendar(2003, 7, 20).getTime();
 
     // for all sets just return empty list

@@ -117,6 +117,7 @@
     <deckTypes>
         <deckType name="Constructed - Standard" jar="mage-deck-constructed.jar" className="mage.deck.Standard"/>
         <deckType name="Constructed - Extended" jar="mage-deck-constructed.jar" className="mage.deck.Extended"/>
+        <deckType name="Constructed - Frontier" jar="mage-deck-constructed.jar" className="mage.deck.Frontier"/>
         <deckType name="Constructed - Modern" jar="mage-deck-constructed.jar" className="mage.deck.Modern"/>
         <deckType name="Constructed - Eternal" jar="mage-deck-constructed.jar" className="mage.deck.Eternal"/>
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed.jar" className="mage.deck.Legacy"/>
@@ -131,6 +132,7 @@
         <deckType name="Variant Magic - Momir Basic" jar="mage-deck-constructed.jar" className="mage.deck.Momir"/>
         <deckType name="Block Constructed - Battle for Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.BattleForZendikarBlock"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>
+        <deckType name="Block Constructed - Kaladesh" jar="mage-deck-constructed.jar" className="mage.deck.KaladeshBlock"/>
         <deckType name="Block Constructed - Kamigawa" jar="mage-deck-constructed.jar" className="mage.deck.KamigawaBlock"/>
         <deckType name="Block Constructed - Khans of Tarkir" jar="mage-deck-constructed.jar" className="mage.deck.KhansOfTarkirBlock"/>
         <deckType name="Block Constructed - Return to Ravnica" jar="mage-deck-constructed.jar" className="mage.deck.ReturnToRavnicaBlock"/>

@@ -602,7 +602,7 @@ public class TablesPanel extends javax.swing.JPanel {
             formatFilterList.add(RowFilter.regexFilter("^Limited", TableTableModel.COLUMN_DECK_TYPE));
         }
         if (btnFormatOther.isSelected()) {
-            formatFilterList.add(RowFilter.regexFilter("^Momir Basic|^Constructed - Pauper|^Constructed - Extended|^Constructed - Historical|^Constructed - Super|^Freeform", TableTableModel.COLUMN_DECK_TYPE));
+            formatFilterList.add(RowFilter.regexFilter("^Momir Basic|^Constructed - Pauper|^Constructed - Frontier|^Constructed - Extended|^Constructed - Historical|^Constructed - Super|^Freeform", TableTableModel.COLUMN_DECK_TYPE));
         }
 
         List<RowFilter<Object, Object>> skillFilterList = new ArrayList<>();
@@ -623,7 +623,7 @@ public class TablesPanel extends javax.swing.JPanel {
         if (btnUnrated.isSelected()){
             ratingFilterList.add(RowFilter.regexFilter("^Unrated", TableTableModel.COLUMN_RATING));
         }
-        
+
         // Password
         List<RowFilter<Object, Object>> passwordFilterList = new ArrayList<>();
         if (btnOpen.isSelected()) {
@@ -669,7 +669,7 @@ public class TablesPanel extends javax.swing.JPanel {
             } else if (ratingFilterList.size() == 1) {
                 filterList.addAll(ratingFilterList);
             }
-            
+
              if (passwordFilterList.size() > 1) {
                 filterList.add(RowFilter.orFilter(passwordFilterList));
             } else if (passwordFilterList.size() == 1) {

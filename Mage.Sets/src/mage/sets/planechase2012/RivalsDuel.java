@@ -28,12 +28,12 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,7 +48,6 @@ public class RivalsDuel extends CardImpl {
     public RivalsDuel(UUID ownerId) {
         super(ownerId, 51, "Rivals' Duel", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "PC2";
-
 
         // Choose two target creatures that share no creature types. Those creatures fight each other.
         this.getSpellAbility().addTarget(new TargetCreaturePermanentWithDifferentTypes(2));
@@ -114,7 +113,7 @@ class RivalsDuelFightTargetsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         TargetCreaturePermanentWithDifferentTypes target = (TargetCreaturePermanentWithDifferentTypes) source.getTargets().get(0);
         Permanent creature1 = game.getPermanent(target.getFirstTarget());
-        Permanent creature2 = game.getPermanent((UUID) target.getTargets().get(1));
+        Permanent creature2 = game.getPermanent(target.getTargets().get(1));
         // 20110930 - 701.10
         if (creature1 != null && creature2 != null) {
             if (creature1.getCardType().contains(CardType.CREATURE) && creature2.getCardType().contains(CardType.CREATURE)) {
