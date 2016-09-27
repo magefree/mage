@@ -66,9 +66,9 @@ public class RiptideReplicator extends CardImpl {
         effect.setText("and a creature type");
         ability.addEffect(new ChooseCreatureTypeEffect(Outcome.Neutral));
         this.addAbility(ability);
-		
-		// Riptide Replicator enters the battlefield with X charge counters on it.
-		this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
+        
+        // Riptide Replicator enters the battlefield with X charge counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
         // {4}, {T}: Put an X/X creature token of the chosen color and type onto the battlefield, where X is the number of charge counters on Riptide Replicator.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RiptideReplicatorEffect(), new GenericManaCost(4));
@@ -106,7 +106,7 @@ class RiptideReplicatorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         String type = (String) game.getState().getValue(source.getSourceId() + "_type");
-		int x = (new CountersSourceCount(CounterType.CHARGE)).calculate(game, source, this);
+        int x = (new CountersSourceCount(CounterType.CHARGE)).calculate(game, source, this);
         Token token = new RiptideReplicatorToken(color, type, x);
         return token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
     }
