@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
 public class GamorreanEnforcer extends CardImpl {
 
     public GamorreanEnforcer(UUID ownerId) {
-        super(ownerId, 106, "Gamorrean Enforcer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        super(ownerId, 106, "Gamorrean Enforcer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "SWS";
         this.subtype.add("Gamorrean");
         this.subtype.add("Warrior");
