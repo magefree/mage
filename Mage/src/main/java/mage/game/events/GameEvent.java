@@ -217,6 +217,7 @@ public class GameEvent implements Serializable {
         TRANSFORM, TRANSFORMED,
         BECOMES_MONSTROUS,
         BECOMES_RENOWNED,
+        MEDITATED,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,
         TURNFACEUP, TURNEDFACEUP,
