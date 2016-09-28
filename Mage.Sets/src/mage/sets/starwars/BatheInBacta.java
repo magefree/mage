@@ -35,7 +35,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -59,7 +59,7 @@ public class BatheInBacta extends CardImpl {
                 HateCondition.getInstance(),
                 "If you lost life from a source other than combat damage this turn, you gain 9 life instead"));
 
-        this.getSpellAbility().addWatcher(new NonCombatDamageWatcher());
+        this.getSpellAbility().addWatcher(new LifeLossOtherFromCombatWatcher());
     }
 
     public BatheInBacta(final BatheInBacta card) {

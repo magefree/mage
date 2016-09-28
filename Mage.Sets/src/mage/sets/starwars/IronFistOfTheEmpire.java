@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.permanent.token.Token;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -60,7 +60,7 @@ public class IronFistOfTheEmpire extends CardImpl {
                 triggeredAbility,
                 HateCondition.getInstance(),
                 "<i>Hate</i> &mdash; At the beggining of each end step, if opponent lost life from a source other than combat damage this turn, you gain 1 life and create a 2/2 red Soldier creature token with first strike named Royal Guard.");
-        this.addAbility(ability, new NonCombatDamageWatcher());
+        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
     public IronFistOfTheEmpire(final IronFistOfTheEmpire card) {

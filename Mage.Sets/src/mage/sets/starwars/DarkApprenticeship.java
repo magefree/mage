@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.target.TargetPlayer;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -56,7 +56,7 @@ public class DarkApprenticeship extends CardImpl {
                 HateCondition.getInstance(),
                 "<i>Hate</i> &mdash; At the beggining of each end step, if an opponent lost life from source other than combat damage this turn, Dark Apprenticeship deals 2 damage to target player.");
         ability.addTarget(new TargetPlayer());
-        this.addAbility(ability, new NonCombatDamageWatcher());
+        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
     public DarkApprenticeship(final DarkApprenticeship card) {

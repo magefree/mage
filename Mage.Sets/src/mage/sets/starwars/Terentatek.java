@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -60,7 +60,7 @@ public class Terentatek extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new Terentatek1RestrictionEffect()));
 
         // <i>Hate</i> &mdash; If an opponent lost life from source other than combat damage this turn, Terentatek may attack as though you controlled a Sith.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new Terentatek2RestrictionEffect()), new NonCombatDamageWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new Terentatek2RestrictionEffect()), new LifeLossOtherFromCombatWatcher());
 
     }
 
@@ -142,8 +142,8 @@ class Terentatek2RestrictionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getSourceId())) {
-            NonCombatDamageWatcher watcher = (NonCombatDamageWatcher) game.getState().getWatchers().get("NonCombatDamageWatcher");
-            return watcher != null && watcher.opponentsBeenDealtNonCombatDamage(source.getControllerId());
+            LifeLossOtherFromCombatWatcher watcher = (LifeLossOtherFromCombatWatcher) game.getState().getWatchers().get("NonCombatDamageWatcher");
+            return watcher != null && watcher.opponentLostLifeOtherFromCombat(source.getControllerId());
         }
         return false;
     }

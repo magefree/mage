@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.target.TargetSpell;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -63,7 +63,7 @@ public class ForceDenial extends CardImpl {
                 HateCondition.getInstance(),
                 "<br><i>Hate</i> - If an opponent lost life from a source other than combat damage this turn, counter that spell instead."));
         this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addWatcher(new NonCombatDamageWatcher());
+        this.getSpellAbility().addWatcher(new LifeLossOtherFromCombatWatcher());
 
         // Scry 1
         this.getSpellAbility().addEffect(new ScryEffect(1));

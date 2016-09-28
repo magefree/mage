@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -70,7 +70,7 @@ public class SithAssassin extends CardImpl {
                 HateCondition.getInstance(),
                 "<i>Hate</i> - When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, destroy target nonblack creature.");
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability, new NonCombatDamageWatcher());
+        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
     public SithAssassin(final SithAssassin card) {

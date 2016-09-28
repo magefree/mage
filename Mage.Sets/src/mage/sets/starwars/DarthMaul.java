@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -70,7 +70,7 @@ public class DarthMaul extends CardImpl {
                 HateCondition.getInstance(),
                 "<i>Hate</i> &mdash; Whenever Darth Maul attacks, if an opponent loses life from a source other than combat damage this turn, target creature can't block this turn.");
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability, new NonCombatDamageWatcher());
+        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
     public DarthMaul(final DarthMaul card) {

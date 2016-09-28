@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -60,7 +60,7 @@ public class SithInquisitor extends CardImpl {
                 HateCondition.getInstance(),
                 "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other then combat damage this turn, target player discard a card at random.");
         ability.addTarget(new TargetOpponent());
-        this.addAbility(ability, new NonCombatDamageWatcher());
+        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
     public SithInquisitor(final SithInquisitor card) {

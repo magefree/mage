@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -62,7 +62,7 @@ public class SithMindseer extends CardImpl {
                 HateCondition.getInstance(),
                 "<i>Hate</i> &mdash; When Sith Mindseer enters the battlefield, if an opponent loses life from a source other than combat damage, gain control of target creature for as long as Sith Mindseer remains on the battlefield.");
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability, new NonCombatDamageWatcher());
+        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
     public SithMindseer(final SithMindseer card) {
