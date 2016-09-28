@@ -28,10 +28,24 @@
 package mage.sets.starwars;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.counters.CounterType;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -40,11 +54,11 @@ import mage.constants.Rarity;
 public class MarchOfTheDroids extends CardImpl {
 
     public MarchOfTheDroids(UUID ownerId) {
-        super(ownerId, 206, "March of the Droids", Rarity.NA/*RARE*/, new CardType[]{CardType.SORCERY}, "{W}{U}{B}");
+        super(ownerId, 206, "March of the Droids", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}{U}{B}");
         this.expansionSetCode = "SWS";
 
         // Remove all repair counters from each exiled card you own. You may cast each card with repair counter removed this way without paying its mana cost until end of turn.
-        
+        this.getSpellAbility().addEffect(new MarchOfTheDroidsEffect());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -56,5 +70,84 @@ public class MarchOfTheDroids extends CardImpl {
     @Override
     public MarchOfTheDroids copy() {
         return new MarchOfTheDroids(this);
+    }
+}
+
+class MarchOfTheDroidsEffect extends OneShotEffect {
+
+    public MarchOfTheDroidsEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Remove all repair counters from each exiled card you own. You may cast each card with repair counter removed this way without paying its mana cost until end of turn";
+    }
+
+    public MarchOfTheDroidsEffect(final MarchOfTheDroidsEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MarchOfTheDroidsEffect copy() {
+        return new MarchOfTheDroidsEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards castable = new CardsImpl();
+            for (Card card : controller.getGraveyard().getCards(game)) {
+                if (card.getOwnerId().equals(controller.getId()) && card.getCounters(game).getCount(CounterType.REPAIR) > 0) {
+                    int number = card.getCounters(game).getCount(CounterType.REPAIR);
+                    if (number > 0) {
+                        castable.add(card);
+                        card.removeCounters(CounterType.REPAIR.createInstance(number), game);
+                    }
+                }
+            }
+            if (!castable.isEmpty()) {
+                ContinuousEffect effect = new MarchOfTheDroidsCastFromExileEffect();
+                effect.setTargetPointer(new FixedTargets(castable, game));
+                game.addEffect(effect, source);
+            }
+            return true;
+        }
+        return false;
+    }
+}
+
+class MarchOfTheDroidsCastFromExileEffect extends AsThoughEffectImpl {
+
+    public MarchOfTheDroidsCastFromExileEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "You may play the card from exile without paying its mana cost until end of turn";
+    }
+
+    public MarchOfTheDroidsCastFromExileEffect(final MarchOfTheDroidsCastFromExileEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public MarchOfTheDroidsCastFromExileEffect copy() {
+        return new MarchOfTheDroidsCastFromExileEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (source.getControllerId().equals(affectedControllerId)
+                && getTargetPointer().getTargets(game, source).contains(objectId)) {
+            Card card = game.getCard(objectId);
+            Player controller = game.getPlayer(source.getControllerId());
+            if (card != null && controller != null) {
+                if (!card.getCardType().contains(CardType.LAND)) {
+                    controller.setCastSourceIdWithAlternateMana(objectId, null, null);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
