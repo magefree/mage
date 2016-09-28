@@ -68,7 +68,7 @@ public class DaybreakRanger extends CardImpl {
         this.subtype.add("Archer");
         this.subtype.add("Werewolf");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new NightfallPredator(ownerId);
 
         this.power = new MageInt(2);

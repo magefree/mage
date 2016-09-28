@@ -56,7 +56,7 @@ public class ArlinnKord extends CardImpl {
         this.expansionSetCode = "SOI";
         this.subtype.add("Arlinn");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new ArlinnEmbracedByTheMoon(ownerId);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

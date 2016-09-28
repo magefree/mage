@@ -60,7 +60,7 @@ public class LudevicsTestSubject extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new LudevicsAbomination(ownerId);
 
         this.addAbility(DefenderAbility.getInstance());

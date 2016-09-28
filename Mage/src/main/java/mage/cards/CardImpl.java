@@ -71,7 +71,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String tokenSetCode;
     protected String tokenDescriptor;
     protected Rarity rarity;
-    protected boolean canTransform;
+    protected boolean transformable;
     protected Card secondSideCard;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
@@ -139,8 +139,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         tokenDescriptor = card.tokenDescriptor;
         rarity = card.rarity;
 
-        canTransform = card.canTransform;
-        if (canTransform) {
+        transformable = card.transformable;
+        if (transformable) {
             secondSideCard = card.secondSideCard;
             nightCard = card.nightCard;
         }
@@ -532,8 +532,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public boolean canTransform() {
-        return this.canTransform;
+    public boolean isTransformable() {
+        return this.transformable;
+    }
+
+    @Override
+    public void setTransformable(boolean transformable) {
+        this.transformable = transformable;
     }
 
     @Override

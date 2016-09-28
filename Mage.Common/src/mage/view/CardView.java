@@ -279,7 +279,7 @@ public class CardView extends SimpleCardView {
         this.subTypes = card.getSubtype(game);
         this.superTypes = card.getSupertype();
         this.color = card.getColor(game);
-        this.canTransform = card.canTransform();
+        this.canTransform = card.isTransformable();
         this.flipCard = card.isFlipCard();
         this.faceDown = !showFaceUp;
 

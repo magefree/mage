@@ -54,7 +54,7 @@ public class ShrillHowler extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new HowlingChorus(ownerId);
 
         // Creatures with power less than Shrill Howler's power can't block it.

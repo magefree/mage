@@ -68,7 +68,7 @@ public class LilianaHereticalHealer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new LilianaDefiantNecromancer(ownerId);
         this.addAbility(new TransformAbility());
 

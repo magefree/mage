@@ -48,7 +48,7 @@ public class MarkovsServant extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.nightCard = true;
     }
 

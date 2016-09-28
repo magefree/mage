@@ -60,7 +60,7 @@ public class SoulSeizer extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Spirit");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new GhastlyHaunting(ownerId);
 
         this.power = new MageInt(1);
@@ -139,7 +139,7 @@ class SoulSeizerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.canTransform()) {
+        if (permanent != null && permanent.isTransformable()) {
             if (permanent.transform(game)) {
                 game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());                    
                 Permanent attachTo = game.getPermanent(targetPointer.getFirst(game, source));

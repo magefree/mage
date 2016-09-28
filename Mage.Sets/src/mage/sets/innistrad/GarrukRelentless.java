@@ -59,7 +59,7 @@ public class GarrukRelentless extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Garruk");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new GarrukTheVeilCursed(ownerId);
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));

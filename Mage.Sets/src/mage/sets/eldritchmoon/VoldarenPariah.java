@@ -64,7 +64,7 @@ public class VoldarenPariah extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new AbolisherOfBloodlines(ownerId);
 
         // Flying

@@ -65,7 +65,7 @@ public class CuriousHomunculus extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new VoraciousReader(ownerId);
 
         // {T}: Add {C} to your mana pool. Spend this mana only to cast an instant or sorcery spell.

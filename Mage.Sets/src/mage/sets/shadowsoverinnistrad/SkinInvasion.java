@@ -60,7 +60,7 @@ public class SkinInvasion extends CardImpl {
         this.expansionSetCode = "SOI";
         this.subtype.add("Aura");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new SkinShedder(ownerId);
 
         // Enchant creature

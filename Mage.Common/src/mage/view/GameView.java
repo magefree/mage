@@ -116,7 +116,7 @@ public class GameView implements Serializable {
                     } else {
                         stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, "", new CardView(card)));
                     }
-                    if (card.canTransform()) {
+                    if (card.isTransformable()) {
                         updateLatestCardView(game, card, stackObject.getId());
                     }
                     checkPaid(stackObject.getId(), (StackAbility) stackObject);
@@ -230,7 +230,7 @@ public class GameView implements Serializable {
     }
 
     private void updateLatestCardView(Game game, Card card, UUID stackId) {
-        if (!card.canTransform()) {
+        if (!card.isTransformable()) {
             return;
         }
         Permanent permanent = game.getPermanent(card.getId());

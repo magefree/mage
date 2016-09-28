@@ -59,7 +59,7 @@ public class DuskwatchRecruiter extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Werewolf");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new KrallenhordeHowler(ownerId);
 
         this.power = new MageInt(2);

@@ -57,7 +57,7 @@ public class MoonriseIntruder extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         // Menace
         this.addAbility(new MenaceAbility());

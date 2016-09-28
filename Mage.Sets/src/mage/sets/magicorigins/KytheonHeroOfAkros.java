@@ -65,7 +65,7 @@ public class KytheonHeroOfAkros extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new GideonBattleForged(ownerId);
 
         // At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon, 

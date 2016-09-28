@@ -54,7 +54,7 @@ public class NeglectedHeirloom extends CardImpl {
         this.expansionSetCode = "SOI";
         this.subtype.add("Equipment");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new AshmouthBlade(ownerId);
 
         // Equipped creature gets +1/+1.

@@ -56,7 +56,7 @@ public class ScornedVillager extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new MoonscarredWerewolf(ownerId);
 
         // {tap}: Add {G} to your mana pool.

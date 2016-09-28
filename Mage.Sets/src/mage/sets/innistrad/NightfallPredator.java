@@ -67,7 +67,7 @@ public class NightfallPredator extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         // {R}, {tap}: Nightfall Predator fights target creature.
         Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NightfallPredatorEffect(), new ManaCostsImpl("{R}"));

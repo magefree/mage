@@ -56,7 +56,7 @@ public class WildbloodPack extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

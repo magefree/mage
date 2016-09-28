@@ -59,7 +59,7 @@ public class JaceVrynsProdigy extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new JaceTelepathUnbound(ownerId);
 
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.

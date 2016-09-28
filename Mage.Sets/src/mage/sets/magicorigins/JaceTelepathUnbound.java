@@ -73,7 +73,7 @@ public class JaceTelepathUnbound extends CardImpl {
 
         this.color.setBlue(true);
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 

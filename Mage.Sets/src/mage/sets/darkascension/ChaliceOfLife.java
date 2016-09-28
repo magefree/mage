@@ -53,7 +53,7 @@ public class ChaliceOfLife extends CardImpl {
         super(ownerId, 146, "Chalice of Life", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "DKA";
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new ChaliceOfDeath(ownerId);
         this.addAbility(new TransformAbility());
 

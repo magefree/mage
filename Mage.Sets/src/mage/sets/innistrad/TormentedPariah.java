@@ -53,7 +53,7 @@ public class TormentedPariah extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Werewolf");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new RampagingWerewolf(ownerId);
 
         this.power = new MageInt(3);

@@ -58,7 +58,7 @@ public class SilverpeltWerewolf extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.nightCard = true;
 
         // Whenever Silverpelt Werewolf deals combat damage to a player, draw a card.

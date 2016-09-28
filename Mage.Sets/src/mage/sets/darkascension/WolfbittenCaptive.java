@@ -57,7 +57,7 @@ public class WolfbittenCaptive extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new KrallenhordeKiller(ownerId);
 
         // {1}{G}: Wolfbitten Captive gets +2/+2 until end of turn. Activate this ability only once each turn.

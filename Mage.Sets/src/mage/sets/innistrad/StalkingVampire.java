@@ -47,7 +47,7 @@ public class StalkingVampire extends CardImpl {
         this.color.setBlack(true);
 
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

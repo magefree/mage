@@ -58,7 +58,7 @@ public class FlameheartWerewolf extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         // Whenever Flameheart Werewolf blocks or becomes blocked by a creature, Flameheart Werewolf deals 2 damage to that creature.
         this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(2, true, "that creature"), false));

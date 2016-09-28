@@ -50,7 +50,7 @@ public class UninvitedGeist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new UnimpededTrespasser(ownerId);
 
         // Skulk (This creature can't be blocked by creatures with greater power.)

@@ -58,7 +58,7 @@ public class CivilizedScholar extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new HomicidalBrute(ownerId);
 
         this.power = new MageInt(0);

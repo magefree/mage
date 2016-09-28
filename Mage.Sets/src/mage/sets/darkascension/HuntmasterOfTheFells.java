@@ -57,7 +57,7 @@ public class HuntmasterOfTheFells extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new RavagerOfTheFells(ownerId);
 
         this.power = new MageInt(2);

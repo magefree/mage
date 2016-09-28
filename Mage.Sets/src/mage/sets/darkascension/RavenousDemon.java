@@ -58,7 +58,7 @@ public class RavenousDemon extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Demon");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new ArchdemonOfGreed(ownerId);
 
         this.power = new MageInt(4);

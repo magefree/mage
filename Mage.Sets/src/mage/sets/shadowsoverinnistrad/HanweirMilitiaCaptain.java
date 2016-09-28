@@ -56,7 +56,7 @@ public class HanweirMilitiaCaptain extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new WestvaleCultLeader(ownerId);
 
         // At the beginning of your upkeep, if you control four or more creatures, transform Hanweir Militia Captain.

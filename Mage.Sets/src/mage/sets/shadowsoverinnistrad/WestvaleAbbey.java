@@ -58,7 +58,7 @@ public class WestvaleAbbey extends CardImpl {
         super(ownerId, 281, "Westvale Abbey", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "SOI";
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new OrmendahlProfanePrince(ownerId);
 
         // {T}: Add {C} to your mana pool.

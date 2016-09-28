@@ -64,7 +64,7 @@ public class UlrichOfTheKrallenhorde extends CardImpl {
         this.toughness = new MageInt(4);
 
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new UlrichUncontestedAlpha(ownerId);
 
         // Whenever this creature enters the battlefield or transforms into Ulrich of the Krallenhorde, target creature gets +4/+4 until end of turn.

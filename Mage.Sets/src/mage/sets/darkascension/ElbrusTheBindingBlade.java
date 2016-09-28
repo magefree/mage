@@ -57,7 +57,7 @@ public class ElbrusTheBindingBlade extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new WithengarUnbound(ownerId);
         this.addAbility(new TransformAbility());
 

@@ -52,7 +52,7 @@ public class GrizzledOutcasts extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new KrallenhordeWantons(ownerId);
 
         this.power = new MageInt(4);

@@ -66,7 +66,7 @@ public class LordOfLineage extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         this.addAbility(FlyingAbility.getInstance());
         // Other Vampire creatures you control get +2/+2.

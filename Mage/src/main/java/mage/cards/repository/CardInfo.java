@@ -134,7 +134,7 @@ public class CardInfo {
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
 
-        this.doubleFaced = card.canTransform() && card.getSecondCardFace() != null;
+        this.doubleFaced = card.isTransformable() && card.getSecondCardFace() != null;
         this.nightCard = card.isNightCard();
         Card secondSide = card.getSecondCardFace();
         if (secondSide != null) {

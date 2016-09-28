@@ -59,7 +59,7 @@ public class LoneWolfOfTheNatterknolls extends CardImpl {
         this.color.setGreen(true);
 
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         // Whenever an opponent cast a spell during your turn, draw two cards.
         this.addAbility(new ConditionalTriggeredAbility(

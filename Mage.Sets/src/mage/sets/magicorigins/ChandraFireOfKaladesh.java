@@ -70,7 +70,7 @@ public class ChandraFireOfKaladesh extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new ChandraRoaringFlame(ownerId);
         
         // Whenever you cast a red spell, untap Chandra, Fire of Kaladesh.

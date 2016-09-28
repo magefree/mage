@@ -58,7 +58,7 @@ public class GrizzledAngler extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new GrislyAnglerfish(ownerId);
 
         // {T}: Put the top two cards of your library into your graveyard. Then if there is a colorless creature card in your graveyard, transform Grizzled Angler.

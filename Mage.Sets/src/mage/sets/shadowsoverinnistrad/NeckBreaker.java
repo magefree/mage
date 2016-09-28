@@ -65,7 +65,7 @@ public class NeckBreaker extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         // Attacking creatures you control get +1/+0 and have trample.
         SimpleStaticAbility boostAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,

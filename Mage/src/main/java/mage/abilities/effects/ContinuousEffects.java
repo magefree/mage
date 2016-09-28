@@ -459,7 +459,7 @@ public class ContinuousEffects implements Serializable {
             exists = false;
             if (object instanceof PermanentCard) {
                 PermanentCard permanent = (PermanentCard) object;
-                if (permanent.canTransform() && event.getType() == GameEvent.EventType.TRANSFORMED) {
+                if (permanent.isTransformable() && event.getType() == GameEvent.EventType.TRANSFORMED) {
                     exists = permanent.getCard().getAbilities().contains(ability);
                 }
             }

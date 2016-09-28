@@ -63,7 +63,7 @@ public class DelverOfSecrets extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new InsectileAberration(ownerId);
 
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets.

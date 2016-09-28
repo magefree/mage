@@ -62,7 +62,7 @@ public class LoneRider extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new ItThatRidesAsOne(ownerId);
 
         // First strike

@@ -65,7 +65,7 @@ public class AccursedWitch extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new InfectiousCurse(ownerId);
 
         // Spells your opponents cast that target Accursed Witch cost {1} less to cast.

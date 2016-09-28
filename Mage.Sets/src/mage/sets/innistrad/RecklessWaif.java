@@ -53,7 +53,7 @@ public class RecklessWaif extends CardImpl {
         this.subtype.add("Rogue");
         this.subtype.add("Werewolf");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new MercilessPredator(ownerId);
 
         this.power = new MageInt(1);

@@ -59,7 +59,7 @@ public class ConduitOfStorms extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new ConduitOfEmrakul(ownerId);
 
         // Whenever Conduit of Storms attacks, add {R} to your mana pool at the beginning of your next main phase this turn.

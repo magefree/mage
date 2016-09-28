@@ -58,7 +58,7 @@ public class ScreechingBat extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Bat");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new StalkingVampire(ownerId);
 
         this.power = new MageInt(2);
@@ -134,7 +134,7 @@ class ScreechingBatTransformSourceEffect extends OneShotEffect {
         if (permanent != null) {
             Cost cost = new ManaCostsImpl("{2}{B}{B}");
             if (cost.pay(source, game, permanent.getControllerId(), permanent.getControllerId(), false, null)) {
-                if (permanent.canTransform()) {
+                if (permanent.isTransformable()) {
                     permanent.setTransformed(!permanent.isTransformed());
                 }
             }

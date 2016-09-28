@@ -70,7 +70,7 @@ public class ArlinnEmbracedByTheMoon extends CardImpl {
         this.color.setGreen(true);
 
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         // +1: Creatures you control get +1/+1 and gain trample until end of turn.
         Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter);

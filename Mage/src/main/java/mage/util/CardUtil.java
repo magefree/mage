@@ -640,7 +640,7 @@ public class CardUtil {
                 mana.setWhite(true);
             }
         }
-        if (card.canTransform()) {
+        if (card.isTransformable()) {
             Card secondCard = card.getSecondCardFace();
             ObjectColor color = secondCard.getColor(null);
             mana.setBlack(mana.isBlack() || color.isBlack());

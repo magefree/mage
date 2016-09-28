@@ -15,8 +15,8 @@ import mage.game.permanent.Permanent;
  *
  * @author halljared
  */
-public class CantAttackBlockTransformAttachedEffect extends RestrictionEffect{
-    
+public class CantAttackBlockTransformAttachedEffect extends RestrictionEffect {
+
     public CantAttackBlockTransformAttachedEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't attack, block, or transform.";
@@ -36,7 +36,7 @@ public class CantAttackBlockTransformAttachedEffect extends RestrictionEffect{
         }
         return false;
     }
-    
+
     @Override
     public boolean canAttack(Game game) {
         return false;
@@ -48,7 +48,7 @@ public class CantAttackBlockTransformAttachedEffect extends RestrictionEffect{
     }
 
     @Override
-    public boolean canTransform(Game game) {
+    public boolean canTransform(Permanent permanent, Ability source, Game game) {
         return false;
     }
 
@@ -56,5 +56,5 @@ public class CantAttackBlockTransformAttachedEffect extends RestrictionEffect{
     public CantAttackBlockTransformAttachedEffect copy() {
         return new CantAttackBlockTransformAttachedEffect(this);
     }
-    
+
 }

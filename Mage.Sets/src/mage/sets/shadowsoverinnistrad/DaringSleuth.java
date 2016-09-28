@@ -54,7 +54,7 @@ public class DaringSleuth extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new BearerOfOverwhelmingTruths(ownerId);
 
         // When you sacrifice a Clue, transform Daring Sleuth.

@@ -52,7 +52,7 @@ public class ThrabenGargoyle extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new StonewingAntagonizer(ownerId);
 
         // Defender

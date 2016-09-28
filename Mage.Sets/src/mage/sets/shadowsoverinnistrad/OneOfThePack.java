@@ -55,7 +55,7 @@ public class OneOfThePack extends CardImpl {
         this.color.setGreen(true);
 
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform One of the Pack.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

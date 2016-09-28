@@ -68,7 +68,7 @@ public class NissaVastwoodSeer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new NissaSageAnimist(ownerId);
 
         // When Nissa, Vastwood Seer enters the battlefield, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle your library.

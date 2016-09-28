@@ -38,13 +38,11 @@ public class RepairAbility extends DiesTriggeredAbility {
         super(new AddCountersSourceEffect(CounterType.REPAIR.createInstance(), new StaticValue(count), false, true));
         addSubAbility(new RepairBeginningOfUpkeepTriggeredAbility());
         addSubAbility(new RepairCastFromGraveyardTriggeredAbility());
-        
-        StringBuilder sb = new StringBuilder("Repair ");
-        sb.append(count)
-                .append(" <i>(When this creature dies, put ")
-                .append(count)
-                .append(" repair counters on it. At the beggining of your upkeep, remove a repair counter. Whenever the last is removed, you may cast it from graveyard until end of turn.)</i>");
-        ruleText = sb.toString();
+
+        ruleText = "Repair " + count + " <i>(When this creature dies, put " + count
+                + " repair counters on it. At the beggining of your upkeep, remove a repair counter. "
+                + "Whenever the last is removed, you may cast it from graveyard until end of turn.)</i>";
+
     }
 
     public RepairAbility(final RepairAbility ability) {

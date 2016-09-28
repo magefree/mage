@@ -51,7 +51,7 @@ public class HeirOfFalkenrath extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new HeirToTheNight(ownerId);
 
         // Discard a card: Transform Heir of Falkenrath. Activate this ability only once each turn.

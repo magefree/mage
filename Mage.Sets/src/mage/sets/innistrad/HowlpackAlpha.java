@@ -71,7 +71,7 @@ public class HowlpackAlpha extends CardImpl {
 
         // this card is the second face of double-faced card
         this.nightCard = true;
-        this.canTransform = true;
+        this.transformable = true;
 
         this.color.setGreen(true);
         this.power = new MageInt(3);

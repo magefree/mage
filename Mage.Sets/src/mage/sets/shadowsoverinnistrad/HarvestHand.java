@@ -55,7 +55,7 @@ public class HarvestHand extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new ScroungedScythe(ownerId);
 
         // When Harvest Hand dies, return it to the battlefield transformed under your control.

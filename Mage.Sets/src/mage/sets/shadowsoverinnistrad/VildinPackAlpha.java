@@ -64,7 +64,7 @@ public class VildinPackAlpha extends CardImpl {
         this.toughness = new MageInt(3);
         this.color.setRed(true);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.nightCard = true;
 
         // Whenever a Werewolf enters the battlefield under your control, you may transform it.
@@ -107,7 +107,7 @@ class VildinPackAlphaEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent werewolf = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (werewolf != null && werewolf.canTransform()) {
+            if (werewolf != null && werewolf.isTransformable()) {
                 werewolf.transform(game);
             }
             return true;

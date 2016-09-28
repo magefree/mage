@@ -65,7 +65,7 @@ public class SageOfAncientLore extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new WerewolfOfAncientHunger(ownerId);
 
         // Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.

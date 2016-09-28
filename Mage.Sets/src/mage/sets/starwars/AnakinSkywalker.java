@@ -35,6 +35,7 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -51,7 +52,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -76,7 +76,7 @@ public class AnakinSkywalker extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new DarthVader(ownerId);
 
         // Whenever another creature dies, put a +1/+1 counter on Anakin Skywalker.
@@ -119,13 +119,7 @@ class AnakinSkywalkerEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
             permanent.regenerate(source.getSourceId(), game);
-            if (permanent.canTransform(game)) {
-                if (!permanent.isTransformed()) {
-                    permanent.setTransformed(true);
-                    game.informPlayers(((PermanentCard) permanent).getCard().getLogName() + " transforms into " + permanent.getSecondCardFace().getLogName());
-                    return true;
-                }
-            }
+            return new TransformSourceEffect(true).apply(game, source);
         }
         return false;
     }

@@ -52,7 +52,7 @@ public class CryptolithFragment extends CardImpl {
         super(ownerId, 193, "Cryptolith Fragment", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "EMN";
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new AuroraOfEmrakul(ownerId);
 
         // Cryptolith Fragment enters the battlefield tapped.

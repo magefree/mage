@@ -54,7 +54,7 @@ public class HanweirWatchkeep extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Werewolf");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new BaneOfHanweir(ownerId);
 
         this.power = new MageInt(1);

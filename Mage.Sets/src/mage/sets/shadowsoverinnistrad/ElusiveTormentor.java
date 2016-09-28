@@ -54,7 +54,7 @@ public class ElusiveTormentor extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new InsidiousMist(ownerId);
 
         // {1}, Discard a card: Transform Elusive Tormentor.

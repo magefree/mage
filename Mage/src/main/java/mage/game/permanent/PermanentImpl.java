@@ -455,7 +455,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean transform(Game game) {
-        if (canTransform) {
+        if (transformable) {
             if (!replaceEvent(EventType.TRANSFORM, game)) {
                 setTransformed(!transformed);
                 game.applyEffects();
@@ -1111,9 +1111,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         //20101001 - 509.1b
-        for (Map.Entry entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-            RestrictionEffect effect = (RestrictionEffect) entry.getKey();
-            for (Ability ability : (HashSet<Ability>) entry.getValue()) {
+        for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            RestrictionEffect effect = entry.getKey();
+            for (Ability ability : entry.getValue()) {
                 if (!effect.canBlock(null, this, ability, game)) {
                     return false;
                 }
@@ -1132,30 +1132,30 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      */
     @Override
     public boolean canUseActivatedAbilities(Game game) {
-        for (Map.Entry entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-            RestrictionEffect effect = (RestrictionEffect) entry.getKey();
-            for (Ability ability : (HashSet<Ability>) entry.getValue()) {
+        for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            RestrictionEffect effect = entry.getKey();
+            for (Ability ability : entry.getValue()) {
                 if (!effect.canUseActivatedAbilities(this, ability, game)) {
                     return false;
                 }
             }
         }
-
         return true;
     }
 
     @Override
-    public boolean canTransform(Game game) {
-        for (Map.Entry entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-            RestrictionEffect effect = (RestrictionEffect) entry.getKey();
-            for (Ability ability : (HashSet<Ability>) entry.getValue()) {
-                if (!effect.canTransform(game)) {
-                    return false;
+    public boolean canTransform(Ability source, Game game) {
+        if (transformable) {
+            for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+                RestrictionEffect effect = entry.getKey();
+                for (Ability ability : entry.getValue()) {
+                    if (!effect.canTransform(this, ability, game)) {
+                        return false;
+                    }
                 }
             }
         }
-
-        return true;
+        return transformable;
     }
 
     @Override

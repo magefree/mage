@@ -52,7 +52,7 @@ public class KessigProwler extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new SinuousPredator(ownerId);
 
         // {4}{G}: Transform Kessig Prowler.

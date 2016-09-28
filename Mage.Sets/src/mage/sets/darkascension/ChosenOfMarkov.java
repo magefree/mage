@@ -66,7 +66,7 @@ public class ChosenOfMarkov extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new MarkovsServant(ownerId);
 
         // {tap}, Tap an untapped Vampire you control: Transform Chosen of Markov.

@@ -69,7 +69,7 @@ public class PiousEvangel extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new WaywardDisciple(ownerId);
 
         // Whenever Pious Evangel or another creature enters the battlefield under your control, you gain 1 life.

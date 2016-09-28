@@ -54,7 +54,7 @@ public class HinterlandLogger extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new TimberShredder(ownerId);
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Hinterland Logger.

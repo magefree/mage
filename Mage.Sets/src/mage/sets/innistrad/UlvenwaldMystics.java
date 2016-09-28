@@ -53,7 +53,7 @@ public class UlvenwaldMystics extends CardImpl {
         this.subtype.add("Shaman");
         this.subtype.add("Werewolf");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new UlvenwaldPrimordials(ownerId);
 
         this.power = new MageInt(3);

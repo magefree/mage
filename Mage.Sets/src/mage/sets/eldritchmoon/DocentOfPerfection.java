@@ -74,7 +74,7 @@ public class DocentOfPerfection extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new FinalIteration(ownerId);
 
         // Flying

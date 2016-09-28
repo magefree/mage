@@ -646,7 +646,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public boolean canTransform() {
+    public boolean isTransformable() {
         return false;
     }
 
@@ -801,6 +801,11 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void assignNewId() {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public void setTransformable(boolean value) {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 

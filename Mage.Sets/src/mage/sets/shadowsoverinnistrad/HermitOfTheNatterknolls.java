@@ -58,7 +58,7 @@ public class HermitOfTheNatterknolls extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new LoneWolfOfTheNatterknolls(ownerId);
 
         // Whenever an opponent casts a spell during your turn, draw a card.

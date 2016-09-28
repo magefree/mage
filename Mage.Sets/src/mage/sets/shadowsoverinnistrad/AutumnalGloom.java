@@ -52,7 +52,7 @@ public class AutumnalGloom extends CardImpl {
     public AutumnalGloom(UUID ownerId) {
         super(ownerId, 194, "Autumnal Gloom", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "SOI";
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new AncientOfTheEquinox(ownerId);
 
         // {B}: Put the top card of your library into your graveyard.

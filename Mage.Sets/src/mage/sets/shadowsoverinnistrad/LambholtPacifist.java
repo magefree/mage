@@ -65,7 +65,7 @@ public class LambholtPacifist extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new LambholtButcher(ownerId);
 
         // Lambholt Pacifist can't attack unless you control a creature with power 4 or greater.

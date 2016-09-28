@@ -54,7 +54,7 @@ public class StartledAwake extends CardImpl {
         super(ownerId, 88, "Startled Awake", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "SOI";
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new PersistentNightmare(ownerId);
 
         // Target opponent puts the top thirteen cards of his or her library into his or her graveyard.

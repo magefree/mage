@@ -56,7 +56,7 @@ public class LoyalCathar extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new UnhallowedCathar(ownerId);
 
         this.power = new MageInt(2);
@@ -133,7 +133,7 @@ class ReturnLoyalCatharEffect extends OneShotEffect {
         if (card != null) {
             card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
             Permanent perm = game.getPermanent(cardId);
-            if (perm != null && perm.canTransform()) {
+            if (perm != null && perm.isTransformable()) {
                 perm.transform(game);
                 return true;
             }

@@ -69,7 +69,7 @@ public class ThingInTheIce extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        this.canTransform = true;
+        this.transformable = true;
         this.secondSideCard = new AwokenHorror(ownerId);
 
         // Defender
