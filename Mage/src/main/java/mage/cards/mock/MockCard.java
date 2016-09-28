@@ -14,11 +14,12 @@ import org.apache.log4j.Logger;
  * @author North
  */
 public class MockCard extends CardImpl {
+
     // Needs to be here, as it is normally calculated from the
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
     // only has MockAbilities.
     private int startingLoyalty;
-    
+
     public MockCard(CardInfo card) {
         super(null, card.getName());
         this.cardNumber = card.getCardNumber();
@@ -30,25 +31,24 @@ public class MockCard extends CardImpl {
         this.subtype = card.getSubTypes();
         this.supertype = card.getSupertypes();
 
-
         this.usesVariousArt = card.usesVariousArt();
 
         this.manaCost = new ManaCostsImpl(join(card.getManaCosts()));
 
         this.color = card.getColor();
-        
+
         this.frameColor = card.getFrameColor();
         this.frameStyle = card.getFrameStyle();
 
         this.splitCard = card.isSplitCard();
         this.flipCard = card.isFlipCard();
 
-        this.canTransform = card.isDoubleFaced();
+        this.transformable = card.isDoubleFaced();
         this.nightCard = card.isNightCard();
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             this.secondSideCard = new MockCard(CardRepository.instance.findCard(card.getSecondSideName()));
         }
-        
+
         if (this.cardType.contains(CardType.PLANESWALKER)) {
             String startingLoyaltyString = card.getStartingLoyalty();
             if (startingLoyaltyString.isEmpty()) {
@@ -63,7 +63,7 @@ public class MockCard extends CardImpl {
         }
 
         this.flipCardName = card.getFlipCardName();
-        for(String ruleText: card.getRules()) {
+        for (String ruleText : card.getRules()) {
             this.addAbility(textAbilityFromString(ruleText));
         }
     }
@@ -71,7 +71,7 @@ public class MockCard extends CardImpl {
     public MockCard(final MockCard card) {
         super(card);
     }
-    
+
     @Override
     public int getStartingLoyalty() {
         return startingLoyalty;
