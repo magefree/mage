@@ -142,7 +142,7 @@ class KayaGhostAssassinEffect extends OneShotEffect {
                         game.addDelayedTriggeredAbility(delayedAbility, source);
                     }
             }
-            controller.loseLife(2, game);
+            controller.loseLife(2, game, false);
             return true;
         }
         return false;

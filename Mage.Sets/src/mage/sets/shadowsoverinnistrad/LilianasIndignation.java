@@ -101,7 +101,7 @@ class LilianasIndignationEffect extends OneShotEffect {
                     if (creatures > 0) {
                         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
                         if (targetPlayer != null) {
-                            targetPlayer.loseLife(creatures * 2, game);
+                            targetPlayer.loseLife(creatures * 2, game, false);
                         }
 
                     }

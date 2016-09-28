@@ -109,7 +109,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
         }
         controller.revealCards(sourceObject.getIdName(), cardsToReveal, game);
         controller.moveCards(cardsToExile, Zone.EXILED, source, game);
-        controller.loseLife(cardsToExile.size(), game);
+        controller.loseLife(cardsToExile.size(), game, false);
 
         return true;
     }

@@ -96,7 +96,7 @@ class PainfulQuandryEffect extends OneShotEffect {
                 paid = cost.pay(source, game, source.getSourceId(), player.getId(), false, null);
             }
             if (!paid) {
-                player.loseLife(5, game);
+                player.loseLife(5, game, false);
             }
             return true;
         }

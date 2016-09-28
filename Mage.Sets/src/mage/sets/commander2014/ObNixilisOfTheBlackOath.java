@@ -112,7 +112,7 @@ class ObNixilisOfTheBlackOathEffect1 extends OneShotEffect {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    loseLife += opponent.loseLife(1, game);
+                    loseLife += opponent.loseLife(1, game, false);
                 }
             }
             controller.gainLife(loseLife, game);

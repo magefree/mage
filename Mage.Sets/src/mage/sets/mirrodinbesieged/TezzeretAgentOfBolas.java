@@ -130,7 +130,7 @@ class TezzeretAgentOfBolasEffect2 extends OneShotEffect {
 
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            player.loseLife(count, game);
+            player.loseLife(count, game, false);
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {

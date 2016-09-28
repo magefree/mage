@@ -107,7 +107,7 @@ class DeathWishEffect extends OneShotEffect {
 
             int amount = (controller.getLife() + 1) / 2;
             if (amount > 0) {
-                controller.loseLife(amount, game);
+                controller.loseLife(amount, game, false);
             }
             return true;
         }

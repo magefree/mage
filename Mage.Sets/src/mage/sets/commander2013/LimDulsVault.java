@@ -106,7 +106,7 @@ class LimDulsVaultEffect extends OneShotEffect {
             player.lookAtCards("Lim-Dul's Vault", cards, game);
             doAgain = player.chooseUse(outcome, "Pay 1 life and look at the next 5 cards?", source, game);
             if (doAgain) {
-                player.loseLife(1, game);
+                player.loseLife(1, game, false);
             } else {
                 player.shuffleLibrary(source, game);
             }

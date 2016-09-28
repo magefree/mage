@@ -31,7 +31,7 @@ public class LoseHalfLifeEffect extends OneShotEffect {
         if (player != null) {
             int amount = (player.getLife() + 1) / 2;
             if (amount > 0) {
-                player.loseLife(amount, game);
+                player.loseLife(amount, game, false);
                 return true;
             }
         }

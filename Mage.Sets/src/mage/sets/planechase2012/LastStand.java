@@ -107,7 +107,7 @@ class LastStandEffect extends OneShotEffect {
             Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (opponent != null) {
                 int swamps = game.getBattlefield().count(filterSwamp, source.getSourceId(), source.getControllerId(), game);
-                opponent.loseLife(swamps * 2, game);
+                opponent.loseLife(swamps * 2, game, false);
             }
             // Last Stand deals damage equal to the number of Mountains you control to target creature.
             Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());

@@ -76,7 +76,7 @@ public class PayLifeCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         int lifeToPayAmount = amount.calculate(game, ability, null);
-        this.paid = game.getPlayer(controllerId).loseLife(lifeToPayAmount, game) == lifeToPayAmount;
+        this.paid = game.getPlayer(controllerId).loseLife(lifeToPayAmount, game, false) == lifeToPayAmount;
         return paid;
     }
 

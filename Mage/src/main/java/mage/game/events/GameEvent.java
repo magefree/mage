@@ -109,6 +109,13 @@ public class GameEvent implements Serializable {
         PLAYER_LIFE_CHANGE,
         GAIN_LIFE, GAINED_LIFE,
         LOSE_LIFE, LOST_LIFE,
+        /* LOSE_LIFE + LOST_LIFE
+         targetId    the id of the player loosing life
+         sourceId    the id of the player loosing life
+         playerId    the id of the player loosing life
+         amount      amount of life loss
+         flag        true = from comabat damage - other from non combat damage
+         */
         PLAY_LAND, LAND_PLAYED,
         CREW_VEHICLE,
         /* CREW_VEHICLE

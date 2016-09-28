@@ -88,7 +88,7 @@ class ServantOfTymaretEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int lostAmount = 0;
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            lostAmount += game.getPlayer(opponentId).loseLife(1, game);
+            lostAmount += game.getPlayer(opponentId).loseLife(1, game, false);
         }
         game.getPlayer(source.getControllerId()).gainLife(lostAmount, game);
         return true;

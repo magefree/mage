@@ -115,7 +115,7 @@ class MalakirBloodwitchEffect extends OneShotEffect {
         for (UUID opponentUuid : opponents) {
             Player opponent = game.getPlayer(opponentUuid);
             if (opponent != null) {
-                total += opponent.loseLife(amount, game);
+                total += opponent.loseLife(amount, game, false);
             }
             if (total > 0) {
                 player.gainLife(total, game);

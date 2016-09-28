@@ -106,7 +106,7 @@ class MurderousBetrayalCost extends CostImpl {
             if (lifeToPay < 0) {
                 this.paid = true;
             } else {
-                this.paid = (controller.loseLife(lifeToPay, game) == lifeToPay);
+                this.paid = (controller.loseLife(lifeToPay, game, false) == lifeToPay);
             }
             return this.paid;
         }

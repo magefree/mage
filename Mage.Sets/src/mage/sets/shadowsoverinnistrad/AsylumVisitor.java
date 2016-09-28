@@ -100,7 +100,7 @@ class AsylumVisitorTriggeredAbility extends TriggeredAbilityImpl {
 
         if (you != null && upkeepPlayer != null && upkeepPlayer.getHand().isEmpty()) {
             you.drawCards(1, game);
-            you.loseLife(1, game);
+            you.loseLife(1, game, false);
             return true;
         }
         

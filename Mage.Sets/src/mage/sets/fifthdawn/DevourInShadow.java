@@ -90,7 +90,7 @@ class DevourInShadowEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent target = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
         if (player != null && target != null) {
-            player.loseLife(target.getToughness().getValue(), game);
+            player.loseLife(target.getToughness().getValue(), game, false);
             return true;
         }
         return false;

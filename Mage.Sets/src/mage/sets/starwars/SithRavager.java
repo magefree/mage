@@ -36,7 +36,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -92,10 +91,7 @@ public class SithRavager extends CardImpl {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (!game.getStep().getType().equals(PhaseStep.COMBAT_DAMAGE)) {
-                return game.getOpponents(game.getControllerId(getSourceId())).contains(event.getPlayerId());
-            }
-            return false;
+            return !event.getFlag() && game.getOpponents(game.getControllerId(getSourceId())).contains(event.getPlayerId());
         }
 
         @Override

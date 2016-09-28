@@ -142,7 +142,7 @@ class ShriekingAfflictionTargetEffect extends OneShotEffect {
             if (sourcePermanent != null) {
                 game.informPlayers(sourcePermanent.getName() + ": " + player.getLogName() + " loses 3 life");
             }
-            player.loseLife(3, game);
+            player.loseLife(3, game, false);
             return true;
         }
         return false;

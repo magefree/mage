@@ -97,7 +97,7 @@ class NetherbornPhalanxEffect extends OneShotEffect {
                 if (count > 0) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
-                        opponent.loseLife(count, game);
+                        opponent.loseLife(count, game, false);
                     return true;
                     }
                 }

@@ -108,7 +108,7 @@ class DevouringGreedEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player sourcePlayer = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && sourcePlayer != null) {
-            targetPlayer.loseLife(amount, game);
+            targetPlayer.loseLife(amount, game, false);
             sourcePlayer.gainLife(amount, game);
             return true;
         }

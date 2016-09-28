@@ -148,7 +148,7 @@ class SoulsOfTheFaultlessEffect extends OneShotEffect {
         UUID attackerId = (UUID) this.getValue("attackerId");
         Player attacker = game.getPlayer(attackerId);
         if (attacker != null) {
-            attacker.loseLife(amount, game);
+            attacker.loseLife(amount, game, false);
         }
         return true;
     }

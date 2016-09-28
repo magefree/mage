@@ -102,7 +102,7 @@ class BatwingBrumeEffect extends OneShotEffect {
                 if (amount > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.loseLife(amount, game);
+                        player.loseLife(amount, game, false);
                     }
                 }
             }

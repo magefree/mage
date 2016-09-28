@@ -93,7 +93,7 @@ class PoxEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int lifeToLose = (int) Math.ceil(player.getLife() / 3.0);
-                    player.loseLife(lifeToLose, game);
+                    player.loseLife(lifeToLose, game, false);
                 }
             }
             // then discards a third of the cards in his or her hand,

@@ -122,7 +122,7 @@ class XathridDemonEffect extends OneShotEffect {
                     for (UUID opponentId : opponents) {
                         Player opponent = game.getPlayer(opponentId);
                         if (opponent != null) {
-                            opponent.loseLife(amount, game);
+                            opponent.loseLife(amount, game, false);
                         }
                     }
                 }
@@ -130,7 +130,7 @@ class XathridDemonEffect extends OneShotEffect {
             }
         } else {
             sourcePermanent.tap(game);
-            controller.loseLife(7, game);
+            controller.loseLife(7, game, false);
             return true;
         }
         return false;

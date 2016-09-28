@@ -71,7 +71,7 @@ public class LoseLifeAllPlayersEffect extends OneShotEffect {
         for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.loseLife(amount.calculate(game, source, this), game);
+                player.loseLife(amount.calculate(game, source, this), game, false);
             }
         }
         return true;

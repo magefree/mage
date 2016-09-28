@@ -123,6 +123,6 @@ class RemorselessPunishmentEffect extends OneShotEffect {
 
             }
         }
-        opponent.loseLife(5, game);
+        opponent.loseLife(5, game, false);
     }
 }

@@ -129,7 +129,7 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
         UUID activePlayerId = game.getActivePlayerId();
         Player player = game.getPlayer(activePlayerId);
         if (player != null) {
-            player.loseLife(3, game);
+            player.loseLife(3, game, false);
             TargetCardInLibrary target = new TargetCardInLibrary();
             if (player.searchLibrary(target, game)) {
                 for (UUID cardId : target.getTargets()) {

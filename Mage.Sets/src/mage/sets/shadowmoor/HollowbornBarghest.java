@@ -98,7 +98,7 @@ class HollowbornBarghestEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            game.getPlayer(opponentId).loseLife(2, game);
+            game.getPlayer(opponentId).loseLife(2, game, false);
         }
         return true;
     }
@@ -135,7 +135,7 @@ class HollowbornBarghestTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Player opponent = game.getPlayer(event.getPlayerId());
             if (opponent != null && opponent.getHand().isEmpty()) {
-                opponent.loseLife(2, game);
+                opponent.loseLife(2, game, false);
                 return true;
             }
         }

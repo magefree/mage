@@ -111,7 +111,14 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setLife(int life, Game game);
 
-    int loseLife(int amount, Game game);
+    /**
+     *
+     * @param amount amount of life loss
+     * @param game
+     * @param atCombat was the source combat damage
+     * @return
+     */
+    int loseLife(int amount, Game game, boolean atCombat);
 
     int gainLife(int amount, Game game);
 

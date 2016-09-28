@@ -116,7 +116,7 @@ class DeathEffect extends OneShotEffect {
             if (game.getState().getZone(creatureCard.getId()).equals(Zone.GRAVEYARD)) {
                 controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game);
             }
-            controller.loseLife(creatureCard.getConvertedManaCost(), game);
+            controller.loseLife(creatureCard.getConvertedManaCost(), game, false);
             return true;
         }
         return false;

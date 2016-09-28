@@ -112,7 +112,7 @@ class DreadDefilerEffect extends OneShotEffect {
         if (amount > 0) {
             Player targetOpponent = game.getPlayer(source.getFirstTarget());
             if (targetOpponent != null) {
-                targetOpponent.loseLife(amount, game);
+                targetOpponent.loseLife(amount, game, false);
                 return true;
             }
         }

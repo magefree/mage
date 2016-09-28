@@ -91,7 +91,7 @@ class WoundReflectionEffect extends OneShotEffect {
                 if (opponent != null) {
                     int lifeLost = watcher.getLiveLost(playerId);
                     if (lifeLost > 0) {
-                        opponent.loseLife(lifeLost, game);
+                        opponent.loseLife(lifeLost, game, false);
                     }
                 }
             }

@@ -168,7 +168,7 @@ class SoulReapEffect extends OneShotEffect {
         if (creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
-                controller.loseLife(3, game);
+                controller.loseLife(3, game, false);
                 return true;
             }
         }

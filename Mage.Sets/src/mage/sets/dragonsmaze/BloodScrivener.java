@@ -102,7 +102,7 @@ class BloodScrivenerReplacementEffect extends ReplacementEffectImpl {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             player.drawCards(2, game, event.getAppliedEffects());
-            player.loseLife(1, game);
+            player.loseLife(1, game, false);
         }
         return true;
     }
