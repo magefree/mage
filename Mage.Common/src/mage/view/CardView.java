@@ -89,7 +89,7 @@ public class CardView extends SimpleCardView {
     protected CardView ability;
     protected int type;
 
-    protected boolean canTransform;
+    protected boolean transformable;
     protected CardView secondCardFace;
     protected boolean transformed;
 
@@ -279,7 +279,7 @@ public class CardView extends SimpleCardView {
         this.subTypes = card.getSubtype(game);
         this.superTypes = card.getSupertype();
         this.color = card.getColor(game);
-        this.canTransform = card.isTransformable();
+        this.transformable = card.isTransformable();
         this.flipCard = card.isFlipCard();
         this.faceDown = !showFaceUp;
 
@@ -652,7 +652,7 @@ public class CardView extends SimpleCardView {
     }
 
     public boolean canTransform() {
-        return this.canTransform;
+        return this.transformable;
     }
 
     public boolean isSplitCard() {
