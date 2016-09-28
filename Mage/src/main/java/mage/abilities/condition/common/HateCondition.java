@@ -30,7 +30,7 @@ package mage.abilities.condition.common;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  * Describes condition when an opponent has been dealt any amount of non-combat
@@ -54,8 +54,8 @@ public class HateCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        NonCombatDamageWatcher watcher = (NonCombatDamageWatcher) game.getState().getWatchers().get("NonCombatDamageWatcher");
-        return watcher != null && watcher.opponentsBeenDealtNonCombatDamage(source.getControllerId());
+        LifeLossOtherFromCombatWatcher watcher = (LifeLossOtherFromCombatWatcher) game.getState().getWatchers().get(LifeLossOtherFromCombatWatcher.class.getName());
+        return watcher != null && watcher.opponentLostLifeOtherFromCombat(source.getControllerId());
     }
 
     @Override

@@ -1439,8 +1439,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int loseLife(int amount, Game game) {
-        return computerPlayer.loseLife(amount, game);
+    public int loseLife(int amount, Game game, boolean atCombat) {
+        return computerPlayer.loseLife(amount, game, atCombat);
     }
 
     @Override

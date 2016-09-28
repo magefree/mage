@@ -113,7 +113,7 @@ class VisionsOfBrutalityEffect extends OneShotEffect {
                     if (controllerEnchanted != null) {
                         int damage = (Integer) getValue("damage");
                         if (damage > 0) {
-                            controllerEnchanted.loseLife(damage, game);
+                            controllerEnchanted.loseLife(damage, game, false);
                         }
                     }
                 }

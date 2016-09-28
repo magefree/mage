@@ -96,7 +96,7 @@ class DarkConfidantEffect extends OneShotEffect {
                     Cards cards = new CardsImpl(card);
                     controller.revealCards(sourcePermanent.getIdName(), cards, game);
                     controller.moveCards(card, Zone.HAND, source, game);
-                    controller.loseLife(card.getConvertedManaCost(), game);
+                    controller.loseLife(card.getConvertedManaCost(), game, false);
 
                 }
                 return true;

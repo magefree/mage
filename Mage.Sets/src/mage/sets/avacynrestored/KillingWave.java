@@ -122,7 +122,7 @@ class KillingWaveEffect extends OneShotEffect {
                 if (lifePaid > 0) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.loseLife(lifePaid, game);
+                        player.loseLife(lifePaid, game, false);
                     }
                 }
             }

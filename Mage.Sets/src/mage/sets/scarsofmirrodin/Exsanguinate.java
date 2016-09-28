@@ -77,7 +77,7 @@ class ExsanguinateEffect extends OneShotEffect {
         int loseLife = 0;
         int damage = source.getManaCostsToPay().getX();
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            loseLife += game.getPlayer(opponentId).loseLife(damage, game);
+            loseLife += game.getPlayer(opponentId).loseLife(damage, game, false);
         }
         if (loseLife > 0)
             game.getPlayer(source.getControllerId()).gainLife(loseLife, game);

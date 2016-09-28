@@ -25,69 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.sets.fridaynightmagic;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author jeffwadsworth
+ * @author fireshoes
  */
-public class DamnablePact extends CardImpl {
+public class FieryTemper extends mage.sets.timeshifted.FieryTemper {
 
-    public DamnablePact(UUID ownerId) {
-        super(ownerId, 93, "Damnable Pact", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
-        this.expansionSetCode = "DTK";
-
-        // Target player draws X cards and loses X life.
-        this.getSpellAbility().addEffect(new DamnablePactEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
-
+    public FieryTemper(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = "198";
+        this.expansionSetCode = "FNMP";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public DamnablePact(final DamnablePact card) {
+    public FieryTemper(final FieryTemper card) {
         super(card);
     }
 
     @Override
-    public DamnablePact copy() {
-        return new DamnablePact(this);
-    }
-}
-
-class DamnablePactEffect extends OneShotEffect {
-
-    public DamnablePactEffect() {
-        super(Outcome.Neutral);
-        staticText = "Target player draws X cards and loses X life";
-    }
-
-    public DamnablePactEffect(DamnablePactEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if (targetPlayer != null) {
-            targetPlayer.drawCards(source.getManaCostsToPay().getX(), game);
-            targetPlayer.loseLife(source.getManaCostsToPay().getX(), game, false);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public DamnablePactEffect copy() {
-        return new DamnablePactEffect(this);
+    public FieryTemper copy() {
+        return new FieryTemper(this);
     }
 }

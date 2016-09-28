@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -60,7 +60,7 @@ public class SithMarauder extends CardImpl {
                 HateCondition.getInstance(),
                 "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, {this} deals 3 damage to target creature or player");
         ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability, new NonCombatDamageWatcher());
+        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
     public SithMarauder(final SithMarauder card) {

@@ -100,7 +100,7 @@ class BanewaspAfflictionLoseLifeEffect extends OneShotEffect {
         if(creature != null){
             Player player = game.getPlayer(creature.getOwnerId());
             if (player != null) {
-                player.loseLife(creature.getToughness().getValue(), game);
+                player.loseLife(creature.getToughness().getValue(), game, false);
                 return true;
             }
         }

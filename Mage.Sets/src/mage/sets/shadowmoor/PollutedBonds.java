@@ -99,7 +99,7 @@ class PollutedBondsEffect extends OneShotEffect {
         if (controller != null) {
             Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (opponent != null) {
-                opponent.loseLife(2, game);
+                opponent.loseLife(2, game, false);
             }
             controller.gainLife(2, game);
             return true;

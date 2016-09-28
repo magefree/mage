@@ -138,7 +138,7 @@ class FleshAllergyEffect extends OneShotEffect {
             if (player != null) {
                 int amount = watcher.creaturesDiedThisTurn;
                 if (amount > 0) {
-                    player.loseLife(amount, game);
+                    player.loseLife(amount, game, false);
                     return true;
                 }
             }

@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -62,7 +62,7 @@ public class SithManipulator extends CardImpl {
                 new InvertCondition(HateCondition.getInstance()),
                 "When Sith Manipulator enters the battlefield, return target creature to its owner's hand");
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability, new NonCombatDamageWatcher());
+        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
 
         // <i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead.
         ability = new ConditionalTriggeredAbility(
@@ -70,7 +70,7 @@ public class SithManipulator extends CardImpl {
                 HateCondition.getInstance(),
                 "<i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead");
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability, new NonCombatDamageWatcher());
+        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
 
     }
 

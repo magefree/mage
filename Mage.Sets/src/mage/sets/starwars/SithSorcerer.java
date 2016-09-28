@@ -38,7 +38,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.watchers.common.NonCombatDamageWatcher;
+import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -62,7 +62,7 @@ public class SithSorcerer extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 HateCondition.getInstance(),
                 "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, draw a card.");
-        this.addAbility(ability, new NonCombatDamageWatcher());
+        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
 
     }
 

@@ -76,7 +76,7 @@ public class LoseLifeControllerAttachedEffect extends OneShotEffect {
             if (creature != null) {
                 Player player = game.getPlayer(creature.getControllerId());
                 if (player != null) {
-                    player.loseLife(amount.calculate(game, source, this), game);
+                    player.loseLife(amount.calculate(game, source, this), game, false);
                     return true;
                 }
             }

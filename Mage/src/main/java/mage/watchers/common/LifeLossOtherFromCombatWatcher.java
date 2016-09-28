@@ -32,58 +32,48 @@ import java.util.Set;
 import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
 /*
  *
  * @author Styxo
  */
-public class NonCombatDamageWatcher extends Watcher {
+public class LifeLossOtherFromCombatWatcher extends Watcher {
 
-    private final Set<UUID> playersBeenDealtNonCombatDamage = new HashSet<>();
+    private final Set<UUID> players = new HashSet<>();
 
-    public NonCombatDamageWatcher() {
-        super("NonCombatDamageWatcher", WatcherScope.GAME);
+    public LifeLossOtherFromCombatWatcher() {
+        super(LifeLossOtherFromCombatWatcher.class.getName(), WatcherScope.GAME);
     }
 
-    public NonCombatDamageWatcher(final NonCombatDamageWatcher watcher) {
+    public LifeLossOtherFromCombatWatcher(final LifeLossOtherFromCombatWatcher watcher) {
         super(watcher);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.LOST_LIFE) {
+        if (event.getType() == GameEvent.EventType.LOST_LIFE && !event.getFlag()) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                playersBeenDealtNonCombatDamage.add(playerId);
+                players.add(playerId);
             }
-        } else if (event.getType() == EventType.DAMAGED_PLAYER) {
-            DamagedPlayerEvent dEvent = (DamagedPlayerEvent) event;
-            if (!dEvent.isCombatDamage()) {
-                UUID playerId = event.getPlayerId();
-                if (playerId != null) {
-                    playersBeenDealtNonCombatDamage.add(playerId);
-                }
-            } 
         }
     }
 
-    public boolean opponentsBeenDealtNonCombatDamage(UUID playerId) {
-        return (!playersBeenDealtNonCombatDamage.contains(playerId) && playersBeenDealtNonCombatDamage.size() > 0)
-                || (playersBeenDealtNonCombatDamage.contains(playerId) && playersBeenDealtNonCombatDamage.size() > 1);
+    public boolean opponentLostLifeOtherFromCombat(UUID playerId) {
+        return (!players.contains(playerId) && players.size() > 0)
+                || (players.contains(playerId) && players.size() > 1);
     }
 
     @Override
     public void reset() {
         super.reset();
-        playersBeenDealtNonCombatDamage.clear();
+        players.clear();
     }
 
     @Override
-    public NonCombatDamageWatcher copy() {
-        return new NonCombatDamageWatcher(this);
+    public LifeLossOtherFromCombatWatcher copy() {
+        return new LifeLossOtherFromCombatWatcher(this);
     }
 }

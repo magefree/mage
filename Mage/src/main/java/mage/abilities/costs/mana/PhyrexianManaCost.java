@@ -75,7 +75,7 @@ public class PhyrexianManaCost extends ColoredManaCost {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.paid = game.getPlayer(controllerId).loseLife(2, game) == 2;
+        this.paid = game.getPlayer(controllerId).loseLife(2, game, false) == 2;
         return paid;
     }
 

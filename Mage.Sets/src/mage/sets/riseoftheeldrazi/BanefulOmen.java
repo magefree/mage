@@ -128,7 +128,7 @@ public class BanefulOmen extends CardImpl {
                     for (UUID opponentUuid : opponents) {
                         Player opponent = game.getPlayer(opponentUuid);
                         if (opponent != null) {
-                            opponent.loseLife(loseLife, game);
+                            opponent.loseLife(loseLife, game, false);
                         }
                     }
                 }

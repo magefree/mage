@@ -132,7 +132,7 @@ class DoomsdayEffect extends OneShotEffect {
             //You lose half your life, rounded up
             int amount = (player.getLife() + 1) / 2;
             if (amount > 0) {
-                player.loseLife(amount, game);
+                player.loseLife(amount, game, false);
             }
 
             return true;

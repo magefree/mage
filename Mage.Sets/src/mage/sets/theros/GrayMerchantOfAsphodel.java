@@ -95,7 +95,7 @@ class GrayMerchantOfAsphodelEffect extends OneShotEffect {
                 for (UUID playerId : game.getOpponents(source.getControllerId())) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
-                        lifeLost += opponent.loseLife(damage, game);
+                        lifeLost += opponent.loseLife(damage, game, false);
                     }
                 }
             }

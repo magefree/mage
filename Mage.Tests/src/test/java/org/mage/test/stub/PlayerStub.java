@@ -159,7 +159,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int loseLife(int amount, Game game) {
+    public int loseLife(int amount, Game game, boolean at) {
         return 0;
     }
 

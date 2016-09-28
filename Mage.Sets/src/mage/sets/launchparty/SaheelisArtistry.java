@@ -25,69 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.sets.launchparty;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author jeffwadsworth
+ * @author fireshoes
  */
-public class DamnablePact extends CardImpl {
+public class SaheelisArtistry extends mage.sets.kaladesh.SaheelisArtistry {
 
-    public DamnablePact(UUID ownerId) {
-        super(ownerId, 93, "Damnable Pact", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
-        this.expansionSetCode = "DTK";
-
-        // Target player draws X cards and loses X life.
-        this.getSpellAbility().addEffect(new DamnablePactEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
-
+    public SaheelisArtistry(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = "37";
+        this.expansionSetCode = "MLP";
     }
 
-    public DamnablePact(final DamnablePact card) {
+    public SaheelisArtistry(final SaheelisArtistry card) {
         super(card);
     }
 
     @Override
-    public DamnablePact copy() {
-        return new DamnablePact(this);
-    }
-}
-
-class DamnablePactEffect extends OneShotEffect {
-
-    public DamnablePactEffect() {
-        super(Outcome.Neutral);
-        staticText = "Target player draws X cards and loses X life";
-    }
-
-    public DamnablePactEffect(DamnablePactEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if (targetPlayer != null) {
-            targetPlayer.drawCards(source.getManaCostsToPay().getX(), game);
-            targetPlayer.loseLife(source.getManaCostsToPay().getX(), game, false);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public DamnablePactEffect copy() {
-        return new DamnablePactEffect(this);
+    public SaheelisArtistry copy() {
+        return new SaheelisArtistry(this);
     }
 }

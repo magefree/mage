@@ -156,7 +156,7 @@ class OrzhovCharmDestroyAndLoseLifeEffect extends OneShotEffect {
             int toughness = target.getToughness().getValue();
             target.destroy(source.getSourceId(), game, false);
             if (toughness > 0) {
-                controller.loseLife(toughness, game);
+                controller.loseLife(toughness, game, false);
             }
             return true;
         }

@@ -1699,7 +1699,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (life > this.life) {
             gainLife(life - this.life, game);
         } else if (life < this.life) {
-            loseLife(this.life - life, game);
+            loseLife(this.life - life, game, false);
         }
     }
 
@@ -1730,17 +1730,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int loseLife(int amount, Game game) {
+    public int loseLife(int amount, Game game, boolean atCombat) {
         if (!canLoseLife) {
             return 0;
         }
-        GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, false);
+        GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, atCombat);
         if (!game.replaceEvent(event)) {
             this.life -= event.getAmount();
             if (!game.isSimulation()) {
                 game.informPlayers(this.getLogName() + " loses " + event.getAmount() + " life");
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount));
+            game.fireEvent(new GameEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount, atCombat));
             return amount;
         }
         return 0;
@@ -1820,7 +1820,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     } else {
                         GameEvent damageToLifeLossEvent = new GameEvent(EventType.DAMAGE_CAUSES_LIFE_LOSS, playerId, sourceId, playerId, actualDamage, combatDamage);
                         if (!game.replaceEvent(damageToLifeLossEvent)) {
-                            this.loseLife(damageToLifeLossEvent.getAmount(), game);
+                            this.loseLife(damageToLifeLossEvent.getAmount(), game, combatDamage);
                         }
                     }
                     if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {

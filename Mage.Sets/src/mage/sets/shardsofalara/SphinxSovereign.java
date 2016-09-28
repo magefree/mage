@@ -99,7 +99,7 @@ class SphinxSovereignEffect extends OneShotEffect {
                     if (controller.hasOpponent(opponentId, game)) {
                     Player opponent = game.getPlayer(opponentId);
                         if (opponent != null) {
-                            opponent.loseLife(3, game);
+                            opponent.loseLife(3, game, false);
                         }
                     }
                 }

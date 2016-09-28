@@ -89,7 +89,7 @@ class InvincibleHymnEffect extends OneShotEffect {
                 player.gainLife(newValue - oldValue, game);
             }
             if (oldValue - newValue > 0) {
-                player.loseLife(oldValue - newValue, game);
+                player.loseLife(oldValue - newValue, game, false);
             }
             return true;
         }

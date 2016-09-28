@@ -100,7 +100,7 @@ class TaintedRemedyReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player opponent = game.getPlayer(event.getPlayerId());
         if (opponent != null) {
-            opponent.loseLife(event.getAmount(), game);
+            opponent.loseLife(event.getAmount(), game, false);
         }
         return true;
     }

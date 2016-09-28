@@ -146,7 +146,7 @@ class ObNixilisUnshackledEffect extends SacrificeEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            player.loseLife(10, game);
+            player.loseLife(10, game, false);
         }
         return super.apply(game, source);
     }
