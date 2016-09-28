@@ -107,7 +107,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private static final int PANEL_WIDTH = 94;
     private static final int PANEL_HEIGHT = 262;
-    private static final int PANEL_HEIGHT_SMALL = 232;
+    private static final int PANEL_HEIGHT_SMALL = 242;
     private static final int MANA_LABEL_SIZE_HORIZONTAL = 20;
 
     private static final Border GREEN_BORDER = new LineBorder(Color.green, 3);
@@ -867,7 +867,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                         .addComponent(manaCountLabelU, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                 )
                         )
-                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addGap(2)
                         .addComponent(zonesPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
                 )
         );
