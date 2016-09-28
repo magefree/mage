@@ -73,9 +73,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         }
         this.minModes = modes.minModes;
         this.maxModes = modes.maxModes;
+        this.selectedModes.addAll(modes.getSelectedModes());
 
-        this.currentMode = values().iterator().next();
-        selectedModes.addAll(modes.getSelectedModes());
+        if (modes.getSelectedModes().isEmpty()) {
+            this.currentMode = values().iterator().next();
+        } else {
+            this.currentMode = get(selectedModes.get(0));
+        }
         this.modeChooser = modes.modeChooser;
         this.eachModeOnlyOnce = modes.eachModeOnlyOnce;
         this.eachModeMoreThanOnce = modes.eachModeMoreThanOnce;
