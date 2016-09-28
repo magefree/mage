@@ -37,7 +37,7 @@ public class MockSplitCard extends SplitCard {
         this.splitCard = card.isSplitCard();
         this.flipCard = card.isFlipCard();
 
-        this.canTransform = card.isDoubleFaced();
+        this.transformable = card.isDoubleFaced();
         this.nightCard = card.isNightCard();
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             this.secondSideCard = new MockCard(CardRepository.instance.findCard(card.getSecondSideName()));
