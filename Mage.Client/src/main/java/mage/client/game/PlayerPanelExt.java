@@ -176,6 +176,15 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     }
 
+    private void setTextForLabel (JLabel label, int amount, boolean alwaysBlack) {
+        label.setText(Integer.toString(amount));
+        if (amount != 0 || alwaysBlack) {
+            label.setForeground(Color.BLACK);
+        } else {
+            label.setForeground(new Color(100, 100, 100));
+        }
+    }
+
     public void update(PlayerView player) {
         this.player = player;
         updateAvatar();
@@ -191,11 +200,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             lifeLabel.setFont(font);
             changedFontLife = false;
         }
-        lifeLabel.setText(Integer.toString(playerLife));
-        poisonLabel.setText(Integer.toString(player.getCounters().getCount(CounterType.POISON)));
-        energyLabel.setText(Integer.toString(player.getCounters().getCount(CounterType.ENERGY)));
-        experienceLabel.setText(Integer.toString(player.getCounters().getCount(CounterType.EXPERIENCE)));
-        handLabel.setText(Integer.toString(player.getHandCount()));
+        setTextForLabel(lifeLabel, playerLife, true);
+        setTextForLabel(poisonLabel, player.getCounters().getCount(CounterType.POISON), false);
+        setTextForLabel(energyLabel, player.getCounters().getCount(CounterType.ENERGY), false);
+        setTextForLabel(experienceLabel, player.getCounters().getCount(CounterType.EXPERIENCE), false);
+        setTextForLabel(handLabel, player.getHandCount(), true);
         int libraryCards = player.getLibraryCount();
         if (libraryCards > 99) {
             Font font = libraryLabel.getFont();
@@ -208,7 +217,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             libraryLabel.setFont(font);
             changedFontLibrary = false;
         }
-        libraryLabel.setText(Integer.toString(libraryCards));
+        setTextForLabel(libraryLabel, libraryCards, true);
 
         int graveCards = player.getGraveyard().size();
         if (graveCards > 99) {
@@ -224,7 +233,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             graveLabel.setFont(font);
             changedFontGrave = false;
         }
-        graveLabel.setText(Integer.toString(graveCards));
+        setTextForLabel(graveLabel, graveCards, false);
         graveLabel.setToolTipText("Card Types: " + qtyCardTypes(player.getGraveyard()));
 
         int exileCards = player.getExile().size();
@@ -241,7 +250,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             exileLabel.setFont(font);
             changedFontExile = false;
         }
-        exileLabel.setText(Integer.toString(exileCards));
+        setTextForLabel(exileLabel, exileCards, false);
 
         if (!MageFrame.isLite()) {
             int id = player.getUserData().getAvatarId();
@@ -358,12 +367,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     protected void update(ManaPoolView pool) {
-        manaLabels.get("B").setText(Integer.toString(pool.getBlack()));
-        manaLabels.get("R").setText(Integer.toString(pool.getRed()));
-        manaLabels.get("W").setText(Integer.toString(pool.getWhite()));
-        manaLabels.get("G").setText(Integer.toString(pool.getGreen()));
-        manaLabels.get("U").setText(Integer.toString(pool.getBlue()));
-        manaLabels.get("X").setText(Integer.toString(pool.getColorless()));
+        setTextForLabel(manaLabels.get("B"), pool.getBlack(), false);
+        setTextForLabel(manaLabels.get("R"), pool.getRed(), false);
+        setTextForLabel(manaLabels.get("W"), pool.getWhite(), false);
+        setTextForLabel(manaLabels.get("G"), pool.getGreen(), false);
+        setTextForLabel(manaLabels.get("U"), pool.getBlue(), false);
+        setTextForLabel(manaLabels.get("X"), pool.getColorless(), false);
     }
 
     /**
@@ -433,7 +442,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         hand.setOpaque(false);
 
         // Poison count
-        poisonLabel.setText("0");
+        setTextForLabel(poisonLabel, 0, false);
         r = new Rectangle(18, 18);
         poisonLabel.setToolTipText("Poison");
         Image imagePoison = ImageHelper.getImageFromResources("/info/poison.png");
@@ -535,7 +544,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         energyExperiencePanel.setOpaque(false);
 
         // Energy count
-        energyLabel.setText("0");
+        setTextForLabel(energyLabel, 0, false);
         r = new Rectangle(18, 18);
         energyLabel.setToolTipText("Energy");
         Image imageEnergy = ImageHelper.getImageFromResources("/info/energy.png");
@@ -545,7 +554,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         energy.setOpaque(false);
         
         // Experience count
-        experienceLabel.setText("0");
+        setTextForLabel(experienceLabel, 0, false);
         r = new Rectangle(18, 18);
         experienceLabel.setToolTipText("Experience");
         Image imageExperience = ImageHelper.getImageFromResources("/info/experience.png");
@@ -568,7 +577,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         // Add mana symbols
         JLabel manaCountLabelW = new JLabel();
         manaCountLabelW.setToolTipText("White mana");
-        manaCountLabelW.setText("0");
+        setTextForLabel(manaCountLabelW, 0, false);
         manaLabels.put("W", manaCountLabelW);
         r = new Rectangle(12, 12);
         BufferedImage imageManaW = ManaSymbols.getSizedManaSymbol("W");
@@ -584,7 +593,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         JLabel manaCountLabelU = new JLabel();
         manaCountLabelU.setToolTipText("Blue mana");
-        manaCountLabelU.setText("0");
+        setTextForLabel(manaCountLabelU, 0, false);
         manaLabels.put("U", manaCountLabelU);
         r = new Rectangle(12, 12);
         BufferedImage imageManaU = ManaSymbols.getSizedManaSymbol("U");
@@ -600,7 +609,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         JLabel manaCountLabelB = new JLabel();
         manaCountLabelB.setToolTipText("Black mana");
-        manaCountLabelB.setText("0");
+        setTextForLabel(manaCountLabelB, 0, false);
         manaLabels.put("B", manaCountLabelB);
         r = new Rectangle(12, 12);
         BufferedImage imageManaB = ManaSymbols.getSizedManaSymbol("B");
@@ -616,7 +625,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         JLabel manaCountLabelR = new JLabel();
         manaCountLabelR.setToolTipText("Red mana");
-        manaCountLabelR.setText("0");
+        setTextForLabel(manaCountLabelR, 0, false);
         manaLabels.put("R", manaCountLabelR);
         r = new Rectangle(12, 12);
         BufferedImage imageManaR = ManaSymbols.getSizedManaSymbol("R");
@@ -632,7 +641,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         JLabel manaCountLabelG = new JLabel();
         manaCountLabelG.setToolTipText("Green mana");
-        manaCountLabelG.setText("0");
+        setTextForLabel(manaCountLabelG, 0, false);
         manaLabels.put("G", manaCountLabelG);
         r = new Rectangle(12, 12);
         BufferedImage imageManaG = ManaSymbols.getSizedManaSymbol("G");
@@ -648,7 +657,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         JLabel manaCountLabelX = new JLabel();
         manaCountLabelX.setToolTipText("Colorless mana");
-        manaCountLabelX.setText("0");
+        setTextForLabel(manaCountLabelX, 0, false);
         manaLabels.put("X", manaCountLabelX);
         r = new Rectangle(12, 12);
         BufferedImage imageManaX = ManaSymbols.getSizedManaSymbol("C");
