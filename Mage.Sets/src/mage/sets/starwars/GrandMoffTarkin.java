@@ -29,18 +29,32 @@ package mage.sets.starwars;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.Game;
+import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Styxo
+ * @author Styxo/spjspj
  */
 public class GrandMoffTarkin extends CardImpl {
 
     public GrandMoffTarkin(UUID ownerId) {
-        super(ownerId, 74, "Grand Moff Tarkin", Rarity.NA/*RARE*/, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        super(ownerId, 74, "Grand Moff Tarkin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "SWS";
         this.supertype.add("Legendary");
         this.subtype.add("Human");
@@ -49,6 +63,7 @@ public class GrandMoffTarkin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beggining of each upkeep, destroy target creature that player controls unless that player pays 2 life. If a player pays life this way, draw a card.
+        this.addAbility(new GrandMoffTarkinTriggeredAbility(new GrandMoffTarkinEffect(), false));
     }
 
     public GrandMoffTarkin(final GrandMoffTarkin card) {
@@ -58,5 +73,102 @@ public class GrandMoffTarkin extends CardImpl {
     @Override
     public GrandMoffTarkin copy() {
         return new GrandMoffTarkin(this);
+    }
+}
+
+class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
+
+    protected String text;
+
+    public GrandMoffTarkinTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+    }
+
+    public GrandMoffTarkinTriggeredAbility(Effect effect, boolean optional, String text) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.text = text;
+    }
+
+    public GrandMoffTarkinTriggeredAbility(final GrandMoffTarkinTriggeredAbility ability) {
+        super(ability);
+        this.text = ability.text;
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
+            Player opponent = game.getPlayer(event.getPlayerId());
+            if (opponent != null) {
+                this.getTargets().clear();
+                FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature that player controls");
+                filter.add(new ControllerIdPredicate(event.getPlayerId()));
+                TargetPermanent target = new TargetPermanent(filter);
+                this.addTarget(target);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        if (text == null || text.isEmpty()) {
+            return "At the beginning of each opponent's upkeep, " + super.getRule();
+        }
+        return text;
+    }
+
+    @Override
+    public GrandMoffTarkinTriggeredAbility copy() {
+        return new GrandMoffTarkinTriggeredAbility(this);
+    }
+}
+
+class GrandMoffTarkinEffect extends OneShotEffect {
+
+    public GrandMoffTarkinEffect() {
+        super(Outcome.ReturnToHand);
+        this.staticText = "destroy target creature that that player controls unless that player pays 2 life.  If a player pays life this way, draw a card";
+    }
+
+    public GrandMoffTarkinEffect(final GrandMoffTarkinEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GrandMoffTarkinEffect copy() {
+        return new GrandMoffTarkinEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        if (targetCreature == null) {
+            return false;
+        }
+
+        Player player = game.getPlayer(targetCreature.getControllerId());
+        if (player == null) {
+            return false;
+        }
+
+        if (player.getLife() > 2 && player.chooseUse(Outcome.Neutral, "Pay 2 life? If you don't, " + targetCreature.getName() + " will be destroyed", source, game)) {
+            player.loseLife(2, game, false);
+            game.informPlayers(player.getLogName() + " pays 2 life to prevent " + targetCreature.getName() + " being destroyed");
+            Player sourceController = game.getPlayer(source.getControllerId());
+            if (sourceController != null) {
+                sourceController.drawCards(1, game);
+            }
+
+            return true;
+        }
+
+        targetCreature.destroy(source.getSourceId(), game, false);
+        return true;
     }
 }
