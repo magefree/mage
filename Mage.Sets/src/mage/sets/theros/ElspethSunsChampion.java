@@ -93,8 +93,8 @@ class ElspethSunsChampionEmblem extends Emblem {
 
     public ElspethSunsChampionEmblem() {
         this.setName("EMBLEM: Elspeth, Sun's Champion");
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false));
-        ability.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter));
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(2, 2, Duration.EndOfGame, filter, false));
+        ability.addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfGame, filter));
         this.getAbilities().add(ability);
 
     }

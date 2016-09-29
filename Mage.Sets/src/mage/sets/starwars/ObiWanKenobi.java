@@ -98,8 +98,8 @@ class ObiWanKenobiEmblem extends Emblem {
     // Creatures you control get +1/+1 and have vigilance, first strike, and lifelink
     public ObiWanKenobiEmblem() {
         this.setName("Emblem - Obi-Wan");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield);
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(1, 1, Duration.EndOfGame));
+        Effect effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfGame);
         effect.setText("and have vigilance,");
         ability.addEffect(effect);
         effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield);

@@ -138,10 +138,10 @@ class YodaEmblem extends Emblem {
     // You get an emblem with "Hexproof, you and your creatures have."
     public YodaEmblem() {
         this.setName("Emblem - Yoda");
-        Effect effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield);
+        Effect effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfGame);
         effect.setText("Hexproof,");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield);
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
+        effect = new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.EndOfGame);
         effect.setText(" you and your creatures have");
         ability.addEffect(effect);
         getAbilities().add(ability);
