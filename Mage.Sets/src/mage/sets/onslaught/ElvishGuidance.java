@@ -41,7 +41,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -60,12 +59,12 @@ public class ElvishGuidance extends CardImpl {
         this.subtype.add("Aura");
 
         // Enchant land
-         TargetPermanent auraTarget = new TargetLandPermanent();
+        TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutManaInPool));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Whenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool for each Elf on the battlefield.
         this.addAbility(new ElvishGuidanceTriggeredAbility());
     }
@@ -82,14 +81,8 @@ public class ElvishGuidance extends CardImpl {
 
 class ElvishGuidanceTriggeredAbility extends TriggeredManaAbility {
 
-    private static final FilterCreaturePermanent elvesFilter = new FilterCreaturePermanent();
-    
-    static {
-        elvesFilter.add(new SubtypePredicate("Elf"));
-    }
-   
     public ElvishGuidanceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DynamicManaEffect(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(elvesFilter)));
+        super(Zone.BATTLEFIELD, new DynamicManaEffect(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("Elf", "Elf"))));
     }
 
     public ElvishGuidanceTriggeredAbility(final ElvishGuidanceTriggeredAbility ability) {
@@ -114,6 +107,6 @@ class ElvishGuidanceTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool for each Elf on the battlefield";
+        return "Whenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool for each Elf on the battlefield.";
     }
 }

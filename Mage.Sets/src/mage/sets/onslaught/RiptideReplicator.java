@@ -62,11 +62,11 @@ public class RiptideReplicator extends CardImpl {
 
         // As Riptide Replicator enters the battlefield, choose a color and a creature type.
         Ability ability = new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
-        Effect effect = new ChooseColorEffect(Outcome.Neutral);
+        Effect effect = new ChooseCreatureTypeEffect(Outcome.Neutral);
         effect.setText("and a creature type");
-        ability.addEffect(new ChooseCreatureTypeEffect(Outcome.Neutral));
+        ability.addEffect(effect);
         this.addAbility(ability);
-        
+
         // Riptide Replicator enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
@@ -90,7 +90,7 @@ class RiptideReplicatorEffect extends OneShotEffect {
 
     RiptideReplicatorEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put an X/X creature token of the chosen color and type onto the battlefield, where X is the number of charge counters on Riptide Replicator.";
+        this.staticText = "Put an X/X creature token of the chosen color and type onto the battlefield, where X is the number of charge counters on {this}.";
     }
 
     RiptideReplicatorEffect(final RiptideReplicatorEffect effect) {
