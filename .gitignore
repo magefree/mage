@@ -1,4 +1,6 @@
 syntax: glob
+
+# Mage.Client
 Mage.Client/*.dck
 Mage.Client/db
 Mage.Client/gamelogs
@@ -7,10 +9,32 @@ Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
 Mage.Client/target
 Mage.Common/target
+/db
+/gamelogs
+/mageclient.log
+
+# Mage.Plugins
 Mage.Plugins/Mage.Card.Plugin/target
 Mage.Plugins/Mage.Counter.Plugin/target
 Mage.Plugins/Mage.Theme.Plugin/target
 Mage.Plugins/Mage.Rating.Plugin/target
+
+# Mage.Server
+Mage.Server/config/init.txt
+Mage.Server/saved
+Mage.Server/target
+Mage.Server/db
+Mage.Server/cache
+Mage.Server/mageserver.log
+Mage.Server/magediag.log
+Mage.Server/extensions
+/saved
+/db
+/cache
+/mageserver.log
+/magediag.log
+/extensions
+
 Mage.Server.Console/target/
 Mage.Server.Console/mageadmin.log
 Mage.Server.Plugins/Mage.Deck.Constructed/target
@@ -30,24 +54,26 @@ Mage.Server.Plugins/Mage.Player.Human/target
 Mage.Server.Plugins/Mage.Tournament.BoosterDraft/target
 Mage.Server.Plugins/Mage.Tournament.Constructed/target
 Mage.Server.Plugins/Mage.Tournament.Sealed/target
-Mage.Server/config/init.txt
-Mage.Server/saved
-Mage.Server/target
-Mage.Server/db
-Mage.Server/cache
-Mage.Server/mageserver.log
-Mage.Server/magediag.log
-Mage.Server/extensions
+
+# Mage.Sets
 Mage.Sets/target
+
+# Mage.Stats
 Mage.Stats/server.log
 Mage.Stats/mageserver.log
 Mage.Stats/magediag.log
+
+# Mage.Tests
 Mage.Tests/target
 Mage.Tests/cache
 Mage.Tests/db
 Mage.Tests/Mage.log
 Mage.Tests/watchdog.log
+
+# Mage
 Mage/target
+
+# Mage.Updater
 Mage.Updater/target
 mage.updater.client/target
 
