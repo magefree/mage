@@ -28,9 +28,11 @@
 package mage.sets.starwars;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -39,11 +41,12 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -58,7 +61,7 @@ public class DarkDecision extends CardImpl {
         // As an additional cost to cast Dark Decision, pay 1 life.
         this.getSpellAbility().addCost(new PayLifeCost(1));
 
-        // Search the top 10 cards of your library for a nonland card, exile it, then shuffle your library. Until end of turn, you may cast that card.
+        // Search the top 10 cards of your library for a nonland cardId, exile it, then shuffle your library. Until end of turn, you may cast that cardId.
         this.getSpellAbility().addEffect(new DarkDecisionEffect());
     }
 
@@ -91,15 +94,18 @@ class DarkDecisionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard());
             target.setCardLimit(10);
             if (controller.searchLibrary(target, game)) {
                 UUID targetId = target.getFirstTarget();
-                Card card = controller.getLibrary().remove(targetId, game);
+                Card card = game.getCard(targetId);
                 if (card != null) {
-                    card.moveToExile(source.getSourceId(), "Dark Decision", source.getSourceId(), game);
-                    game.addEffect(new DarkDecisionMayPlayExiledEffect(targetId), source);
+                    controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
+                    ContinuousEffect effect = new DarkDecisionMayPlayExiledEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
                 }
                 controller.shuffleLibrary(source, game);
             }
@@ -112,16 +118,12 @@ class DarkDecisionEffect extends OneShotEffect {
 
 class DarkDecisionMayPlayExiledEffect extends AsThoughEffectImpl {
 
-    public UUID card;
-
-    public DarkDecisionMayPlayExiledEffect(UUID card) {
+    public DarkDecisionMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        this.card = card;
     }
 
     public DarkDecisionMayPlayExiledEffect(final DarkDecisionMayPlayExiledEffect effect) {
         super(effect);
-        this.card = effect.card;
     }
 
     @Override
@@ -135,11 +137,10 @@ class DarkDecisionMayPlayExiledEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(sourceId);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && card != null && game.getState().getZone(sourceId) == Zone.EXILED && this.card.equals(sourceId)) {
-            return true;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectId.equals(getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getSourceId())) {
+            ExileZone exileZone = game.getExile().getExileZone(source.getSourceId());
+            return exileZone != null && exileZone.contains(getTargetPointer().getFirst(game, source));
         }
         return false;
     }

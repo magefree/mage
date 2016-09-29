@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.RepairAbility;
@@ -46,12 +47,9 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -71,13 +69,15 @@ public class MaintenanceHangar extends CardImpl {
         super(ownerId, 23, "Maintenance Hangar", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "SWS";
 
-        // At the beggining of your upkeep, remove an additional repair counter from each card in your graveyard.
+        // At the beginning of your upkeep, remove an additional repair counter from each card in your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterMaintenanceHangarEffect(), TargetController.YOU, false));
 
         // Starship creatures you control and starship creatures in your graveyard have Repair 6.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new RepairAbility(6), Duration.WhileOnBattlefield, filterPermanent)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaintenanceHangarEffect()));
-
+        Effect effect = new GainAbilityControlledEffect(new RepairAbility(6), Duration.WhileOnBattlefield, filterPermanent);
+        effect.setText("Starship creatures you control");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability.addEffect(new MaintenanceHangarEffect());
+        this.addAbility(ability);
     }
 
     public MaintenanceHangar(final MaintenanceHangar card) {
@@ -92,12 +92,6 @@ public class MaintenanceHangar extends CardImpl {
 
 class RemoveCounterMaintenanceHangarEffect extends OneShotEffect {
 
-    private static final FilterCard filterCard = new FilterCard("each card");
-
-    static {
-        filterCard.add(new CounterPredicate(CounterType.REPAIR));
-    }
-
     public RemoveCounterMaintenanceHangarEffect() {
         super(Outcome.Detriment);
         staticText = "remove an additional repair counter from each card in your graveyard";
@@ -111,9 +105,8 @@ class RemoveCounterMaintenanceHangarEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Set<Card> cards = controller.getGraveyard().getCards(filterCard, game);
-            for (Card card : cards) {
-                if (card != null) {
+            for (Card card : controller.getGraveyard().getCards(game)) {
+                if (card.getCounters(game).getCount("repair") > 0) {
                     card.removeCounters("repair", 1, game);
                 }
             }
@@ -138,7 +131,7 @@ class MaintenanceHangarEffect extends ContinuousEffectImpl {
 
     public MaintenanceHangarEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "Starship creatures in your graveyard have Repair 6";
+        this.staticText = "and starship creatures in your graveyard have Repair 6";
     }
 
     public MaintenanceHangarEffect(final MaintenanceHangarEffect effect) {
@@ -155,14 +148,9 @@ class MaintenanceHangarEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> cards = controller.getGraveyard().getCards(filterCard, game);
-            for (Card card : cards) {
-                if (card != null) {
-                    RepairAbility ability = new RepairAbility(6);
-                    ability.setSourceId(card.getId());
-                    ability.setControllerId(card.getOwnerId());
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
+            cards.stream().forEach((card) -> {
+                game.getState().addOtherAbility(card, new RepairAbility(6));
+            });
             return true;
         }
         return false;

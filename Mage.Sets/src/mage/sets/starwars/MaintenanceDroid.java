@@ -30,7 +30,6 @@ package mage.sets.starwars;
 import java.util.HashSet;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -47,8 +46,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicate;
-import mage.filter.predicate.permanent.CounterPredicate;
+import mage.filter.predicate.other.CounterCardPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -62,7 +60,7 @@ public class MaintenanceDroid extends CardImpl {
     private static final FilterCard filter = new FilterCard("target card you own with a repair counter on it");
 
     static {
-        filter.add(new CounterPredicate(CounterType.REPAIR));
+        filter.add(new CounterCardPredicate(CounterType.REPAIR));
     }
 
     public MaintenanceDroid(UUID ownerId) {

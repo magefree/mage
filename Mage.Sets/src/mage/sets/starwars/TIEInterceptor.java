@@ -50,8 +50,8 @@ public class TIEInterceptor extends CardImpl {
         super(ownerId, 93, "TIE Interceptor", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "SWS";
         this.subtype.add("Starship");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
         // Spaceflight
         this.addAbility(SpaceflightAbility.getInstance());

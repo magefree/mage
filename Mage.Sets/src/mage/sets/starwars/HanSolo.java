@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -70,10 +71,10 @@ public class HanSolo extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // At the beggining of each combat, target starship gets +2/+2 and gains haste until end of turn.
+        // At the beginning of each combat, target starship you control gets +2/+2 and gains haste until end of turn.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
         effect.setText("target Starship you control gets +2/+2");
-        BeginningOfCombatTriggeredAbility ability = new BeginningOfCombatTriggeredAbility(effect, TargetController.ANY, false);
+        BeginningOfCombatTriggeredAbility ability = new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, false, false);
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains haste until end of turn");
         ability.addEffect(effect);

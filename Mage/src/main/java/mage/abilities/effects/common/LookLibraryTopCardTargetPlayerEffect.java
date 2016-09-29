@@ -85,7 +85,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
         if (player != null && targetPlayer != null && sourceObject != null) {
             Cards cards = new CardsImpl();
             cards.addAll(targetPlayer.getLibrary().getTopCards(game, amount));
-            player.lookAtCards(sourceObject.getName(), cards, game);
+            player.lookAtCards(sourceObject.getIdName(), cards, game);
             if (putToGraveyard) {
                 for (Card card : cards.getCards(game)) {
                     if (player.chooseUse(outcome, "Do you wish to put card into the player's graveyard?", source, game)) {

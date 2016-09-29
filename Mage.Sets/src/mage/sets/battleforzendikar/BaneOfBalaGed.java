@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -93,7 +94,14 @@ class BaneOfBalaGedEffect extends OneShotEffect {
         if (defendingPlayer != null) {
             Target target = new TargetControlledPermanent(2);
             defendingPlayer.chooseTarget(outcome, target, source, game);
-            defendingPlayer.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
+            Cards toExile = new CardsImpl();
+            target.getTargets().stream().map((targetId)
+                    -> game.getPermanent(targetId)).filter((permanent)
+                    -> (permanent != null)).forEach((permanent)
+                    -> {
+                toExile.add(permanent);
+            });
+            defendingPlayer.moveCards(toExile, Zone.EXILED, source, game);
             return true;
         }
         return false;

@@ -51,6 +51,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -79,7 +80,10 @@ public class YodaJediMaster extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +1: Look at the top two cards of your library. Put one on the bottom of your library.
-        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false), 1));
+        Effect effect = new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1),
+                new FilterCard(), Zone.LIBRARY, false, false, false, Zone.LIBRARY, false);
+        effect.setText("Look at the top two cards of your library. Put one on the bottom of your library");
+        this.addAbility(new LoyaltyAbility(effect, 1));
 
         //  0: Exile another target permanent you own. Return that card to the battlefield under your control at the beggining of your next end step.
         Ability ability = new LoyaltyAbility(new YodaJediMasterEffect(), 0);
@@ -138,10 +142,10 @@ class YodaEmblem extends Emblem {
     // You get an emblem with "Hexproof, you and your creatures have."
     public YodaEmblem() {
         this.setName("Emblem - Yoda");
-        Effect effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfGame);
-        effect.setText("Hexproof,");
+        Effect effect = new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.EndOfGame);
+        effect.setText("Hexproof, you");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
-        effect = new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.EndOfGame);
+        effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfGame, new FilterCreaturePermanent());
         effect.setText(" you and your creatures have");
         ability.addEffect(effect);
         getAbilities().add(ability);

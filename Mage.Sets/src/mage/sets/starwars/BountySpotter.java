@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
 public class BountySpotter extends CardImpl {
 
     public BountySpotter(UUID ownerId) {
-        super(ownerId, 69, "Bounty Spotter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        super(ownerId, 69, "Bounty Spotter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "SWS";
         this.subtype.add("Zabrak");
         this.subtype.add("Hunter");

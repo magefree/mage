@@ -53,7 +53,7 @@ public class SandTrooper extends CardImpl {
     }
 
     public SandTrooper(UUID ownerId) {
-        super(ownerId, 28, "Sand Trooper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId, 28, "Sand Trooper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "SWS";
         this.subtype.add("Human");
         this.subtype.add("Trooper");
