@@ -15,10 +15,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.5.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                     <!--
                     Because of known error in maven-compiler-plugin 3.2 useIncrementalCompilation is inverted
@@ -26,26 +26,26 @@
                     https://jira.codehaus.org/browse/MCOMPILER-209
                     -->
                     <useIncrementalCompilation>false</useIncrementalCompilation>
-<!--                    <compilerArgument>-Xlint:all</compilerArgument> -->
+                    <!--                    <compilerArgument>-Xlint:all</compilerArgument> -->
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.7</version>
                 <configuration>
-                <encoding>UTF-8</encoding>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.5</version>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<Built-By>MageTeam</Built-By>
-						</manifestEntries>
-					</archive>
-				</configuration>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Built-By>MageTeam</Built-By>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -102,7 +102,7 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.10</version>
+                <version>1.7.19</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
