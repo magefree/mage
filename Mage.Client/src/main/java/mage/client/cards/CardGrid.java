@@ -134,7 +134,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, boolean drawImage) {
-        MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, drawImage);
+        MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, drawImage, true);
         cards.put(card.getId(), cardImg);
         cardImg.addMouseListener(this);
         add(cardImg);

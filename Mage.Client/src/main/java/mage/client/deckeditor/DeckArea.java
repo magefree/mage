@@ -32,24 +32,32 @@
  */
 package mage.client.deckeditor;
 
+import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.cards.BigCard;
-import mage.client.cards.CardsList;
+import mage.client.cards.CardEventSource;
 import mage.client.cards.DragCardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
+import mage.view.CardView;
 import mage.view.CardsView;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import java.util.*;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class DeckArea extends javax.swing.JPanel {
+
+    private CardEventSource maindeckVirtualEvent = new CardEventSource();
+    private CardEventSource sideboardVirtualEvent = new CardEventSource();
+    private Set<UUID> hiddenCards = new HashSet<>();
+    private Deck lastDeck = new Deck();
+    private BigCard lastBigCard = null;
 
     /**
      * Creates new form DeckArea
@@ -61,6 +69,52 @@ public class DeckArea extends javax.swing.JPanel {
         //sideboardList.setOpaque(false);
         deckList.setRole(DragCardGrid.Role.MAINDECK);
         sideboardList.setRole(DragCardGrid.Role.SIDEBOARD);
+
+        // When a selection happens in one pane, deselect the selection in the other
+        deckList.addDragCardGridListener(new DragCardGrid.DragCardGridListener() {
+            @Override
+            public void cardsSelected() {
+                sideboardList.deselectAll();
+            }
+
+            @Override
+            public void hideCards(Collection<CardView> cards) {
+                // Add to hidden and move to sideboard
+                for (CardView card : cards) {
+                    hiddenCards.add(card.getId());
+                    maindeckVirtualEvent.removeSpecificCard(card, "remove-specific-card");
+                    sideboardVirtualEvent.addSpecificCard(card, "add-specific-card");
+                }
+                loadDeck(lastDeck, lastBigCard);
+            }
+
+            @Override
+            public void showAll() {
+                hiddenCards.clear();
+                loadDeck(lastDeck, lastBigCard);
+            }
+        });
+        sideboardList.addDragCardGridListener(new DragCardGrid.DragCardGridListener() {
+            @Override
+            public void cardsSelected() {
+                deckList.deselectAll();
+            }
+
+            @Override
+            public void hideCards(Collection<CardView> cards) {
+                // Just add to hidden, already in sideboard
+                for (CardView card : cards) {
+                    hiddenCards.add(card.getId());
+                }
+                loadDeck(lastDeck, lastBigCard);
+            }
+
+            @Override
+            public void showAll() {
+                hiddenCards.clear();
+                loadDeck(lastDeck, lastBigCard);
+            }
+        });
     }
 
     public void cleanUp() {
@@ -96,16 +150,28 @@ public class DeckArea extends javax.swing.JPanel {
         //this.sideboardList.setDeckEditorMode(mode);
     }
 
+    private Set<Card> filterHidden(Set<Card> cards) {
+        Set<Card> newSet = new LinkedHashSet<>();
+        for (Card card : cards) {
+            if (!hiddenCards.contains(card.getId())) {
+                newSet.add(card);
+            }
+        }
+        return newSet;
+    }
+
     public void loadDeck(Deck deck, BigCard bigCard) {
-        deckList.setCards(new CardsView(deck.getCards()), bigCard);
-        Logger.getLogger(DeckArea.class).info("Loading, sideboard is visible=" + sideboardList.isVisible());
+        lastDeck = deck;
+        lastBigCard = bigCard;
+        deckList.setCards(new CardsView(filterHidden(lastDeck.getCards())), lastBigCard);
         if (sideboardList.isVisible()) {
-            sideboardList.setCards(new CardsView(deck.getSideboard()), bigCard);
+            sideboardList.setCards(new CardsView(filterHidden(lastDeck.getSideboard())), lastBigCard);
         }
     }
 
     public void addDeckEventListener(Listener<Event> listener) {
         deckList.addCardEventListener(listener);
+        maindeckVirtualEvent.addListener(listener);
     }
 
     public void clearDeckEventListeners() {
@@ -114,6 +180,7 @@ public class DeckArea extends javax.swing.JPanel {
 
     public void addSideboardEventListener(Listener<Event> listener) {
         sideboardList.addCardEventListener(listener);
+        sideboardVirtualEvent.addListener(listener);
     }
 
     public void clearSideboardEventListeners() {

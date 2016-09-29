@@ -148,7 +148,7 @@ public class CardArea extends JPanel implements MouseListener {
             tmp.setAbility(card); // cross-reference, required for ability picker
             card = tmp;
         }
-        MageCard cardPanel = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true);
+        MageCard cardPanel = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true, true);
 
         cardPanel.setBounds(rectangle);
         cardPanel.addMouseListener(this);

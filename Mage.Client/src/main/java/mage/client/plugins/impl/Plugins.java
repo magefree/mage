@@ -107,10 +107,12 @@ public class Plugins implements MagePlugins {
     }
 
     @Override
-    public MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage) {
+    public MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, boolean previewable) {
         if (cardPlugin != null) {
-            mageActionCallback.refreshSession();
-            mageActionCallback.setCardPreviewComponent(bigCard);
+            if (previewable) {
+                mageActionCallback.refreshSession();
+                mageActionCallback.setCardPreviewComponent(bigCard);
+            }
             return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage);
         } else {
             return new Card(card, bigCard, Config.dimensions, gameId);

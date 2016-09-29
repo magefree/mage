@@ -1234,6 +1234,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     @Override
     public void dragCardDrop(MouseEvent e, DragCardSource source, Collection<CardView> cards) {
-        // Nothing to do, just eat the dropped cards, they're being removed from the deck or sideboard
+        // Need to add cards back to tally
     }
 }

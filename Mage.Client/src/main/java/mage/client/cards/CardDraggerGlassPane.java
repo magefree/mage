@@ -59,7 +59,7 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         currentCards = new ArrayList<>(source.dragCardList());
 
         // Make a view for the first one and add it to us
-        dragView = Plugins.getInstance().getMageCard(currentCards.get(0), null, new Dimension(100, 140), null, true);
+        dragView = Plugins.getInstance().getMageCard(currentCards.get(0), null, new Dimension(100, 140), null, true, false);
         for (MouseListener l: dragView.getMouseListeners()) {
             dragView.removeMouseListener(l);
         }
@@ -132,11 +132,11 @@ public class CardDraggerGlassPane implements MouseListener, MouseMotionListener 
         glassPane.remove(dragView);
         glassPane.repaint();
 
-        // Update the target, and do the drop
-        updateCurrentTarget(e, true);
-
         // Let the drag source know
         source.dragCardEnd(currentDragTarget);
+
+        // Update the target, and do the drop
+        updateCurrentTarget(e, true);
     }
 
     @Override

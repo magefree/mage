@@ -58,11 +58,7 @@ public class CardEventSource implements EventSource<Event>, Serializable {
         dispatcher.fireEvent(new Event(card, message));
     }
 
-    public void addSpecificCardSideboard(SimpleCardView card, String message) {
-        dispatcher.fireEvent(new Event(card, message));
-    }
-
-    public void addSpecificCardMaindeck(SimpleCardView card, String message) {
+    public void addSpecificCard(SimpleCardView card, String message) {
         dispatcher.fireEvent(new Event(card, message));
     }
 
