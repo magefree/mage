@@ -574,11 +574,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         manaCountLabelW.setToolTipText("White mana");
         setTextForLabel(manaCountLabelW, 0, false);
         manaLabels.put("W", manaCountLabelW);
-        r = new Rectangle(12, 12);
-        BufferedImage imageManaW = ManaSymbols.getSizedManaSymbol("W");
+        r = new Rectangle(15, 15);
+        BufferedImage imageManaW = ManaSymbols.getSizedManaSymbol("W", 15);
         HoverButton btnWhiteMana = new HoverButton(null, imageManaW, imageManaW, imageManaW, r);
+        
         btnWhiteMana.setToolTipText("White mana");
-        btnWhiteMana.setOpaque(false);
+        btnWhiteMana.setOpaque(true);
         btnWhiteMana.setObserver(new Command() {
             @Override
             public void execute() {
@@ -590,8 +591,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         manaCountLabelU.setToolTipText("Blue mana");
         setTextForLabel(manaCountLabelU, 0, false);
         manaLabels.put("U", manaCountLabelU);
-        r = new Rectangle(12, 12);
-        BufferedImage imageManaU = ManaSymbols.getSizedManaSymbol("U");
+        r = new Rectangle(15, 15);
+        BufferedImage imageManaU = ManaSymbols.getSizedManaSymbol("U", 15);
         HoverButton btnBlueMana = new HoverButton(null, imageManaU, imageManaU, imageManaU, r);
         btnBlueMana.setToolTipText("Blue mana");
         btnBlueMana.setOpaque(false);
@@ -606,8 +607,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         manaCountLabelB.setToolTipText("Black mana");
         setTextForLabel(manaCountLabelB, 0, false);
         manaLabels.put("B", manaCountLabelB);
-        r = new Rectangle(12, 12);
-        BufferedImage imageManaB = ManaSymbols.getSizedManaSymbol("B");
+        r = new Rectangle(15, 15);
+        BufferedImage imageManaB = ManaSymbols.getSizedManaSymbol("B", 15);
         HoverButton btnBlackMana = new HoverButton(null, imageManaB, imageManaB, imageManaB, r);
         btnBlackMana.setToolTipText("Black mana");
         btnBlackMana.setOpaque(false);
@@ -622,8 +623,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         manaCountLabelR.setToolTipText("Red mana");
         setTextForLabel(manaCountLabelR, 0, false);
         manaLabels.put("R", manaCountLabelR);
-        r = new Rectangle(12, 12);
-        BufferedImage imageManaR = ManaSymbols.getSizedManaSymbol("R");
+        r = new Rectangle(15, 15);
+        BufferedImage imageManaR = ManaSymbols.getSizedManaSymbol("R", 15);
         HoverButton btnRedMana = new HoverButton(null, imageManaR, imageManaR, imageManaR, r);
         btnRedMana.setToolTipText("Red mana");
         btnRedMana.setOpaque(false);
@@ -638,8 +639,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         manaCountLabelG.setToolTipText("Green mana");
         setTextForLabel(manaCountLabelG, 0, false);
         manaLabels.put("G", manaCountLabelG);
-        r = new Rectangle(12, 12);
-        BufferedImage imageManaG = ManaSymbols.getSizedManaSymbol("G");
+        r = new Rectangle(15, 15);
+        BufferedImage imageManaG = ManaSymbols.getSizedManaSymbol("G", 15);
         HoverButton btnGreenMana = new HoverButton(null, imageManaG, imageManaG, imageManaG, r);
         btnGreenMana.setToolTipText("Green mana");
         btnGreenMana.setOpaque(false);
@@ -654,8 +655,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         manaCountLabelX.setToolTipText("Colorless mana");
         setTextForLabel(manaCountLabelX, 0, false);
         manaLabels.put("X", manaCountLabelX);
-        r = new Rectangle(12, 12);
-        BufferedImage imageManaX = ManaSymbols.getSizedManaSymbol("C");
+        r = new Rectangle(15, 15);
+        BufferedImage imageManaX = ManaSymbols.getSizedManaSymbol("C", 15);
         HoverButton btnColorlessMana = new HoverButton(null, imageManaX, imageManaX, imageManaX, r);
         btnColorlessMana.setToolTipText("Colorless mana");
         btnColorlessMana.setOpaque(false);
