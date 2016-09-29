@@ -702,7 +702,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                 .addGroup(gl_panelBackground.createSequentialGroup()
                                         .addComponent(energy, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(gl_panelBackground.createSequentialGroup()
-                                        .addGap(4)
+                                        .addGap(2)
                                         .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(gl_panelBackground.createSequentialGroup()
                                         .addGap(2)
