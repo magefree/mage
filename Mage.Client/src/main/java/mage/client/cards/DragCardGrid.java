@@ -21,6 +21,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -1008,6 +1009,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             }
         }
 
+        // Trim the grid
+        if (didModify) {
+            trimGrid();
+        }
+
         // Add any new card views
         for (CardView newCard: cardsView.values()) {
             if (!cardViews.containsKey(newCard.getId())) {
@@ -1027,9 +1033,6 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // Modifications?
         if (didModify) {
-            // Trim extra rows / columns from the grid
-            trimGrid();
-
             // Update layout
             layoutGrid();
 
@@ -1213,7 +1216,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // No card in this column?
             if (cardInColumn == null) {
                 // Error, should not have an empty column
-                LOGGER.error("Empty column!");
+                LOGGER.error("Empty column! " + currentColumn);
             } else {
                 int res = cardSort.getComparator().compare(newCard, cardInColumn);
                 if (res <= 0) {
@@ -1384,18 +1387,62 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         });
     }
 
+    static class DeckFilter extends FileFilter {
+        @Override
+        public boolean accept(File f) {
+            if (f.isDirectory()) {
+                return true;
+            }
+
+            String ext = null;
+            String s = f.getName();
+            int i = s.lastIndexOf('.');
+
+            if (i > 0 && i < s.length() - 1) {
+                ext = s.substring(i + 1).toLowerCase();
+            }
+            return (ext == null) ? false : ext.equals("dck");
+        }
+
+        @Override
+        public String getDescription() {
+            return "Deck Files";
+        }
+    }
+
     public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        /*
         GUISizeHelper.calculateGUISizes();
         Plugins.getInstance().loadPlugins();
-        JFrame frame = new JFrame();
         frame.setTitle("Test");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setBackground(Color.BLUE);
         DragCardGrid grid = new DragCardGrid();
         grid.setPreferredSize(new Dimension(800, 600));
-        frame.add(grid, BorderLayout.CENTER);
-        frame.pack();
+        */
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {}
         frame.setVisible(true);
+        JFileChooser choose = new JFileChooser();
+        choose.setAcceptAllFileFilterUsed(false);
+        choose.addChoosableFileFilter(new DeckFilter());
+        choose.showOpenDialog(frame);
+        LOGGER.info("File: " + choose.getSelectedFile());
+        String st = "";
+        try {
+            st = choose.getSelectedFile().getCanonicalPath();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        LOGGER.info("Selected file: " + st);
+        choose.setSelectedFile(new File(st));
+        choose.showOpenDialog(frame);
+        LOGGER.info("File: " + choose.getSelectedFile());
+        //frame.add(grid, BorderLayout.CENTER);
+        //frame.pack();
+        frame.setVisible(false);
     }
 }
 

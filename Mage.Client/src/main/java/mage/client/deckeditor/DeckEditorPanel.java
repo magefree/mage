@@ -33,6 +33,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -222,6 +223,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         Card card = temporaryCards.get(cardView.getId());
         if (card == null) {
             // Need to make a new card
+            Logger.getLogger(DeckEditorPanel.class).info("Retrieve " + cardView.getCardNumber() + " Failed");
             card = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber()).getCard();
         } else {
             // Only need a temporary card once
@@ -845,6 +847,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+        //fcSelectDeck.setCurrentDirectory(new File());
         String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
         if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
@@ -852,13 +855,26 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         int ret = fcSelectDeck.showOpenDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
+            {
+                /**
+                 * Work around a JFileChooser bug on Windows 7-10 with JRT 7+
+                 * In the case where the user selects the exact same file as was previously
+                 * selected without touching anything else in the dialog, getSelectedFile()
+                 * will erroneously return null due to some combination of our settings.
+                 *
+                 * We manually sub in the last selected file in this case.
+                 */
+                if (file == null) {
+                    if (!lastFolder.isEmpty()) {
+                        file = new File(lastFolder);
+                    }
+                }
+            }
             try {
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 deck = Deck.load(DeckImporterUtil.importDeck(file.getPath()), true, true);
             } catch (GameException ex) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
-            } catch (Exception ex) {
-                logger.fatal(ex);
             } finally {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
@@ -882,6 +898,21 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         int ret = fcSelectDeck.showSaveDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
+            {
+                /**
+                 * Work around a JFileChooser bug on Windows 7-10 with JRT 7+
+                 * In the case where the user selects the exact same file as was previously
+                 * selected without touching anything else in the dialog, getSelectedFile()
+                 * will erroneously return null due to some combination of our settings.
+                 *
+                 * We manually sub in the last selected file in this case.
+                 */
+                if (file == null) {
+                    if (!lastFolder.isEmpty()) {
+                        file = new File(lastFolder);
+                    }
+                }
+            }
             try {
                 String fileName = file.getPath();
                 if (!fileName.endsWith(".dck")) {
@@ -889,14 +920,15 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 }
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 Sets.saveDeck(fileName, deck.getDeckCardLists());
-            } catch (Exception ex) {
-                logger.fatal(ex);
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage() + "\nTry ensuring that the selected directory is writable.", "Error saving deck", JOptionPane.ERROR_MESSAGE);
             } finally {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
             try {
                 MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
             } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
