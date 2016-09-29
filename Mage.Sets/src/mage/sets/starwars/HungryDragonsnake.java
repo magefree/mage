@@ -35,9 +35,11 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -45,7 +47,11 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class HungryDragonsnake extends CardImpl {
 
-    String rule = "Whenever a creature enters the battlefield under an opponents's control, put a +1/+1 counter on {this}.";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("under an opponents's control");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
 
     public HungryDragonsnake(UUID ownerId) {
         super(ownerId, 139, "Hungry Dragonsnake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
@@ -59,7 +65,9 @@ public class HungryDragonsnake extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a creature enters the battlefield under an opponents's control, put a +1/+1 counter on Hungry Dragonsnake.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterCreaturePermanent(), false, rule, false));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false,
+                "Whenever a creature enters the battlefield under an opponents's control, put a +1/+1 counter on {this}.", false));
     }
 
     public HungryDragonsnake(final HungryDragonsnake card) {

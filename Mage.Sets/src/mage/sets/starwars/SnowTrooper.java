@@ -38,19 +38,12 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author Styxo
  */
 public class SnowTrooper extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Trooper creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Trooper"));
-    }
 
     public SnowTrooper(UUID ownerId) {
         super(ownerId, 30, "Snow Trooper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -61,8 +54,9 @@ public class SnowTrooper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Trooper creatures you control have firststrike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
-
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield,
+                        new FilterCreaturePermanent("Trooper", "Trooper creatures"), false)));
     }
 
     public SnowTrooper(final SnowTrooper card) {

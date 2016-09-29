@@ -30,22 +30,17 @@ package mage.sets.starwars;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.TrooperToken;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -53,12 +48,6 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author Styxo
  */
 public class RocketTrooper extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Trooper creatures");
-
-    static {
-        filter.add(new SubtypePredicate("Trooper"));
-    }
 
     public RocketTrooper(UUID ownerId) {
         super(ownerId, 119, "Rocket Trooper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -73,7 +62,9 @@ public class RocketTrooper extends CardImpl {
         effect.setText("Whenever this creature enters the battlefield, it deals 1 damage to target creature or player");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ability, Duration.Custom, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield,
+                        new FilterCreaturePermanent("Trooper", "Trooper creatures"), false)));
 
     }
 
