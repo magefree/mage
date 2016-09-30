@@ -86,7 +86,6 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
         this.staticText = "Each player reveals the top card of his or her library. For each nonland card revealed this way, add {G} to your mana pool and you gain 1 life";
     }
 
-
     public SelvalaExplorerReturnedEffect(final SelvalaExplorerReturnedEffect effect) {
         super(effect);
     }
@@ -101,7 +100,7 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Mana parley = getMana(game, source);
-            if (parley.getAny() > 0) {
+            if (parley.getGreen() > 0) {
                 controller.getManaPool().addMana(parley, game, source);
                 controller.gainLife(parley.getAny(), game);
             }
@@ -109,7 +108,6 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
         }
         return false;
     }
-
 
     @Override
     public Mana getMana(Game game, Ability source) {
