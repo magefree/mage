@@ -36,6 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.game.permanent.token.EldraziHorrorToken;
 
 /**
  *

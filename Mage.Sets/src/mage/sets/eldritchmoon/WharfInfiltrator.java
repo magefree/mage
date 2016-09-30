@@ -45,6 +45,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.token.EldraziHorrorToken;
 import mage.game.permanent.token.Token;
 
 /**
@@ -118,17 +119,5 @@ class WharfInfiltratorDiscardAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever you discard a creature card, " + super.getRule();
-    }
-}
-
-class EldraziHorrorToken extends Token {
-
-    public EldraziHorrorToken() {
-        super("Eldrazi Horror", "3/2 colorless Eldrazi Horror creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Eldrazi");
-        subtype.add("Horror");
-        power = new MageInt(3);
-        toughness = new MageInt(2);
     }
 }

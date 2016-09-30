@@ -45,6 +45,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.game.permanent.token.EldraziHorrorToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**

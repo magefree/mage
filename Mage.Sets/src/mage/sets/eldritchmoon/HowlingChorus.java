@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.permanent.token.EldraziHorrorToken;
 
 /**
  *
