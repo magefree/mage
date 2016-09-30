@@ -34,7 +34,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.sets.bornofthegods.TokenAndCounters.GoldToken;
+import mage.game.permanent.token.GoldToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

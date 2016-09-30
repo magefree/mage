@@ -25,9 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods.TokenAndCounters;
+package mage.game.permanent.token;
 
 import mage.MageInt;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.game.permanent.token.Token;
 
@@ -35,16 +36,19 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class CentaurEnchantmentCreatureToken extends Token {
+public class CatSoldierCreatureToken extends Token {
 
-    public CentaurEnchantmentCreatureToken() {
-        super("Centaur", "3/3 green Centaur enchantment creature token");
-        cardType.add(CardType.ENCHANTMENT);
+    public CatSoldierCreatureToken() {
+        super("Cat Soldier", "1/1 white Cat Soldier creature token with vigilance");
         cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add("Centaur");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
+        color.setWhite(true);
+        
+        subtype.add("Cat");
+        subtype.add("Soldier");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        
+        this.addAbility(VigilanceAbility.getInstance());
         this.setOriginalExpansionSetCode("BNG");
     }
 }
