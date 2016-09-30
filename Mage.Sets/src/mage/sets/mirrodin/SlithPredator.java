@@ -58,7 +58,7 @@ public class SlithPredator extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SlithPredator copy() {
         return new SlithPredator(this);
     }

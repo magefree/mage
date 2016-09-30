@@ -101,17 +101,15 @@ class KalitasDestroyEffect extends OneShotEffect {
         }
         return true;
     }
-}
 
-class VampireToken extends Token {
-
-    public VampireToken(int tokenPower, int tokenToughness) {
-        super("Vampire", new StringBuilder(tokenPower).append("/").append(tokenToughness).append(" black Vampire creature token").toString());
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Vampire");
-        power = new MageInt(tokenPower);
-        toughness = new MageInt(tokenToughness);
+    class VampireToken extends Token {
+        public VampireToken(int tokenPower, int tokenToughness) {
+            super("Vampire", new StringBuilder(tokenPower).append("/").append(tokenToughness).append(" black Vampire creature token").toString());
+            cardType.add(CardType.CREATURE);
+            color.setBlack(true);
+            subtype.add("Vampire");
+            power = new MageInt(tokenPower);
+            toughness = new MageInt(tokenToughness);
+        }
     }
-
 }

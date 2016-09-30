@@ -45,7 +45,7 @@ public class StalkingStones extends mage.sets.tempest.StalkingStones {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public StalkingStones copy() {
         return new StalkingStones(this);
     }

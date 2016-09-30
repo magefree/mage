@@ -38,6 +38,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.HumanSoldierToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

@@ -72,7 +72,7 @@ public class BlinkmothWell extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public BlinkmothWell copy() {
         return new BlinkmothWell(this);
     }

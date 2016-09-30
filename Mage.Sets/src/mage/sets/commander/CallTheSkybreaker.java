@@ -64,18 +64,18 @@ public class CallTheSkybreaker extends CardImpl {
     public CallTheSkybreaker copy() {
         return new CallTheSkybreaker(this);
     }
-}
 
-class ElementalToken extends Token {
+    class ElementalToken extends Token {
 
-    public ElementalToken() {
-        super("Elemental", "a 5/5 blue and red Elemental creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        color.setRed(true);
-        subtype.add("Elemental");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        this.addAbility(FlyingAbility.getInstance());
+        public ElementalToken() {
+            super("Elemental", "a 5/5 blue and red Elemental creature token with flying");
+            cardType.add(CardType.CREATURE);
+            color.setBlue(true);
+            color.setRed(true);
+            subtype.add("Elemental");
+            power = new MageInt(5);
+            toughness = new MageInt(5);
+            this.addAbility(FlyingAbility.getInstance());
+        }
     }
 }

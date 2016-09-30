@@ -27,21 +27,18 @@
  */
 package mage.sets.onslaught;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
-import mage.game.turn.TurnMod;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +53,7 @@ public class AggravatedAssault extends CardImpl {
 
         // {3}{R}{R}: Untap all creatures you control. After this main phase, there is an additional combat phase followed by an additional main phase. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "Untap all creatures you control"), new ManaCostsImpl<>("{3}{R}{R}"));
-        ability.addEffect(new AdditionalCombatPhaseEffect());
+        ability.addEffect(new AddCombatAndMainPhaseEffect());
         this.addAbility(ability);
     }
 
@@ -67,29 +64,5 @@ public class AggravatedAssault extends CardImpl {
     @Override
     public AggravatedAssault copy() {
         return new AggravatedAssault(this);
-    }
-}
-
-class AdditionalCombatPhaseEffect extends OneShotEffect {
-
-    AdditionalCombatPhaseEffect() {
-        super(Outcome.Benefit);
-        staticText = "After this main phase, there is an additional combat phase followed by an additional main phase";
-    }
-
-    AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AdditionalCombatPhaseEffect copy() {
-        return new AdditionalCombatPhaseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.POSTCOMBAT_MAIN, null, false));
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
-        return true;
     }
 }

@@ -62,7 +62,7 @@ public class SpoilsOfTheVault extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SpoilsOfTheVault copy() {
         return new SpoilsOfTheVault(this);
     }
@@ -79,12 +79,12 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public SpoilsOfTheVaultEffect copy() {
         return new SpoilsOfTheVaultEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = game.getObject(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());

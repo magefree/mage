@@ -82,19 +82,19 @@ class FlamebladeAngelTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @java.lang.Override
+    @Override
     public FlamebladeAngelTriggeredAbility copy() {
         return new FlamebladeAngelTriggeredAbility(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_CREATURE 
                 || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER
                 || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean result = false;
         UUID sourceControllerId = game.getControllerId(event.getSourceId());
@@ -117,7 +117,7 @@ class FlamebladeAngelTriggeredAbility extends TriggeredAbilityImpl {
         return result;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "Whenever a source an opponent controls deals damage to you or a permanent you control, you may have {this} deal 1 damage to that source's controller.";
     }

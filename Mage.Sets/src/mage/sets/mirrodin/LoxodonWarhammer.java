@@ -47,7 +47,7 @@ public class LoxodonWarhammer extends mage.sets.planechase.LoxodonWarhammer {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LoxodonWarhammer copy() {
         return new LoxodonWarhammer(this);
     }

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HumanSoldierToken;
 
 /**
  *
@@ -69,18 +69,5 @@ public class ThrabenStandardBearer extends CardImpl {
     @Override
     public ThrabenStandardBearer copy() {
         return new ThrabenStandardBearer(this);
-    }
-}
-
-class HumanSoldierToken extends Token {
-
-    public HumanSoldierToken() {
-        super("Human Soldier", "1/1 white Human Soldier creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Soldier");
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

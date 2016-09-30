@@ -69,7 +69,7 @@ public class TelJiladStylus extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TelJiladStylus copy() {
         return new TelJiladStylus(this);
     }

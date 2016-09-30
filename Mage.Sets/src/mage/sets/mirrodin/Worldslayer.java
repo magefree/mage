@@ -45,7 +45,7 @@ public class Worldslayer extends mage.sets.magic2012.Worldslayer {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Worldslayer copy() {
         return new Worldslayer(this);
     }

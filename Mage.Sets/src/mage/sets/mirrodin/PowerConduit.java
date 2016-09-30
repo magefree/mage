@@ -68,7 +68,7 @@ public class PowerConduit extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public PowerConduit copy() {
         return new PowerConduit(this);
     }

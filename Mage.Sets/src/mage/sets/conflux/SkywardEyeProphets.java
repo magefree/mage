@@ -29,21 +29,14 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.RevealTopLandToBattlefieldElseHandEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  * @author North
@@ -62,7 +55,7 @@ public class SkywardEyeProphets extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {tap}: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SkywardEyeProphetsEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealTopLandToBattlefieldElseHandEffect(), new TapSourceCost()));
     }
 
     public SkywardEyeProphets(final SkywardEyeProphets card) {
@@ -72,46 +65,5 @@ public class SkywardEyeProphets extends CardImpl {
     @Override
     public SkywardEyeProphets copy() {
         return new SkywardEyeProphets(this);
-    }
-
-    public static class SkywardEyeProphetsEffect extends OneShotEffect {
-
-        public SkywardEyeProphetsEffect() {
-            super(Outcome.DrawCard);
-            this.staticText = "Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand";
-        }
-
-        public SkywardEyeProphetsEffect(final SkywardEyeProphetsEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public SkywardEyeProphetsEffect copy() {
-            return new SkywardEyeProphetsEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            MageObject sourceObject = game.getObject(source.getSourceId());
-            if (sourceObject == null || controller == null) {
-                return false;
-            }
-            if (controller.getLibrary().size() > 0) {
-                CardsImpl cards = new CardsImpl();
-                Card card = controller.getLibrary().getFromTop(game);
-                if (card == null) {
-                    return false;
-                }
-                cards.add(card);
-                controller.revealCards(sourceObject.getName(), cards, game);
-                if (card.getCardType().contains(CardType.LAND)) {
-                    return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                } else {
-                    controller.moveCards(card, Zone.HAND, source, game);
-                }
-            }
-            return true;
-        }
     }
 }

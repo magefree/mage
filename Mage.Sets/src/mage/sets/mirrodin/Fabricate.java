@@ -45,7 +45,7 @@ public class Fabricate extends mage.sets.magic2010.Fabricate {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Fabricate copy() {
         return new Fabricate(this);
     }

@@ -27,30 +27,25 @@
  */
 package mage.sets.shardsofalara;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SkeletonToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.DamagedByWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -139,21 +134,5 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public String getRule() {
         return "When a creature dealt damage this way dies this turn, " + super.getRule();
-    }
-}
-
-class SkeletonToken extends Token {
-
-    SkeletonToken() {
-        super("Skeleton", "1/1 black Skeleton creature token with \"{B}: Regenerate this creature.\"");
-        this.cardType.add(CardType.CREATURE);
-        this.color = ObjectColor.BLACK;
-        this.subtype.add("Skeleton");
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {B}: Regenerate this creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 }

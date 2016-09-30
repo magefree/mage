@@ -66,7 +66,7 @@ public class ClockworkCondor extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ClockworkCondor copy() {
         return new ClockworkCondor(this);
     }
@@ -83,7 +83,7 @@ class ClockworkCondorEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
@@ -93,7 +93,7 @@ class ClockworkCondorEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public ClockworkCondorEffect copy() {
         return new ClockworkCondorEffect(this);
     }

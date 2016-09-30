@@ -75,7 +75,7 @@ public class LumengridSentinel extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LumengridSentinel copy() {
         return new LumengridSentinel(this);
     }

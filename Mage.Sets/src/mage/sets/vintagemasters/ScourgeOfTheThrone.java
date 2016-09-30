@@ -27,28 +27,26 @@
  */
 package mage.sets.vintagemasters;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.DethroneAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -151,28 +149,5 @@ class ScourgeOfTheThroneAttacksTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public ScourgeOfTheThroneAttacksTriggeredAbility copy() {
         return new ScourgeOfTheThroneAttacksTriggeredAbility(this);
-    }
-}
-
-class AdditionalCombatPhaseEffect extends OneShotEffect {
-
-    public AdditionalCombatPhaseEffect() {
-        super(Outcome.Benefit);
-        staticText = "After this phase, there is an additional combat phase";
-    }
-
-    public AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AdditionalCombatPhaseEffect copy() {
-        return new AdditionalCombatPhaseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
-        return true;
     }
 }

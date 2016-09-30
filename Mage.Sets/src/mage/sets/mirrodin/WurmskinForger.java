@@ -62,7 +62,7 @@ public class WurmskinForger extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public WurmskinForger copy() {
         return new WurmskinForger(this);
     }

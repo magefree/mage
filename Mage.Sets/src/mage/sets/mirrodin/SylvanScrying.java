@@ -45,7 +45,7 @@ public class SylvanScrying extends mage.sets.tenthedition.SylvanScrying {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SylvanScrying copy() {
         return new SylvanScrying(this);
     }

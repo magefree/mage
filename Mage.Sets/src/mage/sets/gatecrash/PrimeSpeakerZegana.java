@@ -66,7 +66,7 @@ public class PrimeSpeakerZegana extends CardImpl {
         //Prime Speaker Zegana enters the battlefield with X +1/+1 counters on it, where X is the greatest power among other creatures you control.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(0),
-                new greatestPowerCount(), true), 
+                new GreatestPowerCount(), true),
                 "where X is the greatest power among other creatures you control"));
         //When Prime Speaker Zegana enters the battlefield, draw cards equal to its power.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new SourcePermanentPowerCount())));
@@ -82,7 +82,7 @@ public class PrimeSpeakerZegana extends CardImpl {
     }
 }
 
-class greatestPowerCount implements DynamicValue {
+class GreatestPowerCount implements DynamicValue {
     
     
     @Override
@@ -98,7 +98,7 @@ class greatestPowerCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new greatestPowerCount();
+        return new GreatestPowerCount();
     }
 
     @Override

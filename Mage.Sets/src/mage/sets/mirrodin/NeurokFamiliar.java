@@ -69,7 +69,7 @@ public class NeurokFamiliar extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public NeurokFamiliar copy() {
         return new NeurokFamiliar(this);
     }
@@ -88,12 +88,12 @@ class NeurokFamiliarEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public NeurokFamiliarEffect copy() {
         return new NeurokFamiliarEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);

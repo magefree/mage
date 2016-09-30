@@ -39,16 +39,12 @@ import mage.cards.CardImpl;
  *
  * @author Loki
  */
-public class SnappingDrake extends CardImpl {
+public class SnappingDrake extends mage.sets.ravnica.SnappingDrake {
 
     public SnappingDrake(UUID ownerId) {
-        super(ownerId, 72, "Snapping Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId);
+        this.cardNumber = "72";
         this.expansionSetCode = "M10";
-
-        this.subtype.add("Drake");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
-        this.addAbility(FlyingAbility.getInstance());
     }
 
     public SnappingDrake(final SnappingDrake card) {

@@ -33,7 +33,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HeroicAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.sets.bornofthegods.TokenAndCounters.CatSoldierCreatureToken;
+import mage.game.permanent.token.CatSoldierCreatureToken;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 

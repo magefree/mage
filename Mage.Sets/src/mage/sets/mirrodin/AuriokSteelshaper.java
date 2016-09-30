@@ -80,7 +80,7 @@ public class AuriokSteelshaper extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public AuriokSteelshaper copy() {
         return new AuriokSteelshaper(this);
     }

@@ -61,7 +61,7 @@ public class MesmericOrb extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public MesmericOrb copy() {
         return new MesmericOrb(this);
     }
@@ -77,17 +77,17 @@ class BecomesUntappedPermanentTriggeredAbility extends TriggeredAbilityImpl{
         super(ability);
     }
 
-    @java.lang.Override
+    @Override
     public BecomesUntappedPermanentTriggeredAbility copy() {
         return new BecomesUntappedPermanentTriggeredAbility(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.UNTAPPED;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
@@ -97,7 +97,7 @@ class BecomesUntappedPermanentTriggeredAbility extends TriggeredAbilityImpl{
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "Whenever a permanent becomes untapped, " + super.getRule();
     }

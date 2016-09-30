@@ -43,7 +43,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.BatToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -89,17 +89,3 @@ public class SkeletalVampire extends CardImpl {
     }
 }
 
-class BatToken extends Token {
-
-    BatToken() {
-        super("Bat", "1/1 black Bat creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlack(true);
-        subtype.add("Bat");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
-
-        this.setOriginalExpansionSetCode("MMA");
-    }
-}

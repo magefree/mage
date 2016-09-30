@@ -60,7 +60,7 @@ public class GateToTheAether extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public GateToTheAether copy() {
         return new GateToTheAether(this);
     }
@@ -77,12 +77,12 @@ class GateToTheAetherEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public GateToTheAetherEffect copy() {
         return new GateToTheAetherEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player activePlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (activePlayer != null) {

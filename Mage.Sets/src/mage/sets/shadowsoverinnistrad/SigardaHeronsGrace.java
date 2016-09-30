@@ -27,7 +27,6 @@
  */
 package mage.sets.shadowsoverinnistrad;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -47,8 +46,10 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.HumanSoldierToken;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,18 +96,5 @@ public class SigardaHeronsGrace extends CardImpl {
     @Override
     public SigardaHeronsGrace copy() {
         return new SigardaHeronsGrace(this);
-    }
-}
-
-class HumanSoldierToken extends Token {
-
-    public HumanSoldierToken() {
-        super("Human Soldier", "1/1 white Human Soldier creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Human");
-        subtype.add("Soldier");
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

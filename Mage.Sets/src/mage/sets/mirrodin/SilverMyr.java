@@ -54,7 +54,7 @@ public class SilverMyr extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SilverMyr copy() {
         return new SilverMyr(this);
     }

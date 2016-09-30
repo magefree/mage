@@ -28,19 +28,17 @@
 
 package mage.sets.dragonsmaze;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.SplitCard;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +60,7 @@ public class ToilTrouble extends SplitCard {
 
         // Trouble
         // Trouble deals damage to target player equal to the number of cards in that player's hand.
-        Effect effect = new DamageTargetEffect(new TargetPlayerCardsInHandCount());
+        Effect effect = new DamageTargetEffect(new CardsInTargetHandCount());
         effect.setText("Trouble deals damage to target player equal to the number of cards in that player's hand");
         getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
@@ -76,33 +74,5 @@ public class ToilTrouble extends SplitCard {
     @Override
     public ToilTrouble copy() {
         return new ToilTrouble(this);
-    }
-}
-
-class TargetPlayerCardsInHandCount implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Player targetPlayer = game.getPlayer(sourceAbility.getFirstTarget());
-        if (targetPlayer != null) {
-            return targetPlayer.getHand().size();
-        }
-
-        return 0;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new TargetPlayerCardsInHandCount();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "target player's cards in hand";
     }
 }

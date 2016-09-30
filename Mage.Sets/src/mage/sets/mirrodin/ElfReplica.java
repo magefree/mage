@@ -71,7 +71,7 @@ public class ElfReplica extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ElfReplica copy() {
         return new ElfReplica(this);
     }

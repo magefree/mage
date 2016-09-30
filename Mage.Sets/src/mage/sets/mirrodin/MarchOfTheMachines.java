@@ -45,7 +45,7 @@ public class MarchOfTheMachines extends mage.sets.tenthedition.MarchOfTheMachine
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public MarchOfTheMachines copy() {
         return new MarchOfTheMachines(this);
     }

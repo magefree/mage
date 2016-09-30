@@ -27,12 +27,10 @@
  */
 package mage.sets.darksteel;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -40,13 +38,12 @@ import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.turn.TurnMod;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +65,7 @@ public class SavageBeating extends CardImpl {
         // or untap all creatures you control and after this phase, there is an additional combat phase.
         Mode mode = new Mode();
         mode.getEffects().add(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "untap all creatures you control"));
-        mode.getEffects().add(new AdditionalCombatPhaseEffect());
+        mode.getEffects().add(new AdditionalCombatPhaseEffect("and after this phase, there is an additional combat phase"));
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {1}{R}
@@ -82,28 +79,5 @@ public class SavageBeating extends CardImpl {
     @Override
     public SavageBeating copy() {
         return new SavageBeating(this);
-    }
-}
-
-class AdditionalCombatPhaseEffect extends OneShotEffect {
-
-    AdditionalCombatPhaseEffect() {
-        super(Outcome.Benefit);
-        staticText = "and after this phase, there is an additional combat phase";
-    }
-
-    AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AdditionalCombatPhaseEffect copy() {
-        return new AdditionalCombatPhaseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
-        return true;
     }
 }

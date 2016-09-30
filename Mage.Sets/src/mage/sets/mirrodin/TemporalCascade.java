@@ -67,7 +67,7 @@ public class TemporalCascade extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TemporalCascade copy() {
         return new TemporalCascade(this);
     }
@@ -84,7 +84,7 @@ class TemporalCascadeShuffleEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
         for (UUID playerId: game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
@@ -103,7 +103,7 @@ class TemporalCascadeShuffleEffect extends OneShotEffect {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public TemporalCascadeShuffleEffect copy() {
         return new TemporalCascadeShuffleEffect(this);
     }
@@ -120,7 +120,7 @@ class TemporalCascadeDrawEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
         game.getState().handleSimultaneousEvent(game); // needed here so state based triggered effects 
@@ -133,7 +133,7 @@ class TemporalCascadeDrawEffect extends OneShotEffect {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public TemporalCascadeDrawEffect copy() {
         return new TemporalCascadeDrawEffect(this);
     }

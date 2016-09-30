@@ -27,7 +27,6 @@
  */
 package mage.sets.homelands;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,7 +35,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -45,8 +43,10 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SkeletonToken;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -83,20 +83,5 @@ public class DrudgeSpell extends CardImpl {
     @Override
     public DrudgeSpell copy() {
         return new DrudgeSpell(this);
-    }
-}
-
-class SkeletonToken extends Token {
-
-    SkeletonToken() {
-        super("Skeleton", "1/1 black Skeleton creature token onto the battlefield. It has \"{B}: Regenerate this creature.\"");
-        this.setOriginalExpansionSetCode("HML");
-        this.getPower().modifyBaseValue(1);
-        this.getToughness().modifyBaseValue(1);
-        this.color.setBlack(true);
-        this.getSubtype(null).add("Skeleton");
-        this.getCardType().add(CardType.CREATURE);
-        
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 }

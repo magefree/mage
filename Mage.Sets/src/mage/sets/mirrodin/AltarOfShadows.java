@@ -74,7 +74,7 @@ public class AltarOfShadows extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public AltarOfShadows copy() {
         return new AltarOfShadows(this);
     }
@@ -91,12 +91,12 @@ class AltarOfShadowsEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public AltarOfShadowsEffect copy() {
         return new AltarOfShadowsEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());

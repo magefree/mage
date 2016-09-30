@@ -50,7 +50,7 @@ public class VaultOfWhispers extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public VaultOfWhispers copy() {
         return new VaultOfWhispers(this);
     }

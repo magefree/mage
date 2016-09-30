@@ -39,19 +39,12 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class EagleOfTheWatch extends CardImpl {
+public class EagleOfTheWatch extends mage.sets.journeyintonyx.EagleOfTheWatch {
 
     public EagleOfTheWatch(UUID ownerId) {
-        super(ownerId, 275, "Eagle of the Watch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        super(ownerId);
+        this.cardNumber = "275";
         this.expansionSetCode = "ORI";
-        this.subtype.add("Bird");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
     }
 
     public EagleOfTheWatch(final EagleOfTheWatch card) {

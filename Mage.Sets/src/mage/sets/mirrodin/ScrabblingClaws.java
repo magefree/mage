@@ -74,7 +74,7 @@ public class ScrabblingClaws extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ScrabblingClaws copy() {
         return new ScrabblingClaws(this);
     }
@@ -91,12 +91,12 @@ class ScrabblingClawsEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public ScrabblingClawsEffect copy() {
         return new ScrabblingClawsEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {

@@ -59,7 +59,7 @@ public class TitaniumGolem extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TitaniumGolem copy() {
         return new TitaniumGolem(this);
     }

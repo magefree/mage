@@ -45,7 +45,7 @@ public class BottleGnomes extends mage.sets.tempest.BottleGnomes {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public BottleGnomes copy() {
         return new BottleGnomes(this);
     }

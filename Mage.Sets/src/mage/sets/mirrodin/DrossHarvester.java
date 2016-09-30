@@ -74,7 +74,7 @@ public class DrossHarvester extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public DrossHarvester copy() {
         return new DrossHarvester(this);
     }

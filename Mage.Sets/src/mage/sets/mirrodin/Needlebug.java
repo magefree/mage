@@ -59,7 +59,7 @@ public class Needlebug extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Needlebug copy() {
         return new Needlebug(this);
     }

@@ -73,7 +73,7 @@ public class SerumTank extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SerumTank copy() {
         return new SerumTank(this);
     }
@@ -89,17 +89,17 @@ class SerumTankTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @java.lang.Override
+    @Override
     public SerumTankTriggeredAbility copy() {
         return new SerumTankTriggeredAbility(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
@@ -112,7 +112,7 @@ class SerumTankTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "Whenever {this} or another artifact enters the battlefield, put a charge counter on {this}.";
     }

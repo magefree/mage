@@ -73,7 +73,7 @@ public class ExtraplanarLens extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ExtraplanarLens copy() {
         return new ExtraplanarLens(this);
     }
@@ -96,7 +96,7 @@ class ExtraplanarLensImprintEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent extraplanarLens = game.getPermanentOrLKIBattlefield(source.getSourceId());
@@ -118,7 +118,7 @@ class ExtraplanarLensImprintEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public ExtraplanarLensImprintEffect copy() {
         return new ExtraplanarLensImprintEffect(this);
     }
@@ -135,12 +135,12 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
         super(ability);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent landTappedForMana = game.getPermanentOrLKIBattlefield(event.getSourceId());
         Permanent extraplanarLens = game.getPermanent(getSourceId());
@@ -164,12 +164,12 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return new StringBuilder("Whenever a land with the same name as the exiled card is tapped for mana, ").append(super.getRule()).toString();
     }
 
-    @java.lang.Override
+    @Override
     public ExtraplanarLensTriggeredAbility copy() {
         return new ExtraplanarLensTriggeredAbility(this);
     }

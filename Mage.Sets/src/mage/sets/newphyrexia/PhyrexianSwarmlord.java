@@ -28,22 +28,16 @@
 package mage.sets.newphyrexia;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.InsectInfectToken;
-import mage.players.Player;
+import mage.abilities.dynamicvalue.common.OpponentsPoisonCountersCount;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -76,33 +70,3 @@ public class PhyrexianSwarmlord extends CardImpl {
     }
 }
 
-class OpponentsPoisonCountersCount implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Set<UUID> playerList = game.getOpponents(sourceAbility.getControllerId());
-        for (UUID playerUUID : playerList) {
-            Player player = game.getPlayer(playerUUID);
-            if (player != null) {
-                amount += player.getCounters().getCount(CounterType.POISON);
-            }
-        }
-        return amount;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new OpponentsPoisonCountersCount();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "poison counter your opponents have";
-    }
-}

@@ -45,7 +45,7 @@ public class Thoughtcast extends mage.sets.elspethvstezzeret.Thoughtcast {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Thoughtcast copy() {
         return new Thoughtcast(this);
     }

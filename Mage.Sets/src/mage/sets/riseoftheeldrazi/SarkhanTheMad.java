@@ -27,9 +27,6 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.List;
-import java.util.UUID;
-import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -47,11 +44,15 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.DragonToken2;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -145,7 +146,7 @@ class SarkhanTheMadSacEffect extends OneShotEffect {
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             permanent.sacrifice(this.getId(), game);
-            Token dragonToken = new DragonToken();
+            Token dragonToken = new DragonToken2();
             dragonToken.putOntoBattlefield(1, game, this.getId(), player.getId());
         }
         return false;
@@ -155,7 +156,6 @@ class SarkhanTheMadSacEffect extends OneShotEffect {
     public SarkhanTheMadSacEffect copy() {
         return new SarkhanTheMadSacEffect(this);
     }
-
 }
 
 class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
@@ -197,13 +197,4 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
         return new SarkhanTheMadDragonDamageEffect(this);
     }
 
-}
-
-class DragonToken extends mage.game.permanent.token.DragonToken {
-
-    DragonToken() {
-        super();
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-    }
 }

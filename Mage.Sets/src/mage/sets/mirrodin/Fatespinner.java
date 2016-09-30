@@ -71,7 +71,7 @@ public class Fatespinner extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Fatespinner copy() {
         return new Fatespinner(this);
     }
@@ -96,12 +96,12 @@ class FatespinnerChooseEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public FatespinnerChooseEffect copy() {
         return new FatespinnerChooseEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if(player != null) {
@@ -136,17 +136,17 @@ class FatespinnerSkipEffect extends ReplacementEffectImpl {
         this.phase = effect.phase;
     }
 
-    @java.lang.Override
+    @Override
     public FatespinnerSkipEffect copy() {
         return new FatespinnerSkipEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         EventType type = event.getType();
         return ((phase.equals("Draw step") && type == EventType.DRAW_STEP)
@@ -154,14 +154,14 @@ class FatespinnerSkipEffect extends ReplacementEffectImpl {
             || (phase.equals("Combat phase") && type == EventType.COMBAT_PHASE));
     }
 
-    @java.lang.Override
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         EventType type = event.getType();
         return (type == EventType.DRAW_STEP || type == EventType.PRECOMBAT_MAIN_PHASE
             || type == EventType.POSTCOMBAT_MAIN_PHASE || type == EventType.COMBAT_PHASE);
     }
 
-    @java.lang.Override
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
     }

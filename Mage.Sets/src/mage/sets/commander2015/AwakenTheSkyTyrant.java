@@ -74,17 +74,17 @@ class AwakenTheSkyTyrantTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    @java.lang.Override
+    @Override
     public AwakenTheSkyTyrantTriggeredAbility copy() {
         return new AwakenTheSkyTyrantTriggeredAbility(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(controllerId)) {
             UUID sourceControllerId = game.getControllerId(event.getSourceId());
@@ -95,7 +95,7 @@ class AwakenTheSkyTyrantTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "When a source an opponent controls deals damage to you, " + super.getRule();
     }

@@ -59,7 +59,7 @@ public class TelJiladExile extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TelJiladExile copy() {
         return new TelJiladExile(this);
     }

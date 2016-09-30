@@ -68,7 +68,7 @@ public class HeartwoodShard extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public HeartwoodShard copy() {
         return new HeartwoodShard(this);
     }

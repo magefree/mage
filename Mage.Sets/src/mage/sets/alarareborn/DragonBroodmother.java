@@ -71,18 +71,18 @@ public class DragonBroodmother extends CardImpl {
     public DragonBroodmother copy() {
         return new DragonBroodmother(this);
     }
-}
 
-class DragonToken extends Token {
-    DragonToken() {
-        super("Dragon", "1/1 red and green Dragon creature token with flying and devour 2");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
-        addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour2));
+    class DragonToken extends Token {
+        DragonToken() {
+            super("Dragon", "1/1 red and green Dragon creature token with flying and devour 2");
+            cardType.add(CardType.CREATURE);
+            color.setGreen(true);
+            color.setRed(true);
+            subtype.add("Dragon");
+            power = new MageInt(1);
+            toughness = new MageInt(1);
+            addAbility(FlyingAbility.getInstance());
+            addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour2));
+        }
     }
 }

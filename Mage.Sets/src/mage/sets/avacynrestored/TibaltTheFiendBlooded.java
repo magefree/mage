@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
@@ -190,31 +190,3 @@ class TibaltTheFiendBloodedControlEffect extends ContinuousEffectImpl {
     }
 }
 
-class CardsInTargetHandCount implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (sourceAbility != null) {
-            Player player = game.getPlayer(sourceAbility.getFirstTarget());
-            if (player != null) {
-                return player.getHand().size();
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new CardsInTargetHandCount();
-    }
-
-    @Override
-    public String getMessage() {
-        return "cards in that player's hand";
-    }
-
-    @Override
-    public String toString() {
-        return "";
-    }
-}

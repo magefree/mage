@@ -56,7 +56,7 @@ public class LeoninSkyhunter extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LeoninSkyhunter copy() {
         return new LeoninSkyhunter(this);
     }

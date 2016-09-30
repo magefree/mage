@@ -35,7 +35,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.sets.bornofthegods.TokenAndCounters.CentaurEnchantmentCreatureToken;
+import mage.game.permanent.token.CentaurEnchantmentCreatureToken;
 
 /**
  *

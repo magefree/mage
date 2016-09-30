@@ -109,18 +109,18 @@ class ZektarShrineExpeditionEffect extends OneShotEffect {
         }
         return true;
     }
-}
 
-class ElementalToken extends Token {
+    class ElementalToken extends Token {
 
-    public ElementalToken() {
-        super("Elemental", "7/1 red Elemental creature token with trample and haste");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Elemental");
-        power = new MageInt(7);
-        toughness = new MageInt(1);
-        addAbility(TrampleAbility.getInstance());
-        addAbility(HasteAbility.getInstance());
+        public ElementalToken() {
+            super("Elemental", "7/1 red Elemental creature token with trample and haste");
+            cardType.add(CardType.CREATURE);
+            color.setRed(true);
+            subtype.add("Elemental");
+            power = new MageInt(7);
+            toughness = new MageInt(1);
+            addAbility(TrampleAbility.getInstance());
+            addAbility(HasteAbility.getInstance());
+        }
     }
 }

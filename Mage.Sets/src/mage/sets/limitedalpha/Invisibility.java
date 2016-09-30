@@ -32,13 +32,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -50,11 +50,15 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Invisibility extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
+    static {
+        filter.add(Predicates.not(new SubtypePredicate("Wall")));
+    }
+
     public Invisibility(UUID ownerId) {
         super(ownerId, 60, "Invisibility", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
         this.expansionSetCode = "LEA";
         this.subtype.add("Aura");
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -64,7 +68,8 @@ public class Invisibility extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't be blocked except by Walls.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByWallsEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.AURA)));
     }
 
     public Invisibility(final Invisibility card) {
@@ -74,41 +79,5 @@ public class Invisibility extends CardImpl {
     @Override
     public Invisibility copy() {
         return new Invisibility(this);
-    }
-}
-
-class CantBeBlockedByWallsEffect extends RestrictionEffect {
-
-    public CantBeBlockedByWallsEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Enchanted creature can't be blocked except by Walls";
-    }
-
-    public CantBeBlockedByWallsEffect(final CantBeBlockedByWallsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            if (permanent.getId().equals(enchantment.getAttachedTo())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (!blocker.hasSubtype("Wall", game)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public CantBeBlockedByWallsEffect copy() {
-        return new CantBeBlockedByWallsEffect(this);
     }
 }

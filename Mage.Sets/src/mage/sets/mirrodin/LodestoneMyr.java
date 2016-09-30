@@ -45,7 +45,7 @@ public class LodestoneMyr extends mage.sets.planechase.LodestoneMyr {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LodestoneMyr copy() {
         return new LodestoneMyr(this);
     }

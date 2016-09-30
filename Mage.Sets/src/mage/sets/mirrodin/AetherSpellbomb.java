@@ -45,7 +45,7 @@ public class AetherSpellbomb extends mage.sets.elspethvstezzeret.AetherSpellbomb
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public AetherSpellbomb copy() {
         return new AetherSpellbomb(this);
     }

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class SnappingDrake extends mage.sets.magic2010.SnappingDrake {
+public class SnappingDrake extends mage.sets.ravnica.SnappingDrake {
 
     public SnappingDrake(UUID ownerId) {
         super(ownerId);

@@ -45,7 +45,7 @@ public class BoshIronGolem extends mage.sets.planechase.BoshIronGolem {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public BoshIronGolem copy() {
         return new BoshIronGolem(this);
     }

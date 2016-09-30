@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CrewsVehicleSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
@@ -63,7 +64,7 @@ public class VeteranMotorist extends CardImpl {
         // Whenever Veteran Motorist crews a Vehicle, that Vehicle gets +1/+1 until end of turn.
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("that Vehicle gets +1/+1 until end of turn");
-        this.addAbility(new VeteranMotoristCrewsTriggeredAbility(effect));
+        this.addAbility(new CrewsVehicleSourceTriggeredAbility(effect));
     }
 
     public VeteranMotorist(final VeteranMotorist card) {
@@ -73,43 +74,5 @@ public class VeteranMotorist extends CardImpl {
     @Override
     public VeteranMotorist copy() {
         return new VeteranMotorist(this);
-    }
-}
-
-class VeteranMotoristCrewsTriggeredAbility extends TriggeredAbilityImpl {
-
-    public VeteranMotoristCrewsTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
-    }
-
-    public VeteranMotoristCrewsTriggeredAbility(final VeteranMotoristCrewsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VeteranMotoristCrewsTriggeredAbility copy() {
-        return new VeteranMotoristCrewsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CREWED_VEHICLE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getSourceId())) {
-            for (Effect effect : getEffects()) {
-                // set the vehicle id as target
-                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} crews a Vehicle, " + super.getRule();
     }
 }

@@ -45,7 +45,7 @@ public class Detonate extends mage.sets.fifthedition.Detonate {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Detonate copy() {
         return new Detonate(this);
     }

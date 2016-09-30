@@ -64,7 +64,7 @@ public class SoldierReplica extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SoldierReplica copy() {
         return new SoldierReplica(this);
     }

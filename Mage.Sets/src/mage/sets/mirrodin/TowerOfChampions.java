@@ -61,7 +61,7 @@ public class TowerOfChampions extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TowerOfChampions copy() {
         return new TowerOfChampions(this);
     }

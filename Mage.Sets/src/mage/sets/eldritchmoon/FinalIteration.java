@@ -49,6 +49,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.permanent.token.HumanWizardToken;
 
 /**
  *

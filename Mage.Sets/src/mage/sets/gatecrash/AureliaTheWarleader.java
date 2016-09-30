@@ -27,12 +27,11 @@
 */
 package mage.sets.gatecrash;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -40,15 +39,14 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.turn.TurnMod;
+
+import java.util.UUID;
 
 /**
 *
@@ -154,28 +152,5 @@ class AureliaAttacksTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public AureliaAttacksTriggeredAbility copy() {
        return new AureliaAttacksTriggeredAbility(this);
-    }
-}
-
-class AdditionalCombatPhaseEffect extends OneShotEffect {
-
-    public AdditionalCombatPhaseEffect() {
-       super(Outcome.Benefit);
-       staticText = "After this phase, there is an additional combat phase";
-    }
-
-    public AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
-       super(effect);
-    }
-
-    @Override
-    public AdditionalCombatPhaseEffect copy() {
-       return new AdditionalCombatPhaseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-       game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
-       return true;
     }
 }

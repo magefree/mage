@@ -28,20 +28,16 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
+
+import mage.abilities.effects.common.MistmeadowWitchEffect;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -75,36 +71,3 @@ public class MistmeadowWitch extends CardImpl {
     }
 }
 
-class MistmeadowWitchEffect extends OneShotEffect {
-
-    public MistmeadowWitchEffect() {
-        super(Outcome.Detriment);
-        staticText = "Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step";
-    }
-
-    public MistmeadowWitchEffect(final MistmeadowWitchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Mistmeadow Witch Exile", source.getSourceId(), game)) {
-                //create delayed triggered ability
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public MistmeadowWitchEffect copy() {
-        return new MistmeadowWitchEffect(this);
-    }
-}

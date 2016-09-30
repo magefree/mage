@@ -76,91 +76,91 @@ public class PrimalClay extends CardImpl {
     public PrimalClay copy() {
         return new PrimalClay(this);
     }
-}
 
-class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
+    class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
 
-    private final String choice33 = "a 3/3 creature";
-    private final String choice22 = "a 2/2 creature with flying";
-    private final String choice16 = "a 1/6 creature with defender";
+        private final String choice33 = "a 3/3 artifact creature";
+        private final String choice22 = "a 2/2 artifact creature with flying";
+        private final String choice16 = "a 1/6 artifact creature with defender";
 
-    public PrimalPlasmaReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types";
-    }
-
-    public PrimalPlasmaReplacementEffect(PrimalPlasmaReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())) {
-            Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
-                return true;
-            }
+        public PrimalPlasmaReplacementEffect() {
+            super(Duration.WhileOnBattlefield, Outcome.Benefit);
+            staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types";
         }
-        return false;
-    }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
+        public PrimalPlasmaReplacementEffect(PrimalPlasmaReplacementEffect effect) {
+            super(effect);
+        }
 
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (permanent != null) {
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Choose what " + permanent.getIdName() + " becomes to");
-            choice.getChoices().add(choice33);
-            choice.getChoices().add(choice22);
-            choice.getChoices().add(choice16);
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                while (!choice.isChosen()) {
-                    controller.choose(Outcome.Neutral, choice, game);
-                    if (!controller.canRespond()) {
-                        return false;
-                    }
+        @Override
+        public boolean checksEventType(GameEvent event, Game game) {
+            return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD);
+        }
+
+        @Override
+        public boolean applies(GameEvent event, Ability source, Game game) {
+            if (event.getTargetId().equals(source.getSourceId())) {
+                Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
+                if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
+                    return true;
                 }
             }
-            int power = 0;
-            int toughness = 0;
-            switch (choice.getChoice()) {
-                case choice33:
-                    power = 3;
-                    toughness = 3;
-                    break;
-                case choice22:
-                    power = 2;
-                    toughness = 2;
-                    game.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.Custom), source);
-                    break;
-                case choice16:
-                    power = 1;
-                    toughness = 6;
-                    game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
-                    break;
-            }
-            permanent.getPower().modifyBaseValue(power);
-            permanent.getToughness().modifyBaseValue(toughness);
-            // game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
+            return false;
         }
-        return false;
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return false;
+        }
+
+        @Override
+        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+            Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+            if (permanent != null) {
+                Choice choice = new ChoiceImpl(true);
+                choice.setMessage("Choose what " + permanent.getIdName() + " becomes to");
+                choice.getChoices().add(choice33);
+                choice.getChoices().add(choice22);
+                choice.getChoices().add(choice16);
+                Player controller = game.getPlayer(source.getControllerId());
+                if (controller != null) {
+                    while (!choice.isChosen()) {
+                        controller.choose(Outcome.Neutral, choice, game);
+                        if (!controller.canRespond()) {
+                            return false;
+                        }
+                    }
+                }
+                int power = 0;
+                int toughness = 0;
+                switch (choice.getChoice()) {
+                    case choice33:
+                        power = 3;
+                        toughness = 3;
+                        break;
+                    case choice22:
+                        power = 2;
+                        toughness = 2;
+                        game.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.Custom), source);
+                        break;
+                    case choice16:
+                        power = 1;
+                        toughness = 6;
+                        game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
+                        break;
+                }
+                permanent.getPower().modifyBaseValue(power);
+                permanent.getToughness().modifyBaseValue(toughness);
+                // game.addEffect(new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b), source);
+            }
+            return false;
+
+        }
+
+        @Override
+        public PrimalPlasmaReplacementEffect copy() {
+            return new PrimalPlasmaReplacementEffect(this);
+        }
 
     }
-
-    @Override
-    public PrimalPlasmaReplacementEffect copy() {
-        return new PrimalPlasmaReplacementEffect(this);
-    }
-
 }

@@ -28,6 +28,8 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
+
+import mage.abilities.effects.common.MistmeadowWitchEffect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.cards.CardImpl;

@@ -64,7 +64,7 @@ public class Woebearer extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Woebearer copy() {
         return new Woebearer(this);
     }

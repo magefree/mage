@@ -30,16 +30,13 @@ package mage.sets.tenthedition;
 import java.util.UUID;
 
 import mage.constants.*;
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SkeletonToken;
 
 /**
  *
@@ -65,14 +62,3 @@ public class SpawningPool extends CardImpl {
     }
 }
 
-class SkeletonToken extends Token {
-    SkeletonToken() {
-        super("Skeleton", "a 1/1 black Skeleton creature with \"{B}: Regenerate this creature\"");
-        cardType.add(CardType.CREATURE);
-        this.subtype.add("Skeleton");
-        color.setBlack(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
-    }
-}

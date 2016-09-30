@@ -71,7 +71,7 @@ public class CullingScales extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public CullingScales copy() {
         return new CullingScales(this);
     }
@@ -80,7 +80,7 @@ public class CullingScales extends CardImpl {
 
 class HasLowestCMCAmongstNonlandPermanentsPredicate implements Predicate<Permanent> {
     
-    @java.lang.Override
+    @Override
     public boolean apply(Permanent input, Game game) {
         FilterPermanent filter = new FilterNonlandPermanent();
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, input.getConvertedManaCost()));

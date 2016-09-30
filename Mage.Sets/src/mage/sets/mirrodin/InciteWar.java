@@ -84,7 +84,7 @@ public class InciteWar extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public InciteWar copy() {
         return new InciteWar(this);
     }
@@ -101,12 +101,12 @@ class InciteWarMustAttackEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public InciteWarMustAttackEffect copy() {
         return new InciteWarMustAttackEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {

@@ -78,17 +78,17 @@ class PresenceOfTheMasterTriggeredAbility extends TriggeredAbilityImpl {
         super(abiltity);
     }
 
-    @java.lang.Override
+    @Override
     public PresenceOfTheMasterTriggeredAbility copy() {
         return new PresenceOfTheMasterTriggeredAbility(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.SPELL_CAST;
     }
     
-    @java.lang.Override
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && (spell.getCardType().contains(CardType.ENCHANTMENT))){ 
@@ -100,7 +100,7 @@ class PresenceOfTheMasterTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public String getRule() {
         return "Whenever a player casts an enchantment spell, counter it";
     }
@@ -117,12 +117,12 @@ class CounterEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public CounterEffect copy() {
         return new CounterEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         return game.getStack().counter(this.getTargetPointer().getFirst(game, source), source.getSourceId(), game);
     }

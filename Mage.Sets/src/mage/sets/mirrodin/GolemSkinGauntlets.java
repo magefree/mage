@@ -62,7 +62,7 @@ public class GolemSkinGauntlets extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public GolemSkinGauntlets copy() {
         return new GolemSkinGauntlets(this);
     }
@@ -78,7 +78,7 @@ class GolemSkinGauntletsAttachedCount implements DynamicValue {
     public GolemSkinGauntletsAttachedCount(final GolemSkinGauntletsAttachedCount dynamicValue) {
     }
 
-    @java.lang.Override
+    @Override
     public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
         Permanent equipment = game.getPermanent(source.getSourceId());
@@ -98,17 +98,17 @@ class GolemSkinGauntletsAttachedCount implements DynamicValue {
         return count;
     }
 
-    @java.lang.Override
+    @Override
     public DynamicValue copy() {
         return new GolemSkinGauntletsAttachedCount(this);
     }
 
-    @java.lang.Override
+    @Override
     public String toString() {
         return "1";
     }
 
-    @java.lang.Override
+    @Override
     public String getMessage() {
         return "Equipment attached to it";
     }

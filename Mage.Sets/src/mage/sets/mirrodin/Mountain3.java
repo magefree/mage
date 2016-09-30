@@ -45,7 +45,7 @@ public class Mountain3 extends mage.cards.basiclands.Mountain {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Mountain3 copy() {
         return new Mountain3(this);
     }

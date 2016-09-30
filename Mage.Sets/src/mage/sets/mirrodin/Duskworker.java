@@ -61,7 +61,7 @@ public class Duskworker extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Duskworker copy() {
         return new Duskworker(this);
     }

@@ -44,7 +44,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.sets.bornofthegods.TokenAndCounters.CatSoldierCreatureToken;
+import mage.game.permanent.token.CatSoldierCreatureToken;
 
 /**
  *

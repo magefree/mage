@@ -43,6 +43,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.EldraziHorrorToken;
 import mage.game.stack.Spell;
 
 /**

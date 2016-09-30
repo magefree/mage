@@ -45,7 +45,7 @@ public class LeoninBladetrap extends mage.sets.commander2013.LeoninBladetrap {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LeoninBladetrap copy() {
         return new LeoninBladetrap(this);
     }

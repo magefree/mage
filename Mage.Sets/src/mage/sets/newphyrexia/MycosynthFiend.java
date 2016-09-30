@@ -37,6 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.abilities.dynamicvalue.common.OpponentsPoisonCountersCount;
 
 /**
  *

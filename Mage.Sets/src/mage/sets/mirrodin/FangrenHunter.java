@@ -55,7 +55,7 @@ public class FangrenHunter extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public FangrenHunter copy() {
         return new FangrenHunter(this);
     }

@@ -70,7 +70,7 @@ public class SharedFate extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SharedFate copy() {
         return new SharedFate(this);
     }
@@ -87,12 +87,12 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public SharedFateReplacementEffect copy() {
         return new SharedFateReplacementEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player playerToDraw = game.getPlayer(event.getPlayerId());
@@ -118,12 +118,12 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DRAW_CARD;
     }
 
-    @java.lang.Override
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
     }
@@ -140,17 +140,17 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         return true;
     }
 
-    @java.lang.Override
+    @Override
     public SharedFatePlayEffect copy() {
         return new SharedFatePlayEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {

@@ -58,7 +58,7 @@ public class SomberHoverguard extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SomberHoverguard copy() {
         return new SomberHoverguard(this);
     }

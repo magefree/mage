@@ -70,7 +70,7 @@ public class ClockworkDragon extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ClockworkDragon copy() {
         return new ClockworkDragon(this);
     }
@@ -87,7 +87,7 @@ class ClockworkDragonEffect extends OneShotEffect {
         super(effect);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
@@ -97,7 +97,7 @@ class ClockworkDragonEffect extends OneShotEffect {
         return false;
     }
 
-    @java.lang.Override
+    @Override
     public ClockworkDragonEffect copy() {
         return new ClockworkDragonEffect(this);
     }

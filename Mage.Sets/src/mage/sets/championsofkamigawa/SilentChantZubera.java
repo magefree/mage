@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.game.Game;
+import mage.watchers.common.ZuberasDiedWatcher;
 
 import java.util.UUID;
 

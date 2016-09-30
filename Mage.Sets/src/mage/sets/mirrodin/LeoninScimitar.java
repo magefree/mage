@@ -47,7 +47,7 @@ public class LeoninScimitar extends mage.sets.tenthedition.LeoninScimitar {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LeoninScimitar copy() {
         return new LeoninScimitar(this);
     }

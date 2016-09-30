@@ -45,7 +45,7 @@ public class LumengridWarden extends mage.sets.tenthedition.LumengridWarden {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public LumengridWarden copy() {
         return new LumengridWarden(this);
     }

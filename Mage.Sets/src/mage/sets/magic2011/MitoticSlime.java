@@ -35,6 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.game.permanent.token.OozeToken;
 import mage.game.permanent.token.Token;
 
 /**
@@ -74,18 +75,6 @@ class Ooze2Token extends Token {
         color.setGreen(true);
         power = new MageInt(2);
         toughness = new MageInt(2);
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new Ooze1Token(), 2), false));
-    }
-}
-
-class Ooze1Token extends Token {
-
-    public Ooze1Token() {
-        super("Ooze", "1/1 green Ooze creature tokens");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Ooze");
-        color.setGreen(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new OozeToken(new MageInt(1), new MageInt(1)), 2), false));
     }
 }

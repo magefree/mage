@@ -27,8 +27,6 @@
  */
 package mage.sets.battleforzendikar;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Mode;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -37,7 +35,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KorAllyToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,18 +64,5 @@ public class RetreatToEmeria extends CardImpl {
     @Override
     public RetreatToEmeria copy() {
         return new RetreatToEmeria(this);
-    }
-}
-
-class KorAllyToken extends Token {
-
-    public KorAllyToken() {
-        super("Kor Ally", "1/1 white Kor Ally creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Kor");
-        subtype.add("Ally");
-        color.setWhite(true);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
     }
 }

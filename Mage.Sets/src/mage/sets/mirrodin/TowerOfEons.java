@@ -58,7 +58,7 @@ public class TowerOfEons extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TowerOfEons copy() {
         return new TowerOfEons(this);
     }

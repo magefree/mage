@@ -65,7 +65,7 @@ public class GoblinWarWagon extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public GoblinWarWagon copy() {
         return new GoblinWarWagon(this);
     }

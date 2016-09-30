@@ -100,18 +100,18 @@ class MoltenBirthEffect extends OneShotEffect {
         }
         return false;
     }
-}
 
-class ElementalToken extends Token {
+    class ElementalToken extends Token {
 
-    public ElementalToken() {
-        super("Elemental", "1/1 red Elemental creature");
-        this.setOriginalExpansionSetCode("M14");
-        this.setTokenType(RandomUtil.nextInt(2) + 1);
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Elemental");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+        public ElementalToken() {
+            super("Elemental", "1/1 red Elemental creature");
+            this.setOriginalExpansionSetCode("M14");
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
+            cardType.add(CardType.CREATURE);
+            color.setRed(true);
+            subtype.add("Elemental");
+            power = new MageInt(1);
+            toughness = new MageInt(1);
+        }
     }
 }

@@ -28,28 +28,22 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+
+import mage.abilities.common.FeralDeceiverAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -84,38 +78,3 @@ public class FeralDeceiver extends CardImpl {
     }
 }
 
-class FeralDeceiverAbility extends LimitedTimesPerTurnActivatedAbility {
-
-    public FeralDeceiverAbility(Zone zone, Effect effect, Cost cost) {
-        super(zone, effect, cost);
-    }
-
-    public FeralDeceiverAbility(FeralDeceiverAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FeralDeceiverAbility copy() {
-        return new FeralDeceiverAbility(this);
-    }
-
-    @Override
-    public boolean checkIfClause(Game game) {
-        Player player = game.getPlayer(this.getControllerId());
-        if (player != null) {
-            Cards cards = new CardsImpl();
-            Card card = player.getLibrary().getFromTop(game);
-            cards.add(card);
-            player.revealCards("Feral Deceiver", cards, game);
-            if (card != null && card.getCardType().contains(CardType.LAND)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "{2}: Reveal the top card of your library. If it's a land card, {this} gets +2/+2 and gains trample until end of turn. Activate this ability only once each turn."; 
-    }
-}

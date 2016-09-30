@@ -27,19 +27,16 @@
  */
 package mage.sets.judgment;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +50,7 @@ public class FlaringPain extends CardImpl {
 
 
         // Damage can't be prevented this turn.
-        this.getSpellAbility().addEffect(new DamageCantBePreventedEffect());
+        this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn", false, false));
         // Flashback {R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{R}"), TimingRule.INSTANT));
     }
@@ -65,35 +62,5 @@ public class FlaringPain extends CardImpl {
     @Override
     public FlaringPain copy() {
         return new FlaringPain(this);
-    }
-}
-
-class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public DamageCantBePreventedEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit, false, false);
-        staticText = "Damage can't be prevented this turn";
-    }
-
-    public DamageCantBePreventedEffect(final DamageCantBePreventedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DamageCantBePreventedEffect copy() {
-        return new DamageCantBePreventedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.PREVENT_DAMAGE)) {
-            return true;
-        }
-        return false;
     }
 }

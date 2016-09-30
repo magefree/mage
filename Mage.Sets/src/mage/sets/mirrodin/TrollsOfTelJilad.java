@@ -72,7 +72,7 @@ public class TrollsOfTelJilad extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public TrollsOfTelJilad copy() {
         return new TrollsOfTelJilad(this);
     }

@@ -65,7 +65,7 @@ public class Cloudpost extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Cloudpost copy() {
         return new Cloudpost(this);
     }

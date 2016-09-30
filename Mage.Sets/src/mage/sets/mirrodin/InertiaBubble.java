@@ -64,7 +64,7 @@ public class InertiaBubble extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public InertiaBubble copy() {
         return new InertiaBubble(this);
     }

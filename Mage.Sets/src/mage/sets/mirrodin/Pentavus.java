@@ -45,7 +45,7 @@ public class Pentavus extends mage.sets.elspethvstezzeret.Pentavus {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public Pentavus copy() {
         return new Pentavus(this);
     }

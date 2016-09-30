@@ -61,7 +61,7 @@ public class ForgeArmor extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ForgeArmor copy() {
         return new ForgeArmor(this);
     }

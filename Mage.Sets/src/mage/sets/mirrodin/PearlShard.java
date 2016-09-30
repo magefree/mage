@@ -65,7 +65,7 @@ public class PearlShard extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public PearlShard copy() {
         return new PearlShard(this);
     }

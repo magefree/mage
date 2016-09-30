@@ -69,7 +69,7 @@ public class SkyhunterCub extends CardImpl {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public SkyhunterCub copy() {
         return new SkyhunterCub(this);
     }

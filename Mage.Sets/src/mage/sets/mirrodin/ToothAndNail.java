@@ -45,7 +45,7 @@ public class ToothAndNail extends mage.sets.modernmasters.ToothAndNail {
         super(card);
     }
 
-    @java.lang.Override
+    @Override
     public ToothAndNail copy() {
         return new ToothAndNail(this);
     }

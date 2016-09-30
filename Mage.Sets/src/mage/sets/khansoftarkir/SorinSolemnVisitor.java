@@ -77,7 +77,7 @@ public class SorinSolemnVisitor extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SorinSolemnVisitorVampireToken()), -2));
 
         // -6: You get an emblem with "At the beginning of each opponent's upkeep, that player sacrifices a creature."
-        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new SorinEmblem()), -6));
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new SorinSolemnVisitorEmblem()), -6));
 
     }
 
@@ -95,9 +95,9 @@ public class SorinSolemnVisitor extends CardImpl {
  * Emblem: "At the beginning of each opponent's upkeep, that player sacrifices a
  * creature."
  */
-class SorinEmblem extends Emblem {
+class SorinSolemnVisitorEmblem extends Emblem {
 
-    public SorinEmblem() {
+    public SorinSolemnVisitorEmblem() {
         this.setName("EMBLEM: Sorin, Solemn Visitor");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new SacrificeEffect(new FilterCreaturePermanent(), 1, "that player"), TargetController.OPPONENT, false, true);
         this.getAbilities().add(ability);

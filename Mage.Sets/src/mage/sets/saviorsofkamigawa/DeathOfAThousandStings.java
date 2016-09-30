@@ -30,6 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
