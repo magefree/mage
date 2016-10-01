@@ -122,7 +122,7 @@ class MeleeDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "your life total";
+        return "number of opponents you attacked this combat";
     }
 
     @Override
