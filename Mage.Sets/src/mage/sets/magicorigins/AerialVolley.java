@@ -56,7 +56,7 @@ public class AerialVolley extends CardImpl {
 
         // Aerial Volley deals 3 damage divided as you choose among one, two, or three target creatures with flying.
         Effect effect = new DamageMultiEffect(3);
-        effect.setText("A{this} deals 3 damage divided as you choose among one, two, or three target creatures with flying");
+        effect.setText("{this} deals 3 damage divided as you choose among one, two, or three target creatures with flying");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, filter));
 
