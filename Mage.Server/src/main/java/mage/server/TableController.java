@@ -601,7 +601,7 @@ public class TableController {
             ServerMessagesUtil.getInstance().incGamesStarted();
 
             // log about game started
-            logger.info("GAME started " + match.getGame().getId() + " [" + match.getName() + "] " + creator + " - " + opponent.toString());
+            logger.info("GAME started " + (match.getGame() != null ? match.getGame().getId() : "no Game") + " [" + match.getName() + "] " + creator + " - " + opponent.toString());
             logger.debug("- matchId: " + match.getId() + " [" + match.getName() + "]");
             if (match.getGame() != null) {
                 logger.debug("- chatId:  " + GameManager.getInstance().getChatId(match.getGame().getId()));

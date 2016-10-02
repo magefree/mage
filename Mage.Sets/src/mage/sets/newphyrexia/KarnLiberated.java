@@ -158,11 +158,7 @@ class KarnLiberatedEffect extends OneShotEffect {
                 game.getExile().add(exileId, sourceObject.getIdName(), card);
             }
         }
-        DelayedTriggeredAbility delayedAbility = new KarnLiberatedDelayedTriggeredAbility(exileId);
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(new KarnLiberatedDelayedTriggeredAbility(exileId), source);
         game.start(null);
         return true;
     }

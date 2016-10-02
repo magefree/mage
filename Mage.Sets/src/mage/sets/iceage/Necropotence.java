@@ -29,7 +29,6 @@ package mage.sets.iceage;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -143,14 +142,10 @@ class NecropotenceEffect extends OneShotEffect {
                 Card card = controller.getLibrary().removeFromTop(game);
                 if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, false)) {
                     card.setFaceDown(true, game);
-                    Effect returnToHandEffect = new ReturnToHandTargetEffect(false);
+                    Effect returnToHandEffect = new ReturnToHandTargetEffect();
                     returnToHandEffect.setText("put that face down card into your hand");
                     returnToHandEffect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandEffect, TargetController.YOU);
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandEffect, TargetController.YOU), source);
                     return true;
                 }
                 return false;

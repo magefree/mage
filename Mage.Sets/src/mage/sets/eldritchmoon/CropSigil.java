@@ -68,7 +68,7 @@ public class CropSigil extends CardImpl {
 
         // <i>Delirium</i> &mdash; {2}{G}, Sacrifice Crop Sigil: Return up to one target creature card and up to one target land card from your graveyard to your hand.
         // Activate this ability only if there are four or more card types among cards in your graveyard.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(true, true), new ManaCostsImpl<>("{2}{G}"),
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(true), new ManaCostsImpl<>("{2}{G}"),
                 DeliriumCondition.getInstance(),
                 "<i>Delirium</i> &mdash; {2}{G}, Sacrifice {this}: Return up to one target creature card and up to one target land card from your graveyard to your hand. "
                 + "Activate this ability only if there are four or more card types among cards in your graveyard");

@@ -30,7 +30,6 @@ package mage.sets.eldritchmoon;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -101,12 +100,8 @@ class LongRoadHomeEffect extends OneShotEffect {
                     Card card = game.getCard(permanent.getId());
                     if (card != null) {
                         //create delayed triggered ability
-                        DelayedTriggeredAbility delayedAbility
-                                = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new LongRoadHomeReturnFromExileEffect(new MageObjectReference(card, game)));
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
+                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                                new LongRoadHomeReturnFromExileEffect(new MageObjectReference(card, game))), source);
                     }
                 }
                 return true;
@@ -152,8 +147,7 @@ class LongRoadHomeReturnFromExileEffect extends OneShotEffect {
                     MeldCard meldCard = (MeldCard) card;
                     game.addEffect(new LongRoadHomeEntersBattlefieldEffect(new MageObjectReference(meldCard.getTopHalfCard(), game)), source);
                     game.addEffect(new LongRoadHomeEntersBattlefieldEffect(new MageObjectReference(meldCard.getBottomHalfCard(), game)), source);
-                }
-                else {
+                } else {
                     game.addEffect(new LongRoadHomeEntersBattlefieldEffect(objectToReturn), source);
                 }
                 owner.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);

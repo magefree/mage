@@ -90,11 +90,7 @@ class OtherworldlyOutburstEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility delayedAbility = new OtherworldlyOutburstDelayedTriggeredAbility(source.getFirstTarget());
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(new OtherworldlyOutburstDelayedTriggeredAbility(source.getFirstTarget()), source);
         return true;
     }
 }

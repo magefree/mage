@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -61,10 +60,10 @@ public class VanishIntoMemory extends CardImpl {
         super(ownerId, 31, "Vanish into Memory", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
         this.expansionSetCode = "DDI";
 
-        // Exile target creature. You draw cards equal to that creature's power.        
+        // Exile target creature. You draw cards equal to that creature's power.
         // At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to that creature's toughness.
         this.getSpellAbility().addEffect(new VanishIntoMemoryEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());        
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public VanishIntoMemory(final VanishIntoMemory card) {
@@ -102,12 +101,8 @@ class VanishIntoMemoryEffect extends OneShotEffect {
                     Card card = game.getCard(permanent.getId());
                     if (card != null) {
                         //create delayed triggered ability
-                        DelayedTriggeredAbility delayedAbility
-                                = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new VanishIntoMemoryReturnFromExileEffect(new MageObjectReference(card, game)));
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
+                        game.addDelayedTriggeredAbility(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(
+                                new VanishIntoMemoryReturnFromExileEffect(new MageObjectReference(card, game))), source);
                     }
                 }
                 return true;
@@ -189,7 +184,7 @@ class VanishIntoMemoryEntersBattlefieldEffect extends ReplacementEffectImpl {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent != null) {
             Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {                
+            if (you != null) {
                 you.discard(permanent.getToughness().getValue(), false, source, game);
             }
             discard(); // use only once

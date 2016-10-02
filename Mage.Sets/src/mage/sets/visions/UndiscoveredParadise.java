@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -41,6 +41,7 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -52,7 +53,7 @@ public class UndiscoveredParadise extends CardImpl {
         super(ownerId, 167, "Undiscovered Paradise", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "VIS";
 
-        // {tap}: Add one mana of any color to your mana pool. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.
+        // {T}: Add one mana of any color to your mana pool. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.
         Ability ability = new AnyColorManaAbility();
         ability.addEffect(new UndiscoveredParadiseEffect());
         this.addAbility(ability);
@@ -83,11 +84,9 @@ class UndiscoveredParadiseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            AtBeginningOfUntapDelayedTriggeredAbility delayedAbility = new AtBeginningOfUntapDelayedTriggeredAbility(new ReturnToHandSourceEffect(true));
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            Effect effect = new ReturnToHandTargetEffect();
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            game.addDelayedTriggeredAbility(new AtBeginningOfUntapDelayedTriggeredAbility(effect));
             return true;
         }
         return false;
@@ -112,9 +111,8 @@ class AtBeginningOfUntapDelayedTriggeredAbility extends DelayedTriggeredAbility 
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UNTAP_STEP_PRE ;
+        return event.getType() == GameEvent.EventType.UNTAP_STEP_PRE;
     }
-
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {

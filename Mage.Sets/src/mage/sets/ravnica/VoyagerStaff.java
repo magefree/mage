@@ -91,11 +91,8 @@ class VoyagerStaffEffect extends OneShotEffect {
         if (controller != null && creature != null && sourcePermanent != null) {
             if (controller.moveCardToExileWithInfo(creature, source.getSourceId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                 //create delayed triggered ability
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, false));
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                        new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, false)), source);
                 return true;
             }
         }

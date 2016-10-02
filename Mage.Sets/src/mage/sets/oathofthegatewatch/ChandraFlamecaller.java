@@ -31,7 +31,6 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -67,15 +66,15 @@ public class ChandraFlamecaller extends CardImpl {
         super(ownerId, 104, "Chandra, Flamecaller", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
         this.expansionSetCode = "OGW";
         this.subtype.add("Chandra");
-        
+
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
         // +1: Put two 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
         this.addAbility(new LoyaltyAbility(new ChandraElementalEffect(), 1));
-        
+
         // 0: Discard all the cards in your hand, then draw that many cards plus one.
         this.addAbility(new LoyaltyAbility(new ChandraDrawEffect(), 0));
-        
+
         // -X: Chandra, Flamecaller deals X damage to each creature.
         this.addAbility(new LoyaltyAbility(new DamageAllEffect(ChandraXValue.getDefault(), new FilterCreaturePermanent("creature"))));
     }
@@ -117,11 +116,7 @@ class ChandraElementalEffect extends OneShotEffect {
                 if (tokenPermanent != null) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
                     exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                    DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
                 }
             }
             return true;
@@ -172,7 +167,7 @@ class ChandraDrawEffect extends OneShotEffect {
             for (Card card : cardsInHand) {
                 player.discard(card, source, game);
             }
-            player.drawCards(amount+1, game);
+            player.drawCards(amount + 1, game);
             return true;
         }
         return false;

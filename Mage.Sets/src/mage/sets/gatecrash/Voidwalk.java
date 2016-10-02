@@ -92,12 +92,8 @@ class VoidwalkEffect extends OneShotEffect {
                 if (permanent != null) {
                     int zcc = game.getState().getZoneChangeCounter(permanent.getId());
                     if (permanent.moveToExile(null, "", source.getSourceId(), game)) {
-                        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                                new ReturnToBattlefieldUnderOwnerControlSourceEffect(false, zcc + 1));
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
+                        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                                new ReturnToBattlefieldUnderOwnerControlSourceEffect(false, zcc + 1)), source);
                     }
                 }
             }

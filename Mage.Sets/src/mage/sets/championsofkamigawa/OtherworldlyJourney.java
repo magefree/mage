@@ -103,10 +103,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
                         //create delayed triggered ability
                         DelayedTriggeredAbility delayedAbility
                                 = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OtherworldlyJourneyReturnFromExileEffect(new MageObjectReference(card, game)));
-                        delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(source.getControllerId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        game.addDelayedTriggeredAbility(delayedAbility);
+                        game.addDelayedTriggeredAbility(delayedAbility, source);
                     }
                 }
                 return true;

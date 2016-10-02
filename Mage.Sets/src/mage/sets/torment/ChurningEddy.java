@@ -47,7 +47,7 @@ public class ChurningEddy extends CardImpl {
         this.expansionSetCode = "TOR";
 
         // Return target creature and target land to their owners' hands.
-        Effect effect = new ReturnToHandTargetEffect(true, true);
+        Effect effect = new ReturnToHandTargetEffect(true);
         effect.setText("Return target creature and target land to their owners' hands");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

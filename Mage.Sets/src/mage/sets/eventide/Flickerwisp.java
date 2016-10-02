@@ -28,10 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -53,12 +53,12 @@ import mage.target.TargetPermanent;
  */
 public class Flickerwisp extends CardImpl {
 
-    private static final FilterPermanent filter  = new FilterPermanent("another target permanent");
-    
-    static{
+    private static final FilterPermanent filter = new FilterPermanent("another target permanent");
+
+    static {
         filter.add(new AnotherPredicate());
     }
-    
+
     public Flickerwisp(UUID ownerId) {
         super(ownerId, 6, "Flickerwisp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.expansionSetCode = "EVE";
@@ -69,7 +69,7 @@ public class Flickerwisp extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // When Flickerwisp enters the battlefield, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FlickerwispEffect());
         ability.addTarget(new TargetPermanent(filter));
@@ -105,11 +105,8 @@ class FlickerwispEffect extends OneShotEffect {
         if (controller != null && permanent != null && sourcePermanent != null) {
             if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                 //create delayed triggered ability
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, false));
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                        new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, false)), source);
                 return true;
             }
         }

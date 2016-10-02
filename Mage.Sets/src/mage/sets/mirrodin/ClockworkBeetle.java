@@ -28,22 +28,23 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.effects.common.counter.RemoveCounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -57,7 +58,11 @@ public class ClockworkBeetle extends CardImpl {
         this.subtype.add("Insect");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
+
+        // Clockwork Beetle enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "{this} enters the battlefield with two +1/+1 counters on it"));
+
+        // Whenever Clockwork Beetle attacks or blocks, remove a +1/+1 counter from it at end of combat.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkBeetleEffect(), false));
     }
 
@@ -72,6 +77,7 @@ public class ClockworkBeetle extends CardImpl {
 }
 
 class ClockworkBeetleEffect extends OneShotEffect {
+
     ClockworkBeetleEffect() {
         super(Outcome.UnboostCreature);
         staticText = "remove a +1/+1 counter from {this} at end of combat";
@@ -83,12 +89,12 @@ class ClockworkBeetleEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance()));
-            ability.setSourceId(source.getSourceId());
-            ability.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(ability);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Effect effect = new RemoveCounterTargetEffect(CounterType.P1P1.createInstance());
+            effect.setTargetPointer(new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
+            game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(effect), source);
+            return true;
         }
         return false;
     }
@@ -99,4 +105,3 @@ class ClockworkBeetleEffect extends OneShotEffect {
     }
 
 }
-

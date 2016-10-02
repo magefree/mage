@@ -33,9 +33,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -97,12 +95,8 @@ class SyntheticDestinyEffect extends OneShotEffect {
             cardsToExile.addAll(game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), controller.getId(), game));
             controller.moveCards(cardsToExile, Zone.EXILED, source, game);
             //Delayed ability
-            Effect effect = new SyntheticDestinyDelayedEffect(cardsToExile.size());
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                    new SyntheticDestinyDelayedEffect(cardsToExile.size())), source);
 
             return true;
         }

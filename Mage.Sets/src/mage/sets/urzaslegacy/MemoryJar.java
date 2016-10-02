@@ -55,19 +55,17 @@ import mage.players.Player;
  */
 public class MemoryJar extends CardImpl {
 
-
-
     public MemoryJar(UUID ownerId) {
         super(ownerId, 129, "Memory Jar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.expansionSetCode = "ULG";
 
-        // {tap}, Sacrifice Memory Jar: Each player exiles all cards from his or her hand face down and draws seven cards.
+        // {T}, Sacrifice Memory Jar: Each player exiles all cards from his or her hand face down and draws seven cards.
         // At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each
         //card he or she exiled this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MemoryJarEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-        
+
     }
 
     public MemoryJar(final MemoryJar card) {
@@ -82,30 +80,26 @@ public class MemoryJar extends CardImpl {
 
 class MemoryJarEffect extends OneShotEffect {
 
-    public MemoryJarEffect()
-    {
+    public MemoryJarEffect() {
         super(Outcome.DrawCard);
         staticText = "Each player exiles all cards from his or her hand face down and draws seven cards. At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.";
     }
-    public MemoryJarEffect(final MemoryJarEffect effect)
-    {
+
+    public MemoryJarEffect(final MemoryJarEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) 
-    {
+    public boolean apply(Game game, Ability source) {
         Cards cards = new CardsImpl();
         //Exile hand
-        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null)
-            {
+            if (player != null) {
                 Cards hand = player.getHand();
                 while (hand.size() > 0) {
                     Card card = hand.get(hand.iterator().next(), game);
-                    if(card != null)
-                    {
+                    if (card != null) {
                         card.moveToExile(getId(), "Memory Jar", source.getSourceId(), game);
                         card.setFaceDown(true, game);
                         cards.add(card);
@@ -114,22 +108,16 @@ class MemoryJarEffect extends OneShotEffect {
             }
         }
         //Draw 7 cards
-        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null)
-            {
+            if (player != null) {
                 player.drawCards(7, game);
             }
         }
         //Delayed ability
         Effect effect = new MemoryJarDelayedEffect();
         effect.setValue("MemoryJarCards", cards);
-        DelayedTriggeredAbility delayedAbility = new MemoryJarDelayedTriggeredAbility(effect);
-        
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(new MemoryJarDelayedTriggeredAbility(effect), source);
         return true;
     }
 
@@ -140,16 +128,16 @@ class MemoryJarEffect extends OneShotEffect {
 }
 
 class MemoryJarDelayedEffect extends OneShotEffect {
-        
-    public MemoryJarDelayedEffect()
-    {
+
+    public MemoryJarDelayedEffect() {
         super(Outcome.DrawCard);
-        staticText = "At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.";
+        staticText = "At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way";
     }
-    public MemoryJarDelayedEffect(final MemoryJarDelayedEffect effect)
-    {
+
+    public MemoryJarDelayedEffect(final MemoryJarDelayedEffect effect) {
         super(effect);
     }
+
     @Override
     public MemoryJarDelayedEffect copy() {
         return new MemoryJarDelayedEffect(this);
@@ -157,15 +145,13 @@ class MemoryJarDelayedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Cards cards = (Cards)this.getValue("MemoryJarCards");
-        
-        if(cards != null)
-        {
+        Cards cards = (Cards) this.getValue("MemoryJarCards");
+
+        if (cards != null) {
             //Discard
-            for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null)
-                {
+                if (player != null) {
                     player.discard(player.getHand().size(), false, source, game);
                 }
             }
@@ -178,7 +164,7 @@ class MemoryJarDelayedEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
 }
 
 class MemoryJarDelayedTriggeredAbility extends DelayedTriggeredAbility {
@@ -205,7 +191,5 @@ class MemoryJarDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         return true;
     }
-
-
 
 }

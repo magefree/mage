@@ -30,7 +30,6 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -97,11 +96,7 @@ class BrackwaterElementalSacrificeEffect extends OneShotEffect {
         if (sourcePermanent != null) {
             SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice {this}");
             sacrificeEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            game.addDelayedTriggeredAbility(delayedAbility);
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
         }
         return false;
     }

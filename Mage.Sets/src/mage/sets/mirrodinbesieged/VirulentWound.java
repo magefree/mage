@@ -57,7 +57,6 @@ public class VirulentWound extends CardImpl {
         super(ownerId, 57, "Virulent Wound", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "MBS";
 
-
         // Put a -1/-1 counter on target creature.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.UnboostCreature));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -93,11 +92,7 @@ class VirulentWoundEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility delayedAbility = new VirulentWoundDelayedTriggeredAbility(source.getFirstTarget());
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        game.addDelayedTriggeredAbility(delayedAbility);
+        game.addDelayedTriggeredAbility(new VirulentWoundDelayedTriggeredAbility(source.getFirstTarget()), source);
         return true;
     }
 }

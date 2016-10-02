@@ -86,11 +86,7 @@ public class RainbowVale extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OpponentGainControlEffect());
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OpponentGainControlEffect()));
                 return true;
             }
             return false;

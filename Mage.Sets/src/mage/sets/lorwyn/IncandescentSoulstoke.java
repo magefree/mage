@@ -30,7 +30,6 @@ package mage.sets.lorwyn;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -136,11 +135,7 @@ class IncandescentSoulstokeEffect extends OneShotEffect {
                                 game.addEffect(effect, source);
                                 SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName(), source.getControllerId());
                                 sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
-                                DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect);
-                                delayedAbility.setSourceId(source.getSourceId());
-                                delayedAbility.setControllerId(source.getControllerId());
-                                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                                game.addDelayedTriggeredAbility(delayedAbility);
+                                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
                             }
                         }
                     }
