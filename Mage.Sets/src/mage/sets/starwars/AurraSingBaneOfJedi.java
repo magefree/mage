@@ -133,7 +133,7 @@ class AurraSingBaneOfJediEffect extends OneShotEffect {
             choice.setMessage("Choose mode");
             choice.setChoices(choices);
             while (!controller.choose(outcome, choice, game)) {
-                if (controller.canRespond()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }

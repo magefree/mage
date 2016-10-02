@@ -68,7 +68,7 @@ public class LunarAvenger extends CardImpl {
         this.addAbility(new SunburstAbility(this));
         // Remove a +1/+1 counter from Lunar Avenger: Lunar Avenger gains your choice of flying, first strike, or haste until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LunarAvengerEffect(),
-            new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
+                new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
     }
 
     public LunarAvenger(final LunarAvenger card) {
@@ -80,7 +80,6 @@ public class LunarAvenger extends CardImpl {
         return new LunarAvenger(this);
     }
 }
-
 
 class LunarAvengerEffect extends OneShotEffect {
 
@@ -109,31 +108,29 @@ class LunarAvengerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null) {
+        if (controller != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose ability to add");
             choice.setChoices(choices);
-            while(!controller.choose(outcome, choice, game)) {
-                if(controller.canRespond()) {
+            while (!controller.choose(outcome, choice, game)) {
+                if (!controller.canRespond()) {
                     return false;
                 }
-           }
+            }
 
-           Ability gainedAbility;
-           String chosen = choice.getChoice();
-           if(chosen.equals("Flying")) {
-               gainedAbility = FlyingAbility.getInstance();
-           }
-           else if(chosen.equals("First strike")) {
-                   gainedAbility = FirstStrikeAbility.getInstance();
-           }
-           else {
-               gainedAbility = HasteAbility.getInstance();
-           }
+            Ability gainedAbility;
+            String chosen = choice.getChoice();
+            if (chosen.equals("Flying")) {
+                gainedAbility = FlyingAbility.getInstance();
+            } else if (chosen.equals("First strike")) {
+                gainedAbility = FirstStrikeAbility.getInstance();
+            } else {
+                gainedAbility = HasteAbility.getInstance();
+            }
 
-           game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.EndOfTurn), source);
-           return true;
-       }
-       return false;
+            game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.EndOfTurn), source);
+            return true;
+        }
+        return false;
     }
 }

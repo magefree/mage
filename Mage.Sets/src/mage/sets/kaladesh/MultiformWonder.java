@@ -121,7 +121,7 @@ class MultiformWonderEffect extends OneShotEffect {
             choice.setMessage("Choose ability to add");
             choice.setChoices(choices);
             while (!controller.choose(outcome, choice, game)) {
-                if (controller.canRespond()) {
+                if (!controller.canRespond()) {
                     return false;
                 }
             }

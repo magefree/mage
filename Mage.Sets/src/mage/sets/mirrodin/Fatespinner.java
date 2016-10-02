@@ -44,8 +44,8 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -64,7 +64,7 @@ public class Fatespinner extends CardImpl {
 
         // At the beginning of each opponent's upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new FatespinnerChooseEffect(),
-            TargetController.OPPONENT, false, true));
+                TargetController.OPPONENT, false, true));
     }
 
     public Fatespinner(final Fatespinner card) {
@@ -88,8 +88,8 @@ class FatespinnerChooseEffect extends OneShotEffect {
     }
 
     public FatespinnerChooseEffect() {
-         super(Outcome.Detriment);
-         staticText = "At the beginning of each opponent's upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.";
+        super(Outcome.Detriment);
+        staticText = "At the beginning of each opponent's upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.";
     }
 
     public FatespinnerChooseEffect(final FatespinnerChooseEffect effect) {
@@ -104,12 +104,12 @@ class FatespinnerChooseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if(player != null) {
+        if (player != null) {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose phase or step to skip");
             choice.setChoices(choices);
-            while(!player.choose(outcome, choice, game)) {
-                if(player.canRespond()) {
+            while (!player.choose(outcome, choice, game)) {
+                if (!player.canRespond()) {
                     return false;
                 }
             }
@@ -150,15 +150,15 @@ class FatespinnerSkipEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         EventType type = event.getType();
         return ((phase.equals("Draw step") && type == EventType.DRAW_STEP)
-            || (phase.equals("Main phase") && (type == EventType.PRECOMBAT_MAIN_PHASE || type == EventType.POSTCOMBAT_MAIN_PHASE))
-            || (phase.equals("Combat phase") && type == EventType.COMBAT_PHASE));
+                || (phase.equals("Main phase") && (type == EventType.PRECOMBAT_MAIN_PHASE || type == EventType.POSTCOMBAT_MAIN_PHASE))
+                || (phase.equals("Combat phase") && type == EventType.COMBAT_PHASE));
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         EventType type = event.getType();
         return (type == EventType.DRAW_STEP || type == EventType.PRECOMBAT_MAIN_PHASE
-            || type == EventType.POSTCOMBAT_MAIN_PHASE || type == EventType.COMBAT_PHASE);
+                || type == EventType.POSTCOMBAT_MAIN_PHASE || type == EventType.COMBAT_PHASE);
     }
 
     @Override
