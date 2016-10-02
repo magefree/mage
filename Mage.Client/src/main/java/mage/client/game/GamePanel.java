@@ -1177,7 +1177,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         updateGame(gameView);
-        Map<String, Serializable> options0 = options == null ? new HashMap<String, Serializable>() : options;
+        Map<String, Serializable> options0 = options == null ? new HashMap<>() : options;
         ShowCardsDialog dialog = null;
         if (cardView != null && cardView.size() > 0) {
             dialog = showCards(message, cardView, required, options0, popupMenuType);
@@ -2345,7 +2345,6 @@ public final class GamePanel extends javax.swing.JPanel {
     public String getGameLog() {
         return gameChatPanel.getText();
     }
-
 
     public Map<String, Card> getLoadedCards() {
         return loadedCards;

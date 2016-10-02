@@ -42,6 +42,7 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
 
@@ -86,7 +87,14 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                     if (sourceObject == null) {
                         sourceObject = game.getPermanent(ability.getSourceId());
                     }
-                    isCard = true;
+                    if (sourceObject == null) {
+                        sourceObject = game.getObject(ability.getSourceId());
+                        if (sourceObject instanceof PermanentToken) {
+                            isPermanent = true;
+                        }
+                    } else {
+                        isCard = true;
+                    }
                     break;
                 case BATTLEFIELD:
                     sourceObject = game.getPermanent(ability.getSourceId());
