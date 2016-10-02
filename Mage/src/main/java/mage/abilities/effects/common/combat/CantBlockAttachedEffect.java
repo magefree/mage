@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -41,17 +42,27 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class CantBlockAttachedEffect extends RestrictionEffect {
 
+    private final FilterCreaturePermanent filter;
+
     public CantBlockAttachedEffect(AttachmentType attachmentType) {
         this(attachmentType, Duration.WhileOnBattlefield);
     }
 
     public CantBlockAttachedEffect(AttachmentType attachmentType, Duration duration) {
+        this(attachmentType, duration, new FilterCreaturePermanent());
+    }
+
+    public CantBlockAttachedEffect(AttachmentType attachmentType, Duration duration, FilterCreaturePermanent filter) {
         super(duration);
+        this.filter = filter;
         StringBuilder sb = new StringBuilder();
         if (attachmentType.equals(AttachmentType.AURA)) {
             sb.append("Enchanted creature can't block");
         } else {
             sb.append("Equipped creature can't block");
+        }
+        if (!filter.getMessage().equals("creature")) {
+            sb.append(" ").append(filter.getMessage());
         }
         if (!duration.toString().isEmpty()) {
             sb.append(" ").append(duration.toString());
@@ -61,6 +72,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
 
     public CantBlockAttachedEffect(final CantBlockAttachedEffect effect) {
         super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
@@ -84,7 +96,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+        return !filter.match(attacker, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
