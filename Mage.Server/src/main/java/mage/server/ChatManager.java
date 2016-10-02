@@ -107,6 +107,7 @@ public class ChatManager {
     }
 
     static String lastMessage = "";
+
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
@@ -119,8 +120,8 @@ public class ChatManager {
                     return;
                 }
             }
-            
-            if (message.equals(lastMessage)) {
+
+            if (!messageType.equals(MessageType.GAME) && message.equals(lastMessage)) {
                 return;
             }
             lastMessage = message;
@@ -128,12 +129,12 @@ public class ChatManager {
         }
     }
 
-    private static final String COMMANDS_LIST =
-            "<br/>List of commands:" +
-            "<br/>\\history or \\h [username] - shows the history of a player" +
-            "<br/>\\me - shows the history of the current player" +
-            "<br/>\\list or \\l - Show a list of commands" +
-            "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name";
+    private static final String COMMANDS_LIST
+            = "<br/>List of commands:"
+            + "<br/>\\history or \\h [username] - shows the history of a player"
+            + "<br/>\\me - shows the history of the current player"
+            + "<br/>\\list or \\l - Show a list of commands"
+            + "<br/>\\whisper or \\w [player name] [text] - whisper to the player with the given name";
 
     private boolean performUserCommand(User user, String message, UUID chatId, boolean doError) {
         String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
