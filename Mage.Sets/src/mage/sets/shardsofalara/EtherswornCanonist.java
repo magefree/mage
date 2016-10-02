@@ -27,10 +27,11 @@
  */
 package mage.sets.shardsofalara;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -44,6 +45,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 /**
@@ -77,28 +79,29 @@ public class EtherswornCanonist extends CardImpl {
 
 class EtherswornCanonistWatcher extends Watcher {
 
-    private Map<UUID, Boolean> castNonartifactSpell = new HashMap<>();
-    
+    private Set<UUID> castNonartifactSpell = new HashSet<>();
+
     public EtherswornCanonistWatcher() {
-        super("EtherswornCanonistWatcher", WatcherScope.GAME);
+        super(EtherswornCanonistWatcher.class.getName(), WatcherScope.GAME);
     }
 
     public EtherswornCanonistWatcher(final EtherswornCanonistWatcher watcher) {
         super(watcher);
-        for (Map.Entry<UUID, Boolean> entry: watcher.castNonartifactSpell.entrySet()) {
-            castNonartifactSpell.put(entry.getKey(), entry.getValue());
-        }
+        this.castNonartifactSpell.addAll(watcher.castNonartifactSpell);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Card card = game.getCard(event.getSourceId());
-            if(card != null && !card.getCardType().contains(CardType.ARTIFACT)){
-                UUID playerId = event.getPlayerId();
-                if (playerId != null) {
-                    castNonartifactSpell.put(playerId, true);
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId() != null) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell == null) {
+                MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
+                if (mageObject instanceof Spell) {
+                    spell = (Spell) mageObject;
                 }
+            }
+            if (spell != null && !spell.getCardType().contains(CardType.ARTIFACT)) {
+                castNonartifactSpell.add(event.getPlayerId());
             }
         }
     }
@@ -107,12 +110,10 @@ class EtherswornCanonistWatcher extends Watcher {
     public void reset() {
         castNonartifactSpell.clear();
     }
-    
-    public boolean castNonArtifactSpell(UUID player){
-        Boolean value = castNonartifactSpell.get(player);
-        return value != null && value;
-    }
 
+    public boolean castNonArtifactSpell(UUID playerId) {
+        return castNonartifactSpell.contains(playerId);
+    }
 
     @Override
     public EtherswornCanonistWatcher copy() {
@@ -144,9 +145,9 @@ class EtherswornCanonistReplacementEffect extends ContinuousRuleModifyingEffectI
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        EtherswornCanonistWatcher watcher = (EtherswornCanonistWatcher)game.getState().getWatchers().get("EtherswornCanonistWatcher");
+        EtherswornCanonistWatcher watcher = (EtherswornCanonistWatcher) game.getState().getWatchers().get(EtherswornCanonistWatcher.class.getName());
         Card card = game.getCard(event.getSourceId());
-        if (card != null && !card.getCardType().contains(CardType.ARTIFACT) && watcher.castNonArtifactSpell(event.getPlayerId())) {  
+        if (card != null && !card.getCardType().contains(CardType.ARTIFACT) && watcher.castNonArtifactSpell(event.getPlayerId())) {
             return true;
         }
         return false;
