@@ -30,6 +30,7 @@ package mage.game.tournament;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.UUID;
+import mage.constants.MultiplayerAttackOption;
 
 import mage.constants.TournamentPlayerState;
 import mage.game.events.TableEvent;
@@ -65,6 +66,7 @@ public abstract class TournamentSwiss extends TournamentImpl {
                 playRound(round);
             }
         } else {
+            options.matchOptions.setAttackOption(MultiplayerAttackOption.MULTIPLE);
             MultiplayerRound round = createMultiplayerRound();
             playMultiplayerRound(round);
         }
@@ -114,6 +116,7 @@ public abstract class TournamentSwiss extends TournamentImpl {
 
         MultiplayerRound round = null;
         if (options.matchOptions.getNumSeats() > 2) {
+            options.matchOptions.setAttackOption(MultiplayerAttackOption.MULTIPLE);
             RoundPairings roundPairings;
             if (roundPlayers.size() <= 16) {
                 SwissPairingMinimalWeightMatching swissPairing = new SwissPairingMinimalWeightMatching(roundPlayers, rounds, isLastRound);

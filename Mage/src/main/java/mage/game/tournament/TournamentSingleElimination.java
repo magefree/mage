@@ -31,6 +31,7 @@ package mage.game.tournament;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.constants.MultiplayerAttackOption;
 import mage.game.events.TableEvent;
 
 /**
@@ -60,6 +61,7 @@ public abstract class TournamentSingleElimination extends TournamentImpl {
                 eliminatePlayers(round);
             }        
         } else {
+            options.matchOptions.setAttackOption(MultiplayerAttackOption.MULTIPLE);
             MultiplayerRound round = new MultiplayerRound(0, this, options.matchOptions.getNumSeats());
             for (TournamentPlayer player : getActivePlayers()) {
                 round.addPlayer(player);
