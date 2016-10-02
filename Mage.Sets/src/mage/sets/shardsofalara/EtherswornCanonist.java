@@ -145,10 +145,10 @@ class EtherswornCanonistReplacementEffect extends ContinuousRuleModifyingEffectI
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        EtherswornCanonistWatcher watcher = (EtherswornCanonistWatcher) game.getState().getWatchers().get(EtherswornCanonistWatcher.class.getName());
         Card card = game.getCard(event.getSourceId());
-        if (card != null && !card.getCardType().contains(CardType.ARTIFACT) && watcher.castNonArtifactSpell(event.getPlayerId())) {
-            return true;
+        if (card != null && !card.getCardType().contains(CardType.ARTIFACT)) {
+            EtherswornCanonistWatcher watcher = (EtherswornCanonistWatcher) game.getState().getWatchers().get(EtherswornCanonistWatcher.class.getName());
+            return watcher != null && watcher.castNonArtifactSpell(event.getPlayerId());
         }
         return false;
     }
