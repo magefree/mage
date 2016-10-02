@@ -40,6 +40,7 @@ import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -118,12 +119,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
             if (controller.searchLibrary(target, game)) {
                 UUID exileZone = CardUtil.getCardExileZoneId(game, source);
                 if (target.getTargets().size() > 0) {
-                    for (UUID cardId : target.getTargets()) {
-                        Card card = controller.getLibrary().getCard(cardId, game);
-                        if (card != null) {
-                            controller.moveCardToExileWithInfo(card, exileZone, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                        }
-                    }
+                    controller.moveCardsToExile(new CardsImpl(target.getTargets()).getCards(game), source, game, true, exileZone, sourceObject.getIdName());
                 }
             }
             controller.shuffleLibrary(source, game);
@@ -161,7 +157,6 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
             if (cards.size() > 0 && controller.choose(Outcome.PlayForFree, cards, target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    game.getExile().removeCard(card, game);
                     controller.cast(card.getSpellAbility(), game, true);
                 }
             }
