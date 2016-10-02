@@ -37,7 +37,7 @@ public class ShipwreckSinger extends mage.sets.theros.ShipwreckSinger {
 
     public ShipwreckSinger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = "205";
+        this.cardNumber = "206";
         this.expansionSetCode = "CN2";
     }
 

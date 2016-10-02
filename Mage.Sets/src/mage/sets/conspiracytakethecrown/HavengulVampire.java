@@ -37,7 +37,7 @@ public class HavengulVampire extends mage.sets.avacynrestored.HavengulVampire {
 
     public HavengulVampire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = "154";
+        this.cardNumber = "164";
         this.expansionSetCode = "CN2";
     }
 

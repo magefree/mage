@@ -38,7 +38,7 @@ public class InquisitionOfKozilek extends mage.sets.riseoftheeldrazi.Inquisition
 
     public InquisitionOfKozilek(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = "146";
+        this.cardNumber = "140";
         this.expansionSetCode = "CN2";
         this.rarity = Rarity.RARE;
     }

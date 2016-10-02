@@ -37,7 +37,7 @@ public class Lance extends mage.sets.limitedalpha.Lance {
 
     public Lance(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = "187";
+        this.cardNumber = "211";
         this.expansionSetCode = "3ED";
     }
 

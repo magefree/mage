@@ -37,7 +37,7 @@ public class Tunnel extends mage.sets.revisededition.Tunnel {
 
     public Tunnel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = "142";
+        this.cardNumber = "245";
         this.expansionSetCode = "4ED";
     }
 
