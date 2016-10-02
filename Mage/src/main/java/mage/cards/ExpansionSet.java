@@ -120,10 +120,12 @@ public abstract class ExpansionSet implements Serializable {
         // since it adds lands then commons before uncommons
         // and rares this should be the least disruptive.
         List<Card> theBooster = this.createBooster();
-        List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
 
-        while (15 > theBooster.size()) {
-            addToBooster(theBooster, commons);
+        if (15 > theBooster.size()) {
+            List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
+            while (15 > theBooster.size()) {
+                addToBooster(theBooster, commons);
+            }
         }
 
         while (theBooster.size() > 15) {
@@ -235,6 +237,7 @@ public abstract class ExpansionSet implements Serializable {
      * Can be overwritten to add a replacement for common card in boosters
      *
      * @param booster
+     * @param number
      */
     public void addSpecialCommon(List<Card> booster, int number) {
 
@@ -329,9 +332,6 @@ public abstract class ExpansionSet implements Serializable {
             if (numBoosterDoubleFaced > -1) {
                 criteria.doubleFaced(false);
             }
-//            if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-//                criteria.maxCardNumber(maxCardNumberInBooster);
-//            }
             savedCardsInfos = CardRepository.instance.findCards(criteria);
             // Workaround after card number is numeric
             if (maxCardNumberInBooster != Integer.MAX_VALUE) {
