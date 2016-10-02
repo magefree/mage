@@ -55,6 +55,10 @@ public class RepairAbility extends DiesTriggeredAbility {
         return ruleText;
     }
 
+    @Override
+    public RepairAbility copy() {
+        return new RepairAbility(this);
+    }
 }
 
 class RepairCastFromGraveyardEffect extends AsThoughEffectImpl {

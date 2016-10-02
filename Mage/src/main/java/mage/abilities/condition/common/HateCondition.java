@@ -55,7 +55,7 @@ public class HateCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         LifeLossOtherFromCombatWatcher watcher = (LifeLossOtherFromCombatWatcher) game.getState().getWatchers().get(LifeLossOtherFromCombatWatcher.class.getName());
-        return watcher != null && watcher.opponentLostLifeOtherFromCombat(source.getControllerId());
+        return watcher != null && watcher.opponentLostLifeOtherFromCombat(source.getControllerId(), game);
     }
 
     @Override

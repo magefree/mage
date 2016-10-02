@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.watchers.Watcher;
 
 /*
@@ -61,9 +62,14 @@ public class LifeLossOtherFromCombatWatcher extends Watcher {
         }
     }
 
-    public boolean opponentLostLifeOtherFromCombat(UUID playerId) {
-        return (!players.contains(playerId) && players.size() > 0)
-                || (players.contains(playerId) && players.size() > 1);
+    public boolean opponentLostLifeOtherFromCombat(UUID playerId, Game game) {
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            if (players.stream().anyMatch((damagedPlayerId) -> (player.hasOpponent(damagedPlayerId, game)))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

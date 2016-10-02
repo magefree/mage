@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.HateCondition;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -41,7 +42,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -57,10 +57,8 @@ public class Terentatek extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Terentatek can't attack or block unless you control a Sith.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new Terentatek1RestrictionEffect()));
-
         // <i>Hate</i> &mdash; If an opponent lost life from source other than combat damage this turn, Terentatek may attack as though you controlled a Sith.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new Terentatek2RestrictionEffect()), new LifeLossOtherFromCombatWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new Terentatek1RestrictionEffect()));
 
     }
 
@@ -84,7 +82,8 @@ class Terentatek1RestrictionEffect extends RestrictionEffect {
 
     public Terentatek1RestrictionEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "{this} can't attack or block unless you control a Sith";
+        staticText = "{this} can't attack or block unless you control a Sith."
+                + "<br><br><i>Hate</i> &mdash; If an opponent lost life from source other than combat damage this turn, {this} may attack as though you controlled a Sith";
     }
 
     public Terentatek1RestrictionEffect(final Terentatek1RestrictionEffect effect) {
@@ -98,52 +97,22 @@ class Terentatek1RestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Game game) {
-        return false;
+        Ability source = (Ability) getValue("source");
+        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0
+                || HateCondition.getInstance().apply(game, source);
     }
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
+
         if (permanent.getId().equals(source.getSourceId())) {
-            if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
-                return false;
-            }
+            setValue("source", source);
             return true;
-        }
-        return false;
-    }
-}
-
-class Terentatek2RestrictionEffect extends RestrictionEffect {
-
-    public Terentatek2RestrictionEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "<i>Hate</i> &mdash; If an opponent lost life from source other than combat damage this turn, {this} may attack as though you controlled a Sith.";
-    }
-
-    public Terentatek2RestrictionEffect(final Terentatek2RestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public Terentatek2RestrictionEffect copy() {
-        return new Terentatek2RestrictionEffect(this);
-    }
-
-    @Override
-    public boolean canAttack(Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            LifeLossOtherFromCombatWatcher watcher = (LifeLossOtherFromCombatWatcher) game.getState().getWatchers().get("NonCombatDamageWatcher");
-            return watcher != null && watcher.opponentLostLifeOtherFromCombat(source.getControllerId());
         }
         return false;
     }

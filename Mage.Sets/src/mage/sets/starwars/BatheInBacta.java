@@ -47,18 +47,11 @@ public class BatheInBacta extends CardImpl {
         super(ownerId, 129, "Bathe in Bacta", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "SWS";
 
-        // You gain 6 life.        
+        // You gain 6 life. If you lost life from a source other than combat damage this turn, you gain 9 life instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new GainLifeEffect(6),
+                new GainLifeEffect(6), new GainLifeEffect(9),
                 new InvertCondition(HateCondition.getInstance()),
-                "You gain 6 life"));
-
-        // If you lost life from a source other than combat damage this turn, you gain 9 life instead.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new GainLifeEffect(9),
-                HateCondition.getInstance(),
-                "If you lost life from a source other than combat damage this turn, you gain 9 life instead"));
-
+                "You gain 6 life. If you lost life from a source other than combat damage this turn, you gain 9 life instead"));
         this.getSpellAbility().addWatcher(new LifeLossOtherFromCombatWatcher());
     }
 
