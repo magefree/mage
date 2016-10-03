@@ -146,7 +146,7 @@ public class DynamicManaEffect extends BasicManaEffect {
             } else {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    ChoiceColor choiceColor = new ChoiceColor();
+                    ChoiceColor choiceColor = new ChoiceColor(true);
                     for (int i = 0; i < count; i++) {
                         if (!choiceColor.isChosen()) {
                             while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
