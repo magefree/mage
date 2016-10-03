@@ -307,8 +307,7 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
         for (UUID modeId : this.getModes().getSelectedModes()) {
-            Mode mode = this.getModes().get(modeId);
-            this.getModes().setActiveMode(mode);
+            this.getModes().setActiveMode(modeId);
             //20121001 - 601.2c
             // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
             // each target the spell requires. A spell may require some targets only if an alternative or
@@ -330,7 +329,7 @@ public abstract class AbilityImpl implements Ability {
                 sourceObject.adjustTargets(this, game);
             }
             // Flashback abilities haven't made the choices the underlying spell might need for targetting.
-            if (!(this instanceof FlashbackAbility) && mode.getTargets().size() > 0 && mode.getTargets().chooseTargets(
+            if (!(this instanceof FlashbackAbility) && getTargets().size() > 0 && getTargets().chooseTargets(
                     getEffects().get(0).getOutcome(), this.controllerId, this, noMana, game) == false) {
                 if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
                     game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");

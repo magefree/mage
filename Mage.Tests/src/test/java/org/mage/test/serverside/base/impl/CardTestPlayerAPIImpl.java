@@ -1131,7 +1131,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * additional by setcode e.g. "creatureName-M15" you can add [no copy] to
      * the end of the target name to prohibite targets that are copied you can
      * add [only copy] to the end of the target name to allow only targets that
-     * are copies
+     * are copies For modal spells use a prefix with the mode number:
+     * mode=1Lightning Bolt^mode=2Silvercoat Lion
      */
     public void addTarget(TestPlayer player, String target) {
         player.addTarget(target);
