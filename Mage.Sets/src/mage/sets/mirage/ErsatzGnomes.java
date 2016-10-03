@@ -25,55 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.mirage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.util.RandomUtil;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.TargetPermanent;
+import mage.target.TargetSpell;
 
 /**
  *
  * @author fireshoes
  */
-public class ThopterColorlessToken extends Token {
+public class ErsatzGnomes extends CardImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    public ErsatzGnomes(UUID ownerId) {
+        super(ownerId, 266, "Ersatz Gnomes", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "MIR";
+        this.subtype.add("Gnome");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-    static {
-        tokenImageSets.addAll(Arrays.asList("MBS", "ORI"));
+        // {tap}: Target spell becomes colorless.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(new ObjectColor(), Duration.Custom), new TapSourceCost());
+        ability.addTarget(new TargetSpell());
+        this.addAbility(ability);
+
+        // {tap}: Target permanent becomes colorless until end of turn.
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(new ObjectColor(), Duration.EndOfTurn), new TapSourceCost());
+        ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
     }
 
-    public ThopterColorlessToken() {
-        super("Thopter", "1/1 colorless Thopter artifact creature token with flying");
-        availableImageSetCodes = tokenImageSets;
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Thopter");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-
-        addAbility(FlyingAbility.getInstance());
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("ORI")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1);
-        }
-    }
-
-    public ThopterColorlessToken(final ThopterColorlessToken token) {
-        super(token);
+    public ErsatzGnomes(final ErsatzGnomes card) {
+        super(card);
     }
 
     @Override
-    public ThopterColorlessToken copy() {
-        return new ThopterColorlessToken(this); //To change body of generated methods, choose Tools | Templates.
+    public ErsatzGnomes copy() {
+        return new ErsatzGnomes(this);
     }
-
 }

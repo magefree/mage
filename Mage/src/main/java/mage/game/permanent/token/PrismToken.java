@@ -31,49 +31,42 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
-import mage.util.RandomUtil;
 
 /**
  *
  * @author fireshoes
  */
-public class ThopterColorlessToken extends Token {
+public class PrismToken extends Token {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("MBS", "ORI"));
+        tokenImageSets.addAll(Arrays.asList("VIS"));
     }
 
-    public ThopterColorlessToken() {
-        super("Thopter", "1/1 colorless Thopter artifact creature token with flying");
+    public PrismToken() {
+        super("Prism", "0/1 colorless Prism artifact creature token");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Thopter");
-        power = new MageInt(1);
+        subtype.add("Prism");
+        power = new MageInt(0);
         toughness = new MageInt(1);
-
-        addAbility(FlyingAbility.getInstance());
     }
 
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("ORI")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1);
-        }
     }
 
-    public ThopterColorlessToken(final ThopterColorlessToken token) {
+    public PrismToken(final PrismToken token) {
         super(token);
     }
 
     @Override
-    public ThopterColorlessToken copy() {
-        return new ThopterColorlessToken(this); //To change body of generated methods, choose Tools | Templates.
+    public PrismToken copy() {
+        return new PrismToken(this); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

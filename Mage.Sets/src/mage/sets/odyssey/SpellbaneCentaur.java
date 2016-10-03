@@ -25,55 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
+package mage.sets.odyssey;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.CantBeTargetedAllEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.util.RandomUtil;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterObject;
+import mage.filter.FilterStackObject;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author fireshoes
  */
-public class ThopterColorlessToken extends Token {
+public class SpellbaneCentaur extends CardImpl {
 
-    final static private List<String> tokenImageSets = new ArrayList<>();
+    private static final FilterObject filter = new FilterStackObject("blue spells or abilities from blue sources");
 
     static {
-        tokenImageSets.addAll(Arrays.asList("MBS", "ORI"));
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public ThopterColorlessToken() {
-        super("Thopter", "1/1 colorless Thopter artifact creature token with flying");
-        availableImageSetCodes = tokenImageSets;
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Thopter");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
+    public SpellbaneCentaur(UUID ownerId) {
+        super(ownerId, 271, "Spellbane Centaur", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "ODY";
+        this.subtype.add("Centaur");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        addAbility(FlyingAbility.getInstance());
+        // Creatures you control can't be the targets of blue spells or abilities from blue sources.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new CantBeTargetedAllEffect(new FilterControlledCreaturePermanent("Creatures you control"),
+                        filter, Duration.WhileOnBattlefield)));
     }
 
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("ORI")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1);
-        }
-    }
-
-    public ThopterColorlessToken(final ThopterColorlessToken token) {
-        super(token);
+    public SpellbaneCentaur(final SpellbaneCentaur card) {
+        super(card);
     }
 
     @Override
-    public ThopterColorlessToken copy() {
-        return new ThopterColorlessToken(this); //To change body of generated methods, choose Tools | Templates.
+    public SpellbaneCentaur copy() {
+        return new SpellbaneCentaur(this);
     }
-
 }
