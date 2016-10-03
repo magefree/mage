@@ -42,6 +42,7 @@ import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.Effect;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
@@ -213,6 +214,13 @@ public class Spell extends StackObjImpl implements Card {
                         for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                             Mode mode = spellAbility.getModes().get(modeId);
                             spellAbility.getModes().setActiveMode(mode);
+                            
+                            if (spellAbility.getModes().isEachModeMoreThanOnce()) {
+                                for (Effect effect : spellAbility.getEffects()) {
+                                    effect.clearEffectTargets();
+                                }
+                            }
+                            
                             if (mode.getTargets().stillLegal(spellAbility, game)) {
                                 if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
                                     updateOptionalCosts(index);
