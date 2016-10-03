@@ -34,6 +34,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -93,6 +94,10 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
             StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
             MageObject sourceObject;
             if (stackObject instanceof StackAbility) {
+                if (filterSource instanceof FilterSpell) {
+                    // only spells have to be selected
+                    return false;
+                }
                 sourceObject = ((StackAbility) stackObject).getSourceObject(game);
             } else {
                 sourceObject = stackObject;
