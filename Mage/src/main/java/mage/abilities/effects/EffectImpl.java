@@ -152,4 +152,8 @@ public abstract class EffectImpl implements Effect {
     public boolean applyEffectsAfter() {
         return applyEffectsAfter;
     }
+    
+    @Override
+    public void clearEffectTargets() {
+    }
 }

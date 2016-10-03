@@ -57,6 +57,7 @@ public interface Effect extends Serializable {
     Object getValue(String key);
     void setApplyEffectsAfter();
     boolean applyEffectsAfter();
+    void clearEffectTargets();
 
     Effect copy();
 

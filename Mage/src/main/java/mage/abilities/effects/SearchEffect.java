@@ -53,4 +53,11 @@ public abstract class SearchEffect extends OneShotEffect {
     public TargetCard getTarget() {
         return target;
     }
+    
+    @Override
+    public void clearEffectTargets() {
+        if (target != null) { 
+            target.clearChosen();
+        }
+    }
 }
