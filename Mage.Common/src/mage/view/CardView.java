@@ -324,7 +324,7 @@ public class CardView extends SimpleCardView {
                 for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                     Mode mode = spellAbility.getModes().get(modeId);
                     if (mode.getTargets().size() > 0) {
-                        setTargets(spellAbility.getTargets());
+                        setTargets(mode.getTargets());
                     }
                 }
             }
