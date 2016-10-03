@@ -48,9 +48,6 @@ public class Constructed extends DeckValidator {
     protected List<String> setCodes = new ArrayList<>();
     protected List<Rarity> rarities = new ArrayList<>();
 
-    protected boolean allowAllCustomSets = false;
-    protected Set<String> allowedCustomSetCodes = new HashSet<>();
-
     public Constructed() {
         super("Constructed");
     }
@@ -173,12 +170,7 @@ public class Constructed extends DeckValidator {
      * @return Whether the set is legal in this format.
      */
     protected boolean isSetAllowed(String code) {
-        // To check here for custom set makes no sens IMHO because the format does define what's aloowed and what not
-//        if (Sets.isCustomSet(code)) {
-//            return allowAllCustomSets || allowedCustomSetCodes.contains(code);
-//        } else {
         return setCodes.isEmpty() || setCodes.contains(code);
-//        }
     }
 
     /**

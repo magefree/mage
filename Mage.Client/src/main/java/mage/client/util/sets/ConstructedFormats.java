@@ -25,6 +25,10 @@ public class ConstructedFormats {
     public static final String EXTENDED = "- Extended";
     public static final String FRONTIER = "- Frontier";
     public static final String MODERN = "- Modern";
+    public static final String VINTAGE_LEGACY = "- Vintage / Legacy";
+    ;
+    public static final String CUSTOM = "- Custom";
+    ;
     public static final Standard STANDARD_CARDS = new Standard();
 
     private static final Map<String, List<String>> underlyingSetCodesPerFormat = new HashMap<>();
@@ -50,50 +54,49 @@ public class ConstructedFormats {
     }
 
     public static void ensureLists() {
-        if (getSetsByFormat(ConstructedFormats.STANDARD) == null) {
+        if (underlyingSetCodesPerFormat.isEmpty()) {
             buildLists();
         }
     }
 
     private static void buildLists() {
+        underlyingSetCodesPerFormat.put(STANDARD, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(EXTENDED, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(FRONTIER, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(MODERN, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(VINTAGE_LEGACY, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(CUSTOM, new ArrayList<>());
         final Map<String, ExpansionInfo> expansionInfo = new HashMap<>();
         formats.clear(); // prevent NPE on sorting if this is not the first try
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
             expansionInfo.put(set.getName(), set);
             formats.add(set.getName());
+
+            underlyingSetCodesPerFormat.put(set.getName(), new ArrayList<>());
+            underlyingSetCodesPerFormat.get(set.getName()).add(set.getCode());
+
+            // create the play formats
+            if (set.getType().equals(SetType.CUSTOM_SET)) {
+                underlyingSetCodesPerFormat.get(CUSTOM).add(set.getCode());
+                continue;
+            }
+            underlyingSetCodesPerFormat.get(VINTAGE_LEGACY).add(set.getCode());
             if (set.getType().equals(SetType.CORE) || set.getType().equals(SetType.EXPANSION) || set.getType().equals(SetType.SUPPLEMENTAL_STANDARD_LEGAL)) {
                 if (STANDARD_CARDS.getSetCodes().contains(set.getCode())) {
-                    if (underlyingSetCodesPerFormat.get(STANDARD) == null) {
-                        underlyingSetCodesPerFormat.put(STANDARD, new ArrayList<>());
-                    }
                     underlyingSetCodesPerFormat.get(STANDARD).add(set.getCode());
                 }
                 if (set.getReleaseDate().after(extendedDate)) {
-                    if (underlyingSetCodesPerFormat.get(EXTENDED) == null) {
-                        underlyingSetCodesPerFormat.put(EXTENDED, new ArrayList<>());
-                    }
                     underlyingSetCodesPerFormat.get(EXTENDED).add(set.getCode());
                 }
                 if (set.getReleaseDate().after(frontierDate)) {
-                    if (underlyingSetCodesPerFormat.get(FRONTIER) == null) {
-                        underlyingSetCodesPerFormat.put(FRONTIER, new ArrayList<>());
-                    }
                     underlyingSetCodesPerFormat.get(FRONTIER).add(set.getCode());
                 }
                 if (set.getReleaseDate().after(modernDate)) {
-                    if (underlyingSetCodesPerFormat.get(MODERN) == null) {
-                        underlyingSetCodesPerFormat.put(MODERN, new ArrayList<>());
-                    }
                     underlyingSetCodesPerFormat.get(MODERN).add(set.getCode());
                 }
             }
 
-            if (underlyingSetCodesPerFormat.get(set.getName()) == null) {
-                underlyingSetCodesPerFormat.put(set.getName(), new ArrayList<>());
-            }
-
-            underlyingSetCodesPerFormat.get(set.getName()).add(set.getCode());
-
+            // Create the Block formats
             if (set.getType().equals(SetType.EXPANSION) && set.getBlockName() != null) {
                 String blockDisplayName = getBlockDisplayName(set.getBlockName());
                 if (underlyingSetCodesPerFormat.get(blockDisplayName) == null) {
@@ -209,10 +212,13 @@ public class ConstructedFormats {
 
         });
         if (!formats.isEmpty()) {
+            formats.add(0, CUSTOM);
+            formats.add(0, VINTAGE_LEGACY);
             formats.add(0, MODERN);
-            formats.add(0, FRONTIER);
             formats.add(0, EXTENDED);
+            formats.add(0, FRONTIER);
             formats.add(0, STANDARD);
+
         }
         formats.add(0, ALL);
     }

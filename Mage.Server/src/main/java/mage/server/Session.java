@@ -284,7 +284,7 @@ public class Session {
                 lockSet = true;
                 logger.debug("SESSION LOCK SET sessionId: " + sessionId);
             } else {
-                logger.error("CAN'T GET LOCK - userId: " + userId);
+                logger.error("CAN'T GET LOCK - userId: " + userId + " hold count: " + lock.getHoldCount());
             }
             User user = UserManager.getInstance().getUser(userId);
             if (user == null || !user.isConnected()) {
